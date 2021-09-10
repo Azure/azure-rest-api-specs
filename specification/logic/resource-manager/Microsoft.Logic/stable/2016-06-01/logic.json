@@ -1558,6 +1558,55 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "operationId": "WorkflowRuns_Delete",
+        "description": "Deletes a workflow run.",
+        "x-ms-examples": {
+          "Delete a run for a workflow": {
+            "$ref": "./examples/WorkflowRuns_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/cancel": {
@@ -4921,6 +4970,232 @@
         "x-ms-odata": "#/definitions/IntegrationAccountSessionFilter"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/rosettanetprocessconfigurations": {
+      "get": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_ListByIntegrationAccounts",
+        "description": "Gets a list of integration account RosettaNet process configurations.",
+        "x-ms-examples": {
+          "Get RosettaNetProcessConfigurations by integrationaccount name": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsListByIntegrationAccounts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfigurationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/rosettanetprocessconfigurations/{rosettaNetProcessConfigurationName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_Get",
+        "description": "Gets an integration account RosettaNetProcessConfiguration.",
+        "x-ms-examples": {
+          "Get RosettaNetProcessConfiguration by name": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNetProcessConfiguration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_CreateOrUpdate",
+        "description": "Creates or updates an integration account RosettaNetProcessConfiguration.",
+        "x-ms-examples": {
+          "Create or update an RosettaNetProcessConfiguration": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNet ProcessConfiguration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "rosettaNetProcessConfiguration",
+            "description": "The integration account RosettaNet ProcessConfiguration.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_Delete",
+        "description": "Deletes an integration account RosettaNet ProcessConfiguration.",
+        "x-ms-examples": {
+          "Delete an RosettaNetProcessConfiguration": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNetProcessConfiguration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions/{sessionName}": {
       "get": {
         "tags": [
@@ -5269,7 +5544,7 @@
         },
         "definition": {
           "$ref": "#/definitions/Object",
-          "description": "The definition."
+          "description": "The definition. See [Schema reference for Workflow Definition Language in Azure Logic Apps](https://aka.ms/logic-apps-workflow-definition-language)."
         },
         "parameters": {
           "type": "object",
@@ -8209,6 +8484,19 @@
         "modelAsString": true
       }
     },
+    "MessageEncoding": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Base64",
+        "EightBit",
+        "QuotedPrintable"
+      ],
+      "x-ms-enum": {
+        "name": "MessageEncoding",
+        "modelAsString": false
+      }
+    },
     "TrailingSeparatorPolicy": {
       "type": "string",
       "enum": [
@@ -9029,6 +9317,323 @@
         "name": "EdifactDecimalIndicator",
         "modelAsString": false
       }
+    },
+    "IntegrationAccountRosettaNetProcessConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+          },
+          "description": "The list of integration account RosettaNet PIP configuration."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration account RosettaNet process configuration."
+    },
+    "IntegrationAccountRosettaNetProcessConfiguration": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfigurationProperties",
+          "description": "The integration account RosettaNet process configuration properties."
+        }
+      },
+      "description": "The integration account RosettaNet process configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "IntegrationAccountRosettaNetProcessConfigurationProperties": {
+      "type": "object",
+      "required": [
+        "processCode",
+        "processVersion",
+        "processName",
+        "activitySettings",
+        "initiatorRoleSettings",
+        "responderRoleSettings"
+      ],
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The changed time."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata.",
+          "properties": {},
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "activitySettings": {
+          "$ref": "#/definitions/RosettaNetPipActivitySettings",
+          "description": "The RosettaNet process configuration activity settings."
+        },
+        "processCode": {
+          "type": "string",
+          "description": "The integration account RosettaNet process code."
+        },
+        "processVersion": {
+          "type": "string",
+          "description": "The integration account RosettaNet process version."
+        },
+        "processName": {
+          "type": "string",
+          "description": "The integration account RosettaNet process name."
+        },
+        "initiatorRoleSettings": {
+          "$ref": "#/definitions/RosettaNetPipRoleSettings",
+          "description": "The RosettaNet initiator role settings."
+        },
+        "responderRoleSettings": {
+          "$ref": "#/definitions/RosettaNetPipRoleSettings",
+          "description": "The RosettaNet responder role settings."
+        },
+        "description": {
+          "type": "string",
+          "description": "The integration account RosettaNet ProcessConfiguration properties."
+        }
+      },
+      "description": "The integration account RosettaNet process configuration properties."
+    },
+    "RosettaNetPipActivitySettings": {
+      "type": "object",
+      "required": [
+        "activityType",
+        "activityBehavior",
+        "acknowledgmentOfReceiptSettings"
+      ],
+      "properties": {
+        "activityType": {
+          "$ref": "#/definitions/RosettaNetPipActivityType",
+          "description": "The RosettaNet ProcessConfiguration activity type."
+        },
+        "activityBehavior": {
+          "$ref": "#/definitions/RosettaNetPipActivityBehavior",
+          "description": "The RosettaNet ProcessConfiguration activity behavior."
+        },
+        "acknowledgmentOfReceiptSettings": {
+          "$ref": "#/definitions/RosettaNetPipAcknowledgmentOfReceiptSettings",
+          "description": "The RosettaNet ProcessConfiguration acknowledgement settings."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration activity settings."
+    },
+    "RosettaNetPipActivityType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "InformationDistribution",
+        "BusinessTransaction",
+        "Notification",
+        "QueryResponse",
+        "RequestConfirm",
+        "RequestResponse"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetPipActivityType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetPipActivityBehavior": {
+      "type": "object",
+      "required": [
+        "isAuthorizationRequired",
+        "persistentConfidentialityScope",
+        "isSecuredTransportRequired",
+        "actionType",
+        "responseType",
+        "nonRepudiationOfOriginAndContent",
+        "retryCount",
+        "timeToPerformInSeconds"
+      ],
+      "properties": {
+        "isAuthorizationRequired": {
+          "type": "boolean",
+          "description": "The value indicating whether authorization is required."
+        },
+        "persistentConfidentialityScope": {
+          "$ref": "#/definitions/RosettaNetPipConfidentialityScope",
+          "description": "The persistent confidentiality encryption scope."
+        },
+        "isSecuredTransportRequired": {
+          "type": "boolean",
+          "description": "The value indicating whether secured transport is required."
+        },
+        "actionType": {
+          "$ref": "#/definitions/RosettaNetActionType",
+          "description": "The value indicating whether the RosettaNet PIP is used for a single action."
+        },
+        "responseType": {
+          "$ref": "#/definitions/RosettaNetResponseType",
+          "description": "The value indicating whether the RosettaNet PIP communication is synchronous."
+        },
+        "nonRepudiationOfOriginAndContent": {
+          "type": "boolean",
+          "description": "The value indicating whether non-repudiation is for origin and content."
+        },
+        "retryCount": {
+          "type": "integer",
+          "description": "The value indicating retry count."
+        },
+        "timeToPerformInSeconds": {
+          "type": "integer",
+          "description": "The time to perform in seconds."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration activity behavior."
+    },
+    "RosettaNetPipConfidentialityScope": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "None",
+        "Payload",
+        "PayloadContainer"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetPipConfidentialityScope",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetActionType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "SingleAction",
+        "DoubleAction"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetActionType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetResponseType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Sync",
+        "Async"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetResponseType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetPipAcknowledgmentOfReceiptSettings": {
+      "type": "object",
+      "required": [
+        "isNonRepudiationRequired",
+        "timeToAcknowledgeInSeconds"
+      ],
+      "properties": {
+        "isNonRepudiationRequired": {
+          "type": "boolean",
+          "description": "The non-repudiation is required or not."
+        },
+        "timeToAcknowledgeInSeconds": {
+          "type": "integer",
+          "description": "The time to acknowledge in seconds."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration Acknowledgement settings."
+    },
+    "RosettaNetPipRoleSettings": {
+      "type": "object",
+      "required": [
+        "action",
+        "role",
+        "roleType",
+        "service",
+        "serviceClassification",
+        "businessDocument"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "The action name."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "roleType": {
+          "$ref": "#/definitions/RosettaNetPipRoleType",
+          "description": "The RosettaNet ProcessConfiguration role type."
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name."
+        },
+        "serviceClassification": {
+          "type": "string",
+          "description": "The service classification name."
+        },
+        "businessDocument": {
+          "$ref": "#/definitions/RosettaNetPipBusinessDocument",
+          "description": "The RosettaNet ProcessConfiguration business document."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration role settings."
+    },
+    "RosettaNetPipRoleType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Functional",
+        "Organizational",
+        "Employee"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetPipRoleType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetPipBusinessDocument": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The business document name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The business document version."
+        },
+        "description": {
+          "type": "string",
+          "description": "The business document description."
+        }
+      },
+      "description": "The RosettaNet ProcessConfiguration business document settings."
     },
     "IntegrationAccountCertificateListResult": {
       "type": "object",

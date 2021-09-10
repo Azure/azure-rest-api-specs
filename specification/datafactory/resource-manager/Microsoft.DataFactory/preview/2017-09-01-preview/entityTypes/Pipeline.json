@@ -371,7 +371,7 @@
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Query",
             "QueryAll"
@@ -413,7 +413,7 @@
         }
       }
     },
-	"SqlSource": {
+    "SqlSource": {
       "description": "A copy activity SQL source.",
       "type": "object",
       "allOf": [
@@ -577,7 +577,7 @@
         },
         "consistencyLevel": {
           "description": "The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "ALL",
             "EACH_QUORUM",
@@ -1091,7 +1091,7 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
-    } ,
+    },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -1148,7 +1148,7 @@
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "String",
         "Int",
@@ -1207,7 +1207,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Update"
@@ -1231,7 +1231,7 @@
     },
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "PreserveHierarchy",
         "FlattenHierarchy",
@@ -1406,7 +1406,7 @@
     },
     "PolybaseSettingsRejectType": {
       "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "value",
         "percentage"
@@ -1501,7 +1501,7 @@
       "properties": {
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Merge",
             "Upload"
@@ -1539,7 +1539,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Upsert"
           ],
@@ -1568,7 +1568,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Upsert"
@@ -2076,6 +2076,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/SSISPropertyOverride"
           }
+        },
+        "logLocation": {
+          "description": "SSIS package execution log location.",
+          "$ref": "#/definitions/SSISLogLocation"
         }
       },
       "required": [
@@ -2085,16 +2089,51 @@
     },
     "SSISPackageLocation": {
       "description": "SSIS package location.",
-      "type" : "object",
+      "type": "object",
       "properties": {
         "packagePath": {
           "description": "The SSIS package path. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS package location.",
+          "type": "string",
+          "enum": [
+            "SSISDB",
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisPackageLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package location properties.",
+          "$ref": "#/definitions/SSISPackageLocationTypeProperties"
         }
       },
       "required": [
         "packagePath"
       ]
+    },
+    "SSISPackageLocationTypeProperties": {
+      "description": "SSIS package location properties.",
+      "type": "object",
+      "properties": {
+        "packagePassword": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "Password of the package."
+        },
+        "accessCredential": {
+          "description": "The package access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "configurationPath": {
+          "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
     },
     "SSISConnectionManager": {
       "description": "SSIS Connection Manager.",
@@ -2155,6 +2194,74 @@
         "userName",
         "password"
       ]
+    },
+    "SSISAccessCredential": {
+      "description": "SSIS access credential.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISLogLocation": {
+      "description": "SSIS package execution log location",
+      "type": "object",
+      "properties": {
+        "logPath": {
+          "description": "The SSIS package execution log path. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS log location.",
+          "type": "string",
+          "enum": [
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisLogLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package execution log location properties.",
+          "$ref": "#/definitions/SSISLogLocationTypeProperties"
+        }
+      },
+      "required": [
+        "logPath",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "SSISLogLocationTypeProperties": {
+      "description": "SSIS package execution log location properties.",
+      "type": "object",
+      "properties": {
+        "accessCredential": {
+          "description": "The package execution log access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "logRefreshInterval": {
+          "type": "object",
+          "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
     },
     "CustomActivity": {
       "description": "Custom activity type.",

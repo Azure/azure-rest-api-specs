@@ -1,0 +1,441 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2019-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}": {
+      "delete": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_Delete",
+        "description": "Deletes the specified Bastion Host.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Bastion Host."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource with the specified name does not exist."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": {
+          "Delete Bastion Host": {
+            "$ref": "./examples/BastionHostDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_Get",
+        "description": "Gets the specified Bastion Host.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Bastion Host."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns an BastionHost resource.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Bastion Host": {
+            "$ref": "./examples/BastionHostGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_CreateOrUpdate",
+        "description": "Creates or updates the specified Bastion Host.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Bastion Host."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            },
+            "description": "Parameters supplied to the create or update Bastion Host operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting Bastion Host resource.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting Bastion Host resource.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Bastion Host": {
+            "$ref": "./examples/BastionHostPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_UpdateTags",
+        "x-ms-examples": {
+          "BastionHostUpdate": {
+            "$ref": "./examples/BastionHostUpdateTags.json"
+          }
+        },
+        "description": "Updates bastion host tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the BastionHost."
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the bastionHost."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "bastionHostParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update a bastion host tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the updated bastion host.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the updated bastion host.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/bastionHosts": {
+      "get": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_List",
+        "description": "Lists all Bastion Hosts in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Bastion Host resources.",
+            "schema": {
+              "$ref": "#/definitions/BastionHostListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Bastion Hosts for a given subscription": {
+            "$ref": "./examples/BastionHostListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts": {
+      "get": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_ListByResourceGroup",
+        "description": "Lists all Bastion Hosts in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of BastionHost resources.",
+            "schema": {
+              "$ref": "#/definitions/BastionHostListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Bastion Hosts for a given resource group": {
+            "$ref": "./examples/BastionHostListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BastionHostIPConfigurationPropertiesFormat": {
+      "properties": {
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the subnet resource."
+        },
+        "publicIPAddress": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the PublicIP resource."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "Private IP allocation method."
+        }
+      },
+      "required": [
+        "subnet",
+        "publicIPAddress"
+      ],
+      "description": "Properties of IP configuration of an Bastion Host."
+    },
+    "BastionHostIPConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BastionHostIPConfigurationPropertiesFormat",
+          "description": "Represents the ip configuration associated with the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Ip configuration type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "IP configuration of an Bastion Host."
+    },
+    "BastionHostPropertiesFormat": {
+      "properties": {
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionHostIPConfiguration"
+          },
+          "description": "IP configuration of the Bastion Host resource."
+        },
+        "dnsName": {
+          "type": "string",
+          "description": "FQDN for the endpoint on which bastion host is accessible."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Properties of the Bastion Host."
+    },
+    "BastionHost": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BastionHostPropertiesFormat",
+          "description": "Represents the bastion host resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Bastion Host resource."
+    },
+    "BastionHostListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionHost"
+          },
+          "description": "List of Bastion Hosts in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListBastionHosts API service call."
+    }
+  }
+}

@@ -1,0 +1,870 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure DevOps",
+    "description": "Azure DevOps Resource Provider",
+    "version": "2019-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "DevOpsClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.DevOps/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all the operations supported by Microsoft.DevOps resource provider.",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported operations has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of operations supported by Microsoft.DevOps resource provider": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DevOps/pipelineTemplateDefinitions": {
+      "get": {
+        "tags": [
+          "PipelineTemplateDefinitions"
+        ],
+        "operationId": "PipelineTemplateDefinitions_List",
+        "description": "Lists all pipeline templates which can be used to configure an Azure Pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The pipeline template definitions have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineTemplateDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get the list of pipeline template definitions": {
+            "$ref": "./examples/ListPipelineTemplateDefinitions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOps/pipelines/{pipelineName}": {
+      "put": {
+        "operationId": "Pipelines_CreateOrUpdate",
+        "description": "Creates or updates an Azure Pipeline.",
+        "tags": [
+          "Pipelines"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "pipelineName",
+            "description": "The name of the Azure Pipeline resource in ARM.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "createOperationParameters",
+            "description": "The request payload to create the Azure Pipeline.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing and the Azure Pipeline will be configured asynchronously."
+          },
+          "200": {
+            "description": "The Azure Pipeline has been configured successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create an Azure pipeline to deploy a sample ASP.Net application to Azure web-app": {
+            "$ref": "./examples/CreateAzurePipeline-Sample-AspNet-WindowsWebApp.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Pipelines_Get",
+        "description": "Gets an existing Azure Pipeline.",
+        "tags": [
+          "Pipelines"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "pipelineName",
+            "description": "The name of the Azure Pipeline resource in ARM.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Pipeline has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an existing Azure pipeline": {
+            "$ref": "./examples/GetAzurePipeline.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Pipelines_Update",
+        "description": "Updates the properties of an Azure Pipeline. Currently, only tags can be updated.",
+        "tags": [
+          "Pipelines"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "pipelineName",
+            "description": "The name of the Azure Pipeline resource.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "updateOperationParameters",
+            "description": "The request payload containing the properties to update in the Azure Pipeline.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Pipeline has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an existing Azure pipeline": {
+            "$ref": "./examples/UpdateAzurePipeline.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Pipelines_Delete",
+        "description": "Deletes an Azure Pipeline.",
+        "tags": [
+          "Pipelines"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "pipelineName",
+            "description": "The name of the Azure Pipeline resource.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Pipeline has been deleted successfully."
+          },
+          "204": {
+            "description": "The Azure Pipeline is not found or has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an existing Azure pipeline": {
+            "$ref": "./examples/DeleteAzurePipeline.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOps/pipelines": {
+      "get": {
+        "operationId": "Pipelines_ListByResourceGroup",
+        "description": "Lists all Azure Pipelines under the specified resource group.",
+        "tags": [
+          "Pipelines"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Pipelines have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Azure Pipelines under the specified resource group": {
+            "$ref": "./examples/ListAzurePipelinesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOps/pipelines": {
+      "get": {
+        "operationId": "Pipelines_ListBySubscription",
+        "description": "Lists all Azure Pipelines under the specified subscription.",
+        "tags": [
+          "Pipelines"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Pipelines have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Azure pipelines under the specified subscription": {
+            "$ref": "./examples/ListAzurePipelinesBySubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "Details of the error from the Pipelines Resource Provider.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Pipelines Resource Provider."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error or the method where the error occurred."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Pipelines Resource Provider."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by Microsoft.DevOps resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of operations, if there are any."
+        }
+      },
+      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplayValue"
+        }
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplayValue": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
+    },
+    "PipelineTemplateDefinitionListResult": {
+      "type": "object",
+      "description": "Result of a request to list all pipeline template definitions.",
+      "properties": {
+        "value": {
+          "description": "List of pipeline template definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineTemplateDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of pipeline template definitions, if there are any."
+        }
+      }
+    },
+    "PipelineTemplateDefinition": {
+      "type": "object",
+      "description": "Definition of a pipeline template.",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the pipeline template.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the pipeline enabled by the template.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "List of input parameters required by the template to create a pipeline.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputDescriptor"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "InputDescriptor": {
+      "type": "object",
+      "description": "Representation of a pipeline template input parameter.",
+      "properties": {
+        "id": {
+          "description": "Identifier of the input parameter.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the input parameter.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Data type of the value of the input parameter.",
+          "type": "string",
+          "enum": [
+            "String",
+            "SecureString",
+            "Int",
+            "Bool",
+            "Authorization"
+          ],
+          "x-ms-enum": {
+            "name": "InputDataType",
+            "modelAsString": true
+          }
+        },
+        "possibleValues": {
+          "description": "List of possible values for the input parameter.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputValue"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "InputValue": {
+      "type": "object",
+      "description": "Representation of a pipeline template input parameter value.",
+      "properties": {
+        "value": {
+          "description": "Value of an input parameter.",
+          "type": "string"
+        },
+        "displayValue": {
+          "description": "Description of the input parameter value.",
+          "type": "string"
+        }
+      }
+    },
+    "Pipeline": {
+      "type": "object",
+      "description": "Azure DevOps Pipeline used to configure Continuous Integration (CI) & Continuous Delivery (CD) for Azure resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineProperties",
+          "description": "Custom properties of the Pipeline.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "PipelineProperties": {
+      "type": "object",
+      "description": "Custom properties of a Pipeline.",
+      "properties": {
+        "pipelineId": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Unique identifier of the Azure Pipeline within the Azure DevOps Project."
+        },
+        "organization": {
+          "$ref": "#/definitions/OrganizationReference",
+          "description": "Reference to the Azure DevOps Organization containing the Pipeline."
+        },
+        "project": {
+          "$ref": "#/definitions/ProjectReference",
+          "description": "Reference to the Azure DevOps Project containing the Pipeline."
+        },
+        "bootstrapConfiguration": {
+          "$ref": "#/definitions/BootstrapConfiguration",
+          "description": "Configuration used to bootstrap the Pipeline."
+        }
+      },
+      "required": [
+        "organization",
+        "project",
+        "bootstrapConfiguration"
+      ]
+    },
+    "OrganizationReference": {
+      "type": "object",
+      "description": "Reference to an Azure DevOps Organization.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique immutable identifier for the Azure DevOps Organization."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Azure DevOps Organization."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ProjectReference": {
+      "type": "object",
+      "description": "Reference to an Azure DevOps Project.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique immutable identifier of the Azure DevOps Project."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Azure DevOps Project."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "BootstrapConfiguration": {
+      "type": "object",
+      "description": "Configuration used to bootstrap a Pipeline.",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/CodeRepository",
+          "description": "Repository containing the source code for the pipeline."
+        },
+        "template": {
+          "$ref": "#/definitions/PipelineTemplate",
+          "description": "Template used to bootstrap the pipeline."
+        }
+      },
+      "required": [
+        "template"
+      ]
+    },
+    "CodeRepository": {
+      "type": "object",
+      "description": "Repository containing the source code for a pipeline.",
+      "properties": {
+        "repositoryType": {
+          "description": "Type of code repository.",
+          "type": "string",
+          "enum": [
+            "gitHub",
+            "vstsGit"
+          ],
+          "x-ms-enum": {
+            "name": "CodeRepositoryType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Unique immutable identifier of the code repository.",
+          "type": "string"
+        },
+        "defaultBranch": {
+          "description": "Default branch used to configure Continuous Integration (CI) in the pipeline.",
+          "type": "string"
+        },
+        "authorization": {
+          "description": "Authorization info to access the code repository.",
+          "$ref": "#/definitions/Authorization"
+        },
+        "properties": {
+          "description": "Repository-specific properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "repositoryType",
+        "id",
+        "defaultBranch"
+      ]
+    },
+    "Authorization": {
+      "description": "Authorization info used to access a resource (like code repository).",
+      "type": "object",
+      "properties": {
+        "authorizationType": {
+          "description": "Type of authorization.",
+          "type": "string",
+          "enum": [
+            "personalAccessToken"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "description": "Authorization parameters corresponding to the authorization type.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "authorizationType"
+      ]
+    },
+    "PipelineTemplate": {
+      "type": "object",
+      "description": "Template used to bootstrap the pipeline.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the pipeline template."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Dictionary of input parameters used in the pipeline template.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An Azure Resource Manager (ARM) resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PipelineUpdateParameters": {
+      "type": "object",
+      "description": "Request payload used to update an existing Azure Pipeline.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of key-value pairs to be set as tags on the Azure Pipeline. This will overwrite any existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PipelineListResult": {
+      "description": "Result of a request to list all Azure Pipelines under a given scope.",
+      "properties": {
+        "value": {
+          "description": "List of pipelines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Pipelines, if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Unique identifier of the Azure subscription. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to be used with the HTTP request."
+    }
+  }
+}

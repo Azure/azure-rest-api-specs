@@ -450,7 +450,9 @@
         "operationId": "Usages_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "x-ms-examples": {
-          "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
+          "UsageList": {
+            "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
         },
         "parameters": [
           {
@@ -618,7 +620,9 @@
         "operationId": "ManagementPolicies_Get",
         "description": "Gets the managementpolicy associated with the specified storage account.",
         "x-ms-examples": {
-          "StorageAccountGetManagementPolicies": { "$ref": "./examples/StorageAccountGetManagementPolicy.json" }
+          "StorageAccountGetManagementPolicies": {
+            "$ref": "./examples/StorageAccountGetManagementPolicy.json"
+          }
         },
         "parameters": [
           {
@@ -653,7 +657,9 @@
         "operationId": "ManagementPolicies_CreateOrUpdate",
         "description": "Sets the managementpolicy to the specified storage account.",
         "x-ms-examples": {
-          "StorageAccountSetManagementPolicies": { "$ref": "./examples/StorageAccountSetManagementPolicy.json" }
+          "StorageAccountSetManagementPolicies": {
+            "$ref": "./examples/StorageAccountSetManagementPolicy.json"
+          }
         },
         "parameters": [
           {
@@ -697,7 +703,9 @@
         "operationId": "ManagementPolicies_Delete",
         "description": "Deletes the managementpolicy associated with the specified storage account.",
         "x-ms-examples": {
-          "StorageAccountDeleteManagementPolicies": { "$ref": "./examples/StorageAccountDeleteManagementPolicy.json" }
+          "StorageAccountDeleteManagementPolicies": {
+            "$ref": "./examples/StorageAccountDeleteManagementPolicy.json"
+          }
         },
         "parameters": [
           {
@@ -2153,14 +2161,16 @@
           "description": "Returns the date and time the ManagementPolicies was last modified."
         },
         "policy": {
-            "$ref": "#/definitions/ManagementPolicySchema",
-            "description": "The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+          "$ref": "#/definitions/ManagementPolicySchema",
+          "description": "The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
-      "required": ["policy"],
+      "required": [
+        "policy"
+      ],
       "description": "The Storage Account ManagementPolicy properties."
     },
-    "ManagementPolicySchema":{
+    "ManagementPolicySchema": {
       "properties": {
         "rules": {
           "type": "array",
@@ -2170,7 +2180,9 @@
           "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
-      "required": ["rules"],
+      "required": [
+        "rules"
+      ],
       "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
     },
     "ManagementPolicyRule": {
@@ -2190,7 +2202,7 @@
             "Lifecycle"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "RuleType",
             "modelAsString": true
           }
         },
@@ -2199,7 +2211,11 @@
           "description": "An object that defines the Lifecycle rule."
         }
       },
-      "required": ["name", "type", "definition"],
+      "required": [
+        "name",
+        "type",
+        "definition"
+      ],
       "description": "An object that wraps the Lifecycle rule. Each rule is uniquely defined by name."
     },
     "ManagementPolicyDefinition": {
@@ -2213,7 +2229,9 @@
           "description": "An object that defines the filter set."
         }
       },
-      "required": ["actions"],
+      "required": [
+        "actions"
+      ],
       "description": "An object that defines the Lifecycle rule. Each definition is made up with a filters set and an actions set."
     },
     "ManagementPolicyFilter": {
@@ -2233,7 +2251,9 @@
           "description": "An array of predefined enum values. Only blockBlob is supported."
         }
       },
-      "required": [ "blobTypes" ],
+      "required": [
+        "blobTypes"
+      ],
       "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. "
     },
     "ManagementPolicyAction": {
@@ -2252,8 +2272,8 @@
     "ManagementPolicyBaseBlob": {
       "properties": {
         "tierToCool": {
-            "$ref": "#/definitions/DateAfterModification",
-            "description": "The function to tier blobs to cool storage. Support blobs currently at Hot tier"
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to tier blobs to cool storage. Support blobs currently at Hot tier"
         },
         "tierToArchive": {
           "$ref": "#/definitions/DateAfterModification",
@@ -2283,7 +2303,9 @@
           "description": "Integer value indicating the age in days after last modification"
         }
       },
-      "required": ["daysAfterModificationGreaterThan"],
+      "required": [
+        "daysAfterModificationGreaterThan"
+      ],
       "description": "Object to define the number of days after last modification."
     },
     "DateAfterCreation": {
@@ -2294,7 +2316,9 @@
           "description": "Integer value indicating the age in days after creation"
         }
       },
-      "required": ["daysAfterCreationGreaterThan"],
+      "required": [
+        "daysAfterCreationGreaterThan"
+      ],
       "description": "Object to define the number of days after creation."
     }
   },
@@ -2326,12 +2350,12 @@
       "required": true,
       "type": "string",
       "description": "The name of the Storage Account Management Policy. It should always be 'default'",
-      "enum":[
+      "enum": [
         "default"
       ],
       "x-ms-enum": {
-          "name": "ManagementPolicyName",
-          "modelAsString": true
+        "name": "ManagementPolicyName",
+        "modelAsString": true
       },
       "x-ms-parameter-location": "method"
     }

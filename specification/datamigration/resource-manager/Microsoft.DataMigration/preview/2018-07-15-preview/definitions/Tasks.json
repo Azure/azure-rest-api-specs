@@ -20,7 +20,6 @@
     "ProjectTaskProperties": {
       "type": "object",
       "description": "Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "taskType": {
           "description": "Task type.",
@@ -373,6 +372,54 @@
         }
       ]
     },
+    "GetUserTablesOracleTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTablesOracle",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of Oracle schemas",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesOracleTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesOracleTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "GetUserTablesPostgreSqlTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTablesPostgreSql",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of databases",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToTargetSqlMITaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
       "type": "object",
@@ -588,7 +635,7 @@
       ]
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties": {
-      "x-ms-discriminator-value": "Migrate.PostgreSql.AzureDbForPostgreSql.Sync",
+      "x-ms-discriminator-value": "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
       "type": "object",
       "description": "Properties for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations",
       "properties": {
@@ -612,7 +659,7 @@
       ]
     },
     "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties": {
-      "x-ms-discriminator-value": "Migrate.Oracle.Sql.Sync",
+      "x-ms-discriminator-value": "Migrate.Oracle.AzureDbForPostgreSql.Sync",
       "type": "object",
       "description": "Properties for the task that migrates Oracle to Azure Database for PostgreSQL for online migrations",
       "properties": {
@@ -767,6 +814,30 @@
           "type": "array",
           "items": {
             "$ref": "./GetTdeCertificatesSqlTask.json#/definitions/GetTdeCertificatesSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateSsisTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.Ssis",
+      "type": "object",
+      "description": "Properties for task that migrates SSIS packages from SQL Server databases to Azure SQL Database Managed Instance.",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateSsisTask.json#/definitions/MigrateSsisTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateSsisTask.json#/definitions/MigrateSsisTaskOutput"
           },
           "readOnly": true
         }

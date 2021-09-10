@@ -4343,6 +4343,14 @@
         "enableMultipleWriteLocations": {
           "description": "Enables the account to write in multiple locations",
           "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
         }
       }
     },
@@ -4407,6 +4415,14 @@
         "enableMultipleWriteLocations": {
           "description": "Enables the account to write in multiple locations",
           "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
         }
       },
       "required": [
@@ -4486,12 +4502,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Base 64 encoded value of the secondary read-write key."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
+        }
+      },
+      "allOf": [
+        {
           "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
         }
-      }
+      ]
     },
     "DatabaseAccountConnectionString": {
       "description": "Connection string for the Cosmos DB account",
@@ -5390,7 +5407,7 @@
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
-      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation."
+      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation. 'Offline' - the Cosmos DB account is not active. 'DeletionFailed' – the Cosmos DB account deletion failed."
     },
     "IPRangeFilter": {
       "type": "string",
@@ -5565,7 +5582,7 @@
             "None",
             "Average",
             "Total",
-            "Minimimum",
+            "Minimum",
             "Maximum",
             "Last"
           ],
@@ -5868,6 +5885,17 @@
         "modelAsString": true,
         "name": "UnitType"
       }
+    },
+    "ConnectorOffer": {
+      "description": "The cassandra connector offer type for the Cosmos DB C* database account.",
+      "type": "string",
+      "enum": [
+        "Small"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorOffer",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -5904,7 +5932,8 @@
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB database account name.",
       "minLength": 3,
-      "maxLength": 50
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
     },
     "filterParameter": {
       "name": "$filter",

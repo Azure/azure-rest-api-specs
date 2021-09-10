@@ -300,25 +300,25 @@
           "minLength": 0,
           "type": "string"
         },
-        "sourceFilter":{
-          "$ref":"#/definitions/TrainSourceFilter",
-          "description":"Get or set filter to further search the\r\nsource path for content."
+        "sourceFilter": {
+          "$ref": "#/definitions/TrainSourceFilter",
+          "description": "Get or set filter to further search the\r\nsource path for content."
         }
       }
     },
-    "TrainSourceFilter":{
-      "description":"Filters to be applied when traversing a data source.",
-      "type":"object",
-      "properties":{
-        "prefix":{
-          "description":"A case-sensitive prefix string to filter content\r\nunder the source location. For e.g., when using a Azure Blob\r\nUri use the prefix to restrict subfolders for content.",
-          "maxLength":128,
-          "minLength":0,
-          "type":"string"
+    "TrainSourceFilter": {
+      "description": "Filters to be applied when traversing a data source.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "A case-sensitive prefix string to filter content\r\nunder the source location. For e.g., when using a Azure Blob\r\nUri use the prefix to restrict subfolders for content.",
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
         },
-        "includeSubFolders":{
-          "description":"A flag to indicate if sub folders within the set of\r\nprefix folders will also need to be included when searching\r\nfor content to be preprocessed.",
-          "type":"boolean"
+        "includeSubFolders": {
+          "description": "A flag to indicate if sub folders within the set of\r\nprefix folders will also need to be included when searching\r\nfor content to be preprocessed.",
+          "type": "boolean"
         }
       }
     },

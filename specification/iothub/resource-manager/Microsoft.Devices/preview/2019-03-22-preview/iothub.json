@@ -121,7 +121,7 @@
           "PUT"
         ],
         "summary": "Create or update the metadata of an IoT hub.",
-        "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.",
+        "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to default, which may lead to unexpected behavior.",
         "operationId": "IotHubResource_CreateOrUpdate",
         "x-ms-examples": {
           "IotHubResource_CreateOrUpdate": {
@@ -2045,6 +2045,14 @@
             "name": "Capabilities",
             "modelAsString": true
           }
+        },
+        "locations": {
+          "description": "Primary and secondary location for iot hub",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubLocationDescription"
+          }
         }
       }
     },
@@ -3453,6 +3461,28 @@
       "required": [
         "failoverRegion"
       ]
+    },
+    "IotHubLocationDescription": {
+      "description": "Public representation of one of the locations where a resource is provisioned.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Azure Geo Regions",
+          "type": "string"
+        },
+        "role": {
+          "description": "Specific Role assigned to this location",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubReplicaRoleType",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {

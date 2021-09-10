@@ -1,10 +1,8 @@
 # Peering
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Peering.
-
-
 
 ---
 ## Getting Started 
@@ -25,20 +23,121 @@ To see additional help and options, run:
 These are the global settings for the Peering API.
 
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
-tag: package-2019-03-01-preview
+tag: package-2021-06-01
 ```
+or
 
-### Tag: package-2019-03-01-preview
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2021-01-01
+```
+or
 
-These settings apply only when `--tag=package-2019-03-01-preview` is specified on the command line.
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2020-10-01
+```
+or
 
-``` yaml $(tag) == 'package-2019-03-01-preview'
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2020-04-01
+```
+or
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2020-01-01-preview
+```
+or
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2019-09-01-preview
+```
+or
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2019-08-01-preview
+```
+### Tag: package-2021-06-01
+
+These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01'
 input-file:
-- Microsoft.Peering/preview/2019-03-01-preview/peering.json
+- Microsoft.Peering/stable/2021-06-01/peering.json
 ```
-# Code Generation
 
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+- Microsoft.Peering/stable/2021-01-01/peering.json
+```
+
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Peering/stable/2020-10-01/peering.json
+```
+
+### Tag: package-2020-04-01
+
+These settings apply only when `--tag=package-2020-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01'
+input-file:
+- Microsoft.Peering/stable/2020-04-01/peering.json
+```
+
+### Tag: package-2020-01-01-preview
+
+These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01-preview'
+input-file:
+- Microsoft.Peering/preview/2020-01-01-preview/peering.json
+```
+
+### Tag: package-2019-09-01-preview
+
+These settings apply only when `--tag=package-2019-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-01-preview'
+input-file:
+- Microsoft.Peering/preview/2019-09-01-preview/peering.json
+```
+
+### Tag: package-2019-08-01-preview
+
+These settings apply only when `--tag=package-2019-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-01-preview'
+input-file:
+- Microsoft.Peering/preview/2019-08-01-preview/peering.json
+```
+
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -47,7 +146,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
@@ -56,8 +155,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_peering']
+  - repo: azure-resource-manager-schemas
 ```
 
+## Python 
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## C# 
 
@@ -66,4 +169,10 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
+
 

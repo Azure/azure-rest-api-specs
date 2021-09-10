@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/providers/microsoft.insights/eventcategories": {
+    "/providers/Microsoft.Insights/eventcategories": {
       "get": {
         "tags": [
           "EventCategories"
@@ -45,7 +45,7 @@
         "description": "Get the list of available event categories supported in the Activity Logs Service.<br>The current list includes the following: Administrative, Security, ServiceHealth, Alert, Recommendation, Policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -66,14 +66,18 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get event categories": { "$ref": "./examples/GetEventCategories.json" }
+          "Get event categories": {
+            "$ref": "./examples/GetEventCategories.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -96,7 +100,9 @@
           "description": "the list that includes the Azure event categories."
         }
       },
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "description": "A collection of event categories. Currently possible values are: Administrative, Security, ServiceHealth, Alert, Recommendation, Policy."
     },
     "ErrorResponse": {
@@ -112,15 +118,6 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

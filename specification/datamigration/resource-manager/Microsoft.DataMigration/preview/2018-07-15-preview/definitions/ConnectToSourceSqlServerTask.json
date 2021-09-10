@@ -29,6 +29,11 @@
           "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
           "description": "Permission group for validations"
         },
+        "collectDatabases": {
+          "type": "boolean",
+          "description": "Flag for whether to collect databases from source server.",
+          "default": true
+        },
         "collectLogins": {
           "type": "boolean",
           "description": "Flag for whether to collect logins from source server.",
@@ -42,6 +47,11 @@
         "collectTdeCertificateInfo": {
           "type": "boolean",
           "description": "Flag for whether to collect TDE Certificate names from source server.",
+          "default": false
+        },
+        "validateSsisCatalogOnly": {
+          "type": "boolean",
+          "description": "Flag for whether to validate SSIS catalog is reachable on the source server.",
           "default": false
         }
       },
@@ -60,10 +70,12 @@
         },
         "resultType": {
           "description": "Type of result - database level or task level",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "ConnectToSourceSqlServerTaskOutputTaskLevel": {

@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2014-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-01'
 input-file:
-- Microsoft.ADHybridHealthService\stable\2014-01-01\ADHybridHealthService.json
+- Microsoft.ADHybridHealthService/stable/2014-01-01/ADHybridHealthService.json
 ```
 
 ---
@@ -54,6 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
 
 
@@ -93,3 +94,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+
+

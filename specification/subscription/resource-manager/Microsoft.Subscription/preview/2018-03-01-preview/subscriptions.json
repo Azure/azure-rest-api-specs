@@ -16,36 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/operations": {
-      "get": {
-        "description": "Lists all of the available Microsoft.Subscription API operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "getOperations": {
-            "$ref": "./examples/getOperations.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Subscription/subscriptionOperations": {
       "get": {
         "description": "Lists all of the available pending Microsoft.Subscription API operations.",
@@ -70,6 +40,57 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
+      "get": {
+        "description": "Get the status of the pending Microsoft.Subscription API operations.",
+        "operationId": "SubscriptionOperation_Get",
+        "x-ms-examples": {
+          "getPendingSubscriptionOperations": {
+            "$ref": "./examples/getSubscriptionOperation.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful completion of the asynchronous operation",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -142,7 +163,7 @@
       "description": "The created subscription object.",
       "properties": {
         "subscriptionLink": {
-          "description": "The link to the new subscription.",
+          "description": "The link to the new subscription. Use this link to check the status of subscription creation operation.",
           "type": "string"
         }
       }
@@ -196,8 +217,18 @@
         }
       }
     },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
     "AdPrincipal": {
-      "description": "Active Directory Principal for subscription creation delegated permission",
+      "description": "Active Directory Principal who’ll get owner access on the new subscription.",
       "properties": {
         "objectId": {
           "description": "Object id of the Principal",
@@ -235,49 +266,6 @@
         "statusDetail": {
           "description": "Status Detail of the pending subscription",
           "type": "string"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Subscription",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          }
         }
       }
     }

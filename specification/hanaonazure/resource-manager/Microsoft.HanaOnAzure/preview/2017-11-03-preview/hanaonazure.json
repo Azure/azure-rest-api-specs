@@ -203,7 +203,7 @@
         "summary": "Creates a SAP HANA instance.",
         "description": "Creates a SAP HANA instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
-          "Get properties of a HANA instance": {
+          "Create a HANA instance": {
             "$ref": "./examples/HanaInstances_Create.json"
           }
         },
@@ -254,7 +254,7 @@
         "summary": "Deletes a SAP HANA instance.",
         "description": "Deletes a SAP HANA instance with the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
-          "Get properties of a HANA instance": {
+          "Delete a HANA instance": {
             "$ref": "./examples/HanaInstances_Delete.json"
           }
         },
@@ -377,21 +377,27 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/monitoring": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/start": {
       "post": {
         "tags": [
           "HanaOnAzure"
         ],
-        "operationId": "HanaInstances_EnableMonitoring",
+        "operationId": "HanaInstances_Start",
         "x-ms-long-running-operation": true,
-        "description": "The operation to add a monitor to an SAP HANA instance.",
+        "description": "The operation to start a SAP HANA instance.",
         "x-ms-examples": {
-          "Monitor a HANA instance": {
-            "$ref": "./examples/HanaInstances_EnableMonitoring.json"
+          "Start a HANA instance": {
+            "$ref": "./examples/HanaInstances_Start.json"
           }
         },
         "consumes": [
@@ -412,9 +418,6 @@
           },
           {
             "$ref": "#/parameters/HanaInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitoringParameter"
           }
         ],
         "responses": {
@@ -423,6 +426,61 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/shutdown": {
+      "post": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "HanaInstances_Shutdown",
+        "x-ms-long-running-operation": true,
+        "description": "The operation to shutdown a SAP HANA instance.",
+        "x-ms-examples": {
+          "Shutdown a HANA instance": {
+            "$ref": "./examples/HanaInstances_Shutdown.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HanaInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -452,7 +510,6 @@
           "description": "Resource location"
         },
         "tags": {
-          "readOnly": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -595,21 +652,41 @@
             "S192m",
             "S192xm",
             "S96",
+            "S112",
+            "S224",
+            "S224m",
+            "S224om",
+            "S224oo",
+            "S224oom",
+            "S224ooo",
             "S384",
             "S384m",
             "S384xm",
             "S384xxm",
+            "S448",
+            "S448m",
+            "S448om",
+            "S448oo",
+            "S448oom",
+            "S448ooo",
             "S576m",
             "S576xm",
+            "S672",
+            "S672m",
+            "S672om",
+            "S672oo",
+            "S672oom",
+            "S672ooo",
             "S768",
             "S768m",
             "S768xm",
-            "S960m",
-            "S224o",
-            "S224m",
-            "S224om",
-            "S224oxm",
-            "S224oxxm"
+            "S896",
+            "S896m",
+            "S896om",
+            "S896oo",
+            "S896oom",
+            "S896ooo",
+            "S960m"
           ],
           "x-ms-enum": {
             "name": "HanaInstanceSizeNamesEnum",
@@ -638,7 +715,34 @@
           "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
         }
       },
-      "description": "Specifies the disk information fo the HANA instance"
+      "description": "Specifies the disk information for the HANA instance"
+    },
+    "SAPSystemID": {
+      "type": "object",
+      "properties": {
+        "gid": {
+          "type": "string",
+          "description": "Group ID of the HANA database user."
+        },
+        "memoryAllocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Percent of memory to allocate to this SID."
+        },
+        "sid": {
+          "type": "string",
+          "description": "SAP system ID as database identifier."
+        },
+        "username": {
+          "type": "string",
+          "description": "Name of the HANA database user."
+        },
+        "uid": {
+          "type": "string",
+          "description": "User ID of the HANA database user."
+        }
+      },
+      "description": "Specifies information related to a SAP system ID"
     },
     "StorageProfile": {
       "properties": {
@@ -653,6 +757,13 @@
             "$ref": "#/definitions/Disk"
           },
           "description": "Specifies information about the operating system disk used by the hana instance."
+        },
+        "hanaSids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SAPSystemID"
+          },
+          "description": "Specifies information related to SAP system IDs for the hana instance."
         }
       },
       "description": "Specifies the storage settings for the HANA instance disks."
@@ -730,6 +841,11 @@
         "display": {
           "$ref": "#/definitions/Display",
           "description": "Displayed HANA operation information"
+        },
+        "isDataAction": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
         }
       },
       "description": "HANA operation information"
@@ -766,16 +882,24 @@
       "description": "Detailed HANA operation information"
     },
     "ErrorResponse": {
-      "description": "Describes the format of Error response.",
       "type": "object",
+      "description": "Describes the format of Error response.",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "description": "Describes the error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "description": "Error code",
+              "type": "string"
+            },
+            "message": {
+              "readOnly": true,
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       }
     },

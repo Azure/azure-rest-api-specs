@@ -52,7 +52,7 @@
             "required": false
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -73,49 +73,49 @@
                   {
                     "data": [
                       {
-                        "timeStamp":"2016-11-23T19:14:00Z",
-                        "total":1.0
+                        "timeStamp": "2016-11-23T19:14:00Z",
+                        "total": 1.0
                       },
                       {
-                        "timeStamp":"2016-11-23T19:15:00Z"
+                        "timeStamp": "2016-11-23T19:15:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:16:00Z"
+                        "timeStamp": "2016-11-23T19:16:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:17:00Z"
+                        "timeStamp": "2016-11-23T19:17:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:18:00Z"
+                        "timeStamp": "2016-11-23T19:18:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:19:00Z",
-                        "total":1.0
+                        "timeStamp": "2016-11-23T19:19:00Z",
+                        "total": 1.0
                       },
                       {
-                        "timeStamp":"2016-11-23T19:20:00Z"
+                        "timeStamp": "2016-11-23T19:20:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:21:00Z"
+                        "timeStamp": "2016-11-23T19:21:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:22:00Z"
+                        "timeStamp": "2016-11-23T19:22:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:23:00Z"
+                        "timeStamp": "2016-11-23T19:23:00Z"
                       },
                       {
-                        "timeStamp":"2016-11-23T19:24:00Z",
-                        "total":1.0
+                        "timeStamp": "2016-11-23T19:24:00Z",
+                        "total": 1.0
                       }
                     ],
-                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metrics/RunsStarted",
+                    "id": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metrics/RunsStarted",
                     "name": {
-                      "value":"RunsStarted",
-                      "localizedValue":"Runs Started"
+                      "value": "RunsStarted",
+                      "localizedValue": "Runs Started"
                     },
-                    "type":"Microsoft.Insights/metrics",
-                    "unit":"Count"
+                    "type": "Microsoft.Insights/metrics",
+                    "unit": "Count"
                   }
                 ]
               }
@@ -127,15 +127,21 @@
         },
         "x-ms-odata": "#/definitions/Metric",
         "x-ms-examples": {
-          "Get Metric without filter": { "$ref": "./examples/GetMetric.json" },
-          "Get Metric with filter": { "$ref": "./examples/GetMetricFiltered.json" }
+          "Get Metric without filter": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric with filter": {
+            "$ref": "./examples/GetMetricFiltered.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -150,7 +156,7 @@
     },
     "Unit": {
       "type": "string",
-      "description": "the unit of the metric.",
+      "description": "The unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -158,7 +164,13 @@
         "CountPerSecond",
         "BytesPerSecond",
         "Percent",
-        "MilliSeconds"
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -166,7 +178,9 @@
       }
     },
     "MetricValue": {
-      "required": [ "timeStamp" ],
+      "required": [
+        "timeStamp"
+      ],
       "properties": {
         "timeStamp": {
           "type": "string",
@@ -202,7 +216,11 @@
       "description": "Represents a metric value."
     },
     "Metric": {
-      "required": [ "name", "unit", "data" ],
+      "required": [
+        "name",
+        "unit",
+        "data"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -240,7 +258,9 @@
           "description": "the value of the collection."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The collection of metric value sets."
     },
     "ErrorResponse": {
@@ -256,15 +276,6 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

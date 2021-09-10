@@ -16,15 +16,17 @@
     "application/json"
   ],
   "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
       "get": {
         "tags": [
           "Servers"
         ],
         "operationId": "ServerUsages_ListByServer",
         "description": "Returns server usages.",
-        "x-ms-examples":{
-          "List servers usages": { "$ref": "./examples/ServerUsageMetricsList.json" }
+        "x-ms-examples": {
+          "List servers usages": {
+            "$ref": "./examples/ServerUsageMetricsList.json"
+          }
         },
         "parameters": [
           {
@@ -61,7 +63,9 @@
         "operationId": "DatabaseUsages_ListByDatabase",
         "description": "Returns database usages.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/DatabaseUsageMetricsList.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/DatabaseUsageMetricsList.json"
+          }
         },
         "parameters": [
           {
@@ -152,7 +156,9 @@
           "description": "The list of server metrics for the server."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a list server metrics request."
     },
     "DatabaseUsage": {
@@ -208,7 +214,9 @@
           "description": "The list of database usages for the database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response to a list database metrics request."
     }
   },

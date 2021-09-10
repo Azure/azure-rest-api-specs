@@ -76,7 +76,7 @@
             "$ref": "#/parameters/ResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -96,35 +96,45 @@
                 "cost": 0,
                 "timespan": "2017-08-10T21:44:34Z/2017-08-10T22:44:34Z",
                 "interval": "PT1M",
-                "value": [{
+                "value": [
+                  {
                     "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/Microsoft.Insights/metrics/CpuTime",
                     "type": "Microsoft.Insights/metrics",
                     "name": {
                       "value": "CpuTime",
                       "localizedValue": "CPU Time"
                     },
+                    "displayDescription": "CPU Time",
                     "unit": "Seconds",
-                    "timeseries": [{
+                    "timeseries": [
+                      {
                         "metadatavalues": [],
-                        "data": [{
+                        "data": [
+                          {
                             "timeStamp": "2017-08-10T21:44:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:45:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:46:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:47:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:48:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:49:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:50:00Z",
                             "total": 0.0
                           }
@@ -139,15 +149,21 @@
         },
         "x-ms-odata": "#/definitions/MetadataValue",
         "x-ms-examples": {
-          "Get Metric for data": { "$ref": "./examples/GetMetric.json" },
-          "Get Metric for metadata": { "$ref": "./examples/GetMetricMetadata.json" }
+          "Get Metric for data": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric for metadata": {
+            "$ref": "./examples/GetMetricMetadata.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -162,7 +178,7 @@
     },
     "Unit": {
       "type": "string",
-      "description": "the unit of the metric.",
+      "description": "The unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -172,7 +188,11 @@
         "Percent",
         "MilliSeconds",
         "ByteSeconds",
-        "Unspecified"
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -180,7 +200,9 @@
       }
     },
     "MetricValue": {
-      "required": [ "timeStamp" ],
+      "required": [
+        "timeStamp"
+      ],
       "properties": {
         "timeStamp": {
           "type": "string",
@@ -249,7 +271,7 @@
           "type": "number",
           "format": "int32",
           "minimum": 0,
-          "description": "The integer value representing the cost of the query, for data case."
+          "description": "The integer value representing the relative cost of the query."
         },
         "timespan": {
           "type": "string",
@@ -268,7 +290,10 @@
           "description": "the value of the collection."
         }
       },
-      "required": [ "timespan", "value" ],
+      "required": [
+        "timespan",
+        "value"
+      ],
       "description": "The response to a metrics query."
     },
     "Metric": {
@@ -286,6 +311,18 @@
           "$ref": "#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
         },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
         "unit": {
           "$ref": "#/definitions/Unit",
           "description": "the unit of the metric."
@@ -298,7 +335,13 @@
           "description": "the time series returned when a data query is performed."
         }
       },
-      "required": [ "id", "type", "name", "unit", "timeseries" ],
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ],
       "description": "The result data of a query."
     },
     "TimeSeriesElement": {
@@ -397,13 +440,6 @@
       "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
       "x-ms-parameter-location": "method",
       "required": false
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

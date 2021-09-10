@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2019-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The pipeline template definitions have been fetched successfully.",
+      "body": {
+        "value": [
+          {
+            "id": "ms.vss-continuous-delivery-pipeline-templates.aspnet-windowswebapp",
+            "description": "Template for configuring CI/CD pipeline for ASP.Net app on Azure windows app service",
+            "inputs": [
+              {
+                "id": "azureAuth",
+                "description": "Authorization for Azure ARM endpoints.",
+                "type": "String",
+                "possibleValues": []
+              },
+              {
+                "id": "subscriptionId",
+                "description": "Id of subscription where azure resources will be created.",
+                "type": "String",
+                "possibleValues": []
+              },
+              {
+                "id": "resourceGroup",
+                "description": "A resource group is a collection of resources that share the same lifecycle, permissions, and policies. Name of resource group which should contain web app.",
+                "type": "String",
+                "possibleValues": []
+              },
+              {
+                "id": "webAppName",
+                "description": "Name of web app to be created",
+                "type": "String",
+                "possibleValues": []
+              },
+              {
+                "id": "location",
+                "description": "Choose the Azure region that's right for you and your customers.",
+                "type": "String",
+                "possibleValues": []
+              },
+              {
+                "id": "appServicePlan",
+                "description": "Details of cost and compute resource associated with the web app",
+                "type": "String",
+                "possibleValues": [
+                  {
+                    "value": "P1 Premium",
+                    "displayValue": "P1 Premium (1 Core, 1.75 GB RAM)"
+                  },
+                  {
+                    "value": "P2 Premium",
+                    "displayValue": "P2 Premium (2 Core, 3.5 GB RAM)"
+                  },
+                  {
+                    "value": "P3 Premium",
+                    "displayValue": "P3 Premium (4 Core, 7 GB RAM)"
+                  },
+                  {
+                    "value": "S1 Standard",
+                    "displayValue": "S1 Standard (1 Core, 1.75 GB RAM)"
+                  },
+                  {
+                    "value": "S2 Standard",
+                    "displayValue": "S2 Standard (2 Core, 3.5 GB RAM)"
+                  },
+                  {
+                    "value": "S3 Standard",
+                    "displayValue": "S3 Standard (4 Core, 7 GB RAM)"
+                  },
+                  {
+                    "value": "B1 Basic",
+                    "displayValue": "B1 Basic (1 Core, 1.75 GB RAM)"
+                  },
+                  {
+                    "value": "B2 Basic",
+                    "displayValue": "B2 Basic (2 Core, 3.5 GB RAM)"
+                  },
+                  {
+                    "value": "B3 Basic",
+                    "displayValue": "B3 Basic (4 Core, 7 GB RAM)"
+                  },
+                  {
+                    "value": "F1 Free",
+                    "displayValue": "F1 Free"
+                  },
+                  {
+                    "value": "D1 Shared",
+                    "displayValue": "D1 Shared"
+                  }
+                ]
+              },
+              {
+                "id": "appInsightLocation",
+                "description": "Collect application monitoring data using Application Insights.",
+                "type": "String",
+                "possibleValues": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

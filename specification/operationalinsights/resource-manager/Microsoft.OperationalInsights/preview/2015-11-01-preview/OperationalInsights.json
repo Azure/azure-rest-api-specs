@@ -34,200 +34,15 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
-      "put": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "LinkedServicesCreate": { "$ref": "./examples/LinkedServicesCreate.json" }
-        },
-        "operationId": "LinkedServices_CreateOrUpdate",
-        "description": "Create or update a linked service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
-          },
-          {
-            "name": "linkedServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the linkedServices resource"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkedService"
-            },
-            "description": "The parameters required to create or update a linked service."
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/LinkedService"
-            }
-          },
-          "201": {
-            "description": "Created response definition.",
-            "schema": {
-              "$ref": "#/definitions/LinkedService"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "LinkedServicesDelete": { "$ref": "./examples/LinkedServicesDelete.json" }
-        },
-        "operationId": "LinkedServices_Delete",
-        "description": "Deletes a linked service instance.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Log Analytics Workspace that contains the linkedServices resource"
-          },
-          {
-            "name": "linkedServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the linked service."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition."
-          },
-          "204": {
-            "description": "NoContent response definition."
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "LinkedServicesGet": { "$ref": "./examples/LinkedServicesGet.json" }
-        },
-        "operationId": "LinkedServices_Get",
-        "description": "Gets a linked service instance.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Log Analytics Workspace that contains the linkedServices resource"
-          },
-          {
-            "name": "linkedServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the linked service."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/LinkedService"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices": {
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "LinkedServicesListByWorkspace": { "$ref": "./examples/LinkedServicesListByWorkspace.json" }
-        },
-        "operationId": "LinkedServices_ListByWorkspace",
-        "description": "Gets the linked services instances in a workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Log Analytics Workspace that contains the linked services."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
       "put": {
         "tags": [
           "DataSources"
         ],
         "x-ms-examples": {
-          "DataSourcesCreate": { "$ref": "./examples/DataSourcesCreate.json" }
+          "DataSourcesCreate": {
+            "$ref": "./examples/DataSourcesCreate.json"
+          }
         },
         "operationId": "DataSources_CreateOrUpdate",
         "description": "Create or update a data source.",
@@ -285,7 +100,9 @@
           "DataSources"
         ],
         "x-ms-examples": {
-          "DataSourcesDelete": { "$ref": "./examples/DataSourcesDelete.json" }
+          "DataSourcesDelete": {
+            "$ref": "./examples/DataSourcesDelete.json"
+          }
         },
         "operationId": "DataSources_Delete",
         "description": "Deletes a data source instance.",
@@ -328,7 +145,9 @@
           "DataSources"
         ],
         "x-ms-examples": {
-          "DataSourcesGet": { "$ref": "./examples/DataSourcesGet.json" }
+          "DataSourcesGet": {
+            "$ref": "./examples/DataSourcesGet.json"
+          }
         },
         "operationId": "DataSources_Get",
         "description": "Gets a datasource instance.",
@@ -373,7 +192,9 @@
           "DataSources"
         ],
         "x-ms-examples": {
-          "DataSourcesListByWorkspace": { "$ref": "./examples/DataSourcesListByWorkspace.json" }
+          "DataSourcesListByWorkspace": {
+            "$ref": "./examples/DataSourcesListByWorkspace.json"
+          }
         },
         "operationId": "DataSources_ListByWorkspace",
         "description": "Gets the first page of data source instances in a workspace with the link to the next page.",
@@ -429,8 +250,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "IntelligencePacksDisable": { "$ref": "./examples/WorkspacesDisableIntelligencePack.json" }
-          },
+          "IntelligencePacksDisable": {
+            "$ref": "./examples/WorkspacesDisableIntelligencePack.json"
+          }
+        },
         "operationId": "Workspaces_DisableIntelligencePack",
         "description": "Disables an intelligence pack for a given workspace.",
         "parameters": [
@@ -471,8 +294,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "IntelligencePacksEnable": { "$ref": "./examples/WorkspacesEnableIntelligencePack.json" }
-          },
+          "IntelligencePacksEnable": {
+            "$ref": "./examples/WorkspacesEnableIntelligencePack.json"
+          }
+        },
         "operationId": "Workspaces_EnableIntelligencePack",
         "description": "Enables an intelligence pack for a given workspace.",
         "parameters": [
@@ -513,8 +338,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "IntelligencePacksList": { "$ref": "./examples/WorkspacesListIntelligencePacks.json" }
-          },
+          "IntelligencePacksList": {
+            "$ref": "./examples/WorkspacesListIntelligencePacks.json"
+          }
+        },
         "operationId": "Workspaces_ListIntelligencePacks",
         "description": "Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.",
         "parameters": [
@@ -554,8 +381,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "SharedKeysList": { "$ref": "./examples/WorkspacesGetSharedKeys.json" }
-          },
+          "SharedKeysList": {
+            "$ref": "./examples/WorkspacesGetSharedKeys.json"
+          }
+        },
         "operationId": "Workspaces_GetSharedKeys",
         "description": "Gets the shared keys for a workspace.",
         "parameters": [
@@ -592,8 +421,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "UsagesList": { "$ref": "./examples/WorkspacesListUsages.json" }
-          },
+          "UsagesList": {
+            "$ref": "./examples/WorkspacesListUsages.json"
+          }
+        },
         "operationId": "Workspaces_ListUsages",
         "description": "Gets a list of usage metrics for a workspace.",
         "parameters": [
@@ -633,8 +464,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspacesListManagementGroups": { "$ref": "./examples/WorkspacesListManagementGroups.json" }
-          },
+          "WorkspacesListManagementGroups": {
+            "$ref": "./examples/WorkspacesListManagementGroups.json"
+          }
+        },
         "operationId": "Workspaces_ListManagementGroups",
         "description": "Gets a list of management groups connected to a workspace.",
         "parameters": [
@@ -674,8 +507,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspacesGet": { "$ref": "./examples/WorkspacesListByResourceGroup.json" }
-          },
+          "WorkspacesGet": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+          }
+        },
         "operationId": "Workspaces_ListByResourceGroup",
         "description": "Gets workspaces in a resource group.",
         "parameters": [
@@ -708,8 +543,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspacesSubscriptionList": { "$ref": "./examples/WorkspacesSubscriptionList.json" }
-          },
+          "WorkspacesSubscriptionList": {
+            "$ref": "./examples/WorkspacesSubscriptionList.json"
+          }
+        },
         "operationId": "Workspaces_List",
         "description": "Gets the workspaces in a subscription.",
         "parameters": [
@@ -739,8 +576,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspacesCreate": { "$ref": "./examples/WorkspacesCreate.json" }
-          },
+          "WorkspacesCreate": {
+            "$ref": "./examples/WorkspacesCreate.json"
+          }
+        },
         "operationId": "Workspaces_CreateOrUpdate",
         "description": "Create or update a workspace.",
         "parameters": [
@@ -798,8 +637,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspacesDelete": { "$ref": "./examples/WorkspacesDelete.json" }
-          },
+          "WorkspacesDelete": {
+            "$ref": "./examples/WorkspacesDelete.json"
+          }
+        },
         "operationId": "Workspaces_Delete",
         "description": "Deletes a workspace instance.",
         "parameters": [
@@ -838,8 +679,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspaceGet": { "$ref": "./examples/WorkspacesGet.json" }
-          },
+          "WorkspaceGet": {
+            "$ref": "./examples/WorkspacesGet.json"
+          }
+        },
         "operationId": "Workspaces_Get",
         "description": "Gets a workspace instance.",
         "parameters": [
@@ -878,8 +721,10 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "WorkspacesPatch": { "$ref": "./examples/WorkspacesUpdate.json" }
-          },
+          "WorkspacesPatch": {
+            "$ref": "./examples/WorkspacesUpdate.json"
+          }
+        },
         "operationId": "Workspaces_Update",
         "description": "Updates a workspace.",
         "parameters": [
@@ -946,20 +791,64 @@
             }
           }
         },
-		"x-ms-pageable": {
-		  "nextLinkName": "nextLink"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get specific operation status": {
+            "$ref": "./examples/operationStatuses.json"
+          }
+        },
+        "tags": [
+          "asyncOperations"
+        ],
+        "operationId": "GetAsyncOperationsStatus",
+        "description": "Get the status of an azure asynchronous operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name of operation."
+          },
+          {
+            "name": "asyncOperationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Operation status.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
         }
       }
     }
   },
   "definitions": {
-  "OperationListResult": {
+    "OperationListResult": {
       "description": "Result of the request to list solution operations.",
       "properties": {
-          "value": {
+        "value": {
           "type": "array",
           "items": {
-              "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/Operation"
           },
           "description": "List of solution operations supported by the OperationsManagement resource provider."
         },
@@ -969,77 +858,34 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
-  },
-  "Operation": {
+    },
+    "Operation": {
       "description": "Supported operation of OperationalInsights resource provider.",
       "properties": {
-          "name": {
-              "description": "Operation name: {provider}/{resource}/{operation}",
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft OperationsManagement.",
               "type": "string"
-          },
-          "display": {
-              "description": "Display metadata associated with the operation.",
-              "properties": {
-                  "provider": {
-                      "description": "Service provider: Microsoft OperationsManagement.",
-                      "type": "string"
-                  },
-                  "resource": {
-                      "description": "Resource on which the operation is performed etc.",
-                      "type": "string"
-                  },
-                  "operation": {
-                      "description": "Type of operation: get, read, delete, etc.",
-                      "type": "string"
-                  }
-              }
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            }
           }
+        }
       }
-  },
-  "LinkedServiceProperties": {
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The resource id of the resource that will be linked to the workspace."
-        }
-      },
-      "required": [
-        "resourceId"
-      ],
-      "description": "Linked service properties."
     },
-    "LinkedService": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LinkedServiceProperties",
-          "description": "The properties of the linked service."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "The top level Linked service resource container.",
-      "x-ms-azure-resource": true
-    },
-    "LinkedServiceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LinkedService"
-          },
-          "description": "Gets or sets a list of linked service instances."
-        }
-      },
-      "description": "The list linked service operation response."
-    },
-    "DataSourceKind":{
+    "DataSourceKind": {
       "type": "string",
       "enum": [
         "AzureActivityLog",
@@ -1274,7 +1120,8 @@
             "Premium",
             "PerNode",
             "PerGB2018",
-            "Standalone"
+            "Standalone",
+            "CapacityReservation"
           ],
           "x-ms-enum": {
             "name": "SkuNameEnum",
@@ -1307,22 +1154,25 @@
         },
         "source": {
           "type": "string",
-          "description": "The source of the workspace.  Source defines where the workspace was created. 'Azure' implies it was created in Azure.  'External' implies it was created via the Operational Insights Portal. This value is set on the service side and read-only on the client side."
+          "description": "This is a read-only legacy property. It is always set to 'Azure' by the service. Kept here for backward compatibility.",
+          "readOnly": true
         },
         "customerId": {
           "type": "string",
-          "description": "The ID associated with the workspace.  Setting this value at creation time allows the workspace being created to be linked to an existing workspace."
+          "description": "This is a read-only property. Represents the ID associated with the workspace.",
+          "readOnly": true
         },
         "portalUrl": {
           "type": "string",
-          "description": "The URL of the Operational Insights portal for this workspace.  This value is set on the service side and read-only on the client side."
+          "description": "This is a legacy property and is not used anymore. Kept here for backward compatibility.",
+          "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the workspace."
         },
-        "retentionInDays":{
-          "type":"integer",
+        "retentionInDays": {
+          "type": "integer",
           "format": "int32",
           "minimum": -1,
           "maximum": 730,
@@ -1336,7 +1186,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceProperties",
-          "description":"Workspace properties."
+          "description": "Workspace properties."
         },
         "eTag": {
           "type": "string",
@@ -1426,6 +1276,51 @@
         }
       },
       "description": "Common properties of proxy resource."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
     }
   },
   "parameters": {
@@ -1444,15 +1339,15 @@
       "description": "Client Api Version."
     },
     "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method",
-        "description": "The name of the resource group to get. The name is case insensitive.",
-        "pattern": "^[-\\w\\._\\(\\)]+$",
-        "minLength": 1,
-        "maxLength": 90
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the resource group to get. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
     }
   }
 }

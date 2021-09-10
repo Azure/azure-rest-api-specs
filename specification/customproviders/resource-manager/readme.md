@@ -49,14 +49,19 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-powershell
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-trenton
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customproviders']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
 ```
 
 ## Go
@@ -82,3 +87,25 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## NodeJS
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
+
+## Terraform
+
+See configuration in [readme.terraform.md](./readme.terraform.md)
+
+
+
+## cli
+
+These settings apply only when `--cli` is specified on the command line.
+
+``` yaml $(cli)
+cli:
+  cli-name: customproviders
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.customproviders
+  package-name: azure-mgmt-customproviders
+  clear-output-folder: false
+```
+

@@ -18,6 +18,34 @@ To see additional help and options, run:
 
 ---
 
+## Suppression
+
+``` yaml
+directive:
+  - from: service.json
+    suppress: OAV131 
+    reason: Testing purpose.
+
+  - from: service.json 
+    suppress: R4010
+    reason: Testing purpose
+
+  - from: service.json
+    suppress:
+    - R4009
+    reason: suppressing system data for 2021-02-10
+
+  - from: service.json
+    suppress:
+      - R4010
+    reason: suppressing default error response as ASR is an old service and implements error response in a different format.
+
+  - from: service.json
+    suppress:
+      - R4011
+    reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
+```
+
 ## Configuration
 
 ### Basic Information
@@ -26,25 +54,72 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07
+tag: package-2021-07
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - UniqueResourcePaths
+```
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-07-01/service.json
 ```
 
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-06-01/service.json
+```
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-04-01/service.json
+```
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-03-01/service.json
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-02-10/service.json
+```
 
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-07'
+``` yaml $(tag) == 'package-2018-07'
 input-file:
   - Microsoft.RecoveryServices/stable/2018-07-10/service.json
 ```
-### Tag: package-2016-08
+
+### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.RecoveryServices/stable/2018-01-10/service.json
+  - Microsoft.RecoveryServices/stable/2018-01-10/service.json
 ```
 
 ### Tag: package-2016-08
@@ -67,7 +142,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -75,6 +151,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_site_recovery']
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -88,7 +165,7 @@ csharp:
   payload-flattening-threshold: 0
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
-  output-folder: $(csharp-sdks-folder)/RecoveryServices.SiteRecovery/Management.RecoveryServices.SiteRecovery/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices-siterecovery/Microsoft.Azure.Management.RecoveryServices.SiteRecovery/src/Generated
   clear-output-folder: true
 ```
 
@@ -96,36 +173,10 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.recoveryservicessiterecovery
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservicessiterecovery
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2016-08
-```
-
-### Tag: package-2016-08 and java
-
-These settings apply only when `--tag=package-2016-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.recoveryservicessiterecovery.v2018_01_10
-  output-folder: $(azure-libraries-for-java-folder)/recoveryservicessiterecovery/resource-manager/v2018_01_10
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)

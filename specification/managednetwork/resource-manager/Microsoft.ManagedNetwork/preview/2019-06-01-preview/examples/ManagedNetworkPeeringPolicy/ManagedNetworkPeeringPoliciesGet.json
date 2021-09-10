@@ -1,0 +1,32 @@
+{
+  "title": "Get Managed Network Peering Policy",
+  "parameters": {
+    "api-version": "2019-06-01",
+    "subscriptionId": "subscriptionA",
+    "resourceGroupName": "myResourceGroup",
+    "managedNetworkName": "myManagedNetwork",
+    "managedNetworkPeeringPolicyName": "myHubAndSpoke"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myHubAndSpoke",
+        "id": "/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork/managedNetworkPeeringPolicies/myHubAndSpoke",
+        "type": "Microsoft.ManagedNetwork/peeringPolicies",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "etag": "asdf-asdf-asdf2",
+          "type": "HubAndSpokeTopology",
+          "hub": {
+            "id": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet"
+          },
+          "spokes": [
+            {
+              "id": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.ManagedNetwork/managedNetworks/myManagedNetwork/managedNetworkGroups/myManagedNetworkGroup1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

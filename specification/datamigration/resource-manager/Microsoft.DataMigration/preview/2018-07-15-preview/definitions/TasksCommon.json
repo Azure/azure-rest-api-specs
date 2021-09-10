@@ -142,6 +142,60 @@
         "modelAsString": true
       }
     },
+    "ScenarioSource": {
+      "type": "string",
+      "description": "An enumeration of source type",
+      "enum": [
+        "Access",
+        "DB2",
+        "MySQL",
+        "Oracle",
+        "SQL",
+        "Sybase",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLRDS",
+        "MySQLRDS",
+        "PostgreSQLRDS"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioSource",
+        "modelAsString": true
+      }
+    },
+    "ScenarioTarget": {
+      "type": "string",
+      "description": "An enumeration of target type",
+      "enum": [
+        "SQLServer",
+        "SQLDB",
+        "SQLDW",
+        "SQLMI",
+        "AzureDBForMySql",
+        "AzureDBForPostgresSQL",
+        "MongoDB"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioTarget",
+        "modelAsString": true
+      }
+    },
+    "ReplicateMigrationState": {
+      "type": "string",
+      "description": "Wrapper for replicate reported migration states.",
+      "enum": [
+        "UNDEFINED",
+        "VALIDATING",
+        "PENDING",
+        "COMPLETE",
+        "ACTION_REQUIRED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicateMigrationState",
+        "modelAsString": true
+      }
+    },
     "DatabaseObjectName": {
       "type": "object",
       "description": "A representation of the name of an object in a database",
@@ -1011,7 +1065,7 @@
       "type": "object",
       "description": "Information about migration eligibility of a server object",
       "properties": {
-        "isEligibileForMigration": {
+        "isEligibleForMigration": {
           "type": "boolean",
           "description": "Whether object is eligible for migration or not.",
           "readOnly": true
@@ -1040,7 +1094,14 @@
         "COMPLETE",
         "CANCELLING",
         "CANCELLED",
-        "FAILED"
+        "FAILED",
+        "VALIDATING",
+        "VALIDATION_COMPLETE",
+        "VALIDATION_FAILED",
+        "RESTORE_IN_PROGRESS",
+        "RESTORE_COMPLETED",
+        "BACKUP_IN_PROGRESS",
+        "BACKUP_COMPLETED"
       ],
       "x-ms-enum": {
         "name": "SyncDatabaseMigrationReportingState",
@@ -1180,6 +1241,61 @@
       ],
       "x-ms-enum": {
         "name": "DatabaseMigrationState",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationInfo": {
+      "type": "object",
+      "description": "SSIS migration info with SSIS store type, overwrite policy.",
+      "properties": {
+        "ssisStoreType": {
+          "$ref": "#/definitions/SsisStoreType",
+          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS"
+        },
+        "projectOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS project migration"
+        },
+        "environmentOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS environment migration"
+        }
+      }
+    },
+    "SsisStoreType": {
+      "type": "string",
+      "description": "An enumeration of supported source SSIS store type in DMS",
+      "enum": [
+        "SsisCatalog"
+      ],
+      "x-ms-enum": {
+        "name": "SsisStoreType",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationOverwriteOption": {
+      "type": "string",
+      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object",
+      "enum": [
+        "Ignore",
+        "Overwrite"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationOverwriteOption",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationStage": {
+      "type": "string",
+      "description": "Current stage of SSIS migration",
+      "enum": [
+        "None",
+        "Initialize",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationStage",
         "modelAsString": true
       }
     }

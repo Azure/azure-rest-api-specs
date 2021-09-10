@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "streamingLocatorName": "UserCreatedSecureStreamingLocator",
+    "api-version": "2018-07-01",
+    "parameters": {
+      "properties": {
+        "streamingPolicyName": "secureStreamingPolicy",
+        "assetName": "ClimbingMountRainier",
+        "startTime": "2018-03-01T00:00:00Z",
+        "endTime": "2028-12-31T23:59:59.9999999Z"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedSecureStreamingLocator",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/streamingLocators/UserCreatedSecureStreamingLocator",
+        "type": "Microsoft.Media/mediaservices/streamingLocators",
+        "properties": {
+          "assetName": "ClimbingMountRainier",
+          "created": "2019-06-06T17:28:03.9392829Z",
+          "startTime": "2018-03-01T00:00:00Z",
+          "endTime": "2028-12-31T23:59:59.9999999Z",
+          "streamingLocatorId": "1f5db621-0c21-43d7-a340-2b143d62d4e7",
+          "streamingPolicyName": "secureStreamingPolicy",
+          "contentKeys": [
+            {
+              "id": "41ddc803-579c-4fe8-b298-b37be5924d9e",
+              "type": "CommonEncryptionCbcs",
+              "labelReferenceInStreamingPolicy": "cbcsDefaultKey",
+              "tracks": []
+            },
+            {
+              "id": "68a5fd6e-ed9e-4cdf-b276-40304299dc4a",
+              "type": "CommonEncryptionCenc",
+              "labelReferenceInStreamingPolicy": "cencDefaultKey",
+              "tracks": []
+            },
+            {
+              "id": "bfb7cbf3-5834-4d43-a87d-f25ed1b88ed3",
+              "type": "EnvelopeEncryption",
+              "labelReferenceInStreamingPolicy": "aesDefaultKey",
+              "tracks": []
+            }
+          ],
+          "filters": []
+        }
+      }
+    }
+  }
+}

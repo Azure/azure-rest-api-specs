@@ -352,7 +352,7 @@
         "ipTags": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpTag"
+            "$ref": "./publicIpAddress.json#/definitions/IpTag"
           },
           "description": "The list of tags associated with the public IP prefix."
         },
@@ -371,6 +371,11 @@
             "$ref": "#/definitions/ReferencedPublicIpAddress"
           },
           "description": "The list of all referenced PublicIPAddresses"
+        },
+        "loadBalancerFrontendIpConfiguration": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to load balancer frontend IP configuration associated with the public IP prefix."
         },
         "resourceGuid": {
           "type": "string",
@@ -428,19 +433,6 @@
         }
       },
       "description": "Response for ListPublicIpPrefixes API service call."
-    },
-    "IpTag": {
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "Gets or sets the ipTag type: Example FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc"
-        }
-      },
-      "description": "Contains the IpTag associated with the object"
     },
     "ReferencedPublicIpAddress": {
       "properties": {

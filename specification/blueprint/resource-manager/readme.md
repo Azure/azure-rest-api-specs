@@ -59,9 +59,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-resource-manager-schemas
 ```
 
 
@@ -129,3 +131,6 @@ directive:
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```
+
+
+

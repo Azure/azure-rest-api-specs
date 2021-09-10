@@ -39,6 +39,15 @@ input-file:
 - Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+```
+
 ---
 # Code Generation
 
@@ -50,7 +59,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -58,35 +67,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_commerce']
+  - repo: azure-resource-manager-schemas
 ```
 
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.commerce
-  package-name: azure-mgmt-commerce
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -121,9 +108,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.commerce.v2015_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/commerce/resource-manager/v2015_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/commerce/mgmt-v2015_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+
 
 

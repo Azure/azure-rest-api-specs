@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/{name}": {
+    "/{resourceUri}/providers/Microsoft.Insights/diagnosticSettings/{name}": {
       "get": {
         "tags": [
           "DiagnosticSettings"
@@ -48,7 +48,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/NameParameter"
@@ -72,7 +72,7 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/getDiagnosticSetting.json"
           }
-        } 
+        }
       },
       "put": {
         "tags": [
@@ -85,7 +85,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -118,7 +118,7 @@
           "Creates or Updates the diagnostic setting": {
             "$ref": "./examples/createOrUpdateDiagnosticSetting.json"
           }
-        } 
+        }
       },
       "delete": {
         "tags": [
@@ -131,7 +131,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/NameParameter"
@@ -155,10 +155,10 @@
           "Deletes the diagnostic setting": {
             "$ref": "./examples/deleteDiagnosticSetting.json"
           }
-        } 
+        }
       }
     },
-    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings": {
+    "/{resourceUri}/providers/Microsoft.Insights/diagnosticSettings": {
       "get": {
         "tags": [
           "DiagnosticSettings"
@@ -170,7 +170,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -191,7 +191,7 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/listDiagnosticSettings.json"
           }
-        } 
+        }
       }
     }
   },
@@ -230,7 +230,10 @@
           "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
-      "required": [ "enabled", "days" ],
+      "required": [
+        "enabled",
+        "days"
+      ],
       "description": "Specifies the retention policy for the log."
     },
     "MetricSettings": {
@@ -253,7 +256,9 @@
           "description": "the retention policy for this category."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
     },
     "LogSettings": {
@@ -271,7 +276,9 @@
           "description": "the retention policy for this log."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
     },
     "DiagnosticSettings": {
@@ -297,18 +304,22 @@
           "items": {
             "$ref": "#/definitions/MetricSettings"
           },
-          "description": "the list of metric settings."
+          "description": "The list of metric settings."
         },
         "logs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSettings"
           },
-          "description": "the list of logs settings."
+          "description": "The list of logs settings."
         },
         "workspaceId": {
           "type": "string",
-          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+          "description": "The full ARM resource ID of the Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        },
+        "logAnalyticsDestinationType": {
+          "type": "string",
+          "description": "A string indicating whether the export to Log Analytics should use the default destination type, i.e. AzureDiagnostics, or use a destination type constructed as follows: <normalized service identity>_<normalized category name>. Possible values are: Dedicated and null (null is default.)"
         }
       },
       "description": "The diagnostic settings."
@@ -357,13 +368,6 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "ResourceUriParameter": {
       "name": "resourceUri",
       "in": "path",

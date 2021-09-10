@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "dedicatedCloudNodeName": "myNode",
+    "api-version": "2019-04-01",
+    "Referer": "https://management.azure.com/",
+    "dedicatedCloudNodeRequest": {
+      "tags": {
+        "myTag": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/myNode",
+        "location": "westus",
+        "name": "myNode",
+        "properties": {
+          "availabilityZoneId": "az1",
+          "created": "2019-05-21T13:43:26.441Z",
+          "placementGroupId": "n1",
+          "purchaseId": "56acbd46-3d36-4bbf-9b08-57c30fdf6932",
+          "nodesCount": 0,
+          "skuDescription": {
+            "id": "general",
+            "name": "CS28-Node"
+          },
+          "status": "unused"
+        },
+        "tags": {
+          "myTag": "tagValue"
+        },
+        "type": "Microsoft.VMwareCloudSimple/dedicatedCloudNodes"
+      }
+    }
+  }
+}

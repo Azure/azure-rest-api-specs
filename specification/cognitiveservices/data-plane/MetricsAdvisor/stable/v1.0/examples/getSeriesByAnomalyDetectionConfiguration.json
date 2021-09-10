@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "configurationId": "33333333-3333-3333-3333-000000000001",
+    "Content-Type": "application/json",
+    "body": {
+      "startTime": "2020-01-01T00:00:00.000Z",
+      "endTime": "2020-02-01T00:00:00.000Z",
+      "series": [
+        {
+          "dimension": {
+            "category": "Jewelry",
+            "city": "Beijing"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "series": {
+              "dimension": {
+                "category": "Jewelry",
+                "city": "Beijing"
+              }
+            },
+            "timestampList": [
+              "2020-01-01T00:00:00.000Z"
+            ],
+            "valueList": [
+              108.3
+            ],
+            "isAnomalyList": [
+              false
+            ],
+            "periodList": [
+              0
+            ],
+            "expectedValueList": [
+              108.0
+            ],
+            "lowerBoundaryList": [
+              100.1
+            ],
+            "upperBoundaryList": [
+              112.8
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

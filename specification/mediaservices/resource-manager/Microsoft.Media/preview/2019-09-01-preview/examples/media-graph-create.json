@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "mediaGraphName": "SampleMediaGraph",
+    "api-version": "2019-09-01-preview",
+    "parameters": {
+      "properties": {
+        "description": "updated description",
+        "sources": [
+          {
+            "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
+            "name": "rtspSource",
+            "rtspUrl": "rtsp://contoso.com:554/stream1",
+            "credentials": {
+              "username": "exampleusername",
+              "password": "examplepassword"
+            }
+          }
+        ],
+        "sinks": [
+          {
+            "@odata.type": "#Microsoft.Media.MediaGraphAssetSink",
+            "name": "AssetSink",
+            "inputs": [
+              "rtspSource"
+            ],
+            "assetName": "SampleAsset"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleMediaGraph",
+        "properties": {
+          "description": "updated description",
+          "state": "Stopped",
+          "created": "2019-09-01T00:00:00Z",
+          "lastModified": "2019-09-01T00:00:00Z",
+          "sources": [
+            {
+              "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
+              "name": "rtspSource",
+              "rtspUrl": "rtsp://contoso.com:554/stream1"
+            }
+          ],
+          "sinks": [
+            {
+              "@odata.type": "#Microsoft.Media.MediaGraphAssetSink",
+              "name": "AssetSink",
+              "inputs": [
+                "rtspSource"
+              ],
+              "assetName": "SampleAsset"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

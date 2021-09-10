@@ -15,11 +15,30 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   clear-output-folder: true
+
+# remove DUMMY member of enum
+directive:
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DummyOrchestrationServiceName');
+      }
+      return $;
+    
+    # remove it from the C# generated code
+  - from: source-file-csharp
+    where: $ 
+    transform: >-
+      return $.
+        replace(/.*public const string DummyOrchestrationServiceName.*/g,'').
+        replace(/, 'DummyOrchestrationServiceName'/g,'');
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Compute
-output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
+output-folder: $(csharp-sdks-folder)/compute/Microsoft.Azure.Management.Compute/src/Generated
 ```
 
 ## Batch settings
@@ -74,4 +93,16 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Compute/Management.Comput
 
 batch:
  - tag: profile-hybrid-2019-03-01
+ ```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Compute
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Compute/Management.Compute/Generated
+
+batch:
+ - tag: profile-hybrid-2020-09-01
  ```

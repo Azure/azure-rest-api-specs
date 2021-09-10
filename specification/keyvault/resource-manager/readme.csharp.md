@@ -14,7 +14,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.KeyVault
-output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
+output-folder: $(csharp-sdks-folder)/keyvault/Microsoft.Azure.Management.KeyVault/src/Generated
 ```
 
 ## Batch settings
@@ -64,4 +64,16 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/KeyVault/Management.KeyVa
 
 batch:
  - tag: profile-hybrid-2019-03-01
+ ```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).KeyVault
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/KeyVault/Management.KeyVault/Generated
+
+batch:
+ - tag: profile-hybrid-2020-09-01
  ```

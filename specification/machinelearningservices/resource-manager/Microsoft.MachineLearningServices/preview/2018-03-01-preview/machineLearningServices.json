@@ -73,7 +73,9 @@
         "description": "Gets the properties of the specified machine learning workspace.",
         "operationId": "Workspaces_Get",
         "x-ms-examples": {
-          "Get Workspace": { "$ref": "./examples/getWorkspace.json" }
+          "Get Workspace": {
+            "$ref": "./examples/getWorkspace.json"
+          }
         },
         "parameters": [
           {
@@ -111,7 +113,9 @@
         "description": "Creates or updates a workspace with the specified parameters.",
         "operationId": "Workspaces_CreateOrUpdate",
         "x-ms-examples": {
-          "Create Workspace": { "$ref": "./examples/createWorkspace.json" }
+          "Create Workspace": {
+            "$ref": "./examples/createWorkspace.json"
+          }
         },
         "parameters": [
           {
@@ -164,8 +168,11 @@
         "description": "Deletes a machine learning workspace.",
         "operationId": "Workspaces_Delete",
         "x-ms-examples": {
-          "Delete Workspace": { "$ref": "./examples/deleteWorkspace.json" }
+          "Delete Workspace": {
+            "$ref": "./examples/deleteWorkspace.json"
+          }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -183,6 +190,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
@@ -202,7 +212,9 @@
         "description": "Updates a machine learning workspace with the specified parameters.",
         "operationId": "Workspaces_Update",
         "x-ms-examples": {
-          "Update Workspace": { "$ref": "./examples/updateWorkspace.json" }
+          "Update Workspace": {
+            "$ref": "./examples/updateWorkspace.json"
+          }
         },
         "parameters": [
           {
@@ -251,7 +263,9 @@
         "description": "Lists all the available machine learning workspaces under the specified resource group.",
         "operationId": "Workspaces_ListByResourceGroup",
         "x-ms-examples": {
-          "Get Workspaces by Resource Group": { "$ref": "./examples/getWorkspacesByResourceGroup.json" }
+          "Get Workspaces by Resource Group": {
+            "$ref": "./examples/getWorkspacesByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -294,7 +308,9 @@
         "description": "Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ListKeys",
         "x-ms-examples": {
-          "List Workspace Keys": { "$ref": "./examples/listWorkspaceKeys.json" }
+          "List Workspace Keys": {
+            "$ref": "./examples/listWorkspaceKeys.json"
+          }
         },
         "parameters": [
           {
@@ -334,7 +350,9 @@
         "description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ResyncKeys",
         "x-ms-examples": {
-          "Resync Workspace Keys": { "$ref": "./examples/resyncWorkspaceKeys.json" }
+          "Resync Workspace Keys": {
+            "$ref": "./examples/resyncWorkspaceKeys.json"
+          }
         },
         "parameters": [
           {
@@ -371,7 +389,9 @@
         "description": "Lists all the available machine learning workspaces under the specified subscription.",
         "operationId": "Workspaces_ListBySubscription",
         "x-ms-examples": {
-          "Get Workspaces by subscription": { "$ref": "./examples/getWorkspacesBySubscription.json" }
+          "Get Workspaces by subscription": {
+            "$ref": "./examples/getWorkspacesBySubscription.json"
+          }
         },
         "parameters": [
           {
@@ -415,7 +435,9 @@
         "operationId": "MachineLearningCompute_ListByWorkspace",
         "description": "Gets computes in specified workspace.",
         "x-ms-examples": {
-          "Get Computes": { "$ref": "./examples/getComputes.json" }
+          "Get Computes": {
+            "$ref": "./examples/getComputes.json"
+          }
         },
         "parameters": [
           {
@@ -459,8 +481,12 @@
         "operationId": "MachineLearningCompute_Get",
         "description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
         "x-ms-examples": {
-          "Get a AKS Compute": { "$ref": "./examples/getAKSCompute.json" },
-          "Get a BatchAI Compute": { "$ref": "./examples/getBatchAICompute.json" }
+          "Get a AKS Compute": {
+            "$ref": "./examples/getAKSCompute.json"
+          },
+          "Get a BatchAI Compute": {
+            "$ref": "./examples/getBatchAICompute.json"
+          }
         },
         "parameters": [
           {
@@ -503,11 +529,21 @@
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a BatchAI Compute": { "$ref": "./examples/createBasicBatchAICompute.json" },
-          "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
-          "Create a DataFactory Compute": { "$ref": "./examples/createBasicDataFactoryCompute.json" },
-          "Update a BatchAI Compute": { "$ref": "./examples/updateBatchAICompute.json" },
-          "Update a AKS Compute": { "$ref": "./examples/updateAKSCompute.json" }
+          "Create a BatchAI Compute": {
+            "$ref": "./examples/createBasicBatchAICompute.json"
+          },
+          "Create AKS Compute": {
+            "$ref": "./examples/createBasicAKSCompute.json"
+          },
+          "Create a DataFactory Compute": {
+            "$ref": "./examples/createBasicDataFactoryCompute.json"
+          },
+          "Update a BatchAI Compute": {
+            "$ref": "./examples/updateBatchAICompute.json"
+          },
+          "Update a AKS Compute": {
+            "$ref": "./examples/updateAKSCompute.json"
+          }
         },
         "parameters": [
           {
@@ -565,7 +601,9 @@
         "description": "Deletes specified Machine Learning compute.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete Compute": { "$ref": "./examples/deleteCompute.json" }
+          "Delete Compute": {
+            "$ref": "./examples/deleteCompute.json"
+          }
         },
         "parameters": [
           {
@@ -618,7 +656,9 @@
         "description": "System Update On Machine Learning compute.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "System Update Compute": { "$ref": "./examples/systemUpdateCompute.json" }
+          "System Update Compute": {
+            "$ref": "./examples/systemUpdateCompute.json"
+          }
         },
         "parameters": [
           {
@@ -672,8 +712,12 @@
         "operationId": "MachineLearningCompute_ListKeys",
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
-          "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" },
-          "List BatchAI Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" }
+          "List AKS Compute Keys": {
+            "$ref": "./examples/listKeysAKSCompute.json"
+          },
+          "List BatchAI Compute Keys": {
+            "$ref": "./examples/listKeysAKSCompute.json"
+          }
         },
         "parameters": [
           {
@@ -1006,7 +1050,6 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "readOnly": true,
           "description": "The identity of the resource."
         },
         "location": {
@@ -1106,7 +1149,7 @@
         },
         {
           "type": "object",
-          "properties":{
+          "properties": {
             "properties": {
               "description": "Compute properties",
               "$ref": "#/definitions/Compute"

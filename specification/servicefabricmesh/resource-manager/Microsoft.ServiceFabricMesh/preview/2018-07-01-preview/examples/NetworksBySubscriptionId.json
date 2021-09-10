@@ -1,60 +1,60 @@
 {
-    "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "api-version": "2018-07-01-preview"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "value": [
-            {
-              "type": "Microsoft.ServiceFabricMesh/networks",
-              "location": "eastus",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/{resourceGroup}/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork",
-              "name": "helloWorldNetwork",
-              "tags": {},
-              "properties": {
-                "provisioningState": "Succeeded",
-                "addressPrefix": "10.0.0.4/22",
-                "ingressConfig": {
-                  "qosLevel": "Bronze",
-                  "publicIPAddress": "52.191.12.219",
-                  "layer4": [
-                    {
-                      "publicPort": 80,
-                      "applicationName": "helloWorldApp",
-                      "serviceName": "helloWorldService",
-                      "endpointName": "helloWorldListener"
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              "type": "Microsoft.ServiceFabricMesh/networks",
-              "location": "eastus",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/{resourceGroup}/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetworkWindows",
-              "name": "helloWorldNetworkWindows",
-              "tags": {},
-              "properties": {
-                "provisioningState": "Succeeded",
-                "addressPrefix": "10.0.0.4/22",
-                "ingressConfig": {
-                  "qosLevel": "Bronze",
-                  "publicIPAddress": "52.191.255.103",
-                  "layer4": [
-                    {
-                      "publicPort": 80,
-                      "applicationName": "helloWorldAppWindows",
-                      "serviceName": "helloWorldService",
-                      "endpointName": "helloWorldListener"
-                    }
-                  ]
-                }
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.ServiceFabricMesh/networks",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/{resourceGroup}/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork",
+            "name": "helloWorldNetwork",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.0.0.4/22",
+              "ingressConfig": {
+                "qosLevel": "Bronze",
+                "publicIPAddress": "52.191.12.219",
+                "layer4": [
+                  {
+                    "publicPort": 80,
+                    "applicationName": "helloWorldApp",
+                    "serviceName": "helloWorldService",
+                    "endpointName": "helloWorldListener"
+                  }
+                ]
               }
             }
-          ]
-        }
+          },
+          {
+            "type": "Microsoft.ServiceFabricMesh/networks",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/{resourceGroup}/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetworkWindows",
+            "name": "helloWorldNetworkWindows",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.0.0.4/22",
+              "ingressConfig": {
+                "qosLevel": "Bronze",
+                "publicIPAddress": "52.191.255.103",
+                "layer4": [
+                  {
+                    "publicPort": 80,
+                    "applicationName": "helloWorldAppWindows",
+                    "serviceName": "helloWorldService",
+                    "endpointName": "helloWorldListener"
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     }
   }
+}

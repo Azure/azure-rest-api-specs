@@ -2,7 +2,8 @@
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Subscriptions Admin.
+This is the AutoRest configuration file for Subscriptions Admin. We do not ship any language SDKs for AzureStack Administrator APIs and these APIs do not exist in azure.
+
 
 ---
 ## Getting Started 
@@ -64,6 +65,7 @@ directive:
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions"].post.operationId
+
 ```
 
 ### Tag: package-2015-11-01
@@ -98,4 +100,31 @@ csharp:
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
+```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Subscriptions.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/AcquiredPlan.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/DelegatedProvider.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/DelegatedProviderOffer.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/DirectoryTenant.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Location.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Manifest.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Offer.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/OfferDelegation.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Plan.json
+  - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Quota.json
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file:
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```

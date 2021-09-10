@@ -1,172 +1,172 @@
 {
-    "swagger":"2.0",
-    "info":{
-        "version":"2017-03-01-preview",
-        "title":"SqlManagementClient",
-        "description":"The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
-    },
-    "host":"management.azure.com",
-    "schemes":[
-        "https"
-    ],
-    "consumes":[
-        "application/json"
-    ],
-    "produces":[
-        "application/json"
-    ],
-    "paths":{
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move":{
-            "post":{
-                "tags":[
-                    "Databases"
-                ],
-                "description":"Renames a database.",
-                "operationId":"Databases_Rename",
-                "parameters":[
-                    {
-                        "$ref":"#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name":"databaseName",
-                        "in":"path",
-                        "description":"The name of the database to rename.",
-                        "required":true,
-                        "type":"string"
-                    },
-                    {
-                        "name":"parameters",
-                        "in":"body",
-                        "description":"The resource move definition for renaming this database.",
-                        "required":true,
-                        "schema":{
-                            "$ref":"#/definitions/ResourceMoveDefinition"
-                        }
-                    },
-                    {
-                        "$ref":"#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"Successfully renamed the database."
-                    },
-                    "default":{
-                        "description":"*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SourceDatabaseNotFound - The source database does not exist."
-                    }
-                },
-                "x-ms-examples":{
-                    "Renames a database.":{
-                        "$ref":"./examples/RenameDatabase.json"
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-03-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Renames a database.",
+        "operationId": "Databases_Rename",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database to rename.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The resource move definition for renaming this database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceMoveDefinition"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully renamed the database."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SourceDatabaseNotFound - The source database does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Renames a database.": {
+            "$ref": "./examples/RenameDatabase.json"
+          }
         }
-    },
-    "definitions":{
-        "ResourceMoveDefinition":{
-            "description":"Contains the information necessary to perform a resource move (rename).",
-            "required":[
-                "id"
-            ],
-            "type":"object",
-            "properties":{
-                "id":{
-                    "description":"The target ID for the resource",
-                    "type":"string"
-                }
-            }
-        }
-    },
-    "parameters":{
-        "SubscriptionIdParameter":{
-            "name":"subscriptionId",
-            "in":"path",
-            "description":"The subscription ID that identifies an Azure subscription.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"client"
-        },
-        "ApiVersionParameter":{
-            "name":"api-version",
-            "in":"query",
-            "description":"The API version to use for the request.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"client"
-        },
-        "ResourceGroupParameter":{
-            "name":"resourceGroupName",
-            "in":"path",
-            "description":"The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        },
-        "ServerNameParameter":{
-            "name":"serverName",
-            "in":"path",
-            "description":"The name of the server.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        },
-        "ManagedInstanceNameParameter":{
-            "name":"managedInstanceName",
-            "in":"path",
-            "description":"The name of the managed instance.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        },
-        "DatabaseNameParameter":{
-            "name":"databaseName",
-            "in":"path",
-            "description":"The name of the database.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        },
-        "SqlVirtualMachineInstanceNameParameter":{
-            "name":"sqlVirtualMachineInstanceName",
-            "in":"path",
-            "description":"The name of the SqlVirtualMachineInstance.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        },
-        "SqlVirtualMachineContainerNameParameter":{
-            "name":"sqlVirtualMachineContainerName",
-            "in":"path",
-            "description":"The name of the SqlVirtualMachineContainer.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        },
-        "VirtualClusterNameParameter":{
-            "name":"virtualClusterName",
-            "in":"path",
-            "description":"The name of the virtual cluster.",
-            "required":true,
-            "type":"string",
-            "x-ms-parameter-location":"method"
-        }
-    },
-    "securityDefinitions":{
-        "azure_auth":{
-            "type":"oauth2",
-            "description":"Azure Active Directory OAuth2 Flow",
-            "flow":"implicit",
-            "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-            "scopes":{
-                "user_impersonation":"impersonate your user account"
-            }
-        }
+      }
     }
+  },
+  "definitions": {
+    "ResourceMoveDefinition": {
+      "description": "Contains the information necessary to perform a resource move (rename).",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The target ID for the resource",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
 }

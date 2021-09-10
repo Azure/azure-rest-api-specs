@@ -23,7 +23,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managementpartner.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/managementpartner/resource-manager/v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementpartner/mgmt-v2018_02_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -71,10 +71,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -94,3 +96,6 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+
+

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for DNS.
+This is the AutoRest configuration file for Authorization.
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -11,7 +11,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION  
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 ```
 
@@ -54,7 +54,7 @@ input-file:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Authorization
-output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
+output-folder: $(csharp-sdks-folder)/authorization/Microsoft.Azure.Management.Authorization/src/Generated
 ```
 
 ## Batch settings
@@ -66,7 +66,7 @@ namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
 
 batch:
- - tag: package-2015-07
+ - tag: package-2015-07-01
  - tag: package-locks-2015-01
  ```
 
@@ -79,7 +79,7 @@ namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
 
 batch:
- - tag: package-2015-07
+ - tag: package-2015-07-01
  - tag: package-locks-2016-09
  - tag: package-policy-2016-12
  ```
@@ -93,12 +93,12 @@ namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
 
 batch:
- - tag: package-2015-07-authorization-only
+ - tag: package-2015-07-01-authorization-only
  - tag: package-locks-2015-01
  - tag: package-policy-2015-10-01-preview
  ```
 
- ### Profile: hybrid_2019_03_01
+### Profile: hybrid_2019_03_01
 
 These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
 
@@ -108,4 +108,28 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.
 
 batch:
  - tag: profile-hybrid-2019-03-01
+ ```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
+
+batch:
+ - tag: profile-hybrid-2020-09-01
+ ```
+
+### Profile: profile_2020_10_01_preview
+
+These settings apply only when `--csharp-profile=profile_2020_10_01_preview` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='profile_2020_10_01_preview'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/$(csharp-profile)/Generated
+
+batch:
+ - tag: package-2020-10-01-preview
  ```

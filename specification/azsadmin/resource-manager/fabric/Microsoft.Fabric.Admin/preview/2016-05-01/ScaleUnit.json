@@ -5,7 +5,7 @@
     "title": "FabricAdminClient",
     "version": "2016-05-01"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -340,14 +340,14 @@
           "description": "The subnet IP mask in the example format 10.0.0.0/25.",
           "type": "array",
           "items": {
-             "type": "string"
+            "type": "string"
           }
         },
         "vlanId": {
           "description": "The Vlan ID of the subnet.",
           "type": "array",
           "items": {
-             "type": "string"
+            "type": "string"
           }
         }
       }
@@ -394,7 +394,7 @@
           "description": "The list of IP addresses used for TOR communication.",
           "type": "array",
           "items": {
-             "type": "string"
+            "type": "string"
           }
         },
         "infrastructureNetwork": {
@@ -423,7 +423,7 @@
       "x-ms-parameter-location": "method"
     },
     "ScaleOutScaleUnitParametersInBody": {
-      "name": "nodeList",
+      "name": "scaleUnitNodeParameters",
       "description": "A list of input data that allows for adding a set of scale unit nodes.",
       "in": "body",
       "required": true,

@@ -26,7 +26,36 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-06
+tag: package-2021-05
+```
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+- Microsoft.AAD/stable/2021-05-01/domainservices.json
+- Microsoft.AAD/stable/2021-05-01/oucontainer.json
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+- Microsoft.AAD/stable/2021-03-01/domainservices.json
+- Microsoft.AAD/stable/2021-03-01/oucontainer.json
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.AAD/stable/2020-01-01/domainservices.json
+- Microsoft.AAD/stable/2020-01-01/oucontainer.json
 ```
 
 ### Tag: package-2017-06
@@ -36,6 +65,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.AAD/stable/2017-06-01/domainservices.json
+- Microsoft.AAD/stable/2017-06-01/oucontainer.json
 ```
 
 ### Tag: package-2017-01
@@ -58,6 +88,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -74,7 +106,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DomainServices
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DomainServices/Management.DomainServices/Generated
+  output-folder: $(csharp-sdks-folder)/domainservices/Microsoft.Azure.Management.DomainServices/src/Generated
   clear-output-folder: true
 ```
 
@@ -100,8 +132,50 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-domainservices
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-05
+  - tag: package-2021-03
+  - tag: package-2020-01
   - tag: package-2017-06
   - tag: package-2017-01
+```
+
+### Tag: package-2021-05 and java
+
+These settings apply only when `--tag=package-2021-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2021_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2021_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-03 and java
+
+These settings apply only when `--tag=package-2021-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2021_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2021_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-01 and java
+
+These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2017-06 and java
@@ -112,7 +186,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.domainservices.v2017_06_01
-  output-folder: $(azure-libraries-for-java-folder)/domainservices/resource-manager/v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2017_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -125,9 +199,10 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.domainservices.v2017_01_01
-  output-folder: $(azure-libraries-for-java-folder)/domainservices/resource-manager/v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2017_01_01
 regenerate-manager: true
 generate-interface: true
 ```
+
 
 
