@@ -5448,6 +5448,240 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}": {
+      "put": {
+        "operationId": "RoutingIntent_CreateOrUpdate",
+        "x-ms-examples": {
+          "RouteTablePut": {
+            "$ref": "./examples/RoutingIntentPut.json"
+          }
+        },
+        "description": "Creates a RoutingIntent resource if it doesn't exist else updates the existing RoutingIntent.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RoutingIntent."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routingIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the per VirtualHub singleton Routing Intent resource."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "routingIntentParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            },
+            "description": "Parameters supplied to create or update RoutingIntent."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RoutingIntent created or updated.",
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the RoutingIntent created or updated.",
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "operationId": "RoutingIntent_Get",
+        "x-ms-examples": {
+          "RouteTableGet": {
+            "$ref": "./examples/RoutingIntentGet.json"
+          }
+        },
+        "description": "Retrieves the details of a RoutingIntent.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RoutingIntent."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routingIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RoutingIntent."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RoutingIntent retrieved.",
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoutingIntent_Delete",
+        "x-ms-examples": {
+          "RouteTableDelete": {
+            "$ref": "./examples/RoutingIntentDelete.json"
+          }
+        },
+        "description": "Deletes a RoutingIntent.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RoutingIntent."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routingIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RoutingIntent."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. RoutingIntent deleted."
+          },
+          "202": {
+            "description": "Request received successfully. RoutingIntent deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No RoutingIntent exists by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routingIntent": {
+      "get": {
+        "operationId": "RoutingIntent_List",
+        "x-ms-examples": {
+          "RoutingIntentList": {
+            "$ref": "./examples/RoutingIntentList.json"
+          }
+        },
+        "description": "Retrieves the details of all RoutingIntent child resources of the VirtualHub.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the RoutingIntent resources for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListRoutingIntentResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -7930,6 +8164,98 @@
         }
       },
       "description": "Office365 breakout categories."
+    },
+    "ListRoutingIntentResult": {
+      "description": "List of the routing intent result and a URL nextLink to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingIntent"
+          },
+          "description": "List of RoutingIntent resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "RoutingIntent": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoutingIntentProperties",
+          "description": "Properties of the RoutingIntent resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "The routing intent child resource of a Virtual hub.",
+      "type": "object"
+    },
+    "RoutingIntentProperties": {
+      "properties": {
+        "routingPolicies": {
+          "type": "array",
+          "description": "List of routing policies.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/RoutingPolicy"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the RoutingIntent resource."
+        }
+      },
+      "description": "The properties of a RoutingIntent resource.",
+      "type": "object"
+    },
+    "RoutingPolicy": {
+      "required": [
+        "name",
+        "destinations",
+        "nextHop"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name for the routing policy."
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of all destinations which this routing policy is applicable to (for example: Internet, PrivateTraffic).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHop": {
+          "type": "string",
+          "description": "The next hop resource id on which this routing policy is applicable to."
+        }
+      },
+      "description": "The routing policy object used in a RoutingIntent resource.",
+      "type": "object"
     }
   }
 }
