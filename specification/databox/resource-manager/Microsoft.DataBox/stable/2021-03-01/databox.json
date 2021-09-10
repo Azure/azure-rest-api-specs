@@ -1849,6 +1849,10 @@
           "description": "Flag to indicate if disk manifest should be backed-up in the Storage Account.",
           "type": "boolean",
           "default": false
+        },
+        "xtPassthroughJobArmId": {
+          "description": "ARM id of the XT passthrough job.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "DataBoxCustomerDisk"
@@ -5145,6 +5149,14 @@
       "properties": {
         "storageAccountId": {
           "description": "Storage Account Resource Id.",
+          "type": "string"
+        },
+        "xtPassthroughStorageAccountId": {
+          "description": "Customer's Storage Account Resource Id of the XT-passthrough job",
+          "type": "string"
+        },
+        "xtPassthroughStorageAccountTenantId": {
+          "description": "Customer's Storage Account's Tenant Id of the XT-passthrough job",
           "type": "string"
         }
       },
