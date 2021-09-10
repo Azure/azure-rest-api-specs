@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterType}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
       "get": {
         "description": "Get Extension Type details",
         "operationId": "ClusterExtensionType_Get",
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/connectedClusters/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
       "get": {
         "description": "Get Extension Types",
         "operationId": "ClusterExtensionTypes_List",
@@ -100,6 +100,9 @@
           },
           {
             "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
             "$ref": "../../common/2021-10-01-preview/definitions.json#/parameters/ClusterNameParameter"

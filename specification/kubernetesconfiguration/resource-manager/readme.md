@@ -38,8 +38,13 @@ These settings apply only when `--tag=package-preview-2021-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-10'
 input-file:
+  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/extensionTypes.json
   - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2021-05
 
 These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
@@ -94,7 +99,10 @@ input-file:
 directive:
   - suppress: TopLevelResourcesListBySubscription
     from: extensions.json
-    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes and Microsoft.ContainerServices'
+  - suppress: TopLevelResourcesListBySubscription
+    from: fluxconfiguration.json
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes and Microsoft.ContainerServices'
 ```
 
 ---
