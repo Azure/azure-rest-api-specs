@@ -105,6 +105,16 @@
           }
         }
       }
+    },
+    "409": {
+      "headers": {},
+      "description": "Conflict failure, as the 'Microsoft.Flux' extension cannot exist on the same cluster alongside sourceControlConfigurations",
+      "body": {
+        "error": {
+          "code": "ValidationFailed",
+          "message": "Source control configurations (FluxV1) cannot be created when 'Microsoft.Flux' extension is installed. Remove the extension to create source control configurations."
+        }
+      }
     }
   }
 }
