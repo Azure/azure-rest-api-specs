@@ -407,9 +407,20 @@
       }
     },
     "SearchAddressBatchResponse": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SearchAddressResponse"
+      "description": "This object is returned from a successful Geocode  Batch service call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+        },
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressResponse"
+          }
+        }
       }
     },
     "SearchAddressResponse": {
