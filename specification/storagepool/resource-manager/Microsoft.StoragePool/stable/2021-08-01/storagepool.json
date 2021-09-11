@@ -1,0 +1,2208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01",
+    "title": "StoragePoolManagement"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "StoragePoolOperations",
+      "description": "APIs for StoragePool operations."
+    },
+    {
+      "name": "DiskPools",
+      "description": "APIs for Disk pool operations."
+    },
+    {
+      "name": "IscsiTargets",
+      "description": "APIs for iSCSI target operations."
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.StoragePool/operations": {
+      "get": {
+        "tags": [
+          "StoragePoolOperations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of StoragePool operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved RP operations",
+            "schema": {
+              "$ref": "#/definitions/StoragePoolOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StoragePool/diskPools": {
+      "get": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_ListBySubscription",
+        "description": "Gets a list of Disk Pools in a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved diskPools by subscription",
+            "schema": {
+              "$ref": "#/definitions/DiskPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Disk Pools by subscription": {
+            "$ref": "./examples/DiskPools_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools": {
+      "get": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_ListByResourceGroup",
+        "description": "Gets a list of DiskPools in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved diskPools by resource group",
+            "schema": {
+              "$ref": "#/definitions/DiskPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Disk Pools": {
+            "$ref": "./examples/DiskPools_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}": {
+      "put": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_CreateOrUpdate",
+        "description": "Create or Update Disk pool. This create or update operation can take 15 minutes to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/DiskPool"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DiskPool"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Disk pool": {
+            "$ref": "./examples/DiskPools_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_Update",
+        "description": "Update a Disk pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolUpdate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/DiskPool"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Disk pool": {
+            "$ref": "./examples/DiskPools_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_Delete",
+        "description": "Delete a Disk pool; attached disks are not affected. This delete operation can take 10 minutes to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed successfully."
+          },
+          "204": {
+            "description": "Resource does not exist in the subscription."
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete Disk pool": {
+            "$ref": "./examples/DiskPools_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_Get",
+        "description": "Get a Disk pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved Disk pool.",
+            "schema": {
+              "$ref": "#/definitions/DiskPool"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Disk pool": {
+            "$ref": "./examples/DiskPools_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StoragePool/locations/{location}/diskPoolZones": {
+      "get": {
+        "tags": [
+          "DiskPoolZones"
+        ],
+        "operationId": "DiskPoolZones_List",
+        "description": "Lists available Disk Pool Skus in an Azure location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Location"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskPoolZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Disk Pool Zones": {
+            "$ref": "./examples/DiskPoolZones_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StoragePool/locations/{location}/skus": {
+      "get": {
+        "tags": [
+          "ResourceSkus"
+        ],
+        "operationId": "ResourceSkus_List",
+        "description": "Lists available StoragePool resources and skus in an Azure location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Location"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Disk Pool Skus": {
+            "$ref": "./examples/Skus_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_ListOutboundNetworkDependenciesEndpoints",
+        "description": "Gets the network endpoints of all outbound dependencies of a Disk Pool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Disk Pool outbound network dependencies": {
+            "$ref": "./examples/DiskPools_GetOutboundNetworkDependencies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/start": {
+      "post": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_Start",
+        "description": "The operation to start a Disk Pool. This start operation can take 10 minutes to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Start Disk Pool": {
+            "$ref": "./examples/DiskPools_Start.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/deallocate": {
+      "post": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_Deallocate",
+        "description": "Shuts down the Disk Pool and releases the compute resources. You are not billed for the compute resources that this Disk Pool uses. This operation can take 10 minutes to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deallocate Disk Pool": {
+            "$ref": "./examples/DiskPools_Deallocate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/upgrade": {
+      "post": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_Upgrade",
+        "description": "Upgrade replaces the underlying virtual machine hosts one at a time. This operation can take 10-15 minutes to complete. This is expected service behavior.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Upgrade Disk Pool": {
+            "$ref": "./examples/DiskPools_Upgrade.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/iscsiTargets": {
+      "get": {
+        "tags": [
+          "IscsiTargets"
+        ],
+        "description": "Get iSCSI Targets in a Disk pool.",
+        "operationId": "IscsiTargets_ListByDiskPool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved iSCSI Targets in a Disk pool.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTargetList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Disk Pools by Resource Group": {
+            "$ref": "./examples/IscsiTargets_ListByDiskPool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/iscsiTargets/{iscsiTargetName}": {
+      "put": {
+        "tags": [
+          "IscsiTargets"
+        ],
+        "description": "Create or Update an iSCSI Target.",
+        "operationId": "IscsiTargets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTarget"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTarget"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update iSCSI Target": {
+            "$ref": "./examples/IscsiTargets_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IscsiTargets"
+        ],
+        "description": "Update an iSCSI Target.",
+        "operationId": "IscsiTargets_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetUpdate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTarget"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update iSCSI Target": {
+            "$ref": "./examples/IscsiTargets_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IscsiTargets"
+        ],
+        "description": "Delete an iSCSI Target.",
+        "operationId": "IscsiTargets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed successfully."
+          },
+          "204": {
+            "description": "Resource does not exist in the subscription."
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete iSCSI Target": {
+            "$ref": "./examples/IscsiTargets_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IscsiTargets"
+        ],
+        "description": "Get an iSCSI Target.",
+        "operationId": "IscsiTargets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved iSCSI Target.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTarget"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get iSCSI Target": {
+            "$ref": "./examples/IscsiTargets_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._]*[0-9A-Za-z]$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "DiskPoolName": {
+      "name": "diskPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Disk Pool.",
+      "x-ms-parameter-location": "method"
+    },
+    "IscsiTargetName": {
+      "name": "iscsiTargetName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The name of the iSCSI Target.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskPoolCreate": {
+      "name": "diskPoolCreatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for Disk Pool create operation",
+      "schema": {
+        "$ref": "#/definitions/DiskPoolCreate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DiskPoolUpdate": {
+      "name": "diskPoolUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for Disk Pool update operation.",
+      "schema": {
+        "$ref": "#/definitions/DiskPoolUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IscsiTargetCreate": {
+      "name": "iscsiTargetCreatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for iSCSI Target create operation.",
+      "schema": {
+        "$ref": "#/definitions/IscsiTargetCreate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IscsiTargetUpdate": {
+      "name": "iscsiTargetUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for iSCSI Target update operation.",
+      "schema": {
+        "$ref": "#/definitions/IscsiTargetUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The unique uuid of an operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "Location": {
+      "name": "location",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The location of the resource.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "StoragePoolOperationDisplay": {
+      "type": "object",
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ],
+      "description": "Metadata about an operation.",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Localized friendly form of the resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Localized friendly form of the resource type related to this action/operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation, as it should be shown to the user."
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized friendly description for the operation, as it should be shown to the user."
+        }
+      }
+    },
+    "StoragePoolRPOperation": {
+      "type": "object",
+      "required": [
+        "name",
+        "isDataAction",
+        "display"
+      ],
+      "description": "Description of a StoragePool RP Operation",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Indicates the action type."
+        },
+        "display": {
+          "description": "Additional metadata about RP operation.",
+          "$ref": "#/definitions/StoragePoolOperationDisplay"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX."
+        }
+      }
+    },
+    "StoragePoolOperationListResult": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of operations supported by the RP.",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of operations supported by the StoragePool RP.",
+          "items": {
+            "$ref": "#/definitions/StoragePoolRPOperation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string"
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointList": {
+      "description": "Collection of Outbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that the App Service Environment reaches the service at.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "EndpointDependency": {
+      "description": "A domain name that a service is reached at, including details of the current connection status.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The IP Addresses and Ports used when connecting to DomainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "Current TCP connectivity information from the App Service Environment to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "An IP Address that Domain Name currently resolves to.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        },
+        "latency": {
+          "format": "double",
+          "description": "The time in milliseconds it takes for a TCP connection to be created from the App Service Environment to this IpAddress at this Port.",
+          "type": "number"
+        },
+        "isAccessible": {
+          "description": "Whether it is possible to create a TCP connection from the App Service Environment to this IpAddress at this Port.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DiskPoolListResult": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of Disk Pools",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "An array of Disk pool objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskPool"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuInfo"
+          },
+          "description": "The list of StoragePool resource skus."
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string"
+        }
+      },
+      "description": "List Disk Pool skus operation response."
+    },
+    "ResourceSkuInfo": {
+      "type": "object",
+      "description": "Resource SKU Details",
+      "properties": {
+        "apiVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "StoragePool RP API version"
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "StoragePool resource type"
+        },
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of additional capabilities for StoragePool resource.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapability"
+          }
+        },
+        "locationInfo": {
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceSkuLocationInfo",
+          "description": "Zones and zone capabilities in those locations where the SKU is available."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sku name"
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sku tier"
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+        }
+      }
+    },
+    "ResourceSkuLocationInfo": {
+      "type": "object",
+      "description": "Zone and capability info for resource sku",
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          },
+          "description": "List of availability zones where the SKU is supported."
+        },
+        "zoneDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "description": "Details of capabilities available to a SKU in specific zones."
+        }
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          },
+          "description": "The set of zones that the SKU is available in with the specified capabilities."
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapability"
+          },
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+        }
+      },
+      "description": "Describes The zonal capabilities of a SKU."
+    },
+    "ResourceSkuCapability": {
+      "type": "object",
+      "description": "Capability a resource SKU has.",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Capability name"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Capability value"
+        }
+      }
+    },
+    "ResourceSkuRestrictions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of restrictions.",
+          "enum": [
+            "Location",
+            "Zone"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "readOnly": true,
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for restriction.",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes scaling information of a SKU."
+    },
+    "ResourceSkuRestrictionInfo": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Locations where the SKU is restricted"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is restricted."
+        }
+      },
+      "description": "Describes an available Compute SKU Restriction Information."
+    },
+    "DiskPoolZoneListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskPoolZoneInfo"
+          },
+          "description": "The list of Disk Pool Skus."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string"
+        }
+      },
+      "description": "List Disk Pool skus operation response."
+    },
+    "DiskPoolZoneInfo": {
+      "type": "object",
+      "description": "Disk Pool SKU Details",
+      "properties": {
+        "availabilityZones": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Logical zone for Disk Pool resource; example: [\"1\"].",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "additionalCapabilities": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of additional capabilities for Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/AdditionalCapability"
+          }
+        },
+        "sku": {
+          "readOnly": true,
+          "description": "Determines the SKU of VM deployed for Disk Pool",
+          "type": "string",
+          "$ref": "#/definitions/Sku"
+        }
+      }
+    },
+    "DiskPool": {
+      "type": "object",
+      "description": "Response for Disk Pool request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "sku": {
+          "description": "Determines the SKU of the Disk pool",
+          "$ref": "#/definitions/Sku",
+          "x-ms-client-flatten": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Disk Pool.",
+          "$ref": "#/definitions/DiskPoolProperties"
+        },
+        "managedBy": {
+          "readOnly": true,
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "readOnly": true,
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiskPoolCreate": {
+      "type": "object",
+      "description": "Request payload for create or update Disk Pool request.",
+      "required": [
+        "properties",
+        "location",
+        "sku"
+      ],
+      "properties": {
+        "sku": {
+          "description": "Determines the SKU of the Disk Pool",
+          "type": "object",
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for Disk Pool create request.",
+          "$ref": "#/definitions/DiskPoolCreateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "managedBy": {
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DiskPoolUpdate": {
+      "type": "object",
+      "description": "Request payload for Update Disk Pool request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "managedBy": {
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for Disk Pool update request.",
+          "$ref": "#/definitions/DiskPoolUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "AvailabilityZone": {
+      "type": "string",
+      "description": "Availability zone."
+    },
+    "DiskPoolProperties": {
+      "type": "object",
+      "description": "Disk Pool response properties.",
+      "required": [
+        "availabilityZones",
+        "subnetId",
+        "provisioningState",
+        "status"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "availabilityZones": {
+          "type": "array",
+          "description": "Logical zone for Disk Pool resource; example: [\"1\"].",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "status": {
+          "type": "string",
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status of the Disk Pool."
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of Azure Managed Disks to attach to a Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Azure Resource ID of a Subnet for the Disk Pool.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "additionalCapabilities": {
+          "type": "array",
+          "description": "List of additional capabilities for Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/AdditionalCapability"
+          }
+        }
+      }
+    },
+    "DiskPoolCreateProperties": {
+      "type": "object",
+      "description": "Properties for Disk Pool create or update request.",
+      "required": [
+        "subnetId"
+      ],
+      "properties": {
+        "availabilityZones": {
+          "type": "array",
+          "description": "Logical zone for Disk Pool resource; example: [\"1\"].",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of Azure Managed Disks to attach to a Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Azure Resource ID of a Subnet for the Disk Pool.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "additionalCapabilities": {
+          "type": "array",
+          "description": "List of additional capabilities for a Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/AdditionalCapability"
+          }
+        }
+      }
+    },
+    "DiskPoolUpdateProperties": {
+      "type": "object",
+      "description": "Properties for Disk Pool update request.",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "description": "List of Azure Managed Disks to attach to a Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
+    "Disk": {
+      "type": "object",
+      "description": "Azure Managed Disk to attach to the Disk Pool.",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Azure Resource ID of the Managed Disk."
+        }
+      }
+    },
+    "AdditionalCapability": {
+      "type": "string",
+      "description": "Special capability that can be set on the Disk Pool."
+    },
+    "IscsiTargetList": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of iSCSI Targets.",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of iSCSI Targets in a Disk Pool.",
+          "items": {
+            "$ref": "#/definitions/IscsiTarget"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IscsiTarget": {
+      "type": "object",
+      "description": "Response for iSCSI Target requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for iSCSI Target operations.",
+          "$ref": "#/definitions/IscsiTargetProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "$ref": "#/definitions/SystemMetadata"
+        },
+        "managedBy": {
+          "readOnly": true,
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "readOnly": true,
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IscsiTargetCreate": {
+      "type": "object",
+      "description": "Payload for iSCSI Target create or update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for iSCSI Target create request.",
+          "$ref": "#/definitions/IscsiTargetCreateProperties"
+        },
+        "managedBy": {
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IscsiTargetUpdate": {
+      "type": "object",
+      "description": "Payload for iSCSI Target update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for iSCSI Target update request.",
+          "$ref": "#/definitions/IscsiTargetUpdateProperties"
+        },
+        "managedBy": {
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "$ref": "#/definitions/ManagedBy"
+        },
+        "managedByExtended": {
+          "description": "List of Azure resource ids that manage this resource.",
+          "$ref": "#/definitions/ManagedByExtended"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IscsiTargetProperties": {
+      "type": "object",
+      "description": "Response properties for iSCSI Target operations.",
+      "required": [
+        "targetIqn",
+        "provisioningState",
+        "status",
+        "aclMode"
+      ],
+      "properties": {
+        "aclMode": {
+          "description": "Mode for Target connectivity.",
+          "type": "string",
+          "$ref": "#/definitions/AclMode"
+        },
+        "staticAcls": {
+          "type": "array",
+          "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
+          "items": {
+            "$ref": "#/definitions/Acl"
+          }
+        },
+        "luns": {
+          "type": "array",
+          "description": "List of LUNs to be exposed through iSCSI Target.",
+          "items": {
+            "$ref": "#/definitions/IscsiLun"
+          }
+        },
+        "targetIqn": {
+          "type": "string",
+          "description": "iSCSI Target IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:server\"."
+        },
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "type": "string",
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status of the iSCSI Target."
+        },
+        "endpoints": {
+          "description": "List of private IPv4 addresses to connect to the iSCSI Target.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used by iSCSI Target portal group."
+        },
+        "sessions": {
+          "readOnly": true,
+          "description": "List of identifiers for active sessions on the iSCSI target",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IscsiTargetCreateProperties": {
+      "type": "object",
+      "description": "Properties for iSCSI Target create or update request.",
+      "required": [
+        "aclMode"
+      ],
+      "properties": {
+        "aclMode": {
+          "description": "Mode for Target connectivity.",
+          "type": "string",
+          "$ref": "#/definitions/AclMode"
+        },
+        "targetIqn": {
+          "type": "string",
+          "description": "iSCSI Target IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:server\"."
+        },
+        "staticAcls": {
+          "type": "array",
+          "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
+          "items": {
+            "$ref": "#/definitions/Acl"
+          }
+        },
+        "luns": {
+          "type": "array",
+          "description": "List of LUNs to be exposed through iSCSI Target.",
+          "items": {
+            "$ref": "#/definitions/IscsiLun"
+          }
+        }
+      }
+    },
+    "IscsiTargetUpdateProperties": {
+      "type": "object",
+      "description": "Properties for iSCSI Target update request.",
+      "properties": {
+        "staticAcls": {
+          "type": "array",
+          "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
+          "items": {
+            "$ref": "#/definitions/Acl"
+          }
+        },
+        "luns": {
+          "type": "array",
+          "description": "List of LUNs to be exposed through iSCSI Target.",
+          "items": {
+            "$ref": "#/definitions/IscsiLun"
+          }
+        }
+      }
+    },
+    "Acl": {
+      "type": "object",
+      "description": "Access Control List (ACL) for an iSCSI Target; defines LUN masking policy",
+      "required": [
+        "initiatorIqn",
+        "mappedLuns"
+      ],
+      "properties": {
+        "initiatorIqn": {
+          "type": "string",
+          "description": "iSCSI initiator IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:client\"."
+        },
+        "mappedLuns": {
+          "type": "array",
+          "description": "List of LUN names mapped to the ACL.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IscsiLun": {
+      "type": "object",
+      "required": [
+        "name",
+        "managedDiskAzureResourceId"
+      ],
+      "description": "LUN to expose the Azure Managed Disk.",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minimum": 1,
+          "maximum": 90,
+          "description": "User defined name for iSCSI LUN; example: \"lun0\""
+        },
+        "managedDiskAzureResourceId": {
+          "type": "string",
+          "description": "Azure Resource ID of the Managed Disk."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the Logical Unit Number of the iSCSI LUN."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "The resource management error response.",
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "RP error response.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStates",
+        "modelAsString": true
+      },
+      "description": "Provisioning state of the iSCSI Target.",
+      "readOnly": true
+    },
+    "OperationalStatus": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Unknown",
+        "Healthy",
+        "Unhealthy",
+        "Updating",
+        "Running",
+        "Stopped",
+        "Stopped (deallocated)"
+      ],
+      "x-ms-enum": {
+        "name": "OperationalStatus",
+        "modelAsString": true
+      },
+      "description": "Operational status of the resource."
+    },
+    "DiskPoolTier": {
+      "type": "string",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "DiskPoolTier",
+        "modelAsString": true
+      },
+      "description": "SKU of the VM host part of the Disk Pool deployment"
+    },
+    "AclMode": {
+      "type": "string",
+      "enum": [
+        "Dynamic",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "IscsiTargetAclMode",
+        "modelAsString": true
+      },
+      "description": "ACL mode for iSCSI Target."
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Sku for ARM resource",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sku name"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Sku tier"
+        }
+      }
+    },
+    "SystemMetadata": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "ARM resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      },
+      "description": "The resource management error response."
+    },
+    "ManagedBy": {
+      "type": "string",
+      "description": "Azure resource id. Indicates if this resource is managed by another Azure resource."
+    },
+    "ManagedByExtended": {
+      "type": "array",
+      "description": "List of Azure resource ids that manage this resource.",
+      "items": {
+        "$ref": "#/definitions/ManagedBy"
+      }
+    }
+  }
+}

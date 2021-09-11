@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-03
+tag: package-preview-2021-06
 ```
 
 ### Suppression
@@ -44,19 +44,19 @@ directive:
   - suppress: R3021
     from: appplatform.json
     reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
-    #where: 
+    #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
 ```
 
 
-### Tag: package-preview-2021-03
+### Tag: package-preview-2021-06
 
-These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-03'
+```yaml $(tag) == 'package-preview-2021-06'
 input-file:
-  - Microsoft.AppPlatform/preview/2021-03-03-preview/appplatform.json
+  - Microsoft.AppPlatform/preview/2021-06-01-preview/appplatform.json
 ```
 ### Tag: package-preview-2020-11
 
@@ -97,9 +97,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-powershell
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-appplatform
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
@@ -138,5 +135,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/appplatform/Microsoft.Azure.Management.AppPlatform/src/Generated
   clear-output-folder: true
 ```
-
-

@@ -251,6 +251,11 @@
             "description": "If the disk is deleted, this is an expected error code."
           }
         },
+        "x-ms-examples": {
+          "Delete a managed disk.": {
+            "$ref": "./examples/DeleteAManagedDisk.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -364,6 +369,11 @@
             "description": "Accepted"
           }
         },
+        "x-ms-examples": {
+          "Get a sas on a managed disk.": {
+            "$ref": "./examples/BeginGetAccessManagedDisk.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -397,6 +407,11 @@
           },
           "202": {
             "description": "Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Revoke access to a managed disk.": {
+            "$ref": "./examples/EndGetAccessManagedDisk.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -505,6 +520,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update a snapshot.": {
+            "$ref": "./examples/UpdateASnapshot.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -570,6 +590,11 @@
           },
           "204": {
             "description": "If the snapshot is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a snapshot.": {
+            "$ref": "./examples/DeleteASnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -685,6 +710,11 @@
             "description": "Accepted"
           }
         },
+        "x-ms-examples": {
+          "Get a sas on a snapshot.": {
+            "$ref": "./examples/BeginGetAccessSnapshot.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -718,6 +748,11 @@
           },
           "202": {
             "description": "Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Revoke access to a snapshot.": {
+            "$ref": "./examples/EndGetAccessSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1666,6 +1701,122 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_GrantAccess",
+        "description": "Grants access to a diskRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get disk access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Grants access to a diskRestorePoint.": {
+            "$ref": "./examples/BeginGetAccessDiskRestorePoint.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_RevokeAccess",
+        "description": "Revokes access to a diskRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Revokes access to a diskRestorePoint.": {
+            "$ref": "./examples/EndGetAccessDiskRestorePoint.json"
+          }
         }
       }
     }
