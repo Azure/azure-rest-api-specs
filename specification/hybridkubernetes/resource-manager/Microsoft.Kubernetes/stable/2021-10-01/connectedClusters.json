@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedKubernetesClient",
-    "version": "2021-04-01-preview",
+    "version": "2021-10-01",
     "description": "Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster"
   },
   "schemes": [
@@ -42,9 +42,6 @@
         "x-ms-examples": {
           "CreateClusterExample": {
             "$ref": "./examples/CreateClusterExample.json"
-          },
-          "CreateClusterPrivateLinkExample": {
-            "$ref": "./examples/CreateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -108,9 +105,6 @@
         "x-ms-examples": {
           "UpdateClusterExample": {
             "$ref": "./examples/UpdateClusterExample.json"
-          },
-          "UpdateClusterPrivateLinkExample": {
-            "$ref": "./examples/UpdateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -143,19 +137,12 @@
               "$ref": "#/definitions/ConnectedCluster"
             }
           },
-          "202": {
-            "description": "Resource patch request accepted"
-          },
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -248,10 +235,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listClusterUserCredentials": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listClusterUserCredential": {
       "post": {
         "summary": "Gets cluster user credentials of a connected cluster",
-        "operationId": "ConnectedCluster_ListClusterUserCredentials",
+        "operationId": "ConnectedCluster_ListClusterUserCredential",
         "description": "Gets cluster user credentials of the connected cluster with a specified resource group and name.",
         "produces": [
           "application/json"
@@ -288,9 +275,9 @@
             "required": true,
             "name": "Properties",
             "schema": {
-              "$ref": "#/definitions/ListClusterUserCredentialsProperties"
+              "$ref": "#/definitions/ListClusterUserCredentialProperties"
             },
-            "description": "ListClusterUserCredentials properties"
+            "description": "ListClusterUserCredential properties"
           }
         ],
         "responses": {
@@ -632,23 +619,6 @@
             "name": "ConnectivityStatus",
             "modelAsString": true
           }
-        },
-        "privateLinkState": {
-          "type": "string",
-          "description": "Property which describes the state of private link on a connected cluster resource.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateLinkState",
-            "modelAsString": true
-          }
-        },
-        "privateLinkScopeResourceId": {
-          "type": "string",
-          "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
         }
       },
       "description": "Properties of the connected cluster."
@@ -725,24 +695,7 @@
     },
     "ConnectedClusterPatchProperties": {
       "type": "object",
-      "properties": {
-        "privateLinkState": {
-          "type": "string",
-          "description": "Property which describes the state of private link on a connected cluster resource.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateLinkState",
-            "modelAsString": true
-          }
-        },
-        "privateLinkScopeResourceId": {
-          "type": "string",
-          "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
-        }
-      },
+      "properties": {},
       "description": "Properties which can be patched on the connected cluster resource."
     },
     "HybridConnectionConfig": {
@@ -770,6 +723,32 @@
           "readOnly": true
         }
       }
+    },
+    "ListClusterUserCredentialProperties": {
+      "type": "object",
+      "required": [
+        "authenticationMethod",
+        "clientProxy"
+      ],
+      "properties": {
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The mode of client authentication.",
+          "enum": [
+            "Token",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "clientProxy": {
+          "type": "boolean",
+          "description": "Boolean value to indicate whether the request is for client side proxy or not"
+        }
+      },
+      "description": ""
     },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -823,32 +802,6 @@
         }
       },
       "readOnly": true
-    },
-    "ListClusterUserCredentialsProperties": {
-      "type": "object",
-      "required": [
-        "authenticationMethod",
-        "clientProxy"
-      ],
-      "properties": {
-        "authenticationMethod": {
-          "type": "string",
-          "description": "The mode of client authentication.",
-          "enum": [
-            "Token",
-            "AAD"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true
-          }
-        },
-        "clientProxy": {
-          "type": "boolean",
-          "description": "Boolean value to indicate whether the request is for client side proxy or not"
-        }
-      },
-      "description": ""
     }
   },
   "parameters": {
