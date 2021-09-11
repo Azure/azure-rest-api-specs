@@ -1868,13 +1868,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/UserIdentityProperties"
           }
-        },
-        "delegatedResources": {
-          "description": "The list of delegated resources associated with the resource. The delegated resources\r\ndictionary key references will be internal ids of the delegated resources.\r\nThis is an internal-only property bag, and can only be configured by source Resource Providers.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/DelegatedResource"
-          }
         }
       }
     },
@@ -2011,31 +2004,6 @@
         }
       }
     },
-    "DelegatedResource": {
-      "description": "Resource delegated to the container registry",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The resource id of the delegated resource",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "AAD tenant GUID of the delegated resource identity",
-          "type": "string"
-        },
-        "referralResource": {
-          "description": "The delegation id of the delegation relationship",
-          "type": "string"
-        },
-        "delegatedIdentities": {
-          "description": "The accessible delegated identitites. \r\nKey: Identity resourceId. A wildcard \"*\" stands for all identities. Value: DelegatedIdentity.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/DelegatedIdentity"
-          }
-        }
-      }
-    },
     "Status": {
       "description": "The status of an Azure resource at the time the operation was called.",
       "type": "object",
@@ -2164,11 +2132,6 @@
           "readOnly": true
         }
       }
-    },
-    "DelegatedIdentity": {
-      "description": "Empty object by design.",
-      "type": "object",
-      "properties": {}
     },
     "VirtualNetworkRule": {
       "description": "Virtual network rule.",
