@@ -2,10 +2,23 @@
   "swagger": "2.0",
   "info": {
     "title": "Speaker Verification API",
-    "version": "3.0"
+    "version": "2021-09-05",
+    "x-ms-code-generation-settings": {
+      "header": "MIT",
+      "strictSpecAdherence": false
+    },
+    "description": "The Azure Cognitive Service Speaker Recognition service provides algorithms that verify and identify speakers by their unique voice characteristics.\nSpeaker Recognition is used to answer the question \"who is speaking?\""
   },
-  "host": "westus.api.cognitive.microsoft.com",
-  "basePath": "/speaker/verification/v3.0",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/speaker/verification",
+    "useSchemePrefix": false,
+    "positionInOperation\"": "first",
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -20,61 +33,71 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
-    },
-    "apiKeyQuery": {
-      "type": "apiKey",
-      "name": "subscription-key",
-      "in": "query"
     }
   },
   "security": [
     {
       "apiKeyHeader": []
-    },
-    {
-      "apiKeyQuery": []
-    }
-  ],
-  "x-servers": [
-    {
-      "url": "https://westus.api.cognitive.microsoft.com"
-    },
-    {
-      "url": "https://cognitive-wu.cognitiveservices.azure.com"
-    },
-    {
-      "url": "https://api.ProjectOxford.ai"
     }
   ],
   "parameters": {
+    "endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "apiVersionParam": {
+      "name": "x-ms-version",
+      "x-ms-parameter-location": "client",
+      "x-ms-client-name": "version",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Specifies the version of the operation to use for this request.",
+      "x-ms-global": "true,",
+      "enum": [
+        "2021-09-05"
+      ],
+      "default": "2021-09-05"
+    },
     "profileIdParam": {
       "in": "path",
       "name": "profileId",
       "required": true,
-      "description": "Unique identifier for profile id (guid).",
       "type": "string",
-      "pattern": "^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$"
+      "format": "uuid",
+      "x-nullable": false,
+      "description": "Unique identifier for profile id (guid).",
+      "x-ms-parameter-location": "method"
     },
     "localeParam": {
       "in": "path",
       "name": "locale",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z]{2}-[a-zA-Z]{2}$",
-      "description": "A combination of language code and country code."
+      "x-nullable": false,
+      "pattern": "^[a-zA-Z]{2}-?[a-zA-Z]{2}$",
+      "description": "A combination of language code and country code.",
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
     "ProfileId": {
       "type": "string",
-      "pattern": "^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$",
       "description": "Unique identifier for profile id (guid).",
+      "format": "uuid",
+      "x-nullable": false,
       "example": "49a36324-fc4b-4387-aa06-090cfbf0064f"
     },
     "Locale": {
       "type": "string",
-      "pattern": "^[a-zA-Z]{2}-[a-zA-Z]{2}$",
+      "pattern": "^[a-zA-Z]{2}-?[a-zA-Z]{2}$",
       "description": "Language identifier consisting of a combination of language code and country code.",
+      "x-nullable": false,
       "example": "en-US"
     },
     "ProfileStatus": {
@@ -84,39 +107,49 @@
         "Active",
         "Inactive"
       ],
-      "example": "Active"
+      "x-ms-enum": {
+        "name": "TrainingStatusType",
+        "modelAsString": false
+      },
+      "example": "Inactive"
     },
     "EnrollmentStatus": {
       "type": "string",
-      "description": "Status representing the current state of the enrollment. Available values are:\n* Enrolling: profile has no voice print and not ready for recognition requests.\n* Training: voice print of profile is being created and can’t be used for recognition at the moment.\n* Enrolled: profile has a voice print and ready for recognition requests.",
+      "description": "Status representing the current state of the profile. Available values are:\n* Enrolling: profile has no voice print and not ready for recognition requests.\n* Training: voice print of profile is being created and can’t be used for recognition at the moment.\n* Enrolled: profile has a voice print and ready for recognition requests.",
       "enum": [
         "Enrolling",
         "Training",
         "Enrolled"
       ],
+      "x-ms-enum": {
+        "name": "TrainingStatusType",
+        "modelAsString": false
+      },
       "example": "Enrolling"
     },
     "CreatedDateTime": {
       "type": "string",
+      "format": "date-time",
       "description": "Profile creation datetime.",
       "example": "2015-04-23T18:25:43.41Z"
     },
     "LastUpdatedDateTime": {
       "type": "string",
+      "format": "date-time",
       "description": "Last datetime when the profile was updated.",
       "example": "2015-04-23T19:34:51.52Z"
     },
     "EnrollmentsCount": {
       "type": "integer",
-      "description": "Number of enrolment audios accepted for this profile.",
+      "description": "Number of enrollment audios accepted for this profile.",
       "example": 1
     },
-    "EnrollmentsLength": {
+    "EnrollmentsLengthInSec": {
       "type": "number",
       "description": "Total length of enrollment audios accepted for this profile in seconds.",
       "example": 1.83
     },
-    "EnrollmentsSpeechLength": {
+    "EnrollmentsSpeechLengthInSec": {
       "type": "number",
       "description": "Summation of pure speech (which is the amount of audio after removing silence and non-speech segments) across all profile enrollments in seconds.",
       "example": 1.35
@@ -126,14 +159,14 @@
       "description": "Number of enrollment audios needed to complete profile enrollment.",
       "example": 2
     },
-    "RemainingEnrollmentsSpeechLength": {
+    "RemainingEnrollmentsSpeechLengthInSec": {
       "type": "number",
       "description": "Amount of pure speech (which is the amount of audio after removing silence and non-speech segments) needed to complete profile enrollment in seconds.",
       "example": 18.65
     },
     "ModelVersion": {
       "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "format": "date",
       "description": "Date specifying the model assigned to this profile. Format is yyyy-mm-dd. If profile has no enrollments, this value will be empty.",
       "example": "2019-12-05"
     },
@@ -147,8 +180,30 @@
       "description": "Activation phrases available to activate a profile.",
       "example": "this is my activation phrase to identify me"
     },
+    "LocaleInfo": {
+      "description": "Speaker profile locale",
+      "properties": {
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        }
+      }
+    },
+    "TdProfileInfoList": {
+      "description": "Text-Dependent Speaker profile info list",
+      "properties": {
+        "profiles": {
+          "items": {
+            "$ref": "#/definitions/TdProfileInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "example": "{opaqueUrl}"
+        }
+      }
+    },
     "TdProfileInfo": {
-      "description": "Speaker profile info",
+      "description": "Text-Dependent Speaker profile info",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -168,11 +223,11 @@
         "enrollmentsCount": {
           "$ref": "#/definitions/EnrollmentsCount"
         },
-        "enrollmentsLength": {
-          "$ref": "#/definitions/EnrollmentsLength"
+        "enrollmentsLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsLengthInSec"
         },
-        "enrollmentsSpeechLength": {
-          "$ref": "#/definitions/EnrollmentsSpeechLength"
+        "enrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsSpeechLengthInSec"
         },
         "remainingEnrollmentsCount": {
           "$ref": "#/definitions/RemainingEnrollmentsCount"
@@ -183,7 +238,7 @@
       }
     },
     "TdEnrollmentInfo": {
-      "description": "Speaker profile enrollment info",
+      "description": "Text-Dependent Speaker profile enrollment info",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -194,11 +249,11 @@
         "enrollmentsCount": {
           "$ref": "#/definitions/EnrollmentsCount"
         },
-        "enrollmentsLength": {
-          "$ref": "#/definitions/EnrollmentsLength"
+        "enrollmentsLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsLengthInSec"
         },
-        "enrollmentsSpeechLength": {
-          "$ref": "#/definitions/EnrollmentsSpeechLength"
+        "enrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsSpeechLengthInSec"
         },
         "remainingEnrollmentsCount": {
           "$ref": "#/definitions/RemainingEnrollmentsCount"
@@ -206,20 +261,34 @@
         "passPhrase": {
           "$ref": "#/definitions/PassPhrase"
         },
-        "audioLength": {
+        "audioLengthInSec": {
           "type": "number",
-          "description": "This enrolment audio length in seconds.",
+          "description": "This enrollment audio length in seconds.",
           "example": 1.83
         },
-        "audioSpeechLength": {
+        "audioSpeechLengthInSec": {
           "type": "number",
           "description": "This enrollment audio pure speech (which is the amount of audio after removing silence and non-speech segments) length in seconds.",
           "example": 1.35
         }
       }
     },
+    "TiProfileInfoList": {
+      "description": "Text-Independent Speaker profile info list",
+      "properties": {
+        "profiles": {
+          "items": {
+            "$ref": "#/definitions/TiProfileInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "example": "{opaqueUrl}"
+        }
+      }
+    },
     "TiProfileInfo": {
-      "description": "Speaker profile info",
+      "description": "Text-Independent Speaker profile info",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -242,14 +311,14 @@
         "enrollmentsCount": {
           "$ref": "#/definitions/EnrollmentsCount"
         },
-        "enrollmentsLength": {
-          "$ref": "#/definitions/EnrollmentsLength"
+        "enrollmentsLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsLengthInSec"
         },
-        "enrollmentsSpeechLength": {
-          "$ref": "#/definitions/EnrollmentsSpeechLength"
+        "enrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsSpeechLengthInSec"
         },
-        "remainingEnrollmentsSpeechLength": {
-          "$ref": "#/definitions/RemainingEnrollmentsSpeechLength"
+        "remainingEnrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/RemainingEnrollmentsSpeechLengthInSec"
         },
         "modelVersion": {
           "$ref": "#/definitions/ModelVersion"
@@ -257,7 +326,7 @@
       }
     },
     "TiEnrollmentInfo": {
-      "description": "Speaker profile enrollment info",
+      "description": "Text-Independent Speaker profile enrollment info",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -268,28 +337,80 @@
         "enrollmentsCount": {
           "$ref": "#/definitions/EnrollmentsCount"
         },
-        "enrollmentsLength": {
-          "$ref": "#/definitions/EnrollmentsLength"
+        "enrollmentsLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsLengthInSec"
         },
-        "enrollmentsSpeechLength": {
-          "$ref": "#/definitions/EnrollmentsSpeechLength"
+        "enrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsSpeechLengthInSec"
         },
-        "remainingEnrollmentsSpeechLength": {
-          "$ref": "#/definitions/RemainingEnrollmentsSpeechLength"
+        "remainingEnrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/RemainingEnrollmentsSpeechLengthInSec"
         },
-        "audioLength": {
+        "audioLengthInSec": {
           "type": "number",
-          "description": "This enrolment audio length in seconds.",
+          "description": "This enrollment audio length in seconds.",
           "example": 1.83
         },
-        "audioSpeechLength": {
+        "audioSpeechLengthInSec": {
           "type": "number",
           "description": "This enrollment audio pure speech (which is the amount of audio after removing silence and non-speech segments) length in seconds.",
           "example": 1.35
         }
       }
     },
-    "Error": {
+    "RecognitionInfo": {
+      "description": "Speaker recognition result",
+      "properties": {
+        "recognitionResult": {
+          "type": "string",
+          "description": "Does audio belong to targeted profile?",
+          "enum": [
+            "accept",
+            "reject"
+          ],
+          "x-ms-enum": {
+            "name": "ResultType",
+            "modelAsString": false
+          },
+          "example": "Accept"
+        },
+        "score": {
+          "type": "number",
+          "description": "A float number indicating the similarity between input audio and targeted voice print. This number must be between 0 and 1. A higher number means higher similarity.",
+          "example": 0.63
+        }
+      }
+    },
+    "PassPhraseInfo": {
+      "description": "Pass phrase list",
+      "properties": {
+        "phrases": {
+          "items": {
+            "properties": {
+              "passPhrase": {
+                "$ref": "#/definitions/PassPhrase"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ActivationPhraseInfo": {
+      "description": "Activation phrase list",
+      "properties": {
+        "phrases": {
+          "items": {
+            "properties": {
+              "activationPhrase": {
+                "$ref": "#/definitions/ActivationPhrase"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SpeakerError": {
+      "description": "Speaker error message",
       "required": [
         "error"
       ],
@@ -307,61 +428,22 @@
       }
     }
   },
-  "responses": {
-    "NotFound": {
-      "description": "NotFound - Requested profile doesn't exist",
-      "schema": {
-        "$ref": "#/definitions/Error"
-      },
-      "examples": {
-        "application/json": {
-          "code": "Not Found",
-          "message": "Requested profile doesn't exist"
-        }
-      }
-    },
-    "Unauthorized": {
-      "description": "Request is not authorized. Make sure subscription key is included and valid.",
-      "schema": {
-        "$ref": "#/definitions/Error"
-      },
-      "examples": {
-        "application/json": {
-          "code": "Unauthorized",
-          "message": "Request is not authorized. Make sure subscription key is included and valid."
-        }
-      }
-    },
-    "RateLimit": {
-      "description": "Rate limit is exceeded.",
-      "schema": {
-        "$ref": "#/definitions/Error"
-      },
-      "examples": {
-        "application/json": {
-          "code": "RateLimit",
-          "message": "Rate limit is exceeded."
-        }
-      }
-    },
-    "ServerError": {
-      "description": "Internal Server Error.",
-      "schema": {
-        "$ref": "#/definitions/Error"
-      },
-      "examples": {
-        "application/json": {
-          "code": "InternalServerError",
-          "message": "Internal Server Error."
-        }
-      }
-    }
-  },
   "paths": {
     "/text-dependent/profiles": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/apiVersionParam"
+        }
+      ],
       "post": {
         "description": "Create a new speaker profile with specified locale.",
+        "operationId": "TextDependent_CreateProfile",
         "summary": "Create Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textDependentCreateProfile.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
@@ -374,12 +456,7 @@
               "required": [
                 "locale"
               ],
-              "properties": {
-                "locale": {
-                  "type": "string",
-                  "example": "en-us"
-                }
-              }
+              "$ref": "#/definitions/LocaleInfo"
             }
           }
         ],
@@ -393,101 +470,56 @@
               }
             },
             "schema": {
-              "properties": {
-                "profileId": {
-                  "type": "string",
-                  "description": "unique identifier for profile id (guid)",
-                  "example": "49a36324-fc4b-4387-aa06-090cfbf0064f"
-                }
-              }
+              "$ref": "#/definitions/TdProfileInfo"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Request body is missing.\n* InvalidRequest - Invalid JSON format.\n* InvalidRequest - Locale parameter is missing.\n* InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Request body is missing."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "415": {
-            "description": "UnsupportedMediaType - Unsupported media type. Only 'application/JSON' is accepted.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "UnsupportedMediaType",
-                "message": "Unsupported media type. Only 'application/JSON' is accepted."
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       },
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "profiles"
+        },
         "description": "Retrieves a set of profiles.\nProfiles are sorted alphabetically by ProfileId",
-        "summary": "List Profile",
+        "operationId": "TextDependent_ListProfiles",
+        "summary": "List Profiles",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textDependentListProfiles.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
         "parameters": [
           {
             "in": "query",
-            "name": "$top",
+            "name": "maxpagesize",
             "description": "The number of profiles to return. Default is 100 and the maximum is 500",
-            "type": "integer"
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "properties": {
-                "profiles": {
-                  "items": {
-                    "$ref": "#/definitions/TdProfileInfo"
-                  }
-                },
-                "@nextLink": {
-                  "type": "string",
-                  "example": "https://{endpoint}/text-dependent/profiles?$top=35&$continuationToken=U21pdGg1QmVuOTk5"
-                }
-              }
+              "$ref": "#/definitions/TdProfileInfoList"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidArgument - Invalid $top parameter value. Value should be positive integer in the range [1, 500].\n* InvalidArgument - Invalid $continuationToken value. $continuationToken must be generated form a prior API call.\n* InvalidArgument - $filter parameter is not supported.\n* InvalidArgument - $skip parameter is not supported.\n* InvalidArgument - $orderBy parameter is not supported.\n* InvalidArgument - $delta parameter is not supported.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidArgument",
-                "message": "Invalid $top parameter value. Value should be positive integer in the range [1, 500]"
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       }
@@ -495,12 +527,21 @@
     "/text-dependent/profiles/{profileId}": {
       "parameters": [
         {
+          "$ref": "#/parameters/apiVersionParam"
+        },
+        {
           "$ref": "#/parameters/profileIdParam"
         }
       ],
       "get": {
         "description": "Retrieves a single profile by ID.",
-        "summary": "Retrive Single Profile",
+        "operationId": "TextDependent_GetProfile",
+        "summary": "Retrieve Single Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textDependentFetchProfile.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
@@ -511,23 +552,24 @@
               "$ref": "#/definitions/TdProfileInfo"
             }
           },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
           }
         }
       },
       "delete": {
         "description": "Deletes an existing profile.",
+        "operationId": "TextDependent_DeleteProfile",
         "summary": "Delete Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/deleteProfile.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
@@ -535,45 +577,55 @@
           "204": {
             "description": "OK"
           },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            }
           }
         }
       }
     },
-    "/text-dependent/profiles/{profileId}/reset": {
+    "/text-dependent/profiles/{profileId}:reset": {
       "parameters": [
+        {
+          "$ref": "#/parameters/apiVersionParam"
+        },
         {
           "$ref": "#/parameters/profileIdParam"
         }
       ],
       "post": {
         "description": "Resets existing profile to its original creation state. The reset operation does the following:\n* Updates enrollmentStatus to Enrolling.\n* Updates lastUpdatedDateTime.\n* Updates enrollmentsCount to 0.\n* Updates enrollmentsLength to 0.\n* Updates enrollmentsSpeechLength to 0.\n* Updates remainingEnrollmentsCount to the initial required number.\n* Removes all associated enrollments from storage.\n* Removes chosen passphrase association.\n* Resets value of modelVersion.",
+        "operationId": "TextDependent_ResetProfile",
         "summary": "Reset Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textDependentResetProfile.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
         "responses": {
-          "204": {
-            "description": "OK"
+          "200": {
+            "description": "Speaker profile reset successfully. Profile is returned with reset vaules.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "url location of the resource"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TdProfileInfo"
+            }
           },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -581,160 +633,105 @@
     "/text-dependent/profiles/{profileId}/enrollments": {
       "parameters": [
         {
-          "$ref": "#/parameters/profileIdParam"
-        }
-      ],
-      "post": {
-        "description": "Adds an enrollment to existing profile.\nIf the minimum number of requested enrollment audios is reached, a voice print is created.\nIf the voice print was created before, it gets recreated from all existing enrollment audios including the new one.\n\nLimitations:\n* Minimum enrollments needed for voice print creation is **3**\n* Maximum enrollment audio length is **10 seconds**\n* Minimum enrollment audio length is **1 second**\n* Maximum enrollments number per profile is **50**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**\n\nConstraints:\n* First enrollment must match an existing passphrase.\n* All enrollments after the first one, must use the same passphrase used in the first enrollment.",
-        "summary": "Enroll Profile",
-        "tags": [
-          "text-dependent"
-        ],
-        "consumes": [
-          "audio/wav; codecs=audio/pcm"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TdEnrollmentInfo"
-            }
-          },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Invalid audio length. Maximum allowed length is 10 seconds.\n* InvalidRequest - Invalid audio length. Minimum allowed length is 1 second.\n* InvalidRequest - Invalid audio format. Supported format is WAV 16Khz 16bit Mono PCM.\n* InvalidRequest - Invalid passphrase.\n* InvalidRequest - Audio is too noisy. The minimum allowed Signal-to-noise ratio (SNR) is 2dB.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Audio is too noisy."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden\n* InvalidOperation - Maximum allowed number of enrollments per profile is 50.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "InvalidOperation",
-                "message": "Maximum allowed number of enrollments per profile is 50."
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "409": {
-            "description": "Conflict\n* Conflict - Sending concurrent requests on same profile is not allowed.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "Conflict",
-                "message": "Sending concurrent requests on same profile is not allowed."
-              }
-            }
-          },
-          "415": {
-            "description": "UnsupportedMediaType - Unsupported media type. Only \"audio/wav; codecs=audio/pcm\" is accepted.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "UnsupportedMediaType",
-                "message": "Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted."
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/text-dependent/profiles/{profileId}/verify": {
-      "parameters": [
+          "$ref": "#/parameters/apiVersionParam"
+        },
         {
           "$ref": "#/parameters/profileIdParam"
         }
       ],
       "post": {
-        "description": "Verifies existing profiles against input audio.\n\nLimitations:\n* Maximum enrollment audio length is **10 seconds**\n* Minimum enrollment audio length is **1 second**\n* Minimum audio Signal-to-noise ratio (SNR) is **10 dB**",
-        "summary": "Verify Profile",
+        "description": "Adds an enrollment to existing profile.\nIf the minimum number of requested enrollment audios is reached, a voice print is created.\nIf the voice print was created before, it gets recreated from all existing enrollment audios including the new one.\n\nLimitations:\n* Minimum audio input length per request is **1 second**\n* Maximum audio input length per request is **10 seconds**\n* Minimum number of enrollments for creating a voiceprint is **3**\n* Maximum number of enrollments for creating a voiceprint is **50**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**\n\nConstraints:\n* First enrollment must match an existing passphrase.\n* All enrollments after the first one, must use the same passphrase used in the first enrollment.",
+        "operationId": "TextDependent_CreateEnrollment",
+        "summary": "Enroll Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textDependentCreateEnrollment.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
         "consumes": [
           "audio/wav; codecs=audio/pcm"
         ],
+        "parameters": [
+          {
+            "name": "audioData",
+            "in": "body",
+            "description": "Binary audio file. Supported formats are audio/wav; codecs=audio/pcm. Supports audio up to 5MB.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TdEnrollmentInfo"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/text-dependent/profiles/{profileId}:verify": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/apiVersionParam"
+        },
+        {
+          "$ref": "#/parameters/profileIdParam"
+        }
+      ],
+      "post": {
+        "description": "Verifies existing profiles against input audio.\n\nLimitations:\n* Minimum audio input length per request is **1 second**\n* Maximum audio input length per request is **10 seconds**\n* Minimum audio Signal-to-noise ratio (SNR) is **10 dB**",
+        "operationId": "TextDependent_VerifyProfile",
+        "summary": "Verify Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/verify.json"
+          }
+        },
+        "tags": [
+          "text-dependent"
+        ],
+        "consumes": [
+          "audio/wav; codecs=audio/pcm"
+        ],
+        "parameters": [
+          {
+            "name": "audioData",
+            "in": "body",
+            "description": "Binary audio file. Supported formats are audio/wav; codecs=audio/pcm. Supports audio up to 5MB.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "properties": {
-                "recognitionResult": {
-                  "type": "string",
-                  "description": "Does audio belong to targeted profile?",
-                  "enum": [
-                    "accept",
-                    "reject"
-                  ],
-                  "example": "Accept"
-                },
-                "score": {
-                  "type": "number",
-                  "description": "A float number indicating the similarity between input audio and targeted voice print. This number must be between 0 and 1. A higher number means higher similarity.",
-                  "example": 0.63
-                }
-              }
+              "$ref": "#/definitions/RecognitionInfo"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Invalid audio length. Maximum allowed length is 10 seconds.\n* InvalidRequest - Invalid audio length. Minimum allowed length is 1 second.\n* InvalidRequest - Invalid audio format. Supported format is 16Khz 16bit Mono PCM.\n* InvalidRequest - Audio is too noisy. The minimum allowed Signal-to-noise ratio (SNR) is 2dB.\n* InvalidRequest - Profile is not enrolled.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Profile is not enrolled."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "415": {
-            "description": "UnsupportedMediaType - Unsupported media type. Only \"audio/wav; codecs=audio/pcm\" is accepted.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "UnsupportedMediaType",
-                "message": "Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted."
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       }
@@ -742,12 +739,21 @@
     "/text-dependent/phrases/{locale}": {
       "parameters": [
         {
+          "$ref": "#/parameters/apiVersionParam"
+        },
+        {
           "$ref": "#/parameters/localeParam"
         }
       ],
       "get": {
         "description": "Retrieves list of supported passphrases for a specific locale.",
+        "operationId": "TextDependent_ListPhrases",
         "summary": "Pass Phrases",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/phrases.json"
+          }
+        },
         "tags": [
           "text-dependent"
         ],
@@ -755,43 +761,34 @@
           "200": {
             "description": "OK",
             "schema": {
-              "items": {
-                "properties": {
-                  "passPhrase": {
-                    "$ref": "#/definitions/PassPhrase"
-                  }
-                }
-              }
+              "$ref": "#/definitions/PassPhraseInfo"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Locale parameter is missing.\n* InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Locale parameter is missing."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       }
     },
     "/text-independent/profiles": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/apiVersionParam"
+        }
+      ],
       "post": {
         "description": "Creates a new speaker profile with specified locale.",
+        "operationId": "TextIndependent_CreateProfile",
         "summary": "Create Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textIndependentCreateProfile.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
@@ -804,12 +801,7 @@
               "required": [
                 "locale"
               ],
-              "properties": {
-                "locale": {
-                  "type": "string",
-                  "example": "en-us"
-                }
-              }
+              "$ref": "#/definitions/LocaleInfo"
             }
           }
         ],
@@ -823,101 +815,55 @@
               }
             },
             "schema": {
-              "properties": {
-                "profileId": {
-                  "type": "string",
-                  "description": "unique identifier for profile id (guid)",
-                  "example": "49a36324-fc4b-4387-aa06-090cfbf0064f"
-                }
-              }
+              "$ref": "#/definitions/TiProfileInfo"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Request body is missing.\n* InvalidRequest - Invalid JSON format.\n* InvalidRequest - Locale parameter is missing.\n* InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Request body is missing."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "415": {
-            "description": "UnsupportedMediaType - Unsupported media type. Only 'application/JSON' is accepted.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "UnsupportedMediaType",
-                "message": "Unsupported media type. Only 'application/JSON' is accepted."
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       },
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "description": "Retrieves a set of profiles.\nProfiles are sorted alphabetically by ProfileId",
-        "summary": "List Profile",
+        "operationId": "TextIndependent_ListProfiles",
+        "summary": "List Profiles",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textIndependentListProfiles.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
         "parameters": [
           {
             "in": "query",
-            "name": "$top",
+            "name": "maxpagesize",
             "description": "The number of profiles to return. Default is 100 and the maximum is 500",
-            "type": "integer"
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "properties": {
-                "profiles": {
-                  "items": {
-                    "$ref": "#/definitions/TiProfileInfo"
-                  }
-                },
-                "@nextLink": {
-                  "type": "string",
-                  "example": "https://{endpoint}/text-independent/profiles?$top=35&$continuationToken=U21pdGg1QmVuOTk5"
-                }
-              }
+              "$ref": "#/definitions/TiProfileInfoList"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidArgument - Invalid $top parameter value. Value should be positive integer in the range [1, 500].\n* InvalidArgument - Invalid $continuationToken value. $continuationToken must be generated form a prior API call.\n* InvalidArgument - $filter parameter is not supported.\n* InvalidArgument - $skip parameter is not supported.\n* InvalidArgument - $orderBy parameter is not supported.\n* InvalidArgument - $delta parameter is not supported.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidArgument",
-                "message": "Invalid $top parameter value. Value should be positive integer in the range [1, 500]"
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       }
@@ -925,12 +871,21 @@
     "/text-independent/profiles/{profileId}": {
       "parameters": [
         {
+          "$ref": "#/parameters/apiVersionParam"
+        },
+        {
           "$ref": "#/parameters/profileIdParam"
         }
       ],
       "get": {
         "description": "Retrieves a single profile by ID.",
-        "summary": "Retrive Single Profile",
+        "operationId": "TextIndependent_GetProfile",
+        "summary": "Retrieve Single Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textIndependentFetchProfile.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
@@ -941,14 +896,24 @@
               "$ref": "#/definitions/TiProfileInfo"
             }
           },
-          "404": {
-            "$ref": "#/responses/NotFound"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
           }
         }
       },
       "delete": {
         "description": "Deletes an existing profile.",
+        "operationId": "TextIndependent_DeleteProfile",
         "summary": "Delete Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/deleteProfile.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
@@ -956,45 +921,56 @@
           "204": {
             "description": "OK"
           },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
           }
         }
       }
     },
-    "/text-independent/profiles/{profileId}/reset": {
+    "/text-independent/profiles/{profileId}:reset": {
       "parameters": [
+        {
+          "$ref": "#/parameters/apiVersionParam"
+        },
         {
           "$ref": "#/parameters/profileIdParam"
         }
       ],
       "post": {
         "description": "Resets existing profile to its original creation state. The reset operation does the following:\n* Updates enrollmentStatus to Enrolling.\n* Updates lastUpdatedDateTime.\n* Updates enrollmentsCount to 0.\n* Updates enrollmentsLength to 0.\n* Updates enrollmentsSpeechLength to 0.\n* Updates remainingEnrollmentsSpeechLength to the required number.\n* Removes all associated enrollments from storage.\n* Removes chosen passphrase association.\n* Resets value of modelVersion.",
+        "operationId": "TextIndependent_ResetProfile",
         "summary": "Reset Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/TextIndependentResetProfile.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
         "responses": {
-          "204": {
-            "description": "OK"
+          "200": {
+            "description": "Speaker profile reset successfully. Profile is returned with reset vaules.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "url location of the resource"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TiProfileInfo"
+            }
           },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -1002,105 +978,21 @@
     "/text-independent/profiles/{profileId}/enrollments": {
       "parameters": [
         {
-          "$ref": "#/parameters/profileIdParam"
-        }
-      ],
-      "post": {
-        "description": "Adds an enrollment to existing profile.\nThe first enrollment must be a predefined activation phrase which can be lised using the /phrases/{locale} api.\nIf the minimum number of requested enrollment audios is reached, a voice print is created.\nAny further enrollemnt will be used to improve the voice print.\n\nLimitations:\n* Minimum amount of speech needed for voice print creation is **20 seconds**\n* Maximum enrollment audio length is **120 seconds**\n* Minimum enrollment audio length is **1 second**\n* Maximum length allowed across all enrollments is **300 seconds**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
-        "summary": "Enroll Profile",
-        "tags": [
-          "text-independent"
-        ],
-        "consumes": [
-          "audio/wav; codecs=audio/pcm"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ignoreMinLength",
-            "type": "boolean",
-            "description": "If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TiEnrollmentInfo"
-            }
-          },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Invalid audio length. Maximum allowed length per enrollment request is 120 seconds.\n* InvalidRequest - Invalid audio length. Minimum allowed length per enrollment request is 1 second.\n* InvalidRequest - Invalid audio format. Supported format is 16Khz 16bit Mono PCM.\n* InvalidArgument - Invalid ignoreMinLength parameter value. Valid values are \"true\" and \"false\".\n* InvalidRequest - Audio is too noisy. The minimum allowed Signal-to-noise ratio (SNR) is 2dB.\n* InvalidRequest - The first enrollment must match an activation phrase.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Audio is too noisy."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden\n* InvalidRequest - Maximum allowed length across all profile enrollments is 300 seconds.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Maximum allowed length across all profile enrollments is 300 seconds."
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "409": {
-            "description": "Conflict\n* Conflict - Sending concurrent requests on same profile is not allowed.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "Conflict",
-                "message": "Sending concurrent requests on same profile is not allowed."
-              }
-            }
-          },
-          "415": {
-            "description": "UnsupportedMediaType - Unsupported media type. Only \"audio/wav; codecs=audio/pcm\" is accepted.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "UnsupportedMediaType",
-                "message": "Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted."
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/text-independent/profiles/{profileId}/verify": {
-      "parameters": [
+          "$ref": "#/parameters/apiVersionParam"
+        },
         {
           "$ref": "#/parameters/profileIdParam"
         }
       ],
       "post": {
-        "description": "Verifies existing profiles against input audio.\n\nLimitations:\n* Maximum audio length is **120 seconds**\n* Minimum audio speech length is **20 seconds**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
-        "summary": "Verify Profile",
+        "description": "Adds an enrollment to existing profile.\nThe first enrollment must be a predefined activation phrase which can be listed using the /phrases/{locale} api.\nIf the minimum number of requested enrollment audios is reached, a voice print is created.\nAny further enrollment will be used to improve the voice print.\n\nLimitations:\n* Minimum audio input length per request is **1 second**\n* Maximum audio input length per request is **120 seconds**\n* Minimum total effective speech length (excluding silence and other non-speech frames) for creating a voiceprint is **20 seconds**\n  This limitation can be disabled by setting \"ignoreMinLength\" to **true**.\n\n* Maximum total audio input length allowed for creating a voiceprint is **300 seconds**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
+        "operationId": "TextIndependent_CreateEnrollment",
+        "summary": "Enroll Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/textIndependentCreateEnrollment.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
@@ -1112,66 +1004,93 @@
             "in": "query",
             "name": "ignoreMinLength",
             "type": "boolean",
-            "description": "If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false."
+            "description": "If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false.",
+            "default": false
+          },
+          {
+            "name": "audioData",
+            "in": "body",
+            "description": "Binary audio file. Supported formats are audio/wav; codecs=audio/pcm. Supports audio up to 5MB.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TiEnrollmentInfo"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/SpeakerError"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/text-independent/profiles/{profileId}:verify": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/apiVersionParam"
+        },
+        {
+          "$ref": "#/parameters/profileIdParam"
+        }
+      ],
+      "post": {
+        "description": "Verifies existing profiles against input audio.\n\nLimitations:\n* Minimum audio input length is **1 second**\n* Maximum audio input length is **120 seconds**\n* Minimum effective speech length (excluding silence and other \"non-speech\" frames) is **4 seconds**\n  This limitation can be disabled by setting \"ignoreMinLength\" to **true**.\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
+        "operationId": "TextIndependent_VerifyProfile",
+        "summary": "Verify Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/verify.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "consumes": [
+          "audio/wav; codecs=audio/pcm"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ignoreMinLength",
+            "type": "boolean",
+            "description": "If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false.",
+            "default": false
+          },
+          {
+            "name": "audioData",
+            "in": "body",
+            "description": "Binary audio file. Supported formats are audio/wav; codecs=audio/pcm. Supports audio up to 5MB.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "properties": {
-                "recognitionResult": {
-                  "type": "string",
-                  "description": "Does audio belong to targeted profile?",
-                  "enum": [
-                    "accept",
-                    "reject"
-                  ],
-                  "example": "Accept"
-                },
-                "score": {
-                  "type": "number",
-                  "description": "A float number indicating the similarity between input audio and targeted voice print. This number must be between 0 and 1. A higher number means higher similarity.",
-                  "example": 0.63
-                }
-              }
+              "$ref": "#/definitions/RecognitionInfo"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Invalid audio length. Maximum allowed length per recognition request is 120 seconds.\n* InvalidRequest - Invalid audio length. Minimum allowed length per recognition request is 1 second.\n* InvalidRequest - Invalid audio format. Supported format is 16Khz 16bit Mono PCM.\n* InvalidArgument - Invalid ignoreMinLength parameter value. Valid values are \"true\" and \"false\".\n* InvalidRequest - Profile is not enrolled.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Profile is not enrolled."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "415": {
-            "description": "UnsupportedMediaType - Unsupported media type. Only \"audio/wav; codecs=audio/pcm\" is accepted.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "examples": {
-              "application/json": {
-                "code": "UnsupportedMediaType",
-                "message": "Unsupported media type. Only 'audio/wav; codecs=audio/pcm' is accepted."
-              }
-            }
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       }
@@ -1179,12 +1098,21 @@
     "/text-independent/phrases/{locale}": {
       "parameters": [
         {
+          "$ref": "#/parameters/apiVersionParam"
+        },
+        {
           "$ref": "#/parameters/localeParam"
         }
       ],
       "get": {
         "description": "Retrieves list of supported passphrases for a specific locale.",
+        "operationId": "TextIndependent_ActivationPhrase",
         "summary": "Pass Phrases",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/activationPhrases.json"
+          }
+        },
         "tags": [
           "text-independent"
         ],
@@ -1192,35 +1120,15 @@
           "200": {
             "description": "OK",
             "schema": {
-              "items": {
-                "properties": {
-                  "activationPhrase": {
-                    "$ref": "#/definitions/ActivationPhrase"
-                  }
-                }
-              }
+              "$ref": "#/definitions/ActivationPhraseInfo"
             }
           },
-          "400": {
-            "description": "Bad Request\n* InvalidRequest - Locale parameter is missing.\n* InvalidArgument - Invalid locale value. Supported locales are {comma-separated list of locales}.",
+          "default": {
+            "description": "Failure",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/SpeakerError"
             },
-            "examples": {
-              "application/json": {
-                "code": "InvalidRequest",
-                "message": "Locale parameter is missing."
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/responses/Unauthorized"
-          },
-          "429": {
-            "$ref": "#/responses/RateLimit"
-          },
-          "500": {
-            "$ref": "#/responses/ServerError"
+            "x-ms-error-response": true
           }
         }
       }
