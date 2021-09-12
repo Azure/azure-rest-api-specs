@@ -12,7 +12,7 @@
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}/speaker/identification",
     "useSchemePrefix": false,
-    "positionInOperation\"": "first",
+    "positionInOperation": "first",
     "parameters": [
       {
         "$ref": "#/parameters/endpoint"
@@ -42,7 +42,7 @@
   ],
   "parameters": {
     "endpoint": {
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
       "required": true,
@@ -51,14 +51,14 @@
       "x-ms-skip-url-encoding": true
     },
     "apiVersionParam": {
-      "name": "x-ms-version",
+      "name": "api-version",
       "x-ms-parameter-location": "client",
       "x-ms-client-name": "version",
       "in": "query",
       "required": false,
       "type": "string",
       "description": "Specifies the version of the operation to use for this request.",
-      "x-ms-global": "true,",
+      "x-ms-global": true,
       "enum": [
         "2021-09-05"
       ],
@@ -109,9 +109,9 @@
       ],
       "x-ms-enum": {
         "name": "ProfileStatusType",
-        "modelAsString": false,
-        "example": "Inactive"
-      }
+        "modelAsString": false
+      },
+      "example": "Inactive"
     },
     "EnrollmentStatus": {
       "type": "string",
@@ -354,11 +354,6 @@
   },
   "paths": {
     "/text-independent/profiles": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/apiVersionParam"
-        }
-      ],
       "post": {
         "description": "Creates a new speaker profile with specified locale.",
         "operationId": "TextIndependent_CreateProfile",
@@ -372,6 +367,9 @@
           "text-independent"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
           {
             "in": "body",
             "name": "profileInfo",
@@ -421,6 +419,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
             "in": "query",
             "name": "maxpagesize",
             "description": "The number of profiles to return. Default is 100 and the maximum is 500",
@@ -446,14 +447,6 @@
       }
     },
     "/text-independent/profiles/{profileId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/apiVersionParam"
-        },
-        {
-          "$ref": "#/parameters/profileIdParam"
-        }
-      ],
       "get": {
         "description": "Retrieves a single profile by ID.",
         "operationId": "TextIndependent_GetProfile",
@@ -465,6 +458,14 @@
         },
         "tags": [
           "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          }
         ],
         "responses": {
           "200": {
@@ -494,6 +495,14 @@
         "tags": [
           "text-independent"
         ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          }
+        ],
         "responses": {
           "204": {
             "description": "OK"
@@ -509,14 +518,6 @@
       }
     },
     "/text-independent/profiles/{profileId}:reset": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/apiVersionParam"
-        },
-        {
-          "$ref": "#/parameters/profileIdParam"
-        }
-      ],
       "post": {
         "description": "Resets existing profile to its original creation state. The reset operation does the following:\n* Updates enrollmentStatus to Enrolling.\n* Updates lastUpdatedDateTime.\n* Updates enrollmentsCount to 0.\n* Updates enrollmentsLength to 0.\n* Updates enrollmentsSpeechLength to 0.\n* Updates remainingEnrollmentsSpeechLength to the required number.\n* Removes all associated enrollments from storage.\n* Removes chosen passphrase association.\n* Resets value of modelVersion.",
         "operationId": "TextIndependent_ResetProfile",
@@ -528,6 +529,14 @@
         },
         "tags": [
           "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          }
         ],
         "responses": {
           "200": {
@@ -553,14 +562,6 @@
       }
     },
     "/text-independent/profiles/{profileId}/enrollments": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/apiVersionParam"
-        },
-        {
-          "$ref": "#/parameters/profileIdParam"
-        }
-      ],
       "post": {
         "description": "Adds an enrollment to existing profile.\nThe first enrollment must be a predefined activation phrase which can be listed using the /phrases/{locale} api.\nIf the minimum number of requested enrollment audios is reached, a voice print is created.\nAny further enrollment will be used to improve the voice print.\n\nLimitations:\n* Minimum audio input length per request is **1 second**\n* Maximum audio input length per request is **120 seconds**\n* Minimum total effective speech length (excluding silence and other non-speech frames) for creating a voiceprint is **20 seconds**\n  This limitation can be disabled by setting ignoreMinLength to **true**.\n\n* Maximum total audio input length allowed for creating a voiceprint is **300 seconds**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
         "operationId": "TextIndependent_CreateEnrollment",
@@ -577,6 +578,12 @@
           "audio/wav; codecs=audio/pcm"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          },
           {
             "in": "query",
             "name": "ignoreMinLength",
@@ -613,11 +620,6 @@
       }
     },
     "/text-independent/profiles:identifySingleSpeaker": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/apiVersionParam"
-        }
-      ],
       "post": {
         "description": "Identifies who is speaking in input audio among a list of candidate profiles.\n\nLimitations:\n* Minimum audio input length is **1 second**\n* Maximum audio input length is **120 seconds**\n* Minimum candidate speakers count is **1**\n* Maximum candidate speakers count is **50**\n* Minimum effective speech length (excluding silence and other non-speech frames) is **4 seconds**\n  This limitation can be disabled by setting \"ignoreMinLength\" to **true**.\n\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
         "operationId": "TextIndependent_IdentifySingleSpeaker",
@@ -634,6 +636,9 @@
           "audio/wav; codecs=audio/pcm"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
           {
             "in": "query",
             "name": "profileIds",
@@ -683,14 +688,6 @@
       }
     },
     "/text-independent/phrases/{locale}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/apiVersionParam"
-        },
-        {
-          "$ref": "#/parameters/localeParam"
-        }
-      ],
       "get": {
         "description": "Retrieves list of supported passphrases for a specific locale.",
         "operationId": "TextIndependent_ActivationPhrase",
@@ -702,6 +699,14 @@
         },
         "tags": [
           "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/localeParam"
+          }
         ],
         "responses": {
           "200": {
