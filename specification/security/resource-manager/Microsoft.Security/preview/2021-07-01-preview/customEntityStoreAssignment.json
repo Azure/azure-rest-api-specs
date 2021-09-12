@@ -207,7 +207,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -247,7 +247,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -264,6 +264,10 @@
           "items": {
             "$ref": "#/definitions/CustomEntityStoreAssignment"
           }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       }
     },
@@ -293,10 +297,6 @@
         },
         "entityStoreDatabaseLink": {
           "description": "The link to entity store database.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of operations.",
           "type": "string"
         }
       }
