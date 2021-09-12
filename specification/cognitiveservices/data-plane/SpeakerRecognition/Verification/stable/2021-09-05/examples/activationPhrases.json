@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "locale": "en-US",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "phrases": [
+          { "activationPhrase": "this is my activation phrase to identify me" }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}

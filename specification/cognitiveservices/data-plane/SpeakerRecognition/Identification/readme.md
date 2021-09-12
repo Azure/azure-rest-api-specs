@@ -5,12 +5,12 @@
 Configuration for generating Speaker Verification SDK.
 
 ``` yaml
-tag: identification_2_0_preview
+tag: identification_2021-09-05_stable
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Authoring Endpoint is `identification_2_0_preview`.
+The current release for the Authoring Endpoint is `identification_2021-09-05_stable`.
 
 # Releases
 
@@ -19,6 +19,13 @@ These settings apply only when `--tag=identification_2_0_preview` is specified o
 
 ``` yaml $(tag) == 'identification_2_0_preview'
 input-file: preview/v2.0/Identification.json
+```
+
+## Identification 2021-09-05
+These settings apply only when `--tag=identification_2021-09-05_stable` is specified on the command line.
+
+``` yaml $(tag) == 'identification_2021-09-05_stable'
+input-file: stable/2021-09-05/Identification.json
 ```
 
 ---

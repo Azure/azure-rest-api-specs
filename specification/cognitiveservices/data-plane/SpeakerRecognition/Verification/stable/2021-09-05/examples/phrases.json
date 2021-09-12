@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "locale": "en-US",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "phrases": [
+          { "passPhrase": "my voice is my passport verify me" },
+          { "passPhrase": "my voice is stronger than passwords" }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}

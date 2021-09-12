@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "audio/wav; codecs=audio/pcm",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+    "audioData": "{binary file date}"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+        "enrollmentStatus": "Enrolling",
+        "enrollmentsCount": 1,
+        "enrollmentsLengthInSec": 1.83,
+        "enrollmentsSpeechLengthInSec": 1.35,
+        "remainingEnrollmentsSpeechLengthInSec": 18.65,
+        "audioLengthInSec": 1.83,
+        "audioSpeechLengthInSec": 1.35
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}
