@@ -3107,6 +3107,10 @@
         "details": {
           "$ref": "#/definitions/StorageSyncErrorDetails",
           "description": "Error details of the given entry."
+        },
+        "innerError": {
+          "$ref": "#/definitions/StorageSyncInnerErrorDetails",
+          "description": "Inner error details of the given entry."
         }
       }
     },
@@ -3125,6 +3129,48 @@
         "target": {
           "type": "string",
           "description": "Target of the given entry."
+        },
+        "requestUri": {
+          "type": "string",
+          "description": "Request URI of the given entry."
+        },
+        "exceptionType": {
+          "type": "string",
+          "description": "Exception type of the given entry."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "HTTP method of the given entry."
+        },
+        "hashedMessage": {
+          "type": "string",
+          "description": "Hashed message of the given entry."
+        },
+        "httpErrorCode": {
+          "type": "string",
+          "description": "HTTP error code of the given entry."
+        }
+      }
+    },
+    "StorageSyncInnerErrorDetails": {
+      "type": "object",
+      "description": "Error Details object.",
+      "properties": {
+        "callStack": {
+          "type": "string",
+          "description": "Call stack of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of the error."
+        },
+        "innerException": {
+          "type": "string",
+          "description": "Exception of the inner error."
+        },
+        "innerExceptionCallStack": {
+          "type": "string",
+          "description": "Call stack of the inner error."
         }
       }
     },
@@ -3396,11 +3442,13 @@
         },
         "initialDownloadPolicy": {
           "$ref": "#/definitions/InitialDownloadPolicy",
-          "description": "Policy for how namespace and files are recalled during FastDr."
+          "description": "Policy for how namespace and files are recalled during FastDr.",
+          "default": "NamespaceThenModifiedFiles"
         },
         "localCacheMode": {
           "$ref": "#/definitions/LocalCacheMode",
-          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access.",
+          "default": "UpdateLocallyCachedFiles"
         }
       }
     },
@@ -3578,6 +3626,10 @@
         "origin": {
           "type": "string",
           "description": "The origin."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operations resource."
         }
       }
     },
@@ -3622,6 +3674,84 @@
         "description": {
           "type": "string",
           "description": "Operation Display Resource Description."
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of the operations resource.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationResourceServiceSpecification",
+          "description": "Service specification for the operations resource."
+        }
+      }
+    },
+    "OperationResourceServiceSpecification": {
+      "type": "object",
+      "description": "Service specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecification"
+          },
+          "description": "List of metric specifications."
+        }
+      }
+    },
+    "OperationResourceMetricSpecification": {
+      "type": "object",
+      "description": "Operation Display Resource object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description for the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type for the metric."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Fill gaps in the metric with zero."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecificationDimension"
+          },
+          "description": "Dimensions for the metric specification."
+        }
+      }
+    },
+    "OperationResourceMetricSpecificationDimension": {
+      "type": "object",
+      "description": "OperationResourceMetricSpecificationDimension object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the dimensions."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Indicates metric should be exported for Shoebox."
         }
       }
     },
@@ -4017,6 +4147,17 @@
           "type": "string",
           "description": "Registered Server Agent Version"
         },
+        "agentVersionStatus": {
+          "$ref": "#/definitions/RegisteredServerAgentVersionStatus",
+          "description": "Registered Server Agent Version Status",
+          "readOnly": true
+        },
+        "agentVersionExpirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Registered Server Agent Version Expiration Date",
+          "readOnly": true
+        },
         "serverOSVersion": {
           "type": "string",
           "description": "Registered Server OS Version"
@@ -4375,6 +4516,11 @@
           },
           "description": "Array of per-item errors coming from the last sync session.",
           "readOnly": true
+        },
+        "lastSyncMode": {
+          "$ref": "#/definitions/ServerEndpointSyncMode",
+          "description": "Sync mode",
+          "readOnly": true
         }
       }
     },
@@ -4422,6 +4568,11 @@
           "minimum": 0,
           "description": "Total bytes (if available)",
           "readOnly": true
+        },
+        "syncMode": {
+          "$ref": "#/definitions/ServerEndpointSyncMode",
+          "description": "Sync mode",
+          "readOnly": true
         }
       }
     },
@@ -4449,6 +4600,21 @@
           "description": "Count of transient files not syncing with the specified error code",
           "readOnly": true
         }
+      }
+    },
+    "ServerEndpointSyncMode": {
+      "type": "string",
+      "description": "Sync mode for the server endpoint.",
+      "enum": [
+        "Regular",
+        "NamespaceDownload",
+        "InitialUpload",
+        "SnapshotUpload",
+        "InitialFullDownload"
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointSyncMode",
+        "modelAsString": true
       }
     },
     "PhysicalPath": {
@@ -4920,6 +5086,20 @@
           "description": "Count of occurences of the error",
           "readOnly": true
         }
+      }
+    },
+    "RegisteredServerAgentVersionStatus": {
+      "type": "string",
+      "description": "Type of the registered server agent version status",
+      "enum": [
+        "Ok",
+        "NearExpiry",
+        "Expired",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "RegisteredServerAgentVersionStatus",
+        "modelAsString": true
       }
     }
   },
