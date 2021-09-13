@@ -713,61 +713,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/refreshDelegatedResourceIdentity": {
-      "post": {
-        "tags": [
-          "Registries"
-        ],
-        "description": "Refresh delegated resource identities for the specified container registry.",
-        "operationId": "Registries_RefreshDelegatedResourceIdentity",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          },
-          {
-            "name": "refreshDelegatedResourceIdentityParameters",
-            "in": "body",
-            "description": "The parameters for refreshing delegated resource identity.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The delegated resource identities and credentials refreshed successfully."
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "400": {
-            "description": "One or more source resources are invalid for the requested container registry."
-          },
-          "403": {
-            "description": "Caller not authorized for action."
-          },
-          "404": {
-            "description": "Backing container registry was not found."
-          }
-        },
-        "x-ms-examples": {
-          "RefreshDelegatedResourceIdentity": {
-            "$ref": "./examples/RefreshDelegatedResourceIdentity.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications": {
       "get": {
         "tags": [
@@ -2561,22 +2506,6 @@
           "x-ms-enum": {
             "name": "PasswordName",
             "modelAsString": false
-          }
-        }
-      }
-    },
-    "RefreshDelegatedResourceIdentityParameters": {
-      "description": "The parameters used to refresh delegated resource identity.",
-      "required": [
-        "sourceResourceInternalIds"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceResourceInternalIds": {
-          "description": "Specifies internal Ids of the source resources whose delegated identity credentials shold be refreshed.",
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }

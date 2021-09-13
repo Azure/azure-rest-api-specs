@@ -33,7 +33,7 @@ tag: package-2021-09-only
 
 These settings apply only when `--tag=package-2021-09-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09-preview-only'
+```yaml $(tag) == 'package-2021-09-only'
 input-file:
   - Microsoft.ContainerRegistry/stable/2021-09-09/containerregistry.json
 ```
@@ -42,7 +42,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09-preview'
+```yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.ContainerRegistry/stable/2021-09-09/containerregistry.json
   - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
