@@ -501,27 +501,12 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**:
 ```json
-"parameters": {
-    "ApiVersionParameter": {
-      "name": "x-ms-version",
-      "x-ms-client-name": "version",
-      "in": "header",
-      "required": false,
+  "headers": {
+    "x-ms-request-id": {
+      "x-ms-client-name": "requestId",
       "type": "string",
-      "x-ms-global": true,
-      "enum": [
-        "2015-04-05",
-        "2014-02-14",
-        "2013-08-15",
-        "2012-02-12",
-        "2011-08-18",
-        "2009-09-19",
-        "2009-07-17",
-        "2009-04-14"
-      ],
-      "default": "2015-04-05",
-      "description": "Specifies the version of the operation to use for this request."
-    }
+      "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+    },
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
