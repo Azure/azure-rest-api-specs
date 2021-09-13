@@ -345,7 +345,7 @@
         },
         "description": "Resets specific documents in the datasource to be selectively re-ingested by the indexer.",
         "externalDocs": {
-          "url": "N/A"
+          "url": "https://aka.ms/reset-documents"
         },
         "parameters": [
           {
@@ -1023,6 +1023,67 @@
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/skillsets('{skillsetName}')/search.resetskills": {
+      "post": {
+        "tags": [
+          "Skillsets"
+        ],
+        "operationId": "Skillsets_ResetSkills",
+        "x-ms-examples": {
+          "SearchServiceResetSkills": {
+            "$ref": "./examples/SearchServiceResetSkills.json"
+          }
+        },
+        "description": "Reset an existing skillset in a search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/reset-skills"
+        },
+        "parameters": [
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the skillset to reset."
+          },
+          {
+            "name": "skillNames",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "skillNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "the names of skills to be reset."
+                }
+              }
+            },
+            "description": "The names of skills to reset."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": "The skills in the skillset are successfully reset."
           },
           "default": {
             "description": "Error response.",
