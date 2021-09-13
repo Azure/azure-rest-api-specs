@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "collection": "ExampleCollection",
+    "api-version": "2021-09-01",
+    "entities": {
+      "referredEntities": {},
+      "entities": [
+        {
+          "typeName": "azure_storage_account",
+          "attributes": {
+            "qualifiedName": "exampleaccount",
+            "name": "exampleaccount",
+            "description": "Example Description"
+          }
+        },
+        {
+          "typeName": "azure_storage_account",
+          "attributes": {
+            "qualifiedName": "exampleaccount2",
+            "name": "exampleaccount2"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "mutatedEntities": {
+          "UPDATE": [
+            {
+              "typeName": "azure_storage_account",
+              "attributes": {
+                "qualifiedName": "exampleaccount"
+              },
+              "lastModifiedTS": "2",
+              "guid": "b2f9c306-cf65-4bb0-878e-cfaafde156b1",
+              "status": "ACTIVE"
+            }
+          ],
+          "CREATE": [
+            {
+              "typeName": "azure_storage_account",
+              "attributes": {
+                "qualifiedName": "exampleaccount2"
+              },
+              "lastModifiedTS": "1",
+              "guid": "321493e3-3fb7-4b3e-9df7-3b69154174c2",
+              "status": "ACTIVE"
+            }
+          ]
+        },
+        "guidAssignments": {
+          "-9514774903018192": "321493e3-3fb7-4b3e-9df7-3b69154174c2",
+          "-9514774903018193": "b2f9c306-cf65-4bb0-878e-cfaafde156b1"
+        }
+      }
+    }
+  }
+}
