@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2021-08-08-preview",
+    "subscriptionId": "subId1",
+    "resourceGroupName": "alertscorrelationrg",
+    "actionRuleName": "AddActionGroupsBySeverity",
+    "actionRule": {
+      "location": "Global",
+      "tags": {},
+      "properties": {
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1",
+          "/subscriptions/subId1/resourceGroups/RGId2"
+        ],
+        "conditions": [
+          {
+            "field": "Severity",
+            "operator": "Equals",
+            "values": [
+              "sev0",
+              "sev1"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "actionType": "AddActionGroups",
+            "actionGroupIds": [
+              "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+              "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+            ]
+          }
+        ],
+        "description": "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups",
+        "enabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-13T22:05:09Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ],
+          "conditions": [
+            {
+              "field": "Severity",
+              "operator": "Equals",
+              "values": [
+                "sev0",
+                "sev1"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "actionType": "AddActionGroups",
+              "actionGroupIds": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+              ]
+            }
+          ],
+          "description": "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/AddActionGroupsBySeverity",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "AddActionGroupsBySeverity",
+        "location": "Global",
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-13T22:05:09Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ],
+          "conditions": [
+            {
+              "field": "Severity",
+              "operator": "Equals",
+              "values": [
+                "sev0",
+                "sev1"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "actionType": "AddActionGroups",
+              "actionGroupIds": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+              ]
+            }
+          ],
+          "description": "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/AddActionGroupsBySeverity",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "AddActionGroupsBySeverity",
+        "location": "Global",
+        "tags": {}
+      }
+    }
+  }
+}
