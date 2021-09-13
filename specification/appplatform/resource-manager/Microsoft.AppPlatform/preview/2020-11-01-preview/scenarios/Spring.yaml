@@ -5,7 +5,6 @@ variables:
   serviceName: test-scenario-instance
   appName: app01
   ascDomainName: .azuremicroservices.io
-  domainName: asc-api.asc-test.net
   customDomainName: asc-api.asc-test.net
   mysqlKey:
     type: secureString
@@ -17,17 +16,17 @@ variables:
     type: secureString
 
 prepareSteps:
-  - step: Generate_Unique_ServiceName
-    armTemplateDeployment: templates/generate_service_name.json
+#  - step: Generate_Unique_ServiceName
+#    armTemplateDeployment: templates/generate_service_name.json
 
   - step: Create_Application_Insight_Instance
     armTemplateDeployment: templates/create_application_insights_instance.json
 
-  - step: Add_Dns_Cname_Record
-    armTemplateDeployment: templates/create_dns_cname_record.json
-    variables:
-      subscriptionId: $(dnsSubscriptionId)
-      resourceGroup: $(dnsResourceGroup)
+#  - step: Add_Dns_Cname_Record
+#    armTemplateDeployment: templates/create_dns_cname_record.json
+#    variables:
+#      subscriptionId: $(dnsSubscriptionId)
+#      resourceGroup: $(dnsResourceGroup)
 
 scenarios:
   - scenario: Spring
@@ -80,6 +79,8 @@ scenarios:
 
       - step: Certificates_Get
         exampleFile: ../examples/Certificates_Get.json
+        variables:
+          certificateName: asc-certificate
 
       - step: Certificates_List
         exampleFile: ../examples/Certificates_List.json
@@ -93,7 +94,7 @@ scenarios:
               {
                 "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
                 "label": "master",
-                "searchPaths": ["/"],
+                "searchPaths": ["/"]
               }
 
       - step: ConfigServers_UpdatePut
@@ -104,14 +105,14 @@ scenarios:
               {
                 "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
                 "label": "master",
-                "searchPaths": ["/"],
+                "searchPaths": [ "/" ]
               }
 
-      # - step: ConfigServers_UpdatePatch
-      #   exampleFile: ../examples/ConfigServers_UpdatePatch.json
-      #   resourceUpdate:
-      #     - replace: /configServerResource/properties/configServer/gitProperty
-      #       value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
+      - step: ConfigServers_UpdatePatch
+        exampleFile: ../examples/ConfigServers_UpdatePatch.json
+        resourceUpdate:
+          - replace: /properties/configServer/gitProperty
+            value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
 
       - step: ConfigServers_Get
         exampleFile: ../examples/ConfigServers_Get.json
@@ -149,9 +150,6 @@ scenarios:
       - step: Apps_Get
         exampleFile: ../examples/Apps_Get.json
         resourceName: app01
-      #    outputVariables:
-      #      fqdn:
-      #        fromResponse: /properties/fqdn
 
       - step: Deployments_CreateOrUpdate_Default
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
@@ -235,8 +233,8 @@ scenarios:
 
       - step: CustomDomains_CreateOrUpdate
         exampleFile: ../examples/CustomDomains_CreateOrUpdate.json
-        #    variables:
-        #      domainName: $(customDomainName)
+        variables:
+          domainName: $(customDomainName)
         resourceUpdate:
           - replace: /properties
             value: { "certName": "asc-certificate" }
@@ -249,6 +247,9 @@ scenarios:
 
       - step: CustomDomains_Get
         exampleFile: ../examples/CustomDomains_Get.json
+
+      - step: CustomDomains_List
+        exampleFile: ../examples/CustomDomains_List.json
 
       # Deployments
       - step: Apps_GetResourceUploadUrl
@@ -302,6 +303,8 @@ scenarios:
 
       - step: Deployments_GetLogFileUrl
         exampleFile: ../examples/Deployments_GetLogFileUrl.json
+        variables:
+          deploymentName: blue
 
       - step: Deployments_List
         exampleFile: ../examples/Deployments_List.json
@@ -320,15 +323,15 @@ scenarios:
         variables:
           deploymentName: blue
 
-      - step: Apps_Delete
-        variables:
-          appName: app01
-        exampleFile: ../examples/Apps_Delete.json
-
       - step: CustomDomains_Delete
         exampleFile: ../examples/CustomDomains_Delete.json
         variable:
           domainName: $(customDomainName)
+
+      - step: Apps_Delete
+        variables:
+          appName: app01
+        exampleFile: ../examples/Apps_Delete.json
 
       - step: Certificates_Delete
         exampleFile: ../examples/Certificates_Delete.json

@@ -7,16 +7,16 @@
       "defaultValue": "[utcNow()]"
     },
     "uploadUrl": {
-      "type": "securestring"
-    },
-    "userAssignedIdentity": {
-      "type": "string"
+      "type": "securestring",
+      "defaultValue": "$(uploadUrl)"
     },
     "scriptsContent": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "$(scriptsContent)"
     },
     "blobUrl": {
-      "type": "securestring"
+      "type": "securestring",
+      "defaultValue": "$(blobUrl)"
     }
   },
   "resources": [
@@ -26,12 +26,7 @@
       "name": "runPowerShellInlineWithOutput",
       "location": "[resourceGroup().location]",
       "kind": "AzurePowerShell",
-      "identity": {
-        "type": "userAssigned",
-        "userAssignedIdentities": {
-          "[parameters('userAssignedIdentity')]": {}
-        }
-      },
+      "identity": null,
       "properties": {
         "forceUpdateTag": "[parameters('utcValue')]",
         "azPowerShellVersion": "6.2",
