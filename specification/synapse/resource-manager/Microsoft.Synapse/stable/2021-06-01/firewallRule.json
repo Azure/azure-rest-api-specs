@@ -1,0 +1,424 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules": {
+      "get": {
+        "operationId": "IpFirewallRules_ListByWorkspace",
+        "description": "Returns a list of firewall rules",
+        "tags": [
+          "IpFirewallRules"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List IP firewall rules in a workspace": {
+            "$ref": "./examples/ListIpFirewallRules.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules/{ruleName}": {
+      "put": {
+        "operationId": "IpFirewallRules_CreateOrUpdate",
+        "description": "Creates or updates a firewall rule",
+        "tags": [
+          "IpFirewallRules"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          },
+          {
+            "description": "IP firewall rule properties",
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo",
+              "description": "IP firewall rule properties"
+            },
+            "in": "body",
+            "name": "ipFirewallRuleInfo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            },
+            "description": ""
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create an IP firewall rule": {
+            "$ref": "./examples/CreateIpFirewallRule.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "operationId": "IpFirewallRules_Delete",
+        "description": "Deletes a firewall rule",
+        "tags": [
+          "IpFirewallRules"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Delete an IP firewall rule from a workspace": {
+            "$ref": "./examples/DeleteIpFirewallRule.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "operationId": "IpFirewallRules_Get",
+        "description": "Get a firewall rule",
+        "tags": [
+          "IpFirewallRules"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/IpFirewallRuleInfo"
+            },
+            "description": "Ip Firewall Rule details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create an IP firewall rule": {
+            "$ref": "./examples/GetIpFirewallRule.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/replaceAllIpFirewallRules": {
+      "post": {
+        "operationId": "IpFirewallRules_ReplaceAll",
+        "description": "Replaces firewall rules",
+        "tags": [
+          "IpFirewallRules"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Replace all IP firewall rules request",
+            "schema": {
+              "$ref": "#/definitions/ReplaceAllIpFirewallRulesRequest",
+              "description": "Replace all IP firewall rules request"
+            },
+            "in": "body",
+            "name": "request",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ReplaceAllFirewallRulesOperationResponse"
+            },
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Replace all IP firewall rules in a workspace": {
+            "$ref": "./examples/ReplaceAllIpFirewallRules.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IpFirewallRuleInfo": {
+      "description": "IP firewall rule",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IpFirewallRuleProperties",
+          "description": "IP firewall rule properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReplaceAllIpFirewallRulesRequest": {
+      "description": "Replace all IP firewall rules request",
+      "type": "object",
+      "properties": {
+        "ipFirewallRules": {
+          "description": "IP firewall rule properties",
+          "additionalProperties": {
+            "description": "IP firewall rule properties",
+            "$ref": "#/definitions/IpFirewallRuleProperties"
+          },
+          "type": "object"
+        }
+      }
+    },
+    "IpFirewallRuleProperties": {
+      "description": "IP firewall rule properties",
+      "type": "object",
+      "properties": {
+        "endIpAddress": {
+          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Resource provisioning state",
+          "enum": [
+            "Provisioning",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "DeleteError"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "startIpAddress": {
+          "description": "The start IP address of the firewall rule. Must be IPv4 format",
+          "type": "string"
+        }
+      }
+    },
+    "IpFirewallRuleInfoListResult": {
+      "type": "object",
+      "description": "List of IP firewall rules",
+      "properties": {
+        "nextLink": {
+          "description": "Link to next page of results",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of IP firewall rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpFirewallRuleInfo"
+          }
+        }
+      }
+    },
+    "ReplaceAllFirewallRulesOperationResponse": {
+      "type": "object",
+      "description": "An existing operation for replacing the firewall rules",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The operation ID"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "ruleNameParameter": {
+      "type": "string",
+      "in": "path",
+      "name": "ruleName",
+      "description": "The IP firewall rule name",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+        "locale": "en-US",
+        "enrollmentStatus": "Enrolling",
+        "createdDateTime": "2015-04-23T18:25:43.41Z",
+        "lastUpdatedDateTime": "2015-04-23T19:34:51.52Z",
+        "enrollmentsCount": 1,
+        "enrollmentsLength": 1.83,
+        "enrollmentsSpeechLength": 1.35,
+        "remainingEnrollmentsCount": 2,
+        "modelVersion": "2019-12-05"
+      }
+    },
+    "401": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized. Make sure subscription key is included and valid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Not Found",
+          "message": "Requested profile doesn't exist"
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "RateLimit",
+          "message": "Rate limit is exceeded."
+        }
+      }
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error."
+        }
+      }
+    }
+  }
+}

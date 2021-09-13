@@ -1,0 +1,351 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "searchAddressBatchRequestBody": {
+      "batchItems": [
+        {
+          "query": "?query=400 Broad St, Seattle, WA 98109&limit=3"
+        },
+        {
+          "query": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
+        },
+        {
+          "query": "?query=350 5th Ave, New York, NY 10118&limit=1"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "summary": {
+          "successfulRequests": 3,
+          "totalRequests": 3
+        },
+        "batchItems": [
+          {
+            "statusCode": 200,
+            "response": {
+              "summary": {
+                "query": "400 broad st seattle wa 98109",
+                "queryType": "NON_NEAR",
+                "queryTime": 127,
+                "numResults": 3,
+                "offset": 0,
+                "totalResults": 9,
+                "fuzzyLevel": 1
+              },
+              "results": [
+                {
+                  "type": "Point Address",
+                  "id": "US/PAD/p0/20843845",
+                  "score": 11.966,
+                  "address": {
+                    "streetNumber": "400",
+                    "streetName": "Broad Street",
+                    "municipalitySubdivision": "Seattle, South Lake Union, Lower Queen Anne",
+                    "municipality": "Seattle",
+                    "countrySecondarySubdivision": "King",
+                    "countryTertiarySubdivision": "Seattle",
+                    "countrySubdivision": "WA",
+                    "postalCode": "98109",
+                    "countryCode": "US",
+                    "country": "United States Of America",
+                    "countryCodeISO3": "USA",
+                    "freeformAddress": "400 Broad Street, Seattle, WA 98109",
+                    "countrySubdivisionName": "Washington"
+                  },
+                  "position": {
+                    "lat": 47.62039,
+                    "lon": -122.34928
+                  },
+                  "viewport": {
+                    "topLeftPoint": {
+                      "lat": 47.62129,
+                      "lon": -122.35061
+                    },
+                    "btmRightPoint": {
+                      "lat": 47.61949,
+                      "lon": -122.34795
+                    }
+                  },
+                  "entryPoints": [
+                    {
+                      "type": "main",
+                      "position": {
+                        "lat": 47.61982,
+                        "lon": -122.34886
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Street",
+                  "id": "US/STR/p0/388442",
+                  "score": 10.225,
+                  "address": {
+                    "streetName": "Broad Street",
+                    "municipalitySubdivision": "Seattle, South Lake Union",
+                    "municipality": "Seattle",
+                    "countrySecondarySubdivision": "King",
+                    "countryTertiarySubdivision": "Seattle",
+                    "countrySubdivision": "WA",
+                    "postalCode": "98109",
+                    "extendedPostalCode": "981094612",
+                    "countryCode": "US",
+                    "country": "United States Of America",
+                    "countryCodeISO3": "USA",
+                    "freeformAddress": "Broad Street, Seattle, WA 98109",
+                    "countrySubdivisionName": "Washington"
+                  },
+                  "position": {
+                    "lat": 47.62001,
+                    "lon": -122.34843
+                  },
+                  "viewport": {
+                    "topLeftPoint": {
+                      "lat": 47.61965,
+                      "lon": -122.34761
+                    },
+                    "btmRightPoint": {
+                      "lat": 47.62066,
+                      "lon": -122.349
+                    }
+                  }
+                },
+                {
+                  "type": "Street",
+                  "id": "US/STR/p0/388680",
+                  "score": 10.225,
+                  "address": {
+                    "streetName": "Broad Street",
+                    "municipalitySubdivision": "Seattle, Belltown",
+                    "municipality": "Seattle",
+                    "countrySecondarySubdivision": "King",
+                    "countryTertiarySubdivision": "Seattle",
+                    "countrySubdivision": "WA",
+                    "postalCode": "98109,98121",
+                    "extendedPostalCode": "981094991,981211117,981211237,981213206",
+                    "countryCode": "US",
+                    "country": "United States Of America",
+                    "countryCodeISO3": "USA",
+                    "freeformAddress": "Broad Street, Seattle, WA",
+                    "countrySubdivisionName": "Washington"
+                  },
+                  "position": {
+                    "lat": 47.61691,
+                    "lon": -122.35251
+                  },
+                  "viewport": {
+                    "topLeftPoint": {
+                      "lat": 47.61502,
+                      "lon": -122.35041
+                    },
+                    "btmRightPoint": {
+                      "lat": 47.61857,
+                      "lon": -122.35484
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "statusCode": 200,
+            "response": {
+              "summary": {
+                "query": "one microsoft way redmond wa 98052",
+                "queryType": "NON_NEAR",
+                "queryTime": 169,
+                "numResults": 2,
+                "offset": 0,
+                "totalResults": 3292,
+                "fuzzyLevel": 2
+              },
+              "results": [
+                {
+                  "type": "Street",
+                  "id": "US/STR/p0/1692663",
+                  "score": 10.225,
+                  "address": {
+                    "streetName": "Microsoft Way",
+                    "municipality": "Redmond",
+                    "countrySecondarySubdivision": "King",
+                    "countryTertiarySubdivision": "Seattle East",
+                    "countrySubdivision": "WA",
+                    "postalCode": "98052",
+                    "extendedPostalCode": "980526399,980528300",
+                    "countryCode": "US",
+                    "country": "United States Of America",
+                    "countryCodeISO3": "USA",
+                    "freeformAddress": "Microsoft Way, Redmond, WA 98052",
+                    "countrySubdivisionName": "Washington"
+                  },
+                  "position": {
+                    "lat": 47.63989,
+                    "lon": -122.12509
+                  },
+                  "viewport": {
+                    "topLeftPoint": {
+                      "lat": 47.63748,
+                      "lon": -122.12309
+                    },
+                    "btmRightPoint": {
+                      "lat": 47.64223,
+                      "lon": -122.13061
+                    }
+                  }
+                },
+                {
+                  "type": "Cross Street",
+                  "id": "US/XSTR/p1/4779971",
+                  "score": 8.506,
+                  "address": {
+                    "streetName": "Microsoft Way & 157th Avenue Northeast, Microsoft Way",
+                    "municipality": "Redmond",
+                    "countrySecondarySubdivision": "King",
+                    "countryTertiarySubdivision": "Seattle East",
+                    "countrySubdivision": "WA",
+                    "postalCode": "98052",
+                    "countryCode": "US",
+                    "country": "United States Of America",
+                    "countryCodeISO3": "USA",
+                    "freeformAddress": "Microsoft Way & 157th Avenue Northeast, Redmond, WA 98052",
+                    "countrySubdivisionName": "Washington"
+                  },
+                  "position": {
+                    "lat": 47.63962,
+                    "lon": -122.13061
+                  },
+                  "viewport": {
+                    "topLeftPoint": {
+                      "lat": 47.64052,
+                      "lon": -122.13194
+                    },
+                    "btmRightPoint": {
+                      "lat": 47.63872,
+                      "lon": -122.12928
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "statusCode": 200,
+            "response": {
+              "summary": {
+                "query": "350 5th ave new york ny 10118",
+                "queryType": "NON_NEAR",
+                "queryTime": 233,
+                "numResults": 1,
+                "offset": 0,
+                "totalResults": 8032,
+                "fuzzyLevel": 1
+              },
+              "results": [
+                {
+                  "type": "Point Address",
+                  "id": "US/PAD/p0/48052000",
+                  "score": 14.334,
+                  "address": {
+                    "streetNumber": "350",
+                    "streetName": "5th Avenue",
+                    "municipalitySubdivision": "New York, Midtown South",
+                    "municipality": "New York, Manhattan",
+                    "countrySecondarySubdivision": "New York",
+                    "countryTertiarySubdivision": "Manhattan",
+                    "countrySubdivision": "NY",
+                    "postalCode": "10118",
+                    "extendedPostalCode": "1011800",
+                    "countryCode": "US",
+                    "country": "United States Of America",
+                    "countryCodeISO3": "USA",
+                    "freeformAddress": "350 5th Avenue, NYC, NY 10118",
+                    "countrySubdivisionName": "New York"
+                  },
+                  "position": {
+                    "lat": 40.74817,
+                    "lon": -73.985
+                  },
+                  "viewport": {
+                    "topLeftPoint": {
+                      "lat": 40.74907,
+                      "lon": -73.98619
+                    },
+                    "btmRightPoint": {
+                      "lat": 40.74727,
+                      "lon": -73.98381
+                    }
+                  },
+                  "entryPoints": [
+                    {
+                      "type": "main",
+                      "position": {
+                        "lat": 40.74808,
+                        "lon": -73.98482
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "URL to download the results of the long-running batch request."
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

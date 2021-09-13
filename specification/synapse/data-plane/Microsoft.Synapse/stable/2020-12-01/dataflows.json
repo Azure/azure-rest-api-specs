@@ -1,0 +1,988 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/dataflows/{dataFlowName}": {
+      "put": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_CreateOrUpdateDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Create": {
+            "$ref": "./examples/DataFlows_Create.json"
+          },
+          "DataFlows_Update": {
+            "$ref": "./examples/DataFlows_Update.json"
+          }
+        },
+        "description": "Creates or updates a data flow.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the data flow entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "dataFlow",
+            "description": "Data flow resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFlowResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowResource"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_GetDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Get": {
+            "$ref": "./examples/DataFlows_Get.json"
+          }
+        },
+        "description": "Gets a data flow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the data flow entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_DeleteDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Delete": {
+            "$ref": "./examples/DataFlows_Delete.json"
+          }
+        },
+        "description": "Deletes a data flow.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/dataflows/{dataFlowName}/rename": {
+      "post": {
+        "tags": [
+          "dataflows"
+        ],
+        "operationId": "DataFlow_RenameDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Rename": {
+            "$ref": "./examples/DataFlows_Rename.json"
+          }
+        },
+        "description": "Renames a dataflow.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "artifacts.json#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/dataflows": {
+      "get": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_GetDataFlowsByWorkspace",
+        "x-ms-examples": {
+          "DataFlows_ListByWorkspace": {
+            "$ref": "./examples/DataFlows_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists data flows.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/createDataFlowDebugSession": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_CreateDataFlowDebugSession",
+        "x-ms-examples": {
+          "DataFlowDebugSession_Create": {
+            "$ref": "./examples/DataFlowDebugSession_Create.json"
+          }
+        },
+        "description": "Creates a data flow debug session.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug session definition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDataFlowDebugSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CreateDataFlowDebugSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/queryDataFlowDebugSessions": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_QueryDataFlowDebugSessionsByWorkspace",
+        "x-ms-examples": {
+          "DataFlowDebugSession_QueryByWorkspace": {
+            "$ref": "./examples/DataFlowDebugSession_QueryByWorkspace.json"
+          }
+        },
+        "description": "Query all active data flow debug sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/QueryDataFlowDebugSessionsResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/addDataFlowToDebugSession": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_AddDataFlow",
+        "x-ms-examples": {
+          "DataFlowDebugSession_AddDataFlow": {
+            "$ref": "./examples/DataFlowDebugSession_AddDataFlow.json"
+          }
+        },
+        "description": "Add a data flow into debug session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug session definition with debug content.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AddDataFlowToDebugSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/deleteDataFlowDebugSession": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_DeleteDataFlowDebugSession",
+        "x-ms-examples": {
+          "DataFlowDebugSession_Delete": {
+            "$ref": "./examples/DataFlowDebugSession_Delete.json"
+          }
+        },
+        "description": "Deletes a data flow debug session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug session definition for deletion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteDataFlowDebugSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/executeDataFlowDebugCommand": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_ExecuteCommand",
+        "x-ms-examples": {
+          "DataFlowDebugSession_ExecuteCommand": {
+            "$ref": "./examples/DataFlowDebugSession_ExecuteCommand.json"
+          }
+        },
+        "description": "Execute a data flow debug command.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug command definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugCommandResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataFlowListResponse": {
+      "description": "A list of data flow resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of data flows.",
+          "items": {
+            "$ref": "#/definitions/DataFlowResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowResource": {
+      "description": "Data flow resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/DataFlow.json#/definitions/DataFlow",
+          "description": "Data flow properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CreateDataFlowDebugSessionRequest": {
+      "description": "Request body structure for creating data flow debug session.",
+      "type": "object",
+      "properties": {
+        "dataFlowName": {
+          "description": "The name of the data flow.",
+          "type": "string"
+        },
+        "existingClusterId": {
+          "description": "The ID of existing Databricks cluster.",
+          "type": "string"
+        },
+        "clusterTimeout": {
+          "description": "Timeout setting for Databricks cluster.",
+          "type": "integer"
+        },
+        "newClusterName": {
+          "description": "The name of new Databricks cluster.",
+          "type": "string"
+        },
+        "newClusterNodeType": {
+          "description": "The type of new Databricks cluster.",
+          "type": "string"
+        },
+        "dataBricksLinkedService": {
+          "description": "Data bricks linked service.",
+          "$ref": "linkedServices.json#/definitions/LinkedServiceResource"
+        }
+      }
+    },
+    "CreateDataFlowDebugSessionResponse": {
+      "description": "Response body structure for creating data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        }
+      }
+    },
+    "QueryDataFlowDebugSessionsResponse": {
+      "description": "A list of active debug sessions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array with all active debug sessions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFlowDebugSessionInfo"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugSessionInfo": {
+      "description": "Data flow debug session info.",
+      "type": "object",
+      "properties": {
+        "dataFlowName": {
+          "description": "The name of the data flow.",
+          "type": "string"
+        },
+        "computeType": {
+          "description": "Compute type of the cluster.",
+          "type": "string"
+        },
+        "coreCount": {
+          "description": "Core count of the cluster.",
+          "type": "integer"
+        },
+        "nodeCount": {
+          "description": "Node count of the cluster. (deprecated property)",
+          "type": "integer"
+        },
+        "integrationRuntimeName": {
+          "description": "Attached integration runtime name of data flow debug session.",
+          "type": "string"
+        },
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time of data flow debug session.",
+          "type": "string"
+        },
+        "timeToLiveInMinutes": {
+          "description": "Compute type of the cluster.",
+          "type": "integer"
+        },
+        "lastActivityTime": {
+          "description": "Last activity time of data flow debug session.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DataFlowDebugPackage": {
+      "description": "Request body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlow": {
+          "description": "Data flow instance.",
+          "$ref": "#/definitions/DataFlowDebugResource"
+        },
+        "datasets": {
+          "type": "array",
+          "description": "List of datasets.",
+          "items": {
+            "$ref": "#/definitions/DatasetDebugResource"
+          }
+        },
+        "linkedServices": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceDebugResource"
+          }
+        },
+        "staging": {
+          "description": "Staging info for debug session.",
+          "$ref": "artifacts.json#/definitions/DataFlowStagingInfo"
+        },
+        "debugSettings": {
+          "description": "Data flow debug settings.",
+          "type": "object",
+          "properties": {
+            "sourceSettings": {
+              "type": "array",
+              "description": "Source setting for data flow debug.",
+              "items": {
+                "$ref": "#/definitions/DataFlowSourceSetting"
+              }
+            },
+            "parameters": {
+              "description": "Data flow parameters.",
+              "$ref": "artifacts.json#/definitions/ParameterValueSpecification"
+            },
+            "datasetParameters": {
+              "description": "Parameters for dataset.",
+              "type": "object"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DataFlowSourceSetting": {
+      "description": "Definition of data flow source setting for debug.",
+      "type": "object",
+      "properties": {
+        "sourceName": {
+          "description": "The data flow source name.",
+          "type": "string"
+        },
+        "rowLimit": {
+          "description": "Defines the row limit of data flow source in debug.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DataFlowDebugResource": {
+      "description": "Data flow debug resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/DataFlow.json#/definitions/DataFlow",
+          "description": "Data flow properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "AddDataFlowToDebugSessionResponse": {
+      "description": "Response body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "jobVersion": {
+          "description": "The ID of data flow debug job version.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugCommandResponse": {
+      "description": "Response body structure of data flow result for data preview, statistics or expression preview.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The run status of data preview, statistics or expression preview.",
+          "type": "string"
+        },
+        "data": {
+          "description": "The result data of data preview, statistics or expression preview.",
+          "type": "string"
+        }
+      }
+    },
+    "StartDataFlowDebugSessionRequest": {
+      "description": "Request body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlow": {
+          "description": "Data flow instance.",
+          "$ref": "dataflows.json#/definitions/DataFlowResource"
+        },
+        "datasets": {
+          "type": "array",
+          "description": "List of datasets.",
+          "items": {
+            "$ref": "datasets.json#/definitions/DatasetResource"
+          }
+        },
+        "linkedServices": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "linkedServices.json#/definitions/LinkedServiceResource"
+          }
+        },
+        "staging": {
+          "description": "Staging info for debug session.",
+          "type": "object"
+        },
+        "debugSettings": {
+          "description": "Data flow debug settings.",
+          "type": "object"
+        },
+        "incrementalDebug": {
+          "description": "The type of new Databricks cluster.",
+          "type": "boolean"
+        }
+      }
+    },
+    "StartDataFlowDebugSessionResponse": {
+      "description": "Response body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "jobVersion": {
+          "description": "The ID of data flow debug job version.",
+          "type": "string"
+        }
+      }
+    },
+    "DeleteDataFlowDebugSessionRequest": {
+      "description": "Request body structure for deleting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugPreviewDataRequest": {
+      "description": "Request body structure for data flow preview data.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The output stream name.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "The row limit for preview request.",
+          "type": "integer"
+        }
+      }
+    },
+    "DataFlowDebugStatisticsRequest": {
+      "description": "Request body structure for data flow statistics.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The output stream name.",
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "description": "List of column names.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EvaluateDataFlowExpressionRequest": {
+      "description": "Request body structure for data flow expression preview.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The output stream name.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "The row limit for preview request.",
+          "type": "integer"
+        },
+        "expression": {
+          "description": "The expression for preview.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugCommandRequest": {
+      "description": "Request body structure for data flow expression preview.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "commandName": {
+          "description": "The command name.",
+          "type": "string"
+        },
+        "commandPayload": {
+          "description": "The command payload object.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "sessionId",
+        "commandPayload"
+      ]
+    },
+    "DataFlowDebugQueryResponse": {
+      "description": "Response body structure of data flow query for data preview, statistics or expression preview.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "The run ID of data flow debug session.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugResultResponse": {
+      "description": "Response body structure of data flow result for data preview, statistics or expression preview.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The run status of data preview, statistics or expression preview.",
+          "type": "string"
+        },
+        "data": {
+          "description": "The result data of data preview, statistics or expression preview.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetDebugResource": {
+      "description": "Dataset debug resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset",
+          "description": "Dataset properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkedServiceDebugResource": {
+      "description": "Linked service debug resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
+          "description": "Properties of linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "dataFlowName": {
+      "name": "dataFlowName",
+      "description": "The data flow name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
