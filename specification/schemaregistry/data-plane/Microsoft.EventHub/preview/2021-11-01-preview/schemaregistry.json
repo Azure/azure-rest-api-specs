@@ -103,23 +103,9 @@
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
               },
-              "Serialization-Type": {
-                "type": "string",
-                "description": "Serialization type for the schema being stored.",
-                "enum": [
-                  "avro"
-                ],
-                "x-ms-enum": {
-                  "name": "SchemaSerializationType",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "value": "avro",
-                      "name": "AVRO",
-                      "description": "Avro Serialization schema type"
-                    }
-                  ]
-                }
+              "Content-Type": {
+                "description": "The serialization type for given schema. Specific type expressed in optional parameter.",
+                "type": "string"
               },
               "Schema-Id": {
                 "type": "string",
@@ -252,26 +238,11 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
           },
           {
-            "name": "Serialization-Type",
+            "name": "accept",
             "in": "header",
             "type": "string",
-            "description": "Serialization type for the schema being registered.",
-            "required": true,
-            "enum": [
-              "avro"
-            ],
-            "x-ms-enum": {
-              "name": "SchemaSerializationType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "avro",
-                  "name": "AVRO",
-                  "description": "Avro Serialization schema type"
-                }
-              ]
-            },
-            "x-nullable": false
+            "description": "Serialization type for the schema being retrieved.",
+            "required": true
           },
           {
             "name": "schema-content",
@@ -294,23 +265,9 @@
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
               },
-              "Serialization-Type": {
-                "type": "string",
-                "description": "Serialization type for the schema being stored.",
-                "enum": [
-                  "avro"
-                ],
-                "x-ms-enum": {
-                  "name": "SchemaSerializationType",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "value": "avro",
-                      "name": "AVRO",
-                      "description": "Avro Serialization schema type"
-                    }
-                  ]
-                }
+              "Content-Type": {
+                "description": "The serialization type for given schema. Specific type expressed in optional parameter.",
+                "type": "string"
               },
               "Schema-Id": {
                 "type": "string",
@@ -336,6 +293,9 @@
             "schema": {
               "$ref": "#/definitions/SchemaId"
             }
+          },
+          "406": {
+            "description": "Not Acceptable"
           },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
@@ -386,26 +346,11 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
           },
           {
-            "name": "Serialization-Type",
+            "name": "accept",
             "in": "header",
             "type": "string",
-            "description": "Serialization type for the schema being registered.",
-            "required": true,
-            "enum": [
-              "avro"
-            ],
-            "x-ms-enum": {
-              "name": "SchemaSerializationType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "avro",
-                  "name": "AVRO",
-                  "description": "Avro Serialization schema type"
-                }
-              ]
-            },
-            "x-nullable": false
+            "description": "Serialization type for the schema being retrieved.",
+            "required": true
           },
           {
             "name": "schema-content",
@@ -428,23 +373,9 @@
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
               },
-              "Serialization-Type": {
-                "type": "string",
-                "description": "Serialization type for the schema being registered.",
-                "enum": [
-                  "avro"
-                ],
-                "x-ms-enum": {
-                  "name": "SchemaSerializationType",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "value": "avro",
-                      "name": "AVRO",
-                      "description": "Avro Serialization schema type"
-                    }
-                  ]
-                }
+              "Content-Type": {
+                "description": "The serialization type for given schema. Specific type expressed in optional parameter.",
+                "type": "string"
               },
               "Schema-Id": {
                 "type": "string",
@@ -467,6 +398,9 @@
                 "description": "Version of the returned schema."
               }
             }
+          },
+          "406": {
+            "description": "Not Acceptable"
           },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
