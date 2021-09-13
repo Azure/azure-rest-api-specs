@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/leni/doc/documentation/test-scenario/references/v1.1/schema.json
 scope: ResourceGroup
 
 variables:
@@ -6,12 +7,14 @@ variables:
   ascDomainName: .azuremicroservices.io
   domainName: asc-api.asc-test.net
   customDomainName: asc-api.asc-test.net
-
-requiredVariables:
-  - mysqlKey
-  - dnsSubscriptionId
-  - dnsResourceGroup
-  - blobUrl
+  mysqlKey:
+    type: secureString
+  dnsSubscriptionId:
+    type: string
+  dnsResourceGroup:
+    type: string
+  blobUrl:
+    type: secureString
 
 prepareSteps:
   - step: Generate_Unique_ServiceName
@@ -26,7 +29,7 @@ prepareSteps:
       subscriptionId: $(dnsSubscriptionId)
       resourceGroup: $(dnsResourceGroup)
 
-testScenarios:
+scenarios:
   - scenario: Spring
     description: Microsoft.AppPlatform/Spring
     steps:
@@ -44,16 +47,14 @@ testScenarios:
         exampleFile: ../examples/Services_Get.json
         resourceName: myservice
 
-      # TODO: resourceUpdate could only be used with "PUT".
-      #  - step: Services_Update
-      #    exampleFile: ../examples/Services_Update.json
-      #    resourceName: myservice
-      #    operationId: Services_Update
-      #    requestUpdate:
-      #      - replace: /tags
-      #        value:
-      #          hello: world
-      #          created-by: api-test
+      - step: Services_Update
+        resourceName: myservice
+        operationId: Services_Update
+        resourceUpdate:
+          - replace: /tags
+            value:
+              hello: world
+              created-by: api-test
 
       - step: Services_DisableTestEndpoint
         exampleFile: ../examples/Services_DisableTestEndpoint.json
@@ -74,10 +75,8 @@ testScenarios:
         resourceUpdate:
           - replace: /properties
             value:
-              {
-                "vaultUri": "https://integration-test-prod.vault.azure.net/",
-                "keyVaultCertName": "pfx-cert",
-              }
+              vaultUri: https://integration-test-prod.vault.azure.net/
+              keyVaultCertName: pfx-cert
 
       - step: Certificates_Get
         exampleFile: ../examples/Certificates_Get.json
@@ -88,8 +87,8 @@ testScenarios:
       # ConfigServers
       - step: ConfigServers_Validate
         exampleFile: ../examples/ConfigServers_Validate.json
-        resourceUpdate:
-          - replace: /gitProperty
+        requestUpdate:
+          - replace: /configServerSettings/gitProperty
             value:
               {
                 "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
@@ -170,27 +169,23 @@ testScenarios:
           deploymentName: default
         resourceName: default
 
-      #  - step: Apps_Update_ActiveDeployment   # PATCH
-      #    resourceName: app01
-      #    requestUpdate:
-      #      - replace: /appResource/properties/activeDeploymentName
-      #        value: default
+      - step: Apps_Update_ActiveDeployment # PATCH
+        resourceName: app01
+        operationId: Apps_Update
+        resourceUpdate:
+          - replace: /properties/activeDeploymentName
+            value: default
 
-      #  - step: Apps_Update_Disk       # PATCH
-      #    resourceName: app01
-      #    requestUpdate:
-      #      - replace: /properties/temporaryDisk
-      #        value: {
-      #          "sizeInGB": 3,
-      #          "mountPath": "/tmpdisk"
-      #        }
-      #      - replace: /properties/persistentDisk
-      #        value: {
-      #          "sizeInGB": 10,
-      #          "mountPath": "/data"
-      #        }
-      #      - replace: /properties/public
-      #        value: true
+      - step: Apps_Update_Disk # PATCH
+        resourceName: app01
+        operationId: Apps_Update
+        resourceUpdate:
+          - replace: /properties/temporaryDisk
+            value: { "sizeInGB": 3, "mountPath": "/tmpdisk" }
+          - replace: /properties/persistentDisk
+            value: { "sizeInGB": 10, "mountPath": "/data" }
+          - replace: /properties/public
+            value: true
 
       - step: Apps_List
         exampleFile: ../examples/Apps_List.json
@@ -234,8 +229,8 @@ testScenarios:
       # CustomDomains         # depends on DNS
       - step: Apps_ValidateDomain
         exampleFile: ../examples/Apps_ValidateDomain.json
-        resourceUpdate:
-          - replace: /name
+        requestUpdate:
+          - replace: /validatePayload/name
             value: $(customDomainName)
 
       - step: CustomDomains_CreateOrUpdate
@@ -260,6 +255,7 @@ testScenarios:
         exampleFile: ../examples/Apps_GetResourceUploadUrl.json
         outputVariables:
           uploadUrl:
+            type: secureString
             fromResponse: /uploadUrl
           relativePath:
             fromResponse: /relativePath
@@ -267,25 +263,7 @@ testScenarios:
       - step: Upload_File
         armTemplateDeployment: ./templates/upload_file.json
         variables:
-          scriptsContent: |
-            $uploadUri = ${Env:uploadUrl}
-            $blobUri = ${Env:blobUrl}
-            $localFilePath = '/tmp/temp.file'
-            function DownloadJarFromBlob([string]$blobUri, [string]$localOutputFilePath) {
-              $BlobFile = [Microsoft.WindowsAzure.Storage.Blob.CloudBlob]::new($blobUri)
-              $DownLoadTask = $BlobFile.DownloadToFileAsync($localOutputFilePath, 4)
-              $DownLoadTask
-            }
-
-            function UploadToFileShare([string]$uploadUri, [string]$localFilePath) {
-              $CloudFile = [Microsoft.WindowsAzure.Storage.File.CloudFile]::New($uploadUri)
-              $UploadTask = $CloudFile.UploadFromFileAsync($localFilePath)
-              $UploadTask
-            }
-
-            Connect-AzAccount -Identity
-            DownloadJarFromBlob $blobUri $localFilePath
-            UploadToFileShare $uploadUri $localFilePath
+          scriptsContent: !include ./templates/uploadJar.ps1
 
       - step: Deployments_CreateOrUpdate
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
@@ -300,11 +278,12 @@ testScenarios:
           - replace: /properties/source/relativePath
             value: $(relativePath)
 
-      #  - step: Apps_Update       # PATCH
-      #    resourceName: app01
-      #    requestUpdate:
-      #      - replace: /appResource/properties/activeDeploymentName
-      #        value: blue
+      - step: Apps_Update # PATCH
+        resourceName: app01
+        operationId: Apps_Update
+        resourceUpdate:
+          - replace: /properties/activeDeploymentName
+            value: blue
 
       - step: Deployments_Restart
         exampleFile: ../examples/Deployments_Restart.json
@@ -367,3 +346,10 @@ testScenarios:
 
       - step: Operations_List
         exampleFile: ../examples/Operations_List.json
+
+cleanUpSteps:
+  - step: Delete_Dns_Cname_Record
+    armTemplateDeployment: templates/create_dns_cname_record.json
+    variables:
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroup: $(dnsResourceGroup)
