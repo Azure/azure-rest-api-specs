@@ -53,12 +53,10 @@
     "apiVersionParam": {
       "name": "api-version",
       "x-ms-parameter-location": "client",
-      "x-ms-client-name": "version",
       "in": "query",
-      "required": false,
+      "required": true,
       "type": "string",
       "description": "Specifies the version of the operation to use for this request.",
-      "x-ms-global": true,
       "enum": [
         "2021-09-05"
       ],
@@ -190,8 +188,11 @@
     },
     "TdProfileInfoList": {
       "description": "Text-Dependent Speaker profile info list",
+      "required": [
+        "value"
+      ],
       "properties": {
-        "profiles": {
+        "value": {
           "items": {
             "$ref": "#/definitions/TdProfileInfo"
           }
@@ -275,8 +276,11 @@
     },
     "TiProfileInfoList": {
       "description": "Text-Independent Speaker profile info list",
+      "required": [
+        "value"
+      ],
       "properties": {
-        "profiles": {
+        "value": {
           "items": {
             "$ref": "#/definitions/TiProfileInfo"
           }
@@ -383,8 +387,11 @@
     },
     "PassPhraseInfo": {
       "description": "Pass phrase list",
+      "required": [
+        "value"
+      ],
       "properties": {
-        "phrases": {
+        "value": {
           "items": {
             "properties": {
               "passPhrase": {
@@ -397,8 +404,11 @@
     },
     "ActivationPhraseInfo": {
       "description": "Activation phrase list",
+      "required": [
+        "value"
+      ],
       "properties": {
-        "phrases": {
+        "value": {
           "items": {
             "properties": {
               "activationPhrase": {
@@ -408,20 +418,36 @@
           }
         }
       }
-    },
-    "SpeakerError": {
-      "description": "Speaker error message",
-      "required": [
-        "error"
-      ],
-      "properties": {
-        "error": {
-          "properties": {
-            "code": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
+    }
+  },
+  "responses": {
+    "SpeakerErrorResponse": {
+      "description": "Failure",
+      "x-ms-error-response": true,
+      "headers": {
+        "x-ms-error-code": {
+          "type": "string",
+          "description": "Error code"
+        }
+      },
+      "schema": {
+        "description": "Speaker error message",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
             }
           }
         }
@@ -472,11 +498,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       },
@@ -516,11 +538,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -554,11 +572,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       },
@@ -587,10 +601,7 @@
             "description": "OK"
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            }
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -630,11 +641,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -681,11 +688,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -732,11 +735,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -770,11 +769,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -822,11 +817,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       },
@@ -865,11 +856,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -903,11 +890,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       },
@@ -936,11 +919,7 @@
             "description": "OK"
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -980,11 +959,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -1038,11 +1013,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -1096,11 +1067,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
@@ -1108,7 +1075,7 @@
     "/text-independent/phrases/{locale}": {
       "get": {
         "description": "Retrieves list of supported passphrases for a specific locale.",
-        "operationId": "TextIndependent_ActivationPhrase",
+        "operationId": "TextIndependent_ListActivationPhrases",
         "summary": "Pass Phrases",
         "x-ms-examples": {
           "Successful Query": {
@@ -1134,11 +1101,7 @@
             }
           },
           "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/SpeakerError"
-            },
-            "x-ms-error-response": true
+            "$ref": "#/responses/SpeakerErrorResponse"
           }
         }
       }
