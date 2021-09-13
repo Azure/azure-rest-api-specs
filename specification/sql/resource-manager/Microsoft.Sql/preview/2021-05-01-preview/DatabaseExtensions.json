@@ -354,6 +354,45 @@
           "description": "Error message.",
           "type": "string",
           "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob URI.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the status of private endpoints associated with this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestStatus": {
+      "description": "Contains the private endpoint connection requests status.",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceId": {
+          "description": "Resource id for which the private endpoint is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnectionName": {
+          "description": "The connection name for the private endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of this private endpoint connection.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
