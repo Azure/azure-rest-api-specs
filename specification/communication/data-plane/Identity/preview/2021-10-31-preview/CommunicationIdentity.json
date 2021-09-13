@@ -236,30 +236,6 @@
     }
   },
   "definitions": {
-    "CommunicationIdentityTokenScope": {
-      "description": "List of scopes for an access token.",
-      "enum": [
-        "chat",
-        "voip"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CommunicationIdentityTokenScope",
-        "modelAsString": true
-      }
-    },
-    "CommunicationIdentityCreateRequest": {
-      "type": "object",
-      "properties": {
-        "createTokenWithScopes": {
-          "description": "Also create access token for the created identity.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentityTokenScope"
-          }
-        }
-      }
-    },
     "CommunicationIdentity": {
       "description": "A communication identity.",
       "required": [
@@ -292,6 +268,21 @@
         }
       }
     },
+    "CommunicationIdentityAccessTokenRequest": {
+      "required": [
+        "scopes"
+      ],
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "List of scopes attached to the token.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
     "CommunicationIdentityAccessTokenResult": {
       "description": "A communication identity with access token.",
       "required": [
@@ -307,6 +298,30 @@
         }
       }
     },
+    "CommunicationIdentityCreateRequest": {
+      "type": "object",
+      "properties": {
+        "createTokenWithScopes": {
+          "description": "Also create access token for the created identity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
+    "CommunicationIdentityTokenScope": {
+      "description": "List of scopes for an access token.",
+      "enum": [
+        "chat",
+        "voip"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentityTokenScope",
+        "modelAsString": true
+      }
+    },
     "TeamsUserAccessTokenRequest": {
       "required": [
         "token"
@@ -316,21 +331,6 @@
         "token": {
           "description": "Azure Active Directory access token to acquire a new ACS access token.",
           "type": "string"
-        }
-      }
-    },
-    "CommunicationIdentityAccessTokenRequest": {
-      "required": [
-        "scopes"
-      ],
-      "type": "object",
-      "properties": {
-        "scopes": {
-          "description": "List of scopes attached to the token.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentityTokenScope"
-          }
         }
       }
     }
