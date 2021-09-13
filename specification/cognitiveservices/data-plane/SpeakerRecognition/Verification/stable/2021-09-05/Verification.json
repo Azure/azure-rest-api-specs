@@ -418,6 +418,28 @@
           }
         }
       }
+    },
+    "SpeakerErrorInfo": {
+      "description": "Speaker error message",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   },
   "responses": {
@@ -431,26 +453,7 @@
         }
       },
       "schema": {
-        "description": "Speaker error message",
-        "required": [
-          "error"
-        ],
-        "properties": {
-          "error": {
-            "required": [
-              "code",
-              "message"
-            ],
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "message": {
-                "type": "string"
-              }
-            }
-          }
-        }
+        "$ref": "#/definitions/SpeakerErrorInfo"
       }
     }
   },
