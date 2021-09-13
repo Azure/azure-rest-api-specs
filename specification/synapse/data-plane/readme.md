@@ -25,6 +25,8 @@ These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
 openapi-type: data-plane
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(package-spark)
