@@ -7719,6 +7719,26 @@
         }
       }
     },
+    "ResourceTypeSku": {
+      "description": "Resource type Sku object",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skus": {
+          "description": "The skus.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuInformation"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "Role": {
       "description": "Compute role.",
       "required": [
@@ -8102,6 +8122,97 @@
         },
         "extendedUnit": {
           "description": "The extended unit.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuInformation": {
+      "description": "Sku information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The sku name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "The sku tier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "The sku kind.",
+          "type": "string",
+          "readOnly": true
+        },
+        "family": {
+          "description": "The Sku family.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costs": {
+          "description": "The pricing info of the Sku.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          },
+          "readOnly": true
+        },
+        "locations": {
+          "description": "The locations where Sku is available.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "description": "The locations where Sku is available with zones and sites info",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationInfo"
+          },
+          "readOnly": true
+        },
+        "requiredQuotaIds": {
+          "description": "The required quotaIds for the sku to be available.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredFeatures": {
+          "description": "The required features for the sku to be available.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuInformationList": {
+      "description": "List of SKU Information objects",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of ResourceTypeSku objects",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeSku"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Links to the next set of results",
           "type": "string",
           "readOnly": true
         }
