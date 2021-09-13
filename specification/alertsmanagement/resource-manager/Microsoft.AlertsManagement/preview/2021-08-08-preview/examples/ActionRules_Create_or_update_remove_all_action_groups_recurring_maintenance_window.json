@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "api-version": "2021-08-08-preview",
+    "subscriptionId": "subId1",
+    "resourceGroupName": "alertscorrelationrg",
+    "actionRuleName": "RemoveActionGroupsRecurringMaintenance",
+    "actionRule": {
+      "location": "Global",
+      "tags": {},
+      "properties": {
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1",
+          "/subscriptions/subId1/resourceGroups/RGId2"
+        ],
+        "conditions": [
+          {
+            "field": "TargetResourceType",
+            "operator": "Equals",
+            "values": [
+              "microsoft.compute/virtualmachines"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "actionType": "RemoveAllActionGroups"
+          }
+        ],
+        "schedule": {
+          "timeZone": "India Standard Time",
+          "recurrences": [
+            {
+              "recurrenceType": "Weekly",
+              "startTime": "22:00:00",
+              "endTime": "04:00:00",
+              "daysOfWeek": [
+                "Saturday",
+                "Sunday"
+              ]
+            }
+          ]
+        },
+        "description": "Remove all ActionGroups from all Vitual machine Alerts during the recurring maintenance",
+        "enabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-11T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ],
+          "conditions": [
+            {
+              "field": "TargetResourceType",
+              "operator": "Equals",
+              "values": [
+                "microsoft.compute/virtualmachines"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "schedule": {
+            "timeZone": "India Standard Time",
+            "recurrences": [
+              {
+                "recurrenceType": "Weekly",
+                "startTime": "22:00:00",
+                "endTime": "04:00:00",
+                "daysOfWeek": [
+                  "Saturday",
+                  "Sunday"
+                ]
+              }
+            ]
+          },
+          "description": "Remove all ActionGroups from all Vitual machine Alerts during the recurring maintenance",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsRecurringMaintenance",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "RemoveActionGroupsRecurringMaintenance",
+        "location": "Global",
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-11T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ],
+          "conditions": [
+            {
+              "field": "TargetResourceType",
+              "operator": "Equals",
+              "values": [
+                "microsoft.compute/virtualmachines"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "schedule": {
+            "timeZone": "India Standard Time",
+            "recurrences": [
+              {
+                "recurrenceType": "Weekly",
+                "startTime": "22:00:00",
+                "endTime": "04:00:00",
+                "daysOfWeek": [
+                  "Saturday",
+                  "Sunday"
+                ]
+              }
+            ]
+          },
+          "description": "Remove all ActionGroups from all Vitual machine Alerts during the recurring maintenance",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsRecurringMaintenance",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "RemoveActionGroupsRecurringMaintenance",
+        "location": "Global",
+        "tags": {}
+      }
+    }
+  }
+}
