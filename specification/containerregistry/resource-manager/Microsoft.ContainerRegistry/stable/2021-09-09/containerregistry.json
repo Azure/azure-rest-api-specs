@@ -1409,10 +1409,6 @@
           "$ref": "#/definitions/OperationPropertiesDefinition",
           "description": "The properties information for the container registry operation.",
           "x-ms-client-flatten": true
-        },
-        "isDataAction": {
-          "description": "This property indicates if the operation is an action or a data action\r\nref: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions#management-and-data-operations",
-          "type": "boolean"
         }
       }
     },
@@ -1457,13 +1453,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecificationDefinition"
-          }
-        },
-        "logSpecifications": {
-          "description": "A list of Azure Monitoring log definitions.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationLogSpecificationDefinition"
           }
         }
       }
@@ -1928,11 +1917,6 @@
             "name": "ZoneRedundancy",
             "modelAsString": true
           }
-        },
-        "anonymousPullEnabled": {
-          "description": "Enables registry-wide pull from unauthenticated clients.",
-          "default": false,
-          "type": "boolean"
         }
       }
     },
@@ -2333,10 +2317,6 @@
             "name": "NetworkRuleBypassOptions",
             "modelAsString": true
           }
-        },
-        "anonymousPullEnabled": {
-          "description": "Enables registry-wide pull from unauthenticated clients.",
-          "type": "boolean"
         }
       }
     },
