@@ -511,31 +511,40 @@
       "description": "Request body structure for creating data flow debug session.",
       "type": "object",
       "properties": {
-        "dataFlowName": {
-          "description": "The name of the data flow.",
+        "computeType": {
+          "description": "Compute type of the cluster. The value will be overwritten by the same setting in integration runtime if provided.",
           "type": "string"
         },
-        "existingClusterId": {
-          "description": "The ID of existing Databricks cluster.",
-          "type": "string"
-        },
-        "clusterTimeout": {
-          "description": "Timeout setting for Databricks cluster.",
+        "coreCount": {
+          "description": "Core count of the cluster. The value will be overwritten by the same setting in integration runtime if provided.",
           "type": "integer"
         },
-        "newClusterName": {
-          "description": "The name of new Databricks cluster.",
-          "type": "string"
+        "timeToLive": {
+          "description": "Time to live setting of the cluster in minutes.",
+          "type": "integer"
         },
-        "newClusterNodeType": {
-          "description": "The type of new Databricks cluster.",
-          "type": "string"
-        },
-        "dataBricksLinkedService": {
-          "description": "Data bricks linked service.",
-          "$ref": "linkedServices.json#/definitions/LinkedServiceResource"
+        "integrationRuntime": {
+          "description": "Set to use integration runtime setting for data flow debug session.",
+          "$ref": "#/definitions/IntegrationRuntimeDebugResource"
         }
       }
+    },
+    "IntegrationRuntimeDebugResource": {
+      "description": "Integration runtime debug resource.",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntime",
+          "description": "Integration runtime properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "CreateDataFlowDebugSessionResponse": {
       "description": "Response body structure for creating data flow debug session.",
@@ -862,29 +871,58 @@
       }
     },
     "DataFlowDebugCommandRequest": {
-      "description": "Request body structure for data flow expression preview.",
+      "description": "Request body structure for data flow debug command.",
       "type": "object",
       "properties": {
         "sessionId": {
           "description": "The ID of data flow debug session.",
           "type": "string"
         },
-        "dataFlowName": {
-          "description": "The data flow which contains the debug session.",
-          "type": "string"
-        },
-        "commandName": {
-          "description": "The command name.",
-          "type": "string"
+        "command": {
+          "description": "The command type.",
+          "type": "string",
+          "enum": [
+            "executePreviewQuery",
+            "executeStatisticsQuery",
+            "executeExpressionQuery"
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowDebugCommandType",
+            "modelAsString": true
+          }
         },
         "commandPayload": {
           "description": "The command payload object.",
-          "type": "object"
+          "$ref": "#/definitions/DataFlowDebugCommandPayload"
+        }
+      }
+    },
+    "DataFlowDebugCommandPayload": {
+      "description": "Structure of command payload.",
+      "type": "object",
+      "properties": {
+        "streamName": {
+          "description": "The stream name which is used for preview.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "Row limits for preview response.",
+          "type": "integer"
+        },
+        "columns": {
+          "description": "Array of column names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "description": "The expression which is used for preview.",
+          "type": "string"
         }
       },
       "required": [
-        "sessionId",
-        "commandPayload"
+        "streamName"
       ]
     },
     "DataFlowDebugQueryResponse": {
