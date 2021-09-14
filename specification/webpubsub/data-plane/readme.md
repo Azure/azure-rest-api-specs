@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-10-01'
 input-file:
-  - WebPubSub/preview/2021-10-01/webpubsub.json
+  - WebPubSub/stable/2021-10-01/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
