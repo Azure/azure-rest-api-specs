@@ -5269,7 +5269,6 @@
       "description": "Azure Data Lake Gen2 datastore configuration.",
       "required": [
         "accountName",
-        "containerName",
         "credentials",
         "filesystem"
       ],
@@ -5282,15 +5281,6 @@
       "properties": {
         "accountName": {
           "description": "Storage account name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "containerName": {
-          "description": "Storage account container name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
