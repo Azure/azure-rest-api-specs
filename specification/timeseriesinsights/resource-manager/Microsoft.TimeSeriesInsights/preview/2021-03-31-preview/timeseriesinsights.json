@@ -1222,7 +1222,8 @@
             "description": "The private endpoint connection was successfully disconnected and removed from the environment. The response will contain the updated definition of the private endpoint connection."
           },
           "404": {
-            "description": "The subscription, resource group, environment or private endpoint connection could not be found."
+            "description": "The subscription, resource group, environment or private endpoint connection could not be found.",
+            "x-ms-error-response": false
           },
           "default": {
             "description": "An unexpected error occurred during the operation.",
@@ -2932,6 +2933,7 @@
       "x-ms-external": true
     },
     "PrivateEndpointConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
@@ -2960,6 +2962,7 @@
       "x-ms-external": true
     },
     "PrivateEndpointConnectionProperties": {
+      "type": "object",
       "properties": {
         "privateEndpoint": {
           "properties": {
@@ -3003,6 +3006,7 @@
       "description": "Describes the properties of an existing Private Endpoint connection to the environment."
     },
     "PrivateLinkResourcesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -3017,6 +3021,7 @@
       "x-ms-external": true
     },
     "PrivateLinkResource": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -3032,6 +3037,7 @@
       "description": "Describes a supported private link resource for the Azure Time Series Insights Environment."
     },
     "PrivateLinkResourceProperties": {
+      "type": "object",
       "properties": {
         "groupId": {
           "readOnly": true,
