@@ -501,11 +501,14 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**:
 ```json
-  "headers": {
-    "x-ms-request-id": {
-      "x-ms-client-name": "requestId",
+  "parameters": [
+    {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
       "type": "string",
-      "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+      "x-ms-client-name": "IfMatch",
+      "description": "The ETag of the resource to match."
     },
 ```
 
