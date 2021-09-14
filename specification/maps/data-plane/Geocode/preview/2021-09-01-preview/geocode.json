@@ -195,10 +195,25 @@
           {
             "name": "strictMatch",
             "in": "query",
-            "description": "Restrict the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\nOne of the following values:\n- 1: Restrict results to the specified countryRegion and adminDistrict.\n- 0 [default]: Do not restrict results to the specified countryRegion and adminDistrict.\nExample:\nstrictMatch=1",
+            "description": "Restrict the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\nExample:\nstrictMatch=1",
             "required": false,
-            "type": "enum",
-            "enum": ["0", "1"]
+            "type": "string",
+            "enum": ["0", "1"],
+            "x-ms-enum": {
+              "name": "StrictMatchEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "0",
+                  "description": "[default] Do not restrict results to the specified countryRegion and adminDistrict."
+                },
+                {
+                  "value": "1",
+                  "description": "Restrict results to the specified countryRegion and adminDistrict."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
