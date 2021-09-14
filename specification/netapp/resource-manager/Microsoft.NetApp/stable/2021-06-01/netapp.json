@@ -207,6 +207,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/quotaLimits": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get quota limits",
+        "description": "Get the default and current limits for quotas",
+        "operationId": "NetAppResourceQuotaLimits_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaItemList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "QuotaLimits": {
+            "$ref": "examples/QuotaLimits_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/quotaLimits/{quotaLimitName}": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get quota limits",
+        "description": "Get the default and current subscription quota limit",
+        "operationId": "NetAppResourceQuotaLimits_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/QuotaLimitName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "QuotaLimits": {
+            "$ref": "examples/QuotaLimits_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a subscription",
@@ -2836,6 +2916,12 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
         }
       }
     },
@@ -2884,6 +2970,10 @@
           "type": "string",
           "description": "The internal metric name."
         },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "boolean"
+        },
         "sourceMdmAccount": {
           "type": "string",
           "description": "The source MDM account."
@@ -2914,6 +3004,22 @@
         "resourceIdDimensionNameOverride": {
           "type": "string",
           "description": "Account Resource Id."
+        },
+        "isInternal": {
+          "description": "Whether the metric is internal.",
+          "type": "boolean"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
         }
       }
     },
@@ -3037,6 +3143,63 @@
         "resourceGroup": {
           "description": "Resource group name.",
           "type": "string"
+        }
+      }
+    },
+    "SubscriptionQuotaItemList": {
+      "description": "List of Subscription Quota Items",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of SubscriptionQuotaItems",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        }
+      }
+    },
+    "SubscriptionQuotaItem": {
+      "description": "Information regarding Subscription Quota Item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SubscriptionQuotaItem properties",
+          "$ref": "#/definitions/SubscriptionQuotaItemProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "SubscriptionQuotaItemProperties": {
+      "description": "SubscriptionQuotaItem Properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Quota Item name"
+        },
+        "current": {
+          "description": "The current quota value.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "The default quota value.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3783,6 +3946,71 @@
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
         },
+        "networkFeatures": {
+          "title": "Network features",
+          "description": "Basic network, or Standard features available to the volume.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFeatures",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Basic",
+                "description": "Basic network feature."
+              },
+              {
+                "value": "Standard",
+                "description": "Standard network feature."
+              }
+            ]
+          },
+          "example": "Standard",
+          "default": "Basic"
+        },
+        "networkSiblingSetId": {
+          "title": "Network Sibling Set ID",
+          "description": "Network Sibling Set ID for the the group of volumes sharing networking resources.",
+          "type": "string",
+          "readOnly": true,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "storageToNetworkProximity": {
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information for the volume.",
+          "type": "string",
+          "enum": [
+            "Default",
+            "T1",
+            "T2"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VolumeStorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Basic storage to network connectivity."
+              },
+              {
+                "value": "T1",
+                "description": "Standard T1 storage to network connectivity."
+              },
+              {
+                "value": "T2",
+                "description": "Standard T2 storage to network connectivity."
+              }
+            ]
+          },
+          "example": "T1"
+        },
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
@@ -3794,7 +4022,7 @@
         },
         "volumeType": {
           "type": "string",
-          "description": "What type of volume is this",
+          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection",
           "example": "DataProtection"
         },
         "dataProtection": {
@@ -5489,6 +5717,14 @@
       "required": true,
       "type": "string",
       "description": "Backup policy Name which uniquely identify backup policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaLimitName": {
+      "name": "quotaLimitName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the Quota Limit",
       "x-ms-parameter-location": "method"
     }
   }
