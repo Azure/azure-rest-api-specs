@@ -1,8 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "MonitorManagementClient",
-    "version": "2018-01-01"
+    "title": "Azure Monitor Metrics Definitions API",
+    "description": "Provides APIs for getting the metric metadata for Azure resources.",
+    "version": "2021-05-01",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -33,6 +37,51 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/metricDefinitions": {
+      "get": {
+        "tags": [
+          "MetricDefinitions"
+        ],
+        "operationId": "MetricDefinitions_ListAtSubscriptionScope",
+        "description": "Lists the metric definitions for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegionParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamespaceParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric definitions",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get Subscription level Metric Definitions without filter": {
+            "$ref": "./examples/GetMultiResourceMetricDefinitions.json"
+          }
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.Insights/metricDefinitions": {
       "get": {
         "tags": [
@@ -84,6 +133,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "type": "object",
       "required": [
         "value"
       ],
@@ -115,7 +165,7 @@
       },
       "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
     },
-    "Unit": {
+    "MetricUnit": {
       "type": "string",
       "description": "The unit of the metric.",
       "enum": [
@@ -152,6 +202,22 @@
       "x-ms-enum": {
         "name": "AggregationType",
         "modelAsString": false
+      }
+    },
+    "MetricAggregationType": {
+      "type": "string",
+      "description": "the aggregation type of the metric.",
+      "enum": [
+        "None",
+        "Average",
+        "Count",
+        "Minimum",
+        "Maximum",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "MetricAggregationType",
+        "modelAsString": true
       }
     },
     "MetricClass": {
@@ -201,8 +267,8 @@
           "description": "The class of the metric."
         },
         "unit": {
-          "$ref": "#/definitions/Unit",
-          "description": "The unit of the metric."
+          "$ref": "#/definitions/MetricUnit",
+          "description": "the unit of the metric."
         },
         "primaryAggregationType": {
           "$ref": "#/definitions/AggregationType",
@@ -252,6 +318,100 @@
       ],
       "description": "Represents collection of metric definitions."
     },
+    "SubscriptionScopeMetricDefinition": {
+      "type": "object",
+      "description": "Metric definition class specifies the metadata for a metric.",
+      "properties": {
+        "isDimensionRequired": {
+          "type": "boolean",
+          "description": "Flag to indicate whether the dimension is required."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "the resource identifier of the resource that emitted the metric."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "the namespace the metric belongs to."
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the name and the display name of the metric, i.e. it is a localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "category": {
+          "type": "string",
+          "description": "Custom category name for this metric."
+        },
+        "metricClass": {
+          "$ref": "#/definitions/MetricClass",
+          "description": "The class of the metric."
+        },
+        "unit": {
+          "$ref": "#/definitions/MetricUnit",
+          "description": "the unit of the metric."
+        },
+        "primaryAggregationType": {
+          "$ref": "#/definitions/MetricAggregationType",
+          "description": "the primary aggregation type value defining how to use the values for display."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAggregationType"
+          },
+          "description": "the collection of what aggregation types are supported."
+        },
+        "metricAvailabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "description": "the collection of what aggregation intervals are available to be queried."
+        },
+        "id": {
+          "type": "string",
+          "description": "the resource identifier of the metric definition."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalizableString"
+          },
+          "description": "the name and the display name of the dimension, i.e. it is a localizable string."
+        }
+      }
+    },
+    "SubscriptionScopeMetricDefinitionCollection": {
+      "type": "object",
+      "description": "Represents collection of metric definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionScopeMetricDefinition"
+          },
+          "description": "The values for the metric definitions."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ErrorContract": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
@@ -277,12 +437,20 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
+    "RegionParameter": {
+      "name": "region",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The region to where the metrics you want reside.",
+      "x-ms-parameter-location": "method"
+    },
     "MetricNamespaceParameter": {
       "name": "metricnamespace",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Metric namespace to query metric definitions for.",
+      "description": "Metric namespace where the metrics you want reside.",
       "x-ms-parameter-location": "method"
     }
   }
