@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoclusterrptest4",
+    "databaseName": "KustoDatabase8",
+    "api-version": "2021-08-27",
+    "parameters": {
+      "dataConnectionName": "DataConnections8",
+      "properties": {
+        "kind": "EventHub",
+        "eventHubResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1",
+        "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+        "consumerGroup": "testConsumerGroup1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "errorMessage": "Event hub's namespace does not exist"
+        },
+        {
+          "errorMessage": "Database does not exist"
+        }
+      ]
+    },
+    "202": {}
+  }
+}
