@@ -564,6 +564,9 @@
           },
           "Create Managed Cluster using an agent pool snapshot": {
             "$ref": "./examples/ManagedClustersCreate_Snapshot.json"
+          },
+          "Create/Update Managed Cluster with Windows gMSA enabled": {
+            "$ref": "./examples/ManagedClustersCreate_UpdateWindowsGmsa.json"
           }
         }
       },
@@ -2929,12 +2932,35 @@
           "type": "boolean",
           "title": "Whether to enable CSI proxy.",
           "description": "For more details on CSI proxy, see the [CSI proxy GitHub repo](https://github.com/kubernetes-csi/csi-proxy)."
+        },
+        "gmsaProfile": {
+          "$ref": "#/definitions/WindowsGmsaProfile",
+          "description": "The Windows gMSA Profile in the Managed Cluster."
         }
       },
       "required": [
         "adminUsername"
       ],
       "description": "Profile for Windows VMs in the managed cluster."
+    },
+    "WindowsGmsaProfile": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Whether to enable Windows gMSA.",
+          "description": "Specifies whether to enable Windows gMSA in the managed cluster."
+        },
+        "dnsServer": {
+          "type": "string",
+          "description": "Specifies the DNS server for Windows gMSA. <br><br> Set it to empty if you have configured the DNS server in the vnet which is used to create the managed cluster."
+        },
+        "rootDomainName": {
+          "type": "string",
+          "description": "Specifies the root domain name for Windows gMSA. <br><br> Set it to empty if you have configured the DNS server in the vnet which is used to create the managed cluster."
+        }
+      },
+      "description": "Windows gMSA Profile in the managed cluster."
     },
     "ContainerServiceLinuxProfile": {
       "properties": {
