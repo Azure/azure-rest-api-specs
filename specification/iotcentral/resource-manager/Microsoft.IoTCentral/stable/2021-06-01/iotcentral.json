@@ -1,0 +1,926 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "IotCentralClient",
+    "description": "Use this API to manage IoT Central Applications in your Azure subscription."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get the metadata of an IoT Central application.",
+        "operationId": "Apps_Get",
+        "x-ms-examples": {
+          "Apps_Get": {
+            "$ref": "./examples/Apps_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the non-security properties of the IoT Central application. Security-related properties are set to null.",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Create or update the metadata of an IoT Central application. The usual pattern to modify a property is to retrieve the IoT Central application metadata and security metadata, and then combine them with the modified values in a new body to update the IoT Central application.",
+        "operationId": "Apps_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Apps_CreateOrUpdate": {
+            "$ref": "./examples/Apps_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "App",
+            "in": "body",
+            "description": "The IoT Central application metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "201": {
+            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Update the metadata of an IoT Central application.",
+        "operationId": "Apps_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Apps_Update": {
+            "$ref": "./examples/Apps_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "AppPatch",
+            "in": "body",
+            "description": "The IoT Central application metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Delete an IoT Central application.",
+        "operationId": "Apps_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Apps_Delete": {
+            "$ref": "./examples/Apps_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
+          },
+          "202": {
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the IoT Central application metadata in the service and the status of the delete operation is set to a completed state."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/iotApps": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get all IoT Central Applications in a subscription.",
+        "operationId": "Apps_ListBySubscription",
+        "x-ms-examples": {
+          "Apps_ListBySubscription": {
+            "$ref": "./examples/Apps_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the IoT Central Applications in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/AppListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get all the IoT Central Applications in a resource group.",
+        "operationId": "Apps_ListByResourceGroup",
+        "x-ms-examples": {
+          "Apps_ListByResourceGroup": {
+            "$ref": "./examples/Apps_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the IoT Central Applications in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/AppListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Check if an IoT Central application name is available.",
+        "operationId": "Apps_CheckNameAvailability",
+        "x-ms-examples": {
+          "Apps_CheckNameAvailability": {
+            "$ref": "./examples/Apps_CheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "operationInputs",
+            "in": "body",
+            "description": "Set the name parameter in the OperationInputs structure to the name of the IoT Central application to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application name is available. If the name is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/AppAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/checkSubdomainAvailability": {
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Check if an IoT Central application subdomain is available.",
+        "operationId": "Apps_CheckSubdomainAvailability",
+        "x-ms-examples": {
+          "Apps_SubdomainAvailability": {
+            "$ref": "./examples/Apps_CheckSubdomainAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "operationInputs",
+            "in": "body",
+            "description": "Set the name parameter in the OperationInputs structure to the subdomain of the IoT Central application to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application subdomain is available. If the subdomain is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/AppAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/appTemplates": {
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get all available application templates.",
+        "operationId": "Apps_ListTemplates",
+        "x-ms-examples": {
+          "Apps_ListTemplates": {
+            "$ref": "./examples/Apps_Templates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the IoT Central application templates.",
+            "schema": {
+              "$ref": "#/definitions/AppTemplatesResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/providers/Microsoft.IoTCentral/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available IoT Central Resource Provider operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "AppProperties": {
+      "description": "The properties of an IoT Central application.",
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "description": "The ID of the application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the application.",
+          "type": "string"
+        },
+        "subdomain": {
+          "description": "The subdomain of the application.",
+          "type": "string"
+        },
+        "template": {
+          "description": "The ID of the application template, which is a blueprint that defines the characteristics and behaviors of an application. Optional; if not specified, defaults to a blank blueprint and allows the application to be defined from scratch.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "state": {
+          "description": "The current state of the application.",
+          "$ref": "#/definitions/AppState"
+        }
+      }
+    },
+    "AppState": {
+      "description": "The current state of the application.",
+      "type": "string",
+      "enum": [
+        "created",
+        "suspended"
+      ],
+      "x-ms-enum": {
+        "name": "AppState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "AppSkuInfo": {
+      "description": "Information about the SKU of the IoT Central application.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU.",
+          "enum": [
+            "ST0",
+            "ST1",
+            "ST2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AppSku",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "App": {
+      "description": "The IoT Central application.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The common properties of an IoT Central application.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppProperties"
+        },
+        "sku": {
+          "description": "A valid instance SKU.",
+          "$ref": "#/definitions/AppSkuInfo"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "sku"
+      ]
+    },
+    "AppPatch": {
+      "description": "The description of the IoT Central application.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Instance tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "description": "A valid instance SKU.",
+          "$ref": "#/definitions/AppSkuInfo"
+        },
+        "properties": {
+          "description": "The common properties of an IoT Central application.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppProperties"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The common properties of an ARM resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM resource name.",
+          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,99}[a-zA-Z0-9]$",
+          "x-comment": "pattern must match #/parameters/resourceName"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ]
+    },
+    "CloudError": {
+      "description": "Error details.",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "Error response body.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "description": "Details of error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      }
+    },
+    "AppListResult": {
+      "description": "A list of IoT Central Applications with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT Central Applications.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of IoT Central Applications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/App"
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of IoT Central operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT Central description objects.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of operations supported by the Microsoft.IoTCentral resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "IoT Central REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Service provider: Microsoft IoT Central"
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Type: IoT Central"
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Friendly description for the operation,"
+        }
+      }
+    },
+    "OperationInputs": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the IoT Central application instance to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the IoT Central resource to query.",
+          "type": "string",
+          "default": "IoTApps"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AppAvailabilityInfo": {
+      "description": "The properties indicating whether a given IoT Central application name or subdomain is available.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value which indicates whether the provided name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for unavailability.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The detailed reason message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppTemplate": {
+      "description": "IoT Central Application Template.",
+      "type": "object",
+      "properties": {
+        "manifestId": {
+          "description": "The ID of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manifestVersion": {
+          "description": "The version of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "description": "The title of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "order": {
+          "description": "The order of the template in the templates list.",
+          "type": "number",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "industry": {
+          "description": "The industry of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "A list of locations that support the template.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AppTemplateLocations"
+          }
+        }
+      }
+    },
+    "AppTemplateLocations": {
+      "description": "IoT Central Application Template Locations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the location.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppTemplatesResult": {
+      "description": "A list of IoT Central Application Templates with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT Central application templates.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of IoT Central Application Templates.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AppTemplate"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the IoT Central application.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceName": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The ARM resource name of the IoT Central application.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-comment": "validation must match #/definitions/Resource"
+    }
+  }
+}

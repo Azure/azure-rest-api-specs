@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTCentralApp",
+    "api-version": "2021-06-01",
+    "App": {
+      "location": "westus",
+      "sku": {
+        "name": "ST2"
+      },
+      "properties": {
+        "displayName": "My IoT Central App",
+        "subdomain": "my-iot-central-app",
+        "template": "iotc-pnp-preview@1.0.0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "header": {
+        "code": "200",
+        "message": "OK"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/IoTApps/myIoTCentralApp",
+        "name": "myIoTCentralApp",
+        "type": "Microsoft.IoTCentral/IoTApps",
+        "location": "westus",
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
+          "displayName": "My IoT Central App 2",
+          "subdomain": "my-iot-central-app-2",
+          "template": "iotc-pnp-preview@1.0.0",
+          "state": "created"
+        },
+        "sku": {
+          "name": "ST2"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "code": "201",
+        "message": "Created",
+        "target": "ResourceHandler.ExecutePutRequest"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/IoTApps/myIoTCentralApp",
+        "name": "myIoTCentralApp",
+        "type": "Microsoft.IoTCentral/IoTApps",
+        "location": "westus",
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
+          "displayName": "My IoT Central App",
+          "subdomain": "my-iot-central-app",
+          "template": "iotc-pnp-preview@1.0.0",
+          "state": "created"
+        },
+        "sku": {
+          "name": "ST2"
+        }
+      }
+    },
+    "202": {},
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
+        }
+      }
+    }
+  }
+}
