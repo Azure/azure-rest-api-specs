@@ -5,26 +5,26 @@
 Configuration for generating Speaker Verification SDK.
 
 ``` yaml
-tag: verification_2021-09-05_stable
+tag: release_2021-09-05
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Authoring Endpoint is `verification_2021-09-05_stable`.
+The current release for the Authoring Endpoint is `release_2021-09-05`.
 
 # Releases
 
-## verification 2.0
+## Verification 2.0 Preview
 These settings apply only when `--tag=verification_2_0_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'verification_2_0_preview'
 input-file: preview/v2.0/Verification.json
 ```
 
-## verification 2021-09-05
-These settings apply only when `--tag=verification_2021-09-05_stable` is specified on the command line.
+## Verification 2021-09-05
+These settings apply only when `--tag=release_2021-09-05` is specified on the command line.
 
-``` yaml $(tag) == 'verification_2021-09-05_stable'
+``` yaml $(tag) == 'release_2021-09-05'
 input-file: stable/2021-09-05/Verification.json
 ```
 
@@ -40,6 +40,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -73,7 +74,7 @@ java:
   with-single-async-method: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -85,15 +86,16 @@ require: $(this-folder)/../../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/stable/2021-09-05/Verification.json
   - $(this-folder)/preview/v2.0/Verification.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
