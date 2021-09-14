@@ -70,7 +70,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           }
         }
@@ -115,11 +115,46 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/PrivateLinkResource"
             }
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
     }
   },
   "parameters": {
