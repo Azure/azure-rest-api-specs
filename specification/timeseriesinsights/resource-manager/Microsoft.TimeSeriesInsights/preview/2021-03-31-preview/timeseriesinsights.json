@@ -1223,7 +1223,7 @@
           },
           "404": {
             "description": "The subscription, resource group, environment or private endpoint connection could not be found.",
-            "x-ms-error-response": false
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error occurred during the operation.",
@@ -2948,6 +2948,7 @@
       "description": "Describes an existing Private Endpoint connection to the environment."
     },
     "PrivateEndpointConnectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2965,6 +2966,7 @@
       "type": "object",
       "properties": {
         "privateEndpoint": {
+          "type": "object",
           "properties": {
             "id": {
               "type": "string",
