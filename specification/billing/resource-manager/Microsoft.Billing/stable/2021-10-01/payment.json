@@ -354,44 +354,8 @@
               }
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDetachPaymentMethodEligibility": {
-      "post": {
-        "tags": [
-          "BillingProfiles"
-        ],
-        "x-ms-examples": {
-          "ValidateDetachPaymentMethodEligibilitySuccess": {
-            "$ref": "./examples/ValidateDetachPaymentMethodEligibilitySuccess.json"
-          },
-          "ValidateDetachPaymentMethodEligibilityFailure": {
-            "$ref": "./examples/ValidateDetachPaymentMethodEligibilityFailure.json"
-          }
-        },
-        "operationId": "BillingProfiles_GetEligibilityToDetachPaymentMethod",
-        "description": "Validates if the payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
+          "409": {
+            "description": "Conflict. Payment method cannot be detached from billing profile.",
             "schema": {
               "$ref": "#/definitions/DetachPaymentMethodEligibilityResult"
             }
@@ -635,9 +599,9 @@
       "type": "object",
       "description": "Result of the detach payment method eligibility.",
       "properties": {
-        "isEligible": {
-          "description": "Specifies whether the payment method is eligible to be detached from the billing profile.",
-          "type": "boolean",
+        "code": {
+          "description": "Error code.",
+          "type": "string",
           "readOnly": true
         },
         "errorDetails": {
