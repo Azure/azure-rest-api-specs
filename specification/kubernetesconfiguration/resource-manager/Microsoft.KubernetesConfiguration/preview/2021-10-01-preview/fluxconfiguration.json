@@ -428,10 +428,12 @@
     "GitRepositoryDefinition": {
       "description": "Parameters to reconcile to the GitRepository source kind type.",
       "type": "object",
+      "x-nullable": true,
       "properties": {
         "url": {
           "description": "The URL to sync for the flux configuration git repository.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timeoutInSeconds": {
           "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote.",
@@ -457,7 +459,7 @@
           "x-nullable": true
         },
         "httpsUser": {
-          "description": "HTTPS username used to access private git repositories over HTTPS",
+          "description": "Base64-encoded HTTPS username used to access private git repositories over HTTPS",
           "type": "string",
           "x-nullable": true
         },
@@ -471,6 +473,7 @@
     "RepositoryRefDefinition": {
       "description": "The source reference for the GitRepository object.",
       "type": "object",
+      "x-nullable": true,
       "properties": {
         "branch": {
           "description": "The git repository branch name to checkout.",
@@ -499,10 +502,6 @@
       "type": "object",
       "x-nullable": true,
       "properties": {
-        "name": {
-          "description": "The name of the Kustomization object to create on the cluster.",
-          "type": "string"
-        },
         "path": {
           "description": "The path in the source reference to reconcile on the cluster.",
           "type": "string",
@@ -512,7 +511,8 @@
           "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/DependsOnDefinition"
           },
           "x-nullable": true
         },
@@ -538,7 +538,8 @@
         },
         "prune": {
           "description": "Enable/disable garbage collections of Kubernetes objects created by this Kustomization.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "validation": {
           "description": "Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.",
@@ -546,7 +547,18 @@
         },
         "force": {
           "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "DependsOnDefinition": {
+      "description": "Specify which kustomizations must succeed reconciliation on the cluster prior to reconciling this kustomization",
+      "type": "object",
+      "properties": {
+        "kustomizationName": {
+          "description": "Name of the kustomization to claim dependency on",
+          "type": "string"
         }
       }
     },
