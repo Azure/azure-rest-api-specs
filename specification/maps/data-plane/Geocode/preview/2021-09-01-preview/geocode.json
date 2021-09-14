@@ -197,7 +197,7 @@
             "in": "query",
             "description": "Restrict the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\nOne of the following values:\n- 1: Restrict results to the specified countryRegion and adminDistrict.\n- 0 [default]: Do not restrict results to the specified countryRegion and adminDistrict.\nExample:\nstrictMatch=1",
             "required": false,
-            "type": "string",
+            "type": "enum",
             "enum": ["0", "1"]
           }
         ],
@@ -214,84 +214,6 @@
               }
             }
           },
-          "400": {
-            "description": "The request contained an error",
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Access was denied. You may have entered your credentials incorrectly, or you might not have access to the requested resource or operation.",
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "The request is for something forbidden. Authorization will not help.",
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "The user has sent too many requests in a given amount of time. The account is being rate limited.",
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Your request could not be completed because there was a problem with the service.",
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "There's a problem with the service right now. Please try again later.",
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
@@ -300,7 +222,7 @@
     },
     "/geocode/batch": {
       "post": {
-        "description": "**Geocode Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Geocode Batch API sends batches of queries to [Geocode API](https://docs.microsoft.com/en-us/rest/api/maps/geocode) using just a single API call. The API allows caller to batch up to **100** queries.\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode/batch?api-version=1.0&subscription-key={subscription-key}\n```\n### POST Body for Batch Request\nTo send the _geocode_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocode_ queries:\n\n\n```json\n{\n    \"batchItems\": [\n        {\"query\": \"?addressLine=Pike Pl&adminDistrict=WA&locality=Seattle&maxResult=3\"},\n        {\"query\": \"?addressLine=One, Microsoft Way, Redmond, WA 98052&maxResult=2\"}\n    ]\n}\n```\n\nA _geocode_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _geocode_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/geocode/get-geocode#uri-parameters). The string values in the _geocode_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SearchAddressResponse`](https://docs.microsoft.com/en-us/rest/api/maps/geocode/get-geocode##searchaddressresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**Geocode Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Geocode Batch API sends batches of queries to [Geocode API](https://docs.microsoft.com/en-us/rest/api/maps/geocode) using just a single API call. The API allows caller to batch up to **100** queries.\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode/batch?api-version=2021-09-01-preview&subscription-key={subscription-key}\n```\n### POST Body for Batch Request\nTo send the _geocode_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocode_ queries:\n\n\n```json\n{\n    \"batchItems\": [\n        {\"query\": \"?addressLine=Pike Pl&adminDistrict=WA&locality=Seattle&maxResult=3\"},\n        {\"query\": \"?addressLine=One, Microsoft Way, Redmond, WA 98052&maxResult=2\"}\n    ]\n}\n```\n\nA _geocode_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _geocode_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/geocode/get-geocode#uri-parameters). The string values in the _geocode_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`SearchAddressResponse`](https://docs.microsoft.com/en-us/rest/api/maps/geocode/get-geocode##searchaddressresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Geocode_PostGeocodeBatch",
         "x-ms-examples": {
           "An Address Geocoding Batch API call containing 2 Address Geocoding API queries": {
