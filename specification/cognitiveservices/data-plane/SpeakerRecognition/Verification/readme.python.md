@@ -8,19 +8,34 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 python-mode: create
 python:
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
+  add-credentials: true
   namespace: azure.cognitiveservices.speech.speaker.verification
-  package-name: azure-cognitiveservices-speech-speaker
+  package-name: azure-cognitiveservices-speech-speaker-verification
+  credential-scopes: https://cognitiveservices.azure.com/.default
   clear-output-folder: true
-
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/speech/speaker/verification
 ```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-speech-speaker
+
+``` yaml $(tag) == 'release_2021-09-05'
+namespace: azure.cognitiveservices.speech.speaker.verification.2021-09-05
+output-folder: $(python-sdks-folder)/cognitiveservices/speech/speaker/verification/_generated/2021-09-05
+```
+
+``` yaml $(tag) == 'verification_v2_0_preview'
+namespace: azure.cognitiveservices.speech.speaker.verification.v2_0_preview
+output-folder: $(python-sdks-folder)/cognitiveservices/speech/speaker/verification/_generated/v2_0_preview
+```
+
+```yaml $(multiapi)
+batch:
+  - tag: release_2021-09-05
+  - tag: verification_v2_0_preview
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/cognitiveservices/speech/speaker/verification/_generated/_generated
+clear-output-folder: false
+perform-load: false
+default-api: release_2021-09-05
 ```
