@@ -4,15 +4,28 @@
 
 Configuration for generating Speaker Verification SDK.
 
+The current release is `release_2021-09-05`.
+
 ``` yaml
 tag: release_2021-09-05
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Authoring Endpoint is `release_2021-09-05`.
+``` yaml
+tag: verification_2_0_preview
+add-credentials: true
+openapi-type: data-plane
+```
 
 # Releases
+
+## Verification 2021-09-05
+These settings apply only when `--tag=release_2021-09-05` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021-09-05'
+input-file: stable/2021-09-05/Verification.json
+```
 
 ## Verification 2.0 Preview
 These settings apply only when `--tag=verification_2_0_preview` is specified on the command line.
@@ -21,11 +34,10 @@ These settings apply only when `--tag=verification_2_0_preview` is specified on 
 input-file: preview/v2.0/Verification.json
 ```
 
-## Verification 2021-09-05
-These settings apply only when `--tag=release_2021-09-05` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021-09-05'
-input-file: stable/2021-09-05/Verification.json
+``` yaml $(multiapi)
+batch:
+  - tag: release_2021-09-05
+  - tag: verification_2_0_preview
 ```
 
 ---
@@ -47,7 +59,17 @@ swagger-to-sdk:
 
 ### CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
-``` yaml $(csharp)
+``` yaml $(csharp) && $(tag) == 'release_2021-09-05'
+csharp:
+  sync-methods: None
+  license-header: MICROSOFT_MIT_NO_VERSION
+  azure-arm: false
+  namespace: Microsoft.Azure.CognitiveServices.speech.speaker.verification
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/speech.speaker.verification/src/Generated
+  clear-output-folder: true
+```
+
+``` yaml $(csharp) && $(tag) == 'verification_2_0_preview'
 csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -62,7 +84,7 @@ csharp:
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
+``` yaml $(java) && $(tag) == 'release_2021-09-05'
 java:
   azure-arm: true
   namespace: com.microsoft.azure.cognitiveservices.speech.speaker.verification
@@ -72,6 +94,25 @@ java:
   with-optional-parameters: true
   with-single-async-method: true
 ```
+
+``` yaml $(java) && $(tag) == 'verification_2_0_preview'
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.cognitiveservices.speech.speaker.verification
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/speech/speaker/verification
+  with-optional-parameters: true
+  with-single-async-method: true
+```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
