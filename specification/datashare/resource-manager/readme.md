@@ -66,6 +66,15 @@ input-file:
 - Microsoft.DataShare/preview/2020-10-01-preview/DataShare.json
 ```
 
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01'
+input-file:
+- Microsoft.DataShare/stable/2021-08-01/DataShare.json
+```
+
 ---
 # Code Generation
 
@@ -122,6 +131,7 @@ input-file:
   - $(this-folder)/Microsoft.DataShare/stable/2019-11-01/DataShare.json
   - $(this-folder)/Microsoft.DataShare/stable/2020-09-01/DataShare.json
   - $(this-folder)/Microsoft.DataShare/preview/2020-10-01-preview/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/stable/2021-08-01/DataShare.json
 
 ```
 

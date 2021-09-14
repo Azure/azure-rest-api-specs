@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-09-01",
+    "version": "2021-08-01",
     "title": "DataShareManagementClient",
     "description": "Creates a Microsoft.DataShare management client."
   },
@@ -582,6 +582,9 @@
           },
           "DataSets_KustoDatabase_Create": {
             "$ref": "./examples/DataSets_KustoDatabase_Create.json"
+          },
+          "DataSets_KustoTable_Create": {
+            "$ref": "./examples/DataSets_KustoTable_Create.json"
           },
           "DataSets_SqlDWTable_Create": {
             "$ref": "./examples/DataSets_SqlDWTable_Create.json"
@@ -4544,6 +4547,7 @@
             "AdlsGen1File",
             "KustoCluster",
             "KustoDatabase",
+            "KustoTable",
             "SqlDBTable",
             "SqlDWTable",
             "SynapseWorkspaceSqlPoolTable"
@@ -4582,6 +4586,7 @@
             "AdlsGen1File",
             "KustoCluster",
             "KustoDatabase",
+            "KustoTable",
             "SqlDBTable",
             "SqlDWTable",
             "SynapseWorkspaceSqlPoolTable"
@@ -4639,6 +4644,7 @@
             "AdlsGen2File",
             "KustoCluster",
             "KustoDatabase",
+            "KustoTable",
             "SqlDBTable",
             "SqlDWTable",
             "SynapseWorkspaceSqlPoolTable"
@@ -5184,6 +5190,144 @@
             "name": "provisioningState",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "KustoTableDataSet": {
+      "description": "A kusto table data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoTableDataSetProperties",
+          "description": "Kusto table data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoTable"
+    },
+    "KustoTableDataSetMapping": {
+      "description": "A Kusto database data set mapping",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoTableDataSetMappingProperties",
+          "description": "Kusto database data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoTable"
+    },
+    "KustoTableDataSetMappingProperties": {
+      "description": "Properties of the Kusto database data set mapping",
+      "required": [
+        "kustoClusterResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the sink kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KustoTableDataSetProperties": {
+      "description": "Properties of the kusto table data set.",
+      "required": [
+        "kustoDatabaseResourceId",
+        "tableLevelSharingProperties"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "kustoDatabaseResourceId": {
+          "description": "Resource id of the kusto database.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the kusto table data set.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "tableLevelSharingProperties": {
+          "$ref": "#/definitions/TableLevelSharingProperties",
+          "description": "Table level sharing properties for kusto database"
         }
       }
     },
@@ -6604,6 +6748,7 @@
             "AdlsGen1File",
             "KustoCluster",
             "KustoDatabase",
+            "KustoTable",
             "SqlDBTable",
             "SqlDWTable",
             "SynapseWorkspaceSqlPoolTable"
@@ -6826,6 +6971,60 @@
           "x-ms-enum": {
             "name": "lastModifiedByType",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "TableLevelSharingProperties": {
+      "description": "Table level sharing properties dto for kusto data set properties",
+      "type": "object",
+      "properties": {
+        "externalTablesToExclude": {
+          "description": "External tables to be excluded in the data set",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalTablesToInclude": {
+          "description": "External tables to be included in the data set",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "materializedViewsToExclude": {
+          "description": "Materialized views to be excluded in the data set",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "materializedViewsToInclude": {
+          "description": "Materialized views to be included in the data set",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tablesToExclude": {
+          "description": "Tables to be excluded in the data set",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tablesToInclude": {
+          "description": "Tables to be included in the data set",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
