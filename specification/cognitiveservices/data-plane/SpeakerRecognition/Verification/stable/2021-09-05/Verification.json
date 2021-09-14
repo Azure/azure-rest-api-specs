@@ -3,10 +3,6 @@
   "info": {
     "title": "Speaker Verification API",
     "version": "2021-09-05",
-    "x-ms-code-generation-settings": {
-      "header": "MIT",
-      "strictSpecAdherence": false
-    },
     "description": "The Azure Cognitive Service Speaker Recognition service provides algorithms that verify and identify speakers by their unique voice characteristics.\nSpeaker Recognition is used to answer the question \"who is speaking?\""
   },
   "x-ms-parameterized-host": {
@@ -180,6 +176,7 @@
     },
     "LocaleInfo": {
       "description": "Speaker profile locale",
+      "type": "object",
       "required": [
         "locale"
       ],
@@ -191,11 +188,13 @@
     },
     "TdProfileInfoList": {
       "description": "Text-Dependent Speaker profile info list",
+      "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TdProfileInfo"
           }
@@ -208,6 +207,7 @@
     },
     "TdProfileInfo": {
       "description": "Text-Dependent Speaker profile info",
+      "type": "object",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -243,6 +243,7 @@
     },
     "TdEnrollmentInfo": {
       "description": "Text-Dependent Speaker profile enrollment info",
+      "type": "object",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -279,11 +280,13 @@
     },
     "TiProfileInfoList": {
       "description": "Text-Independent Speaker profile info list",
+      "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TiProfileInfo"
           }
@@ -296,6 +299,7 @@
     },
     "TiProfileInfo": {
       "description": "Text-Independent Speaker profile info",
+      "type": "object",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -334,6 +338,7 @@
     },
     "TiEnrollmentInfo": {
       "description": "Text-Independent Speaker profile enrollment info",
+      "type": "object",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -367,6 +372,7 @@
     },
     "RecognitionInfo": {
       "description": "Speaker recognition result",
+      "type": "object",
       "properties": {
         "recognitionResult": {
           "type": "string",
@@ -390,12 +396,15 @@
     },
     "PassPhraseInfo": {
       "description": "Pass phrase list",
+      "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
+          "type": "array",
           "items": {
+            "type": "object",
             "properties": {
               "passPhrase": {
                 "$ref": "#/definitions/PassPhrase"
@@ -407,12 +416,15 @@
     },
     "ActivationPhraseInfo": {
       "description": "Activation phrase list",
+      "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
+          "type": "array",
           "items": {
+            "type": "object",
             "properties": {
               "activationPhrase": {
                 "$ref": "#/definitions/ActivationPhrase"
@@ -424,11 +436,13 @@
     },
     "SpeakerErrorInfo": {
       "description": "Speaker error message",
+      "type": "object",
       "required": [
         "error"
       ],
       "properties": {
         "error": {
+          "type": "object",
           "required": [
             "code",
             "message"
@@ -750,7 +764,7 @@
         "summary": "Pass Phrases",
         "x-ms-examples": {
           "Successful Query": {
-            "$ref": "./examples/listPhrases.json"
+            "$ref": "./examples/phrases.json"
           }
         },
         "tags": [
@@ -1079,7 +1093,7 @@
         "summary": "Pass Phrases",
         "x-ms-examples": {
           "Successful Query": {
-            "$ref": "./examples/listActivationPhrases.json"
+            "$ref": "./examples/activationPhrases.json"
           }
         },
         "tags": [

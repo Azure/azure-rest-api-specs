@@ -3,10 +3,6 @@
   "info": {
     "title": "Speaker Identification API",
     "version": "2021-09-05",
-    "x-ms-code-generation-settings": {
-      "header": "MIT",
-      "strictSpecAdherence": false
-    },
     "description": "The Azure Cognitive Service Speaker Recognition service provides algorithms that verify and identify speakers by their unique voice characteristics.\nSpeaker Recognition is used to answer the question \"who is speaking?\""
   },
   "x-ms-parameterized-host": {
@@ -170,6 +166,7 @@
     },
     "LocaleInfo": {
       "description": "Speaker profile locale",
+      "type": "object",
       "required": [
         "locale"
       ],
@@ -181,11 +178,13 @@
     },
     "TiProfileInfoList": {
       "description": "Text-Independent Speaker profile info list",
+      "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TiProfileInfo"
           }
@@ -198,6 +197,7 @@
     },
     "TiProfileInfo": {
       "description": "Text-Independent Speaker profile info",
+      "type": "object",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -236,6 +236,7 @@
     },
     "TiEnrollmentInfo": {
       "description": "Speaker profile enrollment info",
+      "type": "object",
       "properties": {
         "profileId": {
           "$ref": "#/definitions/ProfileId"
@@ -268,6 +269,7 @@
       }
     },
     "IdentifiedSingleSpeakerInfo": {
+      "type": "object",
       "properties": {
         "identifiedProfile": {
           "description": "Object containing data of identified profile.",
@@ -275,6 +277,7 @@
         },
         "profilesRanking": {
           "description": "Object containing data of the top 5 profiles (including identified profile) sorted in descending order by score.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/IdentifyInfo"
           },
@@ -305,6 +308,7 @@
     },
     "IdentifyInfo": {
       "description": "Identified speaker info",
+      "type": "object",
       "properties": {
         "profileId": {
           "type": "string",
@@ -322,12 +326,15 @@
     },
     "ActivationPhraseInfo": {
       "description": "Activation phrase list",
+      "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
+          "type": "array",
           "items": {
+            "type": "object",
             "properties": {
               "activationPhrase": {
                 "$ref": "#/definitions/ActivationPhrase"
@@ -339,6 +346,7 @@
     },
     "SpeakerErrorInfo": {
       "description": "Speaker error message",
+      "type": "object",
       "required": [
         "error"
       ],
@@ -348,6 +356,7 @@
             "code",
             "message"
           ],
+          "type": "object",
           "properties": {
             "code": {
               "type": "string"
