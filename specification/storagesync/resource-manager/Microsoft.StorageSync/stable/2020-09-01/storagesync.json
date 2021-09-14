@@ -3071,63 +3071,63 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}": {
-    "get": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "locationName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The desired region to obtain information from."
-        },
-        {
-          "name": "operationId",
-          "in": "path",
-          "description": "operation Id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "tags": [
-        "Operation Status"
-      ],
-      "operationId": "LocationOperationStatus",
-      "description": "Get Operation status",
-      "x-ms-examples": {
-        "Workflows_Get": {
-          "$ref": "./examples/LocationOperationStatus_Get.json"
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Operation Status",
-          "schema": {
-            "$ref": "#/definitions/LocationOperationStatus"
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
-          "headers": {
-            "x-ms-request-id": {
-              "description": "request id.",
-              "type": "string"
-            },
-            "x-ms-correlation-request-id": {
-              "description": "correlation request id.",
-              "type": "string"
-            }
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The desired region to obtain information from."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "operation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Operation Status"
+        ],
+        "operationId": "LocationOperationStatus",
+        "description": "Get Operation status",
+        "x-ms-examples": {
+          "Workflows_Get": {
+            "$ref": "./examples/LocationOperationStatus_Get.json"
           }
         },
-        "default": {
-          "description": "Error message indicating why the operation failed.",
-          "schema": {
-            "$ref": "#/definitions/StorageSyncError"
+        "responses": {
+          "200": {
+            "description": "Operation Status",
+            "schema": {
+              "$ref": "#/definitions/LocationOperationStatus"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
           }
         }
       }
