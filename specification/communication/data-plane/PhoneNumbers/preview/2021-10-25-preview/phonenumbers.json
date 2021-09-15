@@ -1252,7 +1252,8 @@
         "billingFrequency": {
           "description": "The frequency with which the cost gets billed.",
           "enum": [
-            "monthly"
+            "monthly",
+            "once"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1556,8 +1557,12 @@
             "$ref": "#/definitions/Note"
           }
         },
-        "cost": {
-          "$ref": "#/definitions/ShortCodeCost"
+        "costs": {
+          "description": "Represents the costs tied to the number.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShortCodeCost"
+          }
         },
         "submissionDate": {
           "format": "date-time",
