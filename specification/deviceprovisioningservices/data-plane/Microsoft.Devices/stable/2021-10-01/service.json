@@ -19,7 +19,8 @@
     "/enrollments/{id}": {
       "get": {
         "tags": [
-          "GET"
+          "GET",
+          "IndividualEnrollment"
         ],
         "summary": "Get a device enrollment record.",
         "operationId": "IndividualEnrollment_Get",
@@ -33,7 +34,9 @@
             "in": "path",
             "description": "This id is used to uniquely identify a device registration of an enrollment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^([a-z0-9-._:][a-z0-9-])$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -62,7 +65,8 @@
       },
       "put": {
         "tags": [
-          "PUT"
+          "PUT",
+          "IndividualEnrollment"
         ],
         "summary": "Create or update a device enrollment record.",
         "operationId": "IndividualEnrollment_CreateOrUpdate",
@@ -78,7 +82,9 @@
             "in": "path",
             "description": "This id is used to uniquely identify a device registration of an enrollment. It is alphanumeric, lowercase, and may contain hyphens.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^([a-z0-9-._:][a-z0-9-])$"
           },
           {
             "name": "enrollment",
@@ -123,7 +129,8 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "DELETE",
+          "IndividualEnrollment"
         ],
         "summary": "Delete a device enrollment record.",
         "operationId": "IndividualEnrollment_Delete",
@@ -137,7 +144,9 @@
             "in": "path",
             "description": "This id is used to uniquely identify a device registration of an enrollment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^([a-z0-9-._:][a-z0-9-])$"
           },
           {
             "name": "If-Match",
@@ -172,7 +181,8 @@
     "/enrollmentGroups/{id}": {
       "get": {
         "tags": [
-          "GET"
+          "GET",
+          "EnrollmentGroup"
         ],
         "summary": "Get a device enrollment group.",
         "operationId": "EnrollmentGroup_Get",
@@ -215,7 +225,8 @@
       },
       "put": {
         "tags": [
-          "PUT"
+          "PUT",
+          "EnrollmentGroup"
         ],
         "summary": "Create or update a device enrollment group.",
         "operationId": "EnrollmentGroup_CreateOrUpdate",
@@ -276,7 +287,8 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "DELETE",
+          "EnrollmentGroup"
         ],
         "summary": "Delete a device enrollment group.",
         "operationId": "EnrollmentGroup_Delete",
@@ -325,7 +337,8 @@
     "/registrations/{id}": {
       "get": {
         "tags": [
-          "GET"
+          "GET",
+          "DeviceRegistrationState"
         ],
         "summary": "Gets the device registration state.",
         "operationId": "DeviceRegistrationState_Get",
@@ -368,7 +381,8 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "DELETE",
+          "DeviceRegistrationState"
         ],
         "summary": "Deletes the device registration",
         "operationId": "DeviceRegistrationState_Delete",
@@ -417,7 +431,8 @@
     "/enrollments/query": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "IndividualEnrollment"
         ],
         "summary": "Query the device enrollment records.",
         "operationId": "IndividualEnrollment_Query",
@@ -498,7 +513,8 @@
     "/enrollments/{id}/attestationmechanism": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "IndividualEnrollment"
         ],
         "summary": "Get the attestation mechanism in the device enrollment record.",
         "operationId": "IndividualEnrollment_GetAttestationMechanism",
@@ -512,7 +528,9 @@
             "in": "path",
             "description": "This id is used to uniquely identify a device registration of an enrollment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^([a-z0-9-._:][a-z0-9-])$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -543,7 +561,8 @@
     "/enrollments": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "IndividualEnrollment"
         ],
         "summary": "Bulk device enrollment operation with maximum of 10 enrollments.",
         "operationId": "IndividualEnrollment_RunBulkOperation",
@@ -592,7 +611,8 @@
     "/enrollmentGroups/query": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "EnrollmentGroup"
         ],
         "summary": "Query the device enrollment groups.",
         "operationId": "EnrollmentGroup_Query",
@@ -673,7 +693,8 @@
     "/enrollmentGroups/{id}/attestationmechanism": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "EnrollmentGroup"
         ],
         "summary": "Get the attestation mechanism in the device enrollment group record.",
         "operationId": "EnrollmentGroup_GetAttestationMechanism",
@@ -718,7 +739,8 @@
     "/enrollmentGroups": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "EnrollmentGroup"
         ],
         "summary": "Bulk device enrollment group operation with maximum of 10 groups.",
         "operationId": "EnrollmentGroup_RunBulkOperation",
@@ -767,7 +789,8 @@
     "/registrations/{id}/query": {
       "post": {
         "tags": [
-          "POST"
+          "POST",
+          "DeviceRegistrationState"
         ],
         "summary": "Gets the registration state of devices in this enrollmentGroup.",
         "operationId": "DeviceRegistrationState_Query",
