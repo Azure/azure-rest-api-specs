@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2021-06-30"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -41,38 +41,12 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Migration validation result identifier"
-        },
-        "reportUrl": {
-          "type": "string",
-          "description": "The url of the report."
-        }
-      }
-    },
-    "MigrationValidationResult": {
-      "type": "object",
-      "description": "Migration Validation Result",
-      "properties": {
-        "id": {
-          "type": "string",
           "description": "Migration validation result identifier",
           "readOnly": true
         },
-        "migrationId": {
+        "reportUrl": {
           "type": "string",
-          "description": "Migration Identifier",
-          "readOnly": true
-        },
-        "summaryResults": {
-          "type": "object",
-          "description": "Validation summary results for each database",
-          "additionalProperties": {
-            "$ref": "#/definitions/MigrationValidationDatabaseSummaryResult"
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "Current status of validation at the migration level. Status from the database validation result status will be aggregated here.",
+          "description": "The url of the report.",
           "readOnly": true
         }
       }
@@ -120,64 +94,6 @@
         }
       }
     },
-    "MigrationValidationDatabaseLevelResult": {
-      "type": "object",
-      "description": "Database level validation results",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Result identifier",
-          "readOnly": true
-        },
-        "migrationId": {
-          "type": "string",
-          "description": "Migration Identifier",
-          "readOnly": true
-        },
-        "sourceDatabaseName": {
-          "type": "string",
-          "description": "Name of the source database",
-          "readOnly": true
-        },
-        "targetDatabaseName": {
-          "type": "string",
-          "description": "Name of the target database",
-          "readOnly": true
-        },
-        "startedOn": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Validation start time",
-          "readOnly": true
-        },
-        "endedOn": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Validation end time",
-          "readOnly": true
-        },
-        "dataIntegrityValidationResult": {
-          "description": "Provides data integrity validation result between the source and target tables that are migrated.",
-          "$ref": "#/definitions/DataIntegrityValidationResult",
-          "readOnly": true
-        },
-        "schemaValidationResult": {
-          "description": "Provides schema comparison result between source and target database",
-          "$ref": "#/definitions/SchemaComparisonValidationResult",
-          "readOnly": true
-        },
-        "queryAnalysisValidationResult": {
-          "description": "Results of some of the query execution result between source and target database",
-          "$ref": "#/definitions/QueryAnalysisValidationResult",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "Current status of validation at the database level",
-          "readOnly": true
-        }
-      }
-    },
     "DataIntegrityValidationResult": {
       "type": "object",
       "description": "Results for checksum based Data Integrity validation results",
@@ -187,12 +103,14 @@
           "description": "List of failed table names of source and target pair",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "validationErrors": {
           "type": "array",
           "description": "List of errors that happened while performing data integrity validation",
-          "$ref": "#/definitions/ValidationError"
+          "$ref": "#/definitions/ValidationError",
+          "readOnly": true
         }
       }
     },
@@ -203,19 +121,22 @@
         "schemaDifferences": {
           "type": "array",
           "description": "List of schema differences between the source and target databases",
-          "$ref": "#/definitions/SchemaComparisonValidationResultType"
+          "$ref": "#/definitions/SchemaComparisonValidationResultType",
+          "readOnly": true
         },
         "validationErrors": {
           "type": "array",
           "description": "List of errors that happened while performing schema compare validation",
-          "$ref": "#/definitions/ValidationError"
+          "$ref": "#/definitions/ValidationError",
+          "readOnly": true
         },
         "sourceDatabaseObjectCount": {
           "type": "object",
           "description": "Count of source database objects",
           "additionalProperties": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "readOnly": true
           }
         },
         "targetDatabaseObjectCount": {
@@ -223,7 +144,8 @@
           "description": "Count of target database objects",
           "additionalProperties": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "readOnly": true
           }
         }
       }
@@ -234,17 +156,20 @@
       "properties": {
         "objectName": {
           "type": "string",
-          "description": "Name of the object that has the difference"
+          "description": "Name of the object that has the difference",
+          "readOnly": true
         },
         "objectType": {
           "type": "object",
           "$ref": "./TasksCommon.json#/definitions/DatabaseObjectType",
-          "description": "Type of the object that has the difference. e.g (Table/View/StoredProcedure)"
+          "description": "Type of the object that has the difference. e.g (Table/View/StoredProcedure)",
+          "readOnly": true
         },
         "updateAction": {
           "type": "string",
           "description": "Update action type with respect to target",
-          "$ref": "#/definitions/UpdateActionType"
+          "$ref": "#/definitions/UpdateActionType",
+          "readOnly": true
         }
       }
     },
@@ -268,12 +193,14 @@
         "queryResults": {
           "type": "array",
           "description": "List of queries executed and it's execution results in source and target",
-          "$ref": "#/definitions/QueryExecutionResult"
+          "$ref": "#/definitions/QueryExecutionResult",
+          "readOnly": true
         },
         "validationErrors": {
           "type": "array",
           "description": "Errors that are part of the execution",
-          "$ref": "#/definitions/ValidationError"
+          "$ref": "#/definitions/ValidationError",
+          "readOnly": true
         }
       }
     },
@@ -283,22 +210,26 @@
       "properties": {
         "queryText": {
           "type": "string",
-          "description": "Query text retrieved from the source server"
+          "description": "Query text retrieved from the source server",
+          "readOnly": true
         },
         "statementsInBatch": {
           "type": "integer",
           "format": "int64",
-          "description": "Total no. of statements in the batch"
+          "description": "Total no. of statements in the batch",
+          "readOnly": true
         },
         "sourceResult": {
           "type": "object",
           "description": "Query analysis result from the source",
-          "$ref": "#/definitions/ExecutionStatistics"
+          "$ref": "#/definitions/ExecutionStatistics",
+          "readOnly": true
         },
         "targetResult": {
           "type": "object",
           "description": "Query analysis result from the target",
-          "$ref": "#/definitions/ExecutionStatistics"
+          "$ref": "#/definitions/ExecutionStatistics",
+          "readOnly": true
         }
       }
     },
@@ -309,36 +240,42 @@
         "executionCount": {
           "type": "integer",
           "format": "int64",
-          "description": "No. of query executions"
+          "description": "No. of query executions",
+          "readOnly": true
         },
         "cpuTimeMs": {
           "type": "number",
           "format": "float",
-          "description": "CPU Time in millisecond(s) for the query execution"
+          "description": "CPU Time in millisecond(s) for the query execution",
+          "readOnly": true
         },
         "elapsedTimeMs": {
           "type": "number",
           "format": "float",
-          "description": "Time taken in millisecond(s) for executing the query"
+          "description": "Time taken in millisecond(s) for executing the query",
+          "readOnly": true
         },
         "waitStats": {
           "type": "object",
           "description": "Dictionary of sql query execution wait types and the respective statistics",
           "additionalProperties": {
             "type": "object",
-            "$ref": "#/definitions/WaitStatistics"
+            "$ref": "#/definitions/WaitStatistics",
+            "readOnly": true
           }
         },
         "hasErrors": {
           "type": "boolean",
-          "description": "Indicates whether the query resulted in an error"
+          "description": "Indicates whether the query resulted in an error",
+          "readOnly": true
         },
         "sqlErrors": {
           "type": "array",
           "description": "List of sql Errors",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -348,18 +285,21 @@
       "properties": {
         "waitType": {
           "type": "string",
-          "description": "Type of the Wait"
+          "description": "Type of the Wait",
+          "readOnly": true
         },
         "waitTimeMs": {
           "type": "number",
           "format": "float",
           "default": 0,
-          "description": "Total wait time in millisecond(s) "
+          "description": "Total wait time in millisecond(s)",
+          "readOnly": true
         },
         "waitCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Total no. of waits"
+          "description": "Total no. of waits",
+          "readOnly": true
         }
       }
     },
@@ -382,12 +322,14 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "Error Text"
+          "description": "Error Text",
+          "readOnly": true
         },
         "severity": {
           "type": "string",
           "description": "Severity of the error",
-          "$ref": "#/definitions/Severity"
+          "$ref": "#/definitions/Severity",
+          "readOnly": true
         }
       }
     },
@@ -401,8 +343,8 @@
         "InProgress",
         "Completed",
         "CompletedWithIssues",
-        "Stopped",
-        "Failed"
+        "Failed",
+        "Stopped"
       ],
       "x-ms-enum": {
         "name": "ValidationStatus",

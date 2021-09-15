@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2021-06-30"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -25,11 +25,6 @@
           "description": "Project properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProjectProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -125,9 +120,6 @@
       "description": "Source platform of the project",
       "enum": [
         "SQL",
-        "MySQL",
-        "PostgreSql",
-        "MongoDb",
         "Unknown"
       ],
       "x-ms-enum": {
@@ -140,10 +132,6 @@
       "description": "Target platform of the project",
       "enum": [
         "SQLDB",
-        "SQLMI",
-        "AzureDbForMySql",
-        "AzureDbForPostgreSql",
-        "MongoDb",
         "Unknown"
       ],
       "x-ms-enum": {

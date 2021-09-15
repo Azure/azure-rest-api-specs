@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2021-06-30"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -53,7 +53,7 @@
           "additionalProperties": {
             "type": "array",
             "items": {
-              "$ref": "./TasksCommon.json#/definitions/DatabaseTable"
+              "$ref": "#/definitions/DatabaseTable"
             }
           },
           "readOnly": true
@@ -64,6 +64,22 @@
           "items": {
             "$ref": "./Common.json#/definitions/ReportableException"
           },
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseTable": {
+      "type": "object",
+      "description": "Table properties",
+      "properties": {
+        "hasRows": {
+          "type": "boolean",
+          "description": "Indicates whether table is empty or not",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Schema-qualified name of the table",
           "readOnly": true
         }
       }

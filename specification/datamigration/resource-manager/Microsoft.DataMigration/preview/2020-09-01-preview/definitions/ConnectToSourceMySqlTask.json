@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2021-06-30"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -17,6 +17,30 @@
   },
   "paths": {},
   "definitions": {
+    "ConnectToSourceMySqlTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToSource.MySql",
+      "type": "object",
+      "description": "Properties for the task that validates MySQL database connection",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "#/definitions/ConnectToSourceMySqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/ConnectToSourceNonSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToSourceMySqlTaskInput": {
       "type": "object",
       "description": "Input for the task that validates MySQL database connection",
@@ -32,11 +56,6 @@
         "checkPermissionsGroup": {
           "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
           "description": "Permission group for validations"
-        },
-        "isOfflineMigration": {
-          "type": "boolean",
-          "description": "Flag for whether or not the migration is offline",
-          "default": false
         }
       },
       "required": [

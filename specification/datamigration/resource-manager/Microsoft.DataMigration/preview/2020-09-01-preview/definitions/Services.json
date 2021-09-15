@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2021-06-30"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -43,7 +43,7 @@
             },
             "tier": {
               "type": "string",
-              "description": "The tier of the SKU, such as \"Basic\", \"General Purpose\", or \"Business Critical\""
+              "description": "The tier of the SKU, such as \"Free\", \"Basic\", \"Standard\", or \"Premium\""
             }
           }
         },
@@ -100,11 +100,6 @@
         "sku": {
           "description": "Service SKU",
           "$ref": "#/definitions/ServiceSku"
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -132,7 +127,7 @@
     },
     "DataMigrationServiceProperties": {
       "type": "object",
-      "description": "Properties of the Database Migration Service instance",
+      "description": "Properties of the Data Migration service instance",
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -162,10 +157,6 @@
         "virtualSubnetId": {
           "type": "string",
           "description": "The ID of the Microsoft.Network/virtualNetworks/subnets resource to which the service should be joined"
-        },
-        "virtualNicId": {
-          "type": "string",
-          "description": "The ID of the Microsoft.Network/networkInterfaces resource which the service have"
         }
       },
       "required": [
@@ -257,7 +248,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "The tier of the SKU, such as 'Basic', 'General Purpose', or 'Business Critical'"
+          "description": "The tier of the SKU, such as 'Free', 'Basic', 'Standard', or 'Premium'"
         },
         "family": {
           "type": "string",

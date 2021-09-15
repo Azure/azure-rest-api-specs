@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2021-06-30"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -58,10 +58,6 @@
         "backupMode": {
           "$ref": "./TasksCommon.json#/definitions/BackupMode",
           "description": "Backup Mode to specify whether to use existing backup or create new backup. If using existing backups, backup file paths are required to be provided in selectedDatabases."
-        },
-        "aadDomainName": {
-          "type": "string",
-          "description": "Azure Active Directory domain name in the format of 'contoso.com' for federated Azure AD or 'contoso.onmicrosoft.com' for managed domain, required if and only if Windows logins are selected"
         }
       },
       "required": [
@@ -80,12 +76,10 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
-      "required": [
-        "resultType"
-      ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
