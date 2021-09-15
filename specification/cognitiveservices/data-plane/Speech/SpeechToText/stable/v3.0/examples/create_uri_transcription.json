@@ -2,18 +2,24 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "id": "ba7ea6f5-3065-40b7-b49a-a90f48584683",
-    "transcriptionUpdate": {
-      "displayName": "Updated transcription name",
-      "description": "Updated transcription description",
-      "customProperties": {
-        "key": "value"
-      }
+    "transcription": {
+      "contentUrls": [
+        "https://contoso.com/mystoragelocation",
+        "https://contoso.com/myotherstoragelocation"
+      ],
+      "properties": {
+        "diarizationEnabled": false,
+        "wordLevelTimestampsEnabled": false,
+        "punctuationMode": "DictatedAndAutomatic",
+        "profanityFilterMode": "Masked"
+      },
+      "locale": "en-US",
+      "displayName": "Transcription using default model for en-US"
     },
     "Content-Type": "application/json"
   },
   "responses": {
-    "200": {
+    "201": {
       "headers": {},
       "body": {
         "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683",
@@ -67,13 +73,6 @@
       "body": {
         "code": "Forbidden",
         "message": "No permission to access this resource."
-      }
-    },
-    "409": {
-      "headers": {},
-      "body": {
-        "code": "NotFound",
-        "message": "The specified entity cannot be found."
       }
     },
     "429": {
