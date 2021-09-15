@@ -368,11 +368,46 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists the available billing REST API operations.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
     "PaymentMethodLinksListResult": {
       "description": "The list of payment method links.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of payment method links.",
@@ -418,6 +453,7 @@
     },
     "PaymentMethodsListResult": {
       "description": "The list of payment methods.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of payment methods.",
@@ -580,7 +616,7 @@
       }
     },
     "PaymentMethodLogo": {
-      "description": "PaymentMethodLogo",
+      "description": "Logo of payment method.",
       "type": "object",
       "properties": {
         "mimeType": {
@@ -645,6 +681,7 @@
     },
     "PaymentMethodResource": {
       "description": "The payment method resource model definition.",
+      "type": "object",
       "properties": {
         "paymentMethodId": {
           "type": "string",
@@ -728,6 +765,24 @@
             "type": "string",
             "readOnly": true
           }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The list of billing operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
