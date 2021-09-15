@@ -14,6 +14,11 @@ module-name: sdk/mysql/armmysql
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- from: Servers.json
+  where: $.definitions.CloudError.properties.error
+  transform: >
+    $["description"] = undefined
 ```
 
 ``` yaml $(go) && $(track2) && $(package-flexibleservers)
