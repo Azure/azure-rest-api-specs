@@ -41,6 +41,8 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 ```yaml $(tag) == 'package-preview-2020-09'
 input-file:
   - Microsoft.DataMigration/preview/2020-09-01-preview/datamigration.json
+directive:
+  - suppress: R4009
 ```
 ### Tag: package-2021-06
 
