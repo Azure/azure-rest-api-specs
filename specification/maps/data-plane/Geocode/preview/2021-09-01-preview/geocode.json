@@ -260,7 +260,24 @@
             "description": "The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequestBody"
+              "type": "object",
+              "properties": {
+                "batchItems": {
+                  "description": "The list of queries to process.",
+                  "type": "array",
+                  "items": {
+                    "description": "Batch Query object",
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "description": "Partial query string.",
+                        "type": "string",
+                        "example": "?addressLine=One Microsoft Way"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         ],
@@ -348,14 +365,24 @@
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse/properties/summary"
         },
         "batchItems": {
           "description": "Array containing the batch results.",
           "type": "array",
-          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SearchAddressResponse"
+            "type": "object",
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/SearchAddressResponse/properties/type"
+              },
+              "features": {
+                "$ref": "#/definitions/SearchAddressResponse/properties/features"
+              },
+              "error": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+              }
+            }
           }
         }
       }
