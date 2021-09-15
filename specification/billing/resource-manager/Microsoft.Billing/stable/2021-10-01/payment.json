@@ -785,6 +785,47 @@
           "readOnly": true
         }
       }
+    },
+    "Operation": {
+      "description": "A Billing REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Identifies if the operation is a data operation.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Billing.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type such as read, write and delete.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Description of operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
