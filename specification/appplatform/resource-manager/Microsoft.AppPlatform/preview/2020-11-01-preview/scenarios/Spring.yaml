@@ -16,8 +16,8 @@ variables:
     type: secureString
 
 prepareSteps:
-#  - step: Generate_Unique_ServiceName
-#    armTemplateDeployment: templates/generate_service_name.json
+  #  - step: Generate_Unique_ServiceName
+  #    armTemplateDeployment: templates/generate_service_name.json
 
   - step: Create_Application_Insight_Instance
     armTemplateDeployment: templates/create_application_insights_instance.json
@@ -94,7 +94,7 @@ scenarios:
               {
                 "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
                 "label": "master",
-                "searchPaths": ["/"]
+                "searchPaths": ["/"],
               }
 
       - step: ConfigServers_UpdatePut
@@ -105,14 +105,17 @@ scenarios:
               {
                 "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
                 "label": "master",
-                "searchPaths": [ "/" ]
+                "searchPaths": ["/"],
               }
 
       - step: ConfigServers_UpdatePatch
         exampleFile: ../examples/ConfigServers_UpdatePatch.json
         resourceUpdate:
           - replace: /properties/configServer/gitProperty
-            value: { "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config" }
+            value:
+              {
+                "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config",
+              }
 
       - step: ConfigServers_Get
         exampleFile: ../examples/ConfigServers_Get.json
@@ -241,12 +244,16 @@ scenarios:
 
       - step: CustomDomains_Update
         exampleFile: ../examples/CustomDomains_Update.json
+        variables:
+          domainName: $(customDomainName)
         resourceUpdate:
           - replace: /properties
             value: { "certName": "asc-certificate" } # TODO: use another cert
 
       - step: CustomDomains_Get
         exampleFile: ../examples/CustomDomains_Get.json
+        variables:
+          domainName: $(customDomainName)
 
       - step: CustomDomains_List
         exampleFile: ../examples/CustomDomains_List.json
@@ -325,7 +332,7 @@ scenarios:
 
       - step: CustomDomains_Delete
         exampleFile: ../examples/CustomDomains_Delete.json
-        variable:
+        variables:
           domainName: $(customDomainName)
 
       - step: Apps_Delete
