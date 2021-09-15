@@ -1822,6 +1822,53 @@
       "properties": {
         "redisConfiguration": {
           "type": "object",
+          "properties": {
+            "rdb-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the rdb backup is enabled"
+            },
+            "rdb-backup-frequency": {
+              "type": "string",
+              "description": "Specifies the frequency for creating rdb backup"
+            },
+            "rdb-backup-max-snapshot-count": {
+              "type": "string",
+              "description": "Specifies the maximum number of snapshots for rdb backup"
+            },
+            "rdb-storage-connection-string": {
+              "type": "string",
+              "description": "The storage account connection string for storing rdb file"
+            },
+            "aof-storage-connection-string-0": {
+              "type": "string",
+              "description": "First storage account connection string"
+            },
+            "aof-storage-connection-string-1": {
+              "type": "string",
+              "description": "Second storage account connection string"
+            },
+            "maxfragmentationmemory-reserved": {
+              "type": "string",
+              "description": "Value in megabytes reserved for fragmentation per shard"
+            },
+            "maxmemory-policy": {
+              "type": "string",
+              "description": "The eviction strategy used when your data won't fit within its memory limit."
+            },
+            "maxmemory-reserved": {
+              "type": "string",
+              "description": "Value in megabytes reserved for non-cache usage per shard e.g. failover."
+            },
+            "maxmemory-delta": {
+              "type": "string",
+              "description": "Value in megabytes reserved for non-cache usage per shard e.g. failover."
+            },
+            "maxclients": {
+              "type": "string",
+              "description": "The max clients config",
+              "readOnly": true
+            }
+          },
           "additionalProperties": {
             "type": "string"
           },
@@ -2472,7 +2519,11 @@
         },
         "linkedRedisCacheLocation": {
           "type": "string",
-          "description": "Location of the linked redis cache."
+          "description": "Location of the linked redis cache.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serverRole": {
           "type": "string",
