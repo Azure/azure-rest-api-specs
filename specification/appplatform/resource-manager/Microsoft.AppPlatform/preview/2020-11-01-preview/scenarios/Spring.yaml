@@ -16,8 +16,8 @@ variables:
     type: secureString
 
 prepareSteps:
-  #  - step: Generate_Unique_ServiceName
-  #    armTemplateDeployment: templates/generate_service_name.json
+  - step: Generate_Unique_ServiceName
+    armTemplateDeployment: templates/generate_service_name.json
 
   - step: Create_Application_Insight_Instance
     armTemplateDeployment: templates/create_application_insights_instance.json
