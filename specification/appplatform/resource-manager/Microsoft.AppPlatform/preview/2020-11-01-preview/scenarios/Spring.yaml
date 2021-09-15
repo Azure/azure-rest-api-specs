@@ -91,31 +91,25 @@ scenarios:
         requestUpdate:
           - replace: /configServerSettings/gitProperty
             value:
-              {
-                "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
-                "label": "master",
-                "searchPaths": ["/"],
-              }
+              uri: https://github.com/VSChina/asc-config-server-test-public.git
+              label: master
+              searchPaths: ["/"]
 
       - step: ConfigServers_UpdatePut
         exampleFile: ../examples/ConfigServers_UpdatePut.json
         resourceUpdate:
           - replace: /properties/configServer/gitProperty
             value:
-              {
-                "uri": "https://github.com/VSChina/asc-config-server-test-public.git",
-                "label": "master",
-                "searchPaths": ["/"],
-              }
+              uri: https://github.com/VSChina/asc-config-server-test-public.git
+              label: master
+              searchPaths: ["/"]
 
       - step: ConfigServers_UpdatePatch
         exampleFile: ../examples/ConfigServers_UpdatePatch.json
         resourceUpdate:
           - replace: /properties/configServer/gitProperty
             value:
-              {
-                "uri": "https://github.com/azure-samples/spring-petclinic-microservices-config",
-              }
+              uri: https://github.com/azure-samples/spring-petclinic-microservices-config
 
       - step: ConfigServers_Get
         exampleFile: ../examples/ConfigServers_Get.json
@@ -126,11 +120,9 @@ scenarios:
         resourceUpdate:
           - replace: /properties
             value:
-              {
-                "traceEnabled": true,
-                "appInsightsInstrumentationKey": "$(insightsInstrumentationKey)",
-                "appInsightsSamplingRate": 50.0,
-              }
+              traceEnabled: true
+              appInsightsInstrumentationKey: "$(insightsInstrumentationKey)"
+              appInsightsSamplingRate: 50.0
 
       - step: MonitoringSettings_Get
         exampleFile: ../examples/MonitoringSettings_Get.json
