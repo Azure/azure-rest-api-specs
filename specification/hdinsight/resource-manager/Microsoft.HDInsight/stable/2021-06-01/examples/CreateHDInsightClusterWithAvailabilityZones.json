@@ -1,0 +1,194 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subId",
+    "parameters": {
+      "zones": [
+        "1"
+      ],
+      "properties": {
+        "clusterVersion": "3.6",
+        "osType": "Linux",
+        "clusterDefinition": {
+          "kind": "hadoop",
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
+            },
+            "ambari-conf": {
+              "database-server": "{sql server name}.database.windows.net",
+              "database-name": "{ambari database name}",
+              "database-user-name": "**********",
+              "database-user-password": "**********"
+            },
+            "hive-site": {
+              "javax.jdo.option.ConnectionURL": "jdbc:sqlserver://{sql server name}.database.windows.net;database={hive metastore name};encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300;sendStringParametersAsUnicode=true;prepareSQL=0",
+              "javax.jdo.option.ConnectionUserName": "**********",
+              "javax.jdo.option.ConnectionPassword": "**********!",
+              "javax.jdo.option.ConnectionDriverName": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+            },
+            "hive-env": {
+              "hive_database": "Existing MSSQL Server database with SQL authentication",
+              "hive_database_name": "{hive metastore name}",
+              "hive_database_type": "mssql",
+              "hive_existing_mssql_server_database": "{hive metastore name}",
+              "hive_existing_mssql_server_host": "{sql server name}.database.windows.net",
+              "hive_hostname": "{sql server name}.database.windows.net"
+            },
+            "oozie-site": {
+              "oozie.service.JPAService.jdbc.url": "jdbc:sqlserver://{sql server name}.database.windows.net;database={oozie metastore name};encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300;sendStringParametersAsUnicode=true;prepareSQL=0",
+              "oozie.service.JPAService.jdbc.username": "**********",
+              "oozie.service.JPAService.jdbc.password": "**********",
+              "oozie.service.JPAService.jdbc.driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+              "oozie.db.schema.name": "oozie"
+            },
+            "oozie-env": {
+              "oozie_database": "Existing MSSQL Server database with SQL authentication",
+              "oozie_database_name": "{oozie metastore name}",
+              "oozie_database_type": "mssql",
+              "oozie_existing_mssql_server_database": "{oozie metastore name}",
+              "oozie_existing_mssql_server_host": "{sql server name}.database.windows.net",
+              "oozie_hostname": "{sql server name}.database.windows.net"
+            }
+          }
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage",
+              "isDefault": true,
+              "container": "containername",
+              "key": "storage account key"
+            }
+          ]
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                "vmSize": "standard_d3"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              }
+            },
+            {
+              "name": "workernode",
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                "vmSize": "standard_d3"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusters",
+        "location": "South Central US",
+        "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
+        "tags": null,
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "clusterVersion": "3.6.1000.67",
+          "osType": "Linux",
+          "clusterId": "8186508b6234470e9d16c9e8e13bd821",
+          "clusterDefinition": {
+            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2005040905.json",
+            "kind": "hadoop"
+          },
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "standard_d3"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "virtualNetworkProfile": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                  "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+                }
+              },
+              {
+                "name": "workernode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "standard_d3"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "virtualNetworkProfile": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                  "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "clusterState": "Running",
+          "createdDate": "2020-06-09T12:25:43.48",
+          "quotaInfo": {
+            "coresUsed": 16
+          },
+          "tier": "Standard"
+        }
+      }
+    }
+  }
+}
