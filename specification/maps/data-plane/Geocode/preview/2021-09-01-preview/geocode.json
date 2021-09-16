@@ -59,8 +59,8 @@
       "default": "2021-09-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "maxResult": {
-      "name": "maxResult",
+    "MaxResults": {
+      "name": "maxResults",
       "in": "query",
       "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
       "required": false,
@@ -78,7 +78,7 @@
       "type": "string",
       "x-ms-parameter-location": "client"
     },
-    "location": {
+    "Location": {
       "name": "location",
       "in": "query",
       "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
@@ -86,7 +86,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "bbox": {
+    "Bbox": {
       "name": "bbox",
       "in": "query",
       "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2",
@@ -94,7 +94,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "view": {
+    "View": {
       "name": "view",
       "in": "query",
       "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
@@ -136,7 +136,7 @@
             "$ref": "#/parameters/Accept-Language"
           },
           {
-            "$ref": "#/parameters/maxResult"
+            "$ref": "#/parameters/MaxResults"
           },
           {
             "name": "addressLine",
@@ -149,13 +149,13 @@
             "$ref": "#/parameters/CountryRegionSet"
           },
           {
-            "$ref": "#/parameters/bbox"
+            "$ref": "#/parameters/Bbox"
           },
           {
-            "$ref": "#/parameters/view"
+            "$ref": "#/parameters/View"
           },
           {
-            "$ref": "#/parameters/location"
+            "$ref": "#/parameters/Location"
           },
           {
             "name": "adminDistrict",
@@ -322,7 +322,7 @@
         }
       }
     },
-    "bbox": {
+    "Bbox": {
       "description": "information on the coordinate range for point Geometry.  Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
       "type": "array",
       "minItems": 4,
@@ -332,7 +332,7 @@
         "format": "double"
       }
     },
-    "geocodePoints": {
+    "GeocodePoints": {
       "description": "A collection of geocode points that differ in how they were calculated and their suggested use. For a description of the points in this collection, see the Geocode Point Fields",
       "type": "array",
       "items": {
@@ -397,7 +397,7 @@
                 ]
               },
               "features": {
-                "$ref": "#/definitions/features"
+                "$ref": "#/definitions/Features"
               },
               "error": {
                 "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
@@ -407,7 +407,7 @@
         }
       }
     },
-    "features": {
+    "Features": {
       "type": "array",
       "items": {
         "type": "object",
@@ -432,16 +432,16 @@
                 "readOnly": true
               },
               "confidence": {
-                "$ref": "#/definitions/confidence"
+                "$ref": "#/definitions/Confidence"
               },
               "matchCodes": {
-                "$ref": "#/definitions/matchCodes"
+                "$ref": "#/definitions/MatchCodes"
               },
               "address": {
                 "$ref": "#/definitions/SearchResultAddress"
               },
               "geocodePoints": {
-                "$ref": "#/definitions/geocodePoints"
+                "$ref": "#/definitions/GeocodePoints"
               }
             }
           },
@@ -449,7 +449,7 @@
             "$ref": "#/definitions/GeoJSONPoint"
           },
           "bbox": {
-            "$ref": "#/definitions/bbox"
+            "$ref": "#/definitions/Bbox"
           }
         }
       }
@@ -465,7 +465,7 @@
           ]
         },
         "features": {
-          "$ref": "#/definitions/features"
+          "$ref": "#/definitions/Features"
         },
         "nextLink": {
           "type": "string",
@@ -535,7 +535,7 @@
         }
       }
     },
-    "matchCodes": {
+    "MatchCodes": {
       "type": "array",
       "items": {
         "type": "string",
@@ -546,7 +546,7 @@
         ]
       }
     },
-    "confidence": {
+    "Confidence": {
       "type": "string",
       "enum": [
         "High",
