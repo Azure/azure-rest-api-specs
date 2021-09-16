@@ -44,7 +44,6 @@ input-file:
   - Microsoft.DataMigration/preview/2020-09-01-preview/sqlmigration.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Commands.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Common.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourceMySqlTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourceSqlServerTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
@@ -62,11 +61,12 @@ input-file:
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlDbTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlMITask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrationValidation.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Projects.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ResourceSkus.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Services.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Tasks.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/TasksCommon.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrationValidation.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
