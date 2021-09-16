@@ -30,7 +30,7 @@
   "paths": {
     "/:analyze-conversations": {
       "post": {
-        "operationId": "ConversationAnalysis_AnalyzeConversations",
+        "operationId": "ConversationAnalysis_AnalyzeConversation",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
@@ -40,7 +40,7 @@
             "$ref": "common.json#/parameters/DeploymentNameQueryParameter"
           },
           {
-            "$ref": "#/parameters/ConversationAnalysisInput"
+            "$ref": "#/parameters/AnalyzeConversationOptions"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -56,7 +56,7 @@
           "200": {
             "description": "The conversation analysis response.",
             "schema": {
-              "$ref": "#/definitions/ConversationAnalysisResult"
+              "$ref": "#/definitions/AnalyzeConversationResult"
             }
           },
           "default": {
@@ -81,7 +81,7 @@
     }
   },
   "definitions": {
-    "ConversationAnalysisInput": {
+    "AnalyzeConversationOptions": {
       "type": "object",
       "description": "The request body.",
       "required": [
@@ -247,7 +247,7 @@
         }
       }
     },
-    "ConversationAnalysisResult": {
+    "AnalyzeConversationResult": {
       "type": "object",
       "description": "Represents a conversation analysis response.",
       "required": [
@@ -570,12 +570,12 @@
     }
   },
   "parameters": {
-    "ConversationAnalysisInput": {
-      "name": "ConversationAnalysisInput",
+    "AnalyzeConversationOptions": {
+      "name": "AnalyzeConversationOptions",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ConversationAnalysisInput"
+        "$ref": "#/definitions/AnalyzeConversationOptions"
       },
       "x-nullable": true,
       "description": "Post body of the request.",
