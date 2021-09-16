@@ -90,7 +90,7 @@
         },
         "x-ms-examples": {
           "Network<anagerScopeConnectionsCreateOrUpdate": {
-            "$ref": "./examples/networkManagerScopeConnectionPut.json"
+            "$ref": "./examples/NetworkManagerScopeConnectionPut.json"
           }
         }
       },
@@ -116,7 +116,7 @@
         },
         "x-ms-examples": {
           "Get invitation on network manager side": {
-            "$ref": "./examples/..."
+            "$ref": "./examples/NetworkManagerScopeConnectionGet.json"
           }
         }
       },
@@ -142,7 +142,7 @@
         },
         "x-ms-examples": {
           "Cancel pending invitation on network manager side": {
-            "$ref": "./examples/..."
+            "$ref": "./examples/NetworkManagerScopeConnectionDelete.json"
           }
         }
       }
@@ -200,8 +200,8 @@
         "tags": [
           "ScopeConnections"
         ],
-        "operationId": "PendingScopeConnection_List",
-        "description": "List all pending scope connections sent to this network manager.",
+        "operationId": "PendingNetworkManagerConnection_List",
+        "description": "List all pending network manager connections sent from a subscription or management group.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -218,9 +218,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns a list of the pending scope connections sent to this network manager.",
+            "description": "OK - Returns a list of the network manager connections sent from a subscription or management group.",
             "schema": {
-              "$ref": "./networkManagerConnections.json#/definitions/NetworkManagerConnectionList"
+              "$ref": "./networkManagerConnections.json#/definitions/NetworkManagerConnectionListResult"
             }
           },
           "default": {
@@ -231,8 +231,8 @@
           }
         },
         "x-ms-examples": {
-          "List scope invitations": {
-            "$ref": "./examples/NetworkManagerScopeConnectionPut.json"
+          "List network manager invitations": {
+            "$ref": "./examples/..."
           }
         }
       }

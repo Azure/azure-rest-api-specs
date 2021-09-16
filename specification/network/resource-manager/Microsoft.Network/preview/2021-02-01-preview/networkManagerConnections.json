@@ -166,7 +166,7 @@
           "200": {
             "description": "OK - Returns information about the network manager connection(s).",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerConnectionList"
+              "$ref": "#/definitions/NetworkManagerConnectionListResult"
             }
           }
         },
@@ -188,8 +188,8 @@
         "tags": [
           "NetworkManagerConnections"
         ],
-        "operationId": "PendingNetworkManagerConnections_List",
-        "description": "List all pending network manager connections created by the network manager.",
+        "operationId": "PendingScopeConnections_List",
+        "description": "List all pending scope connections created by a network manager.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -206,7 +206,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network manager connection(s).",
+            "description": "OK - Returns information about the scope connection(s).",
             "schema": {
               "$ref": "./networkManagerScopeConnections.json#/definitions/ScopeConnectionList"
             }
@@ -294,21 +294,13 @@
           "type": "string",
           "description": "Network Manager Id."
         },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant id."
-        },
         "connectionState": {
           "$ref": "./networkManagerScopeConnections.json#/definitions/ConnectionState"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of connection."
         }
       },
       "description": "Information about the network manager connection."
     },
-    "NetworkManagerConnectionList": {
+    "NetworkManagerConnectionListResult": {
       "properties": {
         "value": {
           "type": "array",
