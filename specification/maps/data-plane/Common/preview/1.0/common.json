@@ -4,18 +4,6 @@
     "title": "Azure Maps Common Types",
     "version": "1.0"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
-  "schemes": [
-    "https"
-  ],
-  "consumes": [],
   "produces": [
     "application/json"
   ],
@@ -203,7 +191,7 @@
           ],
           "x-ms-enum": {
             "name": "GeoJsonObjectType",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "value": "Point",
@@ -535,6 +523,7 @@
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
+      "x-ms-client-name": "clientId",
       "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
@@ -547,7 +536,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ResponseFormat": {
+    "JsonFormat": {
       "name": "format",
       "description": "Desired format of the response. Only `json` format is supported.",
       "type": "string",
@@ -557,7 +546,7 @@
         "json"
       ],
       "x-ms-enum": {
-        "name": "ResponseFormat",
+        "name": "JsonFormat",
         "modelAsString": true,
         "values": [
           {
@@ -566,9 +555,10 @@
           }
         ]
       },
+      "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
-    "TextFormat": {
+    "ResponseFormat": {
       "name": "format",
       "description": "Desired format of the response. Value can be either _json_ or _xml_.",
       "type": "string",
@@ -579,7 +569,7 @@
         "xml"
       ],
       "x-ms-enum": {
-        "name": "TextFormat",
+        "name": "ResponseFormat",
         "modelAsString": true,
         "values": [
           {
@@ -592,6 +582,7 @@
           }
         ]
       },
+      "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
     "GeographicResourceLocation": {

@@ -42,7 +42,7 @@
   ],
   "responses": {},
   "parameters": {
-    "GeolocationApiVersion": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -56,10 +56,10 @@
     "/geolocation/ip/{format}": {
       "get": {
         "description": "\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis service will return the ISO country code for the provided IP address. Developers can use this information  to block or alter certain content based on geographical locations where the application is being viewed from. \n\n\n__Note:__ This service returns results from IANA and does not necessarily reflect the views of Microsoft  Corporation.",
-        "operationId": "Geolocation_GetIPToLocationPreview",
+        "operationId": "GetLocation",
         "x-ms-examples": {
-          "GetLocationByIpAddress": {
-            "$ref": "./examples/GetLocationByIpAddress.json"
+          "Successfully retrieve country code from IP address": {
+            "$ref": "./examples/SuccessfulGetCountryCodeFromIP.json"
           }
         },
         "parameters": [
@@ -67,13 +67,14 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/GeolocationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "ip",
+            "x-ms-client-name": "ipAddress",
             "in": "query",
             "description": "The IP address. Both IPv4 and IPv6 are allowed.",
             "required": true,
