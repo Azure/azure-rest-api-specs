@@ -16,19 +16,25 @@
         "previousUserQuery": "Where are QnA Maker quickstarts?"
       },
       "rankerType": "Default",
-      "strictFilters": {
+      "filters": {
         "metadataFilter": {
-          "metadata": {
-            "category": "api",
-            "editorial": "chitchat"
-          },
-          "compoundOperation": "AND"
+          "metadata": [
+            {
+              "key": "category",
+              "value": "api"
+            },
+            {
+              "key": "editorial",
+              "value": "chitchat"
+            }
+          ],
+          "logicalOperation": "AND"
         },
         "sourceFilter": [
           "filename1.pdf",
           "https://www.wikipedia.org/microsoft"
         ],
-        "compoundOperation": "AND"
+        "logicalOperation": "AND"
       },
       "answerSpanRequest": {
         "enable": true,

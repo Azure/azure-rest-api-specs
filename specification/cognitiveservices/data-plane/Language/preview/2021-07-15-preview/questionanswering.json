@@ -349,7 +349,7 @@
         "metadata": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MetadataFilterList"
+            "$ref": "#/definitions/MetadataRecord"
           }
         },
         "logicalOperation": {
@@ -360,18 +360,24 @@
         }
       }
     },
-    "MetadataFilterList": {
-      "type": "array",
-      "items": [
-        {
+    "MetadataRecord": {
+      "type": "object",
+      "description": "Object to provide the key value pair for each metadata.",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
           "type": "string",
           "description": "Metadata Key from Metadata dictionary used in the QnA."
         },
-        {
+        "value": {
           "type": "string",
           "description": "Metadata Value from Metadata dictionary used in the QnA."
         }
-      ]
+      }
     },
     "LogicalOperationKind": {
       "type": "string",
