@@ -32,6 +32,20 @@ tag: package-2021-09
 azure-validator: true
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    from: extensions.json
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+  - suppress: LongRunningResponseStatusCode
+    from: extensions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch
+    reason: Returning HTTP 202 response per ARM RPC guideline https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#updating-using-patch.
+```
+
+---
 
 ### Tag: package-2021-09
 
@@ -41,21 +55,6 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
 ```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: TopLevelResourcesListBySubscription
-    from: extensions.json
-    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
-  - suppress: LongRunningResponseStatusCode
-    from: extensions.json
-    where: $.paths.extensionName.patch.responses
-    reason: Returning HTTP 202 response per ARM RPC guideline https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#updating-using-patch.
-```
-
----
 
 ### Tag: package-preview-2021-05
 
