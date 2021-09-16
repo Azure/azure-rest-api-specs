@@ -8138,21 +8138,15 @@
           "description": "Encryption algorithm that will be used along with this client encryption key to encrypt/decrypt data."
         },
         "wrappedDataEncryptionKey": {
-          "type": "array",
-          "description": "Wrapped (encrypted) form of the key represented as a byte array.",
-          "items": {
-            "$ref": "#/definitions/WrappedDekByte"
-          }
+          "type": "string",
+          "format": "byte",
+		  "description": "Wrapped (encrypted) form of the key represented as a byte array."
         },
         "keyWrapMetadata": {
           "description": "Metadata for the wrapping provider that can be used to unwrap the wrapped client encryption key.",
           "$ref": "#/definitions/KeyWrapMetadata"
         }
       }
-    },
-    "WrappedDekByte": {
-      "type": "byte",
-      "description": "Represents a byte of wrapped Data Encryption Key."
     },
     "KeyWrapMetadata": {
       "type": "object",
