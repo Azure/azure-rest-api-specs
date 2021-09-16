@@ -1932,6 +1932,131 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientencryptionkeys": {
+      "get": {
+        "operationId": "SqlResources_ListClientEncryptionKeys",
+        "x-ms-examples": {
+          "CosmosDBClientEncryptionKeysList": {
+            "$ref": "./examples/CosmosDBClientEncryptionKeysList.json"
+          }
+        },
+        "description": "Lists the ClientEncryptionKeys under an existing Azure Cosmos DB SQL database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ClientEncryptionKeys were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClientEncryptionKeysListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientencryptionkeys/{clientEncryptionKeyName}": {
+      "get": {
+        "operationId": "SqlResources_GetClientEncryptionKey",
+        "x-ms-examples": {
+          "CosmosDBClientEncryptionKeyGet": {
+            "$ref": "./examples/CosmosDBClientEncryptionKeyGet.json"
+          }
+        },
+        "description": "Gets the ClientEncryptionKey under an existing Azure Cosmos DB SQL database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clientEncryptionKeyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ClientEncryptionKey was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClientEncryptionKeyGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlResources_CreateUpdateClientEncryptionKey",
+        "x-ms-examples": {
+          "CosmosDBClientEncryptionKeyCreateUpdate": {
+            "$ref": "./examples/CosmosDBClientEncryptionKeyCreateUpdate.json"
+          }
+        },
+        "description": "Create or update a ClientEncryptionKey",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clientEncryptionKeyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateClientEncryptionKeyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientEncryptionKeyCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the client encryption key."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The client encryption key create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClientEncryptionKeyGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
         "operationId": "SqlResources_ListSqlContainers",
@@ -5636,6 +5761,20 @@
     }
   },
   "definitions": {
+    "ClientEncryptionKeysListResult": {
+      "type": "object",
+	  "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientEncryptionKeyGetResults"
+          },
+          "description": "List of client encryption keys and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the client encryption keys and their properties."
+    },
     "DatabaseAccountsListResult": {
       "properties": {
         "value": {
@@ -5989,6 +6128,69 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ClientEncryptionKeyCreateUpdateParameters": {
+      "description": "Parameters to create and update ClientEncryptionKey.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update ClientEncryptionKey.",
+          "$ref": "#/definitions/ClientEncryptionKeyCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ClientEncryptionKeyCreateUpdateProperties": {
+      "description": "Properties to create and update ClientEncryptionKey.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a ClientEncryptionKey",
+          "$ref": "#/definitions/ClientEncryptionKeyResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "ClientEncryptionKeyGetResults": {
+      "description": "Client Encryption Key.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of a ClientEncryptionKey",
+          "$ref": "#/definitions/ClientEncryptionKeyGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "ClientEncryptionKeyGetProperties": {
+      "description": "The properties of a ClientEncryptionKey resource",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClientEncryptionKeyResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        }
+      }
     },
     "DatabaseAccountGetResults": {
       "description": "An Azure Cosmos DB database account.",
@@ -7927,6 +8129,49 @@
         }
       }
     },
+    "ClientEncryptionKeyResource": {
+      "type": "object",
+      "description": "Cosmos DB client encryption key resource object.",
+      "properties": {
+        "encryptionAlgorithm": {
+          "type": "string",
+          "description": "Encryption algorithm that will be used along with this client encryption key to encrypt/decrypt data."
+        },
+        "wrappedDataEncryptionKey": {
+          "type": "array",
+          "description": "Wrapped (encrypted) form of the key represented as a byte array.",
+		  "items": {
+            "$ref": "#/definitions/WrappedDekByte"
+          }
+        },
+        "keyWrapMetadata": {
+          "description": "Metadata for the wrapping provider that can be used to unwrap the wrapped client encryption key.",
+          "$ref": "#/definitions/KeyWrapMetadata"
+        }
+      }
+    },
+    "WrappedDekByte": {
+      "type": "byte",
+      "description": "Represents a byte of wrapped Data Encryption Key."
+    },
+    "KeyWrapMetadata": {
+      "type": "object",
+      "description": "Represents key wrap metadata that a key wrapping provider can use to wrap/unwrap a client encryption key.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of associated KeyEncryptionKey (aka CustomerManagedKey)."
+        },
+        "type": {
+          "type": "string",
+          "description": "ProviderName of KeyStoreProvider."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value / link of the KeyEncryptionKey."
+        }
+      }
+    },
     "SqlDatabaseResource": {
       "type": "object",
       "description": "Cosmos DB SQL database resource object",
@@ -9609,6 +9854,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB database name."
+    },
+    "clientEncryptionKeyNameParameter": {
+      "name": "clientEncryptionKeyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB ClientEncryptionKey name."
     },
     "containerNameParameter": {
       "name": "containerName",
