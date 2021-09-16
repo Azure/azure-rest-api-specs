@@ -1937,7 +1937,7 @@
         "operationId": "SqlResources_ListClientEncryptionKeys",
         "x-ms-examples": {
           "CosmosDBClientEncryptionKeysList": {
-            "$ref": "./examples/CosmosDBClientEncryptionKeysList.json"
+            "$ref": "./examples/CosmosDBSqlClientEncryptionKeysList.json"
           }
         },
         "description": "Lists the ClientEncryptionKeys under an existing Azure Cosmos DB SQL database.",
@@ -1976,7 +1976,7 @@
         "operationId": "SqlResources_GetClientEncryptionKey",
         "x-ms-examples": {
           "CosmosDBClientEncryptionKeyGet": {
-            "$ref": "./examples/CosmosDBClientEncryptionKeyGet.json"
+            "$ref": "./examples/CosmosDBSqlClientEncryptionKeyGet.json"
           }
         },
         "description": "Gets the ClientEncryptionKey under an existing Azure Cosmos DB SQL database.",
@@ -2013,7 +2013,7 @@
         "operationId": "SqlResources_CreateUpdateClientEncryptionKey",
         "x-ms-examples": {
           "CosmosDBClientEncryptionKeyCreateUpdate": {
-            "$ref": "./examples/CosmosDBClientEncryptionKeyCreateUpdate.json"
+            "$ref": "./examples/CosmosDBSqlClientEncryptionKeyCreateUpdate.json"
           }
         },
         "description": "Create or update a ClientEncryptionKey",
@@ -5763,7 +5763,7 @@
   "definitions": {
     "ClientEncryptionKeysListResult": {
       "type": "object",
-	  "properties": {
+      "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
@@ -8140,7 +8140,7 @@
         "wrappedDataEncryptionKey": {
           "type": "array",
           "description": "Wrapped (encrypted) form of the key represented as a byte array.",
-		  "items": {
+          "items": {
             "$ref": "#/definitions/WrappedDekByte"
           }
         },
