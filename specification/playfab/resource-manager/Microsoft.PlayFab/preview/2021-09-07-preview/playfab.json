@@ -1,0 +1,787 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PlayFab",
+    "description": "PlayFab AzureResourceProvider",
+    "version": "2021-09-07-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PlayerAccountPools"
+    },
+    {
+      "name": "Titles"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/playerAccountPools/{playerAccountPoolName}": {
+      "put": {
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "description": "Create Or Update PlayerAccountPool",
+        "operationId": "PlayerAccountPool_ResourceGroupLevelPut",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/playerAccountPoolName"
+          },
+          {
+            "$ref": "#/parameters/playerAccountPoolResource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Player Account",
+            "schema": {
+              "$ref": "#/definitions/ResourceOfPlayerAccountPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Player Account could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlayerAccountPool_ResourceGroupLevelPut": {
+            "$ref": "./examples/PlayerAccountPool_ResourceGroupLevelPut.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "description": "Read PlayerAccountPool",
+        "operationId": "PlayerAccountPool_ResourceGroupLevelGet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/playerAccountPoolName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Player Account",
+            "schema": {
+              "$ref": "#/definitions/ResourceOfPlayerAccountPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Player Account does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlayerAccountPool_ResourceGroupLevelGet": {
+            "$ref": "./examples/PlayerAccountPool_ResourceGroupLevelGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "description": "Delete PlayerAccountPool",
+        "operationId": "PlayerAccountPool_ResourceGroupLevelDelete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/playerAccountPoolName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the Player Account is deleted."
+          },
+          "202": {
+            "description": "The request was Accepted"
+          },
+          "204": {
+            "description": "The request was successful; Player Account does not exist."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 409 - Conflict(Player Account is in a non-terminal state due to an ongoing operation.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlayerAccountPool_ResourceGroupLevelDelete": {
+            "$ref": "./examples/PlayerAccountPool_ResourceGroupLevelDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "description": "Update PlayerAccountPool",
+        "operationId": "PlayerAccountPool_ResourceGroupLevelPatch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/playerAccountPoolName"
+          },
+          {
+            "$ref": "#/parameters/playerAccountPoolResource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the updated Player Account",
+            "schema": {
+              "$ref": "#/definitions/ResourceOfPlayerAccountPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Player Account does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlayerAccountPool_ResourceGroupLevelPatch": {
+            "$ref": "./examples/PlayerAccountPool_ResourceGroupLevelPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/playerAccountPools": {
+      "get": {
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "description": "Get all PlayerAccountPools in a resource group",
+        "operationId": "PlayerAccountPool_ResourceGroupLevelList",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Player Account",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPoolCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Player Account does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlayerAccountPool_ResourceGroupLevelList": {
+            "$ref": "./examples/PlayerAccountPool_ResourceGroupLevelList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlayFab/playerAccountPools": {
+      "get": {
+        "tags": [
+          "PlayerAccountPools"
+        ],
+        "description": "Get all PlayerAccountPools in a subscription",
+        "operationId": "PlayerAccountPool_SubscriptionLevelList",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Player Account",
+            "schema": {
+              "$ref": "#/definitions/PlayerAccountPoolCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Player Account does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlayerAccountPool_SubscriptionLevelList": {
+            "$ref": "./examples/PlayerAccountPool_SubscriptionLevelList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles/{titleName}": {
+      "put": {
+        "tags": [
+          "Titles"
+        ],
+        "description": "Create or Update Title",
+        "operationId": "Title_ResourceGroupLevelPut",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/titleName"
+          },
+          {
+            "$ref": "#/parameters/titleResource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Title",
+            "schema": {
+              "$ref": "#/definitions/ResourceOfTitle"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Title does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Title_ResourceGroupLevelPut": {
+            "$ref": "./examples/Title_ResourceGroupLevelPut.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Titles"
+        ],
+        "description": "Read Title",
+        "operationId": "Title_ResourceGroupLevelGet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/titleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Title",
+            "schema": {
+              "$ref": "#/definitions/ResourceOfTitle"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Title does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Title_ResourceGroupLevelGet": {
+            "$ref": "./examples/Title_ResourceGroupLevelGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Titles"
+        ],
+        "description": "Delete Title",
+        "operationId": "Title_ResourceGroupLevelDelete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/titleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the Title is deleted."
+          },
+          "202": {
+            "description": "The request was accepted"
+          },
+          "204": {
+            "description": "The request was successful; the Title is deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 409 - Conflict(Title is in a non-terminal state due to an ongoing operation.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Title_ResourceGroupLevelDelete": {
+            "$ref": "./examples/Title_ResourceGroupLevelDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Titles"
+        ],
+        "description": "Update Title",
+        "operationId": "Title_ResourceGroupLevelPatch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/titleName"
+          },
+          {
+            "$ref": "#/parameters/titleResource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Title",
+            "schema": {
+              "$ref": "#/definitions/ResourceOfTitle"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Title does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Title_ResourceGroupLevelPatch": {
+            "$ref": "./examples/Title_ResourceGroupLevelPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PlayFab/titles": {
+      "get": {
+        "tags": [
+          "Titles"
+        ],
+        "description": "Get all Titles in a resource group",
+        "operationId": "Title_ResourceGroupLevelList",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Title",
+            "schema": {
+              "$ref": "#/definitions/TitleCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Title does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Title_ResourceGroupLevelList": {
+            "$ref": "./examples/Title_ResourceGroupLevelList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlayFab/titles": {
+      "get": {
+        "tags": [
+          "Titles"
+        ],
+        "description": "Read all Titles in a subscription",
+        "operationId": "Title_SubscriptionLevelList",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the Title",
+            "schema": {
+              "$ref": "#/definitions/TitleCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Title does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Title_SubscriptionLevelList": {
+            "$ref": "./examples/Title_SubscriptionLevelList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PlayFab/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operation_List",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "he request was successful; response contains the list of operations under Microsoft.PlayFab resource provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlayFabOperationsList": {
+            "$ref": "./examples/PlayFabOperationsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceOfPlayerAccountPool": {
+      "type": "object",
+      "description": "Resource of PlayerAccountPool Type",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlayerAccountPoolProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        },
+        {
+          "$ref": "#/definitions/ExtraProperties"
+        }
+      ]
+    },
+    "PlayerAccountPoolProperties": {
+      "type": "object",
+      "description": "Properties of PlayerAccountPool Resource",
+      "properties": {
+        "playFabPublisherId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "PlayFab Publisher ID associated with the PlayerAccountPoolResource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePropertiesBase"
+        }
+      ]
+    },
+    "ResourcePropertiesBase": {
+      "type": "object",
+      "description": "The Common Resource Properties",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The value for the provisioning state",
+          "readOnly": true,
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Creating",
+            "Deleting",
+            "Canceled",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceOfTitle": {
+      "type": "object",
+      "description": "Resource of Title Type",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TitleProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        },
+        {
+          "$ref": "#/definitions/ExtraProperties"
+        }
+      ]
+    },
+    "TitleProperties": {
+      "type": "object",
+      "description": "Properties of Title Resource",
+      "properties": {
+        "playFabTitleId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Id of title object in PlayFab backend."
+        },
+        "playerAccountPoolId": {
+          "type": "string",
+          "description": "Azure resource Id of the playerAccountPool resource."
+        }
+      },
+      "required": [
+        "playerAccountPoolId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePropertiesBase"
+        }
+      ]
+    },
+    "PlayerAccountPoolCollection": {
+      "description": "Page of PlayerAccountPool",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of PlayerAccountPool Resource",
+          "type": "array",
+          "items": {
+            "description": "The list of PlayerAccountPool.",
+            "$ref": "#/definitions/ResourceOfPlayerAccountPool"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of PlayerAccountPool resources list.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtraProperties": {
+      "type": "object",
+      "description": "Extra properties not included in Tracked Resource",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag of the Azure resource",
+          "readOnly": true
+        }
+      }
+    },
+    "TitleCollection": {
+      "description": "Page of Title",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Title Resource",
+          "type": "array",
+          "items": {
+            "description": "The list of Title.",
+            "$ref": "#/definitions/ResourceOfTitle"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of Title resources list.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "playerAccountPoolName": {
+      "type": "string",
+      "name": "playerAccountPoolName",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Resource Name",
+      "x-ms-parameter-location": "method"
+    },
+    "titleName": {
+      "type": "string",
+      "name": "titleName",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Resource Name",
+      "x-ms-parameter-location": "method"
+    },
+    "playerAccountPoolResource": {
+      "name": "body",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ResourceOfPlayerAccountPool"
+      },
+      "x-nullable": false,
+      "description": "Player Account Pool Request object.",
+      "x-ms-parameter-location": "method"
+    },
+    "titleResource": {
+      "name": "body",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ResourceOfTitle"
+      },
+      "x-nullable": false,
+      "description": "Title Request object.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
