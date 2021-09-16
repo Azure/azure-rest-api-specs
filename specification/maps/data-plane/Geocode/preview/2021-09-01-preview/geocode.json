@@ -368,7 +368,21 @@
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse/properties/summary"
+          "description": "Summary for the batch request",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
         },
         "batchItems": {
           "description": "Array containing the batch results.",
@@ -377,10 +391,13 @@
             "type": "object",
             "properties": {
               "type": {
-                "$ref": "#/definitions/SearchAddressResponse/properties/type"
+                "type": "string",
+                "enum": [
+                  "FeatureCollection"
+                ]
               },
               "features": {
-                "$ref": "#/definitions/SearchAddressResponse/properties/features"
+                "$ref": "#/definitions/features"
               },
               "error": {
                 "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
@@ -389,6 +406,53 @@
           }
         }
       }
+    },
+    "features":{
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "must be Feature",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "ID for feature returned"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection",
+                "readOnly": true
+              },
+              "confidence": {
+                "$ref": "#/definitions/confidence"
+              },
+              "matchCodes": {
+                "$ref": "#/definitions/matchCodes"
+              },
+              "address": {
+                "$ref": "#/definitions/SearchResultAddress"
+              },
+              "geocodePoints": {
+                "$ref": "#/definitions/geocodePoints"
+              }
+            }
+          },
+          "geometry": {
+            "$ref": "#/definitions/GeoJSONPoint"
+          },
+          "bbox": {
+            "$ref": "#/definitions/bbox"
+          }
+        }
+      }      
     },
     "SearchAddressResponse": {
       "description": "This object is returned from a successful Search Address call",
@@ -401,51 +465,7 @@
           ]
         },
         "features": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "must be Feature",
-                "enum": [
-                  "Feature"
-                ]
-              },
-              "id": {
-                "type": "string",
-                "description": "ID for feature returned"
-              },
-              "properties": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection",
-                    "readOnly": true
-                  },
-                  "confidence": {
-                    "$ref": "#/definitions/confidence"
-                  },
-                  "matchCodes": {
-                    "$ref": "#/definitions/matchCodes"
-                  },
-                  "address": {
-                    "$ref": "#/definitions/SearchResultAddress"
-                  },
-                  "geocodePoints": {
-                    "$ref": "#/definitions/geocodePoints"
-                  }
-                }
-              },
-              "geometry": {
-                "$ref": "#/definitions/GeoJSONPoint"
-              },
-              "bbox": {
-                "$ref": "#/definitions/bbox"
-              }
-            }
-          }
+          "$ref": "#/definitions/features"
         },
         "nextLink": {
           "type": "string",
