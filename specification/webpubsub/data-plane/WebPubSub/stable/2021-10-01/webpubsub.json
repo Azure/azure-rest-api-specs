@@ -4,6 +4,15 @@
     "title": "Azure Web PubSub Service REST API",
     "version": "2021-10-01"
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths": {
     "/api/health": {
       "head": {
@@ -105,7 +114,7 @@
           "webpubsub"
         ],
         "summary": "Close the connections in the hub.",
-        "operationId": "WebPubSub_CloseConnections",
+        "operationId": "WebPubSub_CloseAllConnections",
         "parameters": [
           {
             "in": "path",
@@ -1148,6 +1157,17 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "HTTP or HTTPS endpoint for the Web PubSub service instance.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
