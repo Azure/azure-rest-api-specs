@@ -29,6 +29,7 @@ title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
 tag: package-2021-09
+azure-validator: true
 ```
 
 
@@ -95,6 +96,10 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     from: extensions.json
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+  - suppress: ProxyResourcePatchOperation
+    from: extensions.json
+    where: $.paths.extensionName.patch.responses
+    reason: Returning HTTP 202 response per ARM RPC guideline https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#updating-using-patch.
 ```
 
 ---
