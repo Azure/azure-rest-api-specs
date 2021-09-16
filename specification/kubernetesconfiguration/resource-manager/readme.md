@@ -96,7 +96,7 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     from: extensions.json
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
-  - suppress: ProxyResourcePatchOperation
+  - suppress: LongRunningResponseStatusCode
     from: extensions.json
     where: $.paths.extensionName.patch.responses
     reason: Returning HTTP 202 response per ARM RPC guideline https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#updating-using-patch.
