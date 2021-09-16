@@ -55,26 +55,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub_provisioning_services']
   - repo: azure-resource-manager-schemas
 ```
 
 ## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.go.md)
-
-## Node.js
-
-See configuration in [readme.nodejs.md](./readme.nodejs.md)
