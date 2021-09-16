@@ -34,18 +34,10 @@
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
-            "name": "projectName",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The project name."
+            "$ref": "common.json#/parameters/ProjectNameQueryParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The deployment name/deployed version."
+            "$ref": "common.json#/parameters/DeploymentNameQueryParameter"
           },
           {
             "$ref": "#/parameters/ConversationAnalysisInput"
@@ -451,6 +443,54 @@
         }
       }
     },
+    "DeepStackEntityResolution": {
+      "type": "object",
+      "description": "This is the base class of all kinds of entity resolutions.",
+      "required": [
+        "resolutionKind"
+      ],
+      "properties": {
+        "resolutionKind": {
+          "type": "string",
+          "description": "The type of an entity resolution.",
+          "enum": [
+            "DictionaryNormalizedValue"
+          ],
+          "x-ms-enum": {
+            "name": "resolutionKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DictionaryNormalizedValue",
+                "description": "Dictionary normalized entities."
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "DictionaryNormalizedValueResolution": {
+      "type": "object",
+      "description": "The DictionaryNormalizedValue resolution indicates entity values are extracted from a predefined dictionary. For example, Coca could be a normalized name for Coca-Cola.",
+      "x-ms-discriminator-value": "DictionaryNormalizedValue",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeepStackEntityResolution"
+        }
+      ],
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "A list of normalized entities.",
+          "x-nullable": false,
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          }
+        }
+      }
+    },
     "DeepstackEntity": {
       "type": "object",
       "description": "The entity extraction result of a LUIS Deepstack project.",
@@ -484,6 +524,13 @@
           "format": "float",
           "description": "The entity confidence score.",
           "type": "number"
+        },
+        "resolution": {
+          "description": "A array with extra information about the entity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeepStackEntityResolution"
+          }
         }
       }
     },
