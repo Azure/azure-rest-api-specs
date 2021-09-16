@@ -159,9 +159,9 @@
             "QuestionOnly"
           ]
         },
-        "strictFilters": {
+        "filters": {
           "description": "Filter QnAs based on give metadata list and knowledge base source names.",
-          "$ref": "#/definitions/StrictFilters"
+          "$ref": "#/definitions/QueryFilters"
         },
         "answerSpanRequest": {
           "description": "To configure Answer span prediction feature.",
@@ -320,7 +320,7 @@
         }
       }
     },
-    "StrictFilters": {
+    "QueryFilters": {
       "type": "object",
       "description": "filters over knowledge base.",
       "additionalProperties": false,
@@ -333,9 +333,10 @@
           "type": "object",
           "$ref": "#/definitions/SourceFilter"
         },
-        "compoundOperation": {
+        "logicalOperation": {
           "type": "string",
-          "$ref": "#/definitions/CompoundOperationKind",
+          "description": "Logical operation used to join metadata filters with source filters.",
+          "$ref": "#/definitions/LogicalOperationKind",
           "default": "AND"
         }
       }
@@ -346,25 +347,37 @@
       "additionalProperties": false,
       "properties": {
         "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "minLength": 0,
-            "maxLength": 500
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataFilterList"
           }
         },
-        "compoundOperation": {
+        "logicalOperation": {
           "type": "string",
-          "$ref": "#/definitions/CompoundOperationKind",
+          "description": "Operation used to join metadata filters.",
+          "$ref": "#/definitions/LogicalOperationKind",
           "default": "AND"
         }
       }
     },
-    "CompoundOperationKind": {
+    "MetadataFilterList": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "description": "Metadata Key from Metadata dictionary used in the QnA."
+        },
+        {
+          "type": "string",
+          "description": "Metadata Value from Metadata dictionary used in the QnA."
+        }
+      ]
+    },
+    "LogicalOperationKind": {
       "type": "string",
-      "description": "(Optional) Set to 'OR' for joining metadata using 'OR' operation.",
+      "description": "Set to 'OR'/'AND' for using corresponding logical operation.",
       "x-ms-enum": {
-        "name": "CompoundOperationKind",
+        "name": "LogicalOperationKind",
         "modelAsString": true
       },
       "enum": [
