@@ -45,15 +45,14 @@ input-file:
 
 ---
 ## Suppression
-``` yaml
+```yaml
 directive:
   - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
     from: extensions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}"].patch
-    reason: Returning HTTP 202 response per ARM RPC guideline https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#updating-using-patch.
   - suppress: TopLevelResourcesListBySubscription
-    from: extensions.json
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    from: extensions.json
 ```
 
 ### Tag: package-preview-2021-05
