@@ -34,6 +34,52 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/checknameavailability": {
+      "post": {
+        "description": "Checks ADU resource name availability.",
+        "operationId": "CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "description": "Check Name Availability Request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Check Name Availability Response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability_Available": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "CheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/CheckNameAvailability_AlreadyExists.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts": {
       "get": {
         "description": "Returns list of Accounts.",
@@ -56,7 +102,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +142,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -139,13 +185,47 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Gets Account details": {
             "$ref": "./examples/Accounts/Accounts_Get.json"
+          }
+        }
+      },
+      "head": {
+        "description": "Checks whether account exists.",
+        "operationId": "Accounts_Head",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account exists."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether account exists": {
+            "$ref": "./examples/Accounts/Accounts_Head.json"
           }
         }
       },
@@ -189,7 +269,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -222,7 +302,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Async operation to delete Account was created."
+            "description": "Account was deleted."
           },
           "202": {
             "description": "Async operation to delete Account was created."
@@ -233,7 +313,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -276,10 +356,16 @@
               "$ref": "#/definitions/Account"
             }
           },
+          "201": {
+            "description": "Async operation to update accounts was created.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -322,7 +408,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -338,7 +424,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances/{instanceName}": {
       "get": {
-        "description": "Returns instances for the given account and instance name.",
+        "description": "Returns instance details for the given instance and account name.",
         "operationId": "Instances_Get",
         "parameters": [
           {
@@ -367,13 +453,50 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Gets list of Accounts": {
             "$ref": "./examples/Instances/Instances_Get.json"
+          }
+        }
+      },
+      "head": {
+        "description": "Checks whether instance exists.",
+        "operationId": "Instances_Head",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance exists."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether instance exists.": {
+            "$ref": "./examples/Instances/Instances_Head.json"
           }
         }
       },
@@ -420,7 +543,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -456,7 +579,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Async operation to delete Instance was created."
+            "description": "Instance was deleted."
           },
           "202": {
             "description": "Async operation to delete Instance was created."
@@ -467,7 +590,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -516,7 +639,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -546,7 +669,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -567,6 +690,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        },
         "properties": {
           "description": "Device Update account properties.",
           "x-ms-client-flatten": true,
@@ -595,6 +722,10 @@
               "readOnly": true
             }
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The type of identity used for the resource."
         }
       }
     },
@@ -624,6 +755,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        },
         "properties": {
           "description": "Device Update instance properties.",
           "x-ms-client-flatten": true,
@@ -657,6 +792,10 @@
               "items": {
                 "$ref": "#/definitions/IotHubSettings"
               }
+            },
+            "enableDiagnostics": {
+              "description": "Enables or Disables the diagnostic logs collection",
+              "type": "boolean"
             }
           }
         }
@@ -679,6 +818,33 @@
           "items": {
             "$ref": "#/definitions/Instance"
           }
+        }
+      }
+    },
+    "Identity": {
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          },
+          "type": "string",
+          "description": "The identity type."
         }
       }
     },
@@ -707,19 +873,13 @@
         "resourceId"
       ]
     },
-    "ErrorDefinition": {
-      "description": "Error response indicates that the service is not able to process the incoming request.",
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "Error details.",
-          "readOnly": true
-        }
-      }
-    },
     "AccountUpdate": {
       "description": "Request payload used to update and existing Accounts.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The type of identity used for the resource."
+        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -775,7 +935,7 @@
       "type": "string",
       "description": "Account name.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[A-Za-z][A-Za-z0-9]+$",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "minLength": 3,
       "maxLength": 24
     },
@@ -786,7 +946,7 @@
       "type": "string",
       "description": "Instance name.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[A-Za-z][A-Za-z0-9]+$",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "minLength": 3,
       "maxLength": 36
     }

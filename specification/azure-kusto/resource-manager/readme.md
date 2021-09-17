@@ -28,18 +28,37 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2020-09-18
+tag: package-2021-08-27
 ```
 
+
+### Tag: package-2021-08-27
+
+These settings apply only when `--tag=package-2021-08-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-27'
+input-file:
+  - Microsoft.Kusto/stable/2021-08-27/kusto.json
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.Kusto/stable/2021-01-01/kusto.json
+```
 
 ### Tag: package-2020-09-18
 
 These settings apply only when `--tag=package-2020-09-18` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-09-18'
+``` yaml $(tag) == 'package-2020-09-18'
 input-file:
   - Microsoft.Kusto/stable/2020-09-18/kusto.json
 ```
+
 ### Tag: package-2020-06-14
 
 These settings apply only when `--tag=package-2020-06-14` is specified on the command line.
@@ -178,15 +197,12 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-powershell
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js azure-kusto/resource-manager
 ```
 
 ## C#
@@ -207,9 +223,9 @@ csharp:
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
+## Python
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Suppression
 

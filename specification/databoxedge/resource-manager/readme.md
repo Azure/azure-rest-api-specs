@@ -26,7 +26,23 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08
+tag: package-2021-02-01
+```
+### Tag: package-2021-02-01
+
+These settings apply only when `--tag=package-2021-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2021-02-01/databoxedge.json
+```
+### Tag: package-2021-02-01-preview
+
+These settings apply only when `--tag=package-2021-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2021-02-01-preview/databoxedge.json
 ```
 ### Tag: package-2020-12-01
 
@@ -109,9 +125,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-databoxedge
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
@@ -120,8 +134,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databoxedge']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js databoxedge/resource-manager
 ```
 
 ## C#
@@ -155,7 +167,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

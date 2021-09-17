@@ -990,6 +990,97 @@
         }
       }
     },
+    "/providers/Microsoft.DataShare/locations/{location}/activateEmail": {
+      "post": {
+        "tags": [
+          "EmailRegistration"
+        ],
+        "summary": "Activates the tenant and email combination using email code received.",
+        "description": "Activate the email registration for the current tenant",
+        "operationId": "EmailRegistrations_ActivateEmail",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the activation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "emailRegistration",
+            "in": "body",
+            "description": "The payload for tenant domain activation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailRegistration"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EmailRegistration"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmailRegistrations_ActivateEmail": {
+            "$ref": "./examples/EmailRegistrations_ActivateEmail.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataShare/locations/{location}/registerEmail": {
+      "post": {
+        "tags": [
+          "EmailRegistration"
+        ],
+        "summary": "Registers the tenant and email combination for verification.",
+        "description": "Register an email for the current tenant",
+        "operationId": "EmailRegistrations_RegisterEmail",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the registration",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EmailRegistration"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmailRegistrations_RegisterEmail": {
+            "$ref": "./examples/EmailRegistrations_RegisterEmail.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/invitations/{invitationName}": {
       "get": {
         "tags": [
@@ -4568,6 +4659,46 @@
         "name": {
           "description": "dimension name",
           "type": "string"
+        }
+      }
+    },
+    "EmailRegistration": {
+      "description": "Dto for tenant domain registration",
+      "type": "object",
+      "properties": {
+        "activationCode": {
+          "description": "Activation code for the registration",
+          "type": "string"
+        },
+        "activationExpirationDate": {
+          "format": "date-time",
+          "description": "Date of the activation expiration",
+          "type": "string",
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email to register",
+          "type": "string",
+          "readOnly": true
+        },
+        "registrationStatus": {
+          "description": "Registration status",
+          "enum": [
+            "ActivationPending",
+            "Activated",
+            "ActivationAttemptsExhausted"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "registrationStatus",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "description": "The tenant to register",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

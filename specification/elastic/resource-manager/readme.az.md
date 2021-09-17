@@ -11,7 +11,7 @@ az:
     package-name: azure-mgmt-elastic
 az-output-folder: $(azure-cli-extension-folder)/src/elastic
 python-sdk-output-folder: "$(az-output-folder)/azext_elastic/vendored_sdks/elastic"
-# add additinal configuration here specific for Azure CLI
+# add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
 

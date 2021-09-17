@@ -12,9 +12,9 @@ This is the AutoRest configuration file for Azure Migrate.
 batch:
   - tag: package-2018-02
   - tag: package-2020-01
+  - tag: package-2020-05
   - tag: package-2020-07
 ```
-
 
 ### Tag: package-2020-07
 
@@ -24,6 +24,7 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 input-file:
   - Microsoft.OffAzure/stable/2020-07-07/migrate.json
 ```
+
 ### Tag: package-2018-02 and java
 
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
@@ -50,6 +51,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Getting Started
 
 To build the SDK for Migrate, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -70,7 +84,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2019-10
 ```
 
 ### Tag: package-2018-02
@@ -100,6 +114,15 @@ input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
 ```
 
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
+```
+
 ## Suppression
 
 ``` yaml
@@ -127,15 +150,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js migrate/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

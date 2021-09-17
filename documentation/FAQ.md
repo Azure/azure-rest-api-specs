@@ -6,7 +6,8 @@ This page is intended to answer questions frequently asked during Azure Swagger 
 2. [How to fix validation failure?](#validation)
 3. [How to generate SDK from Swagger?](#SDK)
 4. [How to generate document](#doc)
-5. [If need further help, who can we contact?](#contact)
+5. [How to generate swagger examples](#examplegen)
+6. [If need further help, who can we contact?](#contact)
 
 ## How to onboard PR review Process?<a name="Onboard"></a>
 If you are new to Swagger/OpenAPI, you can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/80/Getting-started-with-OpenAPI-specifications)
@@ -36,6 +37,9 @@ If you are working in the private repository, please refer to this [document](ht
 
 ## How to generate Document from Swagger?<a name="doc"></a>
 Refer to [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-docs.microsoft.com)
+
+## How to generate examples from Swagger?<a name="examplegen"></a>
+Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation)
 
 ## If need further help, who can we contact?<a name="contact"></a>
 If any other help need, Please send a mail to vscswagger@microsoft.com

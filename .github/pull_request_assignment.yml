@@ -8,6 +8,18 @@
       - maririos
 
 - rule:
+    paths:
+      - "specification/confidentialledger/data-plane/**"
+    reviewers:
+      - christothes 
+      
+- rule:
+    paths:
+      - "specification/@(applicationinsights|operationalinsights)/**"
+    reviewers:
+      - akning-ms
+
+- rule:
     # eventgrid data-plane PR
     paths:
       - "specification/eventgrid/data-plane/**"
@@ -24,26 +36,37 @@
 - rule:
     # data-plane PR
     paths:
+      - "specification/**/data-plane/iot**"
+    reviewers:
+      - drwill-ms
+
+- rule:
+    # data-plane PR
+    paths:
       - "specification/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
       - tjprescott
-      
 
 - rule:
     paths:
       - "specification/network/**"
     reviewers:
-      - kairu-ms
       - lirenhe
 
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - kairu-ms
 
+- rule:
+    paths: "specification/common-types/**"
+    reviewers:
+      - raych1
+      - akning-ms
+      - leni-msft
+      - ruowan
+      - jianyexi
+      - zhenglaizhang
+      
+      
 - rule:
     paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
     reviewers:
@@ -57,7 +80,7 @@
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - akning-ms
+      - zhenglaizhang
       
 - rule:
     paths: "specification/signalr/**"
@@ -72,7 +95,6 @@
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
-      - yungezz
 
 - rule:
     paths:
@@ -82,51 +104,33 @@
 
 - rule:
     paths:
-      - "specification/azureactivedirectory/**"
-    reviewers:
-      - njuCZ
-
-- rule:
-    paths:
       - "specification/authorization/**"
     reviewers:
-      - qianwens
+      - ruowan
 
 - rule:
     paths:
       - "specification/datafactory/**"
     reviewers:
-      - qianwens
-
-- rule:
-    paths:
-      - "specification/monitor/**"
-    reviewers:
-      - weidongxu-microsoft
-      - kairu-ms
+      - leni-msft
 
 - rule:
     paths:
       - "specification/storage/**"
     reviewers:
-      - Juliehzl
+      - jianyexi
 
 
 - rule:	
     paths: "specification/mediaservices/**"	
     reviewers:	
       - allenjzhang
+      
 - rule:
     paths:
       - "specification/containerregistry/**"
     reviewers:
       - fengzhou-msft
-
-- rule:
-    paths:
-      - "specification/@(containerservice|containerinstance)/**"
-    reviewers:
-      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -137,34 +141,21 @@
 
 - rule:
     paths:
-      - "specification/portal/**"
-    reviewers:
-      - PhoenixHe-msft
-
-- rule:
-    paths:
       - "specification/web/**"
     reviewers:
       - weidongxu-microsoft
       
 - rule:
     paths:
-      - "specification/testbase/**"
-    reviewers:
-      - PhoenixHe-msft
-      
-- rule:
-    paths:
       - "specification/servicelinker/**"
     reviewers:
       - raych1
-
+      
 - rule:
-    paths: 
-      - "specification/azurestack/**"
-      - "specification/automation/**"
+    paths:
+      - "specification/keyvault/**"
     reviewers:
-      - xiaoxuqi-ms
+      - zhenglaizhang
 
 - rule:
     paths:
@@ -183,7 +174,6 @@
       - ".azure-pipelines-preproduction/**"	
     reviewers:
       - akning-ms
-      - PhoenixHe-msft
       - raych1
       - zhenglaizhang
 
@@ -192,18 +182,16 @@
     paths:
       - "**"
     reviewers:
-      - erich-wang
-      - PhoenixHe-msft
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
       - raych1
-      - ChenTanyi
-      - njuCZ
       - akning-ms
       - leni-msft
-      - qianwens
       - ruowan
       - jianyexi
       - zhenglaizhang
       - chunyu3
+      - changlong-liu
+      - msyyc
+      - qwordy

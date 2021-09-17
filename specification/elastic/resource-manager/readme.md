@@ -26,7 +26,8 @@ These are the global settings for the elastic.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-07-01-preview
+openapi-subtype: rpaas
+tag: package-2020-07-01
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -40,6 +41,16 @@ input-file:
 
 ---
 
+### Tag: package-2020-07-01
+
+These settings apply only when `--tag=package-2020-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-01'
+input-file:
+  - Microsoft.Elastic/stable/2020-07-01/elastic.json
+```
+
+---
 # Code Generation
 
 ## Swagger to SDK
@@ -54,10 +65,25 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js elastic/resource-manager
   - repo: azure-cli-extensions
 ```
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Elastic/preview/2020-07-01-preview/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Elastic/stable/2020-07-01/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
@@ -78,6 +104,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

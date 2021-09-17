@@ -48,6 +48,9 @@
           },
           {
             "$ref": "#/parameters/OcrModelVersion"
+          },
+          {
+            "$ref": "#/parameters/ReadingOrder"
           }
         ],
         "consumes": [
@@ -133,6 +136,12 @@
           },
           {
             "$ref": "#/parameters/Pages"
+          },
+          {
+            "$ref": "#/parameters/OcrModelVersion"
+          },
+          {
+            "$ref": "#/parameters/ReadingOrder"
           }
         ],
         "consumes": [
@@ -594,6 +603,15 @@
       "type": "string",
       "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$",
       "default": "latest"
+    },
+    "ReadingOrder": {
+      "name": "readingOrder",
+      "in": "query",
+      "description": "Optional parameter to specify which reading order algorithm should be applied when ordering the extract text elements. Can be either 'basic' or 'natural'. Will default to 'basic' if not specified",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "default": "basic"
     }
   }
 }

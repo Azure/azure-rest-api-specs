@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01-preview
+tag: package-2021-06-preview
 ```
 
 ### Suppression
@@ -90,6 +90,24 @@ input-file:
 - Microsoft.EventHub/preview/2021-01-01-preview/CheckNameAvailability.json
 ```
 
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+input-file:
+- Microsoft.EventHub/preview/2021-06-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/namespaces-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/operations.json
+- Microsoft.EventHub/preview/2021-06-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2021-06-01-preview/disasterRecoveryConfigs.json
+- Microsoft.EventHub/preview/2021-06-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/AuthorizationRules.json
+- Microsoft.EventHub/preview/2021-06-01-preview/consumergroups.json
+- Microsoft.EventHub/preview/2021-06-01-preview/CheckNameAvailability.json
+```
 
 ### Tag: package-2018-01-preview
 
@@ -149,14 +167,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_hub']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js eventhub/resource-manager
 ```
 
 
@@ -186,7 +203,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

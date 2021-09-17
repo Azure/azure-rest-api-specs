@@ -30,7 +30,7 @@ python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/managedservices/azure-mgmt-managedservices/azure/mgmt/managedservices
 ```
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/managedservices/azure-mgmt-managedservices

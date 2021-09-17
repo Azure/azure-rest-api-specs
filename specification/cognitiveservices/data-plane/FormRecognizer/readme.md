@@ -4,16 +4,30 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `release_2_0`.
+The current release is `release_2_1`.
 
 ``` yaml
 
-tag: release_2_0
+tag: release_2_1
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
+
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+``` yaml $(tag) == 'release_2_1'
+input-file:
+  - stable/v2.1/FormRecognizer.json
+```
+
+### Release 2.1-preview.3
+These settings apply only when `--tag=release_2_1_preview.3` is specified on the command line.
+``` yaml $(tag) == 'release_2_1_preview.3'
+input-file:
+  - preview/v2.1-preview.3/FormRecognizer.json
+```
 
 ### Release 2.1-preview.2
 These settings apply only when `--tag=release_2_1_preview.2` is specified on the command line.
@@ -63,8 +77,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
