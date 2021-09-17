@@ -40,15 +40,25 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the database to be created. The name can contain only alphanumeric characters and should not exceed 24 characters"
+          },
+          {
+            "in": "body",
+            "name": "registerBody",
+            "required": true,
+            "description": "The body for the register request",
+            "schema": {
+              "$ref": "#/definitions/metastoreRegisterObject"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Metadata created Response.",
+            "description": "The Job created for the resource creation/updation request",
             "schema": {
               "$ref": "#/definitions/metaDataCreatedResponse"
             }
@@ -116,15 +126,25 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the database to be updated"
+          },
+          {
+            "in": "body",
+            "name": "updateBody",
+            "required": true,
+            "description": "The body for the update request",
+            "schema": {
+              "$ref": "#/definitions/metastoreUpdateObject"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Metadata created Response.",
+            "description": "The Job created for the resource creation/updation request",
             "schema": {
               "$ref": "#/definitions/metaDataCreatedResponse"
             }
@@ -163,7 +183,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Metadata Deleted Response."
+            "description": "The Job created for the resource Deletion request"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -180,7 +200,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string"
+          "$ref": "#/definitions/RequestStatus"
         }
       }
     },
@@ -188,7 +208,59 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string"
+          "$ref": "#/definitions/ResourceStatus"
+        }
+      }
+    },
+    "ResourceStatus": {
+      "description": "Enumerates possible Status of the resource.",
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Created",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceStatus",
+        "modelAsString": true
+      }
+    },
+    "RequestStatus": {
+      "description": "Enumerates possible request statuses.",
+      "type": "string",
+      "enum": [
+        "Running",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RequestStatus",
+        "modelAsString": true
+      }
+    },
+    "metastoreRegisterObject": {
+      "type": "object",
+      "required": [
+        "inputFolder"
+      ],
+      "properties": {
+        "inputFolder": {
+          "type": "string",
+          "example": "https://testsymsstorage.blob.core.windows.net/testsymsstoragefilesystem/CDM/",
+          "description": "The input folder containing CDM files."
+        }
+      }
+    },
+    "metastoreUpdateObject": {
+      "type": "object",
+      "required": [
+        "inputFolder"
+      ],
+      "properties": {
+        "inputFolder": {
+          "type": "string",
+          "example": "https://testsymsstorage.blob.core.windows.net/testsymsstoragefilesystem/CDM/",
+          "description": "The input folder containing CDM files."
         }
       }
     }
