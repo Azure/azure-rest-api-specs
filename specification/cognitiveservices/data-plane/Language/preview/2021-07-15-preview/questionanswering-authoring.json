@@ -874,12 +874,12 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "description": "A list of feedback records.",
+            "description": "Feedback for Active Learning.",
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FeedbackRecords"
+              "$ref": "#/definitions/ActiveLearningFeedback"
             }
           }
         ],
@@ -909,9 +909,19 @@
     }
   },
   "definitions": {
+    "ActiveLearningFeedback": {
+      "type": "object",
+      "description": "Feedback for Active Learning.",
+      "additionalProperties": false,
+      "properties": {
+        "records": {
+          "$ref": "#/definitions/FeedbackRecords"
+        }
+      }
+    },
     "FeedbackRecords": {
       "type": "array",
-      "description": "A list of Active Learning Feedback Records.",
+      "description": "A list of Feedback Records for Active Learning.",
       "additionalProperties": false,
       "items": {
         "$ref": "#/definitions/FeedbackRecord"
@@ -919,7 +929,7 @@
     },
     "FeedbackRecord": {
       "type": "object",
-      "description": "Active Learning Feedback Record.",
+      "description": "Feedback Record for Active Learning.",
       "additionalProperties": false,
       "properties": {
         "userId": {
