@@ -56,95 +56,6 @@
       "in": "header",
       "description": "Specifies the language code in which the timezone names should be returned. If no language code is provided, the response will be in \"EN\". Please refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
       "type": "string",
-      "default": "en",
-      "enum": [
-        "da",
-        "nl",
-        "en",
-        "fi",
-        "fr",
-        "de",
-        "it",
-        "ja",
-        "ko",
-        "no",
-        "pl",
-        "pt-PT",
-        "pt-BR",
-        "ru",
-        "es",
-        "sv"
-      ],
-      "x-ms-enum": {
-        "name": "TimezoneAcceptLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "da",
-            "description": "Danish"
-          },
-          {
-            "value": "nl",
-            "description": "Dutch"
-          },
-          {
-            "value": "en",
-            "description": "English"
-          },
-          {
-            "value": "fi",
-            "description": "Finnish"
-          },
-          {
-            "value": "fr",
-            "description": "French"
-          },
-          {
-            "value": "de",
-            "description": "German"
-          },
-          {
-            "value": "it",
-            "description": "Italian"
-          },
-          {
-            "value": "ja",
-            "description": "Japanese"
-          },
-          {
-            "value": "ko",
-            "description": "Korean"
-          },
-          {
-            "value": "no",
-            "description": "Norwegian (Bokmaal)"
-          },
-          {
-            "value": "pl",
-            "description": "Polish"
-          },
-          {
-            "value": "pt-PT",
-            "description": "Portuguese (Portugal)"
-          },
-          {
-            "value": "pt-BR",
-            "description": "Portuguese (Brazil)"
-          },
-          {
-            "value": "ru",
-            "description": "Russian"
-          },
-          {
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "value": "sv",
-            "description": "Swedish"
-          }
-        ]
-      },
       "x-ms-parameter-location": "method"
     },
     "TimezoneOptions": {
@@ -214,7 +125,7 @@
         "description": "__Time Zone by Id__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
         "operationId": "GetTimezoneByID",
         "x-ms-examples": {
-          "GetTimezoneByID": {
+          "Successfully retrieve timezone by ID": {
             "$ref": "./examples/GetTimezoneByID.json"
           }
         },
@@ -270,7 +181,7 @@
         "description": "__Time Zone by Coordinates__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair. In addition, the API provides sunset and sunrise times for a given location.",
         "operationId": "GetTimezoneByCoordinates",
         "x-ms-examples": {
-          "GetTimezoneByCoordinates": {
+          "Successfully retrieve timezone by coordinates": {
             "$ref": "./examples/GetTimezoneByCoordinates.json"
           }
         },
@@ -326,7 +237,7 @@
         "description": "__Enumerate Windows Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of Windows Time Zone IDs.",
         "operationId": "GetTimezoneWindows",
         "x-ms-examples": {
-          "GetTimezoneEnumWindows": {
+          "Successfully retrieve Windows timezone": {
             "$ref": "./examples/GetTimezoneEnumWindows.json"
           }
         },
@@ -359,7 +270,7 @@
         "description": "__Enumerate IANA Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
         "operationId": "GetTimezoneIANA",
         "x-ms-examples": {
-          "GetTimezoneEnumIANA": {
+          "Successfully retrieve Iana timezone": {
             "$ref": "./examples/GetTimezoneEnumIANA.json"
           }
         },
@@ -389,7 +300,7 @@
     },
     "/timezone/ianaVersion/{format}": {
       "get": {
-        "description": "__Time Zone IANA Version__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns the current IANA version number.",
+        "description": "__Time Zone IANA Version__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns the current IANA version number as Metadata.",
         "operationId": "GetTimezoneIANAVersionMetadata",
         "x-ms-examples": {
           "Successfully retrieve timezone Iana version metadata": {
@@ -423,9 +334,9 @@
     "/timezone/windowsToIana/{format}": {
       "get": {
         "description": "__Windows to IANA Time Zone__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
-        "operationId": "GetIANAMetadata",
+        "operationId": "GetCorrespondingIANA",
         "x-ms-examples": {
-          "GetTimezoneWindowsToIANA": {
+          "Successfully retrieve corresponding timezone Iana": {
             "$ref": "./examples/GetTimezoneWindowsToIANA.json"
           }
         },
