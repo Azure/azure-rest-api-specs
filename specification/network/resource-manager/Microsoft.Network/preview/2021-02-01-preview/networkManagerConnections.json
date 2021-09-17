@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "{scope}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
+    "/{scope}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
       "parameters": [
         {
           "$ref": "#/parameters/ScopeParameter"
@@ -141,13 +141,13 @@
         }
       }
     },
-    "{scope}/providers/Microsoft.Network/networkManagerConnections": {
+    "/{scope}/providers/Microsoft.Network/networkManagerConnections": {
       "get": {
         "tags": [
           "NetworkManagerConnections"
         ],
         "operationId": "NetworkManagerConnections_List",
-        "description": "List all network manager connections created by this subscription/management group.",
+        "description": "List all network manager connections in a scope.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -156,10 +156,10 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./networkManager.json#/parameters/ListTopParameter"
+            "$ref": "#/parameters/ListTopParameter"
           },
           {
-            "$ref": "./networkManager.json#/parameters/ListSkipTokenParameter"
+            "$ref": "#/parameters/ListSkipTokenParameter"
           }
         ],
         "responses": {
@@ -168,22 +168,25 @@
             "schema": {
               "$ref": "#/definitions/NetworkManagerConnectionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "./network.json#/definitions/CloudError"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionList.json"
           }
-        }
-      },
-      "x-ms-examples": {
-        "List Network Manager Connection": {
-          "$ref": "./examples/NetworkManagerConnectionList.json"
         }
       }
     },
-    "{scope}/providers/Microsoft.Network/listPendingScopeConnections": {
+    "/{scope}/providers/Microsoft.Network/listPendingScopeConnections": {
       "post": {
         "tags": [
           "NetworkManagerConnections"
@@ -220,12 +223,12 @@
         },
         "x-ms-examples": {
           "List Pending Scope Connections Sent From A Network Manager": {
-            "$ref": "./examples/NetworkManagerPendingScopeConnectionist.json"
+            "$ref": "./examples/NetworkManagerPendingScopeConnectionList.json"
           }
         }
       }
     },
-    "{scope}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}/revoke": {
+    "/{scope}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}/revoke": {
       "post": {
         "tags": [
           "NetworkManagerConnections"
@@ -305,7 +308,7 @@
         "value": {
           "type": "array",
           "items": {
-            "type": "#/parameters/NetworkManegerConnection"
+            "$ref": "#/definitions/NetworkManagerConnection"
           }
         },
         "nextLink": {
@@ -326,7 +329,7 @@
       "x-ms-parameter-location": "method"
     },
     "NetworkManagerConnectionNameParameter": {
-      "name": "scope",
+      "name": "networkManagerConnectionName",
       "in": "path",
       "required": true,
       "type": "string",

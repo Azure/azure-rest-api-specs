@@ -232,7 +232,7 @@
         },
         "x-ms-examples": {
           "List Pending Network Manager Connections Sent From A Subscription or Management Group": {
-            "$ref": "./examples/NetworkManagerPendingConnectionsList.json"
+            "$ref": "./examples/NetworkManagerPendingConnectionList.json"
           }
         }
       }
@@ -265,6 +265,7 @@
       "description": "The Scope Connections resource"
     },
     "ScopeConnectionProperties": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -273,14 +274,14 @@
         "managementGroups": {
           "type": "array",
           "items": {
-            "type": "#/parameters/ScopeConnectionManagementGroup"
+            "$ref": "#/definitions/ScopeConnectionManagementGroup"
           },
           "description": "List of management groups within scope connection."
         },
         "subscriptions": {
           "type": "array",
           "items": {
-            "type": "#/parameters/ScopeConnectionSubscription"
+            "$ref": "#/definitions/ScopeConnectionSubscription"
           },
           "description": "List of subscriptions within scope connection."
         }
@@ -292,7 +293,7 @@
         "value": {
           "type": "array",
           "items": {
-            "type": "#/parameters/ScopeConnection"
+            "$ref": "#/definitions/ScopeConnection"
           }
         },
         "nextLink": {
@@ -307,7 +308,11 @@
         "id": {
           "type": "string"
         },
-        "state": "#/definitions/ConnectionState"
+        "state": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Connection State"
+        }
       },
       "description": "Management groups within scope connection."
     },
@@ -316,7 +321,11 @@
         "id": {
           "type": "string"
         },
-        "state": "#/definitions/ConnectionState"
+        "state": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Connection State"
+        }
       },
       "description": "Subscriptions within scope connection."
     },
