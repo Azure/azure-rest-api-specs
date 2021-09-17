@@ -9,6 +9,32 @@
       "tags": {
         "Environment": "Dev"
       },
+      "properties": {
+        "networkProfile": {
+          "frontEndIPConfiguration": {
+            "publicIPAddresses": [
+              {
+                "id": "1.1.1.1"
+              }
+            ],
+            "privateIPAddresses": [
+              {
+                "privateIPAddress": "1.1.1.1",
+                "privateIPAllocationMethod": "Static",
+                "subnetId": "someSubnetId"
+              },
+              {
+                "privateIPAddress": "",
+                "privateIPAllocationMethod": "dynamic",
+                "subnetId": "someSubnetId"
+              }
+            ]
+          },
+          "networkInterfaceConfiguration": {
+            "subnetId": "someSubnetId"
+          }
+        }
+      },
       "location": "West US"
     }
   },
@@ -25,7 +51,30 @@
         "properties": {
           "provisioningState": "Succeeded",
           "nginxVersion": "nginx-1.19.6",
-          "ipAddress": "1.1.1.1"
+          "networkProfile": {
+            "frontEndIPConfiguration": {
+              "publicIPAddresses": [
+                {
+                  "id": "1.1.1.1"
+                }
+              ],
+              "privateIPAddresses": [
+                {
+                  "privateIPAddress": "1.1.1.1",
+                  "privateIPAllocationMethod": "Static",
+                  "subnetId": "someSubnetId"
+                },
+                {
+                  "privateIPAddress": "2.2.2.2",
+                  "privateIPAllocationMethod": "Dynamic",
+                  "subnetId": "someSubnetId"
+                }
+              ]
+            },
+            "networkInterfaceConfiguration": {
+              "subnetId": "someSubnetId"
+            }
+          }
         }
       }
     },
@@ -41,7 +90,30 @@
         "properties": {
           "provisioningState": "Accepted",
           "nginxVersion": "nginx-1.19.6",
-          "ipAddress": "1.1.1.1"
+          "networkProfile": {
+            "frontEndIPConfiguration": {
+              "publicIPAddresses": [
+                {
+                  "id": "1.1.1.1"
+                }
+              ],
+              "privateIPAddresses": [
+                {
+                  "privateIPAddress": "1.1.1.1",
+                  "privateIPAllocationMethod": "Static",
+                  "subnetId": "someSubnetId"
+                },
+                {
+                  "privateIPAddress": "",
+                  "privateIPAllocationMethod": "Dynamic",
+                  "subnetId": "someSubnetId"
+                }
+              ]
+            },
+            "networkInterfaceConfiguration": {
+              "subnetId": "someSubnetId"
+            }
+          }
         }
       }
     }

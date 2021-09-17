@@ -586,6 +586,12 @@
               "$ref": "#/definitions/NginxDeployment"
             }
           },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -597,7 +603,8 @@
           "Deployments_Update": {
             "$ref": "./examples/Deployments_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -990,6 +997,75 @@
         }
       }
     },
+    "NginxPrivateIPAllocationMethod": {
+      "enum": [
+        "Static",
+        "Dynamic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NginxPrivateIPAllocationMethod"
+      }
+    },
+    "NginxPrivateIPAddress": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "#/definitions/NginxPrivateIPAllocationMethod"
+        },
+        "subnetId": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxPublicIPAddress": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxFrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "publicIPAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxPublicIPAddress"
+          }
+        },
+        "privateIPAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxPrivateIPAddress"
+          }
+        }
+      }
+    },
+    "NginxNetworkInterfaceConfiguration": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxNetworkProfile": {
+      "type": "object",
+      "properties": {
+        "frontEndIPConfiguration": {
+          "$ref": "#/definitions/NginxFrontendIPConfiguration"
+        },
+        "networkInterfaceConfiguration": {
+          "$ref": "#/definitions/NginxNetworkInterfaceConfiguration"
+        }
+      }
+    },
     "NginxDeploymentInternalMetadata": {
       "type": "object",
       "properties": {
@@ -1018,6 +1094,9 @@
         },
         "ipAddress": {
           "type": "string"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NginxNetworkProfile"
         }
       }
     },

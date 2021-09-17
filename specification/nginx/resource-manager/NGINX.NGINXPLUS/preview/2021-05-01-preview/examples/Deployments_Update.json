@@ -23,7 +23,69 @@
         "properties": {
           "provisioningState": "Succeeded",
           "nginxVersion": "nginx-1.19.6",
-          "ipAddress": "1.1.1.1"
+          "networkProfile": {
+            "frontEndIPConfiguration": {
+              "publicIPAddresses": [
+                {
+                  "id": "1.1.1.1"
+                }
+              ],
+              "privateIPAddresses": [
+                {
+                  "privateIPAddress": "1.1.1.1",
+                  "privateIPAllocationMethod": "Static",
+                  "subnetId": "someSubnetId"
+                },
+                {
+                  "privateIPAddress": "2.2.2.2",
+                  "privateIPAllocationMethod": "Dynamic",
+                  "subnetId": "someSubnetId"
+                }
+              ]
+            },
+            "networkInterfaceConfiguration": {
+              "subnetId": "someSubnetId"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
+        "name": "myDeployment",
+        "type": "nginx.nginxplus/deployments",
+        "location": "westus",
+        "tags": {
+          "Environment": "Dev"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "nginxVersion": "nginx-1.19.6",
+          "networkProfile": {
+            "frontEndIPConfiguration": {
+              "publicIPAddresses": [
+                {
+                  "id": "1.1.1.1"
+                }
+              ],
+              "privateIPAddresses": [
+                {
+                  "privateIPAddress": "1.1.1.1",
+                  "privateIPAllocationMethod": "Static",
+                  "subnetId": "someSubnetId"
+                },
+                {
+                  "privateIPAddress": "2.2.2.2",
+                  "privateIPAllocationMethod": "Dynamic",
+                  "subnetId": "someSubnetId"
+                }
+              ]
+            },
+            "networkInterfaceConfiguration": {
+              "subnetId": "someSubnetId"
+            }
+          }
         }
       }
     }
