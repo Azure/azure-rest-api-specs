@@ -83,7 +83,13 @@
       "in": "query",
       "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "Bbox": {
@@ -91,7 +97,13 @@
       "in": "query",
       "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "collectionFormat": "csv",
+      "minItems": 4,
+      "maxItems": 4,
       "x-ms-parameter-location": "method"
     },
     "View": {
@@ -120,6 +132,9 @@
       "get": {
         "description": "**Geocoding**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
         "operationId": "Geocode_GetGeocode",
+        "produces": [
+          "application/geo+json"
+        ],
         "x-ms-examples": {
           "Search detail address 15127 NE 24th Street, Redmond, WA 98052": {
             "$ref": "./examples/ForwardGeocode.json"
@@ -198,6 +213,7 @@
             "description": "Restrict the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\nExample:\nstrictMatch=1",
             "required": false,
             "type": "string",
+            "default": "0",
             "enum": [
               "0",
               "1"
@@ -208,7 +224,7 @@
               "values": [
                 {
                   "value": "0",
-                  "description": "[default] Do not restrict results to the specified countryRegion and adminDistrict."
+                  "description": "Do not restrict results to the specified countryRegion and adminDistrict."
                 },
                 {
                   "value": "1",
