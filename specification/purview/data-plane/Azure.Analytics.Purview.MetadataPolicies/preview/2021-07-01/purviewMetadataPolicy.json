@@ -1,0 +1,570 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Metadata Policies Service REST API Document",
+    "version": "2021-07-01"
+  },
+  "paths": {
+    "/metadataRoles": {
+      "get": {
+        "tags": [
+          "MetadataRoles"
+        ],
+        "description": "Lists roles for Purview Account",
+        "operationId": "MetadataRoles_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetadataRoleList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MetadataRoles_List": {
+            "$ref": "./examples/MetadataRoles_List.json"
+          }
+        }
+      }
+    },
+    "/metadataPolicies": {
+      "get": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "List or Get metadata policies",
+        "operationId": "MetadataPolicy_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "collectionName",
+            "description": "The name of an existing collection for which one policy needs to be fetched.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_ListAll": {
+            "$ref": "./examples/MetadataPolicy_ListAll.json"
+          }
+        }
+      }
+    },
+    "/metadataPolicies/{policyId}": {
+      "put": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "Updates a metadata policy",
+        "operationId": "MetadataPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "description": "Unique policy id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Policy to be updated.",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_Update": {
+            "$ref": "./examples/MetadataPolicy_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MetadataPolicy"
+        ],
+        "description": "Gets a metadata policy",
+        "operationId": "MetadataPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "description": "Id of an existing policy that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetadataPolicy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Metadata Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataPolicy_Get": {
+            "$ref": "./examples/MetadataPolicy_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttributeMatcher": {
+      "description": "Attribute matcher for a rule",
+      "type": "object",
+      "properties": {
+        "attributeName": {
+          "description": "AttributeName",
+          "type": "string"
+        },
+        "attributeValueIncludes": {
+          "description": "Value for attribute",
+          "type": "string"
+        },
+        "attributeValueIncludedIn": {
+          "description": "List of values for attribute",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeValueExcludes": {
+          "description": "Value excluded for attribute",
+          "type": "string"
+        },
+        "attributeValueExcludedIn": {
+          "description": "List of values excluded for attribute",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DnfCondition": {
+      "description": "The dnf Condition for a rule",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AttributeMatcher"
+        }
+      }
+    },
+    "CnfCondition": {
+      "description": "The cnf Condition for a rule",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AttributeMatcher"
+        }
+      }
+    },
+    "DecisionRule": {
+      "description": "The decision rule for a policy",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The kind of rule",
+          "enum": [
+            "decisionrule"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "effect": {
+          "description": "The effect for rule",
+          "enum": [
+            "Deny",
+            "Permit"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DnfCondition"
+        }
+      }
+    },
+    "AttributeRule": {
+      "description": "The attribute rule for a policy",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The kind of rule",
+          "enum": [
+            "attributerule"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "The id for rule",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name for rule",
+          "type": "string"
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DnfCondition"
+        }
+      }
+    },
+    "CollectionReference": {
+      "description": "The collection reference for a policy",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of reference",
+          "type": "string",
+          "readOnly": true
+        },
+        "referenceName": {
+          "description": "The name of reference",
+          "type": "string"
+        }
+      }
+    },
+    "MetadataPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of policy",
+          "type": "string"
+        },
+        "decisionRules": {
+          "description": "The DecisionRules of policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DecisionRule"
+          }
+        },
+        "attributeRules": {
+          "description": "The AttributeRules of policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeRule"
+          }
+        },
+        "collection": {
+          "$ref": "#/definitions/CollectionReference"
+        },
+        "parentCollectionName": {
+          "description": "The parent collection of the policy",
+          "type": "string"
+        }
+      }
+    },
+    "MetadataPolicy": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of policy",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of policy",
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "description": "The version of policy",
+          "type": "integer"
+        },
+        "properties": {
+          "$ref": "#/definitions/MetadataPolicyProperties"
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "The error model for metadata policy",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message",
+          "type": "string"
+        },
+        "target": {
+          "description": "The error target",
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "The error response model for metadata policy",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "MetadataPolicyList": {
+      "description": "List of Metadata Policies",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "MetadataRoleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioningState of role",
+          "type": "string"
+        },
+        "roleType": {
+          "description": "The type of role",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name of role",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of role",
+          "type": "string"
+        },
+        "cnfCondition": {
+          "$ref": "#/definitions/CnfCondition"
+        },
+        "dnfCondition": {
+          "$ref": "#/definitions/DnfCondition"
+        },
+        "version": {
+          "format": "int64",
+          "description": "The version of role",
+          "type": "integer"
+        }
+      }
+    },
+    "MetadataRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Id of role",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of role",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of role",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/MetadataRoleProperties"
+        }
+      }
+    },
+    "MetadataRoleList": {
+      "description": "List of Metadata roles",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataRole"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "basePath": "/policyStore",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
