@@ -2775,6 +2775,23 @@
         }
       }
     },
+    "CollectionReference": {
+      "type": "object",
+      "properties": {
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SystemClassificationRuleProperties": {
       "type": "object",
       "properties": {
@@ -2958,6 +2975,13 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
+        },
+        "collection": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CollectionReference"
+            }
+          ]
         }
       }
     },
@@ -4726,6 +4750,13 @@
             "name": "ScanRulesetType",
             "modelAsString": true
           }
+        },
+        "collection": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CollectionReference"
+            }
+          ]
         },
         "workers": {
           "format": "int32",
