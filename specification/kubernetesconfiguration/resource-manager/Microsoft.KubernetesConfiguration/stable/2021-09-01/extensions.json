@@ -470,7 +470,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "../../common/2021-09-01/definitions.json#/definitions/ResourceProviderOperationList"
+              "$ref": "#/definitions/ResourceProviderOperationList"
             }
           },
           "default": {
@@ -489,6 +489,7 @@
   "definitions": {
     "ScopeCluster": {
       "description": "Specifies that the scope of the extension is Cluster",
+      "x-nullable": true,
       "type": "object",
       "properties": {
         "releaseNamespace": {
@@ -499,6 +500,7 @@
     },
     "ScopeNamespace": {
       "description": "Specifies that the scope of the extension is Namespace",
+      "x-nullable": true,
       "type": "object",
       "properties": {
         "targetNamespace": {
@@ -512,21 +514,16 @@
       "type": "object",
       "properties": {
         "cluster": {
-          "type": "object",
-          "x-nullable": true,
-          "description": "Specifies that the scope of the extension is Cluster",
           "$ref": "#/definitions/ScopeCluster"
         },
         "namespace": {
-          "type": "object",
-          "x-nullable": true,
-          "description": "Specifies that the scope of the extension is Namespace",
           "$ref": "#/definitions/ScopeNamespace"
         }
       }
     },
     "provisioningState": {
       "type": "string",
+      "readOnly": true,
       "description": "The provisioning state of the extension resource.",
       "enum": [
         "Succeeded",
@@ -627,9 +624,6 @@
               }
             },
             "provisioningState": {
-              "description": "Status of installation of this extension.",
-              "type": "string",
-              "readOnly": true,
               "$ref": "#/definitions/provisioningState"
             },
             "statuses": {
@@ -641,9 +635,6 @@
               }
             },
             "errorInfo": {
-              "description": "Error information from the Agent - e.g. errors during installation.",
-              "type": "object",
-              "readOnly": true,
               "x-nullable": true,
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
             },
@@ -727,6 +718,68 @@
         }
       }
     },
+    "ResourceProviderOperation": {
+      "description": "Supported operation of this resource provider.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Operation name, in format of {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Resource provider: Microsoft KubernetesConfiguration.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of this operation.",
+              "type": "string"
+            }
+          }
+        },
+        "isDataAction": {
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "Result of the request to list operations.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to the next set of results, if any."
+        }
+      }
+    },
     "OperationStatusResult": {
       "description": "The current status of an async operation.",
       "type": "object",
@@ -756,9 +809,6 @@
           }
         },
         "error": {
-          "description": "If present, details of the operation error.",
-          "type": "object",
-          "readOnly": true,
           "x-nullable": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         }
