@@ -36,6 +36,10 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
 - Microsoft.Billing/stable/2021-10-01/payment.json
+directive:
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2021-10-01/payment.json
+    reason: systemData is not in this API version
 ```
 
 ### Tag: package-2020-05
