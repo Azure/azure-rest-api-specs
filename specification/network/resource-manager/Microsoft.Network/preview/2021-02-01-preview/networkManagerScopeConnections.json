@@ -1,0 +1,358 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ScopeConnections",
+    "description": "The Microsoft Azure Virtual Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "version": "2021-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/scopeConnections/{scopeConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/scopeConnectionName"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "put": {
+        "tags": [
+          "ScopeConnections"
+        ],
+        "operationId": "ScopeConnection_CreateOrUpdate",
+        "description": "Creates or updates scope connection from Network Manager",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the updates scope connection.",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new scope connection.",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionPut.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ScopeConnections"
+        ],
+        "operationId": "ScopeConnection_Get",
+        "description": "Get specified scope connection created by this Network Manager.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns the invitation",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScopeConnections"
+        ],
+        "operationId": "ScopeConnection_Delete",
+        "description": "Delete the pending scope connection created by this network manager.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/scopeConnections": {
+      "get": {
+        "tags": [
+          "ScopeConnections"
+        ],
+        "operationId": "ScopeConnection_List",
+        "description": "List all scope connections created by this network manager.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the scope connection(s).",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listPendingNetworkManagerConnections": {
+      "post": {
+        "tags": [
+          "ScopeConnections"
+        ],
+        "operationId": "PendingNetworkManagerConnection_List",
+        "description": "List all pending network manager connections sent from a subscription or management group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the network manager connections sent from a subscription or management group.",
+            "schema": {
+              "$ref": "./networkManagerConnections.json#/definitions/NetworkManagerConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Pending Network Manager Connections Sent From A Subscription or Management Group": {
+            "$ref": "./examples/NetworkManagerPendingConnectionList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScopeConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScopeConnectionProperties",
+          "description": "The scope connection properties"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Scope Connections resource"
+    },
+    "ScopeConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "managementGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeConnectionManagementGroup"
+          },
+          "description": "List of management groups within scope connection."
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeConnectionSubscription"
+          },
+          "description": "List of subscriptions within scope connection."
+        }
+      },
+      "description": "Scope connections."
+    },
+    "ScopeConnectionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "List of scope connections."
+    },
+    "ScopeConnectionManagementGroup": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Connection State"
+        }
+      },
+      "description": "Management groups within scope connection."
+    },
+    "ScopeConnectionSubscription": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Connection State"
+        }
+      },
+      "description": "Subscriptions within scope connection."
+    },
+    "ConnectionState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current scope connection state.",
+      "enum": [
+        "Connected",
+        "Pending",
+        "Deleting",
+        "Revoked"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeConnectionState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "scopeConnectionName": {
+      "name": "scopeConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name for the cross-tenant connection.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
