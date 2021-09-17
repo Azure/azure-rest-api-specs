@@ -227,42 +227,6 @@
           }
         }
       }
-    },
-    "/{scope}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}/revoke": {
-      "post": {
-        "tags": [
-          "NetworkManagerConnections"
-        ],
-        "operationId": "NetworkManagerConnection_Revoke",
-        "description": "Revoke network manager connection.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ScopeParameter"
-          },
-          {
-            "$ref": "#/parameters/NetworkManagerConnectionNameParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Revoke Network Manager Connection": {
-            "$ref": "./examples/NetworkManagerConnectionRevoke.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
