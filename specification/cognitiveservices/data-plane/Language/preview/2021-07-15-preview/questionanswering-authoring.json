@@ -192,7 +192,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}:export": {
+    "/query-knowledgebases/projects/{projectName}/:export": {
       "post": {
         "summary": "Export project metadata and assets.",
         "operationId": "QuestionAnsweringProjects_Export",
@@ -282,7 +282,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}:import": {
+    "/query-knowledgebases/projects/{projectName}/:import": {
       "post": {
         "summary": "Import project assets.",
         "operationId": "QuestionAnsweringProjects_Import",
@@ -861,9 +861,82 @@
           }
         }
       }
+    },
+    "/query-knowledgebases/projects/{projectName}/feedback": {
+      "post": {
+        "summary": "Update Active Learning feedback.",
+        "operationId": "QuestionAnsweringProjects_ActiveLearningFeedback",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "A list of feedback records.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeedbackRecords"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Feedback recorded successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateActiveLearningFeedback.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "FeedbackRecords": {
+      "type": "array",
+      "description": "A list of Active Learning Feedback Records.",
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/FeedbackRecord"
+      }
+    },
+    "FeedbackRecord": {
+      "type": "object",
+      "description": "Active Learning Feedback Record.",
+      "additionalProperties": false,
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        },
+        "userQuestion": {
+          "type": "string",
+          "description": "User suggested question for the QnA."
+        },
+        "qnaId": {
+          "type": "integer",
+          "description": "Unique ID of the QnA.",
+          "format": "int32"
+        }
+      }
+    },
     "ProjectsMetadata": {
       "type": "object",
       "description": "Collection of projects metadata and global settings.",
