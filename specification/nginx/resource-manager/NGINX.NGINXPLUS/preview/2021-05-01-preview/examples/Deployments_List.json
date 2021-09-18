@@ -15,28 +15,24 @@
             "properties": {
               "provisioningState": "Succeeded",
               "nginxVersion": "nginx-1.19.6",
+              "managedResourceGroup": "myManagedResourceGroup",
               "networkProfile": {
                 "frontEndIPConfiguration": {
                   "publicIPAddresses": [
                     {
-                      "id": "1.1.1.1"
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
                     }
                   ],
                   "privateIPAddresses": [
                     {
                       "privateIPAddress": "1.1.1.1",
                       "privateIPAllocationMethod": "Static",
-                      "subnetId": "someSubnetId"
-                    },
-                    {
-                      "privateIPAddress": "2.2.2.2",
-                      "privateIPAllocationMethod": "Dynamic",
-                      "subnetId": "someSubnetId"
+                      "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
                     }
                   ]
                 },
                 "networkInterfaceConfiguration": {
-                  "subnetId": "someSubnetId"
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
                 }
               }
             }
