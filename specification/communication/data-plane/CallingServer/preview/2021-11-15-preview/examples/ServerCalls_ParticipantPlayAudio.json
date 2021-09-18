@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2021-11-15-preview",
+    "playAudioToParticipantRequest": {
+      "identifier": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_f95c7b38-6c4e-4898-93b3-2553402304d6"
+        }
+      },
+      "callLocator": {
+        "groupCallLocator": {
+          "groupId": "0c1610d4-454d-4ac5-a455-05ba5dc6c5fd"
+        },
+        "type": "groupCallLocator"
+      },
+      "audioFileUri": "https://app.contoso.com/audio/message-recording-start.wav",
+      "loop": false,
+      "operationContext": "ddc7436a-905b-45bc-90b0-326730bbd813",
+      "audioFileId": "6e4b4dc3-963d-46f0-8dc5-2b94df2219a2",
+      "callbackUri": "https://app.contoso.com/callback"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "status": "running",
+        "operationContext": "31130c66-2f86-41b5-af61-23850243e093"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "The request contains invalid data."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "401",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "403",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "404",
+          "message": "Resource not found on the server."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}
