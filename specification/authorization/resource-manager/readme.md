@@ -81,7 +81,14 @@ directive:
     from: common-types.json
     reason: common-types doesn't need to reference api version.
 ```
+### Tag: package-2021-10-01-preview-only
 
+These settings apply only when `--tag=package-2021-10-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-10-01-preview/authorization-AccessReviewCalls.json
+```
 ### Tag: package-2021-07-01-preview-only
 
 These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
