@@ -423,6 +423,10 @@
         "rotationPolicy": {
           "$ref": "#/definitions/RotationPolicy",
           "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
         }
       },
       "description": "The properties of the key.",
@@ -473,6 +477,10 @@
           },
           "readOnly": true,
           "x-nullable": false
+        },
+        "exportable": {
+          "type": "boolean",
+          "description": "Indicates if the private key can be exported."
         }
       },
       "description": "The object attributes managed by the Azure Key Vault service.",
@@ -611,6 +619,21 @@
             "name": "KeyRotationPolicyActionType",
             "modelAsString": false
           }
+        }
+      },
+      "type": "object"
+    },
+    "KeyReleasePolicy": {
+      "properties": {
+        "contentType": {
+          "description": "Content type and version of key release policy",
+          "type": "string",
+          "default": "application/json; charset=utf-8"
+        },
+        "data": {
+          "description": "Blob encoding the policy rules under which the key can be released.",
+          "type": "string",
+          "format": "base64url"
         }
       },
       "type": "object"
