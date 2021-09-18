@@ -496,7 +496,14 @@
             "$ref": "#/definitions/ArmRoleReceiver"
           },
           "description": "The list of ARM role receivers that are part of this action group. Roles are Azure RBAC roles and only built-in roles are supported."
-        }
+        },
+        "eventHubReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventHubReceiver"
+          },
+          "description": "The list of event hub receivers that are part of this action group."
+        },        
       },
       "required": [
         "groupShortName",
@@ -628,6 +635,42 @@
         "region"
       ]
     },
+    "EventHubReceiver": {
+      "description": "An Event hub receiver.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Event hub receiver. Names must be unique across all receivers within an action group."
+        },
+        "eventHubNameSpace": {
+          "type": "string",
+          "description": "The Event Hub namespace"
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "The name of the specific Event Hub queue"
+        },
+        "useCommonAlertSchema": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether to use common alert schema."
+        },            
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant Id for the subscription containing this event hub"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The Id for the subscription containing this event hub"
+        }        
+      },
+      "required": [
+        "name",
+        "eventHubNameSpace",
+        "eventHubName",
+        "subscriptionId"
+      ]
+    },    
     "AzureAppPushReceiver": {
       "description": "The Azure mobile App push notification receiver.",
       "properties": {
