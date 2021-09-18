@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Communication Services Management API",
-    "version": "2020-08-20-rc",
+    "version": "2021-09-09-privatepreview",
     "description": "REST API for Azure Communication Services, (internal APIs)"
   },
   "schemes": [
@@ -23,16 +23,16 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/EventGridFilters/{eventGridFilterName}": {
       "parameters": [
         {
-          "$ref": "CommunicationService.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/ResourceGroupParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/CommunicationServiceName"
+          "$ref": "#/parameters/CommunicationServiceName"
         },
         {
           "$ref": "#/parameters/EventGridFilterNameParameter"
@@ -66,7 +66,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -140,14 +140,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "produces": [
           "application/json"
         ],
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update resource": {
             "$ref": "./examples/eventGridFilterCreateOrUpdate.json"
@@ -165,20 +164,16 @@
           "200": {
             "description": "The resource has been deleted successfully."
           },
-          "202": {
-            "description": "The delete operation is being performed in the background."
-          },
           "204": {
             "description": "The resource did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete resource": {
             "$ref": "./examples/eventGridFilterDelete.json"
@@ -189,16 +184,16 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/EventGridFilters": {
       "parameters": [
         {
-          "$ref": "CommunicationService.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/ResourceGroupParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/CommunicationServiceName"
+          "$ref": "#/parameters/CommunicationServiceName"
         }
       ],
       "get": {
@@ -218,7 +213,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -242,7 +237,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "CommunicationService.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -340,6 +335,17 @@
     }
   },
   "parameters": {
+    "CommunicationServiceName": {
+      "name": "communicationServiceName",
+      "in": "path",
+      "description": "The name of the CommunicationService resource.",
+      "pattern": "^[-\\w]+$",
+      "minLength": 1,
+      "maxLength": 63,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "EventGridFilterNameParameter": {
       "name": "eventGridFilterName",
       "in": "path",

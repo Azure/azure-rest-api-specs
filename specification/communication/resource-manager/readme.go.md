@@ -15,8 +15,6 @@ go:
 batch:
   - tag: package-2020-08-20
   - tag: package-2020-08-20-preview
-  - tag: package-2020-08-20-rc
-  - tag: package-2020-08-20-beta
   - tag: package-2019-10-10-preview
 ```
 
@@ -36,24 +34,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2020-08-20-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-08-20-preview/$(namespace)
-```
-
-### Tag: package-2020-08-20-rc and go
-
-These settings apply only when `--tag=package-2020-08-20-rc --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2020-08-20-rc' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-08-20-rc/$(namespace)
-```
-
-### Tag: package-2020-08-20-beta and go
-
-These settings apply only when `--tag=package-2020-08-20-beta --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2020-08-20-beta' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-08-20-beta/$(namespace)
 ```
 
 ### Tag: package-2019-10-10-preview and go
