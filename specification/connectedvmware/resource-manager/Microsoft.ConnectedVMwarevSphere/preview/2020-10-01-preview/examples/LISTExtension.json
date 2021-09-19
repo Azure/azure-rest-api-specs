@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "name": "myMachine",
+    "api-version": "2020-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+            "name": "CustomScriptExtension",
+            "location": "eastus2euap",
+            "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachines/extensions",
+            "properties": {
+              "publisher": "Microsoft.Compute",
+              "type": "CustomScriptExtension",
+              "typeHandlerVersion": "1.10.3",
+              "autoUpgradeMinorVersion": false,
+              "settings": {
+                "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+              },
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "name": "CustomScriptExtension",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.10.3",
+                "status": {
+                  "code": "success",
+                  "level": "Information",
+                  "displayStatus": "Provisioning succeeded",
+                  "message": "formattedMessage: Finished executing command, StdOut: , StdErr: ",
+                  "time": "2020-08-13T17:18:57.405Z"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/winosupdateextension",
+            "name": "winosupdateextension",
+            "location": "eastus2euap",
+            "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachines/extensions",
+            "properties": {
+              "publisher": "microsoft.softwareupdatemanagement.test",
+              "type": "windowsosupdateextension",
+              "typeHandlerVersion": "1.0.0.0",
+              "autoUpgradeMinorVersion": false,
+              "settings": {},
+              "provisioningState": "Creating",
+              "instanceView": {
+                "name": "winosupdateextension",
+                "type": "windowsosupdateextension",
+                "typeHandlerVersion": "1.0.0.0",
+                "status": {}
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
