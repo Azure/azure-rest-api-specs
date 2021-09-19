@@ -3378,7 +3378,7 @@
         "tags": [
           "GuestAgents"
         ],
-        "operationId": "GuestAgent_Create",
+        "operationId": "GuestAgents_Create",
         "description": "Create Or Update GuestAgent.",
         "summary": "Implements GuestAgent PUT method.",
         "x-ms-examples": {
@@ -3454,7 +3454,7 @@
         "tags": [
           "GuestAgents"
         ],
-        "operationId": "GuestAgent_Get",
+        "operationId": "GuestAgents_Get",
         "summary": "Gets GuestAgent.",
         "description": "Implements GuestAgent GET method.",
         "x-ms-examples": {
@@ -3509,7 +3509,7 @@
         "tags": [
           "GuestAgents"
         ],
-        "operationId": "GuestAgent_Delete",
+        "operationId": "GuestAgents_Delete",
         "summary": "Deletes an GuestAgent.",
         "description": "Implements GuestAgent DELETE method.",
         "x-ms-examples": {
@@ -3570,7 +3570,7 @@
         "tags": [
           "GuestAgents"
         ],
-        "operationId": "GuestAgent_ListByVm",
+        "operationId": "GuestAgents_ListByVm",
         "summary": "Implements GET GuestAgent in a vm.",
         "description": "Returns the list of GuestAgent of the given vm.",
         "x-ms-examples": {
@@ -3773,6 +3773,7 @@
     },
     "ResourcePoolsList": {
       "description": "List of ResourcePools.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of ResourcePools.",
@@ -3811,6 +3812,7 @@
     },
     "ResourceStatus": {
       "description": "The resource status information.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the condition.",
@@ -3951,6 +3953,7 @@
     },
     "VirtualDisk": {
       "description": "Virtual disk model",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Gets or sets the name of the virtual disk.",
@@ -4002,6 +4005,7 @@
     },
     "Condition": {
       "description": "Condition defines an extension to status.",
+      "type": "object",
       "properties": {
         "status": {
           "description": "Status of the condition.",
@@ -4085,6 +4089,7 @@
     },
     "VCentersList": {
       "description": "List of VCenters.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of VCenters.",
@@ -4597,6 +4602,7 @@
     },
     "VirtualMachinesList": {
       "description": "List of VirtualMachines.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of VirtualMachines.",
@@ -5180,6 +5186,7 @@
     },
     "VirtualMachineTemplatesList": {
       "description": "List of VirtualMachineTemplates.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of VirtualMachineTemplates.",
@@ -5303,6 +5310,7 @@
     },
     "VirtualNetworksList": {
       "description": "List of VirtualNetworks.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of VirtualNetworks.",
@@ -5349,6 +5357,7 @@
     },
     "NetworkInterface": {
       "description": "Network Interface model",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Gets or sets the name of the network interface.",
@@ -5581,6 +5590,7 @@
     },
     "operation": {
       "description": "Operation provided by provider",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -5616,6 +5626,7 @@
     },
     "operationsList": {
       "description": "Lists the operations available.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of operations.",
@@ -5636,6 +5647,7 @@
     },
     "ErrorResponse": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -5645,6 +5657,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -5668,6 +5681,7 @@
     },
     "InventoryItemsList": {
       "description": "List of InventoryItems.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of InventoryItems.",
@@ -5929,6 +5943,7 @@
     },
     "HybridIdentityMetadataList": {
       "description": "List of HybridIdentityMetadata.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of HybridIdentityMetadata.",
@@ -6028,6 +6043,7 @@
     },
     "MachineExtension": {
       "x-ms-azure-resource": true,
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -6072,6 +6088,7 @@
       "description": "Describes a Machine Extension."
     },
     "MachineExtensionUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -6087,6 +6104,7 @@
       "description": "Describes a Machine Extension Update."
     },
     "MachineExtensionProperties": {
+      "type": "object",
       "properties": {
         "forceUpdateTag": {
           "type": "string",
@@ -6134,6 +6152,7 @@
       "description": "Describes the properties of a Machine Extension."
     },
     "MachineExtensionUpdateProperties": {
+      "type": "object",
       "properties": {
         "forceUpdateTag": {
           "type": "string",
@@ -6168,6 +6187,7 @@
       "description": "Describes the properties of a Machine Extension."
     },
     "MachineExtensionInstanceView": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -6228,6 +6248,7 @@
       "description": "Describes the Machine Extension Instance View."
     },
     "MachineExtensionsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -6287,6 +6308,7 @@
     },
     "GuestAgentList": {
       "description": "List of GuestAgent.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of GuestAgent.",
