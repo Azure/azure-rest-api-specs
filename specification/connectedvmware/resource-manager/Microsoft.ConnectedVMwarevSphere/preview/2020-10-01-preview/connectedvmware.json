@@ -4775,6 +4775,22 @@
           "type": "string",
           "readOnly": true
         },
+        "datastoreIds": {
+          "description": "Gets or sets the datastore ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkIds": {
+          "description": "Gets or sets the network ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -5742,15 +5758,18 @@
         },
         "managedResourceId": {
           "description": "Gets or sets the tracked resource id corresponding to the inventory resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "moRefId": {
           "description": "Gets or sets the MoRef (Managed Object Reference) ID for the inventory item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "moName": {
           "description": "Gets or sets the vCenter Managed Object name for the inventory item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -5911,6 +5930,16 @@
       ],
       "x-ms-discriminator-value": "Datastore"
     },
+    "HostInventoryItem": {
+      "description": "The host inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Host"
+    },
     "InventoryType": {
       "type": "string",
       "description": "The inventory type.",
@@ -5920,7 +5949,8 @@
         "VirtualMachineTemplate",
         "VirtualNetwork",
         "Cluster",
-        "Datastore"
+        "Datastore",
+        "Host"
       ],
       "x-ms-enum": {
         "name": "InventoryType",
@@ -6388,6 +6418,14 @@
           "description": "Gets or sets the provisioning state.",
           "type": "string",
           "readOnly": true
+        },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
         }
       }
     }
