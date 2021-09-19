@@ -776,6 +776,10 @@
           },
           "type": "array"
         },
+        "version": {
+          "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
+          "type": "string"
+        },
         "customDetails": {
           "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
           "type": "object",
@@ -1310,6 +1314,10 @@
           "description": "The Name of the alert rule template used to create this rule.",
           "type": "string"
         },
+        "templateVersion": {
+          "description": "The version of the alert rule template used to create this rule - in format <a.b.c>, where all are numbers, for example 0 <1.0.2>",
+          "type": "string"
+        },
         "description": {
           "description": "The description of the alert rule.",
           "type": "string"
@@ -1435,6 +1443,15 @@
             }
           ],
           "description": "Scheduled alert rule template properties",
+          "properties": {
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
           "required": [
             "displayName",
             "description",
@@ -1445,7 +1462,8 @@
             "queryFrequency",
             "queryPeriod",
             "triggerOperator",
-            "triggerThreshold"
+            "triggerThreshold",
+            "version"
           ],
           "type": "object",
           "x-ms-client-flatten": true
@@ -1478,7 +1496,8 @@
             "status",
             "alertRulesCreatedByTemplateCount",
             "severity",
-            "query"
+            "query",
+            "version"
           ],
           "type": "object",
           "x-ms-client-flatten": true
