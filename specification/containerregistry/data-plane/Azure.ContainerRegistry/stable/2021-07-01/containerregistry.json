@@ -689,7 +689,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The repository is deleted"
+            "description": "The repository is deleted",
+            "schema": {
+              "$ref": "#/definitions/DeletedRepository"
+            }
           },
           "404": {
             "description": "The repository was not found"
@@ -1079,6 +1082,12 @@
             "$ref": "#/parameters/Service"
           },
           {
+            "$ref": "#/parameters/Tenant"
+          },
+          {
+            "$ref": "#/parameters/RefreshToken"
+          },
+          {
             "$ref": "#/parameters/AccessToken"
           },
           {
@@ -1175,6 +1184,55 @@
         "x-ms-examples": {
           "Get Access Token with Refresh Token": {
             "$ref": "./examples/PostAccessToken.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AcrToken",
+          "AccessToken",
+          "userLogin"
+        ],
+        "description": "Exchange Username, Password and Scope an ACR Access Token",
+        "operationId": "GetAcrAccessTokenFromLogin",
+        "parameters": [
+          {
+            "name": "service",
+            "in": "query",
+            "required": true,
+            "description": "Indicates the name of your Azure container registry.",
+            "type": "string"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": true,
+            "description": "Expected to be a valid scope, and can be specified more than once for multiple scope requests. You can obtain this from the Www-Authenticate response header from the challenge.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Access token acquired",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "security": [
+          {
+            "registry_auth": []
+          }
+        ],
+        "x-ms-examples": {
+          "Get Access Token with username and password": {
+            "$ref": "./examples/GetAccessToken.json"
           }
         }
       }
@@ -1543,6 +1601,10 @@
           "format": "date-time",
           "description": "Tag last update time",
           "x-ms-client-name": "lastUpdatedOn"
+        },
+        "signed": {
+          "type": "boolean",
+          "description": "Is signed"
         },
         "changeableAttributes": {
           "$ref": "#/definitions/TagChangeableAttributes",
@@ -1962,6 +2024,10 @@
             "$ref": "#/definitions/ManifestAttributes_manifest_references",
             "description": "Manifest attributes details"
           }
+        },
+        "configMediaType": {
+          "type": "string",
+          "description": "Config blob media type"
         },
         "tags": {
           "type": "array",
@@ -2944,12 +3010,14 @@
     },
     "Grant_type": {
       "name": "grant_type",
-      "description": "Can take a value of access_token",
+      "description": "Can take a value of access_token_refresh_token, or access_token, or refresh_token",
       "type": "string",
       "in": "formData",
       "required": true,
       "enum": [
-        "access_token"
+        "access_token_refresh_token",
+        "access_token",
+        "refresh_token"
       ],
       "x-ms-parameter-location": "method",
       "x-accessibility": "internal"
@@ -2990,7 +3058,7 @@
       "name": "access_token",
       "x-ms-client-name": "aadAccessToken",
       "in": "formData",
-      "required": true,
+      "required": false,
       "description": "AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.",
       "type": "string",
       "x-ms-parameter-location": "method"
