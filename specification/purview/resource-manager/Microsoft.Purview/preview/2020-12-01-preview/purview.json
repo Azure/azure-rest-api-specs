@@ -970,8 +970,13 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku",
-          "description": "Gets or sets the Sku."
+          "description": "Gets or sets the Sku.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountSku"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -981,7 +986,7 @@
       "properties": {
         "capacity": {
           "format": "int32",
-          "description": "Gets or sets the sku capacity. Possible values include: 4, 16",
+          "description": "Gets or sets the sku capacity.",
           "type": "integer"
         },
         "name": {
@@ -1848,10 +1853,10 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
       "required": true,
       "type": "string"
     },
@@ -1863,6 +1868,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
     "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
@@ -1870,13 +1882,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {
