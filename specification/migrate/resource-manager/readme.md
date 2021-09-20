@@ -12,9 +12,9 @@ This is the AutoRest configuration file for Azure Migrate.
 batch:
   - tag: package-2018-02
   - tag: package-2020-01
+  - tag: package-2020-05
   - tag: package-2020-07
 ```
-
 
 ### Tag: package-2020-07
 
@@ -24,6 +24,7 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 input-file:
   - Microsoft.OffAzure/stable/2020-07-07/migrate.json
 ```
+
 ### Tag: package-2018-02 and java
 
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
@@ -46,6 +47,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2020_01_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -98,6 +112,15 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
 ```
 
 ## Suppression

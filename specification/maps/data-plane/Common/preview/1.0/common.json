@@ -4,18 +4,6 @@
     "title": "Azure Maps Common Types",
     "version": "1.0"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
-  "schemes": [
-    "https"
-  ],
-  "consumes": [],
   "produces": [
     "application/json"
   ],
@@ -203,7 +191,7 @@
           ],
           "x-ms-enum": {
             "name": "GeoJsonObjectType",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "value": "Point",
@@ -535,12 +523,20 @@
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
+      "x-ms-client-name": "clientId",
       "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "x-ms-parameter-location": "client"
     },
-    "ResponseFormat": {
+    "Language": {
+      "name": "language",
+      "in": "query",
+      "description": "Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "JsonFormat": {
       "name": "format",
       "description": "Desired format of the response. Only `json` format is supported.",
       "type": "string",
@@ -550,7 +546,7 @@
         "json"
       ],
       "x-ms-enum": {
-        "name": "ResponseFormat",
+        "name": "JsonFormat",
         "modelAsString": true,
         "values": [
           {
@@ -559,9 +555,10 @@
           }
         ]
       },
+      "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
-    "TextFormat": {
+    "ResponseFormat": {
       "name": "format",
       "description": "Desired format of the response. Value can be either _json_ or _xml_.",
       "type": "string",
@@ -572,7 +569,7 @@
         "xml"
       ],
       "x-ms-enum": {
-        "name": "TextFormat",
+        "name": "ResponseFormat",
         "modelAsString": true,
         "values": [
           {
@@ -585,6 +582,7 @@
           }
         ]
       },
+      "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
     "GeographicResourceLocation": {
@@ -613,6 +611,33 @@
         ]
       },
       "x-ms-parameter-location": "client"
+    },
+    "View": {
+      "name": "view",
+      "in": "query",
+      "description": "The View parameter specifies which set of geopolitically disputed content is returned via Azure Maps services, including  borders and labels displayed on the map. The View parameter (also referred to as “user region parameter”) will show the  correct maps for that country/region. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly  for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "xTileIndex": {
+      "name": "x",
+      "x-ms-client-name": "xTileIndex",
+      "in": "query",
+      "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "yTileIndex": {
+      "name": "y",
+      "x-ms-client-name": "yTileIndex",
+      "in": "query",
+      "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   },
   "responses": {
