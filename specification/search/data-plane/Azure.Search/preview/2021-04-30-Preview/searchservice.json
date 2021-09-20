@@ -7650,6 +7650,7 @@
       "description": "Abstract class to share properties between concrete selectors."
     },
     "SearchIndexerKnowledgeStoreBlobProjectionSelector": {
+      "x-ms-client-name" : "KnowledgeStoreBlobProjectionSelector",
       "properties": {
         "storageContainer": {
           "type": "string",
@@ -7667,6 +7668,7 @@
       "description": "Abstract class to share properties between concrete selectors."
     },
     "SearchIndexerKnowledgeStoreTableProjectionSelector": {
+      "x-ms-client-name" : "KnowledgeStoreTableProjectionSelector",
       "properties": {
         "tableName": {
           "type": "string",
@@ -7685,6 +7687,7 @@
       "description": "Description for what data to store in Azure Tables."
     },
     "SearchIndexerKnowledgeStoreObjectProjectionSelector": {
+      "x-ms-client-name" : "KnowledgeStoreObjectProjectionSelector",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
@@ -7693,6 +7696,7 @@
       "description": "Projection definition for what data to store in Azure Blob."
     },
     "SearchIndexerKnowledgeStoreFileProjectionSelector": {
+      "x-ms-client-name" : "KnowledgeStoreFileProjectionSelector",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
@@ -8348,17 +8352,20 @@
         },
         "globalDefaultCaseSensitive": {
           "type": "boolean",
+          "x-ms-client-name": "DefaultCaseSensitive",
           "x-nullable": true,
           "description": "A global flag for CaseSensitive. If CaseSensitive is not set in CustomEntity, this value will be the default value."
         },
         "globalDefaultAccentSensitive": {
           "type": "boolean",
+          "x-ms-client-name": "DefaultAccentSensitive",
           "x-nullable": true,
           "description": "A global flag for AccentSensitive. If AccentSensitive is not set in CustomEntity, this value will be the default value."
         },
         "globalDefaultFuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
+          "x-ms-client-name": "DefaultFuzzyEditDistance",
           "x-nullable": true,
           "description": "A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value."
         }
