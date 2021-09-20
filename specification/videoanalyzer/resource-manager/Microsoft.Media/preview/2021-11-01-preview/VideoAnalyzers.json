@@ -742,29 +742,7 @@
           "type": "string"
         },
         "status": {
-          "type": "string",
-          "enum": [
-            "Failed",
-            "Succeeded",
-            "InProgress"
-          ],
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "values": [
-              {
-                "value": "Failed",
-                "description": "Operation status failed."
-              },
-              {
-                "value": "Succeeded",
-                "description": "Operation status succeeded."
-              },
-              {
-                "value": "InProgress",
-                "description": "Operation status in progress."
-              }
-            ],
-            "modelAsString": true
+          "type": "string"
           }
         },
         "error": {
@@ -933,7 +911,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Location": {
                 "description": "The URI to poll for completion status.",
@@ -1040,7 +1019,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Location": {
                 "description": "The URI to poll for completion status.",
@@ -1293,7 +1273,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Location": {
                 "description": "The URI to poll for completion status.",
@@ -1400,7 +1381,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/VideoAnalyzerOperationStatuses/{name}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/videoAnalyzerOperationStatuses/{name}": {
       "get": {
         "summary": "Get operation status.",
         "description": "Get operation status.",
@@ -1452,7 +1433,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/VideoAnalyzerOperationResults/{name}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/videoAnalyzerOperationResults/{name}": {
       "get": {
         "summary": "Get operation status.",
         "description": "Get operation status.",
