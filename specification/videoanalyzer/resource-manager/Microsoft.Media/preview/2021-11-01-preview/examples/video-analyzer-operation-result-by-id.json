@@ -2,17 +2,13 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
-    "accountName": "contosotv",
-    "api-version": "2021-11-01-Preview",
-    "parameters": {
-      "location": "South Central US",
-      "tags": {
-        "key1": "value3"
-      }
-    }
+    "locationName": "westus",
+    "name": "6FBA62C4-99B5-4FF8-9826-FC4744A8864F",
+    "api-version": "2021-11-01-Preview"
   },
   "responses": {
-    "202": {
+    "202":{},
+    "200": {
       "body": {
         "name": "contosomovies",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/videoAnalyzers/contosomovies",
@@ -20,11 +16,9 @@
         "location": "South Central US",
         "tags": {
           "tag1": "value1",
-          "tag2": "value2",
-          "tag3": "value3"
+          "tag2": "value2"
         },
         "properties": {
-          "provisioningState": "Succeeded",
           "encryption": {
             "type": "SystemKey"
           },
@@ -41,24 +35,7 @@
               "type": "ClientApi",
               "endpointUrl": "https://77d7106674e0454eba85e5ede58cedbc.api.southcentralus.videoanalyzer.azure.net"
             }
-          ],
-          "iotHubs": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Devices/IotHubs/hub1",
-              "identity": {
-                "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id3"
-              },
-              "status": "Ok"
-            },
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Devices/IotHubs/hub2",
-              "identity": {
-                "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id3"
-              },
-              "status": "Ok"
-            }
-          ],
-          "privateEndpointConnections": []
+          ]
         },
         "identity": {
           "type": "UserAssigned",

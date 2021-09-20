@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
-    "api-version": "2021-11-01-preview"
+    "api-version": "2021-11-01-Preview"
   },
   "responses": {
     "200": {
@@ -420,51 +420,6 @@
               "resource": "Job",
               "operation": "Cancel Job",
               "description": "Cancel Job"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/mediaGraphs/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Media Graph",
-              "operation": "Read Media Graph",
-              "description": "Read any Media Graph"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/mediaGraphs/write",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Media Graph",
-              "operation": "Create or Update Media Graph",
-              "description": "Create or Update any Media Graph"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/mediaGraphs/delete",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Media Graph",
-              "operation": "Delete Media Graph",
-              "description": "Delete any Media Graph"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/mediaGraphs/start/action",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Media Graph",
-              "operation": "Start Media Graph Operation",
-              "description": "Start any Media Graph Operation"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/mediaGraphs/stop/action",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Media Graph",
-              "operation": "Stop Media Graph Operation",
-              "description": "Stop any Media Graph Operation"
             }
           },
           {
@@ -1231,8 +1186,8 @@
             "display": {
               "provider": "Microsoft Media Services",
               "resource": "Video Analyzer Account",
-              "operation": "Write a Video Analyzer Account",
-              "description": "Write a Video Analyzer Account"
+              "operation": "Create or Update a Video Analyzer Account",
+              "description": "Create or Update a Video Analyzer Account"
             }
           },
           {
@@ -1245,12 +1200,183 @@
             }
           },
           {
-            "name": "Microsoft.Media/videoAnalyzers/syncStorageKeys/action",
+            "name": "Microsoft.Media/videoAnalyzers/videos/read",
             "display": {
               "provider": "Microsoft Media Services",
-              "resource": "Video Analyzer Account",
-              "operation": "Sync storage keys",
-              "description": "Sync the storage keys of an attached storage account"
+              "resource": "Video Resource",
+              "operation": "Read Video",
+              "description": "Read any Video"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Create or Update Video",
+              "description": "Create or Update any Video"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Delete Video",
+              "description": "Delete any Video"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/videos/listStreamingToken/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Video Resource",
+              "operation": "Generates a streaming token which can be used for video playback",
+              "description": "Generates a streaming token which can be used for video playback"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/accessPolicies/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Access Policy Resource",
+              "operation": "Read Access Policy",
+              "description": "Read any Access Policy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/accessPolicies/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Access Policy Resource",
+              "operation": "Create or Update Access Policy",
+              "description": "Create or Update any Access Policy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/accessPolicies/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Access Policy Resource",
+              "operation": "Delete Access Policy",
+              "description": "Delete any Access Policy"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Read Edge Module",
+              "description": "Read any Edge Module"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Create or Update Edge Module",
+              "description": "Create or Update any Edge Module"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Delete Edge Module",
+              "description": "Delete any Edge Module"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/edgeModules/listProvisioningToken/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Edge Module Resource",
+              "operation": "Creates a new provisioning token",
+              "description": "Creates a new provisioning token. A provisioning token allows for a single instance of Azure Video analyzer IoT edge module to be initialized and authorized to the cloud account. The provisioning token itself is short lived and it is only used for the initial handshake between IoT edge module and the cloud. After the initial handshake, the IoT edge module will agree on a set of authentication keys which will be auto-rotated as long as the module is able to periodically connect to the cloud. A new provisioning token can be generated for the same IoT edge module in case the module state lost or reset"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/pipelineTopologies/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Pipeline Topology Resource",
+              "operation": "Read Pipeline Topology",
+              "description": "Read any Pipeline Topology"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/pipelineTopologies/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Pipeline Topology Resource",
+              "operation": "Create or Update Pipeline Topology",
+              "description": "Create or Update any Pipeline Topology"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/pipelineTopologies/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Pipeline Topology Resource",
+              "operation": "Delete Pipeline Topology",
+              "description": "Delete any Pipeline Topology"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Read Live Pipeline",
+              "description": "Read any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/write",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Create or Update Live Pipeline",
+              "description": "Create or Update any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/delete",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Delete Live Pipeline",
+              "description": "Delete any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/activate/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Activate Live Pipeline",
+              "description": "Activate any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/deactivate/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline Resource",
+              "operation": "Deactivate Live Pipeline",
+              "description": "Deactivate any Live Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.Media/videoAnalyzers/livePipelines/operationsStatus/read",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Live Pipeline operation status Resource",
+              "operation": "Read Live Pipeline operation status",
+              "description": "Read any Live Pipeline operation status"
             }
           },
           {

@@ -4,7 +4,7 @@
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Azure Video Analyzer",
+    "title": "Azure Video Analyzer Resource Provider",
     "description": "Azure Video Analyzer resource provider API definition.",
     "version": "2021-11-01-preview"
   },
@@ -27,15 +27,45 @@
     }
   },
   "definitions": {
-    "VideoStreaming": {
+    "VideoContentUrls": {
       "properties": {
+        "downloadUrl": {
+          "type": "string",
+          "description": "Video file download URL. This URL can be used in conjunction with the video content authorization token to download the video MP4 file. The resulting MP4 file can be played on any standard media player. It is available when the video type is 'file' and video file is available for consumption."
+        },
         "archiveBaseUrl": {
           "type": "string",
-          "description": "Video streaming base URL for the video archive. When present, archived video can be played through the Azure Video Analyzer player. Alternatively, this URL can be used with compatible DASH or HLS players by appending the following to the base URL:\r\n\r\n  - HLSv4:     /manifest(format=m3u8-aapl).m3u8\r\n  - HLS CMAF:  /manifest(format=m3u8-cmaf)\r\n  - DASH CMAF: /manifest(format=mpd-time-cmaf)\r\n\r\nMoreover, an ongoing video recording can be played in \"live mode\" with latencies which are approximately double of the chosen video segment length."
+          "description": "Video archive streaming base URL. The archived content can be automatically played by the Azure Video Analyzer player widget. Alternatively, this URL can be used in conjunction with the video content authorization token on any compatible DASH or HLS players by appending the following to the base URL:\r\n\r\n    - HLSv4:     /manifest(format=m3u8-aapl).m3u8\r\n    - HLS CMAF:  /manifest(format=m3u8-cmaf)\r\n    - DASH CMAF: /manifest(format=mpd-time-cmaf)\r\n\r\n    Moreover, an ongoing video recording can be played in \"live mode\" with latencies which are approximately double of the chosen video segment length. It is available when the video type is 'archive' and video archiving is enabled."
+        },
+        "rtspTunnelUrl": {
+          "type": "string",
+          "description": "Video low-latency streaming URL. The live content can be automatically played by the Azure Video Analyzer player widget. Alternatively, this URL can be used in conjunction with the video content authorization token to expose a WebSocket tunneled RTSP stream. It is available when the video type is 'archive' and a live, low-latency feed is available from the source."
+        },
+        "previewImageUrls": {
+          "$ref": "#/definitions/VideoPreviewImageUrls",
+          "description": "Video preview image URLs. These URLs can be used in conjunction with the video content authorization token to download the most recent still image from the video archive in different resolutions. They are available when the video type is 'archive' and preview images are enabled."
         }
       },
       "type": "object",
-      "description": "Video streaming holds information about video streaming URLs."
+      "description": "Set of URLs to the video content."
+    },
+    "VideoPreviewImageUrls": {
+      "properties": {
+        "small": {
+          "type": "string",
+          "description": "Low resolution preview image URL."
+        },
+        "medium": {
+          "type": "string",
+          "description": "Medium resolution preview image URL."
+        },
+        "large": {
+          "type": "string",
+          "description": "High resolution preview image URL."
+        }
+      },
+      "type": "object",
+      "description": "Video preview image URLs. These URLs can be used in conjunction with the video content authorization token to download the most recent still image from the video archive in different resolutions. They are available when the video type is 'archive' and preview images are enabled."
     },
     "VideoFlags": {
       "properties": {
@@ -47,16 +77,16 @@
           "type": "boolean",
           "description": "Value indicating whether or not there has ever been data recorded or uploaded into the video. Newly created videos have this value set to false."
         },
-        "isRecording": {
+        "isInUse": {
           "type": "boolean",
-          "description": "Value indicating whether or not the video is currently being referenced be an active live pipeline. The fact that is being referenced, doesn't necessarily indicate that data is being received. For example, video recording may be gated on events or camera may not be accessible at the time."
+          "description": "Value indicating whether or not the video is currently being referenced be an active pipeline. The fact that is being referenced, doesn't necessarily indicate that data is being received. For example, video recording may be gated on events or camera may not be accessible at the time."
         }
       },
       "type": "object",
       "required": [
         "canStream",
         "hasData",
-        "isRecording"
+        "isInUse"
       ],
       "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state."
     },
@@ -71,23 +101,23 @@
       "type": "object",
       "description": "Contains information about the video and audio content."
     },
-    "VideoStreamingToken": {
+    "VideoContentToken": {
       "properties": {
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The streaming token expiration date in ISO8601 format (eg. 2021-01-01T00:00:00Z).",
+          "description": "The content token expiration date in ISO8601 format (eg. 2021-01-01T00:00:00Z).",
           "readOnly": true,
           "x-nullable": false
         },
         "token": {
           "type": "string",
-          "description": "The streaming token value to be added to the video streaming URL as the value for a \"token\" query string parameter. The token is specific to a single video.",
+          "description": "The content token value to be added to the video content URL as the value for the \"token\" query string parameter. The token is specific to a single video.",
           "readOnly": true
         }
       },
       "type": "object",
-      "description": "Video streaming token grants access to the video streaming URLs which can be used by an compatible HLS or DASH player."
+      "description": "\"Video content token grants access to the video content URLs.\""
     },
     "VideoProperties": {
       "properties": {
@@ -102,40 +132,60 @@
         "type": {
           "type": "string",
           "enum": [
-            "Archive"
+            "archive",
+            "file"
           ],
           "x-ms-enum": {
             "name": "VideoType",
             "values": [
               {
-                "value": "Archive",
-                "description": "Archive is flexible format that represents a video stream associated with wall-clock time. The video archive can either be continuous or discontinuous. An archive is discontinuous when there are gaps in the recording due to various reasons, such as the live pipeline being stopped, camera being disconnected or due to the use of event based recordings through the use of a signal gate. Finally, there is no limit to the archive duration and new video data can be appended to the existing archive at any time, as long as the same video codec and codec parameters are being used."
+                "value": "archive",
+                "description": "Archive is flexible format that represents a video stream associated with wall-clock time. The video archive can either be continuous or discontinuous. An archive is discontinuous when there are gaps in the recording due to various reasons, such as the live pipeline being stopped, camera being disconnected or due to the use of event based recordings through the use of a signal gate. There is no limit to the archive duration and new video data can be appended to the existing archive at any time, as long as the same video codec and codec parameters are being used. Videos of this type are suitable for appending and long term archival."
+              },
+              {
+                "value": "file",
+                "description": "File represents a video which is stored as a single media file, such as MP4. Videos of this type are suitable to be downloaded for external consumption."
               }
             ],
             "modelAsString": true
           },
-          "description": "Type of the video archive. Different archive formats provide different capabilities.",
-          "readOnly": true,
-          "x-nullable": false
+          "description": "Video content type. Different content types are suitable for different applications and scenarios."
         },
         "flags": {
           "$ref": "#/definitions/VideoFlags",
           "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state.",
           "readOnly": true
         },
-        "streaming": {
-          "$ref": "#/definitions/VideoStreaming",
-          "description": "Video streaming holds information about video streaming URLs.",
+        "contentUrls": {
+          "$ref": "#/definitions/VideoContentUrls",
+          "description": "Set of URLs to the video content.",
           "readOnly": true
         },
         "mediaInfo": {
           "$ref": "#/definitions/VideoMediaInfo",
           "description": "Contains information about the video and audio content.",
           "readOnly": true
+        },
+        "archival": {
+          "$ref": "#/definitions/VideoArchival",
+          "description": "Video archival properties."
         }
       },
       "type": "object",
+      "required": [
+        "type"
+      ],
       "description": "Application level properties for the video resource."
+    },
+    "VideoArchival": {
+      "properties": {
+        "retentionPeriod": {
+          "type": "string",
+          "description": "Video retention period indicates the maximum age of the video archive segments which are intended to be kept in storage. It must be provided in the ISO8601 duration format in the granularity of days, up to a maximum of 10 years. For example, if this is set to P30D (30 days), content older than 30 days will be periodically deleted. This value can be updated at any time and the new desired retention period will be effective within 24 hours."
+        }
+      },
+      "type": "object",
+      "description": "Video archival properties."
     },
     "AuthenticationBase": {
       "discriminator": "@type",
@@ -363,7 +413,7 @@
     "VideoEntity": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -373,18 +423,17 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
       },
-      "type": "object",
-      "description": "The representation of a single video in a Video Analyzer account."
+      "type": "object"
     },
     "AccessPolicyEntity": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -394,13 +443,12 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
       },
-      "type": "object",
-      "description": "Policy that determines how a video can be accessed."
+      "type": "object"
     },
     "VideoEntityCollection": {
       "properties": {
@@ -441,7 +489,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos": {
       "get": {
         "summary": "List all existing video resources.",
-        "description": "List all existing video resources in the specified account.",
+        "description": "List all existing video resources.",
         "operationId": "Videos_List",
         "responses": {
           "200": {
@@ -491,8 +539,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}": {
       "get": {
-        "summary": "Retrieves a video resource.",
-        "description": "Retrieves an existing video resource within an account with a given name.",
+        "summary": "Retrieves an existing video resource.",
+        "description": "Retrieves an existing video resource.",
         "operationId": "Videos_Get",
         "responses": {
           "200": {
@@ -523,7 +571,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the video to retrieve."
+            "description": "The Video name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -536,8 +584,8 @@
         }
       },
       "put": {
-        "summary": "Create or updates a video resource.",
-        "description": "Creates a new video resource or updates an existing one in an account.",
+        "summary": "Creates a new video resource or updates an existing one.",
+        "description": "Creates a new video resource or updates an existing one.",
         "operationId": "Videos_CreateOrUpdate",
         "responses": {
           "200": {
@@ -574,7 +622,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the video to create or update."
+            "description": "The Video name."
           },
           {
             "name": "parameters",
@@ -596,7 +644,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes a video resource.",
+        "summary": "Deletes an existing video resource and its underlying data.",
         "description": "Deletes an existing video resource and its underlying data. This operation is irreversible.",
         "operationId": "Videos_Delete",
         "responses": {
@@ -628,7 +676,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the video to delete."
+            "description": "The Video name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -641,7 +689,7 @@
         }
       },
       "patch": {
-        "summary": "Updates the properties of a video resource.",
+        "summary": "Updates individual properties of an existing video resource.",
         "description": "Updates individual properties of an existing video resource.",
         "operationId": "Videos_Update",
         "responses": {
@@ -673,7 +721,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the video to update."
+            "description": "The Video name."
           },
           {
             "name": "parameters",
@@ -695,16 +743,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/listStreamingToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/listContentToken": {
       "post": {
-        "summary": "Generates a streaming token for video playback.",
-        "description": "Generates a streaming token used for authenticating video playback.",
-        "operationId": "Videos_ListStreamingToken",
+        "summary": "Generates a streaming token which can be used for accessing content from video content URLs.",
+        "description": "Generates a streaming token which can be used for accessing content from video content URLs.",
+        "operationId": "Videos_ListContentToken",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VideoStreamingToken"
+              "$ref": "#/definitions/VideoContentToken"
             }
           },
           "default": {
@@ -729,23 +777,23 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the video to generate a token for playback."
+            "description": "The Video name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
-          "Generate a streaming token for media endpoint authorization.": {
-            "$ref": "examples/video-listStreamingToken.json"
+          "Generate a content token for media endpoint authorization.": {
+            "$ref": "examples/video-listContentToken.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies": {
       "get": {
-        "summary": "List access policy resources.",
-        "description": "List all existing access policy resources for the specified account.",
+        "summary": "List all existing access policy resources.",
+        "description": "List all existing access policy resources.",
         "operationId": "AccessPolicies_List",
         "responses": {
           "200": {
@@ -795,8 +843,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies/{accessPolicyName}": {
       "get": {
-        "summary": "Retrieves an access policy resource.",
-        "description": "Retrieves an existing access policy resource from an account by name.",
+        "summary": "Retrieves an existing access policy resource.",
+        "description": "Retrieves an existing access policy resource.",
         "operationId": "AccessPolicies_Get",
         "responses": {
           "200": {
@@ -827,7 +875,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy to retrieve."
+            "description": "The Access Policy name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -840,7 +888,7 @@
         }
       },
       "put": {
-        "summary": "Creates or updates an access policy.",
+        "summary": "Creates a new access policy resource or updates an existing one.",
         "description": "Creates a new access policy resource or updates an existing one.",
         "operationId": "AccessPolicies_CreateOrUpdate",
         "responses": {
@@ -878,7 +926,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy to create or update."
+            "description": "The Access Policy name."
           },
           {
             "name": "parameters",
@@ -900,7 +948,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes an access policy.",
+        "summary": "Deletes an existing access policy resource.",
         "description": "Deletes an existing access policy resource.",
         "operationId": "AccessPolicies_Delete",
         "responses": {
@@ -932,7 +980,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy to delete."
+            "description": "The Access Policy name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -945,7 +993,7 @@
         }
       },
       "patch": {
-        "summary": "Updates an existing access policy.",
+        "summary": "Updates individual properties of an existing access policy resource.",
         "description": "Updates individual properties of an existing access policy resource.",
         "operationId": "AccessPolicies_Update",
         "responses": {
@@ -977,7 +1025,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy to update."
+            "description": "The Access Policy name."
           },
           {
             "name": "parameters",

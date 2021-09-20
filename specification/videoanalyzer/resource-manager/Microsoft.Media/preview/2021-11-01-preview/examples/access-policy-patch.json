@@ -9,6 +9,23 @@
       "properties": {
         "authentication": {
           "@type": "#Microsoft.VideoAnalyzer.JwtAuthentication",
+          "issuers": [
+            "issuer1",
+            "issuer2"
+          ],
+          "audiences": [
+            "audience1"
+          ],
+          "claims": [
+            {
+              "name": "claimname1",
+              "value": "claimvalue1"
+            },
+            {
+              "name": "claimname2",
+              "value": "claimvalue2"
+            }
+          ],
           "keys": [
             {
               "@type": "#Microsoft.VideoAnalyzer.RsaTokenKey",
@@ -19,7 +36,7 @@
             },
             {
               "@type": "#Microsoft.VideoAnalyzer.EccTokenKey",
-              "alg": "Updated",
+              "alg": "ES256",
               "kid": "124",
               "x": "XX==",
               "y": "YY=="
@@ -44,7 +61,7 @@
               "issuer2"
             ],
             "audiences": [
-              "audience"
+              "audience1"
             ],
             "claims": [
               {
@@ -74,7 +91,14 @@
             ]
           }
         },
-        "systemData": {}
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "0001-01-01T00:00:00Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "0001-01-01T00:00:00Z"
+        }
       }
     }
   }

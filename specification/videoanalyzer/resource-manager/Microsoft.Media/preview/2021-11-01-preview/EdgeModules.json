@@ -4,7 +4,7 @@
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Azure Video Analyzer",
+    "title": "Azure Video Analyzer Resource Provider",
     "description": "Azure Video Analyzer resource provider API definition.",
     "version": "2021-11-01-preview"
   },
@@ -114,8 +114,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules": {
       "get": {
-        "summary": "List edge module resources.",
-        "description": "List all of the existing edge module resources for a given Video Analyzer account.",
+        "summary": "List all existing edge module resources.",
+        "description": "List all existing edge module resources.",
         "operationId": "EdgeModules_List",
         "responses": {
           "200": {
@@ -145,26 +145,12 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Restricts the set of items returned."
-          },
-          {
             "name": "$top",
             "in": "query",
             "required": false,
             "type": "integer",
             "format": "int32",
             "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {
@@ -180,7 +166,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules/{edgeModuleName}": {
       "get": {
         "summary": "Retrieves an existing edge module resource.",
-        "description": "Retrieves a specific existing edge module resource in the given Video Analyzer account.",
+        "description": "Retrieves an existing edge module resource.",
         "operationId": "EdgeModules_Get",
         "responses": {
           "200": {
@@ -211,7 +197,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the edge module to retrieve."
+            "description": "The Edge Module name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -262,7 +248,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the edge module to create or update."
+            "description": "The Edge Module name."
           },
           {
             "name": "parameters",
@@ -316,7 +302,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the edge module to be deleted."
+            "description": "The Edge Module name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -363,7 +349,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the edge module used to create a new provisioning token."
+            "description": "The Edge Module name."
           },
           {
             "name": "parameters",
