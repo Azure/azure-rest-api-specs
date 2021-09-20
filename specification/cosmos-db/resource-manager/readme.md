@@ -45,6 +45,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-10-15-preview/rbac.json
   - Microsoft.DocumentDB/preview/2021-10-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2021-10-15-preview/services.json
+  - Microsoft.DocumentDB/preview/2021-10-15-preview/dataTransferService.json
 ```
 ### Tag: package-2021-07-preview
 
