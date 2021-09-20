@@ -342,7 +342,7 @@
       ],
       "description": "The details about the associated storage account."
     },
-    "VideoAnalyzerProperties": {
+    "VideoAnalyzerPropertiesBase": {
       "properties": {
         "storageAccounts": {
           "type": "array",
@@ -437,18 +437,24 @@
         }
       },
       "type": "object",
+      "description": "The properties of the Video Analyzer account."
+    },
+    "VideoAnalyzerProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoAnalyzerPropertiesBase"
+        }
+      ],
       "required": [
         "storageAccounts"
-      ],
-      "description": "The properties of the Video Analyzer account."
+      ]
     },
     "VideoAnalyzerPropertiesUpdate": {
       "allOf": [
         {
-          "$ref": "#/definitions/VideoAnalyzerProperties"
+          "$ref": "#/definitions/VideoAnalyzerPropertiesBase"
         }
-      ],
-      "required": null
+      ]
     },
     "VideoAnalyzer": {
       "allOf": [
@@ -475,12 +481,19 @@
       "type": "object"
     },
     "VideoAnalyzerUpdate": {
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "properties": {
           "$ref": "#/definitions/VideoAnalyzerPropertiesUpdate",
           "description": "The resource properties.",
@@ -492,7 +505,6 @@
         }
       },
       "type": "object",
-      "required": [],
       "description": "The update operation for a Video Analyzer account."
     },
     "Endpoint": {
