@@ -300,11 +300,11 @@
           "type": "string"
         },
         "assignedStandard": {
-          "description": "List of assigned standards as applied to this standard assignment over the given scope",
+          "description": "Standard item with key as applied to this standard assignment over the given scope",
           "$ref": "#/definitions/AssignedStandardItem"
         },
         "assignedComponent": {
-          "description": "List of Microsoft.Security/assessments as applied to this standard assignment over the given scope",
+          "description": "Component item with key as applied to this standard assignment over the given scope",
           "$ref": "#/definitions/AssignedComponentItem"
         },
         "scope": {
@@ -331,15 +331,8 @@
           }
         },
         "metadata": {
-          "description": "Metadata about this standardAssignment",
-          "type": "object",
-          "properties": {
-            "ticketId": {
-              "type": "integer",
-              "format": "int64",
-              "description": "TicketID in reference to this standardAssignment"
-            }
-          }
+          "description": "The assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.",
+          "type": "object"
         }
       }
     },
