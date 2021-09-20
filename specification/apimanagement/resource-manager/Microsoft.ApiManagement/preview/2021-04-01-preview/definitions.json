@@ -3908,6 +3908,87 @@
       },
       "description": "Descriptions of APIM policies."
     },
+    "PolicyFragmentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyFragmentContract"
+          },
+          "description": "Policy Fragment Contract value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy fragments operation."
+    },
+    "PolicyFragmentContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyFragmentContractProperties",
+          "description": "Properties of the Policy Fragment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Policy Fragment Contract details."
+    },
+    "PolicyFragmentContractProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Contents of the Policy Fragment as defined by the format."
+        },
+        "format": {
+          "type": "string",
+          "description": "Format of the policyFragmentContent.",
+          "enum": [
+            "xml",
+            "xml-link",
+            "rawxml",
+            "rawxml-link"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyFragmentContentFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "xml",
+                "description": "The contents are inline and Content type is an XML document."
+              },
+              {
+                "value": "xml-link",
+                "description": "The policy fragment XML document is hosted on a http endpoint accessible from the API Management service."
+              },
+              {
+                "value": "rawxml",
+                "description": "The contents are inline and Content type is a non XML encoded policy document."
+              },
+              {
+                "value": "rawxml-link",
+                "description": "The policy fragment document is not XML encoded and is hosted on a http endpoint accessible from the API Management service."
+              }
+            ]
+          },
+          "default": "xml"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Policy fragment contract Properties."
+    },
     "PortalDelegationSettings": {
       "properties": {
         "properties": {

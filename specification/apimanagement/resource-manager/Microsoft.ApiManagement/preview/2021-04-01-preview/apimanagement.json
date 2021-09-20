@@ -548,6 +548,48 @@
       "default": "xml",
       "x-ms-parameter-location": "method"
     },
+    "PolicyFragmentExportFormat": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Policy Fragment Export Format.",
+      "enum": [
+        "xml",
+        "rawxml"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyFragmentExportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "xml",
+            "description": "The contents are inline and Content type is an XML document."
+          },
+          {
+            "value": "rawxml",
+            "description": "The contents are inline and Content type is a non XML encoded policy fragment document."
+          }
+        ]
+      },
+      "default": "xml",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyFragmentIdParameter": {
+      "name": "policyFragmentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "policyFragment"
+      ],
+      "description": "The identifier of the Policy Fragment.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PolicyFragmentIdName"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "PolicyIdParameter": {
       "name": "policyId",
       "in": "path",

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "policyFragmentId": "policyFragment1",
+    "parameters": {
+      "properties": {
+        "format": "xml",
+        "value": "<json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n<rewrite-uri template=\"/resource\" />"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyFragments/policyFragment1",
+        "type": "Microsoft.ApiManagement/service/policyFragments",
+        "name": "policyFragment1",
+        "properties": {
+          "value": "<json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n<rewrite-uri template=\"/resource\" />"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyFragments/policyFragment1",
+        "type": "Microsoft.ApiManagement/service/policyFragments",
+        "name": "policyFragment1",
+        "properties": {
+          "value": "<json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n<rewrite-uri template=\"/resource\" />"
+        }
+      }
+    }
+  }
+}
