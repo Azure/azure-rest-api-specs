@@ -71,7 +71,7 @@ input-file:
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Projects.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ResourceSkus.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ServiceFeatureOCITask.json.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ServiceFeatureOCITask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Services.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ServiceTasks.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Tasks.json
