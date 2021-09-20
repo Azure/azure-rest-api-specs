@@ -52,7 +52,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RegionParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/RegionParameter"
           },
           {
             "$ref": "#/parameters/TimespanParameter"
@@ -79,7 +79,7 @@
             "$ref": "#/parameters/SubscriptionScopeResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/MetricNamespaceParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
           },
           {
             "$ref": "#/parameters/AutoAdjustTimegrain"
@@ -92,7 +92,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -126,7 +126,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RegionParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/RegionParameter"
           },
           {
             "$ref": "#/parameters/TimespanParameter"
@@ -153,7 +153,7 @@
             "$ref": "#/parameters/SubscriptionScopeResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/MetricNamespaceParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
           },
           {
             "$ref": "#/parameters/AutoAdjustTimegrain"
@@ -174,7 +174,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -207,7 +207,7 @@
         "description": "**Lists the metric values for a resource**.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/ResourceUriParameter"
           },
           {
             "$ref": "#/parameters/TimespanParameter"
@@ -237,7 +237,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/MetricNamespaceParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
           },
           {
             "$ref": "#/parameters/AutoAdjustTimegrain"
@@ -250,7 +250,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -341,23 +341,6 @@
         }
       }
     },
-    "LocalizableString": {
-      "description": "The localizable string class.",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      }
-    },
     "Unit": {
       "type": "string",
       "description": "The unit of the metric.",
@@ -379,29 +362,6 @@
       "x-ms-enum": {
         "name": "Unit",
         "modelAsString": false
-      }
-    },
-    "MetricUnit": {
-      "type": "string",
-      "description": "The unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": true
       }
     },
     "MetricValue": {
@@ -448,7 +408,7 @@
       "description": "Represents a metric metadata value.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the name of the metadata."
         },
         "value": {
@@ -510,7 +470,7 @@
           "description": "the resource type of the metric resource."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
@@ -598,7 +558,7 @@
           "description": "the resource type of the metric resource."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
@@ -614,7 +574,7 @@
           "description": "Error message encountered querying this specific metric."
         },
         "unit": {
-          "$ref": "#/definitions/MetricUnit",
+          "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
           "description": "The unit of the metric."
         },
         "timeseries": {
@@ -652,51 +612,9 @@
           "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
         }
       }
-    },
-    "ErrorContract": {
-      "title": "Error Response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
-    "ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
-    "RegionParameter": {
-      "name": "region",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The region to where the metrics you want reside.",
-      "x-ms-parameter-location": "method"
-    },
     "TimespanParameter": {
       "name": "timespan",
       "in": "query",
@@ -794,14 +712,6 @@
       "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
       "x-ms-parameter-location": "method",
       "required": false
-    },
-    "MetricNamespaceParameter": {
-      "name": "metricnamespace",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Metric namespace where the metrics you want reside.",
-      "x-ms-parameter-location": "method"
     },
     "AutoAdjustTimegrain": {
       "name": "AutoAdjustTimegrain",

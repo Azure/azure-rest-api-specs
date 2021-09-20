@@ -64,7 +64,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         }
@@ -280,31 +280,6 @@
         "defaultDimensionValues": {
           "type": "object",
           "description": "Default dimension value to be sent down for the hidden dimension during query"
-        }
-      }
-    },
-    "ErrorContract": {
-      "title": "Error Response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
         }
       }
     }
