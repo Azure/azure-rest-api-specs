@@ -44,6 +44,10 @@ directive:
     from: ingestionSettings.json
     where: $.definitions.IngestionConnectionString.properties.value
     reason: Secrets are OK to return in a POST response.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: settings.json
+    reason: Operations API has nothing to do with current additions.
 ```
 
 ### Basic Information
@@ -61,12 +65,11 @@ tag: package-preview-2021-08
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-preview-2021-08
 
 These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-08'
+``` yaml $(tag) == 'package-preview-2021-08'
 input-file:
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
   - Microsoft.Security/preview/2021-08-01-preview/assignments.json
@@ -74,6 +77,7 @@ input-file:
 override-info:
   title: SecurityCenter
 ```
+
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
