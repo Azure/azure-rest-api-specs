@@ -48,6 +48,10 @@ directive:
     where: $.paths
     from: settings.json
     reason: Operations API has nothing to do with current additions.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: assignments.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
