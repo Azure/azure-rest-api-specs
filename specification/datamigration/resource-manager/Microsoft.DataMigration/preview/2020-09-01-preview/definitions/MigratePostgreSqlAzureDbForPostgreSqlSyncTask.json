@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -54,10 +54,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel": {
@@ -94,6 +96,21 @@
         "targetServer": {
           "type": "string",
           "description": "Target server name",
+          "readOnly": true
+        },
+        "sourceServerType": {
+          "$ref": "./TasksCommon.json#/definitions/ScenarioSource",
+          "description": "Source server type.",
+          "readOnly": true
+        },
+        "targetServerType": {
+          "$ref": "./TasksCommon.json#/definitions/ScenarioTarget",
+          "description": "Target server type.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/ReplicateMigrationState",
+          "description": "Migration status",
           "readOnly": true
         }
       },
@@ -357,6 +374,23 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "selectedTables": {
+          "type": "array",
+          "description": "Tables selected for migration",
+          "items": {
+            "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput"
+          }
+        }
+      }
+    },
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput": {
+      "type": "object",
+      "description": "Selected tables for the migration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table to migrate"
         }
       }
     }

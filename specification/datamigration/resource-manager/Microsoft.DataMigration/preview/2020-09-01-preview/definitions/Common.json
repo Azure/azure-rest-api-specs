@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -24,6 +24,11 @@
         "error": {
           "description": "Error information in OData format",
           "$ref": "#/definitions/ODataError"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       }
     },
@@ -32,12 +37,10 @@
       "description": "Indicates whether a proposed resource name is available",
       "properties": {
         "nameAvailable": {
-          "readOnly": true,
           "type": "boolean",
           "description": "If true, the name is valid and available. If false, 'reason' describes why not."
         },
         "reason": {
-          "readOnly": true,
           "type": "string",
           "description": "The reason why the name is not available, if nameAvailable is false",
           "enum": [
@@ -50,7 +53,6 @@
           }
         },
         "message": {
-          "readOnly": true,
           "type": "string",
           "description": "The localized reason why the name is not available, if nameAvailable is false"
         }
@@ -75,17 +77,14 @@
       "description": "Error information in OData format.",
       "properties": {
         "code": {
-          "readOnly": true,
           "type": "string",
           "description": "The machine-readable description of the error, such as 'InvalidRequest' or 'InternalServerError'"
         },
         "message": {
-          "readOnly": true,
           "type": "string",
           "description": "The human-readable description of the error"
         },
         "details": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ODataError"
@@ -154,7 +153,6 @@
       "description": "Exception object for all custom exceptions",
       "properties": {
         "message": {
-          "readOnly": true,
           "type": "string",
           "description": "Error message"
         },
@@ -163,22 +161,18 @@
           "description": "Actionable steps for this exception"
         },
         "filePath": {
-          "readOnly": true,
           "type": "string",
           "description": "The path to the file where exception occurred"
         },
         "lineNumber": {
-          "readOnly": true,
           "type": "string",
           "description": "The line number where exception occurred"
         },
         "hResult": {
-          "readOnly": true,
           "type": "integer",
           "description": "Coded numerical value that is assigned to a specific exception"
         },
         "stackTrace": {
-          "readOnly": true,
           "type": "string",
           "description": "Stack trace"
         }
@@ -206,6 +200,7 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "type": "object",
       "description": "ARM tracked top level resource.",
       "properties": {
         "tags": {
@@ -227,6 +222,11 @@
             "create"
           ],
           "description": "Resource location."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       },
       "required": [
@@ -274,6 +274,24 @@
         "name": "AuthenticationType",
         "modelAsString": true
       }
+    },
+    "MongoDbConnectionInfo": {
+      "type": "object",
+      "description": "Describes a connection to a MongoDB data source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "A MongoDB connection string or blob container URL. The user name and password can be specified here or in the userName and password properties"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
     },
     "SqlConnectionInfo": {
       "x-ms-discriminator-value": "SqlConnectionInfo",
@@ -339,6 +357,11 @@
         "port": {
           "type": "integer",
           "description": "Port for Server"
+        },
+        "encryptConnection": {
+          "type": "boolean",
+          "description": "Whether to encrypt the connection",
+          "default": true
         }
       },
       "allOf": [
@@ -349,6 +372,25 @@
       "required": [
         "serverName",
         "port"
+      ]
+    },
+    "OracleConnectionInfo": {
+      "x-ms-discriminator-value": "OracleConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to Oracle server",
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "EZConnect or TNSName connection string."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "dataSource"
       ]
     },
     "PostgreSqlConnectionInfo": {
@@ -367,6 +409,16 @@
         "port": {
           "type": "integer",
           "description": "Port for Server"
+        },
+        "encryptConnection": {
+          "type": "boolean",
+          "description": "Whether to encrypt the connection",
+          "default": true
+        },
+        "trustServerCertificate": {
+          "type": "boolean",
+          "description": "Whether to trust the server certificate",
+          "default": false
         }
       },
       "allOf": [

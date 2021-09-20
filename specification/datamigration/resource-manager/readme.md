@@ -44,27 +44,36 @@ input-file:
   - Microsoft.DataMigration/preview/2020-09-01-preview/sqlmigration.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Commands.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Common.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourceMySqlTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourceSqlServerTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetSqlDbTask.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetSqlMITask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetSqlMITask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/GetUserTablesMySqlTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Files.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/GetTdeCertificatesSqlTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/GetUserTablesSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/GetUserTablesSqlTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlDbTask.json
-  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlMITask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlMiSyncTask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSqlServerSqlMITask.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrateSsisTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MigrationValidation.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/MongoDbTasks.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Projects.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ResourceSkus.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ServiceFeatureOCITask.json.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Services.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ServiceTasks.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Tasks.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/TasksCommon.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json

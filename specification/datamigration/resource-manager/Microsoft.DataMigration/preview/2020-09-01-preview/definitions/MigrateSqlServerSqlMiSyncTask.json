@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -37,10 +37,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlMISyncTaskOutputMigrationLevel": {

@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
     "version": "2020-09-01-preview",
-    "description": "The Database Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, database migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
+    "description": "The Database Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, data migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
     "x-ms-code-generation-settings": {
       "name": "DataMigrationServiceClient",
       "useDateTimeOffset": true
@@ -483,6 +483,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks": {
+      "get": {
+        "summary": "Get service level tasks for a service",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service level tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
+        "tags": [
+          "Service resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "ServiceTasks_List",
+        "x-ms-examples": {
+          "ServiceTasks_List": {
+            "$ref": "./examples/ServiceTasks_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/taskType"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Got service tasks",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/TaskList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/checkNameAvailability": {
       "post": {
         "summary": "Check nested resource name validity and availability",
@@ -491,10 +542,10 @@
           "Custom operation",
           "POST"
         ],
-        "operationId": "Services_NestedCheckNameAvailability",
+        "operationId": "Services_CheckChildrenNameAvailability",
         "x-ms-examples": {
-          "Services_NestedCheckNameAvailability": {
-            "$ref": "./examples/Services_NestedCheckNameAvailability.json"
+          "Services_CheckChildrenNameAvailability": {
+            "$ref": "./examples/Services_CheckChildrenNameAvailability.json"
           }
         },
         "parameters": [
@@ -785,6 +836,171 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/groupName"
+        },
+        {
+          "$ref": "#/parameters/serviceName"
+        },
+        {
+          "$ref": "#/parameters/taskName"
+        },
+        {
+          "$ref": "#/parameters/apiVersion"
+        }
+      ],
+      "put": {
+        "summary": "Create or update service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PUT method creates a new service task or updates an existing one, although since service tasks have no mutable custom properties, there is little reason to update an existing one.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "PUT"
+        ],
+        "operationId": "ServiceTasks_CreateOrUpdate",
+        "x-ms-examples": {
+          "Tasks_CreateOrUpdate": {
+            "$ref": "./examples/ServiceTasks_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service task updated",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "201": {
+            "description": "Service task created",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get service task information",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The GET method retrieves information about a service task.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "ServiceTasks_Get",
+        "x-ms-examples": {
+          "Tasks_Get": {
+            "$ref": "./examples/ServiceTasks_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "description": "Expand the response",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A service task resource",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The DELETE method deletes a service task, canceling it first if it's running.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "DELETE"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deleteRunningTasks"
+          }
+        ],
+        "operationId": "ServiceTasks_Delete",
+        "x-ms-examples": {
+          "Tasks_Delete": {
+            "$ref": "./examples/ServiceTasks_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service Task resource deleted"
+          },
+          "204": {
+            "description": "Not found"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Create or update service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PATCH method updates an existing service task, but since service tasks have no mutable custom properties, there is little reason to do so.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "PATCH"
+        ],
+        "operationId": "ServiceTasks_Update",
+        "x-ms-examples": {
+          "Tasks_Update": {
+            "$ref": "./examples/ServiceTasks_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Task resource updated",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/cancel": {
       "post": {
         "summary": "Cancel a task",
@@ -836,6 +1052,108 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}/cancel": {
+      "post": {
+        "summary": "Cancel a service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method cancels a service task if it's currently queued or running.",
+        "tags": [
+          "Service Task resource",
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "ServiceTasks_Cancel",
+        "x-ms-examples": {
+          "Tasks_Cancel": {
+            "$ref": "./examples/ServiceTasks_Cancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/taskName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Task canceled",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/command": {
+      "post": {
+        "summary": "Execute a command on a task",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method executes a command on a running task.",
+        "tags": [
+          "Task resource",
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "Tasks_Command",
+        "x-ms-examples": {
+          "Tasks_Command": {
+            "$ref": "./examples/Tasks_Command.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/taskName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/command"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Command executed",
+            "schema": {
+              "$ref": "./definitions/Commands.json#/definitions/CommandProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects": {
       "get": {
         "summary": "Get projects in a service",
@@ -845,9 +1163,9 @@
           "Standard operation",
           "GET"
         ],
-        "operationId": "Projects_ListByResourceGroup",
+        "operationId": "Projects_List",
         "x-ms-examples": {
-          "Projects_ListByResourceGroup": {
+          "Projects_List": {
             "$ref": "./examples/Projects_List.json"
           }
         },
@@ -1059,10 +1377,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/apiVersion"
+            "$ref": "#/parameters/location"
           },
           {
-            "$ref": "#/parameters/location"
+            "$ref": "#/parameters/apiVersion"
           },
           {
             "$ref": "#/parameters/requestedName"
@@ -1117,6 +1435,351 @@
             "description": "Quotas returned",
             "schema": {
               "$ref": "./definitions/Common.json#/definitions/QuotaList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataMigration/operations": {
+      "get": {
+        "summary": "Get available resource provider actions (operations)",
+        "description": "Lists all available actions exposed by the Database Migration Service resource provider.",
+        "tags": [
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Got action list",
+            "schema": {
+              "$ref": "./definitions/Services.json#/definitions/ServiceOperationList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files": {
+      "get": {
+        "summary": "Get files in a project",
+        "description": "The project resource is a nested resource representing a stored migration project. This method returns a list of files owned by a project resource.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "Files_List",
+        "x-ms-examples": {
+          "Files_List": {
+            "$ref": "./examples/Files_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "List of files",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/FileList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/groupName"
+        },
+        {
+          "$ref": "#/parameters/serviceName"
+        },
+        {
+          "$ref": "#/parameters/projectName"
+        },
+        {
+          "$ref": "#/parameters/fileName"
+        },
+        {
+          "$ref": "#/parameters/apiVersion"
+        }
+      ],
+      "get": {
+        "summary": "Get file information",
+        "description": "The files resource is a nested, proxy-only resource representing a file stored under the project resource. This method retrieves information about a file.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "Files_Get",
+        "x-ms-examples": {
+          "Files_List": {
+            "$ref": "./examples/Files_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A file resource",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Create a file resource",
+        "description": "The PUT method creates a new file or updates an existing one.",
+        "tags": [
+          "Fie resource",
+          "Standard operation",
+          "PUT"
+        ],
+        "operationId": "Files_CreateOrUpdate",
+        "x-ms-examples": {
+          "Files_CreateOrUpdate": {
+            "$ref": "./examples/Files_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectFile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File updated",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "201": {
+            "description": "File created",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete file",
+        "description": "This method deletes a file.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "DELETE"
+        ],
+        "operationId": "Files_Delete",
+        "x-ms-examples": {
+          "Files_Delete": {
+            "$ref": "./examples/Files_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "File resource deleted"
+          },
+          "204": {
+            "description": "Not found"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a file",
+        "description": "This method updates an existing file.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "PATCH"
+        ],
+        "operationId": "Files_Update",
+        "x-ms-examples": {
+          "Files_Update": {
+            "$ref": "./examples/Files_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectFile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File resource updated",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}/read": {
+      "post": {
+        "summary": "Request storage information for downloading the file content",
+        "description": "This method is used for requesting storage information using which contents of the file can be downloaded.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "POST"
+        ],
+        "operationId": "Files_Read",
+        "x-ms-examples": {
+          "Files_List": {
+            "$ref": "./examples/Files_Read.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/fileName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object describing how to access the file content",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/FileStorageInfo"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}/readwrite": {
+      "post": {
+        "summary": "Request information for reading and writing file content.",
+        "description": "This method is used for requesting information for reading and writing the file content.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "POST"
+        ],
+        "operationId": "Files_ReadWrite",
+        "x-ms-examples": {
+          "Files_List": {
+            "$ref": "./examples/Files_ReadWrite.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/fileName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object describing how to access the file content",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/FileStorageInfo"
             }
           },
           "default": {
@@ -1247,6 +1910,34 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "command": {
+      "name": "parameters",
+      "description": "Command to execute",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "./definitions/Commands.json#/definitions/CommandProperties"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "projectFile": {
+      "name": "parameters",
+      "description": "Information about the file",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "fileName": {
+      "name": "fileName",
+      "description": "Name of the File",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

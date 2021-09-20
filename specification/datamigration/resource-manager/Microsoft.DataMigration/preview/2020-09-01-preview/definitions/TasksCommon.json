@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -23,88 +23,71 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the database",
-          "readOnly": true
+          "description": "Unique identifier for the database"
         },
         "name": {
           "type": "string",
-          "description": "Name of the database",
-          "readOnly": true
+          "description": "Name of the database"
         },
         "compatibilityLevel": {
           "$ref": "#/definitions/DatabaseCompatLevel",
-          "description": "SQL Server compatibility level of database",
-          "readOnly": true
+          "description": "SQL Server compatibility level of database"
         },
         "collation": {
           "type": "string",
-          "description": "Collation name of the database",
-          "readOnly": true
+          "description": "Collation name of the database"
         },
         "serverName": {
           "type": "string",
-          "description": "Name of the server",
-          "readOnly": true
+          "description": "Name of the server"
         },
         "fqdn": {
           "type": "string",
-          "description": "Fully qualified name",
-          "readOnly": true
+          "description": "Fully qualified name"
         },
         "installId": {
           "type": "string",
-          "description": "Install id of the database",
-          "readOnly": true
+          "description": "Install id of the database"
         },
         "serverVersion": {
           "type": "string",
-          "description": "Version of the server",
-          "readOnly": true
+          "description": "Version of the server"
         },
         "serverEdition": {
           "type": "string",
-          "description": "Edition of the server",
-          "readOnly": true
+          "description": "Edition of the server"
         },
         "serverLevel": {
           "type": "string",
-          "description": "Product level of the server (RTM, SP, CTP).",
-          "readOnly": true
+          "description": "Product level of the server (RTM, SP, CTP)."
         },
         "serverDefaultDataPath": {
           "type": "string",
-          "description": "Default path of the data files",
-          "readOnly": true
+          "description": "Default path of the data files"
         },
         "serverDefaultLogPath": {
           "type": "string",
-          "description": "Default path of the log files",
-          "readOnly": true
+          "description": "Default path of the log files"
         },
         "serverDefaultBackupPath": {
           "type": "string",
-          "description": "Default path of the backup folder",
-          "readOnly": true
+          "description": "Default path of the backup folder"
         },
         "serverCoreCount": {
           "type": "integer",
-          "description": "Number of cores on the server",
-          "readOnly": true
+          "description": "Number of cores on the server"
         },
         "serverVisibleOnlineCoreCount": {
           "type": "integer",
-          "description": "Number of cores on the server that have VISIBLE ONLINE status",
-          "readOnly": true
+          "description": "Number of cores on the server that have VISIBLE ONLINE status"
         },
         "databaseState": {
           "$ref": "#/definitions/DatabaseState",
-          "description": "State of the database",
-          "readOnly": true
+          "description": "State of the database"
         },
         "serverId": {
           "type": "string",
-          "description": "The unique Server Id",
-          "readOnly": true
+          "description": "The unique Server Id"
         }
       }
     },
@@ -156,6 +139,60 @@
       ],
       "x-ms-enum": {
         "name": "ObjectType",
+        "modelAsString": true
+      }
+    },
+    "ScenarioSource": {
+      "type": "string",
+      "description": "An enumeration of source type",
+      "enum": [
+        "Access",
+        "DB2",
+        "MySQL",
+        "Oracle",
+        "SQL",
+        "Sybase",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLRDS",
+        "MySQLRDS",
+        "PostgreSQLRDS"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioSource",
+        "modelAsString": true
+      }
+    },
+    "ScenarioTarget": {
+      "type": "string",
+      "description": "An enumeration of target type",
+      "enum": [
+        "SQLServer",
+        "SQLDB",
+        "SQLDW",
+        "SQLMI",
+        "AzureDBForMySql",
+        "AzureDBForPostgresSQL",
+        "MongoDB"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioTarget",
+        "modelAsString": true
+      }
+    },
+    "ReplicateMigrationState": {
+      "type": "string",
+      "description": "Wrapper for replicate reported migration states.",
+      "enum": [
+        "UNDEFINED",
+        "VALIDATING",
+        "PENDING",
+        "COMPLETE",
+        "ACTION_REQUIRED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicateMigrationState",
         "modelAsString": true
       }
     },
@@ -674,8 +711,7 @@
           "readOnly": true
         },
         "type": {
-          "$ref": "#/definitions/ErrorType",
-          "description": "Type of error."
+          "$ref": "#/definitions/ErrorType"
         }
       }
     },
@@ -824,7 +860,7 @@
     },
     "ConnectToSourceNonSqlTaskOutput": {
       "type": "object",
-      "description": "Output for connect to Oracle, MySQL type source",
+      "description": "Output for connect to MySQL type source",
       "properties": {
         "id": {
           "type": "string",
@@ -861,7 +897,7 @@
     },
     "ServerProperties": {
       "type": "object",
-      "description": "Server properties for Oracle, MySQL type source",
+      "description": "Server properties for MySQL type source",
       "properties": {
         "serverPlatform": {
           "type": "string",
@@ -1058,7 +1094,14 @@
         "COMPLETE",
         "CANCELLING",
         "CANCELLED",
-        "FAILED"
+        "FAILED",
+        "VALIDATING",
+        "VALIDATION_COMPLETE",
+        "VALIDATION_FAILED",
+        "RESTORE_IN_PROGRESS",
+        "RESTORE_COMPLETED",
+        "BACKUP_IN_PROGRESS",
+        "BACKUP_COMPLETED"
       ],
       "x-ms-enum": {
         "name": "SyncDatabaseMigrationReportingState",
@@ -1198,6 +1241,61 @@
       ],
       "x-ms-enum": {
         "name": "DatabaseMigrationState",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationInfo": {
+      "type": "object",
+      "description": "SSIS migration info with SSIS store type, overwrite policy.",
+      "properties": {
+        "ssisStoreType": {
+          "$ref": "#/definitions/SsisStoreType",
+          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS"
+        },
+        "projectOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS project migration"
+        },
+        "environmentOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS environment migration"
+        }
+      }
+    },
+    "SsisStoreType": {
+      "type": "string",
+      "description": "An enumeration of supported source SSIS store type in DMS",
+      "enum": [
+        "SsisCatalog"
+      ],
+      "x-ms-enum": {
+        "name": "SsisStoreType",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationOverwriteOption": {
+      "type": "string",
+      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object",
+      "enum": [
+        "Ignore",
+        "Overwrite"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationOverwriteOption",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationStage": {
+      "type": "string",
+      "description": "Current stage of SSIS migration",
+      "enum": [
+        "None",
+        "Initialize",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationStage",
         "modelAsString": true
       }
     }

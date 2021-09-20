@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -24,6 +24,21 @@
         "targetConnectionInfo": {
           "description": "Connection information for target SQL Server",
           "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "collectLogins": {
+          "type": "boolean",
+          "description": "Flag for whether to collect logins from target SQL MI server.",
+          "default": true
+        },
+        "collectAgentJobs": {
+          "type": "boolean",
+          "description": "Flag for whether to collect agent jobs from target SQL MI server.",
+          "default": true
+        },
+        "validateSsisCatalogOnly": {
+          "type": "boolean",
+          "description": "Flag for whether to validate SSIS catalog is reachable on the target SQL MI server.",
+          "default": false
         }
       },
       "required": [

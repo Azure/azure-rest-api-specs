@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -29,6 +29,11 @@
           "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
           "description": "Permission group for validations"
         },
+        "collectDatabases": {
+          "type": "boolean",
+          "description": "Flag for whether to collect databases from source server.",
+          "default": true
+        },
         "collectLogins": {
           "type": "boolean",
           "description": "Flag for whether to collect logins from source server.",
@@ -37,6 +42,16 @@
         "collectAgentJobs": {
           "type": "boolean",
           "description": "Flag for whether to collect agent jobs from source server.",
+          "default": false
+        },
+        "collectTdeCertificateInfo": {
+          "type": "boolean",
+          "description": "Flag for whether to collect TDE Certificate names from source server.",
+          "default": false
+        },
+        "validateSsisCatalogOnly": {
+          "type": "boolean",
+          "description": "Flag for whether to validate SSIS catalog is reachable on the source server.",
           "default": false
         }
       },
@@ -87,6 +102,14 @@
         "agentJobs": {
           "type": "string",
           "description": "Source agent jobs as a map from agent job name to id.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "databaseTdeCertificateMapping": {
+          "type": "string",
+          "description": "Mapping from database name to TDE certificate name, if applicable",
           "additionalProperties": {
             "type": "string"
           },
@@ -198,33 +221,41 @@
     "ConnectToSourceSqlServerTaskOutputAgentJobLevel": {
       "x-ms-discriminator-value": "AgentJobLevelOutput",
       "type": "object",
-      "description": "AgentJob level output for the task that validates connection to SQL Server and also validates source server requirements",
+      "description": "Agent Job level output for the task that validates connection to SQL Server and also validates source server requirements",
       "properties": {
         "name": {
           "type": "string",
-          "description": "AgentJob name",
+          "description": "Agent Job name",
           "readOnly": true
         },
         "jobCategory": {
           "type": "string",
-          "description": "The type of AgentJob.",
+          "description": "The type of Agent Job.",
           "readOnly": true
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "The state of the original AgentJob.",
+          "description": "The state of the original Agent Job.",
           "readOnly": true
         },
         "jobOwner": {
           "type": "string",
-          "description": "The owner of the AgentJob",
+          "description": "The owner of the Agent Job",
           "readOnly": true
         },
         "lastExecutedOn": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "UTC Date and time when the AgentJob was last executed."
+          "description": "UTC Date and time when the Agent Job was last executed."
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
         },
         "migrationEligibility": {
           "$ref": "./TasksCommon.json#/definitions/MigrationEligibilityInfo",

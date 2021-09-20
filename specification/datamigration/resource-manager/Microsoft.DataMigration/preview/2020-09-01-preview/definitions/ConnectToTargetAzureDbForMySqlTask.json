@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2020-09-01-preview"
+    "version": "2021-06-30"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -28,6 +28,11 @@
         "targetConnectionInfo": {
           "description": "Connection information for target Azure Database for MySQL server",
           "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "isOfflineMigration": {
+          "type": "boolean",
+          "description": "Flag for whether or not the migration is offline",
+          "default": false
         }
       },
       "required": [
