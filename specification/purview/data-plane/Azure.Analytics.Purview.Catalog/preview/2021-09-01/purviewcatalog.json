@@ -3558,6 +3558,141 @@
           }
         }
       }
+    },
+    "/collections/{collection}/entity": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates an entity to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "Collection_CreateOrUpdate",
+        "x-ms-examples": {
+          "Collection_CreateOrUpdate": {
+            "$ref": "./examples/Collection_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entity",
+            "description": "Atlas entity with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/bulk": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates entities in bulk to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "Collection_CreateOrUpdateBulk",
+        "x-ms-examples": {
+          "Collection_CreateOrUpdateBulk": {
+            "$ref": "./examples/Collection_CreateOrUpdateBulk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entities",
+            "description": "Atlas entities with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/moveHere": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Move existing entities to the target collection.",
+        "operationId": "Collection_MoveEntitiesToCollection",
+        "x-ms-examples": {
+          "Collection_MoveEntitiesToCollection": {
+            "$ref": "./examples/Collection_MoveEntitiesToCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "moveEntitiesRequest",
+            "description": "Entity guids to be moved to target collection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveEntitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5189,6 +5324,18 @@
       "title": "ClassificationAssociateRequest",
       "description": "The request for classification association."
     },
+    "MoveEntitiesRequest": {
+      "type": "object",
+      "properties": {
+        "entityGuids": {
+          "type": "array",
+          "description": "An array of entity guids to be moved to target collection.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DateFormat": {
       "type": "object",
       "title": "DateFormat",
@@ -6674,6 +6821,14 @@
         "name": "type",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "collection": {
+      "name": "collection",
+      "description": "the collection unique name",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

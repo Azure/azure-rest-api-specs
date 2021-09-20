@@ -42,7 +42,7 @@
   ],
   "responses": {},
   "parameters": {
-    "ElevationApiVersion": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -57,7 +57,7 @@
       "get": {
         "summary": "Get Elevation Data on One or More Points",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat,long coordinate format.\n\n Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
-        "operationId": "Elevation_GetDataForPoints",
+        "operationId": "GetDataForPoints",
         "x-ms-examples": {
           "GetDataForPoints": {
             "$ref": "./examples/GetDataForPoints.json"
@@ -68,10 +68,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ElevationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "points",
@@ -102,7 +102,7 @@
       "post": {
         "summary": "Query Elevation Data for Multiple Points",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined lon/lat coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
-        "operationId": "Elevation_PostDataForPoints",
+        "operationId": "PostDataForPoints",
         "x-ms-examples": {
           "PostDataForPoints": {
             "$ref": "./examples/PostDataForPoints.json"
@@ -113,10 +113,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ElevationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "pointsRequestBody",
@@ -145,7 +145,7 @@
       "get": {
         "summary": "Get Elevation Data Along a Polyline",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline.\n\n A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and endpoints and equally spaced  points along the polyline will be returned.\n\n A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
-        "operationId": "Elevation_GetDataForPolyline",
+        "operationId": "GetDataForPolyline",
         "x-ms-examples": {
           "GetDataForPolyLine": {
             "$ref": "./examples/GetDataForPolyline.json"
@@ -156,10 +156,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ElevationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "lines",
@@ -198,7 +198,7 @@
       "post": {
         "summary": "Query Elevation Data Along a Polyline",
         "description": "**Applies to**: S1 pricing tier.\n\n The Post Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide  polyline into equally spaced segments.\n\n Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
-        "operationId": "Elevation_PostDataForPolyline",
+        "operationId": "PostDataForPolyline",
         "x-ms-examples": {
           "PostDataForPolyLine": {
             "$ref": "./examples/PostDataForPolyline.json"
@@ -209,10 +209,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ElevationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "linesRequestBody",
@@ -249,7 +249,7 @@
       "get": {
         "summary": "Get Elevation Data at Equally Spaced Locations Within a Bounding Box",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally spaced locations within a bounding box. A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns.\n\n Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2,000 elevations can be returned in a single request. The returned elevation values are ordered,  starting at the southwest corner, and then proceeding west to east along the row. At the end of the row,  it moves north to the next row, and repeats the process until it reaches the far northeast corner.",
-        "operationId": "Elevation_GetDataForBoundingBox",
+        "operationId": "GetDataForBoundingBox",
         "x-ms-examples": {
           "GetDataForBoundingBox": {
             "$ref": "./examples/GetDataForBoundingBox.json"
@@ -260,10 +260,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ElevationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "bounds",
