@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ValidateMigrationInputSqlServerSqlMITaskInput": {
+      "type": "object",
+      "description": "Input for task that validates migration input for SQL to Azure SQL Managed Instance",
+      "properties": {
+        "sourceConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Information for connecting to source"
+        },
+        "targetConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Information for connecting to target"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlMIDatabaseInput"
+          }
+        },
+        "selectedLogins": {
+          "type": "array",
+          "description": "Logins to migrate",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backupFileShare": {
+          "$ref": "./TasksCommon.json#/definitions/FileShare",
+          "description": "Backup file share information for all selected databases."
+        },
+        "backupBlobShare": {
+          "$ref": "./TasksCommon.json#/definitions/BlobShare",
+          "description": "SAS URI of Azure Storage Account Container to be used for storing backup files."
+        },
+        "backupMode": {
+          "$ref": "./TasksCommon.json#/definitions/BackupMode",
+          "description": "Backup Mode to specify whether to use existing backup or create new backup."
+        }
+      },
+      "required": [
+        "sourceConnectionInfo",
+        "targetConnectionInfo",
+        "selectedDatabases",
+        "backupBlobShare"
+      ]
+    },
+    "ValidateMigrationInputSqlServerSqlMITaskOutput": {
+      "type": "object",
+      "description": "Output for task that validates migration input for SQL to Azure SQL Managed Instance migrations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of database",
+          "readOnly": true
+        },
+        "restoreDatabaseNameErrors": {
+          "description": "Errors associated with the RestoreDatabaseName",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "backupFolderErrors": {
+          "description": "Errors associated with the BackupFolder path",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "backupShareCredentialsErrors": {
+          "description": "Errors associated with backup share user name and password credentials",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "backupStorageAccountErrors": {
+          "description": "Errors associated with the storage account provided.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "existingBackupErrors": {
+          "description": "Errors associated with existing backup files.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "databaseBackupInfo": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseBackupInfo",
+          "description": "Information about backup files when existing backup mode is used."
+        }
+      }
+    }
+  }
+}
