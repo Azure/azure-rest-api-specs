@@ -1050,6 +1050,12 @@
           },
           "Create Agent Pool with Krustlet and the WASI runtime": {
             "$ref": "./examples/AgentPoolsCreate_WasmWasi.json"
+          },
+          "Stop Agent Pool" : {
+            "$ref": "./examples/AgentPools_Stop.json"
+          },
+          "Start Agent Pool" : {
+            "$ref": "./examples/AgentPools_Start.json"
           }
         }
       },
@@ -2693,7 +2699,6 @@
           "description": "The current deployment or provisioning state."
         },
         "powerState": {
-          "readOnly": true,
           "description": "Describes whether the Agent Pool is Running or Stopped",
           "$ref": "#/definitions/PowerState"
         },
