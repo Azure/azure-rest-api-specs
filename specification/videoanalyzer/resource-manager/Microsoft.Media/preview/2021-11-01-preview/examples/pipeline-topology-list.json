@@ -12,20 +12,20 @@
         "value": [
           {
             "name": "pipelineTopology1",
-            "kind": "live",
+            "kind": "Live",
             "properties": {
               "description": "Pipeline Topology 1 Description",
               "parameters": [
                 {
                   "name": "rtspUrlParameter",
-                  "type": "string",
-                  "description": "rtsp source url parameter",
+                  "type": "String",
+                  "description": "rtspUrlParameter declaration",
                   "default": "rtsp://microsoft.com/video.mp4"
                 },
                 {
                   "name": "rtspPasswordParameter",
-                  "type": "secretString",
-                  "description": "rtsp source password parameter",
+                  "type": "SecretString",
+                  "description": "rtspPasswordParameter declaration",
                   "default": "password"
                 }
               ],
@@ -33,7 +33,7 @@
                 {
                   "@type": "#Microsoft.VideoAnalyzer.RtspSource",
                   "name": "rtspSource",
-                  "transport": "http",
+                  "transport": "Http",
                   "endpoint": {
                     "url": "${rtspUrlParameter}",
                     "credentials": {
@@ -72,25 +72,25 @@
               "lastModifiedAt": "0001-01-01T00:00:00Z"
             },
             "sku": {
-              "name": "live_S1",
-              "tier": "standard"
+              "name": "Live_S1",
+              "tier": "Standard"
             }
           },
           {
             "name": "pipelineTopology2",
-            "kind": "live",
+            "kind": "Live",
             "properties": {
               "description": "Pipeline Topology 2 Description",
               "parameters": [
                 {
                   "name": "rtspUrlParameter",
-                  "type": "string",
+                  "type": "String",
                   "description": "rtspUrlParameter declaration",
                   "default": "rtsp://microsoft.com/video.mp4"
                 },
                 {
                   "name": "rtspPasswordParameter",
-                  "type": "secretString",
+                  "type": "SecretString",
                   "description": "rtspPasswordParameter declaration",
                   "default": "password"
                 }
@@ -99,7 +99,7 @@
                 {
                   "@type": "#Microsoft.VideoAnalyzer.RtspSource",
                   "name": "rtspSource",
-                  "transport": "http",
+                  "transport": "Http",
                   "endpoint": {
                     "@type": "#Microsoft.VideoAnalyzer.TlsEndpoint",
                     "url": "${rtspUrlParameter}",
@@ -149,8 +149,8 @@
               "lastModifiedAt": "0001-01-01T00:00:00Z"
             },
             "sku": {
-              "name": "live_S1",
-              "tier": "standard"
+              "name": "Live_S1",
+              "tier": "Standard"
             }
           }
         ]

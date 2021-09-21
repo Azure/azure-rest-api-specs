@@ -27,63 +27,23 @@
     }
   },
   "definitions": {
-    "PipelineProperties": {
-      "properties": {
-        "topologyName": {
-          "type": "string",
-          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
-        },
-        "description": {
-          "type": "string",
-          "description": "An optional description for the pipeline."
-        },
-        "parameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ParameterDefinition"
-          },
-          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
-        }
-      },
-      "type": "object",
-      "required": [
-        "topologyName"
-      ]
-    },
-    "ParameterDefinition": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the parameter declared in the pipeline topology."
-        },
-        "value": {
-          "type": "string",
-          "description": "Parameter value to be applied on this specific pipeline."
-        }
-      },
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "description": "Defines the parameter value of an specific pipeline topology parameter. See pipeline topology parameters for more information."
-    },
     "Sku": {
       "properties": {
         "name": {
           "type": "string",
           "enum": [
-            "live_S1",
-            "batch_S1"
+            "Live_S1",
+            "Batch_S1"
           ],
           "x-ms-enum": {
-            "name": "skuName",
+            "name": "SkuName",
             "values": [
               {
-                "value": "live_S1",
+                "value": "Live_S1",
                 "description": "Live S1 sku name."
               },
               {
-                "value": "batch_S1",
+                "value": "Batch_S1",
                 "description": "Batch S1 sku name."
               }
             ],
@@ -94,13 +54,13 @@
         "tier": {
           "type": "string",
           "enum": [
-            "standard"
+            "Standard"
           ],
           "x-ms-enum": {
-            "name": "tier",
+            "name": "Tier",
             "values": [
               {
-                "value": "standard",
+                "value": "Standard",
                 "description": "Standard tier."
               }
             ],
@@ -168,33 +128,33 @@
         "type": {
           "type": "string",
           "enum": [
-            "string",
-            "secretString",
-            "int",
-            "double",
-            "bool"
+            "String",
+            "SecretString",
+            "Int",
+            "Double",
+            "Bool"
           ],
           "x-ms-enum": {
-            "name": "parameterType",
+            "name": "ParameterType",
             "values": [
               {
-                "value": "string",
+                "value": "String",
                 "description": "The parameter's value is a string."
               },
               {
-                "value": "secretString",
+                "value": "SecretString",
                 "description": "The parameter's value is a string that holds sensitive information."
               },
               {
-                "value": "int",
+                "value": "Int",
                 "description": "The parameter's value is a 32-bit signed integer."
               },
               {
-                "value": "double",
+                "value": "Double",
                 "description": "The parameter's value is a 64-bit double-precision floating point."
               },
               {
-                "value": "bool",
+                "value": "Bool",
                 "description": "The parameter's value is a boolean value that is either true or false."
               }
             ],
@@ -337,18 +297,18 @@
         "transport": {
           "type": "string",
           "enum": [
-            "http",
-            "tcp"
+            "Http",
+            "Tcp"
           ],
           "x-ms-enum": {
-            "name": "rtspTransport",
+            "name": "RtspTransport",
             "values": [
               {
-                "value": "http",
+                "value": "Http",
                 "description": "HTTP transport. RTSP messages are exchanged over long running HTTP requests and RTP packets are interleaved within the HTTP channel."
               },
               {
-                "value": "tcp",
+                "value": "Tcp",
                 "description": "TCP transport. RTSP is used directly over TCP and RTP packets are interleaved within the TCP channel."
               }
             ],
@@ -652,28 +612,28 @@
         "name": {
           "type": "string",
           "enum": [
-            "singleLayer_540p_H264_AAC",
-            "singleLayer_720p_H264_AAC",
-            "singleLayer_1080p_H264_AAC",
-            "singleLayer_2160p_H264_AAC"
+            "SingleLayer_540p_H264_AAC",
+            "SingleLayer_720p_H264_AAC",
+            "SingleLayer_1080p_H264_AAC",
+            "SingleLayer_2160p_H264_AAC"
           ],
           "x-ms-enum": {
-            "name": "encoderSystemPresetType",
+            "name": "EncoderSystemPresetType",
             "values": [
               {
-                "value": "singleLayer_540p_H264_AAC",
+                "value": "SingleLayer_540p_H264_AAC",
                 "description": "SingleLayer 540p H264 video codec and AAC audio codec encoder system preset."
               },
               {
-                "value": "singleLayer_720p_H264_AAC",
+                "value": "SingleLayer_720p_H264_AAC",
                 "description": "SingleLayer 720p H264 video codec and AAC audio codec encoder system preset."
               },
               {
-                "value": "singleLayer_1080p_H264_AAC",
+                "value": "SingleLayer_1080p_H264_AAC",
                 "description": "SingleLayer 1080p H264 video codec and AAC audio codec encoder system preset."
               },
               {
-                "value": "singleLayer_2160p_H264_AAC",
+                "value": "SingleLayer_2160p_H264_AAC",
                 "description": "SingleLayer 2160p H264 video codec and AAC audio codec encoder system preset."
               }
             ],
@@ -776,23 +736,23 @@
         "mode": {
           "type": "string",
           "enum": [
-            "pad",
-            "preserveAspectRatio",
-            "stretch"
+            "Pad",
+            "PreserveAspectRatio",
+            "Stretch"
           ],
           "x-ms-enum": {
-            "name": "videoScaleMode",
+            "name": "VideoScaleMode",
             "values": [
               {
-                "value": "pad",
+                "value": "Pad",
                 "description": "Pads the video with black horizontal stripes (letterbox) or black vertical stripes (pillar-box) so the video is resized to the specified dimensions while not altering the content aspect ratio."
               },
               {
-                "value": "preserveAspectRatio",
+                "value": "PreserveAspectRatio",
                 "description": "Preserves the same aspect ratio as the input video. If only one video dimension is provided, the second dimension is calculated based on the input video aspect ratio. When 2 dimensions are provided, the video is resized to fit the most constraining dimension, considering the input video size and aspect ratio."
               },
               {
-                "value": "stretch",
+                "value": "Stretch",
                 "description": "Stretches the original video so it resized to the specified dimensions."
               }
             ],
@@ -882,6 +842,23 @@
       "type": "object",
       "description": "Options for changing video publishing behavior on the video sink and output video."
     },
+    "ParameterDefinition": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter declared in the pipeline topology."
+        },
+        "value": {
+          "type": "string",
+          "description": "Parameter value to be applied on this specific pipeline."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Defines the parameter value of an specific pipeline topology parameter. See pipeline topology parameters for more information."
+    },
     "PipelineTopology": {
       "allOf": [
         {
@@ -902,23 +879,24 @@
         "kind": {
           "type": "string",
           "enum": [
-            "live",
-            "batch"
+            "Live",
+            "Batch"
           ],
           "x-ms-enum": {
-            "name": "kind",
+            "name": "Kind",
             "values": [
               {
-                "value": "live",
+                "value": "Live",
                 "description": "Live pipeline topology resource."
               },
               {
-                "value": "batch",
+                "value": "Batch",
                 "description": "Batch pipeline topology resource."
               }
             ],
             "modelAsString": true
-          }
+          },
+          "description": "Topology kind."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -933,12 +911,15 @@
       "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\\r\\n\\r\\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\\r\\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\\r\\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
     },
     "LivePipelineProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PipelineProperties"
-        }
-      ],
       "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
         "bitrateKbps": {
           "type": "integer",
           "format": "int32",
@@ -947,28 +928,28 @@
         "state": {
           "type": "string",
           "enum": [
-            "inactive",
-            "activating",
-            "active",
-            "deactivating"
+            "Inactive",
+            "Activating",
+            "Active",
+            "Deactivating"
           ],
           "x-ms-enum": {
-            "name": "livePipelineState",
+            "name": "LivePipelineState",
             "values": [
               {
-                "value": "inactive",
+                "value": "Inactive",
                 "description": "The live pipeline is idle and not processing media."
               },
               {
-                "value": "activating",
+                "value": "Activating",
                 "description": "The live pipeline is transitioning into the active state."
               },
               {
-                "value": "active",
+                "value": "Active",
                 "description": "The live pipeline is active and able to process media. If your data source is not available, for instance, if your RTSP camera is powered off or unreachable, the pipeline will still be active and periodically retrying the connection. Your Azure subscription will be billed for the duration in which the live pipeline is in the active state."
               },
               {
-                "value": "deactivating",
+                "value": "Deactivating",
                 "description": "The live pipeline is transitioning into the inactive state."
               }
             ],
@@ -977,10 +958,18 @@
           "description": "Current pipeline state (read-only).",
           "readOnly": true,
           "x-nullable": false
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
         }
       },
       "type": "object",
       "required": [
+        "topologyName",
         "bitrateKbps"
       ],
       "description": "Live pipeline properties."
@@ -1007,37 +996,40 @@
       "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
     },
     "PipelineJobProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PipelineProperties"
-        }
-      ],
       "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
         "state": {
           "type": "string",
           "enum": [
-            "processing",
-            "canceled",
-            "completed",
-            "failed"
+            "Processing",
+            "Canceled",
+            "Completed",
+            "Failed"
           ],
           "x-ms-enum": {
-            "name": "pipelineJobState",
+            "name": "PipelineJobState",
             "values": [
               {
-                "value": "processing",
+                "value": "Processing",
                 "description": "Pipeline job is processing."
               },
               {
-                "value": "canceled",
+                "value": "Canceled",
                 "description": "Pipeline job is canceled."
               },
               {
-                "value": "completed",
+                "value": "Completed",
                 "description": "Pipeline job completed."
               },
               {
-                "value": "failed",
+                "value": "Failed",
                 "description": "Pipeline job failed."
               }
             ],
@@ -1058,9 +1050,19 @@
           "$ref": "#/definitions/PipelineJobError",
           "description": "An optional error information about the pipeline job failure.",
           "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
         }
       },
       "type": "object",
+      "required": [
+        "topologyName"
+      ],
       "description": "Properties of a pipeline job."
     },
     "PipelineJobError": {
