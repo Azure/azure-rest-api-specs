@@ -30,7 +30,7 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2020-10
+### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
