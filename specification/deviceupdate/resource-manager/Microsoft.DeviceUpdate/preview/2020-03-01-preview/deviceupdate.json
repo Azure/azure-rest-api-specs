@@ -871,7 +871,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -919,7 +919,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/GroupInformation"
             }
           },
           "default": {
@@ -976,10 +976,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "properties": {
           "description": "Device Update account properties.",
           "x-ms-client-flatten": true,
@@ -1054,10 +1050,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "properties": {
           "description": "Device Update instance properties.",
           "x-ms-client-flatten": true,
@@ -1201,6 +1193,67 @@
           "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
           "additionalProperties": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "The available private link resources for an Account",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private link resources for an Account",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupInformation"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "GroupInformation": {
+      "description": "The group information for creating a private endpoint on an Account",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties for a group information object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GroupInformationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GroupInformationProperties": {
+      "description": "The properties for a group information object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of private link group ID.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GroupIdProvisioningState",
+            "modelAsString": true
           }
         }
       }
