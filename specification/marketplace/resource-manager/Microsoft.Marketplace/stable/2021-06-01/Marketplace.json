@@ -1334,6 +1334,48 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "notificationsSettings": {
+          "description": "Gets or sets notifications settings",
+          "$ref": "#/definitions/NotificationsSettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NotificationsSettingsProperties": {
+      "description": "Describes the json payload for notifications settings",
+      "type": "object",
+      "properties": {
+        "recipients": {
+          "description": "Gets or sets list of notified recipients for new requests",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipient"
+          }
+        },
+        "sendToAllMarketplaceAdmins": {
+          "description": "Gets or sets whether to send email to all marketplace admins for new requests",
+          "type": "boolean"
+        }
+      }
+    },
+    "Recipient": {
+      "description": "Describes the json payload for a notified recipient for new requests",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal ID",
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email Address",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display Name",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

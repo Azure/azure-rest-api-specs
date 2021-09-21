@@ -478,6 +478,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
@@ -516,12 +517,14 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AZ
 
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Suppression
 
 ``` yaml
-directive:  
+directive:
   - suppress: R4009
     from: apimapis.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
@@ -557,53 +560,56 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimnamedvalues.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimgateways.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimgroups.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimcontenttypes.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimdeletedservices.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimdiagnostics.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimemailtemplates.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimidentityprovider.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimissues.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimloggers.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimopenidconnectproviders.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimpolicies.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimportalrevisions.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimsettings.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimtags.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimtenant.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimnotifications.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4037
+    from: definitions.json
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise
 ```
