@@ -25,29 +25,29 @@ These are the global settings for the FileStorage API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-10
+tag: package-2021-02
 use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2020-10
+### Tag: package-2021-02
 
-These settings apply only when `--tag=package-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10'
+``` yaml $(tag) == 'package-2021-02'
 input-file:
-- preview/2020-10-02/file.json
+- preview/2021-02-12/file.json
 ```
 
 ### Suppression
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: preview/2020-10-02/file.json
+    from: preview/2021-02-12/file.json
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
-    from: preview/2020-10-02/file.json
+    from: preview/2021-02-12/file.json
   - suppress: XmsExamplesRequired
-    from: preview/2020-10-02/file.json
+    from: preview/2021-02-12/file.json
 ```
 ---

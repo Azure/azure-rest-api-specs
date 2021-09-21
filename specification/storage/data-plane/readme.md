@@ -32,13 +32,13 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: blob-package-2020-10
+### Tag: blob-package-2021-02
 
-These settings apply only when `--tag=blob-package-2020-10` is specified on the command line.
+These settings apply only when `--tag=blob-package-2021-02` is specified on the command line.
 
-``` yaml $(tag) == 'blob-package-2020-10'
+``` yaml $(tag) == 'blob-package-2021-02'
 input-file:
-- Microsoft.BlobStorage/preview/2020-10-02/blob.json
+- Microsoft.BlobStorage/preview/2021-02-12/blob.json
 ```
 
 ### Tag: datalake-package-2020-06
@@ -50,13 +50,13 @@ input-file:
 - Microsoft.StorageDataLake/stable/2020-06-12/DataLakeStorage.json
 ```
 
-### Tag: file-package-2020-10
+### Tag: file-package-2021-02
 
-These settings apply only when `--tag=file-package-2020-10` is specified on the command line.
+These settings apply only when `--tag=file-package-2021-02` is specified on the command line.
 
-``` yaml $(tag) == 'file-package-2020-10'
+``` yaml $(tag) == 'file-package-2021-02'
 input-file:
-- Microsoft.FileStorage/preview/2020-10-02/file.json
+- Microsoft.FileStorage/preview/2021-02-12/file.json
 ```
 
 ### Tag: queue-package-2018-03
