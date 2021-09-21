@@ -47,6 +47,9 @@ directive:
     where: $.definitions.Identity.properties.type
     from: deviceupdate.json
     reason: Managed Identity type can be case in-sensitive
+  - suppress: R4031
+    from: deviceupdate.json
+    reason: Common PrivateLinkResource type does not have the ProvisioningState defined
 ```
 
 ---
