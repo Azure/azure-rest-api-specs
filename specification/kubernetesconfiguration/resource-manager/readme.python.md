@@ -10,7 +10,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.kubernetesconfiguration
 package-name: azure-mgmt-kubernetesconfiguration
 no-namespace-folders: true
-package-version: 1.0.0b1
+package-version: 1.1.0
 clear-output-folder: true
 ```
 
@@ -22,6 +22,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch: 
   - tag: package-preview-2021-10
+  - tag: package-2021-09
   - tag: package-preview-2021-05
   - tag: package-2021-03
   - tag: package-preview-2020-10
@@ -43,6 +44,15 @@ These settings apply only when `--tag=package-preview-2021-10 --python` is speci
 ``` yaml $(tag) == 'package-preview-2021-10'
 namespace: azure.mgmt.kubernetesconfiguration.v2021_10_01_preview
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2021_10_01_preview
+```
+
+### Tag: package-2021-09 and python
+
+These settings apply only when `--tag=package-2021-09 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09'
+namespace: azure.mgmt.kubernetesconfiguration.v2021_09_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2021_09_01
 ```
 
 ### Tag: package-preview-2021-05 and python

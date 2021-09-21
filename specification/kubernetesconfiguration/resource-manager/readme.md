@@ -96,6 +96,15 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/operations.json
 ```
 
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
+```
+
 ### Tag: package-preview-2021-05
 
 These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
@@ -145,15 +154,52 @@ input-file:
 ```
 
 ## Suppression
-
-``` yaml
+```yaml
 directive:
   - suppress: TopLevelResourcesListBySubscription
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    from: kubernetesconfiguration.json
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
     from: extensions.json
-    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes and Microsoft.ContainerServices'
+  - suppress: TopLevelResourcesListBySubscription
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    from: extensions.json
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
+    from: fluxconfiguration.json
   - suppress: TopLevelResourcesListBySubscription
     from: fluxconfiguration.json
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes and Microsoft.ContainerServices'
+  - suppress: BodyTopLevelProperties
+    where: $.definitions.Extension.properties
+    from: extensions.json
+    reason: |-
+      https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources
+
+      The systemData should be top level element based on the new requirement: 
+      {
+        "id": "/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}",
+        "name": "{name}",
+        "type": "{resourceProviderNamespace}/{resourceType}",
+        "location": "North US",
+        "systemData":{
+            "createdBy": "<string>",
+            "createdByType": "<User|Application|ManagedIdentity|Key>",
+            "createdAt": "<date-time>",
+            "lastModifiedBy": "<string>",
+            "lastModifiedByType": "<User|Application|ManagedIdentity|Key>",
+            "lastModifiedAt": "<date-time>"
+        },
+        "tags": {
+          "key1": "value 1",
+          "key2": "value 2"
+        },
+        "kind": "resource kind",
+        "properties": {
+          "comment": "Resource defined structure"
+        }
+      }
 ```
 
 ---

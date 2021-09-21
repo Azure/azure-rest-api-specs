@@ -130,6 +130,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request received successfully for an existing resource.",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          },
           "201": {
             "description": "Request received successfully.",
             "schema": {
@@ -344,7 +350,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}/operations/{operationId}": {
       "get": {
         "tags": [
-          "Operation Status"
+          "FluxConfiguration Operation Status"
         ],
         "operationId": "FluxConfigOperationStatus_Get",
         "description": "Get Async Operation status",
@@ -385,7 +391,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation Status",
+            "description": "FluxConfiguration Operation Status",
             "schema": {
               "$ref": "../../common/2021-10-01-preview/definitions.json#/definitions/OperationStatusResult"
             }
@@ -460,6 +466,11 @@
         },
         "httpsUser": {
           "description": "Base64-encoded HTTPS username used to access private git repositories over HTTPS",
+          "type": "string",
+          "x-nullable": true
+        },
+        "httpsCAFile": {
+          "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS",
           "type": "string",
           "x-nullable": true
         },
@@ -576,17 +587,139 @@
         "modelAsString": true
       }
     },
+    "ObjectStatusDefinition": {
+      "description": "Statuses of objects deployed by the user-specified kustomizations from the git repository.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "name": {
+          "description": "Name of the applied object",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Namespace of the applied object",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind of the applied object",
+          "type": "string"
+        },
+        "complianceState": {
+          "description": "Compliance state of the applied object showing whether the applied object has come into a ready state on the cluster.",
+          "type": "string",
+          "$ref": "#/definitions/FluxComplianceStateDefinition"
+        },
+        "appliedBy": {
+          "description": "Object reference to the Kustomization that applied this object",
+          "type": "object",
+          "$ref": "#/definitions/ObjectReferenceDefinition",
+          "x-nullable": true
+        },
+        "statusConditions": {
+          "description": "List of Kubernetes object status conditions present on the cluster",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ObjectStatusConditionDefinition"
+          },
+          "x-nullable": true
+        },
+        "helmReleaseProperties": {
+          "description": "Additional properties that are provided from objects of the HelmRelease kind",
+          "type": "object",
+          "$ref": "#/definitions/HelmReleasePropertiesDefinition",
+          "x-nullable": true
+        }
+      }
+    },
+    "ObjectReferenceDefinition": {
+      "description": "Object reference to a Kubernetes object on a cluster",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "name": {
+          "description": "Name of the object",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Namespace of the object",
+          "type": "string"
+        }
+      }
+    },
+    "ObjectStatusConditionDefinition": {
+      "description": "Status condition of Kubernetes object",
+      "type": "object",
+      "properties": {
+        "lastTransitionTime": {
+          "description": "Last time this status condition has changed",
+          "type": "string",
+          "format": "date-time"
+        },
+        "message": {
+          "description": "A more verbose description of the object status condition",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Reason for the specified status condition type status",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the Kubernetes object condition type",
+          "type": "string"
+        },
+        "type": {
+          "description": "Object status condition type for this object",
+          "type": "string"
+        }
+      }
+    },
+    "HelmReleasePropertiesDefinition": {
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "lastRevision": {
+          "description": "The revision number of the last released object change",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "helmChartRef": {
+          "description": "The reference to the HelmChart object used as the source to this HelmRelease",
+          "type": "object",
+          "$ref": "#/definitions/ObjectReferenceDefinition"
+        },
+        "failureCount": {
+          "description": "Total number of times that the HelmRelease failed to install or upgrade",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "installFailureCount": {
+          "description": "Number of times that the HelmRelease failed to install",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "upgradeFailureCount": {
+          "description": "Number of times that the HelmRelease failed to upgrade",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        }
+      }
+    },
     "FluxComplianceStateDefinition": {
       "description": "Compliance state of the cluster object.",
       "type": "string",
       "enum": [
-        "compliant",
-        "non-compliant",
-        "pending",
-        "suspended",
-        "unknown"
+        "Compliant",
+        "Non-Compliant",
+        "Pending",
+        "Suspended",
+        "Unknown"
       ],
-      "default": "pending",
+      "default": "Unknown",
       "x-ms-enum": {
         "name": "FluxComplianceState",
         "modelAsString": true
@@ -649,9 +782,7 @@
               "x-nullable": true,
               "items": {
                 "type": "object",
-                "additionalProperties": {
-                  "type": "object"
-                }
+                "$ref": "#/definitions/ObjectStatusDefinition"
               }
             },
             "repositoryPublicKey": {
@@ -669,6 +800,7 @@
             "lastSourceSyncedAt": {
               "description": "Datetime the fluxConfiguration last synced its source on the cluster.",
               "type": "string",
+              "format": "date-time",
               "x-nullable": true,
               "readOnly": true
             },
