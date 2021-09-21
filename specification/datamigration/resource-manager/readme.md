@@ -40,8 +40,8 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-09'
 input-file:
-  - Microsoft.DataMigration/preview/2020-09-01-preview/datamigration.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/sqlmigration.json
+  - Microsoft.DataMigration/preview/2020-09-01-preview/datamigration.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Commands.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/Common.json
   - Microsoft.DataMigration/preview/2020-09-01-preview/definitions/ConnectToSourceMySqlTask.json
