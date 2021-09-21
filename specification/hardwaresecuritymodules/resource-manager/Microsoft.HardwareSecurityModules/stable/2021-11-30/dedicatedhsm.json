@@ -633,6 +633,10 @@
     },
     "DedicatedHsm": {
       "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DedicatedHsmProperties",
@@ -775,6 +779,53 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of dedicated hsm resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created dedicated hsm resource."
+        },
+        "createdByType": {
+          "description": "The type of identity that created dedicated hsm resource.",
+          "$ref": "#/definitions/IdentityType"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of dedicated hsm resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified dedicated hsm resource."
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified dedicated hsm resource.",
+          "$ref": "#/definitions/IdentityType"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of dedicated hsm resource last modification (UTC)."
+        }
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of identity.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "identityType",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
