@@ -199,45 +199,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResourceARM": {
-      "type": "object",
-      "description": "ARM tracked top level resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        },
-        "systemData": {
-          "$ref": "../sqlmigration.json#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "ConnectionInfo": {
       "type": "object",
       "description": "Defines the connection properties of a server",
