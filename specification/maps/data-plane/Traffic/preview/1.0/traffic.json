@@ -287,7 +287,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TrafficFlowSegmentData"
+              "$ref": "#/definitions/TrafficFlowSegmentResult"
             }
           },
           "default": {
@@ -629,48 +629,14 @@
     }
   },
   "definitions": {
-    "TrafficFlowSegmentData": {
-      "description": "This object is returned from a successful Traffic Flow Segment call. Contains traffic segment data.",
+    "TrafficFlowSegmentResult": {
+      "description": "This object is returned from a successful Traffic Flow Segment call",
       "type": "object",
-      "readOnly": true,
       "properties": {
-        "frc": {
-          "description": "Functional Road Class. This indicates the road type:\n  0: Motorway, freeway or other major road.\n  1: Major road, less important than a motorway.\n  2: Other major road.\n  3: Secondary road.\n  4: Local connecting road.\n  5: Local road of high importance.\n  6: Local road.",
-          "type": "string",
-          "readOnly": true
-        },
-        "currentSpeed": {
-          "description": "The current average speed at the selected point, in the units requested. This is calculated from the currentTravelTime and the length of the selected segment.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "freeFlowSpeed": {
-          "description": "The free flow speed expected under ideal conditions, expressed in the units requested. This is related to the freeFlowTravelTime.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "currentTravelTime": {
-          "description": "Current travel time in seconds based on fused real-time measurements between the defined locations in the specified direction.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "freeFlowTravelTime": {
-          "description": "The travel time in seconds which would be expected under ideal free flow conditions.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "confidence": {
-          "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data.  Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info.   A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
-          "type": "number",
-          "readOnly": true
-        },
-        "coordinates": {
-          "description": "Includes the coordinates describing the shape of the segment. Coordinates are shifted from the road depending on the zoom level to support high quality visualization in every scale.",
+        "flowSegmentData": {
+          "description": "Flow Segment Data property",
           "type": "object",
+          "readOnly": true,
           "properties": {
             "frc": {
               "description": "Functional Road Class. This indicates the road type:\n  0: Motorway, freeway or other major road.\n  1: Major road, less important than a motorway.\n  2: Other major road.\n  3: Secondary road.\n  4: Local connecting road.\n  5: Local road of high importance.\n  6: Local road.",
@@ -719,18 +685,18 @@
                   }
                 }
               }
+            },
+            "@version": {
+              "description": "This indicates the software version that generated the response.",
+              "type": "string",
+              "readOnly": true
+            },
+            "openlr": {
+              "description": "OpenLR code for segment",
+              "type": "number",
+              "readOnly": true
             }
           }
-        },
-        "@version": {
-          "description": "This indicates the software version that generated the response.",
-          "type": "string",
-          "readOnly": true
-        },
-        "openlr": {
-          "description": "OpenLR code for segment",
-          "type": "number",
-          "readOnly": true
         }
       }
     },
