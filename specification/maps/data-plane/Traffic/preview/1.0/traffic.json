@@ -544,7 +544,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TrafficIncidentDetailResult"
+              "$ref": "#/definitions/TrafficIncidentDetail"
             }
           },
           "default": {
@@ -704,7 +704,7 @@
         }
       }
     },
-    "TrafficIncidentDetailResult": {
+    "TrafficIncidentDetail": {
       "description": "This object is returned from a successful Traffic incident Detail call",
       "type": "object",
       "properties": {
@@ -712,6 +712,7 @@
           "description": "Main response element",
           "type": "object",
           "readOnly": true,
+          "x-ms-client-flatten": true,
           "properties": {
             "@id": {
               "description": "ID of the traffic incident",
