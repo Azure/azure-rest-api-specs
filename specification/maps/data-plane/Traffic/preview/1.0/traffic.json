@@ -618,7 +618,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TrafficIncidentViewportResult"
+              "$ref": "#/definitions/TrafficIncidentViewport"
             }
           },
           "default": {
@@ -848,13 +848,14 @@
         }
       }
     },
-    "TrafficIncidentViewportResult": {
+    "TrafficIncidentViewport": {
       "description": "This object is returned from a successful Traffic Incident Viewport call",
       "type": "object",
       "properties": {
         "viewpResp": {
           "description": "Viewport Response object",
           "type": "object",
+          "x-ms-client-flatten": true,
           "readOnly": true,
           "properties": {
             "trafficState": {
