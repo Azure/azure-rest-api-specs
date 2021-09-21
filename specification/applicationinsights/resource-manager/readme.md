@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2021-07
+tag: package-2021-08-01
 ```
 
 ### Suppression
@@ -222,28 +222,14 @@ directive:
   
 ```
 
-### Tag: package-preview-2021-07
+### Tag: package-2021-08-01
 
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-07'
+``` yaml $(tag) == 'package-2021-08-01'
 input-file:
-  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
-  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
-  - Microsoft.Insights/stable/2021-03-08/workbooks_API.json
-  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
-  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
-  - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
-  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
-  - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+  - Microsoft.Insights/stable/2021-08-01/workbookOperations_API.json
 ```
 
 ### Tag: package-2021-03-only

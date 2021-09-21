@@ -3,7 +3,7 @@
   "info": {
     "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights workbook type.",
-    "version": "2021-03-08"
+    "version": "2021-08-25"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -417,7 +417,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "WorkbookResource": {
       "properties": {
         "identity": {
           "description": "Identity used for BYOS",
@@ -459,16 +459,31 @@
           "additionalProperties": {
             "type": "string"
           },
+          "type": "array",
           "description": "Resource tags"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
         },
         "etag": {
           "additionalProperties": {
             "type": "string"
           },
+          "type": "string",
           "description": "Resource etag"
         }
       },
       "x-ms-azure-resource": true,
+      "type": "object",
       "description": "An azure resource object"
     },
     "WorkbooksListResult": {
@@ -485,28 +500,18 @@
           "type": "string"
         }
       },
+      "type": "array",
       "description": "Workbook list result."
     },
     "Workbook": {
       "description": "An Application Insights workbook definition.",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/WorkbookResource"
         }
       ],
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "kind",
-            "modelAsString": true
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
@@ -520,6 +525,7 @@
     },
     "WorkbookProperties": {
       "description": "Properties that contain a workbook.",
+      "type": "object",
       "required": [
         "displayName",
         "category",
@@ -608,10 +614,12 @@
           "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
         }
       },
+      "type": "object",
       "description": "The parameters that can be provided when updating workbook properties properties."
     },
     "WorkbookPropertiesUpdateParameters": {
       "description": "Properties that contain a workbook for PATCH operation.",
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -646,6 +654,7 @@
     },
     "WorkbookError": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -655,6 +664,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -677,6 +687,7 @@
     },
     "InnerErrorTrace": {
       "description": "Error details",
+      "type": "object",
       "properties": {
         "trace": {
           "description": "detailed error trace",
@@ -690,9 +701,13 @@
     },
     "WorkbookManagedIdentity": {
       "description": "Customer Managed Identity",
+      "type": "object",
       "properties": {
         "userAssignedIdentities": {
-          "$ref": "#/definitions/WorkbookUserAssignedIdentities"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkbookUserAssignedIdentities"
+          }
         },
         "type": {
           "type": "string",
@@ -706,6 +721,7 @@
     },
     "WorkbookUserAssignedIdentities": {
       "description": "Customer Managed Identity",
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
