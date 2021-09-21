@@ -210,6 +210,78 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/notifications": {
+      "post": {
+        "description": "Send test notifications to a set of provided receivers",
+        "operationId": "ActionGroups_PostTestNotifications",
+        "x-ms-examples": {
+          "List action groups": {
+            "$ref": "./examples/postTestNotifications.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/notifications/{notificationId}": {
+      "get": {
+        "description": "Get the test notifications by the notification id",
+        "operationId": "ActionGroups_GetTestNotifications",
+        "x-ms-examples": {
+          "List action groups": {
+            "$ref": "./examples/getTestNotifications.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/NotificationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The notification details",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups": {
       "get": {
         "description": "Get a list of all action groups in a subscription.",
@@ -383,6 +455,110 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
+    "TestNotificationResponse": {
+      "description": "The response when test notification succeeded",
+      "properties": {
+          "notificationId": {
+            "type": "string",
+            "description": "The notification id"
+          },
+          "correlationId": {
+            "type": "string",
+            "description": "The correlation id"
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "The created time"
+          }
+      },
+      "required": [
+        "notificationId",
+        "correlationId",
+        "createdTime"
+      ]
+    },
+    "TestNotificationDetailsResponse": {
+      "description": "An Azure action group.",
+         "properties": {
+            "context": {
+            "properties": {
+              "Description": {
+                "type": "string",
+                "description": "The context description"
+              },
+              "NotificationSource": {
+                "type": "string",
+                "description": "The source of the notification request"
+              },
+              "ContextIdType": {
+                "type": "string",
+                "description": "The context id type"
+              },
+              "ContextId": {
+                "type": "string",
+                "description": "The correlation id"
+              }
+            }
+          },
+          "State": {
+             "type": "string",
+             "description": "The overall state"
+          },
+          "CompletedTime": {
+            "type": "string",
+            "description": "The completed time"
+          },
+          "CreatedTime": {
+            "type": "string",
+            "description": "The created time"
+          },
+          "CreatedBy": {
+            "type": "string",
+            "description": "The created by"
+          },
+          "ActionDetails": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ActionDetail"
+              },
+          "description": "The list of action detail"
+        }
+      },
+      "required": [
+        "MechanismType",
+        "Name",
+        "Status"
+      ]
+    },
+    "ActionDetail": {
+      "description": "The action detail",
+      "properties": {
+          "MechanismType": {
+            "type": "string",
+            "description": "The mechanism type"
+          },
+          "Name": {
+            "type": "string",
+            "description": "The name of the action"
+          },
+          "Status": {
+            "type": "string",
+            "description": "The status of the action"
+          },
+          "SubState": {
+            "type": "string",
+            "description": "The substatus of the action"
+          },
+          "SendTime": {
+            "type": "string",
+            "description": "The send time"
+          },
+          "Detail": {
+            "type": "string",
+            "description": "The detail"
+          }
+      }
+    },
     "ActionGroupResource": {
       "description": "An action group resource.",
       "allOf": [
@@ -503,7 +679,7 @@
             "$ref": "#/definitions/EventHubReceiver"
           },
           "description": "The list of event hub receivers that are part of this action group."
-        },        
+        }
       },
       "required": [
         "groupShortName",
