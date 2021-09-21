@@ -63,6 +63,9 @@
         "x-ms-examples": {
           "Get a list of Dedicated HSM operations": {
             "$ref": "./examples//DedicatedHsm_OperationsList.json"
+          },
+          "Get a list of Payment HSM operations": {
+            "$ref": "./examples//PaymentHsm_OperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -136,6 +139,9 @@
           },
           "Create a new or update an existing payment HSM": {
             "$ref": "./examples//PaymentHsm_CreateOrUpdate.json"
+          },
+          "Create a new or update an existing payment HSM with management profile": {
+            "$ref": "./examples//PaymentHsm_CreateOrUpdate_WithManagementProfile.json"
           }
         }
       },
@@ -302,6 +308,9 @@
           },
           "Get a payment HSM": {
             "$ref": "./examples//PaymentHsm_Get.json"
+          },
+          "Get a payment HSM with 2018-10-31 preview api version": {
+            "$ref": "./examples//PaymentHsm_Get_With_2018-10-31Preview_Version.json"
           }
         }
       }
@@ -355,6 +364,9 @@
         "x-ms-examples": {
           "List dedicated HSM devices in a resource group": {
             "$ref": "./examples//DedicatedHsm_ListByResourceGroup.json"
+          },
+          "List dedicated HSM devices in a resource group including payment HSM": {
+            "$ref": "./examples//PaymentHsm_ListByResourceGroup.json"
           }
         }
       }
@@ -398,6 +410,9 @@
         "x-ms-examples": {
           "List dedicated HSM devices in a subscription": {
             "$ref": "./examples//DedicatedHsm_ListBySubscription.json"
+          },
+          "List dedicated HSM devices in a subscription including payment HSM": {
+            "$ref": "./examples//PaymentHsm_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -438,7 +453,8 @@
               "description": "The object that represents the operation.",
               "type": "string"
             }
-          }
+          },
+          "description": "The display string."
         }
       }
     },
@@ -490,7 +506,8 @@
           },
           "description": "Specifies the list of resource Ids for the network interfaces associated with the dedicated HSM."
         }
-      }
+      },
+      "description": "The network profile definition."
     },
     "Sku": {
       "description": "SKU of the dedicated HSM",
@@ -549,6 +566,10 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "Specifies the network interfaces of the dedicated hsm."
+        },
+        "managementNetworkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Specifies the management network interfaces of the dedicated hsm."
         },
         "stampId": {
           "type": "string",
@@ -677,6 +698,7 @@
     "DedicatedHsmError": {
       "properties": {
         "error": {
+          "description": "The error detail of the operation if any.",
           "readOnly": true,
           "$ref": "#/definitions/Error"
         }
@@ -696,6 +718,7 @@
           "description": "The error message."
         },
         "innererror": {
+          "description": "Contains more specific error that narrows down the cause. May be null.",
           "x-ms-client-name": "innerError",
           "readOnly": true,
           "$ref": "#/definitions/Error"
@@ -722,7 +745,11 @@
         },
         "location": {
           "type": "string",
-          "description": "The supported Azure location where the dedicated HSM should be created."
+          "description": "The supported Azure location where the dedicated HSM should be created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sku": {
           "$ref": "#/definitions/Sku",
