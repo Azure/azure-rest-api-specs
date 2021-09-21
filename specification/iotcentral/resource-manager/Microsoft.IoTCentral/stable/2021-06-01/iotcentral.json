@@ -533,6 +533,33 @@
       },
       "readOnly": true
     },
+    "ArmIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of identity used for the resource. 'SystemAssigned' refers to an implicitly created identity, while the type 'None' will remove any identities from the service.",
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "AppSkuInfo": {
       "description": "Information about the SKU of the IoT Central application.",
       "type": "object",
@@ -567,6 +594,10 @@
         "sku": {
           "description": "A valid instance SKU.",
           "$ref": "#/definitions/AppSkuInfo"
+        },
+        "identity": {
+          "description": "The managed identities for the IoT Central application.",
+          "$ref": "#/definitions/ArmIdentity"
         }
       },
       "allOf": [
@@ -597,6 +628,10 @@
           "description": "The common properties of an IoT Central application.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AppProperties"
+        },
+        "identity": {
+          "description": "The managed identities for the IoT Central application.",
+          "$ref": "#/definitions/ArmIdentity"
         }
       }
     },
