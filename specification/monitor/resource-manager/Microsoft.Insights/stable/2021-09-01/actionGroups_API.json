@@ -213,7 +213,9 @@
     "/subscriptions/{subscriptionId}/notifications": {
       "post": {
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Send test notifications to a set of provided receivers",
         "operationId": "ActionGroups_PostTestNotifications",
         "x-ms-examples": {
@@ -480,24 +482,24 @@
       "properties": {
          "context": {
              "type": "object",
-             "properties": {
+              "properties": {
                 "Description": {
-                "type": "string",
-                "description": "The context description"
-               },
-               "NotificationSource": {
-                 "type": "string",
-                 "description": "The source of the notification request"
-               },
-              "ContextIdType": {
-                 "type": "string",
-                 "description": "The context id type"
-              },
-              "ContextId": {
-                "type": "string",
-                "description": "The correlation id"
-              }
-            }
+                  "type": "string",
+                  "description": "The context description"
+                },
+                "NotificationSource": {
+                  "type": "string",
+                  "description": "The source of the notification request"
+                },
+                "ContextIdType": {
+                  "type": "string",
+                  "description": "The context id type"
+                },
+                "ContextId": {
+                  "type": "string",
+                  "description": "The correlation id"
+                }
+             }
           },
           "State": {
              "type": "string",
