@@ -290,10 +290,90 @@
                     "description": "Batch Query object",
                     "type": "object",
                     "properties": {
-                      "query": {
-                        "description": "Partial query string.",
+                      "top": {
+                        "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
+                        "type": "integer",
+                        "default": 5,
+                        "minimum": 1,
+                        "maximum": 20
+                      },
+                      "addressLine": {
+                        "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.",
+                        "type": "string"
+                      },
+                      "CountryRegionSet": {
+                        "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "Bbox": {
+                        "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "minItems": 4,
+                        "maxItems": 4
+                      },
+                      "View": {
+                        "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
+                        "type": "string"
+                      },
+                      "Location": {
+                        "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                      },
+                      "adminDistrict": {
+                        "description": "The country subdivision portion of an address, such as WA.",
+                        "type": "string"
+                      },
+                      "adminDistrict2": {
+                        "description": "The county for the structured address, such as King.",
+                        "type": "string"
+                      },
+                      "adminDistrict3": {
+                        "description": "The named area for the structured address.",
+                        "type": "string"
+                      },
+                      "locality": {
+                        "description": "The locality portion of an address, such as Seattle.",
+                        "type": "string"
+                      },
+                      "postalCode": {
+                        "description": "The postal code portion of an address.",
+                        "type": "string"
+                      },
+                      "strictMatch": {
+                        "description": "Restrict the geocode result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.",
                         "type": "string",
-                        "example": "?addressLine=One Microsoft Way"
+                        "default": "notstrict",
+                        "enum": [
+                          "notstrict",
+                          "strict"
+                        ],
+                        "x-ms-enum": {
+                          "name": "StrictMatchEnum",
+                          "modelAsString": true,
+                          "values": [
+                            {
+                              "value": "notstrict",
+                              "description": "Do not restrict results to the specified countryRegion and adminDistrict."
+                            },
+                            {
+                              "value": "strict",
+                              "description": "Restrict results to the specified countryRegion and adminDistrict."
+                            }
+                          ]
+                        }
                       }
                     }
                   }
