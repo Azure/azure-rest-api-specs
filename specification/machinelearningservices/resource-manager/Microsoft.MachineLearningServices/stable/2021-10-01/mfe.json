@@ -4566,8 +4566,8 @@
           "Get Managed Online Deployment.": {
             "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/get.json"
           },
-          "Get K8S Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/K8sOnlineDeployment/get.json"
+          "Get Kubernetes Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/KubernetesOnlineDeployment/get.json"
           }
         }
       },
@@ -4661,8 +4661,8 @@
           "Update Managed Online Deployment.": {
             "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/update.json"
           },
-          "Update K8S Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/K8sOnlineDeployment/update.json"
+          "Update Kubernetes Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/KubernetesOnlineDeployment/update.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4756,8 +4756,8 @@
           "CreateOrUpdate Managed Online Deployment.": {
             "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/createOrUpdate.json"
           },
-          "CreateOrUpdate K8S Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/K8sOnlineDeployment/createOrUpdate.json"
+          "CreateOrUpdate Kubernetes Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/KubernetesOnlineDeployment/createOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4903,8 +4903,8 @@
           "List Managed Online Deployment Skus.": {
             "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/listSkus.json"
           },
-          "List K8S Online Deployment Skus.": {
-            "$ref": "./examples/OnlineDeployment/K8sOnlineDeployment/listSkus.json"
+          "List Kubernetes Online Deployment Skus.": {
+            "$ref": "./examples/OnlineDeployment/KubernetesOnlineDeployment/listSkus.json"
           }
         },
         "x-ms-pageable": {
@@ -8053,8 +8053,20 @@
       },
       "additionalProperties": false
     },
-    "K8sOnlineDeployment": {
-      "description": "Properties specific to a K8sOnlineDeployment.",
+    "KeyType": {
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "KubernetesOnlineDeployment": {
+      "description": "Properties specific to a KubernetesOnlineDeployment.",
       "type": "object",
       "allOf": [
         {
@@ -8069,18 +8081,6 @@
         }
       },
       "x-ms-discriminator-value": "Kubernetes",
-      "additionalProperties": false
-    },
-    "KeyType": {
-      "enum": [
-        "Primary",
-        "Secondary"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "KeyType",
-        "modelAsString": true
-      },
       "additionalProperties": false
     },
     "ManagedIdentity": {
@@ -8511,7 +8511,7 @@
           "x-nullable": true
         },
         "scaleSettings": {
-          "description": "Scale settings for the deployment.\r\nIf it is null or not provided,\r\nit defaults to TargetUtilizationScaleSettings for K8sOnlineDeployment\r\nand to DefaultScaleSettings for ManagedOnlineDeployment.",
+          "description": "Scale settings for the deployment.\r\nIf it is null or not provided,\r\nit defaults to TargetUtilizationScaleSettings for KubernetesOnlineDeployment\r\nand to DefaultScaleSettings for ManagedOnlineDeployment.",
           "$ref": "#/definitions/OnlineScaleSettings",
           "x-nullable": true
         }
@@ -9132,8 +9132,8 @@
       "x-ms-discriminator-value": "Id",
       "additionalProperties": false
     },
-    "PartialK8sOnlineDeployment": {
-      "description": "Properties specific to a K8sOnlineDeployment.",
+    "PartialKubernetesOnlineDeployment": {
+      "description": "Properties specific to a KubernetesOnlineDeployment.",
       "type": "object",
       "allOf": [
         {
