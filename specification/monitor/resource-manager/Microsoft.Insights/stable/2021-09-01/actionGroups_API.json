@@ -478,13 +478,14 @@
     },
     "TestNotificationDetailsResponse": {
       "description": "An Azure action group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Context"
-        }
-      ],
       "type": "object",
       "properties": {
+          "Context": {
+              "type": "object",
+              "items": {
+                  "$ref": "#/definitions/Context"
+              }
+          },
           "State": {
              "type": "string",
              "description": "The overall state"
