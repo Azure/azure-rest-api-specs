@@ -2498,7 +2498,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NotebookResource"
+              "$ref": "./entityTypes/Notebook.json#/definitions/NotebookResource"
             }
           }
         ],
@@ -2506,7 +2506,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/NotebookResource"
+              "$ref": "./entityTypes/Notebook.json#/definitions/NotebookResource"
             }
           },
           "202": {
@@ -2550,7 +2550,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/NotebookResource"
+              "$ref": "./entityTypes/Notebook.json#/definitions/NotebookResource"
             }
           },
           "304": {
@@ -4025,7 +4025,7 @@
           "type": "array",
           "description": "List of Notebooks.",
           "items": {
-            "$ref": "#/definitions/NotebookResource"
+            "$ref": "./entityTypes/Notebook.json#/definitions/NotebookResource"
           }
         },
         "nextLink": {
@@ -4033,39 +4033,6 @@
           "type": "string"
         }
       }
-    },
-    "NotebookResource": {
-      "description": "Notebook resource type.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
-        },
-        "properties": {
-          "$ref": "./entityTypes/Notebook.json#/definitions/Notebook",
-          "description": "Properties of Notebook."
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ]
     },
     "DataFlowResource": {
       "description": "Data flow resource type.",
