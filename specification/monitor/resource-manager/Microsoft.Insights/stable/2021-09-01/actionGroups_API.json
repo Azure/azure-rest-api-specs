@@ -481,24 +481,9 @@
       "type": "object",
       "properties": {
          "context": {
-             "type": "object",
-              "properties": {
-                "Description": {
-                  "type": "string",
-                  "description": "The context description"
-                },
-                "NotificationSource": {
-                  "type": "string",
-                  "description": "The source of the notification request"
-                },
-                "ContextIdType": {
-                  "type": "string",
-                  "description": "The context id type"
-                },
-                "ContextId": {
-                  "type": "string",
-                  "description": "The correlation id"
-                }
+             "additionalProperties": {
+               "type": "object",
+               "description": "The context information"
              }
           },
           "State": {
