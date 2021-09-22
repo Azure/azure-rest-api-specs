@@ -5,7 +5,7 @@
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     },
-    "version": "2019-06-01"
+    "version": "2021-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -457,18 +457,18 @@
       "description": "The response when test notification succeeded",
       "type": "object",
       "properties": {
-          "notificationId": {
-            "type": "string",
-            "description": "The notification id"
-          },
-          "correlationId": {
-            "type": "string",
-            "description": "The correlation id"
-          },
-          "createdTime": {
-            "type": "string",
-            "description": "The created time"
-          }
+        "notificationId": {
+          "type": "string",
+          "description": "The notification id"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "The created time"
+        }
       },
       "required": [
         "notificationId",
@@ -480,32 +480,32 @@
       "description": "The details of the test notification results.",
       "type": "object",
       "properties": {
-          "Context": {
-              "type": "object",
-              "$ref": "#/definitions/Context"
+        "Context": {
+          "type": "object",
+          "$ref": "#/definitions/Context"
+        },
+        "State": {
+          "type": "string",
+          "description": "The overall state"
+        },
+        "CompletedTime": {
+          "type": "string",
+          "description": "The completed time"
+        },
+        "CreatedTime": {
+          "type": "string",
+          "description": "The created time"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "description": "The created by"
+        },
+        "ActionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionDetail"
           },
-          "State": {
-             "type": "string",
-             "description": "The overall state"
-          },
-          "CompletedTime": {
-            "type": "string",
-            "description": "The completed time"
-          },
-          "CreatedTime": {
-            "type": "string",
-            "description": "The created time"
-          },
-          "CreatedBy": {
-            "type": "string",
-            "description": "The created by"
-          },
-          "ActionDetails": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ActionDetail"
-              },
-              "description": "The list of action detail"
+          "description": "The list of action detail"
         }
       },
       "required": [
@@ -516,53 +516,53 @@
       "description": "The action detail",
       "type": "object",
       "properties": {
-          "MechanismType": {
-            "type": "string",
-            "description": "The mechanism type"
-          },
-          "Name": {
-            "type": "string",
-            "description": "The name of the action"
-          },
-          "Status": {
-            "type": "string",
-            "description": "The status of the action"
-          },
-          "SubState": {
-            "type": "string",
-            "description": "The substatus of the action"
-          },
-          "SendTime": {
-            "type": "string",
-            "description": "The send time"
-          },
-          "Detail": {
-            "type": "string",
-            "description": "The detail"
-          }
+        "MechanismType": {
+          "type": "string",
+          "description": "The mechanism type"
+        },
+        "Name": {
+          "type": "string",
+          "description": "The name of the action"
+        },
+        "Status": {
+          "type": "string",
+          "description": "The status of the action"
+        },
+        "SubState": {
+          "type": "string",
+          "description": "The substatus of the action"
+        },
+        "SendTime": {
+          "type": "string",
+          "description": "The send time"
+        },
+        "Detail": {
+          "type": "string",
+          "description": "The detail"
+        }
       }
     },
     "Context": {
-        "description": "The context info",
-        "type": "object",
-             "properties": {
-                "Description": {
-                 "type": "string",
-                 "description": "The context description"
-              },
-                "NotificationSource": {
-                  "type": "string",
-                  "description": "The source of the notification request"
-                },
-                "ContextIdType": {
-                  "type": "string",
-                  "description": "The context id type"
-                },
-                "ContextId": {
-                  "type": "string",
-                  "description": "The correlation id"
-                }
-             }
+      "description": "The context info",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "description": "The context description"
+        },
+        "NotificationSource": {
+          "type": "string",
+          "description": "The source of the notification request"
+        },
+        "ContextIdType": {
+          "type": "string",
+          "description": "The context id type"
+        },
+        "ContextId": {
+          "type": "string",
+          "description": "The correlation id"
+        }
+      }
     },
     "ActionGroupResource": {
       "description": "An action group resource.",
@@ -836,7 +836,7 @@
           "type": "boolean",
           "default": false,
           "description": "Indicates whether to use common alert schema."
-        },            
+        },
         "tenantId": {
           "type": "string",
           "description": "The tenant Id for the subscription containing this event hub"
@@ -844,7 +844,7 @@
         "subscriptionId": {
           "type": "string",
           "description": "The Id for the subscription containing this event hub"
-        }        
+        }
       },
       "required": [
         "name",
@@ -852,7 +852,7 @@
         "eventHubName",
         "subscriptionId"
       ]
-    },    
+    },
     "AzureAppPushReceiver": {
       "description": "The Azure mobile App push notification receiver.",
       "properties": {
@@ -1080,7 +1080,7 @@
     }
   },
   "parameters": {
-      "NotificationIdParameter": {
+    "NotificationIdParameter": {
       "name": "notificationId",
       "in": "path",
       "required": true,
