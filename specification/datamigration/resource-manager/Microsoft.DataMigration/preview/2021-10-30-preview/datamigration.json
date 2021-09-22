@@ -54,7 +54,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -82,7 +82,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/groupName"
@@ -261,7 +261,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -306,7 +306,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -352,7 +352,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -398,7 +398,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -446,7 +446,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -500,7 +500,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -550,7 +550,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -598,7 +598,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -643,7 +643,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -671,7 +671,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/groupName"
@@ -839,7 +839,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/groupName"
@@ -1018,7 +1018,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1069,7 +1069,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1117,7 +1117,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1171,7 +1171,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1205,7 +1205,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/groupName"
@@ -1374,7 +1374,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/location"
@@ -1418,7 +1418,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/location"
@@ -1435,44 +1435,6 @@
             "description": "Quotas returned",
             "schema": {
               "$ref": "./definitions/Common.json#/definitions/QuotaList"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "./definitions/Common.json#/definitions/ApiError"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.DataMigration/operations": {
-      "get": {
-        "summary": "Get available resource provider actions (operations)",
-        "description": "Lists all available actions exposed by the Database Migration Service resource provider.",
-        "tags": [
-          "Standard operation",
-          "GET"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "responses": {
-          "200": {
-            "description": "Got action list",
-            "schema": {
-              "$ref": "./definitions/Services.json#/definitions/ServiceOperationList"
             }
           },
           "default": {
@@ -1501,7 +1463,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1538,7 +1500,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/groupName"
@@ -1706,7 +1668,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1757,7 +1719,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./sqlmigration.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/groupName"
@@ -1885,13 +1847,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "description": "Identifier of the subscription",
-      "in": "path",
-      "required": true,
-      "type": "string"
     },
     "projectTask": {
       "name": "parameters",
