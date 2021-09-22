@@ -399,6 +399,7 @@
     "AuthInfoBase": {
       "description": "The authentication info",
       "discriminator": "authType",
+      "type":"object",
       "properties": {
         "authType": {
           "description": "The authentication type.",
@@ -411,6 +412,7 @@
     },
     "SecretAuthInfo": {
       "x-ms-discriminator-value": "secret",
+      "type":"object",
       "description": "The authentication info when authType is secret",
       "allOf": [
         {
@@ -431,6 +433,7 @@
     },
     "UserAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "userAssignedIdentity",
+      "type":"object",
       "description": "The authentication info when authType is userAssignedIdentity",
       "allOf": [
         {
@@ -454,6 +457,7 @@
     },
     "SystemAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "systemAssignedIdentity",
+      "type":"object",
       "description": "The authentication info when authType is systemAssignedIdentity",
       "allOf": [
         {
@@ -463,6 +467,7 @@
     },
     "ServicePrincipalSecretAuthInfo": {
       "x-ms-discriminator-value": "servicePrincipalSecret",
+      "type":"object",
       "description": "The authentication info when authType is servicePrincipal secret",
       "allOf": [
         {
@@ -491,6 +496,7 @@
     },
     "ServicePrincipalCertificateAuthInfo": {
       "x-ms-discriminator-value": "servicePrincipalCertificate",
+      "type":"object",
       "description": "The authentication info when authType is servicePrincipal certificate",
       "allOf": [
         {
@@ -588,19 +594,13 @@
             "none",
             "dotnet",
             "java",
-            "javaScript",
-            "typeScript",
             "python",
             "go",
             "php",
             "ruby",
             "django",
-            "pyodbc17",
-            "pymssql",
             "nodejs",
-            "jdbc",
-            "springBoot",
-            "adonet"
+            "springBoot"
           ],
           "x-ms-enum": {
             "name": "clientType",
