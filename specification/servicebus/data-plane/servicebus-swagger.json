@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017_04",
+    "version": "2021_05",
     "title": "ServiceBusManagementClient",
     "description": "Azure Service Bus client for managing Queues, Topics, and Subscriptions.",
     "x-ms-code-generation-settings": {
@@ -67,7 +67,7 @@
       "name": "api-version",
       "in": "query",
       "type": "string",
-      "default": "2017-04",
+      "default": "2021-05",
       "description": "Specifies the version of the REST protocol used for processing the request. This is required when using shared key authorization.",
       "minLength": 1,
       "x-ms-parameter-location": "client"
@@ -766,6 +766,14 @@
             "name": "ForwardDeadLetteredMessagesTo",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
           }
+        },
+        "maxMessageSizeInKilobytes": {
+          "description": "The maximum message payload that can be accepted by the queue.",
+          "type": "integer",
+          "xml": {
+            "name": "MaxMessageSizeInKilobytes",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
         }
       }
     },
@@ -1127,6 +1135,14 @@
           "type": "string",
           "xml": {
             "name": "UserMetadata",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        },
+        "maxMessageSizeInKilobytes": {
+          "description": "The maximum message payload that can be accepted by the topic.",
+          "type": "integer",
+          "xml": {
+            "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
           }
         }
