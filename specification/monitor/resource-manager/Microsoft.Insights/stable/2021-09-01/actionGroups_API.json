@@ -213,6 +213,7 @@
     "/subscriptions/{subscriptionId}/notifications": {
       "post": {
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": true,
         "description": "Send test notifications to a set of provided receivers",
         "operationId": "ActionGroups_PostTestNotifications",
         "x-ms-examples": {
@@ -476,21 +477,21 @@
     "TestNotificationDetailsResponse": {
       "description": "An Azure action group.",
       "type": "object",
-         "properties": {
-            "context": {
-                "type": "object",
-                "properties": {
+      "properties": {
+         "context": {
+             "type": "object",
+             "properties": {
                 "Description": {
                 "type": "string",
                 "description": "The context description"
                },
-             "NotificationSource": {
-             "type": "string",
-             "description": "The source of the notification request"
+               "NotificationSource": {
+                 "type": "string",
+                 "description": "The source of the notification request"
                },
               "ContextIdType": {
-                "type": "string",
-                "description": "The context id type"
+                 "type": "string",
+                 "description": "The context id type"
               },
               "ContextId": {
                 "type": "string",
