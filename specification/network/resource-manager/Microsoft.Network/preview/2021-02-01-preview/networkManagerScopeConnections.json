@@ -178,7 +178,7 @@
           "200": {
             "description": "OK - Returns information about the scope connection(s).",
             "schema": {
-              "$ref": "#/definitions/ScopeConnectionList"
+              "$ref": "#/definitions/ScopeConnectionListResult"
             }
           },
           "default": {
@@ -220,7 +220,7 @@
           "200": {
             "description": "OK - Returns a list of the network manager connections sent from a subscription or management group.",
             "schema": {
-              "$ref": "./networkManagerConnections.json#/definitions/NetworkManagerConnectionListResult"
+              "$ref": "./networkManagerConnections.json#/definitions/PendingNetworkManagerConnectionListResult"
             }
           },
           "default": {
@@ -288,7 +288,7 @@
       },
       "description": "Scope connections."
     },
-    "ScopeConnectionList": {
+    "ScopeConnectionListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -299,6 +299,17 @@
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "List of scope connections."
+    },
+    "PendingScopeConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeConnection"
+          }
         },
         "skipToken": {
           "type": "string",

@@ -211,7 +211,7 @@
           "200": {
             "description": "OK - Returns information about the scope connection(s).",
             "schema": {
-              "$ref": "./networkManagerScopeConnections.json#/definitions/ScopeConnectionList"
+              "$ref": "./networkManagerScopeConnections.json#/definitions/PendingScopeConnectionListResult"
             }
           },
           "default": {
@@ -278,6 +278,17 @@
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "List of network manager connections."
+    },
+    "PendingNetworkManagerConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerConnection"
+          }
         },
         "skipToken": {
           "type": "string",
