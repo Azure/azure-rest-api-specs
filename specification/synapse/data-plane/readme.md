@@ -269,10 +269,6 @@ input-file:
 - Microsoft.Synapse/preview/2020-08-01-preview/roleDefinitions.json
 - Microsoft.Synapse/preview/2020-08-01-preview/roleAssignments.json
 ```
-### Tag: package-metadata-2021-07-01-preview
-
-These settings apply only when `--tag=package-metadata-2021-07-01-preview` is specified on the command line.
-
 ### Tag: package-vnet-2019-06-01-preview
 
 These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specified on the command line
@@ -289,15 +285,6 @@ These settings apply only when `--tag=package-monitoring-2019-11-01-preview` is 
 ``` yaml $(tag) == 'package-monitoring-2019-11-01-preview'
 input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
-```
-
-### Tag: package-vnet-2021-06-01-preview
-
-These settings apply only when `--tag=package-vnet-2021-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-vnet-2021-06-01-preview'
-input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/managedPrivateEndpoints.json
 ```
 
 ## Suppression
