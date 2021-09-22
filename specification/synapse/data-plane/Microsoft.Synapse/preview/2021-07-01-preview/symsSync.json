@@ -60,7 +60,7 @@
           "201": {
             "description": "The Job created for the resource creation/updation request",
             "schema": {
-              "$ref": "#/definitions/metaDataCreatedResponse"
+              "$ref": "#/definitions/metastoreRegistrationResponse"
             }
           },
           "default": {
@@ -97,7 +97,7 @@
           "200": {
             "description": "Request Success Response.",
             "schema": {
-              "$ref": "#/definitions/metaStoreRequestSuccessResponse"
+              "$ref": "#/definitions/metastoreRequestSuccessResponse"
             }
           },
           "default": {
@@ -146,7 +146,7 @@
           "201": {
             "description": "The Job created for the resource creation/updation request",
             "schema": {
-              "$ref": "#/definitions/metaDataCreatedResponse"
+              "$ref": "#/definitions/metastoreUpdationResponse"
             }
           },
           "default": {
@@ -196,7 +196,7 @@
     }
   },
   "definitions": {
-    "metaDataCreatedResponse": {
+    "metastoreRegistrationResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -204,7 +204,15 @@
         }
       }
     },
-    "metaStoreRequestSuccessResponse": {
+	"metastoreUpdationResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/RequestStatus"
+        }
+      }
+    },
+    "metastoreRequestSuccessResponse": {
       "type": "object",
       "properties": {
         "status": {
