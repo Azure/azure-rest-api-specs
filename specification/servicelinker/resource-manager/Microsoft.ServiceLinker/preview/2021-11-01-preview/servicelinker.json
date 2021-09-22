@@ -265,7 +265,7 @@
         "tags": [
           "Links"
         ],
-        "operationId": "Linker_ValidateLinker",
+        "operationId": "Linker_Validate",
         "description": "Validate a link.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -399,7 +399,7 @@
     "AuthInfoBase": {
       "description": "The authentication info",
       "discriminator": "authType",
-      "type":"object",
+      "type": "object",
       "properties": {
         "authType": {
           "description": "The authentication type.",
@@ -412,7 +412,7 @@
     },
     "SecretAuthInfo": {
       "x-ms-discriminator-value": "secret",
-      "type":"object",
+      "type": "object",
       "description": "The authentication info when authType is secret",
       "allOf": [
         {
@@ -433,7 +433,7 @@
     },
     "UserAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "userAssignedIdentity",
-      "type":"object",
+      "type": "object",
       "description": "The authentication info when authType is userAssignedIdentity",
       "allOf": [
         {
@@ -457,7 +457,7 @@
     },
     "SystemAssignedIdentityAuthInfo": {
       "x-ms-discriminator-value": "systemAssignedIdentity",
-      "type":"object",
+      "type": "object",
       "description": "The authentication info when authType is systemAssignedIdentity",
       "allOf": [
         {
@@ -467,7 +467,7 @@
     },
     "ServicePrincipalSecretAuthInfo": {
       "x-ms-discriminator-value": "servicePrincipalSecret",
-      "type":"object",
+      "type": "object",
       "description": "The authentication info when authType is servicePrincipal secret",
       "allOf": [
         {
@@ -496,7 +496,7 @@
     },
     "ServicePrincipalCertificateAuthInfo": {
       "x-ms-discriminator-value": "servicePrincipalCertificate",
-      "type":"object",
+      "type": "object",
       "description": "The authentication info when authType is servicePrincipal certificate",
       "allOf": [
         {
@@ -579,6 +579,7 @@
     },
     "LinkerProperties": {
       "description": "The properties of the linker.",
+      "type": "object",
       "properties": {
         "targetId": {
           "description": "The resource Id of target service.",
@@ -589,6 +590,7 @@
           "$ref": "#/definitions/AuthInfoBase"
         },
         "clientType": {
+          "description": "The application client type",
           "type": "string",
           "enum": [
             "none",
