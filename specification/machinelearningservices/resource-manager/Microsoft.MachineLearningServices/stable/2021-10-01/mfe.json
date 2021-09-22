@@ -5479,8 +5479,8 @@
         "errorThreshold": {
           "format": "int32",
           "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
-          "type": "integer",
-          "x-nullable": true
+          "default": -1,
+          "type": "integer"
         },
         "loggingLevel": {
           "description": "Logging level for batch inference operation.",
@@ -5489,14 +5489,14 @@
         "maxConcurrencyPerInstance": {
           "format": "int32",
           "description": "Indicates maximum number of parallelism per instance.",
-          "type": "integer",
-          "x-nullable": true
+          "default": 1,
+          "type": "integer"
         },
         "miniBatchSize": {
           "format": "int64",
           "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
-          "type": "integer",
-          "x-nullable": true
+          "default": 10,
+          "type": "integer"
         },
         "model": {
           "description": "Reference to the model asset for the endpoint deployment.",
@@ -5531,12 +5531,12 @@
           ]
         },
         "resources": {
-          "description": "Indicates compute configuration for the job.",
+          "description": "Indicates compute configuration for the job.\r\nIf not provided, will default to the defaults defined in ResourceConfiguration.",
           "$ref": "#/definitions/ResourceConfiguration",
           "x-nullable": true
         },
         "retrySettings": {
-          "description": "Retry Settings for the batch inference operation.",
+          "description": "Retry Settings for the batch inference operation.\r\nIf not provided, will default to the defaults defined in BatchRetrySettings.",
           "$ref": "#/definitions/BatchRetrySettings",
           "x-nullable": true
         }
@@ -5778,8 +5778,8 @@
         "timeout": {
           "format": "duration",
           "description": "Invocation timeout for a mini-batch, in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
+          "default": "PT30S",
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -8511,7 +8511,7 @@
           "x-nullable": true
         },
         "scaleSettings": {
-          "description": "Scale settings for the deployment.",
+          "description": "Scale settings for the deployment.\r\nIf it is null or not provided,\r\nit defaults to TargetUtilizationScaleSettings for K8sOnlineDeployment\r\nand to DefaultScaleSettings for ManagedOnlineDeployment.",
           "$ref": "#/definitions/OnlineScaleSettings",
           "x-nullable": true
         }
@@ -8870,8 +8870,7 @@
         "errorThreshold": {
           "format": "int32",
           "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "loggingLevel": {
           "description": "Logging level for batch inference operation.",
@@ -8880,14 +8879,12 @@
         "maxConcurrencyPerInstance": {
           "format": "int32",
           "description": "Indicates number of processes per instance",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "miniBatchSize": {
           "format": "int64",
           "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         },
         "model": {
           "description": "Reference to the model asset for the endpoint deployment.",
@@ -9014,8 +9011,7 @@
         "timeout": {
           "format": "duration",
           "description": "Invocation timeout for a mini-batch, in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       },
       "additionalProperties": false
