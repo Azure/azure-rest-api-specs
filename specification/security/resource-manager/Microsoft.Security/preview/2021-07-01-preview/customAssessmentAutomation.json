@@ -1,0 +1,355 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customAssessmentAutomations/{customAssessmentAutomationName}": {
+      "get": {
+        "summary": "Gets a custom assessment automation",
+        "description": "Gets a single custom assessment automation by name for the provided subscription and resource group.",
+        "tags": [
+          "customAssessmentAutomations"
+        ],
+        "operationId": "CustomAssessmentAutomations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customAssessmentAutomationName"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a Custom Assessment Automation": {
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationGet_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/customAssessmentAutomation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Creates a custom assessment automation",
+        "description": "Creates or updates a custom assessment automation for the provided subscription. Please note that providing an existing custom assessment automation will replace the existing record.",
+        "tags": [
+          "customAssessmentAutomations"
+        ],
+        "operationId": "CustomAssessmentAutomations_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customAssessmentAutomationName"
+          },
+          {
+            "$ref": "#/parameters/customAssessmentAutomationBody"
+          }
+        ],
+        "x-ms-examples": {
+          "Create a Custom Assessment Automation": {
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationCreate_example.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/customAssessmentAutomation"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/customAssessmentAutomation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a custom assessment automation",
+        "description": "Deletes a custom assessment automation by name for a provided subscription",
+        "tags": [
+          "customAssessmentAutomations"
+        ],
+        "operationId": "CustomAssessmentAutomations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customAssessmentAutomationName"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a Custom Assessment Automation": {
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationDelete_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Custom Assessment Automation was deleted"
+          },
+          "204": {
+            "description": "No Content - Custom Assessment Automation does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customAssessmentAutomations": {
+      "get": {
+        "summary": "List custom assessment automations in a subscription and a resource group",
+        "description": "List custom assessment automations by provided subscription and resource group",
+        "tags": [
+          "customAssessmentAutomations"
+        ],
+        "operationId": "CustomAssessmentAutomations_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "x-ms-examples": {
+          "List Custom Assessment Automations in a subscription and a resource group": {
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationListByResourceGroup_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns a collection of Custom Assessment Automations",
+            "schema": {
+              "$ref": "#/definitions/customAssessmentAutomationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customAssessmentAutomations": {
+      "get": {
+        "summary": "List custom assessment automations in a subscription",
+        "description": "List custom assessment automations by provided subscription",
+        "tags": [
+          "customAssessmentAutomations"
+        ],
+        "operationId": "CustomAssessmentAutomations_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List Custom Assessment Automations in a subscription": {
+            "$ref": "./examples/CustomAssessmentAutomations/customAssessmentAutomationListBySubscription_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns a collection of Custom Assessment Automations",
+            "schema": {
+              "$ref": "#/definitions/customAssessmentAutomationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "customAssessmentAutomationsListResult": {
+      "type": "object",
+      "description": "A list of Custom Assessment Automations",
+      "properties": {
+        "value": {
+          "description": "Collection of Custom Assessment Automations",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/customAssessmentAutomation"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "customAssessmentAutomation": {
+      "type": "object",
+      "description": "Custom Assessment Automation",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "describes Custom Assessment Automation properties.",
+          "$ref": "#/definitions/customAssessmentAutomationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "customAssessmentAutomationProperties": {
+      "type": "object",
+      "description": "describes the Custom Assessment Automation properties",
+      "properties": {
+        "compressedQuery": {
+          "description": "GZip encoded KQL query representing the assessment automation results required.",
+          "type": "string"
+        },
+        "supportedCloud": {
+          "description": "Relevant cloud for the custom assessment automation.",
+          "type": "string",
+          "enum": [
+            "AWS"
+          ],
+          "x-ms-enum": {
+            "name": "supportedCloudEnum",
+            "modelAsString": true
+          },
+          "x-ms-client-default": "AWS"
+        },
+        "severity": {
+          "description": "The severity to relate to the assessments generated by this assessment automation.",
+          "type": "string",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "severityEnum",
+            "modelAsString": true
+          },
+          "x-ms-client-default": "Low"
+        },
+        "description": {
+          "description": "The description to relate to the assessments generated by this assessment automation.",
+          "type": "string"
+        },
+        "remediationDescription": {
+          "description": "The remediation description to relate to the assessments generated by this assessment automation.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "customAssessmentAutomationName": {
+      "name": "customAssessmentAutomationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Custom Assessment Automation.",
+      "x-ms-parameter-location": "method"
+    },
+    "customAssessmentAutomationBody": {
+      "name": "customAssessmentAutomationBody",
+      "in": "body",
+      "description": "Custom Assessment Automation body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/customAssessmentAutomation"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
