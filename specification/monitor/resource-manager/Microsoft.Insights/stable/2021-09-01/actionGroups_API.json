@@ -212,15 +212,13 @@
     },
     "/subscriptions/{subscriptionId}/notifications": {
       "post": {
+        "x-ms-long-running-operation": true,
         "description": "Send test notifications to a set of provided receivers",
         "operationId": "ActionGroups_PostTestNotifications",
         "x-ms-examples": {
           "List action groups": {
             "$ref": "./examples/postTestNotifications.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         },
         "parameters": [
           {
@@ -255,12 +253,9 @@
             "$ref": "./examples/getTestNotifications.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/NotificationIdParameter"
+            "$ref": "#/parameters/NotificationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -457,6 +452,7 @@
     },
     "TestNotificationResponse": {
       "description": "The response when test notification succeeded",
+      "type": "object",
       "properties": {
           "notificationId": {
             "type": "string",
@@ -479,17 +475,19 @@
     },
     "TestNotificationDetailsResponse": {
       "description": "An Azure action group.",
+      "type": "object",
          "properties": {
             "context": {
-            "properties": {
-              "Description": {
+                "type": "object",
+                "properties": {
+                "Description": {
                 "type": "string",
                 "description": "The context description"
-              },
-              "NotificationSource": {
-                "type": "string",
-                "description": "The source of the notification request"
-              },
+               },
+             "NotificationSource": {
+             "type": "string",
+             "description": "The source of the notification request"
+               },
               "ContextIdType": {
                 "type": "string",
                 "description": "The context id type"
@@ -521,17 +519,16 @@
               "items": {
                 "$ref": "#/definitions/ActionDetail"
               },
-          "description": "The list of action detail"
+              "description": "The list of action detail"
         }
       },
       "required": [
-        "MechanismType",
-        "Name",
-        "Status"
+        "State"
       ]
     },
     "ActionDetail": {
       "description": "The action detail",
+      "type": "object",
       "properties": {
           "MechanismType": {
             "type": "string",
@@ -813,6 +810,7 @@
     },
     "EventHubReceiver": {
       "description": "An Event hub receiver.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1074,6 +1072,14 @@
     }
   },
   "parameters": {
+      "NotificationIdParameter": {
+      "name": "notificationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The notification id",
+      "x-ms-parameter-location": "method"
+    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
