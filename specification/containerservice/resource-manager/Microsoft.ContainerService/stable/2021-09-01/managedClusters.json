@@ -5456,6 +5456,34 @@
         },
         "snapshotType": {
           "$ref": "#/definitions/SnapshotType"
+        },
+        "kubernetesVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version of Kubernetes."
+        },
+        "nodeImageVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version of node image."
+        },
+        "osType": {
+          "readOnly": true,
+          "$ref": "#/definitions/OSType"
+        },
+        "osSku": {
+          "readOnly": true,
+          "$ref": "#/definitions/OSSKU"
+        },
+        "vmSize": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The size of the VM."
+        },
+        "enableFIPS": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Whether to use a FIPS-enabled OS."
         }
       },
       "description": "Properties used to configure a node pool snapshot."
