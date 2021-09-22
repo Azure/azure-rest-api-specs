@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-02-01-preview",
+    "version": "2021-06-01-preview",
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
@@ -227,6 +227,9 @@
         "x-ms-examples": {
           "DataBoxEdgeDeviceGetByName": {
             "$ref": "./examples/DataBoxEdgeDeviceGetByName.json"
+          },
+          "DataBoxEdgeDeviceGetByNameWithDataResidency": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetByNameWithDataResidency.json"
           }
         }
       },
@@ -277,10 +280,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DataBoxEdgeDevicePut": {
             "$ref": "./examples/DataBoxEdgeDevicePut.json"
+          },
+          "DataBoxEdgeDevicePutWithDataResidency": {
+            "$ref": "./examples/DataBoxEdgeDevicePutWithDataResidency.json"
           }
         }
       },
@@ -309,14 +314,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the resource."
+          },
           "202": {
             "description": "Accepted the request to delete the resource."
           },
           "204": {
             "description": "The resource is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -630,14 +635,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the bandwidth schedule."
-          },
           "200": {
             "description": "Successfully created or updated the bandwidth schedule.",
             "schema": {
               "$ref": "#/definitions/BandwidthSchedule"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the bandwidth schedule."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -685,14 +690,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
             "description": "Accepted the request to delete the bandwidth schedule."
           },
           "204": {
             "description": "Successfully deleted the bandwidth schedule."
-          },
-          "200": {
-            "description": "Success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -705,6 +710,212 @@
         "x-ms-examples": {
           "BandwidthScheduleDelete": {
             "$ref": "./examples/BandwidthScheduleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticProactiveLogCollectionSettings/default": {
+      "get": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "description": "Gets the proactive log collection settings of the specified Data Box Edge/Data Box Gateway device.",
+        "operationId": "DiagnosticSettings_GetDiagnosticProactiveLogCollectionSettings",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The diagnostic proactive log collection settings.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticProactiveLogCollectionSettings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDiagnosticProactiveLogCollectionSettings": {
+            "$ref": "./examples/GetDiagnosticProactiveLogCollectionSettings.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "description": "Updates the proactive log collection settings on a Data Box Edge/Data Box Gateway device.",
+        "operationId": "DiagnosticSettings_UpdateDiagnosticProactiveLogCollectionSettings",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "proactiveLogCollectionSettings",
+            "in": "body",
+            "description": "The proactive log collection settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticProactiveLogCollectionSettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the proactive log collection settings.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticProactiveLogCollectionSettings"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to update the proactive log collection settings."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UpdateDiagnosticProactiveLogCollectionSettings": {
+            "$ref": "./examples/UpdateDiagnosticProactiveLogCollectionSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticRemoteSupportSettings/default": {
+      "get": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "description": "Gets the diagnostic remote support settings of the specified Data Box Edge/Data Box Gateway device.",
+        "operationId": "DiagnosticSettings_GetDiagnosticRemoteSupportSettings",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The diagnostic remote support settings.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticRemoteSupportSettings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDiagnosticRemoteSupportSettings": {
+            "$ref": "./examples/GetDiagnosticRemoteSupportSettings.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "description": "Updates the diagnostic remote support settings on a Data Box Edge/Data Box Gateway device.",
+        "operationId": "DiagnosticSettings_UpdateDiagnosticRemoteSupportSettings",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticRemoteSupportSettings",
+            "in": "body",
+            "description": "The diagnostic remote support settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticRemoteSupportSettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to update the diagnostic remote support settings."
+          },
+          "200": {
+            "description": "Successfully updated the diagnostic remote support settings.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticRemoteSupportSettings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UpdateDiagnosticRemoteSupportSettings": {
+            "$ref": "./examples/UpdateDiagnosticRemoteSupportSettings.json"
           }
         }
       }
@@ -735,11 +946,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to download the updates on the device."
-          },
           "200": {
             "description": "Successfully downloaded the updates on the device."
+          },
+          "202": {
+            "description": "Accepted the request to download the updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -874,11 +1085,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to install updates on the device."
-          },
           "200": {
             "description": "Successfully installed updates on the device."
+          },
+          "202": {
+            "description": "Accepted the request to install updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1224,14 +1435,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the order."
-          },
           "200": {
             "description": "Successfully created or updated the order.",
             "schema": {
               "$ref": "#/definitions/Order"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1272,14 +1483,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the order."
+          },
           "202": {
             "description": "Accepted the request to delete the order."
           },
           "204": {
             "description": "The order is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1484,14 +1695,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the role."
-          },
           "200": {
             "description": "Successfully created or updated the role.",
             "schema": {
               "$ref": "#/definitions/Role"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1539,14 +1750,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the role."
+          },
           "202": {
             "description": "Accepted the request to delete the role."
           },
           "204": {
             "description": "The role is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1673,7 +1884,7 @@
           }
         },
         "x-ms-examples": {
-          "GetAddons": {
+          "GetAddOns": {
             "$ref": "./examples/GetAddons.json"
           }
         }
@@ -1726,14 +1937,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the addon."
-          },
           "200": {
             "description": "Successfully created or updated the addon.",
             "schema": {
               "$ref": "#/definitions/Addon"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the addon."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1744,7 +1955,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "PutAddons": {
+          "PutAddOns": {
             "$ref": "./examples/PutAddons.json"
           }
         }
@@ -1788,14 +1999,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the addon."
+          },
           "202": {
             "description": "Accepted the request to delete the addon."
           },
           "204": {
             "description": "The addon is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the addon."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1805,11 +2016,8 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
-          "DeleteAddons": {
+          "DeleteAddOns": {
             "$ref": "./examples/DeleteAddons.json"
           }
         }
@@ -1964,14 +2172,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the metrics configuration."
-          },
           "200": {
             "description": "Successfully created or updated the metrics configuration.",
             "schema": {
               "$ref": "#/definitions/MonitoringMetricConfiguration"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the metrics configuration."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2069,11 +2277,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to scan for updates on the device."
-          },
           "200": {
             "description": "Successfully scanned the device for updates."
+          },
+          "202": {
+            "description": "Accepted the request to scan for updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2288,14 +2496,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the share."
-          },
           "200": {
             "description": "Successfully created or updated the share.",
             "schema": {
               "$ref": "#/definitions/Share"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2343,14 +2551,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the share."
+          },
           "202": {
             "description": "Accepted the request to delete the share."
           },
           "204": {
             "description": "The share is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2400,11 +2608,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to refresh the share on the device."
-          },
           "200": {
             "description": "Successfully refreshed the share on the device."
+          },
+          "202": {
+            "description": "Accepted the request to refresh the share on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2563,14 +2771,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the storage account credential."
-          },
           "200": {
             "description": "Successfully created or updated the storage account credential.",
             "schema": {
               "$ref": "#/definitions/StorageAccountCredential"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2618,14 +2826,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the storage account credential."
+          },
           "202": {
             "description": "Accepted the request to delete the storage account credential."
           },
           "204": {
             "description": "The storage account credential is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2784,14 +2992,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the StorageAccount."
-          },
           "200": {
             "description": "Successfully created or updated the StorageAccount.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the StorageAccount."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3023,14 +3231,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the container."
-          },
           "200": {
             "description": "Successfully created or updated the container.",
             "schema": {
               "$ref": "#/definitions/Container"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the container."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3146,11 +3354,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to refresh the container on the device."
-          },
           "200": {
             "description": "Successfully refreshed the container on the device."
+          },
+          "202": {
+            "description": "Accepted the request to refresh the container on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3316,14 +3524,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the trigger."
-          },
           "200": {
             "description": "Successfully created or updated the trigger.",
             "schema": {
               "$ref": "#/definitions/Trigger"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3371,14 +3579,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the trigger."
+          },
           "202": {
             "description": "Accepted the request to delete the trigger."
           },
           "204": {
             "description": "The trigger is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3391,6 +3599,62 @@
         "x-ms-examples": {
           "TriggerDelete": {
             "$ref": "./examples/TriggerDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggerSupportPackage": {
+      "post": {
+        "tags": [
+          "SupportPackages"
+        ],
+        "summary": "Triggers support package on the device",
+        "operationId": "SupportPackages_TriggerSupportPackage",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerSupportPackageRequest",
+            "in": "body",
+            "description": "The trigger support package request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerSupportPackageRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully triggered support package on the device."
+          },
+          "202": {
+            "description": "Accepted the request to trigger support package on the device."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TriggerSupportPackage": {
+            "$ref": "./examples/TriggerSupportPackage.json"
           }
         }
       }
@@ -3576,9 +3840,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
-            "description": "Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.",
+            "description": "Specify $filter='Type eq <type>' to filter on user type property",
             "required": false,
             "type": "string"
           }
@@ -3700,14 +3964,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted the request to create or update the user."
-          },
           "200": {
             "description": "Successfully created or updated the user.",
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "202": {
+            "description": "Accepted the request to create or update the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3755,14 +4019,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the user."
+          },
           "202": {
             "description": "Accepted the request to delete the user."
           },
           "204": {
             "description": "The user is already deleted."
-          },
-          "200": {
-            "description": "Successfully deleted the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4131,11 +4395,11 @@
       "properties": {
         "value": {
           "description": "The value of the secret.",
-          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionCertThumbprint": {
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionAlgorithm": {
@@ -4387,6 +4651,7 @@
     },
     "CloudError": {
       "description": "An error response from the service.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
@@ -4397,6 +4662,7 @@
     },
     "CloudErrorBody": {
       "description": "An error response from the service.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
@@ -4626,7 +4892,7 @@
           "description": "Msi identity of the resource"
         },
         "kind": {
-          "description": "The etag for the devices.",
+          "description": "The kind of the device.",
           "enum": [
             "AzureDataBoxGateway",
             "AzureStackEdge",
@@ -4634,7 +4900,6 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
@@ -4647,7 +4912,6 @@
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
           "description": "The properties of the Data Box Edge/Gateway device.",
-          "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
@@ -4811,6 +5075,10 @@
       "description": "The properties of the Data Box Edge/Gateway device.",
       "type": "object",
       "properties": {
+        "systemData": {
+          "description": "DataBoxEdge Device Properties",
+          "$ref": "#/definitions/SystemData"
+        },
         "dataBoxEdgeDeviceStatus": {
           "description": "The status of the Data Box Edge/Gateway device.",
           "enum": [
@@ -4928,6 +5196,10 @@
           "$ref": "#/definitions/EdgeProfile",
           "description": "The details of Edge Profile for this resource",
           "readOnly": true
+        },
+        "dataResidency": {
+          "$ref": "#/definitions/DataResidency",
+          "description": "The details of data-residency related properties for this resource"
         }
       }
     },
@@ -5159,6 +5431,24 @@
         }
       }
     },
+    "DataResidency": {
+      "description": "Wraps data-residency related information for edge-resource and this should be used with ARM layer.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "DataResidencyType enum",
+          "enum": [
+            "GeoZoneReplication",
+            "ZoneReplication"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataResidencyType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "DCAccessCode": {
       "description": "DC Access code in the case of Self Managed Shipping.",
       "type": "object",
@@ -5177,6 +5467,66 @@
         "authCode": {
           "description": "DCAccess Code for the Self Managed shipment.",
           "type": "string"
+        }
+      }
+    },
+    "DiagnosticProactiveLogCollectionSettings": {
+      "description": "The diagnostic proactive log collection settings of a device.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "DiagnosticProactiveLogCollectionSettings",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProactiveLogCollectionSettingsProperties",
+          "description": "Properties of the diagnostic proactive log collection settings.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticRemoteSupportSettings": {
+      "description": "The remote support settings of a device.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "DiagnosticRemoteSupportSettings",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/DiagnosticRemoteSupportSettingsProperties",
+          "description": "Properties of the remote support  settings.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DiagnosticRemoteSupportSettingsProperties": {
+      "description": "The properties of remote support settings.",
+      "type": "object",
+      "properties": {
+        "remoteSupportSettingsList": {
+          "description": "Remote support settings list according to the RemoteApplicationType",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemoteSupportSettings"
+          }
         }
       }
     },
@@ -6823,7 +7173,8 @@
         },
         "nextLink": {
           "description": "Link to the next set of results.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -6887,6 +7238,10 @@
           "description": "Name of the operation.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Is data action.",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "description": "Properties displayed for the operation."
@@ -6894,10 +7249,6 @@
         "origin": {
           "description": "Origin of the operation.",
           "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
         },
         "properties": {
           "$ref": "#/definitions/OperationProperties",
@@ -6972,6 +7323,11 @@
           "description": "Order configured on ASE resource",
           "$ref": "#/definitions/SystemData"
         },
+        "kind": {
+          "description": "It Contains the version.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/OrderProperties",
           "description": "The order properties.",
@@ -7001,11 +7357,13 @@
     },
     "OrderProperties": {
       "description": "Order properties.",
-      "required": [
-        "contactInformation"
-      ],
       "type": "object",
       "properties": {
+        "orderId": {
+          "description": "The v2 order id.",
+          "type": "string",
+          "readOnly": true
+        },
         "contactInformation": {
           "$ref": "#/definitions/ContactDetails",
           "description": "The contact details."
@@ -7207,6 +7565,27 @@
         }
       }
     },
+    "ProactiveLogCollectionSettingsProperties": {
+      "description": "The properties of proactive log collection settings.",
+      "required": [
+        "userConsent"
+      ],
+      "type": "object",
+      "properties": {
+        "userConsent": {
+          "description": "Proactive diagnostic collection consent flag",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProactiveDiagnosticsConsent",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "RawCertificateData": {
       "description": "Raw Certificate Data.",
       "required": [
@@ -7251,6 +7630,45 @@
         },
         "lastJob": {
           "description": "Indicates the id of the last refresh job on this particular share or container,if any. This could be a failed job or a successful job.",
+          "type": "string"
+        }
+      }
+    },
+    "RemoteSupportSettings": {
+      "description": "RemoteApplicationType for which remote support settings is being modified",
+      "type": "object",
+      "properties": {
+        "remoteApplicationType": {
+          "description": "Remote application type",
+          "enum": [
+            "Powershell",
+            "WAC",
+            "LocalUI",
+            "AllApplications"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RemoteApplicationType",
+            "modelAsString": true
+          }
+        },
+        "accessLevel": {
+          "description": "Access level allowed for this remote application type",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite",
+            "FullAccess"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          }
+        },
+        "expirationTimeStampInUTC": {
+          "format": "date-time",
+          "description": "Expiration time stamp",
           "type": "string"
         }
       }
@@ -8071,6 +8489,26 @@
         }
       }
     },
+    "SupportPackageRequestProperties": {
+      "description": "The share properties.",
+      "type": "object",
+      "properties": {
+        "minimumTimeStamp": {
+          "format": "date-time",
+          "description": "MinimumTimeStamp from where logs need to be collected",
+          "type": "string"
+        },
+        "maximumTimeStamp": {
+          "format": "date-time",
+          "description": "MaximumTimeStamp until where logs need to be collected",
+          "type": "string"
+        },
+        "include": {
+          "description": "Type of files, which need to be included in the logs\r\nThis will contain the type of logs (Default/DefaultWithDumps/None/All/DefaultWithArchived)\r\nor a comma separated list of log types that are required",
+          "type": "string"
+        }
+      }
+    },
     "SymmetricKey": {
       "description": "Symmetric key for authentication.",
       "type": "object",
@@ -8207,6 +8645,25 @@
         }
       }
     },
+    "TriggerSupportPackageRequest": {
+      "description": "The request object for trigger support package.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportPackageRequestProperties",
+          "description": "The TriggerSupportPackageRequest properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "UpdateDetails": {
       "description": "Update Specific attributes",
       "type": "object",
@@ -8237,6 +8694,10 @@
           "description": "Target Version number",
           "type": "string"
         },
+        "friendlyVersionNumber": {
+          "description": "Friendly Version Number",
+          "type": "string"
+        },
         "estimatedInstallTimeInMins": {
           "format": "int32",
           "description": "Estimated Install Time for the update",
@@ -8252,6 +8713,19 @@
           "type": "string",
           "x-ms-enum": {
             "name": "InstallRebootBehavior",
+            "modelAsString": true
+          }
+        },
+        "installationImpact": {
+          "description": "Impact of Installing an updateType",
+          "enum": [
+            "None",
+            "DeviceRebooted",
+            "KubernetesWorkloadsDown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstallationImpact",
             "modelAsString": true
           }
         },
@@ -8389,6 +8863,11 @@
           "description": "The time when the last scan job was completed (success/cancelled/failed) on the appliance.",
           "type": "string"
         },
+        "lastSuccessfulScanJobTime": {
+          "format": "date-time",
+          "description": "Time when the last scan job is successfully completed.",
+          "type": "string"
+        },
         "lastCompletedDownloadJobDateTime": {
           "format": "date-time",
           "description": "The time when the last Download job was completed (success/cancelled/failed) on the appliance.",
@@ -8417,6 +8896,11 @@
             "name": "JobStatus",
             "modelAsString": true
           }
+        },
+        "lastSuccessfulInstallJobDateTime": {
+          "format": "date-time",
+          "description": "The time when the Last Install job was completed successfully on the appliance",
+          "type": "string"
         },
         "lastCompletedInstallJobDateTime": {
           "format": "date-time",
@@ -8687,6 +9171,9 @@
     },
     "UserProperties": {
       "description": "The user properties.",
+      "required": [
+        "userType"
+      ],
       "type": "object",
       "properties": {
         "encryptedPassword": {
