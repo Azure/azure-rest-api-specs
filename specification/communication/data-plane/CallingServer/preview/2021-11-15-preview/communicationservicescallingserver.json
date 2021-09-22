@@ -606,11 +606,12 @@
         "operationId": "ServerCalls_GetParticipants",
         "parameters": [
           {
-            "name": "callLocator",
+            "name": "getAllParticipantsWithCallLocatorRequest",
             "in": "body",
+            "description": "The request payload for getting all the participants.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CallLocator"
+              "$ref": "#/definitions/GetAllParticipantsWithCallLocatorRequest"
             }
           },
           {
@@ -2497,6 +2498,19 @@
           "format": "int32",
           "description": "The timeout for the redirect.",
           "type": "integer"
+        }
+      }
+    },
+    "GetAllParticipantsWithCallLocatorRequest": {
+      "description": "The request payload for get all participants.",
+      "required": [
+        "callLocator"
+      ],
+      "type": "object",
+      "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
         }
       }
     },
