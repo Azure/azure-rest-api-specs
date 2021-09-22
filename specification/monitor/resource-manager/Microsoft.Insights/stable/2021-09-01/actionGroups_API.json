@@ -478,14 +478,13 @@
     },
     "TestNotificationDetailsResponse": {
       "description": "An Azure action group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Context"
+        }
+      ],
       "type": "object",
       "properties": {
-         "context": {
-             "additionalProperties": {
-               "type": "object",
-               "description": "The context information"
-             }
-          },
           "State": {
              "type": "string",
              "description": "The overall state"
@@ -543,6 +542,28 @@
             "description": "The detail"
           }
       }
+    },
+    "Context": {
+        "description": "The context info",
+        "type": "object",
+             "properties": {
+                "Description": {
+                 "type": "string",
+                 "description": "The context description"
+              },
+                "NotificationSource": {
+                  "type": "string",
+                  "description": "The source of the notification request"
+                },
+                "ContextIdType": {
+                  "type": "string",
+                  "description": "The context id type"
+                },
+                "ContextId": {
+                  "type": "string",
+                  "description": "The correlation id"
+                }
+             }
     },
     "ActionGroupResource": {
       "description": "An action group resource.",
