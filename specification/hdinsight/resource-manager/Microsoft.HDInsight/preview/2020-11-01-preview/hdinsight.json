@@ -560,7 +560,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterServiceConfigsResult"
+              "$ref": "#/definitions/ClusterInstanceServiceConfigsResult"
             }
           },
           "default": {
@@ -608,7 +608,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterServiceConfigsResult"
+              "$ref": "#/definitions/ClusterInstanceServiceConfigsResult"
             }
           },
           "default": {
@@ -952,7 +952,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterInstanceViews"
+              "$ref": "#/definitions/ClusterInstanceViewsResult"
             }
           },
           "default": {
@@ -997,7 +997,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterInstanceView"
+              "$ref": "#/definitions/ClusterInstanceViewResult"
             }
           },
           "default": {
@@ -1042,7 +1042,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterInstanceViews"
+              "$ref": "#/definitions/ClusterInstanceViewsResult"
             }
           },
           "default": {
@@ -1090,7 +1090,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterInstanceView"
+              "$ref": "#/definitions/ClusterInstanceViewResult"
             }
           },
           "default": {
@@ -1740,25 +1740,36 @@
         }
       ]
     },
-    "ClusterServiceConfigsResult": {
+    "ClusterInstanceServiceConfigsResult": {
       "type": "object",
+      "description": "Cluster/SessionCluster instance service configs api response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "Cluster/SessionCluster instance service config in the array.",
           "items": {
-            "$ref": "#/definitions/ServiceConfig"
-          },
-          "description": "ServiceConfig."
+            "$ref": "#/definitions/ClusterInstanceServiceConfig"
+          }
         },
         "nextLink": {
-          "description": "The link (url) to the next page of results.",
           "type": "string",
+          "description": "The link (url) to the next page of results.",
           "readOnly": true
         }
-      },
-      "description": "Cluster service config response."
+      }
     },
-    "ServiceConfig": {
+    "ClusterInstanceServiceConfig": {
+      "type": "object",
+      "description": "Cluster/SessionCluster instance service config.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define service config properties.",
+          "$ref": "#/definitions/ClusterInstanceServiceConfigProperties"
+        }
+      }
+    },
+    "ClusterInstanceServiceConfigProperties": {
       "type": "object",
       "properties": {
         "serviceConfigName": {
@@ -1769,7 +1780,7 @@
           "type": "string",
           "description": "File Name."
         },
-        "value": {
+        "content": {
           "type": "string",
           "description": "Content in the service config file."
         }
@@ -1777,16 +1788,16 @@
       "required": [
         "serviceConfigName",
         "fileName",
-        "value"
+        "content"
       ],
       "description": "Service config response."
     },
-    "ClusterInstanceViews": {
+    "ClusterInstanceViewsResult": {
       "type": "object",
       "properties": {
         "value": {
           "items": {
-            "$ref": "#/definitions/ClusterInstanceView"
+            "$ref": "#/definitions/ClusterInstanceViewResult"
           },
           "type": "array"
         },
@@ -1798,49 +1809,91 @@
       },
       "description": "The instance view of a HDInsight Cluster."
     },
-    "ClusterInstanceView": {
+    "ClusterInstanceViewResult": {
       "type": "object",
+      "description": "Cluster Instance View.",
+      "required": [
+        "name",
+        "properties"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the instance view"
+          "description": "Name of the instance view."
         },
-        "serviceStatuses": {
-          "items": {
-            "$ref": "#/definitions/ServiceStatusProperties"
-          },
-          "type": "array"
+        "properties": {
+          "description": "Properties of the instance view.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterInstanceViewProperties"
+            }
+          ]
         }
-      },
+      }
+    },
+    "ClusterInstanceViewProperties": {
+      "type": "object",
       "required": [
+        "status",
         "serviceStatuses"
       ],
-      "description": "The instance view of a HDInsight Cluster."
-    },
-    "ServiceStatusProperties": {
-      "type": "object",
       "properties": {
-        "name": {
+        "status": {
+          "description": "Status of the instance view.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterInstanceViewStatus"
+            }
+          ]
+        },
+        "serviceStatuses": {
+          "type": "array",
+          "description": "List of statuses of relevant services that make up the hilo cluster to surface to the customer.",
+          "items": {
+            "$ref": "#/definitions/ServiceStatus"
+          }
+        }
+      }
+    },
+    "ClusterInstanceViewStatus": {
+      "type": "object",
+      "description": "Status of the instance view.",
+      "required": [
+        "ready"
+      ],
+      "properties": {
+        "ready": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceStatus": {
+      "type": "object",
+      "description": "Describes the status of a service of a Hilo cluster.",
+      "required": [
+        "kind",
+        "ready"
+      ],
+      "properties": {
+        "kind": {
           "type": "string",
-          "description": "Name of the service"
+          "description": "Kind of the service. E.g. \"Zookeeper\"."
         },
         "ready": {
           "type": "string",
-          "description": "Indicates if the service is ready / healthy."
-        },
-        "reason": {
-          "type": "string",
-          "description": "A code describing the health of the service."
+          "description": "Indicates if the service is ready / healthy. Values can be \"true\", \"false\", \"unknown\" or anything else."
         },
         "message": {
           "type": "string",
-          "description": "A message describing the Reason."
+          "description": "A message describing the error if any."
         }
-      },
-      "required": [
-        "name",
-        "ready"
-      ]
+      }
     },
     "SessionClusterListResult": {
       "type": "object",
