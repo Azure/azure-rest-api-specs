@@ -384,6 +384,11 @@
                 "format": "date-time-rfc1123",
                 "description": "Returns the current share next allowed quota downgrade time."
               },
+              "x-ms-share-provisioned-bandwidth-mibps": {
+                "x-ms-client-name": "ProvisionedBandwidthMibps",
+                "type": "integer",
+                "description": "Returns the current share provisioned bandwidth in megabits per second."
+              },
               "x-ms-lease-duration": {
                 "x-ms-client-name": "LeaseDuration",
                 "description": "When a share is leased, specifies whether the lease is of infinite or fixed duration.",
@@ -5801,6 +5806,9 @@
           "type": "integer"
         },
         "ProvisionedEgressMBps": {
+          "type": "integer"
+        },
+        "ProvisionedBandwidthMiBps": {
           "type": "integer"
         },
         "NextAllowedQuotaDowngradeTime": {
