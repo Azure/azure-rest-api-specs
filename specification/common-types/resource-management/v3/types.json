@@ -190,6 +190,20 @@
       },
       "x-ms-azure-resource": true
     },
+    "SkuTier": {
+      "type": "string",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
+      },
+      "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+    },
     "Sku": {
       "description": "The resource model definition representing SKU",
       "type": "object",
@@ -199,18 +213,7 @@
           "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
         },
         "tier": {
-          "type": "string",
-          "enum": [
-            "Free",
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          },
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+          "$ref": "#/definitions/SkuTier"
         },
         "size": {
           "type": "string",
