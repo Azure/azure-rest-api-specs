@@ -9,8 +9,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-servicebus
 package-version: 1.0.0b1
 no-namespace-folders: true
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
@@ -83,4 +81,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2015-08'
 namespace: azure.mgmt.servicebus.v2015_08_01
 output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2015_08_01
+```
+
+``` yaml $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```
