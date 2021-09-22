@@ -468,7 +468,10 @@
         "error": {
           "$ref": "#/definitions/ErrorDetail"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ErrorDetail": {
       "description": "Error response returned from Azure Schema Registry service.",
@@ -482,7 +485,10 @@
           "description": "Brief description of error."
         },
         "details": {
-          "type": "string",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
           "description": "Error message details to help user understand/debug failure."
         }
       },
