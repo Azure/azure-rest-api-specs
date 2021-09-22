@@ -7164,11 +7164,6 @@
       "description": "Service Token",
       "type": "object",
       "properties": {
-        "accessToken": {
-          "description": "Access token for endpoint authentication.",
-          "type": "string",
-          "x-nullable": true
-        },
         "expiryTimeUtc": {
           "format": "int64",
           "description": "Access token expiry time (UTC).",
@@ -7181,8 +7176,25 @@
           "default": 0,
           "type": "integer"
         },
+        "secrets": {
+          "description": "Endpoint authentication secrets.",
+          "$ref": "#/definitions/EndpointAuthTokenSecrets",
+          "x-ms-secret": true,
+          "x-nullable": true
+        },
         "tokenType": {
           "description": "Access token type.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "EndpointAuthTokenSecrets": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "description": "Access token for endpoint authentication.",
           "type": "string",
           "x-nullable": true
         }
