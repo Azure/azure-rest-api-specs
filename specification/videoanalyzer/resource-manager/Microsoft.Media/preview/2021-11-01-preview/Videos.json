@@ -178,6 +178,62 @@
       ],
       "description": "Application level properties for the video resource."
     },
+    "VideoPropertiesUpdate": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Optional video title provided by the user. Value can be up to 256 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional video description provided by the user. Value can be up to 2048 characters long."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Archive",
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "VideoType",
+            "values": [
+              {
+                "value": "Archive",
+                "description": "Archive is flexible format that represents a video stream associated with wall-clock time. The video archive can either be continuous or discontinuous. An archive is discontinuous when there are gaps in the recording due to various reasons, such as the live pipeline being stopped, camera being disconnected or due to the use of event based recordings through the use of a signal gate. There is no limit to the archive duration and new video data can be appended to the existing archive at any time, as long as the same video codec and codec parameters are being used. Videos of this type are suitable for appending and long term archival."
+              },
+              {
+                "value": "File",
+                "description": "File represents a video which is stored as a single media file, such as MP4. Videos of this type are suitable to be downloaded for external consumption."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Video content type. Different content types are suitable for different applications and scenarios.",
+          "x-nullable": false
+        },
+        "flags": {
+          "$ref": "#/definitions/VideoFlags",
+          "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state.",
+          "readOnly": true
+        },
+        "contentUrls": {
+          "$ref": "#/definitions/VideoContentUrls",
+          "description": "Set of URLs to the video content.",
+          "readOnly": true
+        },
+        "mediaInfo": {
+          "$ref": "#/definitions/VideoMediaInfo",
+          "description": "Contains information about the video and audio content.",
+          "readOnly": true
+        },
+        "archival": {
+          "$ref": "#/definitions/VideoArchival",
+          "description": "Video archival properties."
+        }
+      },
+      "type": "object",
+      "description": "Application level properties for the video resource."
+    },
     "VideoArchival": {
       "properties": {
         "retentionPeriod": {
@@ -420,6 +476,26 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VideoProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "VideoEntityUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VideoPropertiesUpdate",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
         },
@@ -729,7 +805,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VideoEntity"
+              "$ref": "#/definitions/VideoEntityUpdate"
             },
             "description": "The request parameters"
           },

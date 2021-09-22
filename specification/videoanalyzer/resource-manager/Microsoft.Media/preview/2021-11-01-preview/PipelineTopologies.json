@@ -119,6 +119,44 @@
       ],
       "description": "Describes the properties of a pipeline topology."
     },
+    "PipelineTopologyPropertiesUpdate": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional description of the pipeline topology. It is recommended that the expected use of the topology to be described here."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDeclaration"
+          },
+          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \\\"${PARAMETER_NAME}\\\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceNodeBase"
+          },
+          "description": "List of the topology source nodes. Source nodes enable external data to be ingested by the pipeline."
+        },
+        "processors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessorNodeBase"
+          },
+          "description": "List of the topology processor nodes. Processor nodes enable pipeline data to be analyzed, processed or transformed."
+        },
+        "sinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SinkNodeBase"
+          },
+          "description": "List of the topology sink nodes. Sink nodes allow pipeline data to be stored or exported."
+        }
+      },
+      "type": "object",
+      "description": "Describes the properties of a pipeline topology."
+    },
     "ParameterDeclaration": {
       "properties": {
         "name": {
@@ -910,6 +948,53 @@
       ],
       "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\\r\\n\\r\\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\\r\\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\\r\\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
     },
+    "PipelineTopologyUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineTopologyPropertiesUpdate",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Live",
+            "Batch"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "values": [
+              {
+                "value": "Live",
+                "description": "Live pipeline topology resource."
+              },
+              {
+                "value": "Batch",
+                "description": "Batch pipeline topology resource."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Topology kind."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU details."
+        }
+      },
+      "type": "object",
+      "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\\r\\n\\r\\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\\r\\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\\r\\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+    },
     "LivePipelineProperties": {
       "properties": {
         "topologyName": {
@@ -974,6 +1059,66 @@
       ],
       "description": "Live pipeline properties."
     },
+    "LivePipelinePropertiesUpdate": {
+      "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
+        "bitrateKbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bitrate capacity in kbps for the live pipeline. The support bit rate is between 500 to 3000 kbps."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Inactive",
+            "Activating",
+            "Active",
+            "Deactivating"
+          ],
+          "x-ms-enum": {
+            "name": "LivePipelineState",
+            "values": [
+              {
+                "value": "Inactive",
+                "description": "The live pipeline is idle and not processing media."
+              },
+              {
+                "value": "Activating",
+                "description": "The live pipeline is transitioning into the active state."
+              },
+              {
+                "value": "Active",
+                "description": "The live pipeline is active and able to process media. If your data source is not available, for instance, if your RTSP camera is powered off or unreachable, the pipeline will still be active and periodically retrying the connection. Your Azure subscription will be billed for the duration in which the live pipeline is in the active state."
+              },
+              {
+                "value": "Deactivating",
+                "description": "The live pipeline is transitioning into the inactive state."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Current pipeline state (read-only).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
+        }
+      },
+      "type": "object",
+      "description": "Live pipeline properties."
+    },
     "LivePipeline": {
       "allOf": [
         {
@@ -983,6 +1128,27 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LivePipelineProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
+    },
+    "LivePipelineUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LivePipelinePropertiesUpdate",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
         },
@@ -1065,6 +1231,73 @@
       ],
       "description": "Properties of a pipeline job."
     },
+    "PipelineJobPropertiesUpdate": {
+      "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Processing",
+            "Canceled",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineJobState",
+            "values": [
+              {
+                "value": "Processing",
+                "description": "Pipeline job is processing."
+              },
+              {
+                "value": "Canceled",
+                "description": "Pipeline job is canceled."
+              },
+              {
+                "value": "Completed",
+                "description": "Pipeline job completed."
+              },
+              {
+                "value": "Failed",
+                "description": "Pipeline job failed."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Current pipeline state (read-only).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration time when the pipeline job will be automatically deleted.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "error": {
+          "$ref": "#/definitions/PipelineJobError",
+          "description": "An optional error information about the pipeline job failure.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
+        }
+      },
+      "type": "object",
+      "description": "Properties of a pipeline job."
+    },
     "PipelineJobError": {
       "properties": {
         "code": {
@@ -1088,6 +1321,27 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineJobProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Represents a pipeline job."
+    },
+    "PipelineJobUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineJobPropertiesUpdate",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
         },
@@ -1442,7 +1696,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PipelineTopology"
+              "$ref": "#/definitions/PipelineTopologyUpdate"
             },
             "description": "The request parameters"
           },
@@ -1706,7 +1960,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LivePipeline"
+              "$ref": "#/definitions/LivePipelineUpdate"
             },
             "description": "The request parameters"
           },
@@ -2066,7 +2320,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PipelineJob"
+              "$ref": "#/definitions/PipelineJobUpdate"
             },
             "description": "The request parameters"
           },
