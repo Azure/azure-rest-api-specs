@@ -816,7 +816,7 @@
         }
       },
       "type": "object",
-      "description": "Incoming video stream out of synch event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event."
+      "description": "Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event."
     },
     "MediaLiveEventIncomingDataChunkDroppedEventData": {
       "properties": {
@@ -867,6 +867,16 @@
           "description": "Gets the track name.",
           "readOnly": true
         },
+        "transcriptionLanguage": {
+          "description": "Gets the Live Transcription language.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "transcriptionState": {
+            "description": "Gets the Live Transcription state.",
+            "readOnly": true,
+            "type": "string"
+        },
         "bitrate": {
           "type": "integer",
           "format": "int64",
@@ -878,6 +888,16 @@
           "format": "int64",
           "description": "Gets the incoming bitrate.",
           "readOnly": true
+        },
+        "ingestDriftValue": {
+          "description": "Gets the track ingest drift value.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastFragmentArrivalTime": {
+            "description": "Gets the arrival UTC time of the last fragment.",
+            "readOnly": true,
+            "type": "string"
         },
         "lastTimestamp": {
           "type": "string",
@@ -924,7 +944,7 @@
         }
       },
       "type": "object",
-      "description": "Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event."
+      "description": "Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeatEventData event."
     },
     "MediaLiveEventTrackDiscontinuityDetectedEventData": {
       "properties": {
@@ -967,6 +987,26 @@
       },
       "type": "object",
       "description": "Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event."
+    },
+    "MediaLiveEventChannelArchiveHeartbeatEventData": {
+        "properties": {
+            "channelLatencyMs": {
+                "type": "string",
+                "description": "Gets the channel latency in ms.",
+                "readOnly": true
+            },
+            "latencyResultCode": {
+                "type": "string",
+                "description": "Gets the latency result code.",
+                "readOnly": true
+            }
+        },
+        "type": "object",
+        "required": [
+            "channelLatencyMs",
+            "latencyResultCode"
+        ],
+        "description": "Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeatEventData event."
     }
   }
 }
