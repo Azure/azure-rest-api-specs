@@ -660,7 +660,7 @@
         "operationId": "ServerCalls_AddParticipant",
         "parameters": [
           {
-            "name": "addParticipantRequest",
+            "name": "addParticipantWithCallLocatorRequest",
             "in": "body",
             "description": "The add participant request using call locator.",
             "required": true,
@@ -709,10 +709,10 @@
         ],
         "summary": "Remove participant from the call using identifier.",
         "description": "Remove participant from the call using identifier.",
-        "operationId": "ServerCalls_RemoveParticipantById",
+        "operationId": "ServerCalls_RemoveParticipant",
         "parameters": [
           {
-            "name": "removeParticipantByIdRequest",
+            "name": "removeParticipantWithCallLocatorRequest",
             "in": "body",
             "description": "The identifier of the participant to be removed from the call.",
             "required": true,
@@ -746,7 +746,7 @@
         },
         "x-ms-examples": {
           "Remove participant from the call using identifier.": {
-            "$ref": "./examples/ServerCalls_RemoveParticipantById.json"
+            "$ref": "./examples/ServerCalls_RemoveParticipant.json"
           }
         }
       }
@@ -758,10 +758,10 @@
         ],
         "summary": "Get participant from the call using identifier.",
         "description": "Get participant from the call using identifier.",
-        "operationId": "ServerCalls_GetParticipantById",
+        "operationId": "ServerCalls_GetParticipant",
         "parameters": [
           {
-            "name": "getParticipantByIdRequest",
+            "name": "getParticipantWithCallLocatorRequest",
             "in": "body",
             "description": "The get participant request.",
             "required": true,
@@ -801,7 +801,7 @@
         },
         "x-ms-examples": {
           "Get participant from the call using identifier.": {
-            "$ref": "./examples/ServerCalls_GetParticipantById.json"
+            "$ref": "./examples/ServerCalls_GetParticipant.json"
           }
         }
       }
@@ -1239,7 +1239,7 @@
         ],
         "summary": "Remove participant from the call using identifier.",
         "description": "Remove participant from the call using identifier.",
-        "operationId": "CallConnections_RemoveParticipantById",
+        "operationId": "CallConnections_RemoveParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -1249,7 +1249,7 @@
             "type": "string"
           },
           {
-            "name": "removeParticipantByIdRequest",
+            "name": "removeParticipantRequest",
             "in": "body",
             "description": "The identifier of the participant to be removed from the call.",
             "required": true,
@@ -1283,7 +1283,7 @@
         },
         "x-ms-examples": {
           "Remove participant from the call using identifier.": {
-            "$ref": "./examples/CallConnections_RemoveParticipantById.json"
+            "$ref": "./examples/CallConnections_RemoveParticipant.json"
           }
         }
       }
@@ -1295,7 +1295,7 @@
         ],
         "summary": "Get participant from the call using identifier.",
         "description": "Get participant from the call using identifier.",
-        "operationId": "CallConnections_GetParticipantById",
+        "operationId": "CallConnections_GetParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -1305,7 +1305,7 @@
             "type": "string"
           },
           {
-            "name": "getParticipantByIdRequest",
+            "name": "getParticipantRequest",
             "in": "body",
             "description": "The identifier of the participant to get from the call.",
             "required": true,
@@ -1345,7 +1345,7 @@
         },
         "x-ms-examples": {
           "Get participant from the call using identifier.": {
-            "$ref": "./examples/CallConnections_GetParticipantById.json"
+            "$ref": "./examples/CallConnections_GetParticipant.json"
           }
         }
       }
@@ -1704,7 +1704,7 @@
         "operationId": "ServerCalls_StartRecording",
         "parameters": [
           {
-            "name": "startCallRecordingRequest",
+            "name": "startCallRecordingWithCallLocatorRequest",
             "in": "body",
             "description": "The request body of start call recording request.",
             "required": true,
