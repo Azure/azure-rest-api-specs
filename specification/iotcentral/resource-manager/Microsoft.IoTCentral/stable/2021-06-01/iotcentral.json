@@ -533,7 +533,7 @@
       },
       "readOnly": true
     },
-    "ArmIdentity": {
+    "ManagedIdentity": {
       "type": "object",
       "properties": {
         "principalId": {
@@ -547,7 +547,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "The type of identity used for the resource. 'SystemAssigned' refers to an implicitly created identity, while the type 'None' will remove any identities from the service.",
+          "description": "The type of managed identity used for the resource. 'SystemAssigned' refers to an implicitly created identity, while the type 'None' will remove any identities from the service.",
           "type": "string",
           "enum": [
             "SystemAssigned",
@@ -597,7 +597,7 @@
         },
         "identity": {
           "description": "The managed identities for the IoT Central application.",
-          "$ref": "#/definitions/ArmIdentity"
+          "$ref": "#/definitions/ManagedIdentity"
         }
       },
       "allOf": [
@@ -631,7 +631,7 @@
         },
         "identity": {
           "description": "The managed identities for the IoT Central application.",
-          "$ref": "#/definitions/ArmIdentity"
+          "$ref": "#/definitions/ManagedIdentity"
         }
       }
     },
