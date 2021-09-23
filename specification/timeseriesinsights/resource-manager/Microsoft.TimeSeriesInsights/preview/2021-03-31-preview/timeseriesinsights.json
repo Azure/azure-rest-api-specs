@@ -1507,27 +1507,6 @@
         }
       }
     },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      },
-      "description": "Time Series Insights resource",
-      "x-ms-azure-resource": true
-    },
     "TrackedResource": {
       "properties": {
         "location": {
@@ -1548,7 +1527,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "required": [
@@ -2831,7 +2810,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "An access policy is used to grant users and applications access to the environment. Roles are assigned to service principals in Azure Active Directory. These roles define the actions the principal can perform through the Time Series Insights data plane APIs."
