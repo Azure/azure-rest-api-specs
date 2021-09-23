@@ -132,9 +132,6 @@
         "x-ms-examples": {
           "ApiManagementGetPolicyFragment": {
             "$ref": "./examples/ApiManagementGetPolicyFragment.json"
-          },
-          "ApiManagementGetPolicyFragmentFormat": {
-            "$ref": "./examples/ApiManagementGetPolicyFragmentFormat.json"
           }
         },
         "parameters": [
@@ -146,9 +143,6 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/PolicyFragmentIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/PolicyFragmentExportFormat"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -304,7 +298,7 @@
           "PolicyFragment"
         ],
         "operationId": "PolicyFragment_GetReferences",
-        "description": "Lists policy documents that reference the policy fragment of the Api Management service.",
+        "description": "Listsresources that reference the policy fragment of the Api Management service.",
         "x-ms-examples": {
           "ApiManagementListPolicyFragmentReferences": {
             "$ref": "./examples/ApiManagementListPolicyFragmentReferences.json"
@@ -329,9 +323,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns an array of Policy Documents that reference the policy fragment.",
+            "description": "Returns an array of references to resources that include the policy fragment in their definitions.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyCollection"
+              "$ref": "./definitions.json#/definitions/PolicyFragmentReferencesCollection"
             }
           },
           "default": {
