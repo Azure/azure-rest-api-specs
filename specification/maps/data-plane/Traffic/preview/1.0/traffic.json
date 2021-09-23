@@ -341,7 +341,7 @@
                 },
                 {
                   "value": "s3",
-                  "description": "Creates plain lines with certain degree of glow."
+                  "description": "Creates plain lines with certain degree of glow, different from the s2 style."
                 },
                 {
                   "value": "night",
@@ -427,7 +427,7 @@
               "night"
             ],
             "x-ms-enum": {
-              "name": "TrafficIncidentDetailStyle",
+              "name": "IncidentDetailStyle",
               "modelAsString": true,
               "values": [
                 {
@@ -440,7 +440,7 @@
                 },
                 {
                   "value": "s3",
-                  "description": "Creates plain lines with certain degree of glow."
+                  "description": "Creates plain lines with certain degree of glow, different than the s2 style."
                 },
                 {
                   "value": "night",
@@ -658,13 +658,13 @@
               "readOnly": true
             },
             "currentTravelTime": {
-              "description": "Current travel time in seconds based on fused real-time measurements between the defined locations in the specified direction.",
+              "description": "Current travel time in seconds, across this traffic segment, based on fused real-time measurements between the defined locations in the specified direction.",
               "type": "integer",
               "format": "int32",
               "readOnly": true
             },
             "freeFlowTravelTime": {
-              "description": "The travel time in seconds which would be expected under ideal free flow conditions.",
+              "description": "The travel time in seconds, across this traffic segment, which would be expected under ideal free flow conditions.",
               "type": "integer",
               "format": "int32",
               "readOnly": true
@@ -696,9 +696,10 @@
               "readOnly": true
             },
             "openlr": {
-              "description": "OpenLR code for segment",
-              "type": "number",
-              "readOnly": true
+              "description": "OpenLR code for segment. See [OpenLR](https://en.wikipedia.org/wiki/OpenLR) for more information on the use of Open LR codes.",
+              "type": "string",
+              "readOnly": true,
+              "x-ms-client-name": "openLrCode"
             }
           }
         }
@@ -723,7 +724,7 @@
               "description": "A single traffic incident, or a cluster of traffic incidents",
               "type": "array",
               "readOnly": true,
-              "x-ms-client-name": "pointOfInterest"
+              "x-ms-client-name": "pointsOfInterest",
               "items": {
                 "$ref": "#/definitions/TrafficIncidentPointOfInterest"
               }
@@ -746,68 +747,157 @@
           "type": "object",
           "readOnly": true,
           "x-ms-client-name": "point",
-          "properties": {
-            "x": {
-              "description": "x coordinate",
-              "type": "number",
-              "readOnly": true
-            },
-            "y": {
-              "description": "y coordinate",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/Point"
         },
         "ic": {
           "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings -- 0: Unknown, 1: Accident, 2: Fog, 3: Dangerous Conditions, 4: Rain, 5: Ice, 6: Jam, 7: Lane Closed, 8: Road Closed, 9: Road Works, 10: Wind, 11: Flooding, 12: Detour, 13: Cluster",
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "x-ms-client-name": "iconCategory"
+          "x-ms-client-name": "iconCategory",
+          "enum": [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+          ],
+          "x-ms-enum": {
+            "name": "IconCategory",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "0",
+                "name": "Unknown",
+                "description": "Unknown"
+              },
+              {
+                "value": "1",
+                "name": "Accident",
+                "description": "Accident"
+              },
+              {
+                "value": "2",
+                "name": "Fog",
+                "description": "Fog"
+              },
+              {
+                "value": "3",
+                "name": "Dangerous Conditions",
+                "description": "Dangerous Conditions"
+              },
+              {
+                "value": "4",
+                "name": "Rain",
+                "description": "Rain"
+              },
+              {
+                "value": "5",
+                "name": "Ice",
+                "description": "Ice"
+              },
+              {
+                "value": "6",
+                "name": "Jam",
+                "description": "Jam"
+              },
+              {
+                "value": "7",
+                "name": "Lane Closed",
+                "description": "Lane Closed"
+              },
+              {
+                "value": "8",
+                "name": "Road Closed",
+                "description": "Road Closed"
+              },
+              {
+                "value": "9",
+                "name": "Road Works",
+                "description": "Road Works"
+              },
+              {
+                "value": "10",
+                "name": "Wind",
+                "description": "Wind"
+              },
+              {
+                "value": "11",
+                "name": "Flooding",
+                "description": "Flooding"
+              },
+              {
+                "value": "12",
+                "name": "Detour",
+                "description": "Detour"
+              },
+              {
+                "value": "13",
+                "name": "Cluster",
+                "description": "Cluster: Returned if a cluster contains incidents with different icon categories."
+              },
+              {
+                "value": "14",
+                "name": "Broken Down Vehicle",
+                "description": "Broken Down Vehicle"
+              }
+            ]
+          }
         },
         "ty": {
           "description": "The magnitude of delay associated with incident. These values correspond to incident colors in the traffic tiles",
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "x-ms-client-name": "delayMagnitude"
+          "x-ms-client-name": "magnitudeOfDelay",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "x-ms-enum": {
+            "name": "DelayMagnitude",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "0",
+                "name": "Unknown",
+                "description": "Unknown"
+              },
+              {
+                "value": "1",
+                "name": "Minor",
+                "description": "Minor"
+              },
+              {
+                "value": "2",
+                "name": "Moderate",
+                "description": "Moderate"
+              },
+              {
+                "value": "3",
+                "name": "Major",
+                "description": "Major"
+              },
+              {
+                "value": "4",
+                "name": "Undefined",
+                "description": "Undefined (used for road closures and other indefinite delays)"
+              }
+            ]
+          }
         },
         "cbl": {
           "description": "Bottom left coordinate of the cluster in the projection of the request",
           "type": "object",
           "readOnly": true,
           "x-ms-client-name": "bottomLeftCoordinate",
-          "properties": {
-            "x": {
-              "description": "x coordinate",
-              "type": "number",
-              "readOnly": true
-            },
-            "y": {
-              "description": "y coordinate",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/Point"
         },
         "ctr": {
           "description": "Top right coordinate of the cluster in the projection of the request",
           "type": "object",
           "readOnly": true,
           "x-ms-client-name": "topLeftCoordinate",
-          "properties": {
-            "x": {
-              "description": "x coordinate",
-              "type": "number",
-              "readOnly": true
-            },
-            "y": {
-              "description": "y coordinate",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/Point"
         },
         "cs": {
           "description": "Cluster size: the number of incidents in the cluster",
@@ -876,17 +966,18 @@
               "$ref":  "#/definitions/TrafficState"
             },
             "copyrightIds": {
-              "description": "Copyright Ids property",
+              "x-ms-client-name": "copyrightInformation",
+              "description": "When the copyright parameter value is true, this contains the full text of the copyright information that must be displayed with the tiles in the viewport",
               "type": "string",
               "readOnly": true
             },
             "@version": {
-              "description": "@Version property",
+              "description": "Indicates the software version used to generate the information. For use with support queries.",
               "type": "string",
               "readOnly": true
             },
             "@maps": {
-              "description": "@maps property",
+              "description": "Indicates the data provider's internal names for the map data used in the viewport. For use with support queries.",
               "type": "string",
               "readOnly": true
             }
@@ -895,19 +986,36 @@
       }
     },
     "TrafficState": {
-      "description": "Traffic State array",
+      "description": "Traffic State information",
       "type": "object",
       "readOnly": true,
       "properties": {
         "@trafficAge": {
-          "description": "@Traffic Age property",
+          "description": "The elapsed time (in seconds) from the Traffic Model ID creation.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
         "@trafficModelId": {
-          "description": "@Traffic Model Id property",
+          "description": "The unique ID called Traffic Model ID is used in calls to Traffic Incident services. It allows to obtain information from particular traffic updates. Traffic Model ID is updated every minute, and is valid for two minutes before it times out.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Point": {
+      "description": "Generic representation of a point with coordinates (x, y) in the Cartesian plane.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "x": {
+          "description": "x coordinate",
+          "type": "number",
+          "readOnly": true
+        },
+        "y": {
+          "description": "y coordinate",
+          "type": "number",
           "readOnly": true
         }
       }
