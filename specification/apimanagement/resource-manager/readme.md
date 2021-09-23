@@ -672,5 +672,11 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4037
     from: definitions.json
-    reason: We want customers to be able to supply any valid JSON token, object or otherwise
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
+  - suppress: R4009
+    from: apimprivatelink.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimprivatelink.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
 ```

@@ -133,16 +133,10 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -151,7 +145,13 @@
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceBackupRestoreParameters"
             },
-            "description": "Parameters supplied to the ApiManagementService_Restore operation."
+            "description": "Parameters supplied to the Restore API Management service from backup operation."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -185,22 +185,22 @@
         "operationId": "ApiManagementService_Backup",
         "description": "Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.",
         "x-ms-examples": {
-          "ApiManagementCreateBackup": {
+          "ApiManagementBackupWithAccessKey": {
             "$ref": "./examples/ApiManagementBackupWithAccessKey.json"
+          },
+          "ApiManagementBackupWithSystemManagedIdentity": {
+            "$ref": "./examples/ApiManagementBackupWithSystemManagedIdentity.json"
+          },
+          "ApiManagementBackupWithUserAssignedManagedIdentity": {
+            "$ref": "./examples/ApiManagementBackupWithUserAssignedManagedIdentity.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -210,6 +210,12 @@
               "$ref": "#/definitions/ApiManagementServiceBackupRestoreParameters"
             },
             "description": "Parameters supplied to the ApiManagementService_Backup operation."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
