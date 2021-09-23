@@ -1050,6 +1050,12 @@
           },
           "Create Agent Pool with Krustlet and the WASI runtime": {
             "$ref": "./examples/AgentPoolsCreate_WasmWasi.json"
+          },
+          "Stop Agent Pool": {
+            "$ref": "./examples/AgentPools_Stop.json"
+          },
+          "Start Agent Pool": {
+            "$ref": "./examples/AgentPools_Start.json"
           }
         }
       },
@@ -2693,8 +2699,8 @@
           "description": "The current deployment or provisioning state."
         },
         "powerState": {
-          "readOnly": true,
-          "description": "Describes whether the Agent Pool is Running or Stopped",
+          "title": "Whether the Agent Pool is running or stopped.",
+          "description": "When an Agent Pool is first created it is initially Running. The Agent Pool can be stopped by setting this field to Stopped. A stopped Agent Pool stops all of its VMs and does not accrue billing charges. An Agent Pool can only be stopped if it is Running and provisioning state is Succeeded",
           "$ref": "#/definitions/PowerState"
         },
         "availabilityZones": {
