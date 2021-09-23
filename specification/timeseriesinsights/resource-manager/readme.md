@@ -117,6 +117,9 @@ directive:
       - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
+  - suppress: R4009 # The response of operation:'PrivateEndpointConnections_CreateOrUpdate' is defined without 'systemData'. Consider adding the systemData to the response.
+    from: timeseriesinsights.json
+    reason: The systemData feature is not implemented in the Time Series Insights RP as of the publication of this api version.
 ```
 
 ---
