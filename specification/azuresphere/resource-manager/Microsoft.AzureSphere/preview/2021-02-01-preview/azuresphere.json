@@ -337,6 +337,17 @@
               "$ref": "#/definitions/Catalog"
             }
           },
+          "201": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            },
+            "description": "Resource creation accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmPutAcceptedResponse"
+            }
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -352,6 +363,10 @@
           "Put the details of the catalog.": {
             "$ref": "./examples/PutCatalog.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -792,6 +807,17 @@
               "$ref": "#/definitions/Product"
             }
           },
+          "201": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            },
+            "description": "Resource creation accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmPutAcceptedResponse"
+            }
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -807,6 +833,10 @@
           "Put the details of the product.": {
             "$ref": "./examples/PutProduct.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -1003,8 +1033,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Response to the request to deploy images to device.",
+          "202": {
+            "description": "Async response to the request to deploy images to device.",
             "schema": {
               "$ref": "#/definitions/DeployImagesToDeviceGroupResponse"
             }
@@ -1950,8 +1980,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Response of the assign device to device group action",
+          "202": {
+            "description": "Async response of the assign device to device group action",
             "schema": {
               "$ref": "#/definitions/DeviceAssignResultResponse"
             }
@@ -2077,6 +2107,17 @@
               "$ref": "#/definitions/Device"
             }
           },
+          "201": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            },
+            "description": "Resource creation accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArmPutAcceptedResponse"
+            }
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -2092,6 +2133,10 @@
           "Claims a device.": {
             "$ref": "./examples/PutDevice.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2938,14 +2983,13 @@
     },
     "DeployImagesToDeviceGroupResponse": {
       "type": "object",
-      "properties": {
-        "createdDateUTC": {
-          "type": "string",
-          "description": "The created date of the deployment in UTC",
-          "readOnly": true
+      "properties": {},
+      "description": "Async response to the request to deploy images to device.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
         }
-      },
-      "description": "Response to the request to deploy images to device."
+      ]
     },
     "ListDeploymentsDeviceGroupRequest": {
       "type": "object",
@@ -3105,13 +3149,13 @@
     },
     "DeviceAssignResultResponse": {
       "type": "object",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
+      "properties": {},
+      "description": "Async response of the assign device to device group action",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
         }
-      },
-      "description": "Response of the assign device to device group action"
+      ]
     },
     "Device": {
       "type": "object",
@@ -3296,6 +3340,16 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "AzureSphereProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
     },
     "AzureSpherePage_DeploymentProperties": {
       "type": "object",
@@ -3785,16 +3839,6 @@
         }
       },
       "description": "The device image"
-    },
-    "AzureSphereProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
     },
     "OSFeedType": {
       "type": "string",
