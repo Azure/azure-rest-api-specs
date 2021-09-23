@@ -120,6 +120,7 @@
           },
           {
             "name": "pointsRequestBody",
+            "x-ms-client-name": "points",
             "in": "body",
             "description": "The string representation of a list of points. A point is defined in lon/lat WGS84 coordinate reference system format.  Each points in a list should be separated by the pipe ('|') character. The number of points that can be requested in  a POST request ranges from 2 to 2,000. The resolution of the elevation data will be the highest for a single point  and will decrease if multiple points are spread further apart. ",
             "required": true,
@@ -216,6 +217,7 @@
           },
           {
             "name": "linesRequestBody",
+            "x-ms-client-name": "endpointsOfPolyline",
             "in": "body",
             "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates,  with each endpoint separated by a pipe ('|') character. The polyline should be defined in the  following format: `[longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ...,  longitude_pointN, latitude_pointN]`. The longitude and latitude values refer to the World Geodetic  System (WGS84) coordinate reference system. The resolution of the data used to compute the  elevation will depend on the distance between the endpoints.",
             "required": true,
