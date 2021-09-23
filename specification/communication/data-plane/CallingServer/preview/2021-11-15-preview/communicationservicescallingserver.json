@@ -2724,8 +2724,7 @@
     "StartHoldMusicRequest": {
       "description": "The request payload for playing hold music for a participant.",
       "required": [
-        "identifier",
-        "audioFileUri"
+        "identifier"
       ],
       "type": "object",
       "properties": {
@@ -2743,6 +2742,10 @@
         },
         "callbackUri": {
           "description": "The callback URI.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
           "type": "string"
         }
       }
@@ -3090,6 +3093,7 @@
     "JoinCallRequest": {
       "description": "The request payload for join call.",
       "required": [
+        "callLocator",
         "source",
         "callbackUri"
       ],
