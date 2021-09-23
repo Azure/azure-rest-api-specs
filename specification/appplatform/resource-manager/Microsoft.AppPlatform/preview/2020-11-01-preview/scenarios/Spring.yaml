@@ -123,12 +123,14 @@ scenarios:
               traceEnabled: true
               appInsightsInstrumentationKey: "$(insightsInstrumentationKey)"
               appInsightsSamplingRate: 50.0
+        resourceName: monitorSetting
 
       - step: MonitoringSettings_Get
         exampleFile: ../examples/MonitoringSettings_Get.json
 
       - step: MonitoringSettings_UpdatePatch
-        exampleFile: ../examples/MonitoringSettings_UpdatePatch.json
+        resourceName: monitorSetting
+        operationId: MonitoringSettings_UpdatePatch
         resourceUpdate:
           - replace: /properties/appInsightsSamplingRate
             value: 100
