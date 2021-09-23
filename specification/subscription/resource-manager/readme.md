@@ -31,7 +31,18 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-09
+tag: package-2021-10
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+- Microsoft.Subscription/stable/2021-10-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
 ```
 
 ### Tag: package-2020-09
