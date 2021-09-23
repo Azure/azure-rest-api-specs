@@ -546,6 +546,316 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/virtualMachines/{virtualMachineName}/attachVolume": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_VolumeAttach",
+        "description": "Attaches a volume to the virtual machine.",
+        "summary": "Implements the operation to attach a volume to a virtual machine.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine attach volume action payload.",
+            "schema": {
+              "$ref": "#/definitions/AttachDetachVolumeVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "VolumeAttachVirtualMachine": {
+            "$ref": "./examples/AttachVolumeVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/virtualMachines/{virtualMachineName}/detachVolume": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_VolumeDetach",
+        "description": "Detaches a volume to the virtual machine.",
+        "summary": "Implements the operation to detach a volume to a virtual machine.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine detach volume action payload.",
+            "schema": {
+              "$ref": "#/definitions/AttachDetachVolumeVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "VolumeDetachVirtualMachine": {
+            "$ref": "./examples/DetachVolumeVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/virtualMachines/{virtualMachineName}/attachNetworkPort": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_NetworkPortAttach",
+        "description": "Attaches a networkPort to the virtual machine.",
+        "summary": "Implements the operation to attach a networkPort to a virtual machine.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine attach networkPort action payload.",
+            "schema": {
+              "$ref": "#/definitions/AttachDetachNetworkPortVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkPortAttachVirtualMachine": {
+            "$ref": "./examples/AttachNetworkPortVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/virtualMachines/{virtualMachineName}/detachNetworkPort": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_NetworkPortDetach",
+        "description": "Detaches a networkPort to the virtual machine.",
+        "summary": "Implements the operation to detach a networkPort to a virtual machine.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine detach networkPort action payload.",
+            "schema": {
+              "$ref": "#/definitions/AttachDetachNetworkPortVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkPortDetachVirtualMachine": {
+            "$ref": "./examples/DetachNetworkPortVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/virtualMachines/{virtualMachineName}/createSnapshot": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Snapshot",
+        "description": "Snapshots a virtual machine, creating a new Image resource.",
+        "summary": "Implements the operation to snapshot the virtual machine into a Glance image.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine snapshot action payload.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SnapshotVirtualMachine": {
+            "$ref": "./examples/CreateSnapshotVirtualMachine.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/openStackIdentities/{identityName}": {
       "put": {
         "tags": [
@@ -865,6 +1175,57 @@
           "ListBySubscriptionOpenStackIdentity": {
             "$ref": "./examples/ListBySubscriptionOpenStackIdentity.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/openStackIdentities/{identityName}/refresh": {
+      "post": {
+        "tags": [
+          "OpenStackIdentities"
+        ],
+        "operationId": "OpenStackIdentities_Refresh",
+        "description": "Refresh state of the OpenStackIdentity.",
+        "summary": "Implements the operation to refresh an OpenStackIdentity.",
+        "x-ms-examples": {
+          "RefreshOpenStackIdentity": {
+            "$ref": "./examples/RefreshOpenStackIdentity.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "identityName",
+            "description": "Name of the OpenStackIdentity.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2800,6 +3161,328 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/heatStackTemplates/{heatStackTemplateName}": {
+      "put": {
+        "tags": [
+          "HeatStackTemplates"
+        ],
+        "operationId": "HeatStackTemplates_Create",
+        "summary": "Create HeatStackTemplate.",
+        "description": "Implements HeatStackTemplate PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "heatStackTemplateName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HeatStackTemplate"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplate"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateHeatStackTemplate": {
+            "$ref": "./examples/CreateHeatStackTemplate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HeatStackTemplates"
+        ],
+        "operationId": "HeatStackTemplates_Get",
+        "summary": "Gets a HeatStackTemplate.",
+        "description": "Implements HeatStackTemplate GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "heatStackTemplateName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HeatStackTemplate"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetHeatStackTemplate": {
+            "$ref": "./examples/GetHeatStackTemplate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "HeatStackTemplates"
+        ],
+        "operationId": "HeatStackTemplates_Update",
+        "summary": "Updates a HeatStackTemplate.",
+        "description": "API to update certain properties of the HeatStackTemplate resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "heatStackTemplateName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HeatStackTemplate"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "HeatStackTemplate properties to update. Only tags are supported.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatchTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplate"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "UpdateHeatStackTemplate": {
+            "$ref": "./examples/UpdateHeatStackTemplate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HeatStackTemplates"
+        ],
+        "operationId": "HeatStackTemplates_Delete",
+        "summary": "Deletes a HeatStackTemplate.",
+        "description": "Implements HeatStackTemplate DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "heatStackTemplateName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HeatStackTemplate"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "DeleteHeatStackTemplate": {
+            "$ref": "./examples/DeleteHeatStackTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/heatStackTemplates": {
+      "get": {
+        "operationId": "HeatStackTemplates_ListByResourceGroup",
+        "summary": "List HeatStackTemplates by resource group.",
+        "description": "Implements HeatStackTemplates list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all HeatStackTemplates under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplatesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListByResourceGroupHeatStackTemplate": {
+            "$ref": "./examples/ListByResourceGroupHeatStackTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedOpenStack/heatStackTemplates": {
+      "get": {
+        "operationId": "HeatStackTemplates_ListBySubscription",
+        "summary": "List HeatStackTemplates by subscription.",
+        "description": "Implements HeatStackTemplates list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all HeatStackTemplates under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/HeatStackTemplatesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListBySubscriptionHeatStackTemplate": {
+            "$ref": "./examples/ListBySubscriptionHeatStackTemplate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/flavors/{flavorName}": {
       "put": {
         "tags": [
@@ -4087,6 +4770,650 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/networkPorts/{networkPortName}": {
+      "put": {
+        "tags": [
+          "NetworkPorts"
+        ],
+        "operationId": "NetworkPorts_Create",
+        "summary": "Create NetworkPort.",
+        "description": "Implements NetworkPort PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "networkPortName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkPort"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkPort"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkPort"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateNetworkPort": {
+            "$ref": "./examples/CreateNetworkPort.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkPorts"
+        ],
+        "operationId": "NetworkPorts_Get",
+        "summary": "Gets a NetworkPort.",
+        "description": "Implements NetworkPort GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "networkPortName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkPort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkPort"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetNetworkPort": {
+            "$ref": "./examples/GetNetworkPort.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkPorts"
+        ],
+        "operationId": "NetworkPorts_Update",
+        "summary": "Updates a NetworkPort.",
+        "description": "API to update certain properties of the NetworkPort resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "networkPortName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkPort"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "NetworkPort properties to update. Only tags are supported.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatchTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkPort"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkPort"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "UpdateNetworkPort": {
+            "$ref": "./examples/UpdateNetworkPort.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkPorts"
+        ],
+        "operationId": "NetworkPorts_Delete",
+        "summary": "Deletes a NetworkPort.",
+        "description": "Implements NetworkPort DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "networkPortName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkPort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "DeleteNetworkPort": {
+            "$ref": "./examples/DeleteNetworkPort.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/networkPorts": {
+      "get": {
+        "operationId": "NetworkPorts_ListByResourceGroup",
+        "summary": "List NetworkPorts by resource group.",
+        "description": "Implements NetworkPorts list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkPorts under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPortsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListByResourceGroupNetworkPort": {
+            "$ref": "./examples/ListByResourceGroupNetworkPort.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedOpenStack/networkPorts": {
+      "get": {
+        "operationId": "NetworkPorts_ListBySubscription",
+        "summary": "List NetworkPorts by subscription.",
+        "description": "Implements NetworkPorts list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkPorts under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkPortsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListBySubscriptionNetworkPort": {
+            "$ref": "./examples/ListBySubscriptionNetworkPort.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/volumeSnapshots/{volumeSnapshotName}": {
+      "put": {
+        "tags": [
+          "volumeSnapshots"
+        ],
+        "operationId": "volumeSnapshots_Create",
+        "summary": "Create volumeSnapshot.",
+        "description": "Implements volumeSnapshot PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "volumeSnapshotName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the volumeSnapshot"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateVolumeSnapshot": {
+            "$ref": "./examples/CreateVolumeSnapshot.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "volumeSnapshots"
+        ],
+        "operationId": "VolumeSnapshots_Get",
+        "summary": "Gets a VolumeSnapshot.",
+        "description": "Implements VolumeSnapshot GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "volumeSnapshotName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VolumeSnapshot"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVolumeSnapshot": {
+            "$ref": "./examples/GetVolumeSnapshot.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VolumeSnapshots"
+        ],
+        "operationId": "VolumeSnapshots_Update",
+        "summary": "Updates a VolumeSnapshot.",
+        "description": "API to update certain properties of the VolumeSnapshot resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "volumeSnapshotName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VolumeSnapshot"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "VolumeSnapshot properties to update. Only tags are supported.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatchTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "UpdateVolumeSnapshot": {
+            "$ref": "./examples/UpdateVolumeSnapshot.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VolumeSnapshots"
+        ],
+        "operationId": "VolumeSnapshots_Delete",
+        "summary": "Deletes a VolumeSnapshot.",
+        "description": "Implements VolumeSnapshot DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "path",
+            "name": "volumeSnapshotName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VolumeSnapshot"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "DeleteVolumeSnapshot": {
+            "$ref": "./examples/DeleteVolumeSnapshot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedOpenStack/volumeSnapshots": {
+      "get": {
+        "operationId": "VolumeSnapshots_ListByResourceGroup",
+        "summary": "List VolumeSnapshots by resource group.",
+        "description": "Implements VolumeSnapshots list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all VolumeSnapshots under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshotsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListByResourceGroupVolumeSnapshot": {
+            "$ref": "./examples/ListByResourceGroupVolumeSnapshot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedOpenStack/volumeSnapshots": {
+      "get": {
+        "operationId": "VolumeSnapshots_ListBySubscription",
+        "summary": "List VolumeSnapshots by subscription.",
+        "description": "Implements VolumeSnapshots list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all VolumeSnapshots under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshotsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListBySubscriptionVolumeSnapshot": {
+            "$ref": "./examples/ListBySubscriptionVolumeSnapshot.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4326,6 +5653,36 @@
               }
             }
           }
+        }
+      }
+    },
+    "AttachDetachVolumeVirtualMachineOptions": {
+      "description": "Defines the volume attach/detach action properties.",
+      "type": "object",
+      "properties": {
+        "volumeId": {
+          "description": "volumeId is the resource reference Id to the Openstack Volume.",
+          "type": "string"
+        }
+      }
+    },
+    "AttachDetachNetworkPortVirtualMachineOptions": {
+      "description": "Defines the network port attach/detach action properties.",
+      "type": "object",
+      "properties": {
+        "networkPortId": {
+          "description": "networkPortId is the resource reference Id to the Openstack Neutron Port.",
+          "type": "string"
+        }
+      }
+    },
+    "SnapshotVirtualMachineOptions": {
+      "description": "Defines the virtual machine snapshot properties.",
+      "type": "object",
+      "properties": {
+        "imageName": {
+          "description": "imageName is the resource reference Id to the Openstack Glance image that will be created.",
+          "type": "string"
         }
       }
     },
@@ -5261,6 +6618,10 @@
               "type": "string",
               "description": "Heat Template download URL."
             },
+            "heatStackTemplateId": {
+              "type": "string",
+              "description": "heatStackTemplateId is the resource reference Id to the Heat Stack Template. It takes precedence over the other template and environment options."
+            },
             "timeoutMins": {
               "type": "integer",
               "format": "int32",
@@ -5391,6 +6752,143 @@
           "description": "List of HeatStack resources.",
           "items": {
             "$ref": "#/definitions/HeatStack"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "HeatStackTemplateProperties": {
+      "type": "object",
+      "properties": {
+        "heatStackTemplateName": {
+          "type": "string",
+          "description": "heatStackTemplateName is the OpenStack resource name."
+        },
+        "identityId": {
+          "type": "string",
+          "description": "IdentityId is the resource reference Id to the Openstack credentials."
+        },
+        "heatStackTemplateConfig": {
+          "type": "object",
+          "description": "heatStackTemplateConfig is the OpenStack resource configuration.",
+          "properties": {
+            "ignoreErrors": {
+              "type": "string",
+              "description": "A list of comma separated error codes to ignore when running pre-checks."
+            },
+            "showNested": {
+              "type": "boolean",
+              "description": "Set to true to include nested stacks in the list."
+            },
+            "environmentBase64": {
+              "type": "string",
+              "description": "Heat environment file represented as a base64 string, as an alternative to the environment file url."
+            },
+            "environmentUrl": {
+              "type": "string",
+              "description": "Heat environment file download url."
+            },
+            "templateBase64": {
+              "type": "string",
+              "description": "Heat Template represented as a base64 string, as an alternative to the template url."
+            },
+            "templateUrl": {
+              "type": "string",
+              "description": "Heat Template download URL."
+            }
+          }
+        },
+        "importConfig": {
+          "$ref": "#/definitions/GenericImportConfig",
+          "description": "The import config. If set, the existing OpenStack resource will be imported to Azure."
+        },
+        "openStackUuid": {
+          "type": "string",
+          "description": "The internal OpenStack resource UUID.",
+          "readOnly": true
+        },
+        "openStackStatus": {
+          "type": "string",
+          "description": "openStackStatus describes the OpenStack resource status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state.",
+          "$ref": "#/definitions/provisioningStateProperties",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identityId"
+      ],
+      "description": "heatStackTemplateProperties defines the resource properties."
+    },
+    "HeatStackTemplate": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/HeatStackTemplateProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location name."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "The heatStackTemplate resource definition."
+    },
+    "HeatStackTemplatesListResult": {
+      "type": "object",
+      "description": "List of heatStackTemplates.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of heatStackTemplate resources.",
+          "items": {
+            "$ref": "#/definitions/HeatStackTemplate"
           }
         },
         "nextLink": {
@@ -5964,6 +7462,311 @@
           "description": "List of VolumeType resources.",
           "items": {
             "$ref": "#/definitions/VolumeType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "NetworkPortProperties": {
+      "type": "object",
+      "properties": {
+        "networkPortName": {
+          "type": "string",
+          "description": "NetworkPortName is the OpenStack resource name."
+        },
+        "identityId": {
+          "type": "string",
+          "description": "IdentityId is the resource reference Id to the Openstack credentials."
+        },
+        "networkPortConfig": {
+          "type": "object",
+          "description": "The desired configuration for the resource",
+          "properties": {
+            "isForwardingPackets": {
+              "type": "boolean",
+              "description": "Administrative state of port. If false (down), port does not forward packets. Defaults to true."
+            },
+            "allowedAddressPairs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ipAddress": {
+                    "type": "string",
+                    "description": "IP address of the port."
+                  },
+                  "macAddress": {
+                    "type": "string",
+                    "description": "MAC address for the port."
+                  }
+                },
+                "required": [
+                  "ipAddress"
+                ]
+              },
+              "description": "A set of zero or more allowed address pair objects each where address pair object contains an ipAddress and mac_address."
+            },
+            "fixedIps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ipAddress": {
+                    "type": "string",
+                    "description": "IP address of the port."
+                  },
+                  "subnetId": {
+                    "type": "string",
+                    "description": "subnetId is the resource reference Id to the Openstack subnet."
+                  }
+                }
+              },
+              "description": "A set of zero or more allowed address pair objects each where address pair object contains an ipAddress and mac_address."
+            },
+            "description": {
+              "type": "string",
+              "description": "Port description."
+            },
+            "macAddress": {
+              "type": "string",
+              "description": "Port MAC address."
+            },
+            "networkId": {
+              "type": "string",
+              "description": "networkId is the resource reference Id to the Openstack Network."
+            },
+            "securityGroupIds": {
+              "type": "array",
+              "description": "securityGroupIds are the resource reference ids to the SecurityGroups resources.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "importConfig": {
+          "$ref": "#/definitions/GenericImportConfig",
+          "description": "The import config. If set, the existing OpenStack resource will be imported to Azure."
+        },
+        "openStackUuid": {
+          "type": "string",
+          "description": "The internal OpenStack resource UUID.",
+          "readOnly": true
+        },
+        "openStackStatus": {
+          "type": "string",
+          "description": "openStackStatus describes the OpenStack resource status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state.",
+          "$ref": "#/definitions/provisioningStateProperties",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identityId"
+      ],
+      "description": "NetworkPortProperties defines the resource properties."
+    },
+    "NetworkPort": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkPortProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location name."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "The NetworkPort resource definition."
+    },
+    "NetworkPortsListResult": {
+      "type": "object",
+      "description": "List of virtual machines.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkPort resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkPort"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "VolumeSnapshotProperties": {
+      "type": "object",
+      "properties": {
+        "volumeSnapshotName": {
+          "type": "string",
+          "description": "VolumeSnapshotName is the OpenStack resource name."
+        },
+        "identityId": {
+          "type": "string",
+          "description": "IdentityId is the resource reference Id to the Openstack credentials."
+        },
+        "volumeSnapshotConfig": {
+          "type": "object",
+          "description": "The desired configuration for the resource",
+          "properties": {
+            "forceSnapshot": {
+              "type": "boolean",
+              "description": "Forcefully snapshot attached volumes. Default: true."
+            },
+            "description": {
+              "type": "string",
+              "description": "Volume Snapshot description."
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "One or more metadata key and value pairs to associate with the volume snapshot."
+            },
+            "volumeId": {
+              "type": "string",
+              "description": "The reference of the volume to snapshot."
+            }
+          }
+        },
+        "importConfig": {
+          "$ref": "#/definitions/GenericImportConfig",
+          "description": "The import config. If set, the existing OpenStack resource will be imported to Azure."
+        },
+        "openStackUuid": {
+          "type": "string",
+          "description": "The internal OpenStack resource UUID.",
+          "readOnly": true
+        },
+        "openStackStatus": {
+          "type": "string",
+          "description": "openStackStatus describes the OpenStack resource status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state.",
+          "$ref": "#/definitions/provisioningStateProperties",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identityId"
+      ],
+      "description": "VolumeSnapshotProperties defines the resource properties."
+    },
+    "VolumeSnapshot": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VolumeSnapshotProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location name."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "The VolumeSnapshot resource definition."
+    },
+    "VolumeSnapshotsListResult": {
+      "type": "object",
+      "description": "List of virtual machines.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of VolumeSnapshot resources.",
+          "items": {
+            "$ref": "#/definitions/VolumeSnapshot"
           }
         },
         "nextLink": {
