@@ -723,15 +723,16 @@
               "description": "A single traffic incident, or a cluster of traffic incidents",
               "type": "array",
               "readOnly": true,
+              "x-ms-client-name": "pointOfInterest"
               "items": {
-                "$ref": "#/definitions/TrafficIncidentPoi"
+                "$ref": "#/definitions/TrafficIncidentPointOfInterest"
               }
             }
           }
         }
       }
     },
-    "TrafficIncidentPoi": {
+    "TrafficIncidentPointOfInterest": {
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -744,6 +745,7 @@
           "description": "The point where an icon of the cluster or raw incident should be drawn, expressed in the requested projection. This is affected by traffic style, zoom level and road type",
           "type": "object",
           "readOnly": true,
+          "x-ms-client-name": "point",
           "properties": {
             "x": {
               "description": "x coordinate",
@@ -761,18 +763,21 @@
           "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings -- 0: Unknown, 1: Accident, 2: Fog, 3: Dangerous Conditions, 4: Rain, 5: Ice, 6: Jam, 7: Lane Closed, 8: Road Closed, 9: Road Works, 10: Wind, 11: Flooding, 12: Detour, 13: Cluster",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "iconCategory"
         },
         "ty": {
           "description": "The magnitude of delay associated with incident. These values correspond to incident colors in the traffic tiles",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "delayMagnitude"
         },
         "cbl": {
           "description": "Bottom left coordinate of the cluster in the projection of the request",
           "type": "object",
           "readOnly": true,
+          "x-ms-client-name": "bottomLeftCoordinate",
           "properties": {
             "x": {
               "description": "x coordinate",
@@ -790,6 +795,7 @@
           "description": "Top right coordinate of the cluster in the projection of the request",
           "type": "object",
           "readOnly": true,
+          "x-ms-client-name": "topLeftCoordinate",
           "properties": {
             "x": {
               "description": "x coordinate",
@@ -807,44 +813,52 @@
           "description": "Cluster size: the number of incidents in the cluster",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "clusterSize"
         },
         "l": {
           "description": "Length of the incident in meters",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "length"
         },
         "r": {
           "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "roadNumbers"
         },
         "dl": {
           "description": "Delay caused by the incident in seconds (except in road closures)",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "delay"
         },
         "t": {
           "description": "To: the name of the intersection or location where the traffic due to the incident ends",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "locationNameTo"
         },
         "f": {
           "description": "From: the name of the intersection or location where the traffic due to the incident starts",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "locationNameFrom"
         },
         "d": {
           "description": "Description of the incident in the language requested",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "description"
         },
         "c": {
           "description": "Cause of the incident, where available, in the language requested",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "cause"
         }
       }
     },
@@ -859,22 +873,7 @@
           "readOnly": true,
           "properties": {
             "trafficState": {
-              "description": "Traffic State array",
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "@trafficAge": {
-                  "description": "@Traffic Age property",
-                  "type": "integer",
-                  "format": "int32",
-                  "readOnly": true
-                },
-                "@trafficModelId": {
-                  "description": "@Traffic Model Id property",
-                  "type": "string",
-                  "readOnly": true
-                }
-              }
+              "$ref":  "#/definitions/TrafficState"
             },
             "copyrightIds": {
               "description": "Copyright Ids property",
@@ -892,6 +891,24 @@
               "readOnly": true
             }
           }
+        }
+      }
+    },
+    "TrafficState": {
+      "description": "Traffic State array",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "@trafficAge": {
+          "description": "@Traffic Age property",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "@trafficModelId": {
+          "description": "@Traffic Model Id property",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
