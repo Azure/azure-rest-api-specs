@@ -219,8 +219,6 @@ input-file:
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityAdminConfiguration.json
-  - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnections.json
-  - Microsoft.Network/preview/2021-02-01-preview/networkManagerScopeConnections.json
   - Microsoft.Network/preview/2021-02-01-preview/networkSecurityPerimeter.json
   - Microsoft.Network/stable/2021-03-01/applicationGateway.json
   - Microsoft.Network/stable/2021-03-01/applicationSecurityGroup.json
