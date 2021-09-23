@@ -18,7 +18,7 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 
 - [Example: Write and run your first API scenario file](./how-to/QuickStart.md)
 - [Example: Generate a basic API scenario file](./how-to/generateABasicApiScenario.md)
-- [Example: use armTemplate to generate unique resourceName](./how-to/ApiScenarioWithARMTemplate.md)
+- [Example: use armTemplate to generate unique resourceName](./how-to/apiScenarioWithARMTemplate.md)
 - [API scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml)
 
 ## References
@@ -26,4 +26,4 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 - [API Scenario Definition Reference](./references/ApiScenarioDefinition.md)
 - [API Scenario Variable Definition Reference](./references/Variables.md)
 - [API Scenario Runner Reference](./references/Runner.md)
-- [API Scenario Schema Reference](./references/v1.1/schema.json)
+- [API Scenario JSON Schema](./references/v1.1/schema.json)

@@ -50,7 +50,7 @@ scenarios:
 
 ## Scenario
 
-See [Scenario Schema](./v1.1/schema.json#L331).
+See [Scenario Schema](./v1.1/schema.json#L83).
 
 It defines one API scenario that could go through on its own.
 
@@ -89,7 +89,7 @@ variables:
 
 ## Step
 
-See [Step Schema](./v1.1/schema.json#L50).
+See [Step Schema](./v1.1/schema.json#L114).
 
 Defines one step in API scenario.
 
@@ -111,7 +111,7 @@ All of the above definitions share the following fields:
 
 ## Step ARM Template Deployment
 
-See [Step ARM Template Deployment Schema](./v1.1/schema.json#L78).
+See [Step ARM Template Deployment Schema](./v1.1/schema.json#L247).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -130,7 +130,7 @@ armTemplateDeployment: ./dep-storage-account.json
 
 ## Step REST Call
 
-See [Step REST Call Schema](./v1.1/schema.json#L97)
+See [Step REST Call Schema](./v1.1/schema.json#L205)
 
 Step to run a swagger operation defined rest call. This may not be just one http call.
 
