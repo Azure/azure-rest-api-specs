@@ -3908,6 +3908,54 @@
       },
       "description": "Descriptions of APIM policies."
     },
+    "PolicyFragmentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyFragmentContract"
+          },
+          "description": "Policy fragment contract value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy fragments operation."
+    },
+    "PolicyFragmentContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyFragmentContractProperties",
+          "description": "Properties of the Policy Fragment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Policy Fragment Contract details."
+    },
+    "PolicyFragmentContractProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Contents of the policy fragment."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Policy fragment contract Properties."
+    },
     "PolicyFragmentReferenceCollection": {
       "properties": {
         "value": {
@@ -3931,34 +3979,7 @@
           "description": "Next page link if any."
         }
       },
-      "description": "The response of the get policy fragments and get policy fragment references operations."
-    },
-    "PolicyFragmentContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PolicyFragmentContractProperties",
-          "description": "Properties of the Policy Fragment."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Policy Fragment Contract details."
-    },
-    "PolicyFragmentContractProperties": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Contents of the Policy Fragment as defined by the format."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "Policy fragment contract Properties."
+      "description": "The response of the get policy fragment references operation."
     },
     "PortalDelegationSettings": {
       "properties": {
