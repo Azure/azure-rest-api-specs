@@ -4,15 +4,6 @@
     "title": "Azure Web PubSub Service REST API",
     "version": "2021-10-01"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/Endpoint"
-      }
-    ]
-  },
   "paths": {
     "/api/health": {
       "head": {
@@ -21,11 +12,17 @@
         ],
         "summary": "Get service health status.",
         "operationId": "HealthApi_GetServiceStatus",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -36,7 +33,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -90,6 +96,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -103,7 +110,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -115,6 +131,11 @@
         ],
         "summary": "Close the connections in the hub.",
         "operationId": "WebPubSub_CloseAllConnections",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -144,17 +165,27 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -170,6 +201,11 @@
           "application/octet-stream",
           "text/plain",
           "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -194,6 +230,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           },
@@ -214,7 +251,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -226,6 +272,11 @@
         ],
         "summary": "Check if the connection with the given connectionId exists.",
         "operationId": "WebPubSub_ConnectionExists",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -247,6 +298,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -260,7 +312,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -270,6 +331,11 @@
         ],
         "summary": "Close the client connection.",
         "operationId": "WebPubSub_CloseConnection",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -297,17 +363,27 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -323,6 +399,11 @@
           "application/octet-stream",
           "text/plain",
           "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -345,6 +426,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           },
@@ -365,7 +447,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -377,6 +468,11 @@
         ],
         "summary": "Check if there are any client connections inside the given group",
         "operationId": "WebPubSub_GroupExists",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -399,6 +495,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -412,7 +509,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -424,6 +530,11 @@
         ],
         "summary": "Close connections in the specific group.",
         "operationId": "WebPubSub_CloseGroupConnections",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -432,6 +543,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1
           },
           {
             "in": "query",
@@ -450,26 +570,30 @@
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "group",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -485,6 +609,11 @@
           "application/octet-stream",
           "text/plain",
           "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -518,6 +647,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           },
@@ -538,7 +668,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -550,6 +689,11 @@
         ],
         "summary": "Add a connection to the target group.",
         "operationId": "WebPubSub_AddConnectionToGroup",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -580,6 +724,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -593,7 +738,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -603,6 +757,11 @@
         ],
         "summary": "Remove a connection from the target group.",
         "operationId": "WebPubSub_RemoveConnectionFromGroup",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -633,17 +792,27 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -655,6 +824,11 @@
         ],
         "summary": "Check if there are any client connections connected for the given user.",
         "operationId": "WebPubSub_UserExists",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -676,6 +850,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -689,7 +864,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -701,6 +885,11 @@
         ],
         "summary": "Close connections for the specific user.",
         "operationId": "WebPubSub_CloseUserConnections",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -709,6 +898,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "The user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "in": "query",
@@ -727,26 +924,30 @@
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -762,6 +963,11 @@
           "application/octet-stream",
           "text/plain",
           "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -784,6 +990,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           },
@@ -804,7 +1011,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -816,6 +1032,11 @@
         ],
         "summary": "Add a user to the target group.",
         "operationId": "WebPubSub_AddUserToGroup",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -846,6 +1067,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -859,7 +1081,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -869,6 +1100,11 @@
         ],
         "summary": "Remove a user from the target group.",
         "operationId": "WebPubSub_RemoveUserFromGroup",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -899,17 +1135,27 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -921,6 +1167,11 @@
         ],
         "summary": "Remove a user from all groups.",
         "operationId": "WebPubSub_RemoveUserFromAllGroups",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -942,17 +1193,30 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The user is deleted."
+          "204": {
+            "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "The user is deleted."
           }
         }
       }
@@ -964,6 +1228,11 @@
         ],
         "summary": "Grant permission to the connection.",
         "operationId": "WebPubSub_GrantPermission",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1006,6 +1275,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -1016,7 +1286,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1026,6 +1305,11 @@
         ],
         "summary": "Revoke permission for the connection.",
         "operationId": "WebPubSub_RevokePermission",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1068,17 +1352,27 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1088,6 +1382,11 @@
         ],
         "summary": "Check if a connection has permission to the specified action.",
         "operationId": "WebPubSub_CheckPermission",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1130,6 +1429,7 @@
             "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
+            "required": true,
             "type": "string",
             "default": "2021-10-01"
           }
@@ -1143,7 +1443,16 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -1151,23 +1460,69 @@
   },
   "definitions": {
     "ClientTokenResponse": {
+      "description": "The response object containing the token for the client",
       "type": "object",
       "properties": {
         "token": {
+          "description": "The token value for the WebSocket client to connect to the service",
           "type": "string"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "The error object.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "inner": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A more specific error code than was provided by the containing error.",
+          "type": "string"
+        },
+        "inner": {
+          "$ref": "#/definitions/InnerError"
         }
       }
     }
   },
-  "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "HTTP or HTTPS endpoint for the Web PubSub service instance.",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    }
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "Endpoint",
+        "description": "HTTP or HTTPS endpoint for the Web PubSub service instance.",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
   }
 }
