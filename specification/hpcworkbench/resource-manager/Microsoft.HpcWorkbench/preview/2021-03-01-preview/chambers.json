@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{consortiumName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}": {
       "put": {
         "tags": [
-          "Consortiums"
+          "Chambers_CreateorUpdate"
         ],
-        "operationId": "Consortiums_CreateOrUpdate",
-        "description": "Creates or updates the specified consortium.",
+        "operationId": "Chambers_CreateOrUpdate",
+        "description": "Creates or updates the specified Chamber.",
         "consumes": [
           "application/json"
         ],
@@ -69,32 +69,32 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update consortium operation.",
+            "description": "Parameters supplied to the create or update chamber operation.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting Consortium resource.",
+            "description": "Update successful. The operation returns the resulting chamber resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Consortium resource.",
+            "description": "Create successful. The operation returns the resulting chamber resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           },
           "default": {
@@ -105,29 +105,22 @@
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create Consortium": {
-            "$ref": "./examples/ConsortiumsCreateOrUpdate.json"
+          "Create Chamber": {
+            "$ref": "./examples/ChambersCreateOrUpdate.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "Consortiums"
+          "Chambers_Update"
         ],
-        "operationId": "Consortiums_Update",
-        "description": "Updates the specified consortium.",
+        "operationId": "Chambers_Update",
+        "description": "Updates the specified Chamber.",
         "consumes": [
           "application/merge-patch+json",
           "application/json"
@@ -157,32 +150,26 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update consortium operation.",
+            "description": "Parameters supplied to the create or update Chamber operation.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting Consortium resource.",
+            "description": "Update successful. The operation returns the resulting Chamber resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
-            }
-          },
-          "201": {
-            "description": "Create successful. The operation returns the resulting Consortium resource.",
-            "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           },
           "default": {
@@ -193,25 +180,18 @@
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-examples": {
-          "Update Consortium": {
-            "$ref": "./examples/ConsortiumsPatch.json"
+          "Update Chamber": {
+            "$ref": "./examples/ChambersPatch.json"
           }
         }
       },
       "get": {
         "tags": [
-          "Consortiums"
+          "Chambers_Get"
         ],
-        "operationId": "Consortiums_Get",
-        "description": "Gets information about the specified consortium.",
+        "operationId": "Chambers_Get",
+        "description": "Gets information about the specified Chamber.",
         "produces": [
           "application/json"
         ],
@@ -237,18 +217,18 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the specified consortium.",
+            "description": "Request is successful. The operation returns the specified Chamber.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           },
           "default": {
@@ -259,25 +239,18 @@
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-examples": {
-          "Get Consortium": {
-            "$ref": "./examples/ConsortiumsGet.json"
+          "Get Chamber": {
+            "$ref": "./examples/ChambersGet.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Consortiums"
+          "Chambers_Delete"
         ],
-        "operationId": "Consortiums_Delete",
-        "description": "Deletes the specified consortium.",
+        "operationId": "Chambers_Delete",
+        "description": "Deletes the specified Chamber.",
         "produces": [
           "application/json"
         ],
@@ -303,18 +276,18 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
           }
         ],
         "responses": {
           "200": {
             "description": "The operation is completed successfully",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Chamber"
             }
           },
           "204": {
@@ -328,27 +301,20 @@
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-examples": {
-          "Delete Consortium": {
-            "$ref": "./examples/ConsortiumsDelete.json"
+          "Delete Chamber": {
+            "$ref": "./examples/ChambersDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers": {
       "get": {
         "tags": [
-          "Consortiums"
+          "Chambers_List"
         ],
-        "operationId": "Consortiums_List",
-        "description": "Lists all consortiums.",
+        "operationId": "Chambers_List",
+        "description": "Lists all Chambers.",
         "produces": [
           "application/json"
         ],
@@ -376,9 +342,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the list of all consortiums",
+            "description": "Request is successful. The operation returns the list of all Chambers",
             "schema": {
-              "$ref": "#/definitions/ConsortiumPageableList"
+              "$ref": "#/definitions/ChamberPageableList"
             }
           },
           "default": {
@@ -389,95 +355,19 @@
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all consortiums": {
-            "$ref": "./examples/ConsortiumsList.json"
+          "List all Chambers": {
+            "$ref": "./examples/ChambersList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "RemoteDesktop": {
-      "type": "object",
-      "description": "Remote Desktop properties.",
-      "properties": {
-        "etx": {
-          "$ref": "#/definitions/Etx",
-          "description": "The etx object."
-        }
-      }
-    },
-    "Etx": {
-      "type": "object",
-      "properties": {
-        "connectionNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The connection node count."
-        },
-        "licenseActivated": {
-          "description": "The license activated.",
-          "type": "boolean"
-        }
-      },
-      "description": "Etx properties."
-    },
-    "AccessConfiguration": {
-      "type": "object",
-      "description": "Access configuration properties.",
-      "properties": {
-        "accessType": {
-          "description": "Gets or sets the AccessType.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "GUI"
-          ],
-          "x-ms-enum": {
-            "name": "AccessType",
-            "modelAsString": true
-          }
-        },
-        "gatewayType": {
-          "description": "Gets or sets the GatewayType.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "ExpressRoute",
-            "None",
-            "Vpn"
-          ],
-          "x-ms-enum": {
-            "name": "GatewayType",
-            "modelAsString": true
-          }
-        },
-        "gatewayVnetId": {
-          "type": "string",
-          "description": "Gets or sets the GatewayVnetId."
-        },
-        "accessUrl": {
-          "type": "string",
-          "description": "Gets or sets the AccessUrl."
-        },
-        "ipAddress": {
-          "type": "string",
-          "description": "Gets or sets the IpAddress."
-        }
-      }
-    },
-    "ConsortiumPageableList": {
+    "ChamberPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
       "properties": {
@@ -489,25 +379,17 @@
           "description": "Gets or sets the values to emit from this list.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Consortium"
+            "$ref": "#/definitions/Chamber"
           }
         }
       }
     },
-    "ConsortiumPropertiesFormat": {
+    "ChamberPropertiesFormat": {
       "type": "object",
       "properties": {
         "sku": {
-          "description": "Gets or sets the SKU.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Gets or sets the Kind.",
-          "type": "string"
-        },
-        "managedBy": {
-          "description": "Gets or sets the Managed By value.",
-          "type": "string"
+          "$ref": "./hpcworkbench.json#/definitions/Sku",
+          "description": "Gets or sets the SKU."
         },
         "zones": {
           "description": "Gets or sets the Zones.",
@@ -516,73 +398,26 @@
             "type": "string"
           }
         },
-        "plan": {
-          "description": "Gets or sets the Plan.",
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "identity": {
-          "description": "Gets or sets the Identity.",
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "vmSize": {
-          "description": "Gets or sets the VmSize.",
+        "licenseHostId": {
+          "description": "Gets or sets the licenseHostId.",
           "type": "string"
-        },
-        "allowedPublicIps": {
-          "description": "Gets or sets the AllowedPublicIps.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "userInterfaceMode": {
-          "description": "Gets or sets the UserInterfaceMode.",
-          "type": "string"
-        },
-        "accessType": {
-          "description": "Gets or sets the Access Type.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "GUI"
-          ],
-          "x-ms-enum": {
-            "name": "AccessType",
-            "modelAsString": true
-          }
-        },
-        "accessConfigurations": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/AccessConfiguration"
-          },
-          "description": "Gets or sets the Access Configuration."
-        },
-        "remoteDesktop": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/RemoteDesktop"
-          },
-          "description": "Gets or sets the Remote Desktop."
         },
         "provisioningState": {
           "$ref": "./hpcworkbench.json#/definitions/ProvisioningState",
-          "description": "Gets the status of the consortium at the time the operation was called"
+          "description": "Gets the status of the Chamber at the time the operation was called"
         }
       },
-      "description": "Consortium properties."
+      "description": "Chamber properties."
     },
-    "Consortium": {
-      "description": "Consortium resource",
+    "Chamber": {
+      "description": "Chamber resource",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConsortiumPropertiesFormat",
-          "description": "Consortium properties."
+          "$ref": "#/definitions/ChamberPropertiesFormat",
+          "description": "Chamber properties."
         }
       },
       "allOf": [

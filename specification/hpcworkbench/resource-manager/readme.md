@@ -38,6 +38,8 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 input-file:
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/hpcworkbench.json
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/consortium.json
+  - Microsoft.HpcWorkbench/preview/2021-03-01-preview/accessprofiles.json
+  - Microsoft.HpcWorkbench/preview/2021-03-01-preview/chambers.json
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/workload.json
 ```
 
