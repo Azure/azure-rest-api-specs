@@ -3908,7 +3908,7 @@
       },
       "description": "Descriptions of APIM policies."
     },
-    "PolicyFragmentCollection": {
+    "PolicyFragmentReferenceCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -3919,7 +3919,7 @@
               }
             ]
           },
-          "description": "Policy Fragment Contract value."
+          "description": "Resource references."
         },
         "count": {
           "type": "integer",
@@ -3931,32 +3931,34 @@
           "description": "Next page link if any."
         }
       },
-      "description": "The response of the get policy fragments operation."
+      "description": "The response of the get policy fragments and get policy fragment references operations."
     },
-    "PolicyFragmentReferencesCollection": {
+    "PolicyFragmentContract": {
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "./apimanagement.json#/definitions/Resource"
-              }
-            ]
-          },
-          "description": "Policy Fragment References Contract value."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyFragmentContractProperties",
+          "description": "Properties of the Policy Fragment."
         }
       },
-      "description": "The response of the get policy fragment references operation."
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Policy Fragment Contract details."
+    },
+    "PolicyFragmentContractProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Contents of the Policy Fragment as defined by the format."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Policy fragment contract Properties."
     },
     "PortalDelegationSettings": {
       "properties": {
