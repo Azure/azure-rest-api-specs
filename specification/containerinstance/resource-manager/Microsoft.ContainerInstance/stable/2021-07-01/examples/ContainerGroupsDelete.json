@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2021-07-01",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/mnt/volume1",
+                    "name": "volume1",
+                    "readOnly": false
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [
+            {
+              "server": "azcloudconsoleregistry.azurecr.io",
+              "username": "azcloudconsoleregistry"
+            }
+          ],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "azureFile": {
+                "readOnly": false,
+                "shareName": "share1",
+                "storageAccountName": "storage1"
+              },
+              "name": "volume1"
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    },
+    "202": {},
+    "204": {}
+  }
+}

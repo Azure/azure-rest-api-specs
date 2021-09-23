@@ -42,7 +42,7 @@
   ],
   "responses": {},
   "parameters": {
-    "RenderApiVersionV2": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -146,7 +146,7 @@
     "/map/tile": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
-        "operationId": "RenderV2_GetMapTilePreview",
+        "operationId": "GetMapTileV2",
         "x-ms-examples": {
           "GetMapTile": {
             "$ref": "./examples/GetMapTileV2.json"
@@ -157,7 +157,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/RenderApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TilesetId_rv2"
