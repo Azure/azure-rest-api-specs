@@ -2,17 +2,22 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-11-15-preview",
-    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "removeParticipantByIdRequest": {
+    "muteParticipantWithCallLocatorRequest": {
+      "callLocator": {
+        "serverCallLocator": {
+          "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb24tc2VydmljZS11cmwvYXBpL3YyL2VwL2NvbnYvc2Rjc3NlaVdiUV8wLVNCTE9peG1NWHRRP2k9OSZlPTYzNzU1MDY4NDM3MDUzNTAwMQ=="
+        },
+        "type": "serverCallLocator"
+      },
       "identifier": {
-        "communicationUser": {
-          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_f95c7b38-6c4e-4898-93b3-2553402304d6"
+        "phoneNumber": {
+          "value": "+14250123456"
         }
       }
     }
   },
   "responses": {
-    "202": {},
+    "200": {},
     "400": {
       "body": {
         "error": {

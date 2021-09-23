@@ -2,27 +2,17 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-11-15-preview",
-    "startCallRecordingWithCallLocatorRequest": {
-      "callLocator": {
-        "groupCallLocator": {
-          "groupId": "0c1610d4-454d-4ac5-a455-05ba5dc6c5fd"
-        },
-        "type": "groupCallLocator"
-      },
-      "startCallRecordingRequest": {
-        "recordingStateCallbackUri": "https://app.contoso.com/callback",
-        "recordingContentType": "audioVideo",
-        "recordingChannelType": "mixed",
-        "recordingFormatType": "mp4"
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "removeParticipantRequest": {
+      "identifier": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_f95c7b38-6c4e-4898-93b3-2553402304d6"
+        }
       }
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "recordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI3ZjQyNmI1OC03NTRmLTQ2M2UtYWRkMS0wNWFhNGNiYjliMzQiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiJmNjMzODYwMS00MmE1LTRkMGUtODI3My01NjIwM2JhNzAzODYifQ"
-      }
-    },
+    "202": {},
     "400": {
       "body": {
         "error": {
