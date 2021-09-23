@@ -2777,7 +2777,9 @@
     "StopHoldMusicWithCallLocatorRequest": {
       "description": "The request payload for removing participant from hold using call locator.",
       "required": [
-        "callLocator"
+        "callLocator",
+        "identifier",
+        "startHoldMusicOperationId"
       ],
       "type": "object",
       "properties": {
@@ -2785,20 +2787,6 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "stopHoldMusicRequest": {
-          "$ref": "#/definitions/StopHoldMusicRequest",
-          "description": "The stop hold music request"
-        }
-      }
-    },
-    "StopHoldMusicRequest": {
-      "description": "The request payload for removing participant from hold.",
-      "required": [
-        "identifier",
-        "startHoldMusicOperationId"
-      ],
-      "type": "object",
-      "properties": {
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant."
@@ -2953,6 +2941,19 @@
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant to be unmuted in the call."
+        }
+      }
+    },
+    "StopHoldMusicRequest": {
+      "description": "The request payload for removing participant from hold.",
+      "required": [
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
         }
       }
     },
