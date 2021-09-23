@@ -38,7 +38,23 @@
                   }
                 },
                 "intervalInSeconds": 120,
-                "sizeLimitInBytes": 10485763
+                "sizeLimitInBytes": 10485763,
+                "throttleRules": [
+                  {
+                    "name": "ingressThrottleApp1",
+                    "limitRate": 1048576
+                  },
+                  {
+                    "name": "egressThrottleKafkaApp",
+                    "consumerId": "AadAppId_or_SasKeyName_or_Client.id",
+                    "limitRate": 1003459
+                  },
+                  {
+                    "name": "egressThrottleAmqpApp",
+                    "consumerId": "cgId_or_AadAppId_or_SaSKeyName",
+                    "limitRate": 1973264
+                  }
+                ]
               }
             }
           }
