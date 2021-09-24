@@ -56,7 +56,7 @@
     "/elevation/point/{format}": {
       "get": {
         "summary": "Get Elevation Data on One or More Points",
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat,long coordinate format.\n\n Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
+        "description": "**Applies to**: S1 pricing tier.\n\n The Get Data for Points API provides elevation data for one or more points.  A point is defined in lat,long coordinate format.\n\n Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/rest/api/maps/elevation/postdataforpoints).\n\n The result will be in the same sequence of points listed in the request.",
         "operationId": "GetDataForPoints",
         "x-ms-examples": {
           "GetDataForPoints": {
@@ -91,7 +91,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointsResult"
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "default": {
@@ -101,7 +101,7 @@
       },
       "post": {
         "summary": "Query Elevation Data for Multiple Points",
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined lon/lat coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
+        "description": "**Applies to**: S1 pricing tier.\n\n The Post Data for Points API provides elevation data for multiple points.  A point is defined lon/lat coordinate format.\n\n Use the POST endpoint only if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/rest/api/maps/elevation/getdataforpoints).\n\n The result will be in the same sequence of points listed in the request.",
         "operationId": "PostDataForPoints",
         "x-ms-examples": {
           "PostDataForPoints": {
@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointsResult"
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "default": {
@@ -145,7 +145,7 @@
     "/elevation/line/{format}": {
       "get": {
         "summary": "Get Elevation Data Along a Polyline",
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline.\n\n A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and endpoints and equally spaced  points along the polyline will be returned.\n\n A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "description": "**Applies to**: S1 pricing tier.\n\n The Get Data for Polyline API provides elevation data along a polyline.\n\n A polyline is defined by passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition to passing in endpoints, customers can specify the number of sample points that will be used to divide polyline into equally spaced segments.\n\n Elevation data at both start and endpoints, as well as equally spaced points along the polyline will be returned. The results will be listed in the direction from the first endpoint towards the last endpoint. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "GetDataForPolyline",
         "x-ms-examples": {
           "GetDataForPolyLine": {
@@ -188,7 +188,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LinesResult"
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "default": {
@@ -198,7 +198,7 @@
       },
       "post": {
         "summary": "Query Elevation Data Along a Polyline",
-        "description": "**Applies to**: S1 pricing tier.\n\n The Post Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide  polyline into equally spaced segments.\n\n Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "description": "**Applies to**: S1 pricing tier.\n\n The Post Data for Polyline API provides elevation data along a polyline.\n\n A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify the number of sample points that will be used to divide polyline into equally spaced segments.\n\n Elevation data at both start and end points, as well as equally spaced  points along the polyline will be returned. The results will be listed in the direction from the first endpoint towards the last endpoint. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved surface of the reference ellipsoid.",
         "operationId": "PostDataForPolyline",
         "x-ms-examples": {
           "PostDataForPolyLine": {
@@ -238,7 +238,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LinesResult"
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "default": {
@@ -304,7 +304,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BoundingBoxResult"
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "default": {
@@ -315,15 +315,15 @@
     }
   },
   "definitions": {
-    "ElevationPointResponse": {
+    "ElevationResponse": {
       "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
       "type": "array",
       "readOnly": true,
       "items": {
-        "$ref": "#/definitions/PointElevationResult"
+        "$ref": "#/definitions/Elevation"
       }
     },
-    "PointElevationResult": {
+    "Elevation": {
       "type": "object",
       "description": "The elevation data.",
       "properties": {
@@ -337,49 +337,13 @@
         }
       }
     },
-    "ElevationLineResponse": {
-      "description": "The response from the Get Data for Polyline API. The results will be listed in the direction from the first endpoint towards the last endpoint.",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/PointElevationResult"
-      }
-    },
-    "ElevationLatticeResponse": {
-      "description": "The response from the Get Data for Bounding Box API. The results are ordered starting with the southwest corner, and then proceed west to east and south to north.",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/PointElevationResult"
-      }
-    },
-    "PointsResult": {
-      "type": "object",
-      "description": "The response from a successful Elevation Points request.",
-      "properties": {
-        "data": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ElevationPointResponse"
-        }
-      }
-    },
-    "LinesResult": {
-      "type": "object",
-      "description": "The response from a successful Elevation Polyline request.",
-      "properties": {
-        "data": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ElevationLineResponse"
-        }
-      }
-    },
-    "BoundingBoxResult": {
+    "ElevationResult": {
       "type": "object",
       "description": "The response from a successful Get Data for Bounding Box API.",
       "properties": {
         "data": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ElevationLatticeResponse"
+          "$ref": "#/definitions/ElevationResponse"
         }
       }
     },
