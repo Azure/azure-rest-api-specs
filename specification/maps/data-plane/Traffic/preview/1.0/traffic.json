@@ -930,8 +930,22 @@
         "r": {
           "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "x-ms-client-name": "roadNumbers"
+        },
+        "sd": {
+          "description": "Start date of the incident, if available. The date is described in the ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-ms-client-name": "startDate"
+        },
+        "ed": {
+          "description": "Estimated end date of the incident, if available. The date is described in the ISO8601 format.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "endDate"
         },
         "dl": {
           "description": "Delay caused by the incident in seconds (except in road closures)",
