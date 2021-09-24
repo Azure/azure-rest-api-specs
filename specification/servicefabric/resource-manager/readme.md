@@ -65,8 +65,8 @@ These settings apply only when `--tag=package-2021-09-privatepreview` is specifi
 
 ``` yaml $(tag) == 'package-2021-09-privatepreview'
 input-file:
-- Microsoft.ServiceFabric/stable/2021-09-01-privatepreview/cluster.json
-- Microsoft.ServiceFabric/stable/2021-09-01-privatepreview/application.json
+- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/cluster.json
+- Microsoft.ServiceFabric/preview/2021-09-01-privatepreview/application.json
 ```
 
 ### Tag: package-2021-06
