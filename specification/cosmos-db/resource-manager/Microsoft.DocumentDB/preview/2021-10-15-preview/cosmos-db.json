@@ -1932,7 +1932,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientencryptionkeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientEncryptionKeys": {
       "get": {
         "operationId": "SqlResources_ListClientEncryptionKeys",
         "x-ms-examples": {
@@ -1971,7 +1971,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientencryptionkeys/{clientEncryptionKeyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/ClientEncryptionKeys/{clientEncryptionKeyName}": {
       "get": {
         "operationId": "SqlResources_GetClientEncryptionKey",
         "x-ms-examples": {
@@ -2016,8 +2016,7 @@
             "$ref": "./examples/CosmosDBSqlClientEncryptionKeyCreateUpdate.json"
           }
         },
-        "description": "Create or update a ClientEncryptionKey",
-        "x-ms-long-running-operation": true,
+        "description": "Create or update a ClientEncryptionKey. This API is meant to be invoked via tools such as the Azure Powershell (instead of directly).",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -8162,7 +8161,7 @@
         },
         "value": {
           "type": "string",
-          "description": "Value / link of the KeyEncryptionKey."
+          "description": "Reference / link to the KeyEncryptionKey."
         }
       }
     },
