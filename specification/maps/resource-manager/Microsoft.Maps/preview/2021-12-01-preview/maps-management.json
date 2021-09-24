@@ -321,7 +321,7 @@
         "tags": [
           "Accounts"
         ],
-        "description": "Create and list an account shared access signature token",
+        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\n1. Create or have a User Assigned Managed Identity in the same Azure region as the account. \n2. Make sure to create or update an Azure Map account with the same Azure region as the User Assigned Managed Identity is placed.",
         "operationId": "Accounts_ListSas",
         "x-ms-examples": {
           "List Account Sas": {
@@ -1012,12 +1012,12 @@
             "secondaryKey"
           ],
           "x-ms-enum": {
-            "name": "KeyName",
+            "name": "SigningKey",
             "modelAsString": true
           }
         },
         "principalId": {
-          "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Map Account.",
+          "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Map Account. To assign a Managed Identity of the account, use operation Create or Update an assign a User Assigned Identity resource Id.",
           "type":"string"
         },
         "regions": {
@@ -1037,22 +1037,24 @@
           "description": "Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement."
         },
         "start": {
-          "description": "The date time offset of when the token validity begins.",
+          "description": "The date time offset of when the token validity begins. For example \"2017-05-24T10:42:03.1567373Z\".",
           "type":"string"
         },
         "expiry": {
-          "description": "The date time offset of when the token validity expires.",
+          "description": "The date time offset of when the token validity expires. For example \"2017-05-24T10:42:03.1567373Z\"",
           "type":"string"
         }
       },
       "required": [
         "signingKey",
         "principalId",
-        "maxRatePerSecond"
+        "maxRatePerSecond",
+        "start",
+        "expiry"
       ]
     },
     "MapsAccountSasToken": {
-      "description": "A new Sas token which can be used to access the Maps REST APIs and is controlled by the specified Managed identity permissions.",
+      "description": "A new Sas token which can be used to access the Maps REST APIs and is controlled by the specified Managed identity permissions on Azure (IAM) Role Based Access Control.",
       "type": "object",
       "properties": {
         "accountSasToken": {
@@ -1345,7 +1347,7 @@
             "description": "Specifies a CORS rule for the Map Account.",
             "$ref": "#/definitions/CorsRule"
           },
-          "description": "The List of CORS rules. You can include up to five CorsRule elements in the request. "
+          "description": "The list of CORS rules. You can include up to five CorsRule elements in the request. "
         }
       },
       "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
