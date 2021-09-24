@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-06-01"
+    "version": "2021-09-01-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -321,7 +321,7 @@
         "description": "Gets information about an available Service Fabric cluster code version.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -364,7 +364,7 @@
         "description": "Gets information about an available Service Fabric cluster code version by environment.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/environment"
@@ -410,7 +410,7 @@
         "description": "Gets all available code versions for Service Fabric cluster resources by location.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -450,7 +450,7 @@
         "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
         "parameters": [
           {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
+            "$ref": "#/parameters/location"
           },
           {
             "$ref": "#/parameters/environment"
@@ -574,6 +574,92 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/UnsupportedVMSizes": {
+      "get": {
+        "tags": [
+          "VMSizes"
+        ],
+        "summary": "Get the lists of unsupported vm sizes for Service Fabric Clusters.",
+        "description": "Get the lists of unsupported vm sizes for Service Fabric Clusters.",
+        "operationId": "UnsupportedVMSizes_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List unsupported vm sizes": {
+            "$ref": "./examples/UnsupportedVMSizesList_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMSizesResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/UnsupportedVMSizes/{vmSize}": {
+      "get": {
+        "tags": [
+          "VMSizes"
+        ],
+        "summary": "Get unsupported vm size for Service Fabric Clusters.",
+        "description": "Get unsupported vm size for Service Fabric Clusters.",
+        "operationId": "UnsupportedVMSizes_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/vmSize"
+          }
+        ],
+        "x-ms-examples": {
+          "Get unsupported vm sizes": {
+            "$ref": "./examples/UnsupportedVMSizesGet_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMSizeResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
         }
       }
     }
@@ -1741,6 +1827,28 @@
       },
       "description": "Describes a section in the fabric settings of the cluster."
     },
+    "SfZonalUpgradeMode": {
+      "type": "string",
+      "enum": [
+        "Parallel",
+        "Hierarchical"
+      ],
+      "x-ms-enum": {
+        "name": "sfZonalUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Parallel",
+            "description": "VMs under the node type are grouped into UDs and ignore the zone info in five UDs. This setting causes UDs across all zones to be upgraded at the same time. This deployment mode is faster for upgrades, we don't recommend it because it goes against the SDP guidelines, which state that the updates should be applied to one zone at a time."
+          },
+          {
+            "value": "Hierarchical",
+            "description": "If this value is omitted or set to Hierarchical, VMs are grouped to reflect the zonal distribution in up to 15 UDs. Each of the three zones has five UDs. This ensures that the zones are updated one at a time, moving to next zone only after completing five UDs within the first zone. This update process is safer for the cluster and the user application."
+          }
+        ]
+      },
+      "description": "This property controls the logical grouping of VMs in upgrade domains (UDs). This property can't be modified if a node type with multiple Availability Zones is already present in the cluster."
+    },
     "StoreName": {
       "type": "string",
       "description": "The local certificate store location.",
@@ -1803,27 +1911,60 @@
         ]
       }
     },
-    "SfZonalUpgradeMode": {
-      "type": "string",
-      "enum": [
-        "Parallel",
-        "Hierarchical"
-      ],
-      "x-ms-enum": {
-        "name": "sfZonalUpgradeMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Parallel",
-            "description": "VMs under the node type are grouped into UDs and ignore the zone info in five UDs. This setting causes UDs across all zones to be upgraded at the same time. This deployment mode is faster for upgrades, we don't recommend it because it goes against the SDP guidelines, which state that the updates should be applied to one zone at a time."
-          },
-          {
-            "value": "Hierarchical",
-            "description": "If this value is omitted or set to Hierarchical, VMs are grouped to reflect the zonal distribution in up to 15 UDs. Each of the three zones has five UDs. This ensures that the zones are updated one at a time, moving to next zone only after completing five UDs within the first zone. This update process is safer for the cluster and the user application."
-          }
-        ]
+    "VMSize": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        }
       },
-      "description": "This property controls the logical grouping of VMs in upgrade domains (UDs). This property can't be modified if a node type with multiple Availability Zones is already present in the cluster."
+      "description": "VM Sizes properties."
+    },
+    "VMSizeResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "VM Size properties.",
+          "$ref": "#/definitions/VMSize",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "VM Size id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "VM Size type.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes a VM Sizes."
+    },
+    "VMSizesResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of VM Sizes for Service Fabric Clusters.",
+          "items": {
+            "$ref": "#/definitions/VMSizeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of VM Sizes if there are any.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the result of the request to list VM Sizes for Service Fabric Clusters."
     },
     "VmssZonalUpgradeMode": {
       "type": "string",
@@ -1929,13 +2070,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-06-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-09-01-privatepreview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2021-06-01"
+        "2021-09-01-privatepreview"
       ],
-      "default": "2021-06-01",
+      "default": "2021-09-01-privatepreview",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
@@ -1966,10 +2107,10 @@
       ],
       "x-ms-parameter-location": "method"
     },
-    "locationForClusterCodeVersions": {
+    "location": {
       "name": "location",
       "in": "path",
-      "description": "The location for the cluster code versions. This is different from cluster location.",
+      "description": "The location parameter.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1989,6 +2130,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "vmSize": {
+      "name": "vmSize",
+      "in": "path",
+      "description": "VM Size name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
