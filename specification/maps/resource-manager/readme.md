@@ -215,6 +215,7 @@ directive:
   - suppress: R3006
     where:
       - $.definitions.MapsAccount.properties
+      - $.definitions.Creator.properties
     reason:
       - Currently systemData is not allowed.
   - suppress: R3010
