@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "configurationProfileAssignmentName": "default",
+    "report": "b4e9ee6b-1717-4ff0-a8d2-e6d72c33d5f4",
+    "api-version": "2021-04-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.Automanage/configurationProfileAssignments/default/reports/b4e9ee6b-1717-4ff0-a8d2-e6d72c33d5f4",
+        "name": "b4e9ee6b-1717-4ff0-a8d2-e6d72c33d5f4",
+        "type": "Microsoft.Automanage/configurationProfileAssignments/reports",
+        "properties": {
+          "startTime": "2021-03-31T22:13:06Z",
+          "endTime": "2021-03-31T22:17:42Z",
+          "lastModifiedTime": "2021-03-31T22:32:42Z",
+          "duration": "PT15M32S",
+          "type": "Consistency",
+          "status": "Conformant",
+          "configurationProfile": "anyConfigurationProfile",
+          "resources": [
+            {
+              "name": "myResourceGroupName",
+              "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName",
+              "type": "Microsoft.Resources/resourceGroups",
+              "status": "Conformant",
+              "error": {}
+            }
+          ],
+          "error": {},
+          "reportFormatVersion": "1.0"
+        }
+      }
+    }
+  }
+}

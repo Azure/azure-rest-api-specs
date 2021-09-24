@@ -1163,6 +1163,123 @@
           "application/json"
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "operationId": "reports_Get",
+        "description": "Get information about a report associated with a configuration profile assignment run",
+        "x-ms-examples": {
+          "Get a configuration profile assignment": {
+            "$ref": "./examples/getReport.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The configuration profile assignment name."
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The report name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The report was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "operationId": "reports_ListByConfigurationProfileAssignments",
+        "description": "Retrieve a list of reports within a given configuration profile assignment",
+        "x-ms-examples": {
+          "List reports by configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The configuration profile assignment name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of reports.",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1368,7 +1485,51 @@
           }
         }
       }
+    },
+    "ReportList": {
+      "description": "The response of the list report operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/report"
+          },
+          "description": "Result of the list report operation."
+        }
+      }
+    },
+    "Report": {
+      "description": "Definition of the report.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Report ARM Resource URI."
+        },
+        "name": {
+          "type": "string",
+          "description": "The Report name"
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of onboarding, which only appears in the response."
+        },
+        "properties": {
+          "$ref": "#/definitions/AssignmentReportProperties",
+          "description": "The profileOverrides setting for the configuration profile assignment."
+        }
+      }
+    },
+    "AssignmentReportProperties": {
+      "description": "Data related to the report detail.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
     }
+
   },
   "parameters": {
     "VmNameParameter": {
