@@ -11332,6 +11332,25 @@
       },
       "x-ms-discriminator-value": "OperationStatusProvisionILRExtendedInfo"
     },
+    "OperationStatusValidateOperationExtendedInfo": {
+      "description": "Operation status extended info for ValidateOperation action.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "validationResults": {
+          "description": "Gets the validation result",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusValidateOperationExtendedInfo"
+    },
     "PreBackupValidation": {
       "description": "Pre-backup validation for Azure VM Workload provider.",
       "type": "object",
