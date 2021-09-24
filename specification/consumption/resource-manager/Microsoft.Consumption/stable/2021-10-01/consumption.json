@@ -2131,7 +2131,16 @@
         "pricingModel": {
           "description": "Identifier that indicates how the meter is priced. Possible values could be 'On Demand', 'Reservation', 'Spot'.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "On Demand",
+            "Reservation",
+            "Spot"
+         ],
+         "x-ms-enum": {
+            "name": "pricingModelType",
+            "modelAsString": true
+         }
         }
       }
     },
@@ -2172,7 +2181,16 @@
         "pricingModel": {
           "description": "Identifier that indicates how the meter is priced. Possible values could be 'On Demand', 'Reservation', 'Spot'.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "On Demand",
+            "Reservation",
+            "Spot"
+         ],
+         "x-ms-enum": {
+            "name": "pricingModelType",
+            "modelAsString": true
+         }
         },
         "billingAccountName": {
           "description": "Name of the Billing Account.",
