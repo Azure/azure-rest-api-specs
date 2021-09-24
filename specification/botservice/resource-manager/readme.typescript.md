@@ -11,7 +11,7 @@ typescript:
   generate-metadata: true
 ```
 
-``` yaml $(typescript) && !$(profile)
+``` yaml $(typescript) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-botservice"
   output-folder: "$(typescript-sdks-folder)/sdk/botservice/arm-botservice"

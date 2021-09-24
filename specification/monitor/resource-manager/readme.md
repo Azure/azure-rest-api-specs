@@ -22,11 +22,6 @@ To see additional help and options, run:
 
 ### Basic Information
 
-There are the global settings for the Azure Monitor Control Service (AMCS) extension.
-``` yaml $(AMCS)
-tag: package-2021-04-only
-```
-
 These are the global settings for the MonitorClient API.
 
 ``` yaml !$(python) || !$(track2)
@@ -41,6 +36,46 @@ title: MonitorManagementClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2021-04
+```
+
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line
+
+``` yaml $(tag) == 'package-2021-07'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2019-06-01/actionGroups_API.json
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
+```
+
+### Tag: package-2021-07-01-preview-only
+
+These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
 ```
 
 ### Tag: package-2021-04
@@ -73,6 +108,18 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
+
+### Tag: package-2021-05-only
+
+These settings apply only when `--tag=package-2021-05-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05-only'
+input-file:
+  - Microsoft.Insights/stable/2021-05-01/metrics_API.json
+  - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+  - Microsoft.Insights/stable/2021-05-01/operations_API.json
+```
+
 ### Tag: package-2021-05-01-preview-only
 
 These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
@@ -84,6 +131,7 @@ input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
 ```
+
 ### Tag: package-2021-04-only
 
 ``` yaml $(tag) == 'package-2021-04-only'
@@ -199,7 +247,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-07-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-07-only'
+``` yaml $(tag) == 'package-2019-07-only'
 input-file:
   - Microsoft.Insights/stable/2019-07-01/metrics_API.json
   - Microsoft.Insights/stable/2019-07-01/operations_API.json
@@ -416,7 +464,7 @@ input-file:
 
 These settings apply only when `--tag=package-2017-09-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-09-preview-only'
+``` yaml $(tag) == 'package-2017-09-preview-only'
 input-file:
   - Microsoft.Insights/preview/2017-09-01-preview/operations_API.json
   - Microsoft.Insights/preview/2017-09-01-preview/metricDefinitions_API.json
@@ -593,7 +641,7 @@ input-file:
 
 These settings apply only when `--tag=package-2016-06-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-06-only'
+``` yaml $(tag) == 'package-2016-06-only'
 input-file:
   - Microsoft.Insights/stable/2016-06-01/metrics_API.json
   - Microsoft.Insights/stable/2016-06-01/operations_API.json
@@ -618,7 +666,9 @@ These settings apply only when `--tag=package-2015-07-01-only` is specified on t
 ``` yaml $(tag) == 'package-2015-07-01-only'
 input-file:
 - Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
+- Microsoft.Insights/stable/2015-07-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
+- Microsoft.Insights/stable/2015-07-01/operations_API.json
 ```
 
 ### Tag: package-2015-04-01-only
@@ -633,6 +683,16 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
 - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
+```
+
+### Tag: package-2014-04-01-only
+
+These settings apply only when `--tag=package-2014-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-04-01-only'
+input-file:
+- Microsoft.Insights/stable/2014-04-01/alertRules_API.json
+- Microsoft.Insights/stable/2014-04-01/autoscale_API.json
 ```
 
 ---
@@ -686,6 +746,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 
 ``` yaml
 directive:
+  - suppress: R4009
+    from: privateLinkScopes_API.json
+    reason: 'Contract is defined in the Network RP private endpoint spec, can be updated by internal calls from Network RP. '
+  - suppress: R3018
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnectionProperties.properties.queryOnlyPrivateLinkResources
+    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
+  - suppress: R3018
+    from: privateLinkScopes_API.json
+    where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
+    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
+  - suppress: OperationsAPIImplementation
+    from: privateLinkScopes_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
   - suppress: OperationsAPIImplementation
@@ -712,6 +787,17 @@ directive:
     where: $.paths
     from: activityLogAlerts_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: scheduledQueryRule_API.json
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: R4005
+    where: $.definitions.Dimension.properties.operator
+    from: scheduledQueryRule_API.json
+    reason: 'The discrepancy in the enum values is with an enum which is defined for a different service of a different team'
+  - suppress: R3016
+    where: $.definitions.Action.properties["odata.type"]
+    reason: 'This is an old field in a stable api version which is not camel cased'
   - suppress: EnumInsteadOfBoolean
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
@@ -724,23 +810,59 @@ directive:
     from: activityLogAlerts_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: DefaultErrorResponseSchema
+    from: metricNamespaces_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
     from: metrics_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: DefaultErrorResponseSchema
     from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: OperationsAPIImplementation
+    from: operations_API.json
+    where: $.paths
+    reason: 'The operations API is implemented however the tool is still firing due to the casing being different'
+  - suppress: OperationsAPIImplementation
+    from: serviceDiagnosticsSettings_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: subscriptionDiagnosticsSettings_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: autoscale_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+    
 ```
 
-``` yaml $(go) || $(csharp) || $(validation) || $(typescript)
+``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
   transform: delete $["Resource"]
-  reason: Missing kind, etag; Generation will take the definition from scheduledQueryRule_API.json which includes kind & etag
+  reason: Missing kind, etag
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ErrorResponse"]
+  reason: Incompatible values (2020-10-01)
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["AzureResource"]
+  reason: Incompatible values (2020-10-01)
+- from: activityLogAlerts_API.json
+  where: $.definitions
+  transform: delete $["ActionGroup"]
+  reason: Incompatible values (2020-10-01)
 ```
 
-``` yaml !$(python) && !$(go) && !$(java)
+``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07')
 directive:
+- from: scheduledQueryRule_API.json
+  where: $.parameters
+  transform: delete $["ResourceGroupNameParameter"]
+  reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: activityLogAlerts_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
@@ -754,10 +876,6 @@ directive:
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
 - from: privateLinkScopes_API.json
-  where: $.parameters
-  transform: delete $["ResourceGroupNameParameter"]
-  reason: ResourceGroupNameParameter is taken from v2/types.json
-- from: scheduledQueryRule_API.json
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
@@ -812,5 +930,3 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
-
-

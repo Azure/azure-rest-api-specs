@@ -26,23 +26,48 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-04
+tag: package-preview-2021-06
 ```
 
 
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.KeyVault/preview/2021-06-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/secrets.json
+```
 ### Tag: package-preview-2021-04
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-04'
+``` yaml $(tag) == 'package-preview-2021-04'
 input-file:
-  - Microsoft.KeyVault/preview/2021-04-01-preview/keys.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
+```
+### Tag: package-preview-2021-04-full
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04-full'
+input-file:
+  - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keys.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/secrets.json
 ```
+
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
@@ -135,11 +160,12 @@ input-file:
 ``` yaml
 directive:
 - suppress:
+    - R3016 # The 'release_policy' property for KeyCreateParameters does not support camelCase.
     - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
     - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
     - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
-    - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team. 
-    - R4009 # Vault object is the only one that need to be tracked with SystemData 
+    - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
+    - R4009 # Vault object is the only one that need to be tracked with SystemData
 ```
 
 ---
@@ -176,5 +202,3 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-

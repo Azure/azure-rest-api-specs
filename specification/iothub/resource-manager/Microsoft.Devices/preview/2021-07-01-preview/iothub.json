@@ -2058,6 +2058,10 @@
         "certificate": {
           "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
           "type": "string"
+        },
+        "isVerified": {
+          "description": "True indicates that the certificate will be created in verified state and proof of possession will not be required.",
+          "type": "boolean"
         }
       }
     },
@@ -2190,8 +2194,7 @@
         },
         "isVerified": {
           "description": "Determines whether certificate has been verified.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         },
         "created": {
           "description": "The certificate's create date and time.",
@@ -3177,7 +3180,8 @@
             "DeviceLifecycleEvents",
             "DeviceJobLifecycleEvents",
             "DigitalTwinChangeEvents",
-            "DeviceConnectionStateEvents"
+            "DeviceConnectionStateEvents",
+            "MqttBrokerMessages"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3966,7 +3970,8 @@
             "DeviceLifecycleEvents",
             "DeviceJobLifecycleEvents",
             "DigitalTwinChangeEvents",
-            "DeviceConnectionStateEvents"
+            "DeviceConnectionStateEvents",
+            "MqttBrokerMessages"
           ],
           "type": "string",
           "x-ms-enum": {
