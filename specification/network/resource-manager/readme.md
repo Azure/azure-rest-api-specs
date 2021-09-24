@@ -202,7 +202,6 @@ input-file:
   - Microsoft.Network/stable/2020-11-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-11-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
-
 ```
 
 ### Tag: package-2021-02-preview
