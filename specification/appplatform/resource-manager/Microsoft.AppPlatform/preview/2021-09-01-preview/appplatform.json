@@ -3873,6 +3873,9 @@
     },
     "CertificateProperties": {
       "description": "Certificate resource payload.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -3926,7 +3929,7 @@
       "discriminator": "type"
     },
     "KeyVaultCertificateProperties": {
-      "description": "Properties of certficate imported from key vault.",
+      "description": "Properties of certificate imported from key vault.",
       "required": [
         "type",
         "vaultUri",
@@ -3951,7 +3954,7 @@
           "description": "The certificate version of key vault.",
           "type": "string"
         },
-        "excludePrivateKey":{
+        "excludePrivateKey": {
           "description": "Optional. If set to true, it will not import private key from key vault.",
           "type": "boolean",
           "default": false
@@ -3960,7 +3963,7 @@
       "x-ms-discriminator-value": "KeyVaultCertificate"
     },
     "ContentCertificateProperties": {
-      "description": "Properties of certficate imported from key vault.",
+      "description": "Properties of certificate imported from key vault.",
       "required": [
         "type",
         "content"
