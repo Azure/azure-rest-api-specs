@@ -322,10 +322,10 @@
           "Accounts"
         ],
         "description": "Create and list an account shared access signature token",
-        "operationId": "Accounts_ListAccountSas",
+        "operationId": "Accounts_ListSas",
         "x-ms-examples": {
           "List Keys": {
-            "$ref": "./examples/ListKeys.json"
+            "$ref": "./examples/AccountListSAS.json"
           }
         },
         "parameters": [
@@ -771,6 +771,11 @@
       "description": "An Azure resource which represents Maps Creator product and provides ability to manage private location data.",
       "type": "object",
       "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "description": "The Creator resource properties.",
           "$ref": "#/definitions/CreatorProperties"
@@ -1027,6 +1032,7 @@
           "minimum": 0,
           "maximum": 500,
           "default": 500,
+          "format": "int32",
           "exclusiveMinimum": true,
           "description": "Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement."
         },
