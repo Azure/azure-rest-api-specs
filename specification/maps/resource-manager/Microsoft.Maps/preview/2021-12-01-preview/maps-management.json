@@ -321,7 +321,7 @@
         "tags": [
           "Accounts"
         ],
-        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\n1. Create or have a User Assigned Managed Identity in the same Azure region as the account. \n2. Make sure to create or update an Azure Map account with the same Azure region as the User Assigned Managed Identity is placed.",
+        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. \n2. Create or update an Azure Map account with the same Azure region as the User Assigned Managed Identity is placed.",
         "operationId": "Accounts_ListSas",
         "x-ms-examples": {
           "List Account Sas": {
@@ -478,6 +478,45 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsOperations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "List operations available for the Maps Resource Provider",
+        "operationId": "Maps_ListSubscriptionOperations",
+        "x-ms-examples": {
+          "Get Operations by Subscription": {
+            "$ref": "./examples/GetOperationsSubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1018,7 +1057,7 @@
         },
         "principalId": {
           "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Map Account. To assign a Managed Identity of the account, use operation Create or Update an assign a User Assigned Identity resource Id.",
-          "type":"string"
+          "type": "string"
         },
         "regions": {
           "type": "array",
@@ -1038,11 +1077,11 @@
         },
         "start": {
           "description": "The date time offset of when the token validity begins. For example \"2017-05-24T10:42:03.1567373Z\".",
-          "type":"string"
+          "type": "string"
         },
         "expiry": {
           "description": "The date time offset of when the token validity expires. For example \"2017-05-24T10:42:03.1567373Z\"",
-          "type":"string"
+          "type": "string"
         }
       },
       "required": [
@@ -1066,6 +1105,7 @@
     },
     "ManagedServiceIdentity": {
       "description": "Identity for the resource.",
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1182,6 +1222,7 @@
     },
     "OperationProperties": {
       "description": "Properties of operation, include metric specifications.",
+      "type": "object",
       "properties": {
         "serviceSpecification": {
           "$ref": "#/definitions/ServiceSpecification",
@@ -1191,6 +1232,7 @@
     },
     "ServiceSpecification": {
       "description": "One property of operation, include metric specifications.",
+      "type": "object",
       "properties": {
         "metricSpecifications": {
           "description": "Metric specifications of operation.",
@@ -1203,6 +1245,7 @@
     },
     "MetricSpecification": {
       "description": "Metric specification of operation.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1255,6 +1298,7 @@
     },
     "Dimension": {
       "description": "Dimension of map account, for example API Category, Api Name, Result Type, and Response Code.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1339,6 +1383,7 @@
       "description": "Linked resource is reference to a resource deployed in an Azure subscription, add the linked resource `uniqueName` value as an optional parameter for operations on Azure Maps Geospatial REST APIs."
     },
     "CorsRules": {
+      "type": "object",
       "properties": {
         "corsRules": {
           "type": "array",
@@ -1353,6 +1398,7 @@
       "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
     },
     "CorsRule": {
+      "type": "object",
       "properties": {
         "allowedOrigins": {
           "type": "array",
