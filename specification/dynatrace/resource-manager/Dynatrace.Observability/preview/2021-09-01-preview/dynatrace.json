@@ -1097,9 +1097,9 @@
     "VMExtensionPayload": {
       "type": "object",
       "properties": {
-        "apiKey": {
-          "$ref": "#/definitions/SecureString",
-          "description": "API Key of the user account"
+        "ingestionKey": {
+          "type": "string",
+          "description": "Ingestion key of the environment"
         },
         "environmentId": {
           "type": "string",
@@ -1774,6 +1774,11 @@
         "logsIngestionEndpoint": {
           "type": "string",
           "description": "Ingestion endpoint used for sending logs",
+          "readOnly": true
+        },
+        "landingURL": {
+          "type": "string",
+          "description": "Landing URL for Dynatrace environment",
           "readOnly": true
         }
       },
