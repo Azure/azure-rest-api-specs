@@ -316,6 +316,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listAccountSas": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create and list an account shared access signature token",
+        "operationId": "Accounts_ListAccountSas",
+        "x-ms-examples": {
+          "List Keys": {
+            "$ref": "./examples/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "MapsAccountSasParameters",
+            "in": "body",
+            "description": "The updated parameters for the Maps Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountSasParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccountSasToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listKeys": {
       "post": {
         "tags": [
@@ -944,6 +995,67 @@
         }
       }
     },
+    "AccountSasParameters": {
+      "description": "Parameters used to create an account Shared Access Signature (SAS) token. The REST API access control is provided by Azure Maps Role Based Access (RBAC) identity and access.",
+      "type": "object",
+      "properties": {
+        "signingKey": {
+          "type": "string",
+          "description": "The Map account key to use for signing.",
+          "enum": [
+            "primaryKey",
+            "secondaryKey"
+          ],
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Map Account.",
+          "type":"string"
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional, allows control of which region locations are permitted access to Azure Maps REST APIs with the SAS token. Example: \"eastus\", \"westus2\". Omitting this parameter will allow all region locations to be accessible."
+        },
+        "maxRatePerSecond": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500,
+          "default": 500,
+          "exclusiveMinimum": true,
+          "description": "Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement."
+        },
+        "start": {
+          "description": "The date time offset of when the token validity begins.",
+          "type":"string"
+        },
+        "expiry": {
+          "description": "The date time offset of when the token validity expires.",
+          "type":"string"
+        }
+      },
+      "required": [
+        "signingKey",
+        "principalId",
+        "maxRatePerSecond"
+      ]
+    },
+    "MapsAccountSasToken": {
+      "description": "A new Sas token which can be used to access the Maps REST APIs and is controlled by the specified Managed identity permissions.",
+      "type": "object",
+      "properties": {
+        "accountSasToken": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The shared access signature access token."
+        }
+      }
+    },
     "ManagedServiceIdentity": {
       "description": "Identity for the resource.",
       "properties": {
@@ -1122,6 +1234,14 @@
         "resourceIdDimensionNameOverride": {
           "type": "string",
           "description": "Account Resource Id."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "Source metrics account."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "Internal metric name."
         }
       }
     },
@@ -1177,6 +1297,10 @@
           "type": "array",
           "$ref": "#/definitions/LinkedResources",
           "description": "Sets the resources to be used for Managed Identities based operations for the Map account resource."
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsRules",
+          "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
         }
       }
     },
@@ -1205,6 +1329,35 @@
         "id"
       ],
       "description": "Linked resource is reference to a resource deployed in an Azure subscription, add the linked resource `uniqueName` value as an optional parameter for operations on Azure Maps Geospatial REST APIs."
+    },
+    "CorsRules": {
+      "properties": {
+        "corsRules": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "description": "Specifies a CORS rule for the Map Account.",
+            "$ref": "#/definitions/CorsRule"
+          },
+          "description": "The List of CORS rules. You can include up to five CorsRule elements in the request. "
+        }
+      },
+      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
+    },
+    "CorsRule": {
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or \"*\" to allow all domains"
+        }
+      },
+      "required": [
+        "allowedOrigins"
+      ],
+      "description": "Specifies a CORS rule for the Map Account."
     },
     "CreatorProperties": {
       "description": "Creator resource properties",
