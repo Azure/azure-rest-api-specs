@@ -241,7 +241,14 @@
             "in": "query",
             "description": "Coordinates of the point close to the road segment. They have to be comma-separated and calculated using EPSG4326 projection.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
           },
           {
             "name": "unit",
@@ -930,7 +937,6 @@
         "r": {
           "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
           "type": "string",
-          "format": "date-time",
           "readOnly": true,
           "x-ms-client-name": "roadNumbers"
         },
@@ -944,6 +950,7 @@
         "ed": {
           "description": "Estimated end date of the incident, if available. The date is described in the ISO8601 format.",
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "x-ms-client-name": "endDate"
         },
