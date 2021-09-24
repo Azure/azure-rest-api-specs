@@ -239,8 +239,9 @@
           {
             "name": "query",
             "in": "query",
-            "description": "Coordinates of the point close to the road segment. They have to be comma-separated and calculated using EPSG4326 projection.",
+            "description": "Coordinates of the point close to the road segment. This parameter is a list of four coordinates, containing two coordinate pairs (lat, long, lat, long), and calculated using EPSG4326 projection. When this endpoint is called directly, coordinates are passed in as a single string containing four coordinates, separated by commas.",
             "required": true,
+            "x-ms-client-name": "coordinates",
             "type": "array",
             "collectionFormat": "csv",
             "minItems": 2,
@@ -582,9 +583,16 @@
           {
             "name": "boundingbox",
             "in": "query",
-            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). All values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 180° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 180° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
+            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). When this endpoint is called directly, all values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 180° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 180° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
           },
           {
             "name": "boundingzoom",
@@ -599,9 +607,17 @@
           {
             "name": "overviewbox",
             "in": "query",
-            "description": "Bounding box of the overview map in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection.<br><br>Used in case the overview box/mini map has different copyright data than the main map. If there is no mini map, the same coordinates as `boundingBox` is used.",
+            "description": "Bounding box of the overview map in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection.<br><br>Used in case the overview box/mini map has different copyright data than the main map. If there is no mini map, the same coordinates as `boundingBox` is used. When this endpoint is called directly, coordinates are passed in as a single string containing four coordinates, separated by commas.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+
           },
           {
             "name": "overviewzoom",
