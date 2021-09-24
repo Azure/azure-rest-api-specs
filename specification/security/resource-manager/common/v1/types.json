@@ -9,11 +9,11 @@
     "CloudError": {
       "x-ms-external": true,
       "type": "object",
-      "description": "Error response structure.",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
           "x-ms-client-flatten": true,
-          "description": "Error data",
+          "description": "The error object.",
           "$ref": "#/definitions/CloudErrorBody"
         }
       }
@@ -21,19 +21,55 @@
     "CloudErrorBody": {
       "x-ms-external": true,
       "type": "object",
-      "description": "Error details.",
+      "description": "The error detail.",
       "properties": {
         "code": {
           "readOnly": true,
           "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+          "description": "The error code."
         },
         "message": {
           "readOnly": true,
           "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
         }
       }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "Resource": {
       "type": "object",
@@ -65,7 +101,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/Location"
+          "$ref": "#/definitions/AzureTrackedResourceLocation"
         },
         {
           "$ref": "#/definitions/Kind"
@@ -122,6 +158,16 @@
         }
       }
     },
+    "AzureTrackedResourceLocation": {
+      "type": "object",
+      "description": "Describes an Azure resource with location",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location where the resource is stored"
+        }
+      }
+    },
     "AscLocationList": {
       "type": "object",
       "description": "List of locations where ASC saves your data",
@@ -169,7 +215,8 @@
           "description": "The platform where the assessed resource resides",
           "enum": [
             "Azure",
-            "OnPremise"
+            "OnPremise",
+            "OnPremiseSql"
           ],
           "x-ms-enum": {
             "name": "source",
@@ -182,6 +229,10 @@
               {
                 "value": "OnPremise",
                 "description": "Resource in an on premise machine connected to Azure cloud"
+              },
+              {
+                "value": "OnPremiseSql",
+                "description": "SQL Resource in an on premise machine connected to Azure cloud"
               }
             ]
           }
@@ -241,6 +292,79 @@
         "sourceComputerId",
         "machineName"
       ]
+    },
+    "OnPremiseSqlResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise Sql resource that was assessed",
+      "x-ms-discriminator-value": "OnPremiseSql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremiseResourceDetails"
+        }
+      ],
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The Sql server name installed on the machine"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The Sql database name installed on the machine"
+        }
+      },
+      "required": [
+        "serverName",
+        "databaseName"
+      ]
+    },
+    "AzureResourceLinks": {
+      "description": "array of azure resource IDs",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureResourceLink"
+      }
+    },
+    "AzureResourceLink": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id"
+        }
+      }
+    },
+    "ExternalSecuritySolutionKind": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the external solution",
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalSecuritySolutionKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CEF"
+              },
+              {
+                "value": "ATA"
+              },
+              {
+                "value": "AAD"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -284,7 +408,8 @@
       "required": true,
       "type": "string",
       "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "Scope": {
       "name": "scope",
@@ -292,7 +417,8 @@
       "required": true,
       "type": "string",
       "description": "Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "ODataFilter": {
       "name": "$filter",

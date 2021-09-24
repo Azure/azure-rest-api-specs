@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "Trigger": {
@@ -341,6 +352,49 @@
       },
       "description": "Blob event types."
     },
+    "CustomEventsTrigger": {
+      "description": "Trigger that runs every time a custom event is received.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiplePipelineTrigger"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Custom Events Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "subjectBeginsWith": {
+              "description": "The event subject must begin with the pattern provided for trigger to fire. At least one of these must be provided: subjectBeginsWith, subjectEndsWith.",
+              "type": "string"
+            },
+            "subjectEndsWith": {
+              "description": "The event subject must end with the pattern provided for trigger to fire. At least one of these must be provided: subjectBeginsWith, subjectEndsWith.",
+              "type": "string"
+            },
+            "events": {
+              "description": "The list of event types that cause this trigger to fire.",
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "scope": {
+              "description": "The ARM resource ID of the Azure Event Grid Topic.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "events",
+            "scope"
+          ]
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
       "type": "object",
@@ -417,7 +471,8 @@
       "type": "string",
       "enum": [
         "Minute",
-        "Hour"
+        "Hour",
+        "Month"
       ],
       "x-ms-enum": {
         "name": "TumblingWindowFrequency",

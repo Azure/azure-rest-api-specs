@@ -56,3 +56,14 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Websites/Management.Websi
 batch:
   - tag: profile-hybrid-2019-03-01
 ```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).WebSites
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Websites/Management.Websites/Generated
+batch:
+  - tag: profile-hybrid-2020-09-01
+```

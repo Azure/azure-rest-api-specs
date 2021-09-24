@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/ActionPlanList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -79,8 +85,11 @@
               "$ref": "#/definitions/ActionPlanResourceEntity"
             }
           },
-          "404": {
-            "description": "NOT FOUND"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }

@@ -30,4 +30,8 @@ cli:
       disabled: true
     - name: Delete spatial anchors account
     - name: Delete remote rendering account
+  cli-directive:
+    - where:
+        operation: CheckNameAvailabilityLocal
+      hidden: true
 ```

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Cosmos-DB.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,19 +15,220 @@ To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2019-12
+tag: package-2021-07-preview
+```
+
+### Tag: package-2021-07-preview
+
+These settings apply only when `--tag=package-2021-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07-preview'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-07-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-06-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-06-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-06-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2021-06-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-06-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-06-15/restorable.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-05-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-05-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-05-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-05-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-05-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-04-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-04-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-04-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-04-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-04-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-04-preview
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-preview'
+input-file:
+- Microsoft.DocumentDB/preview/2021-04-01-preview/cosmos-db.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/rbac.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/restorable.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/managedCassandra.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/privateEndpointConnection.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-03-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-03-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-03-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-03-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-03-preview
+
+These settings apply only when `--tag=package-2021-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-preview'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+tag: package-preview-2021-04
+```
+
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/restorable.json
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-01-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-01-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-01-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-01-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.DocumentDB/stable/2020-09-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2020-06-preview
+
+These settings apply only when `--tag=package-2020-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-preview'
+input-file:
+- Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/restorable.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2020-04-01/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+- Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2020-03-01/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2019-12
@@ -37,6 +238,7 @@ These settings apply only when `--tag=package-2019-12` is specified on the comma
 ``` yaml $(tag) == 'package-2019-12'
 input-file:
 - Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-12-12/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -48,6 +250,7 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 ```
 
 ### Tag: package-2019-08-preview
@@ -57,6 +260,7 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -107,6 +311,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourceGetOperation
@@ -169,11 +374,40 @@ directive:
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P99
     reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: PathResourceProviderNamePascalCase
+    from: cosmos-db.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: notebook.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: managedCassandra.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateEndpointConnection.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateLinkResources.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: rbac.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: RequiredReadOnlySystemData
+    reason: We do not yet support system data
+  - suppress: ListInOperationName
+    from: managedCassandra.json
+    reason: False positive on GET instanceView.
+  - suppress: RequiredDefaultResponse
+    from: cosmos-db.json
+    reason: Linter rules added without correcting existing issues.
+  - suppress: DeleteOperationResponses
+    from: managedCassandra.json
+    reason: Linter is broken and throwing false positives.
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -182,13 +416,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -204,6 +440,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -211,7 +451,8 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -223,10 +464,19 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
@@ -235,11 +485,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

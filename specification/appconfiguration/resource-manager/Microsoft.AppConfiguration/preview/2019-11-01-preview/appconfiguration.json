@@ -939,6 +939,26 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "The encryption settings of the configuration store."
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionReference"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -949,6 +969,32 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Key vault properties."
+        }
+      }
+    },
+    "PrivateEndpointConnectionReference": {
+      "type": "object",
+      "description": "A reference to a related private endpoint connection.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The properties of a private endpoint connection.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1534,6 +1580,14 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of required DNS zone names of the private link resource."
         }
       },
       "description": "Properties of a private link resource."

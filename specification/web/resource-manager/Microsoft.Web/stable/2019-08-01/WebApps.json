@@ -710,6 +710,253 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.",
+        "description": "Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.",
+        "operationId": "WebApps_GetBasicPublishingCredentialsPolicies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/ListPublishingCredentialsPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/ftp": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns whether FTP is allowed on the site or not.",
+        "description": "Description for Returns whether FTP is allowed on the site or not.",
+        "operationId": "WebApps_GetFtpAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FTP Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates whether FTP is allowed on the site or not.",
+        "description": "Description for Updates whether FTP is allowed on the site or not.",
+        "operationId": "WebApps_UpdateFtpAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csmPublishingAccessPoliciesEntity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update FTP Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns whether Scm basic auth is allowed on the site or not.",
+        "description": "Description for Returns whether Scm basic auth is allowed on the site or not.",
+        "operationId": "WebApps_GetScmAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SCM Allowed": {
+            "$ref": "./examples/GetPublishingCredentialsPolicy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates whether user publishing credentials are allowed on the site or not.",
+        "description": "Description for Updates whether user publishing credentials are allowed on the site or not.",
+        "operationId": "WebApps_UpdateScmAllowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "csmPublishingAccessPoliciesEntity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SCM Allowed": {
+            "$ref": "./examples/UpdatePublishingCredentialsPolicy.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config": {
       "get": {
         "tags": [
@@ -3497,7 +3744,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listsecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listsecrets": {
       "post": {
         "tags": [
           "WebApps"
@@ -3791,7 +4038,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
       "get": {
         "tags": [
           "WebApps"
@@ -11464,7 +11711,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listsecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listsecrets": {
       "post": {
         "tags": [
           "WebApps"
@@ -11800,7 +12047,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings": {
       "get": {
         "tags": [
           "WebApps"
@@ -14878,6 +15125,236 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a private endpoint connection",
+        "description": "Description for Gets a private endpoint connection",
+        "operationId": "WebApps_GetPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Approves or rejects a private endpoint connection",
+        "description": "Description for Approves or rejects a private endpoint connection",
+        "operationId": "WebApps_ApproveOrRejectPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a site.": {
+            "$ref": "./examples/ApproveRejectSitePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a private endpoint connection",
+        "description": "Description for Deletes a private endpoint connection",
+        "operationId": "WebApps_DeletePrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the private link resources",
+        "description": "Description for Gets the private link resources",
+        "operationId": "WebApps_GetPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetSitePrivateLinkResources.json"
           }
         }
       }
@@ -19597,9 +20074,10 @@
         },
         "identityType": {
           "enum": [
-            "None",
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -19647,6 +20125,16 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/AzureBlobStorageApplicationLogsConfig",
           "description": "Application logs to blob storage configuration."
+        }
+      }
+    },
+    "ArmIdWrapper": {
+      "description": "A wrapper for an ARM resource id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -20338,6 +20826,59 @@
         "siteConfig": {
           "$ref": "./CommonDefinitions.json#/definitions/SiteConfig",
           "description": "The site object which will be merged with the source slot site\nto produce new destination slot site object.\n<code>null</code> to just copy source slot content. Otherwise a <code>Site</code>\nobject with properties to override source slot site."
+        }
+      }
+    },
+    "CsmPublishingCredentialsPoliciesCollection": {
+      "description": "Publishing Credentials Policies collection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CsmPublishingCredentialsPoliciesCollection resource specific properties",
+          "required": [
+            "ftp",
+            "scm"
+          ],
+          "properties": {
+            "ftp": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
+              "description": "Whether FTP is allowed."
+            },
+            "scm": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
+              "description": "Whether Scm Basic Auth is allowed."
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CsmPublishingCredentialsPoliciesEntity": {
+      "description": "Publishing Credentials Policies parameters.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CsmPublishingCredentialsPoliciesEntity resource specific properties",
+          "required": [
+            "allow"
+          ],
+          "properties": {
+            "allow": {
+              "description": "<code>true</code> to allow access to a publishing method; otherwise, <code>false</code>.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21049,9 +21590,10 @@
             },
             "identityType": {
               "enum": [
-                "None",
                 "SystemAssigned",
-                "UserAssigned"
+                "UserAssigned",
+                "SystemAssigned, UserAssigned",
+                "None"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -21634,6 +22176,133 @@
         }
       }
     },
+    "PrivateEndpointConnectionResource": {
+      "description": "Private Endpoint Connection ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequestResource": {
+      "description": "Private Endpoint Connection Approval ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkConnectionState": {
+      "description": "The state of a private link connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of a private link connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of a private link connection",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "ActionsRequired for a private link connection",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of a private link resource",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of a private link resource"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "GroupId of a private link resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "RequiredMembers of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "RequiredZoneNames of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourcesWrapper": {
+      "description": "Wrapper for a collection of private link resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
     "ProcessInfo": {
       "description": "Process Information.",
       "type": "object",
@@ -22119,6 +22788,23 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "PrivateEndpoint of a remote private endpoint connection"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
         }
       }
     },

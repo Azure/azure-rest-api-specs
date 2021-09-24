@@ -26,7 +26,7 @@ These are the global settings for the DataShare API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11-01
+tag: package-2020-09-01
 ```
 
 
@@ -48,6 +48,33 @@ input-file:
 - Microsoft.DataShare/stable/2019-11-01/DataShare.json
 ```
 
+### Tag: package-2020-09-01
+
+These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01'
+input-file:
+- Microsoft.DataShare/stable/2020-09-01/DataShare.json
+```
+
+### Tag: package-2020-10-01-preview
+
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview'
+input-file:
+- Microsoft.DataShare/preview/2020-10-01-preview/DataShare.json
+```
+
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01'
+input-file:
+- Microsoft.DataShare/stable/2021-08-01/DataShare.json
+```
+
 ---
 # Code Generation
 
@@ -60,8 +87,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-cli-extensions
 ```
 
 
@@ -81,31 +109,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.datashare
-  package-name: azure-mgmt-datashare
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/datashare/azure-mgmt-datashare/azure/mgmt/datashare
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/datashare/azure-mgmt-datashare
-```
-
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -125,6 +129,9 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DataShare/preview/2018-11-01-preview/DataShare.json
   - $(this-folder)/Microsoft.DataShare/stable/2019-11-01/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/stable/2020-09-01/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/preview/2020-10-01-preview/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/stable/2021-08-01/DataShare.json
 
 ```
 

@@ -18,7 +18,6 @@
             "artifactSelector": "sub-module-1"
           },
           "appName": "myapp",
-          "provisioningState": "Succeeded",
           "deploymentSettings": {
             "cpu": 1,
             "memoryInGB": 3,
@@ -29,15 +28,22 @@
             },
             "runtimeVersion": "Java_8"
           },
+          "provisioningState": "Succeeded",
           "status": "Running",
           "active": false,
           "instances": [
             {
               "name": "instance1",
               "status": "Running",
-              "discoveryStatus": "pending"
+              "discoveryStatus": "pending",
+              "startTime": "2020-08-26T01:55:02Z"
             }
           ]
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
         },
         "type": "Microsoft.AppPlatform/Spring/apps/deployments",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",

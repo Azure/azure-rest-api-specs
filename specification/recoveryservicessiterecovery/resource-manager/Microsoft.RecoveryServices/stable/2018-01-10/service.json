@@ -16176,6 +16176,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM Id.",
+          "type": "string"
         }
       }
     },
@@ -16254,6 +16258,10 @@
           "description": "The target availability set ARM Id.",
           "type": "string"
         },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
         "targetBootDiagnosticsStorageAccountId": {
           "description": "The target boot diagnostics storage account ARM Id.",
           "type": "string"
@@ -16321,6 +16329,16 @@
           "type": "string",
           "readOnly": true
         },
+        "firmwareType": {
+          "description": "The firmware type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetGeneration": {
+          "description": "The target generation.",
+          "type": "string",
+          "readOnly": true
+        },
         "licenseType": {
           "description": "License Type of the VM to be used.",
           "type": "string"
@@ -16354,6 +16372,10 @@
         },
         "targetAvailabilitySetId": {
           "description": "The target availability set Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
           "type": "string"
         },
         "targetBootDiagnosticsStorageAccountId": {
@@ -16410,6 +16432,11 @@
           "format": "int32",
           "description": "The resync progress percentage.",
           "type": "integer",
+          "readOnly": true
+        },
+        "resyncRequired": {
+          "description": "A value indicating whether resync is required.",
+          "type": "string",
           "readOnly": true
         },
         "resyncState": {
@@ -16619,6 +16646,11 @@
           "type": "string",
           "readOnly": true
         },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
         "seedManagedDiskId": {
           "description": "The ARM Id of the seed managed disk.",
           "type": "string",
@@ -16754,6 +16786,10 @@
         },
         "targetAvailabilitySetId": {
           "description": "The target availability set ARM Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
           "type": "string"
         },
         "targetBootDiagnosticsStorageAccountId": {

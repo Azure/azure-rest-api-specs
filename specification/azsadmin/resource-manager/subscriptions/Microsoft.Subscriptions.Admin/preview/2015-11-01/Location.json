@@ -37,6 +37,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -73,6 +79,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -107,6 +119,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -143,6 +161,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -156,7 +180,8 @@
             "description": "Not Content"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "x-ms-error-response": true
           }
         }
       }
