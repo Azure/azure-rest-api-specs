@@ -1391,6 +1391,214 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/storages/{storageName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the storage resource.",
+        "operationId": "Storages_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the storage.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_Get": {
+            "$ref": "./examples/Storages_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update storage resource.",
+        "operationId": "Storages_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageNameParameter"
+          },
+          {
+            "name": "storageResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the existed storage updated.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new storage and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting storage is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Storages_CreateOrUpdate": {
+            "$ref": "./examples/Storages_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the storage resource.",
+        "operationId": "Storages_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the storage deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "No content. The response indicates the storage doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Storages_Delete": {
+            "$ref": "./examples/Storages_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/storages": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List all the storages of one Azure Spring Cloud instance.",
+        "operationId": "Storages_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe all the storages attached to one Azure Spring Cloud instance.",
+            "schema": {
+              "$ref": "#/definitions/StorageResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Storages_List": {
+            "$ref": "./examples/Storages_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates/{certificateName}": {
       "get": {
         "tags": [
@@ -1577,7 +1785,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describe the custom domain resource list of one application.",
+            "description": "Success. The response describe the list of certificates in the Service.",
             "schema": {
               "$ref": "#/definitions/CertificateResourceCollection"
             }
@@ -3458,10 +3666,22 @@
           "$ref": "#/definitions/PersistentDisk",
           "description": "Persistent disk settings"
         },
+        "customPersistentDisks": {
+          "$ref": "#/definitions/CustomPersistentDiskCollection",
+          "description": "List of custom persistent disks"
+        },
         "enableEndToEndTLS": {
           "description": "Indicate if end to end TLS is enabled.",
           "type": "boolean",
           "default": false
+        },
+        "loadedCertificates": {
+          "description": "Collection of loaded certificates",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadedCertificate"
+          }
         }
       }
     },
@@ -3505,6 +3725,21 @@
         "mountPath": {
           "description": "Mount path of the persistent disk",
           "type": "string"
+        }
+      }
+    },
+    "LoadedCertificate": {
+      "description": "Loaded certificate payload",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource Id of loaded certificate",
+          "type": "string"
+        },
+        "loadTrustStore": {
+          "description": "Indicate whether the certificate will be loaded into default trust store, only work for Java runtime.",
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -3638,28 +3873,20 @@
     },
     "CertificateProperties": {
       "description": "Certificate resource payload.",
-      "required": [
-        "vaultUri",
-        "keyVaultCertName"
-      ],
       "type": "object",
       "properties": {
+        "type": {
+          "description": "The type of the certificate source.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "thumbprint": {
           "description": "The thumbprint of certificate.",
           "type": "string",
           "readOnly": true
-        },
-        "vaultUri": {
-          "description": "The vault uri of user key vault.",
-          "type": "string"
-        },
-        "keyVaultCertName": {
-          "description": "The certificate name of key vault.",
-          "type": "string"
-        },
-        "certVersion": {
-          "description": "The certificate version of key vault.",
-          "type": "string"
         },
         "issuer": {
           "description": "The issuer of certificate.",
@@ -3695,7 +3922,62 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "type"
+    },
+    "KeyVaultCertificateProperties": {
+      "description": "Properties of certficate imported from key vault.",
+      "required": [
+        "type",
+        "vaultUri",
+        "keyVaultCertName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateProperties"
+        }
+      ],
+      "properties": {
+        "vaultUri": {
+          "description": "The vault uri of user key vault.",
+          "type": "string"
+        },
+        "keyVaultCertName": {
+          "description": "The certificate name of key vault.",
+          "type": "string"
+        },
+        "certVersion": {
+          "description": "The certificate version of key vault.",
+          "type": "string"
+        },
+        "excludePrivateKey":{
+          "description": "Optional. If set to true, it will not import private key from key vault.",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "x-ms-discriminator-value": "KeyVaultCertificate"
+    },
+    "ContentCertificateProperties": {
+      "description": "Properties of certficate imported from key vault.",
+      "required": [
+        "type",
+        "content"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateProperties"
+        }
+      ],
+      "properties": {
+        "content": {
+          "description": "The content of uploaded certificate.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ContentCertificate"
     },
     "CertificateResourceCollection": {
       "description": "Collection compose of certificate resources list and a possible link for next page.",
@@ -3714,6 +3996,156 @@
           "type": "string"
         }
       }
+    },
+    "StorageResource": {
+      "description": "Storage resource payload.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "Properties of the storage resource payload.",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "StorageProperties": {
+      "description": "Storage resource payload.",
+      "type": "object",
+      "required": [
+        "storageType"
+      ],
+      "properties": {
+        "storageType": {
+          "description": "The type of the storage.",
+          "type": "string"
+        }
+      },
+      "discriminator": "storageType"
+    },
+    "StorageAccount": {
+      "description": "storage resource of type Azure Storage Account.",
+      "type": "object",
+      "required": [
+        "storageType",
+        "accountName",
+        "accountKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageProperties"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "description": "The account name of the Azure Storage Account.",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "The account key of the Azure Storage Account.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "StorageAccount"
+    },
+    "StorageResourceCollection": {
+      "description": "Collection compose of storage resources list and a possible link for next page.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The storage resources list.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to next page of storage list.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomPersistentDiskResource": {
+      "description": "Custom persistent disk resource payload.",
+      "type": "object",
+      "required": [
+        "storageId"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomPersistentDiskProperties",
+          "description": "Properties of the custom persistent disk resource payload.",
+          "x-ms-client-flatten": false
+        },
+        "storageId": {
+          "description": "The resource id of Azure Spring Cloud Storage resource.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomPersistentDiskProperties": {
+      "description": "Custom persistent disk resource payload.",
+      "required": [
+        "type",
+        "mountPath"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the underlying resource to mount as a persistent disk.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "The mount path of the persistent disk.",
+          "type": "string"
+        },
+        "readonly": {
+          "description": "Indicates whether the persistent disk is a readonly one.",
+          "type": "boolean"
+        },
+        "mountOptions": {
+          "description": "These are the mount options for a persistent disk.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "type"
+    },
+    "CustomPersistentDiskCollection": {
+      "description": "Collection of persistent disk resources list and a possible link for next page.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CustomPersistentDiskResource"
+      }
+    },
+    "AzureFileVolume": {
+      "description": "The properties of the Azure File volume. Azure File shares are mounted as volumes.",
+      "type": "object",
+      "required": [
+        "type",
+        "mountPath",
+        "shareName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomPersistentDiskProperties"
+        }
+      ],
+      "properties": {
+        "shareName": {
+          "description": "The share name of the Azure File share.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureFileVolume"
     },
     "NameAvailabilityParameters": {
       "description": "Name availability parameters payload",
@@ -4730,6 +5162,14 @@
       "name": "certificateName",
       "in": "path",
       "description": "The name of the certificate resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "StorageNameParameter": {
+      "name": "storageName",
+      "in": "path",
+      "description": "The name of the storage resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
