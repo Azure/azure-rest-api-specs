@@ -205,6 +205,9 @@
           },
           {
             "$ref": "#/parameters/ImportExportFormatParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetKindParameter"
           }
         ],
         "consumes": [
@@ -300,6 +303,9 @@
           },
           {
             "$ref": "#/parameters/ImportExportFormatParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetKindParameter"
           }
         ],
         "consumes": [
@@ -460,6 +466,45 @@
         "x-ms-examples": {
           "Successful query": {
             "$ref": "./examples/questionanswering/authoring/SuccessfulProjectDeployJobStatus.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/{projectName}/deployments": {
+      "get": {
+        "summary": "List all deployments of a project.",
+        "operationId": "QuestionAnsweringProjects_ListDeployments",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of deployments of a project.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeployments"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectListDeployments.json"
           }
         }
       }
@@ -816,9 +861,92 @@
           }
         }
       }
+    },
+    "/query-knowledgebases/projects/{projectName}/feedback": {
+      "post": {
+        "summary": "Update Active Learning feedback.",
+        "operationId": "QuestionAnsweringProjects_AddFeedback",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Feedback for Active Learning.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveLearningFeedback"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Feedback recorded successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateActiveLearningFeedback.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "ActiveLearningFeedback": {
+      "type": "object",
+      "description": "Feedback for Active Learning.",
+      "additionalProperties": false,
+      "properties": {
+        "records": {
+          "$ref": "#/definitions/FeedbackRecords"
+        }
+      }
+    },
+    "FeedbackRecords": {
+      "type": "array",
+      "description": "A list of Feedback Records for Active Learning.",
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/FeedbackRecord"
+      }
+    },
+    "FeedbackRecord": {
+      "type": "object",
+      "description": "Feedback Record for Active Learning.",
+      "additionalProperties": false,
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the user."
+        },
+        "userQuestion": {
+          "type": "string",
+          "description": "User suggested question for the QnA."
+        },
+        "qnaId": {
+          "type": "integer",
+          "description": "Unique ID of the QnA.",
+          "format": "int32"
+        }
+      }
+    },
     "ProjectsMetadata": {
       "type": "object",
       "description": "Collection of projects metadata and global settings.",
@@ -848,21 +976,12 @@
         "language": {
           "$ref": "common.json#/definitions/Language"
         },
-        "defaultAnswer": {
-          "type": "string",
-          "description": "Default Answer response when no good match is found in the knowledge base."
-        },
         "multilingualResource": {
           "type": "boolean",
           "description": "Resource enabled for multiple languages across projects or not."
         },
-        "enableHierarchicalExtraction": {
-          "type": "boolean",
-          "description": "Resource enabled for hierarchical QnA extraction from sources."
-        },
-        "defaultAnswerUsedForExtraction": {
-          "type": "string",
-          "description": "Default answer to be used during QnA extraction from sources."
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings"
         },
         "createdDateTime": {
           "type": "string",
@@ -901,13 +1020,23 @@
         "language": {
           "$ref": "common.json#/definitions/Language"
         },
-        "defaultAnswer": {
-          "type": "string",
-          "description": "Default Answer response when no good match is found in the knowledge base."
-        },
         "multilingualResource": {
           "type": "boolean",
           "description": "Set to true to enable creating knowledgebases in different languages for the same resource."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings"
+        }
+      }
+    },
+    "ProjectSettings": {
+      "type": "object",
+      "description": "Configurable settings of the Project.",
+      "additionalProperties": false,
+      "properties": {
+        "defaultAnswer": {
+          "type": "string",
+          "description": "Default Answer response when no good match is found in the knowledge base."
         },
         "enableHierarchicalExtraction": {
           "type": "boolean",
@@ -919,22 +1048,12 @@
         }
       }
     },
-    "ExportJobOptions": {
-      "type": "object",
-      "description": "Parameters required for export project job.",
-      "additionalProperties": false,
-      "properties": {
-        "exportAssetTypes": {
-          "$ref": "#/definitions/AssetTypes"
-        }
-      }
-    },
     "ImportJobOptions": {
       "type": "object",
       "description": "Project assets the needs to be imported.",
       "additionalProperties": false,
       "properties": {
-        "projectMetadata": {
+        "metadata": {
           "$ref": "#/definitions/CreateProjectOptions"
         },
         "assets": {
@@ -945,25 +1064,6 @@
           "description": "Import data File URI."
         }
       }
-    },
-    "AssetTypes": {
-      "type": "array",
-      "description": "Collection of asset types.",
-      "items": {
-        "$ref": "#/definitions/AssetKind"
-      }
-    },
-    "AssetKind": {
-      "type": "string",
-      "description": "Asset types for the project.",
-      "x-ms-enum": {
-        "name": "assetKind",
-        "modelAsString": true
-      },
-      "enum": [
-        "synonyms",
-        "qnas"
-      ]
     },
     "JobMetadata": {
       "description": "Represents the job metadata.",
@@ -998,13 +1098,13 @@
     "JobStatus": {
       "description": "Job Status.",
       "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Cancelled",
-        "Cancelling",
-        "PartiallyCompleted"
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling",
+        "partiallyCompleted"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1342,7 +1442,7 @@
           "$ref": "#/definitions/UpdateOperationKind"
         },
         "value": {
-          "$ref": "#/definitions/QnaSourceMetadata"
+          "$ref": "#/definitions/UpdateQnaSourceRecord"
         }
       }
     },
@@ -1375,6 +1475,27 @@
         }
       ]
     },
+    "UpdateQnaSourceRecord": {
+      "description": "Update source record.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/QnaSourceMetadata"
+        },
+        {
+          "$ref": "#/definitions/RefreshSourceOptions"
+        }
+      ]
+    },
+    "RefreshSourceOptions": {
+      "type": "object",
+      "description": "Boolean flag used to refresh data from the Source.",
+      "properties": {
+        "refresh": {
+          "type": "boolean",
+          "description": "Boolean flag used to refresh data from the Source."
+        }
+      }
+    },
     "QnaSourceMetadata": {
       "type": "object",
       "description": "Input source file or url details.",
@@ -1384,7 +1505,7 @@
         "sourceKind"
       ],
       "properties": {
-        "sourceName": {
+        "displayName": {
           "type": "string",
           "description": "Friendly name of the Source.",
           "maxLength": 200,
@@ -1392,7 +1513,7 @@
         },
         "source": {
           "type": "string",
-          "description": "Unique source identifier."
+          "description": "Unique source identifier. Provide file name in the case of a file source, otherwise provide the source URI."
         },
         "sourceUri": {
           "type": "string",
@@ -1433,6 +1554,40 @@
         "modelAsString": true,
         "name": "sourceContentStructureKind"
       }
+    },
+    "ProjectDeployments": {
+      "type": "object",
+      "description": "All deployments of a project.",
+      "additionalProperties": false,
+      "properties": {
+        "deployments": {
+          "$ref": "#/definitions/ProjectDeploymentsList"
+        }
+      }
+    },
+    "ProjectDeploymentsList": {
+      "type": "array",
+      "description": "List of deployments of a project.",
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/ProjectDeployment"
+      }
+    },
+    "ProjectDeployment": {
+      "type": "object",
+      "description": "Project deployment details.",
+      "additionalProperties": false,
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Name of the deployment."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "description": "Represents the project last deployment date-time.",
+          "format": "date-time"
+        }
+      }
     }
   },
   "parameters": {
@@ -1442,6 +1597,17 @@
       "description": "Job ID.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AssetKindParameter": {
+      "name": "assetKind",
+      "type": "string",
+      "in": "query",
+      "description": "Asset type of the project.",
+      "enum": [
+        "qnas",
+        "synonyms"
+      ],
       "x-ms-parameter-location": "method"
     },
     "ImportExportFormatParameter": {
