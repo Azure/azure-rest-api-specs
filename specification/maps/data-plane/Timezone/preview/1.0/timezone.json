@@ -212,11 +212,18 @@
           },
           {
             "name": "query",
-            "x-ms-client-name": "coordinate",
             "in": "query",
-            "description": "Coordinates of the point for which time zone information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "description": "Coordinates of the point for which time zone information is requested. This parameter is a list of coordinates, containing a pair of coordinate(lat, long). When this endpoint is called directly, coordinates are passed in as a single string containing coordinates, separated by commas.",
             "required": true,
-            "type": "string"
+            "x-ms-client-name": "coordinates",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
           }
         ],
         "responses": {
