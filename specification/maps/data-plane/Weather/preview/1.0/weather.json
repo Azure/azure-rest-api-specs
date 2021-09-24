@@ -1296,7 +1296,7 @@
           "format": "int32",
           "description": "Value associated with the air quality or pollution category. These values range from 1 to 6. 1 implying good conditions, 6 implying hazardous conditions."
         },
-        "air_quality_type": {
+        "airQualityType": {
           "type": "string",
           "description": "Only exists for air quality. Examples include ozone and particle pollution."
         }
@@ -1750,7 +1750,7 @@
         }
       }
     },
-    "AlertArea": {
+    "AlertDetails": {
       "type": "object",
       "description": "Information about a severe weather alert issued within an affected area(s). If multiple alerts are active for the same location, the alerts will be returned in order of `priority` within the API response, with the highest priority alert being returned at the top of the response.",
       "properties": {
@@ -1758,7 +1758,7 @@
           "type": "string",
           "description": "The name of an area which is affected by the alert. The location that was requested falls under the alert area."
         },
-        "summary": {
+        "description": {
           "type": "string",
           "description": "Text summarizing the alert in the returned area."
         },
@@ -1776,11 +1776,11 @@
           "$ref": "#/definitions/LatestStatus",
           "description": "The latest status of the alert in the current area."
         },
-        "alertDetails": {
+        "details": {
           "type": "string",
           "description": "Full details associated with the alert. Returned if `details`=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
         },
-        "alertDetailsLanguageCode": {
+        "language": {
           "type": "string",
           "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language parameter. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
         }
