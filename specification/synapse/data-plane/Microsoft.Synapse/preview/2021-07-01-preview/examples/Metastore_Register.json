@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2021-07-01-preview",
+    "id": "testdatabase",
+    "registerBody": {
+      "inputFolder": "https://testsymsstorage.dfs.core.windows.net/testsymscontainer/CDM/"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "status": "Running"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}
