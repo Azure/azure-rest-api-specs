@@ -65,7 +65,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CommunityGalleryCloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -110,7 +110,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CommunityGalleryCloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -158,7 +158,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CommunityGalleryCloudError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -440,28 +440,28 @@
       },
       "description": "Describes the properties of a gallery image version."
     },
-    "CommunityGalleryCloudError": {
+    "CloudError": {
       "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CommunityGalleryApiError"
+          "$ref": "#/definitions/ApiError"
         }
       },
       "description": "An error response from the Compute service."
     },
-    "CommunityGalleryApiError": {
+    "ApiError": {
       "type": "object",
       "properties": {
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CommunityGalleryApiErrorBase"
+            "$ref": "#/definitions/ApiErrorBase"
           },
           "description": "The Api error details"
         },
         "innererror": {
-          "$ref": "#/definitions/CommunityGalleryInnerError",
+          "$ref": "#/definitions/InnerError",
           "description": "The Api inner error"
         },
         "code": {
@@ -479,7 +479,7 @@
       },
       "description": "Api error."
     },
-    "CommunityGalleryApiErrorBase": {
+    "ApiErrorBase": {
       "type": "object",
       "properties": {
         "code": {
@@ -497,7 +497,7 @@
       },
       "description": "Api error base."
     },
-    "CommunityGalleryInnerError": {
+    "InnerError": {
       "type": "object",
       "properties": {
         "exceptiontype": {
