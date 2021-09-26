@@ -3677,11 +3677,7 @@
         },
         "loadedCertificates": {
           "description": "Collection of loaded certificates",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LoadedCertificate"
-          }
+          "$ref": "#/definitions/LoadedCertificateCollection"
         }
       }
     },
@@ -3730,6 +3726,9 @@
     },
     "LoadedCertificate": {
       "description": "Loaded certificate payload",
+      "required": [
+        "resourceId"
+      ],
       "type": "object",
       "properties": {
         "resourceId": {
@@ -3741,6 +3740,13 @@
           "type": "boolean",
           "default": false
         }
+      }
+    },
+    "LoadedCertificateCollection": {
+      "description": "Collection of loaded certificate resources list and a possible link for next page.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LoadedCertificate"
       }
     },
     "AppResourceCollection": {
