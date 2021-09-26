@@ -6,13 +6,13 @@
       "type": "string",
       "defaultValue": "[utcNow()]"
     },
-    "scriptsContent": {
-      "type": "string",
-      "defaultValue": "$(scriptsContent)"
-    },
     "resourceGroupName": {
       "type": "string",
       "defaultValue": "$(resourceGroupName)"
+    },
+    "scriptsContent": {
+      "type": "string",
+      "defaultValue": "$(scriptsContent)"
     },
     "dnsCname": {
       "type": "string",
@@ -21,10 +21,6 @@
     "dnsZoneName": {
       "type": "string",
       "defaultValue": "$(dnsZoneName)"
-    },
-    "dnsCnameAlias": {
-      "type": "string",
-      "defaultValue": "[concat('$(serviceName)', '$(ascDomainName)')]"
     },
     "userAssignedIdentity": {
       "type": "string",
@@ -35,7 +31,7 @@
     {
       "type": "Microsoft.Resources/deploymentScripts",
       "apiVersion": "2020-10-01",
-      "name": "createDnsCnameRecord",
+      "name": "deleteDnsCnameRecord",
       "location": "[resourceGroup().location]",
       "kind": "AzurePowerShell",
       "identity": {
@@ -60,10 +56,6 @@
           {
             "name": "dnsZoneName",
             "value": "[parameters('dnsZoneName')]"
-          },
-          {
-            "name": "dnsCnameAlias",
-            "value": "[parameters('dnsCnameAlias')]"
           }
         ],
         "timeout": "PT1H",

@@ -13,7 +13,12 @@
       "type": "string"
     },
     "blobUrl": {
-      "type": "securestring"
+      "type": "securestring",
+      "defaultValue": "$(blobUrl)"
+    },
+    "userAssignedIdentity": {
+      "type": "string",
+      "defaultValue": "$(userAssignedIdentity)"
     }
   },
   "resources": [
@@ -23,7 +28,12 @@
       "name": "runPowerShellInlineWithOutput",
       "location": "[resourceGroup().location]",
       "kind": "AzurePowerShell",
-      "identity": null,
+      "identity": {
+        "type": "userAssigned",
+        "userAssignedIdentities": {
+          "[parameters('userAssignedIdentity')]": {}
+        }
+      },
       "properties": {
         "forceUpdateTag": "[parameters('utcValue')]",
         "azPowerShellVersion": "6.2",

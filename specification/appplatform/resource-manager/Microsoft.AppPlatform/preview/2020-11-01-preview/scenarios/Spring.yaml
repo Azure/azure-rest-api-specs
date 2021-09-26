@@ -1,19 +1,24 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/leni/doc/documentation/test-scenario/references/v1.1/schema.json
 scope: ResourceGroup
 
 variables:
   serviceName: test-scenario-instance
   appName: app01
   ascDomainName: .azuremicroservices.io
-  customDomainName: asc-api.asc-test.net
+  dnsCname: asc
+  customDomainName: 
+    type: string
   mysqlKey:
     type: secureString
   dnsSubscriptionId:
     type: string
   dnsResourceGroup:
     type: string
+  fullCname: 
+    type: string
   blobUrl:
     type: secureString
+  userAssignedIdentity:
+    type: string
 
 prepareSteps:
   - step: Generate_Unique_ServiceName
@@ -22,11 +27,13 @@ prepareSteps:
   - step: Create_Application_Insight_Instance
     armTemplateDeployment: templates/create_application_insights_instance.json
 
-#  - step: Add_Dns_Cname_Record
-#    armTemplateDeployment: templates/create_dns_cname_record.json
-#    variables:
-#      subscriptionId: $(dnsSubscriptionId)
-#      resourceGroup: $(dnsResourceGroup)
+  - step: Add_Dns_Cname_Record
+    armTemplateDeployment: templates/create_dns_cname_record.json
+    variables:
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroupName: $(dnsResourceGroup)
+      dnsZoneName: $(customDomainName)
+      scriptsContent: !include ./templates/create_cname_record.ps1
 
 scenarios:
   - scenario: Spring
@@ -352,8 +359,12 @@ scenarios:
         exampleFile: ../examples/Operations_List.json
 
 cleanUpSteps:
-  - step: Delete_Dns_Cname_Record
-    armTemplateDeployment: templates/create_dns_cname_record.json
-    variables:
-      subscriptionId: $(dnsSubscriptionId)
-      resourceGroup: $(dnsResourceGroup)
+      - step: delete_cname_record
+        armTemplateDeployment: ./templates/delete_dns_record.json
+        variables:
+          dnsCname: $(dnsCname)
+          dnsZoneName: $(customDomainName)
+          subscriptionId: $(dnsSubscriptionId)
+          resourceGroupName: $(dnsResourceGroup)
+          scriptsContent: !include ./templates/delete_cname_record.ps1
+
