@@ -142,3 +142,26 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+### Tag: profile-hybrid-2020-09-01 and java
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01' && $(java)
+input-file:
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+directive:
+  - from: authorization-RoleAssignmentsCalls.json
+    where: $.definitions.RoleAssignment.properties.properties
+    transform: > 
+      $['x-ms-client-flatten'] = true;
+  - from: authorization-RoleAssignmentsCalls.json
+    where: $.definitions.RoleAssignmentCreateParameters.properties.properties
+    transform: > 
+      $['x-ms-client-flatten'] = true;
+```
