@@ -173,65 +173,6 @@
         }
       },
       "type": "object",
-      "required": [
-        "type"
-      ],
-      "description": "Application level properties for the video resource."
-    },
-    "VideoPropertiesUpdate": {
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Optional video title provided by the user. Value can be up to 256 characters long."
-        },
-        "description": {
-          "type": "string",
-          "description": "Optional video description provided by the user. Value can be up to 2048 characters long."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Archive",
-            "File"
-          ],
-          "x-ms-enum": {
-            "name": "VideoType",
-            "values": [
-              {
-                "value": "Archive",
-                "description": "Archive is flexible format that represents a video stream associated with wall-clock time. The video archive can either be continuous or discontinuous. An archive is discontinuous when there are gaps in the recording due to various reasons, such as the live pipeline being stopped, camera being disconnected or due to the use of event based recordings through the use of a signal gate. There is no limit to the archive duration and new video data can be appended to the existing archive at any time, as long as the same video codec and codec parameters are being used. Videos of this type are suitable for appending and long term archival."
-              },
-              {
-                "value": "File",
-                "description": "File represents a video which is stored as a single media file, such as MP4. Videos of this type are suitable to be downloaded for external consumption."
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "Video content type. Different content types are suitable for different applications and scenarios.",
-          "x-nullable": false
-        },
-        "flags": {
-          "$ref": "#/definitions/VideoFlags",
-          "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state.",
-          "readOnly": true
-        },
-        "contentUrls": {
-          "$ref": "#/definitions/VideoContentUrls",
-          "description": "Set of URLs to the video content.",
-          "readOnly": true
-        },
-        "mediaInfo": {
-          "$ref": "#/definitions/VideoMediaInfo",
-          "description": "Contains information about the video and audio content.",
-          "readOnly": true
-        },
-        "archival": {
-          "$ref": "#/definitions/VideoArchival",
-          "description": "Video archival properties."
-        }
-      },
-      "type": "object",
       "description": "Application level properties for the video resource."
     },
     "VideoArchival": {
@@ -487,26 +428,6 @@
       },
       "type": "object"
     },
-    "VideoEntityUpdate": {
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VideoPropertiesUpdate",
-          "description": "The resource properties.",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "The system metadata relating to this resource.",
-          "readOnly": true
-        }
-      },
-      "type": "object"
-    },
     "AccessPolicyEntity": {
       "allOf": [
         {
@@ -584,23 +505,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "$top",
             "in": "query",
             "required": false,
             "type": "integer",
-            "format": "int32",
             "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
           }
         ],
@@ -635,10 +555,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -651,7 +571,7 @@
             "description": "The Video name."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -686,10 +606,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -711,7 +631,7 @@
             "description": "The request parameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -740,10 +660,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -756,7 +676,7 @@
             "description": "The Video name."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -785,10 +705,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -805,12 +725,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VideoEntityUpdate"
+              "$ref": "#/definitions/VideoEntity"
             },
             "description": "The request parameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -841,10 +761,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -857,7 +777,7 @@
             "description": "The Video name."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -888,23 +808,22 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "$top",
             "in": "query",
             "required": false,
             "type": "integer",
-            "format": "int32",
             "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
           }
         ],
@@ -939,10 +858,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -955,7 +874,7 @@
             "description": "The Access Policy name."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -990,10 +909,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -1015,7 +934,7 @@
             "description": "The request parameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -1044,10 +963,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -1060,7 +979,7 @@
             "description": "The Access Policy name."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -1089,10 +1008,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
@@ -1114,7 +1033,7 @@
             "description": "The request parameters"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-examples": {
@@ -1126,6 +1045,21 @@
     }
   },
   "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for a Microsoft Azure subscription."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
     "AzureVideoAnalyzerAccountName": {
       "name": "accountName",
       "in": "path",
@@ -1133,6 +1067,13 @@
       "type": "string",
       "description": "The Azure Video Analyzer account name.",
       "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Version of the API to be used with the client request."
     }
   }
 }

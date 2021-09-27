@@ -40,11 +40,11 @@
             "values": [
               {
                 "value": "Live_S1",
-                "description": "Live S1 sku name."
+                "description": "Represents the Live S1 SKU name. Using this SKU you can create live pipelines to capture, record, and stream live video from RTSP-capable cameras at bitrate settings from 0.5 Kbps to 3000 Kbps."
               },
               {
                 "value": "Batch_S1",
-                "description": "Batch S1 sku name."
+                "description": "Represents the Batch S1 SKU name. Using this SKU you can create pipeline jobs to to process recorded content."
               }
             ],
             "modelAsString": true
@@ -57,7 +57,7 @@
             "Standard"
           ],
           "x-ms-enum": {
-            "name": "Tier",
+            "name": "SkuTier",
             "values": [
               {
                 "value": "Standard",
@@ -88,7 +88,7 @@
           "items": {
             "$ref": "#/definitions/ParameterDeclaration"
           },
-          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \\\"${PARAMETER_NAME}\\\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
+          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \"${PARAMETER_NAME}\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
         },
         "sources": {
           "type": "array",
@@ -130,7 +130,7 @@
           "items": {
             "$ref": "#/definitions/ParameterDeclaration"
           },
-          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \\\"${PARAMETER_NAME}\\\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
+          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \"${PARAMETER_NAME}\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
         },
         "sources": {
           "type": "array",
@@ -382,7 +382,7 @@
         },
         "tunnel": {
           "$ref": "#/definitions/TunnelBase",
-          "description": "Optional tunnel used to connect to the endpoint."
+          "description": "Describes the tunnel through which Video Analyzer can connect to the endpoint URL. This is an optional property, typically used when the endpoint is behind a firewall."
         }
       },
       "type": "object",
@@ -454,11 +454,11 @@
       "properties": {
         "iotHubName": {
           "type": "string",
-          "description": "The IoT Hub name to use when establishing the remote tunnel."
+          "description": "Name of the IoT Hub."
         },
         "deviceId": {
           "type": "string",
-          "description": "The device id to use when establishing the remote tunnel."
+          "description": "The IoT device id to use when establishing the remote tunnel. This string is case-sensitive."
         }
       },
       "type": "object",
@@ -559,11 +559,11 @@
       "properties": {
         "videoName": {
           "type": "string",
-          "description": "Video name."
+          "description": "Name of the Video Analyzer video resource to be used as the source."
         },
         "timeSequences": {
           "$ref": "#/definitions/TimeSequenceBase",
-          "description": "Video time sequences selected for the video."
+          "description": "Describes a sequence of datetime ranges. The video source only picks up recorded media within these ranges."
         }
       },
       "type": "object",
@@ -571,7 +571,7 @@
         "videoName",
         "timeSequences"
       ],
-      "description": "Enables a pipeline to use video as a source."
+      "description": "Video source allows for content from a Video Analyzer video resource to be ingested into a pipeline. Currently supported only with batch pipelines."
     },
     "TimeSequenceBase": {
       "discriminator": "@type",
@@ -585,7 +585,7 @@
       "required": [
         "@type"
       ],
-      "description": "Sequence of time."
+      "description": "A sequence of datetime ranges as a string."
     },
     "VideoSequenceAbsoluteTimeMarkers": {
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSequenceAbsoluteTimeMarkers",
@@ -597,14 +597,14 @@
       "properties": {
         "ranges": {
           "type": "string",
-          "description": "The datetime sequence ranges. Example: '[[\"2020-10-05T03:30:00Z\", \"2020-10-05T03:40:00Z\"],[\"2020-10-05T07:30:00Z\", \"2020-10-05T08:30:00Z\"]]'. Each range indicates the start and end date time marker."
+          "description": "The sequence of datetime ranges. Example: '[[\"2021-10-05T03:30:00Z\", \"2021-10-05T03:40:00Z\"]]'."
         }
       },
       "type": "object",
       "required": [
         "ranges"
       ],
-      "description": "Absolute datetime sequence as a string. The datetime format supported is as per ISO8601."
+      "description": "A sequence of absolute datetime ranges as a string. The datetime values should follow IS08601, and the sum of the ranges should add up to 24 hours or less. Currently, there can be only one range specified in the sequence."
     },
     "EncoderProcessor": {
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EncoderProcessor",
@@ -616,14 +616,14 @@
       "properties": {
         "preset": {
           "$ref": "#/definitions/EncoderPresetBase",
-          "description": "The encoder preset."
+          "description": "The encoder preset, which defines the recipe or instructions on how the input content should be processed."
         }
       },
       "type": "object",
       "required": [
         "preset"
       ],
-      "description": "A processor node which encodes the media."
+      "description": "Encoder processor allows for encoding of the input content. For example, it can used to change the resolution from 4K to 1280x720."
     },
     "EncoderPresetBase": {
       "discriminator": "@type",
@@ -637,7 +637,7 @@
       "required": [
         "@type"
       ],
-      "description": "Encoding preset base."
+      "description": "Base type for all encoder presets, which define the recipe or instructions on how the input content should be processed."
     },
     "EncoderSystemPreset": {
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EncoderSystemPreset",
@@ -660,31 +660,31 @@
             "values": [
               {
                 "value": "SingleLayer_540p_H264_AAC",
-                "description": "SingleLayer 540p H264 video codec and AAC audio codec encoder system preset."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 540 pixels, and at a maximum bitrate of 2000 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 96 Kbps"
               },
               {
                 "value": "SingleLayer_720p_H264_AAC",
-                "description": "SingleLayer 720p H264 video codec and AAC audio codec encoder system preset."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 720 pixels, and at a maximum bitrate of 3500 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 96 Kbps"
               },
               {
                 "value": "SingleLayer_1080p_H264_AAC",
-                "description": "SingleLayer 1080p H264 video codec and AAC audio codec encoder system preset."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 1080 pixels, and at a maximum bitrate of 6000 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 128 Kbps"
               },
               {
                 "value": "SingleLayer_2160p_H264_AAC",
-                "description": "SingleLayer 2160p H264 video codec and AAC audio codec encoder system preset."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 2160 pixels, and at a maximum bitrate of 16000 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 128 Kbps"
               }
             ],
             "modelAsString": true
           },
-          "description": "The system preset value."
+          "description": "Name of the built-in encoding preset."
         }
       },
       "type": "object",
       "required": [
         "name"
       ],
-      "description": "The encoding built in system preset."
+      "description": "Describes a built-in preset for encoding the input content using the encoder processor."
     },
     "EncoderCustomPreset": {
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EncoderCustomPreset",
@@ -696,15 +696,15 @@
       "properties": {
         "audioEncoder": {
           "$ref": "#/definitions/AudioEncoderBase",
-          "description": "The audio encoder."
+          "description": "Describes a custom preset for encoding audio."
         },
         "videoEncoder": {
           "$ref": "#/definitions/VideoEncoderBase",
-          "description": "The video encoder."
+          "description": "Describes a custom preset for encoding video."
         }
       },
       "type": "object",
-      "description": "The encoding custom preset for specifying custom encoder settings."
+      "description": "Describes a custom preset for encoding the input content using the encoder processor."
     },
     "AudioEncoderBase": {
       "discriminator": "@type",
@@ -715,14 +715,14 @@
         },
         "bitrateKbps": {
           "type": "string",
-          "description": "The audio encoding bitrate."
+          "description": "Bitrate, in kilobits per second or Kbps, at which audio should be encoded (2-channel stereo audio at a sampling rate of 48 kHz). Allowed values are 96, 112, 128, 160, 192, 224, and 256. If omitted, the bitrate of the input audio is used."
         }
       },
       "type": "object",
       "required": [
         "@type"
       ],
-      "description": "The audio encoder base."
+      "description": "Base type for all audio encoder presets, which define the recipe or instructions on how audio should be processed."
     },
     "VideoEncoderBase": {
       "discriminator": "@type",
@@ -733,22 +733,22 @@
         },
         "bitrateKbps": {
           "type": "string",
-          "description": "The video encoding bitrate."
+          "description": "The maximum bitrate, in kilobits per second or Kbps, at which video should be encoded. If omitted, encoder sets it automatically to try and match the quality of the input video."
         },
         "frameRate": {
           "type": "string",
-          "description": "Video encoder frame rate."
+          "description": "The frame rate (in frames per second) of the encoded video. The value must be greater than zero, and less than or equal to 300. If omitted, the encoder uses the average frame rate of the input video."
         },
         "scale": {
           "$ref": "#/definitions/VideoScale",
-          "description": "Defines the video scale."
+          "description": "Describes the resolution of the encoded video. If omitted, the encoder uses the resolution of the input video."
         }
       },
       "type": "object",
       "required": [
         "@type"
       ],
-      "description": "The video encoder base."
+      "description": "Base type for all video encoding presets, which define the recipe or instructions on how the input video should be processed."
     },
     "AudioEncoderAac": {
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.AudioEncoderAac",
@@ -759,7 +759,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "The audio encoding AAC Codec."
+      "description": "A custom preset for encoding audio with the AAC codec."
     },
     "VideoScale": {
       "properties": {
@@ -796,7 +796,7 @@
             ],
             "modelAsString": true
           },
-          "description": "Describes the video scaling mode to be applied. Default mode is 'pad'."
+          "description": "Describes the video scaling mode to be applied. Default mode is 'Pad'. If the mode is 'Pad' or 'Stretch' then both width and height must be specified. Else if the mode is 'PreservAspectRatio' then only one of width or height need be provided."
         }
       },
       "type": "object",
@@ -811,7 +811,7 @@
       ],
       "properties": {},
       "type": "object",
-      "description": "The video H264 codec encoder."
+      "description": "A custom preset for encoding video with the H.264 (AVC) codec."
     },
     "VideoSink": {
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSink",
@@ -823,7 +823,7 @@
       "properties": {
         "videoName": {
           "type": "string",
-          "description": "Name of a new or existing Video Analyzer video resource used for the media recording."
+          "description": "Name of a new or existing video resource used to capture and publish content. Note: if downstream of RTSP source, and if disableArchive is set to true, then no content is archived."
         },
         "videoCreationProperties": {
           "$ref": "#/definitions/VideoCreationProperties",
@@ -831,54 +831,54 @@
         },
         "videoPublishingOptions": {
           "$ref": "#/definitions/VideoPublishingOptions",
-          "description": "Optional video publishing options to be used for changing publishing behavior of the output video."
+          "description": "Options to change how the video sink publishes content via the video resource. This property is only allowed for topologies where \"kind\" is set to \"live\"."
         }
       },
       "type": "object",
       "required": [
         "videoName"
       ],
-      "description": "Video sink allows for video and audio to be recorded to the Video Analyzer service. The recorded video can be played from anywhere and further managed from the cloud. Due to security reasons, a given Video Analyzer edge module instance can only record content to new video entries, or existing video entries previously recorded by the same module. Any attempt to record content to an existing video which has not been created by the same module instance will result in failure to record."
+      "description": "Video sink in a live topology allows for video and audio to be captured, optionally archived, and published via a video resource. If archiving is enabled, this results in a video of type 'archive'. If used in a batch topology, this allows for video and audio to be stored as a file, and published via a video resource of type 'file'"
     },
     "VideoCreationProperties": {
       "properties": {
         "title": {
           "type": "string",
-          "description": "Optional video title provided by the user. Value can be up to 256 characters long."
+          "description": "Optional title provided by the user. Value can be up to 256 characters long."
         },
         "description": {
           "type": "string",
-          "description": "Optional video description provided by the user. Value can be up to 2048 characters long."
+          "description": "Optional description provided by the user. Value can be up to 2048 characters long."
         },
         "segmentLength": {
           "type": "string",
-          "description": "Video segment length indicates the length of individual video files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \\\"PT30S\\\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the video is initially created can lead to errors when uploading media to the archive. Default value is 30 seconds."
+          "description": "Segment length indicates the length of individual cotent files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the initial call to create the video resource can lead to errors when uploading content to the archive. Default value is 30 seconds. This property is only allowed for topologies where \"kind\" is set to \"live\"."
         },
         "retentionPeriod": {
           "type": "string",
-          "description": "Video retention period indicates how long the video is kept in storage. Value must be specified in ISO8601 duration format (i.e. \\\"PT1D\\\" equals 1 day) and can vary between 1 day to 5 years, in 1 day increments. When absent (null), all video content is retained indefinitely."
+          "description": "Video retention period indicates how long the video is kept in storage. Value must be specified in ISO8601 duration format (i.e. \"PT1D\" equals 1 day) and can vary between 1 day to 10 years, in 1 day increments. When absent (null), all video content is retained indefinitely. This property is only allowed for topologies where \"kind\" is set to \"live\"."
         }
       },
       "type": "object",
-      "description": "Optional video properties to be used in case a new video resource needs to be created on the service. These will not take effect if the video already exists."
+      "description": "Optional properties to be used in case a new video resource needs to be created on the service. These will not take effect if the video already exists."
     },
     "VideoPublishingOptions": {
       "properties": {
         "disableArchive": {
           "type": "string",
-          "description": "When set to 'true' the video will not archive media content. Default is 'false'."
+          "description": "When set to 'true' content will not be archived or recorded. This is used, for example, when the topology is used only for low latency video streaming. Default is 'false'.  If set to 'true', then \"disableRtspPublishing\" must be set to 'false'."
         },
         "disableRtspPublishing": {
           "type": "string",
-          "description": "When set to 'true' the video will not publish RTSP playback. Default is 'false'."
+          "description": "When set to 'true' the RTSP playback URL will not be published, disabling low latency streaming. This is used, for example, when the topology is used only for archiving content. Default is 'false'.  If set to 'true', then \"disableArchive\" must be set to 'false'."
         },
         "disableVideoPreviewImage": {
           "type": "string",
-          "description": "When set to 'true' the video will not publish preview images. Default is 'false'."
+          "description": "When set to 'true' preview images will not be generated. This is used, for example, when the topology is used only for low latency video streaming. Default is 'false'.  If set to 'false', then \"disableArchive\" must be set to 'false'."
         }
       },
       "type": "object",
-      "description": "Options for changing video publishing behavior on the video sink and output video."
+      "description": "Optional flags used to change how video is published. These are only allowed for topologies where \"kind\" is set to \"live\"."
     },
     "ParameterDefinition": {
       "properties": {
@@ -938,7 +938,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU details."
+          "description": "Describes the properties of a SKU."
         }
       },
       "type": "object",
@@ -946,7 +946,7 @@
         "kind",
         "sku"
       ],
-      "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\\r\\n\\r\\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\\r\\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\\r\\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+      "description": "Pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which captures content from a RTSP camera and archives the content can be reused across many different cameras, as long as the same processing is to be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized. This allows  individual pipelines refer to different values, such as individual cameras' RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for content to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
     },
     "PipelineTopologyUpdate": {
       "allOf": [
@@ -989,11 +989,11 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU details."
+          "description": "Describes the properties of a SKU."
         }
       },
       "type": "object",
-      "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\\r\\n\\r\\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\\r\\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\\r\\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+      "description": "Pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which captures content from a RTSP camera and archives the content can be reused across many different cameras, as long as the same processing is to be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized. This allows  individual pipelines refer to different values, such as individual cameras' RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for content to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
     },
     "LivePipelineProperties": {
       "properties": {
@@ -1008,7 +1008,7 @@
         "bitrateKbps": {
           "type": "integer",
           "format": "int32",
-          "description": "Bitrate capacity in kbps for the live pipeline. The support bit rate is between 500 to 3000 kbps."
+          "description": "Maximum bitrate capacity in Kbps reserved for the live pipeline. The allowed range is from 500 to 3000 Kbps in increments of 100 Kbps. If the RTSP camera exceeds this capacity, then the service will disconnect temporarily from the camera. It will retry to re-establish connection (with exponential backoff), checking to see if the camera bitrate is now below the reserved capacity. Doing so will ensure that one 'noisy neighbor' does not affect other live pipelines in your account."
         },
         "state": {
           "type": "string",
@@ -1040,7 +1040,7 @@
             ],
             "modelAsString": true
           },
-          "description": "Current pipeline state (read-only).",
+          "description": "Current state of the pipeline (read-only).",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1072,7 +1072,7 @@
         "bitrateKbps": {
           "type": "integer",
           "format": "int32",
-          "description": "Bitrate capacity in kbps for the live pipeline. The support bit rate is between 500 to 3000 kbps."
+          "description": "Maximum bitrate capacity in Kbps reserved for the live pipeline. The allowed range is from 500 to 3000 Kbps in increments of 100 Kbps. If the RTSP camera exceeds this capacity, then the service will disconnect temporarily from the camera. It will retry to re-establish connection (with exponential backoff), checking to see if the camera bitrate is now below the reserved capacity. Doing so will ensure that one 'noisy neighbor' does not affect other live pipelines in your account."
         },
         "state": {
           "type": "string",
@@ -1104,7 +1104,7 @@
             ],
             "modelAsString": true
           },
-          "description": "Current pipeline state (read-only).",
+          "description": "Current state of the pipeline (read-only).",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1138,7 +1138,7 @@
         }
       },
       "type": "object",
-      "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
+      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and pubishing of content for a unique RTSP camera."
     },
     "LivePipelineUpdate": {
       "allOf": [
@@ -1159,13 +1159,13 @@
         }
       },
       "type": "object",
-      "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
+      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and pubishing of content for a unique RTSP camera."
     },
     "PipelineJobProperties": {
       "properties": {
         "topologyName": {
           "type": "string",
-          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+          "description": "Reference to an existing pipeline topology. When activated, this pipeline job will process content according to the pipeline topology definition."
         },
         "description": {
           "type": "string",
@@ -1201,20 +1201,20 @@
             ],
             "modelAsString": true
           },
-          "description": "Current pipeline state (read-only).",
+          "description": "Current state of the pipeline (read-only).",
           "readOnly": true,
           "x-nullable": false
         },
         "expiration": {
           "type": "string",
           "format": "date-time",
-          "description": "The expiration time when the pipeline job will be automatically deleted.",
+          "description": "The date-time by when this pipeline job will be automatically deleted from your account.",
           "readOnly": true,
           "x-nullable": false
         },
         "error": {
           "$ref": "#/definitions/PipelineJobError",
-          "description": "An optional error information about the pipeline job failure.",
+          "description": "Details about the error, in case the pipeline job fails.",
           "readOnly": true
         },
         "parameters": {
@@ -1229,13 +1229,13 @@
       "required": [
         "topologyName"
       ],
-      "description": "Properties of a pipeline job."
+      "description": "Pipeline job properties."
     },
     "PipelineJobPropertiesUpdate": {
       "properties": {
         "topologyName": {
           "type": "string",
-          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+          "description": "Reference to an existing pipeline topology. When activated, this pipeline job will process content according to the pipeline topology definition."
         },
         "description": {
           "type": "string",
@@ -1271,20 +1271,20 @@
             ],
             "modelAsString": true
           },
-          "description": "Current pipeline state (read-only).",
+          "description": "Current state of the pipeline (read-only).",
           "readOnly": true,
           "x-nullable": false
         },
         "expiration": {
           "type": "string",
           "format": "date-time",
-          "description": "The expiration time when the pipeline job will be automatically deleted.",
+          "description": "The date-time by when this pipeline job will be automatically deleted from your account.",
           "readOnly": true,
           "x-nullable": false
         },
         "error": {
           "$ref": "#/definitions/PipelineJobError",
-          "description": "An optional error information about the pipeline job failure.",
+          "description": "Details about the error, in case the pipeline job fails.",
           "readOnly": true
         },
         "parameters": {
@@ -1296,7 +1296,7 @@
         }
       },
       "type": "object",
-      "description": "Properties of a pipeline job."
+      "description": "Pipeline job properties."
     },
     "PipelineJobError": {
       "properties": {
@@ -1310,7 +1310,7 @@
         }
       },
       "type": "object",
-      "description": "The pipeline job error details."
+      "description": "Details about the error for a failed pipeline job."
     },
     "PipelineJob": {
       "allOf": [
@@ -1331,7 +1331,7 @@
         }
       },
       "type": "object",
-      "description": "Represents a pipeline job."
+      "description": "Pipeline job represents a unique instance of a batch topology, used for offline processing of selected portions of archived content."
     },
     "PipelineJobUpdate": {
       "allOf": [
@@ -1352,7 +1352,7 @@
         }
       },
       "type": "object",
-      "description": "Represents a pipeline job."
+      "description": "Pipeline job represents a unique instance of a batch topology, used for offline processing of selected portions of archived content."
     },
     "LivePipelineOperationStatus": {
       "properties": {
@@ -1450,7 +1450,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineTopologies": {
       "get": {
         "summary": "Retrieves a list of pipeline topologies.",
-        "description": "Retrieves a list of pipeline topologies that have been added.",
+        "description": "Retrieves a list of pipeline topologies that have been added to the account, if any, along with their JSON representation.",
         "operationId": "PipelineTopologies_List",
         "responses": {
           "200": {
@@ -1507,8 +1507,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineTopologies/{pipelineTopologyName}": {
       "get": {
-        "summary": "Gets a pipeline topology by name.",
-        "description": "Retrieves a pipeline topology by name. If a topology with that name has been previously created, the call will return the JSON representation of that topology.",
+        "summary": "Retrieves a specific pipeline topology by name.",
+        "description": "Retrieves a specific pipeline topology by name. If a topology with that name has been previously created, the call will return the JSON representation of that topology.",
         "operationId": "PipelineTopologies_Get",
         "responses": {
           "200": {
@@ -1553,17 +1553,17 @@
       },
       "put": {
         "summary": "Creates or updates a pipeline topology.",
-        "description": "Creates a new pipeline topology or updates an existing one, with the given name. A pipeline topology is a blueprint defining what nodes are in a pipeline, and how they are interconnected.",
+        "description": "Creates a new pipeline topology or updates an existing one, with the given name. A pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics.",
         "operationId": "PipelineTopologies_CreateOrUpdate",
         "responses": {
           "200": {
-            "description": "A new pipeline topology was created or the existing pipeline topology was updated.",
+            "description": "The existing pipeline topology was updated.",
             "schema": {
               "$ref": "#/definitions/PipelineTopology"
             }
           },
           "201": {
-            "description": "A new pipeline topology was created or the existing pipeline topology was updated.",
+            "description": "A new pipeline topology was created.",
             "schema": {
               "$ref": "#/definitions/PipelineTopology"
             }
@@ -1617,10 +1617,10 @@
         "operationId": "PipelineTopologies_Delete",
         "responses": {
           "200": {
-            "description": "Pipeline topology was deleted successfully."
+            "description": "The pipeline topology was deleted successfully."
           },
           "204": {
-            "description": "Pipeline topology was not found."
+            "description": "The pipeline topology was not found."
           },
           "default": {
             "description": "Detailed error information.",
@@ -1657,8 +1657,8 @@
         }
       },
       "patch": {
-        "summary": "Update pipeline topology entity.",
-        "description": "Updates the pipeline topology entity",
+        "summary": "Updates an existing pipeline topology.",
+        "description": "Updates an existing pipeline topology with the given name. If the associated live pipelines or pipeline jobs are in active or processing state, respectively, then only the description can be updated. Else, the properties that can be updated include: description, parameter declarations, sources, processors, and sinks.",
         "operationId": "PipelineTopologies_Update",
         "responses": {
           "200": {
@@ -1705,7 +1705,7 @@
           }
         ],
         "x-ms-examples": {
-          "Update pipeline topology entity.": {
+          "Update pipeline topology.": {
             "$ref": "examples/pipeline-topology-patch.json"
           }
         }
@@ -1713,12 +1713,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines": {
       "get": {
-        "summary": "Retrieves a list of live pipeline.",
-        "description": "Retrieves a list of live pipeline that have been created.",
+        "summary": "Retrieves a list of live pipelines.",
+        "description": "Retrieves a list of live pipelines that have been created, along with their JSON representations.",
         "operationId": "LivePipelines_List",
         "responses": {
           "200": {
-            "description": "List of live pipeline that were successfully retrieved.",
+            "description": "List of live pipelines that were successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/LivePipelineCollection"
             }
@@ -1763,7 +1763,7 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "List all live pipeline": {
+          "List live pipelines": {
             "$ref": "examples/live-pipeline-list.json"
           }
         }
@@ -1771,12 +1771,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}": {
       "get": {
-        "summary": "Gets a Live Pipeline by name.",
-        "description": "Retrieves a Live Pipeline by name. If a live pipeline with that name has been previously created, the call will return the JSON representation of that instance.",
+        "summary": "Retrieves a specific live pipeline by name.",
+        "description": "Retrieves a specific live pipeline by name. If a live pipeline with that name has been previously created, the call will return the JSON representation of that instance.",
         "operationId": "LivePipelines_Get",
         "responses": {
           "200": {
-            "description": "Live pipeline was retrieved successfully.",
+            "description": "The live pipeline was retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/LivePipeline"
             }
@@ -1810,7 +1810,7 @@
           }
         ],
         "x-ms-examples": {
-          "Get a live pipeline by name": {
+          "Retrieves a specific live pipeline by name": {
             "$ref": "examples/live-pipeline-get-by-name.json"
           }
         }
@@ -1821,13 +1821,13 @@
         "operationId": "LivePipelines_CreateOrUpdate",
         "responses": {
           "200": {
-            "description": "A new live pipeline was created or the existing live pipeline was updated.",
+            "description": "The existing live pipeline was updated.",
             "schema": {
               "$ref": "#/definitions/LivePipeline"
             }
           },
           "201": {
-            "description": "A new live pipeline was created or the existing live pipeline was updated.",
+            "description": "A new live pipeline was created.",
             "schema": {
               "$ref": "#/definitions/LivePipeline"
             }
@@ -1877,14 +1877,14 @@
       },
       "delete": {
         "summary": "Deletes a live pipeline.",
-        "description": "Deletes a live pipeline.",
+        "description": "Deletes a live pipeline with the given name.",
         "operationId": "LivePipelines_Delete",
         "responses": {
           "200": {
-            "description": "Live pipeline was deleted successfully."
+            "description": "The live pipeline was deleted successfully."
           },
           "204": {
-            "description": "Live pipeline was deleted successfully."
+            "description": "The live pipeline was not found."
           },
           "default": {
             "description": "Detailed error information.",
@@ -1921,8 +1921,8 @@
         }
       },
       "patch": {
-        "summary": "Update live pipeline entity.",
-        "description": "Updates the live pipeline entity",
+        "summary": "Updates an existing live pipeline.",
+        "description": "Updates an existing live pipeline with the given name. Properties that can be updated include: description, bitrateKbps, and parameter definitions. Only the description can be updated while the live pipeline is active.",
         "operationId": "LivePipelines_Update",
         "responses": {
           "200": {
@@ -1969,7 +1969,7 @@
           }
         ],
         "x-ms-examples": {
-          "Update live pipeline entity.": {
+          "Updates a live pipeline.": {
             "$ref": "examples/live-pipeline-patch.json"
           }
         }
@@ -1978,14 +1978,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}/activate": {
       "post": {
         "summary": "Activates a live pipeline.",
-        "description": "Activates a live pipeline with the name provided.",
+        "description": "Activates a live pipeline with the given name.",
         "operationId": "LivePipelines_Activate",
         "responses": {
           "202": {
-            "description": "Live pipeline activation was accepted and being processed."
+            "description": "Request to activate a live pipeline was accepted, and is being processed."
           },
           "200": {
-            "description": "Live pipeline was activated successfully."
+            "description": "The live pipeline was activated successfully."
           },
           "default": {
             "description": "Detailed error information.",
@@ -2026,14 +2026,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}/deactivate": {
       "post": {
         "summary": "Deactivates a live pipeline.",
-        "description": "Deactivates a live pipeline with the name provided.",
+        "description": "Deactivates a live pipeline with the given name.",
         "operationId": "LivePipelines_Deactivate",
         "responses": {
           "202": {
-            "description": "Live pipeline deactivation was accepted and being processed."
+            "description": "Request to deactivate a live pipeline was accepted, and is being processed."
           },
           "200": {
-            "description": "Live pipeline was deactivated successfully."
+            "description": "The live pipeline was deactivated successfully."
           },
           "default": {
             "description": "Detailed error information.",
@@ -2074,7 +2074,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs": {
       "get": {
         "summary": "Retrieves a list of pipeline jobs.",
-        "description": "Retrieves a list of pipeline jobs that have been created.",
+        "description": "Retrieves a list of all live pipelines that have been created, along with their JSON representations.",
         "operationId": "PipelineJobs_List",
         "responses": {
           "200": {
@@ -2123,7 +2123,7 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "List all pipeline jobs.": {
+          "List all pipeline jobs": {
             "$ref": "examples/pipeline-job-list.json"
           }
         }
@@ -2131,8 +2131,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs/{pipelineJobName}": {
       "get": {
-        "summary": "Gets a pipeline job by name.",
-        "description": "Retrieves a pipeline job by name. If a pipeline job with that name has been previously created, the call will return the JSON representation of that instance.",
+        "summary": "Gets a specific pipeline job by name.",
+        "description": "Retrieves a specific pipeline job by name. If a pipeline job with that name has been previously created, the call will return the JSON representation of that instance.",
         "operationId": "PipelineJobs_Get",
         "responses": {
           "200": {
@@ -2181,13 +2181,13 @@
         "operationId": "PipelineJobs_CreateOrUpdate",
         "responses": {
           "200": {
-            "description": "A new pipeline job was created or the existing pipeline job was updated.",
+            "description": "The existing pipeline job was updated.",
             "schema": {
               "$ref": "#/definitions/PipelineJob"
             }
           },
           "201": {
-            "description": "A new pipeline job was created or the existing pipeline job was updated.",
+            "description": "A new pipeline job was created.",
             "schema": {
               "$ref": "#/definitions/PipelineJob"
             }
@@ -2237,14 +2237,14 @@
       },
       "delete": {
         "summary": "Deletes a pipeline job.",
-        "description": "Deletes a pipeline job.",
+        "description": "Deletes a pipeline job with the given name.",
         "operationId": "PipelineJobs_Delete",
         "responses": {
           "200": {
-            "description": "Pipeline job was deleted successfully."
+            "description": "The pipeline job was deleted successfully."
           },
           "204": {
-            "description": "Pipeline job was deleted successfully."
+            "description": "The pipeline job was not found."
           },
           "default": {
             "description": "Detailed error information.",
@@ -2275,14 +2275,14 @@
           }
         ],
         "x-ms-examples": {
-          "Delete a pipeline job.": {
+          "Deletes a pipeline job": {
             "$ref": "examples/pipeline-job-delete.json"
           }
         }
       },
       "patch": {
-        "summary": "Update pipeline job entity.",
-        "description": "Updates the pipeline job entity",
+        "summary": "Updates an existing pipeline job.",
+        "description": "Updates an existing pipeline job with the given name. Properties that can be updated include: description.",
         "operationId": "PipelineJobs_Update",
         "responses": {
           "200": {
@@ -2329,7 +2329,7 @@
           }
         ],
         "x-ms-examples": {
-          "Update pipeline job entity.": {
+          "Updates a pipeline job": {
             "$ref": "examples/pipeline-job-patch.json"
           }
         }
@@ -2338,14 +2338,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs/{pipelineJobName}/cancel": {
       "post": {
         "summary": "Cancels a pipeline job.",
-        "description": "Cancels a pipeline job with the name provided.",
+        "description": "Cancels a pipeline job with the given name.",
         "operationId": "PipelineJobs_Cancel",
         "responses": {
           "202": {
-            "description": "Pipeline job cancellation was accepted and being processed."
+            "description": "Request to cancel the pipeline job was accepted, and is being processed."
           },
           "200": {
-            "description": "Pipeline job was cancelled successfully."
+            "description": "The pipeline job was cancelled successfully."
           },
           "default": {
             "description": "Detailed error information.",
@@ -2377,7 +2377,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Cancel a pipeline job.": {
+          "Cancels a pipeline job": {
             "$ref": "examples/pipeline-job-cancel.json"
           }
         }
@@ -2440,11 +2440,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs/{pipelineJobName}/operationStatuses/{operationId}": {
       "get": {
         "summary": "Get the operation statuses.",
-        "description": "Get the operation status of a pipeline job.",
+        "description": "Get the operation status of a pipeline job with the given operationId.",
         "operationId": "PipelineJobOperationStatuses_Get",
         "responses": {
           "200": {
-            "description": "Pipeline job operation status was retrieved successfully.",
+            "description": "The pipeline job operation status was retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineJobOperationStatus"
             }
