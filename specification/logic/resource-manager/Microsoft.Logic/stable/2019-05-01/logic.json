@@ -6105,7 +6105,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedApiListResult"
+              "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApiListResult"
             }
           },
           "default": {
@@ -6165,7 +6165,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedApi"
+              "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApi"
             }
           },
           "default": {
@@ -6215,19 +6215,28 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "integrationServiceEnvironmentManagedApi",
+            "description": "The integration service environment managed api.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApi"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ManagedApi"
+              "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApi"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ManagedApi"
+              "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApi"
             }
           },
           "default": {
@@ -6467,6 +6476,9 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkflowProperties",
           "description": "The workflow properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       },
       "description": "The workflow type.",
@@ -8810,6 +8822,9 @@
         "sku": {
           "$ref": "#/definitions/IntegrationServiceEnvironmentSku",
           "description": "The sku."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       },
       "allOf": [
@@ -9018,7 +9033,6 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/OpenAuthenticationProviderType",
-          "readOnly": true,
           "description": "Type of provider for OAuth."
         },
         "claims": {
@@ -9099,6 +9113,63 @@
         "address": {
           "type": "string",
           "description": "The address."
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "description": "Managed service identity properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of managed service identity. The type 'SystemAssigned' includes an implicitly created identity. The type 'None' will remove any identities from the resource.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "description": "Tenant of managed service identity.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Principal Id of managed service identity.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "userAssignedIdentity": {
+      "description": "User Assigned identity properties.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -9185,6 +9256,64 @@
         "modelAsString": true
       }
     },
+    "IntegrationServiceEnvironmentManagedApiListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApi"
+          },
+          "description": "The integration service environment managed APIs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration service environment managed APIs."
+    },
+    "IntegrationServiceEnvironmentManagedApi": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApiProperties",
+          "description": "The integration service environment managed api properties."
+        }
+      },
+      "description": "The integration service environment managed api.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "IntegrationServiceEnvironmentManagedApiProperties": {
+      "type": "object",
+      "description": "The integration service environment managed api properties.",
+      "properties": {
+        "deploymentParameters": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentManagedApiDeploymentParameters",
+          "description": "The integration service environment managed api deployment parameters."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiResourceProperties"
+        }
+      ]
+    },
+    "IntegrationServiceEnvironmentManagedApiDeploymentParameters": {
+      "type": "object",
+      "description": "The integration service environment managed api deployment parameters.",
+      "properties": {
+        "contentLinkDefinition": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "The integration service environment managed api content link for deployment."
+        }
+      }
+    },
     "IntegrationAccountSkuName": {
       "type": "string",
       "description": "The integration account sku name.",
@@ -9210,6 +9339,9 @@
         "sku": {
           "$ref": "#/definitions/IntegrationAccountSku",
           "description": "The sku."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       },
       "description": "The integration account.",
@@ -9224,7 +9356,7 @@
       "description": "The integration account properties.",
       "properties": {
         "integrationServiceEnvironment": {
-          "$ref": "#/definitions/IntegrationServiceEnvironment",
+          "$ref": "#/definitions/ResourceReference",
           "description": "The integration service environment."
         },
         "state": {
