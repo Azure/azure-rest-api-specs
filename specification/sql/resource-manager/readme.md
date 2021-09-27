@@ -730,7 +730,7 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseExtensions.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseOperations.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseRecommendedActions.json
- - ./Microsoft.Sql/preview/2021-05-01-preview/Databases.jsonss
+ - ./Microsoft.Sql/preview/2021-05-01-preview/Databases.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseSchemas.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseTables.json
