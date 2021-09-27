@@ -2,27 +2,21 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-11-15-preview",
-    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "answerCallRequest": {
+    "redirectCallRequest": {
       "incomingCallContext": "80c927ad-f173-42e0-aeeb-31e84143fafc",
-      "participantCapacity": 10,
-      "callbackUrl": "https://app.contoso.com/callback",
-      "requestedMediaTypes": [
-        "audio",
-        "video"
+      "targets": [
+        {
+          "communicationUser": {
+            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_b3b14421-9c7a-4c89-9779-b16f9bdd69b2"
+          }
+        }
       ],
-      "requestedCallEvents": [
-        "dtmfReceived",
-        "participantsUpdated"
-      ]
+      "callbackUrl": "https://app.contoso.com/callback",
+      "timeout": 20
     }
   },
   "responses": {
-    "201": {
-      "body": {
-        "callConnectionId": "887fde2a-c1e1-454c-8656-a220ff9d3836"
-      }
-    },
+    "202": {},
     "400": {
       "body": {
         "error": {

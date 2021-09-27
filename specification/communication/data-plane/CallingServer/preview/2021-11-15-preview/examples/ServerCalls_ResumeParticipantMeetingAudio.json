@@ -2,22 +2,20 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-11-15-preview",
-    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "redirectCallRequest": {
-      "incomingCallContext": "80c927ad-f173-42e0-aeeb-31e84143fafc",
-      "targets": [
-        {
-          "communicationUser": {
-            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_b3b14421-9c7a-4c89-9779-b16f9bdd69b2"
-          }
+    "resumeMeetingAudioWithCallLocatorRequest": {
+      "callLocator": {
+        "groupCallId": "0c1610d4-454d-4ac5-a455-05ba5dc6c5fd",
+        "kind": "groupCallLocator"
+      },
+      "identifier": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_2666155f-6c41-4369-8420-7afbcb84a017"
         }
-      ],
-      "callbackUrl": "https://app.contoso.com/callback",
-      "timeout": 20
+      }
     }
   },
   "responses": {
-    "202": {},
+    "200": {},
     "400": {
       "body": {
         "error": {

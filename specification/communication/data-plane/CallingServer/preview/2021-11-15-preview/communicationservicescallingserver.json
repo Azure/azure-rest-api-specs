@@ -15,6 +15,188 @@
     "application/json"
   ],
   "paths": {
+    "/calling/callConnections/{callConnectionId}/audioRoutingGroups/{audioRoutingMode}": {
+      "post": {
+        "tags": [
+          "AudioRoutingGroup"
+        ],
+        "summary": "Get audio routing groups from a call.",
+        "operationId": "CallConnections_GetAudioRoutingGroups",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "audioRoutingMode",
+            "in": "path",
+            "description": "The audio routing mode.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "oneToOne",
+              "multicast"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the get audio routing group response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CallParticipant"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Get audio routing groups from a call.": {
+            "$ref": "./examples/CallConnections_GetAudioRoutingGroups.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AudioRoutingGroup"
+        ],
+        "summary": "Delete audio routing group from a call.",
+        "operationId": "CallConnections_DeleteAudioRoutingGroup",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "audioRoutingMode",
+            "in": "path",
+            "description": "The audio routing mode.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "oneToOne",
+              "multicast"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the delete audio routing group response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Delete audio routing group from a call.": {
+            "$ref": "./examples/CallConnections_DeleteAudioRoutingGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AudioRoutingGroup"
+        ],
+        "summary": "Update audio routing group from a call.",
+        "operationId": "CallConnections_UpdateAudioRoutingGroup",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "audioRoutingMode",
+            "in": "path",
+            "description": "The audio routing mode.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "oneToOne",
+              "multicast"
+            ]
+          },
+          {
+            "name": "audioRoutingGroupRequest",
+            "in": "body",
+            "description": "The audio routing group request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AudioRoutingGroupRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the update audio routing group response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Update audio routing group from a call.": {
+            "$ref": "./examples/CallConnections_UpdateAudioRoutingGroup.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections": {
       "post": {
         "tags": [
@@ -426,14 +608,13 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/:answer": {
+    "/calling/callConnections/{callConnectionId}/:createAudioRoutingGroup": {
       "post": {
         "tags": [
           "CallConnection"
         ],
-        "summary": "Answer the call.",
-        "description": "Answer the call.",
-        "operationId": "CallConnections_Answer",
+        "summary": "Create audio routing groups from a call.",
+        "operationId": "CallConnections_CreateAudioRoutingGroup",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -443,12 +624,12 @@
             "type": "string"
           },
           {
-            "name": "answerCallRequest",
+            "name": "audioRoutingGroupRequest",
             "in": "body",
-            "description": "The answer call request.",
+            "description": "The audio routing group request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnswerCallRequest"
+              "$ref": "#/definitions/AudioRoutingGroupRequest"
             }
           },
           {
@@ -456,11 +637,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Returns the answer call response.",
-            "schema": {
-              "$ref": "#/definitions/AnswerCallResult"
-            }
+          "200": {
+            "description": "Returns the create audio routing group response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -479,125 +657,13 @@
           }
         },
         "x-ms-examples": {
-          "Answer the call.": {
-            "$ref": "./examples/CallConnections_Answer.json"
+          "Create audio routing groups from a call.": {
+            "$ref": "./examples/CallConnections_CreateAudioRoutingGroup.json"
           }
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/:reject": {
-      "post": {
-        "tags": [
-          "CallConnection"
-        ],
-        "summary": "Reject the call.",
-        "description": "Reject the call.",
-        "operationId": "CallConnections_Reject",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "rejectCallRequest",
-            "in": "body",
-            "description": "The reject call request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RejectCallRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the reject call response."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "Reject the call.": {
-            "$ref": "./examples/CallConnections_Reject.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/:redirect": {
-      "post": {
-        "tags": [
-          "CallConnection"
-        ],
-        "summary": "Redirect the call.",
-        "description": "Redirect the call.",
-        "operationId": "CallConnections_Redirect",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "redirectCallRequest",
-            "in": "body",
-            "description": "The redirect call request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RedirectCallRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the redirect call response."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "Redirect the call.": {
-            "$ref": "./examples/CallConnections_Redirect.json"
-          }
-        }
-      }
-    },
-    "/calling/participants/:getAll": {
+    "/calling/participants:getAll": {
       "post": {
         "tags": [
           "ServerCall"
@@ -703,7 +769,7 @@
         }
       }
     },
-    "/calling/participants/:remove": {
+    "/calling/participants:remove": {
       "post": {
         "tags": [
           "ServerCall"
@@ -752,7 +818,7 @@
         }
       }
     },
-    "/calling/participants/:get": {
+    "/calling/participants:get": {
       "post": {
         "tags": [
           "ServerCall"
@@ -807,7 +873,7 @@
         }
       }
     },
-    "/calling/participants/:startHoldMusic": {
+    "/calling/participants:startHoldMusic": {
       "post": {
         "tags": [
           "ServerCall"
@@ -859,7 +925,7 @@
         }
       }
     },
-    "/calling/participants/:stopHoldMusic": {
+    "/calling/participants:stopHoldMusic": {
       "post": {
         "tags": [
           "ServerCall"
@@ -911,7 +977,7 @@
         }
       }
     },
-    "/calling/participants/:playAudio": {
+    "/calling/participants:playAudio": {
       "post": {
         "tags": [
           "ServerCall"
@@ -963,7 +1029,7 @@
         }
       }
     },
-    "/calling/participants/:cancelMediaOperation": {
+    "/calling/participants:cancelMediaOperation": {
       "post": {
         "tags": [
           "ServerCall"
@@ -1012,7 +1078,7 @@
         }
       }
     },
-    "/calling/participants/:mute": {
+    "/calling/participants:mute": {
       "post": {
         "tags": [
           "ServerCall"
@@ -1061,7 +1127,7 @@
         }
       }
     },
-    "/calling/participants/:unmute": {
+    "/calling/participants:unmute": {
       "post": {
         "tags": [
           "ServerCall"
@@ -1106,6 +1172,104 @@
         "x-ms-examples": {
           "Unmute participant in the call": {
             "$ref": "./examples/ServerCalls_UnmuteParticipant.json"
+          }
+        }
+      }
+    },
+    "/calling/participants:holdMeetingAudio": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Hold meeting audio of a participant in the call.",
+        "description": "Hold meeting audio of a participant in the call.",
+        "operationId": "ServerCalls_HoldParticipantMeetingAudio",
+        "parameters": [
+          {
+            "name": "holdMeetingAudioWithCallLocatorRequest",
+            "in": "body",
+            "description": "The request payload for holding meeting audio for a participant.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HoldMeetingAudioWithCallLocatorRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the hold meeting audio of participant response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Hold meeting audio of a participant in the call.": {
+            "$ref": "./examples/ServerCalls_HoldParticipantMeetingAudio.json"
+          }
+        }
+      }
+    },
+    "/calling/participants:resumeMeetingAudio": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Resume meeting audio of a participant in the call.",
+        "description": "Resume meeting audio of a participant in the call.",
+        "operationId": "ServerCalls_ResumeParticipantMeetingAudio",
+        "parameters": [
+          {
+            "name": "resumeMeetingAudioWithCallLocatorRequest",
+            "in": "body",
+            "description": "The request payload for resuming meeting audio for a participant.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResumeMeetingAudioWithCallLocatorRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the resume meeting audio of participant response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Resume meeting audio of a participant in the call.": {
+            "$ref": "./examples/ServerCalls_ResumeParticipantMeetingAudio.json"
           }
         }
       }
@@ -1219,7 +1383,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:remove": {
+    "/calling/callConnections/{callConnectionId}/participants:remove": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1275,7 +1439,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:get": {
+    "/calling/callConnections/{callConnectionId}/participants:get": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1337,7 +1501,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:startHoldMusic": {
+    "/calling/callConnections/{callConnectionId}/participants:startHoldMusic": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1396,7 +1560,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:stopHoldMusic": {
+    "/calling/callConnections/{callConnectionId}/participants:stopHoldMusic": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1455,7 +1619,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:playAudio": {
+    "/calling/callConnections/{callConnectionId}/participants:playAudio": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1514,7 +1678,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:cancelMediaOperation": {
+    "/calling/callConnections/{callConnectionId}/participants:cancelMediaOperation": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1570,7 +1734,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:mute": {
+    "/calling/callConnections/{callConnectionId}/participants:mute": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1626,7 +1790,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/:unmute": {
+    "/calling/callConnections/{callConnectionId}/participants:unmute": {
       "post": {
         "tags": [
           "CallConnection"
@@ -1678,6 +1842,118 @@
         "x-ms-examples": {
           "Unmute participant in the call": {
             "$ref": "./examples/CallConnections_UnmuteParticipant.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants:holdMeetingAudio": {
+      "post": {
+        "tags": [
+          "CallConnection"
+        ],
+        "summary": "Hold meeting audio of a participant in the call.",
+        "description": "Hold meeting audio of a participant in the call.",
+        "operationId": "CallConnections_HoldParticipantMeetingAudio",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "holdMeetingAudioRequest",
+            "in": "body",
+            "description": "The request payload for holding meeting audio for a participant.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HoldMeetingAudioRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the hold meeting audio of participant response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Hold meeting audio of a participant in the call.": {
+            "$ref": "./examples/CallConnections_HoldParticipantMeetingAudio.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/participants:resumeMeetingAudio": {
+      "post": {
+        "tags": [
+          "CallConnection"
+        ],
+        "summary": "Resume meeting audio of a participant in the call.",
+        "description": "Resume meeting audio of a participant in the call.",
+        "operationId": "CallConnections_ResumeParticipantMeetingAudio",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resumeMeetingAudioRequest",
+            "in": "body",
+            "description": "The request payload for resuming meeting audio for a participant.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResumeMeetingAudioRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the resume meeting audio of participant response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Resume meeting audio of a participant in the call.": {
+            "$ref": "./examples/CallConnections_ResumeParticipantMeetingAudio.json"
           }
         }
       }
@@ -1918,7 +2194,7 @@
         }
       }
     },
-    "/calling/:join": {
+    "/calling:join": {
       "post": {
         "tags": [
           "ServerCall"
@@ -1967,7 +2243,7 @@
         }
       }
     },
-    "/calling/:playAudio": {
+    "/calling:playAudio": {
       "post": {
         "tags": [
           "ServerCall"
@@ -2019,7 +2295,7 @@
         }
       }
     },
-    "/calling/:cancelMediaOperation": {
+    "/calling:cancelMediaOperation": {
       "post": {
         "tags": [
           "ServerCall"
@@ -2067,9 +2343,224 @@
           }
         }
       }
+    },
+    "/calling:answer": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Answer the call.",
+        "description": "Answer the call.",
+        "operationId": "CallConnections_Answer",
+        "parameters": [
+          {
+            "name": "answerCallRequest",
+            "in": "body",
+            "description": "The answer call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnswerCallRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the answer call response.",
+            "schema": {
+              "$ref": "#/definitions/AnswerCallResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Answer the call.": {
+            "$ref": "./examples/CallConnections_Answer.json"
+          }
+        }
+      }
+    },
+    "/calling:reject": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Reject the call.",
+        "description": "Reject the call.",
+        "operationId": "CallConnections_Reject",
+        "parameters": [
+          {
+            "name": "rejectCallRequest",
+            "in": "body",
+            "description": "The reject call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RejectCallRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the reject call response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Reject the call.": {
+            "$ref": "./examples/CallConnections_Reject.json"
+          }
+        }
+      }
+    },
+    "/calling:redirect": {
+      "post": {
+        "tags": [
+          "ServerCall"
+        ],
+        "summary": "Redirect the call.",
+        "description": "Redirect the call.",
+        "operationId": "CallConnections_Redirect",
+        "parameters": [
+          {
+            "name": "redirectCallRequest",
+            "in": "body",
+            "description": "The redirect call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedirectCallRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the redirect call response."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Redirect the call.": {
+            "$ref": "./examples/CallConnections_Redirect.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "CallParticipant": {
+      "description": "A participant in a call.",
+      "required": [
+        "identifier",
+        "isMuted"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "Communication identifier of the participant"
+        },
+        "participantId": {
+          "description": "Participant id",
+          "type": "string"
+        },
+        "isMuted": {
+          "description": "Is participant muted",
+          "type": "boolean"
+        }
+      }
+    },
+    "CommunicationIdentifier": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+    },
+    "CommunicationUserIdentifier": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "PhoneNumberIdentifier": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/PhoneNumberIdentifierModel"
+    },
+    "CommunicationCloudEnvironment": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationCloudEnvironmentModel"
+    },
+    "MicrosoftTeamsUserIdentifier": {
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+    },
+    "AudioRoutingMode": {
+      "description": "The audio routing mode.",
+      "enum": [
+        "oneToOne",
+        "multicast"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioRoutingMode",
+        "modelAsString": true
+      }
+    },
+    "AudioRoutingGroupRequest": {
+      "description": "The audio routing group request.",
+      "type": "object",
+      "properties": {
+        "audioRoutingMode": {
+          "$ref": "#/definitions/AudioRoutingMode"
+        },
+        "targets": {
+          "description": "The target identities that would be receivers in the audio routing group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifier"
+          }
+        }
+      }
+    },
     "MediaType": {
       "enum": [
         "audio",
@@ -2139,21 +2630,6 @@
           }
         }
       }
-    },
-    "PhoneNumberIdentifier": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/PhoneNumberIdentifierModel"
-    },
-    "CommunicationIdentifier": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
-    },
-    "CommunicationUserIdentifier": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
-    },
-    "CommunicationCloudEnvironment": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationCloudEnvironmentModel"
-    },
-    "MicrosoftTeamsUserIdentifier": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
     "CreateCallResult": {
       "description": "The response payload of the create call operation.",
@@ -2234,15 +2710,15 @@
         }
       }
     },
-    "CallLocatorTypeModel": {
-      "description": "The call locator type.",
+    "CallLocatorKindModel": {
+      "description": "The call locator kind.",
       "enum": [
         "groupCallLocator",
         "serverCallLocator"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "CallLocatorTypeModel",
+        "name": "CallLocatorKindModel",
         "modelAsString": true
       }
     },
@@ -2250,42 +2726,16 @@
       "description": "The locator used for joining or taking action on a call.",
       "type": "object",
       "properties": {
-        "groupCallLocator": {
-          "$ref": "#/definitions/GroupCallLocatorModel",
-          "description": "The group call locator."
-        },
-        "serverCallLocator": {
-          "$ref": "#/definitions/ServerCallLocatorModel",
-          "description": "The server call locator."
-        },
-        "type": {
-          "$ref": "#/definitions/CallLocatorTypeModel"
-        }
-      }
-    },
-    "GroupCallLocatorModel": {
-      "description": "The group call locator.",
-      "required": [
-        "groupId"
-      ],
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The guid representing the group call to join.",
+        "groupCallId": {
+          "description": "The group call id",
           "type": "string"
-        }
-      }
-    },
-    "ServerCallLocatorModel": {
-      "description": "The server call locator.",
-      "required": [
-        "serverCallId"
-      ],
-      "type": "object",
-      "properties": {
+        },
         "serverCallId": {
           "description": "The server call id.",
           "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CallLocatorKindModel"
         }
       }
     },
@@ -2431,117 +2881,6 @@
         }
       }
     },
-    "AnswerCallRequest": {
-      "description": "The request payload for answering the call.",
-      "required": [
-        "callbackUrl"
-      ],
-      "type": "object",
-      "properties": {
-        "incomingCallContext": {
-          "description": "The context associated with the call.",
-          "type": "string"
-        },
-        "participantCapacity": {
-          "format": "int32",
-          "description": "The number of participant that the application can handle for the call.",
-          "type": "integer"
-        },
-        "callbackUrl": {
-          "description": "The callback url.",
-          "type": "string"
-        },
-        "requestedMediaTypes": {
-          "description": "The requested modalities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MediaType"
-          }
-        },
-        "requestedCallEvents": {
-          "description": "The requested call events to subscribe to.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EventSubscriptionType"
-          }
-        }
-      }
-    },
-    "AnswerCallResult": {
-      "description": "The response payload of the answer call operation.",
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "The call connection id.",
-          "type": "string"
-        }
-      }
-    },
-    "CallRejectReason": {
-      "description": "The rejection reason.",
-      "enum": [
-        "none",
-        "busy",
-        "forbidden"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CallRejectReason",
-        "modelAsString": true
-      }
-    },
-    "RejectCallRequest": {
-      "description": "The request payload for rejecting the call.",
-      "required": [
-        "incomingCallContext",
-        "callbackUrl"
-      ],
-      "type": "object",
-      "properties": {
-        "incomingCallContext": {
-          "description": "The context associated with the call.",
-          "type": "string"
-        },
-        "callRejectReason": {
-          "$ref": "#/definitions/CallRejectReason"
-        },
-        "callbackUrl": {
-          "description": "The callback url.",
-          "type": "string"
-        }
-      }
-    },
-    "RedirectCallRequest": {
-      "description": "The request payload for redirecting the call.",
-      "required": [
-        "incomingCallContext",
-        "targets",
-        "callbackUrl"
-      ],
-      "type": "object",
-      "properties": {
-        "incomingCallContext": {
-          "description": "The context associated with the call.",
-          "type": "string"
-        },
-        "targets": {
-          "description": "The target identity to redirect the call to.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifier"
-          }
-        },
-        "callbackUrl": {
-          "description": "The callback url.",
-          "type": "string"
-        },
-        "timeout": {
-          "format": "int32",
-          "description": "The timeout for the redirect in seconds.",
-          "type": "integer"
-        }
-      }
-    },
     "GetAllParticipantsWithCallLocatorRequest": {
       "description": "The request payload for get all participants.",
       "required": [
@@ -2552,28 +2891,6 @@
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
-        }
-      }
-    },
-    "CallParticipant": {
-      "description": "A participant in a call.",
-      "required": [
-        "identifier",
-        "isMuted"
-      ],
-      "type": "object",
-      "properties": {
-        "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifier",
-          "description": "Communication identifier of the participant"
-        },
-        "participantId": {
-          "description": "Participant id",
-          "type": "string"
-        },
-        "isMuted": {
-          "description": "Is participant muted",
-          "type": "boolean"
         }
       }
     },
@@ -2930,6 +3247,42 @@
         }
       }
     },
+    "HoldMeetingAudioWithCallLocatorRequest": {
+      "description": "The request payload for holding meeting audio for a participant.",
+      "required": [
+        "callLocator",
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
+        },
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
+        }
+      }
+    },
+    "ResumeMeetingAudioWithCallLocatorRequest": {
+      "description": "The request payload for resuming meeting audio for a participant.",
+      "required": [
+        "callLocator",
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
+        },
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
+        }
+      }
+    },
     "StopHoldMusicRequest": {
       "description": "The request payload for removing participant from hold.",
       "required": [
@@ -2966,6 +3319,32 @@
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant to be unmuted in the call."
+        }
+      }
+    },
+    "HoldMeetingAudioRequest": {
+      "description": "The request payload for holding meeting audio for a participant.",
+      "required": [
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
+        }
+      }
+    },
+    "ResumeMeetingAudioRequest": {
+      "description": "The request payload for resuming meeting audio for a participant.",
+      "required": [
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
         }
       }
     },
@@ -3080,7 +3459,6 @@
     "JoinCallRequest": {
       "description": "The request payload for join call.",
       "required": [
-        "callLocator",
         "source",
         "callbackUri"
       ],
@@ -3177,6 +3555,117 @@
         }
       }
     },
+    "AnswerCallRequest": {
+      "description": "The request payload for answering the call.",
+      "required": [
+        "callbackUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "incomingCallContext": {
+          "description": "The context associated with the call.",
+          "type": "string"
+        },
+        "participantCapacity": {
+          "format": "int32",
+          "description": "The number of participant that the application can handle for the call.",
+          "type": "integer"
+        },
+        "callbackUrl": {
+          "description": "The callback url.",
+          "type": "string"
+        },
+        "requestedMediaTypes": {
+          "description": "The requested modalities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaType"
+          }
+        },
+        "requestedCallEvents": {
+          "description": "The requested call events to subscribe to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventSubscriptionType"
+          }
+        }
+      }
+    },
+    "AnswerCallResult": {
+      "description": "The response payload of the answer call operation.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "The call connection id.",
+          "type": "string"
+        }
+      }
+    },
+    "CallRejectReason": {
+      "description": "The rejection reason.",
+      "enum": [
+        "none",
+        "busy",
+        "forbidden"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CallRejectReason",
+        "modelAsString": true
+      }
+    },
+    "RejectCallRequest": {
+      "description": "The request payload for rejecting the call.",
+      "required": [
+        "incomingCallContext",
+        "callbackUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "incomingCallContext": {
+          "description": "The context associated with the call.",
+          "type": "string"
+        },
+        "callRejectReason": {
+          "$ref": "#/definitions/CallRejectReason"
+        },
+        "callbackUrl": {
+          "description": "The callback url.",
+          "type": "string"
+        }
+      }
+    },
+    "RedirectCallRequest": {
+      "description": "The request payload for redirecting the call.",
+      "required": [
+        "incomingCallContext",
+        "targets",
+        "callbackUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "incomingCallContext": {
+          "description": "The context associated with the call.",
+          "type": "string"
+        },
+        "targets": {
+          "description": "The target identity to redirect the call to.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifier"
+          }
+        },
+        "callbackUrl": {
+          "description": "The callback url.",
+          "type": "string"
+        },
+        "timeout": {
+          "format": "int32",
+          "description": "The timeout for the redirect in seconds.",
+          "type": "integer"
+        }
+      }
+    },
     "CallConnectionStateChangedEvent": {
       "description": "The call connection state changed event.",
       "required": [
@@ -3184,9 +3673,9 @@
       ],
       "type": "object",
       "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": ""
+        "serverCallId": {
+          "description": "The server call.id.",
+          "type": "string"
         },
         "callConnectionId": {
           "description": "The call connection id.",
@@ -3217,9 +3706,9 @@
           "description": "The time of the recording started",
           "type": "string"
         },
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": ""
+        "serverCallId": {
+          "description": "The server call.id.",
+          "type": "string"
         }
       }
     },

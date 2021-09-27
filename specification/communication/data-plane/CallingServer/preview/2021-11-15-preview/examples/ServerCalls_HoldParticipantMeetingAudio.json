@@ -2,32 +2,20 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-11-15-preview",
-    "startHoldMusicRequest": {
+    "holdMeetingAudioWithCallLocatorRequest": {
       "callLocator": {
         "groupCallId": "0c1610d4-454d-4ac5-a455-05ba5dc6c5fd",
         "kind": "groupCallLocator"
       },
-      "startHoldMusicRequest": {
-        "identifier": {
-          "communicationUser": {
-            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_98d2dbfa-8c19-44c5-bd6f-08c3c430e52f"
-          }
-        },
-        "audioFileUri": "https://app.contoso.com/audio/hold-message.wav",
-        "audioFileId": "863dbfbc-1ee4-40cb-bd50-f8a100c97e9b",
-        "callbackUri": "https://app.contoso.com/callback",
-        "operationContext": "7e143003-a947-4c85-be2c-c7e863e7b178"
+      "identifier": {
+        "communicationUser": {
+          "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_2666155f-6c41-4369-8420-7afbcb84a017"
+        }
       }
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "operationId": "b67b7525-1bbd-41c3-bacb-b4f7bcc0306d",
-        "status": "running",
-        "operationContext": "18dea47f-b081-4107-9a5c-4300819d2c6c"
-      }
-    },
+    "200": {},
     "400": {
       "body": {
         "error": {
