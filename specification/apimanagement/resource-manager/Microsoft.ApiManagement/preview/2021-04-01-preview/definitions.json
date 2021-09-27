@@ -3971,6 +3971,31 @@
       ],
       "description": "Policy fragment contract Properties."
     },
+    "PolicyFragmentReferenceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+              }
+            ]
+          },
+          "description": "Resource references."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy fragment references operation."
+    },
     "PortalDelegationSettingsProperties": {
       "properties": {
         "url": {
