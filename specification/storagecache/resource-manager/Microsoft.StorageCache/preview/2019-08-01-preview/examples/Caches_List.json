@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2019-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "tags": {
+              "Dept": "Initech"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
+            "location": "westus",
+            "name": "sc1",
+            "type": "Microsoft.StorageCache/Cache",
+            "properties": {
+              "cacheSizeGB": 3072,
+              "health": {
+                "state": "Transitioning",
+                "statusDescription": "Cache is being created."
+              },
+              "mountAddresses": [
+                "192.168.1.1",
+                "192.168.1.2"
+              ],
+              "provisioningState": "Booting",
+              "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+              "upgradeStatus": {
+                "currentFirmwareVersion": "AvereOS V5.1.1.2",
+                "firmwareUpdateStatus": "available",
+                "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+                "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+                "pendingFirmwareVersion": "AvereOS V5.1.1.32"
+              }
+            },
+            "sku": {
+              "name": "Standard_2G"
+            }
+          },
+          {
+            "tags": {
+              "Dept": "Intertrode"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc2",
+            "location": "westus",
+            "name": "sc2",
+            "type": "Microsoft.StorageCache/Cache",
+            "properties": {
+              "cacheSizeGB": 3072,
+              "health": {
+                "state": "Transitioning",
+                "statusDescription": "Cache is being created."
+              },
+              "mountAddresses": [
+                "192.168.1.1",
+                "192.168.1.2"
+              ],
+              "provisioningState": "Configuring",
+              "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub2",
+              "upgradeStatus": {
+                "currentFirmwareVersion": "AvereOS V5.1.1.2",
+                "firmwareUpdateStatus": "available",
+                "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+                "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+                "pendingFirmwareVersion": "AvereOS V5.1.1.32"
+              }
+            },
+            "sku": {
+              "name": "Standard_2G"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

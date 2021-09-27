@@ -1,0 +1,977 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-01-01-preview",
+    "title": "AuthorizationManagementClient",
+    "description": "Request Approvals service provides the workflow for running request approvals on different kind of resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Authorization/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "x-ms-examples": {},
+        "description": "Lists the operations available from this provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/roleAssignmentApprovals": {
+      "get": {
+        "tags": [
+          "ListRoleAssignmentApprovals"
+        ],
+        "operationId": "RoleAssignmentApproval_List",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetRoleAssignmentApprovals.json"
+          }
+        },
+        "description": "Get role assignment approvals.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentApprovalsFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}": {
+      "get": {
+        "tags": [
+          "GetRoleAssignmentApprovalById"
+        ],
+        "operationId": "RoleAssignmentApproval_GetById",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetRoleAssignmentApprovalById.json"
+          }
+        },
+        "description": "Get role assignment approval.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApproval"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages": {
+      "get": {
+        "tags": [
+          "GetRoleAssignmentApprovalSteps"
+        ],
+        "operationId": "RoleAssignmentApprovalSteps_List",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetRoleAssignmentApprovalSteps.json"
+          }
+        },
+        "description": "Get role assignment approval.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStepListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages/{stageId}": {
+      "get": {
+        "tags": [
+          "GetRoleAssignmentApprovalStepById"
+        ],
+        "operationId": "RoleAssignmentApprovalStep_GetById",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/GetRoleAssignmentApprovalStepById.json"
+          }
+        },
+        "description": "Get role assignment approval.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "name": "stageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval stage."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStep"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PatchRoleAssignmentApprovalStep"
+        ],
+        "operationId": "RoleAssignmentApprovalStep_Patch",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/PatchRoleAssignmentApprovalStepById.json"
+          }
+        },
+        "description": "Record a decision.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "name": "stageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval stage."
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
+            },
+            "description": "Role Assignment Approval stage properties to patch."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStep"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PutRoleAssignmentApprovalStep"
+        ],
+        "operationId": "RoleAssignmentApprovalStep_Put",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/PutRoleAssignmentApprovalStepById.json"
+          }
+        },
+        "description": "Record a decision.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "name": "stageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval stage."
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
+            },
+            "description": "Role Assignment Approval stage properties to put."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStep"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals": {
+      "get": {
+        "tags": [
+          "ScopeListRoleAssignmentApprovals"
+        ],
+        "operationId": "ScopeRoleAssignmentApproval_List",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/ScopeGetRoleAssignmentApprovals.json"
+          }
+        },
+        "description": "Get role assignment approvals.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentApprovalsFilterParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}": {
+      "get": {
+        "tags": [
+          "ScopeGetRoleAssignmentApprovalById"
+        ],
+        "operationId": "ScopeRoleAssignmentApproval_GetById",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/ScopeGetRoleAssignmentApprovalById.json"
+          }
+        },
+        "description": "Get role assignment approval.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApproval"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages": {
+      "get": {
+        "tags": [
+          "ScopeGetRoleAssignmentApprovalSteps"
+        ],
+        "operationId": "ScopeRoleAssignmentApprovalSteps_List",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/ScopeGetRoleAssignmentApprovalSteps.json"
+          }
+        },
+        "description": "Get role assignment approval.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStepListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages/{stageId}": {
+      "get": {
+        "tags": [
+          "ScopeGetRoleAssignmentApprovalStepById"
+        ],
+        "operationId": "ScopeRoleAssignmentApprovalStep_GetById",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/ScopeGetRoleAssignmentApprovalStepById.json"
+          }
+        },
+        "description": "Get role assignment approval.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "name": "stageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval stage."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStep"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScopePatchRoleAssignmentApprovalStep"
+        ],
+        "operationId": "ScopeRoleAssignmentApprovalStep_Patch",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/ScopePatchRoleAssignmentApprovalStepById.json"
+          }
+        },
+        "description": "Record a decision.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "name": "stageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval stage."
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
+            },
+            "description": "Role Assignment Approval stage properties to patch."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStep"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScopePutRoleAssignmentApprovalStep"
+        ],
+        "operationId": "ScopeRoleAssignmentApprovalStep_Put",
+        "x-ms-examples": {
+          "GetAccessReviews": {
+            "$ref": "./examples/ScopePutRoleAssignmentApprovalStepById.json"
+          }
+        },
+        "description": "Record a decision.",
+        "parameters": [
+          {
+            "name": "approvalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval."
+          },
+          {
+            "name": "stageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the role assignment approval stage."
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
+            },
+            "description": "Role Assignment Approval stage properties to put."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the resource.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentApprovalStep"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleAssignmentApprovalActorIdentity": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity id"
+        },
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity type : user/servicePrincipal",
+          "enum": [
+            "user",
+            "servicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "RoleAssignmentApprovalActorIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity display name"
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The user principal name(if valid)"
+        }
+      },
+      "description": "Details of the actor identity"
+    },
+    "RoleAssignmentApproval": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment approval id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment approval unique id."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleAssignmentApprovalProperties",
+          "description": "Role Assignment Approval properties."
+        }
+      },
+      "description": "Role Assignment Approval."
+    },
+    "RoleAssignmentApprovalProperties": {
+      "properties": {
+        "stages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentApprovalStep"
+          },
+          "description": "This is the collection of stages returned when one does an expand on it."
+        }
+      },
+      "description": "Role Assignment Approval properties."
+    },
+    "RoleAssignmentApprovalListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentApproval"
+          },
+          "description": "Role Assignment Approval list."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of role assignment approvals."
+    },
+    "RoleAssignmentApprovalStep": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment approval stage id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment approval stage name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleAssignmentApprovalStepProperties",
+          "description": "Role Assignment Approval Step properties."
+        }
+      },
+      "description": "Role assignment approval stage properties."
+    },
+    "RoleAssignmentApprovalStepProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the approval stage."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This read-only field specifies the status of an approval.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Expired",
+            "Initializing",
+            "Escalating",
+            "Completing",
+            "Escalated"
+          ],
+          "x-ms-enum": {
+            "name": "RoleAssignmentApprovalStepStatus",
+            "modelAsString": true
+          }
+        },
+        "assignedToMe": {
+          "readOnly": true,
+          "description": "Indicates whether the stage is assigned to me for review",
+          "type": "boolean"
+        },
+        "reviewedBy": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleAssignmentApprovalActorIdentity",
+          "description": "Details of the approver.",
+          "x-nullable": true
+        },
+        "reviewedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Date Time when a decision was taken.",
+          "x-nullable": true
+        },
+        "reviewResult": {
+          "type": "string",
+          "description": "The decision on the approval stage. This value is initially set to NotReviewed. Approvers can take action of Approve/Deny",
+          "enum": [
+            "Approve",
+            "Deny",
+            "NotReviewed"
+          ],
+          "x-ms-enum": {
+            "name": "RoleAssignmentApprovalStepReviewResult",
+            "modelAsString": true
+          }
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification provided by approvers for their action"
+        }
+      },
+      "description": "Approval Step."
+    },
+    "RoleAssignmentApprovalStepListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentApprovalStep"
+          },
+          "description": "Role Assignment Approval Step list."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of role assignment approval stage list."
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "title": "Error",
+      "description": "Error description and code explaining why an operation failed.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinitionProperties",
+          "description": "Error of the list gateway status."
+        }
+      }
+    },
+    "ErrorDefinitionProperties": {
+      "type": "object",
+      "title": "Error",
+      "description": "Error description and code explaining why an operation failed.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Description of the error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Error code of list gateway."
+        }
+      }
+    },
+    "Operation": {
+      "description": "The definition of a Microsoft.Authorization operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation. Values include user|system|user,system",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The display information for a Microsoft.Authorization operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The resource provider name: Microsoft.Authorization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The operation that users can perform.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description for the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The result of a request to list Microsoft.Authorization operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "RoleAssignmentApprovalsFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Valid values for $filter are: 'asApprover()', 'asCreatedBy()' and 'asTarget()'. If $filter is not provided, no filtering is performed. If $filter=asApprover() is provided, the returned list only includes all role assignment approvals that the calling user is assigned as an approver for. If $filter=asCreatedBy() is provided, the returned list only includes all role assignment approvals that the calling user created requests for. If $filter=asTarget() is provided, the returned list only includes all role assignment approvals that the calling user has requests targeted for.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

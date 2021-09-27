@@ -5,7 +5,7 @@
     "title": "CommerceManagementClient",
     "description": "The Admin Commerce Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -38,6 +38,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
             }
           }
         },
@@ -82,6 +88,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -105,7 +117,7 @@
         "tags": [
           "Commerce"
         ],
-        "operationId": "UpdateEncryption",
+        "operationId": "Commerce_UpdateEncryption",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -115,6 +127,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          },
           "200": {
             "description": "OK"
           }
@@ -198,7 +216,8 @@
         },
         "quantity": {
           "description": "The amount of the resource consumption that occurred in this time frame.",
-          "type": "string"
+          "type": "number",
+          "format": "double"
         },
         "meterId": {
           "description": "Unique ID for the resource that was consumed, for example, the Resource ID.",
@@ -224,14 +243,27 @@
     },
     "Operation": {
       "description": "Describes the supported REST operation.",
+      "type": "object",
       "properties": {
-        "name": {
-          "description": "The name of the operation performed on the object. The name should match the action name that appears in RBAC or the event service.",
-          "type": "string"
-        },
         "display": {
           "description": "Contains the localized display information for this particular operation or action.",
-          "$ref": "#/definitions/Display"
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the operation performed on the object. The name should match the action name that appears in RBAC or the event service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "Origin for the operation.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -239,20 +271,24 @@
       "description": "Contains the localized display information for this particular operation / action.",
       "properties": {
         "provider": {
-          "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
-          "type": "string"
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string",
+          "readOnly": true
         },
         "resource": {
           "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "operation": {
-          "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
-          "type": "string"
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string",
+          "readOnly": true
         },
         "description": {
           "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -269,6 +305,40 @@
         "nextLink": {
           "description": "URI to the next page of operations.",
           "type": "string"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
         }
       }
     }

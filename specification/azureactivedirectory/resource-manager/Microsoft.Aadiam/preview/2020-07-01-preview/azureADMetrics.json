@@ -1,0 +1,432 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-07-01-preview",
+    "title": "azureactivedirectory",
+    "description": "Metrics and Alerts for Azure Active Directory."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/azureADMetrics/{azureADMetricsName}": {
+      "put": {
+        "tags": [
+          "azureADMetrics"
+        ],
+        "operationId": "azureADMetrics_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Creates a azureADMetrics instance.",
+        "x-ms-examples": {
+          "azureADMetricsCreate": {
+            "$ref": "./examples/AzureADMetricsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureADMetricsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "azureADMetricsConfig",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsConfig"
+            },
+            "description": "AzureADMetrics definition supplied to the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- AzureADMetrics instance is updated.",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsConfig"
+            }
+          },
+          "201": {
+            "description": "Created -- AzureADMetrics instance created.",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "azureADMetrics"
+        ],
+        "operationId": "azureADMetrics_Update",
+        "description": "Updates azureADMetrics tags with specified values.",
+        "x-ms-examples": {
+          "azureADMetricsUpdate": {
+            "$ref": "./examples/AzureADMetricsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureADMetricsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "azureADMetricsConfig",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsUpdateParameter"
+            },
+            "description": "AzureADMetrics resource with the tags to be updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- AzureADMetrics tags are updated.",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "azureADMetrics"
+        ],
+        "operationId": "azureADMetrics_Get",
+        "description": "Gets a azureADMetrics instance with a given name.",
+        "x-ms-examples": {
+          "azureADMetricsGet": {
+            "$ref": "./examples/AzureADMetricsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureADMetricsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returns information about the azureADMetrics resource.",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "azureADMetrics"
+        ],
+        "operationId": "azureADMetrics_Delete",
+        "description": "Deletes a AzureADMetrics resource. When operation completes, status code 200 returned without content.",
+        "x-ms-examples": {
+          "azureADMetricsDelete": {
+            "$ref": "./examples/AzureADMetricsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureADMetricsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- azureADMetrics resource deleted."
+          },
+          "204": {
+            "description": "azureADMetrics does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/azureADMetrics": {
+      "get": {
+        "tags": [
+          "azureADMetrics"
+        ],
+        "operationId": "azureADMetrics_ListBySubscription",
+        "description": "Lists all AzureADMetrics resources in the given subscription.",
+        "x-ms-examples": {
+          "azureADMetricsListBySubscription": {
+            "$ref": "./examples/AzureADMetricsListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returns a list azureADMetrics resources.",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/azureADMetrics": {
+      "get": {
+        "tags": [
+          "azureADMetrics"
+        ],
+        "operationId": "azureADMetrics_List",
+        "x-ms-examples": {
+          "azureADMetricsGetList": {
+            "$ref": "./examples/AzureADMetricsList.json"
+          }
+        },
+        "description": "Operation to return the list of AzureADMetrics resources scoped to the resourceGroup.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get list of AzureADMetrics resources For AzureAD.",
+            "schema": {
+              "$ref": "#/definitions/azureADMetricsListResult"
+            }
+          },
+          "default": {
+            "description": "Error, failed to get list of AzureADMetrics resources.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "azureADMetricsListResult": {
+      "description": "A list of AzureADMetrics resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of AzureADMetrics resources.",
+          "items": {
+            "$ref": "#/definitions/azureADMetricsConfig"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "azureADMetricsConfig": {
+      "description": "AzureADMetrics resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureADMetricsPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AzureADMetricsPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Created",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "azureADMetricsUpdateParameter": {
+      "type": "object",
+      "description": "AzureADMetrics parameters to be updated. ",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags to be updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Version of the API to be used with the client request."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "azureADMetricsNameParameter": {
+      "name": "azureADMetricsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the azureADMetrics instance."
+    }
+  }
+}

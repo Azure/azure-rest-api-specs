@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "dryRun": {
+      // If dryRun is true, generateScript is expected to parse readme.md
+      // and output the package list with package name and related readme.md.
+      // Should not run codegen at this time.
+      // ** Not supported yet **
+      "type": "boolean"
+    },
+    "specFolder": {
+      // Path to local spec folder.
+      "type": "string"
+    },
+    "headSha": {
+      // Git head sha.
+      "type": "string"
+    },
+    "headRef": {
+      // Git head ref.
+      // Format will be "refs/pull/<number>/merge" or "refs/heads/<branch>".
+      "type": "string"
+    },
+    "repoHttpsUrl": {
+      // Spec repo url in https without auth.
+      "type": "string"
+    },
+    "trigger": {
+      "$ref": "TriggerType#"
+    },
+    "changedFiles": {
+      // Changed file list in spec PR.
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relatedReadmeMdFiles": {
+      // Related readme.md files that pending generation.
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "installInstructionInput": {
+      // See #InstallInstructionScriptInput
+      "$ref": "InstallInstructionScriptInput#"
+    }
+  },
+  "required": [
+    "specFolder",
+    "headSha",
+    "headRef",
+    "repoHttpsUrl",
+    "trigger",
+    "changedFiles",
+    "relatedReadmeMdFiles"
+  ]
+}

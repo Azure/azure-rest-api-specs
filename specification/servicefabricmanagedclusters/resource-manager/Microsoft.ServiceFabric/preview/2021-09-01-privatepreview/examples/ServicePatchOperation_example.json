@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "serviceName": "myService",
+    "api-version": "2021-09-01-privatepreview",
+    "parameters": {
+      "tags": {
+        "a": "b"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
+        "name": "myService",
+        "tags": {
+          "a": "b"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "serviceKind": "Stateless",
+          "placementConstraints": "NodeType==frontend",
+          "serviceTypeName": "myServiceType",
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "weight": "Low",
+              "defaultLoad": 3
+            }
+          ],
+          "correlationScheme": [
+            {
+              "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1",
+              "scheme": "AlignedAffinity"
+            }
+          ],
+          "servicePlacementPolicies": [
+            {
+              "type": "NonPartiallyPlaceService"
+            }
+          ],
+          "scalingPolicies": [
+            {
+              "scalingMechanism": {
+                "kind": "ScalePartitionInstanceCount",
+                "maxInstanceCount": 9,
+                "minInstanceCount": 3,
+                "scaleIncrement": 2
+              },
+              "scalingTrigger": {
+                "kind": "AveragePartitionLoadTrigger",
+                "lowerLoadThreshold": 2.0,
+                "metricName": "metricName",
+                "scaleInterval": "00:01:00",
+                "upperLoadThreshold": 8.0
+              }
+            }
+          ],
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "minInstanceCount": 3,
+          "minInstancePercentage": 30,
+          "servicePackageActivationMode": "SharedProcess"
+        }
+      }
+    }
+  }
+}

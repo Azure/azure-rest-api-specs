@@ -5,12 +5,10 @@
     "resourceGroupName": "my-resource-group",
     "resourceName": "my-component",
     "InsightProperties": {
-      "name": "my-component",
       "location": "South Central US",
       "kind": "web",
       "properties": {
         "Application_Type": "web",
-        "ApplicationId": "my-component",
         "Flow_Type": "Bluefield",
         "Request_Source": "rest"
       }
@@ -37,7 +35,12 @@
           "HockeyAppId": "",
           "HockeyAppToken": "",
           "provisioningState": "Succeeded",
-          "SamplingPercentage": 100.0
+          "SamplingPercentage": 100.0,
+          "RetentionInDays": 90,
+          "ConnectionString": "InstrumentationKey=bc095013-3cf2-45ac-ab47-123456789abc",
+          "DisableIpMasking": false,
+          "ImmediatePurgeDataOn30Days": false,
+          "IngestionMode": "ApplicationInsights"
         }
       }
     }
