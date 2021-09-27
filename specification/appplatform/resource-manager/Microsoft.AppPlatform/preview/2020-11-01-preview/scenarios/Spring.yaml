@@ -13,8 +13,6 @@ variables:
     type: string
   dnsResourceGroup:
     type: string
-  fullCname: 
-    type: string
   blobUrl:
     type: secureString
   userAssignedIdentity:
@@ -238,7 +236,7 @@ scenarios:
       - step: CustomDomains_CreateOrUpdate
         exampleFile: ../examples/CustomDomains_CreateOrUpdate.json
         variables:
-          domainName: $(customDomainName)
+          domainName: $(dnsCname).$(customDomainName)
         resourceUpdate:
           - replace: /properties
             value: { "certName": "asc-certificate" }
@@ -246,7 +244,7 @@ scenarios:
       - step: CustomDomains_Update
         exampleFile: ../examples/CustomDomains_Update.json
         variables:
-          domainName: $(customDomainName)
+          domainName: $(dnsCname).$(customDomainName)
         resourceUpdate:
           - replace: /properties
             value: { "certName": "asc-certificate" } # TODO: use another cert
@@ -254,7 +252,7 @@ scenarios:
       - step: CustomDomains_Get
         exampleFile: ../examples/CustomDomains_Get.json
         variables:
-          domainName: $(customDomainName)
+          domainName: $(dnsCname).$(customDomainName)
 
       - step: CustomDomains_List
         exampleFile: ../examples/CustomDomains_List.json
@@ -334,7 +332,7 @@ scenarios:
       - step: CustomDomains_Delete
         exampleFile: ../examples/CustomDomains_Delete.json
         variables:
-          domainName: $(customDomainName)
+          domainName: $(dnsCname).$(customDomainName)
 
       - step: Apps_Delete
         variables:
