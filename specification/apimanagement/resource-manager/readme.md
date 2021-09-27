@@ -572,13 +572,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-<<<<<<< HEAD
-=======
 ## AZ
 
 See configuration in [readme.az.md](./readme.az.md)
 
->>>>>>> c9992af7235a6550087d4fed8f081ed35019f605
 ## Suppression
 
 ``` yaml
@@ -642,7 +639,7 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimissues.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+    reason: Warning raised to error whilegit s PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimloggers.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
@@ -672,11 +669,5 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4037
     from: definitions.json
-    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
-  - suppress: R4009
-    from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
-  - suppress: R4009
-    from: apimprivatelink.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise
 ```
