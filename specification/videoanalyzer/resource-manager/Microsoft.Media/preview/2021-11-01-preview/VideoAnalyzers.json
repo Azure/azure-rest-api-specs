@@ -1069,6 +1069,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a Video Analyzer account": {
             "$ref": "examples/video-analyzer-accounts-create-or-update.json"
@@ -1177,6 +1178,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a Video Analyzer accounts": {
             "$ref": "examples/video-analyzer-accounts-update.json"
@@ -1187,7 +1189,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateLinkResources": {
       "get": {
         "summary": "Get list of group IDs.",
-        "description": "Get list of group IDs.",
+        "description": "Get list of group IDs for video analyzer account.",
         "operationId": "PrivateLinkResources_List",
         "responses": {
           "200": {
@@ -1223,7 +1225,7 @@
         ],
         "x-ms-examples": {
           "Get list of all group IDs.": {
-            "$ref": "examples/private-link-resources-list.json"
+            "$ref": "examples/video-analyzer-private-link-resources-list.json"
           }
         }
       }
@@ -1231,7 +1233,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateLinkResources/{name}": {
       "get": {
         "summary": "Get group ID.",
-        "description": "Get group ID.",
+        "description": "Get group ID for video analyzer account.",
         "operationId": "PrivateLinkResources_Get",
         "responses": {
           "200": {
@@ -1282,7 +1284,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections": {
       "get": {
         "summary": "Get all private endpoint connections.",
-        "description": "Get all private endpoint connections.",
+        "description": "Get all private endpoint connections under video analyzer account.",
         "operationId": "PrivateEndpointConnections_List",
         "responses": {
           "200": {
@@ -1326,7 +1328,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections/{name}": {
       "get": {
         "summary": "Get private endpoint connection.",
-        "description": "Get private endpoint connection.",
+        "description": "Get private endpoint connection under video analyzer account.",
         "operationId": "PrivateEndpointConnections_Get",
         "responses": {
           "200": {
@@ -1375,7 +1377,7 @@
       },
       "put": {
         "summary": "Update private endpoint connection.",
-        "description": "Update private endpoint connection.",
+        "description": "Update private endpoint connection state under video analyzer account.",
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "responses": {
           "200": {
@@ -1448,7 +1450,7 @@
       },
       "delete": {
         "summary": "Delete private endpoint connection.",
-        "description": "Delete private endpoint connection.",
+        "description": "Delete private endpoint connection under video analyzer account.",
         "operationId": "PrivateEndpointConnections_Delete",
         "responses": {
           "200": {
@@ -1499,7 +1501,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections/{name}/operationStatuses/{operationId}": {
       "get": {
         "summary": "Get operation status.",
-        "description": "Get operation status.",
+        "description": "Get private endpoint connection operation status.",
         "operationId": "OperationStatuses_Get",
         "responses": {
           "200": {
@@ -1556,8 +1558,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections/{name}/operationResults/{operationId}": {
       "get": {
-        "summary": "Get operation status.",
-        "description": "Get operation status.",
+        "summary": "Get operation result.",
+        "description": "Get private endpoint connection operation result.",
         "operationId": "OperationResults_Get",
         "responses": {
           "200": {
@@ -1618,7 +1620,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/VideoAnalyzerOperationStatuses/{name}": {
       "get": {
         "summary": "Get operation status.",
-        "description": "Get operation status.",
+        "description": "Get video analyzer operation status.",
         "operationId": "VideoAnalyzerOperationStatuses_Get",
         "responses": {
           "200": {
@@ -1670,8 +1672,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/VideoAnalyzerOperationResults/{name}": {
       "get": {
-        "summary": "Get operation status.",
-        "description": "Get operation status.",
+        "summary": "Get operation result.",
+        "description": "Get video analyzer operation result.",
         "operationId": "VideoAnalyzerOperationResults_Get",
         "responses": {
           "200": {
