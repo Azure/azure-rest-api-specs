@@ -66,6 +66,7 @@ These settings apply only when `--tag=package-artifacts-composite-v1` is specifi
 
 ``` yaml $(tag) == 'package-artifacts-composite-v1'
 input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
   - Microsoft.Synapse/stable/2020-12-01/artifacts.json
