@@ -5,7 +5,7 @@ variables:
   appName: app01
   ascDomainName: .azuremicroservices.io
   dnsCname: asc
-  customDomainName: 
+  customDomainName:
     type: string
   mysqlKey:
     type: secureString
@@ -357,12 +357,11 @@ scenarios:
         exampleFile: ../examples/Operations_List.json
 
 cleanUpSteps:
-      - step: delete_cname_record
-        armTemplateDeployment: ./templates/delete_dns_record.json
-        variables:
-          dnsCname: $(dnsCname)
-          dnsZoneName: $(customDomainName)
-          subscriptionId: $(dnsSubscriptionId)
-          resourceGroupName: $(dnsResourceGroup)
-          scriptsContent: !include ./templates/delete_cname_record.ps1
-
+  - step: delete_cname_record
+    armTemplateDeployment: ./templates/delete_dns_record.json
+    variables:
+      dnsCname: $(dnsCname)
+      dnsZoneName: $(customDomainName)
+      subscriptionId: $(dnsSubscriptionId)
+      resourceGroupName: $(dnsResourceGroup)
+      scriptsContent: !include ./templates/delete_cname_record.ps1
