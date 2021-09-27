@@ -16,21 +16,6 @@
 - scheduleTask:
     action: sendEmail
     scope: pull_request
-    name: "send email to swagger reviewer"
-    trigger:
-      - time
-    args:
-      booleanFilterExpression: "!(NotReadyForReview||Reviewed-ChangesRequired||WaitForARMFeedback||WaitForARMRevisit||Approved-OkToMerge||(DoNotMerge&&(ARMSignedOff||Approved)))"
-      limit: 48h
-      message: '<p>Dear Swagger reviewer,</p><p>The PR ${URL} requires your attention. You receive the email either because PR author put on the label "WaitForReviewVisit", or because the PR has not been updated for over 48 hours.</p><p>The PR labeled with ${LABELS}</p><p>Quick info.</p><ul><li>If it requires responses from ARM review board, please send email to <a href="mailto:armapireview@microsoft.com">armapireview@microsoft.com</a>.</li><li>If it requires immediate ARM review, please get ARM review oncall contact point from ICM <a href="https://icm.ad.msft.net/imp/v3/oncall/current">https://icm.ad.msft.net/imp/v3/oncall/current</a> under Service "Azure Resource Manager" and Team "RP Manifest Approvers".</li><li>If it is data plane API and requires responses from &nbsp;Azure API review board, please send email to <a href="mailto:azureapirbcore@microsoft.com">azureapirbcore@microsoft.com</a>.</li><li>Pls refer to <a href="https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/212/Swagger-PR-Review">https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/212/Swagger-PR-Review</a>&nbsp;for more about Swagger review process.</li></ul><p><em>DO NOT REPLY: This is an automated email. If you have any questions, please send an email to the Swagger and Tools Team (vscswagger@microsoft.com).</em></p><p>Best regards,</p><p>Swagger and Tools Team, Azure Management Experience</p>'
-      subject: "Action Required: Please respond to the PR ${URL}"
-      to: ${ASSIGNEE}
-      cc:
-        - ${AUTHOR}
-
-- scheduleTask:
-    action: sendEmail
-    scope: pull_request
     name: "send email to ARM review board"
     trigger:
       - label
