@@ -47,6 +47,15 @@ input-file:
 - Microsoft.ChangeAnalysis/stable/2021-04-01/changeanalysis.json
 ```
 
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.ChangeAnalysis/stable/2021-04-01-preview/changeanalysis.json
+```
+
 ---
 
 # Code Generation
