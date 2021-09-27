@@ -153,6 +153,12 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R4009
+    from: costmanagement.exports.json
+    reason: API change needed, we do not yet support systemdata
+  - suppress: R4009
+    from: costmanagement.json
+    reason: API change needed, we do not yet support systemdata
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
