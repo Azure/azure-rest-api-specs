@@ -2274,6 +2274,44 @@
         }
       }
     },
+    "AmazonRdsForSqlServerSource": {
+      "description": "A copy activity Amazon RDS for SQL Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
     "AzureSqlSource": {
       "description": "A copy activity Azure SQL source.",
       "type": "object",
@@ -7168,6 +7206,14 @@
         "sparkJob": {
           "description": "Synapse spark job reference.",
           "$ref": "../artifacts.json#/definitions/SynapseSparkJobReference"
+        },
+        "args": {
+          "x-ms-client-name": "arguments",
+          "description": "User specified arguments to SynapseSparkJobDefinitionActivity.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [
