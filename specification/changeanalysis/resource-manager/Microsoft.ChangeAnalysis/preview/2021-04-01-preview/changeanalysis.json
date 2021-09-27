@@ -251,48 +251,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeAnalysis/computeChanges": {
-      "post": {
-        "tags": [
-          "ComputeChanges"
-        ],
-        "summary": "Compute the changes given by ARG resource changes response. This is intended to be used when the user hasn't registered with our resource provider but uses our services to enrich the ARG data.",
-        "operationId": "ComputeChanges_ListChanges",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceIdQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ComputeChangesParameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ChangeList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ComputeChanges": {
-            "$ref": "./examples/ComputeChanges_ListChanges.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -580,19 +538,6 @@
           }
         }
       }
-    },
-    "ComputeChangesParameters": {
-      "description": "The parameters for the compute changes request.",
-      "type": "object",
-      "properties": {
-        "resourceGraphChangeDataList": {
-          "description": "A list of change details from ARG associated with a resource over a specific time interval.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceGraphChangeData"
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -651,16 +596,6 @@
       "description": "Specifies the change Id.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ComputeChangesParameters": {
-      "in": "body",
-      "name": "computeChangesParameters",
-      "description": "Parameters for compute changes request",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ComputeChangesParameters"
-      },
       "x-ms-parameter-location": "method"
     },
     "ScanLatestParameter": {
