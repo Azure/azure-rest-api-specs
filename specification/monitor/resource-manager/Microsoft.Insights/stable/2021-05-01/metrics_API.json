@@ -1,0 +1,733 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Metrics Data API",
+    "description": "Provides APIs for getting the metric data for Azure resources.",
+    "version": "2021-05-01",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/metrics": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_ListAtSubscriptionScope",
+        "description": "**Lists the metric data for a subscription**.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./commonMonitoringTypes.json#/parameters/RegionParameter"
+          },
+          {
+            "$ref": "#/parameters/TimespanParameter"
+          },
+          {
+            "$ref": "#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "#/parameters/AggregationsParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionScopeResultTypeParameter"
+          },
+          {
+            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoAdjustTimegrain"
+          },
+          {
+            "$ref": "#/parameters/ValidateDimensions"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionScopeMetricResponse"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/MetadataValue",
+        "x-ms-examples": {
+          "Get subscription level metric data": {
+            "$ref": "./examples/GetMultiResourceMetric.json"
+          },
+          "Get subscription level metric metadata": {
+            "$ref": "./examples/GetMultiResourceMetricMetadata.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_ListAtSubscriptionScopePost",
+        "description": "**Lists the metric data for a subscription**. Parameters can be specified on either query params or the body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./commonMonitoringTypes.json#/parameters/RegionParameter"
+          },
+          {
+            "$ref": "#/parameters/TimespanParameter"
+          },
+          {
+            "$ref": "#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "#/parameters/AggregationsParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionScopeResultTypeParameter"
+          },
+          {
+            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoAdjustTimegrain"
+          },
+          {
+            "$ref": "#/parameters/ValidateDimensions"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parameters serialized in the body",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionScopeMetricsRequestBodyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionScopeMetricResponse"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/MetadataValue",
+        "x-ms-examples": {
+          "Post request for subscription level metric data": {
+            "$ref": "./examples/GetMultiResourceMetric.json"
+          },
+          "Post request for subscription level metric data using body params": {
+            "$ref": "./examples/PostMultiResourceMetricBody.json"
+          },
+          "Post request for subscription level metric metadata": {
+            "$ref": "./examples/GetMultiResourceMetricMetadata.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_List",
+        "description": "**Lists the metric values for a resource**.",
+        "parameters": [
+          {
+            "$ref": "./commonMonitoringTypes.json#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/TimespanParameter"
+          },
+          {
+            "$ref": "#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "#/parameters/AggregationsParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ResultTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoAdjustTimegrain"
+          },
+          {
+            "$ref": "#/parameters/ValidateDimensions"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/MetadataValue",
+        "x-ms-examples": {
+          "Get Metric for data": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric for metadata": {
+            "$ref": "./examples/GetMetricMetadata.json"
+          },
+          "Get Metric with error": {
+            "$ref": "./examples/GetMetricError.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubscriptionScopeMetricsRequestBodyParameters": {
+      "description": "Query parameters can also be specified in the body, specifying the same parameter in both the body and query parameters will result in an error.",
+      "type": "object",
+      "properties": {
+        "timespan": {
+          "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
+          "type": "string",
+          "format": "time"
+        },
+        "interval": {
+          "description": "The interval (i.e. timegrain) of the query.",
+          "type": "string",
+          "format": "duration"
+        },
+        "metricNames": {
+          "description": "The names of the metrics (comma separated) to retrieve.",
+          "type": "string"
+        },
+        "aggregation": {
+          "description": "The list of aggregation types (comma separated) to retrieve.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
+          "type": "string"
+        },
+        "top": {
+          "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "orderBy": {
+          "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
+          "type": "string"
+        },
+        "rollUpBy": {
+          "description": "Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one timeseries.",
+          "type": "string"
+        },
+        "resultType": {
+          "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
+          "type": "string",
+          "enum": [
+            "Data",
+            "Metadata"
+          ],
+          "x-ms-enum": {
+            "name": "MetricResultType",
+            "modelAsString": true
+          }
+        },
+        "metricNamespace": {
+          "description": "Metric namespace where the metrics you want reside.",
+          "type": "string"
+        },
+        "autoAdjustTimegrain": {
+          "description": "When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.",
+          "type": "boolean"
+        },
+        "validateDimensions": {
+          "description": "When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Unit": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "Unit",
+        "modelAsString": false
+      }
+    },
+    "MetricValue": {
+      "type": "object",
+      "description": "Represents a metric value.",
+      "required": [
+        "timeStamp"
+      ],
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the timestamp for the metric value in ISO 8601 format."
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "description": "the average value in the time range."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "the least value in the time range."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "the greatest value in the time range."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "the sum of all of the values in the time range."
+        },
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+        }
+      }
+    },
+    "MetadataValue": {
+      "type": "object",
+      "description": "Represents a metric metadata value.",
+      "properties": {
+        "name": {
+          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
+          "description": "the name of the metadata."
+        },
+        "value": {
+          "type": "string",
+          "description": "the value of the metadata."
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "description": "The response to a metrics query.",
+      "properties": {
+        "cost": {
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The integer value representing the relative cost of the query."
+        },
+        "timespan": {
+          "type": "string",
+          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the metrics being queried"
+        },
+        "resourceregion": {
+          "type": "string",
+          "description": "The region of the resource being queried for metrics."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "description": "the value of the collection."
+        }
+      },
+      "required": [
+        "timespan",
+        "value"
+      ]
+    },
+    "Metric": {
+      "type": "object",
+      "description": "The result data of a query.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "the metric Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "the resource type of the metric resource."
+        },
+        "name": {
+          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
+          "description": "the name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
+        "unit": {
+          "$ref": "#/definitions/Unit",
+          "description": "The unit of the metric."
+        },
+        "timeseries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesElement"
+          },
+          "description": "the time series returned when a data query is performed."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ]
+    },
+    "SubscriptionScopeMetricResponse": {
+      "type": "object",
+      "description": "The response to a subscription scope metrics query.",
+      "properties": {
+        "cost": {
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The integer value representing the relative cost of the query."
+        },
+        "timespan": {
+          "type": "string",
+          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the metrics being queried"
+        },
+        "resourceregion": {
+          "type": "string",
+          "description": "The region of the resource being queried for metrics."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionScopeMetric"
+          },
+          "description": "the value of the collection."
+        }
+      },
+      "required": [
+        "timespan",
+        "value"
+      ]
+    },
+    "SubscriptionScopeMetric": {
+      "type": "object",
+      "description": "The result data of a query.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "the metric Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "the resource type of the metric resource."
+        },
+        "name": {
+          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
+          "description": "the name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
+        },
+        "unit": {
+          "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
+          "description": "The unit of the metric."
+        },
+        "timeseries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesElement"
+          },
+          "description": "the time series returned when a data query is performed."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ]
+    },
+    "TimeSeriesElement": {
+      "type": "object",
+      "description": "A time series result type. The discriminator value is always TimeSeries in this case.",
+      "properties": {
+        "metadatavalues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataValue"
+          },
+          "description": "the metadata values returned if $filter was specified in the call."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TimespanParameter": {
+      "name": "timespan",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
+      "x-ms-parameter-location": "method"
+    },
+    "IntervalParameter": {
+      "name": "interval",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "format": "duration",
+      "description": "The interval (i.e. timegrain) of the query.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamesParameter": {
+      "name": "metricnames",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The names of the metrics (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
+    },
+    "AggregationsParameter": {
+      "name": "aggregation",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The list of aggregation types (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10.",
+      "x-ms-parameter-location": "method"
+    },
+    "OrderByParameter": {
+      "name": "orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
+      "x-ms-parameter-location": "method"
+    },
+    "RollUpByParameter": {
+      "name": "rollupby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one timeseries.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionScopeResultTypeParameter": {
+      "name": "resultType",
+      "in": "query",
+      "type": "string",
+      "enum": [
+        "Data",
+        "Metadata"
+      ],
+      "x-ms-enum": {
+        "name": "MetricResultType",
+        "modelAsString": true
+      },
+      "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
+      "x-ms-parameter-location": "method",
+      "required": false
+    },
+    "ResultTypeParameter": {
+      "name": "resultType",
+      "in": "query",
+      "type": "string",
+      "enum": [
+        "Data",
+        "Metadata"
+      ],
+      "x-ms-enum": {
+        "name": "ResultType",
+        "modelAsString": false
+      },
+      "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
+      "x-ms-parameter-location": "method",
+      "required": false
+    },
+    "AutoAdjustTimegrain": {
+      "name": "AutoAdjustTimegrain",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.",
+      "x-ms-parameter-location": "method"
+    },
+    "ValidateDimensions": {
+      "name": "ValidateDimensions",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
