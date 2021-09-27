@@ -39,15 +39,16 @@
             "schema": {
               "$ref": "#/definitions/AvailableProviderOperations"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_ListGET11": {
-            "$ref": "./examples/Operations_List-GET-example-11.json"
-          }
         }
       }
     },
@@ -78,15 +79,16 @@
             "schema": {
               "$ref": "#/definitions/DataManagerList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "DataManagers_ListGET21": {
-            "$ref": "./examples/DataManagers_List-GET-example-21.json"
-          }
         }
       }
     },
@@ -120,15 +122,16 @@
             "schema": {
               "$ref": "#/definitions/DataManagerList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "DataManagers_ListByResourceGroupGET31": {
-            "$ref": "./examples/DataManagers_ListByResourceGroup-GET-example-31.json"
-          }
         }
       }
     },
@@ -165,11 +168,12 @@
             "schema": {
               "$ref": "#/definitions/DataManager"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataManagers_GetGET41": {
-            "$ref": "./examples/DataManagers_Get-GET-example-41.json"
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       },
@@ -217,14 +221,15 @@
           },
           "202": {
             "description": "Accepted request for Create."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataManagers_CreatePUT41": {
-            "$ref": "./examples/DataManagers_Create-PUT-example-41.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -258,14 +263,15 @@
           },
           "204": {
             "description": "Data Manager Resource deleted."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataManagers_DeleteDELETE41": {
-            "$ref": "./examples/DataManagers_Delete-DELETE-example-41.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -317,14 +323,15 @@
           },
           "202": {
             "description": "Accepted request for Data Manager Update."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataManagers_UpdatePATCH43": {
-            "$ref": "./examples/DataManagers_Update-PATCH-example-43.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices": {
@@ -360,15 +367,16 @@
             "schema": {
               "$ref": "#/definitions/DataServiceList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataServices_ListByDataManagerGET51": {
-            "$ref": "./examples/DataServices_ListByDataManager-GET-example-51.json"
-          }
         }
       }
     },
@@ -412,11 +420,12 @@
             "schema": {
               "$ref": "#/definitions/DataService"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataServices_GetGET62": {
-            "$ref": "./examples/DataServices_Get-GET-example-62.json"
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       }
@@ -468,16 +477,17 @@
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "JobDefinitions_ListByDataServiceGET71": {
-            "$ref": "./examples/JobDefinitions_ListByDataService-GET-example-71.json"
-          }
         }
       }
     },
@@ -528,11 +538,12 @@
             "schema": {
               "$ref": "#/definitions/JobDefinition"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobDefinitions_GetGET81": {
-            "$ref": "./examples/JobDefinitions_Get-GET-example-81.json"
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       },
@@ -594,14 +605,15 @@
           },
           "202": {
             "description": "Accepted request for create/update."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobDefinitions_CreateOrUpdatePUT83": {
-            "$ref": "./examples/JobDefinitions_CreateOrUpdate-PUT-example-83.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -649,14 +661,15 @@
           },
           "204": {
             "description": "Completed request for Delete JobDefinition."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobDefinitions_DeleteDELETE81": {
-            "$ref": "./examples/JobDefinitions_Delete-DELETE-example-81.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
@@ -713,16 +726,17 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Jobs_ListByJobDefinitionGET91": {
-            "$ref": "./examples/Jobs_ListByJobDefinition-GET-example-91.json"
-          }
         }
       }
     },
@@ -787,11 +801,12 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Jobs_GetGET101": {
-            "$ref": "./examples/Jobs_Get-GET-example-101.json"
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       }
@@ -850,14 +865,15 @@
           },
           "204": {
             "description": "Completed request for job Cancel."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Jobs_CancelPOST111": {
-            "$ref": "./examples/Jobs_Cancel-POST-example-111.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume": {
@@ -914,14 +930,15 @@
           },
           "204": {
             "description": "Complete request for Job resume."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Jobs_ResumePOST121": {
-            "$ref": "./examples/Jobs_Resume-POST-example-121.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run": {
@@ -980,14 +997,15 @@
           },
           "204": {
             "description": "Completed request for Job run. Run has started."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobDefinitions_RunPOST132": {
-            "$ref": "./examples/JobDefinitions_Run-POST-example-132.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobs": {
@@ -1037,16 +1055,17 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Jobs_ListByDataServiceGET141": {
-            "$ref": "./examples/Jobs_ListByDataService-GET-example-141.json"
-          }
         }
       }
     },
@@ -1090,16 +1109,17 @@
             "schema": {
               "$ref": "#/definitions/DataStoreList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/DataStoreFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataStores_ListByDataManagerGET151": {
-            "$ref": "./examples/DataStores_ListByDataManager-GET-example-151.json"
-          }
         }
       }
     },
@@ -1143,14 +1163,12 @@
             "schema": {
               "$ref": "#/definitions/DataStore"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataStores_GetGET161": {
-            "$ref": "./examples/DataStores_Get-GET-example-161.json"
           },
-          "DataStores_GetGET162": {
-            "$ref": "./examples/DataStores_Get-GET-example-162.json"
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       },
@@ -1205,17 +1223,15 @@
           },
           "202": {
             "description": "Accepted request for create/update."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataStores_CreateOrUpdate_DataSinkPUT162": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSink-PUT-example-162.json"
-          },
-          "DataStores_CreateOrUpdate_DataSourcePUT162": {
-            "$ref": "./examples/DataStores_CreateOrUpdate_DataSource-PUT-example-162.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1256,17 +1272,15 @@
           },
           "204": {
             "description": "Completed request for Delete Data Store."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DataStores_Delete_DataSinkDELETE161": {
-            "$ref": "./examples/DataStores_Delete_DataSink-DELETE-example-161.json"
-          },
-          "DataStores_Delete_DataSourceDELETE161": {
-            "$ref": "./examples/DataStores_Delete_DataSource-DELETE-example-161.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes": {
@@ -1302,15 +1316,16 @@
             "schema": {
               "$ref": "#/definitions/DataStoreTypeList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataStoreTypes_ListByDataManagerGET171": {
-            "$ref": "./examples/DataStoreTypes_ListByDataManager-GET-example-171.json"
-          }
         }
       }
     },
@@ -1354,14 +1369,12 @@
             "schema": {
               "$ref": "#/definitions/DataStoreType"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataStoreTypes_GetGET182": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-182.json"
           },
-          "DataStoreTypes_GetGET183": {
-            "$ref": "./examples/DataStoreTypes_Get-GET-example-183.json"
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       }
@@ -1406,16 +1419,17 @@
             "schema": {
               "$ref": "#/definitions/JobDefinitionList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobDefinitionFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "JobDefinitions_ListByDataManagerGET191": {
-            "$ref": "./examples/JobDefinitions_ListByDataManager-GET-example-191.json"
-          }
         }
       }
     },
@@ -1459,16 +1473,17 @@
             "schema": {
               "$ref": "#/definitions/JobList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-odata": "#/definitions/JobFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Jobs_ListByDataManagerGET201": {
-            "$ref": "./examples/Jobs_ListByDataManager-GET-example-201.json"
-          }
         }
       }
     },
@@ -1505,15 +1520,16 @@
             "schema": {
               "$ref": "#/definitions/PublicKeyList"
             }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PublicKeys_ListByDataManagerGET211": {
-            "$ref": "./examples/PublicKeys_ListByDataManager-GET-example-211.json"
-          }
         }
       }
     },
@@ -1557,17 +1573,29 @@
             "schema": {
               "$ref": "#/definitions/PublicKey"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PublicKeys_GetGET222": {
-            "$ref": "./examples/PublicKeys_Get-GET-example-222.json"
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       }
     }
   },
   "definitions": {
+    "ApiError": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
     "AvailableProviderOperation": {
       "description": "Class represents provider operation",
       "required": [
@@ -1809,7 +1837,8 @@
           "description": "DataStore properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "DataStoreFilter": {
       "description": "Contains the information about the filters for the DataStore.",
@@ -1994,6 +2023,24 @@
         }
       }
     },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "Error Details",
       "type": "object",
@@ -2041,7 +2088,8 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2087,7 +2135,8 @@
           "description": "JobDefinition properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "JobDefinitionFilter": {
       "description": "Contains the supported job definition filters.",
@@ -2287,7 +2336,8 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2358,6 +2408,131 @@
           "description": "Number of items to be processed by the job in total",
           "type": "integer"
         },
+        "itemsDeleted": {
+          "format": "int64",
+          "description": "Number of items deleted by the job as of now",
+          "type": "integer"
+        },
+        "totalItemsToDelete": {
+          "format": "int64",
+          "description": "Number of items to be deleted by the job in total",
+          "type": "integer"
+        },
+        "filesCopiedCounter": {
+          "format": "int64",
+          "description": "Of the items copied by the job as of now, how many are files",
+          "type": "integer"
+        },
+        "filesDeletedCounter": {
+          "format": "int64",
+          "description": "Of the items deleted by the job as of now, how many are files",
+          "type": "integer"
+        },
+        "bytesCopied": {
+          "format": "int64",
+          "description": "Number of bytes actually copied by the job as of now",
+          "type": "integer"
+        },
+        "backupStartTime": {
+          "format": "date-time",
+          "description": "Time getting the backup started",
+          "type": "string"
+        },
+        "backupEndTime": {
+          "format": "date-time",
+          "description": "Time getting the backup ended",
+          "type": "string"
+        },
+        "estimationConfigureComputeStartTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for estimation stage started",
+          "type": "string"
+        },
+        "estimationConfigureComputeEndTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for estimation stage ended",
+          "type": "string"
+        },
+        "directoryParserStartTime": {
+          "format": "date-time",
+          "description": "Time enumerating source directory started",
+          "type": "string"
+        },
+        "directoryParserEndTime": {
+          "format": "date-time",
+          "description": "Time enumerating source directory ended",
+          "type": "string"
+        },
+        "purgeDetectionStartTime": {
+          "format": "date-time",
+          "description": "Time enumerating target directory started",
+          "type": "string"
+        },
+        "purgeDetectionEndTime": {
+          "format": "date-time",
+          "description": "Time enumerating target directory ended",
+          "type": "string"
+        },
+        "estimationStartTime": {
+          "format": "date-time",
+          "description": "Time estimating files started",
+          "type": "string"
+        },
+        "estimationEndTime": {
+          "format": "date-time",
+          "description": "Time estimating files ended",
+          "type": "string"
+        },
+        "postEstimationStartTime": {
+          "format": "date-time",
+          "description": "Time deleting excess files started",
+          "type": "string"
+        },
+        "postEstimationEndTime": {
+          "format": "date-time",
+          "description": "Time deleting excess files ended",
+          "type": "string"
+        },
+        "copyConfigureComputeStartTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for copy stage started",
+          "type": "string"
+        },
+        "copyConfigureComputeEndTime": {
+          "format": "date-time",
+          "description": "Time configuring compute for copy stage ended",
+          "type": "string"
+        },
+        "copyStartTime": {
+          "format": "date-time",
+          "description": "Time copying files started",
+          "type": "string"
+        },
+        "copyEndTime": {
+          "format": "date-time",
+          "description": "Time copying files ended",
+          "type": "string"
+        },
+        "postCopyStartTime": {
+          "format": "date-time",
+          "description": "Time copying logs and creating share snapshot started",
+          "type": "string"
+        },
+        "postCopyEndTime": {
+          "format": "date-time",
+          "description": "Time copying logs and creating share snapshot ended",
+          "type": "string"
+        },
+        "cleanupComputeStartTime": {
+          "format": "date-time",
+          "description": "Time cleaning up compute started",
+          "type": "string"
+        },
+        "cleanupComputeEndTime": {
+          "format": "date-time",
+          "description": "Time cleaning up compute ended",
+          "type": "string"
+        },
         "details": {
           "$ref": "#/definitions/JobDetails",
           "description": "Details of a job run. This field will only be sent for expand details filter."
@@ -2393,7 +2568,8 @@
             "Failed",
             "Cancelled",
             "Cancelling",
-            "PartiallySucceeded"
+            "PartiallySucceeded",
+            "Waiting"
           ],
           "type": "string",
           "x-ms-enum": {
