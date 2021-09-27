@@ -3908,6 +3908,79 @@
       },
       "description": "Descriptions of APIM policies."
     },
+    "PolicyFragmentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyFragmentContract"
+          },
+          "description": "Policy fragment contract value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy fragments operation."
+    },
+    "PolicyFragmentContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyFragmentContractProperties",
+          "description": "Properties of the Policy Fragment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Policy Fragment Contract details."
+    },
+    "PolicyFragmentContractProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Contents of the policy fragment."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Policy fragment contract Properties."
+    },
+    "PolicyFragmentReferenceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+              }
+            ]
+          },
+          "description": "Resource references."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy fragment references operation."
+    },
     "PortalDelegationSettings": {
       "properties": {
         "properties": {
