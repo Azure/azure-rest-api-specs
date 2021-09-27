@@ -1172,7 +1172,7 @@
         "operationId": "reports_Get",
         "description": "Get information about a report associated with a configuration profile assignment run",
         "x-ms-examples": {
-          "Get a configuration profile assignment": {
+          "Get a report for a configuration profile assignment": {
             "$ref": "./examples/getReport.json"
           }
         },
@@ -1514,14 +1514,16 @@
           "type": "string",
           "description": "The Report name"
         },
-        "type": {
+        "status": {
           "type": "string",
           "readOnly": true,
           "description": "The status of onboarding, which only appears in the response."
         },
         "properties": {
+	      "title": "Properties",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AssignmentReportProperties",
-          "description": "The profileOverrides setting for the configuration profile assignment."
+          "description": "The properties for the report."
         }
       }
     },
@@ -1532,6 +1534,7 @@
         "type": "object"
       }
     }
+
   },
   "parameters": {
     "VmNameParameter": {
