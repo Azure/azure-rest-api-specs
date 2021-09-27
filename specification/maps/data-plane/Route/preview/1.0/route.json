@@ -501,8 +501,9 @@
     },
     "VehicleCommercial": {
       "name": "vehicleCommercial",
+      "x-ms-client-name": "isVehicleCommercial",
       "in": "query",
-      "description": "Vehicle is used for commercial purposes and thus may not be allowed to drive  on some roads.",
+      "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may not be allowed to drive on some roads.",
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
@@ -589,6 +590,7 @@
     },
     "ComputeBestOrder": {
       "name": "computeBestOrder",
+      "x-ms-client-name": "computeBestWaypointOrder",
       "in": "query",
       "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route length. Yields best results when used in conjunction with routeType _shortest_. Notice that origin and destination are excluded from the optimized waypoint indices. To include origin and destination in the response, please increase all the indices by 1 to account for the origin, and then add the destination as the final index. Possible values are true or false. True computes a better order if possible, but is not allowed to be used in conjunction with maxAlternatives value greater than 0 or in conjunction with circle waypoints. False will use the locations in the given order and not allowed to be used in conjunction with routeRepresentation _none_.",
       "type": "boolean",
@@ -667,6 +669,7 @@
     },
     "Traffic": {
       "name": "traffic",
+      "x-ms-client-name": "useTrafficData",
       "in": "query",
       "description": "Possible values: \n  * true - Do consider all available traffic information during routing\n  * false - Ignore current traffic data during routing. Note that although the current traffic data is ignored \n  during routing, the effect of historic traffic on effective road speeds is still incorporated.",
       "type": "boolean",
@@ -729,6 +732,7 @@
     },
     "MatrixId": {
       "name": "format",
+      "x-ms-client-name": "matrixId",
       "description": "Matrix id received after the Matrix Route request was accepted successfully.",
       "type": "string",
       "in": "path",
@@ -737,6 +741,7 @@
     },
     "BatchId": {
       "name": "format",
+      "x-ms-client-name": "batchId",
       "description": "Batch id for querying the operation.",
       "type": "string",
       "in": "path",
@@ -1012,6 +1017,7 @@
           },
           {
             "name": "query",
+            "x-ms-client-name": "routePoints",
             "in": "query",
             "description": "The Coordinates through which the route is calculated, delimited by a colon.  A minimum of two coordinates is required.  The first one is the origin and the last is the destination of the route. Optional coordinates in-between act as WayPoints in the route.  You can pass up to 150 WayPoints.",
             "required": true,
@@ -1692,7 +1698,7 @@
           }
         },
         "report": {
-          "$ref": "#/definitions/RouteResponseReport"
+          "$ref": "#/definitions/EffectiveSettingsReport"
         }
       }
     },
@@ -1707,7 +1713,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RouteResultLeg"
+            "$ref": "#/definitions/RouteLeg"
           }
         },
         "sections": {
@@ -1715,11 +1721,11 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RouteResultSection"
+            "$ref": "#/definitions/RouteSection"
           }
         },
         "guidance": {
-          "$ref": "#/definitions/RouteResultGuidance"
+          "$ref": "#/definitions/RouteGuidance"
         }
       }
     },
@@ -1771,11 +1777,11 @@
         }
       }
     },
-    "RouteResultLeg": {
+    "RouteLeg": {
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/RouteResultLegSummary"
+          "$ref": "#/definitions/RouteLegSummary"
         },
         "points": {
           "description": "Points array",
@@ -1787,7 +1793,7 @@
         }
       }
     },
-    "RouteResultLegSummary": {
+    "RouteLegSummary": {
       "description": "Summary object for route section.",
       "type": "object",
       "readOnly": true,
@@ -1846,7 +1852,7 @@
         }
       }
     },
-    "RouteResultSection": {
+    "RouteSection": {
       "type": "object",
       "properties": {
         "startPointIndex": {
@@ -1923,11 +1929,11 @@
           }
         },
         "tec": {
-          "$ref": "#/definitions/RouteResultSectionTec"
+          "$ref": "#/definitions/RouteSectionTec"
         }
       }
     },
-    "RouteResultSectionTec": {
+    "RouteSectionTec": {
       "description": "Details of the traffic event, using definitions in the [TPEG2-TEC](https://www.iso.org/standard/63116.html) standard. Can contain effectCode and causes elements.",
       "type": "object",
       "properties": {
@@ -1940,12 +1946,12 @@
           "description": "Causes array",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RouteResultSectionTecCause"
+            "$ref": "#/definitions/RouteSectionTecCause"
           }
         }
       }
     },
-    "RouteResultSectionTecCause": {
+    "RouteSectionTecCause": {
       "description": "The cause of the traffic event. Can contain mainCauseCode and subCauseCode elements. Can be used to define iconography and descriptions.",
       "type": "object",
       "properties": {
@@ -1961,7 +1967,7 @@
         }
       }
     },
-    "RouteResultInstruction": {
+    "RouteInstruction": {
       "description": "A set of attributes describing a maneuver, e.g. 'Turn right', 'Keep left', 'Take the ferry', 'Take the motorway', 'Arrive'.",
       "type": "object",
       "properties": {
@@ -2315,7 +2321,7 @@
         }
       }
     },
-    "RouteResultInstructionGroup": {
+    "RouteInstructionGroup": {
       "description": "Groups a sequence of instruction elements which are related to each other. The sequence range is constrained with firstInstructionIndex and lastInstructionIndex. When human-readable text messages are requested for guidance (instructionType=text or tagged), then the instructionGroup has a summary message returned when available.",
       "type": "object",
       "properties": {
@@ -2341,7 +2347,7 @@
         }
       }
     },
-    "RouteResultGuidance": {
+    "RouteGuidance": {
       "description": "Contains guidance related elements. This field is present only when guidance was requested and is available.",
       "type": "object",
       "readOnly": true,
@@ -2351,7 +2357,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RouteResultInstruction"
+            "$ref": "#/definitions/RouteInstruction"
           }
         },
         "instructionGroups": {
@@ -2359,7 +2365,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RouteResultInstructionGroup"
+            "$ref": "#/definitions/RouteInstructionGroup"
           }
         }
       }
@@ -2377,7 +2383,7 @@
           "$ref": "#/definitions/RouteRange"
         },
         "report": {
-          "$ref": "#/definitions/RouteResponseReport"
+          "$ref": "#/definitions/EffectiveSettingsReport"
         }
       }
     },
@@ -2399,7 +2405,7 @@
         }
       }
     },
-    "RouteResponseReport": {
+    "EffectiveSettingsReport": {
       "description": "Reports the effective settings used in the current call.",
       "type": "object",
       "properties": {
@@ -2408,12 +2414,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RouteResponseReportEffectiveSetting"
+            "$ref": "#/definitions/EffectiveSetting"
           }
         }
       }
     },
-    "RouteResponseReportEffectiveSetting": {
+    "EffectiveSetting": {
       "description": "Effective parameter or data used when calling this Route API.",
       "type": "object",
       "properties": {
@@ -2493,7 +2499,7 @@
       "readOnly": true,
       "properties": {
         "routeSummary": {
-          "$ref": "#/definitions/RouteResultLegSummary"
+          "$ref": "#/definitions/RouteLegSummary"
         }
       }
     },
