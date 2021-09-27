@@ -796,7 +796,7 @@
             ],
             "modelAsString": true
           },
-          "description": "Describes the video scaling mode to be applied. Default mode is 'Pad'. If the mode is 'Pad' or 'Stretch' then both width and height must be specified. Else if the mode is 'PreservAspectRatio' then only one of width or height need be provided."
+          "description": "Describes the video scaling mode to be applied. Default mode is 'Pad'. If the mode is 'Pad' or 'Stretch' then both width and height must be specified. Else if the mode is 'PreserveAspectRatio' then only one of width or height need be provided."
         }
       },
       "type": "object",
@@ -852,7 +852,7 @@
         },
         "segmentLength": {
           "type": "string",
-          "description": "Segment length indicates the length of individual cotent files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the initial call to create the video resource can lead to errors when uploading content to the archive. Default value is 30 seconds. This property is only allowed for topologies where \"kind\" is set to \"live\"."
+          "description": "Segment length indicates the length of individual content files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the initial call to create the video resource can lead to errors when uploading content to the archive. Default value is 30 seconds. This property is only allowed for topologies where \"kind\" is set to \"live\"."
         },
         "retentionPeriod": {
           "type": "string",
@@ -1138,7 +1138,7 @@
         }
       },
       "type": "object",
-      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and pubishing of content for a unique RTSP camera."
+      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and publishing of content for a unique RTSP camera."
     },
     "LivePipelineUpdate": {
       "allOf": [
@@ -1159,7 +1159,7 @@
         }
       },
       "type": "object",
-      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and pubishing of content for a unique RTSP camera."
+      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and publishing of content for a unique RTSP camera."
     },
     "PipelineJobProperties": {
       "properties": {
