@@ -1506,26 +1506,18 @@
       "description": "Definition of the report.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Report ARM Resource URI."
-        },
-        "name": {
-          "type": "string",
-          "description": "The Report name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The status of onboarding, which only appears in the response."
-        },
         "properties": {
           "title": "Properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AssignmentReportProperties",
           "description": "The properties for the report."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "AssignmentReportProperties": {
       "description": "Data related to the report detail.",
