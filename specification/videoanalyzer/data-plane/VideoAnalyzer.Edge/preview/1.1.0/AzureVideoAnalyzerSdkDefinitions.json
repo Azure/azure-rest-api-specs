@@ -76,7 +76,7 @@
           "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
         }
       ],
-      "description": "Pipeline topology resource representation."
+      "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\r\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
     },
     "LivePipelineSetRequest": {
       "type": "object",
@@ -106,7 +106,7 @@
           "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
         }
       ],
-      "description": "Live pipeline resource representation."
+      "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
     },
     "MethodRequestEmptyBodyBase": {
       "type": "object",
@@ -204,6 +204,140 @@
         }
       ],
       "description": "Deletes an existing live pipeline."
+    },
+    "RemoteDeviceAdapterSetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterSet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "remoteDeviceAdapter"
+      ],
+      "properties": {
+        "remoteDeviceAdapter": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/RemoteDeviceAdapter"
+        }
+      },
+      "description": "Creates a new remote device adapter or updates an existing one."
+    },
+    "RemoteDeviceAdapterSetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        },
+        {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/RemoteDeviceAdapter"
+        }
+      ],
+      "description": "The Video Analyzer edge module can act as a transparent gateway for video, enabling IoT devices to send video to the cloud from behind a firewall. A remote device adapter should be created for each such IoT device. Communication between the cloud and IoT device would then flow via the Video Analyzer edge module."
+    },
+    "RemoteDeviceAdapterListRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "description": "List all existing remote device adapters."
+    },
+    "RemoteDeviceAdapterGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Retrieves an existing remote device adapter."
+    },
+    "RemoteDeviceAdapterDeleteRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterDelete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deletes an existing remote device adapter."
+    },
+    "OnvifDeviceDiscoverRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "properties": {
+        "discoveryDuration": {
+          "type": "string",
+          "description": "The amount of time that the ONVIF device discovery will wait for supported device responses."
+        }
+      },
+      "description": "OnvifDeviceDiscover request body."
+    },
+    "OnvifDeviceDiscoverRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "onvifDeviceDiscover",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "properties": {
+        "onvifDeviceDiscoverRequestBody": {
+          "$ref": "#/definitions/OnvifDeviceDiscoverRequestBody"
+        }
+      },
+      "description": "Lists all the discoverable ONVIF devices on the same subnet as the Edge Module. "
+    },
+    "OnvifDeviceGetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "remoteIPAddress"
+      ],
+      "properties": {
+        "remoteIPAddress": {
+          "type": "string",
+          "description": "The ONVIF device remote IP Address."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username to be presented as part of the ONVIF device credentials."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password to be presented as part of the ONVIF device credentials."
+        }
+      },
+      "description": "OnvifDeviceGet request body."
+    },
+    "OnvifDeviceGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "onvifDeviceGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "onvifDeviceGetRequestBody"
+      ],
+      "properties": {
+        "onvifDeviceGetRequestBody": {
+          "$ref": "#/definitions/OnvifDeviceGetRequestBody"
+        }
+      },
+      "description": "Retrieves properties and media profiles of an ONVIF device."
     }
   }
 }

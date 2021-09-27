@@ -493,6 +493,25 @@
       "description": "TLS endpoint describes an endpoint that the pipeline can connect to over TLS transport (data is encrypted in transit).",
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.TlsEndpoint"
     },
+    "SymmetricKeyCredentials": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Symmetric key credential."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      ],
+      "description": "Symmetric key credential.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SymmetricKeyCredentials"
+    },
     "CertificateSource": {
       "type": "object",
       "required": [
@@ -670,6 +689,16 @@
       "description": "File sink allows for video and audio content to be recorded on the file system on the edge device.",
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.FileSink"
     },
+    "VideoPublishingOptions": {
+      "type": "object",
+      "properties": {
+        "disableVideoPreviewImage": {
+          "type": "string",
+          "description": "When set to 'true' the video will not publish preview images. Default is 'false'."
+        }
+      },
+      "description": "Options for changing video publishing behavior on the video sink and output video."
+    },
     "VideoCreationProperties": {
       "type": "object",
       "properties": {
@@ -685,6 +714,11 @@
           "type": "string",
           "example": "PT30S",
           "description": "Video segment length indicates the length of individual video files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the video is initially created can lead to errors when uploading media to the archive. Default value is 30 seconds."
+        },
+        "retentionPeriod": {
+          "type": "string",
+          "example": "P30D",
+          "description": "Video retention period indicates how long the video is kept in storage, and must be a multiple of 1 day. For example, if this is set to 30 days, then content older than 30 days will be deleted."
         }
       },
       "description": "Optional video properties to be used in case a new video resource needs to be created on the service. These will not take effect if the video already exists."
@@ -698,8 +732,14 @@
           "example": "myVideo001"
         },
         "videoCreationProperties": {
+          "type": "object",
           "description": "Optional video properties to be used in case a new video resource needs to be created on the service.",
           "$ref": "#/definitions/VideoCreationProperties"
+        },
+        "videoPublishingOptions": {
+          "type": "object",
+          "description": "Optional video publishing options to be used for changing publishing behavior of the output video.",
+          "$ref": "#/definitions/VideoPublishingOptions"
         },
         "localMediaCachePath": {
           "type": "string",
@@ -1251,12 +1291,12 @@
         },
         "minimumActivationTime": {
           "type": "string",
-          "example": "PT10S",
+          "example": "PT1S",
           "description": "The minimum period for which the gate remains open in the absence of subsequent triggers (events). When used upstream of a file or video sink, it determines the minimum length of the recorded video clip."
         },
         "maximumActivationTime": {
           "type": "string",
-          "example": "PT10S",
+          "example": "PT2S",
           "description": "The maximum period for which the gate remains open in the presence of subsequent triggers (events). When used upstream of a file or video sink, it determines the maximum length of the recorded video clip."
         }
       },
@@ -1315,6 +1355,10 @@
         "detectorNodeConfiguration": {
           "type": "string",
           "description": "Advanced detector node configuration."
+        },
+        "trackerNodeConfiguration": {
+          "type": "string",
+          "description": "Advanced tracker node configuration."
         },
         "enableFaceMaskClassifier": {
           "type": "string",
@@ -1653,6 +1697,96 @@
       "description": "Defines a Spatial Analysis person line crossing operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisPersonLineCrossingOperation"
     },
+    "RemoteDeviceAdapter": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the remote device adapter."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Read-only system metadata associated with this object."
+        },
+        "properties": {
+          "$ref": "#/definitions/RemoteDeviceAdapterProperties",
+          "description": "Properties of the remote device adapter."
+        }
+      },
+      "description": "The Video Analyzer edge module can act as a transparent gateway for video, enabling IoT devices to send video to the cloud from behind a firewall. A remote device adapter should be created for each such IoT device. Communication between the cloud and IoT device would then flow via the Video Analyzer edge module."
+    },
+    "RemoteDeviceAdapterProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "An optional description for the remote device adapter.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The IoT device to which this remote device will connect.",
+          "$ref": "#/definitions/RemoteDeviceAdapterTarget"
+        },
+        "iotHubDeviceConnection": {
+          "description": "Information that enables communication between the IoT Hub and the IoT device - allowing this edge module to act as a transparent gateway between the two.",
+          "$ref": "#/definitions/IotHubDeviceConnection"
+        }
+      },
+      "required": [
+        "target",
+        "iotHubDeviceConnection"
+      ],
+      "description": "Remote device adapter properties."
+    },
+    "RemoteDeviceAdapterTarget": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "Hostname or IP address of the remote device.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "description": "Properties of the remote device adapter target."
+    },
+    "IotHubDeviceConnection": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "description": "The name of the IoT device configured and managed in IoT Hub. (case-sensitive)",
+          "type": "string"
+        },
+        "credentials": {
+          "description": "IoT device connection credentials. Currently IoT device symmetric key credentials are supported.",
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "description": "Information that enables communication between the IoT Hub and the IoT device - allowing this edge module to act as a transparent gateway between the two."
+    },
+    "RemoteDeviceAdapterCollection": {
+      "description": "A list of remote device adapters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of remote device adapters.",
+          "items": {
+            "$ref": "#/definitions/RemoteDeviceAdapter"
+          }
+        },
+        "@continuationToken": {
+          "type": "string",
+          "description": "A continuation token to use in subsequent calls to enumerate through the remote device adapter collection. This is used when the collection contains too many results to return in one response."
+        }
+      },
+      "type": "object"
+    },
     "CognitiveServicesVisionProcessor": {
       "type": "object",
       "required": [
@@ -1684,6 +1818,338 @@
       ],
       "description": "A processor that allows the pipeline topology to send video frames to a Cognitive Services Vision extension. Inference results are relayed to downstream nodes.",
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.CognitiveServicesVisionProcessor"
+    },
+    "DiscoveredOnvifDeviceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of ONVIF devices that have been discovered in the same subnet as the IoT Edge device.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredOnvifDevice"
+          }
+        }
+      },
+      "description": "A list of ONVIF devices that were discovered in the same subnet as the IoT Edge device."
+    },
+    "DiscoveredOnvifDevice": {
+      "type": "object",
+      "properties": {
+        "serviceIdentifier": {
+          "type": "string",
+          "description": "The unique identifier of the ONVIF device that was discovered in the same subnet as the IoT Edge device."
+        },
+        "remoteIPAddress": {
+          "type": "string",
+          "description": "The IP address of the ONVIF device that was discovered in the same subnet as the IoT Edge device."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "An array of hostnames for the ONVIF discovered devices that are in the same subnet as the IoT Edge device.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transportAddresses": {
+          "type": "array",
+          "description": "An array of media profiles that the ONVIF discovered device supports.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The discovered properties of the ONVIF device that are returned during the discovery."
+    },
+    "OnvifDevice": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "object",
+          "description": "The hostname of the ONVIF device.",
+          "$ref": "#/definitions/OnvifHostName"
+        },
+        "systemDateTime": {
+          "description": "The system date and time of the ONVIF device.",
+          "$ref": "#/definitions/OnvifSystemDateTime"
+        },
+        "dns": {
+          "description": "The ONVIF device DNS properties.",
+          "$ref": "#/definitions/OnvifDns"
+        },
+        "mediaProfiles": {
+          "type": "array",
+          "description": "An array of of ONVIF media profiles supported by the ONVIF device.",
+          "items": {
+            "$ref": "#/definitions/MediaProfile"
+          }
+        }
+      },
+      "description": "The ONVIF device properties."
+    },
+    "OnvifSystemDateTime": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "An enum value determining whether the date time was configured using NTP or manual.",
+          "enum": [
+            "Ntp",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "values": [
+              {
+                "value": "Ntp"
+              },
+              {
+                "value": "Manual"
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "time": {
+          "type": "string",
+          "description": "The device datetime returned when calling the request."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone of the ONVIF device datetime."
+        }
+      },
+      "description": "The ONVIF device DNS properties."
+    },
+    "OnvifHostName": {
+      "type": "object",
+      "properties": {
+        "fromDHCP": {
+          "type": "boolean",
+          "description": "Result value showing if the ONVIF device is configured to use DHCP."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the ONVIF device."
+        }
+      },
+      "description": "The ONVIF device DNS properties."
+    },
+    "OnvifDns": {
+      "type": "object",
+      "properties": {
+        "fromDHCP": {
+          "type": "boolean",
+          "description": "Result value showing if the ONVIF device is configured to use DHCP."
+        },
+        "ipv4Address": {
+          "type": "array",
+          "description": "An array of IPv4 address for the discovered ONVIF device.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Address": {
+          "type": "array",
+          "description": "An array of IPv6 address for the discovered ONVIF device.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The ONVIF device DNS properties."
+    },
+    "MediaProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Media Profile."
+        },
+        "mediaUri": {
+          "type": "object",
+          "description": "Object representing the URI that will be used to request for media streaming.",
+          "items": {
+            "$ref": "#/definitions/MediaUri"
+          }
+        },
+        "videoEncoderConfiguration": {
+          "type": "object",
+          "description": "The Video encoder configuration.",
+          "$ref": "#/definitions/VideoEncoderConfiguration"
+        }
+      },
+      "description": "Class representing the ONVIF MediaProfiles."
+    },
+    "MediaUri": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI that can be used for media streaming."
+        }
+      },
+      "description": "Object representing the URI that will be used to request for media streaming."
+    },
+    "VideoEncoderConfiguration": {
+      "type": "object",
+      "properties": {
+        "encoding": {
+          "type": "string",
+          "description": "The video codec used by the Media Profile.",
+          "enum": [
+            "JPEG",
+            "H264",
+            "MPEG4"
+          ],
+          "x-ms-enum": {
+            "name": "videoEncoding",
+            "values": [
+              {
+                "value": "JPEG",
+                "description": "The Media Profile uses JPEG encoding."
+              },
+              {
+                "value": "H264",
+                "description": "The Media Profile uses H264 encoding."
+              },
+              {
+                "value": "MPEG4",
+                "description": "The Media Profile uses MPEG4 encoding."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "quality": {
+          "type": "number",
+          "description": "Relative value representing the quality of the video."
+        },
+        "resolution": {
+          "description": "The Video Resolution.",
+          "$ref": "#/definitions/Resolution"
+        },
+        "rateControl": {
+          "type": "object",
+          "description": "The Video's rate control.",
+          "$ref": "#/definitions/RateControl"
+        },
+        "h264": {
+          "type": "object",
+          "description": "The H264 Configuration.",
+          "$ref": "#/definitions/H264Configuration"
+        },
+        "mpeg4": {
+          "description": "The H264 Configuration.",
+          "$ref": "#/definitions/MPEG4Configuration"
+        }
+      },
+      "description": "Class representing the MPEG4 Configuration."
+    },
+    "MPEG4Configuration": {
+      "type": "object",
+      "properties": {
+        "govLength": {
+          "type": "number",
+          "description": "Group of Video frames length."
+        },
+        "profile": {
+          "type": "string",
+          "description": "The MPEG4 Profile",
+          "enum": [
+            "SP",
+            "ASP"
+          ],
+          "x-ms-enum": {
+            "name": "MPEG4Profile",
+            "values": [
+              {
+                "value": "SP",
+                "description": "Simple Profile."
+              },
+              {
+                "value": "ASP",
+                "description": "Advanced Simple Profile."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Class representing the MPEG4 Configuration."
+    },
+    "RateControl": {
+      "type": "object",
+      "properties": {
+        "bitRateLimit": {
+          "type": "number",
+          "description": "the maximum output bitrate in kbps."
+        },
+        "encodingInterval": {
+          "type": "number",
+          "description": "Interval at which images are encoded and transmitted."
+        },
+        "frameRateLimit": {
+          "type": "number",
+          "description": "Maximum output framerate in fps."
+        },
+        "guarantedFrameRate": {
+          "type": "boolean",
+          "description": "A value of true indicates that frame rate is a fixed value rather than an upper limit, and that the video encoder shall prioritize frame rate over all other adaptable configuration values such as bitrate."
+        }
+      },
+      "description": "Class  representing the video's rate control."
+    },
+    "Resolution": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "description": "The number of columns of the Video image."
+        },
+        "height": {
+          "type": "number",
+          "description": "The number of lines of the Video image."
+        }
+      },
+      "description": "The Video resolution."
+    },
+    "H264Configuration": {
+      "type": "object",
+      "properties": {
+        "govLength": {
+          "type": "number",
+          "description": "Group of Video frames length."
+        },
+        "profile": {
+          "type": "string",
+          "description": "The H264 Profile",
+          "enum": [
+            "Baseline",
+            "Main",
+            "Extended",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "H264Profile",
+            "values": [
+              {
+                "value": "Baseline"
+              },
+              {
+                "value": "Main"
+              },
+              {
+                "value": "Extended"
+              },
+              {
+                "value": "High"
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Class representing the H264 Configuration."
     }
   }
 }
