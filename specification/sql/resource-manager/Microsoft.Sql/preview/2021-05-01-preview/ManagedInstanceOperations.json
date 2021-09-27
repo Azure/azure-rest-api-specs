@@ -301,7 +301,7 @@
           "description": "The operation steps list.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UpsertManagedServerOperationStep"
+            "$ref": "#/definitions/UpsertManagedServerOperationStepWithEstimatesAndDuration"
           },
           "readOnly": true
         }
@@ -326,9 +326,20 @@
         }
       }
     },
-    "UpsertManagedServerOperationStep": {
+    "UpsertManagedServerOperationStepWithEstimatesAndDuration": {
       "type": "object",
       "properties": {
+        "stepStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "stepEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timeElapsed": {
+          "type": "string"
+        },
         "order": {
           "format": "int32",
           "type": "integer"
