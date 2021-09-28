@@ -1575,24 +1575,24 @@
           "format": "float",
           "description": "Hours of sun."
         },
-        "degreeDaySummary": {
-          "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary of Heating Degree Day or Cooling Degree Day information"
+        "meanTemperatureDeviation": {
+          "$ref": "#/definitions/MeanTemperatureDeviation",
+          "description": "Summary for mean temperature of Heating Degree Day or Cooling Degree Day information"
         },
-        "airAndPollen": {
+        "airQuality": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AirAndPollen"
+            "$ref": "#/definitions/AirQuality"
           },
-          "description": "airAndPollen"
+          "description": "air quality"
         },
-        "day": {
-          "$ref": "#/definitions/DayOrNight",
-          "description": "Day"
+        "daytimeForecast": {
+          "$ref": "#/definitions/DailyForecastDetail",
+          "description": "Day forecast detail"
         },
-        "night": {
-          "$ref": "#/definitions/DayOrNight",
-          "description": "Night"
+        "nighttimeForecast": {
+          "$ref": "#/definitions/DailyForecastDetail",
+          "description": "Night forecast detail"
         },
         "sources": {
           "description": "Source(s) of the forecast data.",
@@ -1637,13 +1637,11 @@
         }
       }
     },
-    "DayOrNight": {
+    "DailyForecastDetail": {
       "type": "object",
       "properties": {
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "iconPhrase": {
           "type": "string",
@@ -1807,19 +1805,17 @@
         }
       }
     },
-    "WeatherWaypoint": {
+    "WaypointForecast": {
       "type": "object",
       "properties": {
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         },
-        "isDayTime": {
+        "isDaytime": {
           "type": "boolean",
           "description": "Indicates the time of the day. True indicates 'day',', false indicates 'night."
         },
