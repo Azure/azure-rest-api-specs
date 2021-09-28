@@ -538,7 +538,9 @@
         "tollVignette",
         "traffic",
         "travelMode",
-        "tunnel"
+        "tunnel",
+        "carpool",
+        "urban"
       ],
       "x-ms-enum": {
         "name": "SectionType",
@@ -546,43 +548,51 @@
         "values": [
           {
             "value": "carTrain",
-            "description": "Get sections if the route includes car trains."
+            "description": "Sections of the route that are car trains."
           },
           {
             "value": "country",
-            "description": "Countries the route has parts in."
+            "description": "Sections indicating which countries the route is in."
           },
           {
             "value": "ferry",
-            "description": "Get sections if the route includes ferries."
+            "description": "Sections of the route that are ferries."
           },
           {
             "value": "motorway",
-            "description": "Get sections if the route includes motorways."
+            "description": "Sections of the route that are motorways."
           },
           {
             "value": "pedestrian",
-            "description": "Get sections which are suited for pedestrians."
+            "description": "Sections of the route that are only suited for pedestrians."
           },
           {
             "value": "tollRoad",
-            "description": "Get sections which require a toll to be payed."
+            "description": "Sections of the route that require a toll to be payed."
           },
           {
             "value": "tollVignette",
-            "description": "Get sections which require a toll vignette to be present."
+            "description": "Sections of the route that require a toll vignette to be present."
           },
           {
             "value": "traffic",
-            "description": "Get sections which contain traffic information."
+            "description": "Sections of the route that contain traffic information."
           },
           {
             "value": "travelMode",
-            "description": "Get sections in relation to the request parameter `travelMode`."
+            "description": "Sections in relation to the request parameter `travelMode`."
           },
           {
             "value": "tunnel",
-            "description": "Get sections if the route includes tunnels."
+            "description": "Sections of the route that are tunnels."
+          },
+          {
+            "value": "carpool",
+            "description": "Sections of the route that require use of carpool (HOV/High Occupancy Vehicle) lanes."
+          },
+          {
+            "value": "urban",
+            "description": "Sections of the route that are located within urban areas."
           }
         ]
       },
@@ -665,7 +675,20 @@
       "in": "query",
       "description": "Specifies which data should be reported for diagnosis purposes. The only possible value is _effectiveSettings_. Reports the effective parameters or data used when calling the API. In the case of defaulted parameters the default will be reflected where the parameter was not specified by the caller.",
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "effectiveSettings"
+      ],
+      "x-ms-enum": {
+        "name": "Report",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "effectiveSettings",
+            "description": "Reports the effective parameters or data used when calling the API."
+          }
+        ]
+      }
     },
     "Traffic": {
       "name": "traffic",
@@ -1866,19 +1889,168 @@
           "readOnly": true
         },
         "sectionType": {
-          "description": "Section Type property",
+          "description": "Section types of the reported route response",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "CAR_TRAIN",
+            "COUNTRY",
+            "FERRY",
+            "MOTORWAY",
+            "PEDESTRIAN",
+            "TOLL_ROAD",
+            "TOLL_VIGNETTE",
+            "TRAFFIC",
+            "TRAVEL_MODE",
+            "TUNNEL",
+            "CARPOOL",
+            "URBAN"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseSectionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CAR_TRAIN",
+                "description": "Sections of the route that are car trains."
+              },
+              {
+                "value": "COUNTRY",
+                "description": "Sections indicating which countries the route is in."
+              },
+              {
+                "value": "FERRY",
+                "description": "Sections of the route that are ferries."
+              },
+              {
+                "value": "MOTORWAY",
+                "description": "Sections of the route that are motorways."
+              },
+              {
+                "value": "PEDESTRIAN",
+                "description": "Sections of the route that are only suited for pedestrians."
+              },
+              {
+                "value": "TOLL_ROAD",
+                "description": "Sections of the route that require a toll to be payed."
+              },
+              {
+                "value": "TOLL_VIGNETTE",
+                "description": "Sections of the route that require a toll vignette to be present."
+              },
+              {
+                "value": "TRAFFIC",
+                "description": "Sections of the route that contain traffic information."
+              },
+              {
+                "value": "TRAVEL_MODE",
+                "description": "Sections in relation to the request parameter `travelMode`."
+              },
+              {
+                "value": "TUNNEL",
+                "description": "Sections of the route that are tunnels."
+              },
+              {
+                "value": "CARPOOL",
+                "description": "Sections of the route that require use of carpool (HOV/High Occupancy Vehicle) lanes."
+              },
+              {
+                "value": "URBAN",
+                "description": "Sections of the route that are located within urban areas."
+              }
+            ]
+          }
         },
         "travelMode": {
-          "description": "Travel Mode property",
+          "description": "Travel mode for the calculated route. The value will be set to `other` if the requested mode of transport is not possible in this section",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "car",
+            "truck",
+            "taxi",
+            "bus",
+            "van",
+            "motorcycle",
+            "bicycle",
+            "pedestrian",
+            "other"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseTravelMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "car",
+                "description": "The returned routes are optimized for cars."
+              },
+              {
+                "value": "truck",
+                "description": "The returned routes are optimized for commercial vehicles, like for trucks."
+              },
+              {
+                "value": "taxi",
+                "description": "The returned routes are optimized for taxis. BETA functionality."
+              },
+              {
+                "value": "bus",
+                "description": "The returned routes are optimized for buses, including the use of bus only lanes. BETA functionality."
+              },
+              {
+                "value": "van",
+                "description": "The returned routes are optimized for vans. BETA functionality."
+              },
+              {
+                "value": "motorcycle",
+                "description": "The returned routes are optimized for motorcycles. BETA functionality."
+              },
+              {
+                "value": "bicycle",
+                "description": "The returned routes are optimized for bicycles, including use of bicycle lanes."
+              },
+              {
+                "value": "pedestrian",
+                "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
+              },
+              {
+                "value": "other",
+                "description": "The given mode of transport is not possible in this section"
+              }
+            ]
+          }
         },
         "simpleCategory": {
           "description": "Type of the incident. Can currently be JAM, ROAD_WORK, ROAD_CLOSURE, or OTHER. See \"tec\" for detailed information.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "JAM",
+            "ROAD_WORK",
+            "ROAD_CLOSURE",
+            "OTHER"
+          ],
+          "x-ms-enum": {
+            "name": "SimpleCategory",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "JAM",
+                "description": "Traffic jam."
+              },
+              {
+                "value": "ROAD_WORK",
+                "description": "Road work."
+              },
+              {
+                "value": "ROAD_CLOSURE",
+                "description": "Road closure."
+              },
+              {
+                "value": "OTHER",
+                "description": "Other."
+              }
+            ]
+          }
         },
         "effectiveSpeedInKmh": {
           "description": "Effective speed of the incident in km/h, averaged over its entire length.",
