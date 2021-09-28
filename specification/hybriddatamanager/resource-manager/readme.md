@@ -56,6 +56,19 @@ directive:
     - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
 ```
 
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+- Microsoft.HybridData/stable/2020-10-01/hybriddata.json
+directive:
+  - suppress:
+    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
+    - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
+```
+
 ---
 # Code Generation
 
