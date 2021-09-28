@@ -13,9 +13,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2020-03-01-preview
-```
-``` yaml $(go) && $(multiapi)
-batch:
   - tag: package-2021-09-01-preview
 ```
 
