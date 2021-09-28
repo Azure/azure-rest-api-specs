@@ -556,7 +556,8 @@
           "description": "The identities associated to the Video Analyzer resource."
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "The Video Analyzer account."
     },
     "VideoAnalyzerUpdate": {
       "properties": {
@@ -837,24 +838,30 @@
       "type": "object",
       "required": [
         "name"
-      ]
+      ],
+      "description": "Status of private endpoint connection operation."
     },
     "VideoAnalyzerOperationStatus": {
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation identifier."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation resource ID."
         },
         "startTime": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation start time."
         },
         "endTime": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation end time."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation status."
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
@@ -864,7 +871,8 @@
       "type": "object",
       "required": [
         "name"
-      ]
+      ],
+      "description": "Status of video analyzer operation."
     },
     "OperationCollection": {
       "properties": {
@@ -1614,7 +1622,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Get status of asynchronous operation.": {
+          "Get status of private endpoint connection asynchronous operation.": {
             "$ref": "examples/video-analyzer-private-endpoint-connection-operation-result-by-id.json"
           }
         }
@@ -1753,7 +1761,8 @@
             "name": "locationName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Location Name."
           },
           {
             "name": "parameters",
@@ -1778,7 +1787,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/videoAnalyzers": {
       "get": {
         "summary": "List Video Analyzer accounts",
-        "description": "Lists the Video Analyzer accounts in the specified resource group.",
+        "description": "List all Video Analyzer accounts in the specified subscription.",
         "operationId": "VideoAnalyzers_ListBySubscription",
         "responses": {
           "200": {
@@ -1803,7 +1812,7 @@
           }
         ],
         "x-ms-examples": {
-          "List all Video Analyzer accounts": {
+          "List all Video Analyzer accounts in the specified subscription": {
             "$ref": "examples/video-analyzer-accounts-subscription-list-all-accounts.json"
           }
         }
