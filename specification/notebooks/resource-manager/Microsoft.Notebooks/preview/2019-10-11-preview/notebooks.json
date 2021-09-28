@@ -196,13 +196,66 @@
         ],
         "responses": {
           "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_Update",
+        "x-ms-examples": {
+          "Update Notebook Proxy": {
+            "$ref": "./examples/NBResourcePatch.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Patch NotebookProxy resource.",
+        "description": "Patch NotebookProxy resource with specified configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the NotebookProxy to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MutableNotebookProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/NotebookProxy"
             }
           },
-          "204": {
-            "description": "No Content"
+          "404": {
+            "description": "NotFound"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -403,6 +456,9 @@
               "$ref": "#/definitions/NotebookPEResponse"
             }
           },
+          "404": {
+            "description": "Not found"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -464,6 +520,9 @@
           "200": {
             "description": "Success"
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -502,6 +561,43 @@
         },
         "hostname": {
           "description": "The friendly string identifier of the creator of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "region": {
+          "description": "The region of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "secondaryAppId": {
+          "description": "The alternate application ID used for auth token request in the data plane",
+          "type": "string"
+        },
+        "publicDns": {
+          "description": "The public DNS name",
+          "type": "string"
+        },
+        "publicNetworkAccess": {
+          "description": "Allow public network access on a V-Net locked notebook resource",
+          "type": "string"
+        }
+      }
+    },
+    "MutableNotebookProxy": {
+      "description": "The mutable properties on a NotebookProxy resource ",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MutableNotebookResource",
+          "description": "The mutable properties of NotebookProxy resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MutableNotebookResource": {
+      "description": "Properties of NotebookProxy resource",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "A flag that allows public network access to a private link locked notebook resource.",
           "type": "string"
         }
       }
@@ -632,9 +728,47 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Storage/storageAccounts or Microsoft.Notebooks/notebookProxies."
+        },
+        "systemData": {
+          "$ref": "#/definitions/NotebookResourceSystemData"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "NotebookResourceSystemData": {
+      "type": "object",
+      "description": "System data for notebook resource",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityType": {
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "type": "string"
     },
     "CloudError": {
       "type": "object",
@@ -643,6 +777,25 @@
         "error": {
           "description": "The error response.",
           "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "type": "string",
+          "description": "[DEPRECATED] Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "[DEPRECATED] Error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "[DEPRECATED] Error target."
+        },
+        "details": {
+          "type": "array",
+          "description": "[DEPRECATED] An array of error detail objects.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
         }
       }
     },
@@ -657,6 +810,10 @@
         "message": {
           "type": "string",
           "description": "Error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
         },
         "details": {
           "type": "array",
@@ -697,8 +854,12 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane. True is for data-plane operations and false is for ARM/control-plane operations.",
+          "type": "boolean"
+        },
         "display": {
-          "description": "Display name of operation",
+          "description": "Display properties of the operation",
           "properties": {
             "provider": {
               "description": "The resource provider name: Microsoft.Notebooks",

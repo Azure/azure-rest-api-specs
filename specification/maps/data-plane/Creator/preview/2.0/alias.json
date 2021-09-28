@@ -49,7 +49,7 @@
   ],
   "responses": {},
   "parameters": {
-    "AliasApiVersionV2": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -94,7 +94,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/AliasApiVersionV2"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/CreateCreatorDataItemId"
@@ -128,7 +131,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/AliasApiVersionV2"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-pageable": {
@@ -159,10 +165,13 @@
         },
         "parameters": [
           {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "#/parameters/AliasApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/AssignCreatorDataItemId"
@@ -190,10 +199,13 @@
         },
         "parameters": [
           {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "#/parameters/AliasApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -215,10 +227,13 @@
         },
         "parameters": [
           {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "#/parameters/AliasApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -243,6 +258,7 @@
         "createdTimestamp": {
           "description": "The created timestamp for the alias.",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "aliasId": {
@@ -258,6 +274,7 @@
         "lastUpdatedTimestamp": {
           "description": "The timestamp of the last time the alias was assigned.",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }
@@ -304,6 +321,7 @@
         "lastUpdatedTimestamp": {
           "description": "The timestamp of the last time the alias was assigned.",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }

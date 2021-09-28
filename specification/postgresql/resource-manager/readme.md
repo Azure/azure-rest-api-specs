@@ -31,7 +31,13 @@ openapi-type: arm
 tag: package-preview-2021-07
 ```
 
+``` yaml $(package-flexibleservers)
+tag: package-flexibleserver-2021-06
+```
 
+``` yaml $(package-singleservers)
+tag: package-2020-01-01
+```
 ### Tag: package-preview-2021-07
 
 These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
@@ -41,6 +47,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2021-07-01-privatepreview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2021-07-01-privatepreview/postgresql.json
 ```
+
 ### Tag: package-2021-06-15-privatepreview
 
 These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
@@ -213,6 +220,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
 ```
