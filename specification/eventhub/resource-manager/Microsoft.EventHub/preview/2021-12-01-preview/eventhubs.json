@@ -267,19 +267,34 @@
       "description": "Properties to configure capture description for eventhub"
     },
     "ThrottleRules": {
+      "description": "List of all throttle rules",
       "properties": {
-        "name": {
+        "value": {
+          "description": "A collection of throttle rules resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottleRule"
+          }
+        }
+      }
+    },
+    "ThrottleRule": {
+      "properties": {
+        "ruleName": {
           "type": "string",
           "description": "The name of the throttling rule"
         },
-        "consumerId": {
+        "targetId": {
           "type": "string",
-          "description": "Consumer Group Id or SAS Key Name or AAD App ID on which consumption of the Event Hub will be throttled. In case this value is not supplied, it will be assumed to be on Produce scenario"
+          "description": "Consumer Group Id or SAS Key Name or AAD App ID on which Event Hub will be throttled. In case this value is not supplied"
         },
-        "limitRate": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Data Limit Rate, the units are in MB/s"
+        "metricId": {
+          "type": "string",
+          "description": ""
+        },
+        "throttleLimit": {
+          "type": "long",
+          "description": "Throttling Limit applicable on the rule"
         }
       },
       "description": "Properties to configure throttling limits for eventhub"

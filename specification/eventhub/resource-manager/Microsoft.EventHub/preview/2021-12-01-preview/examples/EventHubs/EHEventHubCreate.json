@@ -24,36 +24,39 @@
             }
           }
         },
-        "throttleRules": {
-          "RuleName": "Ingress1",
-          "TargetId": "AppId=Guid1",
-          "MetricId": "IncomingBytes",
-          "ThrottleLimit": 137429547
-        },
-        {
-          "RuleName": "Egress1",
-          "TargetId": "ConsumerGroupName=AmqpGroup1",
-          "MetricId": "OutgoingBytes",
-          "ThrottleLimit": 3951729
-        },
-        {
-          "RuleName": "Egress2",
-          "TargetId": "SASKey=SASKeyName",
-          "MetricId": "OutgoingMessages",
-          "ThrottleLimit": 6967
-        },
-        {
-          "RuleName": "Egress3",
-          "TargetId": "KafkaClientId=KafkaClientId",
-          "MetricId": "OutgoingBytes",
-          "ThrottleLimit": 3951729
-        },
-        {
-          "RuleName": "Ingress2",
-          "TargetId": "SASKey=SASKeyName",
-          "MetricId": "IncomingMessages",
-          "ThrottleLimit": 3456
-        }
+        "throttleRules": [
+
+          {
+            "ruleName": "Ingress1",
+            "targetId": "AppId=Guid1",
+            "metricId": "IncomingBytes",
+            "throttleLimit": 137429547
+          },
+          {
+            "ruleName": "Egress1",
+            "targetId": "ConsumerGroupName=AmqpGroup1",
+            "metricId": "OutgoingBytes",
+            "throttleLimit": 3951729
+          },
+          {
+            "ruleName": "Egress2",
+            "targetId": "SASKey=SASKeyName",
+            "metricId": "OutgoingMessages",
+            "throttleLimit": 6967
+          },
+          {
+            "ruleName": "Egress3",
+            "targetId": "KafkaClientId=KafkaClientId",
+            "metricId": "OutgoingBytes",
+            "throttleLimit": 3951729
+          },
+          {
+            "ruleName": "Ingress2",
+            "targetId": "SASKey=SASKeyName",
+            "metricId": "IncomingMessages",
+            "throttleLimit": 3456
+          }
+        ]
       }
     },
     "responses": {
@@ -90,34 +93,34 @@
             },
             "throttleRules": [
               {
-                "RuleName": "Ingress1",
-                "TargetId": "AppId=Guid1",
-                "MetricId": "IncomingBytes",
-                "ThrottleLimit": 137429547
+                "ruleName": "Ingress1",
+                "targetId": "AppId=Guid1",
+                "metricId": "IncomingBytes",
+                "throttleLimit": 137429547
               },
               {
-                "RuleName": "Egress1",
-                "TargetScope": "ConsumerGroupName=AmqpGroup1",
-                "MetricId": "OutgoingBytes",
-                "ThrottleLimit": 3951729
+                "ruleName": "Egress1",
+                "targetId": "ConsumerGroupName=AmqpGroup1",
+                "metricId": "OutgoingBytes",
+                "throttleLimit": 3951729
               },
               {
-                "RuleName": "Egress2",
-                "TargetId": "SASKey=SASKeyName",
-                "MetricId": "OutgoingMessages",
-                "ThrottleLimit": 6967
+                "ruleName": "Egress2",
+                "targetId": "SASKey=SASKeyName",
+                "metricId": "OutgoingMessages",
+                "throttleLimit": 6967
               },
               {
-                "RuleName": "Egress3",
-                "TargetId": "KafkaClientId=KafkaClientId",
-                "MetricId": "OutgoingBytes",
-                "ThrottleLimit": 3951729
+                "ruleName": "Egress3",
+                "targetId": "KafkaClientId=KafkaClientId",
+                "metricId": "OutgoingBytes",
+                "throttleLimit": 3951729
               },
               {
-                "RuleName": "Ingress2",
-                "TargetId": "SASKey=SASKeyName",
-                "MetricId": "IncomingMessages",
-                "ThrottleLimit": 3456
+                "ruleName": "Ingress2",
+                "targetId": "SASKey=SASKeyName",
+                "metricId": "IncomingMessages",
+                "throttleLimit": 3456
               }
             ]
           }
