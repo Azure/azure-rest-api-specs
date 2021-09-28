@@ -185,13 +185,17 @@
           },
           "Create or update a watchlist and bulk creates watchlist items.": {
             "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
+          },
+          "Create or update a watchlist and bulk creates watchlist items from SAL URI.": {
+            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItemsFromSasUri.json"
           }
         },
         "tags": [
           "Watchlists"
         ],
-        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.",
+        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with either rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large watchlist, where the file size can go up to 500 MB. The status of processing such large file can be polled through the returned status endpoint URL.",
         "operationId": "Watchlists_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -224,6 +228,12 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Watchlist"
             }
@@ -576,6 +586,11 @@
           "description": "The raw content that represents to watchlist items to create. Example : This line will be skipped\nheader1,header2\nvalue1,value2",
           "type": "string"
         },
+        "sasUri": {
+          "x-ms-secret": true,
+          "description": "The Shared Access Signature (SAS) URI under which the large csv watchlist file is located and from which the watchlist and its items will be created",
+          "type": "string"
+        },
         "itemsSearchKey": {
           "description": "The search key is used to optimize query performance when using watchlists for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.",
           "type": "string"
@@ -586,6 +601,10 @@
         },
         "uploadStatus": {
           "description": "The status of the Watchlist upload : New, InProgress or Complete. **Note** : When a Watchlist upload status is InProgress, the Watchlist cannot be deleted",
+          "type": "string"
+        },
+        "statusEndpointUrl": {
+          "description": "The get endpoint that can be called to poll the status of the large Watchlist processing",
           "type": "string"
         }
       },
