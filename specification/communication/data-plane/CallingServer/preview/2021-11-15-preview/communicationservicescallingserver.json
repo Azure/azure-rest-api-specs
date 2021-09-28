@@ -31,15 +31,11 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/AudioRoutingMode",
             "name": "audioRoutingMode",
             "in": "path",
             "description": "The audio routing mode.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "oneToOne",
-              "multicast"
-            ]
+            "required": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -49,10 +45,7 @@
           "200": {
             "description": "Returns the get audio routing group response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CallParticipant"
-              }
+              "$ref": "#/definitions/AudioRoutingGroupResult"
             }
           },
           "400": {
@@ -92,22 +85,18 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/AudioRoutingMode",
             "name": "audioRoutingMode",
             "in": "path",
             "description": "The audio routing mode.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "oneToOne",
-              "multicast"
-            ]
+            "required": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Returns the delete audio routing group response."
           },
           "400": {
@@ -147,15 +136,11 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/AudioRoutingMode",
             "name": "audioRoutingMode",
             "in": "path",
             "description": "The audio routing mode.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "oneToOne",
-              "multicast"
-            ]
+            "required": true
           },
           {
             "name": "audioRoutingGroupRequest",
@@ -2351,7 +2336,7 @@
         ],
         "summary": "Answer the call.",
         "description": "Answer the call.",
-        "operationId": "CallConnections_Answer",
+        "operationId": "ServerCalls_AnswerCall",
         "parameters": [
           {
             "name": "answerCallRequest",
@@ -2391,7 +2376,7 @@
         },
         "x-ms-examples": {
           "Answer the call.": {
-            "$ref": "./examples/CallConnections_Answer.json"
+            "$ref": "./examples/ServerCalls_AnswerCall.json"
           }
         }
       }
@@ -2403,7 +2388,7 @@
         ],
         "summary": "Reject the call.",
         "description": "Reject the call.",
-        "operationId": "CallConnections_Reject",
+        "operationId": "ServerCalls_RejectCall",
         "parameters": [
           {
             "name": "rejectCallRequest",
@@ -2440,7 +2425,7 @@
         },
         "x-ms-examples": {
           "Reject the call.": {
-            "$ref": "./examples/CallConnections_Reject.json"
+            "$ref": "./examples/ServerCalls_RejectCall.json"
           }
         }
       }
@@ -2452,7 +2437,7 @@
         ],
         "summary": "Redirect the call.",
         "description": "Redirect the call.",
-        "operationId": "CallConnections_Redirect",
+        "operationId": "ServerCalls_RedirectCall",
         "parameters": [
           {
             "name": "redirectCallRequest",
@@ -2489,32 +2474,38 @@
         },
         "x-ms-examples": {
           "Redirect the call.": {
-            "$ref": "./examples/CallConnections_Redirect.json"
+            "$ref": "./examples/ServerCalls_RedirectCall.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "CallParticipant": {
-      "description": "A participant in a call.",
-      "required": [
-        "identifier",
-        "isMuted"
+    "AudioRoutingMode": {
+      "description": "The audio routing mode.",
+      "enum": [
+        "oneToOne",
+        "multicast"
       ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioRoutingMode",
+        "modelAsString": true
+      }
+    },
+    "AudioRoutingGroupResult": {
+      "description": "The audio routing group result.",
       "type": "object",
       "properties": {
-        "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifier",
-          "description": "Communication identifier of the participant"
+        "audioRoutingMode": {
+          "$ref": "#/definitions/AudioRoutingMode"
         },
-        "participantId": {
-          "description": "Participant id",
-          "type": "string"
-        },
-        "isMuted": {
-          "description": "Is participant muted",
-          "type": "boolean"
+        "targets": {
+          "description": "The target identities that would be receivers in the audio routing group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifier"
+          }
         }
       }
     },
@@ -2532,18 +2523,6 @@
     },
     "MicrosoftTeamsUserIdentifier": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
-    "AudioRoutingMode": {
-      "description": "The audio routing mode.",
-      "enum": [
-        "oneToOne",
-        "multicast"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "AudioRoutingMode",
-        "modelAsString": true
-      }
     },
     "AudioRoutingGroupRequest": {
       "description": "The audio routing group request.",
@@ -2891,6 +2870,28 @@
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
+        }
+      }
+    },
+    "CallParticipant": {
+      "description": "A participant in a call.",
+      "required": [
+        "identifier",
+        "isMuted"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "Communication identifier of the participant"
+        },
+        "participantId": {
+          "description": "Participant id",
+          "type": "string"
+        },
+        "isMuted": {
+          "description": "Is participant muted",
+          "type": "boolean"
         }
       }
     },
