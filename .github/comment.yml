@@ -21,7 +21,7 @@
       - Azure/azure-rest-api-specs-pr
     variables:
       openapiHub: https://portal.azure-devex-tools.com
-      to: Azure/azure-rest-api-specs/master
+      to: Azure/azure-rest-api-specs/main
     label: Approved-OkToMerge
     onLabeledComments: "Hi @${PRAuthor},Your PR is approved. Congratulations. </br>  <li> Since your PR is in private repo (azure-rest-api-specs-pr),  there won’t be PR merge. If you want to publish the PR to public repo (Azure/azure-rest-api-specs) and get it merged, pls use [OpenAPIHub Publish PR](${openapiHub}/tools/publishpullrequest?pr=${owner}/${repo}/${PRNumber}&to=${to}).</li> <li> For further guidance on how to proceed.  Please refer to this [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**)</li>"
 
@@ -37,9 +37,9 @@
       Hi @${PRAuthor}, Your PR has some issues. Please fix the CI sequentially by following the order of `Avocado, semantic validation, model validation, breaking change, lintDiff`. 
       <table><tr><th>Task</th><th>How to fix</th><th>Priority</th><th>Support (Microsoft alias)</th></tr>
       <tr><td>Avocado</td><td>[Fix-Avocado](https://github.com/Azure/avocado)</td><td>High</td><td>ruowan</td></tr>
-      <tr><td>Semantic validation</td><td>[Fix-SemanticValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md#semantic-validation)</td><td>High</td><td>raychen, jianyxi</td></tr>
-      <tr><td>Model validation</td><td>[Fix-ModelValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md#model-validation)</td><td>High</td><td>raychen,jianyxi</td></tr>
-      <tr><td>LintDiff</td><td>[Fix-LintDiff](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md#linter-validation)</td><td>high</td><td>jianyxi, ruoxuan</td></tr></table> 
+      <tr><td>Semantic validation</td><td>[Fix-SemanticValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#semantic-validation)</td><td>High</td><td>raychen, jianyxi</td></tr>
+      <tr><td>Model validation</td><td>[Fix-ModelValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#model-validation)</td><td>High</td><td>raychen,jianyxi</td></tr>
+      <tr><td>LintDiff</td><td>[Fix-LintDiff](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#linter-validation)</td><td>high</td><td>jianyxi, ruoxuan</td></tr></table> 
       If you need further help, please feedback via [swagger feedback](https://aka.ms/swaggerfeedback)." 
 
 - rule:
@@ -48,7 +48,7 @@
       openapiHub: https://portal.azure-devex-tools.com
     keywords:
       - "I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow."
-    onOpenedComments: "Hi, @${PRAuthor} Thanks for your PR. I am workflow bot for review process. Here are some small tips. </br> <li> Please ensure to do self-check against checklists in first PR comment.</li> <li> PR assignee is the person auto-assigned and responsible for your current PR reviewing and merging. </li>   <li> For specs comparison cross API versions,  Use [API Specs Comparison Report Generator](${openapiHub}/tools/diff?pr=${owner}/${repo}/${PRNumber})</li>  <li> If there is CI failure(s), to fix CI error(s) is mandatory for PR merging; or you need to provide justification in PR comment for explanation. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md)</li></br> Any feedback about review process or workflow bot, pls contact swagger and tools team. vsswagger@microsoft.com"
+    onOpenedComments: "Hi, @${PRAuthor} Thanks for your PR. I am workflow bot for review process. Here are some small tips. </br> <li> Please ensure to do self-check against checklists in first PR comment.</li> <li> PR assignee is the person auto-assigned and responsible for your current PR reviewing and merging. </li>   <li> For specs comparison cross API versions,  Use [API Specs Comparison Report Generator](${openapiHub}/tools/diff?pr=${owner}/${repo}/${PRNumber})</li>  <li> If there is CI failure(s), to fix CI error(s) is mandatory for PR merging; or you need to provide justification in PR comment for explanation. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md)</li></br> Any feedback about review process or workflow bot, pls contact swagger and tools team. vsswagger@microsoft.com"
 
 - rule:
     type: PROpen
