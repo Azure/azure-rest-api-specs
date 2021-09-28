@@ -443,21 +443,21 @@
         }
       }
     },
-    "DeepStackEntityResolution": {
+    "DeepStackExtraInformationBase": {
       "type": "object",
-      "description": "This is the base class of all kinds of entity resolutions.",
+      "description": "This is the base class of all kinds of extra information.",
       "required": [
-        "resolutionKind"
+        "extraInfoKind"
       ],
       "properties": {
-        "resolutionKind": {
+        "extraInfoKind": {
           "type": "string",
-          "description": "The type of an entity resolution.",
+          "description": "The type of a piece of extra information.",
           "enum": [
             "DictionaryNormalizedValue"
           ],
           "x-ms-enum": {
-            "name": "resolutionKind",
+            "name": "extraInfoKind",
             "modelAsString": true,
             "values": [
               {
@@ -470,19 +470,34 @@
       },
       "additionalProperties": true
     },
-    "DictionaryNormalizedValueResolution": {
+    "DictionaryNormalizedValues": {
       "type": "object",
-      "description": "The DictionaryNormalizedValue resolution indicates entity values are extracted from a predefined dictionary. For example, Coca could be a normalized name for Coca-Cola.",
+      "description": "The dictionary normalized values are entities extracted from a predefined dictionary. For example, Coca could be a normalized name for Coca-Cola.",
       "x-ms-discriminator-value": "DictionaryNormalizedValue",
+      "required": [
+        "extraInfoValue"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/DeepStackEntityResolution"
+          "$ref": "#/definitions/DeepStackExtraInformationBase"
         }
       ],
       "properties": {
+        "extraInfoValue": {
+          "type": "object",
+          "description": "The value for A list of normalized entities.",
+          "x-nullable": false,
+          "$ref": "#/definitions/DictionaryNormalizedValue"
+        }
+      }
+    },
+    "DictionaryNormalizedValue": {
+      "type": "object",
+      "description": "A single dictionary normalized value.",
+      "properties": {
         "values": {
           "type": "array",
-          "description": "A list of normalized entities.",
+          "description": "A list of normalized values.",
           "x-nullable": false,
           "items": {
             "type": "string",
@@ -525,11 +540,11 @@
           "description": "The entity confidence score.",
           "type": "number"
         },
-        "resolution": {
-          "description": "A array with extra information about the entity.",
+        "extraInformation": {
+          "description": "An array contains extra information about the entity.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeepStackEntityResolution"
+            "$ref": "#/definitions/DeepStackExtraInformationBase"
           }
         }
       }
