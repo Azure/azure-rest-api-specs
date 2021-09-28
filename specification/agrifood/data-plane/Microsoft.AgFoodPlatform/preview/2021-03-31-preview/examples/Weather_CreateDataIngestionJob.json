@@ -1,47 +1,51 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "jobId": "JOB123",
+    "jobId": "Job123",
     "api-version": "2021-03-31-preview",
     "body": {
-      "farmerId": "test_farmer",
-      "boundaryId": "test_boundary",
-      "extensionId": "dtn.clearAg",
-      "extensionApiName": "dailyforecast",
+      "boundaryId": "Boundary123",
       "extensionApiInput": {
-        "start": 0,
-        "end": 5
+        "location": "47.922759,-97.089954",
+        "start": "1606262400",
+        "end": "1606780800"
       },
-      "name": "TestWeatherJob",
-      "description": "Daily Forecast data for 5 days",
+      "extensionApiName": "dailyhistorical",
+      "extensionId": "DTN.ClearAg",
+      "farmerId": "Farmer123",
+      "extensionDataProviderAppId": "12...ca0",
+      "extensionDataProviderApiKey": "c743a0f....1eed0709",
+      "name": "Test weather job",
+      "description": "Test weather job details",
       "properties": {
-        "region": "Asia"
+        "Region": "Central US",
+        "RetailerId": 123
       }
     }
   },
   "responses": {
     "202": {
       "body": {
-        "durationInSeconds": 12.4,
-        "id": "weather-job",
-        "status": "Waiting",
-        "message": "Created job to fetch weather data for job name 'TestWeatherJob', farmer id 'test_farmer' and field id 'test_field'.",
-        "createdDateTime": "2021-04-16T11:33:45Z",
-        "lastActionDateTime": "2021-04-16T11:33:45Z",
-        "startTime": "2021-04-16T11:33:45Z",
-        "endTime": "2021-04-16T11:33:45Z",
-        "farmerId": "test_farmer",
-        "boundaryId": "test_boundary",
-        "extensionId": "dtn.clearAg",
-        "extensionApiName": "dailyforecast",
+        "boundaryId": "Boundary123",
+        "farmerId": "Farmer123",
+        "extensionId": "DTN.ClearAg",
+        "extensionApiName": "dailyhistorical",
         "extensionApiInput": {
-          "start": 0,
-          "end": 5
+          "location": "47.922759,-97.089954",
+          "start": "1606262400",
+          "end": "1606780800"
         },
-        "name": "TestWeatherJob",
-        "description": "Daily Forecast data for 5 days",
+        "id": "Job123",
+        "status": "Waiting",
+        "message": "Created job 'Job123' to fetch weather data for farmer id 'Farmer123' and boundary id 'Boundary123'.",
+        "createdDateTime": "2021-06-19T14:52:22Z",
+        "lastActionDateTime": "2021-06-19T14:52:22Z",
+        "startTime": "2021-06-19T14:52:22Z",
+        "name": "Test weather job",
+        "description": "Test weather job details",
         "properties": {
-          "region": "Asia"
+          "region": "Central US",
+          "retailerId": 123
         }
       }
     }

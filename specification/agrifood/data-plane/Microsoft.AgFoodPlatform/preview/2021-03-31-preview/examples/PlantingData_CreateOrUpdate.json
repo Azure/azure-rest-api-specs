@@ -2,24 +2,11 @@
   "parameters": {
     "Endpoint": "{Endpoint}",
     "api-version": "2021-03-31-preview",
-    "farmerId": "FARMER123",
-    "plantingDataId": "PLANTINGOP123",
+    "farmerId": "Farmer123",
+    "plantingDataId": "Planting123",
     "plantingData": {
-      "source": "Manual",
-      "name": "Planting data for North Farm",
-      "description": "some description",
-      "status": "Active",
-      "operationStartDateTime": "2021-02-25T16:57:04Z",
-      "operationEndDateTime": "2021-02-27T10:13:06Z",
-      "operationModifiedDateTime": "2021-02-28T10:14:12Z",
-      "operationBoundaryId": "PLANTINGOPBOUNDARY1",
-      "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
       "avgPlantingRate": {
         "unit": "seedsperacre",
-        "value": 30
-      },
-      "area": {
-        "unit": "acre",
         "value": 30
       },
       "totalMaterial": {
@@ -32,7 +19,7 @@
       },
       "plantingProductDetails": [
         {
-          "productName": "VAR1",
+          "productName": "Product123",
           "area": {
             "unit": "acre",
             "value": 20
@@ -47,123 +34,134 @@
           }
         }
       ],
+      "area": {
+        "unit": "acre",
+        "value": 30
+      },
+      "source": "Manual",
+      "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+      "operationStartDateTime": "2021-02-25T16:57:04Z",
+      "operationEndDateTime": "2021-02-27T10:13:06Z",
+      "associatedBoundaryId": "AssociatedBoundary123",
+      "operationBoundaryId": "OperationBoundary123",
+      "status": "Active",
+      "name": "Test planting data",
+      "description": "Test planting data details",
       "properties": {
-        "Region": "Europe",
-        "CountyCode": 123
+        "Region": "Central US",
+        "RetailerId": 123
       }
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "farmerId": "FARMER123",
-        "id": "PLANTINGOP123",
-        "source": "Manual",
-        "name": "Planting data for North Farm",
-        "description": "some description",
-        "status": "Active",
-        "operationStartDateTime": "2021-02-25T16:57:04Z",
-        "operationEndDateTime": "2021-02-27T10:13:06Z",
-        "operationModifiedDateTime": "2021-02-28T10:14:12Z",
-        "operationBoundaryId": "PLANTINGOPBOUNDARY1",
-        "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
-        "avgPlantingRate": {
-          "unit": "seedsperacre",
-          "value": 30
-        },
-        "area": {
-          "unit": "acre",
-          "value": 30
-        },
-        "totalMaterial": {
-          "unit": "seeds",
-          "value": 758814
-        },
-        "avgMaterial": {
-          "unit": "seedsperacre",
-          "value": 25293
-        },
-        "plantingProductDetails": [
-          {
-            "productName": "VAR1",
-            "area": {
-              "unit": "acre",
-              "value": 20
-            },
-            "totalMaterial": {
-              "unit": "seeds",
-              "value": 389214
-            },
-            "avgMaterial": {
-              "unit": "seedsperacre",
-              "value": 19460
-            }
-          }
-        ],
-        "properties": {
-          "Region": "Europe",
-          "CountyCode": 123
-        },
-        "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{plantingDataId}}&resourceTypes=PlantingData",
-        "createdDateTime": "2021-02-29T04:57:04Z",
-        "modifiedDateTime": "2021-03-08T18:22:07Z",
-        "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
-      }
-    },
     "201": {
       "body": {
-        "farmerId": "FARMER123",
-        "id": "PLANTINGOP123",
-        "source": "Manual",
-        "name": "Planting data for North Farm",
-        "description": "some description",
-        "status": "Active",
-        "operationStartDateTime": "2021-02-25T16:57:04Z",
-        "operationEndDateTime": "2021-02-27T10:13:06Z",
-        "operationModifiedDateTime": "2021-02-28T10:14:12Z",
-        "operationBoundaryId": "PLANTINGOPBOUNDARY1",
-        "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
         "avgPlantingRate": {
           "unit": "seedsperacre",
-          "value": 30
-        },
-        "area": {
-          "unit": "acre",
-          "value": 30
+          "value": 30.0
         },
         "totalMaterial": {
           "unit": "seeds",
-          "value": 758814
+          "value": 758814.0
         },
         "avgMaterial": {
           "unit": "seedsperacre",
-          "value": 25293
+          "value": 25293.0
         },
         "plantingProductDetails": [
           {
-            "productName": "VAR1",
+            "productName": "Product123",
             "area": {
               "unit": "acre",
-              "value": 20
+              "value": 20.0
             },
             "totalMaterial": {
               "unit": "seeds",
-              "value": 389214
+              "value": 389214.0
             },
             "avgMaterial": {
               "unit": "seedsperacre",
-              "value": 19460
+              "value": 19460.0
             }
           }
         ],
-        "properties": {
-          "Region": "Europe",
-          "CountyCode": 123
+        "area": {
+          "unit": "acre",
+          "value": 30.0
         },
-        "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{plantingDataId}}&resourceTypes=PlantingData",
-        "createdDateTime": "2021-02-29T04:57:04Z",
-        "modifiedDateTime": "2021-03-08T18:22:07Z",
-        "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
+        "source": "Manual",
+        "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+        "operationStartDateTime": "2021-02-25T16:57:04Z",
+        "operationEndDateTime": "2021-02-27T10:13:06Z",
+        "associatedBoundaryId": "AssociatedBoundary123",
+        "operationBoundaryId": "OperationBoundary123",
+        "farmerId": "Farmer123",
+        "id": "Planting123",
+        "eTag": "03002c6d-0000-0600-0000-60cdc7740000",
+        "status": "Active",
+        "createdDateTime": "2021-06-19T10:31:16Z",
+        "modifiedDateTime": "2021-06-19T10:31:16Z",
+        "name": "Test planting data",
+        "description": "Test planting data details",
+        "properties": {
+          "Region": "Central US",
+          "RetailerId": 123
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "avgPlantingRate": {
+          "unit": "seedsperacre",
+          "value": 30.0
+        },
+        "totalMaterial": {
+          "unit": "seeds",
+          "value": 758814.0
+        },
+        "avgMaterial": {
+          "unit": "seedsperacre",
+          "value": 25293.0
+        },
+        "plantingProductDetails": [
+          {
+            "productName": "Product123",
+            "area": {
+              "unit": "acre",
+              "value": 20.0
+            },
+            "totalMaterial": {
+              "unit": "seeds",
+              "value": 389214.0
+            },
+            "avgMaterial": {
+              "unit": "seedsperacre",
+              "value": 19460.0
+            }
+          }
+        ],
+        "area": {
+          "unit": "acre",
+          "value": 30.0
+        },
+        "source": "Manual",
+        "operationModifiedDateTime": "2021-02-28T10:14:12Z",
+        "operationStartDateTime": "2021-02-25T16:57:04Z",
+        "operationEndDateTime": "2021-02-27T10:13:06Z",
+        "associatedBoundaryId": "AssociatedBoundary123",
+        "operationBoundaryId": "OperationBoundary123",
+        "farmerId": "Farmer123",
+        "id": "Planting123",
+        "eTag": "03002c6d-0000-0600-0000-60cdc7740000",
+        "status": "Active",
+        "createdDateTime": "2021-06-19T10:31:16Z",
+        "modifiedDateTime": "2021-06-19T10:31:16Z",
+        "name": "Test planting data",
+        "description": "Test planting data details",
+        "properties": {
+          "Region": "Central US",
+          "RetailerId": 123
+        }
       }
     }
   }

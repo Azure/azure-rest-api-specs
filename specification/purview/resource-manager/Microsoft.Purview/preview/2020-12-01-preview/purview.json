@@ -725,6 +725,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnections_CreateOrUpdate": {
             "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
@@ -969,8 +970,13 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku",
-          "description": "Gets or sets the Sku."
+          "description": "Gets or sets the Sku.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountSku"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -980,7 +986,7 @@
       "properties": {
         "capacity": {
           "format": "int32",
-          "description": "Gets or sets the sku capacity. Possible values include: 4, 16",
+          "description": "Gets or sets the sku capacity.",
           "type": "integer"
         },
         "name": {
@@ -1070,7 +1076,8 @@
             "SoftDeleting",
             "SoftDeleted",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
@@ -1846,20 +1853,20 @@
     }
   },
   "parameters": {
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
       "description": "The subscription identifier",
       "required": true,
       "type": "string"
+    },
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "api-version": {
       "name": "api-version",
@@ -1868,10 +1875,10 @@
       "required": true,
       "type": "string"
     },
-    "accountName": {
-      "name": "accountName",
+    "resourceGroupName": {
+      "name": "resourceGroupName",
       "in": "path",
-      "description": "The name of the account.",
+      "description": "The resource group name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -13,7 +13,7 @@
             "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
             "name": "perf",
             "type": "microsoft.insights/scheduledqueryrules",
-            "location": "Global",
+            "location": "eastus",
             "tags": {},
             "properties": {
               "description": "Performance rule",
@@ -68,14 +68,18 @@
                   "key11": "value11",
                   "key12": "value12"
                 }
-              }
+              },
+              "autoMitigate": true,
+              "isWorkspaceAlertsStorageConfigured": true,
+              "checkWorkspaceAlertsStorageConfigured": true,
+              "skipQueryValidation": true
             }
           },
           {
             "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/heartbeat",
             "name": "heartbeat",
             "type": "microsoft.insights/scheduledqueryrules",
-            "location": "Global",
+            "location": "eastus",
             "tags": {},
             "properties": {
               "description": "Health check rule",
@@ -113,7 +117,11 @@
                   "key11": "value11",
                   "key12": "value12"
                 }
-              }
+              },
+              "autoMitigate": true,
+              "isWorkspaceAlertsStorageConfigured": true,
+              "checkWorkspaceAlertsStorageConfigured": true,
+              "skipQueryValidation": true
             }
           }
         ]

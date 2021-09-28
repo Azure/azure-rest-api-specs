@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "fabricName": "Azure",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "protectedItemName": "VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2021-06-01"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01",
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2016-12-01",
+        "Retry-After": 60
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+        "name": "VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+        "properties": {
+          "friendlyName": "netvmtestv2vm1",
+          "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+          "protectionStatus": "Healthy",
+          "protectionState": "Protected",
+          "healthStatus": "Passed",
+          "lastBackupStatus": "Completed",
+          "lastBackupTime": "2018-01-22T12:25:32.048723Z",
+          "protectedItemDataId": "636482643132986882",
+          "protectedItemType": "Microsoft.Compute/virtualMachines",
+          "backupManagementType": "AzureIaasVM",
+          "workloadType": "VM",
+          "containerName": "iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+          "policyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupPolicies/testPolicy1",
+          "lastRecoveryPoint": null
+        }
+      }
+    },
+    "204": {}
+  }
+}

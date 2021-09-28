@@ -1554,9 +1554,30 @@
           "readOnly": true,
           "description": "The bot's endpoint version"
         },
+        "msaAppType": {
+          "type": "string",
+          "description": "Microsoft App Type for the bot",
+          "enum": [
+            "UserAssignedMSI",
+            "SingleTenant",
+            "MultiTenant"
+          ],
+          "x-ms-enum": {
+            "name": "msaAppType",
+            "modelAsString": true
+          }
+        },
         "msaAppId": {
           "type": "string",
           "description": "Microsoft App Id for the bot"
+        },
+        "msaAppTenantId": {
+          "type": "string",
+          "description": "Microsoft App Tenant Id for the bot"
+        },
+        "msaAppMSIResourceId": {
+          "type": "string",
+          "description": "Microsoft App Managed Identity Resource Id for the bot"
         },
         "configuredChannels": {
           "type": "array",
@@ -1609,9 +1630,21 @@
           "type": "boolean",
           "description": "Whether the bot is in an isolated network"
         },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+        },
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of Private Endpoint Connections configured for the bot",
+          "items": {
+            "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         }
       },
       "description": "The parameters to provide for the Bot.",
@@ -2136,6 +2169,10 @@
           "x-ms-secret": true,
           "type": "string",
           "description": "The Slack verification token. Value only returned through POST to the action Channel List API, otherwise empty."
+        },
+        "scopes": {
+          "type": "string",
+          "description": "The Slack permission scopes."
         },
         "landingPageUrl": {
           "type": "string",

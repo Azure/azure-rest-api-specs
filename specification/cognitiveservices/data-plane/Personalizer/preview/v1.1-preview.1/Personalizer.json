@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Personalizer Client v1.1-preview.1",
+    "title": "Personalizer Base",
     "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls.",
     "version": "v1.1-preview.1"
   },
@@ -180,7 +180,7 @@
           "ConfigurationsV1Dot1Preview1"
         ],
         "summary": "Apply Learning Settings and model from a pre-existing Offline Evaluation, making them the current online Learning Settings and model and replacing the previous ones.",
-        "operationId": "Evaluation_Apply",
+        "operationId": "ServiceConfiguration_ApplyFromEvaluation",
         "consumes": [
           "application/json"
         ],
@@ -209,8 +209,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Evaluation_Apply request": {
-            "$ref": "./examples/Evaluation_Apply.json"
+          "Successful ServiceConfiguration_ApplyFromEvaluation request": {
+            "$ref": "./examples/ServiceConfiguration_ApplyFromEvaluation.json"
           }
         }
       }
@@ -769,73 +769,6 @@
     }
   },
   "definitions": {
-    "ApprenticeLearningMetrics": {
-      "required": [
-        "numberOfEvents",
-        "numberOfImitatedEvents",
-        "sumOfImitatedRewards",
-        "sumOfRewards"
-      ],
-      "type": "object",
-      "properties": {
-        "numberOfEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfRewards": {
-          "format": "float",
-          "type": "number"
-        },
-        "numberOfImitatedEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfImitatedRewards": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "ApprenticeModeMetrics": {
-      "required": [
-        "lastProcessedEventTime",
-        "numberOfEvents",
-        "numberOfImitatedEvents",
-        "startTime",
-        "sumOfImitatedRewards",
-        "sumOfRewards"
-      ],
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastProcessedEventTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastBatchMetrics": {
-          "$ref": "#/definitions/ApprenticeLearningMetrics"
-        },
-        "numberOfEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfRewards": {
-          "format": "float",
-          "type": "number"
-        },
-        "numberOfImitatedEvents": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "sumOfImitatedRewards": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
     "ServiceConfiguration": {
       "description": "The configuration of the service.",
       "required": [
@@ -909,9 +842,6 @@
             "name": "LearningMode",
             "modelAsString": true
           }
-        },
-        "latestApprenticeModeMetrics": {
-          "$ref": "#/definitions/ApprenticeModeMetrics"
         },
         "isAutoOptimizationEnabled": {
           "description": "Flag indicating whether Personalizer will automatically optimize Learning Settings by running Offline Evaluations periodically.",
@@ -1307,6 +1237,8 @@
           "readOnly": true
         },
         "totalSummary": {
+          "description": "The aggregate total of the Offline Evaluation.",
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/PolicyResultSummary"
@@ -1317,7 +1249,7 @@
       }
     },
     "Evaluation": {
-      "description": "A counterfactual evaluation.",
+      "description": "A Counterfactual Evaluation.",
       "type": "object",
       "properties": {
         "id": {
@@ -1375,6 +1307,7 @@
           }
         },
         "featureImportance": {
+          "description": "Feature Importance.",
           "type": "array",
           "items": {
             "type": "array",
@@ -1384,6 +1317,7 @@
           }
         },
         "evaluationType": {
+          "description": "Evaluation type (manual or through Automatic Optimization).",
           "enum": [
             "Manual",
             "Auto"
@@ -1395,9 +1329,11 @@
           }
         },
         "optimalPolicy": {
+          "description": "Thr optimal policy.",
           "type": "string"
         },
         "creationTime": {
+          "description": "Creation time.",
           "format": "date-time",
           "type": "string"
         }
@@ -1478,6 +1414,8 @@
       "type": "object",
       "properties": {
         "dateRange": {
+          "description": "Date range.",
+          "type": "object",
           "allOf": [
             {
               "$ref": "#/definitions/DateRange"
@@ -1533,6 +1471,7 @@
       "type": "object",
       "properties": {
         "reward": {
+          "description": "List of SlotRewards",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SlotReward"
@@ -1784,18 +1723,6 @@
       "x-ms-skip-url-encoding": true
     }
   },
-  "securityDefinitions": {
-    "apim_key": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "apim_key": []
-    }
-  ],
   "tags": [
     {
       "name": "ConfigurationsV1Dot1Preview1",

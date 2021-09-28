@@ -332,16 +332,12 @@
           "readOnly": true
         },
         "duration": {
-          "format": "int32",
-          "type": "integer",
+          "type": "string",
           "description": "The duration of the request in hours.",
           "readOnly": true
         },
-        "requestedResourceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+        "resourceIds": {
+          "type": "string",
           "description": "A list of resource IDs associated with the Lockbox request separated by ','.",
           "readOnly": true
         },
@@ -358,6 +354,11 @@
         "supportCaseUrl": {
           "type": "string",
           "description": "The url of the support case.",
+          "readOnly": true
+        },
+        "workItemSource": {
+          "type": "string",
+          "description": "The support case system that was used to initiate the request.",
           "readOnly": true
         },
         "subscriptionId": {
@@ -394,7 +395,7 @@
       "description": "Request content object, in the use of Approve or Deny a Lockbox request.",
       "type": "object",
       "properties": {
-        "decision": {
+        "status": {
           "enum": [
             "Approve",
             "Deny"
@@ -402,7 +403,7 @@
           "type": "string",
           "description": "Approval decision to the Lockbox request.",
           "x-ms-enum": {
-            "name": "Decision",
+            "name": "Status",
             "modelAsString": true
           }
         },
@@ -417,7 +418,8 @@
       "description": "An error response from the Lockbox service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorBody"
+          "$ref": "#/definitions/ErrorBody",
+          "description": "Detailed information about the error encountered."
         }
       }
     },
@@ -456,6 +458,7 @@
         },
         "info": {
           "type": "object",
+          "description": "Additional information about the request that is in error state.",
           "properties": {
             "currentStatus": {
               "$ref": "#/definitions/LockboxRequestStatus",
