@@ -850,15 +850,13 @@
     "HourlyForecast": {
       "type": "object",
       "properties": {
-        "date": {
+        "dateTime": {
           "type": "string",
           "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00.",
           "format": "date-time"
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "iconPhrase": {
           "type": "string",
@@ -978,11 +976,11 @@
           "type": "string",
           "description": "Summary phrase for the next 60 minutes. Phrase length is approximately 60 characters."
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "Short summary phrase for the next 120 minutes. Phrase length is approximately 25 characters."
         },
-        "briefPhrase": {
+        "briefDescription": {
           "type": "string",
           "description": "Summary phrase for the next 120 minutes. Phrase length is approximately 60 characters."
         },
@@ -991,9 +989,7 @@
           "description": "Long summary phrase for the next 120 minutes. Phrase length is 60+ characters."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         }
       },
       "description": "Phrase summaries for the entire forecast period."
@@ -1016,11 +1012,11 @@
           "format": "int32",
           "description": "The number of minutes for which the summary applies."
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "Short summary phrase. Phrase length is approximately 25 characters."
         },
-        "briefPhrase": {
+        "briefDescription": {
           "type": "string",
           "description": "Brief summary phrase. Phrase length is approximately 60 characters."
         },
@@ -1051,7 +1047,7 @@
           "format": "double",
           "description": "A unit that represents forecasted precipitation intensity."
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "A short phrase describing precipitation condition for the interval."
         },
@@ -1130,8 +1126,9 @@
     "QuarterDayForecast": {
       "type": "object",
       "properties": {
-        "date": {
+        "dateTime": {
           "type": "string",
+          "format":"date-time",
           "description": "Date of the forecast as example, 2019-10-27T00:00:00"
         },
         "effectiveDate": {
@@ -1284,7 +1281,7 @@
     "PressureTendency": {
       "type": "object",
       "properties": {
-        "localizedDescription": {
+        "description": {
           "type": "string",
           "description": "Description of the pressure tendency in specified language"
         },
@@ -1429,12 +1426,12 @@
         "uvIndex": {
           "$ref": "#/definitions/UVIndex"
         },
-        "uvIndexPhrase": {
+        "uvIndexDescription": {
           "type": "string",
           "description": "Phrase associated with the `uvIndex`."
         },
         "visibility": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
         "obstructionsToVisibility": {
@@ -1774,7 +1771,7 @@
           "type": "array",
           "description": "Data for each waypoint returned in the same order as specified in the request.",
           "items": {
-            "$ref": "#/definitions/WeatherWaypoint"
+            "$ref": "#/definitions/WaypointForecast"
           }
         }
       }
@@ -1890,7 +1887,7 @@
           "type": "string",
           "description": "A unique identifier (non-displayable) for each type of hazard: LightRain, ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow, ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail, SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh, WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning, SevereThunderstormWarning."
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
@@ -1910,7 +1907,7 @@
           "type": "string",
           "description": "A unique identifier (non-displayable) for each type of hazard: LightRain, ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow, ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail, SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh, WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning, SevereThunderstormWarning."
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
@@ -1989,11 +1986,11 @@
       "type": "object",
       "description": "Description of a severe weather alert.",
       "properties": {
-        "localized": {
+        "description": {
           "type": "string",
           "description": "Description of the alert in the specified language. By default English (en-US) is returned if the language parameter is not specified in the request."
         },
-        "english": {
+        "status": {
           "type": "string",
           "description": "Description of the alert in English (en-US)."
         }
@@ -2137,7 +2134,7 @@
           "format": "float",
           "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
         },
-        "category": {
+        "categoryDescription": {
           "type": "string",
           "description": "Textual description for `categoryValue` corresponding to the level that the index value falls under, for example \"Very Good\"."
         },
