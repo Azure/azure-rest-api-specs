@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2018-11-30",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName",
+            "location": "eastus",
+            "name": "identityName",
+            "properties": {
+              "clientId": "clientGUID",
+              "principalId": "identityObjectID",
+              "tenantId": "tenantGUID"
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ],
+        "nextLink": "https://serviceRoot/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities?api-version=2018-11-30&$skiptoken=X'12345'"
+      }
+    }
+  }
+}
