@@ -477,8 +477,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos": {
       "get": {
-        "summary": "List all existing video resources.",
-        "description": "List all existing video resources.",
+        "summary": "Retrieves all existing video resources.",
+        "description": "Retrieves a list of video resources that have been created, along with their JSON representations.",
         "operationId": "Videos_List",
         "responses": {
           "200": {
@@ -529,7 +529,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}": {
       "get": {
         "summary": "Retrieves an existing video resource.",
-        "description": "Retrieves an existing video resource.",
+        "description": "Retrieves an existing video resource with the given name.",
         "operationId": "Videos_Get",
         "responses": {
           "200": {
@@ -574,7 +574,7 @@
       },
       "put": {
         "summary": "Creates a new video resource or updates an existing one.",
-        "description": "Creates a new video resource or updates an existing one.",
+        "description": "Creates a new video resource or updates an existing video resource with the given name.",
         "operationId": "Videos_CreateOrUpdate",
         "responses": {
           "200": {
@@ -679,7 +679,7 @@
       },
       "patch": {
         "summary": "Updates individual properties of an existing video resource.",
-        "description": "Updates individual properties of an existing video resource.",
+        "description": "Updates individual properties of an existing video resource with the given name.",
         "operationId": "Videos_Update",
         "responses": {
           "200": {
@@ -735,7 +735,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/listContentToken": {
       "post": {
         "summary": "Generates a streaming token which can be used for accessing content from video content URLs.",
-        "description": "Generates a streaming token which can be used for accessing content from video content URLs.",
+        "description": "Generates a streaming token which can be used for accessing content from video content URLs, for a video resource with the given name.",
         "operationId": "Videos_ListContentToken",
         "responses": {
           "200": {
@@ -782,7 +782,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies": {
       "get": {
         "summary": "List all existing access policy resources.",
-        "description": "List all existing access policy resources.",
+        "description": "Retrieves all existing access policy resources, along with their JSON representations.",
         "operationId": "AccessPolicies_List",
         "responses": {
           "200": {
@@ -833,7 +833,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies/{accessPolicyName}": {
       "get": {
         "summary": "Retrieves an existing access policy resource.",
-        "description": "Retrieves an existing access policy resource.",
+        "description": "Retrieves an existing access policy resource with the given name.",
         "operationId": "AccessPolicies_Get",
         "responses": {
           "200": {
@@ -878,7 +878,7 @@
       },
       "put": {
         "summary": "Creates a new access policy resource or updates an existing one.",
-        "description": "Creates a new access policy resource or updates an existing one.",
+        "description": "Creates a new access policy resource or updates an existing one with the given name.",
         "operationId": "AccessPolicies_CreateOrUpdate",
         "responses": {
           "200": {
@@ -938,7 +938,7 @@
       },
       "delete": {
         "summary": "Deletes an existing access policy resource.",
-        "description": "Deletes an existing access policy resource.",
+        "description": "Deletes an existing access policy resource with the given name.",
         "operationId": "AccessPolicies_Delete",
         "responses": {
           "200": {
@@ -983,7 +983,7 @@
       },
       "patch": {
         "summary": "Updates individual properties of an existing access policy resource.",
-        "description": "Updates individual properties of an existing access policy resource.",
+        "description": "Updates individual properties of an existing access policy resource with the given name.",
         "operationId": "AccessPolicies_Update",
         "responses": {
           "200": {

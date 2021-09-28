@@ -783,7 +783,8 @@
           "x-nullable": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "Group level network access control."
     },
     "NetworkAccessControl": {
       "properties": {
@@ -803,24 +804,30 @@
           "x-nullable": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "Network access control for video analyzer account."
     },
     "VideoAnalyzerPrivateEndpointConnectionOperationStatus": {
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation identifier."
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation resource ID."
         },
         "startTime": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation start time."
         },
         "endTime": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation end time."
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation status."
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
@@ -1376,7 +1383,7 @@
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "responses": {
           "201": {
-            "description": "OK",
+            "description": "Created",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -1545,7 +1552,7 @@
           }
         ],
         "x-ms-examples": {
-          "Get status of asynchronous operation when it is completed.": {
+          "Get status of private endpoint asynchronous operation when it is completed.": {
             "$ref": "examples/video-analyzer-private-endpoint-connection-operation-status-by-id-terminal-state.json"
           }
         }
@@ -1640,7 +1647,8 @@
             "name": "locationName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Location name."
           },
           {
             "name": "name",
@@ -1696,7 +1704,8 @@
             "name": "locationName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Location name."
           },
           {
             "name": "name",
