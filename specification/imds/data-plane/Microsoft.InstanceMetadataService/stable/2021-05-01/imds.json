@@ -235,6 +235,89 @@
           }
         }
       }
+    },
+    "/login/ca_keys": {
+      "get": {
+        "tags": [
+          "Get signing keys"
+        ],
+        "description": "Get signing keys for SSH certificates",
+        "operationId": "Login_GetCaKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/MetadataParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CaKeysResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get CA Keys": {
+            "$ref": "./examples/GetCaKeys.json"
+          }
+        }
+      }
+    },
+    "/login/users/{upn}": {
+      "get": {
+        "tags": [
+          "Get user info"
+        ],
+        "description": "Get information about a user",
+        "operationId": "Login_GetUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "upn",
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MetadataParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get User Info": {
+            "$ref": "./examples/GetUserInfo.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -918,6 +1001,88 @@
         "tenantId": {
           "type": "string",
           "description": "This is the AAD tenantId of the identity of the system assigned managed identity."
+        }
+      }
+    },
+    "CaKeysResponse": {
+      "type": "object",
+      "description": "This is the response from the Login_GetCaKeys operation.",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "CA Keys",
+          "items": {
+            "type": "object",
+            "description": "CA Key",
+            "properties": {
+              "kty": {
+                "type": "string",
+                "description": "kty part"
+              },
+              "use": {
+                "type": "string",
+                "description": "use part"
+              },
+              "kid": {
+                "type": "string",
+                "description": "kid part"
+              },
+              "x5t": {
+                "type": "string",
+                "description": "x5t part"
+              },
+              "n": {
+                "type": "string",
+                "description": "n part"
+              },
+              "e": {
+                "type": "string",
+                "description": "e part"
+              },
+              "x5c": {
+                "type": "array",
+                "description": "e part",
+                "items": {
+                  "type": "string",
+                  "description": "one x5c"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserInfoResponse": {
+      "type": "object",
+      "description": "This is the response from the Login_GetUser operation.",
+      "properties": {
+        "oid": {
+          "type": "string",
+          "description": "User object ID"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User UPN"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email"
+        },
+        "uid": {
+          "type": "int",
+          "description": "User UID (currently 0)"
+        },
+        "gid": {
+          "type": "int",
+          "description": "User GID (currently 0)"
+        },
+        "isAdmin": {
+          "type": "bool",
+          "description": "Whether user is allowed regular or admin access"
         }
       }
     }
