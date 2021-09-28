@@ -34,14 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{targetDBServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
         ],
-        "operationId": "Migrations_Create",
+        "operationId": "PGVersionUpgradeResources_Write",
         "x-ms-examples": {
-          "Migrations_Create": {
+          "PGVersionUpgradeResources_Write": {
             "$ref": "./examples/Migrations_Create.json"
           }
         },
@@ -97,9 +97,9 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "Migrations_Get",
+        "operationId": "PGVersionUpgradeResources_Read",
         "x-ms-examples": {
-          "Migrations_Get": {
+          "PGVersionUpgradeResources_Read": {
             "$ref": "./examples/Migrations_Get.json"
           }
         },
@@ -140,9 +140,9 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "Migrations_Update",
+        "operationId": "PGVersionUpgradeResources_Update",
         "x-ms-examples": {
-          "Migrations_Update": {
+          "PGVersionUpgradeResources_Update": {
             "$ref": "./examples/Migrations_Update.json"
           }
         },
@@ -192,9 +192,9 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "Migrations_Delete",
+        "operationId": "PGVersionUpgradeResources_Delete",
         "x-ms-examples": {
-          "Migrations_Delete": {
+          "PGVersionUpgradeResources_Delete": {
             "$ref": "./examples/Migrations_Delete.json"
           }
         },
@@ -232,14 +232,14 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{targetDBServerName}/migrations": {
       "get": {
         "tags": [
           "Migrations"
         ],
-        "operationId": "Migrations_ListByTargetServer",
+        "operationId": "PGVersionUpgradeResources_ListByTargetServer",
         "x-ms-examples": {
-          "Migrations_ListByTargetServer": {
+          "PGVersionUpgradeResources_ListByTargetServer": {
             "$ref": "./examples/Migrations_ListByTargetServer.json"
           }
         },
@@ -280,7 +280,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{targetDBServerName}/checkMigrationNameAvailability": {
       "post": {
         "summary": "Check migration name validity and availability",
         "description": "This method checks whether a proposed migration name is valid and available.",
