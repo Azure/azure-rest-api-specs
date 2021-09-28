@@ -6,17 +6,33 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release is 2021-05-01-preview
+The current preview release is 2021-11-01-preview
 
 ```yaml
-tag: release_2021_05_01_preview
+tag: release_2021_11_01_preview
 add-credentials: true
 clear-output-folder: true
+directive:
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
+```
+
+### Release 2021-11-01-preview
+
+These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_11_01_preview'
+input-file:
+- preview/2021-11-01-preview/textanalytics.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Release 2021-05-01-preview
 
-These settings apply only when `--tag=elease_2021_05_01_preview` is specified on the command line.
+These settings apply only when `--tag=release_2021_05_01_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2021_05_01_preview'
 input-file:
