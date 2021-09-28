@@ -4520,17 +4520,9 @@
           "description": "The MDM Provider GUID used during MDM enrollment for Azure AD joined virtual machines."
         },
         "credential": {
-          "$ref": "#/definitions/CredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialProperties",
           "description": "Credential needed to create the virtual machine."
         }
-      }
-    },
-    "CredentialProperties": {
-      "description": "Credential needed to create the virtual machine.",
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/KeyVaultCredentialProperties",
-        "description": "Credentials kept in the keyvault."
       }
     },
     "KeyVaultCredentialProperties": {
