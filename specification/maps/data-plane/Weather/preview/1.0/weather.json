@@ -495,7 +495,266 @@
     }
   },
   "definitions": {
-    "WeatherUnit": {
+    "IconCode": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "readOnly": true,
+      "x-ms-client-name": "iconCode",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "x-ms-enum": {
+        "name": "IconCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "1",
+            "name": "Sunny",
+            "description": "Sunny"
+          },
+          {
+            "value": "2",
+            "name": "Mostly Sunny",
+            "description": "Mostly Sunny"
+          },
+          {
+            "value": "3",
+            "name": "Partly Sunny",
+            "description": "Partly Sunny"
+          },
+          {
+            "value": "4",
+            "name": "Intermittent Clouds",
+            "description": "Intermittent Clouds"
+          },
+          {
+            "value": "5",
+            "name": "Hazy Sunshine",
+            "description": "Hazy Sunshine"
+          },
+          {
+            "value": "6",
+            "name": "Mostly Cloudy",
+            "description": "Mostly Cloudy"
+          },
+          {
+            "value": "7",
+            "name": "Cloudy",
+            "description": "Cloudy"
+          },
+          {
+            "value": "8",
+            "name": "Dreary (Overcast)",
+            "description": "Dreary (Overcast)"
+          },
+          {
+            "value": "11",
+            "name": "Fog",
+            "description": "Fog"
+          },
+          {
+            "value": "12",
+            "name": "Showers",
+            "description": "Showers"
+          },
+          {
+            "value": "13",
+            "name": "Mostly Cloudy with Showers",
+            "description": "Mostly Cloudy with Showers"
+          },
+          {
+            "value": "14",
+            "name": "Partly Sunny with Showers",
+            "description": "Partly Sunny with Showers"
+          },
+          {
+            "value": "15",
+            "name": "Thunderstorms",
+            "description": "Thunderstorms"
+          },
+          {
+            "value": "16",
+            "name": "Mostly Cloudy with Thunderstorms",
+            "description": "Mostly Cloudy with Thunderstorms"
+          },
+          {
+            "value": "17",
+            "name": "Partly Sunny with Thunderstorms",
+            "description": "Partly Sunny with Thunderstorms"
+          },
+          {
+            "value": "18",
+            "name": "Rain",
+            "description": "Rain"
+          },
+          {
+            "value": "19",
+            "name": "Flurries",
+            "description": "Flurries"
+          },
+          {
+            "value": "20",
+            "name": "Mostly Cloudy with Flurries",
+            "description": "Mostly Cloudy with Flurries"
+          },
+          {
+            "value": "21",
+            "name": "Partly Sunny with Flurries",
+            "description": "Partly Sunny with Flurries"
+          },
+          {
+            "value": "22",
+            "name": "Snow",
+            "description": "Snow"
+          },
+          {
+            "value": "23",
+            "name": "Mostly Cloudy with Snow",
+            "description": "Mostly Cloudy with Snow"
+          },
+          {
+            "value": "24",
+            "name": "Ice",
+            "description": "Ice"
+          },
+          {
+            "value": "25",
+            "name": "Sleet",
+            "description": "Sleet"
+          },
+          {
+            "value": "26",
+            "name": "Freezing Rain",
+            "description": "Freezing Rain"
+          },
+          {
+            "value": "29",
+            "name": "Rain and Snow",
+            "description": "Rain and Snow"
+          },
+          {
+            "value": "30",
+            "name": "Hot",
+            "description": "Hot"
+          },
+          {
+            "value": "31",
+            "name": "Cold",
+            "description": "Cold"
+          },
+          {
+            "value": "32",
+            "name": "Windy",
+            "description": "Windy"
+          },
+          {
+            "value": "33",
+            "name": "Clear",
+            "description": "Clear"
+          },
+          {
+            "value": "34",
+            "name": "Mostly Clear",
+            "description": "Mostly Clear"
+          },
+          {
+            "value": "35",
+            "name": "Partly Cloudy",
+            "description": "Partly Cloudy"
+          },
+          {
+            "value": "36",
+            "name": "Intermittent Clouds",
+            "description": "Intermittent Clouds"
+          },
+          {
+            "value": "37",
+            "name": "Hazy Moonlight",
+            "description": "Hazy Moonlight"
+          },
+          {
+            "value": "38",
+            "name": "Mostly Cloudy",
+            "description": "Mostly Cloudy"
+          },
+          {
+            "value": "39",
+            "name": "Partly Cloudy with Showers",
+            "description": "Partly Cloudy with Showers"
+          },
+          {
+            "value": "40",
+            "name": "Mostly Clear",
+            "description": "Mostly Clear"
+          },
+          {
+            "value": "41",
+            "name": "Partly Cloudy with Thunderstorms",
+            "description": "Partly Cloudy with Thunderstorms"
+          },
+          {
+            "value": "42",
+            "name": "Mostly Cloudy with Thunderstorms",
+            "description": "Mostly Cloudy with Thunderstorms"
+          },
+          {
+            "value": "43",
+            "name": "Mostly Cloudy with Flurries",
+            "description": "Mostly Cloudy with Flurries"
+          },
+          {
+            "value": "44",
+            "name": "Mostly Cloudy with Snow",
+            "description": "Mostly Cloudy with Snow"
+          }
+        ]
+      }
+    },
+    "WeatherValue": {
       "description": "Specific value of a given unit related to weather.",
       "type": "object",
       "properties": {
@@ -504,7 +763,7 @@
           "format": "float",
           "description": "Rounded value."
         },
-        "unit": {
+        "unitLabel": {
           "type": "string",
           "description": "Type of unit for the returned value."
         },
@@ -537,7 +796,7 @@
           "format": "int32",
           "description": "Wind direction in Azimuth degrees,  starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359."
         },
-        "localizedDescription": {
+        "description": {
           "type": "string",
           "description": "Direction abbreviation in the specified language."
         }
@@ -564,16 +823,16 @@
         }
       }
     },
-    "WeatherUnitRange": {
+    "WeatherValueRange": {
       "type": "object",
       "description": "Returned temperature values.",
       "properties": {
         "minimum": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Minimum temperature for the time period."
         },
         "maximum": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Maximum temperature for the time period"
         }
       }
@@ -614,19 +873,19 @@
           "description": "Specifies whether or not it is daylight. True indicates day light."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Temperature being returned."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
         },
         "wetBulbTemperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation."
         },
         "dewPoint": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "wind": {
@@ -643,17 +902,17 @@
           "description": "Relative humidity is the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature."
         },
         "visibility": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
         "ceiling": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Cloud ceiling in specified unit. The ceiling is a measurement of the height of the base of the lowest clouds."
         },
         "uvIndex": {
           "$ref": "#/definitions/UVIndex"
         },
-        "uvIndexPhrase": {
+        "uvIndexDescription": {
           "type": "string",
           "description": "Phrase associated with the `uvIndex`."
         },
@@ -678,19 +937,19 @@
           "description": "Percent representing the probability of snow. For example, '5'."
         },
         "totalLiquid": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Total liquid equivalent of precipitation during the forecast period."
         },
         "rain": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Rain"
         },
         "snow": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Snow"
         },
         "ice": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Ice"
         },
         "cloudCover": {
@@ -770,9 +1029,7 @@
           "description": "Long summary phrase. Phrase length is 60+ characters."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         }
       }
     },
@@ -815,9 +1072,7 @@
           "description": "Specifies the type of precipitation (\"rain\" \"snow\" \"ice\" or \"mix\"). If dbz is zero, precipitationType is not present in the response."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "cloudCover": {
           "type": "integer",
@@ -918,9 +1173,7 @@
           }
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "iconPhrase": {
           "type": "string",
@@ -939,7 +1192,7 @@
           "description": "RealFeel™ Temperature values for the quarter."
         },
         "dewPoint": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "relativeHumidity": {
@@ -956,7 +1209,7 @@
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "visibility": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
         "cloudCover": {
@@ -987,19 +1240,19 @@
           "description": "Percent representing the probability of a thunderstorm. For example, '10'."
         },
         "totalLiquid": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Total liquid equivalent of precipitation during the forecast period."
         },
         "rain": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Rain"
         },
         "snow": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Snow"
         },
         "ice": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Ice"
         }
       }
@@ -1045,31 +1298,31 @@
       "type": "object",
       "properties": {
         "pastHour": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past hour."
         },
         "past3Hours": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past three hours."
         },
         "past6Hours": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past six hours. Contains Metric and Imperial Values."
         },
         "past9Hours": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past nine hours."
         },
         "past12Hours": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 12 hours."
         },
         "past18Hours": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 18 hours."
         },
         "past24Hours": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 24 hours."
         }
       }
@@ -1081,11 +1334,11 @@
           "type": "object",
           "properties": {
             "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
+              "$ref": "#/definitions/WeatherValue",
               "description": "minimum"
             },
             "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
+              "$ref": "#/definitions/WeatherValue",
               "description": "maximum"
             }
           },
@@ -1095,11 +1348,11 @@
           "type": "object",
           "properties": {
             "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
+              "$ref": "#/definitions/WeatherValue",
               "description": "minimum"
             },
             "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
+              "$ref": "#/definitions/WeatherValue",
               "description": "maximum"
             }
           },
@@ -1109,11 +1362,11 @@
           "type": "object",
           "properties": {
             "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
+              "$ref": "#/definitions/WeatherValue",
               "description": "minimum"
             },
             "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
+              "$ref": "#/definitions/WeatherValue",
               "description": "maximum"
             }
           },
@@ -1129,14 +1382,12 @@
           "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
-        "phrase": {
+        "description": {
           "type": "string",
           "description": "Phrase description of the current weather condition.  Displayed in specified language."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "hasPrecipitation": {
           "type": "boolean",
@@ -1147,15 +1398,15 @@
           "description": "Indicates the time of the day. True indicates 'day',', false indicates 'night."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Temperature being returned."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "RealFeel™ Temperature being returned."
         },
         "realFeelTemperatureShade": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
         },
         "relativeHumidity": {
@@ -1164,7 +1415,7 @@
           "description": "Relative humidity is the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature."
         },
         "dewPoint": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "wind": {
@@ -1196,11 +1447,11 @@
           "description": "Percent representing cloud cover."
         },
         "cloudCeiling": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Cloud ceiling in specified unit. The ceiling is a measurement of the height of the base of the lowest clouds."
         },
         "pressure": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Atmospheric pressure in specified unit."
         },
         "pressureTendency": {
@@ -1208,19 +1459,19 @@
           "description": "Atmospheric pressure change."
         },
         "past24HourTemperatureDeparture": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Departure from the temperature observed 24 hours ago in specified unit."
         },
         "apparentTemperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Perceived outdoor temperature caused by the combination of air temperature, relative humidity, and wind speed in specified unit."
         },
         "windChillTemperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Perceived air temperature on exposed skin due to wind."
         },
         "wetBulbTemperature": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation."
         },
         "precipitationSummary": {
@@ -1262,15 +1513,15 @@
       },
       "description": "Summary for the main conditions for the requested time period. Notice that summary can cover only part of the time period."
     },
-    "DegreeDaySummary": {
+    "MeanTemperatureDeviation": {
       "type": "object",
       "properties": {
         "heating": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Number of degrees that the mean temperature is below 65 degrees F/ 18 degree C."
         },
         "cooling": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Number of degrees that the mean temperature is above 65 degrees F/ 18 degree C."
         }
       }
@@ -1458,19 +1709,19 @@
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "totalLiquid": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Total liquid equivalent of precipitation during the forecast period."
         },
         "rain": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Rain"
         },
         "snow": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Snow"
         },
         "ice": {
-          "$ref": "#/definitions/WeatherUnit",
+          "$ref": "#/definitions/WeatherValue",
           "description": "Ice"
         },
         "hoursOfPrecipitation": {
@@ -1505,9 +1756,7 @@
       "type": "object",
       "properties": {
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "hazards": {
           "$ref": "#/definitions/WeatherHazards"
@@ -1583,7 +1832,7 @@
           "description": "Percent representing cloud cover."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherUnit"
+          "$ref": "#/definitions/WeatherValue"
         },
         "wind": {
           "$ref": "#/definitions/WindDetails"
