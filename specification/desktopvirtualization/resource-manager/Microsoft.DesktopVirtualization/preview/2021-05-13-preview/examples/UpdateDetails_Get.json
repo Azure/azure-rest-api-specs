@@ -62,8 +62,8 @@
           "sessionHostConfiguration": {
             "vmSizeId": "Standard_D2s_v3",
             "diskType": "Standard_LRS",
-            "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
-            "vmCustomConfigurationParameterUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+            "customConfigurationTemplateUrl": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+            "customConfigurationParameterUrl": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
             "imageInfo": {
               "type": "Gallery",
               "marketPlaceInfo": {
@@ -72,25 +72,23 @@
                 "sku": "19h2-ent",
                 "exactVersion": "2019.0.20190115"
               },
-              "storageBlobUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
+              "managedImageUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
               "customId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
             },
             "domainInfo": {
               "name": "wvdarmtest1.net",
               "joinType": "ActiveDirectory",
               "mdmProviderGuid": "",
-              "credentials": {
-                "localAdmin": {
-                  "userName": "localAdminUserName",
-                  "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
-                  "passwordSecretName": "localAdminPasswordName"
-                },
-                "domainAdmin": {
-                  "userName": "domainAdminUserName",
-                  "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
-                  "passwordSecretName": "domainAdminPasswordName"
-                }
+              "credential": {
+                "userName": "UserName",
+                "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                "passwordSecretName": "PasswordName"
               }
+            },
+            "localAdminCredential": {
+              "userName": "UserName",
+              "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+              "passwordSecretName": "PasswordName"
             }
           }
         }

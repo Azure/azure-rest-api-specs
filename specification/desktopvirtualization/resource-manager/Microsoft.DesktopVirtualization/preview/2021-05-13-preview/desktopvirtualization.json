@@ -4394,11 +4394,11 @@
           },
           "description": "The disk type used by virtual machine in hostpool session host."
         },
-        "vmCustomConfigurationUri": {
+        "customConfigurationTemplateUrl": {
           "type": "string",
           "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
         },
-        "vmCustomConfigurationParameterUri": {
+        "customConfigurationParameterUrl": {
           "type": "string",
           "description": "The uri to the storage blob containing the parameter file to be run on the virtual machine after provisioning."
         },
@@ -4409,6 +4409,10 @@
         "domainInfo": {
           "$ref": "#/definitions/DomainInfoProperties",
           "description": "Domain configurations of session hosts."
+        },
+        "localAdminCredential": {
+          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "description": "Local Admin credential for session hosts."
         }
       }
     },
@@ -4419,7 +4423,7 @@
         "type": {
           "enum": [
             "Gallery",
-            "StorageBlob",
+            "CustomVHD",
             "CustomImage"
           ],
           "x-ms-enum": {
@@ -4431,7 +4435,7 @@
                 "description": "Using default gallery images offered by Azure Marketplace."
               },
               {
-                "value": "StorageBlob",
+                "value": "CustomVHD",
                 "description": "Using a VHD stored in a storage blob."
               },
               {
@@ -4448,9 +4452,9 @@
           "$ref": "#/definitions/MarketPlaceInfoProperties",
           "description": "The values to uniquely identify a gallery image."
         },
-        "storageBlobUri": {
+        "managedImageUri": {
           "type": "string",
-          "description": "The uri to the storage blob which contains the VHD. Image type must be StorageBlob."
+          "description": "The uri to the storage blob which contains the VHD. Image type must be CustomVHD."
         },
         "customId": {
           "type": "string",
@@ -4515,24 +4519,18 @@
           "type": "string",
           "description": "The MDM Provider GUID used during MDM enrollment for Azure AD joined virtual machines."
         },
-        "credentials": {
-          "$ref": "#/definitions/CredentialsProperties",
-          "description": "Credentials needed to create the virtual machine."
+        "credential": {
+          "$ref": "#/definitions/CredentialProperties",
+          "description": "Credential needed to create the virtual machine."
         }
       }
     },
-    "CredentialsProperties": {
-      "description": "Credentials needed to create the virtual machine.",
+    "CredentialProperties": {
+      "description": "Credential needed to create the virtual machine.",
       "type": "object",
       "properties": {
-        "localAdmin": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
-          "description": "The local admin credentials."
-        },
-        "domainAdmin": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
-          "description": "The domain admin credentials."
-        }
+        "$ref": "#/definitions/KeyVaultCredentialProperties",
+        "description": "Credentials kept in the keyvault."
       }
     },
     "KeyVaultCredentialProperties": {
@@ -6052,7 +6050,7 @@
         "imageType": {
           "enum": [
             "Gallery",
-            "StorageBlob",
+            "CustomVHD",
             "CustomImage"
           ],
           "x-ms-enum": {
@@ -6064,7 +6062,7 @@
                 "description": "Using default gallery images offered by azure market place."
               },
               {
-                "value": "StorageBlob",
+                "value": "CustomVHD",
                 "description": "Using a VHD stored in a storage blob."
               },
               {
