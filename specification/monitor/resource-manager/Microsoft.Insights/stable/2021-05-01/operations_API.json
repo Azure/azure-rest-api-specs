@@ -1,0 +1,287 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Operations API",
+    "description": "Lists all of the possible operations available for the Azure Monitor resource provider.",
+    "version": "2021-05-01",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available operations from Microsoft.Insights provider.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get a list of operations for a resource provider": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Microsoft.Insights provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft Insights API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Property to specify whether the action is a data action."
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "type": "object",
+          "properties": {
+            "publisher": {
+              "description": "The publisher of this operation.",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Service provider: Microsoft.Insights",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: AlertRules, Autoscale, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "properties": {
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "OperationProperties",
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include log specifications.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Log specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "legacyMetricSpecifications": {
+          "description": "Legacy Metric specifications for operation. Deprecated, do not use.",
+          "type": "object"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log specification of operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of specification."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The metric unit. Possible values include: Count,Bytes,Seconds,Percent,CountPerSecond,BytesPerSecond,MilliSeconds,ByteSeconds,Unspecified,BitsPerSecond,Cores,MilliCores,NanoCores"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The default metric aggregation type. Possible values include: Total,Average,Maximum,Minimum,Count"
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "The supported aggregation types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "description": "The metric lock aggregation type."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category or type of metric."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of metric.",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          }
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Property to specify whether to fill empty gaps with zero."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "The internal metric name."
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "Type of operation: get, read, delete, etc.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Legacy usage, should not set."
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "When set, the dimension is hidden from the customer, used in conjunction with the defaultDimensionValues field below"
+        },
+        "defaultDimensionValues": {
+          "type": "object",
+          "description": "Default dimension value to be sent down for the hidden dimension during query"
+        }
+      }
+    }
+  }
+}
