@@ -1662,7 +1662,7 @@
           "type": "string",
           "description": "Description of the intensity."
         },
-        "shortPhrase": {
+        "shortDescription": {
           "type": "string",
           "description": "Phrase description of the forecast in specified language. Azure Maps attempts to keep this phrase under 30 characters in length, but some languages/weather events may result in a longer phrase length, exceeding 30 characters."
         },
@@ -1864,7 +1864,7 @@
         "maxHazardIndex": {
           "$ref": "#/definitions/HazardIndex"
         },
-        "hazardDetails": {
+        "details": {
           "type": "array",
           "description": "Details of the weather hazards affecting the trip.",
           "items": {
@@ -1948,7 +1948,7 @@
           "format": "int32",
           "description": "Number signifying the importance or ranking order of the given alert within the country/region it has originated. A lower number signifies a higher priority. For example, 1 is the highest priority. The number varies by country/region and can change over time as each country/region evolves their alert systems."
         },
-        "class": {
+        "classification": {
           "type": "string",
           "description": "Classification of the alert. This field is not available for all countries and therefore not always returned."
         },
@@ -1969,10 +1969,10 @@
           "type": "string",
           "description": "A disclaimer regarding the source of the alert information. This field is not always available. For example, disclaimer may include details about the delays or potential issues related to the alarm."
         },
-        "alertAreas": {
+        "alertDetails": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AlertArea"
+            "$ref": "#/definitions/AlertDetails"
           },
           "description": "Information about the alert specific to the affected area(s)."
         }
@@ -2085,7 +2085,7 @@
           },
           {
             "value": "Continue",
-            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
+            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
           },
           {
             "value": "Update",
@@ -2139,9 +2139,9 @@
           "format": "int32",
           "description": "Level that the index value falls under, represented by an integer. This value can be 1 through 5 and should be used in combination with the `ascending` flag because it can differ among indices. For example, the following values apply for Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, and Extreme=5."
         },
-        "ascending": {
+        "isAscending": {
           "type": "boolean",
-          "description": "Describes the direction of the `value` and `categoryValue`. For example, when `ascending`=True, the poorest index value is 0 and the best index value is 10. When `ascending`=True, the poorest index value is 10 and the best index value is 0."
+          "description": "Describes the direction of the `value` and `categoryValue`. For example, when `is_ascending`=True, the poorest index value is 0 and the best index value is 10. When `is_ascending`=True, the poorest index value is 10 and the best index value is 0."
         },
         "description": {
           "type": "string",
