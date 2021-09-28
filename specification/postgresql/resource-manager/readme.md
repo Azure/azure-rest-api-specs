@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Sql.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for PostgreSQL, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,18 @@ To build the SDK for PostgreSQL, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
 ### Basic Information
-
 These are the global settings for the PostgreSQL API.
 
 ``` yaml
 title: PostgreSQLManagementClient
-description: 'The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.'
+description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-preview-2021-07
+tag: package-flexibleserver-2021-06
 ```
 
 ``` yaml $(package-flexibleservers)
@@ -38,14 +36,15 @@ tag: package-flexibleserver-2021-06
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
 ```
-### Tag: package-preview-2021-07
 
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+### Tag: package-2021-07-01-privatepreview
 
-```yaml $(tag) == 'package-preview-2021-07'
+These settings apply only when `--tag=package-2021-07-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01-privatepreview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2021-07-01-privatepreview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2021-07-01-privatepreview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2021-07-01-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-07-01-privatepreview/postgresql.json
 ```
 
 ### Tag: package-2021-06-15-privatepreview
@@ -93,6 +92,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
 ```
 
+
 ### Tag: package-2021-03-31-privatepreview
 
 These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
@@ -104,9 +104,11 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
 
+
 ### Tag: package-2020-11-05-preview
 
 These settings apply only when `--tag=package-2020-11-05-preview` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2020-11-05-preview'
 input-file:
@@ -114,18 +116,22 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
 ```
 
+
 ### Tag: package-2020-02-14-preview
 
 These settings apply only when `--tag=package-2020-02-14-preview` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2020-02-14-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
 ```
 
+
 ### Tag: package-2020-02-14-privatepreview
 
 These settings apply only when `--tag=package-2020-02-14-privatepreview` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2020-02-14-privatepreview'
 input-file:
@@ -136,14 +142,17 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
 
+
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
+
 ### Tag: package-2020-01-01
 
 These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
@@ -154,9 +163,11 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
+
 ### Tag: package-2018-06-01-privatepreview
 
 These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
@@ -167,6 +178,7 @@ input-file:
 ### Tag: package-2018-06-01
 
 These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
@@ -179,18 +191,22 @@ input-file:
 
 ```
 
+
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2017-12-01-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 ```
 
+
 ### Tag: package-2017-12-01
 
 These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
+
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
@@ -199,7 +215,6 @@ input-file:
 ```
 
 ## Suppression
-
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
@@ -207,8 +222,8 @@ directive:
 ```
 
 ---
-
 # Code Generation
+
 
 ## Swagger to SDK
 
@@ -254,6 +269,8 @@ See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
