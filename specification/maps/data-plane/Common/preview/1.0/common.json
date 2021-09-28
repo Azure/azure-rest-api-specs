@@ -70,23 +70,20 @@
       "type": "object",
       "properties": {
         "batchItems": {
-          "$ref": "#/definitions/BatchQueries"
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchRequestItem"
+          }
         }
       }
     },
-    "BatchQueries": {
-      "description": "The list of queries to process.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/BatchQuery"
-      }
-    },
-    "BatchQuery": {
+    "BatchRequestItem": {
       "description": "Batch Query object",
       "type": "object",
       "properties": {
         "query": {
-          "description": "A query string for the corresponding batch API endpoint. It is the exact query string you would use for a single (non-batch) API request.",
+          "description": "Partial query string.",
           "type": "string",
           "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
         }
@@ -115,7 +112,7 @@
         }
       }
     },
-    "BatchItem": {
+    "BatchResponseItem": {
       "description": "An item returned from Batch API. Extend with 'response' property.",
       "type": "object",
       "properties": {

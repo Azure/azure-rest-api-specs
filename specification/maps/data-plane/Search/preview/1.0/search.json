@@ -340,7 +340,7 @@
           "Tesla"
         ],
         "x-ms-enum": {
-          "name": "ConnectorSet",
+          "name": "ElectricVehicleConnector",
           "modelAsString": true,
           "values": [
             {
@@ -1011,7 +1011,58 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/EntityType"
+            "name": "entityType",
+            "in": "query",
+            "description": "Specifies the level of filtering performed on geographies. Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API. The following parameters are ignored when entityType is set:\n\n* heading\n* number\n* returnRoadUse\n* returnSpeedLimit\n* roadUse\n* returnMatchType",
+            "type": "string",
+            "enum": [
+              "Country",
+              "CountrySubdivision",
+              "CountrySecondarySubdivision",
+              "CountryTertiarySubdivision",
+              "Municipality",
+              "MunicipalitySubdivision",
+              "Neighbourhood",
+              "PostalCodeArea"
+            ],
+            "x-ms-enum": {
+              "name": "GeographicEntityType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Country",
+                  "description": "Country name"
+                },
+                {
+                  "value": "CountrySubdivision",
+                  "description": "State or Province"
+                },
+                {
+                  "value": "CountrySecondarySubdivision",
+                  "description": "County"
+                },
+                {
+                  "value": "CountryTertiarySubdivision",
+                  "description": "Named Area"
+                },
+                {
+                  "value": "Municipality",
+                  "description": "City / Town"
+                },
+                {
+                  "value": "MunicipalitySubdivision",
+                  "description": "Sub / Super City"
+                },
+                {
+                  "value": "Neighbourhood",
+                  "description": "Neighbourhood"
+                },
+                {
+                  "value": "PostalCodeArea",
+                  "description": "Postal Code / Zip Code"
+                }
+              ]
+            }
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
@@ -2471,7 +2522,7 @@
         "PostalCodeArea"
       ],
       "x-ms-enum": {
-        "name": "EntityType",
+        "name": "GeographicalEntityType",
         "modelAsString": true,
         "values": [
           {
@@ -2533,7 +2584,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponseItem"
         }
       ],
       "properties": {
@@ -2576,7 +2627,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponseItem"
         }
       ],
       "properties": {
@@ -2619,7 +2670,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponseItem"
         }
       ],
       "properties": {
