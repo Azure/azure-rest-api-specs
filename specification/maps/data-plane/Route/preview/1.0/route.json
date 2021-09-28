@@ -831,12 +831,12 @@
             "$ref": "#/parameters/VehicleLoadType"
           },
           {
-            "name": "postRouteMatrixRequestBody",
+            "name": "routeMatrixQuery",
             "description": "The matrix of origin and destination coordinates to compute the route distance, travel time and other summary for each cell of the matrix based on the input parameters. The minimum and the maximum cell count supported are 1 and **700** for async and **100** for sync respectively. For example, it can be 35 origins and 20 destinations or 25 origins and 25 destinations for async API.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostRouteMatrixRequestBody"
+              "$ref": "#/definitions/RouteMatrixQuery"
             }
           }
         ],
@@ -971,12 +971,12 @@
             "$ref": "#/parameters/VehicleLoadType"
           },
           {
-            "name": "postRouteMatrixRequestBody",
+            "name": "routeMatrixQuery",
             "description": "The matrix of origin and destination coordinates to compute the route distance, travel time and other summary for each cell of the matrix based on the input parameters. The minimum and the maximum cell count supported are 1 and **700** for async and **100** for sync respectively. For example, it can be 35 origins and 20 destinations or 25 origins and 25 destinations for async API.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostRouteMatrixRequestBody"
+              "$ref": "#/definitions/RouteMatrixQuery"
             }
           }
         ],
@@ -1336,12 +1336,12 @@
             "$ref": "#/parameters/AuxiliaryPowerInkW"
           },
           {
-            "name": "postRouteDirectionsRequestBody",
+            "name": "routeDirectionParameters",
             "description": "Used for reconstructing a route and for calculating zero or more alternative routes to this reference route.  The provided sequence of coordinates is used as input for route reconstruction. The alternative routes  are calculated between the origin and destination points specified in the base path parameter locations.  If both minDeviationDistance and minDeviationTime are set to zero, then these origin and destination points  are expected to be at (or very near) the beginning and end of the reference route, respectively. Intermediate  locations (waypoints) are not supported when using supportingPoints.\n\nSetting at least one of minDeviationDistance or minDeviationTime to a value greater than zero has the  following consequences:\n\n*  The origin point of the calculateRoute request must be on (or very near) the input reference route. If  this is not the case, an error is returned. However, the origin point does not need to be at the beginning of  the input reference route (it can be thought of as the current vehicle position on the reference route).\n*  The reference route, returned as the first route in the calculateRoute response, will start at the origin  point specified in the calculateRoute request. The initial part of the input reference route up until the  origin point will be excluded from the response.\n*  The values of minDeviationDistance and minDeviationTime determine how far alternative routes will be  guaranteed to follow the reference route from the origin point onwards.\n*  The route must use departAt.\n*  The vehicleHeading is ignored.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostRouteDirectionsRequestBody"
+              "$ref": "#/definitions/RouteDirectionParameters"
             }
           }
         ],
@@ -1534,9 +1534,9 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "postRouteDirectionsBatchRequestBody",
+            "name": "routeDirectionsBatchQueries",
             "in": "body",
-            "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
+            "description": "The list of route directions queries/requests to process. The list can contain a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequestBody"
@@ -1617,7 +1617,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "postRouteDirectionsBatchRequestBody",
+            "name": "routeDirectionsBatchQueries",
             "in": "body",
             "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
@@ -1644,7 +1644,7 @@
     }
   },
   "definitions": {
-    "PostRouteDirectionsRequestBody": {
+    "RouteDirectionParameters": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
       "properties": {
@@ -2503,7 +2503,7 @@
         }
       }
     },
-    "PostRouteMatrixRequestBody": {
+    "RouteMatrixQuery": {
       "description": "An object with a matrix of coordinates.",
       "type": "object",
       "properties": {
