@@ -24,22 +24,36 @@
             }
           }
         },
-        "throttleRules": [
-          {
-            "name": "ingressThrottleApp1",
-            "limitRate": 1048576
-          },
-          {
-            "name": "egressThrottleKafkaApp",
-            "consumerId": "AadAppId_or_SasKeyName_or_Client.id",
-            "limitRate": 1003459
-          },
-          {
-            "name": "egressThrottleAmqpApp",
-            "consumerId": "cgId_or_AadAppId_or_SaSKeyName",
-            "limitRate": 1973264
-          }
-        ]
+        "throttleRules": {
+          "RuleName": "Ingress1",
+          "TargetId": "AppId=Guid1",
+          "MetricId": "IncomingBytes",
+          "ThrottleLimit": 137429547
+        },
+        {
+          "RuleName": "Egress1",
+          "TargetId": "ConsumerGroupName=AmqpGroup1",
+          "MetricId": "OutgoingBytes",
+          "ThrottleLimit": 3951729
+        },
+        {
+          "RuleName": "Egress2",
+          "TargetId": "SASKey=SASKeyName",
+          "MetricId": "OutgoingMessages",
+          "ThrottleLimit": 6967
+        },
+        {
+          "RuleName": "Egress3",
+          "TargetId": "KafkaClientId=KafkaClientId",
+          "MetricId": "OutgoingBytes",
+          "ThrottleLimit": 3951729
+        },
+        {
+          "RuleName": "Ingress2",
+          "TargetId": "SASKey=SASKeyName",
+          "MetricId": "IncomingMessages",
+          "ThrottleLimit": 3456
+        }
       }
     },
     "responses": {
@@ -74,26 +88,38 @@
               "intervalInSeconds": 120,
               "sizeLimitInBytes": 10485763
             },
-            "throttleRules": {
-              "ingress": [
-                {
-                  "name": "ingressThrottleApp1",
-                  "limitRate": 1048576
-                }
-              ],
-              "egress": [
-                {
-                  "name": "egressThrottleKafkaApp",
-                  "consumerId": "AadAppId_or_SasKeyName_or_Client.id",
-                  "limitRate": 1003459
-                },
-                {
-                  "name": "egressThrottleAmqpApp",
-                  "consumerId": "cgId_or_AadAppId_or_SaSKeyName",
-                  "limitRate": 1973264
-                }
-              ]
-            }
+            "throttleRules": [
+              {
+                "RuleName": "Ingress1",
+                "TargetId": "AppId=Guid1",
+                "MetricId": "IncomingBytes",
+                "ThrottleLimit": 137429547
+              },
+              {
+                "RuleName": "Egress1",
+                "TargetScope": "ConsumerGroupName=AmqpGroup1",
+                "MetricId": "OutgoingBytes",
+                "ThrottleLimit": 3951729
+              },
+              {
+                "RuleName": "Egress2",
+                "TargetId": "SASKey=SASKeyName",
+                "MetricId": "OutgoingMessages",
+                "ThrottleLimit": 6967
+              },
+              {
+                "RuleName": "Egress3",
+                "TargetId": "KafkaClientId=KafkaClientId",
+                "MetricId": "OutgoingBytes",
+                "ThrottleLimit": 3951729
+              },
+              {
+                "RuleName": "Ingress2",
+                "TargetId": "SASKey=SASKeyName",
+                "MetricId": "IncomingMessages",
+                "ThrottleLimit": 3456
+              }
+            ]
           }
         }
       }
