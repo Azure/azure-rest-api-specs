@@ -177,11 +177,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/associatedResources": {
       "get": {
-        "operationId": "UserAssignedIdentities_GetAssociatedResources",
-        "description": "Gets the associated resources for this identity.",
+        "operationId": "UserAssignedIdentities_ListAssociatedResources",
+        "description": "Lists the associated resources for this identity.",
         "x-ms-examples": {
-          "IdentityGetAssociatedResources": {
-            "$ref": "./examples/IdentityGetAssociatedResources.json"
+          "IdentityListAssociatedResources": {
+            "$ref": "./examples/IdentityListAssociatedResources.json"
           }
         },
         "parameters": [
@@ -226,6 +226,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -579,7 +582,6 @@
         "subscriptionId": {
           "type": "string",
           "readOnly": true,
-          "format": "guid",
           "description": "The ID of the subscription this resource belongs to."
         },
         "subscriptionDisplayName": {
@@ -590,9 +592,10 @@
       }
     },
     "AssociatedResourcesListResult": {
+      "type": "object",
       "properties": {
         "totalCount": {
-          "type":"number",
+          "type": "number",
           "readOnly": true,
           "description": "Total number of Azure resources assigned to the identity."
         },
