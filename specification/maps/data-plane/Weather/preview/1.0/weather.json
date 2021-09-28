@@ -1181,11 +1181,11 @@
           "description": "Short summary phrase summary for quarter."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherUnitRange",
+          "$ref": "#/definitions/WeatherValueRange",
           "description": "Temperature values for the quarter."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherUnitRange",
+          "$ref": "#/definitions/WeatherValueRange",
           "description": "RealFeel™ Temperature values for the quarter."
         },
         "dewPoint": {
@@ -1553,21 +1553,21 @@
     "DailyForecast": {
       "type": "object",
       "properties": {
-        "date": {
+        "dateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherUnitRange",
+          "$ref": "#/definitions/WeatherValueRange",
           "description": "Temperature values for the day."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherUnitRange",
+          "$ref": "#/definitions/WeatherValueRange",
           "description": "RealFeel™ Temperature being returned."
         },
         "realFeelTemperatureShade": {
-          "$ref": "#/definitions/WeatherUnitRange",
+          "$ref": "#/definitions/WeatherValueRange",
           "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
         },
         "hoursOfSun": {
