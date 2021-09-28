@@ -53,6 +53,7 @@
     },
     "BatchId": {
       "name": "format",
+      "x-ms-client-name": "batchId",
       "description": "Batch id for querying the operation.",
       "type": "string",
       "in": "path",
@@ -62,6 +63,7 @@
     "LimitSearch": {
       "name": "limit",
       "in": "query",
+      "x-ms-client-name": "top",
       "description": "Maximum number of responses that will be returned. Default: 10, minimum: 1 and maximum: 100",
       "type": "integer",
       "minimum": 1,
@@ -71,6 +73,7 @@
     "Offset": {
       "name": "ofs",
       "in": "query",
+      "x-ms-client-name": "skip",
       "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
       "type": "integer",
       "minimum": 0,
@@ -259,6 +262,7 @@
     },
     "Typeahead": {
       "name": "typeahead",
+      "x-ms-client-name": "isTypeAhead",
       "in": "query",
       "description": "Boolean. If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode",
       "type": "boolean",
@@ -267,6 +271,7 @@
     "CategorySet": {
       "name": "categorySet",
       "in": "query",
+      "x-ms-client-name": "categoryFilters",
       "description": "A comma-separated list of category set IDs which could be used to restrict the result to specific Points of Interest categories. ID order does not matter. When multiple category identifiers are provided, only POIs that belong to (at least) one of the categories from the provided list will be returned. The list of supported categories can be discovered using  [POI Categories API](https://aka.ms/AzureMapsPOICategoryTree). Usage examples: \n\n* **categorySet=7315** (Search Points of Interest from category Restaurant)\n\n* **categorySet=7315025,7315017** (Search Points of Interest of category either Italian or French Restaurant) ",
       "type": "array",
       "items": {
@@ -277,6 +282,7 @@
     },
     "CountrySet": {
       "name": "countrySet",
+      "x-ms-client-name": "countryFilters",
       "in": "query",
       "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries",
       "type": "array",
@@ -288,6 +294,7 @@
     },
     "Radius": {
       "name": "radius",
+      "x-ms-client-name": "radiusInMeters",
       "in": "query",
       "description": "The radius in meters to for the results to be constrained to the defined area",
       "type": "number",
@@ -411,7 +418,7 @@
     "/search/polygon/{format}": {
       "get": {
         "description": "**Get Polygon**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry  ID is returned in the dataSources object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
-        "operationId": "GetSearchPolygon",
+        "operationId": "SearchPolygon",
         "x-ms-examples": {
           "Get the Geometry using the geometry id returned by the previous Search": {
             "$ref": "./examples/GetSearchPolygon.json"
@@ -454,7 +461,7 @@
     "/search/fuzzy/{format}": {
       "get": {
         "description": "\n**Free Form Search**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://docs.microsoft.com/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
-        "operationId": "GetSearchFuzzy",
+        "operationId": "SearchFuzzy",
         "x-ms-examples": {
           "Search City Seattle": {
             "$ref": "./examples/GetSearchFuzzy.json"
@@ -564,7 +571,7 @@
     "/search/poi/{format}": {
       "get": {
         "description": "**Get POI by Name**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Search allows you to request POI results by name.  Search supports additional query parameters such as language and filtering results by area of interest driven by country or bounding box.  Endpoint will return only POI results matching the query string. Response includes POI details such as address, coordinate location and category.",
-        "operationId": "GetSearchPOI",
+        "operationId": "SearchPOI",
         "x-ms-examples": {
           "Search for juice bars within 5 miles of Seattle Downtown and limit the response to 5 results": {
             "$ref": "./examples/GetSearchPOI.json"
@@ -652,7 +659,7 @@
     "/search/nearby/{format}": {
       "get": {
         "description": "**Nearby Search**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nIf you have a use case for only retrieving POI results around a specific location, the nearby search method may be the right choice. This endpoint will only return POI results, and does not take in a search query parameter.",
-        "operationId": "GetSearchNearby",
+        "operationId": "SearchNearby",
         "x-ms-examples": {
           "Search for any points of interest (POI) within 5 miles of Manhattan NY and return the top 10 results": {
             "$ref": "./examples/GetSearchNearby.json"
@@ -689,6 +696,7 @@
           {
             "name": "radius",
             "in": "query",
+            "x-ms-client-name": "radiusInMeters",
             "description": "The radius in meters to for the results to be constrained to the defined area, Min value is 1, Max Value is 50000.",
             "type": "number"
           },
@@ -724,7 +732,7 @@
     "/search/poi/category/{format}": {
       "get": {
         "description": "**Get POI by Category**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Category Search allows you to request POI results from given category. Search allows to query POIs from one category at a time.  Endpoint will only return POI results which are categorized as specified.  Response includes POI details such as address, coordinate location and classification.",
-        "operationId": "GetSearchPOICategory",
+        "operationId": "SearchPOICategory",
         "x-ms-examples": {
           "Search for atm's within 2 miles of Times Square NY and return the top 3 results": {
             "$ref": "./examples/GetSearchPOICategory.json"
@@ -812,7 +820,7 @@
     "/search/poi/category/tree/{format}": {
       "get": {
         "description": "**Get POI Category Tree**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPOI Category API provides a full list of supported Points of Interest (POI) categories and subcategories together with their translations and synonyms. The returned content can be used to provide more meaningful results through other Search Service APIs, like [Get Search POI](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi).",
-        "operationId": "GetSearchPOICategoryTree",
+        "operationId": "SearchPOICategoryTree",
         "x-ms-examples": {
           "Get the POI Category Tree (only partial response shown below)": {
             "$ref": "./examples/GetSearchPOICategoryTree.json"
@@ -851,7 +859,7 @@
     "/search/address/{format}": {
       "get": {
         "description": "**Address Geocoding**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
-        "operationId": "GetSearchAddress",
+        "operationId": "SearchAddress",
         "x-ms-examples": {
           "Search detail address 15127 NE 24th Street, Redmond, WA 98052": {
             "$ref": "./examples/GetSearchAddress.json"
@@ -930,7 +938,7 @@
     "/search/address/reverse/{format}": {
       "get": {
         "description": "**Reverse Geocode to an Address**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThere may be times when you need to translate a  coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often  this is needed in tracking applications where you  receive a GPS feed from the device or asset and  wish to know what address where the coordinate is  located. This endpoint will return address  information for a given coordinate.",
-        "operationId": "GetSearchAddressReverse",
+        "operationId": "SearchAddressReverse",
         "x-ms-examples": {
           "GetSearchAddressReverse": {
             "$ref": "./examples/GetSearchAddressReverse.json"
@@ -954,6 +962,7 @@
           },
           {
             "name": "returnSpeedLimit",
+            "x-ms-client-name": "includeSpeedLimit",
             "in": "query",
             "description": "Boolean. To enable return of the posted speed limit",
             "type": "boolean"
@@ -977,6 +986,7 @@
           },
           {
             "name": "returnRoadUse",
+            "x-ms-client-name": "includeRoadUse",
             "in": "query",
             "description": "Boolean. To enable return of the road use array for reverse geocodes at street level",
             "type": "boolean"
@@ -995,6 +1005,7 @@
           },
           {
             "name": "returnMatchType",
+            "x-ms-client-name": "includeMatchType",
             "in": "query",
             "description": "Include information on the type of match the geocoder achieved in the response.",
             "type": "boolean"
@@ -1022,7 +1033,7 @@
     "/search/address/reverse/crossStreet/{format}": {
       "get": {
         "description": "**Reverse Geocode to a Cross Street**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThere may be times when you need to translate a  coordinate (example: 37.786505, -122.3862) into a human understandable cross street. Most often this  is needed in tracking applications where you  receive a GPS feed from the device or asset and wish to know what address where the coordinate is  located.\nThis endpoint will return cross street information  for a given coordinate.",
-        "operationId": "GetSearchAddressReverseCrossStreet",
+        "operationId": "SearchAddressReverseCrossStreet",
         "x-ms-examples": {
           "GetSearchAddressReverseCrossStreet": {
             "$ref": "./examples/GetSearchAddressReverseCrossStreet.json"
@@ -1078,7 +1089,7 @@
     "/search/address/structured/{format}": {
       "get": {
         "description": "**Structured Address Geocoding**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nAzure Address Geocoding can also be accessed for  structured address look up exclusively. The geocoding search index will be queried for everything above the  street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete  addresses. It will also handle everything from exact  street addresses or street or intersections as well as higher level geographies such as city centers,  counties, states etc.",
-        "operationId": "GetSearchAddressStructured",
+        "operationId": "SearchAddressStructured",
         "x-ms-examples": {
           "GetSearchAddressStructured": {
             "$ref": "./examples/GetSearchAddressStructured.json"
@@ -1294,6 +1305,7 @@
           },
           {
             "name": "limit",
+            "x-ms-client-name": "top",
             "description": "Maximum number of responses that will be returned. Default value is 10. Max value is 20",
             "type": "integer",
             "in": "query",
@@ -1356,6 +1368,7 @@
           {
             "name": "searchFuzzyBatchRequestBody",
             "in": "body",
+            "x-ms-client-flatten": true,
             "description": "The list of search fuzzy queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
@@ -1405,6 +1418,7 @@
           {
             "name": "searchFuzzyBatchRequestBody",
             "in": "body",
+            "x-ms-client-flatten": true,
             "description": "The list of search fuzzy queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
@@ -1488,6 +1502,7 @@
           {
             "name": "searchAddressBatchRequestBody",
             "in": "body",
+            "x-ms-client-flatten": true,
             "description": "The list of address geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
@@ -1537,6 +1552,7 @@
           {
             "name": "searchAddressBatchRequestBody",
             "in": "body",
+            "x-ms-client-flatten": true,
             "description": "The list of address geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
@@ -1620,6 +1636,7 @@
           {
             "name": "searchAddressReverseBatchRequestBody",
             "in": "body",
+            "x-ms-client-flatten": true,
             "description": "The list of reverse geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
@@ -1669,6 +1686,7 @@
           {
             "name": "searchAddressReverseBatchRequestBody",
             "in": "body",
+            "x-ms-client-flatten": true,
             "description": "The list of reverse geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
@@ -1812,6 +1830,7 @@
           "readOnly": true
         },
         "limit": {
+          "x-ms-client-name": "top",
           "description": "Maximum number of responses that will be returned",
           "readOnly": true,
           "type": "integer"
