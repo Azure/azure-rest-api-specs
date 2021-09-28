@@ -1587,7 +1587,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
 
-**Description**: For ARM spec, the allowed response status codes for a long DELETE operation are "200" & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200" & "201".
+**Description**: For ARM spec, the allowed response status codes for a long DELETE operation are "200" & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200", 201" and "202".
                  For Data plane spec, the allowed response status codes for a long DELETE operation are "200","202", & "204"; the allowed response status codes for a POST operation are "200", "201" ,"202", & "204"; the allowed response status codes for a PUT/PATCH operation are  "200","201", & "202".
 
 **Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
