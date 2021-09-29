@@ -5351,7 +5351,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Specifies the mode of sqlpool creation.\n\nDefault: regular sqlpool creation.\n\nPointInTimeRestore: Creates a sqlpool by restoring a point in time backup of an existing sqlpool. sourceDatabaseId must be specified as the resource ID of the existing sqlpool, and restorePointInTime must be specified.\n\nRecovery: Creates a sqlpool by a geo-replicated backup. sourceDatabaseId  must be specified as the recoverable sqlpool resource ID to restore.\n\nRestore: Creates a sqlpool by restoring a backup of a deleted sqlpool. sourceDatabaseId  must be specified. If sourceDatabaseId is the sqlpool's original resource ID, then sourceSqlpoolDeletionDate must be specified.Otherwise sourceDatabaseId must be the restorable dropped sqlpool resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time."
+          "description": "Specifies the mode of sqlpool creation.\n\nDefault: regular sqlpool creation.\n\nPointInTimeRestore: Creates a sqlpool by restoring a point in time backup of an existing sqlpool. sourceDatabaseId must be specified as the resource ID of the existing sqlpool, and restorePointInTime must be specified.\n\nRecovery: Creates a sqlpool by a geo-replicated backup. sourceDatabaseId  must be specified as the recoverableDatabaseId to restore.\n\nRestore: Creates a sqlpool by restoring a backup of a deleted sqlpool. SourceDatabaseId should be the sqlpool's original resource ID. SourceDatabaseId and sourceDatabaseDeletionDate must be specified."
         },
         "creationDate": {
           "type": "string",
