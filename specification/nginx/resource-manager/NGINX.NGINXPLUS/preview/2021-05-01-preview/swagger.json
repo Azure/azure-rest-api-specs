@@ -1077,10 +1077,16 @@
           "readOnly": true
         },
         "managedResourceGroup": {
-          "type": "string"
+          "type": "string",
+          "description": "The managed resource group to deploy VNet injection related network resources."
         },
         "networkProfile": {
           "$ref": "#/definitions/NginxNetworkProfile"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the deployment.",
+          "readOnly": true
         }
       }
     },
