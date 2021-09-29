@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-10-15-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "accountName": "accountName",
+    "databaseName": "databaseName",
+    "clientEncryptionKeyName": "cekName",
+    "createUpdateClientEncryptionKeyParameters": {
+      "properties": {
+        "resource": {
+          "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+          "wrappedDataEncryptionKey": "This is actually an array of bytes. This request/response is being presented as a string for readability in the example",
+          "keyWrapMetadata": {
+            "name": "customerManagedKey",
+            "type": "AzureKeyVault",
+            "value": "AzureKeyVault Key URL"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.DocumentDB/databaseAccounts/accountName/sqlDatabases/databaseName/clientEncryptionKeys/cekName",
+        "name": "cekName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/clientEncryptionKey",
+        "properties": {
+          "resource": {
+            "encryptionAlgorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+            "wrappedDataEncryptionKey": "This is actually an array of bytes. This request/response is being presented as a string for readability in the example",
+            "keyWrapMetadata": {
+              "name": "customerManagedKey",
+              "type": "AzureKeyVault",
+              "value": "AzureKeyVault Key URL"
+            },
+            "_rid": "tNc4AAAAAAAQkjzWAgAAAA==",
+            "_ts": 1626425552,
+            "_etag": "00000000-0000-0000-7a1f-bc0828e801d7"
+          }
+        }
+      }
+    }
+  }
+}
