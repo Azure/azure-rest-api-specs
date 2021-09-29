@@ -56,7 +56,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -67,17 +67,6 @@
     }
   },
   "definitions": {
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
-          "description": "The error object of the CloudError response"
-        }
-      },
-      "type": "object",
-      "description": "An error response for a resource management request."
-    },
     "OperationsList": {
       "description": "Lists the operations available in the SecurityInsights RP.",
       "properties": {
