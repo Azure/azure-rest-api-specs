@@ -1585,6 +1585,17 @@
     }
   },
   "definitions": {
+    "ApiError": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
     "AvailableProviderOperation": {
       "description": "Class represents provider operation",
       "required": [
@@ -2007,6 +2018,24 @@
         },
         "message": {
           "description": "Describes the error in detail and provides debugging information.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
           "type": "string"
         }
       }
