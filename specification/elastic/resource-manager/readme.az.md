@@ -13,6 +13,14 @@ az-output-folder: $(azure-cli-extension-folder)/src/elastic
 python-sdk-output-folder: "$(az-output-folder)/azext_elastic/vendored_sdks/elastic"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
+cli:
+  cli-directive:
+    ## rename a parameter
+    - where:
+        gruop: elastic monitor
+        op: create
+        param: name
+      name: sku
 ```
 
 
