@@ -1,14 +1,14 @@
-# Azure Geocode
+# Azure Geocoding
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Geocode Client
+This is the AutoRest configuration file for Geocoding Client
 
 ---
 
 ## Getting Started
 
-To build the SDK for Geocode, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Geocoding, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,10 +22,10 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Geocode Client.
+These are the global settings for Geocoding Client.
 
 ``` yaml
-title: GeocodeClient
+title: GeocodingClient
 openapi-type: data-plane
 tag: 1.0-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
@@ -41,7 +41,7 @@ These settings apply only when `--tag=1.0-preview` is specified on the command l
 
 ``` yaml $(tag) == '1.0-preview'
 input-file:
-  - preview/2021-09-01-preview/geocode.json
+  - preview/2021-09-01-preview/geocoding.json
 ```
 
 
