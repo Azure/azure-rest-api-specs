@@ -233,6 +233,9 @@
           },
           "Create virtual network with delegated subnets": {
             "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json"
+          },
+          "Create virtual network with encryption": {
+            "$ref": "./examples/VirtualNetworkCreateWithEncryption.json"
           }
         }
       },
@@ -998,6 +1001,9 @@
         "x-ms-examples": {
           "Get peering": {
             "$ref": "./examples/VirtualNetworkPeeringGet.json"
+          },
+          "Get peering with remote virtual network encryption": {
+            "$ref": "./examples/VirtualNetworkPeeringGetWithRemoteVirtualNetworkEncryption.json"
           }
         }
       },
@@ -1085,6 +1091,9 @@
           },
           "Sync Peering": {
             "$ref": "./examples/VirtualNetworkPeeringSync.json"
+          },
+          "Create peering with remote virtual network encryption": {
+            "$ref": "./examples/VirtualNetworkPeeringCreateWithRemoteVirtualNetworkEncryption.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1142,6 +1151,9 @@
         "x-ms-examples": {
           "List peerings": {
             "$ref": "./examples/VirtualNetworkPeeringList.json"
+          },
+          "List peerings with remote virtual network encryption": {
+            "$ref": "./examples/VirtualNetworkPeeringListWithRemoteVirtualNetworkEncryption.json"
           }
         }
       }
@@ -1607,6 +1619,12 @@
           "default": null,
           "description": "The reference to the remote virtual network's Bgp Communities."
         },
+        "remoteVirtualNetworkEncryption":{
+          "readOnly": true,
+          "$ref": "#/definitions/VirtualNetworkEncryption",
+          "default": null,
+          "description": "The reference to the remote virtual network's encryption"
+        },
         "peeringState": {
           "type": "string",
           "description": "The status of the virtual network peering.",
@@ -1832,6 +1850,11 @@
           "default": null,
           "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
         },
+        "encryption": {
+          "$ref": "#/definitions/VirtualNetworkEncryption",
+          "default": null,
+          "description": "Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet."
+        },
         "ipAllocations": {
           "type": "array",
           "items": {
@@ -1922,6 +1945,30 @@
         "virtualNetworkCommunity"
       ],
       "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
+    },
+    "VirtualNetworkEncryption": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if encryption is enabled on the virtual network."
+        },
+        "enforcement": {
+          "type": "string",
+          "description": "If the encrypted VNet allows VM that does not support encryption",
+          "enum": [
+            "DropUnencrypted",
+            "AllowUnencrypted"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkEncryptionEnforcement",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet."
     },
     "IPAddressAvailabilityResult": {
       "properties": {
