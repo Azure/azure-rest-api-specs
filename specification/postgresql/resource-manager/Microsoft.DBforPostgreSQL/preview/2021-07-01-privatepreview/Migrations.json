@@ -34,14 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{targetDBServerName}/migrations/{migrationName}": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
         ],
-        "operationId": "PGVersionUpgradeResources_Write",
+        "operationId": "Migrations_Create",
         "x-ms-examples": {
-          "PGVersionUpgradeResources_Write": {
+          "Migrations_Create": {
             "$ref": "./examples/Migrations_Create.json"
           }
         },
@@ -97,9 +97,9 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "PGVersionUpgradeResources_Read",
+        "operationId": "Migrations_Get",
         "x-ms-examples": {
-          "PGVersionUpgradeResources_Read": {
+          "Migrations_Get": {
             "$ref": "./examples/Migrations_Get.json"
           }
         },
@@ -140,9 +140,9 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "PGVersionUpgradeResources_Update",
+        "operationId": "Migrations_Update",
         "x-ms-examples": {
-          "PGVersionUpgradeResources_Update": {
+          "Migrations_Update": {
             "$ref": "./examples/Migrations_Update.json"
           }
         },
@@ -192,10 +192,309 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "PGVersionUpgradeResources_Delete",
+        "operationId": "Migrations_Delete",
         "x-ms-examples": {
-          "PGVersionUpgradeResources_Delete": {
+          "Migrations_Delete": {
             "$ref": "./examples/Migrations_Delete.json"
+          }
+        },
+        "description": "Deletes a migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+      "get": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_ListByTargetServer",
+        "x-ms-examples": {
+          "Migrations_ListByTargetServer": {
+            "$ref": "./examples/Migrations_ListByTargetServer.json"
+          }
+        },
+        "description": "List all the migrations on a given target server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationListFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MigrationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
+      "post": {
+        "summary": "Check migration name validity and availability",
+        "description": "This method checks whether a proposed migration name is valid and available.",
+        "tags": [
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "CheckMigrationNameAvailability",
+        "x-ms-examples": {
+          "CheckMigrationNameAvailability": {
+            "$ref": "./examples/CheckMigrationNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationNameAvailabilityResource"
+            },
+            "description": "The required parameters for checking if a migration name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationNameAvailabilityResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{targetDBServerName}/migrations/{migrationName}": {
+      "put": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "VersionUpgradeResources_Write",
+        "x-ms-examples": {
+          "VersionUpgradeResources_Write": {
+            "$ref": "./examples/PGVersionUpgrade_Migrations_Create.json"
+          }
+        },
+        "description": "Creates a new migration for PG version upgrade.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            },
+            "description": "The required parameters for creating a migration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "VersionUpgradeResources_Read",
+        "x-ms-examples": {
+          "VersionUpgradeResources_Read": {
+            "$ref": "./examples/PGVersionUpgrade_Migrations_Get.json"
+          }
+        },
+        "description": "Gets details of a migration performing the PG Version Upgrade.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "VersionUpgradeResources_Update",
+        "x-ms-examples": {
+          "VersionUpgradeResources_Update": {
+            "$ref": "./examples/PGVersionUpgrade_Migrations_Update.json"
+          }
+        },
+        "description": "Updates an existing migration which is performing the PG version upgrade. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationResourceForPatch"
+            },
+            "description": "The required parameters for updating a migration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "VersionUpgradeResources_Delete",
+        "x-ms-examples": {
+          "VersionUpgradeResources_Delete": {
+            "$ref": "./examples/PGVersionUpgrade_Migrations_Delete.json"
           }
         },
         "description": "Deletes a migration.",
@@ -237,10 +536,10 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "PGVersionUpgradeResources_ListByTargetServer",
+        "operationId": "VersionUpgradeResources_ListByTargetServer",
         "x-ms-examples": {
-          "PGVersionUpgradeResources_ListByTargetServer": {
-            "$ref": "./examples/Migrations_ListByTargetServer.json"
+          "VersionUpgradeResources_ListByTargetServer": {
+            "$ref": "./examples/PGVersionUpgrade_Migrations_ListByTargetServer.json"
           }
         },
         "description": "List all the migrations on a given target server.",
@@ -288,10 +587,10 @@
           "Custom operation",
           "POST"
         ],
-        "operationId": "CheckMigrationNameAvailability",
+        "operationId": "VersionUpgradeCheckNameAvailabilityResources_Action",
         "x-ms-examples": {
-          "CheckMigrationNameAvailability": {
-            "$ref": "./examples/CheckMigrationNameAvailability.json"
+          "VersionUpgradeCheckNameAvailabilityResources_Action": {
+            "$ref": "./examples/PGVersionUpgrade_CheckMigrationNameAvailability.json"
           }
         },
         "parameters": [
