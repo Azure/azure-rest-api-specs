@@ -628,6 +628,17 @@
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
+    "SchemaIdParameter": {
+      "name": "schemaId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
     "ServiceNameParameter": {
       "name": "serviceName",
       "in": "path",
