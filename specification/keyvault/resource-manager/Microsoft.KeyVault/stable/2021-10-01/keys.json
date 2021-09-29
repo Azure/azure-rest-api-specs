@@ -419,14 +419,6 @@
           "type": "string",
           "description": "The URI to retrieve the specific version of the key.",
           "readOnly": true
-        },
-        "rotationPolicy": {
-          "$ref": "#/definitions/RotationPolicy",
-          "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
-        },
-        "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
         }
       },
       "description": "The properties of the key.",
@@ -541,101 +533,6 @@
         }
       },
       "description": "The page of keys.",
-      "type": "object"
-    },
-    "RotationPolicy": {
-      "properties": {
-        "attributes": {
-          "$ref": "#/definitions/KeyRotationPolicyAttributes",
-          "description": "The attributes of key rotation policy."
-        },
-        "lifetimeActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LifetimeAction"
-          },
-          "description": "The lifetimeActions for key rotation action."
-        }
-      },
-      "type": "object"
-    },
-    "KeyRotationPolicyAttributes": {
-      "properties": {
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Creation time in seconds since 1970-01-01T00:00:00Z."
-        },
-        "updated": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z."
-        },
-        "expiryTime": {
-          "type": "string",
-          "description": "The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
-        }
-      },
-      "type": "object"
-    },
-    "LifetimeAction": {
-      "properties": {
-        "trigger": {
-          "$ref": "#/definitions/Trigger",
-          "description": "The trigger of key rotation policy lifetimeAction."
-        },
-        "action": {
-          "$ref": "#/definitions/Action",
-          "description": "The action of key rotation policy lifetimeAction."
-        }
-      },
-      "type": "object"
-    },
-    "Trigger": {
-      "properties": {
-        "timeAfterCreate": {
-          "type": "string",
-          "description": "The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
-        },
-        "timeBeforeExpiry": {
-          "type": "string",
-          "description": "The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
-        }
-      },
-      "type": "object"
-    },
-    "Action": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of action.",
-          "enum": [
-            "rotate",
-            "notify"
-          ],
-          "x-ms-enum": {
-            "name": "KeyRotationPolicyActionType",
-            "modelAsString": false
-          }
-        }
-      },
-      "type": "object"
-    },
-    "KeyReleasePolicy": {
-      "properties": {
-        "contentType": {
-          "description": "Content type and version of key release policy",
-          "type": "string",
-          "default": "application/json; charset=utf-8"
-        },
-        "data": {
-          "description": "Blob encoding the policy rules under which the key can be released.",
-          "type": "string",
-          "format": "base64url"
-        }
-      },
       "type": "object"
     }
   },
