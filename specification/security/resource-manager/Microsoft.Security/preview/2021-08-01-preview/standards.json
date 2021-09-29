@@ -1,0 +1,353 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/standards": {
+      "get": {
+        "x-ms-examples": {
+          "List security standards by subscription level scope": {
+            "$ref": "./examples/Standards/ListBySubscriptionStandards_example.json"
+          }
+        },
+        "tags": [
+          "Standards"
+        ],
+        "description": "Get a list of all relevant security standards over a subscription level scope.",
+        "operationId": "Standards_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StandardList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards": {
+      "get": {
+        "x-ms-examples": {
+          "List security standards": {
+            "$ref": "./examples/Standards/ListStandards_example.json"
+          }
+        },
+        "tags": [
+          "Standards"
+        ],
+        "description": "Get security standards on all your resources inside a scope",
+        "operationId": "Standards_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StandardList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/standards/{standardId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a specific security standard by scope and standardId": {
+            "$ref": "./examples/Standards/GetStandard_example.json"
+          }
+        },
+        "tags": [
+          "Standards"
+        ],
+        "description": "Get a specific security standard for the requested scope",
+        "operationId": "Standards_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StandardId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Standard"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a security standard on a specified scope": {
+            "$ref": "./examples/Standards/PutStandard_example.json"
+          }
+        },
+        "tags": [
+          "Standards"
+        ],
+        "description": "Create a security standard on the given scope.  Available only for custom standards.  Will create/update the required standard definitions.",
+        "operationId": "Standards_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StandardId"
+          },
+          {
+            "$ref": "#/parameters/StandardBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Standard"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/Standard"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security standard over the specified scope": {
+            "$ref": "./examples/Standards/DeleteStandard_example.json"
+          }
+        },
+        "tags": [
+          "Standards"
+        ],
+        "description": "Delete a security standard on a scope.",
+        "operationId": "Standards_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StandardId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Standard was deleted"
+          },
+          "204": {
+            "description": "No Content - Standard does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StandardList": {
+      "type": "object",
+      "description": "Page of a Standard list",
+      "properties": {
+        "value": {
+          "description": "Collection of standards in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Standard"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "Standard": {
+      "type": "object",
+      "description": "Security Standard on a resource",
+      "properties": {
+        "properties": {
+          "description": "Properties of a security standard",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StandardProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StandardProperties": {
+      "type": "object",
+      "description": "Describes properties of a standard.",
+      "properties": {
+        "displayName": {
+          "description": "display name of the standard, equivalent to the standardId",
+          "type": "string"
+        },
+        "standardType": {
+          "description": "standard type (Custom or BuiltIn only currently)",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "description of the standard",
+          "type": "string"
+        },
+        "category": {
+          "description": "category of the standard provided",
+          "type": "string"
+        },
+        "components": {
+          "description": "List of component objects containing component unique keys (such as assessment keys) to apply to standard scope.  Currently only supports assessment keys.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandardComponentProperties"
+          }
+        }
+      }
+    },
+    "StandardComponentProperties": {
+      "type": "object",
+      "description": "Describes properties of an component as related to the standard",
+      "properties": {
+        "key": {
+          "description": "Component Key matching componentMetadata",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "StandardId": {
+      "name": "standardId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Security Standard key - unique key for the standard type",
+      "x-ms-parameter-location": "method"
+    },
+    "StandardBody": {
+      "name": "standard",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Standard"
+      },
+      "description": "Custom security standard over a pre-defined scope",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
