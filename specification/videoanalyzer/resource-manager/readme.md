@@ -31,6 +31,20 @@ openapi-type: arm
 tag: package-preview-2021-11
 ```
 
+### Suppression
+
+```yaml
+directive:
+  - from: Microsoft.Media/preview/2021-11-01-preview/VideoAnalyzers.json
+    where: $..paths[($..operationId["VideoAnalyzer_Update"])]
+    reason: Patch response is 202.
+    suppress: LongRunningResponseStatusCode
+
+  - from: Microsoft.Media/preview/2021-11-01-preview/VideoAnalyzers.json
+    reason: Patch response is 202.
+    suppress: TrackedResourcePatchOperation
+```
+
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
