@@ -267,7 +267,6 @@
       "description": "Properties to configure capture description for eventhub"
     },
     "ThrottleRules": {
-      "type": "object",
       "description": "List of all throttle rules",
       "properties": {
         "value": {
@@ -280,7 +279,6 @@
       }
     },
     "ThrottleRule": {
-      "type": "object",
       "properties": {
         "ruleName": {
           "type": "string",
@@ -295,7 +293,8 @@
           "description": ""
         },
         "throttleLimit": {
-          "type": "long",
+          "format": "int64",
+          "type": "integer",
           "description": "Throttling Limit applicable on the rule"
         }
       },
