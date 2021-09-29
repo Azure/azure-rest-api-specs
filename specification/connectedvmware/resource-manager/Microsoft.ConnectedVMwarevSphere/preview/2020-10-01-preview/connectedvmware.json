@@ -3072,6 +3072,237 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/hybridIdentityMetadata/{metadataName}": {
+      "put": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_Create",
+        "description": "Create Or Update HybridIdentityMetadata.",
+        "summary": "Implements HybridIdentityMetadata PUT method.",
+        "x-ms-examples": {
+          "CreateHybridIdentityMetadata": {
+            "$ref": "./examples/CreateHybridIdentityMetadata.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vm."
+          },
+          {
+            "in": "path",
+            "name": "metadataName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the hybridIdentityMetadata."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_Get",
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vm."
+          },
+          {
+            "in": "path",
+            "name": "metadataName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HybridIdentityMetadata."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_Delete",
+        "summary": "Deletes an HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata DELETE method.",
+        "x-ms-examples": {
+          "DeleteHybridIdentityMetadata": {
+            "$ref": "./examples/DeleteHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vm."
+          },
+          {
+            "in": "path",
+            "name": "metadataName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HybridIdentityMetadata."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/hybridIdentityMetadata": {
+      "get": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_ListByVm",
+        "summary": "Implements GET HybridIdentityMetadata in a vm.",
+        "description": "Returns the list of HybridIdentityMetadata of the given vm.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVm": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVm.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vm."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/extensions/{extensionName}": {
       "put": {
         "tags": [
@@ -5779,18 +6010,15 @@
         },
         "managedResourceId": {
           "description": "Gets or sets the tracked resource id corresponding to the inventory resource.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "moRefId": {
           "description": "Gets or sets the MoRef (Managed Object Reference) ID for the inventory item.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "moName": {
           "description": "Gets or sets the vCenter Managed Object name for the inventory item.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
