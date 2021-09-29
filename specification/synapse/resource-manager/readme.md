@@ -44,7 +44,6 @@ input-file:
   - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
   - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
   - Microsoft.Synapse/stable/2021-06-01/keys.json
-  - Microsoft.Synapse/stable/2021-06-01/library.json
   - Microsoft.Synapse/stable/2021-06-01/operations.json
   - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
   - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
@@ -53,6 +52,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-06-01/workspace.json
   - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
   - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
 ```
