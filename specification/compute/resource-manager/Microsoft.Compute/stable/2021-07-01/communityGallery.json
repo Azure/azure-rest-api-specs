@@ -171,8 +171,7 @@
     }
   },
   "definitions": {
-    "PirResource": {
-      "description": "The Resource model definition.",
+    "PirCommunityGalleryResource": {
       "properties": {
         "name": {
           "readOnly": true,
@@ -188,21 +187,12 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
-        }
-      }
-    },
-    "PirCommunityGalleryResource": {
-      "properties": {
+        },
         "identifier": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CommunityGalleryIdentifier"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PirResource"
-        }
-      ],
       "description": "Base information about the community gallery resource in pir."
     },
     "CommunityGalleryIdentifier": {
