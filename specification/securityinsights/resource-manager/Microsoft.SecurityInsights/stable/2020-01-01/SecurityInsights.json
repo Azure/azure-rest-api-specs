@@ -814,35 +814,8 @@
         },
         "severity": {
           "description": "The severity of the incident",
-          "enum": [
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentSeverity",
-            "values": [
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentSeverityEnum"
         },
         "status": {
           "description": "The status of the incident",
@@ -883,6 +856,38 @@
       ],
       "type": "object"
     },
+    "IncidentSeverityEnum": {
+      "description": "The severity of the incident",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentSeverity",
+        "values": [
+          {
+            "description": "High severity",
+            "value": "High"
+          },
+          {
+            "description": "Medium severity",
+            "value": "Medium"
+          },
+          {
+            "description": "Low severity",
+            "value": "Low"
+          },
+          {
+            "description": "Informational severity",
+            "value": "Informational"
+          }
+        ]
+      }
+    },
     "OfficeConsent": {
       "allOf": [
         {
@@ -915,6 +920,7 @@
           "type": "array"
         }
       },
+      "type": "object",
       "required": [
         "value"
       ]
@@ -1038,37 +1044,6 @@
       "type": "object",
       "x-ms-azure-resource": true
     },
-    "Settings": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithEtag"
-        }
-      ],
-      "description": "The Settings.",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/SettingsKind",
-          "description": "The data connector kind"
-        }
-      },
-      "type": "object"
-    },
-    "SettingsKind": {
-      "description": "The kind of the setting",
-      "enum": [
-        "UebaSettings",
-        "ToggleSettings"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "SettingKind"
-      }
-    },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
       "properties": {
@@ -1106,86 +1081,6 @@
       },
       "type": "object"
     },
-    "ToggleSettings": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "description": "Settings with single toggle.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ToggleSettingsProperties",
-          "description": "toggle properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "ToggleSettings"
-    },
-    "ToggleSettingsProperties": {
-      "description": "toggle property bag.",
-      "properties": {
-        "isEnabled": {
-          "description": "Determines whether the setting is enable or disabled.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "UebaSettings": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "description": "Represents settings for User and Entity Behavior Analytics enablement.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UebaSettingsProperties",
-          "description": "User and Entity Behavior Analytics settings properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "UebaSettings"
-    },
-    "UebaSettingsProperties": {
-      "description": "User and Entity Behavior Analytics settings property bag.",
-      "properties": {
-        "atpLicenseStatus": {
-          "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "LicenseStatus"
-          }
-        },
-        "isEnabled": {
-          "description": "Determines whether User and Entity Behavior Analytics is enabled for this workspace.",
-          "type": "boolean"
-        },
-        "statusInMcas": {
-          "description": "Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "StatusInMcas"
-          }
-        }
-      },
-      "type": "object"
-    },
     "UserInfo": {
       "description": "User information that made some action",
       "properties": {
@@ -1209,61 +1104,6 @@
       "required": [
         "objectId"
       ],
-      "type": "object"
-    },
-    "IncidentInfo": {
-      "description": "Describes related incident information for the bookmark",
-      "properties": {
-        "incidentId": {
-          "description": "Incident Id",
-          "type": "string"
-        },
-        "severity": {
-          "description": "The severity of the incident",
-          "enum": [
-            "Critical",
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "CaseSeverity",
-            "values": [
-              {
-                "description": "Critical severity",
-                "value": "Critical"
-              },
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
-        },
-        "title": {
-          "description": "The title of the incident",
-          "type": "string"
-        },
-        "relationName": {
-          "description": "Relation Name",
-          "type": "string"
-        }
-      },
       "type": "object"
     }
   },
@@ -1386,24 +1226,6 @@
       "minLength": 1,
       "name": "resourceGroupName",
       "pattern": "^[-\\w\\._\\(\\)]+$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Settings": {
-      "description": "The setting",
-      "in": "body",
-      "name": "settings",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Settings"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "SettingsName": {
-      "description": "The setting name. Supports- Fusion, UEBA",
-      "in": "path",
-      "name": "settingsName",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

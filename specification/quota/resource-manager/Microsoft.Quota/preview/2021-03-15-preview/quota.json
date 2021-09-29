@@ -27,23 +27,125 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonate your user account."
       },
       "type": "oauth2",
       "description": "Azure Active Directory OAuth 2.0 authorization"
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Quota/quotaLimits/{resourceName}": {
+    "/{scope}/providers/Microsoft.Quota/usages/{resourceName}": {
+      "get": {
+        "tags": [
+          "UsagesInformation"
+        ],
+        "description": "Get the current usage of a resource.",
+        "operationId": "Usages_Get",
+        "x-ms-examples": {
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuUsages.json"
+          },
+          "Quotas_UsagesRequest_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuUsages.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The usage information will be returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/CurrentUsagesBase"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/usages": {
+      "get": {
+        "tags": [
+          "UsagesInformation"
+        ],
+        "description": "Get a list of current usage for all resources for the scope specified.",
+        "operationId": "Usages_List",
+        "x-ms-examples": {
+          "Quotas_listUsagesForNetwork": {
+            "$ref": "./examples/getNetworkUsages.json"
+          },
+          "Quotas_listUsagesForCompute": {
+            "$ref": "./examples/getComputeUsages.json"
+          },
+          "Quotas_listUsagesMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesUsages.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Usage information will be returned in the response with pagination.",
+            "schema": {
+              "$ref": "#/definitions/UsagesLimits"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Quota/quotas/{resourceName}": {
       "get": {
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Gets the quota limit and current quota usage of a resource. The response can be used to determine the remaining quota and calculate a new quota limit that can be submitted with a PUT request.",
+        "description": "Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.",
         "operationId": "Quota_Get",
         "x-ms-examples": {
-          "Quotas_Request_ForCompute": {
-            "$ref": "./examples/getComputeOneSkuUsages.json"
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuQuotaLimit.json"
+          },
+          "Quotas_Get_Request_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuQuotaLimit.json"
           }
         },
         "parameters": [
@@ -82,17 +184,20 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Create or update the quota limit for the specified resource to the requested value. To update the quota, follow these steps:\n1. Use the GET operation to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit.",
+        "description": "Create or update the quota limit for the specified resource with the requested value. To update the quota, follow these steps:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
-          "Quotas_Request_ForCompute": {
-            "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
+          "Quotas_PutRequest_ForNetwork": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequest.json"
           },
-          "Quotas_Request_ForMachineLearningServices_DedicatedResource": {
-            "$ref": "./examples/putMachineLearningServicesQuotaRequestDedicated.json"
+          "Quotas_Put_Request_ForCompute": {
+            "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
           },
           "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
             "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
+          },
+          "Quotas_PutRequest_ForNetwork_StandardSkuPublicIpAddressesResource": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequestStandardSkuPublicIpAddresses.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -112,7 +217,7 @@
           {
             "name": "createQuotaRequest",
             "in": "body",
-            "description": "Quota requests payload.",
+            "description": "Quota request payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
@@ -127,10 +232,7 @@
             }
           },
           "202": {
-            "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
-            "schema": {
-              "$ref": "#/definitions/CurrentQuotaLimitBase"
-            }
+            "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** obtained in the response of a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -144,9 +246,12 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the GET operation to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit.",
+        "description": "Update the quota limit for a specific resource to the specified value:\n1. Use the Usages-GET and Quota-GET operations to determine the remaining quota for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
+          "Quotas_Request_PatchForNetwork": {
+            "$ref": "./examples/patchNetworkOneSkuQuotaRequest.json"
+          },
           "Quotas_Request_PatchForCompute": {
             "$ref": "./examples/patchComputeQuotaRequest.json"
           }
@@ -183,10 +288,7 @@
             }
           },
           "202": {
-            "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation.",
-            "schema": {
-              "$ref": "#/definitions/CurrentQuotaLimitBase"
-            }
+            "description": "The request is accepted and is being processed. To check the status for this request, use the value for the quota request ID **id** in a [Quota Request Status](https://docs.microsoft.com/en-us/rest/api/reserved-vm-instances/quotarequeststatus/get) GET operation."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -197,19 +299,22 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Quota/quotaLimits": {
+    "/{scope}/providers/Microsoft.Quota/quotas": {
       "get": {
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Get a list of current quota limits and usages of all resources. The response from this GET operation can be leveraged to submit requests to update a quota.",
+        "description": "Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota.",
         "operationId": "Quota_List",
         "x-ms-examples": {
-          "Quotas_listUsagesForCompute": {
-            "$ref": "./examples/getComputeUsages.json"
+          "Quotas_listQuotaLimitsForNetwork": {
+            "$ref": "./examples/getNetworkQuotaLimits.json"
           },
-          "Quotas_listUsagesMachineLearningServices": {
-            "$ref": "./examples/getMachineLearningServicesUsages.json"
+          "Quotas_listQuotaLimitsForCompute": {
+            "$ref": "./examples/getComputeQuotaLimits.json"
+          },
+          "Quotas_listQuotaLimitsMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesQuotaLimits.json"
           }
         },
         "parameters": [
@@ -245,7 +350,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Quota/quotaLimitsRequests/{id}": {
+    "/{scope}/providers/Microsoft.Quota/quotaRequests/{id}": {
       "get": {
         "tags": [
           "QuotaRequests"
@@ -261,7 +366,7 @@
             "$ref": "./examples/getQuotaRequestStatusFailed.json"
           }
         },
-        "description": "Gets the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.",
+        "description": "Get the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.",
         "operationId": "QuotaRequestStatus_Get",
         "parameters": [
           {
@@ -290,7 +395,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Quota/quotaLimitsRequests": {
+    "/{scope}/providers/Microsoft.Quota/quotaRequests": {
       "get": {
         "tags": [
           "QuotaRequests"
@@ -300,7 +405,7 @@
             "$ref": "./examples/getQuotaRequestsHistory.json"
           }
         },
-        "description": "For the specified location and resource provider, gets the current quota requests under the subscription for a one year period ending at the time is made. Use the **oData** filter can be used to select quota requests.",
+        "description": "For the specified scope, get the current quota requests for a one year period ending at the time is made. Use the **oData** filter to select quota requests.",
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
@@ -342,43 +447,10 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaLimitProviders": {
-      "get": {
-        "tags": [
-          "QuotaMetadata"
-        ],
-        "description": "Gets the list of current resource providers supported by the Microsoft.Quota resource provider.\r\nFor each resource provider, the resource templates the resource provider supports are be provided. \r\nFor each resource template, the resource dimensions are listed. The resource dimensions are the name-value pairs in the resource URI.\r\nExample: Microsoft.Compute Resource Provider\r\nThe URI template is '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaBucket'. The actual dimensions vary depending on the resource provider.\r\nThe resource dimensions are {subscriptions},{locations},{quotaBucket}.",
-        "operationId": "QuotaResourceProviders_List",
-        "x-ms-examples": {
-          "Quotas_listMetadataForRPs": {
-            "$ref": "./examples/metadata/getQuotaRPMetadata.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Quota limits type information.",
-            "schema": {
-              "$ref": "#/definitions/resourceProvidersList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Quota/operations": {
       "get": {
         "summary": "GET operations.",
-        "description": "List all GET operations.",
+        "description": "List all the operations supported by the Microsoft.Quota resource provider.",
         "operationId": "Operation_List",
         "x-ms-examples": {
           "GetOperations": {
@@ -394,11 +466,11 @@
           }
         ],
         "tags": [
-          "Operation"
+          "Operations"
         ],
         "responses": {
           "200": {
-            "description": "List all GET operations.",
+            "description": "List all the operations.",
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
@@ -469,7 +541,7 @@
       "description": "Resource properties.",
       "properties": {
         "id": {
-          "description": "Resource ID.",
+          "description": "Resource ID",
           "type": "string",
           "readOnly": true
         },
@@ -481,17 +553,17 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. Example: \"Microsoft.Quota/quotas\""
         }
       }
     },
-    "CurrentQuotaLimitBase": {
+    "CurrentUsagesBase": {
       "type": "object",
-      "description": "Quota limit.",
+      "description": "Resource usage.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "The resource Id.",
+          "description": "The resource ID.",
           "type": "string",
           "readOnly": true
         },
@@ -506,7 +578,87 @@
           "readOnly": true
         },
         "properties": {
-          "description": "Quota properties for the specified resource.",
+          "description": "Usage properties for the specified resource.",
+          "$ref": "#/definitions/UsagesProperties"
+        }
+      }
+    },
+    "UsagesProperties": {
+      "description": "Usage properties for the specified resource.",
+      "type": "object",
+      "properties": {
+        "usages": {
+          "description": "The quota limit properties for this resource.",
+          "$ref": "#/definitions/UsagesObject"
+        },
+        "unit": {
+          "description": " The units for the quota usage, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name provided by the resource provider. Use this property name when requesting quota.",
+          "$ref": "#/definitions/ResourceName"
+        },
+        "resourceType": {
+          "description": "The name of the resource type.",
+          "$ref": "#/definitions/ResourceTypesName"
+        },
+        "quotaPeriod": {
+          "description": "The time period for the summary of the quota usage values. For example:\r\n*P1D (per one day)\n*PT1M (per one minute)\n*PT1S (per one second).\r\nThis parameter is optional because it is not relevant for all resources such as compute.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isQuotaApplicable": {
+          "description": "States if quota can be requested for this resource.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties for the specific resource provider.",
+          "type": "object"
+        }
+      }
+    },
+    "UsagesLimits": {
+      "type": "object",
+      "description": "Quota limits.",
+      "properties": {
+        "value": {
+          "description": "List of quota limits.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrentUsagesBase"
+          }
+        },
+        "nextLink": {
+          "description": "The URI used to fetch the next page of quota limits. When there are no more pages, this is null.",
+          "type": "string"
+        }
+      }
+    },
+    "CurrentQuotaLimitBase": {
+      "type": "object",
+      "description": "Quota limit.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Quota properties for the specified resource, based on the API called, Quotas or Usages.",
           "$ref": "#/definitions/QuotaProperties"
         }
       }
@@ -516,19 +668,11 @@
       "type": "object",
       "properties": {
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
-        },
-        "currentValue": {
-          "description": "Usage information for the current resource.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/LimitJsonObject"
         },
         "unit": {
-          "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "description": " The quota units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
           "type": "string",
           "readOnly": true
         },
@@ -584,7 +728,7 @@
           }
         },
         "nextLink": {
-          "description": "The URI used to fetch the next page of quota limits. When there are no more pages, this is null.",
+          "description": "The URI used to fetch the next page of quota limits. When there are no more pages, this string is null.",
           "type": "string"
         }
       }
@@ -623,18 +767,12 @@
       "type": "object",
       "description": "Request property.",
       "properties": {
-        "limit": {
-          "description": "Resource quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
         "name": {
           "description": "Resource name.",
           "$ref": "#/definitions/ResourceName"
         },
         "resourceType": {
-          "description": "Resource type for which the quota check was made.",
+          "description": "Resource type for which the quota properties were requested.",
           "type": "string",
           "readOnly": true
         },
@@ -655,8 +793,110 @@
           "description": "Quota request ID.",
           "type": "string",
           "readOnly": true
+        },
+        "limit": {
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/LimitJsonObject"
         }
       }
+    },
+    "LimitObjectTypes": {
+      "description": "The limit object type.",
+      "enum": [
+        "LimitValue"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "limitType",
+        "modelAsString": true
+      }
+    },
+    "LimitTypes": {
+      "description": "The quota or usages limit types.",
+      "enum": [
+        "Independent",
+        "Shared"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "quotaLimitTypes",
+        "modelAsString": true
+      }
+    },
+    "LimitJsonObject": {
+      "description": "LimitJson abstract class.",
+      "required": [
+        "limitObjectType"
+      ],
+      "type": "object",
+      "properties": {
+        "limitObjectType": {
+          "$ref": "#/definitions/LimitObjectTypes"
+        }
+      },
+      "discriminator": "limitObjectType"
+    },
+    "UsagesTypes": {
+      "description": "The quota or usages limit types.",
+      "enum": [
+        "Individual",
+        "Combined"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "usagesTypes",
+        "modelAsString": true
+      }
+    },
+    "UsagesObject": {
+      "description": "The resource usages value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The usages value."
+        },
+        "usagesType": {
+          "$ref": "#/definitions/UsagesTypes"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LimitObject": {
+      "description": "The resource quota limit value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quota/limit value"
+        },
+        "limitObjectType": {
+          "$ref": "#/definitions/LimitObjectTypes"
+        },
+        "limitType": {
+          "$ref": "#/definitions/LimitTypes"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LimitValue": {
+      "x-ms-discriminator-value": "LimitValue",
+      "type": "object",
+      "description": "The resource quota limit.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LimitJsonObject"
+        },
+        {
+          "$ref": "#/definitions/LimitObject"
+        }
+      ]
     },
     "QuotaRequestOneResourceSubmitResponse": {
       "description": "Quota request response.",
@@ -701,14 +941,14 @@
           "readOnly": true
         },
         "properties": {
-          "description": "The quota request details.",
+          "description": "Quota request details.",
           "type": "object",
           "$ref": "#/definitions/QuotaRequestProperties"
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. \"Microsoft.Quota/quotas\"."
         }
       }
     },
@@ -753,16 +993,8 @@
           "readOnly": true
         },
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
-        },
-        "currentValue": {
-          "description": "Usage information for the current resource.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/LimitObject"
         },
         "unit": {
           "description": " The quota limit units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
@@ -805,7 +1037,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type. \"Microsoft.Quota/quotaLimits\""
+          "description": "Resource type. \"Microsoft.Quota/quotas\"."
         },
         "properties": {
           "description": "Quota request details.",
@@ -826,7 +1058,7 @@
           }
         },
         "nextLink": {
-          "description": "The URI for fetching the next page of quota limits. When there are no more pages, this is null.",
+          "description": "The URI for fetching the next page of quota limits. When there are no more pages, this string is null.",
           "type": "string"
         }
       }
@@ -843,6 +1075,10 @@
           "description": "User-friendly status message.",
           "type": "string",
           "readOnly": true
+        },
+        "error": {
+          "description": "Error details of the quota request.",
+          "$ref": "#/definitions/ServiceErrorDetail"
         },
         "requestSubmitTime": {
           "description": "The quota request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
@@ -880,10 +1116,8 @@
           "format": "date-time"
         },
         "limit": {
-          "description": "Quota limit.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false
+          "description": "Resource quota limit properties.",
+          "$ref": "#/definitions/LimitObject"
         },
         "currentValue": {
           "description": "Usage information for the current resource.",
@@ -914,6 +1148,10 @@
           "type": "boolean",
           "readOnly": true
         },
+        "error": {
+          "description": "Error details of the quota request.",
+          "$ref": "#/definitions/ServiceErrorDetail"
+        },
         "properties": {
           "description": "Additional properties for the specific resource provider.",
           "type": "object"
@@ -938,19 +1176,8 @@
     },
     "ResourceTypesName": {
       "description": "Resource types. For extensibility, it is a string.",
-      "enum": [
-        "standard",
-        "dedicated",
-        "lowPriority",
-        "shared",
-        "serviceSpecific"
-      ],
       "readOnly": false,
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": true
-      }
+      "type": "string"
     },
     "ExceptionResponse": {
       "type": "object",
@@ -961,211 +1188,6 @@
         }
       },
       "description": "Error."
-    },
-    "quotaBucketProperties": {
-      "type": "object",
-      "description": "quotaBucket provider properties.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Property name."
-        },
-        "displayName": {
-          "description": "Display name.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceProviderDimension": {
-      "type": "object",
-      "description": "Resource provider resource dimension.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Resource dimension name."
-        },
-        "displayName": {
-          "description": "Display name.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceProviderTemplate": {
-      "type": "object",
-      "description": "Resource template details for the resource provider.",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Resource type."
-        },
-        "resourceQuery": {
-          "description": "Resource query for dimension values.",
-          "$ref": "#/definitions/resourceQueryDetails"
-        },
-        "resourceUsagesQuery": {
-          "description": "Resource usages query.",
-          "$ref": "#/definitions/resourceQueryDetails"
-        },
-        "dimensions": {
-          "description": "Resource provider dimensions.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderDimension"
-          }
-        }
-      }
-    },
-    "ResourceProviderTemplates": {
-      "type": "object",
-      "description": "List of resource provider templates",
-      "properties": {
-        "value": {
-          "description": "The resource provider templates",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderTemplate"
-          }
-        }
-      }
-    },
-    "ResourceProviderInformation": {
-      "type": "object",
-      "description": "Resource provider information.",
-      "properties": {
-        "resourceProviderName": {
-          "type": "string",
-          "description": "Resource provider name."
-        },
-        "properties": {
-          "description": "Resource provider quota dimensions.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ResourceProviderTemplates"
-        }
-      }
-    },
-    "resourceProvidersList": {
-      "type": "object",
-      "description": "Resource providers list.",
-      "properties": {
-        "value": {
-          "description": "Resource provider information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderInformation"
-          }
-        }
-      }
-    },
-    "QuotaTypeInformationDimensionList": {
-      "description": "Quota types information list.",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Resource type"
-        },
-        "value": {
-          "description": "Quota type information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTypeDimensionInformation"
-          }
-        }
-      }
-    },
-    "QuotaTypeDimensionInformation": {
-      "type": "object",
-      "description": "Quota type information.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Property name."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name."
-        },
-        "id": {
-          "type": "string",
-          "description": "Dimension ID."
-        }
-      }
-    },
-    "QuotaTemplateDetails": {
-      "type": "object",
-      "description": "Quota template details.",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Resource type."
-        },
-        "properties": {
-          "description": "Quota type properties for the resource ID.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaTypeInformationDimensionList"
-        }
-      }
-    },
-    "resourceQueryDetails": {
-      "type": "object",
-      "description": "Resource query details.",
-      "properties": {
-        "resourceQueryType": {
-          "description": "Resource query type.",
-          "$ref": "#/definitions/ResourceQueryType"
-        },
-        "resourceQueryMethod": {
-          "description": "Resource query method.",
-          "$ref": "#/definitions/ResourceQueryMethod"
-        },
-        "resourceQueryUri": {
-          "type": "string",
-          "description": "Base URI for for resource query."
-        },
-        "resourceQueryPostTemplate": {
-          "description": "Template to create the resource query.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceQueryType": {
-      "description": "Resource query types. For extensibility, it is a string.",
-      "enum": [
-        "ARG",
-        "RestAPI"
-      ],
-      "readOnly": false,
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceQueryType",
-        "modelAsString": true
-      }
-    },
-    "ResourceQueryMethod": {
-      "description": "The resource query method.",
-      "enum": [
-        "GET",
-        "POST"
-      ],
-      "readOnly": false,
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceQueryMethod",
-        "modelAsString": true
-      }
-    },
-    "QuotaTemplatesDetails": {
-      "type": "object",
-      "description": "Quota templates details.",
-      "properties": {
-        "value": {
-          "description": "Quota templates information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTemplateDetails"
-          }
-        }
-      }
     },
     "ServiceError": {
       "description": "API error details.",
@@ -1228,7 +1250,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Resource name for a given resource provider. For example:\r\n- SKU name for Microsoft.Compute\r\n- Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices",
+      "description": "Resource name for a given resource provider. For example:\r\n- SKU name for Microsoft.Compute\r\n- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices\r\n For Microsoft.Network PublicIPAddresses.",
       "x-ms-parameter-location": "method"
     },
     "ResourceDimensionTypeInParameter": {
@@ -1262,12 +1284,12 @@
       "in": "query",
       "type": "string",
       "required": false,
-      "description": "The **Skiptoken** parameter is used only if a previous operation returned a partial result. If a previous response contains a **nextLink** element, the value of the **nextLink** element includes a **skiptoken** parameter that specifies a starting point to use for subsequent calls.",
+      "description": "The **Skiptoken** parameter is used only if a previous operation returned a partial result. If a previous response contains a **nextLink** element, its value includes a **skiptoken** parameter that specifies a starting point to use for subsequent calls.",
       "x-ms-parameter-location": "method"
     },
     "ScopeInPath": {
       "name": "scope",
-      "description": "The target Azure resource URI. For example, `/subscriptions/9f6cce51-6baf-4de5-a3c4-6f58b85315b9/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotaLimits`, then it's the target Azure resource URI in the GET operation for the specific resource.",
+      "description": "The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotas`, then it's the target Azure resource URI in the GET operation for the specific resource.",
       "in": "path",
       "required": true,
       "type": "string",
