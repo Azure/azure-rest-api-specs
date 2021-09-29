@@ -35,12 +35,11 @@ tag: package-preview-2021-11
 
 ```yaml
 directive:
-  - from: Microsoft.Media/preview/2021-11-01-preview/VideoAnalyzers.json
-    where: $..paths[($..operationId["VideoAnalyzer_Update"])]
+  - from: VideoAnalyzers.json
     reason: Patch response is 202.
     suppress: LongRunningResponseStatusCode
 
-  - from: Microsoft.Media/preview/2021-11-01-preview/VideoAnalyzers.json
+  - from: VideoAnalyzers.json
     reason: Patch response is 202.
     suppress: TrackedResourcePatchOperation
 ```
