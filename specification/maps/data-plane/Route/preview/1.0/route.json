@@ -1667,6 +1667,18 @@
     }
   },
   "definitions": {
+    "DepartureTime": {
+      "description": "The estimated departure time for the route or leg.",
+      "type": "string",
+      "readOnly": true,
+      "format": "date-time"
+    },
+    "ArrivalTime": {
+      "description": "The estimated arrival time for the route or leg.",
+      "type": "string",
+      "readOnly": true,
+      "format": "date-time"
+    },
     "RouteDirectionParameters": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
@@ -1773,14 +1785,10 @@
           "readOnly": true
         },
         "departureTime": {
-          "description": "Departure Time property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/DepartureTime"
         },
         "arrivalTime": {
-          "description": "Arrival Time property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/ArrivalTime"
         }
       }
     },
@@ -1837,14 +1845,10 @@
           "readOnly": true
         },
         "departureTime": {
-          "description": "Departure Time property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/DepartureTime"
         },
         "arrivalTime": {
-          "description": "Arrival Time property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/ArrivalTime"
         },
         "noTrafficTravelTimeInSeconds": {
           "description": "Estimated travel time calculated as if there are no delays on the route due to traffic conditions (e.g. congestion). Included only if computeTravelTimeFor = all is used in the query.",
