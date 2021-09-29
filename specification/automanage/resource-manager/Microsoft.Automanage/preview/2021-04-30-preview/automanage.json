@@ -1527,8 +1527,89 @@
     "AssignmentReportProperties": {
       "description": "Data related to the report detail.",
       "type": "object",
-      "additionalProperties": {
-        "type": "object"
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "Start time of the configuration profile assignment processing."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End time of the configuration profile assignment processing."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Last modified time of the configuration profile assignment processing."
+        },
+        "duration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Duration of the configuration profile assignment processing."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of the configuration profile assignment processing (Initial/Consistency)."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the configuration profile assignment."
+        },
+        "configurationProfile": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The configurationProfile linked to the assignment."
+        },
+        "resources": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReportResource"
+          },
+          "description": "List of resources processed by the configuration profile assignment."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+          "readOnly": true,
+          "description": "Error message, if any, returned by the configuration profile assignment processing."
+        },
+        "reportFormatVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Version of the report format"
+        }
+      }
+    },
+    "ReportResource": {
+      "description": "Details about the resource processed by the configuration profile assignment",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Nema of the resource."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM id of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of the resource."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the resource."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+          "readOnly": true,
+          "description": "Error message, if any, returned when deploying the resource."
+        }
       }
     }
   },
