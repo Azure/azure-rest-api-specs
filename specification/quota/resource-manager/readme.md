@@ -77,8 +77,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js quota/resource-manager
 ```
 
 ## C#
@@ -111,10 +109,6 @@ See configuration in [readme.cli.md](./readme.cli.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Java
 
