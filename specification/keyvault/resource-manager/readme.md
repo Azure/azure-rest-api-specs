@@ -26,15 +26,26 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-2021-09
 ```
 
 
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09'
+input-file:
+  - Microsoft.KeyVault/stable/2021-09-01/keys.json
+  - Microsoft.KeyVault/stable/2021-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2021-09-01/providers.json
+  - Microsoft.KeyVault/stable/2021-09-01/secrets.json
+```
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.KeyVault/preview/2021-06-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-06-01-preview/keys.json
@@ -43,6 +54,7 @@ input-file:
   - Microsoft.KeyVault/preview/2021-06-01-preview/providers.json
   - Microsoft.KeyVault/preview/2021-06-01-preview/secrets.json
 ```
+
 ### Tag: package-preview-2021-04
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
@@ -54,11 +66,12 @@ input-file:
   - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
 ```
+
 ### Tag: package-preview-2021-04-full
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-04-full'
+``` yaml $(tag) == 'package-preview-2021-04-full'
 input-file:
   - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
