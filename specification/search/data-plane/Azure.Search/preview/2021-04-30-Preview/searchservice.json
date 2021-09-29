@@ -1062,9 +1062,16 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
+              "type": "object",
+              "x-ms-client-name": "SkillNames",
+              "properties": {
+                "skillNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "the names of skills to be reset."
+                }
               }
             },
             "description": "The names of skills to reset."
