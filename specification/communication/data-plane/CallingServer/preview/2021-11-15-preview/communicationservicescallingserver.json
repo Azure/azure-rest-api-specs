@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/calling/callConnections/{callConnectionId}/audioRoutingGroups/{audioRoutingMode}": {
+    "/calling/callConnections/{callConnectionId}/audioRoutingGroups/{audioRoutingGroupId}": {
       "post": {
         "tags": [
           "AudioRoutingGroup"
@@ -31,9 +31,9 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingMode",
+            "name": "audioRoutingGroupId",
             "in": "path",
-            "description": "The audio routing mode.",
+            "description": "The audio routing group id.",
             "required": true,
             "type": "string"
           },
@@ -85,9 +85,9 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingMode",
+            "name": "audioRoutingGroupId",
             "in": "path",
-            "description": "The audio routing mode.",
+            "description": "The audio routing group id.",
             "required": true,
             "type": "string"
           },
@@ -136,9 +136,9 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingMode",
+            "name": "audioRoutingGroupId",
             "in": "path",
-            "description": "The audio routing mode.",
+            "description": "The audio routing group id.",
             "required": true,
             "type": "string"
           },
@@ -2685,7 +2685,7 @@
         },
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
-          "description": ""
+          "description": "The call locator."
         }
       }
     },
@@ -3674,9 +3674,9 @@
       ],
       "type": "object",
       "properties": {
-        "serverCallId": {
-          "description": "The server call.id.",
-          "type": "string"
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
         },
         "callConnectionId": {
           "description": "The call connection id.",
@@ -3707,9 +3707,9 @@
           "description": "The time of the recording started",
           "type": "string"
         },
-        "serverCallId": {
-          "description": "The server call.id.",
-          "type": "string"
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
         }
       }
     },
