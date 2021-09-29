@@ -18,7 +18,43 @@
             {
               "matchVariable": "RequestArgNames",
               "selectorMatchOperator": "StartsWith",
-              "selector": "hello"
+              "selector": "hello",
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                      "rules": [
+                        {
+                          "ruleId": "930120"
+                        }
+                      ]
+                    },
+                    {
+                      "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matchVariable": "RequestArgNames",
+              "selectorMatchOperator": "EndsWith",
+              "selector": "hello",
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.1",
+                  "ruleGroups": []
+                }
+              ]
+            },
+            {
+              "matchVariable": "RequestArgNames",
+              "selectorMatchOperator": "StartsWith",
+              "selector": "test"
             },
             {
               "matchVariable": "RequestArgValues",
@@ -117,7 +153,43 @@
               {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
-                "selector": "hello"
+                "selector": "hello",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                        "rules": [
+                          {
+                            "ruleId": "930120"
+                          }
+                        ]
+                      },
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestArgNames",
+                "selectorMatchOperator": "EndsWith",
+                "selector": "hello",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.1",
+                    "ruleGroups": []
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestArgNames",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "test"
               },
               {
                 "matchVariable": "RequestArgValues",
@@ -219,7 +291,43 @@
               {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
-                "selector": "hello"
+                "selector": "hello",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                        "rules": [
+                          {
+                            "ruleId": "930120"
+                          }
+                        ]
+                      },
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestArgNames",
+                "selectorMatchOperator": "EndsWith",
+                "selector": "hello",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.1",
+                    "ruleGroups": []
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestArgNames",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "test"
               },
               {
                 "matchVariable": "RequestArgValues",
