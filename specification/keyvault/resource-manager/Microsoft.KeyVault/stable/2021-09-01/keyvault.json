@@ -1337,6 +1337,11 @@
             "$ref": "#/definitions/PrivateEndpointConnectionItem"
           },
           "description": "List of private endpoint connections associated with the key vault."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "enabled",
+          "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules."
         }
       },
       "required": [
@@ -1407,6 +1412,10 @@
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "A collection of rules governing the accessibility of the vault from specific network locations."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules."
         }
       },
       "description": "Properties of the vault"
