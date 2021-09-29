@@ -2063,46 +2063,50 @@
           "readOnly": true
         },
         "magnitudeOfDelay": {
-          "description": "The magnitude of delay caused by the incident. These values correspond to the values of the response field ty of the [Get Traffic Incident Detail API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentdetail). ",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"
-          ],
-          "x-ms-enum": {
-            "name": "MagnitudeOfDelay",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "0",
-                "description": "Unknown."
-              },
-              {
-                "value": "1",
-                "description": "Minor."
-              },
-              {
-                "value": "2",
-                "description": "Moderate."
-              },
-              {
-                "value": "3",
-                "description": "Major."
-              },
-              {
-                "value": "4",
-                "description": "Undefined, used for road closures and other indefinite delays."
-              }
-            ]
-          }
+          "x-ms-client-name": "delayMagnitude",
+          "$ref": "#/definitions/DelayMagnitude"
         },
         "tec": {
           "$ref": "#/definitions/RouteSectionTec"
         }
+      }
+    },
+    "DelayMagnitude": {
+      "description": "The magnitude of delay caused by the incident. These values correspond to the values of the response field ty of the [Get Traffic Incident Detail API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentdetail). ",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "x-ms-enum": {
+        "name": "DelayMagnitude",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "0",
+            "description": "Unknown."
+          },
+          {
+            "value": "1",
+            "description": "Minor."
+          },
+          {
+            "value": "2",
+            "description": "Moderate."
+          },
+          {
+            "value": "3",
+            "description": "Major."
+          },
+          {
+            "value": "4",
+            "description": "Undefined, used for road closures and other indefinite delays."
+          }
+        ]
       }
     },
     "RouteSectionTec": {
