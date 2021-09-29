@@ -36,7 +36,7 @@ tag: package-preview-2021-10
 
 ### Tag: package-preview-2021-10
 
-These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2021-10'
 input-file:
