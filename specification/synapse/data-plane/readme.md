@@ -49,12 +49,24 @@ tag: package-vnet-2020-12-01
 tag: package-monitoring-2020-12-01
 ```
 
+### Tag: package-metadata-2021-07-01-preview
+
+These settings apply only when `--tag=package-metadata-2021-07-01-preview` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Synapse metadata API set is not ready to be included in SDK.
+
+``` yaml $(tag) == 'package-metadata-2021-07-01-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
+```
+
 ### Tag: package-artifacts-composite-v1
 
 These settings apply only when `--tag=package-artifacts-composite-v1` is specified on the command line.
 
 ``` yaml $(tag) == 'package-artifacts-composite-v1'
 input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
   - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
   - Microsoft.Synapse/stable/2020-12-01/artifacts.json
