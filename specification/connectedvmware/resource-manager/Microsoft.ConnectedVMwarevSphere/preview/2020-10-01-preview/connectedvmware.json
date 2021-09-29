@@ -4692,6 +4692,10 @@
           "type": "string",
           "description": "Gets or sets the SMBIOS UUID of the vm."
         },
+        "firmwareType": {
+          "description": "Firmware type",
+          "$ref": "#/definitions/FirmwareType"
+        },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
           "type": "string",
@@ -4946,6 +4950,11 @@
           "type": "string",
           "readOnly": true
         },
+        "firmwareType": {
+          "description": "Firmware type",
+          "$ref": "#/definitions/FirmwareType",
+          "readOnly": true
+        },
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
@@ -4998,6 +5007,22 @@
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
+          "readOnly": true
+        },
+        "datastoreIds": {
+          "description": "Gets or sets the datastore ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkIds": {
+          "description": "Gets or sets the network ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "provisioningState": {
@@ -5694,6 +5719,18 @@
         "name": "NICType"
       }
     },
+    "FirmwareType": {
+      "description": "Firmware type",
+      "type": "string",
+      "enum": [
+        "bios",
+        "efi"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "FirmwareType"
+      }
+    },
     "IPAddressAllocationMethod": {
       "description": "IP address allocation method.",
       "enum": [
@@ -6126,7 +6163,35 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
+      "properties": {
+        "capacityGB": {
+          "format": "int64",
+          "description": "Gets or sets Maximum capacity of this datastore, in GBs.",
+          "type": "integer"
+        },
+        "freeSpaceGB": {
+          "format": "int64",
+          "description": "Gets or sets Available space of this datastore, in GBs.",
+          "type": "integer"
+        }
+      },
       "x-ms-discriminator-value": "Datastore"
+    },
+    "HostInventoryItem": {
+      "description": "The host inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "properties": {
+        "parent": {
+          "description": "Parent host inventory resource details.",
+          "$ref": "#/definitions/InventoryItemDetails"
+        }
+      },
+      "x-ms-discriminator-value": "Host"
     },
     "InventoryType": {
       "type": "string",
@@ -6137,7 +6202,8 @@
         "VirtualMachineTemplate",
         "VirtualNetwork",
         "Cluster",
-        "Datastore"
+        "Datastore",
+        "Host"
       ],
       "x-ms-enum": {
         "name": "InventoryType",
@@ -6591,6 +6657,14 @@
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
           "readOnly": true
+        },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
