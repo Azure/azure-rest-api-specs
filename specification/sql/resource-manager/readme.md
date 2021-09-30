@@ -39,7 +39,6 @@ This section contains the "composite-v5" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
