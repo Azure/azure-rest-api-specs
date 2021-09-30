@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "591e76c3-3e97-44db-879c-3e2b12961b62",
+    "resourceGroupName": "testrg",
+    "accountName": "testaccount2",
+    "api-version": "2021-11-01-preview",
+    "$top": "2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pipelineJob1",
+            "properties": {
+              "topologyName": "pipelineTopology1",
+              "description": "Pipeline Job 1 Description",
+              "state": "Processing",
+              "parameters": [
+                {
+                  "name": "timeSequences",
+                  "value": "[[2020-10-05T03:30:00Z, 2020-10-05T04:30:00Z]]"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "0001-01-01T00:00:00Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "0001-01-01T00:00:00Z"
+            }
+          },
+          {
+            "name": "pipelineJob2",
+            "properties": {
+              "topologyName": "pipelineTopology1",
+              "description": "Pipeline Job 2 Description",
+              "state": "Completed",
+              "expiration": "2020-11-04T07:30:00Z",
+              "parameters": [
+                {
+                  "name": "timeSequences",
+                  "value": "[[2020-10-05T07:30:00Z, 2020-10-05T08:30:00Z]]"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "0001-01-01T00:00:00Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "0001-01-01T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

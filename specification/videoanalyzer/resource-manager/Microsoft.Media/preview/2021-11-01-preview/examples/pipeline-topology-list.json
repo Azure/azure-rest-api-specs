@@ -1,0 +1,160 @@
+{
+  "parameters": {
+    "subscriptionId": "591e76c3-3e97-44db-879c-3e2b12961b62",
+    "resourceGroupName": "testrg",
+    "accountName": "testaccount2",
+    "api-version": "2021-11-01-preview",
+    "$top": "2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pipelineTopology1",
+            "kind": "Live",
+            "properties": {
+              "description": "Pipeline Topology 1 Description",
+              "parameters": [
+                {
+                  "name": "rtspUrlParameter",
+                  "type": "String",
+                  "description": "rtspUrlParameter declaration",
+                  "default": "rtsp://microsoft.com/video.mp4"
+                },
+                {
+                  "name": "rtspPasswordParameter",
+                  "type": "SecretString",
+                  "description": "rtspPasswordParameter declaration",
+                  "default": "password"
+                }
+              ],
+              "sources": [
+                {
+                  "@type": "#Microsoft.VideoAnalyzer.RtspSource",
+                  "name": "rtspSource",
+                  "transport": "Http",
+                  "endpoint": {
+                    "url": "${rtspUrlParameter}",
+                    "credentials": {
+                      "@type": "#Microsoft.VideoAnalyzer.UsernamePasswordCredentials",
+                      "username": "username",
+                      "password": "${rtspPasswordParameter}"
+                    }
+                  }
+                }
+              ],
+              "processors": [],
+              "sinks": [
+                {
+                  "@type": "#Microsoft.VideoAnalyzer.VideoSink",
+                  "name": "videoSink",
+                  "videoName": "camera001",
+                  "inputs": [
+                    {
+                      "nodeName": "rtspSource"
+                    }
+                  ],
+                  "videoCreationProperties": {
+                    "title": "Parking Lot (Camera 1)",
+                    "description": "Parking lot south entrance",
+                    "segmentLength": "PT30S"
+                  }
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "0001-01-01T00:00:00Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "0001-01-01T00:00:00Z"
+            },
+            "sku": {
+              "name": "Live_S1",
+              "tier": "Standard"
+            }
+          },
+          {
+            "name": "pipelineTopology2",
+            "kind": "Live",
+            "properties": {
+              "description": "Pipeline Topology 2 Description",
+              "parameters": [
+                {
+                  "name": "rtspUrlParameter",
+                  "type": "String",
+                  "description": "rtspUrlParameter declaration",
+                  "default": "rtsp://microsoft.com/video.mp4"
+                },
+                {
+                  "name": "rtspPasswordParameter",
+                  "type": "SecretString",
+                  "description": "rtspPasswordParameter declaration",
+                  "default": "password"
+                }
+              ],
+              "sources": [
+                {
+                  "@type": "#Microsoft.VideoAnalyzer.RtspSource",
+                  "name": "rtspSource",
+                  "transport": "Http",
+                  "endpoint": {
+                    "@type": "#Microsoft.VideoAnalyzer.TlsEndpoint",
+                    "url": "${rtspUrlParameter}",
+                    "credentials": {
+                      "@type": "#Microsoft.VideoAnalyzer.UsernamePasswordCredentials",
+                      "username": "username",
+                      "password": "${rtspPasswordParameter}"
+                    },
+                    "trustedCertificates": {
+                      "@type": "#Microsoft.VideoAnalyzer.PemCertificateList",
+                      "certificates": [
+                        "-----BEGIN CERTIFICATE-----\nMIIDhTCCAm2gAwIBAgIUajvPKmoO+8qaO89/ZGATl7ZYnTswDQYJKoZIhvcNAQEL\nBQAwUTESMBAGA1UECgwJTWljcm9zb2Z0MRQwEgYDVQQLDAtBenVyZSBNZWRpYTEl\nMCMGA1UEAwwcKFVudHJ1c3RlZCkgVGVzdCBDZXJ0aWZpY2F0ZTAgFw0yMDAyMDYy\nMTI5MTlaGA8zMDE5MDYwOTIxMjkxOVowUTESMBAGA1UECgwJTWljcm9zb2Z0MRQw\nEgYDVQQLDAtBenVyZSBNZWRpYTElMCMGA1UEAwwcKFVudHJ1c3RlZCkgVGVzdCBD\nZXJ0aWZpY2F0ZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAK2lg5ff\n7xXPaBZXHl/zrTukdiBtu7BNIOchHba51eloruPRzpvQx7Pedk3CVTut7LYinijf\nuol0EwkQ2FLt2i2jOqiva9nXR95ujIZHcKsEeMC4RSNSP4++k6SpP8FgyYVdv5ru\nf8GC+HyYQ4j0TqpR/cJs53l/LGRSldaFZ6fcDde1jeyca4VivAbAH1/WDIOvmjzo\n9XIGxZ10VSS5l5+DIgdkJZ+mDMLJIuVZ0YVF16ZGEB3beq1trk5lItvmSjQLTllH\nqMFm9UGY8jKZSo/BY8ewHEtnGSAFQK0TVuRx1HhUWwu6C9jk+2zmRS2090BNpQWa\nJMKFJrSPzFDPRX8CAwEAAaNTMFEwHQYDVR0OBBYEFIumbhu0lYk0EFDThEg0yyIn\n/wZZMB8GA1UdIwQYMBaAFIumbhu0lYk0EFDThEg0yyIn/wZZMA8GA1UdEwEB/wQF\nMAMBAf8wDQYJKoZIhvcNAQELBQADggEBADUNw+/NGNVtigq9tMJKqlk39MTpDn1s\nZ1BVIAuAWSQjlevYZJeDIPUiWNWFhRe+xN7oOLnn2+NIXEKKeMSyuPoZYbN0mBkB\n99oS3XVipSANpmDvIepNdCrOnjfqDFIifRF1Dqjtb6i1hb6v/qYKVPLQvcrgGur7\nPKKkAu9p4YRZ3RBdwwaUuMgojrj/l6DGbeJY6IRVnVMY39rryMnZjA5xUlhCu55n\noB3t/jsJLwnQN+JbAjLAeuqgOWtgARsEFzvpt+VvDsaj0YLOJPhyJwTvHgaa/slB\nnECzd3TuyFKYeGssSni/QQ1e7yZcLapQqz66g5otdriw0IRdOfDxm5M=\n-----END CERTIFICATE-----"
+                      ]
+                    },
+                    "validationOptions": {
+                      "ignoreHostname": "true",
+                      "ignoreSignature": "false"
+                    }
+                  }
+                }
+              ],
+              "processors": [],
+              "sinks": [
+                {
+                  "@type": "#Microsoft.VideoAnalyzer.VideoSink",
+                  "name": "videoSink",
+                  "videoName": "camera001",
+                  "inputs": [
+                    {
+                      "nodeName": "rtspSource"
+                    }
+                  ],
+                  "videoCreationProperties": {
+                    "title": "Parking Lot (Camera 1)",
+                    "description": "Parking lot south entrance",
+                    "segmentLength": "PT30S"
+                  }
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "0001-01-01T00:00:00Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "0001-01-01T00:00:00Z"
+            },
+            "sku": {
+              "name": "Live_S1",
+              "tier": "Standard"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

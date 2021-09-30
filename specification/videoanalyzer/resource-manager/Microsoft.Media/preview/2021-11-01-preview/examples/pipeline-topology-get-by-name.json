@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "591e76c3-3e97-44db-879c-3e2b12961b62",
+    "resourceGroupName": "testrg",
+    "accountName": "testaccount2",
+    "pipelineTopologyName": "pipelineTopology1",
+    "api-version": "2021-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pipelineTopology1",
+        "kind": "Live",
+        "properties": {
+          "description": "Pipeline Topology 1 Description",
+          "parameters": [
+            {
+              "name": "rtspUrlParameter",
+              "type": "String",
+              "description": "rtspUrlParameter declaration",
+              "default": "rtsp://microsoft.com/video.mp4"
+            },
+            {
+              "name": "rtspPasswordParameter",
+              "type": "SecretString",
+              "description": "rtspPasswordParameter declaration",
+              "default": "password"
+            }
+          ],
+          "sources": [
+            {
+              "@type": "#Microsoft.VideoAnalyzer.RtspSource",
+              "name": "rtspSource",
+              "transport": "Http",
+              "endpoint": {
+                "url": "${rtspUrlParameter}",
+                "credentials": {
+                  "@type": "#Microsoft.VideoAnalyzer.UsernamePasswordCredentials",
+                  "username": "username",
+                  "password": "${rtspPasswordParameter}"
+                }
+              }
+            }
+          ],
+          "processors": [],
+          "sinks": [
+            {
+              "@type": "#Microsoft.VideoAnalyzer.VideoSink",
+              "name": "videoSink",
+              "videoName": "camera001",
+              "inputs": [
+                {
+                  "nodeName": "rtspSource"
+                }
+              ],
+              "videoCreationProperties": {
+                "title": "Parking Lot (Camera 1)",
+                "description": "Parking lot south entrance",
+                "segmentLength": "PT30S"
+              }
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "0001-01-01T00:00:00Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "0001-01-01T00:00:00Z"
+        },
+        "sku": {
+          "name": "Live_S1",
+          "tier": "Standard"
+        }
+      }
+    }
+  }
+}
