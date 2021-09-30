@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-01-preview",
+    "version": "2021-08-01-preview",
     "title": "ContainerRegistryManagementClient"
   },
   "host": "management.azure.com",
@@ -2724,6 +2724,8 @@
         "mode": {
           "description": "The mode of the connected registry resource that indicates the permissions of the registry.",
           "enum": [
+            "ReadWrite",
+            "ReadOnly",
             "Registry",
             "Mirror"
           ],
@@ -2790,6 +2792,13 @@
             "$ref": "#/definitions/StatusDetailProperties"
           },
           "readOnly": true
+        },
+        "notificationsList": {
+          "description": "The list of notifications subscription information for the connected registry.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3023,6 +3032,13 @@
         },
         "clientTokenIds": {
           "description": "The list of the ACR token resource IDs used to authenticate clients to the connected registry.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notificationsList": {
+          "description": "The list of notifications subscription information for the connected registry.",
           "type": "array",
           "items": {
             "type": "string"

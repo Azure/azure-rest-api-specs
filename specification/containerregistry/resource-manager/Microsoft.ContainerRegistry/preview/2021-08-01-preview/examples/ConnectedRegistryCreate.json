@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "api-version": "2021-06-01-preview",
+    "api-version": "2021-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry",
     "connectedRegistryName": "myConnectedRegistry",
     "connectedRegistryCreateParameters": {
       "properties": {
-        "mode": "Registry",
+        "mode": "ReadWrite",
         "parent": {
           "syncProperties": {
             "tokenId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tokens/syncToken",
@@ -18,6 +18,10 @@
         },
         "clientTokenIds": [
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tokens/client1Token"
+        ],
+        "notificationsList": [
+          "hello-world:*:*",
+          "sample/repo/*:1.0:*"
         ]
       }
     }
@@ -29,7 +33,7 @@
         "name": "myConnectedRegistry",
         "type": "Microsoft.ContainerRegistry/registries/connectedRegistries",
         "properties": {
-          "mode": "Registry",
+          "mode": "ReadWrite",
           "activation": {
             "status": "Inactive"
           },
@@ -47,7 +51,11 @@
           "logging": {
             "logLevel": "Information",
             "auditLogStatus": "Disabled"
-          }
+          },
+          "notificationsList": [
+            "hello-world:*:*",
+            "sample/repo/*:1.0:*"
+          ]
         }
       }
     },
@@ -57,7 +65,7 @@
         "name": "myConnectedRegistry",
         "type": "Microsoft.ContainerRegistry/registries/connectedRegistries",
         "properties": {
-          "mode": "Registry",
+          "mode": "ReadWrite",
           "activation": {
             "status": "Inactive"
           },
@@ -75,7 +83,11 @@
           "logging": {
             "logLevel": "Information",
             "auditLogStatus": "Disabled"
-          }
+          },
+          "notificationsList": [
+            "hello-world:*:*",
+            "sample/repo/*:1.0:*"
+          ]
         }
       }
     }
