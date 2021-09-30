@@ -84,3 +84,18 @@
       to: ${AUTHOR}
       cc:
         - cplatsdkdev@microsoft.com
+
+- scheduleTask:	
+    action: sendEmail	
+    scope: pull_request	
+    name: "send email for synapse PR"	
+    trigger:	
+      - path	
+    args:	
+      message: '<p>Dear Synapse Swagger reviewers,</p><p>Please check the PR ${URL} . You receive the email because the PR is making changes in the Synapse&#39;s path of the Azure REST Api Specs repository.</p><p>This PR need to be reviewed, please feel free to leave comments.</p><p>DO NOT REPLY: This email was automatically sent. Please send an email to&nbsp;<a href="mailto:synapsecodereview@microsoft.com">synapsecodereview@microsoft.com</a>&nbsp;if you have any questions.</p>'
+      targetPaths:	
+        - "specification/synapse/**"
+      subject: "[Action Required] Please review the PR ${URL}"	
+      to: synapsecodereview@microsoft.com
+      cc:
+        - ${AUTHOR}
