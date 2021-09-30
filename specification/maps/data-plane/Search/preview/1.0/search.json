@@ -1324,7 +1324,7 @@
     "/search/alongRoute/{format}": {
       "post": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nThe Search Along Route endpoint allows you to perform a fuzzy search for POIs along a specified route. This search is constrained by specifying the `maxDetourTime` limiting measure.<br><br>To send the route-points you will use a `POST` request where the request body will contain the `route` object represented as a `GeoJSON LineString` type and the `Content-Type` header will be set to `application/json`. Each route-point in `route` is represented as a `GeoJSON Position` type i.e. an array where the _longitude_ value is followed by the _latitude_ value and the _altitude_ value is ignored. The `route` should contain at least 2 route-points.<br><br>It is possible that original route will be altered, some of it's points may be skipped. If the route that passes through the found point is faster than the original one, the `detourTime` value in the response is negative.",
-        "operationId": "PostSearchAlongRoute",
+        "operationId": "searchAlongRoute",
         "x-ms-examples": {
           "Search for burger joints along a route": {
             "$ref": "./examples/PostSearchAlongRoute.json"
@@ -1375,10 +1375,11 @@
             "$ref": "#/parameters/OpeningHours"
           },
           {
-            "name": "searchAlongRouteRequestBody",
+            "name": "route",
             "in": "body",
             "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/SearchAlongRouteRequestBody"
             }
