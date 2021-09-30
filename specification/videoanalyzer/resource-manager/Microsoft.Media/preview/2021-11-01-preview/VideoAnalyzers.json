@@ -1,0 +1,1822 @@
+{
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Video Analyzer",
+    "description": "Azure Video Analyzer resource provider API definition.",
+    "version": "2021-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "definitions": {
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The service provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The operation description."
+        }
+      },
+      "type": "object",
+      "description": "Operation details."
+    },
+    "MetricDimension": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The metric dimension name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the dimension.",
+          "readOnly": true
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Whether to export metric to shoebox.",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "type": "object",
+      "description": "A metric dimension."
+    },
+    "MetricSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The metric name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The metric display name.",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The metric display description.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Bytes",
+            "Count",
+            "Milliseconds"
+          ],
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "values": [
+              {
+                "value": "Bytes",
+                "description": "The number of bytes."
+              },
+              {
+                "value": "Count",
+                "description": "The count."
+              },
+              {
+                "value": "Milliseconds",
+                "description": "The number of milliseconds."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric unit",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "aggregationType": {
+          "type": "string",
+          "enum": [
+            "Average",
+            "Count",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "values": [
+              {
+                "value": "Average",
+                "description": "The average."
+              },
+              {
+                "value": "Count",
+                "description": "The count of a number of items, usually requests."
+              },
+              {
+                "value": "Total",
+                "description": "The sum."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric aggregation type",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "enum": [
+            "Average",
+            "Count",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "values": [
+              {
+                "value": "Average",
+                "description": "The average."
+              },
+              {
+                "value": "Count",
+                "description": "The count of a number of items, usually requests."
+              },
+              {
+                "value": "Total",
+                "description": "The sum."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The metric lock aggregation type",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported aggregation types."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "The metric dimensions.",
+          "readOnly": true
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Indicates whether regional MDM account is enabled.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account.",
+          "readOnly": true
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace.",
+          "readOnly": true
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The supported time grain types.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "A metric emitted by service."
+    },
+    "Properties": {
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "The service specifications.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Metric properties."
+    },
+    "ServiceSpecification": {
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "description": "List of log specifications.",
+          "readOnly": true
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "description": "List of metric specifications.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The service metric specifications."
+    },
+    "LogSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The diagnostic log category name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The diagnostic log category display name.",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "The time range for requests in each blob.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "A diagnostic log emitted by service."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The operation display name."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "Operation properties format."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether the operation applies to data-plane.",
+          "x-nullable": true
+        },
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "values": [
+              {
+                "value": "Internal",
+                "description": "An internal action."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Indicates the action type.",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "An operation."
+    },
+    "StorageAccount": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the storage account resource. Video Analyzer relies on tables, queues, and blobs. The primary storage account must be a Standard Storage account (either Microsoft.ClassicStorage or Microsoft.Storage)."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "A managed identity that Video Analyzer will use to access the storage account."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the storage account mapping.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "description": "The details about the associated storage account."
+    },
+    "VideoAnalyzerProperties": {
+      "properties": {
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          },
+          "description": "The storage accounts for this resource."
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "description": "The endpoints associated with this resource.",
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/AccountEncryption",
+          "description": "The account encryption properties."
+        },
+        "iotHubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHub"
+          },
+          "description": "The IoT Hubs for this resource."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Public network access is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "Public network access is disabled."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Whether or not public network access is allowed for resources under the Video Analyzer account.",
+          "x-nullable": true
+        },
+        "networkAccessControl": {
+          "$ref": "#/definitions/NetworkAccessControl",
+          "description": "Network access control for Video Analyzer.",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "InProgress",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "values": [
+              {
+                "value": "Failed",
+                "description": "Provisioning state failed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Provisioning state in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Provisioning state succeeded."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Provisioning state of the Video Analyzer account.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "privateEndpointConnections": {
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "type": "array",
+          "description": "Private Endpoint Connections created under Video Analyzer account.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "storageAccounts"
+      ],
+      "description": "The properties of the Video Analyzer account."
+    },
+    "VideoAnalyzerPropertiesUpdate": {
+      "properties": {
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          },
+          "description": "The storage accounts for this resource."
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "description": "The endpoints associated with this resource.",
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/AccountEncryption",
+          "description": "The account encryption properties."
+        },
+        "iotHubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHub"
+          },
+          "description": "The IoT Hubs for this resource."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Public network access is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "Public network access is disabled."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Whether or not public network access is allowed for resources under the Video Analyzer account.",
+          "x-nullable": true
+        },
+        "networkAccessControl": {
+          "$ref": "#/definitions/NetworkAccessControl",
+          "description": "Network access control for Video Analyzer.",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "InProgress",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "values": [
+              {
+                "value": "Failed",
+                "description": "Provisioning state failed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Provisioning state in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Provisioning state succeeded."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Provisioning state of the Video Analyzer account.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "privateEndpointConnections": {
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "type": "array",
+          "description": "Private Endpoint Connections created under Video Analyzer account.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The properties of the Video Analyzer account."
+    },
+    "VideoAnalyzer": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VideoAnalyzerProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/VideoAnalyzerIdentity",
+          "description": "The identities associated to the Video Analyzer resource."
+        }
+      },
+      "type": "object",
+      "description": "The Video Analyzer account."
+    },
+    "VideoAnalyzerUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/VideoAnalyzerPropertiesUpdate",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/VideoAnalyzerIdentity",
+          "description": "The identities associated to the Video Analyzer resource."
+        }
+      },
+      "type": "object",
+      "description": "The update operation for a Video Analyzer account."
+    },
+    "Endpoint": {
+      "properties": {
+        "endpointUrl": {
+          "type": "string",
+          "description": "The URL of the endpoint."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ClientApi"
+          ],
+          "x-ms-enum": {
+            "name": "VideoAnalyzerEndpointType",
+            "values": [
+              {
+                "value": "ClientApi",
+                "description": "The client API endpoint."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The type of the endpoint."
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "The endpoint details."
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The client ID.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The principal ID.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity used by the Video Analyzer resource."
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The User Assigned Managed Identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "VideoAnalyzerIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The identity type."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "The User Assigned Managed Identities."
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "The managed identity for the Video Analyzer resource."
+    },
+    "ResourceIdentity": {
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned managed identity's resource identifier to use when accessing a resource."
+        }
+      },
+      "type": "object",
+      "required": [
+        "userAssignedIdentity"
+      ],
+      "description": "The user assigned managed identity to use when accessing a resource."
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyIdentifier": {
+          "type": "string",
+          "description": "The URL of the Key Vault key used to encrypt the account. The key may either be versioned (for example https://vault/keys/mykey/version1) or reference a key without a version (for example https://vault/keys/mykey)."
+        },
+        "currentKeyIdentifier": {
+          "type": "string",
+          "description": "The current key used to encrypt Video Analyzer account, including the key version.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "keyIdentifier"
+      ],
+      "description": "The details for accessing the encryption keys in Key Vault."
+    },
+    "AccountEncryption": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemKey",
+            "CustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "AccountEncryptionKeyType",
+            "values": [
+              {
+                "value": "SystemKey",
+                "description": "The Account Key is encrypted with a System Key."
+              },
+              {
+                "value": "CustomerKey",
+                "description": "The Account Key is encrypted with a Customer Key."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The type of key used to encrypt the Account Key."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "The properties of the key used to encrypt the account."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Key Vault identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the Key Vault mapping.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "Defines how the Video Analyzer account is (optionally) encrypted."
+    },
+    "IotHub": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The IoT Hub resource identifier."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The IoT Hub identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the Iot Hub mapping.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "identity"
+      ],
+      "description": "The IoT Hub details."
+    },
+    "GroupLevelAccessControl": {
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Public network access is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "Public network access is disabled."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Whether or not public network access is allowed for specified resources under the Video Analyzer account.",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "description": "Group level network access control."
+    },
+    "NetworkAccessControl": {
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/GroupLevelAccessControl",
+          "description": "Public network access for integration group.",
+          "x-nullable": true
+        },
+        "ingestion": {
+          "$ref": "#/definitions/GroupLevelAccessControl",
+          "description": "Public network access for ingestion group.",
+          "x-nullable": true
+        },
+        "consumption": {
+          "$ref": "#/definitions/GroupLevelAccessControl",
+          "description": "Public network access for consumption group.",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "description": "Network access control for video analyzer account."
+    },
+    "VideoAnalyzerPrivateEndpointConnectionOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "id": {
+          "type": "string",
+          "description": "Operation resource ID."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Operation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Operation end time."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Status of private endpoint connection operation."
+    },
+    "VideoAnalyzerOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "id": {
+          "type": "string",
+          "description": "Operation resource ID."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Operation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Operation end time."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "x-nullable": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Status of video analyzer operation."
+    },
+    "OperationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "A collection of Operation items."
+        }
+      },
+      "type": "object",
+      "description": "A collection of Operation items."
+    },
+    "VideoAnalyzerCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoAnalyzer"
+          },
+          "description": "A collection of VideoAnalyzer items."
+        }
+      },
+      "type": "object",
+      "description": "A collection of VideoAnalyzer items."
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Media/operations": {
+      "get": {
+        "summary": "List Operations",
+        "description": "Lists all the Media operations.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "examples/operations-list-all.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers": {
+      "get": {
+        "summary": "List Video Analyzer accounts",
+        "description": "Lists the Video Analyzer accounts in the specified resource group.",
+        "operationId": "VideoAnalyzers_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List all Video Analyzer accounts": {
+            "$ref": "examples/video-analyzer-accounts-list-all-accounts.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}": {
+      "get": {
+        "summary": "Get a Video Analyzer account",
+        "description": "Get the details of the specified Video Analyzer account",
+        "operationId": "VideoAnalyzers_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a Video Analyzer account by name": {
+            "$ref": "examples/video-analyzer-accounts-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or update a Video Analyzer account",
+        "description": "Create or update an instance of a Video Analyzer account",
+        "operationId": "VideoAnalyzers_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a Video Analyzer account": {
+            "$ref": "examples/video-analyzer-accounts-create-or-update.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Video Analyzer account.",
+        "description": "Delete the specified Video Analyzer account",
+        "operationId": "VideoAnalyzers_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a Video Analyzer account": {
+            "$ref": "examples/video-analyzer-accounts-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a Video Analyzer account",
+        "description": "Updates an existing instance of Video Analyzer account",
+        "operationId": "VideoAnalyzers_Update",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerUpdate"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a Video Analyzer accounts": {
+            "$ref": "examples/video-analyzer-accounts-update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateLinkResources": {
+      "get": {
+        "summary": "Get list of group IDs.",
+        "description": "Get list of group IDs for video analyzer account.",
+        "operationId": "PrivateLinkResources_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get list of all group IDs.": {
+            "$ref": "examples/video-analyzer-private-link-resources-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateLinkResources/{name}": {
+      "get": {
+        "summary": "Get group ID.",
+        "description": "Get group ID for video analyzer account.",
+        "operationId": "PrivateLinkResources_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the private link resource (Group ID)."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get details of a group ID.": {
+            "$ref": "examples/video-analyzer-private-link-resources-get-by-name.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections": {
+      "get": {
+        "summary": "Get all private endpoint connections.",
+        "description": "Get all private endpoint connections under video analyzer account.",
+        "operationId": "PrivateEndpointConnections_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get all private endpoint connections.": {
+            "$ref": "examples/video-analyzer-private-endpoint-connection-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections/{name}": {
+      "get": {
+        "summary": "Get private endpoint connection.",
+        "description": "Get private endpoint connection under video analyzer account.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Private endpoint connection name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get private endpoint connection.": {
+            "$ref": "examples/video-analyzer-private-endpoint-connection-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update private endpoint connection.",
+        "description": "Update private endpoint connection state under video analyzer account.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Private endpoint connection name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Update private endpoint connection.": {
+            "$ref": "examples/video-analyzer-private-endpoint-connection-put.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete private endpoint connection.",
+        "description": "Delete private endpoint connection under video analyzer account.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Private endpoint connection name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete private endpoint connection.": {
+            "$ref": "examples/video-analyzer-private-endpoint-connection-delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections/{name}/operationStatuses/{operationId}": {
+      "get": {
+        "summary": "Get operation status.",
+        "description": "Get private endpoint connection operation status.",
+        "operationId": "OperationStatuses_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerPrivateEndpointConnectionOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Private endpoint connection name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get status of private endpoint asynchronous operation when it is completed.": {
+            "$ref": "examples/video-analyzer-private-endpoint-connection-operation-status-by-id-terminal-state.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/privateEndpointConnections/{name}/operationResults/{operationId}": {
+      "get": {
+        "summary": "Get operation result.",
+        "description": "Get private endpoint connection operation result.",
+        "operationId": "OperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video Analyzer account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Private endpoint connection name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Get status of private endpoint connection asynchronous operation.": {
+            "$ref": "examples/video-analyzer-private-endpoint-connection-operation-result-by-id.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/videoAnalyzerOperationStatuses/{operationId}": {
+      "get": {
+        "summary": "Get operation status.",
+        "description": "Get video analyzer operation status.",
+        "operationId": "VideoAnalyzerOperationStatuses_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Location name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get status of asynchronous operation when it is completed.": {
+            "$ref": "examples/video-analyzer-operation-status-by-id-terminal-state.json"
+          },
+          "Get status of asynchronous operation when it is ongoing.": {
+            "$ref": "examples/video-analyzer-operation-status-by-id-non-terminal-state.json"
+          },
+          "Get status of asynchronous operation when it is completed with error.": {
+            "$ref": "examples/video-analyzer-operation-status-by-id-non-terminal-state-failed.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/videoAnalyzerOperationResults/{operationId}": {
+      "get": {
+        "summary": "Get operation result.",
+        "description": "Get video analyzer operation result.",
+        "operationId": "VideoAnalyzerOperationResults_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzer"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Location name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation Id."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Get status of asynchronous operation.": {
+            "$ref": "examples/video-analyzer-operation-result-by-id.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "summary": "Check Name Availability",
+        "description": "Checks whether the Video Analyzer resource name is available.",
+        "operationId": "Locations_CheckNameAvailability",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Location Name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Check Name Availability": {
+            "$ref": "examples/accounts-check-name-availability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/videoAnalyzers": {
+      "get": {
+        "summary": "List Video Analyzer accounts",
+        "description": "List all Video Analyzer accounts in the specified subscription.",
+        "operationId": "VideoAnalyzers_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoAnalyzerCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List all Video Analyzer accounts in the specified subscription": {
+            "$ref": "examples/video-analyzer-accounts-subscription-list-all-accounts.json"
+          }
+        }
+      }
+    }
+  }
+}
