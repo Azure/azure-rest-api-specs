@@ -49,7 +49,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/PolicyExemptionScopeParameter"
           },
           {
             "$ref": "#/parameters/PolicyExemptionNameParameter"
@@ -87,7 +87,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/PolicyExemptionScopeParameter"
           },
           {
             "$ref": "#/parameters/PolicyExemptionNameParameter"
@@ -140,7 +140,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/PolicyExemptionScopeParameter"
           },
           {
             "$ref": "#/parameters/PolicyExemptionNameParameter"
@@ -385,6 +385,7 @@
       "description": "An error response from a policy operation."
     },
     "PolicyExemptionProperties": {
+      "type": "object",
       "required": [
         "policyAssignmentId",
         "exemptionCategory"
@@ -444,6 +445,7 @@
       "description": "The policy exemption properties."
     },
     "PolicyExemption": {
+      "type": "object",
       "required": [
         "properties"
       ],
@@ -479,6 +481,7 @@
       "x-ms-azure-resource": true
     },
     "PolicyExemptionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -505,7 +508,7 @@
       "description": "The name of the policy exemption.",
       "x-ms-parameter-location": "method"
     },
-    "ScopeParameter": {
+    "PolicyExemptionScopeParameter": {
       "name": "scope",
       "in": "path",
       "required": true,

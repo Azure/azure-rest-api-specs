@@ -49,7 +49,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/PolicyPricingScopeParameter"
           },
           {
             "$ref": "#/parameters/PolicyPricingNameParameter"
@@ -101,7 +101,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/PolicyPricingScopeParameter"
           },
           {
             "$ref": "#/parameters/PolicyPricingNameParameter"
@@ -155,7 +155,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/PolicyPricingScopeParameter"
           },
           {
             "$ref": "#/parameters/PolicyPricingNameParameter"
@@ -272,6 +272,7 @@
       "description": "An error response from a policy operation."
     },
     "PolicyPricingProperties": {
+      "type": "object",
       "required": [
         "pricingTier"
       ],
@@ -330,6 +331,7 @@
       "description": "The policy pricing properties."
     },
     "PolicyPricing": {
+      "type": "object",
       "required": [
         "properties"
       ],
@@ -365,6 +367,7 @@
       "x-ms-azure-resource": true
     },
     "PolicyPricingListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -391,7 +394,7 @@
       "description": "The name of the policy pricing.",
       "x-ms-parameter-location": "method"
     },
-    "ScopeParameter": {
+    "PolicyPricingScopeParameter": {
       "name": "scope",
       "in": "path",
       "required": true,
