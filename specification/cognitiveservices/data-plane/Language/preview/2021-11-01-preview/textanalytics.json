@@ -27,6 +27,56 @@
         ]
     },
     "paths": {
+        "/analyze-text": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "operationId": "AnalyzeText",
+                "consumes": [
+                    "application/json",
+                    "text/json"
+                ],
+                    "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "common.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ShowStats"
+                    },
+                    {
+                        "description": "",
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/AnalyzeTextInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/AnalyzeTextResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "common.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful Text Analysis Request": {
+                        "$ref": ".//examples//SuccessfulAnalyzeTextRequest.json"
+                    }
+                }
+            }
+        },
         "/analyze-text/jobs": {
             "post": {
                 "consumes": [
@@ -38,7 +88,7 @@
                     "text/json"
                 ],
                 "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
-                "operationId": "AnalyzeText",
+                "operationId": "AnalyzeTextSubmitJob",
                 "summary": "Submit analysis job",
                 "parameters": [
                     {
@@ -70,8 +120,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Submit analysis job request": {
-                        "$ref": ".//examples//SuccessfulAnalyzeTextRequest.json"
+                    "Successful Submit Analysis Job Request": {
+                        "$ref": ".//examples//SuccessfulAnalyzeTextJobSubmitRequest.json"
                     }
                 },
                 "deprecated": false,
@@ -85,9 +135,12 @@
                     "text/json"
                 ],
                 "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
-                "operationId": "AnalyzeStatus",
+                "operationId": "AnalyzeTextJobStatus",
                 "summary": "Get analysis status and results",
                 "parameters": [
+                    {
+                        "$ref": "common.json#/parameters/ApiVersionParameter"
+                    },
                     {
                         "$ref": "#/parameters/JobId"
                     },
@@ -127,8 +180,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Get Analysis job status request": {
-                        "$ref": ".//examples//SuccessfulAnalyzeTextStatusRequest.json"
+                    "Successful Get Text Analysis Job Status Request": {
+                        "$ref": ".//examples//SuccessfulAnalyzeTextJobStatusRequest.json"
                     }
                 },
                 "deprecated": false
@@ -136,6 +189,61 @@
         }
     },
     "definitions": {
+        "AnalyzeTextInput": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MultiLanguageBatchInput"
+                },
+                {
+                    "properties": {
+                        "sentimentAnalysisTask": {
+                            "$ref": "#/definitions/SentimentAnalysisTask"
+                        },
+                        "entityRecognitionTask": {
+                            "$ref": "#/definitions/EntitiesTask"
+                        },
+                        "entityRecognitionPiiTask": {
+                            "$ref": "#/definitions/PiiTask"
+                        },
+                        "keyPhraseExtractionTask": {
+                            "$ref": "#/definitions/KeyPhraseTask"
+                        },
+                        "entityLinkingTask": {
+                            "$ref": "#/definitions/EntityLinkingTask"
+                        },
+                        "languageDetectionTask": {
+                            "$ref": "#/definitions/LanguageDetectionTask"
+                        }
+                    },
+                    "minProperties": 1,
+                    "maxProperties": 1
+                }
+            ]
+        },
+        "AnalyzeTextResponse": {
+            "properties": {
+                "sentiment": {
+                    "$ref": "#/definitions/SentimentResponse"
+                },
+                "entityRecognition": {
+                    "$ref": "#/definitions/EntitiesResult"
+                },
+                "entityRecognitionPii": {
+                    "$ref": "#/definitions/PiiResult"
+                },
+                "keyPhraseExtraction": {
+                    "$ref": "#/definitions/KeyPhraseResult"
+                },
+                "entityLinking": {
+                    "$ref": "#/definitions/EntityLinkingResult"
+                },
+                "languageDetection": {
+                    "$ref": "#/definitions/LanguageDetectionResult"
+                }
+            },
+            "minProperties": 1,
+            "maxProperties": 1
+        },
         "AnalyzeTextJobsInput": {
             "allOf": [
                 {
@@ -918,6 +1026,9 @@
                                     "$ref": "#/definitions/TaskParameters"
                                 },
                                 {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
+                                },
+                                {
                                     "$ref": "#/definitions/EntitiesTaskParameters"
                                 }
                             ]
@@ -1056,6 +1167,9 @@
                             "allOf": [
                                 {
                                     "$ref": "#/definitions/TaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
                                 },
                                 {
                                     "$ref": "#/definitions/EntityLinkingTaskParameters"
@@ -1241,6 +1355,9 @@
                             "allOf": [
                                 {
                                     "$ref": "#/definitions/TaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
                                 },
                                 {
                                     "$ref": "#/definitions/PiiTaskParameters"
@@ -1548,6 +1665,9 @@
                                     "$ref": "#/definitions/TaskParameters"
                                 },
                                 {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
+                                },
+                                {
                                     "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
                                 }
                             ]
@@ -1668,6 +1788,9 @@
                             "allOf": [
                                 {
                                     "$ref": "#/definitions/TaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
                                 }
                             ]
                         }
@@ -1742,6 +1865,116 @@
                     }
                 }
             ]
+        },
+        "LanguageDetectionTaskParameters": {
+            "type": "object",
+            "description": "Parameters object for a Language Detection task.",
+            "properties": {
+                "regionHint": {
+                    "type": "string",
+                    "description": "TODO"
+                }
+            }
+        },
+        "LanguageDetectionTask": {
+            "type": "object",
+            "description": "TODO",
+            "allOf":[
+                {
+                    "$ref": "#/definitions/Task"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "parameters": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/TaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/LanguageDetectionTaskParameters"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "LanguageDetectionResult": {
+            "type": "object",
+            "required": [
+                "records",
+                "errors",
+                "modelVersion"
+            ],
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "$ref": "#/definitions/LanguageDetectionRecordResult"
+                    }
+                },
+                "errors": {
+                    "type": "array",
+                    "description": "Errors by record id.",
+                    "items": {
+                        "$ref": "#/definitions/RecordError"
+                    }
+                },
+                "statistics": {
+                    "$ref": "#/definitions/RequestStatistics"
+                },
+                "modelVersion": {
+                    "type": "string",
+                    "description": "This field indicates which model is used for scoring."
+                }
+            }
+        },
+        "LanguageDetectionRecordResult": {
+            "type": "object",
+            "required": [
+                "detectedLanguage"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RecordResult"
+                },
+                {
+                    "properties": {
+                        "detectedLanguage": {
+                            "description": "Detected Language.",
+                            "$ref": "#/definitions/DetectedLanguage"
+                        }
+                    }
+                }
+            ]
+        },
+        "DetectedLanguage": {
+            "type": "object",
+            "required": [
+                "name",
+                "iso6391Name",
+                "confidenceScore"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Long name of a detected language (e.g. English, French)."
+                    },
+                "iso6391Name": {
+                    "type": "string",
+                    "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
+                },
+                "confidenceScore": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+                }
+            }
         },
         "AnalyzeTextJobState": {
             "allOf": [
@@ -2068,7 +2301,7 @@
                         }
                     }
                 }
-            },
+        },
         "MultiLanguageInput": {
             "type": "object",
             "description": "Contains an input record to be analyzed by the service.",
