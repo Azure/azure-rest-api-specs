@@ -27,9 +27,17 @@ These are the global settings for the loadtestservice.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-09-01-preview
+tag: package-2021-10-01-preview
 ```
 
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+  - Microsoft.LoadTestService/preview/2021-10-01-preview/loadtestservice.json
+```
 ### Tag: package-2021-09-01-preview
 
 These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
