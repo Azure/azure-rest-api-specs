@@ -11,7 +11,7 @@
         "tags": [
           "Identity"
         ],
-        "summary": "Create a new identity.",
+        "summary": "Create a new identity, and optionally, an access token.",
         "operationId": "CommunicationIdentity_Create",
         "consumes": [
           "application/json"
@@ -26,6 +26,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityCreateRequest"
             }
@@ -137,7 +138,7 @@
         "tags": [
           "TeamsUser"
         ],
-        "summary": "Exchange an AAD access token of a Teams user for a new ACS access token.",
+        "summary": "Exchange an AAD access token of a Teams user for a new Communication Identity access token.",
         "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
         "consumes": [
           "application/json"
@@ -152,6 +153,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "AAD access token of a Teams user",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TeamsUserAccessTokenRequest"
@@ -206,7 +208,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Requesting scopes for the new token.",
+            "description": "Requested scopes for the new token.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessTokenRequest"
@@ -329,7 +331,7 @@
       "type": "object",
       "properties": {
         "token": {
-          "description": "Azure Active Directory access token to acquire a new ACS access token.",
+          "description": "AAD access token of a Teams User to acquire a new Communication Identity access token.",
           "type": "string"
         }
       }
