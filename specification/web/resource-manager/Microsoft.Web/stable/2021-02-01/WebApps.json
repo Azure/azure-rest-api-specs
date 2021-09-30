@@ -2832,6 +2832,109 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deploymentStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the deployment status for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_GetProductionSiteDeploymentStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the deployment operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deploymentStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the deployment status for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_GetSlotSiteDeploymentStatusSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the deployment operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get the deployment status for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
       "get": {
         "tags": [
@@ -22501,6 +22604,82 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DeploymentStatus": {
+      "description": "Deployment status response payload.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DeploymentStatus resource specific properties",
+          "type": "object",
+          "properties": {
+            "id": {
+              "format": "uuid",
+              "description": "Deployment operation id..",
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "status": {
+              "description": "Deployment build status.",
+              "enum": [
+                "TimedOut",
+                "RuntimeFailed",
+                "BuildAborted",
+                "BuildFailed",
+                "BuildRequestReceived",
+                "BuildPending",
+                "BuildInProgress",
+                "BuildSuccessful",
+                "PostBuildRestartRequired",
+                "StartPolling",
+                "StartPollingWithRestart",
+                "RuntimeStarting",
+                "RuntimeSuccessful"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DeploymentBuildStatus",
+                "modelAsString": false
+              }
+            },
+            "numberOfInstancesInProgress": {
+              "format": "int32",
+              "description": "Number of site instances currently being provisioned.",
+              "type": "integer"
+            },
+            "numberOfInstancesSuccessful": {
+              "format": "int32",
+              "description": "Number of site instances provisioned successfully.",
+              "type": "integer"
+            },
+            "numberOfInstancesFailed": {
+              "format": "int32",
+              "description": "Number of site instances failed to provision.",
+              "type": "integer"
+            },
+            "failedInstancesLogs": {
+              "description": "List of URLs pointing to logs for instances wihch failed to provision.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "errors": {
+              "description": "List of errors.",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
