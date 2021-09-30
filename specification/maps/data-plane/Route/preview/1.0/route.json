@@ -1667,18 +1667,6 @@
     }
   },
   "definitions": {
-    "DepartureTime": {
-      "description": "The estimated departure time for the route or leg.",
-      "type": "string",
-      "readOnly": true,
-      "format": "date-time"
-    },
-    "ArrivalTime": {
-      "description": "The estimated arrival time for the route or leg.",
-      "type": "string",
-      "readOnly": true,
-      "format": "date-time"
-    },
     "RouteDirectionParameters": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
@@ -1895,168 +1883,13 @@
           "readOnly": true
         },
         "sectionType": {
-          "description": "Section types of the reported route response",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "CAR_TRAIN",
-            "COUNTRY",
-            "FERRY",
-            "MOTORWAY",
-            "PEDESTRIAN",
-            "TOLL_ROAD",
-            "TOLL_VIGNETTE",
-            "TRAFFIC",
-            "TRAVEL_MODE",
-            "TUNNEL",
-            "CARPOOL",
-            "URBAN"
-          ],
-          "x-ms-enum": {
-            "name": "ResponseSectionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "CAR_TRAIN",
-                "description": "Sections of the route that are car trains."
-              },
-              {
-                "value": "COUNTRY",
-                "description": "Sections indicating which countries the route is in."
-              },
-              {
-                "value": "FERRY",
-                "description": "Sections of the route that are ferries."
-              },
-              {
-                "value": "MOTORWAY",
-                "description": "Sections of the route that are motorways."
-              },
-              {
-                "value": "PEDESTRIAN",
-                "description": "Sections of the route that are only suited for pedestrians."
-              },
-              {
-                "value": "TOLL_ROAD",
-                "description": "Sections of the route that require a toll to be payed."
-              },
-              {
-                "value": "TOLL_VIGNETTE",
-                "description": "Sections of the route that require a toll vignette to be present."
-              },
-              {
-                "value": "TRAFFIC",
-                "description": "Sections of the route that contain traffic information."
-              },
-              {
-                "value": "TRAVEL_MODE",
-                "description": "Sections in relation to the request parameter `travelMode`."
-              },
-              {
-                "value": "TUNNEL",
-                "description": "Sections of the route that are tunnels."
-              },
-              {
-                "value": "CARPOOL",
-                "description": "Sections of the route that require use of carpool (HOV/High Occupancy Vehicle) lanes."
-              },
-              {
-                "value": "URBAN",
-                "description": "Sections of the route that are located within urban areas."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ResponseSectionType"
         },
         "travelMode": {
-          "description": "Travel mode for the calculated route. The value will be set to `other` if the requested mode of transport is not possible in this section",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "car",
-            "truck",
-            "taxi",
-            "bus",
-            "van",
-            "motorcycle",
-            "bicycle",
-            "pedestrian",
-            "other"
-          ],
-          "x-ms-enum": {
-            "name": "ResponseTravelMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "car",
-                "description": "The returned routes are optimized for cars."
-              },
-              {
-                "value": "truck",
-                "description": "The returned routes are optimized for commercial vehicles, like for trucks."
-              },
-              {
-                "value": "taxi",
-                "description": "The returned routes are optimized for taxis. BETA functionality."
-              },
-              {
-                "value": "bus",
-                "description": "The returned routes are optimized for buses, including the use of bus only lanes. BETA functionality."
-              },
-              {
-                "value": "van",
-                "description": "The returned routes are optimized for vans. BETA functionality."
-              },
-              {
-                "value": "motorcycle",
-                "description": "The returned routes are optimized for motorcycles. BETA functionality."
-              },
-              {
-                "value": "bicycle",
-                "description": "The returned routes are optimized for bicycles, including use of bicycle lanes."
-              },
-              {
-                "value": "pedestrian",
-                "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
-              },
-              {
-                "value": "other",
-                "description": "The given mode of transport is not possible in this section"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ResponseTravelMode"
         },
         "simpleCategory": {
-          "description": "Type of the incident. Can currently be JAM, ROAD_WORK, ROAD_CLOSURE, or OTHER. See \"tec\" for detailed information.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "JAM",
-            "ROAD_WORK",
-            "ROAD_CLOSURE",
-            "OTHER"
-          ],
-          "x-ms-enum": {
-            "name": "SimpleCategory",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "JAM",
-                "description": "Traffic jam."
-              },
-              {
-                "value": "ROAD_WORK",
-                "description": "Road work."
-              },
-              {
-                "value": "ROAD_CLOSURE",
-                "description": "Road closure."
-              },
-              {
-                "value": "OTHER",
-                "description": "Other."
-              }
-            ]
-          }
+          "$ref": "#/definitions/SimpleCategory"
         },
         "effectiveSpeedInKmh": {
           "description": "Effective speed of the incident in km/h, averaged over its entire length.",
@@ -2075,44 +1908,6 @@
         "tec": {
           "$ref": "#/definitions/RouteSectionTec"
         }
-      }
-    },
-    "DelayMagnitude": {
-      "description": "The magnitude of delay caused by the incident. These values correspond to the values of the response field ty of the [Get Traffic Incident Detail API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentdetail). ",
-      "readOnly": true,
-      "type": "string",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "x-ms-enum": {
-        "name": "DelayMagnitude",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "0",
-            "description": "Unknown."
-          },
-          {
-            "value": "1",
-            "description": "Minor."
-          },
-          {
-            "value": "2",
-            "description": "Moderate."
-          },
-          {
-            "value": "3",
-            "description": "Major."
-          },
-          {
-            "value": "4",
-            "description": "Undefined, used for road closures and other indefinite delays."
-          }
-        ]
       }
     },
     "RouteSectionTec": {
@@ -2739,6 +2534,220 @@
             }
           ]
         }
+      }
+    },
+    "DepartureTime": {
+      "description": "The estimated departure time for the route or leg.",
+      "type": "string",
+      "readOnly": true,
+      "format": "date-time"
+    },
+    "ArrivalTime": {
+      "description": "The estimated arrival time for the route or leg.",
+      "type": "string",
+      "readOnly": true,
+      "format": "date-time"
+    },
+    "ResponseSectionType": {
+      "description": "Section types of the reported route response",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "CAR_TRAIN",
+        "COUNTRY",
+        "FERRY",
+        "MOTORWAY",
+        "PEDESTRIAN",
+        "TOLL_ROAD",
+        "TOLL_VIGNETTE",
+        "TRAFFIC",
+        "TRAVEL_MODE",
+        "TUNNEL",
+        "CARPOOL",
+        "URBAN"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseSectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CAR_TRAIN",
+            "description": "Sections of the route that are car trains."
+          },
+          {
+            "value": "COUNTRY",
+            "description": "Sections indicating which countries the route is in."
+          },
+          {
+            "value": "FERRY",
+            "description": "Sections of the route that are ferries."
+          },
+          {
+            "value": "MOTORWAY",
+            "description": "Sections of the route that are motorways."
+          },
+          {
+            "value": "PEDESTRIAN",
+            "description": "Sections of the route that are only suited for pedestrians."
+          },
+          {
+            "value": "TOLL_ROAD",
+            "description": "Sections of the route that require a toll to be payed."
+          },
+          {
+            "value": "TOLL_VIGNETTE",
+            "description": "Sections of the route that require a toll vignette to be present."
+          },
+          {
+            "value": "TRAFFIC",
+            "description": "Sections of the route that contain traffic information."
+          },
+          {
+            "value": "TRAVEL_MODE",
+            "description": "Sections in relation to the request parameter `travelMode`."
+          },
+          {
+            "value": "TUNNEL",
+            "description": "Sections of the route that are tunnels."
+          },
+          {
+            "value": "CARPOOL",
+            "description": "Sections of the route that require use of carpool (HOV/High Occupancy Vehicle) lanes."
+          },
+          {
+            "value": "URBAN",
+            "description": "Sections of the route that are located within urban areas."
+          }
+        ]
+      }
+    },
+    "ResponseTravelMode": {
+      "description": "Travel mode for the calculated route. The value will be set to `other` if the requested mode of transport is not possible in this section",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "car",
+        "truck",
+        "taxi",
+        "bus",
+        "van",
+        "motorcycle",
+        "bicycle",
+        "pedestrian",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseTravelMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "car",
+            "description": "The returned routes are optimized for cars."
+          },
+          {
+            "value": "truck",
+            "description": "The returned routes are optimized for commercial vehicles, like for trucks."
+          },
+          {
+            "value": "taxi",
+            "description": "The returned routes are optimized for taxis. BETA functionality."
+          },
+          {
+            "value": "bus",
+            "description": "The returned routes are optimized for buses, including the use of bus only lanes. BETA functionality."
+          },
+          {
+            "value": "van",
+            "description": "The returned routes are optimized for vans. BETA functionality."
+          },
+          {
+            "value": "motorcycle",
+            "description": "The returned routes are optimized for motorcycles. BETA functionality."
+          },
+          {
+            "value": "bicycle",
+            "description": "The returned routes are optimized for bicycles, including use of bicycle lanes."
+          },
+          {
+            "value": "pedestrian",
+            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
+          },
+          {
+            "value": "other",
+            "description": "The given mode of transport is not possible in this section"
+          }
+        ]
+      }
+    },
+    "SimpleCategory": {
+      "description": "Type of the incident. Can currently be JAM, ROAD_WORK, ROAD_CLOSURE, or OTHER. See \"tec\" for detailed information.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "JAM",
+        "ROAD_WORK",
+        "ROAD_CLOSURE",
+        "OTHER"
+      ],
+      "x-ms-enum": {
+        "name": "SimpleCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JAM",
+            "description": "Traffic jam."
+          },
+          {
+            "value": "ROAD_WORK",
+            "description": "Road work."
+          },
+          {
+            "value": "ROAD_CLOSURE",
+            "description": "Road closure."
+          },
+          {
+            "value": "OTHER",
+            "description": "Other."
+          }
+        ]
+      }
+    },
+    "DelayMagnitude": {
+      "description": "The magnitude of delay caused by the incident. These values correspond to the values of the response field ty of the [Get Traffic Incident Detail API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentdetail). ",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "x-ms-enum": {
+        "name": "DelayMagnitude",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "0",
+            "description": "Unknown."
+          },
+          {
+            "value": "1",
+            "description": "Minor."
+          },
+          {
+            "value": "2",
+            "description": "Moderate."
+          },
+          {
+            "value": "3",
+            "description": "Major."
+          },
+          {
+            "value": "4",
+            "description": "Undefined, used for road closures and other indefinite delays."
+          }
+        ]
       }
     }
   }
