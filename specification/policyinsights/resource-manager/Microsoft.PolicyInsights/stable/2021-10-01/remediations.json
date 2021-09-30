@@ -1212,6 +1212,34 @@
           "$ref": "#/definitions/RemediationDeploymentSummary",
           "description": "The deployment status summary for all deployments created by the remediation.",
           "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "The remediation status message. Provides additional details regarding the state of the remediation.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The remediation correlation Id. Can be used to find events related to the remediation in the activity log.",
+          "readOnly": true
+        },
+        "resourceCount": {
+          "type": "integer",
+          "description": "Determines the max number of resources that can be remediated by the remediation job. If not provided, the default resource count is used."
+        },
+        "parallelDeployments": {
+          "type": "integer",
+          "description": "Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used."
+        },
+        "failureThreshold": {
+          "properties": {
+            "percentage": {
+              "type": "number",
+              "format": "float",
+              "description": "A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold."
+            }
+          },
+          "description": "The remediation failure threshold settings"
         }
       },
       "description": "The remediation properties."
