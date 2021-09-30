@@ -1504,6 +1504,7 @@
             "InProgress",
             "Completed",
             "CompletedWithErrors",
+            "CompletedWithWarnings",
             "Failed",
             "NotReturned",
             "HardwareError",
@@ -1511,13 +1512,30 @@
             "DeviceMetadataModified",
             "StorageAccountNotAccessible",
             "UnsupportedData",
-            "DriveNotReceived",
-            "UnsupportedDrive",
-            "OtherServiceError",
-            "OtherUserError",
-            "DriveNotDetected",
-            "DriveCorrupted",
-            "MetadataFilesModifiedOrRemoved"
+            "DiskFormatted",
+            "DiskNotReceived",
+            "UnsupportedDisk",
+            "DiskNotDetected",
+            "DiskCorrupted",
+            "VolumeNotNtfs",
+            "DiskOperationFailed",
+            "DiskSecurityLocked",
+            "ManifestNameInvalid",
+            "ManifestNotFound",
+            "ManifestAccessDenied",
+            "ManifestFormatInvalid",
+            "ReadManifestFailed",
+            "ManifestDriveIdMismatch",
+            "BlobListFormatInvalid",
+            "BlobRequestForbidden",
+            "BitLockerVolumeNotFound",
+            "BitLockerNotActivated",
+            "BitLockerProtectorNotFound",
+            "BitLockerKeyInvalid",
+            "BitLockerUnlockVolumeFailed",
+            "BitLockerFailed",
+            "SecurityArtifactsNotFound",
+            "ManagedDiskConversionError"
           ],
           "type": "string",
           "readOnly": true,
@@ -1540,6 +1558,10 @@
               {
                 "value": "CompletedWithErrors",
                 "description": "Data copy completed with errors."
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Data copy completed with warnings."
               },
               {
                 "value": "Failed",
@@ -1570,32 +1592,96 @@
                 "description": "Data copy failed. The Device data content is not supported."
               },
               {
-                "value": "DriveNotReceived",
+                "value": "DiskNotReceived",
                 "description": "No copy triggered as device was not received."
               },
               {
-                "value": "UnsupportedDrive",
+                "value": "UnsupportedDisk",
                 "description": "No copy triggered as device type is not supported."
               },
               {
-                "value": "OtherServiceError",
-                "description": "Copy failed due to service error."
-              },
-              {
-                "value": "OtherUserError",
-                "description": "Copy failed due to user error."
-              },
-              {
-                "value": "DriveNotDetected",
+                "value": "DiskNotDetected",
                 "description": "Copy failed due to disk detection error."
               },
               {
-                "value": "DriveCorrupted",
+                "value": "DiskCorrupted",
                 "description": "Copy failed due to corrupted drive."
               },
-              {
-                "value": "MetadataFilesModifiedOrRemoved",
-                "description": "Copy failed due to modified  or removed metadata files."
+              { 
+                "value":"VolumeNotNtfs",
+                "description": "VolumeNotNtfs."
+              },
+              { 
+                "value":"DiskOperationFailed",
+                "description": "DiskOperationFailed."
+              },
+              { 
+                "value":"DiskSecurityLocked",
+                "description": "DiskSecurityLocked."
+              },
+              { 
+                "value":"ManifestNameInvalid",
+                "description": "ManifestNameInvalid."
+              },
+              { 
+                "value":"ManifestNotFound",
+                "description": "ManifestNotFound."
+              },
+              { 
+                "value":"ManifestAccessDenied",
+                "description": "ManifestAccessDenied."
+              },
+              { 
+                "value":"ManifestFormatInvalid",
+                "description": "ManifestFormatInvalid."
+              },
+              { 
+                "value":"ReadManifestFailed",
+                "description": "ReadManifestFailed."
+              },
+              { 
+                "value":"ManifestDriveIdMismatch",
+                "description": "ManifestDriveIdMismatch."
+              },
+              { 
+                "value":"BlobListFormatInvalid",
+                "description": "BlobListFormatInvalid."
+              },
+              { 
+                "value":"BlobRequestForbidden",
+                "description": "BlobRequestForbidden."
+              },
+              { 
+                "value":"BitLockerVolumeNotFound",
+                "description": "BitLockerVolumeNotFound."
+              },
+              { 
+                "value":"BitLockerNotActivated",
+                "description": "BitLockerNotActivated."
+              },
+              { 
+                "value":"BitLockerProtectorNotFound",
+                "description": "BitLockerProtectorNotFound."
+              },
+              { 
+                "value":"BitLockerKeyInvalid",
+                "description": "BitLockerKeyInvalid."
+              },
+              { 
+                "value":"BitLockerUnlockVolumeFailed",
+                "description": "BitLockerUnlockVolumeFailed."
+              },
+              { 
+                "value":"BitLockerFailed",
+                "description": "BitLockerFailed."
+              },
+              { 
+                "value":"SecurityArtifactsNotFound",
+                "description": "SecurityArtifactsNotFound."
+              },
+              { 
+                "value":"ManagedDiskConversionError",
+                "description": "ManagedDiskConversionError."
               }
             ]
           }
@@ -2269,6 +2355,7 @@
             "InProgress",
             "Completed",
             "CompletedWithErrors",
+            "CompletedWithWarnings",
             "Failed",
             "NotReturned",
             "HardwareError",
@@ -2276,13 +2363,30 @@
             "DeviceMetadataModified",
             "StorageAccountNotAccessible",
             "UnsupportedData",
-            "DriveNotReceived",
-            "UnsupportedDrive",
-            "OtherServiceError",
-            "OtherUserError",
-            "DriveNotDetected",
-            "DriveCorrupted",
-            "MetadataFilesModifiedOrRemoved"
+            "DiskFormatted",
+            "DiskNotReceived",
+            "UnsupportedDisk",
+            "DiskNotDetected",
+            "DiskCorrupted",
+            "VolumeNotNtfs",
+            "DiskOperationFailed",
+            "DiskSecurityLocked",
+            "ManifestNameInvalid",
+            "ManifestNotFound",
+            "ManifestAccessDenied",
+            "ManifestFormatInvalid",
+            "ReadManifestFailed",
+            "ManifestDriveIdMismatch",
+            "BlobListFormatInvalid",
+            "BlobRequestForbidden",
+            "BitLockerVolumeNotFound",
+            "BitLockerNotActivated",
+            "BitLockerProtectorNotFound",
+            "BitLockerKeyInvalid",
+            "BitLockerUnlockVolumeFailed",
+            "BitLockerFailed",
+            "SecurityArtifactsNotFound",
+            "ManagedDiskConversionError"
           ],
           "type": "string",
           "readOnly": true,
@@ -2335,32 +2439,96 @@
                 "description": "Data copy failed. The Device data content is not supported."
               },
               {
-                "value": "DriveNotReceived",
+                "value": "DiskNotReceived",
                 "description": "No copy triggered as device was not received."
               },
               {
-                "value": "UnsupportedDrive",
+                "value": "UnsupportedDisk",
                 "description": "No copy triggered as device type is not supported."
               },
               {
-                "value": "OtherServiceError",
-                "description": "Copy failed due to service error."
-              },
-              {
-                "value": "OtherUserError",
-                "description": "Copy failed due to user error."
-              },
-              {
-                "value": "DriveNotDetected",
+                "value": "DiskNotDetected",
                 "description": "Copy failed due to disk detection error."
               },
               {
-                "value": "DriveCorrupted",
+                "value": "DiskCorrupted",
                 "description": "Copy failed due to corrupted drive."
               },
-              {
-                "value": "MetadataFilesModifiedOrRemoved",
-                "description": "Copy failed due to modified  or removed metadata files."
+              { 
+                "value":"VolumeNotNtfs",
+                "description": "VolumeNotNtfs."
+              },
+              { 
+                "value":"DiskOperationFailed",
+                "description": "DiskOperationFailed."
+              },
+              { 
+                "value":"DiskSecurityLocked",
+                "description": "DiskSecurityLocked."
+              },
+              { 
+                "value":"ManifestNameInvalid",
+                "description": "ManifestNameInvalid."
+              },
+              { 
+                "value":"ManifestNotFound",
+                "description": "ManifestNotFound."
+              },
+              { 
+                "value":"ManifestAccessDenied",
+                "description": "ManifestAccessDenied."
+              },
+              { 
+                "value":"ManifestFormatInvalid",
+                "description": "ManifestFormatInvalid."
+              },
+              { 
+                "value":"ReadManifestFailed",
+                "description": "ReadManifestFailed."
+              },
+              { 
+                "value":"ManifestDriveIdMismatch",
+                "description": "ManifestDriveIdMismatch."
+              },
+              { 
+                "value":"BlobListFormatInvalid",
+                "description": "BlobListFormatInvalid."
+              },
+              { 
+                "value":"BlobRequestForbidden",
+                "description": "BlobRequestForbidden."
+              },
+              { 
+                "value":"BitLockerVolumeNotFound",
+                "description": "BitLockerVolumeNotFound."
+              },
+              { 
+                "value":"BitLockerNotActivated",
+                "description": "BitLockerNotActivated."
+              },
+              { 
+                "value":"BitLockerProtectorNotFound",
+                "description": "BitLockerProtectorNotFound."
+              },
+              { 
+                "value":"BitLockerKeyInvalid",
+                "description": "BitLockerKeyInvalid."
+              },
+              { 
+                "value":"BitLockerUnlockVolumeFailed",
+                "description": "BitLockerUnlockVolumeFailed."
+              },
+              { 
+                "value":"BitLockerFailed",
+                "description": "BitLockerFailed."
+              },
+              { 
+                "value":"SecurityArtifactsNotFound",
+                "description": "SecurityArtifactsNotFound."
+              },
+              { 
+                "value":"ManagedDiskConversionError",
+                "description": "ManagedDiskConversionError."
               }
             ]
           }
@@ -2713,6 +2881,29 @@
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
           "description": "Account details of the data to be transferred"
+        },
+        "logCollectionLevel": {
+          "description": "Level of the logs to be collected.",
+          "enum": [
+            "Error",
+            "Verbose"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LogCollectionLevel",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Error",
+                "description": "Only Errors will be collected in the logs."
+              },
+              {
+                "value": "Verbose",
+                "description": "Verbose logging (includes Errors, CRC, size information and others)."
+              }
+            ]
+          },
+          "default": "Error"
         }
       }
     },
@@ -4386,11 +4577,13 @@
         },
         "carrierName": {
           "description": "Name of the carrier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "trackingId": {
           "description": "Tracking Id of shipment.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
