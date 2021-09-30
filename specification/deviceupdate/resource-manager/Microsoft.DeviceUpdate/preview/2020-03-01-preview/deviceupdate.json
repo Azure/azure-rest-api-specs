@@ -1087,12 +1087,46 @@
             "enableDiagnostics": {
               "description": "Enables or Disables the diagnostic logs collection",
               "type": "boolean"
+            },
+            "diagnosticStorageProperties": {
+              "$ref": "#/definitions/DiagnosticStorageProperties"
             }
           }
         }
       },
       "required": [
         "properties"
+      ]
+    },
+    "DiagnosticStorageProperties": {
+      "description": "Customer-initiated diagnostic log collection storage properties",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "Authentication Type",
+          "enum": [
+            "KeyBased"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-ms-enum": {
+            "name": "AuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "connectionString": {
+          "description": "ConnectionString of the diagnostic storage account",
+          "x-ms-secret": true,
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ResourceId of the diagnostic storage account",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authenticationType",
+        "resourceId"
       ]
     },
     "InstanceList": {
