@@ -630,7 +630,7 @@
             "description": "Rain"
           },
           {
-            "value":19,
+            "value": 19,
             "name": "Flurries",
             "description": "Flurries"
           },
@@ -863,7 +863,7 @@
             "description": "fahrenheit"
           },
           {
-            "value":19,
+            "value": 19,
             "description": "kelvin"
           },
           {
@@ -887,37 +887,38 @@
     },
     "PrecipitationType": {
       "type": "string",
-      "description": "Specifies the type of precipitation (\"rain\" \"snow\" \"ice\" or \"mix\"). If dbz is zero, precipitationType is not present in the response.",
+      "description": "Specifies the type of precipitation (\"Rain\" \"Snow\" \"Ice\" or \"Mix\"). If dbz is zero, precipitationType is not present in the response.",
       "enum": [
-        "rain",
-        "snow",
-        "ice",
-        "mix"
+        "Rain",
+        "Snow",
+        "Ice",
+        "Mix"
       ],
       "x-ms-enum": {
         "name": "PrecipitationType",
         "modelAsString": true,
         "values": [
           {
-            "value": "rain",
-            "description": "rain"
+            "value": "Rain",
+            "description": "Rain"
           },
           {
-            "value": "snow",
-            "description": "snow"
+            "value": "Snow",
+            "description": "Snow"
           },
           {
-            "value": "ice",
-            "description": "ice"
+            "value": "Ice",
+            "description": "Ice"
           },
           {
-            "value": "mix",
-            "description": "mix"
+            "value": "Mix",
+            "description": "Mix"
           }
         ]
       }
     },
-    "WeatherValue": {
+    "WeatherUnit": {
+      "x-ms-client-name": "WeatherValue",
       "description": "Specific value of a given unit related to weather.",
       "type": "object",
       "properties": {
@@ -926,7 +927,8 @@
           "format": "float",
           "description": "Rounded value."
         },
-        "unitLabel": {
+        "unit": {
+          "x-ms-client-name": "unitLabel",
           "type": "string",
           "description": "Type of unit for the returned value."
         },
@@ -958,7 +960,8 @@
           "format": "int32",
           "description": "Wind direction in Azimuth degrees,  starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359."
         },
-        "description": {
+        "localizedDescription": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Direction abbreviation in the specified language."
         }
@@ -984,16 +987,17 @@
         }
       }
     },
-    "WeatherValueRange": {
+    "WeatherUnitRange": {
+      "x-ms-client-name": "WeatherValueRange",
       "type": "object",
       "description": "Returned temperature values.",
       "properties": {
         "minimum": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Minimum temperature for the time period."
         },
         "maximum": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Maximum temperature for the time period"
         }
       }
@@ -1044,7 +1048,8 @@
     "HourlyForecast": {
       "type": "object",
       "properties": {
-        "dateTime": {
+        "date": {
+          "x-ms-client-name": "dateTime",
           "type": "string",
           "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00.",
           "format": "date-time"
@@ -1066,19 +1071,19 @@
           "description": "Specifies whether or not it is daylight. True indicates day light."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Temperature being returned."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
         },
         "wetBulbTemperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation."
         },
         "dewPoint": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "wind": {
@@ -1095,17 +1100,19 @@
           "description": "Relative humidity is the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature."
         },
         "visibility": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
-        "cloudCeiling": {
-          "$ref": "#/definitions/WeatherValue",
+        "ceiling": {
+          "x-ms-client-name": "cloudCeiling",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Cloud ceiling in specified unit. The ceiling is a measurement of the height of the base of the lowest clouds."
         },
         "uvIndex": {
           "$ref": "#/definitions/UVIndex"
         },
-        "uvIndexDescription": {
+        "uvIndexPhrase": {
+          "x-ms-client-name": "uvIndexDescription",
           "type": "string",
           "description": "Phrase associated with the `uvIndex`."
         },
@@ -1130,19 +1137,19 @@
           "description": "Percent representing the probability of snow. For example, '5'."
         },
         "totalLiquid": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Total liquid equivalent of precipitation during the forecast period."
         },
         "rain": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Rain"
         },
         "snow": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Snow"
         },
         "ice": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Ice"
         },
         "cloudCover": {
@@ -1171,11 +1178,13 @@
           "type": "string",
           "description": "Summary phrase for the next 60 minutes. Phrase length is approximately 60 characters."
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "Short summary phrase for the next 120 minutes. Phrase length is approximately 25 characters."
         },
-        "briefDescription": {
+        "briefPhrase": {
+          "x-ms-client-name": "briefDescription",
           "type": "string",
           "description": "Summary phrase for the next 120 minutes. Phrase length is approximately 60 characters."
         },
@@ -1208,11 +1217,13 @@
           "format": "int32",
           "description": "The number of minutes for which the summary applies."
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "Short summary phrase. Phrase length is approximately 25 characters."
         },
-        "briefDescription": {
+        "briefPhrase": {
+          "x-ms-client-name": "briefDescription",
           "type": "string",
           "description": "Brief summary phrase. Phrase length is approximately 60 characters."
         },
@@ -1238,12 +1249,14 @@
           "format": "int32",
           "description": "The first minute for the interval."
         },
-        "decibelRelativeToZ": {
+        "dbz": {
+          "x-ms-client-name": "decibelRelativeToZ",
           "type": "number",
           "format": "double",
           "description": "A unit that represents forecasted precipitation intensity."
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A short phrase describing precipitation condition for the interval."
         },
@@ -1321,9 +1334,10 @@
     "QuarterDayForecast": {
       "type": "object",
       "properties": {
-        "dateTime": {
+        "date": {
+          "x-ms-client-name": "dateTime",
           "type": "string",
-          "format":"date-time",
+          "format": "date-time",
           "description": "Date of the forecast as example, 2019-10-27T00:00:00"
         },
         "effectiveDate": {
@@ -1376,15 +1390,15 @@
           "description": "Short summary phrase summary for quarter."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherValueRange",
+          "$ref": "#/definitions/WeatherUnitRange",
           "description": "Temperature values for the quarter."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherValueRange",
+          "$ref": "#/definitions/WeatherUnitRange",
           "description": "RealFeel™ Temperature values for the quarter."
         },
         "dewPoint": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "relativeHumidity": {
@@ -1401,7 +1415,7 @@
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "visibility": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
         "cloudCover": {
@@ -1431,19 +1445,19 @@
           "description": "Percent representing the probability of a thunderstorm. For example, '10'."
         },
         "totalLiquid": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Total liquid equivalent of precipitation during the forecast period."
         },
         "rain": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Rain"
         },
         "snow": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Snow"
         },
         "ice": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Ice"
         }
       }
@@ -1475,7 +1489,8 @@
     "PressureTendency": {
       "type": "object",
       "properties": {
-        "description": {
+        "localizedDescription": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Description of the pressure tendency in specified language"
         },
@@ -1489,31 +1504,31 @@
       "type": "object",
       "properties": {
         "pastHour": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past hour."
         },
         "past3Hours": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past three hours."
         },
         "past6Hours": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past six hours. Contains Metric and Imperial Values."
         },
         "past9Hours": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past nine hours."
         },
         "past12Hours": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 12 hours."
         },
         "past18Hours": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 18 hours."
         },
         "past24Hours": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 24 hours."
         }
       }
@@ -1525,11 +1540,11 @@
           "type": "object",
           "properties": {
             "minimum": {
-              "$ref": "#/definitions/WeatherValue",
+              "$ref": "#/definitions/WeatherUnit",
               "description": "minimum"
             },
             "maximum": {
-              "$ref": "#/definitions/WeatherValue",
+              "$ref": "#/definitions/WeatherUnit",
               "description": "maximum"
             }
           },
@@ -1539,11 +1554,11 @@
           "type": "object",
           "properties": {
             "minimum": {
-              "$ref": "#/definitions/WeatherValue",
+              "$ref": "#/definitions/WeatherUnit",
               "description": "minimum"
             },
             "maximum": {
-              "$ref": "#/definitions/WeatherValue",
+              "$ref": "#/definitions/WeatherUnit",
               "description": "maximum"
             }
           },
@@ -1553,11 +1568,11 @@
           "type": "object",
           "properties": {
             "minimum": {
-              "$ref": "#/definitions/WeatherValue",
+              "$ref": "#/definitions/WeatherUnit",
               "description": "minimum"
             },
             "maximum": {
-              "$ref": "#/definitions/WeatherValue",
+              "$ref": "#/definitions/WeatherUnit",
               "description": "maximum"
             }
           },
@@ -1573,7 +1588,8 @@
           "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
-        "description": {
+        "phrase": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Phrase description of the current weather condition.  Displayed in specified language."
         },
@@ -1584,20 +1600,21 @@
           "type": "boolean",
           "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
         },
-        "isDaytime": {
+        "isDayTime": {
+          "x-ms-client-name": "isDaytime",
           "type": "boolean",
           "description": "Indicates the time of the day. True indicates 'day',', false indicates 'night."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Temperature being returned."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "RealFeel™ Temperature being returned."
         },
         "realFeelTemperatureShade": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
         },
         "relativeHumidity": {
@@ -1606,7 +1623,7 @@
           "description": "Relative humidity is the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature."
         },
         "dewPoint": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "wind": {
@@ -1620,12 +1637,13 @@
         "uvIndex": {
           "$ref": "#/definitions/UVIndex"
         },
-        "uvIndexDescription": {
+        "uvIndexPhrase": {
+          "x-ms-client-name": "uvIndexDescription",
           "type": "string",
           "description": "Phrase associated with the `uvIndex`."
         },
         "visibility": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
         "obstructionsToVisibility": {
@@ -1637,12 +1655,13 @@
           "format": "int32",
           "description": "Percent representing cloud cover."
         },
-        "cloudCeiling": {
-          "$ref": "#/definitions/WeatherValue",
+        "ceiling": {
+          "x-ms-client-name": "cloudCeiling",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Cloud ceiling in specified unit. The ceiling is a measurement of the height of the base of the lowest clouds."
         },
         "pressure": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Atmospheric pressure in specified unit."
         },
         "pressureTendency": {
@@ -1650,19 +1669,19 @@
           "description": "Atmospheric pressure change."
         },
         "past24HourTemperatureDeparture": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Departure from the temperature observed 24 hours ago in specified unit."
         },
         "apparentTemperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Perceived outdoor temperature caused by the combination of air temperature, relative humidity, and wind speed in specified unit."
         },
         "windChillTemperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Perceived air temperature on exposed skin due to wind."
         },
         "wetBulbTemperature": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation."
         },
         "precipitationSummary": {
@@ -1704,23 +1723,24 @@
       },
       "description": "Summary for the main conditions for the requested time period. Notice that summary can cover only part of the time period."
     },
-    "MeanTemperatureDeviation": {
+    "DegreeDaySummary": {
       "type": "object",
       "properties": {
         "heating": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Number of degrees that the mean temperature is below 65 degrees F/ 18 degree C."
         },
         "cooling": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Number of degrees that the mean temperature is above 65 degrees F/ 18 degree C."
         }
       }
     },
-    "AirQuality": {
+    "AirAndPollen": {
       "type": "object",
       "properties": {
-        "description": {
+        "name": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Name of the pollen or pollutant. For example, grass, mold, weed, air quality, tree and UV index."
         },
@@ -1738,7 +1758,8 @@
           "format": "int32",
           "description": "Value associated with the air quality or pollution category. These values range from 1 to 6. 1 implying good conditions, 6 implying hazardous conditions."
         },
-        "airQualityType": {
+        "type": {
+          "x-ms-client-name": "airQualityType",
           "type": "string",
           "description": "Only exists for air quality. Examples include ozone and particle pollution."
         }
@@ -1747,21 +1768,22 @@
     "DailyForecast": {
       "type": "object",
       "properties": {
-        "dateTime": {
+        "date": {
+          "x-ms-client-name": "dateTime",
           "type": "string",
           "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherValueRange",
+          "$ref": "#/definitions/WeatherUnitRange",
           "description": "Temperature values for the day."
         },
         "realFeelTemperature": {
-          "$ref": "#/definitions/WeatherValueRange",
+          "$ref": "#/definitions/WeatherUnitRange",
           "description": "RealFeel™ Temperature being returned."
         },
         "realFeelTemperatureShade": {
-          "$ref": "#/definitions/WeatherValueRange",
+          "$ref": "#/definitions/WeatherUnitRange",
           "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
         },
         "hoursOfSun": {
@@ -1769,23 +1791,27 @@
           "format": "float",
           "description": "Hours of sun."
         },
-        "meanTemperatureDeviation": {
-          "$ref": "#/definitions/MeanTemperatureDeviation",
+        "degreeDaySummary": {
+          "x-ms-client-name": "meanTemperatureDeviation",
+          "$ref": "#/definitions/DegreeDaySummary",
           "description": "Summary for mean temperature of Heating Degree Day or Cooling Degree Day information"
         },
-        "airQuality": {
+        "airAndPollen": {
+          "x-ms-client-name": "airQuality",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AirQuality"
+            "$ref": "#/definitions/AirAndPollen"
           },
           "description": "air quality"
         },
-        "daytimeForecast": {
-          "$ref": "#/definitions/DailyForecastDetail",
+        "day": {
+          "x-ms-client-name": "daytimeForecast",
+          "$ref": "#/definitions/DayOrNight",
           "description": "Day forecast detail"
         },
-        "nighttimeForecast": {
-          "$ref": "#/definitions/DailyForecastDetail",
+        "night": {
+          "x-ms-client-name": "nighttimeForecast",
+          "$ref": "#/definitions/DayOrNight",
           "description": "Night forecast detail"
         },
         "sources": {
@@ -1831,7 +1857,8 @@
         }
       }
     },
-    "DailyForecastDetail": {
+    "DayOrNight": {
+      "x-ms-client-name": "DailyForecastDetail",
       "type": "object",
       "properties": {
         "iconCode": {
@@ -1855,7 +1882,8 @@
           "type": "string",
           "description": "Description of the intensity."
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "Phrase description of the forecast in specified language. Azure Maps attempts to keep this phrase under 30 characters in length, but some languages/weather events may result in a longer phrase length, exceeding 30 characters."
         },
@@ -1897,19 +1925,19 @@
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "totalLiquid": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Total liquid equivalent of precipitation during the forecast period."
         },
         "rain": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Rain"
         },
         "snow": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Snow"
         },
         "ice": {
-          "$ref": "#/definitions/WeatherValue",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Ice"
         },
         "hoursOfPrecipitation": {
@@ -1962,7 +1990,7 @@
           "type": "array",
           "description": "Data for each waypoint returned in the same order as specified in the request.",
           "items": {
-            "$ref": "#/definitions/WaypointForecast"
+            "$ref": "#/definitions/WeatherWaypoint"
           }
         }
       }
@@ -1998,17 +2026,20 @@
         }
       }
     },
-    "WaypointForecast": {
+    "WeatherWaypoint": {
+      "x-ms-client-name": "WaypointForecast",
       "type": "object",
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode"
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         },
-        "isDaytime": {
+        "isDayTime": {
+          "x-ms-client-name": "isDaytime",
           "type": "boolean",
           "description": "Indicates the time of the day. True indicates 'day',', false indicates 'night."
         },
@@ -2018,7 +2049,7 @@
           "description": "Percent representing cloud cover."
         },
         "temperature": {
-          "$ref": "#/definitions/WeatherValue"
+          "$ref": "#/definitions/WeatherUnit"
         },
         "wind": {
           "$ref": "#/definitions/WindDetails"
@@ -2057,7 +2088,8 @@
         "maxHazardIndex": {
           "$ref": "#/definitions/HazardIndex"
         },
-        "details": {
+        "hazardDetails": {
+          "x-ms-client-name": "details",
           "type": "array",
           "description": "Details of the weather hazards affecting the trip.",
           "items": {
@@ -2076,7 +2108,8 @@
           "type": "string",
           "description": "A unique identifier (non-displayable) for each type of hazard: LightRain, ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow, ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail, SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh, WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning, SevereThunderstormWarning."
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
@@ -2096,7 +2129,8 @@
           "type": "string",
           "description": "A unique identifier (non-displayable) for each type of hazard: LightRain, ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow, ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail, SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh, WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning, SevereThunderstormWarning."
         },
-        "shortDescription": {
+        "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
@@ -2141,7 +2175,8 @@
           "format": "int32",
           "description": "Number signifying the importance or ranking order of the given alert within the country/region it has originated. A lower number signifies a higher priority. For example, 1 is the highest priority. The number varies by country/region and can change over time as each country/region evolves their alert systems."
         },
-        "classification": {
+        "class": {
+          "x-ms-client-name": "classification",
           "type": "string",
           "description": "Classification of the alert. This field is not available for all countries and therefore not always returned."
         },
@@ -2162,10 +2197,11 @@
           "type": "string",
           "description": "A disclaimer regarding the source of the alert information. This field is not always available. For example, disclaimer may include details about the delays or potential issues related to the alarm."
         },
-        "alertDetails": {
+        "alertAreas": {
+          "x-ms-client-name": "alertDetails",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AlertDetails"
+            "$ref": "#/definitions/AlertArea"
           },
           "description": "Information about the alert specific to the affected area(s)."
         }
@@ -2175,17 +2211,20 @@
       "type": "object",
       "description": "Description of a severe weather alert.",
       "properties": {
-        "description": {
+        "localized": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Description of the alert in the specified language. By default English (en-US) is returned if the language parameter is not specified in the request."
         },
-        "status": {
+        "english": {
+          "x-ms-client-name": "status",
           "type": "string",
           "description": "Description of the alert in English (en-US)."
         }
       }
     },
-    "AlertDetails": {
+    "AlertArea": {
+      "x-ms-client-name": "AlertDetails",
       "type": "object",
       "description": "Information about a severe weather alert issued within an affected area(s). If multiple alerts are active for the same location, the alerts will be returned in order of `priority` within the API response, with the highest priority alert being returned at the top of the response.",
       "properties": {
@@ -2193,7 +2232,8 @@
           "type": "string",
           "description": "The name of an area which is affected by the alert. The location that was requested falls under the alert area."
         },
-        "description": {
+        "summary": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Text summarizing the alert in the returned area."
         },
@@ -2211,11 +2251,13 @@
           "$ref": "#/definitions/LatestStatus",
           "description": "The latest status of the alert in the current area."
         },
-        "details": {
+        "alertDetails": {
+          "x-ms-client-name": "details",
           "type": "string",
           "description": "Full details associated with the alert. Returned if `details`=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
         },
-        "language": {
+        "alertDetailsLanguageCode": {
+          "x-ms-client-name": "language",
           "type": "string",
           "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language parameter. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
         }
@@ -2323,7 +2365,8 @@
           "format": "float",
           "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
         },
-        "categoryDescription": {
+        "category": {
+          "x-ms-client-name": "categoryDescription",
           "type": "string",
           "description": "Textual description for `categoryValue` corresponding to the level that the index value falls under, for example \"Very Good\"."
         },
@@ -2332,7 +2375,8 @@
           "format": "int32",
           "description": "Level that the index value falls under, represented by an integer. This value can be 1 through 5 and should be used in combination with the `ascending` flag because it can differ among indices. For example, the following values apply for Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, and Extreme=5."
         },
-        "isAscending": {
+        "ascending": {
+          "x-ms-client-name": "isAscending",
           "type": "boolean",
           "description": "Describes the direction of the `value` and `categoryValue`. For example, when `is_ascending`=True, the poorest index value is 0 and the best index value is 10. When `is_ascending`=True, the poorest index value is 10 and the best index value is 0."
         },
