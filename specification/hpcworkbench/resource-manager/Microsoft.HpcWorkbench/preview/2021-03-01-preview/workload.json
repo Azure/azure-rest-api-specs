@@ -433,7 +433,19 @@
         },
         "edaType": {
           "description": "Gets or sets the edaType.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Cadence",
+            "Mentor",
+            "Synopsys",
+            "Ansys",
+            "Common"
+          ],
+          "default": "Common",
+          "x-ms-enum": {
+            "name": "EdaType",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "Gets or sets the status.",
