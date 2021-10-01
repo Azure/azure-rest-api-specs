@@ -1850,6 +1850,49 @@
       },
       "description": "Properties of Backend address pool settings of an application gateway."
     },
+    "ApplicationGatewayBackendSettingsPropertiesFormat": {
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The destination port on the backend."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationGatewayProtocol",
+          "description": "The protocol used to communicate with the backend."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Connection timeout in seconds. Application Gateway will fail the request if response is not received within ConnectionTimeout. Acceptable values are from 1 second to 86400 seconds."
+        },
+        "probe": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Probe resource of an application gateway."
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Array of references to application gateway trusted root certificates."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Server name indication to be sent to the backend servers for Tls protocol."
+        },
+        "pickHostNameFromBackendAddress": {
+          "type": "boolean",
+          "description": "Whether to pick server name indication from the host name of the backend server for Tls protocol. Default value is false."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the backend HTTP settings resource."
+        }
+      },
+      "description": "Properties of Backend address pool settings of an application gateway."
+    },
     "ApplicationGatewayBackendHttpSettings": {
       "properties": {
         "properties": {
@@ -1860,6 +1903,35 @@
         "name": {
           "type": "string",
           "description": "Name of the backend http settings that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Backend address pool settings of an application gateway."
+    },
+    "ApplicationGatewayBackendSettings": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayBackendSettingsPropertiesFormat",
+          "description": "Properties of the application gateway backend settings."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the backend settings that is unique within an Application Gateway."
         },
         "etag": {
           "readOnly": true,
@@ -1989,6 +2061,36 @@
       },
       "description": "Properties of HTTP listener of an application gateway."
     },
+    "ApplicationGatewayListenerPropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Frontend IP configuration resource of an application gateway."
+        },
+        "frontendPort": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Frontend port resource of an application gateway."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationGatewayProtocol",
+          "description": "Protocol of the listener."
+        },
+        "sslCertificate": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "SSL certificate resource of an application gateway."
+        },
+        "sslProfile": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "SSL profile resource of the application gateway."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the listener resource."
+        },
+      },
+      "description": "Properties of listener of an application gateway."
+    },
     "ApplicationGatewayHttpListener": {
       "properties": {
         "properties": {
@@ -2017,6 +2119,35 @@
         }
       ],
       "description": "Http listener of an application gateway."
+    },
+    "ApplicationGatewayListener": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayListenerPropertiesFormat",
+          "description": "Properties of the application gateway listener."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the listener that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Listener of an application gateway."
     },
     "ApplicationGatewayPathRulePropertiesFormat": {
       "properties": {
@@ -2116,6 +2247,10 @@
         "pickHostNameFromBackendHttpSettings": {
           "type": "boolean",
           "description": "Whether the host header should be picked from the backend http settings. Default value is false."
+        },
+        "pickHostNameFromBackendSettings": {
+          "type": "boolean",
+          "description": "Whether the server name indication should be picked from the backend settings for Tls protocol. Default value is false."
         },
         "minServers": {
           "type": "integer",
@@ -2241,6 +2376,40 @@
       },
       "description": "Properties of request routing rule of the application gateway."
     },
+    "ApplicationGatewayRoutingRulePropertiesFormat": {
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "Rule type.",
+          "enum": [
+            "Basic",
+            "PathBasedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRequestRoutingRuleType",
+            "modelAsString": true
+          }
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend address pool resource of the application gateway."
+        },
+        "backendSettings": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend settings resource of the application gateway."
+        },
+        "listener": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Listener resource of the application gateway."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the request routing rule resource."
+        }
+      },
+      "description": "Properties of routing rule of the application gateway."
+    },
     "ApplicationGatewayRequestRoutingRule": {
       "properties": {
         "properties": {
@@ -2269,6 +2438,35 @@
         }
       ],
       "description": "Request routing rule of an application gateway."
+    },
+    "ApplicationGatewayRoutingRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayRoutingRulePropertiesFormat",
+          "description": "Properties of the application gateway routing rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the routing rule that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Routing rule of an application gateway."
     },
     "ApplicationGatewayRewriteRuleSet": {
       "properties": {
@@ -2821,12 +3019,26 @@
           },
           "description": "Backend http settings of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
         },
+        "backendSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendSettings"
+          },
+          "description": "Backend settings of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
+        },
         "httpListeners": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayHttpListener"
           },
           "description": "Http listeners of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
+        },
+        "listeners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayListener"
+          },
+          "description": "Listeners of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
         },
         "sslProfiles": {
           "type": "array",
@@ -2848,6 +3060,13 @@
             "$ref": "#/definitions/ApplicationGatewayRequestRoutingRule"
           },
           "description": "Request routing rules of the application gateway resource."
+        },
+        "routingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRoutingRule"
+          },
+          "description": "Routing rules of the application gateway resource."
         },
         "rewriteRuleSets": {
           "type": "array",
@@ -3515,7 +3734,9 @@
       "description": "Application Gateway protocol.",
       "enum": [
         "Http",
-        "Https"
+        "Https",
+        "Tcp",
+        "Tls"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewayProtocol",
