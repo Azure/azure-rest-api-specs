@@ -427,7 +427,7 @@
     "/search/polygon/{format}": {
       "get": {
         "description": "**Get Polygon**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry  ID is returned in the dataSources object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
-        "operationId": "SearchPolygon",
+        "operationId": "GetPolygon",
         "x-ms-examples": {
           "Get the Geometry using the geometry id returned by the previous Search": {
             "$ref": "./examples/GetSearchPolygon.json"
@@ -459,7 +459,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchPolygonResponse"
+              "$ref": "#/definitions/GetPolygonResponse"
             }
           },
           "default": {
@@ -1015,7 +1015,10 @@
                 "Ramp",
                 "Rotary",
                 "LocalStreet"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "RoadUseQueryType"
+              }
             }
           },
           {
@@ -1047,7 +1050,7 @@
               "PostalCodeArea"
             ],
             "x-ms-enum": {
-              "name": "GeographicEntityType",
+              "name": "GeographicEntityQueryType",
               "modelAsString": true,
               "values": [
                 {
@@ -1826,7 +1829,7 @@
     }
   },
   "definitions": {
-    "SearchPolygonResponse": {
+    "GetPolygonResponse": {
       "description": "This object is returned from a successful Search Polygon call",
       "type": "object",
       "properties": {
@@ -1835,12 +1838,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SearchPolygonResult"
+            "$ref": "#/definitions/GetPolygonResult"
           }
         }
       }
     },
-    "SearchPolygonResult": {
+    "GetPolygonResult": {
       "type": "object",
       "properties": {
         "providerID": {
@@ -2136,7 +2139,6 @@
       "type": "object",
       "properties": {
         "geometry": {
-          "x-ms-client-name": "geometry",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
         }
       }
@@ -2146,7 +2148,6 @@
       "type": "object",
       "properties": {
         "route": {
-          "x-ms-client-name": "route",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonLineString"
         }
       }
@@ -2556,7 +2557,7 @@
         "PostalCodeArea"
       ],
       "x-ms-enum": {
-        "name": "GeographicalEntityType",
+        "name": "GeographicEntityType",
         "modelAsString": true,
         "values": [
           {
