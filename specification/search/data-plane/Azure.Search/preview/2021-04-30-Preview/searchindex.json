@@ -240,6 +240,15 @@
             }
           },
           {
+            "name": "semanticConfiguration",
+            "in": "query",
+            "type": "string",
+            "description": "The name of a semantic configuration that will be used when processing documents for query of type semantic.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "searchFields",
             "in": "query",
             "type": "array",
@@ -1667,6 +1676,10 @@
         "scoringProfile": {
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
+        },
+        "semanticConfiguration": {
+          "type": "string",
+          "description": "The name of a semantic configuration that will be used when processing documents for query of type semantic."
         },
         "search": {
           "type": "string",
