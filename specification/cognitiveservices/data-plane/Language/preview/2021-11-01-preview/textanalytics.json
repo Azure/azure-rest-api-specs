@@ -27,56 +27,6 @@
         ]
     },
     "paths": {
-        "/analyze-text": {
-            "post": {
-                "summary": "",
-                "description": "",
-                "operationId": "AnalyzeText",
-                "consumes": [
-                    "application/json",
-                    "text/json"
-                ],
-                    "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "common.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ShowStats"
-                    },
-                    {
-                        "description": "",
-                        "in": "body",
-                        "name": "body",
-                        "schema": {
-                            "$ref": "#/definitions/AnalyzeTextInput"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/AnalyzeTextResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "common.json#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful Text Analysis Request": {
-                        "$ref": ".//examples//SuccessfulAnalyzeTextRequest.json"
-                    }
-                }
-            }
-        },
         "/analyze-text/jobs": {
             "post": {
                 "consumes": [
@@ -189,61 +139,6 @@
         }
     },
     "definitions": {
-        "AnalyzeTextInput": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/MultiLanguageBatchInput"
-                },
-                {
-                    "properties": {
-                        "sentimentAnalysisTask": {
-                            "$ref": "#/definitions/SentimentAnalysisTask"
-                        },
-                        "entityRecognitionTask": {
-                            "$ref": "#/definitions/EntitiesTask"
-                        },
-                        "entityRecognitionPiiTask": {
-                            "$ref": "#/definitions/PiiTask"
-                        },
-                        "keyPhraseExtractionTask": {
-                            "$ref": "#/definitions/KeyPhraseTask"
-                        },
-                        "entityLinkingTask": {
-                            "$ref": "#/definitions/EntityLinkingTask"
-                        },
-                        "languageDetectionTask": {
-                            "$ref": "#/definitions/LanguageDetectionTask"
-                        }
-                    },
-                    "minProperties": 1,
-                    "maxProperties": 1
-                }
-            ]
-        },
-        "AnalyzeTextResponse": {
-            "properties": {
-                "sentiment": {
-                    "$ref": "#/definitions/SentimentResponse"
-                },
-                "entityRecognition": {
-                    "$ref": "#/definitions/EntitiesResult"
-                },
-                "entityRecognitionPii": {
-                    "$ref": "#/definitions/PiiResult"
-                },
-                "keyPhraseExtraction": {
-                    "$ref": "#/definitions/KeyPhraseResult"
-                },
-                "entityLinking": {
-                    "$ref": "#/definitions/EntityLinkingResult"
-                },
-                "languageDetection": {
-                    "$ref": "#/definitions/LanguageDetectionResult"
-                }
-            },
-            "minProperties": 1,
-            "maxProperties": 1
-        },
         "AnalyzeTextJobsInput": {
             "allOf": [
                 {
@@ -261,10 +156,6 @@
             "properties": {
                 "displayName": {
                     "description": "Optional display name for the analysis job.",
-                    "type": "string"
-                },
-                "defaultLanguage": {
-                    "description": "Default language to use for records requesting automatic language detection.",
                     "type": "string"
                 }
             },
@@ -309,12 +200,6 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/ExtractiveSummarizationTask"
-                            }
-                        },
-                        "healthcareTasks": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HealthcareTask"
                             }
                         }
                     },
@@ -466,14 +351,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/EntitiesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/EntitiesRecordResult"
                             }
                         }
                     },
@@ -526,14 +404,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/SingleClassificationRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/SingleClassificationRecordResult"
                             }
                         }
                     },
@@ -622,14 +493,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/MultiClassificationRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/MultiClassificationRecordResult"
                             }
                         }
                     },
@@ -659,339 +523,6 @@
                     }
                 }
             ]
-        },
-        "HealthcareTaskParameters": {
-            "type": "object",
-            "description": "Parameters object for a Healthcare task.",
-            "properties": {
-                "structureFhir": {
-                    "type": "boolean",
-                    "default": false
-                },
-                "stringIndexType": {
-                    "$ref": "common.json#/definitions/StringIndexType"
-                }
-            }
-        },
-        "HealthcareTask": {
-            "type": "object",
-            "description": "TODO",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Task"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/HealthcareTaskParameters"
-                                }
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        "HealthcareTaskResult": {
-            "type": "object",
-            "properties": {
-                "results": {
-                    "$ref": "#/definitions/HealthcareResult"
-                }
-            }
-        },
-        "HealthcareResult": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/HealthcareEntitiesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
-                }
-            ]
-        },
-        "HealthcareEntitiesRecordResult": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "entities": {
-                            "description": "Healthcare entities.",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HealthcareEntity"
-                            }
-                        },
-                        "relations": {
-                            "type": "array",
-                            "description": "Healthcare entity relations.",
-                            "items": {
-                                "$ref": "#/definitions/HealthcareRelation"
-                            }
-                        }
-                    },
-                    "required": [
-                        "entities",
-                        "relations"
-                    ]
-                }
-            ]
-        },
-        "HealthcareEntity": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/HealthcareEntityProperties"
-                },
-                {
-                    "$ref": "#/definitions/HealthcareLinkingProperties"
-                }
-            ]
-        },
-        "HealthcareRelation": {
-            "type": "object",
-            "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
-            "required": [
-                "relationType",
-                "entities"
-            ],
-            "properties": {
-                "relationType": {
-                    "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
-                    "type": "string",
-                    "enum": [
-                        "Abbreviation",
-                        "DirectionOfBodyStructure",
-                        "DirectionOfCondition",
-                        "DirectionOfExamination",
-                        "DirectionOfTreatment",
-                        "DosageOfMedication",
-                        "FormOfMedication",
-                        "FrequencyOfMedication",
-                        "FrequencyOfTreatment",
-                        "QualifierOfCondition",
-                        "RelationOfExamination",
-                        "RouteOfMedication",
-                        "TimeOfCondition",
-                        "TimeOfEvent",
-                        "TimeOfExamination",
-                        "TimeOfMedication",
-                        "TimeOfTreatment",
-                        "UnitOfCondition",
-                        "UnitOfExamination",
-                        "ValueOfCondition",
-                        "ValueOfExamination"
-                    ],
-                    "x-ms-enum": {
-                        "name": "relationType",
-                        "modelAsString": true
-                    }
-                },
-                "entities": {
-                    "description": "The entities in the relation.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/HealthcareRelationEntity"
-                    }
-                }
-            }
-        },
-        "HealthcareAssertion": {
-            "type": "object",
-            "properties": {
-                "conditionality": {
-                    "description": "Describes any conditionality on the entity.",
-                    "type": "string",
-                    "enum": [
-                        "hypothetical",
-                        "conditional"
-                    ],
-                    "x-ms-enum": {
-                        "name": "Conditionality",
-                        "modelAsString": false
-                    }
-                },
-                "certainty": {
-                    "description": "Describes the entities certainty and polarity.",
-                    "type": "string",
-                    "enum": [
-                        "positive",
-                        "positivePossible",
-                        "neutralPossible",
-                        "negativePossible",
-                        "negative"
-                    ],
-                    "x-ms-enum": {
-                        "name": "Certainty",
-                        "modelAsString": false
-                    }
-                },
-                "association": {
-                    "description": "Describes if the entity is the subject of the text or if it describes someone else.",
-                    "type": "string",
-                    "enum": [
-                        "subject",
-                        "other"
-                    ],
-                    "x-ms-enum": {
-                        "name": "Association",
-                        "modelAsString": false
-                    }
-                }
-            }
-        },
-        "HealthcareRelationEntity": {
-            "type": "object",
-            "required": [
-                "ref",
-                "role"
-            ],
-            "properties": {
-                "ref": {
-                    "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .",
-                    "type": "string"
-                },
-                "role": {
-                    "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis).",
-                    "type": "string"
-                }
-            }
-        },
-        "HealthcareEntityLink": {
-            "type": "object",
-            "required": [
-                "dataSource",
-                "id"
-            ],
-            "properties": {
-                "dataSource": {
-                    "description": "Entity Catalog. Examples include: UMLS, CHV, MSH, etc.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Entity id in the given source catalog.",
-                    "type": "string"
-                }
-            }
-        },
-        "HealthcareEntityProperties": {
-            "type": "object",
-            "required": [
-                "text",
-                "category",
-                "offset",
-                "length",
-                "confidenceScore"
-            ],
-            "properties": {
-                "text": {
-                    "type": "string",
-                    "description": "Entity text as appears in the request."
-                },
-                "category": {
-                    "x-ms-enum": {
-                        "name": "healthcareEntityCategory",
-                        "modelAsString": true
-                    },
-                    "type": "string",
-                    "description": "Healthcare Entity Category.",
-                    "enum": [
-                        "BODY_STRUCTURE",
-                        "AGE",
-                        "GENDER",
-                        "EXAMINATION_NAME",
-                        "DATE",
-                        "DIRECTION",
-                        "FREQUENCY",
-                        "MEASUREMENT_VALUE",
-                        "MEASUREMENT_UNIT",
-                        "RELATIONAL_OPERATOR",
-                        "TIME",
-                        "GENE_OR_PROTEIN",
-                        "VARIANT",
-                        "ADMINISTRATIVE_EVENT",
-                        "CARE_ENVIRONMENT",
-                        "HEALTHCARE_PROFESSION",
-                        "DIAGNOSIS",
-                        "SYMPTOM_OR_SIGN",
-                        "CONDITION_QUALIFIER",
-                        "MEDICATION_CLASS",
-                        "MEDICATION_NAME",
-                        "DOSAGE",
-                        "MEDICATION_FORM",
-                        "MEDICATION_ROUTE",
-                        "FAMILY_RELATION",
-                        "TREATMENT_NAME"
-                    ]
-                },
-                "subcategory": {
-                    "type": "string",
-                    "description": "(Optional) Entity sub type."
-                },
-                "offset": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-                },
-                "length": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-                },
-                "confidenceScore": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "Confidence score between 0 and 1 of the extracted entity."
-                }
-            }
-        },
-        "HealthcareLinkingProperties": {
-            "properties": {
-                "assertion": {
-                    "type": "object",
-                    "$ref": "#/definitions/HealthcareAssertion"
-                },
-                "name": {
-                    "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
-                    "type": "string"
-                },
-                "links": {
-                    "description": "Entity references in known data sources.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/HealthcareEntityLink"
-                    }
-                }
-            }
         },
         "SentimentAnalysisTaskParameters": {
             "type": "object",
@@ -1037,11 +568,11 @@
             "type": "object",
             "properties": {
                 "results": {
-                    "$ref": "#/definitions/SentimentResponse"
+                    "$ref": "#/definitions/SentimentResult"
                 }
             }
         },
-        "SentimentResponse": {
+        "SentimentResult": {
             "type": "object",
             "allOf": [
                 {
@@ -1053,14 +584,7 @@
                             "type": "array",
                             "description": "Sentiment analysis per record.",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/SentimentRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/SentimentRecordResult"
                             }
                         }
                     },
@@ -1390,14 +914,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/EntitiesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/EntitiesRecordResult"
                             }
                         }
                     },
@@ -1524,14 +1041,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/LinkedEntitiesRecordResult"
-                                    }
-                                ]
+                                "$ref": "#/definitions/LinkedEntitiesRecordResult"
                             }
                         }
                     },
@@ -1703,14 +1213,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PiiEntitiesRecordResult"
-                                    }
-                                ]
+                                "$ref": "#/definitions/PiiEntitiesRecordResult"
                             }
                         }
                     },
@@ -2002,14 +1505,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/ExtractedSummaryRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/ExtractedSummaryRecordResult"
                             }
                         }
                     },
@@ -2115,14 +1611,7 @@
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/KeyPhrasesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
+                                "$ref": "#/definitions/KeyPhrasesRecordResult"
                             }
                         }
                     },
@@ -2457,15 +1946,6 @@
                 }
             }
         },
-        "RecordDetectedLanguage": {
-            "type": "object",
-            "properties": {
-                "detectedLanguage": {
-                    "type": "string",
-                    "description": "If 'language' is set to 'auto' for the record in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-                }
-            }
-        },
         "RecordError": {
             "type": "object",
             "required": [
@@ -2621,6 +2101,6 @@
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
-          }
+        }
     }
 }
