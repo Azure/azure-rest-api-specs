@@ -6872,7 +6872,6 @@
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
-      "discriminator": "createMode",
       "properties": {
         "consistencyPolicy": {
           "description": "The consistency policy for the Cosmos DB account.",
@@ -7010,15 +7009,6 @@
         "databaseAccountOfferType",
         "createMode"
       ]
-    },
-    "DefaultRequestDatabaseAccountCreateUpdateProperties": {
-      "description": "Properties for non-restore Azure Cosmos DB database account requests.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Default"
     },
     "DatabaseAccountCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB database accounts.",

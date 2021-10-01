@@ -1,0 +1,2475 @@
+{
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Video Analyzer Resource Provider",
+    "description": "Azure Video Analyzer resource provider API definition.",
+    "version": "2021-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Live_S1",
+            "Batch_S1"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "values": [
+              {
+                "value": "Live_S1",
+                "description": "Represents the Live S1 SKU name. Using this SKU you can create live pipelines to capture, record, and stream live video from RTSP-capable cameras at bitrate settings from 0.5 Kbps to 3000 Kbps."
+              },
+              {
+                "value": "Batch_S1",
+                "description": "Represents the Batch S1 SKU name. Using this SKU you can create pipeline jobs to process recorded content."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The SKU name."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard tier."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The SKU tier.",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "The SKU details."
+    },
+    "PipelineTopologyProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional description of the pipeline topology. It is recommended that the expected use of the topology to be described here."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDeclaration"
+          },
+          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \"${PARAMETER_NAME}\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceNodeBase"
+          },
+          "description": "List of the topology source nodes. Source nodes enable external data to be ingested by the pipeline."
+        },
+        "processors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessorNodeBase"
+          },
+          "description": "List of the topology processor nodes. Processor nodes enable pipeline data to be analyzed, processed or transformed."
+        },
+        "sinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SinkNodeBase"
+          },
+          "description": "List of the topology sink nodes. Sink nodes allow pipeline data to be stored or exported."
+        }
+      },
+      "type": "object",
+      "required": [
+        "sources",
+        "sinks"
+      ],
+      "description": "Describes the properties of a pipeline topology."
+    },
+    "PipelineTopologyPropertiesUpdate": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional description of the pipeline topology. It is recommended that the expected use of the topology to be described here."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDeclaration"
+          },
+          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \"${PARAMETER_NAME}\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceNodeBase"
+          },
+          "description": "List of the topology source nodes. Source nodes enable external data to be ingested by the pipeline."
+        },
+        "processors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessorNodeBase"
+          },
+          "description": "List of the topology processor nodes. Processor nodes enable pipeline data to be analyzed, processed or transformed."
+        },
+        "sinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SinkNodeBase"
+          },
+          "description": "List of the topology sink nodes. Sink nodes allow pipeline data to be stored or exported."
+        }
+      },
+      "type": "object",
+      "description": "Describes the properties of a pipeline topology."
+    },
+    "ParameterDeclaration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "String",
+            "SecretString",
+            "Int",
+            "Double",
+            "Bool"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "values": [
+              {
+                "value": "String",
+                "description": "The parameter's value is a string."
+              },
+              {
+                "value": "SecretString",
+                "description": "The parameter's value is a string that holds sensitive information."
+              },
+              {
+                "value": "Int",
+                "description": "The parameter's value is a 32-bit signed integer."
+              },
+              {
+                "value": "Double",
+                "description": "The parameter's value is a 64-bit double-precision floating point."
+              },
+              {
+                "value": "Bool",
+                "description": "The parameter's value is a boolean value that is either true or false."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Type of the parameter."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter."
+        },
+        "default": {
+          "type": "string",
+          "description": "The default value for the parameter to be used if the pipeline does not specify a value."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Single topology parameter declaration. Declared parameters can and must be referenced throughout the topology and can optionally have default values to be used when they are not defined in the pipelines."
+    },
+    "NodeBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "name": {
+          "type": "string",
+          "description": "Node name. Must be unique within the topology."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type",
+        "name"
+      ],
+      "description": "Base class for nodes."
+    },
+    "SourceNodeBase": {
+      "discriminator": "@type",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SourceNodeBase",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NodeBase"
+        }
+      ],
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base class for topology source nodes."
+    },
+    "ProcessorNodeBase": {
+      "discriminator": "@type",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ProcessorNodeBase",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NodeBase"
+        }
+      ],
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeInput"
+          },
+          "description": "An array of upstream node references within the topology to be used as inputs for this node."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type",
+        "inputs"
+      ],
+      "description": "Base class for topology processor nodes."
+    },
+    "SinkNodeBase": {
+      "discriminator": "@type",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SinkNodeBase",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NodeBase"
+        }
+      ],
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeInput"
+          },
+          "description": "An array of upstream node references within the topology to be used as inputs for this node."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type",
+        "inputs"
+      ],
+      "description": "Base class for topology sink nodes."
+    },
+    "NodeInput": {
+      "properties": {
+        "nodeName": {
+          "type": "string",
+          "description": "The name of the upstream node in the pipeline which output is used as input of the current node."
+        }
+      },
+      "type": "object",
+      "required": [
+        "nodeName"
+      ],
+      "description": "Describes an input signal to be used on a pipeline node."
+    },
+    "RtspSource": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.RtspSource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceNodeBase"
+        }
+      ],
+      "properties": {
+        "transport": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Tcp"
+          ],
+          "x-ms-enum": {
+            "name": "RtspTransport",
+            "values": [
+              {
+                "value": "Http",
+                "description": "HTTP transport. RTSP messages are exchanged over long running HTTP requests and RTP packets are interleaved within the HTTP channel."
+              },
+              {
+                "value": "Tcp",
+                "description": "TCP transport. RTSP is used directly over TCP and RTP packets are interleaved within the TCP channel."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Network transport utilized by the RTSP and RTP exchange: TCP or HTTP. When using TCP, the RTP packets are interleaved on the TCP RTSP connection. When using HTTP, the RTSP messages are exchanged through long lived HTTP connections, and the RTP packages are interleaved in the HTTP connections alongside the RTSP messages."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/EndpointBase",
+          "description": "RTSP endpoint information for Video Analyzer to connect to. This contains the required information for Video Analyzer to connect to RTSP cameras and/or generic RTSP servers."
+        }
+      },
+      "type": "object",
+      "required": [
+        "endpoint"
+      ],
+      "description": "RTSP source allows for media from an RTSP camera or generic RTSP server to be ingested into a pipeline."
+    },
+    "EndpointBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "credentials": {
+          "$ref": "#/definitions/CredentialsBase",
+          "description": "Credentials to be presented to the endpoint."
+        },
+        "url": {
+          "type": "string",
+          "description": "The endpoint URL for Video Analyzer to connect to."
+        },
+        "tunnel": {
+          "$ref": "#/definitions/TunnelBase",
+          "description": "Describes the tunnel through which Video Analyzer can connect to the endpoint URL. This is an optional property, typically used when the endpoint is behind a firewall."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type",
+        "url"
+      ],
+      "description": "Base class for endpoints."
+    },
+    "CredentialsBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base class for credential objects."
+    },
+    "TunnelBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base class for tunnel objects."
+    },
+    "UsernamePasswordCredentials": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.UsernamePasswordCredentials",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username to be presented as part of the credentials."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password to be presented as part of the credentials. It is recommended that this value is parameterized as a secret string in order to prevent this value to be returned as part of the resource on API requests."
+        }
+      },
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "description": "Username and password credentials."
+    },
+    "SecureIotDeviceRemoteTunnel": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SecureIotDeviceRemoteTunnel",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TunnelBase"
+        }
+      ],
+      "properties": {
+        "iotHubName": {
+          "type": "string",
+          "description": "Name of the IoT Hub."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "The IoT device id to use when establishing the remote tunnel. This string is case-sensitive."
+        }
+      },
+      "type": "object",
+      "required": [
+        "iotHubName",
+        "deviceId"
+      ],
+      "description": "A remote tunnel securely established using IoT Hub device information."
+    },
+    "UnsecuredEndpoint": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.UnsecuredEndpoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBase"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Unsecured endpoint describes an endpoint that the pipeline can connect to over clear transport (no encryption in transit)."
+    },
+    "TlsEndpoint": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.TlsEndpoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBase"
+        }
+      ],
+      "properties": {
+        "trustedCertificates": {
+          "$ref": "#/definitions/CertificateSource",
+          "description": "List of trusted certificate authorities when authenticating a TLS connection. A null list designates that Azure Video Analyzer's list of trusted authorities should be used."
+        },
+        "validationOptions": {
+          "$ref": "#/definitions/TlsValidationOptions",
+          "description": "Validation options to use when authenticating a TLS connection. By default, strict validation is used."
+        }
+      },
+      "type": "object",
+      "description": "TLS endpoint describes an endpoint that the pipeline can connect to over TLS transport (data is encrypted in transit)."
+    },
+    "CertificateSource": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base class for certificate sources."
+    },
+    "TlsValidationOptions": {
+      "properties": {
+        "ignoreHostname": {
+          "type": "string",
+          "description": "When set to 'true' causes the certificate subject name validation to be skipped. Default is 'false'."
+        },
+        "ignoreSignature": {
+          "type": "string",
+          "description": "When set to 'true' causes the certificate chain trust validation to be skipped. Default is 'false'."
+        }
+      },
+      "type": "object",
+      "description": "Options for controlling the validation of TLS endpoints."
+    },
+    "PemCertificateList": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.PemCertificateList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateSource"
+        }
+      ],
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "PEM formatted public certificates. One certificate per entry."
+        }
+      },
+      "type": "object",
+      "required": [
+        "certificates"
+      ],
+      "description": "A list of PEM formatted certificates."
+    },
+    "VideoSource": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceNodeBase"
+        }
+      ],
+      "properties": {
+        "videoName": {
+          "type": "string",
+          "description": "Name of the Video Analyzer video resource to be used as the source."
+        },
+        "timeSequences": {
+          "$ref": "#/definitions/TimeSequenceBase",
+          "description": "Describes a sequence of datetime ranges. The video source only picks up recorded media within these ranges."
+        }
+      },
+      "type": "object",
+      "required": [
+        "videoName",
+        "timeSequences"
+      ],
+      "description": "Video source allows for content from a Video Analyzer video resource to be ingested into a pipeline. Currently supported only with batch pipelines."
+    },
+    "TimeSequenceBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "A sequence of datetime ranges as a string."
+    },
+    "VideoSequenceAbsoluteTimeMarkers": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSequenceAbsoluteTimeMarkers",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeSequenceBase"
+        }
+      ],
+      "properties": {
+        "ranges": {
+          "type": "string",
+          "description": "The sequence of datetime ranges. Example: '[[\"2021-10-05T03:30:00Z\", \"2021-10-05T03:40:00Z\"]]'."
+        }
+      },
+      "type": "object",
+      "required": [
+        "ranges"
+      ],
+      "description": "A sequence of absolute datetime ranges as a string. The datetime values should follow IS08601, and the sum of the ranges should add up to 24 hours or less. Currently, there can be only one range specified in the sequence."
+    },
+    "EncoderProcessor": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EncoderProcessor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "properties": {
+        "preset": {
+          "$ref": "#/definitions/EncoderPresetBase",
+          "description": "The encoder preset, which defines the recipe or instructions on how the input content should be processed."
+        }
+      },
+      "type": "object",
+      "required": [
+        "preset"
+      ],
+      "description": "Encoder processor allows for encoding of the input content. For example, it can used to change the resolution from 4K to 1280x720."
+    },
+    "EncoderPresetBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base type for all encoder presets, which define the recipe or instructions on how the input content should be processed."
+    },
+    "EncoderSystemPreset": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EncoderSystemPreset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EncoderPresetBase"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "SingleLayer_540p_H264_AAC",
+            "SingleLayer_720p_H264_AAC",
+            "SingleLayer_1080p_H264_AAC",
+            "SingleLayer_2160p_H264_AAC"
+          ],
+          "x-ms-enum": {
+            "name": "EncoderSystemPresetType",
+            "values": [
+              {
+                "value": "SingleLayer_540p_H264_AAC",
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 540 pixels, and at a maximum bitrate of 2000 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 96 Kbps"
+              },
+              {
+                "value": "SingleLayer_720p_H264_AAC",
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 720 pixels, and at a maximum bitrate of 3500 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 96 Kbps"
+              },
+              {
+                "value": "SingleLayer_1080p_H264_AAC",
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 1080 pixels, and at a maximum bitrate of 6000 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 128 Kbps"
+              },
+              {
+                "value": "SingleLayer_2160p_H264_AAC",
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at a picture height of 2160 pixels, and at a maximum bitrate of 16000 Kbps. Encoded video has the same average frame rate as the input. The aspect ratio of the input is preserved. If the input content has audio, then it is encoded with AAC-LC codec at 128 Kbps"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Name of the built-in encoding preset."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Describes a built-in preset for encoding the input content using the encoder processor."
+    },
+    "EncoderCustomPreset": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EncoderCustomPreset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EncoderPresetBase"
+        }
+      ],
+      "properties": {
+        "audioEncoder": {
+          "$ref": "#/definitions/AudioEncoderBase",
+          "description": "Describes a custom preset for encoding audio."
+        },
+        "videoEncoder": {
+          "$ref": "#/definitions/VideoEncoderBase",
+          "description": "Describes a custom preset for encoding video."
+        }
+      },
+      "type": "object",
+      "description": "Describes a custom preset for encoding the input content using the encoder processor."
+    },
+    "AudioEncoderBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "bitrateKbps": {
+          "type": "string",
+          "description": "Bitrate, in kilobits per second or Kbps, at which audio should be encoded (2-channel stereo audio at a sampling rate of 48 kHz). Allowed values are 96, 112, 128, 160, 192, 224, and 256. If omitted, the bitrate of the input audio is used."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base type for all audio encoder presets, which define the recipe or instructions on how audio should be processed."
+    },
+    "VideoEncoderBase": {
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "bitrateKbps": {
+          "type": "string",
+          "description": "The maximum bitrate, in kilobits per second or Kbps, at which video should be encoded. If omitted, encoder sets it automatically to try and match the quality of the input video."
+        },
+        "frameRate": {
+          "type": "string",
+          "description": "The frame rate (in frames per second) of the encoded video. The value must be greater than zero, and less than or equal to 300. If omitted, the encoder uses the average frame rate of the input video."
+        },
+        "scale": {
+          "$ref": "#/definitions/VideoScale",
+          "description": "Describes the resolution of the encoded video. If omitted, the encoder uses the resolution of the input video."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "description": "Base type for all video encoding presets, which define the recipe or instructions on how the input video should be processed."
+    },
+    "AudioEncoderAac": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.AudioEncoderAac",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioEncoderBase"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "A custom preset for encoding audio with the AAC codec."
+    },
+    "VideoScale": {
+      "properties": {
+        "height": {
+          "type": "string",
+          "description": "The desired output video height."
+        },
+        "width": {
+          "type": "string",
+          "description": "The desired output video width."
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Pad",
+            "PreserveAspectRatio",
+            "Stretch"
+          ],
+          "x-ms-enum": {
+            "name": "VideoScaleMode",
+            "values": [
+              {
+                "value": "Pad",
+                "description": "Pads the video with black horizontal stripes (letterbox) or black vertical stripes (pillar-box) so the video is resized to the specified dimensions while not altering the content aspect ratio."
+              },
+              {
+                "value": "PreserveAspectRatio",
+                "description": "Preserves the same aspect ratio as the input video. If only one video dimension is provided, the second dimension is calculated based on the input video aspect ratio. When 2 dimensions are provided, the video is resized to fit the most constraining dimension, considering the input video size and aspect ratio."
+              },
+              {
+                "value": "Stretch",
+                "description": "Stretches the original video so it resized to the specified dimensions."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Describes the video scaling mode to be applied. Default mode is 'Pad'. If the mode is 'Pad' or 'Stretch' then both width and height must be specified. Else if the mode is 'PreserveAspectRatio' then only one of width or height need be provided."
+        }
+      },
+      "type": "object",
+      "description": "The video scaling information."
+    },
+    "VideoEncoderH264": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoEncoderH264",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoEncoderBase"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "A custom preset for encoding video with the H.264 (AVC) codec."
+    },
+    "VideoSink": {
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSink",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SinkNodeBase"
+        }
+      ],
+      "properties": {
+        "videoName": {
+          "type": "string",
+          "description": "Name of a new or existing video resource used to capture and publish content. Note: if downstream of RTSP source, and if disableArchive is set to true, then no content is archived."
+        },
+        "videoCreationProperties": {
+          "$ref": "#/definitions/VideoCreationProperties",
+          "description": "Optional video properties to be used in case a new video resource needs to be created on the service."
+        },
+        "videoPublishingOptions": {
+          "$ref": "#/definitions/VideoPublishingOptions",
+          "description": "Options to change how the video sink publishes content via the video resource. This property is only allowed for topologies where \"kind\" is set to \"live\"."
+        }
+      },
+      "type": "object",
+      "required": [
+        "videoName"
+      ],
+      "description": "Video sink in a live topology allows for video and audio to be captured, optionally archived, and published via a video resource. If archiving is enabled, this results in a video of type 'archive'. If used in a batch topology, this allows for video and audio to be stored as a file, and published via a video resource of type 'file'"
+    },
+    "VideoCreationProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Optional title provided by the user. Value can be up to 256 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description provided by the user. Value can be up to 2048 characters long."
+        },
+        "segmentLength": {
+          "type": "string",
+          "description": "Segment length indicates the length of individual content files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the initial call to create the video resource can lead to errors when uploading content to the archive. Default value is 30 seconds. This property is only allowed for topologies where \"kind\" is set to \"live\"."
+        },
+        "retentionPeriod": {
+          "type": "string",
+          "description": "Video retention period indicates how long the video is kept in storage. Value must be specified in ISO8601 duration format (i.e. \"PT1D\" equals 1 day) and can vary between 1 day to 10 years, in 1 day increments. When absent (null), all video content is retained indefinitely. This property is only allowed for topologies where \"kind\" is set to \"live\"."
+        }
+      },
+      "type": "object",
+      "description": "Optional properties to be used in case a new video resource needs to be created on the service. These will not take effect if the video already exists."
+    },
+    "VideoPublishingOptions": {
+      "properties": {
+        "disableArchive": {
+          "type": "string",
+          "description": "When set to 'true' content will not be archived or recorded. This is used, for example, when the topology is used only for low latency video streaming. Default is 'false'.  If set to 'true', then \"disableRtspPublishing\" must be set to 'false'."
+        },
+        "disableRtspPublishing": {
+          "type": "string",
+          "description": "When set to 'true' the RTSP playback URL will not be published, disabling low latency streaming. This is used, for example, when the topology is used only for archiving content. Default is 'false'.  If set to 'true', then \"disableArchive\" must be set to 'false'."
+        },
+        "disableVideoPreviewImage": {
+          "type": "string",
+          "description": "When set to 'true' preview images will not be generated. This is used, for example, when the topology is used only for low latency video streaming. Default is 'false'.  If set to 'false', then \"disableArchive\" must be set to 'false'."
+        }
+      },
+      "type": "object",
+      "description": "Optional flags used to change how video is published. These are only allowed for topologies where \"kind\" is set to \"live\"."
+    },
+    "ParameterDefinition": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter declared in the pipeline topology."
+        },
+        "value": {
+          "type": "string",
+          "description": "Parameter value to be applied on this specific pipeline."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Defines the parameter value of an specific pipeline topology parameter. See pipeline topology parameters for more information."
+    },
+    "PipelineTopology": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineTopologyProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Live",
+            "Batch"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "values": [
+              {
+                "value": "Live",
+                "description": "Live pipeline topology resource."
+              },
+              {
+                "value": "Batch",
+                "description": "Batch pipeline topology resource."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Topology kind."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Describes the properties of a SKU."
+        }
+      },
+      "type": "object",
+      "required": [
+        "kind",
+        "sku"
+      ],
+      "description": "Pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which captures content from a RTSP camera and archives the content can be reused across many different cameras, as long as the same processing is to be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized. This allows  individual pipelines refer to different values, such as individual cameras' RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for content to be ingested from cameras.\r\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  - Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+    },
+    "PipelineTopologyUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineTopologyPropertiesUpdate",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Live",
+            "Batch"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "values": [
+              {
+                "value": "Live",
+                "description": "Live pipeline topology resource."
+              },
+              {
+                "value": "Batch",
+                "description": "Batch pipeline topology resource."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Topology kind."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Describes the properties of a SKU."
+        }
+      },
+      "type": "object",
+      "description": "Pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which captures content from a RTSP camera and archives the content can be reused across many different cameras, as long as the same processing is to be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized. This allows  individual pipelines refer to different values, such as individual cameras' RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for content to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+    },
+    "LivePipelineProperties": {
+      "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
+        "bitrateKbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum bitrate capacity in Kbps reserved for the live pipeline. The allowed range is from 500 to 3000 Kbps in increments of 100 Kbps. If the RTSP camera exceeds this capacity, then the service will disconnect temporarily from the camera. It will retry to re-establish connection (with exponential backoff), checking to see if the camera bitrate is now below the reserved capacity. Doing so will ensure that one 'noisy neighbor' does not affect other live pipelines in your account."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Inactive",
+            "Activating",
+            "Active",
+            "Deactivating"
+          ],
+          "x-ms-enum": {
+            "name": "LivePipelineState",
+            "values": [
+              {
+                "value": "Inactive",
+                "description": "The live pipeline is idle and not processing media."
+              },
+              {
+                "value": "Activating",
+                "description": "The live pipeline is transitioning into the active state."
+              },
+              {
+                "value": "Active",
+                "description": "The live pipeline is active and able to process media. If your data source is not available, for instance, if your RTSP camera is powered off or unreachable, the pipeline will still be active and periodically retrying the connection. Your Azure subscription will be billed for the duration in which the live pipeline is in the active state."
+              },
+              {
+                "value": "Deactivating",
+                "description": "The live pipeline is transitioning into the inactive state."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Current state of the pipeline (read-only).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
+        }
+      },
+      "type": "object",
+      "required": [
+        "topologyName",
+        "bitrateKbps"
+      ],
+      "description": "Live pipeline properties."
+    },
+    "LivePipelinePropertiesUpdate": {
+      "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
+        "bitrateKbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum bitrate capacity in Kbps reserved for the live pipeline. The allowed range is from 500 to 3000 Kbps in increments of 100 Kbps. If the RTSP camera exceeds this capacity, then the service will disconnect temporarily from the camera. It will retry to re-establish connection (with exponential backoff), checking to see if the camera bitrate is now below the reserved capacity. Doing so will ensure that one 'noisy neighbor' does not affect other live pipelines in your account."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Inactive",
+            "Activating",
+            "Active",
+            "Deactivating"
+          ],
+          "x-ms-enum": {
+            "name": "LivePipelineState",
+            "values": [
+              {
+                "value": "Inactive",
+                "description": "The live pipeline is idle and not processing media."
+              },
+              {
+                "value": "Activating",
+                "description": "The live pipeline is transitioning into the active state."
+              },
+              {
+                "value": "Active",
+                "description": "The live pipeline is active and able to process media. If your data source is not available, for instance, if your RTSP camera is powered off or unreachable, the pipeline will still be active and periodically retrying the connection. Your Azure subscription will be billed for the duration in which the live pipeline is in the active state."
+              },
+              {
+                "value": "Deactivating",
+                "description": "The live pipeline is transitioning into the inactive state."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Current state of the pipeline (read-only).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
+        }
+      },
+      "type": "object",
+      "description": "Live pipeline properties."
+    },
+    "LivePipeline": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LivePipelineProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and publishing of content for a unique RTSP camera."
+    },
+    "LivePipelineUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LivePipelinePropertiesUpdate",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "description": "Live pipeline represents a unique instance of a live topology, used for real-time ingestion, archiving and publishing of content for a unique RTSP camera."
+    },
+    "PipelineJobProperties": {
+      "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "Reference to an existing pipeline topology. When activated, this pipeline job will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Processing",
+            "Canceled",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineJobState",
+            "values": [
+              {
+                "value": "Processing",
+                "description": "Pipeline job is processing."
+              },
+              {
+                "value": "Canceled",
+                "description": "Pipeline job is canceled."
+              },
+              {
+                "value": "Completed",
+                "description": "Pipeline job completed."
+              },
+              {
+                "value": "Failed",
+                "description": "Pipeline job failed."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Current state of the pipeline (read-only).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date-time by when this pipeline job will be automatically deleted from your account.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "error": {
+          "$ref": "#/definitions/PipelineJobError",
+          "description": "Details about the error, in case the pipeline job fails.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
+        }
+      },
+      "type": "object",
+      "required": [
+        "topologyName"
+      ],
+      "description": "Pipeline job properties."
+    },
+    "PipelineJobPropertiesUpdate": {
+      "properties": {
+        "topologyName": {
+          "type": "string",
+          "description": "Reference to an existing pipeline topology. When activated, this pipeline job will process content according to the pipeline topology definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the pipeline."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Processing",
+            "Canceled",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineJobState",
+            "values": [
+              {
+                "value": "Processing",
+                "description": "Pipeline job is processing."
+              },
+              {
+                "value": "Canceled",
+                "description": "Pipeline job is canceled."
+              },
+              {
+                "value": "Completed",
+                "description": "Pipeline job completed."
+              },
+              {
+                "value": "Failed",
+                "description": "Pipeline job failed."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Current state of the pipeline (read-only).",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date-time by when this pipeline job will be automatically deleted from your account.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "error": {
+          "$ref": "#/definitions/PipelineJobError",
+          "description": "Details about the error, in case the pipeline job fails.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          },
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden."
+        }
+      },
+      "type": "object",
+      "description": "Pipeline job properties."
+    },
+    "PipelineJobError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "type": "object",
+      "description": "Details about the error for a failed pipeline job."
+    },
+    "PipelineJob": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineJobProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "description": "Pipeline job represents a unique instance of a batch topology, used for offline processing of selected portions of archived content."
+    },
+    "PipelineJobUpdate": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineJobPropertiesUpdate",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "description": "Pipeline job represents a unique instance of a batch topology, used for offline processing of selected portions of archived content."
+    },
+    "LivePipelineOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the live pipeline operation.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the live pipeline operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error details for the live pipeline operation.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "PipelineJobOperationStatus": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the pipeline job operation.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the pipeline job operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error details for the pipeline job operation.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "PipelineTopologyCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineTopology"
+          },
+          "description": "A collection of PipelineTopology items."
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of PipelineTopology items."
+    },
+    "LivePipelineCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LivePipeline"
+          },
+          "description": "A collection of LivePipeline items."
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of LivePipeline items."
+    },
+    "PipelineJobCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineJob"
+          },
+          "description": "A collection of PipelineJob items."
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of PipelineJob items."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineTopologies": {
+      "get": {
+        "summary": "Retrieves a list of pipeline topologies.",
+        "description": "Retrieves a list of pipeline topologies that have been added to the account, if any, along with their JSON representation.",
+        "operationId": "PipelineTopologies_List",
+        "responses": {
+          "200": {
+            "description": "Pipeline topologies were successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/PipelineTopologyCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restricts the set of items returned."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all pipeline topologies": {
+            "$ref": "examples/pipeline-topology-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineTopologies/{pipelineTopologyName}": {
+      "get": {
+        "summary": "Retrieves a specific pipeline topology by name.",
+        "description": "Retrieves a specific pipeline topology by name. If a topology with that name has been previously created, the call will return the JSON representation of that topology.",
+        "operationId": "PipelineTopologies_Get",
+        "responses": {
+          "200": {
+            "description": "Pipeline topology was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineTopology"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineTopologyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Pipeline topology unique identifier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a pipeline topology by name": {
+            "$ref": "examples/pipeline-topology-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creates or updates a pipeline topology.",
+        "description": "Creates a new pipeline topology or updates an existing one, with the given name. A pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics.",
+        "operationId": "PipelineTopologies_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "The existing pipeline topology was updated.",
+            "schema": {
+              "$ref": "#/definitions/PipelineTopology"
+            }
+          },
+          "201": {
+            "description": "A new pipeline topology was created.",
+            "schema": {
+              "$ref": "#/definitions/PipelineTopology"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineTopologyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Pipeline topology unique identifier."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineTopology"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Create or update a pipeline topology with an Rtsp source and video sink.": {
+            "$ref": "examples/pipeline-topology-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a pipeline topology.",
+        "description": "Deletes a pipeline topology with the given name. This method should be called after all instances of the topology have been stopped and deleted.",
+        "operationId": "PipelineTopologies_Delete",
+        "responses": {
+          "200": {
+            "description": "The pipeline topology was deleted successfully."
+          },
+          "204": {
+            "description": "The pipeline topology was not found."
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineTopologyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Pipeline topology unique identifier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a pipeline topology": {
+            "$ref": "examples/pipeline-topology-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an existing pipeline topology.",
+        "description": "Updates an existing pipeline topology with the given name. If the associated live pipelines or pipeline jobs are in active or processing state, respectively, then only the description can be updated. Else, the properties that can be updated include: description, parameter declarations, sources, processors, and sinks.",
+        "operationId": "PipelineTopologies_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineTopology"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineTopologyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Pipeline topology unique identifier."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineTopologyUpdate"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Update pipeline topology.": {
+            "$ref": "examples/pipeline-topology-patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines": {
+      "get": {
+        "summary": "Retrieves a list of live pipelines.",
+        "description": "Retrieves a list of live pipelines that have been created, along with their JSON representations.",
+        "operationId": "LivePipelines_List",
+        "responses": {
+          "200": {
+            "description": "List of live pipelines that were successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/LivePipelineCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restricts the set of items returned."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List live pipelines": {
+            "$ref": "examples/live-pipeline-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}": {
+      "get": {
+        "summary": "Retrieves a specific live pipeline by name.",
+        "description": "Retrieves a specific live pipeline by name. If a live pipeline with that name has been previously created, the call will return the JSON representation of that instance.",
+        "operationId": "LivePipelines_Get",
+        "responses": {
+          "200": {
+            "description": "The live pipeline was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/LivePipeline"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Retrieves a specific live pipeline by name": {
+            "$ref": "examples/live-pipeline-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creates or updates a live pipeline.",
+        "description": "Creates a new live pipeline or updates an existing one, with the given name.",
+        "operationId": "LivePipelines_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "The existing live pipeline was updated.",
+            "schema": {
+              "$ref": "#/definitions/LivePipeline"
+            }
+          },
+          "201": {
+            "description": "A new live pipeline was created.",
+            "schema": {
+              "$ref": "#/definitions/LivePipeline"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LivePipeline"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Create or update a live pipeline": {
+            "$ref": "examples/live-pipeline-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a live pipeline.",
+        "description": "Deletes a live pipeline with the given name.",
+        "operationId": "LivePipelines_Delete",
+        "responses": {
+          "200": {
+            "description": "The live pipeline was deleted successfully."
+          },
+          "204": {
+            "description": "The live pipeline was not found."
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a live pipeline": {
+            "$ref": "examples/live-pipeline-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an existing live pipeline.",
+        "description": "Updates an existing live pipeline with the given name. Properties that can be updated include: description, bitrateKbps, and parameter definitions. Only the description can be updated while the live pipeline is active.",
+        "operationId": "LivePipelines_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LivePipeline"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LivePipelineUpdate"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Updates a live pipeline.": {
+            "$ref": "examples/live-pipeline-patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}/activate": {
+      "post": {
+        "summary": "Activates a live pipeline.",
+        "description": "Activates a live pipeline with the given name.",
+        "operationId": "LivePipelines_Activate",
+        "responses": {
+          "202": {
+            "description": "Request to activate a live pipeline was accepted, and is being processed."
+          },
+          "200": {
+            "description": "The live pipeline was activated successfully."
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Activate live pipeline": {
+            "$ref": "examples/live-pipeline-activate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}/deactivate": {
+      "post": {
+        "summary": "Deactivates a live pipeline.",
+        "description": "Deactivates a live pipeline with the given name.",
+        "operationId": "LivePipelines_Deactivate",
+        "responses": {
+          "202": {
+            "description": "Request to deactivate a live pipeline was accepted, and is being processed."
+          },
+          "200": {
+            "description": "The live pipeline was deactivated successfully."
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deactivate Live pipeline": {
+            "$ref": "examples/live-pipeline-deactivate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs": {
+      "get": {
+        "summary": "Retrieves a list of pipeline jobs.",
+        "description": "Retrieves a list of all live pipelines that have been created, along with their JSON representations.",
+        "operationId": "PipelineJobs_List",
+        "responses": {
+          "200": {
+            "description": "List of pipeline jobs that were successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/PipelineJobCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restricts the set of items returned."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all pipeline jobs": {
+            "$ref": "examples/pipeline-job-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs/{pipelineJobName}": {
+      "get": {
+        "summary": "Gets a specific pipeline job by name.",
+        "description": "Retrieves a specific pipeline job by name. If a pipeline job with that name has been previously created, the call will return the JSON representation of that instance.",
+        "operationId": "PipelineJobs_Get",
+        "responses": {
+          "200": {
+            "description": "Pipeline job was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineJob"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The pipeline job name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a pipeline job by name": {
+            "$ref": "examples/pipeline-job-get-by-name.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creates or updates a pipeline job.",
+        "description": "Creates a new pipeline job or updates an existing one, with the given name.",
+        "operationId": "PipelineJobs_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "The existing pipeline job was updated.",
+            "schema": {
+              "$ref": "#/definitions/PipelineJob"
+            }
+          },
+          "201": {
+            "description": "A new pipeline job was created.",
+            "schema": {
+              "$ref": "#/definitions/PipelineJob"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The pipeline job name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineJob"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Create or update a pipeline job": {
+            "$ref": "examples/pipeline-job-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a pipeline job.",
+        "description": "Deletes a pipeline job with the given name.",
+        "operationId": "PipelineJobs_Delete",
+        "responses": {
+          "200": {
+            "description": "The pipeline job was deleted successfully."
+          },
+          "204": {
+            "description": "The pipeline job was not found."
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The pipeline job name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Deletes a pipeline job": {
+            "$ref": "examples/pipeline-job-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an existing pipeline job.",
+        "description": "Updates an existing pipeline job with the given name. Properties that can be updated include: description.",
+        "operationId": "PipelineJobs_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineJob"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The pipeline job name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineJobUpdate"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Updates a pipeline job": {
+            "$ref": "examples/pipeline-job-patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs/{pipelineJobName}/cancel": {
+      "post": {
+        "summary": "Cancels a pipeline job.",
+        "description": "Cancels a pipeline job with the given name.",
+        "operationId": "PipelineJobs_Cancel",
+        "responses": {
+          "202": {
+            "description": "Request to cancel the pipeline job was accepted, and is being processed."
+          },
+          "200": {
+            "description": "The pipeline job was cancelled successfully."
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The pipeline job name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Cancels a pipeline job": {
+            "$ref": "examples/pipeline-job-cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/livePipelines/{livePipelineName}/operationStatuses/{operationId}": {
+      "get": {
+        "summary": "Get the operation status",
+        "description": "Get the operation status of a live pipeline.",
+        "operationId": "LivePipelineOperationStatuses_Get",
+        "responses": {
+          "200": {
+            "description": "Live pipeline operation status was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/LivePipelineOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "livePipelineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Live pipeline unique identifier."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation ID."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get the live pipeline operation status.": {
+            "$ref": "examples/live-pipeline-operation-status-get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/pipelineJobs/{pipelineJobName}/operationStatuses/{operationId}": {
+      "get": {
+        "summary": "Get the operation statuses.",
+        "description": "Get the operation status of a pipeline job with the given operationId.",
+        "operationId": "PipelineJobOperationStatuses_Get",
+        "responses": {
+          "200": {
+            "description": "The pipeline job operation status was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineJobOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "pipelineJobName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The pipeline job name."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation ID."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get the pipeline job operation status.": {
+            "$ref": "examples/pipeline-job-operation-status-get.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AzureVideoAnalyzerAccountName": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure Video Analyzer account name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
