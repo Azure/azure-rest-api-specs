@@ -7885,35 +7885,6 @@
       },
       "additionalProperties": false
     },
-    "MLAssistConfiguration": {
-      "description": "Labeling MLAssist configuration definition",
-      "type": "object",
-      "properties": {
-        "inferencingComputeBinding": {
-          "description": "AML compute binding used in inferencing.",
-          "$ref": "#/definitions/ComputeConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
-        "mlAssistEnabled": {
-          "description": "Indicates whether MLAssist feature is enabled.",
-          "type": "boolean"
-        },
-        "trainingComputeBinding": {
-          "description": "AML compute binding used in training.",
-          "$ref": "#/definitions/ComputeConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "ManagedIdentity": {
       "description": "Managed identity configuration.",
       "type": "object",
@@ -7994,6 +7965,17 @@
       "x-ms-discriminator-value": "Manual",
       "additionalProperties": false
     },
+    "MedianStoppingPolicy": {
+      "description": "Defines an early termination policy based on running averages of the primary metric of all runs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EarlyTerminationPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "MedianStopping",
+      "additionalProperties": false
+    },
     "MediaType": {
       "description": "Media type of data asset.",
       "enum": [
@@ -8007,15 +7989,33 @@
       },
       "additionalProperties": false
     },
-    "MedianStoppingPolicy": {
-      "description": "Defines an early termination policy based on running averages of the primary metric of all runs.",
+    "MLAssistConfiguration": {
+      "description": "Labeling MLAssist configuration definition",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicy"
+      "properties": {
+        "inferencingComputeBinding": {
+          "description": "AML compute binding used in inferencing.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "mlAssistEnabled": {
+          "description": "Indicates whether MLAssist feature is enabled.",
+          "type": "boolean"
+        },
+        "trainingComputeBinding": {
+          "description": "AML compute binding used in training.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
-      ],
-      "x-ms-discriminator-value": "MedianStopping",
+      },
       "additionalProperties": false
     },
     "ModelContainer": {
