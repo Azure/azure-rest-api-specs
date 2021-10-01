@@ -139,8 +139,15 @@
       "in": "query",
       "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "type": "array",
+      "collectionFormat": "csv",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number",
+        "format": "float"
+      }
     },
     "SearchIndexSet": {
       "name": "idxSet",
@@ -271,7 +278,7 @@
     "CategorySet": {
       "name": "categorySet",
       "in": "query",
-      "x-ms-client-name": "categoryFilters",
+      "x-ms-client-name": "categoryFilter",
       "description": "A comma-separated list of category set IDs which could be used to restrict the result to specific Points of Interest categories. ID order does not matter. When multiple category identifiers are provided, only POIs that belong to (at least) one of the categories from the provided list will be returned. The list of supported categories can be discovered using  [POI Categories API](https://aka.ms/AzureMapsPOICategoryTree). Usage examples: \n\n* **categorySet=7315** (Search Points of Interest from category Restaurant)\n\n* **categorySet=7315025,7315017** (Search Points of Interest of category either Italian or French Restaurant) ",
       "type": "array",
       "items": {
@@ -282,7 +289,7 @@
     },
     "CountrySet": {
       "name": "countrySet",
-      "x-ms-client-name": "countryFilters",
+      "x-ms-client-name": "countryFilter",
       "in": "query",
       "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries",
       "type": "array",
@@ -311,6 +318,7 @@
     "BrandSet": {
       "name": "brandSet",
       "in": "query",
+      "x-ms-client-name": "brandFilter",
       "description": "A comma-separated list of brand names which could be used to restrict the result to specific brands. Item order does not matter. When multiple brands are provided, only results that belong to (at least) one of the provided list will be returned. Brands that contain a \",\" in their name should be put into quotes.\n\nUsage examples:\n\n brandSet=Foo\n\n brandSet=Foo,Bar\n\n brandSet=\"A,B,C Comma\",Bar",
       "type": "array",
       "items": {
@@ -322,6 +330,7 @@
     "ConnectorSet": {
       "name": "connectorSet",
       "in": "query",
+      "x-ms-client-name": "electricVehicleConnectorFilter",
       "description": "A comma-separated list of connector types which could be used to restrict the result to Electric Vehicle Station supporting specific connector types. Item order does not matter. When multiple connector types are provided, only results that belong to (at least) one of the provided list will be returned.\n\nAvailable connector types are:\n  * `StandardHouseholdCountrySpecific` - These are the standard household connectors for a certain region. They are all AC single phase and the standard Voltage and standard Amperage. See also: [Plug & socket types - World Standards](https://www.worldstandards.eu/electricity/plugs-and-sockets).\n  * `IEC62196Type1` - Type 1 connector as defined in the IEC 62196-2 standard. Also called Yazaki after the original manufacturer or SAE J1772 after the standard that first published it. Mostly used in combination with 120V single phase or up to 240V single phase infrastructure.\n  * `IEC62196Type1CCS` - Type 1 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 1 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging.\n  * `IEC62196Type2CableAttached` - Type 2 connector as defined in the IEC 62196-2 standard. Provided as a cable and plug attached to the charging point.\n  * `IEC62196Type2Outlet` - Type 2 connector as defined in the IEC 62196-2 standard. Provided as a socket set into the charging point.\n  * `IEC62196Type2CCS` - Type 2 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 2 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging.\n  * `IEC62196Type3` - Type 3 connector as defined in the IEC 62196-2 standard. Also called Scame after the original manufacturer. Mostly used in combination with up to 240V single phase or up to 420V three phase infrastructure.\n  * `Chademo` - CHAdeMO connector named after an association formed by the Tokyo Electric Power Company and industrial partners. Because of this is is also known as the TEPCO's connector. It supports fast DC charging.\n  * `IEC60309AC1PhaseBlue` - Industrial Blue connector is a connector defined in the IEC 60309 standard. It is sometime referred to as by some combination of the standard, the color and the fact that is a single phase connector. The connector usually has the \"P+N+E, 6h\" configuration.\n  * `IEC60309DCWhite` - Industrial White connector is a DC connector defined in the IEC 60309 standard.\n  * `Tesla` - The Tesla connector is the regionally specific Tesla Supercharger connector. I.e. it refers to either Tesla's proprietary connector, sometimes referred to as Tesla Port mostly limited to North America or the modified Type 2 (DC over Type 2) in Europe.\n\nUsage examples:\n\n connectorSet=IEC62196Type2CableAttached\n connectorSet=IEC62196Type2Outlet,IEC62196Type2CableAttached",
       "type": "array",
       "items": {
@@ -437,6 +446,7 @@
           {
             "name": "geometries",
             "in": "query",
+            "x-ms-client-name": "geometryIds",
             "description": "Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.",
             "required": true,
             "type": "array",
@@ -820,7 +830,7 @@
     "/search/poi/category/tree/{format}": {
       "get": {
         "description": "**Get POI Category Tree**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPOI Category API provides a full list of supported Points of Interest (POI) categories and subcategories together with their translations and synonyms. The returned content can be used to provide more meaningful results through other Search Service APIs, like [Get Search POI](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi).",
-        "operationId": "SearchPOICategoryTree",
+        "operationId": "GetPoiCategoryTree",
         "x-ms-examples": {
           "Get the POI Category Tree (only partial response shown below)": {
             "$ref": "./examples/GetSearchPOICategoryTree.json"
@@ -847,7 +857,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchPoiCategoryTreeResponse"
+              "$ref": "#/definitions/GetPoiCategoryTreeResponse"
             }
           },
           "default": {
@@ -938,9 +948,9 @@
     "/search/address/reverse/{format}": {
       "get": {
         "description": "**Reverse Geocode to an Address**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThere may be times when you need to translate a  coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often  this is needed in tracking applications where you  receive a GPS feed from the device or asset and  wish to know what address where the coordinate is  located. This endpoint will return address  information for a given coordinate.",
-        "operationId": "SearchAddressReverse",
+        "operationId": "ReverseSearchAddress",
         "x-ms-examples": {
-          "GetSearchAddressReverse": {
+          "Searches addresses for coordinates 37.337,-121.89": {
             "$ref": "./examples/GetSearchAddressReverse.json"
           }
         },
@@ -995,7 +1005,18 @@
             "name": "roadUse",
             "in": "query",
             "description": "To restrict reverse geocodes to a certain type of road use. The road use array for reverse geocodes can be one or more of LimitedAccess, Arterial, Terminal, Ramp, Rotary, LocalStreet",
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "LimitedAccess",
+                "Arterial",
+                "Terminal",
+                "Ramp",
+                "Rotary",
+                "LocalStreet"
+              ]
+            }
           },
           {
             "name": "allowFreeformNewline",
@@ -1072,7 +1093,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressReverseResponse"
+              "$ref": "#/definitions/ReverseSearchAddressResponse"
             }
           },
           "default": {
@@ -1084,9 +1105,9 @@
     "/search/address/reverse/crossStreet/{format}": {
       "get": {
         "description": "**Reverse Geocode to a Cross Street**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThere may be times when you need to translate a  coordinate (example: 37.786505, -122.3862) into a human understandable cross street. Most often this  is needed in tracking applications where you  receive a GPS feed from the device or asset and wish to know what address where the coordinate is  located.\nThis endpoint will return cross street information  for a given coordinate.",
-        "operationId": "SearchAddressReverseCrossStreet",
+        "operationId": "ReverseSearchCrossStreetAddress",
         "x-ms-examples": {
-          "GetSearchAddressReverseCrossStreet": {
+          "Search address of the nearest intersection/crossroad": {
             "$ref": "./examples/GetSearchAddressReverseCrossStreet.json"
           }
         },
@@ -1128,7 +1149,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressReverseCrossStreetResponse"
+              "$ref": "#/definitions/ReverseSearchCrossStreetAddressResponse"
             }
           },
           "default": {
@@ -1142,7 +1163,7 @@
         "description": "**Structured Address Geocoding**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nAzure Address Geocoding can also be accessed for  structured address look up exclusively. The geocoding search index will be queried for everything above the  street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete  addresses. It will also handle everything from exact  street addresses or street or intersections as well as higher level geographies such as city centers,  counties, states etc.",
         "operationId": "SearchAddressStructured",
         "x-ms-examples": {
-          "GetSearchAddressStructured": {
+          "Search address in Redmond, WA in structured form": {
             "$ref": "./examples/GetSearchAddressStructured.json"
           }
         },
@@ -1252,7 +1273,7 @@
     "/search/geometry/{format}": {
       "post": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Search Geometry endpoint allows you to perform a free form search inside a single geometry or many of them. The search results that fall inside the geometry/geometries will be returned.<br><br>To send the geometry you will use a `POST` request where the request body will contain the `geometry` object represented as a `GeoJSON` type and the `Content-Type` header will be set to `application/json`. The geographical features to be searched can be modeled as Polygon and/or Circle geometries represented using any one of the following `GeoJSON` types:<ul><li>**GeoJSON FeatureCollection** <br>The `geometry` can be represented as a `GeoJSON FeatureCollection` object. This is the recommended option if the geometry contains both Polygons and Circles. The `FeatureCollection` can contain a max of 50 `GeoJSON Feature` objects. Each `Feature` object should represent either a Polygon or a Circle with the following conditions:<ul style=\"list-style-type:none\"><li>A `Feature` object for the Polygon geometry can have a max of 50 coordinates and it's properties must be empty.</li><li>A `Feature` object for the Circle geometry is composed of a _center_ represented using a `GeoJSON Point` type and a _radius_ value (in meters) which must be specified in the object's properties along with the _subType_ property whose value should be 'Circle'.</li></ul><br> Please see the Examples section below for a sample `FeatureCollection` representation.<br><br></li><li>**GeoJSON GeometryCollection**<br>The `geometry` can be represented as a `GeoJSON GeometryCollection` object. This is the recommended option if the geometry contains a list of Polygons only. The `GeometryCollection` can contain a max of 50 `GeoJSON Polygon` objects. Each `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `GeometryCollection` representation.<br><br></li><li>**GeoJSON Polygon**<br>The `geometry` can be represented as a `GeoJSON Polygon` object. This is the recommended option if the geometry contains a single Polygon. The `Polygon` object can have a max of 50 coordinates. Please see the Examples section below for a sample `Polygon` representation.<br><br></li></ul>.<br><br>",
-        "operationId": "PostSearchInsideGeometry",
+        "operationId": "searchInsideGeometry",
         "x-ms-examples": {
           "Search for pizza places inside a geometry represented as a GeoJSON FeatureCollection type": {
             "$ref": "./examples/PostSearchInsideFeatureCollection.json"
@@ -1297,6 +1318,8 @@
             "in": "body",
             "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) to search in and should be a GeoJSON compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
             "required": true,
+            "x-ms-client-flatten": true,
+            "x-ms-client-name": "geometryParameter",
             "schema": {
               "$ref": "#/definitions/SearchInsideGeometryRequestBody"
             }
@@ -1344,9 +1367,6 @@
             "$ref": "#/parameters/PoiQuery"
           },
           {
-            "$ref": "#/parameters/CategorySet"
-          },
-          {
             "name": "maxDetourTime",
             "description": "Maximum detour time of the point of interest in seconds. Max value is 3600 seconds",
             "required": true,
@@ -1355,15 +1375,29 @@
             "maximum": 3600
           },
           {
+            "name": "route",
+            "in": "body",
+            "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "x-ms-client-name": "routeParameter",
+            "schema": {
+              "$ref": "#/definitions/SearchAlongRouteRequestBody"
+            }
+          },
+          {
             "name": "limit",
             "x-ms-client-name": "top",
             "description": "Maximum number of responses that will be returned. Default value is 10. Max value is 20",
             "type": "integer",
             "in": "query",
             "maximum": 20
-          },
+          },      
           {
             "$ref": "#/parameters/BrandSet"
+          },
+          {
+            "$ref": "#/parameters/CategorySet"
           },
           {
             "$ref": "#/parameters/ConnectorSet"
@@ -1373,16 +1407,6 @@
           },
           {
             "$ref": "#/parameters/OpeningHours"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/SearchAlongRouteRequestBody"
-            }
           }
         ],
         "responses": {
@@ -1981,7 +2005,7 @@
         }
       }
     },
-    "SearchPoiCategoryTreeResponse": {
+    "GetPoiCategoryTreeResponse": {
       "description": "This object is returned from a successful POI Category Tree call",
       "type": "object",
       "properties": {
@@ -2029,7 +2053,7 @@
         }
       }
     },
-    "SearchAddressReverseResponse": {
+    "ReverseSearchAddressResponse": {
       "description": "This object is returned from a successful Search Address Reverse call",
       "type": "object",
       "properties": {
@@ -2043,12 +2067,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SearchAddressReverseResult"
+            "$ref": "#/definitions/ReverseSearchAddressResult"
           }
         }
       }
     },
-    "SearchAddressReverseResult": {
+    "ReverseSearchAddressResult": {
       "description": "Result object for a Search Address Reverse response",
       "type": "object",
       "properties": {
@@ -2060,6 +2084,12 @@
           "readOnly": true,
           "description": "Position property in the form of \"{latitude},{longitude}\""
         },
+        "roadUse": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoadUseType"
+          }
+        },
         "matchType": {
           "type": "string",
           "readOnly": true,
@@ -2067,7 +2097,7 @@
         }
       }
     },
-    "SearchAddressReverseCrossStreetResponse": {
+    "ReverseSearchCrossStreetAddressResponse": {
       "description": "This object is returned from a successful Search Address Reverse CrossStreet call",
       "type": "object",
       "properties": {
@@ -2081,12 +2111,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SearchAddressReverseCrossStreetResult"
+            "$ref": "#/definitions/ReverseSearchCrossStreetAddressResult"
           }
         }
       }
     },
-    "SearchAddressReverseCrossStreetResult": {
+    "ReverseSearchCrossStreetAddressResult": {
       "description": "Result object for a Search Address Reverse Cross Street response",
       "type": "object",
       "properties": {
@@ -2105,6 +2135,7 @@
       "type": "object",
       "properties": {
         "geometry": {
+          "x-ms-client-name": "geometry",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
         }
       }
@@ -2114,6 +2145,7 @@
       "type": "object",
       "properties": {
         "route": {
+          "x-ms-client-name": "route",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonLineString"
         }
       }
@@ -2561,6 +2593,19 @@
         ]
       }
     },
+    "RoadUseType": {
+      "description": "Describes the possible uses of a road.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "LimitedAccess",
+        "Arterial",
+        "Terminal",
+        "Ramp",
+        "Rotary",
+        "LocalStreet"
+      ]
+    },
     "SearchFuzzyBatchResponse": {
       "description": "This object is returned from a successful Search Fuzzy Batch service call.",
       "type": "object",
@@ -2681,7 +2726,7 @@
           "readOnly": true,
           "allOf": [
             {
-              "$ref": "#/definitions/SearchAddressReverseResponse"
+              "$ref": "#/definitions/ReverseSearchAddressResponse"
             },
             {
               "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
