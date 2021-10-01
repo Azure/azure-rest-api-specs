@@ -858,110 +858,6 @@
         }
       }
     },
-    "/calling/participants:startHoldMusic": {
-      "post": {
-        "tags": [
-          "ServerCall"
-        ],
-        "summary": "Play hold music to a participant.",
-        "description": "Play hold music to a participant.",
-        "operationId": "ServerCalls_StartHoldMusic",
-        "parameters": [
-          {
-            "name": "startHoldMusicRequest",
-            "in": "body",
-            "description": "The start hold music request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StartHoldMusicWithCallLocatorRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the start hold music response.",
-            "schema": {
-              "$ref": "#/definitions/StartHoldMusicResult"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "Play hold music to a participant.": {
-            "$ref": "./examples/ServerCalls_StartHoldMusic.json"
-          }
-        }
-      }
-    },
-    "/calling/participants:stopHoldMusic": {
-      "post": {
-        "tags": [
-          "ServerCall"
-        ],
-        "summary": "Stop hold music to a participant.",
-        "description": "Stop hold music to a participant.",
-        "operationId": "ServerCalls_StopHoldMusic",
-        "parameters": [
-          {
-            "name": "stopHoldMusicRequest",
-            "in": "body",
-            "description": "The stop hold music request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StopHoldMusicWithCallLocatorRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the stop hold music response.",
-            "schema": {
-              "$ref": "#/definitions/StopHoldMusicResult"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "Stop hold music to a participant.": {
-            "$ref": "./examples/ServerCalls_StopHoldMusic.json"
-          }
-        }
-      }
-    },
     "/calling/participants:playAudio": {
       "post": {
         "tags": [
@@ -1482,124 +1378,6 @@
         "x-ms-examples": {
           "Get participant from the call using identifier.": {
             "$ref": "./examples/CallConnections_GetParticipant.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/participants:startHoldMusic": {
-      "post": {
-        "tags": [
-          "CallConnection"
-        ],
-        "summary": "Play hold music to a participant.",
-        "description": "Play hold music to a participant.",
-        "operationId": "CallConnections_StartHoldMusic",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The callConnectionId.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "The start hold music request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StartHoldMusicRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the start hold music response.",
-            "schema": {
-              "$ref": "#/definitions/StartHoldMusicResult"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "Play hold music to a participant.": {
-            "$ref": "./examples/CallConnections_StartHoldMusic.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/participants:stopHoldMusic": {
-      "post": {
-        "tags": [
-          "CallConnection"
-        ],
-        "summary": "Stop hold music to a participant.",
-        "description": "Stop hold music to a participant.",
-        "operationId": "CallConnections_StopHoldMusic",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The callConnectionId.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stopHoldMusicRequest",
-            "in": "body",
-            "description": "The stop hold music request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StopHoldMusicRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Returns the stop hold music response.",
-            "schema": {
-              "$ref": "#/definitions/StopHoldMusicResult"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        },
-        "x-ms-examples": {
-          "Stop hold music to a participant.": {
-            "$ref": "./examples/CallConnections_StopHoldMusic.json"
           }
         }
       }
@@ -2915,8 +2693,7 @@
     "AddParticipantWithCallLocatorRequest": {
       "description": "The add participant request with call locator.",
       "required": [
-        "callLocator",
-        "addParticipantRequest"
+        "callLocator"
       ],
       "type": "object",
       "properties": {
@@ -2924,16 +2701,6 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "addParticipantRequest": {
-          "$ref": "#/definitions/AddParticipantRequest",
-          "description": "The add participant request."
-        }
-      }
-    },
-    "AddParticipantRequest": {
-      "description": "The add participant request.",
-      "type": "object",
-      "properties": {
         "alternateCallerId": {
           "$ref": "#/definitions/PhoneNumberIdentifier",
           "description": "The alternate identity of source participant."
@@ -2966,7 +2733,7 @@
       "description": "The remove participant by identifier request.",
       "required": [
         "callLocator",
-        "removeParticipantRequest"
+        "identifier"
       ],
       "type": "object",
       "properties": {
@@ -2974,19 +2741,6 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "removeParticipantRequest": {
-          "$ref": "#/definitions/RemoveParticipantRequest",
-          "description": "The remove participant by identifier request."
-        }
-      }
-    },
-    "RemoveParticipantRequest": {
-      "description": "The remove participant by identifier request.",
-      "required": [
-        "identifier"
-      ],
-      "type": "object",
-      "properties": {
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant to be removed from the call."
@@ -2997,113 +2751,10 @@
       "description": "The get participant by identifier request using call locator.",
       "required": [
         "callLocator",
-        "getParticipantRequest"
-      ],
-      "type": "object",
-      "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
-        },
-        "getParticipantRequest": {
-          "$ref": "#/definitions/GetParticipantRequest",
-          "description": "The get participant by identifier request."
-        }
-      }
-    },
-    "GetParticipantRequest": {
-      "description": "The get participant by identifier request.",
-      "required": [
         "identifier"
       ],
       "type": "object",
       "properties": {
-        "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifier",
-          "description": "The identifier of the participant."
-        }
-      }
-    },
-    "StartHoldMusicWithCallLocatorRequest": {
-      "description": "The request payload for playing hold music for a participant with call locator.",
-      "required": [
-        "callLocator",
-        "startHoldMusicRequest"
-      ],
-      "type": "object",
-      "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
-        },
-        "startHoldMusicRequest": {
-          "$ref": "#/definitions/StartHoldMusicRequest",
-          "description": "The request payload for playing hold music for a participant."
-        }
-      }
-    },
-    "StartHoldMusicRequest": {
-      "description": "The request payload for playing hold music for a participant.",
-      "required": [
-        "identifier"
-      ],
-      "type": "object",
-      "properties": {
-        "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifier",
-          "description": "The identifier of the participant."
-        },
-        "audioFileUri": {
-          "description": "The media resource uri of the hold music request. \r\nCurrently only Wave file (.wav) format audio prompts are supported.\r\nMore specifically, the audio content in the wave file must be mono (single-channel),\r\n16-bit samples with a 16,000 (16KHz) sampling rate.",
-          "type": "string"
-        },
-        "audioFileId": {
-          "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
-          "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback URI.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "The value to identify context of the operation.",
-          "type": "string"
-        }
-      }
-    },
-    "StartHoldMusicResult": {
-      "description": "The response payload for start hold music operation.",
-      "required": [
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultInfo": {
-          "$ref": "#/definitions/ResultInfo",
-          "description": "The result info for the operation."
-        }
-      }
-    },
-    "StopHoldMusicWithCallLocatorRequest": {
-      "description": "The request payload for removing participant from hold using call locator.",
-      "required": [
-        "callLocator",
-        "identifier",
-        "startHoldMusicOperationId"
-      ],
-      "type": "object",
-      "properties": {
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
@@ -3111,41 +2762,15 @@
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant."
-        },
-        "startHoldMusicOperationId": {
-          "description": "The operationId of the StartHoldMusicOperation to stop",
-          "type": "string"
-        }
-      }
-    },
-    "StopHoldMusicResult": {
-      "description": "The response payload for start hold music operation.",
-      "required": [
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultInfo": {
-          "$ref": "#/definitions/ResultInfo",
-          "description": "The result info for the operation."
         }
       }
     },
     "PlayAudioToParticipantWithCallLocatorRequest": {
       "description": "The request payload for playing audio with call locator to participant.",
       "required": [
-        "callLocator"
+        "callLocator",
+        "identifier",
+        "loop"
       ],
       "type": "object",
       "properties": {
@@ -3153,20 +2778,6 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "playAudioToParticipantRequest": {
-          "$ref": "#/definitions/PlayAudioToParticipantRequest",
-          "description": "The play audio to participant request."
-        }
-      }
-    },
-    "PlayAudioToParticipantRequest": {
-      "description": "The request payload for playing audio to participant.",
-      "required": [
-        "identifier",
-        "loop"
-      ],
-      "type": "object",
-      "properties": {
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant to play audio to."
@@ -3197,7 +2808,8 @@
       "description": "The request payload for stopping a media operation for a participant with call locator.",
       "required": [
         "callLocator",
-        "cancelParticipantMediaOperationRequest"
+        "identifier",
+        "mediaOperationId"
       ],
       "type": "object",
       "properties": {
@@ -3205,20 +2817,6 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "cancelParticipantMediaOperationRequest": {
-          "$ref": "#/definitions/CancelParticipantMediaOperationRequest",
-          "description": "The request payload for stopping a media operation."
-        }
-      }
-    },
-    "CancelParticipantMediaOperationRequest": {
-      "description": "The request payload for stopping a media operation for a participant.",
-      "required": [
-        "identifier",
-        "mediaOperationId"
-      ],
-      "type": "object",
-      "properties": {
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant."
@@ -3301,8 +2899,43 @@
         }
       }
     },
-    "StopHoldMusicRequest": {
-      "description": "The request payload for removing participant from hold.",
+    "AddParticipantRequest": {
+      "description": "The add participant request.",
+      "type": "object",
+      "properties": {
+        "alternateCallerId": {
+          "$ref": "#/definitions/PhoneNumberIdentifier",
+          "description": "The alternate identity of source participant."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The participant to be added to the call."
+        },
+        "operationContext": {
+          "description": "The operation context.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI.",
+          "type": "string"
+        }
+      }
+    },
+    "RemoveParticipantRequest": {
+      "description": "The remove participant by identifier request.",
+      "required": [
+        "identifier"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant to be removed from the call."
+        }
+      }
+    },
+    "GetParticipantRequest": {
+      "description": "The get participant by identifier request.",
       "required": [
         "identifier"
       ],
@@ -3311,6 +2944,58 @@
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant."
+        }
+      }
+    },
+    "PlayAudioToParticipantRequest": {
+      "description": "The request payload for playing audio to participant.",
+      "required": [
+        "identifier",
+        "loop"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant to play audio to."
+        },
+        "audioFileUri": {
+          "description": "The media resource uri of the play audio request. \r\nCurrently only Wave file (.wav) format audio prompts are supported.\r\nMore specifically, the audio content in the wave file must be mono (single-channel),\r\n16-bit samples with a 16,000 (16KHz) sampling rate.",
+          "type": "string"
+        },
+        "loop": {
+          "description": "The flag indicating whether audio file needs to be played in loop or not.",
+          "type": "boolean"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "audioFileId": {
+          "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback Uri to receive PlayAudio status notifications.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelParticipantMediaOperationRequest": {
+      "description": "The request payload for stopping a media operation for a participant.",
+      "required": [
+        "identifier",
+        "mediaOperationId"
+      ],
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The identifier of the participant."
+        },
+        "mediaOperationId": {
+          "description": "The operationId of the media operation to cancel",
+          "type": "string"
         }
       }
     },
@@ -3366,24 +3051,6 @@
         }
       }
     },
-    "StartCallRecordingWithCallLocatorRequest": {
-      "description": "The request payload start for call recording operation with call locator.",
-      "required": [
-        "callLocator",
-        "startCallRecordingRequest"
-      ],
-      "type": "object",
-      "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
-        },
-        "startCallRecordingRequest": {
-          "$ref": "#/definitions/StartCallRecordingRequest",
-          "description": "The request payload for start call recording operation."
-        }
-      }
-    },
     "RecordingContentType": {
       "description": "Content type of call recording.",
       "enum": [
@@ -3421,10 +3088,17 @@
         "modelAsString": true
       }
     },
-    "StartCallRecordingRequest": {
-      "description": "The request payload start call recording operation.",
+    "StartCallRecordingWithCallLocatorRequest": {
+      "description": "The request payload start for call recording operation with call locator.",
+      "required": [
+        "callLocator"
+      ],
       "type": "object",
       "properties": {
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
+        },
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
           "type": "string"
@@ -3528,7 +3202,7 @@
       "description": "The request payload for playing audio with call locator.",
       "required": [
         "callLocator",
-        "playAudioRequest"
+        "loop"
       ],
       "type": "object",
       "properties": {
@@ -3536,9 +3210,25 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "playAudioRequest": {
-          "$ref": "#/definitions/PlayAudioRequest",
-          "description": "The request payload for playing audio."
+        "audioFileUri": {
+          "description": "The media resource uri of the play audio request. \r\nCurrently only Wave file (.wav) format audio prompts are supported.\r\nMore specifically, the audio content in the wave file must be mono (single-channel),\r\n16-bit samples with a 16,000 (16KHz) sampling rate.",
+          "type": "string"
+        },
+        "loop": {
+          "description": "The flag indicating whether audio file needs to be played in loop or not.",
+          "type": "boolean"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "audioFileId": {
+          "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback Uri to receive PlayAudio status notifications.",
+          "type": "string"
         }
       }
     },
@@ -3546,7 +3236,7 @@
       "description": "The request payload for stopping a media operation for a participant with call locator.",
       "required": [
         "callLocator",
-        "cancelMediaOperationRequest"
+        "mediaOperationId"
       ],
       "type": "object",
       "properties": {
@@ -3554,19 +3244,6 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
-        "cancelMediaOperationRequest": {
-          "$ref": "#/definitions/CancelMediaOperationRequest",
-          "description": "The request payload for stopping a media operation."
-        }
-      }
-    },
-    "CancelMediaOperationRequest": {
-      "description": "The request payload for stopping a media operation for a participant.",
-      "required": [
-        "mediaOperationId"
-      ],
-      "type": "object",
-      "properties": {
         "mediaOperationId": {
           "description": "The operationId of the media operation to cancel",
           "type": "string"
