@@ -5784,6 +5784,81 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
+    "Semantic": {
+      "properties": {
+        "semanticConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticConfiguration"
+          },
+          "description": ""
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+      },
+      "description": "Defines parameters for a search index that influence semantic capabilities."
+    },
+    "SemanticConfiguration": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the semantic configuration.",
+          "x-nullable": false
+        },
+        "prioritizedFields": {
+          "$ref": "#/definitions/PrioritizedFields",
+          "description": "",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "name",
+        "prioritizedFields"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+      },
+      "description": ""
+    },
+    "PrioritizedFields": {
+      "properties": {
+        "TitleField": {
+          "$ref": "#/definitions/SemanticField",
+          "description": ""
+        },
+        "prioritizedContentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField/"
+          },
+          "description": ""
+        },
+        "PrioritizedKeywordsFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField/"
+          },
+          "description": ""
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+      },
+      "description": ""
+    },
+    "SemanticField": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "",
+          "x-nullable": false
+        }
+      }
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -7452,6 +7527,14 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/azure/search/index-ranking-similarity"
           }
+        },
+        "semantic": {
+          "$ref": "#/definitions/Semantic",
+          "description": "",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+          },
+          "x-nullable": true
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
