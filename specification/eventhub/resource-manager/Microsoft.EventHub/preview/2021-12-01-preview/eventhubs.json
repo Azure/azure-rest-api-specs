@@ -267,6 +267,7 @@
       "description": "Properties to configure capture description for eventhub"
     },
     "ThrottleRule": {
+      "type": "object",
       "properties": {
         "ruleName": {
           "type": "string",
@@ -287,17 +288,6 @@
         }
       },
       "description": "Properties to configure throttling limits for eventhub"
-    },
-    "ThrottleRules": {
-      "properties": {
-        "value": {
-          "description": "A collection of throttle rules resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ThrottleRule"
-          }
-        }
-      }
     },
     "Eventhub": {
       "properties": {
@@ -360,8 +350,11 @@
               "description": "Properties of capture description"
             },
             "throttleRules": {
-              "$ref": "#/definitions/ThrottleRules",
-              "description": "Properties of Throttling Rules"
+              "description": "List of Throttling Rules",
+              "type": "array",
+              "items": {
+                "type": "#/definitions/ThrottleRule"
+              }
             }
           },
           "description": "Properties supplied to the Create Or Update Event Hub operation."
