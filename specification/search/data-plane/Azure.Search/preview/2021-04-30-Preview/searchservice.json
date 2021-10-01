@@ -5791,7 +5791,7 @@
           "items": {
             "$ref": "#/definitions/SemanticConfiguration"
           },
-          "description": ""
+          "description": "The semantic configurations for the index."
         }
       },
       "externalDocs": {
@@ -5812,7 +5812,8 @@
         "prioritizedFields": {
           "$ref": "#/definitions/PrioritizedFields",
           "description": "",
-          "x-nullable": false
+          "x-nullable": false,
+          "description": "Describe how the service should process document fields in the context of semantic capabilities.",
         }
       },
       "required": [
@@ -5822,33 +5823,33 @@
       "externalDocs": {
         "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
       },
-      "description": ""
+      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
     },
     "PrioritizedFields": {
       "properties": {
         "TitleField": {
           "$ref": "#/definitions/SemanticField",
-          "description": ""
+          "description": "Define which field to be used as the title of the document in the context of semantic capabilities."
         },
         "prioritizedContentFields": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField/"
           },
-          "description": ""
+          "description": "Define the fields to be processed in the context of semantic capabilities. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represent their priority. Fields with lower priority may get truncated if the content is too long."
         },
         "PrioritizedKeywordsFields": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField/"
           },
-          "description": ""
+          "description": "Define the fields to be processed in the context of semantic capabilities. For the best result, the selected fields should contain text in keyword form. The order of the fields in the array represent their priority. Fields with lower priority may get truncated if the content is too long."
         }
       },
       "externalDocs": {
         "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
       },
-      "description": ""
+      "description": "Describe how the service should process document fields in the context of semantic capabilities."
     },
     "SemanticField": {
       "properties": {
@@ -5857,7 +5858,8 @@
           "description": "",
           "x-nullable": false
         }
-      }
+      },
+      description": "Define a single field to be used in the context of semantic capabilities."
     },
     "DataSourceCredentials": {
       "properties": {
@@ -7530,7 +7532,7 @@
         },
         "semantic": {
           "$ref": "#/definitions/Semantic",
-          "description": "",
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
           "externalDocs": {
             "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
           },
