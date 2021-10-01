@@ -6272,100 +6272,6 @@
       "x-ms-discriminator-value": "DataPath",
       "additionalProperties": false
     },
-    "DataVersion": {
-      "description": "Data asset version details.",
-      "required": [
-        "path"
-      ],
-      "type": "object",
-      "properties": {
-        "datasetType": {
-          "description": "The Format of dataset.",
-          "$ref": "#/definitions/DatasetType"
-        },
-        "datastoreId": {
-          "description": "ARM resource ID of the datastore where the asset is located.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
-        "isAnonymous": {
-          "description": "If the name version are system generated (anonymous registration).",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "path": {
-          "description": "The path of the file/directory in the datastore.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "DataVersionResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/DataVersion"
-        },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "DataVersionResourceArmPaginatedResult": {
-      "description": "A paginated list of DataVersion entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of DataVersion objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type DataVersion.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataVersionResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "DatasetExportSummary": {
       "type": "object",
       "allOf": [
@@ -6532,6 +6438,100 @@
         }
       },
       "discriminator": "secretsType"
+    },
+    "DataVersion": {
+      "description": "Data asset version details.",
+      "required": [
+        "path"
+      ],
+      "type": "object",
+      "properties": {
+        "datasetType": {
+          "description": "The Format of dataset.",
+          "$ref": "#/definitions/DatasetType"
+        },
+        "datastoreId": {
+          "description": "ARM resource ID of the datastore where the asset is located.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "isAnonymous": {
+          "description": "If the name version are system generated (anonymous registration).",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "path": {
+          "description": "The path of the file/directory in the datastore.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataVersionResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/DataVersion"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataVersionResourceArmPaginatedResult": {
+      "description": "A paginated list of DataVersion entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of DataVersion objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type DataVersion.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataVersionResource"
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "DeploymentLogs": {
       "type": "object",
