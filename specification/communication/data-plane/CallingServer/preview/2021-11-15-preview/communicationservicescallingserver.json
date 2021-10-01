@@ -16,7 +16,7 @@
   ],
   "paths": {
     "/calling/callConnections/{callConnectionId}/audioRoutingGroups/{audioRoutingGroupId}": {
-      "post": {
+      "get": {
         "tags": [
           "AudioRoutingGroup"
         ],
@@ -125,7 +125,7 @@
         "tags": [
           "AudioRoutingGroup"
         ],
-        "summary": "Update audio routing group from a call.",
+        "summary": "Update audio routing group.",
         "operationId": "CallConnections_UpdateAudioRoutingGroup",
         "parameters": [
           {
@@ -143,12 +143,12 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingGroupRequest",
+            "name": "updateAudioRoutingGroupRequest",
             "in": "body",
-            "description": "The audio routing group request.",
+            "description": "The update audio routing group request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AudioRoutingGroupRequest"
+              "$ref": "#/definitions/UpdateAudioRoutingGroupRequest"
             }
           },
           {
@@ -176,7 +176,7 @@
           }
         },
         "x-ms-examples": {
-          "Update audio routing group from a call.": {
+          "Update audio routing group.": {
             "$ref": "./examples/CallConnections_UpdateAudioRoutingGroup.json"
           }
         }
@@ -2524,13 +2524,10 @@
     "MicrosoftTeamsUserIdentifier": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
-    "AudioRoutingGroupRequest": {
-      "description": "The audio routing group request.",
+    "UpdateAudioRoutingGroupRequest": {
+      "description": "The update audio routing group request.",
       "type": "object",
       "properties": {
-        "audioRoutingMode": {
-          "$ref": "#/definitions/AudioRoutingMode"
-        },
         "targets": {
           "description": "The target identities that would be receivers in the audio routing group.",
           "type": "array",
@@ -2857,6 +2854,22 @@
         "userToUserInformation": {
           "description": "The user to user information.",
           "type": "string"
+        }
+      }
+    },
+    "AudioRoutingGroupRequest": {
+      "description": "The audio routing group request.",
+      "type": "object",
+      "properties": {
+        "audioRoutingMode": {
+          "$ref": "#/definitions/AudioRoutingMode"
+        },
+        "targets": {
+          "description": "The target identities that would be receivers in the audio routing group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifier"
+          }
         }
       }
     },
