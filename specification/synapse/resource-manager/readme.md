@@ -47,7 +47,6 @@ input-file:
   - Microsoft.Synapse/preview/2021-09-01-preview/firewallRule.json
   - Microsoft.Synapse/preview/2021-09-01-preview/integrationRuntime.json
   - Microsoft.Synapse/preview/2021-09-01-preview/keys.json
-  - Microsoft.Synapse/preview/2021-09-01-preview/kustoPool.json
   - Microsoft.Synapse/preview/2021-09-01-preview/library.json
   - Microsoft.Synapse/preview/2021-09-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-09-01-preview/privateEndpointConnections.json
