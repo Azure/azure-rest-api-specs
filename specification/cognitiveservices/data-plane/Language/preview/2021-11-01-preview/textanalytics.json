@@ -310,6 +310,12 @@
                             "items": {
                                 "$ref": "#/definitions/ExtractiveSummarizationTask"
                             }
+                        },
+                        "healthcareTasks": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HealthcareTask"
+                            }
                         }
                     },
                     "type": "object"
@@ -349,6 +355,28 @@
                 }
             }
         },
+        "PreBuiltResult": {
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "description": "Errors by record id.",
+                    "items": {
+                        "$ref": "#/definitions/RecordError"
+                    }
+                },
+                "statistics": {
+                    "$ref": "#/definitions/RequestStatistics"
+                },
+                "modelVersion": {
+                    "type": "string",
+                    "description": "This field indicates which model is used for scoring."
+                }
+            },
+            "required": [
+                "errors",
+                "modelVersion"
+            ]
+        },
         "CustomTaskParameters": {
             "type": "object",
             "description": "Parameters object for a text analysis task using custom models.",
@@ -363,6 +391,33 @@
             "required": [
                 "project-name",
                 "deployment-name"
+            ]
+        },
+        "CustomResult": {
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "description": "Errors by document id.",
+                    "items": {
+                        "$ref": "#/definitions/RecordError"
+                    }
+                },
+                "statistics": {
+                    "$ref": "#/definitions/RequestStatistics"
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "This field indicates the project name for the model."
+                },
+                "deploymentName": {
+                    "type": "string",
+                    "description": "This field indicates the deployment name for the model."
+                }
+            },
+            "required": [
+                "errors",
+                "projectName",
+                "deploymentName"
             ]
         },
         "CustomEntitiesTask": {
@@ -401,46 +456,32 @@
         },
         "CustomEntitiesResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "projectName",
-                "deploymentName"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/EntitiesRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CustomResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/EntitiesRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by document id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "projectName": {
-                    "type": "string",
-                    "description": "This field indicates the project name for the model."
-                },
-                "deploymentName": {
-                    "type": "string",
-                    "description": "This field indicates the deployment name for the model."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "CustomSingleClassificationTask": {
             "type": "object",
@@ -475,46 +516,32 @@
         },
         "CustomSingleClassificationResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "projectName",
-                "deploymentName"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/SingleClassificationRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CustomResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/SingleClassificationRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by record id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "projectName": {
-                    "type": "string",
-                    "description": "This field indicates the project name for the model."
-                },
-                "deploymentName": {
-                    "type": "string",
-                    "description": "This field indicates the deployment name for the model."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "SingleClassificationRecordResult": {
             "type": "object",
@@ -585,46 +612,32 @@
         },
         "CustomMultiClassificationResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "projectName",
-                "deploymentName"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/MultiClassificationRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CustomResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/MultiClassificationRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by record id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "projectName": {
-                    "type": "string",
-                    "description": "This field indicates the project name for the model."
-                },
-                "deploymentName": {
-                    "type": "string",
-                    "description": "This field indicates the deployment name for the model."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "MultiClassificationRecordResult": {
             "type": "object",
@@ -646,6 +659,339 @@
                     }
                 }
             ]
+        },
+        "HealthcareTaskParameters": {
+            "type": "object",
+            "description": "Parameters object for a Healthcare task.",
+            "properties": {
+                "structureFhir": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "stringIndexType": {
+                    "$ref": "common.json#/definitions/StringIndexType"
+                }
+            }
+        },
+        "HealthcareTask": {
+            "type": "object",
+            "description": "TODO",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Task"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "parameters": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/TaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/PreBuiltTaskParameters"
+                                },
+                                {
+                                    "$ref": "#/definitions/HealthcareTaskParameters"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "HealthcareTaskResult": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "$ref": "#/definitions/HealthcareResult"
+                }
+            }
+        },
+        "HealthcareResult": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/HealthcareEntitiesRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
+                }
+            ]
+        },
+        "HealthcareEntitiesRecordResult": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RecordResult"
+                },
+                {
+                    "properties": {
+                        "entities": {
+                            "description": "Healthcare entities.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HealthcareEntity"
+                            }
+                        },
+                        "relations": {
+                            "type": "array",
+                            "description": "Healthcare entity relations.",
+                            "items": {
+                                "$ref": "#/definitions/HealthcareRelation"
+                            }
+                        }
+                    },
+                    "required": [
+                        "entities",
+                        "relations"
+                    ]
+                }
+            ]
+        },
+        "HealthcareEntity": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthcareEntityProperties"
+                },
+                {
+                    "$ref": "#/definitions/HealthcareLinkingProperties"
+                }
+            ]
+        },
+        "HealthcareRelation": {
+            "type": "object",
+            "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
+            "required": [
+                "relationType",
+                "entities"
+            ],
+            "properties": {
+                "relationType": {
+                    "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+                    "type": "string",
+                    "enum": [
+                        "Abbreviation",
+                        "DirectionOfBodyStructure",
+                        "DirectionOfCondition",
+                        "DirectionOfExamination",
+                        "DirectionOfTreatment",
+                        "DosageOfMedication",
+                        "FormOfMedication",
+                        "FrequencyOfMedication",
+                        "FrequencyOfTreatment",
+                        "QualifierOfCondition",
+                        "RelationOfExamination",
+                        "RouteOfMedication",
+                        "TimeOfCondition",
+                        "TimeOfEvent",
+                        "TimeOfExamination",
+                        "TimeOfMedication",
+                        "TimeOfTreatment",
+                        "UnitOfCondition",
+                        "UnitOfExamination",
+                        "ValueOfCondition",
+                        "ValueOfExamination"
+                    ],
+                    "x-ms-enum": {
+                        "name": "relationType",
+                        "modelAsString": true
+                    }
+                },
+                "entities": {
+                    "description": "The entities in the relation.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HealthcareRelationEntity"
+                    }
+                }
+            }
+        },
+        "HealthcareAssertion": {
+            "type": "object",
+            "properties": {
+                "conditionality": {
+                    "description": "Describes any conditionality on the entity.",
+                    "type": "string",
+                    "enum": [
+                        "hypothetical",
+                        "conditional"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Conditionality",
+                        "modelAsString": false
+                    }
+                },
+                "certainty": {
+                    "description": "Describes the entities certainty and polarity.",
+                    "type": "string",
+                    "enum": [
+                        "positive",
+                        "positivePossible",
+                        "neutralPossible",
+                        "negativePossible",
+                        "negative"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Certainty",
+                        "modelAsString": false
+                    }
+                },
+                "association": {
+                    "description": "Describes if the entity is the subject of the text or if it describes someone else.",
+                    "type": "string",
+                    "enum": [
+                        "subject",
+                        "other"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Association",
+                        "modelAsString": false
+                    }
+                }
+            }
+        },
+        "HealthcareRelationEntity": {
+            "type": "object",
+            "required": [
+                "ref",
+                "role"
+            ],
+            "properties": {
+                "ref": {
+                    "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .",
+                    "type": "string"
+                },
+                "role": {
+                    "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis).",
+                    "type": "string"
+                }
+            }
+        },
+        "HealthcareEntityLink": {
+            "type": "object",
+            "required": [
+                "dataSource",
+                "id"
+            ],
+            "properties": {
+                "dataSource": {
+                    "description": "Entity Catalog. Examples include: UMLS, CHV, MSH, etc.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Entity id in the given source catalog.",
+                    "type": "string"
+                }
+            }
+        },
+        "HealthcareEntityProperties": {
+            "type": "object",
+            "required": [
+                "text",
+                "category",
+                "offset",
+                "length",
+                "confidenceScore"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "Entity text as appears in the request."
+                },
+                "category": {
+                    "x-ms-enum": {
+                        "name": "healthcareEntityCategory",
+                        "modelAsString": true
+                    },
+                    "type": "string",
+                    "description": "Healthcare Entity Category.",
+                    "enum": [
+                        "BODY_STRUCTURE",
+                        "AGE",
+                        "GENDER",
+                        "EXAMINATION_NAME",
+                        "DATE",
+                        "DIRECTION",
+                        "FREQUENCY",
+                        "MEASUREMENT_VALUE",
+                        "MEASUREMENT_UNIT",
+                        "RELATIONAL_OPERATOR",
+                        "TIME",
+                        "GENE_OR_PROTEIN",
+                        "VARIANT",
+                        "ADMINISTRATIVE_EVENT",
+                        "CARE_ENVIRONMENT",
+                        "HEALTHCARE_PROFESSION",
+                        "DIAGNOSIS",
+                        "SYMPTOM_OR_SIGN",
+                        "CONDITION_QUALIFIER",
+                        "MEDICATION_CLASS",
+                        "MEDICATION_NAME",
+                        "DOSAGE",
+                        "MEDICATION_FORM",
+                        "MEDICATION_ROUTE",
+                        "FAMILY_RELATION",
+                        "TREATMENT_NAME"
+                    ]
+                },
+                "subcategory": {
+                    "type": "string",
+                    "description": "(Optional) Entity sub type."
+                },
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+                },
+                "length": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+                },
+                "confidenceScore": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Confidence score between 0 and 1 of the extracted entity."
+                }
+            }
+        },
+        "HealthcareLinkingProperties": {
+            "properties": {
+                "assertion": {
+                    "type": "object",
+                    "$ref": "#/definitions/HealthcareAssertion"
+                },
+                "name": {
+                    "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "Entity references in known data sources.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HealthcareEntityLink"
+                    }
+                }
+            }
         },
         "SentimentAnalysisTaskParameters": {
             "type": "object",
@@ -697,59 +1043,41 @@
         },
         "SentimentResponse": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Sentiment analysis per record.",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/SentimentRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Sentiment analysis per record.",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/SentimentRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by document id.",
-                    "items": {
-                        "$ref": "common.json#/definitions/Error"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "SentimentRecordResult": {
             "type": "object",
-            "required": [
-                "sentiment",
-                "confidenceScores",
-                "sentences"
-            ],
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
                 },
                 {
                     "properties": {
-                        "id": {
-                            "type": "string",
-                            "description": "Unique, non-empty document identifier."
-                        },
                         "sentiment": {
                             "type": "string",
                             "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
@@ -775,7 +1103,12 @@
                                 "$ref": "#/definitions/SentenceSentiment"
                             }
                         }
-                    }
+                    },
+                    "required": [
+                        "sentiment",
+                        "confidenceScores",
+                        "sentences"
+                    ]
                 }
             ]
         },
@@ -1047,41 +1380,32 @@
         },
         "EntitiesResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/EntitiesRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/EntitiesRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by document id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
+                        }
                     },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "EntitiesRecordResult": {
             "type": "object",
@@ -1190,41 +1514,32 @@
         },
         "EntityLinkingResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
-                            },
-                            {
-                                "$ref": "#/definitions/LinkedEntitiesRecordResult"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/LinkedEntitiesRecordResult"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by record id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "LinkedEntitiesRecordResult": {
             "type": "object",
@@ -1378,41 +1693,32 @@
         },
         "PiiResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
-                            },
-                            {
-                                "$ref": "#/definitions/PiiEntitiesRecordResult"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PiiEntitiesRecordResult"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by record id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "PiiEntitiesRecordResult": {
             "type": "object",
@@ -1686,41 +1992,32 @@
         },
         "ExtractiveSummarizationResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/ExtractedSummaryRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/ExtractedSummaryRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by document id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "ExtractedSummaryRecordResult": {
             "type": "object",
@@ -1808,41 +2105,32 @@
         },
         "KeyPhraseResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/KeyPhrasesRecordResult"
-                            },
-                            {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
+                },
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/KeyPhrasesRecordResult"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/RecordDetectedLanguage"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by record id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "KeyPhrasesRecordResult": {
             "type": "object",
@@ -1905,34 +2193,25 @@
         },
         "LanguageDetectionResult": {
             "type": "object",
-            "required": [
-                "records",
-                "errors",
-                "modelVersion"
-            ],
-            "properties": {
-                "records": {
-                    "type": "array",
-                    "description": "Response by record",
-                    "items": {
-                        "$ref": "#/definitions/LanguageDetectionRecordResult"
-                    }
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PreBuiltResult"
                 },
-                "errors": {
-                    "type": "array",
-                    "description": "Errors by record id.",
-                    "items": {
-                        "$ref": "#/definitions/RecordError"
-                    }
-                },
-                "statistics": {
-                    "$ref": "#/definitions/RequestStatistics"
-                },
-                "modelVersion": {
-                    "type": "string",
-                    "description": "This field indicates which model is used for scoring."
+                {
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "description": "Response by record",
+                            "items": {
+                                "$ref": "#/definitions/LanguageDetectionRecordResult"
+                            }
+                        }
+                    },
+                    "required": [
+                        "records"
+                    ]
                 }
-            }
+            ]
         },
         "LanguageDetectionRecordResult": {
             "type": "object",
