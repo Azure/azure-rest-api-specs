@@ -815,19 +815,6 @@
         }
       }
     },
-    "CopyrightsResult": {
-      "type": "object",
-      "properties": {
-        "regions": {
-          "description": "Regions array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RegionCopyrights"
-          }
-        }
-      }
-    },
     "GetCopyrightCaptionResult": {
       "description": "This object is returned from a successful copyright call",
       "type": "object",
@@ -845,16 +832,32 @@
       }
     },
     "GetCopyrightResult": {
-      "description": "This object is returned from a successful copyright call",
+      "description": "This object is returned from a successful Get Copyright For Tile call",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GetCopyrightCaptionResult"
+      "properties": {
+        "formatVersion": {
+          "description": "Format Version property",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "$ref": "#/definitions/CopyrightsResult"
+        "generalCopyrights": {
+          "description": "General Copyrights array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "regions": {
+          "description": "Regions array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegionCopyrights"
+          }
         }
-      ]
+      }
     }
   }
 }
