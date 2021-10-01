@@ -393,6 +393,8 @@
       "description": "Specifies the efficiency of converting chemical energy stored in fuel to kinetic energy when the vehicle accelerates _(i.e. KineticEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is obtained by converting consumed fuel to chemical energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **decelerationEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**decelerationEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.33, for **Electric Model** : 0.66",
       "type": "number",
       "format": "float",
+      "minimum": 0,
+      "maximum": 1,
       "x-ms-parameter-location": "method"
     },
     "DecelerationEfficiency": {
@@ -401,6 +403,8 @@
       "description": "Specifies the efficiency of converting kinetic energy to saved (not consumed) fuel when the vehicle decelerates _(i.e. ChemicalEnergySaved/KineticEnergyLost). ChemicalEnergySaved_ is obtained by converting saved (not consumed) fuel to energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **accelerationEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**accelerationEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.83, for **Electric Model** : 0.91",
       "type": "number",
       "format": "float",
+      "minimum": 0,
+      "maximum": 1,
       "x-ms-parameter-location": "method"
     },
     "UphillEfficiency": {
@@ -409,6 +413,8 @@
       "description": "Specifies the efficiency of converting chemical energy stored in fuel to potential energy when the vehicle gains elevation _(i.e. PotentialEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is obtained by converting consumed fuel to chemical energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **downhillEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**downhillEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.27, for **Electric Model** : 0.74",
       "type": "number",
       "format": "float",
+      "minimum": 0,
+      "maximum": 1,
       "x-ms-parameter-location": "method"
     },
     "DownhillEfficiency": {
@@ -417,6 +423,8 @@
       "description": "Specifies the efficiency of converting potential energy to saved (not consumed) fuel when the vehicle loses elevation _(i.e. ChemicalEnergySaved/PotentialEnergyLost). ChemicalEnergySaved_ is obtained by converting saved (not consumed) fuel to energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **uphillEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**uphillEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.51, for **Electric Model** : 0.73",
       "type": "number",
       "format": "float",
+      "minimum": 0,
+      "maximum": 1,
       "x-ms-parameter-location": "method"
     },
     "ConstantSpeedConsumptionInkWhPerHundredkm": {
