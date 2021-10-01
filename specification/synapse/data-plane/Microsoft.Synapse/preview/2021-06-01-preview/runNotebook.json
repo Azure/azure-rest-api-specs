@@ -34,12 +34,12 @@
     }
   },
   "paths": {
-    "/runNotebookApi/versions/{version}/run": {
+    "/notebooks/runs/{runId}": {
       "post": {
         "tags": [
           "RunNotebook"
         ],
-        "operationId": "Create_RunNotebook",
+        "operationId": "RunNotebook_CreateRun",
         "x-ms-examples": {
           "Run Notebook": {
             "$ref": "./examples/RunNotebook_Create.json"
@@ -48,7 +48,10 @@
         "description": "Run notebook",
         "parameters": [
           {
-            "$ref": "#/parameters/VersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RunId"
           },
           {
             "name": "RunNotebookRequest",
@@ -63,7 +66,12 @@
         "responses": {
           "202": {
             "description": "Accepted.",
-            "x-ms-long-running-operation": true,
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/RunNotebookResponse"
             }
@@ -75,14 +83,12 @@
             }
           }
         }
-      }
-    },
-    "/runNotebookApi/versions/{version}/run/{runId}": {
+      },
       "get": {
         "tags": [
           "RunNotebook"
         ],
-        "operationId": "GET_RunNotebookStatus",
+        "operationId": "RunNotebook_GetStatus",
         "x-ms-examples": {
           "Get Run Notebook Status": {
             "$ref": "./examples/RunNotebook_GetStatus.json"
@@ -91,7 +97,7 @@
         "description": "Get RunNotebook Status for run id.",
         "parameters": [
           {
-            "$ref": "#/parameters/VersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/RunId"
@@ -113,12 +119,12 @@
         }
       }
     },
-    "/runNotebookApi/versions/{version}/run/{runId}/cancel": {
+    "/notebooks/run/{runId}/cancel": {
       "post": {
         "tags": [
           "RunNotebook"
         ],
-        "operationId": "Cancel_RunNotebook",
+        "operationId": "RunNotebook_CancelRun",
         "x-ms-examples": {
           "Cancel Run Notebook": {
             "$ref": "./examples/RunNotebook_Cancel.json"
@@ -127,7 +133,7 @@
         "description": "Cancel notebook run.",
         "parameters": [
           {
-            "$ref": "#/parameters/VersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/RunId"
@@ -156,12 +162,12 @@
         }
       }
     },
-    "/runNotebookApi/versions/{version}/run/{runId}/snapshot": {
+    "/notebooks/runs/{runId}/snapshot": {
       "get": {
         "tags": [
           "RunNotebook"
         ],
-        "operationId": "Get_RunNotebookSnapshot",
+        "operationId": "RunNotebook_GetSnapshot",
         "x-ms-examples": {
           "Get Run Notebook Snapshot": {
             "$ref": "./examples/RunNotebook_GetSnapshot.json"
@@ -170,7 +176,7 @@
         "description": "Get RunNotebook Snapshot for run id.",
         "parameters": [
           {
-            "$ref": "#/parameters/VersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/RunId"
@@ -538,15 +544,13 @@
     }
   },
   "parameters": {
-    "VersionParameter": {
-      "name": "version",
-      "in": "path",
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
       "maxLength": 50,
       "required": true,
       "type": "string",
-      "description": "Api version.",
-      "x-ms-parameter-location": "client",
-      "x-ms-client-default": "2021-06-01-preview"
+      "description": "Api version."
     },
     "RunId": {
       "name": "runId",
