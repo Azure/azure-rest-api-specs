@@ -1935,7 +1935,11 @@
         "staticIP": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
-          "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
+          "description": "Static IP address. Optionally, may be specified when deploying a Redis cache inside an existing Azure Virtual Network; auto assigned by default.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
