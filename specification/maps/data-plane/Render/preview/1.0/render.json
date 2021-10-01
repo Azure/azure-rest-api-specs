@@ -57,6 +57,7 @@
       "type": "string",
       "in": "path",
       "required": true,
+      "x-ms-client-default": "png",
       "enum": [
         "png"
       ],
@@ -98,66 +99,39 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "RasterZoom18": {
-      "name": "zoom",
+    "BoundingBoxSouthWest": {
+      "name": "mincoordinates",
+      "x-ms-client-name": "southWest",
       "in": "query",
-      "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-18 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "description": "Minimum coordinates (south-west point) of bounding box in latitude longitude coordinate system. E.g. 52.41064,4.84228",
       "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "VectorZoom": {
-      "name": "zoom",
-      "in": "query",
-      "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-20 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "ImageryRasterZoom": {
-      "name": "zoom",
-      "in": "query",
-      "description": "Zoom level for the desired tile. Zoom value must be in the range: 1-19 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "RasterVectorNaturalEarthZoom": {
-      "name": "zoom",
-      "in": "query",
-      "description": "Zoom level for the desired tile. For _raster_ tiles, value must be in the range: 0-18 (inclusive). Terra raster tiles, values must be in the range 0-6 (inclusive). For _vector_ tiles, value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "IncludeText": {
-      "name": "text",
-      "in": "query",
-      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
-      "type": "string",
-      "enum": [
-        "yes",
-        "no"
-      ],
-      "x-ms-enum": {
-        "name": "IncludeText",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "yes",
-            "description": "Include all textual data in response."
-          },
-          {
-            "value": "no",
-            "description": "Exclude textual data from response. Only images and country names will be in response."
-          }
-        ]
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
       },
-      "x-ms-parameter-location": "method"
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "BoundingBox"
+      }
+    },
+    "BoundingBoxNorthEast": {
+      "name": "maxcoordinates",
+      "x-ms-client-name": "northEast",
+      "in": "query",
+      "description": "Maximum coordinates (north-east point) of bounding box in latitude longitude coordinate system. E.g. 52.41064,4.84228",
+      "required": true,
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "BoundingBox"
+      }
     }
   },
   "paths": {
@@ -246,13 +220,24 @@
             "name": "center",
             "in": "query",
             "description": "Coordinates of the center point. Format: 'lon,lat'. Projection used\n- EPSG:3857. Longitude range: -180 to 180. Latitude range: -85 to 85. \n\nNote: Either center or bbox are required parameters. They are\nmutually exclusive.",
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "bbox",
+            "x-ms-client-name": "boundingBox",
             "in": "query",
             "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat,\nmaxLon, maxLat'. \n\nNote: Either bbox or center are required\nparameters. They are mutually exclusive. It shouldn’t be used with\nheight or width.\n\nThe maximum allowed ranges for Lat and Lon are defined for each zoom level\nin the table at the top of this page.",
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "height",
@@ -412,7 +397,7 @@
             }
           },
           {
-            "$ref": "#/parameters/RasterVectorNaturalEarthZoom"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
@@ -496,7 +481,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/VectorZoom"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
@@ -595,6 +580,7 @@
             "description": "Map style to be returned. __Possible values:__ satellite.",
             "required": true,
             "type": "string",
+            "x-ms-client-default": "satellite",
             "enum": [
               "satellite"
             ],
@@ -610,7 +596,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ImageryRasterZoom"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
@@ -662,24 +648,16 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/BoundingBoxSouthWest"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxNorthEast"
+          },
+          {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "name": "mincoordinates",
-            "in": "query",
-            "description": "Minimum coordinates of bounding box in latitude longitude coordinate system. E.g. 52.41064,4.84228",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxcoordinates",
-            "in": "query",
-            "description": "Maximum coordinates of bounding box in latitude longitude coordinate system. E.g. 52.41064,4.84228",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/IncludeText"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
           }
         ],
         "responses": {
@@ -712,10 +690,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "$ref": "#/parameters/RasterZoom18"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
@@ -724,14 +699,17 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           },
           {
-            "$ref": "#/parameters/IncludeText"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetCopyrightForTileResult"
+              "$ref": "#/definitions/GetCopyrightResult"
             }
           },
           "default": {
@@ -760,14 +738,14 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "$ref": "#/parameters/IncludeText"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetCopyrightForWorldResult"
+              "$ref": "#/definitions/GetCopyrightResult"
             }
           },
           "default": {
@@ -837,8 +815,21 @@
         }
       }
     },
+    "CopyrightsResult": {
+      "type": "object",
+      "properties": {
+        "regions": {
+          "description": "Regions array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegionCopyrights"
+          }
+        }
+      }
+    },
     "GetCopyrightCaptionResult": {
-      "description": "This object is returned from a successful Get Copyright Caption call",
+      "description": "This object is returned from a successful copyright call",
       "type": "object",
       "properties": {
         "formatVersion": {
@@ -853,61 +844,17 @@
         }
       }
     },
-    "GetCopyrightForWorldResult": {
-      "description": "This object is returned from a successful Get Copyright For World call",
+    "GetCopyrightResult": {
+      "description": "This object is returned from a successful copyright call",
       "type": "object",
-      "properties": {
-        "formatVersion": {
-          "description": "Format Version property",
-          "type": "string",
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/GetCopyrightCaptionResult"
         },
-        "generalCopyrights": {
-          "description": "General Copyrights array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "regions": {
-          "description": "Regions array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RegionCopyrights"
-          }
+        {
+          "$ref": "#/definitions/CopyrightsResult"
         }
-      }
-    },
-    "GetCopyrightForTileResult": {
-      "description": "This object is returned from a successful Get Copyright For Tile call",
-      "type": "object",
-      "properties": {
-        "formatVersion": {
-          "description": "Format Version property",
-          "type": "string",
-          "readOnly": true
-        },
-        "generalCopyrights": {
-          "description": "General Copyrights array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "regions": {
-          "description": "Regions array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RegionCopyrights"
-          }
-        }
-      }
+      ]
     }
   }
 }

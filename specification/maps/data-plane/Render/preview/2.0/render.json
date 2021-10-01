@@ -131,15 +131,6 @@
         ]
       },
       "x-ms-parameter-location": "method"
-    },
-    "MapTileV2Zoom": {
-      "name": "zoom",
-      "in": "query",
-      "description": "Zoom level for the desired tile. Please find TilesetID list below for more details on supported zoom level for each tilesetId.<br>\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -163,7 +154,7 @@
             "$ref": "#/parameters/TilesetId_rv2"
           },
           {
-            "$ref": "#/parameters/MapTileV2Zoom"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
