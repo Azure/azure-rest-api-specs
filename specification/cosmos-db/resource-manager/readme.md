@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 ```yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.DocumentDB/stable/2021-10-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-10-15/managedCassandra.json
   - Microsoft.DocumentDB/stable/2021-10-15/notebook.json
   - Microsoft.DocumentDB/stable/2021-10-15/privateEndpointConnection.json
   - Microsoft.DocumentDB/stable/2021-10-15/privateLinkResources.json
