@@ -313,7 +313,7 @@
     }
   },
   "definitions": {
-    "ElevationResponse": {
+    "ElevationArray": {
       "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
       "type": "array",
       "readOnly": true,
@@ -340,7 +340,8 @@
       "description": "The response from a successful Get Data for Bounding Box API.",
       "properties": {
         "data": {
-          "$ref": "#/definitions/ElevationResponse"
+          "x-ms-client-name": "elevations",
+          "$ref": "#/definitions/ElevationArray"
         }
       }
     },
