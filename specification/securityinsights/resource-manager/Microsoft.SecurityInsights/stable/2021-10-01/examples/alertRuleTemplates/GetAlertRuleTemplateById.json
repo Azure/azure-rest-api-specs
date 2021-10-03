@@ -23,10 +23,14 @@
           "triggerThreshold": 0,
           "displayName": "Changes to Amazon VPC settings",
           "description": "This alert monitors changes to Amazon VPC (Virtual Private Cloud) settings such as new ACL entries and routes in route tables.\nMore information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255 \nand https://aws.amazon.com/vpc/",
+          "eventGroupingSettings": {
+            "aggregationKind": "AlertPerResult"
+          },
           "tactics": [
             "PrivilegeEscalation",
             "LateralMovement"
           ],
+          "lastUpdatedDateUTC": "2021-02-27T10:00:00Z",
           "createdDateUTC": "2019-02-27T00:00:00Z",
           "status": "Available",
           "requiredDataConnectors": [
@@ -34,6 +38,26 @@
               "connectorId": "AWS",
               "dataTypes": [
                 "AWSCloudTrail"
+              ]
+            }
+          ],
+          "entityMappings": [
+            {
+              "entityType": "Account",
+              "fieldMappings": [
+                {
+                  "identifier": "FullName",
+                  "columnName": "AccountCustomEntity"
+                }
+              ]
+            },
+            {
+              "entityType": "IP",
+              "fieldMappings": [
+                {
+                  "identifier": "Address",
+                  "columnName": "IPCustomEntity"
+                }
               ]
             }
           ],
