@@ -786,61 +786,6 @@
         "value"
       ]
     },
-    "AlertSeverity": {
-      "description": "The severity of the alert",
-      "enum": [
-        "High",
-        "Medium",
-        "Low",
-        "Informational"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AlertSeverity",
-        "values": [
-          {
-            "description": "High severity",
-            "value": "High"
-          },
-          {
-            "description": "Medium severity",
-            "value": "Medium"
-          },
-          {
-            "description": "Low severity",
-            "value": "Low"
-          },
-          {
-            "description": "Informational severity",
-            "value": "Informational"
-          }
-        ]
-      }
-    },
-    "AttackTactic": {
-      "description": "The severity for alerts created by this alert rule.",
-      "enum": [
-        "InitialAccess",
-        "Execution",
-        "Persistence",
-        "PrivilegeEscalation",
-        "DefenseEvasion",
-        "CredentialAccess",
-        "Discovery",
-        "LateralMovement",
-        "Collection",
-        "Exfiltration",
-        "CommandAndControl",
-        "Impact",
-        "PreAttack"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AttackTactic"
-      }
-    },
     "FusionAlertRule": {
       "allOf": [
         {
@@ -886,14 +831,14 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule.",
           "readOnly": true
         },
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -970,13 +915,13 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule."
         },
         "tactics": {
           "description": "The tactics of the alert rule template",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "type": "array"
         }
@@ -1024,7 +969,7 @@
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
-            "$ref": "#/definitions/AlertSeverity"
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity"
           },
           "type": "array"
         }
@@ -1158,7 +1103,7 @@
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
-            "$ref": "#/definitions/AlertSeverity"
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity"
           },
           "type": "array"
         }
@@ -1218,7 +1163,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule."
         },
         "triggerOperator": {
@@ -1484,7 +1429,7 @@
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "type": "array"
         },
@@ -1562,7 +1507,7 @@
           "type": "string"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule."
         },
         "triggerOperator": {
@@ -1577,7 +1522,7 @@
         "tactics": {
           "description": "The tactics of the alert rule template",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "type": "array"
         }
