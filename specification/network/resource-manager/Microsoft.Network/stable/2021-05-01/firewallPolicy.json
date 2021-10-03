@@ -705,7 +705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Will return the policy current signature overrides object",
+            "description": "Describes the new state of the signature overrides after the PUT operation",
             "schema": {
               "$ref": "#/definitions/SignaturesOverrides"
             }
@@ -766,7 +766,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listAllIdpsFilterOptions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions": {
       "post": {
         "operationId": "FirewallPolicyIdpsSignaturesFilterValues_List",
         "description": "Retrieves the current filter values for the signatures overrides",
@@ -814,6 +814,50 @@
         "x-ms-examples": {
           "query signature overrides": {
             "$ref": "./examples/FirewallPolicyQuerySignatureOverridesFilterValues.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/signatureOverrides": {
+      "get": {
+        "description": "Returns all signatures overrides objects for a specific policy as a list containing a single value.",
+        "operationId": "FirewallPolicyIdpsSignaturesOverrides_List",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Will return the policy current signature overrides object inside a list",
+            "schema": {
+              "$ref": "#/definitions/SignaturesOverridesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "get signature overrides": {
+            "$ref": "./examples/FirewallPolicySignatureOverridesList.json"
           }
         }
       }
@@ -1780,9 +1824,13 @@
           "type": "string",
           "description": "Describes the actual column name to sort by"
         },
-        "asc": {
-          "type": "boolean",
-          "description": "Describes if results should be in ascending order"
+        "Order": {
+          "type": "string",
+          "description": "Describes if results should be in ascending/descending order",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
         }
       }
     },
@@ -1790,14 +1838,10 @@
       "description": "Query result",
       "type": "object",
       "properties": {
-        "allRecords": {
+        "matchingRecordsCount": {
           "type": "integer",
           "format": "int64",
           "description": "Number of total records matching the query."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
         },
         "signatures": {
           "type": "array",
@@ -1890,6 +1934,14 @@
       "type": "object",
       "additionalProperties": {
         "type": "string"
+      }
+    },
+    "SignaturesOverridesList": {
+      "type": "array",
+      "description": "Describes a list consisting exactly one item describing the policy's signature override status",
+      "items": {
+        "description": "Describes the single signatures overrides object related to that policy.",
+        "$ref": "#/definitions/SignaturesOverrides"
       }
     },
     "SignaturesOverrides": {
