@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-01",
+    "version": "2021-11-01",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -1387,6 +1387,12 @@
           "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
         },
         "basicLoginInformation": {
+          "$ref": "#/definitions/BasicLoginInformation"
+        },
+        "metricsDashboardCredential": {
+          "$ref": "#/definitions/BasicLoginInformation"
+        },
+        "logsDashboardCredential": {
           "$ref": "#/definitions/BasicLoginInformation"
         },
         "logAnalyticsWorkspaceConfig": {
