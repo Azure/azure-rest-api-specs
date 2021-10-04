@@ -61,7 +61,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-07-01-preview/restorable.json
   - Microsoft.DocumentDB/preview/2021-07-01-preview/managedCassandra.json
   - Microsoft.DocumentDB/preview/2021-07-01-preview/services.json
-  - Microsoft.DocumentDB/preview/2021-10-15-preview/mongorbac.json
 modelerfour:
   lenient-model-deduplication: true
 ```
