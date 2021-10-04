@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/ScopeParameter"
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerConnectionNameParameter"
@@ -50,7 +50,204 @@
         "tags": [
           "NetworkManagerConnections"
         ],
-        "operationId": "NetworkManagerConnections_CreateOrUpdate",
+        "operationId": "SubscriptionNetworkManagerConnections_CreateOrUpdate",
+        "description": "Create a connection from this subscription to a cross tenant network manager.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the connection.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the connection.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Network Manager Connection": {
+            "$ref": "./examples/SubscriptionNetworkManagerConnectionPut.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "operationId": "SubscriptionNetworkManagerConnections_Get",
+        "description": "Get a specified connection created by this subscription.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns the connection.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Manager Connection": {
+            "$ref": "./examples/SubscriptionNetworkManagerConnectionGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "operationId": "SubscriptionNetworkManagerConnections_Delete",
+        "description": "Delete specified pending connection created by this subscription.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Network Manager Connection": {
+            "$ref": "./examples/SubscriptionNetworkManagerConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagerConnections": {
+      "get": {
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "operationId": "SubscriptionNetworkManagerConnections_List",
+        "description": "List all network manager connections created by this subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the network manager connection(s).",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Network Manager Connection": {
+            "$ref": "./examples/SubscriptionNetworkManagerConnectionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/listPendingScopeConnections": {
+      "post": {
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "operationId": "SubscriptionPendingScopeConnections_List",
+        "description": "List all pending scope connections created by a network manager.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+          },
+          "description": "Parameters supplied to list correct page."
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the scope connection(s).",
+            "schema": {
+              "$ref": "./networkManagerScopeConnections.json#/definitions/PendingScopeConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Pending Scope Connections Sent From A Network Manager": {
+            "$ref": "./examples/SubscriptionNetworkManagerPendingScopeConnectionList.json"
+          }
+        }
+      }
+    },
+    "/managementGroups/{managementGroupId}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ManagementGroupIdParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerConnectionNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "put": {
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "operationId": "ManagementGroupNetworkManagerConnections_CreateOrUpdate",
         "description": "Create a connection to a cross tenant network manager.",
         "parameters": [
           {
@@ -84,7 +281,7 @@
         },
         "x-ms-examples": {
           "Create or Update Network Manager Connection": {
-            "$ref": "./examples/NetworkManagerConnectionPut.json"
+            "$ref": "./examples/ManagementGroupNetworkManagerConnectionPut.json"
           }
         }
       },
@@ -92,8 +289,8 @@
         "tags": [
           "NetworkManagerConnections"
         ],
-        "operationId": "NetworkManagerConnections_Get",
-        "description": "Get a specified connection created by this subscription/management group.",
+        "operationId": "ManagementGroupNetworkManagerConnections_Get",
+        "description": "Get a specified connection created by this management group.",
         "responses": {
           "200": {
             "description": "OK - Returns the connection.",
@@ -110,7 +307,7 @@
         },
         "x-ms-examples": {
           "Get Network Manager Connection": {
-            "$ref": "./examples/NetworkManagerConnectionGet.json"
+            "$ref": "./examples/ManagementGroupNetworkManagerConnectionGet.json"
           }
         }
       },
@@ -118,8 +315,8 @@
         "tags": [
           "NetworkManagerConnections"
         ],
-        "operationId": "NetworkManagerConnections_Delete",
-        "description": "Delete specified pending connection created by this subscription/management group.",
+        "operationId": "ManagementGroupNetworkManagerConnections_Delete",
+        "description": "Delete specified pending connection created by this management group.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
@@ -136,21 +333,21 @@
         },
         "x-ms-examples": {
           "Delete Network Manager Connection": {
-            "$ref": "./examples/NetworkManagerConnectionDelete.json"
+            "$ref": "./examples/ManagementGroupNetworkManagerConnectionDelete.json"
           }
         }
       }
     },
-    "/{scope}/providers/Microsoft.Network/networkManagerConnections": {
+    "/managementGroups/{managementGroupId}/providers/Microsoft.Network/networkManagerConnections": {
       "get": {
         "tags": [
           "NetworkManagerConnections"
         ],
-        "operationId": "NetworkManagerConnections_List",
-        "description": "List all network manager connections created by this subscription/management group.",
+        "operationId": "ManagementGroupNetworkManagerConnections_List",
+        "description": "List all network manager connections created by this management group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -181,32 +378,35 @@
         },
         "x-ms-examples": {
           "List Network Manager Connection": {
-            "$ref": "./examples/NetworkManagerConnectionList.json"
+            "$ref": "./examples/ManagementGroupNetworkManagerConnectionList.json"
           }
         }
       }
     },
-    "/{scope}/providers/Microsoft.Network/listPendingScopeConnections": {
+    "/managementGroups/{managementGroupId}/providers/Microsoft.Network/listPendingScopeConnections": {
       "post": {
         "tags": [
           "NetworkManagerConnections"
         ],
-        "operationId": "PendingScopeConnections_List",
+        "operationId": "ManagementGroupPendingScopeConnections_List",
         "description": "List all pending scope connections created by a network manager.",
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./networkManager.json#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "./networkManager.json#/parameters/ListSkipTokenParameter"
           }
         ],
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+          },
+          "description": "Parameters supplied to list correct page."
+        },
         "responses": {
           "200": {
             "description": "OK - Returns information about the scope connection(s).",
@@ -223,7 +423,7 @@
         },
         "x-ms-examples": {
           "List Pending Scope Connections Sent From A Network Manager": {
-            "$ref": "./examples/NetworkManagerPendingScopeConnectionList.json"
+            "$ref": "./examples/ManagementGroupNetworkManagerPendingScopeConnectionList.json"
           }
         }
       }
@@ -303,13 +503,12 @@
     }
   },
   "parameters": {
-    "ScopeParameter": {
-      "name": "scope",
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Scope id for subscription or management group.",
-      "x-ms-parameter-location": "method"
+      "description": "The management group Id which uniquely identify the Microsoft Azure management group."
     },
     "NetworkManagerConnectionNameParameter": {
       "name": "networkManagerConnectionName",

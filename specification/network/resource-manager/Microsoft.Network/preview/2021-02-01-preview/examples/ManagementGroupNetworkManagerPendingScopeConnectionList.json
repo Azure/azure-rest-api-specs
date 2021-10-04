@@ -2,7 +2,10 @@
   "title": "List Pending Azure Virtual Network Manager Scope Connection",
   "parameters": {
     "api-version": "2021-02-01-preview",
-    "scope": "subscriptions/subscriptionA"
+    "managementGroup": "managementGroupA",
+    "body": {
+      "skipToken": "NextFakeSkipTokenCode"
+    }
   },
   "responses": {
     "200": {
@@ -25,13 +28,13 @@
             },
             "properties": {
               "tenantId": "6babcaad-604b-40ac-a9d7-9fd97c0b779f",
-              "managementGroups": [],
-              "subscriptions": [
+              "managementGroups": [
                 {
-                  "id": "subscriptionA",
+                  "id": "managementGroupA",
                   "state": "Pending"
                 }
-              ]
+              ],
+              "subscriptions": []
             }
           }
         ],

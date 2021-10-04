@@ -46,7 +46,7 @@
           "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/scopeConnectionName"
+          "$ref": "#/parameters/ScopeConnectionName"
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -197,11 +197,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listPendingNetworkManagerConnections": {
       "post": {
-        "tags": [
-          "ScopeConnections"
-        ],
-        "operationId": "PendingNetworkManagerConnection_List",
-        "description": "List all pending network manager connections sent from a subscription or management group.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -216,6 +211,20 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
+        "tags": [
+          "ScopeConnections"
+        ],
+        "operationId": "PendingNetworkManagerConnection_List",
+        "description": "List all pending network manager connections sent from a subscription or management group.",
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+          },
+          "description": "Parameters supplied to list correct page."
+        },
         "responses": {
           "200": {
             "description": "OK - Returns a list of the network manager connections sent from a subscription or management group.",
@@ -275,14 +284,14 @@
         "managementGroups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScopeConnectionManagementGroup"
+            "$ref": "#/definitions/ScopeConnectionMember"
           },
           "description": "List of management groups within scope connection."
         },
         "subscriptions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScopeConnectionSubscription"
+            "$ref": "#/definitions/ScopeConnectionMember"
           },
           "description": "List of subscriptions within scope connection."
         }
@@ -321,7 +330,7 @@
       },
       "description": "List of scope connections."
     },
-    "ScopeConnectionManagementGroup": {
+    "ScopeConnectionMember": {
       "type": "object",
       "properties": {
         "id": {
@@ -333,21 +342,7 @@
           "description": "Connection State"
         }
       },
-      "description": "Management groups within scope connection."
-    },
-    "ScopeConnectionSubscription": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "state": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectionState",
-          "description": "Connection State"
-        }
-      },
-      "description": "Subscriptions within scope connection."
+      "description": "Management group or subscription within scope connection."
     },
     "ConnectionState": {
       "type": "string",
@@ -366,8 +361,8 @@
     }
   },
   "parameters": {
-    "scopeConnectionName": {
-      "name": "scopeConnectionName",
+    "ScopeConnectionName": {
+      "name": "ScopeConnectionName",
       "in": "path",
       "required": true,
       "type": "string",
