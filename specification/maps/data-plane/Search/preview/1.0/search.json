@@ -202,6 +202,61 @@
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
+    "EntityType": {
+      "name": "entityType",
+      "in": "query",
+      "description": "Specifies the level of filtering performed on geographies. Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API. The following parameters are ignored when entityType is set:\n\n* heading\n* number\n* returnRoadUse\n* returnSpeedLimit\n* roadUse\n* returnMatchType",
+      "type": "string",
+      "enum": [
+        "Country",
+        "CountrySubdivision",
+        "CountrySecondarySubdivision",
+        "CountryTertiarySubdivision",
+        "Municipality",
+        "MunicipalitySubdivision",
+        "Neighbourhood",
+        "PostalCodeArea"
+      ],
+      "x-ms-enum": {
+        "name": "EntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Country",
+            "description": "Country name"
+          },
+          {
+            "value": "CountrySubdivision",
+            "description": "State or Province"
+          },
+          {
+            "value": "CountrySecondarySubdivision",
+            "description": "County"
+          },
+          {
+            "value": "CountryTertiarySubdivision",
+            "description": "Named Area"
+          },
+          {
+            "value": "Municipality",
+            "description": "City / Town"
+          },
+          {
+            "value": "MunicipalitySubdivision",
+            "description": "Sub / Super City"
+          },
+          {
+            "value": "Neighbourhood",
+            "description": "Neighbourhood"
+          },
+          {
+            "value": "PostalCodeArea",
+            "description": "Postal Code / Zip Code"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "ExtendedPostalCodesFor": {
       "name": "extendedPostalCodesFor",
       "in": "query",
@@ -496,6 +551,9 @@
           },
           {
             "$ref": "#/parameters/ConnectorSet"
+          },
+          {
+            "$ref": "#/parameters/EntityType"
           },
           {
             "$ref": "#/parameters/View"
@@ -864,6 +922,9 @@
             "$ref": "#/parameters/ExtendedPostalCodesFor"
           },
           {
+            "$ref": "#/parameters/EntityType"
+          },
+          {
             "$ref": "#/parameters/View"
           }
         ],
@@ -953,58 +1014,7 @@
             "type": "boolean"
           },
           {
-            "name": "entityType",
-            "in": "query",
-            "description": "Specifies the level of filtering performed on geographies. Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API. The following parameters are ignored when entityType is set:\n\n* heading\n* number\n* returnRoadUse\n* returnSpeedLimit\n* roadUse\n* returnMatchType",
-            "type": "string",
-            "enum": [
-              "Country",
-              "CountrySubdivision",
-              "CountrySecondarySubdivision",
-              "CountryTertiarySubdivision",
-              "Municipality",
-              "MunicipalitySubdivision",
-              "Neighbourhood",
-              "PostalCodeArea"
-            ],
-            "x-ms-enum": {
-              "name": "EntityType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Country",
-                  "description": "Country name"
-                },
-                {
-                  "value": "CountrySubdivision",
-                  "description": "State or Province"
-                },
-                {
-                  "value": "CountrySecondarySubdivision",
-                  "description": "County"
-                },
-                {
-                  "value": "CountryTertiarySubdivision",
-                  "description": "Named Area"
-                },
-                {
-                  "value": "Municipality",
-                  "description": "City / Town"
-                },
-                {
-                  "value": "MunicipalitySubdivision",
-                  "description": "Sub / Super City"
-                },
-                {
-                  "value": "Neighbourhood",
-                  "description": "Neighbourhood"
-                },
-                {
-                  "value": "PostalCodeArea",
-                  "description": "Postal Code / Zip Code"
-                }
-              ]
-            }
+            "$ref": "#/parameters/EntityType"
           },
           {
             "$ref": "#/parameters/View"
@@ -1170,6 +1180,9 @@
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
+          },
+          {
+            "$ref": "#/parameters/EntityType"
           },
           {
             "$ref": "#/parameters/View"
