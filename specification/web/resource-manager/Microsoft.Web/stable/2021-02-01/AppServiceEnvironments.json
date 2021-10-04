@@ -1,0 +1,2903 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-02-01",
+    "title": "AppServiceEnvironments API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/hostingEnvironments": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all App Service Environments for a subscription.",
+        "description": "Description for Get all App Service Environments for a subscription.",
+        "operationId": "AppServiceEnvironments_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all App Service Environments in a resource group.",
+        "description": "Description for Get all App Service Environments in a resource group.",
+        "operationId": "AppServiceEnvironments_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the properties of an App Service Environment.",
+        "description": "Description for Get the properties of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update an App Service Environment.",
+        "description": "Description for Create or update an App Service Environment.",
+        "operationId": "AppServiceEnvironments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the App Service Environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Delete an App Service Environment.",
+        "description": "Description for Delete an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Specify <code>true</code> to force the deletion even if the App Service Environment contains resources. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Operation is in progress."
+          },
+          "204": {
+            "description": "App Service Environment does not exist"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update an App Service Environment.",
+        "description": "Description for Create or update an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the App Service Environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/compute": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the used, available, and total worker capacity an App Service Environment.",
+        "description": "Description for Get the used, available, and total worker capacity an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListCapacities",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StampCapacityCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/virtualip": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get IP addresses assigned to an App Service Environment.",
+        "description": "Description for Get IP addresses assigned to an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetVipInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddressResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/changeVirtualNetwork": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Move an App Service Environment to a different VNET.",
+        "description": "Description for Move an App Service Environment to a different VNET.",
+        "operationId": "AppServiceEnvironments_ChangeVnet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetInfo",
+            "in": "body",
+            "description": "Details for the new virtual network.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VirtualNetworkProfile"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/configurations/networking": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get networking configuration of an App Service Environment",
+        "description": "Description for Get networking configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_GetAseV3NetworkingConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Update networking configuration of an App Service Environment",
+        "description": "Description for Update networking configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_UpdateAseNetworkingConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aseNetworkingConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get diagnostic information for an App Service Environment.",
+        "description": "Description for Get diagnostic information for an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListDiagnostics",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostingEnvironmentDiagnostics"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get a diagnostics item for an App Service Environment.",
+        "description": "Description for Get a diagnostics item for an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticsName",
+            "in": "path",
+            "description": "Name of the diagnostics item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostingEnvironmentDiagnostics"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/inboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
+        "description": "Description for Get the network endpoints of all inbound dependencies of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Inbound Network Dependencies Endpoints": {
+            "$ref": "./examples/GetInboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all multi-role pools.",
+        "description": "Description for Get all multi-role pools.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePools",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get properties of a multi-role pool.",
+        "description": "Description for Get properties of a multi-role pool.",
+        "operationId": "AppServiceEnvironments_GetMultiRolePool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a multi-role pool.",
+        "description": "Description for Create or update a multi-role pool.",
+        "operationId": "AppServiceEnvironments_CreateOrUpdateMultiRolePool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "multiRolePoolEnvelope",
+            "in": "body",
+            "description": "Properties of the multi-role pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a multi-role pool.",
+        "description": "Description for Create or update a multi-role pool.",
+        "operationId": "AppServiceEnvironments_UpdateMultiRolePool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "multiRolePoolEnvelope",
+            "in": "body",
+            "description": "Properties of the multi-role pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
+        "description": "Description for Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the multi-role pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a multi-role pool of an App Service Environment.",
+        "description": "Description for Get metric definitions for a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRoleMetricDefinitions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/skus": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get available SKUs for scaling a multi-role pool.",
+        "description": "Description for Get available SKUs for scaling a multi-role pool.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePoolSkus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuInfoCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/usages": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get usage metrics for a multi-role pool of an App Service Environment.",
+        "description": "Description for Get usage metrics for a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRoleUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/operations": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "List all currently running operations on the App Service Environment.",
+        "description": "Description for List all currently running operations on the App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/Operation"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
+        "description": "Description for Get the network endpoints of all outbound dependencies of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Outbound Network Dependencies Endpoints": {
+            "$ref": "./examples/GetOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Gets the list of private endpoints associated with a hosting environment",
+        "description": "Description for Gets the list of private endpoints associated with a hosting environment",
+        "operationId": "AppServiceEnvironments_GetPrivateEndpointConnectionList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Gets a private endpoint connection",
+        "description": "Description for Gets a private endpoint connection",
+        "operationId": "AppServiceEnvironments_GetPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Approves or rejects a private endpoint connection",
+        "description": "Description for Approves or rejects a private endpoint connection",
+        "operationId": "AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Deletes a private endpoint connection",
+        "description": "Description for Deletes a private endpoint connection",
+        "operationId": "AppServiceEnvironments_DeletePrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Gets the private link resources",
+        "description": "Description for Gets the private link resources",
+        "operationId": "AppServiceEnvironments_GetPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/reboot": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Reboot all machines in an App Service Environment.",
+        "description": "Description for Reboot all machines in an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Reboot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/resume": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Resume an App Service Environment.",
+        "description": "Description for Resume an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Resume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all App Service plans in an App Service Environment.",
+        "description": "Description for Get all App Service plans in an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListAppServicePlans",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlanCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/sites": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all apps in an App Service Environment.",
+        "description": "Description for Get all apps in an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWebApps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "propertiesToInclude",
+            "in": "query",
+            "description": "Comma separated list of app properties to include.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/suspend": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Suspend an App Service Environment.",
+        "description": "Description for Suspend an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Suspend",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/usages": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get global usage metrics of an App Service Environment.",
+        "description": "Description for Get global usage metrics of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CsmUsageQuotaCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all worker pools of an App Service Environment.",
+        "description": "Description for Get all worker pools of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWorkerPools",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get properties of a worker pool.",
+        "description": "Description for Get properties of a worker pool.",
+        "operationId": "AppServiceEnvironments_GetWorkerPool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a worker pool.",
+        "description": "Description for Create or update a worker pool.",
+        "operationId": "AppServiceEnvironments_CreateOrUpdateWorkerPool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolEnvelope",
+            "in": "body",
+            "description": "Properties of the worker pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a worker pool.",
+        "description": "Description for Create or update a worker pool.",
+        "operationId": "AppServiceEnvironments_UpdateWorkerPool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolEnvelope",
+            "in": "body",
+            "description": "Properties of the worker pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
+        "description": "Description for Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a worker pool of an App Service Environment.",
+        "description": "Description for Get metric definitions for a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWebWorkerMetricDefinitions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/skus": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get available SKUs for scaling a worker pool.",
+        "description": "Description for Get available SKUs for scaling a worker pool.",
+        "operationId": "AppServiceEnvironments_ListWorkerPoolSkus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuInfoCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/usages": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get usage metrics for a worker pool of an App Service Environment.",
+        "description": "Description for Get usage metrics for a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWebWorkerUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddressResponse": {
+      "description": "Describes main public IP address and any extra virtual IPs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AddressResponse resource specific properties",
+          "type": "object",
+          "properties": {
+            "serviceIpAddress": {
+              "description": "Main public virtual IP.",
+              "type": "string"
+            },
+            "internalIpAddress": {
+              "description": "Virtual Network internal IP address of the App Service Environment if it is in internal load-balancing mode.",
+              "type": "string"
+            },
+            "outboundIpAddresses": {
+              "description": "IP addresses appearing on outbound connections.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vipMappings": {
+              "description": "Additional virtual IPs.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualIPMapping"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AppServiceEnvironmentCollection": {
+      "description": "Collection of App Service Environments.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceEnvironmentResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppServiceEnvironmentPatchResource": {
+      "description": "ARM resource for a app service environment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AppServiceEnvironmentResource": {
+      "description": "App Service Environment ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AseV3NetworkingConfiguration": {
+      "description": "Full view of networking configuration for an ASE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AseV3NetworkingConfiguration resource specific properties",
+          "type": "object",
+          "properties": {
+            "windowsOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "linuxOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "externalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "internalInboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "allowNewPrivateEndpointConnections": {
+              "description": "Property to enable and disable new private endpoint connection creation on ASE",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EndpointDependency": {
+      "description": "A domain name that a service is reached at, including details of the current connection status.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The IP Addresses and Ports used when connecting to DomainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "Current TCP connectivity information from the App Service Environment to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "An IP Address that Domain Name currently resolves to.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        },
+        "latency": {
+          "format": "double",
+          "description": "The time in milliseconds it takes for a TCP connection to be created from the App Service Environment to this IpAddress at this Port.",
+          "type": "number"
+        },
+        "isAccessible": {
+          "description": "Whether it is possible to create a TCP connection from the App Service Environment to this IpAddress at this Port.",
+          "type": "boolean"
+        }
+      }
+    },
+    "HostingEnvironmentDiagnostics": {
+      "description": "Diagnostics for an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name/identifier of the diagnostics.",
+          "type": "string"
+        },
+        "diagnosticsOutput": {
+          "description": "Diagnostics output.",
+          "type": "string"
+        }
+      }
+    },
+    "InboundEnvironmentEndpoint": {
+      "description": "The IP Addresses and Ports that require inbound network access to and within the subnet of the App Service Environment.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Short text describing the purpose of the network traffic.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The IP addresses that network traffic will originate from in cidr notation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ports": {
+          "description": "The ports that network traffic will arrive to the App Service Environment at.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InboundEnvironmentEndpointCollection": {
+      "description": "Collection of Inbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that the App Service Environment reaches the service at.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "Collection of Outbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricAvailability": {
+      "description": "Metrics availability and retention.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain .",
+          "type": "string",
+          "readOnly": true
+        },
+        "retention": {
+          "description": "Retention period for the current time grain.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricDefinition": {
+      "description": "Metadata for the metrics.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ResourceMetricDefinition resource specific properties",
+          "type": "object",
+          "properties": {
+            "unit": {
+              "description": "Unit of the metric.",
+              "type": "string",
+              "readOnly": true
+            },
+            "primaryAggregationType": {
+              "description": "Primary aggregation type.",
+              "type": "string",
+              "readOnly": true
+            },
+            "metricAvailabilities": {
+              "description": "List of time grains supported for the metric together with retention period.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceMetricAvailability"
+              },
+              "readOnly": true
+            },
+            "resourceUri": {
+              "description": "Resource URI.",
+              "type": "string",
+              "readOnly": true
+            },
+            "properties": {
+              "description": "Resource metric definition properties.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResourceMetricDefinitionCollection": {
+      "description": "Collection of metric definitions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuInfo": {
+      "description": "SKU discovery information.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource type that this SKU applies to.",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
+          "description": "Name and tier of the SKU."
+        },
+        "capacity": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuCapacity",
+          "description": "Min, max, and default scale values of the SKU."
+        }
+      }
+    },
+    "SkuInfoCollection": {
+      "description": "Collection of SKU information.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StampCapacity": {
+      "description": "Stamp capacity information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the stamp.",
+          "type": "string"
+        },
+        "availableCapacity": {
+          "format": "int64",
+          "description": "Available capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "totalCapacity": {
+          "format": "int64",
+          "description": "Total capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "Name of the unit.",
+          "type": "string"
+        },
+        "computeMode": {
+          "description": "Shared/dedicated workers.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "Size of the machines.",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large",
+            "D1",
+            "D2",
+            "D3",
+            "SmallV3",
+            "MediumV3",
+            "LargeV3",
+            "NestedSmall",
+            "NestedSmallLinux",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkerSizeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Size ID of machines: \n0 - Small\n1 - Medium\n2 - Large",
+          "type": "integer"
+        },
+        "excludeFromCapacityAllocation": {
+          "description": "If <code>true</code>, it includes basic apps.\nBasic apps are not used for capacity allocation.",
+          "type": "boolean"
+        },
+        "isApplicableForAllComputeModes": {
+          "description": "<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "siteMode": {
+          "description": "Shared or Dedicated.",
+          "type": "string"
+        },
+        "isLinux": {
+          "description": "Is this a linux stamp capacity",
+          "type": "boolean"
+        }
+      }
+    },
+    "StampCapacityCollection": {
+      "description": "Collection of stamp capacities.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampCapacity"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Usage": {
+      "description": "Usage of the quota resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Usage resource specific properties",
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "description": "Friendly name shown in the UI.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceName": {
+              "description": "Name of the quota resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "unit": {
+              "description": "Units of measurement for the quota resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "currentValue": {
+              "format": "int64",
+              "description": "The current value of the resource counter.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "limit": {
+              "format": "int64",
+              "description": "The resource limit.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "nextResetTime": {
+              "format": "date-time",
+              "description": "Next reset time for the resource counter.",
+              "type": "string",
+              "readOnly": true
+            },
+            "computeMode": {
+              "description": "Compute mode used for this usage.",
+              "enum": [
+                "Shared",
+                "Dedicated",
+                "Dynamic"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ComputeModeOptions",
+                "modelAsString": false
+              }
+            },
+            "siteMode": {
+              "description": "Site mode used for this usage.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UsageCollection": {
+      "description": "Collection of usages.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualIPMapping": {
+      "description": "Virtual IP mapping.",
+      "type": "object",
+      "properties": {
+        "virtualIP": {
+          "description": "Virtual IP address.",
+          "type": "string"
+        },
+        "internalHttpPort": {
+          "format": "int32",
+          "description": "Internal HTTP port.",
+          "type": "integer"
+        },
+        "internalHttpsPort": {
+          "format": "int32",
+          "description": "Internal HTTPS port.",
+          "type": "integer"
+        },
+        "inUse": {
+          "description": "Is virtual IP mapping in use.",
+          "type": "boolean"
+        },
+        "serviceName": {
+          "description": "name of the service that virtual IP is assigned to",
+          "type": "string"
+        }
+      }
+    },
+    "WorkerPool": {
+      "description": "Worker pool of an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Worker size ID for referencing this worker pool.",
+          "type": "integer"
+        },
+        "computeMode": {
+          "description": "Shared or dedicated app hosting.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "VM size of the worker pool instances.",
+          "type": "string"
+        },
+        "workerCount": {
+          "format": "int32",
+          "description": "Number of instances in the worker pool.",
+          "type": "integer"
+        },
+        "instanceNames": {
+          "description": "Names of all instances in the worker pool (read only).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "WorkerPoolCollection": {
+      "description": "Collection of worker pools.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerPoolResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkerPoolResource": {
+      "description": "Worker pool of an App Service Environment ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkerPool",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

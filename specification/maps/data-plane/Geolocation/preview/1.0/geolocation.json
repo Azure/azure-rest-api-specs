@@ -5,14 +5,7 @@
     "version": "1.0",
     "description": "Azure Maps Geolocation REST APIs"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
+  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
@@ -49,7 +42,7 @@
   ],
   "responses": {},
   "parameters": {
-    "GeolocationApiVersion": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -62,11 +55,11 @@
   "paths": {
     "/geolocation/ip/{format}": {
       "get": {
-        "description": "\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis service will return the ISO country code for the provided IP address. Developers can use this information  to block or alter certain content based on geographical locations where the application is being viewed from. \n\n\n__Note:__ This service returns results from IANA and does not necessarily reflect the views of Microsoft  Corporation.",
-        "operationId": "Geolocation_GetIPToLocationPreview",
+        "description": "\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis service will return the ISO country code for the provided IP address. Developers can use this information  to block or alter certain content based on geographical locations where the application is being viewed from.",
+        "operationId": "GetLocation",
         "x-ms-examples": {
-          "GetLocationByIpAddress": {
-            "$ref": "./examples/GetLocationByIpAddress.json"
+          "Successfully retrieve country code from IP address": {
+            "$ref": "./examples/SuccessfulGetCountryCodeFromIP.json"
           }
         },
         "parameters": [
@@ -74,13 +67,14 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/GeolocationApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "ip",
+            "x-ms-client-name": "ipAddress",
             "in": "query",
             "description": "The IP address. Both IPv4 and IPv6 are allowed.",
             "required": true,
@@ -123,7 +117,7 @@
       "readOnly": true,
       "properties": {
         "isoCode": {
-          "description": "The IP Address's 2-character code [(ISO 3166-1)](https://www.iso.org/iso-3166-country-codes.html) of the country or region as assigned by IANA and regional internet authorities. Please note, IP address in ranges reserved for special purpose will return Null for country/region.",
+          "description": "The IP Address's 2-character code [(ISO 3166-1)](https://www.iso.org/iso-3166-country-codes.html) of the country or region. Please note, IP address in ranges reserved for special purpose will return Null for country/region.",
           "type": "string",
           "readOnly": true
         }
