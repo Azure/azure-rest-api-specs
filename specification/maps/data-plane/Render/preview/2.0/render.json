@@ -192,10 +192,10 @@
     "/map/tile": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
-        "operationId": "GetMapTileV2",
+        "operationId": "GetMapTile",
         "x-ms-examples": {
           "GetMapTile": {
-            "$ref": "./examples/GetMapTileV2.json"
+            "$ref": "./examples/GetMapTile.json"
           }
         },
         "parameters": [
@@ -225,28 +225,7 @@
             "format": "date-time"
           },
           {
-            "name": "tileSize",
-            "in": "query",
-            "description": "The size of the returned map tile in pixels.",
-            "type": "string",
-            "enum": [
-              "256",
-              "512"
-            ],
-            "x-ms-enum": {
-              "name": "TileSize",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "256",
-                  "description": "Return a 256 by 256 pixel tile. Available for all tilesetIds except for\n* microsoft.terra.main"
-                },
-                {
-                  "value": "512",
-                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid\n* microsoft.dem\n* microsoft.imagery"
-                }
-              ]
-            }
+            "$ref": "../1.0/render.json#/parameters/MapTileSize"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -266,9 +245,7 @@
           "200": {
             "description": "The tile returned from a successful API call.",
             "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
+              "$ref": "#/definitions/MapTile"
             },
             "headers": {
               "Content-Type": {
@@ -282,6 +259,14 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "MapTile": {
+      "description": "The tile returned from a successful API call.",
+      "type": "object",
+      "format": "file",
+      "readOnly": true
     }
   }
 }

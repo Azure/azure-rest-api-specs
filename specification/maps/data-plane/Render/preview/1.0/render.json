@@ -73,6 +73,33 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "MapTileSize": {
+      "name": "tileSize",
+      "in": "query",
+      "description": "The size of the returned map tile in pixels.",
+      "type": "string",
+      "enum": [
+        "256",
+        "512"
+      ],
+      "x-ms-enum": {
+        "name": "MapTileSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "256",
+            "name": "size256",
+            "description": "Return a 256 by 256 pixel tile."
+          },
+          {
+            "value": "512",
+            "name": "size512",
+            "description": "Return a 512 by 512 pixel tile."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "TileFormat": {
       "name": "format",
       "description": "Desired format of the response. Possible values are png & pbf.",
@@ -406,28 +433,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
           },
           {
-            "name": "tileSize",
-            "in": "query",
-            "description": "The size of the returned map tile in pixels.",
-            "type": "string",
-            "enum": [
-              "256",
-              "512"
-            ],
-            "x-ms-enum": {
-              "name": "MapTileSize",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "256",
-                  "description": "Return a 256 by 256 pixel tile."
-                },
-                {
-                  "value": "512",
-                  "description": "Return a 512 by 512 pixel tile."
-                }
-              ]
-            }
+            "$ref": "#/parameters/MapTileSize"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -546,7 +552,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetCopyrightCaptionResult"
+              "$ref": "#/definitions/CopyrightCaption"
             }
           },
           "default": {
@@ -664,7 +670,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetCopyrightFromBoundingBoxResult"
+              "$ref": "#/definitions/Copyright"
             }
           },
           "default": {
@@ -709,7 +715,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetCopyrightResult"
+              "$ref": "#/definitions/Copyright"
             }
           },
           "default": {
@@ -745,7 +751,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetCopyrightResult"
+              "$ref": "#/definitions/Copyright"
             }
           },
           "default": {
@@ -756,34 +762,6 @@
     }
   },
   "definitions": {
-    "GetCopyrightFromBoundingBoxResult": {
-      "description": "This object is returned from a successful Get Copyright From Bounding Box call",
-      "type": "object",
-      "properties": {
-        "formatVersion": {
-          "description": "Format Version property",
-          "type": "string",
-          "readOnly": true
-        },
-        "generalCopyrights": {
-          "description": "General Copyrights array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "regions": {
-          "description": "Regions array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RegionCopyrights"
-          }
-        }
-      }
-    },
     "RegionCopyrights": {
       "type": "object",
       "properties": {
@@ -815,7 +793,7 @@
         }
       }
     },
-    "GetCopyrightCaptionResult": {
+    "CopyrightCaption": {
       "description": "This object is returned from a successful copyright call",
       "type": "object",
       "properties": {
@@ -831,8 +809,8 @@
         }
       }
     },
-    "GetCopyrightResult": {
-      "description": "This object is returned from a successful Get Copyright For Tile call",
+    "Copyright": {
+      "description": "This object is returned from a successful copyright request",
       "type": "object",
       "properties": {
         "formatVersion": {

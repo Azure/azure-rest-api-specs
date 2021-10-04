@@ -59,7 +59,7 @@
         "operationId": "GetMapTileV2",
         "x-ms-examples": {
           "GetMapTile": {
-            "$ref": "./examples/GetMapTileV2.json"
+            "$ref": "./examples/GetMapTile.json"
           }
         },
         "parameters": [
@@ -89,28 +89,7 @@
             "type": "string"
           },
           {
-            "name": "tileSize",
-            "in": "query",
-            "description": "The size of the returned map tile in pixels.",
-            "type": "string",
-            "enum": [
-              "256",
-              "512"
-            ],
-            "x-ms-enum": {
-              "name": "TileSize",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "256",
-                  "description": "Return a 256 by 256 pixel tile. Available for all tilesetIds except for\n* microsoft.terra.main"
-                },
-                {
-                  "value": "512",
-                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid\n* microsoft.dem\n* microsoft.imagery"
-                }
-              ]
-            }
+            "$ref": "../1.0/render.json#/parameters/MapTileSize"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -130,9 +109,7 @@
           "200": {
             "description": "The tile returned from a successful API call.",
             "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
+              "$ref": "../2.0/render.json#/definitions/MapTile"
             },
             "headers": {
               "Content-Type": {
@@ -153,7 +130,7 @@
         "operationId": "GetMapTileset",
         "x-ms-examples": {
           "GetMapTileset": {
-            "$ref": "./examples/GetMapTilesetV2.json"
+            "$ref": "./examples/GetMapTileset.json"
           }
         },
         "parameters": [
@@ -174,7 +151,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MapTilesetResultV2"
+              "$ref": "#/definitions/MapTileset"
             }
           },
           "default": {
@@ -189,7 +166,7 @@
         "operationId": "GetMapAttribution",
         "x-ms-examples": {
           "GetMapAttribution": {
-            "$ref": "./examples/GetMapAttributionV2.json"
+            "$ref": "./examples/GetMapAttribution.json"
           }
         },
         "parameters": [
@@ -219,7 +196,8 @@
             "type": "array",
             "collectionFormat": "csv",
             "items": {
-              "type": "string"
+              "type": "number",
+              "format": "double"
             }
           }
         ],
@@ -230,7 +208,293 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MapAttributionResultV2"
+              "$ref": "#/definitions/MapAttribution"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/statetile": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nFetches state tiles in vector format typically to be integrated into indoor maps module of map control or SDK. The map control will call this API after user turns on dynamic styling (see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid))",
+        "operationId": "GetMapStateTile",
+        "x-ms-examples": {
+          "GetMapStateTile": {
+            "$ref": "./examples/GetMapStateTile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
+          },
+          {
+            "name": "statesetId",
+            "in": "query",
+            "description": "The stateset id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/vnd.mapbox-vector-tile",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "This tile is returned from a successful Get Map State Tile call",
+            "schema": {
+              "$ref": "../2.0/render.json#/definitions/MapTile"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/copyright/caption/{format}": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\n\nCopyrights API is designed to serve copyright information for Render Tile \nservice. In addition to basic copyright for the whole map, API is serving \nspecific groups of copyrights for some countries.\n\nAs an alternative to copyrights for map request, one can receive captions\nfor displaying the map provider information on the map.",
+        "operationId": "GetCopyrightCaption",
+        "x-ms-examples": {
+          "GetCopyrightCaption": {
+            "$ref": "./examples/GetCopyrightCaption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../1.0/render.json#/definitions/CopyrightCaption"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/imagery/{format}": {
+      "get": {
+        "description": "**Applies to:** S1 pricing tier.\n\n\nThis service returns a map image tile with size 256x256, given the x and y coordinates and zoom\nlevel. Zoom level ranges from 1 to 19. The current available style value is 'satellite' which provides satellite\nimagery alone.\n\n\n**Note**: We recommend to start to use the new [Get Map Tile V2 API](https://aka.ms/GetMapTileV2).",
+        "operationId": "GetMapImageryTile",
+        "x-ms-examples": {
+          "GetMapImageryTile": {
+            "$ref": "./examples/GetMapImageryTile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../1.0/render.json#/parameters/RasterTileFormat"
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "description": "Map style to be returned. __Possible values:__ satellite.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-default": "satellite",
+            "enum": [
+              "satellite"
+            ],
+            "x-ms-enum": {
+              "name": "MapImageryStyle",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "satellite",
+                  "description": "Satellite imagery"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "image/jpeg",
+          "image/png"
+        ],
+        "responses": {
+          "200": {
+            "description": "This image is returned from a successful Get Map Imagery Tile call",
+            "schema": {
+              "$ref": "../2.0/render.json#/definitions/MapTile"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/copyright/bounding/{format}": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns copyright information for a given bounding box. Bounding-box requests should specify the minimum and maximum longitude and latitude (EPSG-3857) coordinates",
+        "operationId": "GetCopyrightFromBoundingBox",
+        "x-ms-examples": {
+          "GetCopyrightFromBoundingBox": {
+            "$ref": "./examples/GetCopyrightFromBoundingBox.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../1.0/render.json#/parameters/BoundingBoxSouthWest"
+          },
+          {
+            "$ref": "../1.0/render.json#/parameters/BoundingBoxNorthEast"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../1.0/render.json#/definitions/Copyright"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/copyright/tile/{format}": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nReturns the copyright information for a given tile. To obtain the copyright information for a particular tile, the request should specify the tile's zoom level and x and y coordinates (see: Zoom Levels and Tile Grid).",
+        "operationId": "GetCopyrightForTile",
+        "x-ms-examples": {
+          "GetCopyrightForTile": {
+            "$ref": "./examples/GetCopyrightForTile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../1.0/render.json#/definitions/Copyright"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/map/copyright/world/{format}": {
+      "get": {
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nReturns the copyright information for the world. To obtain the default copyright information for the whole world, do not specify a tile or bounding box.",
+        "operationId": "GetCopyrightForWorld",
+        "x-ms-examples": {
+          "GetCopyrightForWorld": {
+            "$ref": "./examples/GetCopyrightForWorld.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../1.0/render.json#/definitions/Copyright"
             }
           },
           "default": {
@@ -241,13 +505,7 @@
     }
   },
   "definitions": {
-    "MapTileResultv2": {
-      "description": "The tile returned from a successful API call.",
-      "type": "object",
-      "format": "file",
-      "readOnly": true
-    },
-    "MapTilesetResultV2": {
+    "MapTileset": {
       "description": "Metadata for a tileset in the TileJSON format.",
       "type": "object",
       "readOnly": true,
@@ -255,24 +513,24 @@
         "tilejson": {
           "type": "string",
           "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
-          "description": "Version of the TileJSON spec."
+          "description": "Describes the version of the TileJSON spec that is implemented by this JSON object."
         },
         "name": {
           "type": "string",
-          "description": "Name of the tileset."
+          "description": "A name describing the tileset. The name can contain any legal character. Implementations SHOULD NOT interpret the name as HTML."
         },
         "description": {
           "type": "string",
-          "description": "Text description of the tileset."
+          "description": "Text description of the tileset. The description can contain any legal character. Implementations SHOULD NOT interpret the description as HTML."
         },
         "version": {
           "type": "string",
           "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
-          "description": "A semver.org style version number for the tiles contained within the tileset."
+          "description": "A semver.org style version number for the tiles contained within the tileset. When changes across tiles are introduced, the minor version MUST change."
         },
         "attribution": {
           "type": "string",
-          "description": "Copyright attribution to be displayed on the map."
+          "description": "Copyright attribution to be displayed on the map. Implementations MAY decide to treat this as HTML or literal text. For security reasons, make absolutely sure that this field can't be abused as a vector for XSS or beacon tracking."
         },
         "template": {
           "type": "string",
@@ -280,18 +538,18 @@
         },
         "legend": {
           "type": "string",
-          "description": "A legend to be displayed with the map."
+          "description": "A legend to be displayed with the map. Implementations MAY decide to treat this as HTML or literal text. For security reasons, make absolutely sure that this field can't be abused as a vector for XSS or beacon tracking."
         },
         "scheme": {
           "type": "string",
-          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile coordinates."
+          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile coordinates. The global-mercator (aka Spherical Mercator) profile is assumed."
         },
         "tiles": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "An array of tile endpoints."
+          "description": "An array of tile endpoints. If multiple endpoints are specified, clients may use any combination of endpoints. All endpoints MUST return the same content for the same URL. The array MUST contain at least one endpoint."
         },
         "grids": {
           "type": "array",
@@ -308,12 +566,14 @@
           "description": "An array of data files in GeoJSON format."
         },
         "minzoom": {
+          "x-ms-client-name": "minZoom",
           "minimum": 0,
           "maximum": 30,
           "type": "integer",
           "description": "The minimum zoom level."
         },
         "maxzoom": {
+          "x-ms-client-name": "maxZoom",
           "minimum": 0,
           "maximum": 30,
           "type": "integer",
@@ -324,18 +584,18 @@
           "items": {
             "type": "number"
           },
-          "description": "The WGS84 bounds of the tileset."
+          "description": "The maximum extent of available map tiles. Bounds MUST define an area covered by all zoom levels. The bounds are represented in WGS:84 latitude and longitude values, in the order left, bottom, right, top. Values may be integers or floating point numbers."
         },
         "center": {
           "type": "array",
           "items": {
             "type": "number"
           },
-          "description": "The default location of the tileset in the form [longitude, latitude, zoom]."
+          "description": "The default location of the tileset in the form [longitude, latitude, zoom]. The zoom level MUST be between minzoom and maxzoom. Implementations can use this value to set the default location."
         }
       }
     },
-    "MapAttributionResultV2": {
+    "MapAttribution": {
       "description": "Copyright attribution for the requested section of a tileset.",
       "type": "object",
       "readOnly": true,
