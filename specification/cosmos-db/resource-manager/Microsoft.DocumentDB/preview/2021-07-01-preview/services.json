@@ -118,7 +118,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceResource"
+              "$ref": "#/definitions/ServiceResourceCreateUpdateParameters"
             },
             "description": "The Service resource parameters."
           }
@@ -285,6 +285,34 @@
         "serviceType"
       ]
     },
+    "ServiceResourceCreateUpdateParameters": {
+      "description": "Parameters for Create or Update Request for ServiceResource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      }
+    },
+    "ServiceResourceCreateUpdateProperties": {
+      "description": "Properties in ServiceResourceCreateUpdateParameters.",
+      "type": "object",
+      "properties": {
+        "instanceSize": {
+          "$ref": "#/definitions/ServiceResourceInstanceSize"
+        },
+        "instanceCount": {
+          "description": "Instance count for the service.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "serviceType": {
+          "$ref": "#/definitions/ServiceType"
+        }
+      }
+    },
     "ServiceResource": {
       "description": "Properties for the database account.",
       "type": "object",
@@ -327,6 +355,7 @@
     "DataTransferServiceResourceProperties": {
       "description": "Properties for DataTransferServiceResource.",
       "type": "object",
+      "x-ms-discriminator-value": "DataTransfer",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
@@ -356,6 +385,7 @@
     "SqlDedicatedGatewayServiceResourceProperties": {
       "description": "Properties for SqlDedicatedGatewayServiceResource.",
       "type": "object",
+      "x-ms-discriminator-value": "SqlDedicatedGateway",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
@@ -389,6 +419,7 @@
     "GraphAPIComputeServiceResourceProperties": {
       "description": "Properties for GraphAPIComputeServiceResource.",
       "type": "object",
+      "x-ms-discriminator-value": "GraphAPICompute",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceResourceProperties"
