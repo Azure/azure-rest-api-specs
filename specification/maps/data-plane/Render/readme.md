@@ -52,6 +52,15 @@ input-file:
   - preview/2.0/render.json
 ```
 
+### Tag: 1.0-preview
+
+These settings apply only when `--tag=1.0-preview` is specified on the command line.
+
+``` yaml $(tag) == '1.0-preview'
+input-file:
+  - preview/1.0/render.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
