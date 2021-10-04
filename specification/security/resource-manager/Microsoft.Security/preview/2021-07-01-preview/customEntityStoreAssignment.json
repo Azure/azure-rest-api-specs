@@ -1,0 +1,345 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customEntityStoreAssignments/{customEntityStoreAssignmentName}": {
+      "get": {
+        "summary": "Gets a custom entity store assignment",
+        "description": "Gets a single custom entity store assignment by name for the provided subscription and resource group.",
+        "tags": [
+          "customEntityStoreAssignments"
+        ],
+        "operationId": "CustomEntityStoreAssignments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customEntityStoreAssignmentName"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a custom entity store assignment": {
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentGet_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityStoreAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Creates a custom entity store assignment",
+        "description": "Creates a custom entity store assignment for the provided subscription, if not already exists.",
+        "tags": [
+          "customEntityStoreAssignments"
+        ],
+        "operationId": "CustomEntityStoreAssignments_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customEntityStoreAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/customEntityStoreAssignmentRequestBody"
+          }
+        ],
+        "x-ms-examples": {
+          "Create a custom entity store assignment": {
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentCreate_example.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityStoreAssignment"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityStoreAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deleted a custom entity store assignment",
+        "description": "Delete a custom entity store assignment by name for a provided subscription",
+        "tags": [
+          "customEntityStoreAssignments"
+        ],
+        "operationId": "CustomEntityStoreAssignments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/customEntityStoreAssignmentName"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a custom entity store assignment": {
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentDelete_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Custom Entity Store Assignment was deleted"
+          },
+          "204": {
+            "description": "No Content - Custom Entity Store Assignment does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Security/customEntityStoreAssignments": {
+      "get": {
+        "summary": "List custom entity store assignments in a subscription and a resource group",
+        "description": "List custom entity store assignments by a provided subscription and resource group",
+        "tags": [
+          "customEntityStoreAssignments"
+        ],
+        "operationId": "CustomEntityStoreAssignments_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "x-ms-examples": {
+          "List custom entity store assignments in a subscription and a resource group": {
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentListByResourceGroup_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns a collection of custom entity store assignments",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityStoreAssignmentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/customEntityStoreAssignments": {
+      "get": {
+        "summary": "List custom entity store assignments in a subscription",
+        "description": "List custom entity store assignments by provided subscription",
+        "tags": [
+          "customEntityStoreAssignments"
+        ],
+        "operationId": "CustomEntityStoreAssignments_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List custom entity store assignments in a subscription": {
+            "$ref": "./examples/CustomEntityStoreAssignments/customEntityStoreAssignmentListBySubscription_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns a collection of custom entity store assignments",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityStoreAssignmentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomEntityStoreAssignmentsListResult": {
+      "type": "object",
+      "description": "A list of custom entity store assignments",
+      "properties": {
+        "value": {
+          "description": "Collection of custom entity store assignments",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityStoreAssignment"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomEntityStoreAssignment": {
+      "type": "object",
+      "description": "Custom entity store assignment",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "describes custom entity store assignment properties.",
+          "$ref": "#/definitions/CustomEntityStoreAssignmentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CustomEntityStoreAssignmentProperties": {
+      "type": "object",
+      "description": "describes the custom entity store assignment properties",
+      "properties": {
+        "principal": {
+          "description": "The principal assigned with entity store. Format of principal is: [AAD type]=[PrincipalObjectId];[TenantId]",
+          "type": "string"
+        },
+        "entityStoreDatabaseLink": {
+          "description": "The link to entity store database.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomEntityStoreAssignmentRequest": {
+      "type": "object",
+      "description": "describes the custom entity store assignment request",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomEntityStoreAssignmentRequestProperties"
+        }
+      }
+    },
+    "CustomEntityStoreAssignmentRequestProperties": {
+      "type": "object",
+      "description": "describes properties of custom entity store assignment request",
+      "properties": {
+        "principal": {
+          "description": "The principal assigned with entity store. If not provided, will use caller principal. Format of principal is: [AAD type]=[PrincipalObjectId];[TenantId]",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "customEntityStoreAssignmentName": {
+      "name": "customEntityStoreAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the custom entity store assignment. Generated name is GUID.",
+      "x-ms-parameter-location": "method"
+    },
+    "customEntityStoreAssignmentRequestBody": {
+      "name": "customEntityStoreAssignmentRequestBody",
+      "in": "body",
+      "description": "Custom entity store assignment body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CustomEntityStoreAssignmentRequest"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

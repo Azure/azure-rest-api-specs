@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataLakeAnalytics.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataLakeAnalytics, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for DataLakeAnalytics, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-11
+tag: package-preview-2019-11
 ```
 
 
+### Tag: package-preview-2019-11
+
+These settings apply only when `--tag=package-preview-2019-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-11'
+input-file:
+  - Microsoft.DataLakeAnalytics/preview/2019-11-01-preview/account.json
+```
 ### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
@@ -49,6 +57,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourceGetOperation
@@ -63,8 +72,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -83,7 +92,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
   - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -104,7 +112,7 @@ csharp:
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(python)
+``` yaml $(python)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -166,8 +174,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
