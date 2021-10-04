@@ -448,24 +448,12 @@
             "type": "string"
           },
           {
-            "name": "cancelAllMediaOperationRequest",
-            "in": "body",
-            "description": "The cancel all media operations context.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CancelAllMediaOperationsRequest"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns the cancel all media operations response.",
-            "schema": {
-              "$ref": "#/definitions/CancelAllMediaOperationsResult"
-            }
+            "description": "Returns the cancel all media operations response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -598,7 +586,7 @@
         "tags": [
           "CallConnection"
         ],
-        "summary": "Create audio routing groups from a call.",
+        "summary": "Create audio routing group in a call.",
         "operationId": "CallConnections_CreateAudioRoutingGroup",
         "parameters": [
           {
@@ -622,8 +610,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Returns the create audio routing group response."
+          "201": {
+            "description": "Returns the create audio routing group response.",
+            "schema": {
+              "$ref": "#/definitions/CreateAudioRoutingGroupResult"
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -642,7 +633,7 @@
           }
         },
         "x-ms-examples": {
-          "Create audio routing groups from a call.": {
+          "Create audio routing group in a call.": {
             "$ref": "./examples/CallConnections_CreateAudioRoutingGroup.json"
           }
         }
@@ -2304,6 +2295,9 @@
     },
     "UpdateAudioRoutingGroupRequest": {
       "description": "The update audio routing group request.",
+      "required": [
+        "targets"
+      ],
       "type": "object",
       "properties": {
         "targets": {
@@ -2315,25 +2309,25 @@
         }
       }
     },
-    "MediaType": {
+    "CallMediaType": {
       "enum": [
         "audio",
         "video"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "MediaType",
+        "name": "CallMediaType",
         "modelAsString": true
       }
     },
-    "EventSubscriptionType": {
+    "CallingEventSubscriptionType": {
       "enum": [
         "participantsUpdated",
-        "dtmfReceived"
+        "toneReceived"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "EventSubscriptionType",
+        "name": "CallingEventSubscriptionType",
         "modelAsString": true
       }
     },
@@ -2373,14 +2367,14 @@
           "description": "The requested modalities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaType"
+            "$ref": "#/definitions/CallMediaType"
           }
         },
         "requestedCallEvents": {
           "description": "The requested call events to subscribe to.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EventSubscriptionType"
+            "$ref": "#/definitions/CallingEventSubscriptionType"
           }
         }
       }
@@ -2448,14 +2442,14 @@
           "description": "The requested modalities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaType"
+            "$ref": "#/definitions/CallMediaType"
           }
         },
         "requestedCallEvents": {
           "description": "The requested call events to subscribe to.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EventSubscriptionType"
+            "$ref": "#/definitions/CallingEventSubscriptionType"
           }
         },
         "callLocator": {
@@ -2496,6 +2490,7 @@
     "PlayAudioRequest": {
       "description": "The request payload for playing audio.",
       "required": [
+        "audioFileUri",
         "loop"
       ],
       "type": "object",
@@ -2522,7 +2517,7 @@
         }
       }
     },
-    "OperationStatus": {
+    "CallingOperationStatus": {
       "description": "The status of the operation",
       "enum": [
         "notStarted",
@@ -2532,7 +2527,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "OperationStatus",
+        "name": "CallingOperationStatus",
         "modelAsString": true
       }
     },
@@ -2548,20 +2543,20 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/CallingOperationStatus"
         },
         "operationContext": {
           "description": "The operation context provided by client.",
           "type": "string"
         },
         "resultInfo": {
-          "$ref": "#/definitions/ResultInfo",
+          "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result info for the operation."
         }
       }
     },
-    "ResultInfo": {
-      "description": "Result info class to be used to report result status for actions/operations.",
+    "CallingOperationResultDetails": {
+      "description": "The result details of calling operation.",
       "required": [
         "code",
         "subcode"
@@ -2575,7 +2570,7 @@
         },
         "subcode": {
           "format": "int32",
-          "description": "The subcode that further classifies the result.\r\nThe subcode further classifies a failure. For example.",
+          "description": "The subcode that further classifies the result.",
           "type": "integer"
         },
         "message": {
@@ -2584,45 +2579,8 @@
         }
       }
     },
-    "CancelAllMediaOperationsRequest": {
-      "description": "The request payload for cancel all media operations",
-      "type": "object",
-      "properties": {
-        "operationContext": {
-          "description": "The context for this operation.",
-          "type": "string"
-        }
-      }
-    },
-    "CancelAllMediaOperationsResult": {
-      "description": "The response payload of the cancel all media operations.",
-      "required": [
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultInfo": {
-          "$ref": "#/definitions/ResultInfo",
-          "description": "The result info for the operation."
-        }
-      }
-    },
     "TransferCallRequest": {
       "description": "The transfer call request.",
-      "required": [
-        "targetParticipant"
-      ],
       "type": "object",
       "properties": {
         "targetParticipant": {
@@ -2636,11 +2594,23 @@
         "userToUserInformation": {
           "description": "The user to user information.",
           "type": "string"
+        },
+        "operationContext": {
+          "description": "The operation context.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI.",
+          "type": "string"
         }
       }
     },
     "AudioRoutingGroupRequest": {
       "description": "The audio routing group request.",
+      "required": [
+        "audioRoutingMode",
+        "targets"
+      ],
       "type": "object",
       "properties": {
         "audioRoutingMode": {
@@ -2652,6 +2622,16 @@
           "items": {
             "$ref": "#/definitions/CommunicationIdentifier"
           }
+        }
+      }
+    },
+    "CreateAudioRoutingGroupResult": {
+      "description": "The response payload of the create audio routing group operation.",
+      "type": "object",
+      "properties": {
+        "audioRoutingGroupId": {
+          "description": "The audio routing group id.",
+          "type": "string"
         }
       }
     },
@@ -2770,6 +2750,7 @@
       "required": [
         "callLocator",
         "identifier",
+        "audioFileUri",
         "loop"
       ],
       "type": "object",
@@ -2951,6 +2932,7 @@
       "description": "The request payload for playing audio to participant.",
       "required": [
         "identifier",
+        "audioFileUri",
         "loop"
       ],
       "type": "object",
@@ -3151,6 +3133,7 @@
     "JoinCallRequest": {
       "description": "The request payload for join call.",
       "required": [
+        "callLocator",
         "source",
         "callbackUri"
       ],
@@ -3176,14 +3159,14 @@
           "description": "The requested modalities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaType"
+            "$ref": "#/definitions/CallMediaType"
           }
         },
         "requestedCallEvents": {
           "description": "The requested call events to subscribe to.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EventSubscriptionType"
+            "$ref": "#/definitions/CallingEventSubscriptionType"
           }
         }
       }
@@ -3202,6 +3185,7 @@
       "description": "The request payload for playing audio with call locator.",
       "required": [
         "callLocator",
+        "audioFileUri",
         "loop"
       ],
       "type": "object",
@@ -3253,7 +3237,7 @@
     "AnswerCallRequest": {
       "description": "The request payload for answering the call.",
       "required": [
-        "callbackUrl"
+        "callbackUri"
       ],
       "type": "object",
       "properties": {
@@ -3261,27 +3245,22 @@
           "description": "The context associated with the call.",
           "type": "string"
         },
-        "participantCapacity": {
-          "format": "int32",
-          "description": "The number of participant that the application can handle for the call.",
-          "type": "integer"
-        },
-        "callbackUrl": {
-          "description": "The callback url.",
+        "callbackUri": {
+          "description": "The callback uri.",
           "type": "string"
         },
         "requestedMediaTypes": {
           "description": "The requested modalities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaType"
+            "$ref": "#/definitions/CallMediaType"
           }
         },
         "requestedCallEvents": {
           "description": "The requested call events to subscribe to.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EventSubscriptionType"
+            "$ref": "#/definitions/CallingEventSubscriptionType"
           }
         }
       }
@@ -3312,8 +3291,7 @@
     "RejectCallRequest": {
       "description": "The request payload for rejecting the call.",
       "required": [
-        "incomingCallContext",
-        "callbackUrl"
+        "incomingCallContext"
       ],
       "type": "object",
       "properties": {
@@ -3324,8 +3302,8 @@
         "callRejectReason": {
           "$ref": "#/definitions/CallRejectReason"
         },
-        "callbackUrl": {
-          "description": "The callback url.",
+        "callbackUri": {
+          "description": "The callback uri.",
           "type": "string"
         }
       }
@@ -3334,8 +3312,7 @@
       "description": "The request payload for redirecting the call.",
       "required": [
         "incomingCallContext",
-        "targets",
-        "callbackUrl"
+        "targets"
       ],
       "type": "object",
       "properties": {
@@ -3350,11 +3327,11 @@
             "$ref": "#/definitions/CommunicationIdentifier"
           }
         },
-        "callbackUrl": {
-          "description": "The callback url.",
+        "callbackUri": {
+          "description": "The callback uri.",
           "type": "string"
         },
-        "timeout": {
+        "timeoutInSeconds": {
           "format": "int32",
           "description": "The timeout for the redirect in seconds.",
           "type": "integer"
@@ -3370,7 +3347,7 @@
       "properties": {
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
+          "description": "The server call locator."
         },
         "callConnectionId": {
           "description": "The call connection id.",
@@ -3384,7 +3361,7 @@
     "CallRecordingStateChangeEvent": {
       "description": "The call recording state change event.",
       "required": [
-        "state",
+        "callRecordingState",
         "startDateTime"
       ],
       "type": "object",
@@ -3393,7 +3370,7 @@
           "description": "The call recording id",
           "type": "string"
         },
-        "state": {
+        "callRecordingState": {
           "$ref": "#/definitions/CallRecordingState"
         },
         "startDateTime": {
@@ -3403,7 +3380,7 @@
         },
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
+          "description": "The server call locator."
         }
       }
     },
@@ -3414,7 +3391,7 @@
       "type": "object",
       "properties": {
         "resultInfo": {
-          "$ref": "#/definitions/ResultInfo",
+          "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
         "operationContext": {
@@ -3422,7 +3399,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/CallingOperationStatus"
         }
       }
     },
@@ -3451,7 +3428,7 @@
       "type": "object",
       "properties": {
         "resultInfo": {
-          "$ref": "#/definitions/ResultInfo",
+          "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
         "operationContext": {
@@ -3459,7 +3436,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/CallingOperationStatus"
         }
       }
     },
