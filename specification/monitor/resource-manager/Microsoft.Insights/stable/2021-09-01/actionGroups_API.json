@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}": {
       "put": {
         "description": "Create a new action group or update an existing one.",
         "operationId": "ActionGroups_CreateOrUpdate",
@@ -280,7 +280,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/actionGroups": {
       "get": {
         "description": "Get a list of all action groups in a subscription.",
         "operationId": "ActionGroups_ListBySubscriptionId",
@@ -316,7 +316,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups": {
       "get": {
         "description": "Get a list of all action groups in a resource group.",
         "operationId": "ActionGroups_ListByResourceGroup",
@@ -355,7 +355,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}/subscribe": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/subscribe": {
       "post": {
         "description": "Enable a receiver in an action group. This changes the receiver's status from Disabled to Enabled. This operation is only supported for Email or SMS receivers.",
         "operationId": "ActionGroups_EnableReceiver",
@@ -392,7 +392,8 @@
             "description": "The receiver was successfully enabled."
           },
           "409": {
-            "description": "The receiver is already enabled in the action group."
+            "description": "The receiver is already enabled in the action group.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An error occurred and the receiver could not be enabled, e.g.: 404: The action group was not found or no matching receiver was found in the action group.",
@@ -444,12 +445,14 @@
           "additionalProperties": {
             "type": "string"
           },
+          "type":"object",
           "description": "Resource tags"
         }
       },
       "required": [
         "location"
       ],
+      "type":"object",
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
@@ -558,6 +561,7 @@
     },
     "ActionGroupResource": {
       "description": "An action group resource.",
+      "type":"object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureResource"
@@ -573,6 +577,7 @@
     },
     "ActionGroupList": {
       "description": "A list of action groups.",
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
@@ -589,6 +594,7 @@
     },
     "ActionGroup": {
       "description": "An Azure action group.",
+      "type":"object",
       "properties": {
         "groupShortName": {
           "type": "string",
@@ -685,6 +691,7 @@
     },
     "EmailReceiver": {
       "description": "An email receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -712,6 +719,7 @@
     },
     "SmsReceiver": {
       "description": "An SMS receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -739,6 +747,7 @@
     },
     "WebhookReceiver": {
       "description": "A webhook receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -778,6 +787,7 @@
     },
     "ItsmReceiver": {
       "description": "An Itsm receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -847,6 +857,7 @@
     },
     "AzureAppPushReceiver": {
       "description": "The Azure mobile App push notification receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -864,6 +875,7 @@
     },
     "AutomationRunbookReceiver": {
       "description": "The Azure Automation Runbook notification receiver.",
+      "type":"object",
       "properties": {
         "automationAccountId": {
           "type": "string",
@@ -904,6 +916,7 @@
     },
     "VoiceReceiver": {
       "description": "A voice receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -926,6 +939,7 @@
     },
     "LogicAppReceiver": {
       "description": "A logic app receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -953,6 +967,7 @@
     },
     "AzureFunctionReceiver": {
       "description": "An azure function receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -985,6 +1000,7 @@
     },
     "ArmRoleReceiver": {
       "description": "An arm role receiver.",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -1020,6 +1036,7 @@
     },
     "EnableRequest": {
       "description": "Describes a receiver that should be resubscribed.",
+      "type":"object",
       "properties": {
         "receiverName": {
           "type": "string",
@@ -1046,8 +1063,10 @@
     },
     "ActionGroupPatchBody": {
       "description": "An action group object for the body of patch operations.",
+      "type":"object",
       "properties": {
         "tags": {
+          "type":"object",
           "additionalProperties": {
             "type": "string"
           },
@@ -1062,6 +1081,7 @@
     },
     "ActionGroupPatch": {
       "description": "An Azure action group for patch operations.",
+      "type":"object",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -1085,7 +1105,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group.",
+      "description": "The name of the resource group. The name is case insensitive.",
       "x-ms-parameter-location": "method"
     },
     "ActionGroupNameParameter": {
