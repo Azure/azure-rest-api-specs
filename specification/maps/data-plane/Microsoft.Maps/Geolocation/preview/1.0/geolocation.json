@@ -128,8 +128,8 @@
     "/geolocation/ip/{format}": {
       "get": {
         "x-publish": true,
-        "description": "\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis service will return the ISO country code for the provided IP address. Developers can use this information  to block or alter certain content based on geographical locations where the application is being viewed from. \n\n\n__Note:__ This service returns results from IANA and does not necessarily reflect the views of Microsoft  Corporation.",
-        "operationId": "Geolocation_GetIPToLocationPreview",
+        "description": "\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis service will return the ISO country code for the provided IP address. Developers can use this information to block or alter certain content based on geographical locations where the application is being viewed from.",
+        "operationId": "Geolocation_GetIPToLocation",
         "x-ms-examples": {
           "GetLocationByIpAddress": {
             "$ref": "./examples/GetLocationByIpAddress.json"
@@ -239,7 +239,7 @@
       "readOnly": true,
       "properties": {
         "isoCode": {
-          "description": "The IP Address's 2-character code [(ISO 3166-1)](https://www.iso.org/iso-3166-country-codes.html) of the country or region as assigned by IANA and regional internet authorities. Please note, IP address in ranges reserved for special purpose will return Null for country/region.",
+          "description": "The IP Address's 2-character code [(ISO 3166-1)](https://www.iso.org/iso-3166-country-codes.html) of the country or region. Please note, IP address in ranges reserved for special purpose will return Null for country/region.",
           "type": "string",
           "readOnly": true
         }
