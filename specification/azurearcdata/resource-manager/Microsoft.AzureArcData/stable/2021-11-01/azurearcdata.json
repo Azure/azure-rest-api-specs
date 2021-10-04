@@ -1387,19 +1387,23 @@
           "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
         },
         "basicLoginInformation": {
-          "$ref": "#/definitions/BasicLoginInformation"
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Deprecated. Azure Arc Data Services data controller no longer expose any endpoint. All traffic are exposed through Kubernetes native API."
         },
         "metricsDashboardCredential": {
-          "$ref": "#/definitions/BasicLoginInformation"
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Login credential for metrics dashboard on the Kubernetes cluster."
         },
         "logsDashboardCredential": {
-          "$ref": "#/definitions/BasicLoginInformation"
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Login credential for logs dashboard on the Kubernetes cluster."
         },
         "logAnalyticsWorkspaceConfig": {
           "$ref": "#/definitions/LogAnalyticsWorkspaceConfig"
         },
         "uploadServicePrincipal": {
-          "$ref": "#/definitions/UploadServicePrincipal"
+          "$ref": "#/definitions/UploadServicePrincipal",
+          "description": "Deprecated. Service principal is deprecated in favor of Arc Kubernetes service extension managed identity."
         },
         "provisioningState": {
           "type": "string",
