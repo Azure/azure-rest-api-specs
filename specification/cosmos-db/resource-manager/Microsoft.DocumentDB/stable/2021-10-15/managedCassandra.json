@@ -729,9 +729,6 @@
           "202": {
             "description": "Enqueued Operation to deallocate the cluster."
           },
-          "200": {
-            "description": "Successfully deallocate the cluster."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -768,8 +765,47 @@
           "202": {
             "description": "Enqueued Operation to start the cluster."
           },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/status": {
+      "get": {
+        "operationId": "CassandraStatus_Get",
+        "description": "Gets the CPU, memory, and disk usage statistics for each Cassandra node in a cluster.",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraStatus": {
+            "$ref": "./examples/CosmosDBManagedCassandraStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
           "200": {
-            "description": "Successfully start the cluster."
+            "description": "Successfully fetched the usage statistics of all nodes in the cluster.",
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterPublicStatus"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -831,6 +867,65 @@
         }
       }
     },
+    "ManagedCassandraARMResourceProperties": {
+      "type": "object",
+      "description": "The core properties of ARM resources.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
+        "tags": {
+          "$ref": "cosmos-db.json#/definitions/Tags"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedCassandraManagedServiceIdentity"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ManagedCassandraManagedServiceIdentity": {
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The object id of the identity resource."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedCassandraResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ManagedCassandraProvisioningState": {
       "description": "The status of the resource at the time the operation was called.",
       "type": "string",
@@ -852,7 +947,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
+          "$ref": "#/definitions/ManagedCassandraARMResourceProperties"
         }
       ],
       "properties": {
@@ -895,7 +990,8 @@
               "description": "Which authentication method Cassandra should use to authenticate clients. 'None' turns off authentication, so should not be used except in emergencies. 'Cassandra' is the default password based authentication. The default is 'Cassandra'.",
               "enum": [
                 "None",
-                "Cassandra"
+                "Cassandra",
+                "Ldap"
               ],
               "x-ms-enum": {
                 "name": "AuthenticationMethod",
@@ -909,11 +1005,6 @@
               "x-ms-secret": true,
               "description": "Initial password for clients connecting as admin to the cluster. Should be changed after cluster creation. Returns null on GET. This field only applies when the authenticationMethod field is 'Cassandra'.",
               "type": "string"
-            },
-            "hoursBetweenBackups": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Number of hours to wait between taking a backup of the cluster. To disable backups, set this property to 0."
             },
             "prometheusEndpoint": {
               "$ref": "#/definitions/SeedNode",
@@ -962,8 +1053,234 @@
                 "$ref": "#/definitions/SeedNode"
               },
               "description": "List of IP addresses of seed nodes in the managed data centers. These should be added to the seed node lists of all unmanaged nodes."
+            },
+            "hoursBetweenBackups": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of hours to wait between taking a backup of the cluster."
+            },
+            "deallocated": {
+              "type": "boolean",
+              "description": "Whether the cluster and associated data centers has been deallocated."
+            },
+            "connectivity": {
+              "type": "string",
+              "description": "The connectivity method to connect to the Cassandra data centers. Defaults to 'VNetInjection'"
             }
           }
+        }
+      }
+    },
+    "ManagedCassandraNodeStatus": {
+      "type": "string",
+      "description": "Indicates whether the node is functioning or not.",
+      "enum": [
+        "Up",
+        "Down"
+      ],
+      "x-ms-enum": {
+        "name": "NodeStatus",
+        "modelAsString": true
+      }
+    },
+    "ManagedCassandraNodeState": {
+      "type": "string",
+      "description": "The state of the node in Cassandra ring.",
+      "enum": [
+        "Normal",
+        "Leaving",
+        "Joining",
+        "Moving",
+        "Stopped"
+      ],
+      "x-ms-enum": {
+        "name": "NodeState",
+        "modelAsString": true
+      }
+    },
+    "CassandraClusterPublicStatus": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Properties of a managed Cassandra cluster public status.",
+          "properties": {
+            "ETag": {
+              "type": "string"
+            },
+            "cassandraClusterReaperStatus": {
+              "$ref": "#/definitions/ManagedCassandraReaperStatus"
+            },
+            "connectionErrors": {
+              "type": "array",
+              "description": "List relevant information about any connection errors to the Datacenters.",
+              "items": {
+                "$ref": "#/definitions/ConnectionError"
+              }
+            },
+            "dataCenters": {
+              "type": "array",
+              "description": "List of the status of each datacenter in this cluster.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "This Datacenter's name."
+                  },
+                  "seedNodes": {
+                    "type": "array",
+                    "description": "A list of all seed nodes in the cluster, managed and unmanaged.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "nodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string",
+                          "description": "The node's IP address."
+                        },
+                        "state": {
+                          "$ref": "#/definitions/ManagedCassandraNodeState"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "load": {
+                          "type": "string",
+                          "description": "The amount of file system data in the data directory (e.g., 47.66 kB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cells or tombstones) is counted."
+                        },
+                        "tokens": {
+                          "type": "array",
+                          "description": "List of tokens this node covers.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "hostId": {
+                          "description": "The network ID of the node.",
+                          "type": "string"
+                        },
+                        "rack": {
+                          "description": "The rack this node is part of.",
+                          "type": "string"
+                        },
+                        "timestamp": {
+                          "description": "The timestamp at which that snapshot of these usage statistics were taken.",
+                          "type": "string"
+                        },
+                        "diskUsedKB": {
+                          "description": "The amount of disk used, in kB, of the diretory /var/lib/cassandra.",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "diskFreeKB": {
+                          "description": "The amount of disk free, in kB, of the directory /var/lib/cassandra.",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "memoryUsedKB": {
+                          "description": "Used memory (calculated as total - free - buffers - cache), in kB.",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "memoryBuffersAndCachedKB": {
+                          "description": "Memory used by kernel buffers (Buffers in /proc/meminfo) and page cache and slabs (Cached and SReclaimable in /proc/meminfo), in kB.",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "memoryFreeKB": {
+                          "description": "Unused memory (MemFree and SwapFree in /proc/meminfo), in kB.",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "memoryTotalKB": {
+                          "description": "Total installed memory (MemTotal and SwapTotal in /proc/meminfo), in kB.",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "cpuUsage": {
+                          "description": "A float representing the current system-wide CPU utilization as a percentage.",
+                          "type": "integer",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ManagedCassandraReaperStatus": {
+      "type": "object",
+      "properties": {
+        "healthy": {
+          "type": "string"
+        },
+        "repairRunIds": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "repairSchedules": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConnectionError": {
+      "type": "object",
+      "properties": {
+        "connectionState": {
+          "description": "The kind of connection error that occurred.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "OK",
+            "OperatorToDataCenterNetworkError",
+            "DatacenterToDatacenterNetworkError",
+            "InternalOperatorToDataCenterCertificateError",
+            "InternalError"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionState",
+            "modelAsString": true
+          }
+        },
+        "iPFrom": {
+          "description": "The IP of host that originated the failed connection.",
+          "type": "string"
+        },
+        "iPTo": {
+          "description": "The IP that the connection attempted to reach.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The TCP port the connection was attempted on.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "exception": {
+          "description": "Detailed error message about the failed connection.",
+          "type": "string"
         }
       }
     },
@@ -1003,31 +1320,10 @@
                 "description": "The Cassandra data center this node resides in."
               },
               "status": {
-                "type": "string",
-                "description": "Indicates whether the node is functioning or not.",
-                "enum": [
-                  "Up",
-                  "Down"
-                ],
-                "x-ms-enum": {
-                  "name": "NodeStatus",
-                  "modelAsString": true
-                }
+                "$ref": "#/definitions/ManagedCassandraNodeStatus"
               },
               "state": {
-                "type": "string",
-                "description": "The state of the node in relation to the cluster.",
-                "enum": [
-                  "Normal",
-                  "Leaving",
-                  "Joining",
-                  "Moving",
-                  "Stopped"
-                ],
-                "x-ms-enum": {
-                  "name": "NodeState",
-                  "modelAsString": true
-                }
+                "$ref": "#/definitions/ManagedCassandraNodeState"
               },
               "address": {
                 "type": "string",
@@ -1035,7 +1331,7 @@
               },
               "load": {
                 "type": "string",
-                "description": "The amount of file system data in the data directory (e.g., 47.66 KB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cell or tombstoned data) is counted."
+                "description": "The amount of file system data in the data directory (e.g., 47.66 kB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cell or tombstoned data) is counted."
               },
               "tokens": {
                 "type": "array",
@@ -1179,6 +1475,10 @@
               "type": "string",
               "description": "A fragment of a cassandra.yaml configuration file to be included in the cassandra.yaml for all nodes in this data center. The fragment should be Base64 encoded, and only a subset of keys are allowed."
             },
+            "managedDiskCustomerKeyUri": {
+              "type": "string",
+              "description": "Indicates the Key Uri of the customer key to use for encryption of managed disks."
+            },
             "sku": {
               "type": "string",
               "description": "Virtual Machine SKU used for data centers. Default value is Standard_DS14_v2"
@@ -1192,10 +1492,49 @@
               "format": "int32",
               "description": "Number of disk used for data centers. Default value is 4."
             },
-            "availabilityZoneEnabled": {
-              "type": "boolean",
-              "description": "Should availability zone be enabled on this data center? If omitted, this is false. This could not be changed after creation."
+            "availabilityZone": {
+              "type": "bool",
+              "description": "If the data center will have Availability Zone feature apply to the Virtual Machine ScaleSet that host the data center virtual machines"
+            },
+            "authenticationMethodLdapProperties": {
+              "$ref": "#/definitions/AuthenticationMethodLdapProperties"
             }
+          }
+        }
+      }
+    },
+    "AuthenticationMethodLdapProperties": {
+      "type": "object",
+      "properties": {
+        "serverHostname": {
+          "description": "Hostname of the LDAP server.",
+          "type": "string"
+        },
+        "serverPort": {
+          "description": "Port of the LDAP server.",
+          "type": "integer",
+          "nullable": true
+        },
+        "serviceUserDistinguishedName": {
+          "description": "Distinguished name of the look up user account, who can look up user details on authentication.",
+          "type": "string"
+        },
+        "serviceUserPassword": {
+          "description": "Password of the look up user.",
+          "type": "string"
+        },
+        "searchBaseDistinguishedName": {
+          "description": "Distinguished name of the object to start the recursive search of users from.",
+          "type": "string"
+        },
+        "searchFilterTemplate": {
+          "description": "Template to use for searching. Defaults to (cn=%s) where %s will be replaced by the username used to login.",
+          "type": "string"
+        },
+        "serverCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
           }
         }
       }
