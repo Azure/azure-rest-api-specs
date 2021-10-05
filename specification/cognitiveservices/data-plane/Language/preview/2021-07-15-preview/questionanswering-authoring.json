@@ -202,7 +202,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulCreateProject.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateProject.json"
           }
         }
       },
@@ -1145,7 +1145,6 @@
       "description": "Parameters needed to create the project.",
       "additionalProperties": false,
       "required": [
-        "projectName",
         "language"
       ],
       "properties": {
@@ -1173,14 +1172,6 @@
         "defaultAnswer": {
           "type": "string",
           "description": "Default Answer response when no good match is found in the knowledge base."
-        },
-        "enableHierarchicalExtraction": {
-          "type": "boolean",
-          "description": "Resource enabled for hierarchical QnA extraction from sources."
-        },
-        "defaultAnswerUsedForExtraction": {
-          "type": "string",
-          "description": "Default answer to be used during QnA extraction from sources."
         }
       }
     },
