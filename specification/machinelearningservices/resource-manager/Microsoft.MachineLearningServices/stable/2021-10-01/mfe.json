@@ -6259,19 +6259,12 @@
     "CommandJobLimits": {
       "description": "Command Job limit class.",
       "type": "object",
-      "properties": {
-        "jobLimitsType": {
-          "description": "Command Job limit type.",
-          "$ref": "#/definitions/JobLimitsType",
-          "readOnly": true
-        },
-        "timeout": {
-          "format": "duration",
-          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
-          "type": "string",
-          "x-nullable": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobLimits"
         }
-      },
+      ],
+      "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
     "ComponentContainer": {
@@ -7844,6 +7837,25 @@
       },
       "x-ms-discriminator-value": "Uri",
       "additionalProperties": false
+    },
+    "JobLimits": {
+      "required": [
+        "jobLimitsType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobLimitsType": {
+          "description": "Joblimit type.",
+          "$ref": "#/definitions/JobLimitsType"
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "discriminator": "jobLimitsType"
     },
     "JobLimitsType": {
       "enum": [
@@ -10063,12 +10075,12 @@
     "SweepJobLimits": {
       "description": "Sweep Job limit class.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobLimits"
+        }
+      ],
       "properties": {
-        "jobLimitsType": {
-          "description": "Sweep Job limit type.",
-          "$ref": "#/definitions/JobLimitsType",
-          "readOnly": true
-        },
         "maxConcurrentTrials": {
           "format": "int32",
           "description": "Sweep Job max concurrent trials.",
@@ -10081,12 +10093,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "timeout": {
-          "format": "duration",
-          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
-          "type": "string",
-          "x-nullable": true
-        },
         "trialTimeout": {
           "format": "duration",
           "description": "Sweep Job Trial timeout value.",
@@ -10094,6 +10100,7 @@
           "x-nullable": true
         }
       },
+      "x-ms-discriminator-value": "Sweep",
       "additionalProperties": false
     },
     "TargetUtilizationScaleSettings": {
