@@ -114,8 +114,8 @@
           }
         }
       },
-      "put": {
-        "summary": "Create a project.",
+      "patch": {
+        "summary": "Create or update a project.",
         "operationId": "QuestionAnsweringProjects_CreateProject",
         "parameters": [
           {
@@ -147,46 +147,6 @@
               "$ref": "#/definitions/ProjectMetadata"
             }
           },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulCreateProject.json"
-          }
-        }
-      },
-      "patch": {
-        "summary": "Update a project.",
-        "operationId": "QuestionAnsweringProjects_UpdateProject",
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ProjectNamePathParameter"
-          },
-          {
-            "description": "Parameters needed to update the project.",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateProjectOptions"
-            }
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
           "201": {
             "description": "The metadata of the created project, if it doesn't exist.",
             "schema": {
@@ -202,7 +162,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateProject.json"
+            "$ref": "./examples/questionanswering/authoring/SuccessfulCreateProject.json"
           }
         }
       },
