@@ -34,6 +34,15 @@
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
           }
         ],
         "consumes": [
@@ -43,8 +52,8 @@
           "application/json"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "projects"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "responses": {
           "200": {
@@ -106,7 +115,7 @@
         }
       },
       "put": {
-        "summary": "Create or update a project.",
+        "summary": "Create a project.",
         "operationId": "QuestionAnsweringProjects_CreateProject",
         "parameters": [
           {
@@ -138,6 +147,46 @@
               "$ref": "#/definitions/ProjectMetadata"
             }
           },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulCreateProject.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a project.",
+        "operationId": "QuestionAnsweringProjects_UpdateProject",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "description": "Parameters needed to update the project.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
           "201": {
             "description": "The metadata of the created project, if it doesn't exist.",
             "schema": {
@@ -175,8 +224,13 @@
           "application/json"
         ],
         "responses": {
-          "204": {
-            "description": "Project deleted successfully."
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -188,6 +242,45 @@
         "x-ms-examples": {
           "Successful query": {
             "$ref": "./examples/questionanswering/authoring/SuccessfulDeleteProject.json"
+          }
+        }
+      }
+    },
+    "/query-knowledgebases/projects/deletion-jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of a Project delete job.",
+        "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Project delete job status.",
+            "schema": {
+              "$ref": "#/definitions/JobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulProjectDeleteJobStatus.json"
           }
         }
       }
@@ -480,6 +573,15 @@
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
           }
         ],
         "consumes": [
@@ -488,6 +590,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
         "responses": {
           "200": {
             "description": "List of deployments of a project.",
@@ -519,6 +625,15 @@
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
           }
         ],
         "consumes": [
@@ -527,6 +642,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
         "responses": {
           "200": {
             "description": "All the synonyms of a project.",
@@ -601,6 +720,15 @@
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
           }
         ],
         "consumes": [
@@ -610,8 +738,8 @@
           "application/json"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "sources"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "responses": {
           "200": {
@@ -738,6 +866,15 @@
           },
           {
             "$ref": "#/parameters/SourceFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
           }
         ],
         "consumes": [
@@ -747,8 +884,8 @@
           "application/json"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "qnas"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "responses": {
           "200": {
@@ -952,11 +1089,14 @@
       "description": "Collection of projects metadata and global settings.",
       "additionalProperties": false,
       "properties": {
-        "projects": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProjectMetadata"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1009,10 +1149,6 @@
         "language"
       ],
       "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "Friendly name for the project."
-        },
         "description": {
           "type": "string",
           "description": "Description of the project."
@@ -1177,8 +1313,11 @@
       "description": "All synonym assets for this project.",
       "additionalProperties": false,
       "properties": {
-        "synonyms": {
+        "value": {
           "$ref": "#/definitions/SynonymAsset"
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1214,8 +1353,11 @@
       "description": "All QnA assets for the project.",
       "additionalProperties": false,
       "properties": {
-        "qnas": {
+        "value": {
           "$ref": "#/definitions/QnaAsset"
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1344,7 +1486,7 @@
       "properties": {
         "isContextOnly": {
           "type": "boolean",
-          "description": "To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, ignores context and includes this QnA in search result."
+          "description": "To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as answer for queries without context; otherwise, ignores context and includes this QnA in answers."
         },
         "prompts": {
           "type": "array",
@@ -1451,8 +1593,11 @@
       "description": "All QnA sources for the project.",
       "additionalProperties": false,
       "properties": {
-        "sources": {
+        "value": {
           "$ref": "#/definitions/QnaSourcesMetadata"
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1513,7 +1658,7 @@
         },
         "source": {
           "type": "string",
-          "description": "Unique source identifier. Provide file name in the case of a file source, otherwise provide the source URI."
+          "description": "Unique source identifier. Name of the file if it's a 'file' source, complete URL if it's a 'url' source."
         },
         "sourceUri": {
           "type": "string",
@@ -1560,8 +1705,11 @@
       "description": "All deployments of a project.",
       "additionalProperties": false,
       "properties": {
-        "deployments": {
+        "value": {
           "$ref": "#/definitions/ProjectDeploymentsList"
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1603,7 +1751,7 @@
       "name": "assetKind",
       "type": "string",
       "in": "query",
-      "description": "Asset type of the project.",
+      "description": "Kind of the Asset of the project.",
       "enum": [
         "qnas",
         "synonyms"
@@ -1646,6 +1794,30 @@
       "in": "query",
       "description": "Source of the QnA.",
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The maximum number of resources to return from the collection.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "An offset into the collection of the first resource to be returned.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "MaxPageSizeParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of resources to include in a single response.",
+      "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   }
