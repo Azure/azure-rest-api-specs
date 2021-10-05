@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-01",
+    "version": "2021-10-01",
     "title": "RecoveryServicesBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -6647,6 +6647,26 @@
       },
       "x-ms-discriminator-value": "GenericProtectionPolicy"
     },
+    "HourlySchedule": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "format": "int32",
+          "description": "Interval at which backup needs to be triggered. For hourly the value\r\n can be 4/6/8/12",
+          "type": "integer"
+        },
+        "scheduleWindowStartTime": {
+          "format": "date-time",
+          "description": "To specify start time of the backup window",
+          "type": "string"
+        },
+        "scheduleWindowDuration": {
+          "format": "int32",
+          "description": "To specify duration of the backup window",
+          "type": "integer"
+        }
+      }
+    },
     "IdentityInfo": {
       "description": "Encapsulates Managed Identity related information",
       "type": "object",
@@ -8460,7 +8480,8 @@
           "enum": [
             "Invalid",
             "Daily",
-            "Weekly"
+            "Weekly",
+            "Hourly"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8495,6 +8516,10 @@
             "format": "date-time",
             "type": "string"
           }
+        },
+        "hourlySchedule": {
+          "$ref": "#/definitions/HourlySchedule",
+          "description": "Hourly Schedule of this Policy"
         },
         "scheduleWeeklyFrequency": {
           "format": "int32",
@@ -9196,6 +9221,18 @@
           "format": "int64",
           "description": "Number of items backed up in this container.",
           "type": "integer"
+        },
+        "acquireStorageAccountLock": {
+          "description": "Whether storage account lock is to be acquired for this container or not.",
+          "enum": [
+            "Acquire",
+            "NotAcquire"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AcquireStorageAccountLock",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "StorageContainer"
