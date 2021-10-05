@@ -39,7 +39,6 @@ This section contains the "composite-v5" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
@@ -740,6 +739,7 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/DatabaseVulnerabilityAssessmentScans.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DataWarehouseUserActivities.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/DeletedServers.json
+ - ./Microsoft.Sql/preview/2021-05-01-preview/DistributedAvailabilityGroups.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ElasticPoolOperations.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ElasticPools.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/EncryptionProtectors.json
@@ -805,12 +805,14 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerAutomaticTuning.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerDevOpsAudit.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerDnsAliases.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerKeys.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerOperations.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/Servers.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2021-05-01-preview/ServerTrustCertificates.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerTrustGroups.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ServerVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/SqlAgent.json

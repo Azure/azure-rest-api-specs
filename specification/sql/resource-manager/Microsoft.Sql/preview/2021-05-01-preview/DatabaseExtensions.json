@@ -64,7 +64,7 @@
         "tags": [
           "DatabaseExtensions"
         ],
-        "description": "Perform a database extension operation, like polybase import",
+        "description": "Perform a database extension operation, like database import, database export, or polybase import",
         "operationId": "DatabaseExtensions_CreateOrUpdate",
         "parameters": [
           {
@@ -116,6 +116,12 @@
         "x-ms-examples": {
           "Create or Update database extensions.": {
             "$ref": "./examples/CreateOrUpdateDatabaseExtensions.json"
+          },
+          "Import database using database extension.": {
+            "$ref": "./examples/ImportDatabaseUsingDatabaseExtensions.json"
+          },
+          "Export database using database extension.": {
+            "$ref": "./examples/ExportDatabaseUsingDatabaseExtensions.json"
           }
         }
       }
@@ -168,7 +174,7 @@
   },
   "definitions": {
     "DatabaseExtensionsProperties": {
-      "description": "Contains the database information after successful export.",
+      "description": "Contains the database information after a successful Import, Export, or PolybaseImport",
       "required": [
         "operationMode",
         "storageKeyType",
@@ -178,9 +184,11 @@
       "type": "object",
       "properties": {
         "operationMode": {
-          "description": "Operation Mode.",
+          "description": "Operation mode of the operation: Import, Export, or PolybaseImport.",
           "enum": [
-            "PolybaseImport"
+            "PolybaseImport",
+            "Import",
+            "Export"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -192,7 +200,7 @@
           ]
         },
         "storageKeyType": {
-          "description": "Storage key type.",
+          "description": "Storage key type: StorageAccessKey or SharedAccessKey.",
           "enum": [
             "SharedAccessKey",
             "StorageAccessKey"
@@ -207,14 +215,83 @@
           ]
         },
         "storageKey": {
-          "description": "Storage key.",
+          "description": "Storage key for the storage account.",
           "type": "string",
           "x-ms-mutability": [
             "create"
           ]
         },
         "storageUri": {
-          "description": "Storage Uri.",
+          "description": "Storage Uri for the storage account.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type: SQL authentication or AD password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "databaseEdition": {
+          "description": "Database edition for the newly created database in the case of an import operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "serviceObjectiveName": {
+          "description": "Database service level objective for the newly created database in the case of an import operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "maxSizeBytes": {
+          "description": "Database max size in bytes for the newly created database in the case of an import operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "NetworkIsolationSettings": {
+      "description": "Contains the ARM resources for which to create private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlServerResourceId": {
+          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -223,7 +300,7 @@
       }
     },
     "DatabaseExtensions": {
-      "description": "An export managed database operation result resource.",
+      "description": "An Import, Export, or PolybaseImport resource.",
       "type": "object",
       "allOf": [
         {
@@ -275,6 +352,45 @@
         },
         "errorMessage": {
           "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob URI.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the status of private endpoints associated with this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestStatus": {
+      "description": "Contains the private endpoint connection requests status.",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceId": {
+          "description": "Resource id for which the private endpoint is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnectionName": {
+          "description": "The connection name for the private endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of this private endpoint connection.",
           "type": "string",
           "readOnly": true
         }
