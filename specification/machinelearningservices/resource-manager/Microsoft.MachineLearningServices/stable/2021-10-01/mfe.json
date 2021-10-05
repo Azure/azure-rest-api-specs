@@ -5153,6 +5153,55 @@
       "x-ms-discriminator-value": "AMLToken",
       "additionalProperties": false
     },
+    "AssetBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "isAnonymous": {
+          "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetContainer": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "latestVersion": {
+          "description": "The latest version inside this container.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "nextVersion": {
+          "description": "The next auto incremental version",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "AssetReferenceBase": {
       "description": "Base definition for asset references.",
       "required": [
@@ -5171,8 +5220,7 @@
       "description": "Azure Blob datastore configuration.",
       "required": [
         "accountName",
-        "containerName",
-        "credentials"
+        "containerName"
       ],
       "type": "object",
       "allOf": [
@@ -5234,7 +5282,6 @@
     "AzureDataLakeGen1Datastore": {
       "description": "Azure Data Lake Gen1 datastore configuration.",
       "required": [
-        "credentials",
         "storeName"
       ],
       "type": "object",
@@ -5269,7 +5316,6 @@
       "description": "Azure Data Lake Gen2 datastore configuration.",
       "required": [
         "accountName",
-        "credentials",
         "filesystem"
       ],
       "type": "object",
@@ -5333,7 +5379,6 @@
       "description": "Azure File datastore configuration.",
       "required": [
         "accountName",
-        "credentials",
         "fileShareName"
       ],
       "type": "object",
@@ -5446,34 +5491,15 @@
     "BatchDeployment": {
       "description": "Batch inference settings per deployment.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointDeploymentPropertiesBase"
+        }
+      ],
       "properties": {
-        "codeConfiguration": {
-          "description": "Code configuration for the endpoint deployment.",
-          "$ref": "#/definitions/CodeConfiguration",
-          "x-nullable": true
-        },
         "compute": {
           "description": "Compute target for batch inference operation.",
           "type": "string",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Description of the endpoint deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "environmentId": {
-          "description": "ARM resource ID of the environment specification for the endpoint deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "environmentVariables": {
-          "description": "Environment variables configuration for the deployment.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         },
         "errorThreshold": {
@@ -5511,15 +5537,6 @@
           "description": "Customized output file name for append_row output action.",
           "default": "predictions.csv",
           "type": "string",
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Property dictionary. Properties can be added, but not removed or altered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         },
         "provisioningState": {
@@ -5604,37 +5621,15 @@
     "BatchEndpoint": {
       "description": "Batch endpoint configuration.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointPropertiesBase"
+        }
+      ],
       "properties": {
-        "authMode": {
-          "description": "Authentication mode",
-          "$ref": "#/definitions/EndpointAuthMode"
-        },
         "defaults": {
           "description": "Default values for Batch Endpoint",
           "$ref": "#/definitions/BatchEndpointDefaults",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Description of the inference endpoint.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "keys": {
-          "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
-          "$ref": "#/definitions/EndpointAuthKeys",
-          "x-ms-mutability": [
-            "create"
-          ],
-          "x-ms-secret": true,
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Property dictionary. Properties can be added, but not removed or altered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         },
         "provisioningState": {
@@ -5644,26 +5639,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "scoringUri": {
-          "format": "uri",
-          "description": "Endpoint URI.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "swaggerUri": {
-          "format": "uri",
-          "description": "Endpoint Swagger URI.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -5944,49 +5919,11 @@
     "CodeContainer": {
       "description": "Container for code asset versions.",
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "latestVersion": {
-          "description": "The latest version inside this container.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "nextVersion": {
-          "description": "The next auto incremental version",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "CodeContainerResource": {
@@ -6038,43 +5975,16 @@
     "CodeVersion": {
       "description": "Code asset version details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
       "properties": {
         "codeUri": {
           "description": "Uri where code is located",
           "type": "string",
           "example": "https://blobStorage/folderName",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "isAnonymous": {
-          "description": "If the name version are system generated (anonymous registration).",
-          "default": false,
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         }
       },
@@ -6270,49 +6180,11 @@
     "ComponentContainer": {
       "description": "Component container definition.",
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "latestVersion": {
-          "description": "The latest version inside this container.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "nextVersion": {
-          "description": "The next auto incremental version",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "ComponentContainerResource": {
@@ -6426,6 +6298,11 @@
     "ComponentVersion": {
       "description": "Definition of a component version: defines resources that span component types.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
       "properties": {
         "componentSpec": {
           "description": "Defines Component definition details.",
@@ -6434,38 +6311,6 @@
             "create",
             "read"
           ],
-          "x-nullable": true
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "isAnonymous": {
-          "description": "If the name version are system generated (anonymous registration).",
-          "default": false,
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         }
       },
@@ -6612,49 +6457,11 @@
     "DatasetContainer": {
       "description": "Container for dataset asset versions.",
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "latestVersion": {
-          "description": "The latest version inside this container.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "nextVersion": {
-          "description": "The next auto incremental version",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "DatasetContainerResource": {
@@ -6709,21 +6516,12 @@
         "paths"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
       "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "isAnonymous": {
-          "description": "If the name version are system generated (anonymous registration).",
-          "default": false,
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "paths": {
           "description": "The path of the file/directory in the datastore or https/wasb/adlsgen storage url.",
           "type": "array",
@@ -6734,24 +6532,6 @@
             "create",
             "read"
           ]
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -6809,6 +6589,11 @@
         "datastoreType"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
       "properties": {
         "credentials": {
           "description": "Account credentials.",
@@ -6818,11 +6603,6 @@
           "description": "Storage type backing the datastore.",
           "$ref": "#/definitions/DatastoreType"
         },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
         "isDefault": {
           "description": "Readonly property to indicate if datastore is the workspace default datastore",
           "type": "boolean",
@@ -6830,24 +6610,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "properties": {
-          "description": "Datastore properties",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
       "discriminator": "datastoreType"
@@ -7193,6 +6955,103 @@
       },
       "additionalProperties": false
     },
+    "EndpointDeploymentPropertiesBase": {
+      "description": "Base definition for endpoint deployment.",
+      "type": "object",
+      "properties": {
+        "codeConfiguration": {
+          "description": "Code configuration for the endpoint deployment.",
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "Description of the endpoint deployment.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "environmentId": {
+          "description": "ARM resource ID of the environment specification for the endpoint deployment.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "environmentVariables": {
+          "description": "Environment variables configuration for the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "EndpointPropertiesBase": {
+      "description": "Inference Endpoint base definition",
+      "required": [
+        "authMode"
+      ],
+      "type": "object",
+      "properties": {
+        "authMode": {
+          "description": "Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication.\r\n'Key' doesn't expire but 'AMLToken' does.",
+          "$ref": "#/definitions/EndpointAuthMode"
+        },
+        "description": {
+          "description": "Description of the inference endpoint.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keys": {
+          "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
+          "$ref": "#/definitions/EndpointAuthKeys",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true,
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "scoringUri": {
+          "format": "uri",
+          "description": "Endpoint URI.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "swaggerUri": {
+          "format": "uri",
+          "description": "Endpoint Swagger URI.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "EndpointProvisioningState": {
       "description": "State of endpoint provisioning.",
       "enum": [
@@ -7213,49 +7072,11 @@
     "EnvironmentContainer": {
       "description": "Container for environment specification versions.",
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "latestVersion": {
-          "description": "The latest version inside this container.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "nextVersion": {
-          "description": "The next auto incremental version",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "EnvironmentContainerResource": {
@@ -7320,6 +7141,11 @@
     "EnvironmentVersion": {
       "description": "Environment version details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
       "properties": {
         "build": {
           "description": "Configuration settings for Docker build context.",
@@ -7336,11 +7162,6 @@
             "create",
             "read"
           ]
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
         },
         "environmentType": {
           "description": "Environment type is either user managed or curated by the Azure ML service\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments\" />",
@@ -7367,15 +7188,6 @@
             "read"
           ]
         },
-        "isAnonymous": {
-          "description": "If the name version are system generated (anonymous registration).",
-          "default": false,
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "osType": {
           "description": "The OS type of the environment.",
           "$ref": "#/definitions/OperatingSystemType",
@@ -7383,24 +7195,6 @@
             "create",
             "read"
           ]
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -7580,6 +7374,11 @@
         "jobType"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
       "properties": {
         "computeId": {
           "description": "ARM resource ID of the compute resource.",
@@ -7588,11 +7387,6 @@
             "create",
             "read"
           ],
-          "x-nullable": true
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
           "x-nullable": true
         },
         "displayName": {
@@ -7630,15 +7424,6 @@
           ],
           "x-nullable": true
         },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
         "services": {
           "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
           "type": "object",
@@ -7655,15 +7440,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
       "discriminator": "jobType"
@@ -8158,49 +7934,11 @@
     },
     "ModelContainer": {
       "type": "object",
-      "properties": {
-        "description": {
-          "description": "The model container description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "latestVersion": {
-          "description": "The latest version inside this container.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "nextVersion": {
-          "description": "The next auto incremental version",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "ModelContainerResource": {
@@ -8270,12 +8008,12 @@
         "modelUri"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
       "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
         "flavors": {
           "description": "Mapping of model flavors to their properties.",
           "type": "object",
@@ -8285,15 +8023,6 @@
           },
           "x-nullable": true
         },
-        "isAnonymous": {
-          "description": "If the name version are system generated (anonymous registration).",
-          "default": false,
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "jobName": {
           "description": "Name of the training job which produced this model",
           "type": "string",
@@ -8301,30 +8030,13 @@
         },
         "modelFormat": {
           "description": "The storage format for this entity. Used for NCD.",
+          "default": "Custom",
           "$ref": "#/definitions/ModelFormat"
         },
         "modelUri": {
           "description": "The URI path to the model contents.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -8434,39 +8146,20 @@
         "endpointComputeType"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointDeploymentPropertiesBase"
+        }
+      ],
       "properties": {
         "appInsightsEnabled": {
           "description": "If true, enables Application Insights logging.",
           "default": false,
           "type": "boolean"
         },
-        "codeConfiguration": {
-          "description": "Code configuration for the endpoint deployment.",
-          "$ref": "#/definitions/CodeConfiguration",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Description of the endpoint deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
         "endpointComputeType": {
           "description": "The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
-        },
-        "environmentId": {
-          "description": "ARM resource ID of the environment specification for the endpoint deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "environmentVariables": {
-          "description": "Environment variables configuration for the deployment.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         },
         "instanceType": {
           "description": "Compute instance type.",
@@ -8490,15 +8183,6 @@
         "modelMountPath": {
           "description": "The path to mount the model in custom container.",
           "type": "string",
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Property dictionary. Properties can be added, but not removed or altered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         },
         "provisioningState": {
@@ -8587,46 +8271,21 @@
     },
     "OnlineEndpoint": {
       "description": "Online endpoint configuration",
-      "required": [
-        "authMode"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointPropertiesBase"
+        }
+      ],
       "properties": {
         "allowPublicAccess": {
           "description": "Set to true for endpoints that should allow public access when Private Link is enabled.",
           "default": true,
           "type": "boolean"
         },
-        "authMode": {
-          "description": "Use 'key' for key based authentication and 'aml_token' for Azure Machine Learning token-based authentication.\r\nkey doesn't expire but aml_token does.",
-          "$ref": "#/definitions/EndpointAuthMode"
-        },
         "compute": {
           "description": "ARM resource ID of the compute if it exists.\r\noptional",
           "type": "string",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Description of the inference endpoint.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "keys": {
-          "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
-          "$ref": "#/definitions/EndpointAuthKeys",
-          "x-ms-mutability": [
-            "create"
-          ],
-          "x-ms-secret": true,
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Property dictionary. Properties can be added, but not removed or altered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
           "x-nullable": true
         },
         "provisioningState": {
@@ -8636,26 +8295,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "scoringUri": {
-          "format": "uri",
-          "description": "Endpoint URI.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "swaggerUri": {
-          "format": "uri",
-          "description": "Endpoint Swagger URI.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
         },
         "traffic": {
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
@@ -9648,6 +9287,35 @@
         "keyValue": {
           "description": "The value the key is set to.",
           "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceBase": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The asset description text.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
           "x-nullable": true
         }
       },
