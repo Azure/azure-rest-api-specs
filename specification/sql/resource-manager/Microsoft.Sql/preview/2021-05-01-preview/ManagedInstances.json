@@ -372,6 +372,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets the collection of outbound network dependencies for the given managed instance.",
+        "operationId": "ManagedInstances_ListOutboundNetworkDependenciesByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the outbound network dependencies for this managed instance.",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the collection of outbound network dependencies for the given managed instance.": {
+            "$ref": "./examples/ListOutboundNetworkDependenciesByManagedInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries": {
       "get": {
         "tags": [
@@ -763,7 +805,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "CurrentBackupStorageRedundancy",
+            "name": "BackupStorageRedundancy",
             "modelAsString": true
           }
         },
@@ -777,7 +819,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RequestedBackupStorageRedundancy",
+            "name": "BackupStorageRedundancy",
             "modelAsString": true
           },
           "x-ms-mutability": [
@@ -1034,6 +1076,75 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "A collection of endpoints that the managed instance service requires outbound network access to.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "An endpoint that the managed instance service requires outbound network access to.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The type of service accessed by the managed instance service, e.g., Azure Storage, Azure Active Directory, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpoints": {
+          "description": "The endpoints that the managed instance service communicates with in order to function correctly.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependecy"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointDependecy": {
+      "description": "A domain name that the managed instance services needs to communicate with, along with additional details.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpointDetails": {
+          "description": "The IP Addresses and Ports used when connecting to DomainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "A domain name that the managed instance services needs to communicate with, along with additional details.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
