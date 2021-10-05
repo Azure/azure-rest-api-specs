@@ -85,6 +85,7 @@
       "in": "query",
       "description": "Latitude where results should be biased. E.g. 37.337",
       "type": "number",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "OptionalBiasLon": {
@@ -92,6 +93,7 @@
       "in": "query",
       "description": "Longitude where results should be biased. E.g. -121.89",
       "type": "number",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "BoundingBoxTopLeft": {
@@ -116,6 +118,7 @@
       "description": "Latitude where results should be biased. E.g. 37.337.",
       "required": true,
       "type": "number",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "RequiredBiasLon": {
@@ -124,6 +127,7 @@
       "description": "Longitude where results should be biased. E.g. -121.89.",
       "required": true,
       "type": "number",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "Query": {
@@ -146,7 +150,7 @@
       "maxItems": 2,
       "items": {
         "type": "number",
-        "format": "float"
+        "format": "double"
       }
     },
     "SearchIndexSet": {
@@ -357,7 +361,7 @@
       "x-ms-client-name": "radiusInMeters",
       "in": "query",
       "description": "The radius in meters to for the results to be constrained to the defined area",
-      "type": "number",
+      "type": "integer",
       "x-ms-parameter-location": "method"
     },
     "PoiQuery": {
@@ -479,7 +483,7 @@
   "paths": {
     "/search/polygon/{format}": {
       "get": {
-        "description": "**Get Polygon**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry  ID is returned in the dataSources object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
+        "description": "**Get Polygon**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry ID is returned in the sourceGeometry object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
         "operationId": "GetPolygon",
         "x-ms-examples": {
           "Get the Geometry using the geometry id returned by the previous Search": {
@@ -634,7 +638,7 @@
     "/search/poi/{format}": {
       "get": {
         "description": "**Get POI by Name**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Search allows you to request POI results by name.  Search supports additional query parameters such as language and filtering results by area of interest driven by country or bounding box.  Endpoint will return only POI results matching the query string. Response includes POI details such as address, coordinate location and category.",
-        "operationId": "SearchPOI",
+        "operationId": "SearchPointOfInterest",
         "x-ms-examples": {
           "Search for juice bars within 5 miles of Seattle Downtown and limit the response to 5 results": {
             "$ref": "./examples/GetSearchPOI.json"
@@ -761,7 +765,7 @@
             "in": "query",
             "x-ms-client-name": "radiusInMeters",
             "description": "The radius in meters to for the results to be constrained to the defined area, Min value is 1, Max Value is 50000.",
-            "type": "number"
+            "type": "integer"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -795,7 +799,7 @@
     "/search/poi/category/{format}": {
       "get": {
         "description": "**Get POI by Category**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Category Search allows you to request POI results from given category. Search allows to query POIs from one category at a time.  Endpoint will only return POI results which are categorized as specified.  Response includes POI details such as address, coordinate location and classification.",
-        "operationId": "SearchPOICategory",
+        "operationId": "SearchPointOfInterestCategory",
         "x-ms-examples": {
           "Search for atm's within 2 miles of Times Square NY and return the top 3 results": {
             "$ref": "./examples/GetSearchPOICategory.json"
@@ -883,7 +887,7 @@
     "/search/poi/category/tree/{format}": {
       "get": {
         "description": "**Get POI Category Tree**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPOI Category API provides a full list of supported Points of Interest (POI) categories and subcategories together with their translations and synonyms. The returned content can be used to provide more meaningful results through other Search Service APIs, like [Get Search POI](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi).",
-        "operationId": "GetPoiCategoryTree",
+        "operationId": "GetPointOfInterestCategoryTree",
         "x-ms-examples": {
           "Get the POI Category Tree (only partial response shown below)": {
             "$ref": "./examples/GetSearchPOICategoryTree.json"
@@ -910,7 +914,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetPoiCategoryTreeResponse"
+              "$ref": "#/definitions/PointOfInterestCategoryTreeResponse"
             }
           },
           "default": {
@@ -1034,7 +1038,7 @@
             "name": "heading",
             "in": "query",
             "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
-            "type": "number",
+            "type": "integer",
             "minimum": -360,
             "maximum": 360
           },
@@ -1187,7 +1191,7 @@
             "name": "heading",
             "in": "query",
             "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
-            "type": "number",
+            "type": "integer",
             "minimum": -360,
             "maximum": 360
           },
@@ -1885,7 +1889,7 @@
     }
   },
   "definitions": {
-    "GetPolygonResponse": {
+    "PolygonResponse": {
       "description": "This object is returned from a successful Search Polygon call",
       "type": "object",
       "properties": {
@@ -1947,22 +1951,30 @@
       "readOnly": true,
       "properties": {
         "query": {
-          "description": "Query property",
+          "description": "The query parameter that was used to produce these search results.",
           "type": "string",
           "readOnly": true
         },
         "queryType": {
-          "description": "QueryType property",
+          "description": "The type of query being returned: NEARBY or NON_NEAR.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "NEARBY",
+            "NON_NEAR"
+          ],
+          "x-ms-enum": {
+            "name": "QueryType",
+            "modelAsString": true
+          }
         },
         "queryTime": {
-          "description": "QueryTime property",
+          "description": "Time spent resolving the query, in milliseconds.",
           "type": "integer",
           "readOnly": true
         },
         "numResults": {
-          "description": "NumResults property",
+          "description": "Number of results in the response.",
           "type": "integer",
           "readOnly": true
         },
@@ -1973,17 +1985,18 @@
           "type": "integer"
         },
         "offset": {
-          "description": "Offset property",
+          "x-ms-client-name": "skip",
+          "description": "The starting offset of the returned Results within the full Result set.",
           "type": "integer",
           "readOnly": true
         },
         "totalResults": {
-          "description": "TotalResults property",
+          "description": "The total number of Results found.",
           "type": "integer",
           "readOnly": true
         },
         "fuzzyLevel": {
-          "description": "FuzzyLevel property",
+          "description": "The maximum fuzzy level required to provide Results.",
           "type": "integer",
           "readOnly": true
         },
@@ -2007,7 +2020,19 @@
         "type": {
           "description": "One of:\n* POI\n* Street\n* Geography\n* Point Address\n* Address Range\n* Cross Street",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "POI",
+            "Street",
+            "Geography",
+            "Point Address",
+            "Address Range",
+            "Cross Street"
+          ],
+          "x-ms-enum": {
+            "name": "ResultType",
+            "modelAsString": true
+          }
         },
         "id": {
           "description": "Id property",
@@ -2018,10 +2043,11 @@
           "$ref": "#/definitions/Score"
         },
         "dist": {
+          "x-ms-client-name": "distanceInMeters",
           "$ref": "#/definitions/Distance"
         },
         "info": {
-          "description": "Info property",
+          "description": "Information about the original data source of the Result. Used for support requests.",
           "type": "string",
           "readOnly": true
         },
@@ -2029,6 +2055,7 @@
           "$ref": "#/definitions/EntityType"
         },
         "poi": {
+          "x-ms-client-name": "pointOfInterest",
           "$ref": "#/definitions/PointOfInterest"
         },
         "address": {
@@ -2041,7 +2068,7 @@
           "$ref": "#/definitions/Viewport"
         },
         "entryPoints": {
-          "description": "Entry Points array",
+          "description": "Array of EntryPoints. Those describe the types of entrances available at the location. The type can be \"main\" for main entrances such as a front door, or a lobby, and \"minor\", for side and back doors.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -2052,6 +2079,9 @@
           "$ref": "#/definitions/AddressRanges"
         },
         "dataSources": {
+          "description": "Optional section. Reference geometry id for use with the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API.",
+          "type": "object",
+          "readOnly": true,
           "$ref": "#/definitions/DataSources"
         },
         "matchType": {
@@ -2059,17 +2089,18 @@
           "description": "Information on the type of match.\n\nOne of:\n  * AddressPoint\n  * HouseNumberRange\n  * Street"
         },
         "detourTime": {
-          "description": "Detour time in seconds",
-          "type": "number",
+          "description": "Detour time in seconds. Only returned for calls to the Search Along Route API.",
+          "type": "integer",
           "readOnly": true
         }
       }
     },
-    "GetPoiCategoryTreeResponse": {
+    "PointOfInterestCategoryTreeResponse": {
       "description": "This object is returned from a successful POI Category Tree call",
       "type": "object",
       "properties": {
         "poiCategories": {
+          "x-ms-client-name": "categories",
           "description": "Categories array",
           "type": "array",
           "readOnly": true,
@@ -2374,28 +2405,18 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "buildingNumber": {
-          "description": "Building Number property",
-          "type": "string",
-          "readOnly": true
-        },
-        "street": {
-          "description": "Street property",
-          "type": "string",
-          "readOnly": true
-        },
         "crossStreet": {
-          "description": "Cross Street property",
+          "description": "The name of the street being crossed.",
           "type": "string",
           "readOnly": true
         },
         "streetNumber": {
-          "description": "Street Number property",
+          "description": "The building number on the street.",
           "type": "string",
           "readOnly": true
         },
         "routeNumbers": {
-          "description": "number of routes",
+          "description": "The codes used to unambiguously identify the street",
           "type": "array",
           "items": {
             "type": "integer",
@@ -2404,72 +2425,72 @@
           "readOnly": true
         },
         "streetName": {
-          "description": "Street Name property",
+          "description": "The street name.",
           "type": "string",
           "readOnly": true
         },
         "streetNameAndNumber": {
-          "description": "Street Name and Number property",
+          "description": "The street name and number.",
           "type": "string",
           "readOnly": true
         },
         "municipality": {
-          "description": "Municipality property",
+          "description": "City / Town",
           "type": "string",
           "readOnly": true
         },
         "municipalitySubdivision": {
-          "description": "Municipality Subdivision property",
+          "description": "Sub / Super City",
           "type": "string",
           "readOnly": true
         },
         "countryTertiarySubdivision": {
-          "description": "Country Tertiary Subdivision property",
+          "description": "Named Area",
           "type": "string",
           "readOnly": true
         },
         "countrySecondarySubdivision": {
-          "description": "Country Secondary Subdivision property",
+          "description": "County",
           "type": "string",
           "readOnly": true
         },
         "countrySubdivision": {
-          "description": "Country Subdivision property",
+          "description": "State or Province",
           "type": "string",
           "readOnly": true
         },
         "postalCode": {
-          "description": "Postal Code property",
+          "description": "Postal Code / Zip Code",
           "type": "string",
           "readOnly": true
         },
         "extendedPostalCode": {
-          "description": "Extended Postal Code property",
+          "description": "Extended postal code (availability is dependent on the region).",
           "type": "string",
           "readOnly": true
         },
         "countryCode": {
-          "description": "Country Code property",
+          "description": "Country (Note: This is a two-letter code, not a country name.)",
           "type": "string",
           "readOnly": true
         },
         "country": {
-          "description": "Country property",
+          "description": "Country name",
           "type": "string",
           "readOnly": true
         },
         "countryCodeISO3": {
-          "description": "Country Code ISO3 property",
+          "description": "ISO alpha-3 country code",
           "type": "string",
           "readOnly": true
         },
         "freeformAddress": {
-          "description": "Free form Address property",
+          "description": "An address line formatted according to the formatting rules of a Result's country of origin, or in the case of a country, its full country name.",
           "type": "string",
           "readOnly": true
         },
         "countrySubdivisionName": {
-          "description": "Country Subdivision Name property",
+          "description": "The full name of a first level of country administrative hierarchy. This field appears only in case countrySubdivision is presented in an abbreviated form. Only supported for USA, Canada, and Great Britain.",
           "type": "string",
           "readOnly": true
         },
@@ -2481,12 +2502,26 @@
         "boundingBox": {
           "description": "Bounding box coordinates.",
           "type": "object",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/BoundingBox"
         }
       }
     },
     "Viewport": {
-      "description": "The viewport that covers the result represented by the top-left and bottom-right coordinates of the  viewport.",
+      "description": "The viewport that covers the result represented by the top-left and bottom-right coordinates of the viewport.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "topLeftPoint": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
+        },
+        "btmRightPoint": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
+        }
+      }
+    },
+    "BoundingBox": {
+      "description": "The viewport that covers the result represented by the top-left and bottom-right coordinates of the viewport.",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -2545,33 +2580,13 @@
     "Score": {
       "description": "The value within a result set to indicate the relative matching score between results.  You can use this to  determine that result x is twice as likely to be as relevant as result y if the value of x is 2x the value of y.   The values vary between queries and is only meant as a relative value for one result set.",
       "type": "number",
+      "format": "double",
       "readOnly": true
     },
     "Distance": {
       "description": "Straight line distance between the result and geobias location in meters.",
-      "type": "number",
+      "type": "integer",
       "readOnly": true
-    },
-    "DataSources": {
-      "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "geometry": {
-          "$ref": "#/definitions/DataSourcesGeometry"
-        }
-      }
-    },
-    "DataSourcesGeometry": {
-      "description": "Information about the geometric shape of the result. Only present if type == Geography.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Pass this as geometryId to the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API to fetch geometry information for this result.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "EntityType": {
       "description": "Geography entity type. Present only when entityType was requested and is available.",
@@ -2648,6 +2663,27 @@
         "HouseNumberRange",
         "Street"
       ]
+    },
+    "DataSources": {
+      "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/Geometry"
+        }
+      }
+    },
+    "Geometry": {
+      "description": "Information about the geometric shape of the result. Only present if type == Geography.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Pass this as geometryId to the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API to fetch geometry information for this result.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "SearchAddressBatchProcessResponse": {
       "description": "This object is returned from a successful Search Address Batch service call.",
