@@ -7330,20 +7330,24 @@
         },
         "contentVersion": {
           "type": "string",
-          "description": "The content version."
+          "description": "The content version.",
+          "readOnly": true
         },
         "contentSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The content size."
+          "description": "The content size.",
+          "readOnly": true
         },
         "contentHash": {
           "$ref": "#/definitions/ContentHash",
-          "description": "The content hash."
+          "description": "The content hash.",
+          "readOnly": true
         },
         "metadata": {
           "$ref": "#/definitions/Object",
-          "description": "The metadata."
+          "description": "The metadata.",
+          "readOnly": true
         }
       },
       "description": "The content link."
@@ -8309,52 +8313,62 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name"
+          "description": "The name",
+          "readOnly": true
         },
         "connectionParameters": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Object"
           },
-          "description": "The connection parameters."
+          "description": "The connection parameters.",
+          "readOnly": true
         },
         "metadata": {
           "$ref": "#/definitions/ApiResourceMetadata",
-          "description": "The metadata."
+          "description": "The metadata.",
+          "readOnly": true
         },
         "runtimeUrls": {
           "type": "array",
           "description": "The runtime urls.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "generalInformation": {
           "$ref": "#/definitions/ApiResourceGeneralInformation",
-          "description": "The api general information."
+          "description": "The api general information.",
+          "readOnly": true
         },
         "capabilities": {
           "type": "array",
           "description": "The capabilities.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "backendService": {
           "$ref": "#/definitions/ApiResourceBackendService",
-          "description": "The backend service."
+          "description": "The backend service.",
+          "readOnly": true
         },
         "policies": {
           "$ref": "#/definitions/ApiResourcePolicies",
-          "description": "The policies for the API."
+          "description": "The policies for the API.",
+          "readOnly": true
         },
         "apiDefinitionUrl": {
           "type": "string",
-          "description": "The API definition."
+          "description": "The API definition.",
+          "readOnly": true
         },
         "apiDefinitions": {
           "$ref": "#/definitions/ApiResourceDefinitions",
-          "description": "The api definitions."
+          "description": "The api definitions.",
+          "readOnly": true
         },
         "integrationServiceEnvironment": {
           "$ref": "#/definitions/ResourceReference",
@@ -8362,11 +8376,13 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/WorkflowProvisioningState",
-          "description": "The provisioning state."
+          "description": "The provisioning state.",
+          "readOnly": true
         },
         "category": {
           "$ref": "#/definitions/ApiTier",
-          "description": "The category."
+          "description": "The category.",
+          "readOnly": true
         }
       }
     },
@@ -9339,9 +9355,6 @@
         "sku": {
           "$ref": "#/definitions/IntegrationAccountSku",
           "description": "The sku."
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       },
       "description": "The integration account.",
