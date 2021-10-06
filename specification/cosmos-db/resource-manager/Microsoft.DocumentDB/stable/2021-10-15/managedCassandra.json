@@ -347,7 +347,6 @@
             "$ref": "./examples/CosmosDBManagedCassandraCommand.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -373,7 +372,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The command operation will begin as soon as possible."
+            "description": "Success. The command operation will begin as soon as possible.",
+            "schema": {
+              "$ref": "#/definitions/CommandOutput"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -773,8 +775,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Enqueued Operation to deallocate the cluster."
+          "200": {
+            "description": "Cluster deallocated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1149,13 +1151,8 @@
     "CassandraClusterPublicStatus": {
       "type": "object",
       "description": "Properties of a managed Cassandra cluster public status.",
-      "allOf": [
-        {
-          "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
-        }
-      ],
       "properties": {
-        "ETag": {
+        "eTag": {
           "type": "string"
         },
         "cassandraClusterReaperStatus": {
@@ -1379,6 +1376,16 @@
         "readwrite": {
           "type": "boolean",
           "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
+        }
+      }
+    },
+    "CommandOutput": {
+      "description": "Response of /command api",
+      "type": "object",
+      "properties": {
+        "commandOutput" : {
+          "type": "string",
+          "description": "Output of the command."
         }
       }
     },
