@@ -536,7 +536,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ShortCodeEntities"
+              "$ref": "#/definitions/ShortCodes"
             }
           },
           "default": {
@@ -587,7 +587,7 @@
             "name": "body",
             "description": "Data to create new a Program Brief or fields to update an existing Program Brief",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/USProgramBrief"
             }
           }
         ],
@@ -595,13 +595,13 @@
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/USProgramBrief"
             }
           },
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/USProgramBrief"
             }
           },
           "default": {
@@ -680,7 +680,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/USProgramBrief"
             }
           },
           "default": {
@@ -722,7 +722,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntity"
+              "$ref": "#/definitions/USProgramBrief"
             }
           },
           "default": {
@@ -774,7 +774,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProgramBriefEntities"
+              "$ref": "#/definitions/USProgramBriefs"
             }
           },
           "default": {
@@ -1165,7 +1165,7 @@
         }
       }
     },
-    "ShortCodeEntity": {
+    "ShortCode": {
       "description": "Represents a number, ShortCode or AlphaId, acquired in a given country.",
       "type": "object",
       "properties": {
@@ -1203,7 +1203,7 @@
         }
       }
     },
-    "ShortCodeEntities": {
+    "ShortCodes": {
       "description": "A wrapper for a list of short code entities.",
       "type": "object",
       "properties": {
@@ -1211,7 +1211,7 @@
           "description": "List of short codes.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ShortCodeEntity"
+            "$ref": "#/definitions/ShortCode"
           }
         },
         "nextLink": {
@@ -1515,8 +1515,8 @@
         }
       }
     },
-    "ProgramBriefEntity": {
-      "description": "A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
+    "USProgramBrief": {
+      "description": "Represents a US Program Brief for acquiring a short code in the United States.\r\nA Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number.\r\nA Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.",
       "required": [
         "id"
       ],
@@ -1585,19 +1585,19 @@
         }
       }
     },
-    "ProgramBriefEntities": {
-      "description": "A wrapper for a list of ProgramBrief entities.",
+    "USProgramBriefs": {
+      "description": "A wrapper for a list of USProgramBrief entities.",
       "type": "object",
       "properties": {
         "programBriefs": {
-          "description": "List of Program ¨Briefs.",
+          "description": "List of Program Briefs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProgramBriefEntity"
+            "$ref": "#/definitions/USProgramBrief"
           }
         },
         "nextLink": {
-          "description": "Represents the URL link to the next page",
+          "description": "Represents the URL link to the next page.",
           "type": "string"
         }
       }
