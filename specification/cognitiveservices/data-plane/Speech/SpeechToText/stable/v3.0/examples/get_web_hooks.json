@@ -3,7 +3,7 @@
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
     "$skip": 0,
-    "$top": 10
+    "$top": 3
   },
   "responses": {
     "200": {
@@ -18,7 +18,8 @@
               "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d/ping"
             },
             "properties": {
-              "apiVersion": "v3.0"
+              "apiVersion": "v3.0",
+              "secret": "$CREDENTIAL_PLACEHOLDER$"
             },
             "webUrl": "https://contoso.com/call/me/back",
             "events": {
@@ -37,7 +38,8 @@
               "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d/ping"
             },
             "properties": {
-              "apiVersion": "v3.0"
+              "apiVersion": "v3.0",
+              "secret": "$CREDENTIAL_PLACEHOLDER$"
             },
             "webUrl": "https://contoso.com/call/me/back",
             "events": {
@@ -56,7 +58,8 @@
               "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d/ping"
             },
             "properties": {
-              "apiVersion": "v3.0"
+              "apiVersion": "v3.0",
+              "secret": "$CREDENTIAL_PLACEHOLDER$"
             },
             "webUrl": "https://contoso.com/call/me/back",
             "events": {
@@ -68,7 +71,7 @@
             "status": "Succeeded"
           }
         ],
-        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks?skip=0&top=10"
+        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/webhooks?$skip=3&$top=3"
       }
     },
     "400": {

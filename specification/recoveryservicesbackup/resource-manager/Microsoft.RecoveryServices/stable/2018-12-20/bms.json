@@ -185,6 +185,9 @@
         "x-ms-examples": {
           "Trigger Cross Region Restore": {
             "$ref": "./examples/AzureIaasVm/TriggerCrossRegionRestore_Post.json"
+          },
+          "Trigger Cross Region Restore with identityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/TriggerCrossRegionRestore_IdentityBasedRestoreDetails_Post.json"
           }
         }
       }
@@ -3161,9 +3164,27 @@
         "identityInfo": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Managed Identity information required to access customer storage account."
+        },
+        "identityBasedRestoreDetails": {
+          "$ref": "#/definitions/IdentityBasedRestoreDetails",
+          "description": "IaaS VM workload specific restore details for restores using managed identity."
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
+    },
+    "IdentityBasedRestoreDetails": {
+      "description": "IaaS VM workload specific restore details for restores using managed identity",
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Gets the class type.",
+          "type": "string"
+        },
+        "targetStorageAccountId": {
+          "description": "Fully qualified ARM ID of the target storage account.",
+          "type": "string"
+        }
+      }
     },
     "IdentityInfo": {
       "description": "Encapsulates Managed Identity related information",
