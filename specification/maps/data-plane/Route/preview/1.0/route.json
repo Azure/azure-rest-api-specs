@@ -193,7 +193,7 @@
     },
     "HillinessDegree": {
       "name": "hilliness",
-      "x-ms-client-name": "HillinessLevel",
+      "x-ms-client-name": "InclineDegree",
       "in": "query",
       "description": "Degree of hilliness for thrilling route. This parameter can only be used in conjunction with `routeType`=thrilling.",
       "type": "string",
@@ -361,8 +361,7 @@
       "name": "constantSpeedConsumptionInLitersPerHundredkm",
       "in": "query",
       "description": "\n\nSpecifies the speed-dependent component of consumption.\n\nProvided as an unordered list of colon-delimited speed & consumption-rate pairs. The list defines points on a consumption curve. Consumption rates for speeds not in the list are found as follows:\n\n * by linear interpolation, if the given speed lies in between two speeds in the list\n\n * by linear extrapolation otherwise, assuming a constant (ΔConsumption/ΔSpeed) determined by the nearest two points in the list\n\nThe list must contain between 1 and 25 points (inclusive), and may not contain duplicate points for the same speed. If it only contains a single point, then the consumption rate of that point is used without further processing.\n\nConsumption specified for the largest speed must be greater than or equal to that of the penultimate largest speed. This ensures that extrapolation does not lead to negative consumption rates.\n\nSimilarly, consumption values specified for the two smallest speeds in the list cannot lead to a negative consumption rate for any smaller speed.\n\nThe valid range for the consumption values(expressed in l/100km) is between 0.01 and 100000.0.\n\nSensible Values : 50,6.3:130,11.5\n\n**Note** : This parameter is required for **The Combustion Consumption Model**.",
-      "type": "number",
-      "format": "float",
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "CurrentFuelInLiters": {
@@ -469,7 +468,6 @@
       "x-ms-parameter-location": "method"
     },
     "VehicleWeight": {
-      "x-ms-client-name": "VehicleWeightInKg",
       "name": "vehicleWeight",
       "in": "query",
       "description": "Weight of the vehicle in kilograms.\n\n* It is mandatory if any of the *Efficiency parameters are set.\n\n* It must be strictly positive when used in the context of the Consumption Model. Weight restrictions are considered.\n\n* If no detailed **Consumption Model** is specified and the value of **vehicleWeight** is non-zero, then weight restrictions are considered.\n\n* In all other cases, this parameter is ignored.\n\nSensible Values : for **Combustion Model** : 1600, for **Electric Model** : 1900",
@@ -2496,7 +2494,8 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "summary": {
+        "routeSummary": {
+          "x-ms-client-name": "summary",
           "$ref": "#/definitions/RouteLegSummary"
         }
       }
