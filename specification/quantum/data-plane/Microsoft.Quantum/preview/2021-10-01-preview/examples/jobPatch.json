@@ -3,7 +3,18 @@
     "jobId": "a0f7adb6-0378-11eb-9463-2816a847b9a3",
     "resourceGroupName": "quantumResourcegroup",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceName": "quantumworkspace1"
+    "workspaceName": "quantumworkspace1",
+    "patchJob": [
+      {
+        "op": "add",
+        "path": "/tags/-",
+        "value": "new_tag"
+      },
+      {
+        "op": "remove",
+        "path": "/tags/0"
+      }
+    ]
   },
   "responses": {
     "200": {
@@ -30,10 +41,11 @@
         "status": "Succeeded",
         "target": "microsoft.tabu.cpu",
         "tags": [
-          "tag1",
-          "new"
+          "tag2",
+          "new_tag"
         ]
       }
-    }
+    },
+    "204": {}
   }
 }
