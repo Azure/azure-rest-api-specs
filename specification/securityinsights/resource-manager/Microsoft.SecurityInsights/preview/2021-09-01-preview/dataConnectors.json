@@ -334,7 +334,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK, Operation successfully completed"
+            "description": "OK, Operation successfully completed",
+            "schema": {}
+          },
+          "201": {
+            "description": "OK, Operation successfully completed",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -348,7 +353,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect": {
       "put": {
         "x-ms-examples": {
-          "Connect an APIPolling data connector": {
+          "Disconnect an APIPolling data connector": {
             "$ref": "./examples/dataConnectors/DisconnectAPIPolling.json"
           }
         },
@@ -382,7 +387,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK, Operation successfully completed"
+            "description": "OK, Operation successfully completed",
+            "schema": {}
+          },
+          "201": {
+            "description": "OK, Operation successfully completed",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2517,7 +2527,7 @@
     "DataConnectorConnectBody": {
       "description": "The data connector",
       "in": "body",
-      "name": "DataConnectorConnectBody",
+      "name": "connectBody",
       "required": true,
       "schema": {
         "$ref": "#/definitions/DataConnectorConnectBody"
@@ -2527,7 +2537,7 @@
     "DataConnectorDisconnectBody": {
       "description": "The data connector",
       "in": "body",
-      "name": "DataConnectorDisconnectBody",
+      "name": "disconnectBody",
       "required": true,
       "schema": {
         "$ref": "#/definitions/DataConnectorDisconnectBody"
