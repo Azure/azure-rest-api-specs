@@ -62,18 +62,18 @@ These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-07-01
+tag: package-2021-07-01-preview
 title: PurviewMetadataPolicyClient
 ```
 
 
-### Tag: package-2021-07-01
+### Tag: package-2021-07-01-preview
 
-These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-07-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-01'
+``` yaml $(tag) == 'package-2021-07-01-preview'
 input-file:
-- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01/purviewMetadataPolicy.json
+- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
 modelerfour:
   lenient-model-deduplication: true
 ```
