@@ -1972,6 +1972,22 @@
         "parameters": [
           {
             "$ref": "#/parameters/returnRecognitionModel"
+          },
+          {
+            "name": "start",
+            "description": "Starting large face list id to return (used to list a range of large face lists).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "description": "Number of large face lists to return starting with the large face list id indicated by the 'start' parameter.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -4491,10 +4507,10 @@
         },
         "maxNumOfCandidatesReturned": {
           "type": "integer",
-          "description": "The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1).",
+          "description": "The range of maxNumOfCandidatesReturned is between 1 and 100 (default is 1).",
           "default": 1,
           "minimum": 1,
-          "maximum": 5
+          "maximum": 100
         },
         "confidenceThreshold": {
           "description": "Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm).",

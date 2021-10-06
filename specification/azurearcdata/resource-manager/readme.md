@@ -39,6 +39,15 @@ input-file:
   - Microsoft.AzureArcData/stable/2021-08-01/azurearcdata.json
 ```
 
+### Tag: package-preview-2021-07-01
+
+These settings apply only when `--tag=package-preview-2021-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-07-01'
+input-file:
+  - Microsoft.AzureArcData/preview/2021-07-01-preview/azurearcdata.json
+```
+
 ### Tag: package-preview-2021-06-01
 
 These settings apply only when `--tag=package-preview-2021-06-01` is specified on the command line.
@@ -68,8 +77,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurearcdata']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js azurearcdata/resource-manager
 ```
 
 ## Go
@@ -91,7 +98,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
