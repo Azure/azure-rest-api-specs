@@ -614,11 +614,109 @@
     },
     "View": {
       "name": "view",
-      "x-ms-client-name": "userRegion",
+      "x-ms-client-name": "localizedMapView",
       "in": "query",
-      "description": "The View parameter specifies which set of geopolitically disputed content is returned via Azure Maps services, including  borders and labels displayed on the map. The View parameter (also referred to as “user region parameter”) will show the  correct maps for that country/region. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly  for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "description": "The View parameter (also called the \"user region\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries have different views of such regions, and the View parameter allows your application to comply with the view required by the country your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "x-ms-parameter-location": "method",
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "enum": [
+        "AE",
+        "AR",
+        "BH",
+        "IN",
+        "IQ",
+        "JO",
+        "KW",
+        "LB",
+        "MA",
+        "OM",
+        "PK",
+        "PS",
+        "QA",
+        "SA",
+        "SY",
+        "YE",
+        "Auto",
+        "Unified"
+      ],
+      "x-ms-enum": {
+        "name": "LocalizedMapView",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AE",
+            "description": "United Arab Emirates (Arabic View)"
+          },
+          {
+            "value": "AR",
+            "description": "Argentina (Argentinian View)"
+          },
+          {
+            "value": "BH",
+            "description": "Bahrain (Arabic View)"
+          },
+          {
+            "value": "IN",
+            "description": "India (Indian View)"
+          },
+          {
+            "value": "IQ",
+            "description": "Iraq (Arabic View)"
+          },
+          {
+            "value": "JO",
+            "description": "Jordan (Arabic View)"
+          },
+          {
+            "value": "KW",
+            "description": "Kuwait (Arabic View)"
+          },
+          {
+            "value": "LB",
+            "description": "Lebanon (Arabic View)"
+          },
+          {
+            "value": "MA",
+            "description": "Morocco (Moroccan View)"
+          },
+          {
+            "value": "OM",
+            "description": "Oman (Arabic View)"
+          },
+          {
+            "value": "PK",
+            "description": "Pakistan (Pakistani View)"
+          },
+          {
+            "value": "PS",
+            "description": "Palestinian Authority (Arabic View)"
+          },
+          {
+            "value": "QA",
+            "description": "Qatar (Arabic View)"
+          },
+          {
+            "value": "SA",
+            "description": "Saudi Arabia (Arabic View)"
+          },
+          {
+            "value": "SY",
+            "description": "Syria (Arabic View)"
+          },
+          {
+            "value": "YE",
+            "description": "Yemen (Arabic View)"
+          },
+          {
+            "value": "Auto",
+            "description": "Return the map data based on the IP address of the request."
+          },
+          {
+            "value": "Unified",
+            "description": "Unified View (Others)"
+          }
+        ]
+      }
     },
     "xTileIndex": {
       "name": "x",
