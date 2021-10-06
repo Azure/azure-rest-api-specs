@@ -338,6 +338,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/command": {
+      "post": {
+        "operationId": "CassandraClusters_InvokeCommand",
+        "description": "Invoke a command like nodetool for cassandra maintenance ",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraRepair": {
+            "$ref": "./examples/CosmosDBManagedCassandraCommand.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommandPostBody"
+            },
+            "description": "Specification which command to run where"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The command operation will begin as soon as possible."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/fetchNodeStatus": {
       "post": {
         "operationId": "CassandraClusters_FetchNodeStatus",
@@ -990,8 +1036,7 @@
               "description": "Which authentication method Cassandra should use to authenticate clients. 'None' turns off authentication, so should not be used except in emergencies. 'Cassandra' is the default password based authentication. The default is 'Cassandra'.",
               "enum": [
                 "None",
-                "Cassandra",
-                "Ldap"
+                "Cassandra"
               ],
               "x-ms-enum": {
                 "name": "AuthenticationMethod",
@@ -1305,6 +1350,39 @@
         }
       }
     },
+    "CommandPostBody": {
+      "description": "Specification of which command to run where",
+      "type": "object",
+      "required": [
+        "command",
+        "host"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command which should be run"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for the command to be run",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "IP address of the cassandra host to run the command on"
+        },
+        "cassandra-stop-start": {
+          "type": "boolean",
+          "description": "If true, stops cassandra before executing the command and then start it again"
+        },
+        "readwrite": {
+          "type": "boolean",
+          "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
+        }
+      }
+    },
     "ClusterNodeStatus": {
       "description": "The status of all nodes in the cluster (as returned by 'nodetool status').",
       "type": "object",
@@ -1495,45 +1573,7 @@
             "availabilityZone": {
               "type": "boolean",
               "description": "If the data center will have Availability Zone feature apply to the Virtual Machine ScaleSet that host the data center virtual machines"
-            },
-            "authenticationMethodLdapProperties": {
-              "$ref": "#/definitions/AuthenticationMethodLdapProperties"
             }
-          }
-        }
-      }
-    },
-    "AuthenticationMethodLdapProperties": {
-      "type": "object",
-      "properties": {
-        "serverHostname": {
-          "description": "Hostname of the LDAP server.",
-          "type": "string"
-        },
-        "serverPort": {
-          "description": "Port of the LDAP server.",
-          "type": "integer"
-        },
-        "serviceUserDistinguishedName": {
-          "description": "Distinguished name of the look up user account, who can look up user details on authentication.",
-          "type": "string"
-        },
-        "serviceUserPassword": {
-          "description": "Password of the look up user.",
-          "type": "string"
-        },
-        "searchBaseDistinguishedName": {
-          "description": "Distinguished name of the object to start the recursive search of users from.",
-          "type": "string"
-        },
-        "searchFilterTemplate": {
-          "description": "Template to use for searching. Defaults to (cn=%s) where %s will be replaced by the username used to login.",
-          "type": "string"
-        },
-        "serverCertificates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Certificate"
           }
         }
       }
