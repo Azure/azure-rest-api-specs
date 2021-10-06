@@ -239,9 +239,10 @@ input-file:
 - Microsoft.Compute/stable/2021-07-01/compute.json
 - Microsoft.Compute/stable/2021-07-01/runCommands.json
 - Microsoft.Compute/stable/2021-07-01/skus.json
-- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2021-04-01/disk.json
 - Microsoft.Compute/stable/2021-07-01/gallery.json
 - Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
@@ -292,7 +293,7 @@ input-file:
 - Microsoft.Compute/stable/2021-04-01/compute.json
 - Microsoft.Compute/stable/2021-04-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-12-01/disk.json
+- Microsoft.Compute/stable/2021-04-01/disk.json
 - Microsoft.Compute/stable/2020-09-30/gallery.json
 - Microsoft.Compute/stable/2020-09-30/sharedGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
@@ -925,6 +926,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

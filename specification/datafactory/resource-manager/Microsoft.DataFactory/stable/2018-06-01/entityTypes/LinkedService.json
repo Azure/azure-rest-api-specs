@@ -486,7 +486,8 @@
           },
           "enum": [
             "ServicePrincipal",
-            "ManagedIdentity"
+            "ManagedIdentity",
+            "UserAssignedManagedIdentity"
           ],
           "type": "string",
           "description": "Sql always encrypted AKV authentication type. Type: string (or Expression with resultType string)."
@@ -498,6 +499,10 @@
         "servicePrincipalKey": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The key of the service principal used to authenticate against Azure Key Vault."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [

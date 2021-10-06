@@ -1,0 +1,233 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "api-version": "2021-07-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba"
+      },
+      "body": {
+        "values": [
+          {
+            "name": "policy_mycollection",
+            "id": "98ed42ff-b67f-44df-8c8c-7e6b43e77055",
+            "version": 1,
+            "properties": {
+              "description": "",
+              "decisionRules": [
+                {
+                  "kind": "decisionrule",
+                  "effect": "Permit",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "resource.purview.collection",
+                        "attributeValueIncludes": "mycollection"
+                      },
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "permission:mycollection"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "attributeRules": [
+                {
+                  "kind": "attributerule",
+                  "id": "purviewmetadatarole_builtin_collection-administrator:mycollection",
+                  "name": "purviewmetadatarole_builtin_collection-administrator:mycollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "principal.microsoft.id",
+                        "attributeValueIncludedIn": [
+                          "69e520f2-5f26-4074-9fe1-5187d85ec005"
+                        ]
+                      },
+                      {
+                        "attributeName": "derived.purview.role",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_collection-administrator"
+                      }
+                    ],
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_collection-administrator:myparentcollection"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "kind": "attributerule",
+                  "id": "permission:mycollection",
+                  "name": "permission:mycollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_collection-administrator:mycollection"
+                      }
+                    ],
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "permission:myparentcollection"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "collection": {
+                "type": "CollectionReference",
+                "referenceName": "mycollection"
+              },
+              "parentCollectionName": "myparentcollection"
+            }
+          },
+          {
+            "name": "policy_myparentcollection",
+            "id": "b69bb29e-91dc-41f5-af94-3eb86f9c45e8",
+            "version": 6,
+            "properties": {
+              "description": "",
+              "decisionRules": [
+                {
+                  "kind": "decisionrule",
+                  "effect": "Permit",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "resource.purview.collection",
+                        "attributeValueIncludes": "myparentcollection"
+                      },
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "permission:myparentcollection"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "attributeRules": [
+                {
+                  "kind": "attributerule",
+                  "id": "purviewmetadatarole_builtin_collection-administrator:myparentcollection",
+                  "name": "purviewmetadatarole_builtin_collection-administrator:myparentcollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "principal.microsoft.id",
+                        "attributeValueIncludedIn": [
+                          "6545aabd-7f83-4e63-adc1-45dcab61d5c3"
+                        ]
+                      },
+                      {
+                        "attributeName": "derived.purview.role",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_collection-administrator"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "kind": "attributerule",
+                  "id": "purviewmetadatarole_builtin_purview-reader:myparentcollection",
+                  "name": "purviewmetadatarole_builtin_purview-reader:myparentcollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "principal.microsoft.id",
+                        "attributeValueIncludedIn": [
+                          "6545aabd-7f83-4e63-adc1-45dcab61d5c3"
+                        ]
+                      },
+                      {
+                        "attributeName": "derived.purview.role",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_purview-reader"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "kind": "attributerule",
+                  "id": "purviewmetadatarole_builtin_data-curator:myparentcollection",
+                  "name": "purviewmetadatarole_builtin_data-curator:myparentcollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "principal.microsoft.id",
+                        "attributeValueIncludedIn": [
+                          "6545aabd-7f83-4e63-adc1-45dcab61d5c3"
+                        ]
+                      },
+                      {
+                        "attributeName": "derived.purview.role",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_data-curator"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "kind": "attributerule",
+                  "id": "purviewmetadatarole_builtin_data-source-administrator:myparentcollection",
+                  "name": "purviewmetadatarole_builtin_data-source-administrator:myparentcollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "principal.microsoft.id",
+                        "attributeValueIncludedIn": [
+                          "6545aabd-7f83-4e63-adc1-45dcab61d5c3"
+                        ]
+                      },
+                      {
+                        "attributeName": "derived.purview.role",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_data-source-administrator"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "kind": "attributerule",
+                  "id": "permission:myparentcollection",
+                  "name": "permission:myparentcollection",
+                  "dnfCondition": [
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_collection-administrator:myparentcollection"
+                      }
+                    ],
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_purview-reader:myparentcollection"
+                      }
+                    ],
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_data-curator:myparentcollection"
+                      }
+                    ],
+                    [
+                      {
+                        "attributeName": "derived.purview.permission",
+                        "attributeValueIncludes": "purviewmetadatarole_builtin_data-source-administrator:myparentcollection"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "collection": {
+                "type": "CollectionReference",
+                "referenceName": "myparentcollection"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
