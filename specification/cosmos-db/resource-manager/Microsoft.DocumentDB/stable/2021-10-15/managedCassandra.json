@@ -343,7 +343,7 @@
         "operationId": "CassandraClusters_InvokeCommand",
         "description": "Invoke a command like nodetool for cassandra maintenance ",
         "x-ms-examples": {
-          "CosmosDBManagedCassandraRepair": {
+          "CosmosDBManagedCassandraCommand": {
             "$ref": "./examples/CosmosDBManagedCassandraCommand.json"
           }
         },
@@ -757,6 +757,7 @@
             "$ref": "./examples/CosmosDBManagedCassandraClusterDeallocate.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -793,6 +794,7 @@
             "$ref": "./examples/CosmosDBManagedCassandraClusterStart.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -947,6 +949,7 @@
     },
     "ManagedCassandraManagedServiceIdentity": {
       "description": "Identity for the resource.",
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1145,123 +1148,119 @@
     },
     "CassandraClusterPublicStatus": {
       "type": "object",
+      "description": "Properties of a managed Cassandra cluster public status.",
       "allOf": [
         {
           "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
         }
       ],
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "Properties of a managed Cassandra cluster public status.",
-          "properties": {
-            "ETag": {
-              "type": "string"
-            },
-            "cassandraClusterReaperStatus": {
-              "$ref": "#/definitions/ManagedCassandraReaperStatus"
-            },
-            "connectionErrors": {
-              "type": "array",
-              "description": "List relevant information about any connection errors to the Datacenters.",
-              "items": {
-                "$ref": "#/definitions/ConnectionError"
-              }
-            },
-            "dataCenters": {
-              "type": "array",
-              "description": "List of the status of each datacenter in this cluster.",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "This Datacenter's name."
-                  },
-                  "seedNodes": {
-                    "type": "array",
-                    "description": "A list of all seed nodes in the cluster, managed and unmanaged.",
-                    "items": {
+        "ETag": {
+          "type": "string"
+        },
+        "cassandraClusterReaperStatus": {
+          "$ref": "#/definitions/ManagedCassandraReaperStatus"
+        },
+        "connectionErrors": {
+          "type": "array",
+          "description": "List relevant information about any connection errors to the Datacenters.",
+          "items": {
+            "$ref": "#/definitions/ConnectionError"
+          }
+        },
+        "dataCenters": {
+          "type": "array",
+          "description": "List of the status of each datacenter in this cluster.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "This Datacenter's name."
+              },
+              "seedNodes": {
+                "type": "array",
+                "description": "A list of all seed nodes in the cluster, managed and unmanaged.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "nodes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "description": "The node's IP address."
+                    },
+                    "state": {
+                      "$ref": "#/definitions/ManagedCassandraNodeState"
+                    },
+                    "status": {
                       "type": "string"
-                    }
-                  },
-                  "nodes": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "address": {
-                          "type": "string",
-                          "description": "The node's IP address."
-                        },
-                        "state": {
-                          "$ref": "#/definitions/ManagedCassandraNodeState"
-                        },
-                        "status": {
-                          "type": "string"
-                        },
-                        "load": {
-                          "type": "string",
-                          "description": "The amount of file system data in the data directory (e.g., 47.66 kB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cells or tombstones) is counted."
-                        },
-                        "tokens": {
-                          "type": "array",
-                          "description": "List of tokens this node covers.",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "size": {
-                          "type": "integer"
-                        },
-                        "hostId": {
-                          "description": "The network ID of the node.",
-                          "type": "string"
-                        },
-                        "rack": {
-                          "description": "The rack this node is part of.",
-                          "type": "string"
-                        },
-                        "timestamp": {
-                          "description": "The timestamp at which that snapshot of these usage statistics were taken.",
-                          "type": "string"
-                        },
-                        "diskUsedKB": {
-                          "description": "The amount of disk used, in kB, of the diretory /var/lib/cassandra.",
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "diskFreeKB": {
-                          "description": "The amount of disk free, in kB, of the directory /var/lib/cassandra.",
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "memoryUsedKB": {
-                          "description": "Used memory (calculated as total - free - buffers - cache), in kB.",
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "memoryBuffersAndCachedKB": {
-                          "description": "Memory used by kernel buffers (Buffers in /proc/meminfo) and page cache and slabs (Cached and SReclaimable in /proc/meminfo), in kB.",
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "memoryFreeKB": {
-                          "description": "Unused memory (MemFree and SwapFree in /proc/meminfo), in kB.",
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "memoryTotalKB": {
-                          "description": "Total installed memory (MemTotal and SwapTotal in /proc/meminfo), in kB.",
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "cpuUsage": {
-                          "description": "A float representing the current system-wide CPU utilization as a percentage.",
-                          "type": "integer",
-                          "format": "double"
-                        }
+                    },
+                    "load": {
+                      "type": "string",
+                      "description": "The amount of file system data in the data directory (e.g., 47.66 kB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cells or tombstones) is counted."
+                    },
+                    "tokens": {
+                      "type": "array",
+                      "description": "List of tokens this node covers.",
+                      "items": {
+                        "type": "string"
                       }
+                    },
+                    "size": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "hostId": {
+                      "description": "The network ID of the node.",
+                      "type": "string"
+                    },
+                    "rack": {
+                      "description": "The rack this node is part of.",
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "description": "The timestamp at which that snapshot of these usage statistics were taken.",
+                      "type": "string"
+                    },
+                    "diskUsedKB": {
+                      "description": "The amount of disk used, in kB, of the diretory /var/lib/cassandra.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "diskFreeKB": {
+                      "description": "The amount of disk free, in kB, of the directory /var/lib/cassandra.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "memoryUsedKB": {
+                      "description": "Used memory (calculated as total - free - buffers - cache), in kB.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "memoryBuffersAndCachedKB": {
+                      "description": "Memory used by kernel buffers (Buffers in /proc/meminfo) and page cache and slabs (Cached and SReclaimable in /proc/meminfo), in kB.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "memoryFreeKB": {
+                      "description": "Unused memory (MemFree and SwapFree in /proc/meminfo), in kB.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "memoryTotalKB": {
+                      "description": "Total installed memory (MemTotal and SwapTotal in /proc/meminfo), in kB.",
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "cpuUsage": {
+                      "description": "A float representing the current system-wide CPU utilization as a percentage.",
+                      "type": "number",
+                      "format": "double"
                     }
                   }
                 }
