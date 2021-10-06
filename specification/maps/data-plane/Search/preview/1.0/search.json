@@ -174,27 +174,33 @@
           "values": [
             {
               "value": "Addr",
-              "description": "Address range interpolation"
+              "description": "Address range interpolation",
+              "name": "Address"
             },
             {
               "value": "Geo",
-              "description": "Geographies"
+              "description": "Geographies",
+              "name": "Geographies"
             },
             {
               "value": "PAD",
-              "description": "Point Addresses"
+              "description": "Point Addresses",
+              "name": "PointAddresses"
             },
             {
               "value": "POI",
-              "description": "Points of interest"
+              "description": "Points of interest",
+              "name": "PointsOfInterest"
             },
             {
               "value": "Str",
-              "description": "Streets"
+              "description": "Streets",
+              "name": "Streets"
             },
             {
               "value": "Xstr",
-              "description": "Cross Streets (Intersections)"
+              "description": "Cross Streets (Intersections)",
+              "name": "CrossStreets"
             }
           ]
         }
@@ -278,27 +284,33 @@
           "values": [
             {
               "value": "Addr",
-              "description": "Address range interpolation"
+              "description": "Address range interpolation",
+              "name": "AddressRange"
             },
             {
               "value": "Geo",
-              "description": "Geographies"
+              "description": "Geographies",
+              "name": "Geographies"
             },
             {
               "value": "PAD",
-              "description": "Point Addresses"
+              "description": "Point Addresses",
+              "name": "PointAddresses"
             },
             {
               "value": "POI",
-              "description": "Points of interest"
+              "description": "Points of interest",
+              "name": "PointsOfInterest"
             },
             {
               "value": "Str",
-              "description": "Streets"
+              "description": "Streets",
+              "name": "Streets"
             },
             {
               "value": "Xstr",
-              "description": "Cross Streets (Intersections)"
+              "description": "Cross Streets (Intersections)",
+              "name": "CrossStreets"
             }
           ]
         }
@@ -1330,8 +1342,6 @@
             "in": "body",
             "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) to search in and should be a GeoJSON compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
             "required": true,
-            "x-ms-client-flatten": true,
-            "x-ms-client-name": "geometryParameter",
             "schema": {
               "$ref": "#/definitions/SearchInsideGeometryRequestBody"
             }
@@ -1391,8 +1401,6 @@
             "in": "body",
             "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
             "required": true,
-            "x-ms-client-flatten": true,
-            "x-ms-client-name": "routeParameter",
             "schema": {
               "$ref": "#/definitions/SearchAlongRouteRequestBody"
             }
