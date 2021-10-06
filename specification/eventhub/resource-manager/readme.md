@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01-preview
+tag: package-2021-06-preview
 ```
 
 ### Suppression
@@ -96,6 +96,9 @@ These settings apply only when `--tag=package-2021-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-06-preview'
 input-file:
+- Microsoft.EventHub/preview/2021-06-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2021-06-01-preview/quotaConfiguration-preview.json
 - Microsoft.EventHub/preview/2021-06-01-preview/namespaces-preview.json
 - Microsoft.EventHub/preview/2021-06-01-preview/operations.json
 - Microsoft.EventHub/preview/2021-06-01-preview/eventhubs.json
