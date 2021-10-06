@@ -30,6 +30,24 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+- preview/2020-10-02/blob.json
+```
+
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12'
+input-file:
+- preview/2020-12-06/blob.json
+```
+
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
