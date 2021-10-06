@@ -1,8 +1,13 @@
 {
   "parameters": {
     "resourceUri": "subscriptions/f5bcc1d9-23af-4ae9-aca1-041d0f593a63/resourceGroups/hybridRG/providers/Microsoft.HybridCompute/machines/testMachine",
-    "api-version": "2021-07-08-privatepreview",
-    "endpointName": "default"
+    "api-version": "2021-10-06-preview",
+    "endpointName": "default",
+    "EndpointResource": {
+      "properties": {
+        "type": "default"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -11,7 +16,8 @@
         "name": "default",
         "type": "Microsoft.HybridConnectivity/endpoints",
         "properties": {
-          "type": "default"
+          "type": "default",
+          "provisioningState": "Succeeded"
         }
       }
     }

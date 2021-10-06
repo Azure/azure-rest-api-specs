@@ -27,16 +27,16 @@ These are the global settings for the hybridconnectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2021-07-08-privatepreview
+tag: package-2021-10-06-preview
 ```
 
-### Tag: package-2021-07-08-privatepreview
+### Tag: package-2021-10-06-preview
 
-These settings apply only when `--tag=package-2021-07-08-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2021-10-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07-08-privatepreview'
+```yaml $(tag) == 'package-2021-10-06-preview'
 input-file:
-  - Microsoft.HybridConnectivity/preview/2021-07-08-privatepreview/hybridconnectivity.json
+  - Microsoft.HybridConnectivity/preview/2021-10-06-preview/hybridconnectivity.json
 ```
 
 ---
