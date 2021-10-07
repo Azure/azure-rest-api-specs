@@ -467,6 +467,7 @@
       "in": "query",
       "description": "Weight of the vehicle in kilograms.",
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleWeight": {
@@ -474,6 +475,7 @@
       "in": "query",
       "description": "Weight of the vehicle in kilograms.\n\n* It is mandatory if any of the *Efficiency parameters are set.\n\n* It must be strictly positive when used in the context of the Consumption Model. Weight restrictions are considered.\n\n* If no detailed **Consumption Model** is specified and the value of **vehicleWeight** is non-zero, then weight restrictions are considered.\n\n* In all other cases, this parameter is ignored.\n\nSensible Values : for **Combustion Model** : 1600, for **Electric Model** : 1900",
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleMaxSpeed": {
@@ -481,6 +483,7 @@
       "in": "query",
       "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways. \n\n* A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\n* A non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle  maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation.  If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour.",
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleLength": {
@@ -489,6 +492,7 @@
       "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered.",
       "type": "number",
       "format": "float",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleHeight": {
@@ -497,6 +501,7 @@
       "description": "Height of the vehicle in meters. A value of 0 means that height restrictions are not considered.",
       "type": "number",
       "format": "float",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleWidth": {
@@ -505,6 +510,7 @@
       "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are not considered.",
       "type": "number",
       "format": "float",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleAxleWeight": {
@@ -512,6 +518,7 @@
       "in": "query",
       "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
       "type": "integer",
+      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "VehicleCommercial": {
@@ -520,6 +527,7 @@
       "in": "query",
       "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may not be allowed to drive on some roads.",
       "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "DepartAt": {
