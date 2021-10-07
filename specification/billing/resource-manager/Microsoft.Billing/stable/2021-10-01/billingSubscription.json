@@ -727,15 +727,6 @@
       "description": "The billing properties of a subscription.",
       "type": "object",
       "properties": {
-        "extendedProperties": {
-          "type": "object",
-          "description": "Dictionary of additional properties associated with the subscription.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "maxItems": 50,
-          "readOnly": true
-        },
         "autoRenew": {
           "description": "Indicates whether auto renewal is turned on or off for a product.",
           "type": "string",
@@ -748,6 +739,10 @@
             "modelAsString": true
           }
         },
+        "billingFrequency": {
+          "description": "The billing frequency in ISO8601 format of product in the subscription. Example: P1M, P3M, P1Y",
+          "type": "string"
+        },
         "billingProfileId": {
           "description": "The ID of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
           "type": "string"
@@ -757,11 +752,12 @@
           "type": "string",
           "readOnly": true
         },
-        "billingFrequency": {
-          "description": "The billing frequency in ISO8601 format of product in the subscription. Example: P1M, P3M, P1Y",
-          "type": "string"
+        "billingProfileName": {
+          "description": "The name of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
+          "type": "string",
+          "readOnly": true
         },
-        "billingProfileSpendingLimit": {
+        "billingProfileSpendingLimitDetails": {
           "description": "The spending limit that is set on the billing profile to which the subscription is billed.",
           "enum": [
             "Off",
@@ -789,8 +785,7 @@
         },
         "displayName": {
           "description": "The name of the subscription.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "enrollmentAccountId": {
           "description": "The enrollment Account ID associated with the subscription. This field is available only for the Enterprise Agreement Type billing accounts.",
@@ -817,6 +812,10 @@
           "type": "string",
           "readOnly": true
         },
+        "invoiceSectionName": {
+          "description": "The name of the invoice section to which the subscription is billed. The field is applicable only for Microsoft Partner Agreement billing accounts.",
+          "type": "string"
+        },
         "lastMonthCharges": {
           "description": "The last month charges. This field is only available for consumption subscriptions of Microsoft Customer Agreement billing accounts.",
           "readOnly": true,
@@ -830,7 +829,6 @@
         "nextBillingCycleDetails": {
           "description": "Next billing cycle details of the subscription.",
           "type": "object",
-          "readOnly": true,
           "$ref": "#/definitions/NextBillingCycleDetails"
         },
         "offerId": {
@@ -839,7 +837,7 @@
           "readOnly": true
         },
         "productCategory": {
-          "description": "Category of the subscription. Possible values include: Consumption, SaaS, AzureSupport, AzureReservationOrder, AzureSavingsPlan, Hardware, M365",
+          "description": "Category of the subscription. Possible values include: AzureSupport, Hardware, ReservationOrder, SaaS, SavingsPlanOrder, Software, UsageBased, Other",
           "type": "string",
           "readOnly": true
         },
@@ -851,11 +849,6 @@
         "productTypeId": {
           "description": "Id of the product for which the subscription is purchased",
           "type": "string"
-        },
-        "publisherName": {
-          "description": "The organization that published the product for which the subscription is purchased.",
-          "type": "string",
-          "readOnly": true
         },
         "purchaseDate": {
           "type": "string",
@@ -872,6 +865,11 @@
           "description": "Reseller for this subscription. The fields is not available for Microsoft Partner Agreement billing accounts.",
           "readOnly": true,
           "$ref": "#/definitions/Reseller"
+        },
+        "renewalTermDetails": {
+          "description": "  ",
+          "type": "object",
+          "$ref": "#/definitions/RenewalTermDetails"
         },
         "skuDescription": {
           "description": "The SKU description of the product for which the subscription is purchased. This field is only available  for Microsoft Customer Agreement billing accounts.",
@@ -890,7 +888,7 @@
             "Active",
             "Disabled",
             "Deleted",
-            "PastDue",
+            "Warned",
             "Expiring",
             "Expired",
             "AutoRenew",
@@ -903,8 +901,8 @@
             "modelAsString": true
           }
         },
-        "consumptionSubscriptionId": {
-          "description": "The ID of the consumption subscription. This field is only available for consumption subscriptions of Microsoft Customer Agreement Type billing accounts.",
+        "subscriptionId": {
+          "description": "The ID of the usage-based subscription. This field is only available for usage-based subscriptions of Microsoft Customer Agreement Type billing accounts.",
           "type": "string",
           "readOnly": true
         },
@@ -915,11 +913,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "tenantId": {
-          "description": "The id of the tenant in which the product is used.",
-          "type": "string",
-          "readOnly": true
         },
         "termDuration": {
           "description": "The duration for which you can use the subscription. Example P1Y and P1M",
@@ -936,6 +929,77 @@
           "format": "date-time",
           "description": "End date of the term in UTC time.",
           "readOnly": true
+        }
+      }
+    },
+    "BillingProfileSpendingLimitDetails": {
+      "description": "Billing profile spending limit details of the product.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "amount": {
+          "description": "The spending limit value.",
+          "type": "number",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The spending limit currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date of the spending limit.",
+          "readOnly": true
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date of the spending limit.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The spending limit status.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "None",
+            "Active",
+            "Expired",
+            "LimitReached",
+            "LimitRemoved"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingSubscriptionCreditStatus",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "description": "The spending limit type.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "None",
+            "FreeAccount",
+            "AzureForStudents",
+            "AcademicSponsorship",
+            "AzureConsumptionCredit",
+            "AzurePassSponsorship",
+            "MpnSponsorship",
+            "MSDN",
+            "NonProfitSponsorship",
+            "Sponsorship",
+            "StartupSponsorship",
+            "AzureForStudentsStarter",
+            "VisualStudio"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SpendingLimitType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -999,7 +1063,7 @@
             "Transferring"
           ],
           "x-ms-enum": {
-            "name": "BillingEnrollmentAccountSubscriptionStatusType",
+            "name": "SubscriptionEnrollmentAccountStatus",
             "modelAsString": true
           }
         },
@@ -1017,6 +1081,38 @@
       "properties": {
         "billingFrequency": {
           "description": "Billing frequency of the product under the subscription.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RenewalTermDetails": {
+      "description": "Renewal term details of the product.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "billingFrequency": {
+          "description": "Billing frequency of the product under the subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "The ID of the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The number of licenses",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "The SKU ID of the product",
+          "type": "string",
+          "readOnly": true
+        },
+        "termDuration": {
+          "description": "The duration. Example P1Y and P1M",
           "type": "string",
           "readOnly": true
         }
