@@ -386,49 +386,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/fetchNodeStatus": {
-      "post": {
-        "operationId": "CassandraClusters_FetchNodeStatus",
-        "description": "Request the status of all nodes in the cluster (as returned by 'nodetool status').",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraClusterFetchNodeStatus": {
-            "$ref": "./examples/CosmosDBManagedCassandraClusterFetchNodeStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The node status will be returned asynchronously."
-          },
-          "200": {
-            "description": "Successfully fetched the status of all nodes in the cluster.",
-            "schema": {
-              "$ref": "#/definitions/ClusterNodeStatus"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
       "get": {
         "operationId": "CassandraClusters_ListBackups",
@@ -1212,7 +1169,7 @@
                       "type": "integer",
                       "format": "int32"
                     },
-                    "hostId": {
+                    "hostID": {
                       "description": "The network ID of the node.",
                       "type": "string"
                     },
@@ -1386,60 +1343,6 @@
         "commandOutput" : {
           "type": "string",
           "description": "Output of the command."
-        }
-      }
-    },
-    "ClusterNodeStatus": {
-      "description": "The status of all nodes in the cluster (as returned by 'nodetool status').",
-      "type": "object",
-      "properties": {
-        "nodes": {
-          "type": "array",
-          "description": "Information about nodes in the cluster (corresponds to what is returned from nodetool info).",
-          "items": {
-            "type": "object",
-            "properties": {
-              "datacenter": {
-                "type": "string",
-                "description": "The Cassandra data center this node resides in."
-              },
-              "status": {
-                "$ref": "#/definitions/ManagedCassandraNodeStatus"
-              },
-              "state": {
-                "$ref": "#/definitions/ManagedCassandraNodeState"
-              },
-              "address": {
-                "type": "string",
-                "description": "The node's URL."
-              },
-              "load": {
-                "type": "string",
-                "description": "The amount of file system data in the data directory (e.g., 47.66 kB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cell or tombstoned data) is counted."
-              },
-              "tokens": {
-                "type": "array",
-                "description": "List of tokens.",
-                "items": {
-                  "type": "string",
-                  "description": "Token of this node."
-                }
-              },
-              "owns": {
-                "type": "number",
-                "format": "double",
-                "description": "The percentage of the data owned by the node per datacenter times the replication factor (e.g., 33.3, or null if the data is not available). For example, a node can own 33% of the ring, but shows 100% if the replication factor is 3. For non-system keyspaces, the endpoint percentage ownership information is shown."
-              },
-              "hostId": {
-                "type": "string",
-                "description": "The network ID of the node."
-              },
-              "rack": {
-                "type": "string",
-                "description": "The rack this node is part of."
-              }
-            }
-          }
         }
       }
     },
