@@ -431,7 +431,7 @@
     },
     "ConstantSpeedConsumptionInkWhPerHundredkm": {
       "name": "constantSpeedConsumptionInkWhPerHundredkm",
-      "x-ms-client-name": "ConstantSpeedConsumptionInkWhPerHundredKm",
+      "x-ms-client-name": "ConstantSpeedConsumptionInKwHPerHundredKm",
       "in": "query",
       "description": "Specifies the speed-dependent component of consumption.\n\nProvided as an unordered list of speed/consumption-rate pairs. The list defines points on a consumption curve. Consumption rates for speeds not in the list are found as follows:\n\n* by linear interpolation, if the given speed lies in between two speeds in the list\n\n* by linear extrapolation otherwise, assuming a constant (ΔConsumption/ΔSpeed) determined by the nearest two points in the list\n\nThe list must contain between 1 and 25 points (inclusive), and may not contain duplicate points for the same speed. If it only contains a single point, then the consumption rate of that point is used without further processing.\n\nConsumption specified for the largest speed must be greater than or equal to that of the penultimate largest speed. This ensures that extrapolation does not lead to negative consumption rates.\n\nSimilarly, consumption values specified for the two smallest speeds in the list cannot lead to a negative consumption rate for any smaller  speed.\n\nThe valid range for the consumption values(expressed in kWh/100km) is between 0.01 and 100000.0.\n\nSensible Values : 50,8.2:130,21.3\n\nThis parameter is required for **Electric consumption model**.",
       "type": "string",
@@ -439,6 +439,7 @@
     },
     "CurrentChargeInkWh": {
       "name": "currentChargeInkWh",
+      "x-ms-client-name": "CurrentChargeInKwH",
       "in": "query",
       "description": "Specifies the current electric energy supply in kilowatt hours (kWh).\n\nThis parameter co-exists with **maxChargeInkWh** parameter.\n\nThe range of values allowed are 0.0 to **maxChargeInkWh**.\n\nSensible Values : 43",
       "type": "string",
@@ -446,6 +447,7 @@
     },
     "MaxChargeInkWh": {
       "name": "maxChargeInkWh",
+      "x-ms-client-name": "CurrentChargeInKwH",
       "in": "query",
       "description": "Specifies the maximum electric energy supply in kilowatt hours (kWh) that may be stored in the vehicle's battery.\n\nThis parameter co-exists with **currentChargeInkWh** parameter.\n\nMinimum value has to be greater than or equal to **currentChargeInkWh**.\n\nSensible Values : 85",
       "type": "string",
@@ -1431,6 +1433,7 @@
           },
           {
             "name": "energyBudgetInkWh",
+            "x-ms-client-name": "energyBudgetInKwH",
             "in": "query",
             "description": "Electric energy budget in kilowatt hours (kWh) that determines maximal range which can be travelled using the specified Electric Consumption Model.<br> When energyBudgetInkWh is used, it is mandatory to specify a detailed Electric Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "type": "number",
@@ -1877,6 +1880,7 @@
           "readOnly": true
         },
         "batteryConsumptionInkWh": {
+          "x-ms-client-name": "batteryConsumptionInKwH",
           "description": "Estimated electric energy consumption in kilowatt hours (kWh) using the Electric Consumption Model. Included if vehicleEngineType is set to electric and constantSpeedConsumptionInkWhPerHundredkm is specified. The value of batteryConsumptionInkWh includes the recuperated electric energy and can therefore be negative (which indicates gaining energy). If both maxChargeInkWh and currentChargeInkWh are specified, recuperation will be capped to ensure that the battery charge level never exceeds maxChargeInkWh. If neither maxChargeInkWh nor currentChargeInkWh are specified, unconstrained recuperation is assumed in the consumption calculation.",
           "type": "number",
           "format": "float",
