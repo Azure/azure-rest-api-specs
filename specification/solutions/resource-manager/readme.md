@@ -24,16 +24,18 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the managedApplication.
 
-``` yaml
+```yaml
 openapi-type: arm
-```
-
-``` yaml
 openapi-subtype: rpaas
+tag: package-managedapplications-2021-07
 ```
 
 ``` yaml $(package-managedapplications)
 tag: package-managedapplications-2021-02
+```
+
+``` yaml $(package-managedapplications)
+tag: package-managedapplications-2021-07
 ```
 
 ### Tag: package-managedapplications-2021-02
@@ -43,6 +45,15 @@ These settings apply only when `--tag=package-managedapplications-2021-02` is sp
 ``` yaml $(tag) == 'package-managedapplications-2021-02'
 input-file:
 - Microsoft.Solutions/preview/2021-02-01-preview/managedapplications.json
+```
+
+### Tag: package-managedapplications-2021-07
+
+These settings apply only when `--tag=package-managedapplications-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2021-07'
+input-file:
+- Microsoft.Solutions/stable/2021-07-01/managedapplications.json
 ```
 
 ---
