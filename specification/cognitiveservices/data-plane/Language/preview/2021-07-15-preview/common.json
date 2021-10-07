@@ -99,7 +99,13 @@
         "Unauthorized",
         "Forbidden",
         "NotFound",
+        "ProjectNotFound",
+        "OperationNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchIndexNotFound",
         "TooManyRequests",
+        "AzureCognitiveSearchThrottling",
+        "AzureCogntiveSearchIndexLimitReached",
         "InternalServerError",
         "ServiceUnavailable"
       ]
@@ -176,6 +182,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "maxLength": 100,
       "description": "The name of the project to use.",
       "x-ms-parameter-location": "method"
     },
@@ -201,6 +208,30 @@
       "required": true,
       "type": "string",
       "description": "Client API version."
+    },
+    "TopParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The maximum number of resources to return from the collection.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "An offset into the collection of the first resource to be returned.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "MaxPageSizeParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of resources to include in a single response.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }
