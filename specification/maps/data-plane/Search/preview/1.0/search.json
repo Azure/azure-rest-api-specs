@@ -123,13 +123,6 @@
       "type": "number",
       "x-ms-parameter-location": "method"
     },
-    "Language": {
-      "name": "language",
-      "in": "query",
-      "description": "Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "Query": {
       "name": "query",
       "in": "query",
@@ -143,13 +136,6 @@
       "in": "query",
       "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "View": {
-      "name": "view",
-      "in": "query",
-      "description": "The View parameter specifies which set of geopolitically disputed content is returned via Azure Maps services, including  borders and labels displayed on the map. The View parameter (also referred to as “user region parameter”) will show the  correct maps for that country/region. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly  for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -522,7 +508,7 @@
             "$ref": "#/parameters/BoundingBoxBottomRight"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
@@ -556,7 +542,7 @@
             "$ref": "#/parameters/EntityType"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
             "$ref": "#/parameters/OpeningHours"
@@ -632,7 +618,7 @@
             "$ref": "#/parameters/BoundingBoxBottomRight"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesForPoi"
@@ -644,7 +630,7 @@
             "$ref": "#/parameters/ConnectorSet"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
             "$ref": "#/parameters/OpeningHours"
@@ -707,7 +693,7 @@
             "type": "number"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
@@ -719,7 +705,7 @@
             "$ref": "#/parameters/ConnectorSet"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "responses": {
@@ -792,7 +778,7 @@
             "$ref": "#/parameters/BoundingBoxBottomRight"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
@@ -804,7 +790,7 @@
             "$ref": "#/parameters/ConnectorSet"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
             "$ref": "#/parameters/OpeningHours"
@@ -916,7 +902,7 @@
             "$ref": "#/parameters/BoundingBoxBottomRight"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
@@ -925,7 +911,7 @@
             "$ref": "#/parameters/EntityType"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "responses": {
@@ -964,7 +950,7 @@
             "$ref": "#/parameters/Position"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "name": "returnSpeedLimit",
@@ -1017,7 +1003,7 @@
             "$ref": "#/parameters/EntityType"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "responses": {
@@ -1070,10 +1056,10 @@
             "$ref": "#/parameters/Radius"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "responses": {
@@ -1109,7 +1095,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "name": "countryCode",
@@ -1185,7 +1171,7 @@
             "$ref": "#/parameters/EntityType"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           }
         ],
         "responses": {
@@ -1233,7 +1219,7 @@
             "$ref": "#/parameters/LimitSearch"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
             "$ref": "#/parameters/CategorySet"
@@ -1254,7 +1240,7 @@
             }
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
             "$ref": "#/parameters/OpeningHours"
@@ -1320,7 +1306,7 @@
             "$ref": "#/parameters/ConnectorSet"
           },
           {
-            "$ref": "#/parameters/View"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
             "$ref": "#/parameters/OpeningHours"
@@ -1851,7 +1837,7 @@
           "readOnly": true,
           "allOf": [
             {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
             }
           ]
         }
@@ -1893,7 +1879,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2352,10 +2338,10 @@
       "readOnly": true,
       "properties": {
         "topLeftPoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         },
         "btmRightPoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         }
       }
     },
@@ -2378,7 +2364,7 @@
           }
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         }
       }
     },
@@ -2396,10 +2382,10 @@
           "type": "string"
         },
         "from": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         },
         "to": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         }
       }
     },
