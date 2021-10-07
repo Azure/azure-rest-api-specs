@@ -20,10 +20,4 @@ directive:
         "type": "object"
       };
     reason: Autorest TS codegen does not deserialize array of base class objects as an operation parameter properly -> https://github.com/Azure/autorest.typescript/issues/1040
-  - remove-operation: GetFuzzySearchBatch
-    reason: This operation is created for Java SDK that has no LRO poller implementation
-  - remove-operation: GetSearchAddressBatch
-    reason: This operation is created for Java SDK that has no LRO poller implementation
-  - remove-operation: GetReverseSearchAddressBatch
-    reason: This operation is created for Java SDK that has no LRO poller implementation
 ```
