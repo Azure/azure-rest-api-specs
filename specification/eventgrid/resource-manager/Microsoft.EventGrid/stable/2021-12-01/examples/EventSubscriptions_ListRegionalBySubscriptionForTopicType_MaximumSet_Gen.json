@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "location": "aaaaaaaaaaaaaaaa",
+    "topicTypeName": "aaaaaaaaaaa",
+    "api-version": "2020-12-01",
+    "$filter": "aaaaaaaaaaaaaaa",
+    "$top": 9
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1",
+              "provisioningState": "Succeeded",
+              "destination": {
+                "endpointType": "StorageQueue"
+              },
+              "filter": {
+                "subjectBeginsWith": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "subjectEndsWith": "aaaaaaaaaaaaaaaaaaaaa",
+                "includedEventTypes": [
+                  "aaaaaaaaaaaaaaaaaaa"
+                ],
+                "isSubjectCaseSensitive": true,
+                "enableAdvancedFilteringOnArrays": true,
+                "advancedFilters": [
+                  {
+                    "values": [
+                      12
+                    ],
+                    "operatorType": "NumberIn",
+                    "key": "aaaaaaaaaaaaaaaaaa"
+                  }
+                ]
+              },
+              "labels": [],
+              "eventDeliverySchema": "EventGridSchema",
+              "retryPolicy": {
+                "maxDeliveryAttempts": 10,
+                "eventTimeToLiveInMinutes": 1440
+              },
+              "expirationTimeUtc": "2021-10-06T23:58:55.170Z",
+              "deadLetterDestination": {
+                "properties": {
+                  "resourceId": "aaaaaaaaaaaaaaaaaaaaaaa",
+                  "blobContainerName": "aaaaaaaaaaa"
+                },
+                "endpointType": "StorageBlob"
+              }
+            },
+            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1/eventSubscriptions/examplesubscription1",
+            "name": "examplesubscription1",
+            "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions",
+            "systemData": {
+              "createdBy": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "createdByType": "User",
+              "createdAt": "2021-10-06T23:58:55.146Z",
+              "lastModifiedBy": "a",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-10-06T23:58:55.146Z"
+            }
+          },
+          {
+            "properties": {
+              "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1",
+              "provisioningState": "Succeeded",
+              "destination": {
+                "endpointType": "StorageQueue"
+              },
+              "filter": {
+                "isSubjectCaseSensitive": true,
+                "subjectBeginsWith": "ExamplePrefix",
+                "subjectEndsWith": "ExampleSuffix",
+                "includedEventTypes": [
+                  "Microsoft.Storage.BlobCreated",
+                  "Microsoft.Storage.BlobDeleted"
+                ],
+                "enableAdvancedFilteringOnArrays": true,
+                "advancedFilters": [
+                  {
+                    "values": [
+                      12
+                    ],
+                    "operatorType": "NumberIn",
+                    "key": "aaaaaaaaaaaaaaaaaa"
+                  }
+                ]
+              },
+              "labels": [
+                "label1",
+                "label2"
+              ],
+              "eventDeliverySchema": "EventGridSchema",
+              "retryPolicy": {
+                "maxDeliveryAttempts": 30,
+                "eventTimeToLiveInMinutes": 1440
+              },
+              "expirationTimeUtc": "2021-10-06T23:58:55.170Z",
+              "deadLetterDestination": {
+                "properties": {
+                  "resourceId": "aaaaaaaaaaaaaaaaaaaaaaa",
+                  "blobContainerName": "aaaaaaaaaaa"
+                },
+                "endpointType": "StorageBlob"
+              }
+            },
+            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1/eventSubscriptions/examplesubscription2",
+            "name": "examplesubscription2",
+            "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions",
+            "systemData": {
+              "createdBy": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "createdByType": "User",
+              "createdAt": "2021-10-06T23:58:55.146Z",
+              "lastModifiedBy": "a",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-10-06T23:58:55.146Z"
+            }
+          }
+        ],
+        "nextLink": "aa"
+      }
+    }
+  }
+}
