@@ -2,60 +2,155 @@
   "swagger": "2.0",
   "info": {
     "version": "2021-10-01",
-    "title": "marketplacecatalog",
-    "description": "Description of the new service",
+    "title": "Microsoft Marketplace Catalog Browse API",
+    "description": "Microsoft Marketplace Catalog Browse API",
     "x-ms-code-generation-settings": {
       "name": "marketplacecatalogClient"
     }
   },
-  "host": "management.azure.com",
+  "host": "catalogapi.azure.com",
   "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "security": [
-    {
-      "azure_auth": ["user_impersonation"]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Marketplace/operations": {
+    "/offers/{id}": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "Public-Offers-Single"
+        ],
+        "operationId": "SinglePublicOffer_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "value",
+            "default": "2021-06-01",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Offer language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Offer market",
+            "default": "US",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "To include stop sold or hidden plans",
+            "default": false,
+            "x-nullable": false
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Add hide key to retrive preview items",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "x-nullable": false,
+            "description": "Returns a single public or preview offer",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/CatalogItem"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "404": {
+            "x-nullable": false,
+            "description": "In case offer does not exist",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/offers": {
+      "get": {
+        "tags": [
+          "Public-Offers-Listing"
+        ],
+        "operationId": "PublicOffers_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "API version",
+            "default": "2021-06-01",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Offer language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Add hide key to retrive preview items",
+            "collectionFormat": "multi",
+            "x-nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a list of public or preview offers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CatalogItem"
+              }
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "description": "In case request malformed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "x-nullable": false,
+            "description": "In case offer does not exist.",
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -63,70 +158,1937 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "CatalogItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryItemEntity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "searchScore": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      ]
+    },
+    "GalleryItemEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceEntity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "language",
+            "hasStandardContractAmendments",
+            "offerId",
+            "legacyId",
+            "standardContractAmendmentsRevisionId",
+            "offerType",
+            "isPrivate",
+            "isPreview",
+            "isStopSell",
+            "fulfillBeforeChargeEligible",
+            "bigId",
+            "legalTermsType",
+            "isDeleted",
+            "isThirdParty",
+            "popularity",
+            "hasFreeTrials",
+            "isByol",
+            "isMacc",
+            "hasFreePlans",
+            "isQuantifiable",
+            "hasPaygPlans",
+            "isReseller",
+            "isExcludedFromSearch",
+            "offerEnvironment",
+            "excludeFromBootstrap",
+            "disableSendEmailOnPurchase",
+            "hideFromSaasBlade",
+            "integratedWithMicrosoftGraphApi"
+          ],
+          "properties": {
+            "language": {
+              "type": "string"
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "hasStandardContractAmendments": {
+              "type": "boolean",
+              "description": "Value indicating whether standard contract amendments are present for this product"
+            },
+            "publisherMpnId": {
+              "type": "string",
+              "description": "value"
+            },
+            "sellerId": {
+              "type": "string",
+              "description": "value"
+            },
+            "publisherId": {
+              "type": "string",
+              "description": "value"
+            },
+            "partnerCenterId": {
+              "type": "string",
+              "description": "value"
+            },
+            "publisherDisplayName": {
+              "type": "string",
+              "description": "value"
+            },
+            "offerId": {
+              "type": "string",
+              "description": "value"
+            },
+            "legacyId": {
+              "type": "string",
+              "description": "value"
+            },
+            "determinedStorefronts": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/Store"
+              }
+            },
+            "standardContractAmendmentsRevisionId": {
+              "type": "string",
+              "description": "value",
+              "format": "guid"
+            },
+            "summary": {
+              "type": "string",
+              "description": "value"
+            },
+            "longSummary": {
+              "type": "string",
+              "description": "value"
+            },
+            "description": {
+              "type": "string",
+              "description": "value"
+            },
+            "offerType": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OfferType"
+                }
+              ]
+            },
+            "isPrivate": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isPreview": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isStopSell": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "fulfillBeforeChargeEligible": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "marketingMaterial": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/MarketingMaterial"
+                }
+              ]
+            },
+            "markets": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "isvContactDetails": {
+              "type": "object",
+              "description": "value",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "bigId": {
+              "type": "string",
+              "description": "value"
+            },
+            "ocpSolutionId": {
+              "type": "string",
+              "description": "value"
+            },
+            "legalTermsUri": {
+              "type": "string",
+              "description": "value"
+            },
+            "cspLegalTermsUri": {
+              "type": "string",
+              "description": "value"
+            },
+            "legalTermsType": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/LegalTermsType"
+                }
+              ]
+            },
+            "privacyPolicyUri": {
+              "type": "string",
+              "description": "value"
+            },
+            "helpLink": {
+              "type": "string",
+              "description": "value"
+            },
+            "supportUri": {
+              "type": "string",
+              "description": "value"
+            },
+            "version": {
+              "type": "string",
+              "description": "value"
+            },
+            "uiDefinitionUri": {
+              "type": "string",
+              "description": "value"
+            },
+            "categoryIds": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "marketCode": {
+              "type": "string",
+              "description": "value"
+            },
+            "marketStates": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "industryIds": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cloudIndustryCategories": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "primaryProduct": {
+              "type": "string",
+              "description": "value"
+            },
+            "supportedProducts": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "applicableProducts": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "serviceType": {
+              "type": "string",
+              "description": "value"
+            },
+            "competencies": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/Competency"
+              }
+            },
+            "hasPrices": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "duration": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Duration"
+                }
+              ]
+            },
+            "marketPricingDetails": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/MarketPricingDetailsItem"
+              }
+            },
+            "pricing": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Pricing"
+                }
+              ]
+            },
+            "solutionAreas": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "screenshotUris": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "links": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/LinkProperties"
+              }
+            },
+            "filters": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/Filter"
+              }
+            },
+            "iconFileUris": {
+              "type": "object",
+              "description": "value",
+              "x-dictionaryKey": {
+                "$ref": "#/definitions/IconKind"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "artifacts": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/Artifact"
+              }
+            },
+            "metadata": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OfferMetadata"
+                }
+              ]
+            },
+            "properties": {
+              "type": "object",
+              "description": "value",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "images": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/ImageGroup"
+              }
+            },
+            "videos": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/ProductVideo"
+              }
+            },
+            "plans": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/Plan"
+              }
+            },
+            "resourceGroupName": {
+              "type": "string",
+              "description": "value"
+            },
+            "definitionTemplates": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/DefinitionTemplates"
+                }
+              ]
+            },
+            "additionalProperties": {
+              "type": "object",
+              "description": "value",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "restrictedAudience": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/RestrictedAudience"
+                }
+              ]
+            },
+            "isDeleted": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isThirdParty": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "groupId": {
+              "type": "string",
+              "description": "value"
+            },
+            "hideKeys": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "keywords": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "popularity": {
+              "type": "number",
+              "description": "value",
+              "format": "double"
+            },
+            "pricingDetailsUri": {
+              "type": "string",
+              "description": "value"
+            },
+            "hasFreeTrials": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isByol": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isMacc": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "hasFreePlans": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isQuantifiable": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "altStackReference": {
+              "type": "string",
+              "description": "value"
+            },
+            "hasPaygPlans": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "isReseller": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "ttl": {
+              "type": "integer",
+              "description": "value",
+              "format": "int32"
+            },
+            "isExcludedFromSearch": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "applicableStoreFronts": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/StoreFrontOptions"
+                }
+              ]
+            },
+            "offerVersion": {
+              "type": "string",
+              "description": "value"
+            },
+            "isMicrosoftProduct": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "productOwnershipSellingMotion": {
+              "type": "string",
+              "description": "value"
+            },
+            "documentLinks": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/LinkProperties"
+              }
+            },
+            "offerEnvironment": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/EnvironmentInfo"
+                }
+              ]
+            },
+            "linkedAddIns": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "excludeFromBootstrap": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "hydrationNotificationRecivedAt": {
+              "type": "string",
+              "description": "value",
+              "format": "date-time"
+            },
+            "bigCatLastModifiedDate": {
+              "type": "string",
+              "description": "value",
+              "format": "date-time"
+            },
+            "disableSendEmailOnPurchase": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "hideFromSaasBlade": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "integratedWithMicrosoftGraphApi": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "multiTenantAadAppId": {
+              "type": "string",
+              "description": "value"
+            },
+            "licenseManagementType": {
+              "type": "string",
+              "description": "value"
+            },
+            "licenseModel": {
+              "type": "string",
+              "description": "value"
+            },
+            "pbiServicePrincipalIds": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "isCoreVm": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "m365CertificationInfo": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/M365CertificationInfo"
+                }
+              ]
+            },
+            "downloadLink": {
+              "type": "string",
+              "description": "value"
+            },
+            "downloadSampleLink": {
+              "type": "string",
+              "description": "value"
+            },
+            "omexAssetId": {
+              "type": "string",
+              "description": "value"
+            },
+            "mixProductId": {
+              "type": "string",
+              "description": "value"
+            },
+            "appFreeType": {
+              "type": "string",
+              "description": "value"
+            },
+            "storeFrontPricings": {
+              "type": "object",
+              "description": "value",
+              "x-dictionaryKey": {
+                "$ref": "#/definitions/Store"
+              },
+              "additionalProperties": {
+                "$ref": "#/definitions/UIPricing"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Store": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell"
+      ],
+      "enum": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell"
+      ]
+    },
+    "OfferType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals"
+      ],
+      "enum": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals"
+      ]
+    },
+    "MarketingMaterial": {
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "path": {
           "type": "string",
-          "description": "Sample property of type string"
+          "description": "value"
+        },
+        "learnUri": {
+          "type": "string",
+          "description": "value"
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "LegalTermsType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "EA"
+      ],
+      "enum": [
+        "None",
+        "EA"
+      ]
+    },
+    "Competency": {
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "competencyName": {
+          "type": "string",
+          "description": "value"
+        },
+        "competencyLevel": {
+          "type": "string",
+          "description": "value"
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "Duration": {
+      "type": "object",
+      "required": [
+        "durationValue",
+        "durationUnit"
+      ],
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+        "durationValue": {
+          "type": "integer",
+          "description": "value",
+          "format": "int64"
         },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
+        "durationUnit": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceDurationUnit"
+            }
+          ]
+        }
+      }
+    },
+    "ServiceDurationUnit": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Days",
+        "Hours",
+        "Weeks"
+      ],
+      "enum": [
+        "Days",
+        "Hours",
+        "Weeks"
+      ]
+    },
+    "MarketPricingDetailsItem": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pricing"
+            }
+          ]
         },
-        "details": {
-          "description": "Internal error details.",
+        "marketCode": {
+          "type": "string",
+          "description": "value"
+        },
+        "marketStates": {
           "type": "array",
+          "description": "value",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+            "type": "string"
+          }
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
     },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
+    "Pricing": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "value"
+        },
+        "planPrices": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "$ref": "#/definitions/PlanPrice"
+          }
+        }
+      }
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
+    "PlanPrice": {
+      "type": "object",
+      "required": [
+        "currencyDecorator",
+        "price"
+      ],
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "value"
+        },
+        "currencyDecorator": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CurrencyDecorator"
+            }
+          ]
+        },
+        "price": {
+          "type": "number",
+          "description": "value",
+          "format": "double"
+        }
+      }
+    },
+    "CurrencyDecorator": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Fixed",
+        "Estimated"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "LinkProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "value"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "value"
+        },
+        "uri": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "value"
+        },
+        "value": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "IconKind": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Small",
+        "Medium",
+        "Large",
+        "Wide",
+        "Hero"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "Artifact": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Artifact name"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Artifact uri"
+        },
+        "type": {
+          "description": "Artifact type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactType"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactType": {
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "",
+      "x-enumNames": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ],
+      "enum": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ]
+    },
+    "OfferMetadata": {
+      "type": "object",
+      "properties": {
+        "leadGeneration": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LeadGeneration"
+            }
+          ]
+        },
+        "testDrive": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TestDrive"
+            }
+          ]
+        }
+      }
+    },
+    "LeadGeneration": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "TestDrive": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "value"
+        },
+        "userManual": {
+          "type": "string",
+          "description": "value"
+        },
+        "testDriveDuration": {
+          "type": "string",
+          "description": "value"
+        },
+        "accessInformation": {
+          "type": "string",
+          "description": "value"
+        },
+        "orchestrationType": {
+          "type": "string",
+          "description": "value"
+        },
+        "labId": {
+          "type": "string",
+          "description": "value"
+        },
+        "demoId": {
+          "type": "string",
+          "description": "value"
+        },
+        "video": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductVideo"
+            }
+          ]
+        },
+        "powerBiDashboardLink": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "ProductVideo": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "value"
+        },
+        "uri": {
+          "type": "string",
+          "description": "value",
+          "format": "uri"
+        },
+        "videoPurpose": {
+          "type": "string",
+          "description": "value"
+        },
+        "previewImage": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreviewImage"
+            }
+          ]
+        }
+      }
+    },
+    "PreviewImage": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "value"
+        },
+        "uri": {
+          "type": "string",
+          "description": "value",
+          "format": "uri"
+        },
+        "imagePurpose": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "ImageGroup": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "value"
+        },
+        "items": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "value"
+        },
+        "uri": {
+          "type": "string",
+          "description": "value"
+        },
+        "type": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "required": [
+        "type",
+        "isPrivate",
+        "isHidden",
+        "hasFreeTrials",
+        "isByol",
+        "isFree",
+        "isPayg",
+        "isStopSell",
+        "cspState",
+        "isQuantifiable"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "value"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "value"
+        },
+        "summary": {
+          "type": "string",
+          "description": "value"
+        },
+        "description": {
+          "type": "string",
+          "description": "value"
+        },
+        "restrictedAudience": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RestrictedAudience"
+            }
+          ]
+        },
+        "skuId": {
+          "type": "string",
+          "description": "value"
+        },
+        "planId": {
+          "type": "string",
+          "description": "value"
+        },
+        "legacyPlanId": {
+          "type": "string",
+          "description": "value"
+        },
+        "keywords": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferType"
+            }
+          ]
+        },
+        "leadGeneration": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LeadGeneration"
+            }
+          ]
+        },
+        "testDrive": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TestDrive"
+            }
+          ]
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "$ref": "#/definitions/AvailabilityEntity"
+          }
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conversionPaths": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OpenProperty"
+            }
+          ]
+        },
+        "operatingSystem": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperatingSystem"
+            }
+          ]
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "value"
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "value"
+        },
+        "itemName": {
+          "type": "string",
+          "description": "value"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "isByol": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "isFree": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "isPayg": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "value"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "value"
+        },
+        "cspState": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CSPState"
+            }
+          ]
+        },
+        "resourceProviderNamespace": {
+          "type": "string",
+          "description": "value"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "value"
+        },
+        "minQuantity": {
+          "type": "integer",
+          "description": "value",
+          "format": "int32"
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "description": "value",
+          "format": "int32"
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "callToAction": {
+          "type": "string",
+          "description": "value"
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "value"
+        },
+        "serviceIdentifier": {
+          "type": "string",
+          "description": "value"
+        },
+        "vmSecuritytype": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VmSecurityType"
+            }
+          ]
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "RestrictedAudience": {
+      "type": "object",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenants": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AvailabilityEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceEntity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "isPIRequired",
+            "pricingAudience",
+            "isStopSell",
+            "hasFreeTrials",
+            "displayRank",
+            "remediationRequired"
+          ],
+          "properties": {
+            "actions": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "market": {
+              "type": "string",
+              "description": "value"
+            },
+            "isPIRequired": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "appId": {
+              "type": "string",
+              "description": "value"
+            },
+            "planID": {
+              "type": "string",
+              "description": "value"
+            },
+            "meterId": {
+              "type": "string",
+              "description": "value"
+            },
+            "meter": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Meter"
+                }
+              ]
+            },
+            "pricingAudience": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/PricingAudience"
+                }
+              ]
+            },
+            "terms": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "$ref": "#/definitions/Term"
+              }
+            },
+            "piFilter": {
+              "description": "value",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/PIFilter"
+                }
+              ]
+            },
+            "isStopSell": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "hasFreeTrials": {
+              "type": "boolean",
+              "description": "value"
+            },
+            "assetBehaviors": {
+              "type": "array",
+              "description": "value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "consumptionUnitType": {
+              "type": "string",
+              "description": "value"
+            },
+            "displayRank": {
+              "type": "integer",
+              "description": "value",
+              "format": "int32"
+            },
+            "partitionKey": {
+              "type": "string",
+              "description": "value"
+            },
+            "remediationRequired": {
+              "type": "boolean"
+            },
+            "remediations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Remediation"
+              }
+            },
+            "startDate": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "endDate": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "planAvailabilities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AvailabilityEntity"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Meter": {
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "value"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "value"
+        },
+        "consumptionResourceId": {
+          "type": "string",
+          "description": "value"
+        },
+        "price": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "value"
+        },
+        "includedQuantityProperties": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "$ref": "#/definitions/IncludedQuantityProperty"
+          }
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "required": [
+        "isPIRequired",
+        "listPrice",
+        "msrp"
+      ],
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "value"
+        },
+        "isPIRequired": {
+          "type": "boolean",
+          "description": "value"
+        },
+        "listPrice": {
+          "type": "number",
+          "description": "value",
+          "format": "decimal"
+        },
+        "msrp": {
+          "type": "number",
+          "description": "value",
+          "format": "decimal"
+        }
+      }
+    },
+    "IncludedQuantityProperty": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IncludedQuantityProperty2"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "IncludedQuantityProperty2": {
+      "type": "object",
+      "properties": {
+        "termId": {
+          "type": "string",
+          "description": "value"
+        },
+        "quantity": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "PricingAudience": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "DirectCommercial",
+        "PartnerCommercial",
+        "Custom",
+        "IndirectCommercial",
+        "IndirectGov",
+        "DirectChk",
+        "DirectBlue"
+      ],
+      "enum": [
+        "None",
+        "DirectCommercial",
+        "PartnerCommercial",
+        "Custom",
+        "IndirectCommercial",
+        "IndirectGov",
+        "DirectChk",
+        "DirectBlue"
+      ]
+    },
+    "Term": {
+      "type": "object",
+      "properties": {
+        "termDescriptionParameters": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "$ref": "#/definitions/TermDescriptionParameter"
+          }
+        },
+        "termId": {
+          "type": "string",
+          "description": "value"
+        },
+        "termUnits": {
+          "type": "string",
+          "description": "value"
+        },
+        "prorationPolicy": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProrationPolicy"
+            }
+          ]
+        },
+        "termDescription": {
+          "type": "string",
+          "description": "value"
+        },
+        "price": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "renewTermId": {
+          "type": "string",
+          "description": "value"
+        },
+        "renewTermUnits": {
+          "type": "string",
+          "description": "value"
+        },
+        "billingPlan": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingPlan"
+            }
+          ]
+        }
+      }
+    },
+    "TermDescriptionParameter": {
+      "type": "object",
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "description": "value"
+        },
+        "value": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "ProrationPolicy": {
+      "type": "object",
+      "properties": {
+        "minimumProratedUnits": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "BillingPlan": {
+      "type": "object",
+      "properties": {
+        "billingPeriod": {
+          "type": "string",
+          "description": "value"
+        },
+        "title": {
+          "type": "string",
+          "description": "value"
+        },
+        "description": {
+          "type": "string",
+          "description": "value"
+        },
+        "price": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        }
+      }
+    },
+    "PIFilter": {
+      "type": "object",
+      "properties": {
+        "exclusionProperties": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inclusionProperties": {
+          "type": "array",
+          "description": "value",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Remediation": {
+      "type": "object",
+      "properties": {
+        "remediationId": {
+          "type": "string",
+          "description": "value"
+        },
+        "type": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "ResourceEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ResourceBase": {
+      "type": "object",
+      "x-abstract": true,
+      "required": [
+        "_ts"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "partitionKey": {
+          "type": "string"
+        },
+        "_ts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "_etag": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenProperty": {
+      "type": "object",
+      "properties": {
+        "generation": {
+          "type": "string",
+          "description": "value"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "OperatingSystem": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "value"
+        },
+        "type": {
+          "type": "string",
+          "description": "value"
+        },
+        "name": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "CSPState": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ],
+      "enum": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ]
+    },
+    "VmSecurityType": {
+      "type": "string",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ],
+      "enum": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ]
+    },
+    "DefinitionTemplates": {
+      "type": "object",
+      "properties": {
+        "uiDefinitionFileUri": {
+          "type": "string",
+          "description": "value"
+        },
+        "defaultDeploymentTemplateId": {
+          "type": "string",
+          "description": "value"
+        },
+        "deploymentTemplateFileUris": {
+          "type": "object",
+          "description": "value",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deploymentFragmentFileUris": {
+          "type": "object",
+          "description": "value",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StoreFrontOptions": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Azure",
+        "AMP",
+        "AppSource"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4
+      ]
+    },
+    "EnvironmentInfo": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "DogFood",
+        "Canary",
+        "Production",
+        "FairFax",
+        "Unknown"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "M365CertificationInfo": {
+      "type": "object",
+      "required": [
+        "m365CertificationType"
+      ],
+      "properties": {
+        "m365CertificationType": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CertificationType"
+            }
+          ]
+        },
+        "m365CertificationDetailsUrl": {
+          "type": "string",
+          "description": "value"
+        },
+        "m365CertificationId": {
+          "type": "string",
+          "description": "value"
+        }
+      }
+    },
+    "CertificationType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Undefined",
+        "None",
+        "SelfAttested",
+        "MicrosoftCertified"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "UIPricing": {
+      "type": "object",
+      "required": [
+        "pricingOptions"
+      ],
+      "properties": {
+        "pricingOptions": {
+          "description": "value",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PricingOptions"
+            }
+          ]
+        },
+        "hasPrices": {
+          "type": "boolean",
+          "description": "value"
+        }
+      }
+    },
+    "PricingOptions": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Free",
+        "FreeTrial",
+        "Paid",
+        "Byol"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8
+      ]
     }
   }
 }
