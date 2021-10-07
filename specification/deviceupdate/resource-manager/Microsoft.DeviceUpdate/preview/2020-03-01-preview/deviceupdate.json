@@ -1019,7 +1019,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The type of identity used for the resource."
         }
       }
@@ -1146,34 +1146,6 @@
         }
       }
     },
-    "Identity": {
-      "description": "Identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          },
-          "type": "string",
-          "description": "The identity type."
-        }
-      }
-    },
     "IotHubSettings": {
       "type": "object",
       "description": "Device Update account integration with IoT Hub settings.",
@@ -1204,7 +1176,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The type of identity used for the resource."
         },
         "location": {
