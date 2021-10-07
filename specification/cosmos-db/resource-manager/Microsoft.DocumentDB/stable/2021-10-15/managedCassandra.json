@@ -292,52 +292,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repair": {
-      "post": {
-        "operationId": "CassandraClusters_RequestRepair",
-        "description": "Request that repair begin on this cluster as soon as possible.",
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraRepair": {
-            "$ref": "./examples/CosmosDBManagedCassandraRepair.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RepairPostBody"
-            },
-            "description": "Specification of what keyspaces and tables to run repair on."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The repair operation will begin as soon as possible."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/command": {
       "post": {
         "operationId": "CassandraClusters_InvokeCommand",
@@ -347,6 +301,7 @@
             "$ref": "./examples/CosmosDBManagedCassandraCommand.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1279,27 +1234,6 @@
         "exception": {
           "description": "Detailed error message about the failed connection.",
           "type": "string"
-        }
-      }
-    },
-    "RepairPostBody": {
-      "description": "Specification of the keyspaces and tables to run repair on.",
-      "type": "object",
-      "required": [
-        "keyspace"
-      ],
-      "properties": {
-        "keyspace": {
-          "type": "string",
-          "description": "The name of the keyspace that repair should be run on."
-        },
-        "tables": {
-          "type": "array",
-          "description": "List of tables in the keyspace to repair. If omitted, repair all tables in the keyspace.",
-          "items": {
-            "type": "string",
-            "description": "Name of a table in the Cassandra keyspace."
-          }
         }
       }
     },
