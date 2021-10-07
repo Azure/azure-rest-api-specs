@@ -54,11 +54,19 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
-  # No track2 pipeline for Java now
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-js-track2
-  - repo: azure-sdk-for-net-track2
+
+  #track1 doesn't support data-plane for go
+  #manually generate for now with track2
+  #- repo: azure-sdk-for-go
+
+  #track1 doesn't support features needed for typescript
+  #manually generate for now with track2
+  #- repo: azure-sdk-for-js
+
+  #should be azure-sdk-for-net-track2, but SDK has not yet onboarded
+  #manually generate for now with track2
+  - repo: azure-sdk-for-net
 ```
 ## Python
 
