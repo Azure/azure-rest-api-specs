@@ -408,6 +408,21 @@
   "definitions": {
     "AzureResource": {
       "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
         "kind": {
           "type": "string",
           "readOnly": true,
@@ -417,12 +432,25 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource identity"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "Resource tags"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
+      "required": [
+        "location"
       ],
       "type": "object",
       "x-ms-azure-resource": true,
