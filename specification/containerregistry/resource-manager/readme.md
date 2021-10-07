@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 ```yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.ContainerRegistry/stable/2021-09-01/containerregistry.json
-  - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2021-06-preview-only
