@@ -115,7 +115,7 @@
   "definitions": {
     "KnowledgeBaseQueryOptions": {
       "type": "object",
-      "description": "The question parameters to answer using a knowledge base.",
+      "description": "Parameters to query a knowledge base.",
       "additionalProperties": false,
       "properties": {
         "qnaId": {
@@ -149,10 +149,20 @@
         },
         "rankerType": {
           "type": "string",
-          "description": "(Optional) Set to 'QuestionOnly' for using a question only Ranker.",
+          "description": "Type of ranker to be used.",
           "x-ms-enum": {
             "name": "RankerType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "QuestionOnly",
+                "description": "Question only ranker."
+              },
+              {
+                "value": "Default",
+                "description": "Default ranker."
+              }
+            ]
           },
           "enum": [
             "Default",
@@ -160,7 +170,7 @@
           ]
         },
         "filters": {
-          "description": "Filter QnAs based on give metadata list and knowledge base source names.",
+          "description": "Filter QnAs based on given metadata list and knowledge base sources.",
           "$ref": "#/definitions/QueryFilters"
         },
         "answerSpanRequest": {
@@ -238,14 +248,14 @@
       "properties": {
         "questions": {
           "type": "array",
-          "description": "List of questions.",
+          "description": "List of questions associated with the answer.",
           "items": {
             "type": "string"
           }
         },
         "answer": {
           "type": "string",
-          "description": "The Answer."
+          "description": "Answer text."
         },
         "confidenceScore": {
           "type": "number",
@@ -291,7 +301,7 @@
         },
         "prompts": {
           "type": "array",
-          "description": "List of 0 to 20 prompts associated with the answer.",
+          "description": "List of prompts associated with the answer.",
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
@@ -335,7 +345,7 @@
         },
         "logicalOperation": {
           "type": "string",
-          "description": "Logical operation used to join metadata filters with source filters.",
+          "description": "Logical operation used to join metadata filter with source filter.",
           "$ref": "#/definitions/LogicalOperationKind",
           "default": "AND"
         }
@@ -393,7 +403,7 @@
     },
     "SourceFilter": {
       "type": "array",
-      "description": "Find QnAs that are associated with the given list of sources in knowledge base.",
+      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
       "items": {
         "type": "string"
       }
