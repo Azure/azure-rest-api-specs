@@ -50,39 +50,116 @@
       "description": "Definition of resource."
     },
     "Resource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource ID."
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name."
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         }
       },
-      "description": "The resource definition.",
       "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates Event Hub service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "systemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -207,6 +284,7 @@
       "in": "query",
       "required": false,
       "type": "integer",
+      "format": "int64",
       "minimum": 0,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
@@ -217,6 +295,7 @@
       "in": "query",
       "required": false,
       "type": "integer",
+      "format": "int64",
       "minimum": 1,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
