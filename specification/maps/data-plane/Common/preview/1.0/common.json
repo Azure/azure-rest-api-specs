@@ -66,23 +66,30 @@
     },
     "BatchRequestBody": {
       "description": "This type represents the request body for the Batch service.",
-      "x-ms-client-name": "BatchQueries",
+      "x-ms-client-name": "BatchRequest",
       "type": "object",
       "properties": {
         "batchItems": {
-          "description": "The list of queries to process.",
-          "type": "array",
-          "items": {
-            "description": "Batch Query object",
-            "type": "object",
-            "properties": {
-              "query": {
-                "description": "Partial query string.",
-                "type": "string",
-                "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
-              }
-            }
-          }
+          "x-ms-client-name": "batchQueries",
+          "$ref": "#/definitions/BatchQueries"
+        }
+      }
+    },
+    "BatchQueries": {
+      "description": "The list of queries to process.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BatchQuery"
+      }
+    },
+    "BatchQuery": {
+      "description": "Batch Query object",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "Partial query string.",
+          "type": "string",
+          "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
         }
       }
     },
