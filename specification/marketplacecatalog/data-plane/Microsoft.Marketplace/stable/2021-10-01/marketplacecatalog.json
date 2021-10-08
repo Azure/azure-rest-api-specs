@@ -19,13 +19,14 @@
           "Public-Offers-Single"
         ],
         "summary": "adsad",
-        "operationId": "SinglePublicOffer_Get",
+        "operationId": "PublicOffers_Get",
         "parameters": [
           {
             "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "value",
             "x-nullable": true
           },
           {
@@ -98,7 +99,7 @@
           "Public-Offers-Listing"
         ],
         "summary": "adsad",
-        "operationId": "PublicOffers_Get",
+        "operationId": "PublicOffers_List",
         "parameters": [
           {
             "type": "string",
@@ -186,7 +187,6 @@
             "hasStandardContractAmendments",
             "offerId",
             "legacyId",
-            "standardContractAmendmentsRevisionId",
             "offerType",
             "isPrivate",
             "isPreview",
@@ -258,10 +258,6 @@
               "items": {
                 "$ref": "#/definitions/Store"
               }
-            },
-            "standardContractAmendmentsRevisionId": {
-              "type": "string",
-              "format": "guid"
             },
             "summary": {
               "type": "string",
@@ -505,13 +501,6 @@
                   "$ref": "#/definitions/OfferMetadata"
                 }
               ]
-            },
-            "properties": {
-              "type": "object",
-              "description": "value",
-              "additionalProperties": {
-                "type": "string"
-              }
             },
             "images": {
               "type": "array",
@@ -1861,10 +1850,6 @@
         "generation": {
           "type": "string",
           "description": "value"
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {}
         }
       }
     },
