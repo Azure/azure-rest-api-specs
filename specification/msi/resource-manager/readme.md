@@ -75,7 +75,7 @@ directive:
     where: $.definitions.SystemAssignedIdentity
     reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
   - suppress: RequiredReadOnlySystemData
-    reason: User-assigned and system-assigned identities do not support systemData. 
+    reason: User-assigned and system-assigned identities do not support systemData.
 ```
 
 ---
