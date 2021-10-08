@@ -5349,7 +5349,7 @@
           "description": "Snapshot time to restore",
           "format": "date-time"
         },
-       "createMode": {
+        "createMode": {
           "type": "string",
           "description": "Specifies the mode of sql pool creation.\n\nDefault: regular sql pool creation.\n\nPointInTimeRestore: Creates a sql pool by restoring a point in time backup of an existing sql pool. sourceDatabaseId must be specified as the resource ID of the existing sql pool, and restorePointInTime must be specified.\n\nRecovery: Creates a sql pool by a geo-replicated backup. sourceDatabaseId  must be specified as the recoverableDatabaseId to restore.\n\nRestore: Creates a sql pool by restoring a backup of a deleted sql  pool. SourceDatabaseId should be the sql pool's original resource ID. SourceDatabaseId and sourceDatabaseDeletionDate must be specified.",
           "enum": [
@@ -5358,7 +5358,7 @@
             "Recovery",
             "Restore"
           ],
-           "x-ms-enum": {
+          "x-ms-enum": {
             "name": "createMode",
             "modelAsString": true
           }
