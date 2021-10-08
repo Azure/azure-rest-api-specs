@@ -566,6 +566,19 @@
       "description": "this is an extension of IPAddress which includes logic related to Classes Interdomain Routing (CIDR) formatted IP Addresses.  \r\nE.g. 192.168.0.0/24, most people's default class C RFC 1918 IP space for their home router",
       "type": "string"
     },
+    "AppOpenIdClient": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id"
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret"
+        }
+      }
+    },
     "InstancePropertiesFormat": {
       "type": "object",
       "properties": {
@@ -579,6 +592,9 @@
         },
         "instanceAddressSpace": {
           "$ref": "#/definitions/CidrBlock"
+        },
+        "appOpenIdClient": {
+          "$ref": "#/definitions/AppOpenIdClient"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
