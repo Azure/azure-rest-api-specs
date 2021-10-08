@@ -18,6 +18,7 @@
         "tags": [
           "Public-Offers-Single"
         ],
+        "summary": "adsad",
         "operationId": "SinglePublicOffer_Get",
         "parameters": [
           {
@@ -96,6 +97,7 @@
         "tags": [
           "Public-Offers-Listing"
         ],
+        "summary": "adsad",
         "operationId": "PublicOffers_Get",
         "parameters": [
           {
@@ -168,6 +170,7 @@
           "properties": {
             "searchScore": {
               "type": "number",
+              "description": "value",
               "format": "double"
             }
           }
@@ -176,9 +179,6 @@
     },
     "GalleryItemEntity": {
       "allOf": [
-        {
-          "$ref": "#/definitions/ResourceEntity"
-        },
         {
           "type": "object",
           "required": [
@@ -213,10 +213,12 @@
           ],
           "properties": {
             "language": {
-              "type": "string"
+              "type": "string",
+              "description": "value"
             },
             "displayName": {
-              "type": "string"
+              "type": "string",
+              "description": "value"
             },
             "hasStandardContractAmendments": {
               "type": "boolean",
@@ -259,7 +261,6 @@
             },
             "standardContractAmendmentsRevisionId": {
               "type": "string",
-              "description": "value",
               "format": "guid"
             },
             "summary": {
@@ -771,7 +772,7 @@
     },
     "Store": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "Appsource",
         "AMP",
@@ -787,7 +788,7 @@
     },
     "OfferType": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "None",
         "DevService",
@@ -848,7 +849,7 @@
     },
     "LegalTermsType": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "None",
         "EA"
@@ -895,7 +896,7 @@
     },
     "ServiceDurationUnit": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "Days",
         "Hours",
@@ -975,7 +976,7 @@
     },
     "CurrencyDecorator": {
       "type": "integer",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "Fixed",
         "Estimated"
@@ -1017,7 +1018,7 @@
     },
     "IconKind": {
       "type": "integer",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "Small",
         "Medium",
@@ -1059,7 +1060,7 @@
     },
     "ArtifactType": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "Template",
         "Fragment",
@@ -1484,9 +1485,6 @@
     "AvailabilityEntity": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceEntity"
-        },
-        {
           "type": "object",
           "required": [
             "isPIRequired",
@@ -1579,29 +1577,30 @@
               "description": "value",
               "format": "int32"
             },
-            "partitionKey": {
-              "type": "string",
-              "description": "value"
-            },
             "remediationRequired": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "value"
             },
             "remediations": {
               "type": "array",
+              "description": "value",
               "items": {
                 "$ref": "#/definitions/Remediation"
               }
             },
             "startDate": {
               "type": "integer",
+              "description": "value",
               "format": "int32"
             },
             "endDate": {
               "type": "integer",
+              "description": "value",
               "format": "int32"
             },
             "planAvailabilities": {
               "type": "array",
+              "description": "value",
               "items": {
                 "$ref": "#/definitions/AvailabilityEntity"
               }
@@ -1699,7 +1698,7 @@
     },
     "PricingAudience": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "None",
         "DirectCommercial",
@@ -1856,38 +1855,6 @@
         }
       }
     },
-    "ResourceEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        },
-        {
-          "type": "object"
-        }
-      ]
-    },
-    "ResourceBase": {
-      "type": "object",
-      "x-abstract": true,
-      "required": [
-        "_ts"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "partitionKey": {
-          "type": "string"
-        },
-        "_ts": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "_etag": {
-          "type": "string"
-        }
-      }
-    },
     "OpenProperty": {
       "type": "object",
       "properties": {
@@ -1920,7 +1887,7 @@
     },
     "CSPState": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "OptIn",
         "OptOut",
@@ -1936,7 +1903,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "",
+      "description": "enum type",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
@@ -1978,7 +1945,7 @@
     },
     "StoreFrontOptions": {
       "type": "integer",
-      "description": "",
+      "description": "enum type",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
@@ -1995,7 +1962,7 @@
     },
     "EnvironmentInfo": {
       "type": "integer",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "DogFood",
         "Canary",
@@ -2037,7 +2004,7 @@
     },
     "CertificationType": {
       "type": "integer",
-      "description": "",
+      "description": "enum type",
       "x-enumNames": [
         "Undefined",
         "None",
@@ -2073,7 +2040,7 @@
     },
     "PricingOptions": {
       "type": "integer",
-      "description": "",
+      "description": "enum type",
       "x-enumFlags": true,
       "x-enumNames": [
         "None",
