@@ -631,6 +631,7 @@
       "x-ms-parameter-location": "method"
     },
     "RouteRepresentation": {
+      "x-ms-client-name": "routeRepresentationForBestOrder",
       "name": "routeRepresentation",
       "in": "query",
       "description": "Specifies the representation of the set of routes provided as response. This parameter value can only be used in conjunction with computeBestOrder=true.",
@@ -1698,7 +1699,7 @@
       "description": "Post body parameters for Route directions.",
       "properties": {
         "supportingPoints": {
-          "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction and for calculating zero or more alternative routes to this reference route.\n  - The provided sequence of supporting points is used as input for route reconstruction.\n  - The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.\n  - If both _minDeviationDistance_ and _minDeviationTime_ are set to zero, then these origin and destination points are\n  expected to be at (or very near) the beginning and end of the reference route, respectively.\n  - Intermediate locations (_waypoints_) are not supported when using <_supportingPoints_>.\n  - The reference route may contain traffic incidents of type _ROAD_CLOSURE_, which are\n  ignored for the calculation of the reference route's travel time and traffic delay.",
+          "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction and for calculating zero or more alternative routes to this reference route.\n  - The provided sequence of supporting points is used as input for route reconstruction.\n  - The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.\n  - If both _minDeviationDistance_ and _minDeviationTime_ are set to zero, then these origin and destination points are\n  expected to be at (or very near) the beginning and end of the reference route, respectively.\n  - Intermediate locations (_waypoints_) are not supported when using <_supportingPoints_>.\n  - The reference route may contain traffic incidents of type _ROAD_CLOSURE_, which are\n  ignored for the calculation of the reference route's travel time and traffic delay.\n Please refer to [Supporting Points](https://docs.microsoft.com/en-us/azure/azure-maps/how-to-use-best-practices-for-routing#calculate-and-bias-alternative-routes-using-supporting-points) for details.",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometryCollection"
         },
         "avoidVignette": {
