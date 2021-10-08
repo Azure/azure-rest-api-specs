@@ -369,7 +369,7 @@
       "in": "query",
       "description": "Specifies the current supply of fuel in liters.\n\nSensible Values : 55",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "AuxiliaryPowerInLitersPerHour": {
@@ -377,7 +377,7 @@
       "in": "query",
       "description": "Specifies the amount of fuel consumed for sustaining auxiliary systems of the vehicle, in liters per hour.\n\nIt can be used to specify consumption due to devices and systems such as AC systems, radio, heating, etc.\n\nSensible Values : 0.2",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "FuelEnergyDensityInMJoulesPerLiter": {
@@ -386,7 +386,7 @@
       "in": "query",
       "description": "Specifies the amount of chemical energy stored in one liter of fuel in megajoules (MJ). It is used in conjunction with the ***Efficiency** parameters for conversions between saved or consumed energy and fuel. For example, energy density is 34.2 MJ/l for gasoline, and 35.8 MJ/l for Diesel fuel.\n\nThis parameter is required if any ***Efficiency** parameter is set.\n\nSensible Values : 34.2",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "AccelerationEfficiency": {
@@ -394,7 +394,7 @@
       "in": "query",
       "description": "Specifies the efficiency of converting chemical energy stored in fuel to kinetic energy when the vehicle accelerates _(i.e. KineticEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is obtained by converting consumed fuel to chemical energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **decelerationEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**decelerationEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.33, for **Electric Model** : 0.66",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "minimum": 0,
       "maximum": 1,
       "x-ms-parameter-location": "method"
@@ -404,7 +404,7 @@
       "in": "query",
       "description": "Specifies the efficiency of converting kinetic energy to saved (not consumed) fuel when the vehicle decelerates _(i.e. ChemicalEnergySaved/KineticEnergyLost). ChemicalEnergySaved_ is obtained by converting saved (not consumed) fuel to energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **accelerationEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**accelerationEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.83, for **Electric Model** : 0.91",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "minimum": 0,
       "maximum": 1,
       "x-ms-parameter-location": "method"
@@ -414,7 +414,7 @@
       "in": "query",
       "description": "Specifies the efficiency of converting chemical energy stored in fuel to potential energy when the vehicle gains elevation _(i.e. PotentialEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is obtained by converting consumed fuel to chemical energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **downhillEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**downhillEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.27, for **Electric Model** : 0.74",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "minimum": 0,
       "maximum": 1,
       "x-ms-parameter-location": "method"
@@ -424,7 +424,7 @@
       "in": "query",
       "description": "Specifies the efficiency of converting potential energy to saved (not consumed) fuel when the vehicle loses elevation _(i.e. ChemicalEnergySaved/PotentialEnergyLost). ChemicalEnergySaved_ is obtained by converting saved (not consumed) fuel to energy using **fuelEnergyDensityInMJoulesPerLiter**.\n\nMust be paired with **uphillEfficiency**.\n\nThe range of values allowed are 0.0 to 1/**uphillEfficiency**.\n\nSensible Values : for **Combustion Model** : 0.51, for **Electric Model** : 0.73",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "minimum": 0,
       "maximum": 1,
       "x-ms-parameter-location": "method"
@@ -442,7 +442,8 @@
       "x-ms-client-name": "CurrentChargeInKwH",
       "in": "query",
       "description": "Specifies the current electric energy supply in kilowatt hours (kWh).\n\nThis parameter co-exists with **maxChargeInkWh** parameter.\n\nThe range of values allowed are 0.0 to **maxChargeInkWh**.\n\nSensible Values : 43",
-      "type": "string",
+      "type": "number",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "MaxChargeInkWh": {
@@ -450,7 +451,8 @@
       "x-ms-client-name": "MaxChargeInKwH",
       "in": "query",
       "description": "Specifies the maximum electric energy supply in kilowatt hours (kWh) that may be stored in the vehicle's battery.\n\nThis parameter co-exists with **currentChargeInkWh** parameter.\n\nMinimum value has to be greater than or equal to **currentChargeInkWh**.\n\nSensible Values : 85",
-      "type": "string",
+      "type": "number",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "AuxiliaryPowerInkW": {
@@ -459,7 +461,7 @@
       "in": "query",
       "description": "Specifies the amount of power consumed for sustaining auxiliary systems, in kilowatts (kW).\n\nIt can be used to specify consumption due to devices and systems such as AC systems, radio, heating, etc.\n\nSensible Values : 1.7",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "x-ms-parameter-location": "method"
     },
     "VehicleWeightMatrix": {
@@ -491,7 +493,7 @@
       "in": "query",
       "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered.",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "default": 0,
       "x-ms-parameter-location": "method"
     },
@@ -500,7 +502,7 @@
       "in": "query",
       "description": "Height of the vehicle in meters. A value of 0 means that height restrictions are not considered.",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "default": 0,
       "x-ms-parameter-location": "method"
     },
@@ -509,7 +511,7 @@
       "in": "query",
       "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are not considered.",
       "type": "number",
-      "format": "float",
+      "format": "double",
       "default": 0,
       "x-ms-parameter-location": "method"
     },
