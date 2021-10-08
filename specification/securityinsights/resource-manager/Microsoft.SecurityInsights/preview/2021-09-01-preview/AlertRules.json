@@ -88,6 +88,9 @@
           "Get a Scheduled alert rule.": {
             "$ref": "./examples/alertRules/GetScheduledAlertRule.json"
           },
+          "Get an Nrt alert rule.": {
+            "$ref": "./examples/alertRules/GetNrtAlertRule.json"
+          },
           "Get a Fusion alert rule.": {
             "$ref": "./examples/alertRules/GetFusionAlertRule.json"
           },
@@ -139,6 +142,9 @@
         "x-ms-examples": {
           "Creates or updates a Scheduled alert rule.": {
             "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
+          },
+          "Creates or updates a Nrt alert rule.": {
+            "$ref": "./examples/alertRules/CreateNrtAlertRule.json"
           },
           "Creates or updates a Fusion alert rule.": {
             "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
@@ -622,7 +628,8 @@
         "MicrosoftSecurityIncidentCreation",
         "Fusion",
         "MLBehaviorAnalytics",
-        "ThreatIntelligence"
+        "ThreatIntelligence",
+        "NRT"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -643,6 +650,9 @@
           },
           {
             "value": "ThreatIntelligence"
+          },
+          {
+            "value": "NRT"
           }
         ]
       }
@@ -744,6 +754,47 @@
               }
             ]
           }
+        }
+      },
+      "type": "object"
+    },
+    "QueryBasedAlertRuleTemplateProperties": {
+      "description": "Query based alert rule template base property bag.",
+      "properties": {
+        "query": {
+          "description": "The query that creates alerts for this rule.",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
+          "type": "string"
+        },
+        "customDetails": {
+          "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entityMappings": {
+          "$ref": "#/definitions/EntityMappings",
+          "description": "Array of the entity mappings of the alert rule"
+        },
+        "alertDetailsOverride": {
+          "type": "object",
+          "$ref": "#/definitions/AlertDetailsOverride",
+          "description": "The alert details override settings"
         }
       },
       "type": "object"
@@ -1256,13 +1307,8 @@
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
-    "ScheduledAlertRuleProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
-        }
-      ],
-      "description": "Scheduled alert rule base property bag.",
+    "QueryBasedAlertRuleProperties": {
+      "description": "Query based alert rule base property bag.",
       "properties": {
         "alertRuleTemplateName": {
           "description": "The Name of the alert rule template used to create this rule.",
@@ -1274,6 +1320,10 @@
         },
         "description": {
           "description": "The description of the alert rule.",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query that creates alerts for this rule.",
           "type": "string"
         },
         "displayName": {
@@ -1299,6 +1349,10 @@
           "description": "Determines whether the suppression for this alert rule is enabled or disabled.",
           "type": "boolean"
         },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule."
+        },
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
@@ -1309,8 +1363,42 @@
         "incidentConfiguration": {
           "$ref": "#/definitions/IncidentConfiguration",
           "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
+        },
+        "customDetails": {
+          "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entityMappings": {
+          "$ref": "#/definitions/EntityMappings",
+          "description": "Array of the entity mappings of the alert rule"
+        },
+        "alertDetailsOverride": {
+          "type": "object",
+          "$ref": "#/definitions/AlertDetailsOverride",
+          "description": "The alert details override settings"
         }
       },
+      "required": [
+        "displayName",
+        "enabled",
+        "suppressionEnabled",
+        "suppressionDuration"
+      ],
+      "type": "object"
+    },
+    "ScheduledAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
+        },
+        {
+          "$ref": "#/definitions/QueryBasedAlertRuleProperties"
+        }
+      ],
+      "description": "Scheduled alert rule base property bag.",
       "required": [
         "displayName",
         "enabled",
@@ -1323,6 +1411,15 @@
         "suppressionEnabled",
         "suppressionDuration"
       ],
+      "type": "object"
+    },
+    "NrtAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryBasedAlertRuleProperties"
+        }
+      ],
+      "description": "Nrt alert rule base property bag.",
       "type": "object"
     },
     "ScheduledAlertRuleTemplate": {
@@ -1339,6 +1436,9 @@
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
             },
             {
+              "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
+            },
+            {
               "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
             }
           ],
@@ -1350,10 +1450,6 @@
                 "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
               },
               "type": "array"
-            },
-            "version": {
-              "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
-              "type": "string"
             }
           },
           "required": [
@@ -1375,6 +1471,40 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
+    },
+    "NrtAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents NRT alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            },
+            {
+              "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
+            }
+          ],
+          "description": "NRT alert rule template properties",
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "alertRulesCreatedByTemplateCount",
+            "severity",
+            "query",
+            "version"
+          ],
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "NRT"
     },
     "EventGroupingSettings": {
       "description": "Event grouping settings property bag.",
@@ -1414,13 +1544,26 @@
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
     },
+    "NrtAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents NRT alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NrtAlertRuleProperties",
+          "description": "NRT alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "NRT"
+    },
     "ScheduledAlertRuleCommonProperties": {
       "description": "Scheduled alert rule template property bag.",
       "properties": {
-        "query": {
-          "description": "The query that creates alerts for this rule.",
-          "type": "string"
-        },
         "queryFrequency": {
           "description": "The frequency (in ISO 8601 duration format) for this alert rule to run.",
           "format": "duration",
@@ -1430,10 +1573,6 @@
           "description": "The period (in ISO 8601 duration format) that this alert rule looks at.",
           "format": "duration",
           "type": "string"
-        },
-        "severity": {
-          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
-          "description": "The severity for alerts created by this alert rule."
         },
         "triggerOperator": {
           "$ref": "#/definitions/AlertRuleTriggerOperator",
@@ -1447,22 +1586,6 @@
         "eventGroupingSettings": {
           "$ref": "#/definitions/EventGroupingSettings",
           "description": "The event grouping settings."
-        },
-        "customDetails": {
-          "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "entityMappings": {
-          "$ref": "#/definitions/EntityMappings",
-          "description": "Array of the entity mappings of the alert rule"
-        },
-        "alertDetailsOverride": {
-          "type": "object",
-          "$ref": "#/definitions/AlertDetailsOverride",
-          "description": "The alert details override settings"
         }
       },
       "type": "object"
