@@ -856,6 +856,24 @@
         }
       }
     },
+    "NginxConfigurationContent": {
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "NginxConfigurationProperties": {
       "type": "object",
       "properties": {
@@ -867,6 +885,18 @@
         },
         "content": {
           "type": "string"
+        },
+        "lastUpdateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastSuccessfullySavedContent": {
+          "$ref": "#/definitions/NginxConfigurationContent"
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
