@@ -533,35 +533,6 @@
       },
       "readOnly": true
     },
-    "ManagedIdentity": {
-      "description": "The managed identity for IoT Central application.",
-      "title": "Managed Identity",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity. Also known as the objectId."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "description": "The type of managed identity used for the resource. 'SystemAssigned' refers to an implicitly created identity, while the type 'None' will remove any identities from the service.",
-          "type": "string",
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "AppSkuInfo": {
       "description": "Information about the SKU of the IoT Central application.",
       "type": "object",
@@ -599,7 +570,7 @@
         },
         "identity": {
           "description": "The managed identities for the IoT Central application.",
-          "$ref": "#/definitions/ManagedIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
         }
       },
       "allOf": [
@@ -633,7 +604,7 @@
         },
         "identity": {
           "description": "The managed identities for the IoT Central application.",
-          "$ref": "#/definitions/ManagedIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
         }
       }
     },
