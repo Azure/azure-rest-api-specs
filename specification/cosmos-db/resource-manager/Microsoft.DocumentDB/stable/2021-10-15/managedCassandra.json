@@ -341,90 +341,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
-      "get": {
-        "operationId": "CassandraClusters_ListBackups",
-        "description": "List the backups of this cluster that are available to restore.",
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraBackupsList": {
-            "$ref": "./examples/CosmosDBManagedCassandraBackupsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of restorable backups for this Cassandra cluster.",
-            "schema": {
-              "$ref": "#/definitions/ListBackups"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups/{backupId}": {
-      "get": {
-        "operationId": "CassandraClusters_GetBackup",
-        "description": "Get the properties of an individual backup of this cluster that is available to restore.",
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraBackup": {
-            "$ref": "./examples/CosmosDBManagedCassandraBackup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/backupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the properties of the backup.",
-            "schema": {
-              "$ref": "#/definitions/BackupResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters": {
       "get": {
         "operationId": "CassandraDataCenters_List",
@@ -1274,41 +1190,6 @@
         "commandOutput": {
           "type": "string",
           "description": "Output of the command."
-        }
-      }
-    },
-    "BackupResource": {
-      "description": "A restorable backup of a Cassandra cluster.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "timestamp": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The time this backup was taken, formatted like 2021-01-21T17:35:21"
-            }
-          }
-        }
-      }
-    },
-    "ListBackups": {
-      "description": "List of restorable backups for a Cassandra cluster.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Container for array of backups.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/BackupResource"
-          }
         }
       }
     },
