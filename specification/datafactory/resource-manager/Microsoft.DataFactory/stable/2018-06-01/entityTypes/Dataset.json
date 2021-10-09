@@ -2307,6 +2307,37 @@
         }
       }
     },
+    "AmazonRdsForSqlServerTableDataset": {
+      "x-ms-discriminator-value": "AmazonRdsForSqlServerTable",
+      "description": "The Amazon RDS for SQL Server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "The Amazon RDS for SQL Server dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRdsForSqlServerTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AmazonRdsForSqlServerTableDatasetTypeProperties": {
+      "description": "The Amazon RDS for SQL Server dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the SQL Server dataset. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the SQL Server dataset. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RestResourceDataset": {
       "x-ms-discriminator-value": "RestResource",
       "description": "A Rest service dataset.",
