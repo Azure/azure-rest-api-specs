@@ -11,7 +11,7 @@ go:
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/eventgrid/armeventgrid
+module-name: sdk/resourcemanager/eventgrid/armeventgrid
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
