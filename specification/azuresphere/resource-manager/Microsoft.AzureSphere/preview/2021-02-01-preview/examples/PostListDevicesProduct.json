@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MyResourceGroup1",
     "catalogName": "MyCatalog1",
-    "productName": "MyProduct1",
+    "productName": "MyProduct11",
     "parameters": {
       "$top": 10
     },
@@ -12,7 +12,24 @@
   "responses": {
     "200": {
       "description": "The list of devices for the product retrieved successfully.",
-      "body": {}
+      "body": {
+        "value": [
+          {
+            "name": "DeviceName1111",
+            "properties": {
+              "product": "MyProduct11",
+              "deviceGroup": "deviceGroupName111"
+            }
+          },
+          {
+            "name": "DeviceName1121",
+            "properties": {
+              "product": "MyProduct11",
+              "deviceGroup": "deviceGroupName112"
+            }
+          }
+        ]
+      }
     }
   }
 }

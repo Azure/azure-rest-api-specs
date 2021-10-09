@@ -557,7 +557,7 @@
           "200": {
             "description": "Response to the action call for list devices in a product.",
             "schema": {
-              "$ref": "#/definitions/AzureSpherePage_DeviceProperties"
+              "$ref": "#/definitions/AzureSpherePage_Device"
             }
           },
           "default": {
@@ -1108,7 +1108,7 @@
           "200": {
             "description": "Response to the action call for list deployments in a device group.",
             "schema": {
-              "$ref": "#/definitions/AzureSpherePage_DeploymentProperties"
+              "$ref": "#/definitions/AzureSpherePage_Deployment"
             }
           },
           "default": {
@@ -1187,7 +1187,7 @@
           "200": {
             "description": "Response to the action call for list devices in a device group.",
             "schema": {
-              "$ref": "#/definitions/ListDevicesDeviceGroupPageResponse"
+              "$ref": "#/definitions/AzureSpherePage_Device"
             }
           },
           "default": {
@@ -1746,7 +1746,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/deployments/{deploymentId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/deployments/{deploymentName}": {
       "get": {
         "operationId": "Deployments_Get",
         "summary": "Get a Deployment",
@@ -1770,7 +1770,7 @@
             "$ref": "#/parameters/CatalogParameter"
           },
           {
-            "$ref": "#/parameters/DeploymentIdParameter"
+            "$ref": "#/parameters/DeploymentNameParameter"
           }
         ],
         "responses": {
@@ -3011,16 +3011,6 @@
         }
       ]
     },
-    "ListDevicesDeviceGroupPageResponse": {
-      "type": "object",
-      "properties": {},
-      "description": "Response to the action call for list devices in a device group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureSpherePage_DeviceProperties"
-        }
-      ]
-    },
     "CountDevicesDeviceGroupResponse": {
       "type": "object",
       "properties": {},
@@ -3283,13 +3273,13 @@
         "modelAsString": true
       }
     },
-    "AzureSpherePage_DeviceProperties": {
+    "AzureSpherePage_Device": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeviceProperties"
+            "$ref": "#/definitions/Device"
           },
           "description": "List of elements",
           "readOnly": true
@@ -3351,13 +3341,13 @@
         }
       }
     },
-    "AzureSpherePage_DeploymentProperties": {
+    "AzureSpherePage_Deployment": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentProperties"
+            "$ref": "#/definitions/Deployment"
           },
           "description": "List of elements",
           "readOnly": true
@@ -3688,30 +3678,6 @@
         }
       ]
     },
-    "DeviceProperties": {
-      "type": "object",
-      "properties": {
-        "product": {
-          "type": "string",
-          "description": "Product of the device"
-        },
-        "deviceGroup": {
-          "type": "string",
-          "description": "Device group of the device"
-        },
-        "chipSku": {
-          "type": "string",
-          "description": "SKU of the chip",
-          "readOnly": true
-        }
-      },
-      "description": "Properties of the device",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureSphereProperties"
-        }
-      ]
-    },
     "DeviceGroupProperties": {
       "type": "object",
       "properties": {
@@ -3757,36 +3723,6 @@
         }
       ]
     },
-    "DeploymentProperties": {
-      "type": "object",
-      "properties": {
-        "identifier": {
-          "type": "string",
-          "description": "Deployment identifier",
-          "readOnly": true
-        },
-        "deployedImages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-adl-name": "string[]",
-          "description": "Location the image",
-          "readOnly": true
-        },
-        "deploymentDateUtc": {
-          "type": "string",
-          "description": "Deployment date UTC",
-          "readOnly": true
-        }
-      },
-      "description": "Properties of the deployment",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureSphereProperties"
-        }
-      ]
-    },
     "ImageProperties": {
       "type": "object",
       "properties": {
@@ -3803,6 +3739,31 @@
       "required": [
         "uri"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
+        }
+      ]
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "properties": {
+        "deployedImages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-adl-name": "string[]",
+          "description": "Images deployed",
+          "readOnly": true
+        },
+        "deploymentDateUtc": {
+          "type": "string",
+          "description": "Deployment date UTC",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of the deployment",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSphereProperties"
@@ -3839,6 +3800,30 @@
         }
       },
       "description": "The device image"
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "type": "string",
+          "description": "Product of the device"
+        },
+        "deviceGroup": {
+          "type": "string",
+          "description": "Device group of the device"
+        },
+        "chipSku": {
+          "type": "string",
+          "description": "SKU of the chip",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of the device",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
+        }
+      ]
     },
     "OSFeedType": {
       "type": "string",
@@ -3923,12 +3908,12 @@
       "description": "Image identifier",
       "type": "string"
     },
-    "DeploymentIdParameter": {
+    "DeploymentNameParameter": {
       "x-ms-parameter-location": "method",
-      "name": "deploymentId",
+      "name": "deploymentName",
       "in": "path",
       "required": true,
-      "description": "Deployment identifier",
+      "description": "Deployment name",
       "type": "string"
     },
     "DeviceIdParameter": {
