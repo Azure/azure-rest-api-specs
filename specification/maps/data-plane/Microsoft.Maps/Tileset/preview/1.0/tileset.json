@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Tileset Service",
-    "version": "2.0",
+    "version": "1.0",
     "description": "APIs for managing Tilesets."
   },
   "x-ms-parameterized-host": {
@@ -82,22 +82,22 @@
         "$ref": "#/definitions/ODataErrorResponse"
       }
     },
-    "200Async": {
-      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+    "201Async": {
+      "description": "The resource has been created successfully.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
       },
       "headers": {
-        "Resource-Location": {
+        "Location": {
           "type": "string",
-          "description": "If successful, a URI where details on the newly created resource can be found."
+          "description": "A URI where details on the newly created resource can be found."
         }
       }
     },
-    "202Accepted": {
-      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "headers": {
-        "Operation-Location": {
+        "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
         }
@@ -150,11 +150,11 @@
     },
     "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 2.0",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2.0",
+      "default": "1.0",
       "x-ms-parameter-location": "client"
     },
     "JsonFormat": {
@@ -180,7 +180,7 @@
     },
     "DatasetIdQuery": {
       "name": "datasetId",
-      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create) call.",
+      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](/en-us/rest/api/maps/dataset/createpreview) call.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -201,22 +201,18 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
-    },
-    "TilesetOperationId": {
-      "name": "operationId",
-      "type": "string",
-      "in": "path",
-      "description": "The ID to query the status for the tileset create/import request.",
-      "required": true,
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
-    "/tilesets": {
+    "/tileset/create/vector": {
       "post": {
         "x-publish": true,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Tileset_Create",
+        "description": ">[!Important]\n>The Azure Maps Creator services (Preview) version 1.0 will retire on 6 September 2021. Please transition to using version 2.0 by that date.\n>For details, see [Azure Maps Creator V1 Retirement](https://azure.microsoft.com/en-us/updates/azure-maps-creator-v1-will-be-retired-on-6-september-2021/).\n\n\n**Tileset Create API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
+        "operationId": "Tileset_CreatePreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Create Tileset by providing a Dataset Id": {
             "$ref": "./examples/Create.json"
@@ -240,8 +236,11 @@
           }
         ],
         "responses": {
+          "201": {
+            "$ref": "#/responses/201Async"
+          },
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "$ref": "#/responses/202Async"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -259,11 +258,13 @@
             "$ref": "#/responses/500"
           }
         }
-      },
+      }
+    },
+    "/tileset": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all tilesets created.   \n<br>",
-        "operationId": "Tileset_List",
+        "description": ">[!Important]\n>The Azure Maps Creator services (Preview) version 1.0 will retire on 6 September 2021. Please transition to using version 2.0 by that date.\n>For details, see [Azure Maps Creator V1 Retirement](https://azure.microsoft.com/en-us/updates/azure-maps-creator-v1-will-be-retired-on-6-september-2021/).\n\n\n**Tileset List API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\nThis API allows the caller to fetch a list of all tilesets created.   \n<br>",
+        "operationId": "Tileset_ListPreview",
         "x-ms-examples": {
           "Get a list of all tilesets": {
             "$ref": "./examples/List.json"
@@ -305,58 +306,11 @@
         }
       }
     },
-    "/tilesets/{tilesetId}": {
-      "get": {
-        "x-publish": true,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a tileset.",
-        "operationId": "Tileset_Get",
-        "x-ms-examples": {
-          "Gets the details for a single tileset": {
-            "$ref": "./examples/Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TilesetId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
-            "schema": {
-              "$ref": "#/definitions/TilesetDetailInfo"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      },
+    "/tileset/{tilesetId}": {
       "delete": {
         "x-publish": true,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created tileset.<br>    \nYou can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
-        "operationId": "Tileset_Delete",
+        "description": ">[!Important]\n>The Azure Maps Creator services (Preview) version 1.0 will retire on 6 September 2021. Please transition to using version 2.0 by that date.\n>For details, see [Azure Maps Creator V1 Retirement](https://azure.microsoft.com/en-us/updates/azure-maps-creator-v1-will-be-retired-on-6-september-2021/).\n\n\n**Tileset Delete API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\nThis API allows the caller to delete a created tileset.<br>    \nYou can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "operationId": "Tileset_DeletePreview",
         "x-ms-examples": {
           "Delete a created tileset": {
             "$ref": "./examples/Delete.json"
@@ -378,7 +332,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Tileset delete request completed successfully."
+            "description": "Tileset delete request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TilesetDeleteResponse"
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -394,39 +351,6 @@
           },
           "500": {
             "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/tilesets/operations/{operationId}": {
-      "get": {
-        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
-        "operationId": "Tileset_GetOperation",
-        "x-ms-examples": {
-          "Get the status of an operation which is still running": {
-            "$ref": "./examples/GetOperationStillRunning.json"
-          },
-          "Get the status of an operation which has finished successfully": {
-            "$ref": "./examples/GetOperation.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TilesetOperationId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/responses/200Async"
-          },
-          "400": {
-            "$ref": "#/responses/400"
           }
         }
       }
@@ -515,6 +439,11 @@
           "type": "string",
           "readOnly": true
         },
+        "resourceLocation": {
+          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
+          "type": "string",
+          "readOnly": true
+        },
         "error": {
           "$ref": "#/definitions/ODataError"
         },
@@ -534,11 +463,6 @@
           "items": {
             "$ref": "#/definitions/TilesetDetailInfo"
           }
-        },
-        "nextLink": {
-          "description": "If present, the location of the next page of data.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -548,11 +472,6 @@
       "properties": {
         "tilesetId": {
           "description": "The unique tileset id for the tileset.",
-          "type": "string",
-          "readOnly": true
-        },
-        "ontology": {
-          "description": "The ontology of the source dataset. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
           "type": "string",
           "readOnly": true
         },
@@ -585,6 +504,10 @@
           }
         }
       }
+    },
+    "TilesetDeleteResponse": {
+      "description": "The response model for the Delete API. The response body will be empty signifying there's no content available for the `tilesetId` anymore.",
+      "type": "object"
     }
   }
 }
