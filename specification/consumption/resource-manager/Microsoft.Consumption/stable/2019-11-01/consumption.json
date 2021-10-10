@@ -2079,6 +2079,11 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced. Possible values could be 'On Demand', 'Reservation', 'Spot'.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2108,6 +2113,12 @@
         "billingAccountId": {
           "description": "Billing Account identifier.",
           "type": "string",
+          "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "Effective Price that's charged for the usage.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         },
         "pricingModel": {
