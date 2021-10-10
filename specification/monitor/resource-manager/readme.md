@@ -63,7 +63,7 @@ input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
-- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
