@@ -147,11 +147,28 @@
                         "x-nullable": false,
                         "description": "Returns a list of public or preview offers",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CatalogItem"
+                            "type": "object",
+                            "description": "Represents a feed of entities that includes additional information that OData formats support.",
+                            "properties": {
+                              "items": {
+                                "type": "array",
+                                "description": "Gets the collection of entities for this feed.",
+                                "items": {
+                                  "$ref": "#/definitions/CatalogItem"
+                                }
+                              },
+                              "nextPageLink": {
+                                "type": "string",
+                                "description": "Gets the link for the next page of items in the feed.",
+                                "format": "uri"
+                              },
+                              "count": {
+                                "type": "integer",
+                                "description": "Gets the total count of items in the feed.",
+                                "format": "int64"
+                              }
                             }
-                        }
+                          }
                     },
                     "400": {
                         "x-nullable": false,
@@ -184,7 +201,6 @@
                 "fulfillBeforeChargeEligible",
                 "bigId",
                 "legalTermsType",
-                "isDeleted",
                 "isThirdParty",
                 "popularity",
                 "hasFreeTrials",
@@ -539,10 +555,6 @@
                             "$ref": "#/definitions/RestrictedAudience"
                         }
                     ]
-                },
-                "isDeleted": {
-                    "type": "boolean",
-                    "description": "value"
                 },
                 "isThirdParty": {
                     "type": "boolean",
