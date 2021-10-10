@@ -2795,7 +2795,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resource groups."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4701,6 +4701,12 @@
           },
           "description": "The API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "capabilities": {
           "type": "string",
           "description": "The additional capabilities offered by this resource type."
@@ -5928,7 +5934,25 @@
             "Replace",
             "Merge",
             "Delete"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "tagsPatchOperation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Replace",
+                "description": "The 'replace' option replaces the entire set of existing tags with a new set."
+              },
+              {
+                "value": "Merge",
+                "description": "The 'merge' option allows adding tags with new names and updating the values of tags with existing names."
+              },
+              {
+                "value": "Delete",
+                "description": "The 'delete' option allows selectively deleting tags based on given names or name/value pairs."
+              }
+            ]
+          }
         },
         "properties": {
           "$ref": "#/definitions/Tags",
@@ -5964,6 +5988,20 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {

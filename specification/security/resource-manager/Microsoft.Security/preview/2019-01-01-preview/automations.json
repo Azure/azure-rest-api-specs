@@ -158,8 +158,11 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update a security automation": {
-            "$ref": "./examples/Automations/PutAutomation_example.json"
+          "Create or update a security automation for all assessments (including all severities)": {
+            "$ref": "./examples/Automations/PutAutomationAllAssessments_example.json"
+          },
+          "Create or update a security automation for all high severity assessments": {
+            "$ref": "./examples/Automations/PutAutomationHighSeverityAssessments_example.json"
           },
           "Disable or enable a security automation": {
             "$ref": "./examples/Automations/PutDisableAutomation_example.json"
@@ -373,7 +376,14 @@
           "description": "A valid event source type.",
           "enum": [
             "Assessments",
-            "Alerts"
+            "SubAssessments",
+            "Alerts",
+            "SecureScores",
+            "SecureScoresSnapshot",
+            "SecureScoreControls",
+            "SecureScoreControlsSnapshot",
+            "RegulatoryComplianceAssessment",
+            "RegulatoryComplianceAssessmentSnapshot"
           ],
           "x-ms-enum": {
             "name": "EventSource",
@@ -383,7 +393,28 @@
                 "value": "Assessments"
               },
               {
+                "value": "SubAssessments"
+              },
+              {
                 "value": "Alerts"
+              },
+              {
+                "value": "SecureScores"
+              },
+              {
+                "value": "SecureScoresSnapshot"
+              },
+              {
+                "value": "SecureScoreControls"
+              },
+              {
+                "value": "SecureScoreControlsSnapshot"
+              },
+              {
+                "value": "RegulatoryComplianceAssessment"
+              },
+              {
+                "value": "RegulatoryComplianceAssessmentSnapshot"
               }
             ]
           }
@@ -578,31 +609,40 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Equals"
+                "value": "Equals",
+                "description": "Applies for decimal and non-decimal operands"
               },
               {
-                "value": "GreaterThan"
+                "value": "GreaterThan",
+                "description": "Applies only for decimal operands"
               },
               {
-                "value": "GreaterThanOrEqualTo"
+                "value": "GreaterThanOrEqualTo",
+                "description": "Applies only for decimal operands"
               },
               {
-                "value": "LesserThan"
+                "value": "LesserThan",
+                "description": "Applies only for decimal operands"
               },
               {
-                "value": "LesserThanOrEqualTo"
+                "value": "LesserThanOrEqualTo",
+                "description": "Applies only for decimal operands"
               },
               {
-                "value": "NotEquals"
+                "value": "NotEquals",
+                "description": "Applies  for decimal and non-decimal operands"
               },
               {
-                "value": "Contains"
+                "value": "Contains",
+                "description": "Applies only for non-decimal operands"
               },
               {
-                "value": "StartsWith"
+                "value": "StartsWith",
+                "description": "Applies only for non-decimal operands"
               },
               {
-                "value": "EndsWith"
+                "value": "EndsWith",
+                "description": "Applies only for non-decimal operands"
               }
             ]
           }

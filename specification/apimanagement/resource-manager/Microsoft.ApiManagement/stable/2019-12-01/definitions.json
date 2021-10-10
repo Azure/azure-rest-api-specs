@@ -207,11 +207,11 @@
               },
               {
                 "value": "swagger-json",
-                "description": "The contents are inline and Content Type is a OpenApi 2.0 Document."
+                "description": "The contents are inline and Content Type is a OpenAPI 2.0 JSON Document."
               },
               {
                 "value": "swagger-link-json",
-                "description": "The Open Api 2.0 document is hosted on a publicly accessible internet address."
+                "description": "The OpenAPI 2.0 JSON document is hosted on a publicly accessible internet address."
               },
               {
                 "value": "wsdl",
@@ -223,19 +223,19 @@
               },
               {
                 "value": "openapi",
-                "description": "The contents are inline and Content Type is a OpenApi 3.0 Document in YAML format."
+                "description": "The contents are inline and Content Type is a OpenAPI 3.0 YAML Document."
               },
               {
                 "value": "openapi+json",
-                "description": "The contents are inline and Content Type is a OpenApi 3.0 Document in JSON format."
+                "description": "The contents are inline and Content Type is a OpenAPI 3.0 JSON Document."
               },
               {
                 "value": "openapi-link",
-                "description": "The Open Api 3.0 document is hosted on a publicly accessible internet address."
+                "description": "The OpenAPI 3.0 YAML document is hosted on a publicly accessible internet address."
               },
               {
                 "value": "openapi+json-link",
-                "description": "The Open Api 3.0 Json document is hosted on a publicly accessible internet address."
+                "description": "The OpenAPI 3.0 JSON document is hosted on a publicly accessible internet address."
               }
             ]
           }
@@ -708,7 +708,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -735,7 +735,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -813,7 +813,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -3545,13 +3545,13 @@
           "type": "boolean"
         },
         "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true.",
           "type": "boolean"
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",
@@ -5054,14 +5054,19 @@
         },
         "appType": {
           "type": "string",
-          "description": "Determines the type of application which send the create user request. Default is old publisher portal.",
+          "description": "Determines the type of application which send the create user request. Default is legacy portal.",
           "enum": [
+            "portal",
             "developerPortal"
           ],
           "x-ms-enum": {
             "name": "AppType",
             "modelAsString": true,
             "values": [
+              {
+                "value": "portal",
+                "description": "User create request was sent by legacy developer portal."
+              },
               {
                 "value": "developerPortal",
                 "description": "User create request was sent by new developer portal."
@@ -5565,6 +5570,100 @@
         }
       ],
       "description": "Association entity details."
+    },
+    "ContentTypeCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentTypeContract"
+          },
+          "description": "Collection of content types.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content types."
+    },
+    "ContentTypeContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentTypeContractProperties",
+          "description": "Properties of the content type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentTypeContractProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Content type identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Content type name. Must be 1 to 250 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Content type description."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Content type schema."
+        },
+        "version": {
+          "type": "string",
+          "description": "Content type version."
+        }
+      }
+    },
+    "ContentItemCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItemContract"
+          },
+          "description": "Collection of content items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content items."
+    },
+    "ContentItemContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentItemContractProperties",
+          "description": "Properties of the content item."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentItemContractProperties": {
+      "properties": {},
+      "additionalProperties": true
     }
   },
   "parameters": {}

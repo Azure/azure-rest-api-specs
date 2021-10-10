@@ -433,6 +433,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceSkusResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -550,6 +556,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "deprecated": false,
@@ -597,6 +609,12 @@
             "schema": {
               "$ref": "#/definitions/CheckSkuAvailabilityResultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -637,6 +655,54 @@
             "schema": {
               "$ref": "#/definitions/CheckDomainAvailabilityResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "Gets the private endpoint connections associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetPrivateEndpointConnection": {
+            "$ref": "./examples/ListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -675,6 +741,12 @@
             "description": "OK -- Get the private endpoint connection properties successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -722,6 +794,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -759,6 +837,12 @@
           },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -795,6 +879,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -818,11 +908,12 @@
           "enum": [
             "Free",
             "Standard",
-            "Premium"
+            "Premium",
+            "Enterprise"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -943,6 +1034,16 @@
           },
           "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only."
         },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "If the resource is migrated from an existing key.",
+          "readOnly": true
+        },
+        "skuChangeInfo": {
+          "$ref": "#/definitions/CognitiveServicesAccountSkuChangeInfo",
+          "description": "Sku change info of account.",
+          "readOnly": true
+        },
         "customSubDomainName": {
           "type": "string",
           "description": "Optional subdomain name used for token-based authentication."
@@ -984,6 +1085,11 @@
         "apiProperties": {
           "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
           "description": "The api properties for special APIs."
+        },
+        "dateCreated": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the date of cognitive services account creation."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -993,6 +1099,14 @@
         "qnaRuntimeEndpoint": {
           "type": "string",
           "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "qnaAzureSearchEndpointKey": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker."
+        },
+        "qnaAzureSearchEndpointId": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint id of QnAMaker."
         },
         "statisticsEnabled": {
           "type": "boolean",
@@ -1009,6 +1123,26 @@
           "description": "(Personalization Only) The storage account connection string.",
           "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
           "maxLength": 1000
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
         }
       },
       "description": "The api properties for special APIs."
@@ -1025,6 +1159,26 @@
         }
       },
       "description": "The access keys for the cognitive services account."
+    },
+    "CognitiveServicesAccountSkuChangeInfo": {
+      "properties": {
+        "countOfDowngrades": {
+          "type": "number",
+          "description": "Gets the count of downgrades.",
+          "readOnly": true
+        },
+        "countOfUpgradesAfterDowngrades": {
+          "type": "number",
+          "description": "Gets the count of upgrades after downgrades.",
+          "readOnly": true
+        },
+        "lastChangeDate": {
+          "type": "string",
+          "description": "Gets the last change date.",
+          "readOnly": true
+        }
+      },
+      "description": "Sku change info of account."
     },
     "RegenerateKeyParameters": {
       "properties": {
@@ -1658,11 +1812,32 @@
       },
       "description": "The user owned storage for Cognitive Services account."
     },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "A list of private endpoint connections"
+    },
     "PrivateEndpointConnection": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the private endpoint connection"
         }
       },
       "allOf": [
@@ -1715,7 +1890,7 @@
           "type": "string",
           "description": "The reason for approval/rejection of the connection."
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }

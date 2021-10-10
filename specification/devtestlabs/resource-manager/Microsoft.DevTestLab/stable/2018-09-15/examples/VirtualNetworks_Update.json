@@ -1,31 +1,13 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
-    "labName": "{devtestlab-name}",
-    "name": "{virtualnetwork-name}",
     "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{virtualNetworkName}",
     "virtualNetwork": {
-      "properties": {
-        "subnetOverrides": [
-          {
-            "resourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{virtualnetwork-name}/subnets/{virtualnetwork-name}Subnet",
-            "useInVmCreationPermission": "Allow",
-            "usePublicIpAddressPermission": "Deny",
-            "sharedPublicIpAddressConfiguration": {
-              "allowedPorts": [
-                {
-                  "transportProtocol": "Tcp",
-                  "backendPort": 3389
-                },
-                {
-                  "transportProtocol": "Tcp",
-                  "backendPort": 22
-                }
-              ]
-            }
-          }
-        ]
+      "tags": {
+        "tagName1": "tagValue1"
       }
     }
   },
@@ -33,11 +15,11 @@
     "200": {
       "body": {
         "properties": {
-          "externalProviderResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{virtualnetwork-name}",
+          "externalProviderResourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
           "subnetOverrides": [
             {
-              "resourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{virtualnetwork-name}/subnets/{virtualnetwork-name}Subnet",
-              "labSubnetName": "{virtualnetwork-name}Subnet",
+              "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet",
+              "labSubnetName": "{virtualNetworkName}Subnet",
               "useInVmCreationPermission": "Allow",
               "usePublicIpAddressPermission": "Allow",
               "sharedPublicIpAddressConfiguration": {
@@ -56,13 +38,13 @@
           ],
           "createdDate": "2018-10-01T13:01:44.6005134-07:00",
           "provisioningState": "Succeeded",
-          "uniqueIdentifier": "{unique-identifier}"
+          "uniqueIdentifier": "{uniqueIdentifier}"
         },
-        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
-        "name": "{virtualnetwork-name}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+        "name": "{virtualNetworkName}",
         "type": "Microsoft.DevTestLab/labs/virtualNetworks",
         "tags": {
-          "MyTag": "MyValue"
+          "tagName1": "tagValue1"
         }
       }
     }

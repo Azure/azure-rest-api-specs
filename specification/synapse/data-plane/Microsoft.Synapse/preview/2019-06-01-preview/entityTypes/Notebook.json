@@ -16,11 +16,13 @@
         },
         "bigDataPool": {
           "description": "Big data pool reference.",
-          "$ref": "#/definitions/BigDataPoolReference"
+          "$ref": "#/definitions/BigDataPoolReference",
+          "x-nullable": true
         },
         "sessionProperties": {
           "description": "Session properties.",
-          "$ref": "#/definitions/NotebookSessionProperties"
+          "$ref": "#/definitions/NotebookSessionProperties",
+          "x-nullable": true
         },
         "metadata": {
           "description": "Notebook root-level metadata.",
@@ -54,6 +56,7 @@
     },
     "BigDataPoolReference": {
       "description": "Big data pool reference.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "Big data pool reference type.",
@@ -86,7 +89,8 @@
         },
         "language_info": {
           "description": "Language info.",
-          "$ref": "#/definitions/NotebookLanguageInfo"
+          "$ref": "#/definitions/NotebookLanguageInfo",
+          "x-nullable": true
         }
       },
       "additionalProperties": {
@@ -155,7 +159,8 @@
         },
         "attachments": {
           "description": "Attachments associated with the cell.",
-          "type": "object"
+          "type": "object",
+          "x-nullable": true
         },
         "outputs": {
           "description": "Cell-level output items.",
@@ -176,6 +181,7 @@
     },
     "NotebookSessionProperties": {
       "description": "Session properties.",
+      "type": "object",
       "properties": {
         "driverMemory": {
           "description": "Amount of memory to use for the driver process.",
@@ -208,6 +214,7 @@
     },
     "NotebookCellOutputItem": {
       "description": "An item of the notebook cell execution output.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "For output_type=stream, determines the name of stream (stdout / stderr).",

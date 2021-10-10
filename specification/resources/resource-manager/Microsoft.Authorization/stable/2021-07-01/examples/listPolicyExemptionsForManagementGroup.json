@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "managementGroupId": "DevOrg",
+    "api-version": "2021-07-01",
+    "$filter": "atScope()"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/HardwareDivision/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+              "policyDefinitionReferenceIds": [
+                "Limit_Skus"
+              ],
+              "exemptionCategory": "Waiver",
+              "displayName": "Exempt demo cluster",
+              "description": "Exempt demo cluster from limit sku",
+              "metadata": {
+                "reason": "Temporary exemption for a expensive VM demo"
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2021-07-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-07-01T02:01:01.1075056Z"
+            },
+            "id": "/providers/Microsoft.Management/managementGroups/DevOrg/providers/Microsoft.Authorization/policyExemptions/ResearchBudgetExemption",
+            "type": "Microsoft.Authorization/policyExemptions",
+            "name": "ResearchBudgetExemption"
+          },
+          {
+            "properties": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/HardwareDivision/providers/Microsoft.Authorization/policyAssignments/LimitPorts",
+              "exemptionCategory": "Mitigated",
+              "displayName": "Exempt jump box open ports",
+              "description": "Exempt jump box open ports from limit ports policy",
+              "metadata": {
+                "reason": "Need to open RDP port to corp net"
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2021-07-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-07-01T02:01:01.1075056Z"
+            },
+            "id": "/providers/Microsoft.Management/managementGroups/DevOrg/providers/Microsoft.Authorization/policyExemptions/VNetIsMonitored",
+            "type": "Microsoft.Authorization/policyExemptions",
+            "name": "VNetIsMonitored"
+          }
+        ]
+      }
+    }
+  }
+}

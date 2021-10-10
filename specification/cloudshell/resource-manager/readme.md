@@ -56,6 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cloudshell']
+  - repo: azure-resource-manager-schemas
 ```
 
 ## Go
@@ -146,3 +147,5 @@ csharp:
   namespace: Microsoft.CloudShell
   output-folder: $(csharp-sdks-folder)/CloudShell/management/Microsoft.CloudShell/GeneratedProtocol
 ```
+
+

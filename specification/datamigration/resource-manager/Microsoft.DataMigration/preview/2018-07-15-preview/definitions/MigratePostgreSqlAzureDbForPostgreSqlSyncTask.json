@@ -374,6 +374,23 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "selectedTables": {
+          "type": "array",
+          "description": "Tables selected for migration",
+          "items": {
+            "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput"
+          }
+        }
+      }
+    },
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput": {
+      "type": "object",
+      "description": "Selected tables for the migration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table to migrate"
         }
       }
     }
