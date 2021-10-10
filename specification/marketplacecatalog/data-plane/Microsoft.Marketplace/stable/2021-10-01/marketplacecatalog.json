@@ -187,6 +187,29 @@
     }
   },
   "definitions": {
+    "PageResultOfCatalogItem": {
+        "type": "object",
+        "description": "Represents a feed of entities that includes additional information that OData formats support.",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Gets the collection of entities for this feed.",
+            "items": {
+              "$ref": "#/definitions/CatalogItem"
+            }
+          },
+          "nextPageLink": {
+            "type": "string",
+            "description": "Gets the link for the next page of items in the feed.",
+            "format": "uri"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Gets the total count of items in the feed.",
+            "format": "int64"
+          }
+        }
+      },
     "CatalogItem": {
       "type": "object",
       "required": [
