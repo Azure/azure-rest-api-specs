@@ -204,9 +204,6 @@
         "x-ms-examples": {
           "Update capacity parameters": {
             "$ref": "./examples/updateCapacity.json"
-          },
-          "Update capacity to Generation 2": {
-            "$ref": "./examples/updateToGen2.json"
           }
         },
         "tags": [
@@ -848,16 +845,9 @@
           "description": "A collection of Dedicated capacity administrators"
         },
         "mode": {
-          "description": "Specifies the generation of the Power BI Embedded capacity. If no value is specified, the default value 'Gen2' is used. [Learn More](https://docs.microsoft.com/power-bi/developer/embedded/power-bi-embedded-generation-2)",
+          "description": "The capacity mode.",
           "type": "string",
-          "enum": [
-            "Gen1",
-            "Gen2"
-          ],
-          "x-ms-enum": {
-            "name": "Mode",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
       }
     },
