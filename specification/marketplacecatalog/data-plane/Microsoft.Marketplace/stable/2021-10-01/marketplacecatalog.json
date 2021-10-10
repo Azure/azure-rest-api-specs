@@ -24,7 +24,7 @@
         "tags": [
           "Public-Offers-Single"
         ],
-        "summary": "Get a public offer by it's id",
+        "summary": "Get a public offer by id",
         "operationId": "PublicOffers_Get",
         "parameters": [
           {
@@ -32,7 +32,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "value",
+            "description": "Offer id",
             "x-nullable": true
           },
           {
@@ -41,7 +41,7 @@
             "x-originalName": "apiVersion",
             "in": "query",
             "required": true,
-            "description": "value",
+            "description": "API version",
             "default": "2021-06-01",
             "x-nullable": true
           },
@@ -223,65 +223,65 @@
       "properties": {
         "language": {
           "type": "string",
-          "description": "value"
+          "description": "Language"
         },
         "displayName": {
           "type": "string",
-          "description": "value"
+          "description": "Display name"
         },
         "hasStandardContractAmendments": {
           "type": "boolean",
-          "description": "Value indicating whether standard contract amendments are present for this product"
+          "description": "A value indicating whether standard contract amendments are present for this product"
         },
         "publisherMpnId": {
           "type": "string",
-          "description": "value"
+          "description": "The publisher's Microsoft Partner Network (MPN) Id"
         },
         "sellerId": {
           "type": "string",
-          "description": "value"
+          "description": "Partner Center Seller Id"
         },
         "publisherId": {
           "type": "string",
-          "description": "value"
+          "description": "Publisher id"
         },
         "partnerCenterId": {
           "type": "string",
-          "description": "value"
+          "description": "Partner center id"
         },
         "publisherDisplayName": {
           "type": "string",
-          "description": "value"
+          "description": "Publisher display name"
         },
         "offerId": {
           "type": "string",
-          "description": "value"
+          "description": "Offer id"
         },
         "legacyId": {
           "type": "string",
-          "description": "value"
+          "description": "Offer legacy id"
         },
         "determinedStorefronts": {
           "type": "array",
-          "description": "value",
+          "description": "The list of the storefronts for which this offer is designated",
           "items": {
             "$ref": "#/definitions/Store"
           }
         },
         "summary": {
           "type": "string",
-          "description": "value"
+          "description": "Summary"
         },
         "longSummary": {
           "type": "string",
-          "description": "value"
+          "description": "Long summary"
         },
         "description": {
           "type": "string",
-          "description": "value"
+          "description": "Description"
         },
         "offerType": {
-          "description": "value",
+          "description": "Offer type",
           "allOf": [
             {
               "$ref": "#/definitions/OfferType"
@@ -290,22 +290,22 @@
         },
         "isPrivate": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the item is private"
         },
         "isPreview": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the item is preview"
         },
         "isStopSell": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether sale of this item is stopped"
         },
         "fulfillBeforeChargeEligible": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether this item is eligible for fulfill before charge"
         },
         "marketingMaterial": {
-          "description": "value",
+          "description": "Marketing material added by the publisher",
           "allOf": [
             {
               "$ref": "#/definitions/MarketingMaterial"
@@ -314,36 +314,36 @@
         },
         "markets": {
           "type": "array",
-          "description": "value",
+          "description": "Markets for the item",
           "items": {
             "type": "string"
           }
         },
         "isvContactDetails": {
           "type": "object",
-          "description": "value",
+          "description": "ISV contact details",
           "additionalProperties": {
             "type": "string"
           }
         },
         "bigId": {
           "type": "string",
-          "description": "value"
+          "description": "Big catalog id"
         },
         "ocpSolutionId": {
           "type": "string",
-          "description": "value"
+          "description": "OCP solution id of the product"
         },
         "legalTermsUri": {
           "type": "string",
-          "description": "value"
+          "description": "Legal terms URI"
         },
         "cspLegalTermsUri": {
           "type": "string",
-          "description": "value"
+          "description": "CSP legal terms URI"
         },
         "legalTermsType": {
-          "description": "value",
+          "description": "Type of to the legal terms",
           "allOf": [
             {
               "$ref": "#/definitions/LegalTermsType"
@@ -352,91 +352,91 @@
         },
         "privacyPolicyUri": {
           "type": "string",
-          "description": "value"
+          "description": "Uri to the privacy policy of the product"
         },
         "helpLink": {
           "type": "string",
-          "description": "value"
+          "description": "Help link for the product"
         },
         "supportUri": {
           "type": "string",
-          "description": "value"
+          "description": "Support uri of the product"
         },
         "version": {
           "type": "string",
-          "description": "value"
+          "description": "Big Cat submission version"
         },
         "uiDefinitionUri": {
           "type": "string",
-          "description": "value"
+          "description": "User interface definition uri"
         },
         "categoryIds": {
           "type": "array",
-          "description": "value",
+          "description": "List of category IDs the marketplace item belongs to",
           "items": {
             "type": "string"
           }
         },
         "marketCode": {
           "type": "string",
-          "description": "value"
+          "description": "Market code of a service offer"
         },
         "marketStates": {
           "type": "array",
-          "description": "value",
+          "description": "Market states of a service offer",
           "items": {
             "type": "string"
           }
         },
         "industryIds": {
           "type": "array",
-          "description": "value",
+          "description": "List of industry IDs the item belongs to",
           "items": {
             "type": "string"
           }
         },
         "cloudIndustryCategories": {
           "type": "array",
-          "description": "value",
+          "description": "List of cloud industry IDs the item belongs to",
           "items": {
             "type": "string"
           }
         },
         "primaryProduct": {
           "type": "string",
-          "description": "value"
+          "description": "Primary product for the offer"
         },
         "supportedProducts": {
           "type": "array",
-          "description": "value",
+          "description": "It maps to the list of products the publisher provides with which their offer works",
           "items": {
             "type": "string"
           }
         },
         "applicableProducts": {
           "type": "array",
-          "description": "value",
+          "description": "Product categories the offer belongs to",
           "items": {
             "type": "string"
           }
         },
         "serviceType": {
           "type": "string",
-          "description": "value"
+          "description": "Service type that applies to the offer"
         },
         "competencies": {
           "type": "array",
-          "description": "value",
+          "description": "Competencies that apply to the offer",
           "items": {
             "$ref": "#/definitions/Competency"
           }
         },
         "hasPrices": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the item has prices"
         },
         "duration": {
-          "description": "value",
+          "description": "The duration that applies to the item",
           "allOf": [
             {
               "$ref": "#/definitions/Duration"
@@ -445,13 +445,13 @@
         },
         "marketPricingDetails": {
           "type": "array",
-          "description": "value",
+          "description": "The pricing details of each market to the item",
           "items": {
             "$ref": "#/definitions/MarketPricingDetailsItem"
           }
         },
         "pricing": {
-          "description": "value",
+          "description": "The pricing that applies to the item",
           "allOf": [
             {
               "$ref": "#/definitions/Pricing"
@@ -460,35 +460,35 @@
         },
         "solutionAreas": {
           "type": "array",
-          "description": "value",
+          "description": "The states that apply to the item",
           "items": {
             "type": "string"
           }
         },
         "screenshotUris": {
           "type": "array",
-          "description": "value",
+          "description": "List of screenshot image URIs provided for the item",
           "items": {
             "type": "string"
           }
         },
         "links": {
           "type": "array",
-          "description": "value",
+          "description": "List of Links provided for the item",
           "items": {
             "$ref": "#/definitions/LinkProperties"
           }
         },
         "filters": {
           "type": "array",
-          "description": "value",
+          "description": "List of filters for the item",
           "items": {
             "$ref": "#/definitions/Filter"
           }
         },
         "iconFileUris": {
           "type": "object",
-          "description": "value",
+          "description": "Dictionary of icon image URIs by icon type",
           "x-dictionaryKey": {
             "$ref": "#/definitions/IconKind"
           },
@@ -498,13 +498,13 @@
         },
         "artifacts": {
           "type": "array",
-          "description": "value",
+          "description": "List of artifacts",
           "items": {
             "$ref": "#/definitions/Artifact"
           }
         },
         "metadata": {
-          "description": "value",
+          "description": "Custom item metadata",
           "allOf": [
             {
               "$ref": "#/definitions/OfferMetadata"
@@ -513,31 +513,31 @@
         },
         "images": {
           "type": "array",
-          "description": "value",
+          "description": "List of Images",
           "items": {
             "$ref": "#/definitions/ImageGroup"
           }
         },
         "videos": {
           "type": "array",
-          "description": "value",
+          "description": "List of product videos",
           "items": {
             "$ref": "#/definitions/ProductVideo"
           }
         },
         "plans": {
           "type": "array",
-          "description": "value",
+          "description": "Plans available for the offer details",
           "items": {
             "$ref": "#/definitions/Plan"
           }
         },
         "resourceGroupName": {
           "type": "string",
-          "description": "value"
+          "description": "Resource group name the gallery item belongs to"
         },
         "definitionTemplates": {
-          "description": "value",
+          "description": "Definition templates",
           "allOf": [
             {
               "$ref": "#/definitions/DefinitionTemplates"
@@ -546,13 +546,13 @@
         },
         "additionalProperties": {
           "type": "object",
-          "description": "value",
+          "description": "Properties provided for the item",
           "additionalProperties": {
             "type": "string"
           }
         },
         "restrictedAudience": {
-          "description": "value",
+          "description": "This fields supports setting explicit audience like subscription, tenant or user",
           "allOf": [
             {
               "$ref": "#/definitions/RestrictedAudience"
@@ -561,78 +561,78 @@
         },
         "isThirdParty": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the product is third party offer or not"
         },
         "groupId": {
           "type": "string",
-          "description": "value"
+          "description": "This value is used to merge different entities to a single item"
         },
         "hideKeys": {
           "type": "array",
-          "description": "value",
+          "description": "List of hide keys provided for the item",
           "items": {
             "type": "string"
           }
         },
         "keywords": {
           "type": "array",
-          "description": "value",
+          "description": "List of keywords provided for the item",
           "items": {
             "type": "string"
           }
         },
         "popularity": {
           "type": "number",
-          "description": "value",
+          "description": "Popularity of the product",
           "format": "double"
         },
         "pricingDetailsUri": {
           "type": "string",
-          "description": "value"
+          "description": "Pricing details uri of the product"
         },
         "hasFreeTrials": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has free trials"
         },
         "isByol": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has licensed plans"
         },
         "isMacc": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it is MACC eligible"
         },
         "hasFreePlans": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has free plans"
         },
         "isQuantifiable": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether product is quantifiable"
         },
         "altStackReference": {
           "type": "string",
-          "description": "value"
+          "description": "Alternative stack reference"
         },
         "hasPaygPlans": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether an offer has a 'Pay As You Go' plan"
         },
         "isReseller": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether microsoft is acting as a reseller"
         },
         "ttl": {
           "type": "integer",
-          "description": "value",
+          "description": "Expiration policy in seconds",
           "format": "int32"
         },
         "isExcludedFromSearch": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the offer should excluded from search"
         },
         "applicableStoreFronts": {
-          "description": "value",
+          "description": "A value indicating what store fronts this offer should surface on",
           "allOf": [
             {
               "$ref": "#/definitions/StoreFrontOptions"
@@ -641,25 +641,25 @@
         },
         "offerVersion": {
           "type": "string",
-          "description": "value"
+          "description": "Offer version specified by the publisher on publishing portal"
         },
         "isMicrosoftProduct": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it is a microsoft product"
         },
         "productOwnershipSellingMotion": {
           "type": "string",
-          "description": "value"
+          "description": "Product ownership selling motion"
         },
         "documentLinks": {
           "type": "array",
-          "description": "value",
+          "description": "The list of document links provided for the item",
           "items": {
             "$ref": "#/definitions/LinkProperties"
           }
         },
         "offerEnvironment": {
-          "description": "value",
+          "description": "A value indicating offer's environment",
           "allOf": [
             {
               "$ref": "#/definitions/EnvironmentInfo"
@@ -668,62 +668,62 @@
         },
         "linkedAddIns": {
           "type": "array",
-          "description": "value",
+          "description": "List of linked Add Ins provided for the item",
           "items": {
             "type": "string"
           }
         },
         "excludeFromBootstrap": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the offer should not be re-ingest during bootstrap session"
         },
         "hydrationNotificationReceivedAt": {
           "type": "string",
-          "description": "value",
+          "description": "Notification creation time",
           "format": "date-time"
         },
         "bigCatLastModifiedDate": {
           "type": "string",
-          "description": "value",
+          "description": "Last modified date",
           "format": "date-time"
         },
         "disableSendEmailOnPurchase": {
           "type": "boolean",
-          "description": "value"
+          "description": "Indication to disable sending email on purchase"
         },
         "hideFromSaasBlade": {
           "type": "boolean",
-          "description": "value"
+          "description": "Indication to hide from SaaS blade"
         },
         "integratedWithMicrosoftGraphApi": {
           "type": "boolean",
-          "description": "value"
+          "description": "Indication if there is integrated with Microsoft graph API"
         },
         "multiTenantAadAppId": {
           "type": "string",
-          "description": "value"
+          "description": "Multi tenant AAD app id"
         },
         "licenseManagementType": {
           "type": "string",
-          "description": "value"
+          "description": "License management type"
         },
         "licenseModel": {
           "type": "string",
-          "description": "value"
+          "description": "License model"
         },
         "pbiServicePrincipalIds": {
           "type": "array",
-          "description": "value",
+          "description": "PBI service principals",
           "items": {
             "type": "string"
           }
         },
         "isCoreVm": {
           "type": "boolean",
-          "description": "value"
+          "description": "Set to true only for offers of OfferType.VirtualMachine to indicate that it was originally of OfferType.CoreVirtualMachine"
         },
         "m365CertificationInfo": {
-          "description": "value",
+          "description": "M365 Certification info",
           "allOf": [
             {
               "$ref": "#/definitions/M365CertificationInfo"
@@ -732,27 +732,27 @@
         },
         "downloadLink": {
           "type": "string",
-          "description": "value"
+          "description": "Download link for offers of type OfferType.PowerBIVisuals"
         },
         "downloadSampleLink": {
           "type": "string",
-          "description": "value"
+          "description": "Download sample report link for offers of type OfferType.PowerBIVisuals"
         },
         "omexAssetId": {
           "type": "string",
-          "description": "value"
+          "description": "Asset ID for offers of type OfferType.PowerBIVisuals"
         },
         "mixProductId": {
           "type": "string",
-          "description": "value"
+          "description": "Product ID for offers of type OfferType.PowerBIVisuals"
         },
         "appFreeType": {
           "type": "string",
-          "description": "value"
+          "description": "Whether an offer has additional purchases required"
         },
         "storeFrontPricings": {
           "type": "object",
-          "description": "value",
+          "description": "storefront pricings parameters for AppSource and AMP",
           "x-dictionaryKey": {
             "$ref": "#/definitions/Store"
           },
@@ -831,11 +831,11 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "value"
+          "description": "Path to the marketing site"
         },
         "learnUri": {
           "type": "string",
-          "description": "value"
+          "description": "Path to the learn site"
         }
       }
     },
@@ -856,11 +856,11 @@
       "properties": {
         "competencyName": {
           "type": "string",
-          "description": "value"
+          "description": "Competency name"
         },
         "competencyLevel": {
           "type": "string",
-          "description": "value"
+          "description": "Competency level"
         }
       }
     },
@@ -873,11 +873,11 @@
       "properties": {
         "durationValue": {
           "type": "integer",
-          "description": "value",
+          "description": "Duration value",
           "format": "int64"
         },
         "durationUnit": {
-          "description": "value",
+          "description": "Duration unit",
           "allOf": [
             {
               "$ref": "#/definitions/ServiceDurationUnit"
@@ -904,7 +904,7 @@
       "type": "object",
       "properties": {
         "pricing": {
-          "description": "value",
+          "description": "Pricing that applies to the item",
           "allOf": [
             {
               "$ref": "#/definitions/Pricing"
@@ -913,11 +913,11 @@
         },
         "marketCode": {
           "type": "string",
-          "description": "value"
+          "description": "Market code of a service offer"
         },
         "marketStates": {
           "type": "array",
-          "description": "value",
+          "description": "Market states of a service offer",
           "items": {
             "type": "string"
           }
@@ -929,11 +929,11 @@
       "properties": {
         "currencyCode": {
           "type": "string",
-          "description": "value"
+          "description": "Currency code"
         },
         "planPrices": {
           "type": "array",
-          "description": "value",
+          "description": "Plan prices",
           "items": {
             "$ref": "#/definitions/PlanPrice"
           }
@@ -949,10 +949,10 @@
       "properties": {
         "planId": {
           "type": "string",
-          "description": "value"
+          "description": "Plan id"
         },
         "currencyDecorator": {
-          "description": "value",
+          "description": "Currency decorator",
           "allOf": [
             {
               "$ref": "#/definitions/CurrencyDecorator"
@@ -961,7 +961,7 @@
         },
         "price": {
           "type": "number",
-          "description": "value",
+          "description": "Price of the item",
           "format": "double"
         }
       }
@@ -983,15 +983,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "value"
+          "description": "Id of the link"
         },
         "displayName": {
           "type": "string",
-          "description": "value"
+          "description": "Display name of the link"
         },
         "uri": {
           "type": "string",
-          "description": "value"
+          "description": "URI of the link"
         }
       }
     },
@@ -1000,11 +1000,11 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "value"
+          "description": "Filter type"
         },
         "value": {
           "type": "string",
-          "description": "value"
+          "description": "Filter value"
         }
       }
     },
@@ -1070,7 +1070,7 @@
       "type": "object",
       "properties": {
         "leadGeneration": {
-          "description": "value",
+          "description": "Lead generation info",
           "allOf": [
             {
               "$ref": "#/definitions/LeadGeneration"
@@ -1078,7 +1078,7 @@
           ]
         },
         "testDrive": {
-          "description": "value",
+          "description": "Test Drive info",
           "allOf": [
             {
               "$ref": "#/definitions/TestDrive"
@@ -1092,7 +1092,7 @@
       "properties": {
         "productId": {
           "type": "string",
-          "description": "value"
+          "description": "Product Id"
         }
       }
     },
@@ -1101,34 +1101,34 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "value"
+          "description": "Description"
         },
         "userManual": {
           "type": "string",
-          "description": "value"
+          "description": "User manual"
         },
         "testDriveDuration": {
           "type": "string",
-          "description": "value"
+          "description": "Test Drive Duration"
         },
         "accessInformation": {
           "type": "string",
-          "description": "value"
+          "description": "Access Information"
         },
         "orchestrationType": {
           "type": "string",
-          "description": "value"
+          "description": "Orchestration Type"
         },
         "labId": {
           "type": "string",
-          "description": "value"
+          "description": "Lab identifier"
         },
         "demoId": {
           "type": "string",
-          "description": "value"
+          "description": "Demo identifier"
         },
         "video": {
-          "description": "value",
+          "description": "Walkthrough video",
           "allOf": [
             {
               "$ref": "#/definitions/ProductVideo"
@@ -1137,7 +1137,7 @@
         },
         "powerBiDashboardLink": {
           "type": "string",
-          "description": "value"
+          "description": "Power Bi dashboard link"
         }
       }
     },
@@ -1146,19 +1146,19 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "value"
+          "description": "Caption"
         },
         "uri": {
           "type": "string",
-          "description": "value",
+          "description": "Video uri",
           "format": "uri"
         },
         "videoPurpose": {
           "type": "string",
-          "description": "value"
+          "description": "Video purpose"
         },
         "previewImage": {
-          "description": "value",
+          "description": "Preview image",
           "allOf": [
             {
               "$ref": "#/definitions/PreviewImage"
@@ -1172,16 +1172,16 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "value"
+          "description": "Caption"
         },
         "uri": {
           "type": "string",
-          "description": "value",
+          "description": "Image uri",
           "format": "uri"
         },
         "imagePurpose": {
           "type": "string",
-          "description": "value"
+          "description": "Image purpose"
         }
       }
     },
@@ -1190,11 +1190,11 @@
       "properties": {
         "context": {
           "type": "string",
-          "description": "value"
+          "description": "context"
         },
         "items": {
           "type": "array",
-          "description": "value",
+          "description": "List of images",
           "items": {
             "$ref": "#/definitions/Image"
           }
@@ -1206,15 +1206,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "value"
+          "description": "Image id"
         },
         "uri": {
           "type": "string",
-          "description": "value"
+          "description": "Image uri"
         },
         "type": {
           "type": "string",
-          "description": "value"
+          "description": "Image type"
         }
       }
     },
@@ -1235,22 +1235,22 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "value"
+          "description": "Plan id"
         },
         "displayName": {
           "type": "string",
-          "description": "value"
+          "description": "Display name of the plan"
         },
         "summary": {
           "type": "string",
-          "description": "value"
+          "description": "Summary of the plan"
         },
         "description": {
           "type": "string",
-          "description": "value"
+          "description": "Description of the plan"
         },
         "restrictedAudience": {
-          "description": "value",
+          "description": "Restricted audience",
           "allOf": [
             {
               "$ref": "#/definitions/RestrictedAudience"
@@ -1259,25 +1259,25 @@
         },
         "skuId": {
           "type": "string",
-          "description": "value"
+          "description": "Sku id"
         },
         "planId": {
           "type": "string",
-          "description": "value"
+          "description": "Plan id"
         },
         "legacyPlanId": {
           "type": "string",
-          "description": "value"
+          "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
         },
         "keywords": {
           "type": "array",
-          "description": "value",
+          "description": "List of keywords",
           "items": {
             "type": "string"
           }
         },
         "type": {
-          "description": "value",
+          "description": "Offer type",
           "allOf": [
             {
               "$ref": "#/definitions/OfferType"
@@ -1285,7 +1285,7 @@
           ]
         },
         "leadGeneration": {
-          "description": "value",
+          "description": "Lead generation info",
           "allOf": [
             {
               "$ref": "#/definitions/LeadGeneration"
@@ -1293,7 +1293,7 @@
           ]
         },
         "testDrive": {
-          "description": "value",
+          "description": "Test Drive info",
           "allOf": [
             {
               "$ref": "#/definitions/TestDrive"
@@ -1302,27 +1302,27 @@
         },
         "availabilities": {
           "type": "array",
-          "description": "value",
+          "description": "List of availabilities for this plan",
           "items": {
             "$ref": "#/definitions/AvailabilityEntity"
           }
         },
         "categoryIds": {
           "type": "array",
-          "description": "value",
+          "description": "Category IDs for this plan",
           "items": {
             "type": "string"
           }
         },
         "conversionPaths": {
           "type": "array",
-          "description": "value",
+          "description": "Conversion paths for this plan",
           "items": {
             "type": "string"
           }
         },
         "metadata": {
-          "description": "value",
+          "description": "Metadata for this plan",
           "allOf": [
             {
               "$ref": "#/definitions/OpenProperty"
@@ -1330,7 +1330,7 @@
           ]
         },
         "operatingSystem": {
-          "description": "value",
+          "description": "Operating system info for this plan",
           "allOf": [
             {
               "$ref": "#/definitions/OperatingSystem"
@@ -1339,61 +1339,61 @@
         },
         "uiDefinitionUri": {
           "type": "string",
-          "description": "value"
+          "description": "What blade to be opened when someone wants to create the marketplace item"
         },
         "artifacts": {
           "type": "array",
-          "description": "value",
+          "description": "Files related to the marketplace item",
           "items": {
             "$ref": "#/definitions/Artifact"
           }
         },
         "version": {
           "type": "string",
-          "description": "value"
+          "description": "Version of the marketplace item"
         },
         "itemName": {
           "type": "string",
-          "description": "value"
+          "description": "Item name"
         },
         "isPrivate": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the item is private"
         },
         "isHidden": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the plan is hidden"
         },
         "hasFreeTrials": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has free trials"
         },
         "isByol": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has licensed plans"
         },
         "isFree": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has at least one free availability in any market"
         },
         "isPayg": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the plan is 'Pay As You Go'"
         },
         "isStopSell": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has been stopped from sell in a market"
         },
         "altStackReference": {
           "type": "string",
-          "description": "value"
+          "description": "Alternative stack reference"
         },
         "stackType": {
           "type": "string",
-          "description": "value"
+          "description": "Stack type : Classic, Gen1, Gen2"
         },
         "cspState": {
-          "description": "value",
+          "description": "A value indicating whether the product is available for purchase through CSP channel",
           "allOf": [
             {
               "$ref": "#/definitions/CSPState"
@@ -1402,40 +1402,40 @@
         },
         "resourceProviderNamespace": {
           "type": "string",
-          "description": "value"
+          "description": "Resource Provider Namespace"
         },
         "resourceType": {
           "type": "string",
-          "description": "value"
+          "description": "Resource Provider type"
         },
         "minQuantity": {
           "type": "integer",
-          "description": "value",
+          "description": "Min quantity",
           "format": "int32"
         },
         "maxQuantity": {
           "type": "integer",
-          "description": "value",
+          "description": "Max quantity",
           "format": "int32"
         },
         "isQuantifiable": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether the plan is quantifiable"
         },
         "callToAction": {
           "type": "string",
-          "description": "value"
+          "description": "Ahe action that can be performed on this plan on the storefronts"
         },
         "redirectUrl": {
           "type": "string",
-          "description": "value"
+          "description": "URL to redirect the user to post the performed action on the storefronts"
         },
         "serviceIdentifier": {
           "type": "string",
-          "description": "value"
+          "description": "Service identifier"
         },
         "vmSecurityType": {
-          "description": "value",
+          "description": "VM security type",
           "allOf": [
             {
               "$ref": "#/definitions/VmSecurityType"
@@ -1444,7 +1444,7 @@
         },
         "displayRank": {
           "type": "string",
-          "description": "value"
+          "description": "Display rank"
         }
       }
     },
@@ -1453,21 +1453,21 @@
       "properties": {
         "subscriptions": {
           "type": "array",
-          "description": "value",
+          "description": "Subscription based restricted audience",
           "items": {
             "type": "string"
           }
         },
         "tenants": {
           "type": "array",
-          "description": "value",
+          "description": "Tenant based restricted audience",
           "items": {
             "type": "string"
           }
         },
         "users": {
           "type": "array",
-          "description": "value",
+          "description": "User based restricted audience",
           "items": {
             "type": "string"
           }
@@ -1487,33 +1487,33 @@
       "properties": {
         "actions": {
           "type": "array",
-          "description": "value",
+          "description": "List of allowed actions",
           "items": {
             "type": "string"
           }
         },
         "market": {
           "type": "string",
-          "description": "value"
+          "description": "Market for the availability collection"
         },
         "isPIRequired": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether a payment instrument is required"
         },
         "appId": {
           "type": "string",
-          "description": "value"
+          "description": "App id of the availability collection"
         },
         "planID": {
           "type": "string",
-          "description": "value"
+          "description": "Plan Id of the availability collection"
         },
         "meterId": {
           "type": "string",
-          "description": "value"
+          "description": "Applicable billing meter Id"
         },
         "meter": {
-          "description": "value",
+          "description": "Applicable billing meter information",
           "allOf": [
             {
               "$ref": "#/definitions/Meter"
@@ -1521,7 +1521,7 @@
           ]
         },
         "pricingAudience": {
-          "description": "value",
+          "description": "Pricing audience",
           "allOf": [
             {
               "$ref": "#/definitions/PricingAudience"
@@ -1530,13 +1530,13 @@
         },
         "terms": {
           "type": "array",
-          "description": "value",
+          "description": "List of applicable terms",
           "items": {
             "$ref": "#/definitions/Term"
           }
         },
         "piFilter": {
-          "description": "value",
+          "description": "Applicable billing meter information",
           "allOf": [
             {
               "$ref": "#/definitions/PIFilter"
@@ -1545,52 +1545,56 @@
         },
         "isStopSell": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has been stopped from sell in a market"
         },
         "hasFreeTrials": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether it has free trials"
         },
         "assetBehaviors": {
           "type": "array",
-          "description": "value",
+          "description": "Asset behaviors",
           "items": {
             "type": "string"
           }
         },
         "consumptionUnitType": {
           "type": "string",
-          "description": "value"
+          "description": "Consumption unit type"
         },
         "displayRank": {
           "type": "integer",
-          "description": "value",
+          "description": "Display rank",
           "format": "int32"
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Partition key"
         },
         "remediationRequired": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether remediation is required to acquire availability"
         },
         "remediations": {
           "type": "array",
-          "description": "value",
+          "description": "Remediation actions for acquiring availability if RemediationRequired is true",
           "items": {
             "$ref": "#/definitions/Remediation"
           }
         },
         "startDate": {
           "type": "integer",
-          "description": "value",
+          "description": "Availability effectiveness start date - in epoch minutes",
           "format": "int32"
         },
         "endDate": {
           "type": "integer",
-          "description": "value",
+          "description": "Availability effectiveness end date - in epoch minutes",
           "format": "int32"
         },
         "planAvailabilities": {
           "type": "array",
-          "description": "value",
+          "description": "Plan availabilities",
           "items": {
             "$ref": "#/definitions/AvailabilityEntity"
           }
@@ -1602,18 +1606,18 @@
       "properties": {
         "meterId": {
           "type": "string",
-          "description": "value"
+          "description": "Metetr id"
         },
         "partNumber": {
           "type": "string",
-          "description": "value"
+          "description": "Compute part number"
         },
         "consumptionResourceId": {
           "type": "string",
-          "description": "value"
+          "description": "Consumption resource id"
         },
         "price": {
-          "description": "value",
+          "description": "Price for this meter",
           "allOf": [
             {
               "$ref": "#/definitions/Price"
@@ -1622,11 +1626,11 @@
         },
         "type": {
           "type": "string",
-          "description": "value"
+          "description": "Type for this meter"
         },
         "includedQuantityProperties": {
           "type": "array",
-          "description": "value",
+          "description": "Included quantity properties",
           "items": {
             "$ref": "#/definitions/IncludedQuantityProperty"
           }
@@ -1643,20 +1647,20 @@
       "properties": {
         "currencyCode": {
           "type": "string",
-          "description": "value"
+          "description": "Currency code i.e. 'USD'"
         },
         "isPIRequired": {
           "type": "boolean",
-          "description": "value"
+          "description": "A value indicating whether a payment instrument is required"
         },
         "listPrice": {
           "type": "number",
-          "description": "value",
+          "description": "Retail price for the item",
           "format": "decimal"
         },
         "msrp": {
           "type": "number",
-          "description": "value",
+          "description": "Manufacturer's suggested retail price for the item",
           "format": "decimal"
         }
       }
@@ -1676,11 +1680,11 @@
       "properties": {
         "termId": {
           "type": "string",
-          "description": "value"
+          "description": "Term id"
         },
         "quantity": {
           "type": "string",
-          "description": "value"
+          "description": "Quantity"
         }
       }
     },
@@ -1713,21 +1717,21 @@
       "properties": {
         "termDescriptionParameters": {
           "type": "array",
-          "description": "value",
+          "description": "Term description parameters",
           "items": {
             "$ref": "#/definitions/TermDescriptionParameter"
           }
         },
         "termId": {
           "type": "string",
-          "description": "value"
+          "description": "Term id"
         },
         "termUnits": {
           "type": "string",
-          "description": "value"
+          "description": "Term unit"
         },
         "prorationPolicy": {
-          "description": "value",
+          "description": "Proration policy",
           "allOf": [
             {
               "$ref": "#/definitions/ProrationPolicy"
@@ -1736,10 +1740,10 @@
         },
         "termDescription": {
           "type": "string",
-          "description": "value"
+          "description": "Term description"
         },
         "price": {
-          "description": "value",
+          "description": "Price for the term",
           "allOf": [
             {
               "$ref": "#/definitions/Price"
@@ -1748,14 +1752,14 @@
         },
         "renewTermId": {
           "type": "string",
-          "description": "value"
+          "description": "Renew term id"
         },
         "renewTermUnits": {
           "type": "string",
-          "description": "value"
+          "description": "Renew term units"
         },
         "billingPlan": {
-          "description": "value",
+          "description": "Billing Plan",
           "allOf": [
             {
               "$ref": "#/definitions/BillingPlan"
@@ -1769,11 +1773,11 @@
       "properties": {
         "parameter": {
           "type": "string",
-          "description": "value"
+          "description": "Parameter"
         },
         "value": {
           "type": "string",
-          "description": "value"
+          "description": "Value"
         }
       }
     },
@@ -1782,7 +1786,7 @@
       "properties": {
         "minimumProratedUnits": {
           "type": "string",
-          "description": "value"
+          "description": "Minimum prorated units"
         }
       }
     },
@@ -1791,18 +1795,18 @@
       "properties": {
         "billingPeriod": {
           "type": "string",
-          "description": "value"
+          "description": "Billing period"
         },
         "title": {
           "type": "string",
-          "description": "value"
+          "description": "Title"
         },
         "description": {
           "type": "string",
-          "description": "value"
+          "description": "Description"
         },
         "price": {
-          "description": "value",
+          "description": "Price",
           "allOf": [
             {
               "$ref": "#/definitions/Price"
@@ -1816,14 +1820,14 @@
       "properties": {
         "exclusionProperties": {
           "type": "array",
-          "description": "value",
+          "description": "List of exclusion properties",
           "items": {
             "type": "string"
           }
         },
         "inclusionProperties": {
           "type": "array",
-          "description": "value",
+          "description": "List of inclusion properties",
           "items": {
             "type": "string"
           }
@@ -1835,11 +1839,11 @@
       "properties": {
         "remediationId": {
           "type": "string",
-          "description": "value"
+          "description": "Remediation identifier"
         },
         "type": {
           "type": "string",
-          "description": "value"
+          "description": "Remediation type"
         }
       }
     },
@@ -1848,7 +1852,11 @@
       "properties": {
         "generation": {
           "type": "string",
-          "description": "value"
+          "description": "VM generation"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -1857,15 +1865,15 @@
       "properties": {
         "family": {
           "type": "string",
-          "description": "value"
+          "description": "Operating system family"
         },
         "type": {
           "type": "string",
-          "description": "value"
+          "description": "Operating system type"
         },
         "name": {
           "type": "string",
-          "description": "value"
+          "description": "Operating system name"
         }
       }
     },
@@ -1905,22 +1913,22 @@
       "properties": {
         "uiDefinitionFileUri": {
           "type": "string",
-          "description": "value"
+          "description": "UI definition file URI"
         },
         "defaultDeploymentTemplateId": {
           "type": "string",
-          "description": "value"
+          "description": "Default deployment template id"
         },
         "deploymentTemplateFileUris": {
           "type": "object",
-          "description": "value",
+          "description": "A dictionary containing the deployment template file IDs defined in the package manifest and corresponding URIs",
           "additionalProperties": {
             "type": "string"
           }
         },
         "deploymentFragmentFileUris": {
           "type": "object",
-          "description": "value",
+          "description": "a dictionary containing the deployment fragment file IDs defined in the package manifest and corresponding URIs",
           "additionalProperties": {
             "type": "string"
           }
@@ -1969,7 +1977,7 @@
       ],
       "properties": {
         "m365CertificationType": {
-          "description": "value",
+          "description": "M365 Certification Type",
           "allOf": [
             {
               "$ref": "#/definitions/CertificationType"
@@ -1978,11 +1986,11 @@
         },
         "m365CertificationDetailsUrl": {
           "type": "string",
-          "description": "value"
+          "description": "M365 Certification Url"
         },
         "m365CertificationId": {
           "type": "string",
-          "description": "value"
+          "description": "M365 Certification Id"
         }
       }
     },
@@ -2009,7 +2017,7 @@
       ],
       "properties": {
         "pricingOptions": {
-          "description": "value",
+          "description": "A value indicating what pricing options are available on the application",
           "allOf": [
             {
               "$ref": "#/definitions/PricingOptions"
@@ -2018,7 +2026,7 @@
         },
         "hasPrices": {
           "type": "boolean",
-          "description": "value"
+          "description": "Has prices"
         }
       }
     },
