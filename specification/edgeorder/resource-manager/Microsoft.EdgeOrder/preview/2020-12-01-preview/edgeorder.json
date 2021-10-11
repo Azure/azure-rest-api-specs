@@ -2443,7 +2443,16 @@
         },
         "managementRpDetails": {
           "$ref": "#/definitions/ResourceProviderDetails",
-          "description": "parent RP details",
+          "description": "Parent RP details - this returns only the first or default parent RP from the entire list",
+          "readOnly": true
+        },
+        "managementRpDetailsList": {
+          "description": "List of parent RP details supported for configuration.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDetails"
+          },
           "readOnly": true
         },
         "error": {
@@ -2915,6 +2924,14 @@
             "$ref": "#/definitions/ProductLine"
           },
           "readOnly": true
+        },
+        "resourceProviderDetails": {
+          "description": "Contains details related to resource provider",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDetails"
+          }
         }
       }
     },
@@ -3023,7 +3040,13 @@
     "ResourceProviderDetails": {
       "description": "Management RP details",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "resourceProviderNamespace": {
+          "description": "Resource provider namespace",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ReturnOrderItemDetails": {
       "description": "Return order item request body",
