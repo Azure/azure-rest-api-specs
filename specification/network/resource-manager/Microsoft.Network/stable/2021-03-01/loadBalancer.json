@@ -1436,16 +1436,10 @@
             "schema": {
               "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
-          "Check connectivity": {
+          "Query inbound Nat rule port mapping": {
             "$ref": "./examples/QueryInboundNatRulePortMapping.json"
           }
         },
@@ -1717,11 +1711,12 @@
           "description": "Reference to the frontend ip address configuration defined in regional loadbalancer."
         },
         "inboundNatRulesPortMapping": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NatRulePortMapping"
           },
-          "description": "Collection of inboound Nat rule port mappings."
+          "description": "Collection of inbound Nat rule port mappings."
         }
       },
       "description": "Properties of the load balancer backend addresses."
@@ -2526,6 +2521,7 @@
       "description": "The properties of VIP swap request's frontend IP configuration object."
     },
     "NatRulePortMapping": {
+      "type": "object",
       "properties": {
         "inboundNatRuleName": {
           "type": "string",
@@ -2545,6 +2541,7 @@
       "description": "Individual port mappings for inbound NAT rule created for backend pool."
     },
     "QueryInboundNatRulePortMappingRequest": {
+      "type": "object",
       "properties": {
         "iPConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -2558,18 +2555,20 @@
       "description": "The request for a QueryInboundNatRulePortMapping API."
     },
     "BackendAddressInboundNatRulePortMappings": {
+      "type": "object",
       "properties": {
         "inboundNatRulePortMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundNatRulePortMapping"
           },
-          "description": "Collection of inboound Nat rule port mappings."
+          "description": "Collection of inbound Nat rule port mappings."
         }
       },
       "description": "The response for a QueryInboundNatRulePortMapping API."
     },
     "InboundNatRulePortMapping": {
+      "type": "object",
       "properties": {
         "inboundNatRuleName": {
           "type": "string",
