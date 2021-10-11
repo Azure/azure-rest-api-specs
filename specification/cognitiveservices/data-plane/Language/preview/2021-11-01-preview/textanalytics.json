@@ -145,7 +145,7 @@
                     "$ref": "#/definitions/JobDescriptor"
                 },
                 {
-                    "$ref": "#/definitions/MultiLanguageBatchInput"
+                    "$ref": "#/definitions/AnalysisInput"
                 },
                 {
                     "$ref": "#/definitions/JobManifest"
@@ -229,6 +229,13 @@
             ],
             "type": "object"
         },
+        "AnalysisInput": {
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageBatchInput"
+                }
+            }
+        },
         "Task": {
             "type": "object",
             "description": "Base task object.",
@@ -284,16 +291,16 @@
             "type": "object",
             "description": "Parameters object for a text analysis task using custom models.",
             "properties": {
-                "project-name": {
+                "projectName": {
                     "type": "string"
                 },
-                "deployment-name": {
+                "deploymentName": {
                     "type": "string"
                 }
             },
             "required": [
-                "project-name",
-                "deployment-name"
+                "projectName",
+                "deploymentName"
             ]
         },
         "CustomResult": {
@@ -1828,7 +1835,7 @@
             ],
             "type": "object"
         },
-          "JobState": {
+        "JobState": {
             "allOf": [
               {
                   "$ref": "#/definitions/JobMetadata"
@@ -1841,7 +1848,7 @@
               } 
             ]
         },
-          "JobErrors": {
+        "JobErrors": {
             "properties": {
               "errors": {
                   "items": {
