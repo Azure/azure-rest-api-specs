@@ -1384,8 +1384,8 @@
         "tags": [
           "LoadBalancers"
         ],
-        "operationId": "LoadBalancers_QueryInboundNatRulePortMapping",
-        "description": "Query inbound Nat rule port mapping.",
+        "operationId": "LoadBalancers_ListInboundNatRulePortMappings",
+        "description": "List of inbound Nat rule port mappings.",
         "parameters": [
           {
             "name": "groupName",
@@ -1435,6 +1435,12 @@
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
