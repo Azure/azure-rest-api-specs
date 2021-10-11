@@ -16,7 +16,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kubernetesconfigura
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-preview-2021-10
+  - tag: package-preview-2021-11
   - tag: package-2021-09
   - tag: package-preview-2021-05
   - tag: package-2021-03-01
@@ -25,15 +25,15 @@ batch:
   - tag: package-2019-11-01-preview
 ```
 
-### Tag: package-preview-2021-10 and java
+### Tag: package-preview-2021-11 and java
 
-These settings apply only when `--tag=package-preview-2021-10 --java` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-11 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-preview-2021-10' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-preview-2021-11' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2021_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2021_10_01_preview
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2021_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2021_11_01_preview
   regenerate-manager: true
   generate-interface: true
 ```

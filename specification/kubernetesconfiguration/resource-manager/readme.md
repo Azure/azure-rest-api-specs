@@ -28,7 +28,7 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2021-10
+tag: package-preview-2021-11
 ```
 
 ---
@@ -83,17 +83,17 @@ directive:
       }
 ```
 
-### Tag: package-preview-2021-10
+### Tag: package-preview-2021-11
 
-These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-10'
+```yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-10-01-preview/operations.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
 ```
 
 ### Tag: package-2021-09
