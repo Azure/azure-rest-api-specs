@@ -405,6 +405,83 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{name}/licenseAdd": {
+      "post": {
+        "tags": [
+          "Consortiums"
+        ],
+        "description": "Add license to an HPC Workbench consortium.",
+        "operationId": "Consortiums_LicenseAdd",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "The name of the consortium."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "License key parameters",
+            "schema": {
+              "$ref": "#/definitions/LicenseKeyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Consortiums License Add": {
+            "$ref": "./examples/ConsortiumsLicenseAdd.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -590,6 +667,16 @@
           "$ref": "./hpcworkbench.json#/definitions/Resource"
         }
       ]
+    },
+    "LicenseKeyParameters": {
+      "type": "object",
+      "description": "License Key Parameters",
+      "properties": {
+        "licenseKey": {
+          "description": "Gets or sets LicenseKey",
+          "type": "string"
+        }
+      }
     }
   }
 }
