@@ -15,6 +15,14 @@ clear-output-folder: true
 openapi-type: data-plane
 ```
 
+
+```yaml
+tag: release_2021_10_01
+add-credentials: true
+clear-output-folder: true
+openapi-type: data-plane
+```
+
 ```yaml
 tag: release_2021_07_15_preview
 add-credentials: true
@@ -36,6 +44,20 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 ``` yaml $(tag) == 'release_2021_11_01_preview'
 input-file: 
   - preview/2021-11-01-preview/analyzeconversations.json
+title: 
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2021-10-01
+
+These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_10_01'
+input-file: 
+  - preview/2021-10-01/questionanswering.json
+  - preview/2021-10-01/questionanswering-authoring.json
 title: 
   Microsoft Cognitive Language Service
 modelerfour:
