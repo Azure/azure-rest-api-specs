@@ -258,9 +258,6 @@
               }
             }
           },
-          "204": {
-            "description": "Billing subscription not found."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -301,7 +298,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+              "$ref": "#/definitions/MoveBillingSubscriptionRequest"
             },
             "description": "Request parameters that are provided to the move subscription operation."
           }
@@ -366,7 +363,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+              "$ref": "#/definitions/MoveBillingSubscriptionRequest"
             },
             "description": "Request parameters that are provided to the validate move eligibility operation."
           }
@@ -375,7 +372,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityResult"
+              "$ref": "#/definitions/ValidateMoveBillingSubscriptionEligibilityResult"
             }
           },
           "default": {
@@ -758,16 +755,9 @@
           "readOnly": true
         },
         "billingProfileSpendingLimitDetails": {
-          "description": "The spending limit that is set on the billing profile to which the subscription is billed.",
-          "enum": [
-            "Off",
-            "On"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BillingProfileSpendingLimit",
-            "modelAsString": true
-          },
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingProfileSpendingLimitDetails",
+          "title": "The details of the spending limit that is set on the billing profile to which the subscription is billed.",
           "readOnly": true
         },
         "consumptionCostCenter": {
@@ -1007,7 +997,7 @@
       "description": "Request to merge two billing subscriptions",
       "type": "object",
       "properties": {
-        "targetBillingSubscriptionId": {
+        "targetBillingSubscriptionName": {
           "description": "The ID of the target billing subscription with which the billing subscription in request will be merged.",
           "type": "string"
         },
@@ -1069,6 +1059,7 @@
         },
         "enrollmentAccountStartDate": {
           "description": "The enrollment Account and the subscription association start date. This field is available only for the Enterprise Agreement Type.",
+          "format": "date-time",
           "type": "string",
           "readOnly": true
         }
@@ -1096,15 +1087,15 @@
           "type": "string",
           "readOnly": true
         },
-        "productId": {
+        "productTypeId": {
           "description": "The ID of the product.",
           "type": "string",
           "readOnly": true
         },
         "quantity": {
           "description": "The number of licenses",
-          "type": "string",
-          "readOnly": true
+          "type": "integer",
+          "format": "int64"
         },
         "skuId": {
           "description": "The SKU ID of the product",
@@ -1135,25 +1126,41 @@
         }
       }
     },
-    "SubscriptionTransferValidationErrorCode": {
+    "MoveBillingSubscriptionEligibilityErrorCode": {
       "type": "string",
       "description": "Error code of the transfer validation response.",
       "enum": [
-        "InvalidSource",
-        "SubscriptionNotActive",
-        "InsufficientPermissionOnSource",
-        "InsufficientPermissionOnDestination",
-        "DestinationBillingProfilePastDue",
-        "SubscriptionTypeNotSupported",
+        "AccountIsLocked",
+        "AssetNotActive",
+        "AssetHasCap",
+        "BillingAccountInactive",
+        "BillingProfilePastDue",
         "CrossBillingAccountNotAllowed",
-        "NotAvailableForDestinationMarket"
+        "DestinationBillingProfileNotFound",
+        "DestinationBillingProfileInactive",
+        "DestinationBillingProfilePastDue",
+        "DestinationInvoiceSectionNotFound",
+        "DestinationInvoiceSectionInactive",
+        "InvalidDestination",
+        "InvalidSource",
+        "InvoiceSectionIsRestricted",
+        "InsufficientPermissionOnDestination",
+        "InsufficientPermissionOnSource",
+        "MarketplaceNotEnabledOnDestination",
+        "ProductNotFound",
+        "ProductInactive",
+        "ProductTypeNotSupported",
+        "SourceBillingProfilePastDue",
+        "SourceInvoiceSectionInactive",
+        "SubscriptionNotActive",
+        "SubscriptionTypeNotSupported"
       ],
       "x-ms-enum": {
         "name": "subscriptionTransferValidationErrorCode",
         "modelAsString": true
       }
     },
-    "TransferBillingSubscriptionRequestProperties": {
+    "MoveBillingSubscriptionRequest": {
       "type": "object",
       "description": "Request parameters to transfer billing subscription.",
       "properties": {
@@ -1167,36 +1174,28 @@
         }
       }
     },
-    "ValidateSubscriptionTransferEligibilityResult": {
+    "ValidateMoveBillingSubscriptionEligibilityResult": {
       "type": "object",
       "description": "Result of the transfer eligibility validation.",
       "properties": {
-        "isTransferEligible": {
-          "description": "Specifies whether the subscription is eligible to be transferred.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "isTransferEligible",
-            "modelAsString": true
-          },
+        "isMoveEligible": {
+          "description": "Specifies whether the subscription is eligible to move.",
+          "type": "boolean",
           "readOnly": true
         },
         "errorDetails": {
           "description": "Validation error details.",
-          "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityError"
+          "$ref": "#/definitions/ValidateMoveBillingSubscriptionEligibilityError"
         }
       }
     },
-    "ValidateSubscriptionTransferEligibilityError": {
+    "ValidateMoveBillingSubscriptionEligibilityError": {
       "type": "object",
       "description": "Error details of the transfer eligibility validation",
       "properties": {
         "code": {
-          "description": "Error code for the product transfer validation.",
-          "$ref": "#/definitions/SubscriptionTransferValidationErrorCode"
+          "description": "Error code for the billing subscription move validation.",
+          "$ref": "#/definitions/MoveBillingSubscriptionEligibilityErrorCode"
         },
         "message": {
           "description": "The error message.",
