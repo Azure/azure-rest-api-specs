@@ -461,6 +461,11 @@
           "format": "date-time",
           "description": "The time when a job was successfully cancelled."
         },
+        "costEstimate": {
+          "$ref": "#/definitions/CostEstimate",
+          "readOnly": true,
+          "description": "The job billing data."
+        },
         "errorData": {
           "$ref": "#/definitions/ErrorData",
           "readOnly": true,
@@ -657,6 +662,55 @@
           }
         }
       }
+    },
+    "CostEstimate": {
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "The estimated cost currency."
+        },
+        "events": {
+          "type": "array",
+          "description": "List of usage events",
+          "items": {
+            "$ref": "#/definitions/UsageEvent"
+          }
+        },
+        "estimatedTotal": {
+          "type": "number",
+          "description": "The estimated total."
+        }
+      },
+      "description": "A job cost estimate."
+    },
+    "UsageEvent": {
+      "properties": {
+        "dimensionId": {
+          "type": "string",
+          "description": "The dimension id."
+        },
+        "dimensionName": {
+          "type": "string",
+          "description": "The dimension name."
+        },
+        "measureUnit": {
+          "type": "string",
+          "description": "The unit of measure."
+        },
+        "amountBilled": {
+          "type": "number",
+          "description": "The amount billed."
+        },
+        "amountConsumed": {
+          "type": "number",
+          "description": "The amount consumed."
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "The unit price."
+        }
+      },
+      "description": "Usage event details."
     },
     "RestError": {
       "type": "object",
