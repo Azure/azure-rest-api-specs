@@ -1482,8 +1482,16 @@
           "type": "string"
         },
         "useCase": {
-          "description": "Messaging use case description.",
-          "type": "string"
+          "description": "Messaging use case describing directionality e.g. oneWay or twoWay",
+          "enum": [
+            "oneWay",
+            "twoWay"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UseCase",
+            "modelAsString": true
+          }
         }
       }
     },
