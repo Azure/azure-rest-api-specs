@@ -580,7 +580,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/deallocate": {
       "post": {
-        "operationId": "CassandraCluster_Deallocate",
+        "operationId": "CassandraClusters_Deallocate",
         "description": "Deallocate the Managed Cassandra Cluster and Associated Data Centers. Deallocation will deallocate the host virtual machine of this cluster, and reserved the data disk. This won't do anything on an already deallocated cluster. Use Start to restart the cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterDeallocate": {
@@ -617,7 +617,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/start": {
       "post": {
-        "operationId": "CassandraCluster_Start",
+        "operationId": "CassandraClusters_Start",
         "description": "Start the Managed Cassandra Cluster and Associated Data Centers. Start will start the host virtual machine of this cluster with reserved data disk. This won't do anything on an already running cluster. Use Deallocate to deallocate the cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterStart": {
@@ -654,13 +654,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/status": {
       "get": {
-        "operationId": "CassandraStatus_Get",
+        "operationId": "CassandraClusters_Status",
         "description": "Gets the CPU, memory, and disk usage statistics for each Cassandra node in a cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraStatus": {
             "$ref": "./examples/CosmosDBManagedCassandraStatus.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -932,7 +933,7 @@
             "hoursBetweenBackups": {
               "type": "integer",
               "format": "int32",
-              "description": "Number of hours to wait between taking a backup of the cluster."
+              "description": "Number of hours to wait between taking a backup of the cluster. To disable backups, set this property to 0."
             },
             "deallocated": {
               "type": "boolean",
@@ -1166,9 +1167,9 @@
           "type": "string",
           "description": "The command which should be run"
         },
-        "parameters": {
+        "arguments": {
           "type": "object",
-          "description": "The parameters for the command to be run",
+          "description": "The arguments for the command to be run",
           "additionalProperties": {
             "type": "string"
           }
