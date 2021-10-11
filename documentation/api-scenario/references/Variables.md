@@ -1,36 +1,40 @@
-# Variables in test scenario
+# Variables in API scenario
 
 ## Variable definition and replacement
 
-Variables could be defined in different level of test scenario:
-- Test Definition level variable definition
-- Test Scenario level variable definition
-- Test Step level variable definition
+Variables could be defined in different level of API scenario:
 
-Variable could be referenced by `$(variableName)`. Currently variable type must be string. 
+- `runtime`: Variables specified at runtime
+- `global`: API scenario definition level variable definition
+- `scope`: Scope level variable
+- `scenario`: API scenario level variable definition
+- `step`: Step level variable definition
 
-For example, in the following test scenario:
+Variable could be referenced by `$(variableName)`. Currently variable type must be string.
+
+For example, in the following API scenario:
 
 ```yaml
 variables:
   resourceName: level-1
 
-test-scenarios:
-- definition: Create some resource
-  variables:
-    resourceName: level-2
-  steps:
-  - step: Create resource
+scenarios:
+  - definition: Create some resource
     variables:
-      resourceName: level-3
-    exampleFile: ../examples/ResourceCreate.json
+      resourceName: level-2
+    steps:
+      - step: Create resource
+        variables:
+          resourceName: level-3
+        exampleFile: ../examples/ResourceCreate.json
 ```
 
 if in `../examples/ResourceCreate.json` we have `$(resourceName)` in some string, it would be replaced with `level-3`.
 
-Variables could also be defined on test running. For example you could set `subscriptionId` or `resourceGroupName` on the global scope. How to set global env is based on the test scenario consumer.
+Variables could also be defined on test running. For example you could set `subscriptionId` or `resourceGroupName` on the global scope. How to set global env is based on the API scenario consumer.
 
 Variables could be replaced recursively. For example if we have the following variables:
+
 ```yaml
 variables:
   resourceName: abc
@@ -43,11 +47,13 @@ Variable resolving is limited to at most 100 times for certain string.
 
 ## Convention: parameter name in example
 
-In one rest call step, if we have any parameter, for example it's named `param`, in the step requestParameters, with value `paramValue`, and test scenario has variable `param`, then by default, test scenario loader will:
+In one rest call step, if we have any parameter, for example it's named `param`, in the step requestParameters, with value `paramValue`, and API scenario has variable `param`, then by default, API scenario loader will:
+
 - replace the parameter value of `param` to `$(param)` so that it will reference the variable value.
 - replace `paramValue` to `$(param)` in every string in request body (in requestParameter) and in responseExpected.
 
 For example, for the following step with loaded requestParameter and responseExpected
+
 ```yaml
 requestParameters:
   subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -88,9 +94,10 @@ With this convention, you could control most of the parameters with variables.
 
 ## Convention: location
 
-In one rest call step, if we have variable `location` (exact match) in the test scenario, and we have `location` as top level property defined in request body (`requestParameters[bodyParamName]`) and response body (responseExpected), then the top level location property will be replaced with variable value of location.
+In one rest call step, if we have variable `location` (exact match) in the API scenario, and we have `location` as top level property defined in request body (`requestParameters[bodyParamName]`) and response body (responseExpected), then the top level location property will be replaced with variable value of location.
 
 For example,
+
 ```yaml
 requestParameters:
   parameters:
@@ -115,7 +122,7 @@ responseExpected:
 
 ## Convention: Arm Template Deployment
 
-When you deploy arm template in test scenario, you could define template parameters and outputs. By default if the parameter name matches the variable exists and the parameter type is string, then the parameter value would use the variable value. If the template has output which is string type, the variables will be set with output values.
+When you deploy arm template in API scenario, you could define template parameters and outputs. By default if the parameter name matches the variable exists and the parameter type is string, then the parameter value would use the variable value. If the template has output which is string type, the variables will be set with output values.
 
 For example, given the following arm template:
 
@@ -123,18 +130,17 @@ For example, given the following arm template:
 {
   "parameters": {
     "userName": {
-        "type": "string"
+      "type": "string"
     }
   },
-  "resources": [
-  ],
+  "resources": [],
   "outputs": {
     "nameResult": {
-        "type": "string",
-        "value": "[concat('prefix/', parameters['userName'])]"
+      "type": "string",
+      "value": "[concat('prefix/', parameters['userName'])]"
     }
   }
 }
 ```
 
-If we have variable `userName` defined with `abc`, then we will have variable `nameResult` defined with value `prefix/abc` so that following steps in the test scenario could use variable `nameResult`.
+If we have variable `userName` defined with `abc`, then we will have variable `nameResult` defined with value `prefix/abc` so that following steps in the API scenario could use variable `nameResult`.

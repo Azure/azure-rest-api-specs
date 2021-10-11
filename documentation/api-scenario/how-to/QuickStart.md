@@ -14,13 +14,14 @@
 ```sh
 npm install -g oav@latest
 ```
+
 ### OAV Features
+
 - Very easy to use and run.
 - Support postman collection format. Debug easily.
 - Request response validation. `oav` implement a powerful validation algorithm and help developer to detect service issue in the early phase.
-- Validation result report. After each run test scenario, developer will get a validation report which contains detect issue in api test.
+- Validation result report. After each run API scenario, developer will get a validation report which contains detect issue in api test.
 - Integrate everywhere. Easily integrate with azure-pipeline, cloud-test.
-
 
 ## Create AAD app
 
@@ -30,24 +31,24 @@ For how to create AAD app, please follow this doc https://docs.microsoft.com/en-
 
 ## Authoring steps
 
-We will write test scenario file for SignalR service as an example.
+We will write API scenario file for SignalR service as an example.
 
-#### 1. Write your first test scenario file
+#### 1. Write your first API scenario file
 
-First, create a folder `scenarios` under the api version folder. All test scenario files under the `scenarios` folder should bind with the api version.
+First, create a folder `scenarios` under the api version folder. All API scenario files under the `scenarios` folder should bind with the api version.
 
 ![folder-structure](./folder-structure.png)
 
-Now write your basic test scenario. For more detail about test scenario file format, please refer to
-[Test Scenario Definition Reference](../references/TestDefinitionReference.md).
+Now write your basic API scenario. For more detail about API scenario file format, please refer to
+[API Scenario Definition Reference](../references/ApiScenarioDefinition.md).
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/test-scenario/references/v1.0/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.1/schema.json
 
-contentVersion: 1.0.0
 scope: ResourceGroup
-testScenarios:
-  - description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
+scenarios:
+  - scenario: quickStart
+    description: Microsoft.SignalRService/signalR SignalR_CreateOrUpdate
     steps:
       - step: SignalR_CreateOrUpdate
         exampleFile: ../examples/SignalR_CreateOrUpdate.json
@@ -57,7 +58,7 @@ testScenarios:
 
 #### 2. create your env file
 
-The `env.json` file contains required test scenario variables such as, subscriptionId, AAD applicationId, AAD applicationSecret.
+The `env.json` file contains required API scenario variables such as, subscriptionId, AAD applicationId, AAD applicationSecret.
 
 ```json
 {
@@ -77,9 +78,9 @@ oav run /home/user/azure-rest-api-specs/specification/signalr/resource-manager/M
 
 #### 4. Debug with postman
 
-Sometimes the command `oav run` may fail due to non 2xx HTTP status code. Now you need to debug the test scenario with postman.
+Sometimes the command `oav run` may fail due to non 2xx HTTP status code. Now you need to debug the API scenario with postman.
 
-When run `run`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
+When run `run`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<apiScenarioFile>/<runId>/<apiScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
 
 ```
 generated
@@ -104,7 +105,7 @@ After you import postman collection, you will get such requests. Now you could d
 
 #### 5. manual update example value
 
-After debug with postman, you need to rewrite back all the updated values and run `oav run <test-scenario-file> -e <env.json>` again. The result should be successful.
+After debug with postman, you need to rewrite back all the updated values and run `oav run <api-scenario-file> -e <env.json>` again. The result should be successful.
 
 ## Feedback
 

@@ -1,4 +1,4 @@
-# Test scenario integrate with armTemplate
+# API scenario integrate with armTemplate
 
 ## Background
 
@@ -13,7 +13,7 @@ Here is an example about `generate unique resource name for signalR service`
 
 #### Generate unique resource name
 
-We use `armTemplate output` to overwrite `resourceName` variable and following `createResource` step will use this variable. Below is generate unique name armTemplate. This armTemplate output `resourceName` variables, so test scenario following step will using the output variable.
+We use `armTemplate output` to overwrite `resourceName` variable and following `createResource` step will use this variable. Below is generate unique name armTemplate. This armTemplate output `resourceName` variables, so API scenario following step will using the output variable.
 
 ```json
 {
@@ -38,7 +38,7 @@ We use `armTemplate output` to overwrite `resourceName` variable and following `
 }
 ```
 
-After we have this armTemplate, we could define current test scenario file. We defined `resourceName` variable globally. `./generate_unique_string.json` is armTemplate.
+After we have this armTemplate, we could define current API scenario file. We defined `resourceName` variable globally. `./generate_unique_string.json` is armTemplate.
 
 `SignalR_CreateOrUpdate.json`
 
@@ -80,8 +80,9 @@ After we have this armTemplate, we could define current test scenario file. We d
 scope: ResourceGroup
 variables:
   resourceName: ""
-testScenarios:
-  - description: Microsoft.SignalRService/signalR CRUD
+scenarios:
+  - scenario: quickStart
+    description: Microsoft.SignalRService/signalR CRUD
     steps:
       - step: Generate_Unique_string
         armTemplateDeployment: ./generate_unique_string.json
