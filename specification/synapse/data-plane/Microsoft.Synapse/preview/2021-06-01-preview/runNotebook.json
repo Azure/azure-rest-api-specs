@@ -35,7 +35,7 @@
   },
   "paths": {
     "/notebooks/runs/{runId}": {
-      "post": {
+      "put": {
         "tags": [
           "RunNotebook"
         ],
@@ -119,7 +119,7 @@
         }
       }
     },
-    "/notebooks/run/{runId}/cancel": {
+    "/notebooks/runs/{runId}/cancel": {
       "post": {
         "tags": [
           "RunNotebook"
@@ -146,8 +146,8 @@
               "$ref": "#/definitions/RunNotebookResponse"
             }
           },
-          "408": {
-            "description": "RequestTimeout.",
+          "409": {
+            "description": "Conflict.",
             "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/RunNotebookResponse"
@@ -265,10 +265,6 @@
       "description": "Run notebook request.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Run id (GUID)."
-        },
         "notebook": {
           "type": "string",
           "description": "Notebook name."
@@ -292,11 +288,7 @@
             "$ref": "#/definitions/parameter"
           }
         }
-      },
-      "required": [
-        "id",
-        "notebook"
-      ]
+      }
     },
     "parameter": {
       "description": "Run notebook parameter.",
@@ -425,39 +417,24 @@
         },
         "kind": {
           "x-nullable": true,
-          "type": "string"
+          "type": "string",
+          "description": "The session kind"
         },
         "proxyUser": {
           "x-nullable": true,
-          "type": "string"
-        },
-        "artifactId": {
-          "type": "string"
+          "type": "string",
+          "description": "User to impersonate when starting the session"
         },
         "name": {
           "x-nullable": true,
-          "type": "string"
-        },
-        "file": {
-          "x-nullable": true,
-          "type": "string"
-        },
-        "className": {
-          "x-nullable": true,
-          "type": "string"
-        },
-        "args": {
-          "x-ms-client-name": "arguments",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "The name of this session"
         },
         "jars": {
           "uniqueItems": false,
           "x-nullable": true,
           "type": "array",
+          "description": "jars to be used in this session",
           "items": {
             "type": "string"
           }
@@ -466,6 +443,7 @@
           "x-ms-client-name": "pythonFiles",
           "uniqueItems": false,
           "x-nullable": true,
+          "description": "Python files to be used in this session",
           "type": "array",
           "items": {
             "type": "string"
@@ -475,6 +453,7 @@
           "uniqueItems": false,
           "type": "array",
           "x-nullable": true,
+          "description": "files to be used in this session",
           "items": {
             "type": "string"
           }
@@ -482,6 +461,7 @@
         "archives": {
           "uniqueItems": false,
           "x-nullable": true,
+          "description": "Archives to be used in this session",
           "type": "array",
           "items": {
             "type": "string"
@@ -489,41 +469,50 @@
         },
         "queue": {
           "type": "object",
-          "x-nullable": true
+          "x-nullable": true,
+          "description": "The name of the YARN queue to which submitted"
         },
         "conf": {
           "x-ms-client-name": "configuration",
           "type": "object",
+          "description": "Spark configuration properties",
           "additionalProperties": {
             "type": "string"
           }
         },
         "driverMemory": {
-          "type": "string"
+          "type": "string",
+          "description": "Amount of memory to use for the driver process"
         },
         "driverCores": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of cores to use for the driver process"
         },
         "executorMemory": {
-          "type": "string"
+          "type": "string",
+          "description": "Amount of memory to use per executor process"
         },
         "executorCores": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of cores to use for each executor"
         },
         "numExecutors": {
           "x-ms-client-name": "executorCount",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of executors to launch for this session"
         },
         "isQueueable": {
           "type": "boolean",
-          "x-nullable": true
+          "x-nullable": true,
+          "description": "Whether to queue session creation if Spark pool doesn't have enough capacity. Default value is true in notebook runs API"
         },
         "heartbeatTimeoutInSecond": {
           "type": "integer",
           "format": "int32",
+          "description": "Timeout in second to which session be orphaned",
           "x-nullable": true
         }
       }
