@@ -56,8 +56,8 @@ These settings apply only when `--tag=release_2021_10_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2021_10_01'
 input-file: 
-  - preview/2021-10-01/questionanswering.json
-  - preview/2021-10-01/questionanswering-authoring.json
+  - stable/2021-10-01/questionanswering.json
+  - stable/2021-10-01/questionanswering-authoring.json
 title: 
   Microsoft Cognitive Language Service
 modelerfour:
