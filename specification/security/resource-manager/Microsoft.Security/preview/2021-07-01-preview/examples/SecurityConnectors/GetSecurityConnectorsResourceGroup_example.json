@@ -13,20 +13,17 @@
             "name": "exampleSecurityConnectorName",
             "type": "Microsoft.Security/securityConnectors",
             "etag": "etag value",
+            "kind": "",
             "location": "Central US",
             "tags": {},
             "properties": {
-              "hierarchyId": "exampleHierarchyId",
-              "multiCloudName": "AWS",
+              "hierarchyIdentifier": "exampleHierarchyId",
+              "cloudName": "AWS",
               "offerings": [
                 {
                   "offeringType": "CSPMMonitorAWS",
-                  "description": "Monitor your resources",
                   "nativeCloudConnection": {
-                    "policies": [
-                      "s3:ListBucket"
-                    ],
-                    "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor"
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor"
                   }
                 }
               ]
