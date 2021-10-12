@@ -229,7 +229,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
+          },
+          {
+            "name": "notificationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationRequestBody"
+            },
+            "description": "The notification request body which includes the contact details"
+          },
         ],
         "responses": {
           "202": {
@@ -247,7 +256,7 @@
         }
       }
     },
-    "/providers/Microsoft.Insights/notifications/{notificationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/notifications/{notificationId}": {
       "get": {
         "description": "Get the test notifications by the notification id",
         "operationId": "ActionGroups_GetTestNotifications",
@@ -587,6 +596,97 @@
           "description": "Provides the link to retrieve the next set of elements."
         }
       }
+    },
+    "NotificationRequestBody": {
+      "description": "The request body which contain contact detail metadata",
+      "type": "object",
+      "properties": {
+        "alertType": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "The name of the supported alert type."
+        },
+        "emailReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailReceiver"
+          },
+          "description": "The list of email receivers that are part of this action group."
+        },
+        "smsReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmsReceiver"
+          },
+          "description": "The list of SMS receivers that are part of this action group."
+        },
+        "webhookReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebhookReceiver"
+          },
+          "description": "The list of webhook receivers that are part of this action group."
+        },
+        "itsmReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItsmReceiver"
+          },
+          "description": "The list of ITSM receivers that are part of this action group."
+        },
+        "azureAppPushReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureAppPushReceiver"
+          },
+          "description": "The list of AzureAppPush receivers that are part of this action group."
+        },
+        "automationRunbookReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationRunbookReceiver"
+          },
+          "description": "The list of AutomationRunbook receivers that are part of this action group."
+        },
+        "voiceReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoiceReceiver"
+          },
+          "description": "The list of voice receivers that are part of this action group."
+        },
+        "logicAppReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogicAppReceiver"
+          },
+          "description": "The list of logic app receivers that are part of this action group."
+        },
+        "azureFunctionReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFunctionReceiver"
+          },
+          "description": "The list of azure function receivers that are part of this action group."
+        },
+        "armRoleReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmRoleReceiver"
+          },
+          "description": "The list of ARM role receivers that are part of this action group. Roles are Azure RBAC roles and only built-in roles are supported."
+        },
+        "eventHubReceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventHubReceiver"
+          },
+          "description": "The list of event hub receivers that are part of this action group."
+        }
+      },
+      "required": [
+        "alertType"
+      ]
     },
     "ActionGroup": {
       "description": "An Azure action group.",
