@@ -1,0 +1,170 @@
+{
+  "parameters": {
+    "api-version": "2021-02-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "instanceName": "myInstance",
+    "sandboxName": "mySandbox",
+    "experimentName": "myExperiment",
+    "body": {
+      "location": "westus2",
+      "properties": {
+        "notificationEmails": [
+          "foo@microsoft.com"
+        ],
+        "dataTypes": [
+          {
+            "name": "myDataType",
+            "dataFamilyId": "dt",
+            "descriptors": [
+              "repo_id",
+              "url",
+              "commit"
+            ],
+            "friendlyDescriptorName": "url",
+            "adfPipelineReference": {
+              "name": "Git",
+              "inputName": "input"
+            },
+            "mainDescriptor": "repo_id"
+          }
+        ],
+        "batchJobCommand": "cmd /c echo %TIME% && py \"%AZ_BATCH_APP_PACKAGE_PythiaModel%\\PythiaModel.pyz\"",
+        "machinePools": [
+          {
+            "name": "MyPool",
+            "vmSize": "STANDARD_A2_V2",
+            "maxTasksPerNode": 8,
+            "apps": [
+              {
+                "packageLink": "https://foo.blob.core.windows.net/stores/myapp/3.2.01572.002/myapp/myapp.zip?sv=...",
+                "startTaskStatus": "Enabled",
+                "name": "myapp",
+                "version": "3.2.01572.002"
+              }
+            ],
+            "scale": {
+              "mode": "Fixed",
+              "dedicatedNodeCount": 1
+            },
+            "vmOsType": "Windows"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus2",
+        "properties": {
+          "notificationEmails": [
+            "foo@microsoft.com"
+          ],
+          "dataTypes": [
+            {
+              "name": "myDataType",
+              "dataFamilyId": "dt",
+              "descriptors": [
+                "repo_id",
+                "url",
+                "commit"
+              ],
+              "friendlyDescriptorName": "url",
+              "adfPipelineReference": {
+                "name": "Git",
+                "inputName": "input"
+              },
+              "mainDescriptor": "repo_id"
+            }
+          ],
+          "batchJobCommand": "cmd /c echo %TIME% && py \"%AZ_BATCH_APP_PACKAGE_PythiaModel%\\PythiaModel.pyz\"",
+          "machinePools": [
+            {
+              "name": "MyPool",
+              "vmSize": "STANDARD_A2_V2",
+              "maxTasksPerNode": 8,
+              "apps": [
+                {
+                  "packageLink": "https://foo.blob.core.windows.net/stores/myapp/3.2.01572.002/myapp/myapp.zip?sv=...",
+                  "startTaskStatus": "Enabled",
+                  "name": "myapp",
+                  "version": "3.2.01572.002"
+                }
+              ],
+              "scale": {
+                "mode": "Fixed",
+                "dedicatedNodeCount": 1
+              },
+              "vmOsType": "Windows"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-02-04T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-05T17:18:19.1234567Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "westus2",
+        "properties": {
+          "notificationEmails": [
+            "foo@microsoft.com"
+          ],
+          "dataTypes": [
+            {
+              "name": "myDataType",
+              "dataFamilyId": "dt",
+              "descriptors": [
+                "repo_id",
+                "url",
+                "commit"
+              ],
+              "friendlyDescriptorName": "url",
+              "adfPipelineReference": {
+                "name": "Git",
+                "inputName": "input"
+              },
+              "mainDescriptor": "repo_id"
+            }
+          ],
+          "batchJobCommand": "cmd /c echo %TIME% && py \"%AZ_BATCH_APP_PACKAGE_PythiaModel%\\PythiaModel.pyz\"",
+          "machinePools": [
+            {
+              "name": "MyPool",
+              "vmSize": "STANDARD_A2_V2",
+              "maxTasksPerNode": 8,
+              "apps": [
+                {
+                  "packageLink": "https://foo.blob.core.windows.net/stores/myapp/3.2.01572.002/myapp/myapp.zip?sv=...",
+                  "startTaskStatus": "Enabled",
+                  "name": "myapp",
+                  "version": "3.2.01572.002"
+                }
+              ],
+              "scale": {
+                "mode": "Fixed",
+                "dedicatedNodeCount": 1
+              },
+              "vmOsType": "Windows"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-02-04T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-05T17:18:19.1234567Z"
+        }
+      }
+    }
+  }
+}
