@@ -99,25 +99,39 @@
           "type": "string",
           "description": "Operation name: {provider}/{resource}/{operation}"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Service provider: Microsoft.EventHub"
-            },
-            "resource": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource on which the operation is performed: Invoice, etc."
-            },
-            "operation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Operation type: Read, write, delete, etc."
-            }
-          }
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
         }
       }
     }
