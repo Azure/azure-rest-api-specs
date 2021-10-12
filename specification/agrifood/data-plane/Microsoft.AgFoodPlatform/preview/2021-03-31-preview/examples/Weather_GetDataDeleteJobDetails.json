@@ -1,29 +1,30 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "jobId": "JOB123",
+    "jobId": "Job123",
     "api-version": "2021-03-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "durationInSeconds": 12.4,
-        "id": "weather-delete-job",
-        "status": "Succeeded",
-        "message": "Weather data is deleted for startTime to endTime",
-        "createdDateTime": "2021-04-16T08:24:50Z",
-        "lastActionDateTime": "2021-04-16T08:24:50Z",
-        "extensionId": "dtn.clearAg",
-        "farmerId": "test_farmer",
-        "boundaryId": "test_farmer",
-        "weatherDataType": "forecast",
+        "extensionId": "DTN.ClearAg",
+        "farmerId": "Farmer123",
+        "boundaryId": "Boundary123",
+        "weatherDataType": "historical",
         "granularity": "daily",
-        "startDateTime": "2021-04-18T01:32:42Z",
-        "endDateTime": "2021-04-18T01:32:42Z",
-        "name": "Delete Job",
-        "description": "For extension dtn.clearAg",
+        "id": "Job123",
+        "status": "Succeeded",
+        "durationInSeconds": 2.7015882,
+        "message": "Created weather data delete job for farmer id 'Farmer123', boundary id 'Boundary123' and extension id 'DTN.ClearAg'",
+        "createdDateTime": "2021-06-19T15:13:15Z",
+        "lastActionDateTime": "2021-06-19T15:13:18Z",
+        "startTime": "2021-06-19T15:13:15Z",
+        "endTime": "2021-06-19T15:13:18Z",
+        "name": "Test delete weather job",
+        "description": "Test delete weather job details",
         "properties": {
-          "region": "US"
+          "region": "Central US",
+          "retailerId": 123
         }
       }
     }

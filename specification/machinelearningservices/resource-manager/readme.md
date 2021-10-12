@@ -27,7 +27,18 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-04-01
+tag: package-2021-07-01
+```
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-07-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceSkus.json
 ```
 
 ### Tag: package-2021-04-01
@@ -208,6 +219,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java

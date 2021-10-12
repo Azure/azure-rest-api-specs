@@ -29,7 +29,7 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2018-06-preview
+tag: package-2021-06
 ```
 
 ### Suppression
@@ -86,6 +86,7 @@ directive:
     from: 
       - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
       - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
+      - Microsoft.HDInsight/stable/2021-06-01/cluster.json
     where:
       - $.definitions.Role.properties.VMGroupName
 ```
@@ -106,6 +107,25 @@ directive:
   - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
     reason: Update the default error response to a new format would be a braking change for service.
 ```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+- Microsoft.HDInsight/stable/2021-06-01/cluster.json
+- Microsoft.HDInsight/stable/2021-06-01/applications.json
+- Microsoft.HDInsight/stable/2021-06-01/locations.json
+- Microsoft.HDInsight/stable/2021-06-01/configurations.json
+- Microsoft.HDInsight/stable/2021-06-01/extensions.json
+- Microsoft.HDInsight/stable/2021-06-01/scriptActions.json
+- Microsoft.HDInsight/stable/2021-06-01/operations.json
+- Microsoft.HDInsight/stable/2021-06-01/virtualMachines.json
+- Microsoft.HDInsight/stable/2021-06-01/privateEndpointConnections.json
+- Microsoft.HDInsight/stable/2021-06-01/privateLinkResources.json
+```
+
 
 ### Tag: package-2018-06-preview
 

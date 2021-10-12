@@ -58,7 +58,7 @@
             "description": "The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup'"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -101,6 +101,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Eligible child resources list operation result."
     },
     "EligibleChildResource": {
@@ -121,6 +122,7 @@
           "description": "The resource type."
         }
       },
+      "type": "object",
       "description": "Eligible child resource"
     },
     "CloudError": {
@@ -130,6 +132,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
@@ -144,16 +147,8 @@
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         }
       },
+      "type": "object",
       "description": "An error response from the service."
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
     }
   }
 }

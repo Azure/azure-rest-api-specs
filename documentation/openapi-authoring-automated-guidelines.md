@@ -237,15 +237,19 @@ For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library
 * fooBarBaz
 * resourceKey
 * resourceApiKey
+* publicIPAddress
+* enableSsl
 
 **Bad Examples**: The following would be invalid:
 * PascalCase
 * UpperCamelCase
 * resourceAPIKey
+* enableSSL
 
 **Bad Examples**: The following violate these guidelines but would not be caught by automation: 
 * alllowercase - If there are multiple words, please capitalize starting with the second word
 * miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
+* resourceAPIkey - Automation would incorrectly recognize "Ikey" as a word and not flag the property name
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -497,27 +501,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**:
 ```json
-"parameters": {
-    "ApiVersionParameter": {
-      "name": "x-ms-version",
-      "x-ms-client-name": "version",
+  "parameters": [
+    {
+      "name": "If-Match",
       "in": "header",
       "required": false,
       "type": "string",
-      "x-ms-global": true,
-      "enum": [
-        "2015-04-05",
-        "2014-02-14",
-        "2013-08-15",
-        "2012-02-12",
-        "2011-08-18",
-        "2009-09-19",
-        "2009-07-17",
-        "2009-04-14"
-      ],
-      "default": "2015-04-05",
-      "description": "Specifies the version of the operation to use for this request."
-    }
+      "x-ms-client-name": "IfMatch",
+      "description": "The ETag of the resource to match."
+    },
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
