@@ -993,7 +993,8 @@
         },
         "password": {
           "description": "Password to connect to source SQL.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "encryptConnection": {
           "description": "Whether to encrypt connection or not.",
@@ -1215,6 +1216,7 @@
         "password": {
           "description": "Password for username to access file share location.",
           "type": "string",
+          "x-ms-secret": true,
           "x-ms-mutability": [
             "create",
             "update"
@@ -1232,7 +1234,8 @@
         },
         "accountKey": {
           "description": "Storage Account Key.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "blobContainerName": {
           "description": "Blob container name where backups are stored.",
@@ -1514,6 +1517,7 @@
         "authKey1": {
           "description": "The first authentication key.",
           "type": "string",
+          "x-ms-secret": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1522,6 +1526,7 @@
         "authKey2": {
           "description": "The second authentication key.",
           "type": "string",
+          "x-ms-secret": true,
           "x-ms-mutability": [
             "read",
             "create"
