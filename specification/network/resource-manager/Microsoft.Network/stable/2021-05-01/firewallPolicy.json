@@ -1937,11 +1937,17 @@
       }
     },
     "SignaturesOverridesList": {
-      "type": "array",
-      "description": "Describes a list consisting exactly one item describing the policy's signature override status",
-      "items": {
-        "description": "Describes the single signatures overrides object related to that policy.",
-        "$ref": "#/definitions/SignaturesOverrides"
+      "type": "object",
+      "description": "Describes an object containing an array with a single item",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Describes a list consisting exactly one item describing the policy's signature override status",
+          "items": {
+            "description": "Describes the single signatures overrides object related to that policy.",
+            "$ref": "#/definitions/SignaturesOverrides"
+          }
+        }
       }
     },
     "SignaturesOverrides": {
