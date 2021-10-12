@@ -1609,6 +1609,9 @@
         "logAnalyticsProfile": {
           "$ref": "#/definitions/ClusterLogAnalyticsProfile"
         },
+        "sshProfile": {
+          "$ref": "#/definitions/SshProfile"
+        },
         "kafkaProfile": {
           "type": "object",
           "description": "Kafka cluster profile.",
@@ -1641,6 +1644,30 @@
         }
       },
       "description": "Cluster profile."
+    },
+    "SshProfile": {
+      "type": "object",
+      "description": "Ssh profile for the cluster.",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Number of ssh pods per cluster.",
+          "format": "int32",
+          "maximum": 5.0,
+          "minimum": 0.0
+        },
+        "podPrefix": {
+          "type": "string",
+          "description": "Prefix of the pod names. Pod number will be appended to the prefix. The ingress URLs for the pods will be available at <clusterFqdn>/<sshBasePath>/<prefix>-<number>",
+          "minLength": 1,
+          "maxLength": 58,
+          "pattern": "^[a-z]([-a-z0-9]*[a-z0-9])?$",
+          "default": "pod"
+        }
+      }
     },
     "ClusterResourceProperties": {
       "type": "object",
