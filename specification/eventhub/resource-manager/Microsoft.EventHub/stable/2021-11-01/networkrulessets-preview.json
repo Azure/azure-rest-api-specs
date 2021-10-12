@@ -155,7 +155,7 @@
           "200": {
             "description": "Namespace NetworkRuleSet successfully returned.",
             "schema": {
-              "$ref": "#/definitions/NetworkRuleSet"
+              "$ref": "#/definitions/NetworkRuleSetListResult"
             }
           },
           "default": {
@@ -278,6 +278,8 @@
       "description": "Description of topic resource."
     },
     "NetworkRuleSetListResult": {
+      "type": "object",
+      "description": "The response of the List NetworkRuleSet operation",
       "properties": {
         "value": {
           "type": "array",
@@ -290,8 +292,7 @@
           "type": "string",
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of NetworkRuleSet."
         }
-      },
-      "description": "The response of the List NetworkRuleSet operation"
+      }
     }
   },
   "parameters": {}
