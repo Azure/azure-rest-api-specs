@@ -183,7 +183,7 @@
           "201": {
             "description": "Content created successfully. The response body contains the newly created alias id `aliasId`.",
             "schema": {
-              "$ref": "#/definitions/AliasCreateResult"
+              "$ref": "#/definitions/AliasCreateResponse"
             },
             "headers": {
               "Access-Control-Expose-Headers": {
@@ -230,7 +230,7 @@
           "200": {
             "description": "List alias request completed successfully. The response body contains a list of all the previously created aliases.",
             "schema": {
-              "$ref": "#/definitions/AliasListResult"
+              "$ref": "#/definitions/AliasListResponse"
             }
           },
           "400": {
@@ -279,7 +279,7 @@
           "200": {
             "description": "Alias was assigned successfully.",
             "schema": {
-              "$ref": "#/definitions/AliasInfo"
+              "$ref": "#/definitions/AliasListItem"
             }
           },
           "400": {
@@ -364,7 +364,7 @@
           "200": {
             "description": "Get alias request completed successfully. The response body contains the previously created alias.",
             "schema": {
-              "$ref": "#/definitions/AliasInfo"
+              "$ref": "#/definitions/AliasListItem"
             }
           },
           "400": {
@@ -423,7 +423,7 @@
         }
       }
     },
-    "AliasCreateResult": {
+    "AliasCreateResponse": {
       "description": "The response model for the Alias Create API for the case when the alias was successfully created.",
       "type": "object",
       "properties": {
@@ -449,7 +449,7 @@
         }
       }
     },
-    "AliasListResult": {
+    "AliasListResponse": {
       "description": "The response model for the List API. Returns a list of all the previously created aliases.",
       "type": "object",
       "properties": {
@@ -458,7 +458,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/AliasInfo"
+            "$ref": "#/definitions/AliasListItem"
           }
         },
         "nextLink": {
@@ -468,7 +468,7 @@
         }
       }
     },
-    "AliasInfo": {
+    "AliasListItem": {
       "description": "Detailed information for the alias.",
       "type": "object",
       "properties": {
