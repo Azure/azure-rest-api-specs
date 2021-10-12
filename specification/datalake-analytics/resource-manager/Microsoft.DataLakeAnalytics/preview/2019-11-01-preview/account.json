@@ -636,6 +636,9 @@
           "200": {
             "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
           },
+          "204": {
+            "description": "The specified datalake storage account does not exist or was already deleted."
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -646,6 +649,246 @@
         "x-ms-examples": {
           "Removes the specified Data Lake Store account": {
             "$ref": "./examples/DataLakeStoreAccounts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/dataLakeStoreGen2Accounts": {
+      "get": {
+        "tags": [
+          "DataLakeStoreGen2Accounts"
+        ],
+        "operationId": "DataLakeStoreGen2Accounts_ListByAccount",
+        "description": "Gets the first page of Data Lake Store Gen2 accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Data Lake Store Gen2 accounts.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreGen2AccountInformationListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account": {
+            "$ref": "./examples/DataLakeStoreGen2Accounts_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DataLakeStoreGen2AccountInformation"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/dataLakeStoreGen2Accounts/{dataLakeStoreGen2AccountName}": {
+      "put": {
+        "tags": [
+          "DataLakeStoreGen2Accounts"
+        ],
+        "operationId": "DataLakeStoreGen2Accounts_Add",
+        "description": "Updates the specified Data Lake Analytics account to include the additional Data Lake Store Gen2 account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "dataLakeStoreGen2AccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store Gen2 account to add."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AddDataLakeStoreGen2Parameters"
+            },
+            "description": "The details of the Data Lake Store Gen2 account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the specified Azure Data Lake Store Gen2 account information."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Adds a Data Lake Store account": {
+            "$ref": "./examples/DataLakeStoreGen2Accounts_Add.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataLakeStoreGen2Accounts"
+        ],
+        "operationId": "DataLakeStoreGen2Accounts_Get",
+        "description": "Gets the specified Data Lake Store Gen2 account details in the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "dataLakeStoreGen2AccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store Gen2 account to retrieve"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified Azure Data Lake Store Gen2 account information.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreGen2AccountInformation"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store account details": {
+            "$ref": "./examples/DataLakeStoreGen2Accounts_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataLakeStoreGen2Accounts"
+        ],
+        "operationId": "DataLakeStoreGen2Accounts_Delete",
+        "description": "Updates the Data Lake Analytics account specified to remove the specified Data Lake Store Gen2 account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "dataLakeStoreGen2AccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store Gen2 account to remove"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed the specified Azure Data Lake Store Gen2 account information from the specified Azure Data Lake Analytics account."
+          },
+          "204": {
+            "description": "The specified datalake storage Gen2 account does not exist or was already deleted."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Removes the specified Data Lake Store account": {
+            "$ref": "./examples/DataLakeStoreGen2Accounts_Delete.json"
           }
         }
       }
@@ -1859,6 +2102,14 @@
           },
           "description": "The list of Data Lake Store accounts associated with this account."
         },
+        "dataLakeStoreGen2Accounts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreGen2AccountInformation"
+          },
+          "description": "The list of Data Lake Store Gen2 accounts associated with this account."
+        },
         "publicDataLakeStoreAccounts": {
           "type": "array",
           "items": {
@@ -2124,6 +2375,12 @@
           },
           "description": "The results of the list operation."
         },
+        "count": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of data lake analytics accounts under this subscription."
+        },
         "nextLink": {
           "readOnly": true,
           "type": "string",
@@ -2147,6 +2404,21 @@
       },
       "description": "Data Lake Store account information."
     },
+    "DataLakeStoreGen2AccountInformation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeStoreGen2AccountInformationProperties",
+          "description": "The Data Lake Store Gen2 account properties."
+        }
+      },
+      "description": "Data Lake Store Gen2 account information."
+    },
     "DataLakeStoreAccountInformationProperties": {
       "properties": {
         "suffix": {
@@ -2156,6 +2428,16 @@
         }
       },
       "description": "The Data Lake Store account properties."
+    },
+    "DataLakeStoreGen2AccountInformationProperties": {
+      "properties": {
+        "suffix": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store Gen2 account."
+        }
+      },
+      "description": "The Data Lake Store Gen2 account properties."
     },
     "DataLakeStoreAccountInformationListResult": {
       "properties": {
@@ -2174,6 +2456,24 @@
         }
       },
       "description": "Data Lake Store account list information."
+    },
+    "DataLakeStoreGen2AccountInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreGen2AccountInformation"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store Gen2 account list information."
     },
     "StorageAccountInformation": {
       "allOf": [
@@ -3082,6 +3382,33 @@
       },
       "description": "The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account."
     },
+    "AddDataLakeStoreGen2Parameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddDataLakeStoreGen2Properties",
+          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+        }
+      },
+      "description": "The parameters used to add a new Data Lake Store account."
+    },
+    "AddDataLakeStoreGen2WithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Data Lake Store Gen2 account to add."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddDataLakeStoreGen2Properties",
+          "description": "The Data Lake Store Gen2 account properties to use when adding a new Data Lake Store Gen2 account."
+        }
+      },
+      "description": "The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account."
+    },
     "AddDataLakeStoreProperties": {
       "properties": {
         "suffix": {
@@ -3090,6 +3417,15 @@
         }
       },
       "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+    },
+    "AddDataLakeStoreGen2Properties": {
+      "properties": {
+        "suffix": {
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store Gen2 account."
+        }
+      },
+      "description": "The Data Lake Store Gen2 account properties to use when adding a new Data Lake Store Gen2 account."
     },
     "UpdateDataLakeStoreWithAccountParameters": {
       "required": [
