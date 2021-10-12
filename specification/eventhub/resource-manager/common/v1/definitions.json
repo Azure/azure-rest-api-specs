@@ -98,68 +98,19 @@
       },
       "x-ms-azure-resource": true
     },
-    "ErrorDetail": {
-      "description": "The error detail.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "description": "The error additional info."
-        }
-      }
-    },
     "ErrorResponse": {
       "description": "Error response indicates Event Hub service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetail"
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
     },
     "systemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -284,7 +235,6 @@
       "in": "query",
       "required": false,
       "type": "integer",
-      "format": "int32",
       "minimum": 0,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
@@ -295,7 +245,6 @@
       "in": "query",
       "required": false,
       "type": "integer",
-      "format": "int32",
       "minimum": 1,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
