@@ -1415,7 +1415,7 @@
             "schema": {
               "$ref": "#/definitions/QueryInboundNatRulePortMappingRequest"
             },
-            "description": "Query inbound Nat rule port mapping request."
+            "description": "Query inbound NAT rule port mapping request."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2549,7 +2549,7 @@
     "QueryInboundNatRulePortMappingRequest": {
       "type": "object",
       "properties": {
-        "iPConfiguration": {
+        "ipConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "NetworkInterfaceIPConfiguration set in load balancer backend address."
         },
@@ -2558,7 +2558,7 @@
           "description": "IP address set in load balancer backend address."
         }
       },
-      "description": "The request for a QueryInboundNatRulePortMapping API."
+      "description": "The request for a QueryInboundNatRulePortMapping API. Either IpConfiguration or IpAddress should be set"
     },
     "BackendAddressInboundNatRulePortMappings": {
       "type": "object",
@@ -2577,19 +2577,23 @@
       "type": "object",
       "properties": {
         "inboundNatRuleName": {
+          "readOnly": true,
           "type": "string",
           "description": "Name of inbound Nat rule."
         },
         "protocol": {
+          "readOnly": true,
           "$ref": "#/definitions/TransportProtocol",
           "description": "The reference to the transport protocol used by the inbound Nat rule."
         },
         "frontendPort": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Frontend port."
         },
         "backendPort": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Backend port."
