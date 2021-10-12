@@ -345,63 +345,166 @@
                 "description": "account ID"
               }
             }
-        }
-      }
-    },
-    "cloudOffering": {
-      "type": "object",
-      "description": "The security offering details",
-      "discriminator": "offeringType",
-      "required": [
-        "offeringType"
-      ],
-      "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The type of the security offering.",
-          "enum": [
-            "CspmMonitorAWS",
-            "DefenderForContainersAws",
-            "DefenderForServersAws"
-          ],
-          "x-ms-enum": {
-            "name": "OfferingType",
-            "modelAsString": true
           }
-        },
-        "description": {
-          "type": "string",
-          "description": "The offering description.",
-          "readOnly": true
         }
-      }
-    },
-    "CSPMMonitorAWSOffering": {
-      "type": "object",
-      "description": "The CSPM monitoring for AWS offering configurations",
-      "x-ms-discriminator-value": "CSPMMonitorAWS",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
+      },
+      "cloudOffering": {
+        "type": "object",
+        "description": "The security offering details",
+        "discriminator": "offeringType",
+        "required": [
+          "offeringType"
+        ],
+        "properties": {
+          "offeringType": {
+            "type": "string",
+            "description": "The type of the security offering.",
+            "enum": [
+              "CspmMonitorAWS",
+              "DefenderForContainersAws",
+              "DefenderForServersAws"
+            ],
+            "x-ms-enum": {
+              "name": "OfferingType",
+              "modelAsString": true
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The offering description.",
+            "readOnly": true
+          }
         }
-      ],
-      "properties": {
-        "nativeCloudConnection": {
-          "type": "object",
-          "description": "The native cloud connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            },
-            "policies": {
-              "type": "array",
-              "description": "The list of the required policies of the multi cloud roles for the offering. [READ ONLY]",
-              "items": {
+      },
+      "CSPMMonitorAWSOffering": {
+        "type": "object",
+        "description": "The CSPM monitoring for AWS offering configurations",
+        "x-ms-discriminator-value": "CSPMMonitorAWS",
+        "allOf": [
+          {
+            "$ref": "#/definitions/cloudOffering"
+          }
+        ],
+        "properties": {
+          "nativeCloudConnection": {
+            "type": "object",
+            "description": "The native cloud connection configuration",
+            "properties": {
+              "cloudRoleArn": {
                 "type": "string",
-                "description": "multi cloud role"
+                "description": "The cloud role ARN in AWS for this feature"
               },
-              "readOnly": true
+              "policies": {
+                "type": "array",
+                "description": "The list of the required policies of the multi cloud roles for the offering. [READ ONLY]",
+                "items": {
+                  "type": "string",
+                  "description": "multi cloud role"
+                },
+                "readOnly": true
+              }
+            }
+          }
+        }
+      },
+      "DefenderForContainersAwsOffering": {
+        "type": "object",
+        "description": "The Defender for Containers AWS offering configurations",
+        "x-ms-discriminator-value": "DefenderForContainersAws",
+        "allOf": [
+          {
+            "$ref": "#/definitions/cloudOffering"
+          }
+        ],
+        "properties": {
+          "kubernetesService": {
+            "type": "object",
+            "description": "The kubernetes service connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
+            }
+          },
+          "kubernetesScubaReader": {
+            "type": "object",
+            "description": "The kubernetes to scuba connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
+            }
+          },
+          "cloudWatchToKinesis": {
+            "type": "object",
+            "description": "The cloudwatch to kinesis connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
+            }
+          },
+          "kinesisToS3": {
+            "type": "object",
+            "description": "The kinesis to s3 connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
+            }
+          }
+        }
+      },
+      "DefenderForServersAWSOffering": {
+        "type": "object",
+        "description": "The Defender for Servers AWS offering configurations",
+        "x-ms-discriminator-value": "DefenderForServersAWS",
+        "allOf": [
+          {
+            "$ref": "#/definitions/cloudOffering"
+          }
+        ],
+        "properties": {
+          "defenderForServers": {
+            "type": "object",
+            "description": "The Defender for servers connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
+            }
+          },
+          "arcAutoProvisioning": {
+            "type": "object",
+            "description": "The ARC autoprovisioning configuration",
+            "properties": {
+              "enabled": {
+                "type": "bool",
+                "description": "Is arc auto provisioning enabled"
+              },
+              "servicePrincipalSecretMetadata": {
+                "type": "object",
+                "description": "Metadata of Service Principal secret for autoprovisioning",
+                "properties": {
+                  "expiryDate": {
+                    "type": "string",
+                    "description": "expiration date of service principal secret"
+                  },
+                  "parameterStoreRegion": {
+                    "type": "string",
+                    "description": "region of parameter store where secret is kept"
+                  },
+                  "parameterNameInStore": {
+                    "type": "string",
+                    "description": "name of secret resource in parameter store"
+                  }
+                }
+              }
             }
           }
         }
