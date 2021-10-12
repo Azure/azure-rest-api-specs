@@ -289,11 +289,11 @@
       "type": "object",
       "description": "A set of properties that defines the security connector configuration.",
       "properties": {
-        "hierarchyId": {
+        "hierarchyIdentifier": {
           "type": "string",
           "description": "The multi cloud resource identifier (account id in case of AWS connector)."
         },
-        "multiCloudName": {
+        "cloudName": {
           "type": "string",
           "description": "The multi cloud resource's cloud name.",
           "enum": [
@@ -302,7 +302,7 @@
             "GCP"
           ],
           "x-ms-enum": {
-            "name": "MultiCloudName",
+            "name": "cloudName",
             "modelAsString": true
           }
         },
@@ -310,12 +310,45 @@
           "type": "array",
           "description": "A collection of offerings for the security connector.",
           "items": {
-            "$ref": "#/definitions/MultiCloudOffering"
+            "$ref": "#/definitions/cloudOffering"
           }
+        },
+        "organizationalData": {
+          "type": "object",
+          "description": "The multi cloud account's organizational data",
+          "properties": {
+            "organizationMembershipType": {
+              "type": "string",
+              "description": "The multi cloud account's membership type in the organization",
+              "enum": [
+                "Member",
+                "Organization"
+              ],
+              "x-ms-enum": {
+                "name": "organizationMembershipType",
+                "modelAsString": true
+              }
+            },
+            "parentHierarchyId": {
+              "type": "string",
+              "description": "If the multi cloud account is not of membership type organization, this will be the ID of the account's parent"
+            },
+            "stacksetName": {
+              "type": "string",
+              "description": "If the multi cloud account is of membership type organization, this will be the name of the onboarding stackset"
+            },
+            "excludedAccountId": {
+              "type": "array",
+              "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
+              "items": {
+                "type": "string",
+                "description": "account ID"
+              }
+            }
         }
       }
     },
-    "MultiCloudOffering": {
+    "cloudOffering": {
       "type": "object",
       "description": "The security offering details",
       "discriminator": "offeringType",
@@ -327,16 +360,13 @@
           "type": "string",
           "description": "The type of the security offering.",
           "enum": [
-            "CSPMMonitorAWS"
+            "CspmMonitorAWS",
+            "DefenderForContainersAws",
+            "DefenderForServersAws"
           ],
           "x-ms-enum": {
             "name": "OfferingType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "CSPMMonitorAWS"
-              }
-            ]
+            "modelAsString": true
           }
         },
         "description": {
@@ -352,7 +382,7 @@
       "x-ms-discriminator-value": "CSPMMonitorAWS",
       "allOf": [
         {
-          "$ref": "#/definitions/MultiCloudOffering"
+          "$ref": "#/definitions/cloudOffering"
         }
       ],
       "properties": {
