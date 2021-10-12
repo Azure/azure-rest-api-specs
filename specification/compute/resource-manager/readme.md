@@ -308,6 +308,7 @@ These settings apply only when `--tag=package-2021-04-01-only` is specified on t
 input-file:
 - Microsoft.Compute/stable/2021-04-01/compute.json
 - Microsoft.Compute/stable/2021-04-01/runCommands.json
+- Microsoft.Compute/stable/2021-04-01/disk.json
 ```
 
 ### Tag: package-2021-03-01
