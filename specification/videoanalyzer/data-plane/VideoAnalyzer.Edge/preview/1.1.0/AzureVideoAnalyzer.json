@@ -1,0 +1,2200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1.0",
+    "title": "Azure Video Analyzer for Edge",
+    "description": "Azure Video Analyzer resources which can be utilized when performing direct method calls through Azure IoT Edge.",
+    "contact": {
+      "email": "videoanalyzerhelp@microsoft.com"
+    }
+  },
+  "security": [
+    {
+      "sharedAccessSignature": []
+    }
+  ],
+  "paths": {},
+  "securityDefinitions": {
+    "sharedAccessSignature": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "LivePipeline": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Live pipeline unique identifier."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Read-only system metadata associated with this object."
+        },
+        "properties": {
+          "$ref": "#/definitions/LivePipelineProperties",
+          "description": "Live pipeline properties."
+        }
+      },
+      "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
+    },
+    "LivePipelineProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional description of the live pipeline."
+        },
+        "topologyName": {
+          "type": "string",
+          "description": "The reference to an existing pipeline topology defined for real-time content processing. When activated, this live pipeline will process content according to the pipeline topology definition."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "List of the instance level parameter values for the user-defined topology parameters. A pipeline can only define or override parameters values for parameters which have been declared in the referenced topology. Topology parameters without a default value must be defined. Topology parameters with a default value can be optionally be overridden.",
+          "items": {
+            "$ref": "#/definitions/ParameterDefinition"
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "Current pipeline state (read-only).",
+          "enum": [
+            "inactive",
+            "activating",
+            "active",
+            "deactivating"
+          ],
+          "x-ms-enum": {
+            "name": "livePipelineState",
+            "values": [
+              {
+                "value": "inactive",
+                "description": "The live pipeline is idle and not processing media."
+              },
+              {
+                "value": "activating",
+                "description": "The live pipeline is transitioning into the active state."
+              },
+              {
+                "value": "active",
+                "description": "The live pipeline is active and able to process media. If your data source is not available, for instance, if your RTSP camera is powered off or unreachable, the pipeline will still be active and periodically retrying the connection. Your Azure subscription will be billed for the duration in which the live pipeline is in the active state."
+              },
+              {
+                "value": "deactivating",
+                "description": "The live pipeline is transitioning into the inactive state."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Live pipeline properties."
+    },
+    "ParameterDefinition": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter declared in the pipeline topology."
+        },
+        "value": {
+          "type": "string",
+          "description": "Parameter value to be applied on this specific live pipeline."
+        }
+      },
+      "description": "Defines the parameter value of an specific pipeline topology parameter. See pipeline topology parameters for more information."
+    },
+    "LivePipelineCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of live pipelines.",
+          "items": {
+            "$ref": "#/definitions/LivePipeline"
+          }
+        },
+        "@continuationToken": {
+          "type": "string",
+          "description": "A continuation token to be used in subsequent calls when enumerating through the collection. This is returned when the collection results won't fit in a single response."
+        }
+      },
+      "description": "A collection of live pipelines."
+    },
+    "PipelineTopologyCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipeline topologies.",
+          "items": {
+            "$ref": "#/definitions/PipelineTopology"
+          }
+        },
+        "@continuationToken": {
+          "type": "string",
+          "description": "A continuation token to be used in subsequent calls when enumerating through the collection. This is returned when the collection results won't fit in a single response."
+        }
+      },
+      "description": "A collection of pipeline topologies."
+    },
+    "PipelineTopology": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Pipeline topology unique identifier."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Read-only system metadata associated with this object."
+        },
+        "properties": {
+          "$ref": "#/definitions/PipelineTopologyProperties",
+          "description": "Pipeline topology properties."
+        }
+      },
+      "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\r\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+    },
+    "PipelineTopologyProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "An optional description of the pipeline topology. It is recommended that the expected use of the topology to be described here."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterDeclaration"
+          },
+          "description": "List of the topology parameter declarations. Parameters declared here can be referenced throughout the topology nodes through the use of \"${PARAMETER_NAME}\" string pattern. Parameters can have optional default values and can later be defined in individual instances of the pipeline."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceNodeBase"
+          },
+          "description": "List of the topology source nodes. Source nodes enable external data to be ingested by the pipeline."
+        },
+        "processors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessorNodeBase"
+          },
+          "description": "List of the topology processor nodes. Processor nodes enable pipeline data to be analyzed, processed or transformed."
+        },
+        "sinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SinkNodeBase"
+          },
+          "description": "List of the topology sink nodes. Sink nodes allow pipeline data to be stored or exported."
+        }
+      },
+      "description": "Pipeline topology properties."
+    },
+    "SystemData": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when this resource was first created. Value is represented in UTC according to the ISO8601 date format."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when this resource was last modified. Value is represented in UTC according to the ISO8601 date format."
+        }
+      },
+      "description": "Read-only system metadata associated with a resource."
+    },
+    "ParameterDeclaration": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter.",
+          "maxLength": 64
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the parameter.",
+          "enum": [
+            "string",
+            "secretString",
+            "int",
+            "double",
+            "bool"
+          ],
+          "x-ms-enum": {
+            "name": "parameterType",
+            "values": [
+              {
+                "value": "string",
+                "description": "The parameter's value is a string."
+              },
+              {
+                "value": "secretString",
+                "description": "The parameter's value is a string that holds sensitive information."
+              },
+              {
+                "value": "int",
+                "description": "The parameter's value is a 32-bit signed integer."
+              },
+              {
+                "value": "double",
+                "description": "The parameter's value is a 64-bit double-precision floating point."
+              },
+              {
+                "value": "bool",
+                "description": "The parameter's value is a boolean value that is either true or false."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter."
+        },
+        "default": {
+          "type": "string",
+          "description": "The default value for the parameter to be used if the live pipeline does not specify a value."
+        }
+      },
+      "description": "Single topology parameter declaration. Declared parameters can and must be referenced throughout the topology and can optionally have default values to be used when they are not defined in the pipeline instances."
+    },
+    "SourceNodeBase": {
+      "type": "object",
+      "required": [
+        "@type",
+        "name"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        },
+        "name": {
+          "type": "string",
+          "description": "Node name. Must be unique within the topology."
+        }
+      },
+      "description": "Base class for topology source nodes."
+    },
+    "RtspSource": {
+      "type": "object",
+      "properties": {
+        "transport": {
+          "type": "string",
+          "description": "Network transport utilized by the RTSP and RTP exchange: TCP or HTTP. When using TCP, the RTP packets are interleaved on the TCP RTSP connection. When using HTTP, the RTSP messages are exchanged through long lived HTTP connections, and the RTP packages are interleaved in the HTTP connections alongside the RTSP messages.",
+          "enum": [
+            "http",
+            "tcp"
+          ],
+          "x-ms-enum": {
+            "name": "rtspTransport",
+            "values": [
+              {
+                "value": "http",
+                "description": "HTTP transport. RTSP messages are exchanged over long running HTTP requests and RTP packets are interleaved within the HTTP channel."
+              },
+              {
+                "value": "tcp",
+                "description": "TCP transport. RTSP is used directly over TCP and RTP packets are interleaved within the TCP channel."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "endpoint": {
+          "description": "RTSP endpoint information for Video Analyzer to connect to. This contains the required information for Video Analyzer to connect to RTSP cameras and/or generic RTSP servers.",
+          "$ref": "#/definitions/EndpointBase"
+        }
+      },
+      "required": [
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceNodeBase"
+        }
+      ],
+      "description": "RTSP source allows for media from an RTSP camera or generic RTSP server to be ingested into a live pipeline.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.RtspSource"
+    },
+    "IotHubMessageSource": {
+      "type": "object",
+      "properties": {
+        "hubInputName": {
+          "type": "string",
+          "description": "Name of the IoT Edge Hub input from which messages will be consumed."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceNodeBase"
+        }
+      ],
+      "description": "IoT Hub Message source allows for the pipeline to consume messages from the IoT Edge Hub. Messages can be routed from other IoT modules via routes declared in the IoT Edge deployment manifest.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.IotHubMessageSource"
+    },
+    "IotHubMessageSink": {
+      "type": "object",
+      "properties": {
+        "hubOutputName": {
+          "type": "string",
+          "description": "Name of the Iot Edge Hub output to which the messages will be published."
+        }
+      },
+      "required": [
+        "@type",
+        "hubOutputName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SinkNodeBase"
+        }
+      ],
+      "description": "IoT Hub Message sink allows for pipeline messages to published into the IoT Edge Hub. Published messages can then be delivered to the cloud and other modules via routes declared in the IoT Edge deployment manifest.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.IotHubMessageSink"
+    },
+    "EndpointBase": {
+      "type": "object",
+      "required": [
+        "@type",
+        "url"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        },
+        "credentials": {
+          "description": "Credentials to be presented to the endpoint.",
+          "$ref": "#/definitions/CredentialsBase"
+        },
+        "url": {
+          "type": "string",
+          "description": "The endpoint URL for Video Analyzer to connect to."
+        }
+      },
+      "description": "Base class for endpoints."
+    },
+    "CredentialsBase": {
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        }
+      },
+      "description": "Base class for credential objects."
+    },
+    "UsernamePasswordCredentials": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username to be presented as part of the credentials."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password to be presented as part of the credentials. It is recommended that this value is parameterized as a secret string in order to prevent this value to be returned as part of the resource on API requests."
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      ],
+      "description": "Username and password credentials.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.UsernamePasswordCredentials"
+    },
+    "HttpHeaderCredentials": {
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "type": "string",
+          "description": "HTTP header name."
+        },
+        "headerValue": {
+          "type": "string",
+          "description": "HTTP header value. It is recommended that this value is parameterized as a secret string in order to prevent this value to be returned as part of the resource on API requests."
+        }
+      },
+      "required": [
+        "headerName",
+        "headerValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      ],
+      "description": "HTTP header credentials.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.HttpHeaderCredentials"
+    },
+    "UnsecuredEndpoint": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBase"
+        }
+      ],
+      "description": "Unsecured endpoint describes an endpoint that the pipeline can connect to over clear transport (no encryption in transit).",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.UnsecuredEndpoint"
+    },
+    "TlsEndpoint": {
+      "type": "object",
+      "properties": {
+        "trustedCertificates": {
+          "description": "List of trusted certificate authorities when authenticating a TLS connection. A null list designates that Azure Video Analyzer's list of trusted authorities should be used.",
+          "$ref": "#/definitions/CertificateSource"
+        },
+        "validationOptions": {
+          "description": "Validation options to use when authenticating a TLS connection. By default, strict validation is used.",
+          "$ref": "#/definitions/TlsValidationOptions"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBase"
+        }
+      ],
+      "description": "TLS endpoint describes an endpoint that the pipeline can connect to over TLS transport (data is encrypted in transit).",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.TlsEndpoint"
+    },
+    "SymmetricKeyCredentials": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Symmetric key credential."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      ],
+      "description": "Symmetric key credential.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SymmetricKeyCredentials"
+    },
+    "CertificateSource": {
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        }
+      },
+      "description": "Base class for certificate sources."
+    },
+    "TlsValidationOptions": {
+      "type": "object",
+      "properties": {
+        "ignoreHostname": {
+          "type": "string",
+          "description": "When set to 'true' causes the certificate subject name validation to be skipped. Default is 'false'."
+        },
+        "ignoreSignature": {
+          "type": "string",
+          "description": "When set to 'true' causes the certificate chain trust validation to be skipped. Default is 'false'."
+        }
+      },
+      "description": "Options for controlling the validation of TLS endpoints."
+    },
+    "PemCertificateList": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "description": "PEM formatted public certificates. One certificate per entry.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "certificates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateSource"
+        }
+      ],
+      "description": "A list of PEM formatted certificates.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.PemCertificateList"
+    },
+    "SinkNodeBase": {
+      "type": "object",
+      "required": [
+        "@type",
+        "inputs",
+        "name"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        },
+        "name": {
+          "type": "string",
+          "description": "Node name. Must be unique within the topology."
+        },
+        "inputs": {
+          "type": "array",
+          "description": "An array of upstream node references within the topology to be used as inputs for this node.",
+          "items": {
+            "$ref": "#/definitions/NodeInput"
+          }
+        }
+      },
+      "description": "Base class for topology sink nodes."
+    },
+    "NodeInput": {
+      "type": "object",
+      "required": [
+        "nodeName"
+      ],
+      "properties": {
+        "nodeName": {
+          "type": "string",
+          "description": "The name of the upstream node in the pipeline which output is used as input of the current node."
+        },
+        "outputSelectors": {
+          "type": "array",
+          "description": "Allows for the selection of specific data streams (eg. video only) from another node.",
+          "items": {
+            "$ref": "#/definitions/OutputSelector"
+          }
+        }
+      },
+      "description": "Describes an input signal to be used on a pipeline node."
+    },
+    "OutputSelector": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "The property of the data stream to be used as the selection criteria.",
+          "enum": [
+            "mediaType"
+          ],
+          "x-ms-enum": {
+            "name": "outputSelectorProperty",
+            "values": [
+              {
+                "value": "mediaType",
+                "description": "The stream's MIME type or subtype: audio, video or application"
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "operator": {
+          "type": "string",
+          "description": "The operator to compare properties by.",
+          "enum": [
+            "is",
+            "isNot"
+          ],
+          "x-ms-enum": {
+            "name": "outputSelectorOperator",
+            "values": [
+              {
+                "value": "is",
+                "description": "The property is of the type defined by value."
+              },
+              {
+                "value": "isNot",
+                "description": "The property is not of the type defined by value."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value to compare against."
+        }
+      },
+      "description": "Allows for the selection of particular streams from another node."
+    },
+    "FileSink": {
+      "type": "object",
+      "properties": {
+        "baseDirectoryPath": {
+          "type": "string",
+          "description": "Absolute directory path where media files will be stored.",
+          "example": "/var/media/output/"
+        },
+        "fileNamePattern": {
+          "type": "string",
+          "description": "File name pattern for creating new files when performing event based recording. The pattern must include at least one system variable.",
+          "example": "mySampleFile-${System.TopologyName}-${System.PipelineName}-${System.Runtime.DateTime}"
+        },
+        "maximumSizeMiB": {
+          "type": "string",
+          "description": "Maximum amount of disk space that can be used for storing files from this sink. Once this limit is reached, the oldest files from this sink will be automatically deleted."
+        }
+      },
+      "required": [
+        "fileNamePattern",
+        "baseDirectoryPath",
+        "maximumSizeMiB"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SinkNodeBase"
+        }
+      ],
+      "description": "File sink allows for video and audio content to be recorded on the file system on the edge device.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.FileSink"
+    },
+    "VideoPublishingOptions": {
+      "type": "object",
+      "properties": {
+        "enableVideoPreviewImages": {
+          "type": "string",
+          "description": "When set to 'true' the video will publish preview images. Default is 'false'."
+        }
+      },
+      "description": "Options for changing video publishing behavior on the video sink and output video."
+    },
+    "VideoCreationProperties": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Optional video title provided by the user. Value can be up to 256 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional video description provided by the user. Value can be up to 2048 characters long."
+        },
+        "segmentLength": {
+          "type": "string",
+          "example": "PT30S",
+          "description": "Video segment length indicates the length of individual video files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments. Changing this value after the video is initially created can lead to errors when uploading media to the archive. Default value is 30 seconds."
+        },
+        "retentionPeriod": {
+          "type": "string",
+          "example": "P30D",
+          "description": "Video retention period indicates how long the video is kept in storage, and must be a multiple of 1 day. For example, if this is set to 30 days, then content older than 30 days will be deleted."
+        }
+      },
+      "description": "Optional video properties to be used in case a new video resource needs to be created on the service. These will not take effect if the video already exists."
+    },
+    "VideoSink": {
+      "type": "object",
+      "properties": {
+        "videoName": {
+          "type": "string",
+          "description": "Name of a new or existing Video Analyzer video resource used for the media recording.",
+          "example": "myVideo001"
+        },
+        "videoCreationProperties": {
+          "type": "object",
+          "description": "Optional video properties to be used in case a new video resource needs to be created on the service.",
+          "$ref": "#/definitions/VideoCreationProperties"
+        },
+        "videoPublishingOptions": {
+          "type": "object",
+          "description": "Optional video publishing options to be used for changing publishing behavior of the output video.",
+          "$ref": "#/definitions/VideoPublishingOptions"
+        },
+        "localMediaCachePath": {
+          "type": "string",
+          "description": "Path to a local file system directory for caching of temporary media files. This will also be used to store content which cannot be immediately uploaded to Azure due to Internet connectivity issues.",
+          "example": "/var/lib/tmp/"
+        },
+        "localMediaCacheMaximumSizeMiB": {
+          "type": "string",
+          "description": "Maximum amount of disk space that can be used for caching of temporary media files. Once this limit is reached, the oldest segments of the media archive will be continuously deleted in order to make space for new media, thus leading to gaps in the cloud recorded content."
+        }
+      },
+      "required": [
+        "@type",
+        "videoName",
+        "localMediaCachePath",
+        "localMediaCacheMaximumSizeMiB"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SinkNodeBase"
+        }
+      ],
+      "description": "Video sink allows for video and audio to be recorded to the Video Analyzer service. The recorded video can be played from anywhere and further managed from the cloud. Due to security reasons, a given Video Analyzer edge module instance can only record content to new video entries, or existing video entries previously recorded by the same module. Any attempt to record content to an existing video which has not been created by the same module instance will result in failure to record.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSink"
+    },
+    "ProcessorNodeBase": {
+      "type": "object",
+      "required": [
+        "@type",
+        "inputs",
+        "name"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        },
+        "name": {
+          "type": "string",
+          "description": "Node name. Must be unique within the topology."
+        },
+        "inputs": {
+          "type": "array",
+          "description": "An array of upstream node references within the topology to be used as inputs for this node.",
+          "items": {
+            "$ref": "#/definitions/NodeInput"
+          }
+        }
+      },
+      "description": "Base class for topology processor nodes."
+    },
+    "MotionDetectionProcessor": {
+      "type": "object",
+      "properties": {
+        "sensitivity": {
+          "type": "string",
+          "description": "Motion detection sensitivity: low, medium, high.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "motionDetectionSensitivity",
+            "values": [
+              {
+                "value": "low",
+                "description": "Low sensitivity."
+              },
+              {
+                "value": "medium",
+                "description": "Medium sensitivity."
+              },
+              {
+                "value": "high",
+                "description": "High sensitivity."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "outputMotionRegion": {
+          "type": "boolean",
+          "description": "Indicates whether the processor should detect and output the regions within the video frame where motion was detected. Default is true."
+        },
+        "eventAggregationWindow": {
+          "type": "string",
+          "description": "Time window duration on which events are aggregated before being emitted. Value must be specified in ISO8601 duration format (i.e. \"PT2S\" equals 2 seconds). Use 0 seconds for no aggregation. Default is 1 second."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "description": "Motion detection processor allows for motion detection on the video stream. It generates motion events whenever motion is present on the video.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.MotionDetectionProcessor"
+    },
+    "ObjectTrackingProcessor": {
+      "type": "object",
+      "properties": {
+        "accuracy": {
+          "type": "string",
+          "description": "Object tracker accuracy: low, medium, high. Higher accuracy leads to higher CPU consumption in average.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "objectTrackingAccuracy",
+            "values": [
+              {
+                "value": "low",
+                "description": "Low accuracy."
+              },
+              {
+                "value": "medium",
+                "description": "Medium accuracy."
+              },
+              {
+                "value": "high",
+                "description": "High accuracy."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "description": "Object tracker processor allows for continuous tracking of one of more objects over a finite sequence of video frames. It must be used downstream of an object detector extension node, thus allowing for the extension to be configured to to perform inferences on sparse frames through the use of the 'maximumSamplesPerSecond' sampling property. The object tracker node will then track the detected objects over the frames in which the detector is not invoked resulting on a smother tracking of detected objects across the continuum of video frames. The tracker will stop tracking objects which are not subsequently detected by the upstream detector on the subsequent detections.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ObjectTrackingProcessor"
+    },
+    "LineCrossingProcessor": {
+      "type": "object",
+      "required": [
+        "lines"
+      ],
+      "properties": {
+        "lines": {
+          "type": "array",
+          "description": "An array of lines used to compute line crossing events.",
+          "items": {
+            "$ref": "#/definitions/NamedLineBase"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "description": "Line crossing processor allows for the detection of tracked objects moving across one or more predefined lines. It must be downstream of an object tracker of downstream on an AI extension node that generates sequenceId for objects which are tracked across different frames of the video. Inference events are generated every time objects crosses from one side of the line to another.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.LineCrossingProcessor"
+    },
+    "ExtensionProcessorBase": {
+      "type": "object",
+      "required": [
+        "endpoint",
+        "image"
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "Endpoint details of the pipeline extension plugin.",
+          "$ref": "#/definitions/EndpointBase"
+        },
+        "image": {
+          "description": "Image transformations and formatting options to be applied to the video frame(s) prior submission to the pipeline extension plugin.",
+          "$ref": "#/definitions/ImageProperties"
+        },
+        "samplingOptions": {
+          "description": "Media sampling parameters that define how often media is submitted to the extension plugin.",
+          "$ref": "#/definitions/SamplingOptions"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "description": "Base class for pipeline extension processors. Pipeline extensions allow for custom media analysis and processing to be plugged into the Video Analyzer pipeline.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ExtensionProcessorBase"
+    },
+    "GrpcExtension": {
+      "type": "object",
+      "required": [
+        "dataTransfer"
+      ],
+      "properties": {
+        "dataTransfer": {
+          "description": "Specifies how media is transferred to the extension plugin.",
+          "$ref": "#/definitions/GrpcExtensionDataTransfer"
+        },
+        "extensionConfiguration": {
+          "type": "string",
+          "description": "An optional configuration string that is sent to the extension plugin. The configuration string is specific to each custom extension and it not understood neither validated by Video Analyzer. Please see https://aka.ms/ava-extension-grpc for details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtensionProcessorBase"
+        }
+      ],
+      "description": "GRPC extension processor allows pipeline extension plugins to be connected to the pipeline through over a gRPC channel. Extension plugins must act as an gRPC server. Please see https://aka.ms/ava-extension-grpc for details.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.GrpcExtension"
+    },
+    "GrpcExtensionDataTransfer": {
+      "type": "object",
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "sharedMemorySizeMiB": {
+          "type": "string",
+          "description": "The share memory buffer for sample transfers, in mebibytes. It can only be used with the 'SharedMemory' transfer mode."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Data transfer mode: embedded or sharedMemory.",
+          "enum": [
+            "embedded",
+            "sharedMemory"
+          ],
+          "x-ms-enum": {
+            "name": "grpcExtensionDataTransferMode",
+            "values": [
+              {
+                "value": "embedded",
+                "description": "Media samples are embedded into the gRPC messages. This mode is less efficient but it requires a simpler implementations and can be used with plugins which are not on the same node as the Video Analyzer module."
+              },
+              {
+                "value": "sharedMemory",
+                "description": "Media samples are made available through shared memory. This mode enables efficient data transfers but it requires that the extension plugin to be co-located on the same node and sharing the same shared memory space."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes how media is transferred to the extension plugin.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.GrpcExtensionDataTransfer"
+    },
+    "HttpExtension": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtensionProcessorBase"
+        }
+      ],
+      "description": "HTTP extension processor allows pipeline extension plugins to be connected to the pipeline through over the HTTP protocol. Extension plugins must act as an HTTP server. Please see https://aka.ms/ava-extension-http for details.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.HttpExtension"
+    },
+    "ImageProperties": {
+      "type": "object",
+      "properties": {
+        "scale": {
+          "$ref": "#/definitions/ImageScale"
+        },
+        "format": {
+          "$ref": "#/definitions/ImageFormatProperties"
+        }
+      },
+      "description": "Image transformations and formatting options to be applied to the video frame(s)."
+    },
+    "SamplingOptions": {
+      "type": "object",
+      "properties": {
+        "skipSamplesWithoutAnnotation": {
+          "type": "string",
+          "description": "When set to 'true', prevents frames without upstream inference data to be sent to the extension plugin. This is useful to limit the frames sent to the extension to pre-analyzed frames only. For example, when used downstream from a motion detector, this can enable for only frames in which motion has been detected to be further analyzed."
+        },
+        "maximumSamplesPerSecond": {
+          "type": "string",
+          "description": "Maximum rate of samples submitted to the extension. This prevents an extension plugin to be overloaded with data."
+        }
+      },
+      "description": "Defines how often media is submitted to the extension plugin."
+    },
+    "ImageScale": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Describes the image scaling mode to be applied. Default mode is 'pad'.",
+          "enum": [
+            "preserveAspectRatio",
+            "pad",
+            "stretch"
+          ],
+          "x-ms-enum": {
+            "name": "imageScaleMode",
+            "values": [
+              {
+                "value": "preserveAspectRatio",
+                "description": "Preserves the same aspect ratio as the input image. If only one image dimension is provided, the second dimension is calculated based on the input image aspect ratio. When 2 dimensions are provided, the image is resized to fit the most constraining dimension, considering the input image size and aspect ratio."
+              },
+              {
+                "value": "pad",
+                "description": "Pads the image with black horizontal stripes (letterbox) or black vertical stripes (pillar-box) so the image is resized to the specified dimensions while not altering the content aspect ratio."
+              },
+              {
+                "value": "stretch",
+                "description": "Stretches the original image so it resized to the specified dimensions."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "width": {
+          "type": "string",
+          "description": "The desired output image width."
+        },
+        "height": {
+          "type": "string",
+          "description": "The desired output image height."
+        }
+      },
+      "description": "Image scaling mode."
+    },
+    "ImageFormatProperties": {
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "Type discriminator for the derived types."
+        }
+      },
+      "description": "Base class for image formatting properties."
+    },
+    "ImageFormatRaw": {
+      "type": "object",
+      "required": [
+        "pixelFormat"
+      ],
+      "properties": {
+        "pixelFormat": {
+          "type": "string",
+          "description": "Pixel format to be applied to the raw image.",
+          "enum": [
+            "yuv420p",
+            "rgb565be",
+            "rgb565le",
+            "rgb555be",
+            "rgb555le",
+            "rgb24",
+            "bgr24",
+            "argb",
+            "rgba",
+            "abgr",
+            "bgra"
+          ],
+          "x-ms-enum": {
+            "name": "imageFormatRawPixelFormat",
+            "values": [
+              {
+                "value": "yuv420p",
+                "description": "Planar YUV 4:2:0, 12bpp, (1 Cr and Cb sample per 2x2 Y samples)."
+              },
+              {
+                "value": "rgb565be",
+                "description": "Packed RGB 5:6:5, 16bpp, (msb)   5R 6G 5B(lsb), big-endian."
+              },
+              {
+                "value": "rgb565le",
+                "description": "Packed RGB 5:6:5, 16bpp, (msb)   5R 6G 5B(lsb), little-endian."
+              },
+              {
+                "value": "rgb555be",
+                "description": "Packed RGB 5:5:5, 16bpp, (msb)1X 5R 5G 5B(lsb), big-endian , X=unused/undefined."
+              },
+              {
+                "value": "rgb555le",
+                "description": "Packed RGB 5:5:5, 16bpp, (msb)1X 5R 5G 5B(lsb), little-endian, X=unused/undefined."
+              },
+              {
+                "value": "rgb24",
+                "description": "Packed RGB 8:8:8, 24bpp, RGBRGB."
+              },
+              {
+                "value": "bgr24",
+                "description": "Packed RGB 8:8:8, 24bpp, BGRBGR."
+              },
+              {
+                "value": "argb",
+                "description": "Packed ARGB 8:8:8:8, 32bpp, ARGBARGB."
+              },
+              {
+                "value": "rgba",
+                "description": "Packed RGBA 8:8:8:8, 32bpp, RGBARGBA."
+              },
+              {
+                "value": "abgr",
+                "description": "Packed ABGR 8:8:8:8, 32bpp, ABGRABGR."
+              },
+              {
+                "value": "bgra",
+                "description": "Packed BGRA 8:8:8:8, 32bpp, BGRABGRA."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageFormatProperties"
+        }
+      ],
+      "description": "Raw image formatting.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatRaw"
+    },
+    "ImageFormatJpeg": {
+      "type": "object",
+      "properties": {
+        "quality": {
+          "type": "string",
+          "description": "Image quality value between 0 to 100 (best quality)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageFormatProperties"
+        }
+      ],
+      "description": "JPEG image encoding.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatJpeg"
+    },
+    "ImageFormatBmp": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageFormatProperties"
+        }
+      ],
+      "description": "BMP image encoding.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatBmp"
+    },
+    "ImageFormatPng": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageFormatProperties"
+        }
+      ],
+      "description": "PNG image encoding.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatPng"
+    },
+    "NamedLineBase": {
+      "type": "object",
+      "required": [
+        "@type",
+        "name"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The Type discriminator for the derived types."
+        },
+        "name": {
+          "type": "string",
+          "description": "Line name. Must be unique within the node."
+        }
+      },
+      "description": "Base class for named lines."
+    },
+    "NamedLineString": {
+      "type": "object",
+      "required": [
+        "line"
+      ],
+      "properties": {
+        "line": {
+          "type": "string",
+          "example": "[[0.3,0.2],[0.9,0.8]]",
+          "description": "Point coordinates for the line start and end, respectively. Example: '[[0.3, 0.2],[0.9, 0.8]]'. Each point is expressed as [LEFT, TOP] coordinate ratios ranging from 0.0 to 1.0, where [0,0] is the upper-left frame corner and [1, 1] is the bottom-right frame corner."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NamedLineBase"
+        }
+      ],
+      "description": "Describes a line configuration.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.NamedLineString"
+    },
+    "NamedPolygonBase": {
+      "type": "object",
+      "required": [
+        "@type",
+        "name"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The Type discriminator for the derived types."
+        },
+        "name": {
+          "type": "string",
+          "description": "Polygon name. Must be unique within the node."
+        }
+      },
+      "description": "Describes the named polygon."
+    },
+    "NamedPolygonString": {
+      "type": "object",
+      "required": [
+        "polygon"
+      ],
+      "properties": {
+        "polygon": {
+          "type": "string",
+          "example": "[[0.3, 0.2],[0.9, 0.8],[0.7, 0.6]]",
+          "description": "Point coordinates for the polygon. Example: '[[0.3, 0.2],[0.9, 0.8],[0.7, 0.6]]'. Each point is expressed as [LEFT, TOP] coordinate ratios ranging from 0.0 to 1.0, where [0,0] is the upper-left frame corner and [1, 1] is the bottom-right frame corner."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NamedPolygonBase"
+        }
+      ],
+      "description": "Describes a closed polygon configuration.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.NamedPolygonString"
+    },
+    "SignalGateProcessor": {
+      "type": "object",
+      "properties": {
+        "activationEvaluationWindow": {
+          "type": "string",
+          "example": "PT1.0S",
+          "description": "The period of time over which the gate gathers input events before evaluating them."
+        },
+        "activationSignalOffset": {
+          "type": "string",
+          "example": "-PT1.0S",
+          "description": "Signal offset once the gate is activated (can be negative). It determines the how much farther behind of after the signal will be let through based on the activation time. A negative offset indicates that data prior the activation time must be included on the signal that is let through, once the gate is activated. When used upstream of a file or video sink, this allows for scenarios such as recording buffered media prior an event, such as: record video 5 seconds prior motions is detected."
+        },
+        "minimumActivationTime": {
+          "type": "string",
+          "example": "PT1S",
+          "description": "The minimum period for which the gate remains open in the absence of subsequent triggers (events). When used upstream of a file or video sink, it determines the minimum length of the recorded video clip."
+        },
+        "maximumActivationTime": {
+          "type": "string",
+          "example": "PT2S",
+          "description": "The maximum period for which the gate remains open in the presence of subsequent triggers (events). When used upstream of a file or video sink, it determines the maximum length of the recorded video clip."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "description": "A signal gate determines when to block (gate) incoming media, and when to allow it through. It gathers input events over the activationEvaluationWindow, and determines whether to open or close the gate. See https://aka.ms/ava-signalgate for more information.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SignalGateProcessor"
+    },
+    "SpatialAnalysisOperationBase": {
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "discriminator": "@type",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "The Type discriminator for the derived types."
+        }
+      },
+      "description": "Base class for Azure Cognitive Services Spatial Analysis operations."
+    },
+    "SpatialAnalysisCustomOperation": {
+      "type": "object",
+      "required": [
+        "extensionConfiguration"
+      ],
+      "properties": {
+        "extensionConfiguration": {
+          "type": "string",
+          "description": "Custom configuration to pass to the Azure Cognitive Services Spatial Analysis module."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisOperationBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis custom operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisCustomOperation"
+    },
+    "SpatialAnalysisTypedOperationBase": {
+      "type": "object",
+      "properties": {
+        "debug": {
+          "type": "string",
+          "description": "If set to 'true', enables debugging mode for this operation."
+        },
+        "calibrationConfiguration": {
+          "type": "string",
+          "description": "Advanced calibration configuration."
+        },
+        "cameraConfiguration": {
+          "type": "string",
+          "description": "Advanced camera configuration."
+        },
+        "cameraCalibratorNodeConfiguration": {
+          "type": "string",
+          "description": "Advanced camera calibrator configuration."
+        },
+        "detectorNodeConfiguration": {
+          "type": "string",
+          "description": "Advanced detector node configuration."
+        },
+        "trackerNodeConfiguration": {
+          "type": "string",
+          "description": "Advanced tracker node configuration."
+        },
+        "enableFaceMaskClassifier": {
+          "type": "string",
+          "description": "If set to 'true', enables face mask detection for this operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisOperationBase"
+        }
+      ],
+      "description": "Base class for Azure Cognitive Services Spatial Analysis typed operations."
+    },
+    "SpatialAnalysisOperationEventBase": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "string",
+          "description": "The event threshold."
+        },
+        "focus": {
+          "type": "string",
+          "description": "The operation focus type.",
+          "enum": [
+            "center",
+            "bottomCenter",
+            "footprint"
+          ],
+          "x-ms-enum": {
+            "name": "spatialAnalysisOperationFocus",
+            "values": [
+              {
+                "value": "center",
+                "description": "The center of the object."
+              },
+              {
+                "value": "bottomCenter",
+                "description": "The bottom center of the object."
+              },
+              {
+                "value": "footprint",
+                "description": "The footprint."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Defines the Azure Cognitive Services Spatial Analysis operation eventing configuration."
+    },
+    "SpatialAnalysisPersonCountEvent": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "type": "string",
+          "description": "The event trigger type.",
+          "enum": [
+            "event",
+            "interval"
+          ],
+          "x-ms-enum": {
+            "name": "spatialAnalysisPersonCountEventTrigger",
+            "values": [
+              {
+                "value": "event",
+                "description": "Event trigger."
+              },
+              {
+                "value": "interval",
+                "description": "Interval trigger."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "outputFrequency": {
+          "type": "string",
+          "description": "The event or interval output frequency."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisOperationEventBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person count operation eventing configuration."
+    },
+    "SpatialAnalysisPersonCountZoneEvents": {
+      "type": "object",
+      "required": [
+        "zone"
+      ],
+      "properties": {
+        "zone": {
+          "description": "The named zone.",
+          "$ref": "#/definitions/NamedPolygonBase"
+        },
+        "events": {
+          "type": "array",
+          "description": "The event configuration.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonCountEvent"
+          }
+        }
+      }
+    },
+    "SpatialAnalysisPersonCountOperation": {
+      "type": "object",
+      "required": [
+        "zones"
+      ],
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "The list of zones and optional events.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonCountZoneEvents"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisTypedOperationBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person count operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisPersonCountOperation"
+    },
+    "SpatialAnalysisPersonZoneCrossingEvent": {
+      "type": "object",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "description": "The event type.",
+          "enum": [
+            "zoneCrossing",
+            "zoneDwellTime"
+          ],
+          "x-ms-enum": {
+            "name": "spatialAnalysisPersonZoneCrossingEventType",
+            "values": [
+              {
+                "value": "zoneCrossing",
+                "description": "Zone crossing event type."
+              },
+              {
+                "value": "zoneDwellTime",
+                "description": "Zone dwell time event type."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisOperationEventBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person crossing zone operation eventing configuration."
+    },
+    "SpatialAnalysisPersonZoneCrossingZoneEvents": {
+      "type": "object",
+      "required": [
+        "zone"
+      ],
+      "properties": {
+        "zone": {
+          "description": "The named zone.",
+          "$ref": "#/definitions/NamedPolygonBase"
+        },
+        "events": {
+          "type": "array",
+          "description": "The event configuration.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonZoneCrossingEvent"
+          }
+        }
+      }
+    },
+    "SpatialAnalysisPersonZoneCrossingOperation": {
+      "type": "object",
+      "required": [
+        "zones"
+      ],
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "The list of zones with optional events.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonZoneCrossingZoneEvents"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisTypedOperationBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person zone crossing operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisPersonZoneCrossingOperation"
+    },
+    "SpatialAnalysisPersonDistanceEvent": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "type": "string",
+          "description": "The event trigger type.",
+          "enum": [
+            "event",
+            "interval"
+          ],
+          "x-ms-enum": {
+            "name": "spatialAnalysisPersonDistanceEventTrigger",
+            "values": [
+              {
+                "value": "event",
+                "description": "Event trigger."
+              },
+              {
+                "value": "interval",
+                "description": "Interval trigger."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "outputFrequency": {
+          "type": "string",
+          "description": "The event or interval output frequency."
+        },
+        "minimumDistanceThreshold": {
+          "type": "string",
+          "description": "The minimum distance threshold"
+        },
+        "maximumDistanceThreshold": {
+          "type": "string",
+          "description": "The maximum distance threshold"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisOperationEventBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person distance operation eventing configuration."
+    },
+    "SpatialAnalysisPersonDistanceZoneEvents": {
+      "type": "object",
+      "required": [
+        "zone"
+      ],
+      "properties": {
+        "zone": {
+          "description": "The named zone.",
+          "$ref": "#/definitions/NamedPolygonBase"
+        },
+        "events": {
+          "type": "array",
+          "description": "The event configuration.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonDistanceEvent"
+          }
+        }
+      }
+    },
+    "SpatialAnalysisPersonDistanceOperation": {
+      "type": "object",
+      "required": [
+        "zones"
+      ],
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "The list of zones with optional events.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonDistanceZoneEvents"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisTypedOperationBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person distance operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisPersonDistanceOperation"
+    },
+    "SpatialAnalysisPersonLineCrossingEvent": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisOperationEventBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person line crossing operation eventing configuration."
+    },
+    "SpatialAnalysisPersonLineCrossingLineEvents": {
+      "type": "object",
+      "required": [
+        "line"
+      ],
+      "properties": {
+        "line": {
+          "description": "The named line.",
+          "$ref": "#/definitions/NamedLineBase"
+        },
+        "events": {
+          "type": "array",
+          "description": "The event configuration.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonLineCrossingEvent"
+          }
+        }
+      }
+    },
+    "SpatialAnalysisPersonLineCrossingOperation": {
+      "type": "object",
+      "required": [
+        "lines"
+      ],
+      "properties": {
+        "lines": {
+          "type": "array",
+          "description": "The list of lines with optional events.",
+          "items": {
+            "$ref": "#/definitions/SpatialAnalysisPersonLineCrossingLineEvents"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpatialAnalysisTypedOperationBase"
+        }
+      ],
+      "description": "Defines a Spatial Analysis person line crossing operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisPersonLineCrossingOperation"
+    },
+    "AssetSink": {
+      "type": "object",
+      "properties": {
+        "assetContainerSasUrl": {
+          "type": "string",
+          "description": "An Azure Storage SAS URL which points to container, such as the one created for an Azure Media Services asset.",
+          "example": "https://azurestorage.com/mycontainer?sig=mysecretkey"
+        },
+        "segmentLength": {
+          "type": "string",
+          "example": "PT30S",
+          "description": "When writing media to an asset, wait until at least this duration of media has been accumulated on the Edge. Expressed in increments of 30 seconds, with a minimum of 30 seconds and a recommended maximum of 5 minutes."
+        },
+        "localMediaCachePath": {
+          "type": "string",
+          "description": "Path to a local file system directory for temporary caching of media before writing to an Asset. Used when the Edge device is temporarily disconnected from Azure.",
+          "example": "/var/lib/tmp/"
+        },
+        "localMediaCacheMaximumSizeMiB": {
+          "type": "string",
+          "description": "Maximum amount of disk space that can be used for temporary caching of media."
+        }
+      },
+      "required": [
+        "@type",
+        "assetContainerSasUrl",
+        "localMediaCachePath",
+        "localMediaCacheMaximumSizeMiB"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SinkNodeBase"
+        }
+      ],
+      "description": "Enables a pipeline topology to record media to an Azure Media Services asset for subsequent playback.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.AssetSink"
+    },
+    "RemoteDeviceAdapter": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the remote device adapter."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Read-only system metadata associated with this object."
+        },
+        "properties": {
+          "$ref": "#/definitions/RemoteDeviceAdapterProperties",
+          "description": "Properties of the remote device adapter."
+        }
+      },
+      "description": "The Video Analyzer edge module can act as a transparent gateway for video, enabling IoT devices to send video to the cloud from behind a firewall. A remote device adapter should be created for each such IoT device. Communication between the cloud and IoT device would then flow via the Video Analyzer edge module."
+    },
+    "RemoteDeviceAdapterProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "An optional description for the remote device adapter.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The IoT device to which this remote device will connect.",
+          "$ref": "#/definitions/RemoteDeviceAdapterTarget"
+        },
+        "iotHubDeviceConnection": {
+          "description": "Information that enables communication between the IoT Hub and the IoT device - allowing this edge module to act as a transparent gateway between the two.",
+          "$ref": "#/definitions/IotHubDeviceConnection"
+        }
+      },
+      "required": [
+        "target",
+        "iotHubDeviceConnection"
+      ],
+      "description": "Remote device adapter properties."
+    },
+    "RemoteDeviceAdapterTarget": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "Hostname or IP address of the remote device.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "description": "Properties of the remote device adapter target."
+    },
+    "IotHubDeviceConnection": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "description": "The name of the IoT device configured and managed in IoT Hub. (case-sensitive)",
+          "type": "string"
+        },
+        "credentials": {
+          "description": "IoT device connection credentials. Currently IoT device symmetric key credentials are supported.",
+          "$ref": "#/definitions/CredentialsBase"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "description": "Information that enables communication between the IoT Hub and the IoT device - allowing this edge module to act as a transparent gateway between the two."
+    },
+    "RemoteDeviceAdapterCollection": {
+      "description": "A list of remote device adapters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of remote device adapters.",
+          "items": {
+            "$ref": "#/definitions/RemoteDeviceAdapter"
+          }
+        },
+        "@continuationToken": {
+          "type": "string",
+          "description": "A continuation token to use in subsequent calls to enumerate through the remote device adapter collection. This is used when the collection contains too many results to return in one response."
+        }
+      },
+      "type": "object"
+    },
+    "CognitiveServicesVisionProcessor": {
+      "type": "object",
+      "required": [
+        "operation",
+        "endpoint"
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "Endpoint to which this processor should connect.",
+          "$ref": "#/definitions/EndpointBase"
+        },
+        "image": {
+          "description": "Describes the parameters of the image that is sent as input to the endpoint.",
+          "$ref": "#/definitions/ImageProperties"
+        },
+        "samplingOptions": {
+          "description": "Describes the sampling options to be applied when forwarding samples to the extension.",
+          "$ref": "#/definitions/SamplingOptions"
+        },
+        "operation": {
+          "description": "Describes the Spatial Analysis operation to be used in the Cognitive Services Vision processor.",
+          "$ref": "#/definitions/SpatialAnalysisOperationBase"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessorNodeBase"
+        }
+      ],
+      "description": "A processor that allows the pipeline topology to send video frames to a Cognitive Services Vision extension. Inference results are relayed to downstream nodes.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.CognitiveServicesVisionProcessor"
+    },
+    "DiscoveredOnvifDeviceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of ONVIF devices that have been discovered in the same subnet as the IoT Edge device.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredOnvifDevice"
+          }
+        }
+      },
+      "description": "A list of ONVIF devices that were discovered in the same subnet as the IoT Edge device."
+    },
+    "DiscoveredOnvifDevice": {
+      "type": "object",
+      "properties": {
+        "serviceIdentifier": {
+          "type": "string",
+          "description": "The unique identifier of the ONVIF device that was discovered in the same subnet as the IoT Edge device."
+        },
+        "remoteIPAddress": {
+          "type": "string",
+          "description": "The IP address of the ONVIF device that was discovered in the same subnet as the IoT Edge device."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "An array of hostnames for the ONVIF discovered devices that are in the same subnet as the IoT Edge device.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "An array of media profile endpoints that the ONVIF discovered device supports.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The discovered properties of the ONVIF device that are returned during the discovery."
+    },
+    "OnvifDevice": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "object",
+          "description": "The hostname of the ONVIF device.",
+          "$ref": "#/definitions/OnvifHostName"
+        },
+        "systemDateTime": {
+          "description": "The system date and time of the ONVIF device.",
+          "$ref": "#/definitions/OnvifSystemDateTime"
+        },
+        "dns": {
+          "description": "The ONVIF device DNS properties.",
+          "$ref": "#/definitions/OnvifDns"
+        },
+        "mediaProfiles": {
+          "type": "array",
+          "description": "An array of of ONVIF media profiles supported by the ONVIF device.",
+          "items": {
+            "$ref": "#/definitions/MediaProfile"
+          }
+        }
+      },
+      "description": "The ONVIF device properties."
+    },
+    "OnvifSystemDateTime": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "An enum value determining whether the date time was configured using NTP or manual.",
+          "enum": [
+            "Ntp",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "onvifSystemDateTimeType",
+            "values": [
+              {
+                "value": "Ntp"
+              },
+              {
+                "value": "Manual"
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "time": {
+          "type": "string",
+          "description": "The device datetime returned when calling the request."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone of the ONVIF device datetime."
+        }
+      },
+      "description": "The ONVIF device DNS properties."
+    },
+    "OnvifHostName": {
+      "type": "object",
+      "properties": {
+        "fromDhcp": {
+          "type": "boolean",
+          "description": "Result value showing if the ONVIF device is configured to use DHCP."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the ONVIF device."
+        }
+      },
+      "description": "The ONVIF device DNS properties."
+    },
+    "OnvifDns": {
+      "type": "object",
+      "properties": {
+        "fromDhcp": {
+          "type": "boolean",
+          "description": "Result value showing if the ONVIF device is configured to use DHCP."
+        },
+        "ipv4Address": {
+          "type": "array",
+          "description": "An array of IPv4 address for the discovered ONVIF device.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Address": {
+          "type": "array",
+          "description": "An array of IPv6 address for the discovered ONVIF device.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The ONVIF device DNS properties."
+    },
+    "MediaProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Media Profile."
+        },
+        "mediaUri": {
+          "type": "object",
+          "description": "Object representing the URI that will be used to request for media streaming.",
+          "items": {
+            "$ref": "#/definitions/MediaUri"
+          }
+        },
+        "videoEncoderConfiguration": {
+          "type": "object",
+          "description": "The Video encoder configuration.",
+          "$ref": "#/definitions/VideoEncoderConfiguration"
+        }
+      },
+      "description": "Class representing the ONVIF MediaProfiles."
+    },
+    "MediaUri": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI that can be used for media streaming."
+        }
+      },
+      "description": "Object representing the URI that will be used to request for media streaming."
+    },
+    "VideoEncoderConfiguration": {
+      "type": "object",
+      "properties": {
+        "encoding": {
+          "type": "string",
+          "description": "The video codec used by the Media Profile.",
+          "enum": [
+            "JPEG",
+            "H264",
+            "MPEG4"
+          ],
+          "x-ms-enum": {
+            "name": "videoEncoding",
+            "values": [
+              {
+                "value": "JPEG",
+                "description": "The Media Profile uses JPEG encoding."
+              },
+              {
+                "value": "H264",
+                "description": "The Media Profile uses H264 encoding."
+              },
+              {
+                "value": "MPEG4",
+                "description": "The Media Profile uses MPEG4 encoding."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "quality": {
+          "type": "number",
+          "description": "Relative value representing the quality of the video."
+        },
+        "resolution": {
+          "description": "The Video Resolution.",
+          "$ref": "#/definitions/VideoResolution"
+        },
+        "rateControl": {
+          "type": "object",
+          "description": "The Video's rate control.",
+          "$ref": "#/definitions/RateControl"
+        },
+        "h264": {
+          "type": "object",
+          "description": "The H264 Configuration.",
+          "$ref": "#/definitions/H264Configuration"
+        },
+        "mpeg4": {
+          "description": "The H264 Configuration.",
+          "$ref": "#/definitions/MPEG4Configuration"
+        }
+      },
+      "description": "Class representing the MPEG4 Configuration."
+    },
+    "MPEG4Configuration": {
+      "type": "object",
+      "properties": {
+        "govLength": {
+          "type": "number",
+          "description": "Group of Video frames length."
+        },
+        "profile": {
+          "type": "string",
+          "description": "The MPEG4 Profile",
+          "enum": [
+            "SP",
+            "ASP"
+          ],
+          "x-ms-enum": {
+            "name": "MPEG4Profile",
+            "values": [
+              {
+                "value": "SP",
+                "description": "Simple Profile."
+              },
+              {
+                "value": "ASP",
+                "description": "Advanced Simple Profile."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Class representing the MPEG4 Configuration."
+    },
+    "RateControl": {
+      "type": "object",
+      "properties": {
+        "bitRateLimit": {
+          "type": "number",
+          "description": "the maximum output bitrate in kbps."
+        },
+        "encodingInterval": {
+          "type": "number",
+          "description": "Interval at which images are encoded and transmitted."
+        },
+        "frameRateLimit": {
+          "type": "number",
+          "description": "Maximum output framerate in fps."
+        },
+        "guaranteedFrameRate": {
+          "type": "boolean",
+          "description": "A value of true indicates that frame rate is a fixed value rather than an upper limit, and that the video encoder shall prioritize frame rate over all other adaptable configuration values such as bitrate."
+        }
+      },
+      "description": "Class  representing the video's rate control."
+    },
+    "VideoResolution": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "description": "The number of columns of the Video image."
+        },
+        "height": {
+          "type": "number",
+          "description": "The number of lines of the Video image."
+        }
+      },
+      "description": "The Video resolution."
+    },
+    "H264Configuration": {
+      "type": "object",
+      "properties": {
+        "govLength": {
+          "type": "number",
+          "description": "Group of Video frames length."
+        },
+        "profile": {
+          "type": "string",
+          "description": "The H264 Profile",
+          "enum": [
+            "Baseline",
+            "Main",
+            "Extended",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "H264Profile",
+            "values": [
+              {
+                "value": "Baseline"
+              },
+              {
+                "value": "Main"
+              },
+              {
+                "value": "Extended"
+              },
+              {
+                "value": "High"
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Class representing the H264 Configuration."
+    }
+  }
+}

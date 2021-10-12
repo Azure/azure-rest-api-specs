@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1.0",
+    "title": "Azure Video Analyzer for Edge",
+    "description": "Azure Video Analyzer helpers for IoT Edge direct method calls.",
+    "contact": {
+      "email": "videoanalyzerhelp@microsoft.com"
+    }
+  },
+  "security": [
+    {
+      "sharedAccessSignature": []
+    }
+  ],
+  "paths": {},
+  "securityDefinitions": {
+    "sharedAccessSignature": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "MethodRequest": {
+      "type": "object",
+      "required": [
+        "methodName"
+      ],
+      "properties": {
+        "methodName": {
+          "type": "string",
+          "description": "Direct method method name.",
+          "readOnly": true
+        },
+        "@apiVersion": {
+          "type": "string",
+          "description": "Video Analyzer API version.",
+          "enum": [
+            "1.1"
+          ],
+          "x-ms-enum": {
+            "name": "apiVersionEnum",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "methodName",
+      "description": "Base class for direct method calls."
+    },
+    "PipelineTopologySetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologySet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "pipelineTopology"
+      ],
+      "properties": {
+        "pipelineTopology": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
+        }
+      },
+      "description": "Creates a new pipeline topology or updates an existing one."
+    },
+    "PipelineTopologySetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        },
+        {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
+        }
+      ],
+      "description": "Pipeline topology describes the processing steps to be applied when processing media for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which acquires data from a RTSP camera, process it with an specific AI model and stored the data on the cloud can be reused across many different cameras, as long as the same processing should be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized, thus allowing individual pipelines to refer to different values, such as individual cameras RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for media to be ingested from cameras.\r\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+    },
+    "LivePipelineSetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineSet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "livePipeline"
+      ],
+      "properties": {
+        "livePipeline": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
+        }
+      },
+      "description": "Creates a new live pipeline or updates an existing one."
+    },
+    "LivePipelineSetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        },
+        {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
+        }
+      ],
+      "description": "Live Pipeline represents an unique instance of a pipeline topology which is used for real-time content ingestion and analysis."
+    },
+    "MethodRequestEmptyBodyBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        }
+      }
+    },
+    "PipelineTopologyListRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologyList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "description": "List all existing pipeline topologies."
+    },
+    "PipelineTopologyGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologyGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Retrieves an existing pipeline topology."
+    },
+    "PipelineTopologyDeleteRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologyDelete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deletes an existing pipeline topology."
+    },
+    "LivePipelineListRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "description": "List all existing live pipelines."
+    },
+    "LivePipelineGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Retrieves an existing live pipeline."
+    },
+    "LivePipelineActivateRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineActivate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Activates an existing live pipeline."
+    },
+    "LivePipelineDeactivateRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineDeactivate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deactivates an existing live pipeline."
+    },
+    "LivePipelineDeleteRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineDelete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deletes an existing live pipeline."
+    },
+    "RemoteDeviceAdapterSetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterSet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "remoteDeviceAdapter"
+      ],
+      "properties": {
+        "remoteDeviceAdapter": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/RemoteDeviceAdapter"
+        }
+      },
+      "description": "Creates a new remote device adapter or updates an existing one."
+    },
+    "RemoteDeviceAdapterSetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        },
+        {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/RemoteDeviceAdapter"
+        }
+      ],
+      "description": "The Video Analyzer edge module can act as a transparent gateway for video, enabling IoT devices to send video to the cloud from behind a firewall. A remote device adapter should be created for each such IoT device. Communication between the cloud and IoT device would then flow via the Video Analyzer edge module."
+    },
+    "RemoteDeviceAdapterListRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "description": "List all existing remote device adapters."
+    },
+    "RemoteDeviceAdapterGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Retrieves an existing remote device adapter."
+    },
+    "RemoteDeviceAdapterDeleteRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteDeviceAdapterDelete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deletes an existing remote device adapter."
+    },
+    "OnvifDeviceDiscoverRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "properties": {
+        "discoveryDuration": {
+          "type": "string",
+          "description": "The amount of time that the ONVIF device discovery will wait for supported device responses."
+        }
+      },
+      "description": "OnvifDeviceDiscover request body."
+    },
+    "OnvifDeviceDiscoverRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "onvifDeviceDiscover",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "properties": {
+        "onvifDeviceDiscoverRequestBody": {
+          "$ref": "#/definitions/OnvifDeviceDiscoverRequestBody"
+        }
+      },
+      "description": "Lists all the discoverable ONVIF devices on the same subnet as the Edge Module."
+    },
+    "OnvifDeviceGetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "endpoint"
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "ONVIF device endpoint.",
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/EndpointBase"
+        }
+      },
+      "description": "OnvifDeviceGet request body."
+    },
+    "OnvifDeviceGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "onvifDeviceGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "onvifDeviceGetRequestBody"
+      ],
+      "properties": {
+        "onvifDeviceGetRequestBody": {
+          "$ref": "#/definitions/OnvifDeviceGetRequestBody"
+        }
+      },
+      "description": "Retrieves properties and media profiles of an ONVIF device."
+    }
+  }
+}
