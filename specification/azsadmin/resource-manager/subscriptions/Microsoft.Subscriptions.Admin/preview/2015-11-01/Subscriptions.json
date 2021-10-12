@@ -5,7 +5,7 @@
     "title": "SubscriptionsManagementClient",
     "description": "The Admin Subscriptions Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -34,6 +34,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -54,7 +60,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "UpdateEncryption",
+        "operationId": "Subscriptions_UpdateEncryption",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -64,6 +70,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK"
           }
@@ -81,7 +93,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "RestoreData",
+        "operationId": "Subscriptions_RestoreData",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -91,6 +103,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -111,7 +129,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "CheckIdentityHealth",
+        "operationId": "Subscriptions_CheckIdentityHealth",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -121,6 +139,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -157,6 +181,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "204": {
             "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
           },
@@ -194,6 +224,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "204": {
             "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
           },
@@ -228,6 +264,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -238,7 +280,7 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "x-ms-odata": "#/definitions/Subscription"
+        "x-ms-odata": "#/definitions/SubscriptionDefinition"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability": {
@@ -265,19 +307,22 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}": {
       "get": {
         "x-ms-examples": {
           "Get a specified subscription.": {
@@ -294,17 +339,23 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           }
         }
@@ -325,26 +376,32 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/NewSubscriptionParameter"
+            "$ref": "#/parameters/SubscriptionDefinitionParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           }
         }
@@ -365,13 +422,19 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK"
           },
@@ -417,35 +480,78 @@
       },
       "x-ms-azure-resource": true
     },
+    "Error": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Operation": {
       "description": "Supported REST operation.",
       "type": "object",
       "properties": {
         "display": {
           "description": "Display information for the operation.",
-          "type": "object",
-          "properties": {
-            "description": {
-              "description": "Description for the operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Display name of the operation.",
-              "type": "string",
-              "readOnly": true
-            },
-            "provider": {
-              "description": "Resource provider display name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource type display name related to the operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
         },
         "name": {
           "description": "Name of the operation being performed on an object.",
@@ -770,8 +876,8 @@
         }
       }
     },
-    "Subscription": {
-      "description": "List of supported operations.",
+    "SubscriptionDefinition": {
+      "description": "Subscription object properties.",
       "type": "object",
       "properties": {
         "delegatedProviderSubscriptionId": {
@@ -814,7 +920,8 @@
           "description": "Directory tenant identifier.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "SubscriptionList": {
       "description": "List of subscriptions.",
@@ -823,7 +930,7 @@
           "type": "array",
           "description": "Subscription definition.",
           "items": {
-            "$ref": "#/definitions/Subscription"
+            "$ref": "#/definitions/SubscriptionDefinition"
           }
         },
         "nextLink": {
@@ -993,7 +1100,8 @@
         },
         "count": {
           "description": "Number of measurements for metric sample period.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "properties": {
           "x-ms-client-name": "extendedProperties",
@@ -1218,20 +1326,20 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "SubscriptionParameter": {
-      "description": "Subscription parameter.",
-      "name": "subscription",
+    "TargetSubscriptionIdParameter": {
+      "description": "The target subscription ID.",
+      "name": "targetSubscriptionId",
       "in": "path",
       "type": "string",
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "NewSubscriptionParameter": {
+    "SubscriptionDefinitionParameter": {
       "description": "Subscription parameter.",
-      "name": "newSubscription",
+      "name": "subscriptionDefinition",
       "in": "body",
       "schema": {
-        "$ref": "#/definitions/Subscription"
+        "$ref": "#/definitions/SubscriptionDefinition"
       },
       "required": true,
       "x-ms-parameter-location": "method"

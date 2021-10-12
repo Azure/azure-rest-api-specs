@@ -1,0 +1,264 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "ContainerRegistryManagementClient",
+    "description": "Admin Container Registry Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configurations/{configurationName}": {
+      "put": {
+        "x-ms-examples": {
+          "Returns container registry overall configuration properties.": {
+            "$ref": "./examples/Configuration/PutConfiguration.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryConfiguration"
+        ],
+        "description": "Configure container registry overall configuration properties.",
+        "operationId": "ContainerRegistryConfiguration_Put",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Container registry overall configuration properties is being returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an existing container registry quota.": {
+            "$ref": "./examples/Configuration/DeleteConfiguration.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryConfiguration"
+        ],
+        "description": "Delete an existing container registry configuration",
+        "operationId": "ContainerRegistryConfiguration_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The container registry configuration has been deleted."
+          },
+          "204": {
+            "description": "NotFound -- The container registry configuration not found."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-ms-examples": {
+          "Returns the specified configuration.": {
+            "$ref": "./examples/Configuration/GetConfiguration.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryConfiguration"
+        ],
+        "description": "Returns the specified configuration details.",
+        "operationId": "ContainerRegistryConfiguration_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The configuration has been returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configurations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of configuration at the given location.": {
+            "$ref": "./examples/Configuration/ListConfiguration.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryConfiguration"
+        ],
+        "description": "Returns a list of configuration at the given location.",
+        "operationId": "ContainerRegistryConfiguration_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of configuration has been returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerRegistryConfiguration": {
+      "description": "Container registry configuration property.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry configuration property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContainerRegistryConfigurationProperty"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ContainerRegistryConfigurationProperty": {
+      "description": "Container registry configuration property.",
+      "type": "object",
+      "properties": {
+        "maximumCapacityInGiB": {
+          "description": "Total storage capacity (GiB) which can used by the registry.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ContainerRegistryConfigurationList": {
+      "description": "List of configuration.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of configuration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistryConfiguration"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConfigurationNameParameter": {
+      "description": "The name of the configuration.",
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationParameter": {
+      "description": "The properties of configuration being created or updated.",
+      "name": "configurationObject",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ContainerRegistryConfiguration"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -27,17 +27,13 @@ openapi-type: arm
 tag: package-2015-06-15
 ```
 
-### Tag: package-2015-06-15
-
-These settings apply only when `--tag=package-2015-06-15` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-06-15'
+``` yaml
 input-file:
-    - "Microsoft.Network.Admin/preview/2015-06-15/Network.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/LoadBalancers.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/Quotas.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json"
+    - Microsoft.Network.Admin/preview/2015-06-15/Network.json
+    - Microsoft.Network.Admin/preview/2015-06-15/LoadBalancers.json
+    - Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json
+    - Microsoft.Network.Admin/preview/2015-06-15/Quotas.json
+    - Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json
 ```
 
 ---
@@ -58,7 +54,7 @@ csharp:
   clear-output-folder: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -78,11 +74,11 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+
+#exclude-file:  
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

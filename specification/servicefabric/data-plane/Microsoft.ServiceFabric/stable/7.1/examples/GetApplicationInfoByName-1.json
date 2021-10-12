@@ -1,0 +1,24 @@
+{
+  "operationId": "GetApplicationInfo",
+  "description": "This example shows how to get information about an application using it's identifier. If the application is found, information about it is returned with 200 status code. If the application is not found, empty content is returned with 204 status code.",
+  "parameters": {
+    "api-version": "6.0",
+    "applicationId": "samples~CalculatorApp"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Id": "samples~CalculatorApp",
+        "Name": "fabric:/samples/CalculatorApp",
+        "TypeName": "CalculatorApp",
+        "TypeVersion": "1.0",
+        "Status": "Ready",
+        "Parameters": [],
+        "HealthState": "Ok",
+        "ApplicationDefinitionKind": "ServiceFabricApplicationDescription"
+      }
+    },
+    "204": {}
+  }
+}

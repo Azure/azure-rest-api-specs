@@ -27,7 +27,7 @@
                 "enabledState": "Enabled",
                 "mode": "Prevention",
                 "defaultRedirectUrl": "http://www.bing.com",
-                "defaultCustomBlockResponseStatusCode": 499,
+                "defaultCustomBlockResponseStatusCode": 429,
                 "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
               },
               "rateLimitRules": {
@@ -44,6 +44,7 @@
                         "selector": null,
                         "operator": "IPMatch",
                         "negateCondition": false,
+                        "transforms": [],
                         "matchValue": [
                           "192.168.1.0/24",
                           "10.0.0.0/24"
@@ -66,6 +67,7 @@
                         "selector": null,
                         "operator": "GeoMatch",
                         "negateCondition": false,
+                        "transforms": [],
                         "matchValue": [
                           "CH"
                         ]
@@ -75,8 +77,23 @@
                         "selector": "UserAgent",
                         "operator": "Contains",
                         "negateCondition": false,
+                        "transforms": [],
                         "matchValue": [
                           "windows"
+                        ]
+                      },
+                      {
+                        "matchVariable": "QueryString",
+                        "selector": "search",
+                        "operator": "Contains",
+                        "negateCondition": false,
+                        "transforms": [
+                          "UrlDecode",
+                          "Lowercase"
+                        ],
+                        "matchValue": [
+                          "<?php",
+                          "?>"
                         ]
                       }
                     ],
@@ -108,7 +125,7 @@
                   }
                 ]
               },
-              "cdnEndpointLinks": [
+              "endpointLinks": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
                 },
@@ -137,7 +154,7 @@
                 "enabledState": "Enabled",
                 "mode": "Prevention",
                 "defaultRedirectUrl": "http://www.bing.com",
-                "defaultCustomBlockResponseStatusCode": 499,
+                "defaultCustomBlockResponseStatusCode": 429,
                 "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
               },
               "rateLimitRules": {
@@ -154,6 +171,7 @@
                         "selector": null,
                         "operator": "IPMatch",
                         "negateCondition": false,
+                        "transforms": [],
                         "matchValue": [
                           "192.168.1.0/24",
                           "10.0.0.0/24"
@@ -176,6 +194,7 @@
                         "selector": null,
                         "operator": "GeoMatch",
                         "negateCondition": false,
+                        "transforms": [],
                         "matchValue": [
                           "CH"
                         ]
@@ -187,6 +206,20 @@
                         "negateCondition": false,
                         "matchValue": [
                           "windows"
+                        ]
+                      },
+                      {
+                        "matchVariable": "QueryString",
+                        "selector": "search",
+                        "operator": "Contains",
+                        "negateCondition": false,
+                        "transforms": [
+                          "UrlDecode",
+                          "Lowercase"
+                        ],
+                        "matchValue": [
+                          "<?php",
+                          "?>"
                         ]
                       }
                     ],
@@ -218,7 +251,7 @@
                   }
                 ]
               },
-              "cdnEndpointLinks": [
+              "endpointLinks": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint3"
                 }
