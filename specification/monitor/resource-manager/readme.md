@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-2021-09-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2021-09-01-only'
 input-file:
-- Microsoft.Insights/stable/2021-09-01-only/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2021-09-01/privateLinkScopes_API.json
 ```
 
 
