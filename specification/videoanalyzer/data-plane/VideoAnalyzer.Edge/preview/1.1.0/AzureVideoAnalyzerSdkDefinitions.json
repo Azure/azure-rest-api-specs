@@ -293,7 +293,7 @@
           "$ref": "#/definitions/OnvifDeviceDiscoverRequestBody"
         }
       },
-      "description": "Lists all the discoverable ONVIF devices on the same subnet as the Edge Module. "
+      "description": "Lists all the discoverable ONVIF devices on the same subnet as the Edge Module."
     },
     "OnvifDeviceGetRequestBody": {
       "type": "object",
@@ -303,20 +303,12 @@
         }
       ],
       "required": [
-        "remoteIPAddress"
+        "endpoint"
       ],
       "properties": {
-        "remoteIPAddress": {
-          "type": "string",
-          "description": "The ONVIF device remote IP Address."
-        },
-        "username": {
-          "type": "string",
-          "description": "Username to be presented as part of the ONVIF device credentials."
-        },
-        "password": {
-          "type": "string",
-          "description": "Password to be presented as part of the ONVIF device credentials."
+        "endpoint": {
+          "description": "ONVIF device endpoint.",
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/EndpointBase"
         }
       },
       "description": "OnvifDeviceGet request body."
