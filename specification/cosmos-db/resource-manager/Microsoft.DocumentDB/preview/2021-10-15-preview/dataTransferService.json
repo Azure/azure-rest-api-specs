@@ -244,6 +244,11 @@
         "destination": {
           "$ref": "#/definitions/DataTransferDataSourceSink",
           "description": "Destination DataStore details"
+        },
+        "workerCount": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Worker Count"
         }
       },
       "required": [
@@ -273,16 +278,25 @@
           "type": "string",
           "description": "Job Status"
         },
-        "percentComplete": {
+        "percentageComplete": {
           "readOnly": true,
           "type": "number",
           "description": "Percentage of completion."
         },
-        "lastUpdated": {
+        "lastUpdatedUtcTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Last Updated Time (ISO-8601 format)."
+        },
+        "workerCount": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Worker Count"
+        },
+        "error": {
+          "$ref": "./cosmos-db.json#/definitions/ErrorResponse",
+          "description": "Error response for Faulted job"
         }
       }
     },
