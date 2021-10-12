@@ -52,6 +52,102 @@
         }
       }
     },
+    "/Providers/Microsoft.CustomerLockbox/TenantOptedIn/{tenantId}": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Get Customer Lockbox request",
+        "operationId": "Get_TenantOptedIn",
+        "x-ms-examples": {
+          "check if a TenantId is Optedin": {
+            "$ref": "./examples/TenantOptedIn.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieval of Opt-in status for Tenant successful.",
+            "schema": {
+              "$ref": "#/definitions/TenantOptInResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/Providers/Microsoft.CustomerLockbox/EnableLockbox": {
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Enable Tenant for Lockbox ",
+        "operationId": "Post_EnableLockbox",
+        "x-ms-examples": {
+          "Enable Tenant in Lockbox": {
+            "$ref": "./examples/EnableLockbox.json"
+          }
+        }
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Enabling Tenant for Lockbox successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/Providers/Microsoft.CustomerLockbox/DisableLockbox": {
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Disable Tenant for Lockbox ",
+        "operationId": "Post_DisableLockbox",
+        "x-ms-examples": {
+          "Disable a tenant in Lockbox": {
+            "$ref": "./examples/DisableLockbox.json"
+          }
+        }
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Disabling Tenant for Lockbox successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}": {
       "get": {
         "tags": [
@@ -91,7 +187,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}/UpdateApproval": {
+    "/Subscriptions/{subscriptionId}/Providers/Microsoft.CustomerLockbox/Requests/{requestId}/UpdateApproval": {
       "post": {
         "tags": [
           "Requests"
@@ -254,6 +350,17 @@
         "origin": {
           "description": "Gets or sets origin",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantOptInResponse": {
+      "description": "TenantOptIn Response object",
+      "type": "object",
+      "properties": {
+        "isOptedIn": {
+          "type": "boolean",
+          "description": "True if tenant is opted in, false otherwise ",
           "readOnly": true
         }
       }
@@ -474,6 +581,14 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdParameter": {
+      "name": "tenantId",
+      "in": "path",
+      "description": "The Azure tenant ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
