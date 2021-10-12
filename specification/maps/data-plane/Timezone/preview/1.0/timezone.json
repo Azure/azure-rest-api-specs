@@ -577,7 +577,7 @@
           "$ref": "#/definitions/ReferenceTime"
         },
         "RepresentativePoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair"
+          "$ref": "#/definitions/RepresentativePoint"
         },
         "TimeTransitions": {
           "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
@@ -660,6 +660,23 @@
           "description": "Sunset at the given time zone as shown in the `Tag` property. The sunset is described in the ISO8601 format.(Only be populated if the call is byCoordinates)",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "RepresentativePoint": {
+      "description": "Representative point property",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "Latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "readOnly": true
+        },
+        "Longitude": {
+          "description": "Longitude property",
+          "type": "number",
           "readOnly": true
         }
       }
