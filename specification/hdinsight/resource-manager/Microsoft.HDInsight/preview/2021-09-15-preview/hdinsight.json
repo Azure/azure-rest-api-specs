@@ -1347,19 +1347,6 @@
       },
       "description": "The list cluster operation response."
     },
-    "ClusterNetworkProfile": {
-      "type": "object",
-      "description": "Cluster networking configuration.",
-      "required": [
-        "subnetId"
-      ],
-      "properties": {
-        "subnetId": {
-          "type": "string",
-          "description": "Cluster subnet resource id."
-        }
-      }
-    },
     "ClusterLogAnalyticsProfile": {
       "type": "object",
       "description": "Cluster log analytics profile to enable or disable OMS agent for cluster.",
@@ -1709,9 +1696,6 @@
               "minimum": 1.0
             }
           }
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/ClusterNetworkProfile"
         },
         "logAnalyticsProfile": {
           "$ref": "#/definitions/ClusterLogAnalyticsProfile"

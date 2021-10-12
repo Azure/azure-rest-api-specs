@@ -29,16 +29,7 @@ description: HDInsight Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-2020-11-preview
-```
-
-### Tag: package-2020-11-preview
-
-These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-11-preview'
-input-file:
-- Microsoft.HDInsight/preview/2020-11-01-preview/hdinsight.json
+tag: package-2021-09-preview
 ```
 
 ### Tag: package-2021-09-preview
