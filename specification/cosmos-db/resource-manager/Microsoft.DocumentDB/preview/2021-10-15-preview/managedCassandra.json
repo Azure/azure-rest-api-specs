@@ -664,7 +664,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/deallocate": {
       "post": {
-        "operationId": "CassandraCluster_Deallocate",
+        "operationId": "CassandraClusters_Deallocate",
         "description": "Deallocate the Managed Cassandra Cluster and Associated Data Centers. Deallocation will deallocate the host virtual machine of this cluster, and reserved the data disk. This won't do anything on an already deallocated cluster. Use Start to restart the cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterDeallocate": {
@@ -701,7 +701,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/start": {
       "post": {
-        "operationId": "CassandraCluster_Start",
+        "operationId": "CassandraClusters_Start",
         "description": "Start the Managed Cassandra Cluster and Associated Data Centers. Start will start the host virtual machine of this cluster with reserved data disk. This won't do anything on an already running cluster. Use Deallocate to deallocate the cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterStart": {
@@ -738,7 +738,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/status": {
       "get": {
-        "operationId": "CassandraStatus_Get",
+        "operationId": "CassandraClusters_Status",
         "description": "Gets the CPU, memory, and disk usage statistics for each Cassandra node in a cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraStatus": {
@@ -1251,9 +1251,9 @@
           "type": "string",
           "description": "The command which should be run"
         },
-        "parameters": {
+        "arguments": {
           "type": "object",
-          "description": "The parameters for the command to be run",
+          "description": "The arguments for the command to be run",
           "additionalProperties": {
             "type": "string"
           }
