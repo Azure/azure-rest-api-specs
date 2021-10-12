@@ -4,6 +4,8 @@
 
 This is the AutoRest configuration file for Live video analytics edge.
 
+These swaggers are used to generate the SDKs for Live Video Analytics. These SDKs are models only (no client) and customer would need to use IoT SDK to send direct method calls to IoT hub. These SDKs are not ARM based and doesn't do any REST calls. all operations are sent as direct methods on IoT hub.
+
 ---
 
 ## Getting Started
@@ -26,16 +28,23 @@ These are the global settings for the Live video analytics API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-lva-1-0-preview
+tag: package-lva-2-0-0-preview
+
+directive:
+  - where:
+      -  $.definitions.MethodRequest.properties.methodName
+    suppress:
+      - RequiredReadOnlyProperties
 ```
 
-### Tag: package-2018-07
+### Tag: package-lva-1-0-4-preview
 
-These settings apply only when `--tag=package-lva-1-0-preview` is specified on the command line.
+These settings apply only when `--tag=package-lva-2-0-0-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-lva-1-0-preview'
+``` yaml $(tag) == 'package-lva-2-0-0-preview'
 input-file:
-  - LiveVideoAnalytics.Edge/preview/1.0/LiveVideoAnalytics.json
+  - LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalytics.json
+  - LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalyticsSdkDefinitions.json
 ```
 
 ---
@@ -71,7 +80,7 @@ csharp:
   override-client-name: LiveVideoAnalyticsEdgeClient
   use-datetimeoffset: true
 ```
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -83,15 +92,14 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/LiveVideoAnalytics.Edge/preview/1.0/LiveVideoAnalytics.json
+  - $(this-folder)/LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalytics.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

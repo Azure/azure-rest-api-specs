@@ -879,221 +879,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
-      "put": {
-        "tags": [
-          "SharedPrivateLinkResources"
-        ],
-        "operationId": "SharedPrivateLinkResources_CreateOrUpdate",
-        "x-ms-examples": {
-          "SharedPrivateLinkResourceCreateOrUpdate": {
-            "$ref": "./examples/CreateOrUpdateSharedPrivateLinkResource.json"
-          }
-        },
-        "description": "Creates or updates a shared private link resource managed by the Search service in the given resource group.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SharedPrivateLinkResourceNameParameter"
-          },
-          {
-            "name": "sharedPrivateLinkResource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedPrivateLinkResource"
-            },
-            "description": "The definition of the shared private link resource to create or update."
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The existing shared private link resource definition was successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/SharedPrivateLinkResource"
-            }
-          },
-          "201": {
-            "description": "The shared private link resource was successfully created.",
-            "schema": {
-              "$ref": "#/definitions/SharedPrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "HTTP 400 (Bad Request): The given shared private link resource name or the shared private link resource definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or shared private link resource could not be found. HTTP 409 (Conflict): The specified subscription is disabled. HTTP 409 (Conflict): A shared private link resource of the same name is being deleted, please retry in a few minutes.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "SharedPrivateLinkResources"
-        ],
-        "operationId": "SharedPrivateLinkResources_Get",
-        "x-ms-examples": {
-          "SharedPrivateLinkResourceGet": {
-            "$ref": "./examples/GetSharedPrivateLinkResource.json"
-          }
-        },
-        "description": "Gets the details of the shared private link resource managed by the Search service in the given resource group.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SharedPrivateLinkResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The definition of the shared private link resource was successfully retrieved and is in the response.",
-            "schema": {
-              "$ref": "#/definitions/SharedPrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, Search service or shared private link resource could not be found.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "SharedPrivateLinkResources"
-        ],
-        "operationId": "SharedPrivateLinkResources_Delete",
-        "x-ms-examples": {
-          "SharedPrivateLinkResourceDelete": {
-            "$ref": "./examples/DeleteSharedPrivateLinkResource.json"
-          }
-        },
-        "description": "Deletes the shared private link resource from the Search service.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SharedPrivateLinkResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The shared private link resource was successfully deleted from the search service."
-          },
-          "404": {
-            "description": "The subscription, resource group, Search service or shared private link resource could not be found."
-          },
-          "default": {
-            "description": "An unexpected error occurred during the operation.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources": {
-      "get": {
-        "tags": [
-          "SharedPrivateLinkResources"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "operationId": "SharedPrivateLinkResources_ListByService",
-        "x-ms-examples": {
-          "ListSharedPrivateLinkResourcesByService": {
-            "$ref": "./examples/ListSharedPrivateLinkResourcesByService.json"
-          }
-        },
-        "description": "Gets a list of all shared private link resources managed by the given service.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchServiceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation succeeded. The response contains the list of all shared private link resources managed by the given service.",
-            "schema": {
-              "$ref": "#/definitions/SharedPrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred during the operation.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
       "get": {
         "tags": [
@@ -1437,72 +1222,6 @@
       "description": "Response containing a list of Private Endpoint connections.",
       "x-ms-external": true
     },
-    "SharedPrivateLinkResource": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the shared private link resource.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
-          "description": "Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service."
-        }
-      },
-      "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service."
-    },
-    "SharedPrivateLinkResourceProperties": {
-      "properties": {
-        "privateLinkResourceId": {
-          "type": "string",
-          "description": "The resource id of the resource the shared private link resource is for."
-        },
-        "groupId": {
-          "type": "string",
-          "description": "The group id from the provider of resource the shared private link resource is for."
-        },
-        "requestMessage": {
-          "type": "string",
-          "description": "The request message for requesting approval of the shared private link resource."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected, Disconnected, or Timeout.",
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected",
-            "Timeout"
-          ],
-          "x-ms-enum": {
-            "name": "SharedPrivateLinkResourceStatus",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Describes the properties of an existing Shared Private Link Resource managed by the Azure Cognitive Search service."
-    },
-    "SharedPrivateLinkResourceListResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedPrivateLinkResource"
-          },
-          "description": "The list of Shared Private Link Resources."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of shared private link resources, if there are any."
-        }
-      },
-      "description": "Response containing a list of Shared Private Link Resources.",
-      "x-ms-external": true
-    },
     "PrivateLinkResourcesResult": {
       "properties": {
         "value": {
@@ -1564,52 +1283,9 @@
             "type": "string"
           },
           "description": "The list of required DNS zone names of the private link resource."
-        },
-        "shareablePrivateLinkResourceTypes": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ShareablePrivateLinkResourceType"
-          },
-          "description": "The list of resources that are onboarded to private link service, that are supported by Azure Cognitive Search."
         }
       },
-      "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource."
-    },
-    "ShareablePrivateLinkResourceType": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
-        },
-        "properties": {
-          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
-          "readOnly": true,
-          "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
-        }
-      },
-      "description": "Describes an resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
-    },
-    "ShareablePrivateLinkResourceProperties": {
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource provider type for the resource that has been onboarded to private link service, supported by Azure Cognitive Search."
-        },
-        "groupId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource provider group id for the resource that has been onboarded to private link service, supported by Azure Cognitive Search."
-        },
-        "description": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The description of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
-        }
-      },
-      "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
+      "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service."
     },
     "SearchService": {
       "properties": {
@@ -1711,14 +1387,6 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "The list of private endpoint connections to the Azure Cognitive Search service."
-        },
-        "sharedPrivateLinkResources": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedPrivateLinkResource"
-          },
-          "description": "The list of shared private link resources managed by the Azure Cognitive Search service."
         }
       },
       "description": "Properties of the Search service."
@@ -1932,14 +1600,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "SharedPrivateLinkResourceNameParameter": {
-      "name": "sharedPrivateLinkResourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "ClientRequestIdParameter": {

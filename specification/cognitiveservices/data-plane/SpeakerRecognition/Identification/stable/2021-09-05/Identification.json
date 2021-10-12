@@ -1,0 +1,730 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Speaker Identification API",
+    "version": "2021-09-05",
+    "description": "The Azure Cognitive Service Speaker Recognition service provides algorithms that verify and identify speakers by their unique voice characteristics.\nSpeaker Recognition is used to answer the question \"who is speaking?\""
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/speaker/identification",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "parameters": {
+    "endpoint": {
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "apiVersionParam": {
+      "name": "api-version",
+      "x-ms-parameter-location": "client",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the version of the operation to use for this request.",
+      "enum": [
+        "2021-09-05"
+      ],
+      "default": "2021-09-05"
+    },
+    "profileIdParam": {
+      "in": "path",
+      "name": "profileId",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-nullable": false,
+      "description": "Unique identifier for profile id (guid).",
+      "x-ms-parameter-location": "method"
+    },
+    "localeParam": {
+      "in": "path",
+      "name": "locale",
+      "required": true,
+      "type": "string",
+      "x-nullable": false,
+      "pattern": "^[a-zA-Z]{2}-?[a-zA-Z]{2}$",
+      "description": "A combination of language code and country code.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "ProfileId": {
+      "type": "string",
+      "description": "Unique identifier for profile id (guid).",
+      "format": "uuid",
+      "x-nullable": false,
+      "example": "49a36324-fc4b-4387-aa06-090cfbf0064f"
+    },
+    "Locale": {
+      "type": "string",
+      "pattern": "^[a-zA-Z]{2}-?[a-zA-Z]{2}$",
+      "x-nullable": false,
+      "description": "Language identifier consisting of a combination of language code and country code.",
+      "example": "en-US"
+    },
+    "ProfileStatus": {
+      "type": "string",
+      "description": "Status representing the current state of the profile activation. Available values are:\n* Active: profile is active and can be used if the enrollment status is 'Enrolled'.\n* Inactive: profile has not been activated and an activation phrase must be submitted.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ProfileStatusType",
+        "modelAsString": false
+      },
+      "example": "Inactive"
+    },
+    "EnrollmentStatus": {
+      "type": "string",
+      "description": "Status representing the current state of the profile enrollment. Available values are:\n* Enrolling: profile has no voice print and not ready for recognition requests.\n* Training: voice print of profile is being created and can’t be used for recognition at the moment.\n* Enrolled: profile has a voice print and ready for recognition requests.",
+      "enum": [
+        "Enrolling",
+        "Training",
+        "Enrolled"
+      ],
+      "x-ms-enum": {
+        "name": "TrainingStatusType",
+        "modelAsString": false
+      },
+      "example": "Enrolling"
+    },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Profile creation datetime.",
+      "example": "2015-04-23T18:25:43.41Z"
+    },
+    "LastUpdatedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last datetime when the profile was updated.",
+      "example": "2015-04-23T19:34:51.52Z"
+    },
+    "EnrollmentsCount": {
+      "type": "integer",
+      "description": "Number of enrollment audios accepted for this profile.",
+      "example": 1
+    },
+    "EnrollmentsLengthInSec": {
+      "type": "number",
+      "description": "Total length of enrollment audios accepted for this profile in seconds.",
+      "example": 1.83
+    },
+    "EnrollmentsSpeechLengthInSec": {
+      "type": "number",
+      "description": "Summation of pure speech (which is the amount of audio after removing silence and non-speech segments) across all profile enrollments in seconds.",
+      "example": 1.35
+    },
+    "RemainingEnrollmentsSpeechLengthInSec": {
+      "type": "number",
+      "description": "Amount of pure speech (which is the amount of audio after removing silence and non-speech segments) needed to complete profile enrollment in seconds.",
+      "example": 18.65
+    },
+    "ModelVersion": {
+      "type": "string",
+      "format": "date",
+      "description": "Date specifying the model assigned to this profile. Format is yyyy-mm-dd. If profile has no enrollments, this value will be empty.",
+      "example": "2019-12-05"
+    },
+    "ActivationPhrase": {
+      "type": "string",
+      "description": "Activation phrases available to activate a profile.",
+      "example": "this is my activation phrase to identify me"
+    },
+    "LocaleInfo": {
+      "description": "Speaker profile locale",
+      "type": "object",
+      "required": [
+        "locale"
+      ],
+      "properties": {
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        }
+      }
+    },
+    "TiProfileInfoList": {
+      "description": "Text-Independent Speaker profile info list",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TiProfileInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "example": "{opaqueUrl}"
+        }
+      }
+    },
+    "TiProfileInfo": {
+      "description": "Text-Independent Speaker profile info",
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "$ref": "#/definitions/ProfileId"
+        },
+        "locale": {
+          "$ref": "#/definitions/Locale"
+        },
+        "profileStatus": {
+          "$ref": "#/definitions/ProfileStatus"
+        },
+        "enrollmentStatus": {
+          "$ref": "#/definitions/EnrollmentStatus"
+        },
+        "createdDateTime": {
+          "$ref": "#/definitions/CreatedDateTime"
+        },
+        "lastUpdatedDateTime": {
+          "$ref": "#/definitions/LastUpdatedDateTime"
+        },
+        "enrollmentsCount": {
+          "$ref": "#/definitions/EnrollmentsCount"
+        },
+        "enrollmentsLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsLengthInSec"
+        },
+        "enrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsSpeechLengthInSec"
+        },
+        "remainingEnrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/RemainingEnrollmentsSpeechLengthInSec"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
+        }
+      }
+    },
+    "TiEnrollmentInfo": {
+      "description": "Speaker profile enrollment info",
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "$ref": "#/definitions/ProfileId"
+        },
+        "enrollmentStatus": {
+          "$ref": "#/definitions/EnrollmentStatus"
+        },
+        "enrollmentsCount": {
+          "$ref": "#/definitions/EnrollmentsCount"
+        },
+        "enrollmentsLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsLengthInSec"
+        },
+        "enrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/EnrollmentsSpeechLengthInSec"
+        },
+        "remainingEnrollmentsSpeechLengthInSec": {
+          "$ref": "#/definitions/RemainingEnrollmentsSpeechLengthInSec"
+        },
+        "audioLengthInSec": {
+          "type": "number",
+          "description": "This enrollment audio length in seconds.",
+          "example": 1.83
+        },
+        "audioSpeechLengthInSec": {
+          "type": "number",
+          "description": "This enrollment audio pure speech (which is the amount of audio after removing silence and non-speech segments) length in seconds.",
+          "example": 1.35
+        }
+      }
+    },
+    "IdentifiedSingleSpeakerInfo": {
+      "type": "object",
+      "properties": {
+        "identifiedProfile": {
+          "description": "Object containing data of identified profile.",
+          "$ref": "#/definitions/IdentifyInfo"
+        },
+        "profilesRanking": {
+          "description": "Object containing data of the top 5 profiles (including identified profile) sorted in descending order by score.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentifyInfo"
+          },
+          "example": [
+            {
+              "profileId": "111f427c-3791-468f-b709-fcef7660fff9",
+              "score": 0.63
+            },
+            {
+              "profileId": "3669fa29-1bf3-45ad-beea-6b348d058d7e",
+              "score": 0.49
+            },
+            {
+              "profileId": "0e196cd9-32d5-4883-8631-54a0e7c7cb3d",
+              "score": 0.4
+            },
+            {
+              "profileId": "726e57d9-04e0-4214-b482-7f786fa83560",
+              "score": 0.1
+            },
+            {
+              "profileId": "f95189fd-1bf5-4485-9c2e-e5897e0c98ca",
+              "score": 0.03
+            }
+          ]
+        }
+      }
+    },
+    "IdentifyInfo": {
+      "description": "Identified speaker info",
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "type": "string",
+          "description": "ID of identified of profile. If no candidate is identified as the right speaker, the value is set to empty GUID.",
+          "example": "111f427c-3791-468f-b709-fcef7660fff9",
+          "format": "uuid",
+          "x-nullable": false
+        },
+        "score": {
+          "type": "number",
+          "description": "A float number indicating the similarity between input audio and targeted voice print. This number must be between 0 and 1. A higher number means higher similarity.",
+          "example": 0.63
+        }
+      }
+    },
+    "ActivationPhraseInfo": {
+      "description": "Activation phrase list",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "activationPhrase": {
+                "$ref": "#/definitions/ActivationPhrase"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SpeakerErrorInfo": {
+      "description": "Speaker error message",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "required": [
+            "code",
+            "message"
+          ],
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "SpeakerErrorResponse": {
+      "description": "Failure",
+      "x-ms-error-response": true,
+      "headers": {
+        "x-ms-error-code": {
+          "type": "string",
+          "description": "Error code"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/SpeakerErrorInfo"
+      }
+    }
+  },
+  "paths": {
+    "/text-independent/profiles": {
+      "post": {
+        "description": "Creates a new speaker profile with specified locale.",
+        "operationId": "TextIndependent_CreateProfile",
+        "summary": "Create Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/createProfile.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "in": "body",
+            "name": "profileInfo",
+            "description": "Provide following detail info when creating a new profile.\nFields  | Description\n------- | ------------\nlocale  | Locale for the language of this speaker profile. A complete supported locale list is here: <ul><li>**en-US (American English)**</li><li>**es-ES (Castilian Spanish)**</li><li>**fr-FR (Standard French)**</li><li>**zh-CN (Mandarin Chinese)**</li></ul>",
+            "schema": {
+              "$ref": "#/definitions/LocaleInfo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Speaker profile created successfully. GUID is returned to reference the created profile.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "url location of new resource"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TiProfileInfo"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "description": "Retrieves a set of profiles.\nProfiles are sorted alphabetically by ProfileId",
+        "operationId": "TextIndependent_ListProfiles",
+        "summary": "List Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/listProfiles.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "The number of profiles to return. Default is 100 and the maximum is 500",
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TiProfileInfoList"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      }
+    },
+    "/text-independent/profiles/{profileId}": {
+      "get": {
+        "description": "Retrieves a single profile by ID.",
+        "operationId": "TextIndependent_GetProfile",
+        "summary": "Retrieve Single Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/fetchProfile.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TiProfileInfo"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing profile.",
+        "operationId": "TextIndependent_DeleteProfile",
+        "summary": "Delete Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/deleteProfile.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      }
+    },
+    "/text-independent/profiles/{profileId}:reset": {
+      "post": {
+        "description": "Resets existing profile to its original creation state. The reset operation does the following:\n* Updates enrollmentStatus to Enrolling.\n* Updates lastUpdatedDateTime.\n* Updates enrollmentsCount to 0.\n* Updates enrollmentsLength to 0.\n* Updates enrollmentsSpeechLength to 0.\n* Updates remainingEnrollmentsSpeechLength to the required number.\n* Removes all associated enrollments from storage.\n* Removes chosen passphrase association.\n* Resets value of modelVersion.",
+        "operationId": "TextIndependent_ResetProfile",
+        "summary": "Reset Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/resetProfile.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Speaker profile reset successfully. Profile is returned with reset values.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "url location of the resource"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TiProfileInfo"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      }
+    },
+    "/text-independent/profiles/{profileId}/enrollments": {
+      "post": {
+        "description": "Adds an enrollment to existing profile.\nThe first enrollment must be a predefined activation phrase which can be listed using the /phrases/{locale} api.\nIf the minimum number of requested enrollment audios is reached, a voice print is created.\nAny further enrollment will be used to improve the voice print.\n\nLimitations:\n* Minimum audio input length per request is **1 second**\n* Maximum audio input length per request is **120 seconds**\n* Minimum total effective speech length (excluding silence and other non-speech frames) for creating a voiceprint is **20 seconds**\n  This limitation can be disabled by setting ignoreMinLength to **true**.\n\n* Maximum total audio input length allowed for creating a voiceprint is **300 seconds**\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
+        "operationId": "TextIndependent_CreateEnrollment",
+        "summary": "Enroll Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/createEnrollment.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "consumes": [
+          "audio/wav; codecs=audio/pcm"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/profileIdParam"
+          },
+          {
+            "in": "query",
+            "name": "ignoreMinLength",
+            "type": "boolean",
+            "description": "If true, a voice print will be created immediately for this profile regardless of how much speech is supplied or stored. Default is false.",
+            "default": false
+          },
+          {
+            "name": "audioData",
+            "in": "body",
+            "description": "Binary audio file. Supported formats are audio/wav; codecs=audio/pcm. Supports audio up to 5MB.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TiEnrollmentInfo"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      }
+    },
+    "/text-independent/profiles:identifySingleSpeaker": {
+      "post": {
+        "description": "Identifies who is speaking in input audio among a list of candidate profiles.\n\nLimitations:\n* Minimum audio input length is **1 second**\n* Maximum audio input length is **120 seconds**\n* Minimum candidate speakers count is **1**\n* Maximum candidate speakers count is **50**\n* Minimum effective speech length (excluding silence and other non-speech frames) is **4 seconds**\n  This limitation can be disabled by setting \"ignoreMinLength\" to **true**.\n\n* Minimum audio Signal-to-noise ratio (SNR) is **2dB**",
+        "operationId": "TextIndependent_IdentifySingleSpeaker",
+        "summary": "Identify Single Speaker Profile",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/identifySingleSpeaker.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "consumes": [
+          "audio/wav; codecs=audio/pcm"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "in": "query",
+            "name": "profileIds",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "minItems": 1,
+            "maxItems": 50,
+            "required": true,
+            "description": "Comma-delimited profile IDs. Maximum supported number is 50 IDs."
+          },
+          {
+            "in": "query",
+            "name": "ignoreMinLength",
+            "type": "boolean",
+            "description": "If true, the minimum amount of speech needed for identification is skipped. Default is false.",
+            "default": false
+          },
+          {
+            "name": "audioData",
+            "in": "body",
+            "description": "Binary audio file. Supported formats are audio/wav; codecs=audio/pcm. Supports audio up to 5MB.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IdentifiedSingleSpeakerInfo"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      }
+    },
+    "/text-independent/phrases/{locale}": {
+      "get": {
+        "description": "Retrieves list of supported passphrases for a specific locale.",
+        "operationId": "TextIndependent_ListActivationPhrases",
+        "summary": "Activation Phrases",
+        "x-ms-examples": {
+          "Successful Query": {
+            "$ref": "./examples/listActivationPhrases.json"
+          }
+        },
+        "tags": [
+          "text-independent"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParam"
+          },
+          {
+            "$ref": "#/parameters/localeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivationPhraseInfo"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/SpeakerErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

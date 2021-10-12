@@ -2,12 +2,18 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-01-01",
-    "title": "MarketplaceManagementClient",
+    "title": "Marketplace RP Service",
     "description": "REST APIs for Azure Marketplace"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
   ],
   "paths": {
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers": {
@@ -25,9 +31,6 @@
         ],
         "operationId": "PrivateStoreOffers_List",
         "description": "Get a list of all private offers in the given private store",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -70,9 +73,6 @@
         ],
         "operationId": "PrivateStorePrivateOffers_List",
         "description": "Get a list of all private offers in the given private store",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -138,9 +138,6 @@
         ],
         "operationId": "PrivateStoreOffer_Get",
         "description": "Gets information about a specific offer.",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Offer information retrieved",
@@ -167,12 +164,6 @@
         ],
         "operationId": "PrivateStoreOffer_CreateOrUpdate",
         "description": "Update or add an offer to the default collection of the private store.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -197,8 +188,40 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePrivateStoreOffer": {
-            "$ref": "./examples/UpdatePrivateStoreOffer.json"
+          "PrivateStoreOffer_update": {
+            "$ref": "./examples/PrivateStoreOffer_update.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Post",
+        "description": "Delete Private store offer. This is a workaround.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PostPrivateStoreOffer": {
+            "$ref": "./examples/PostPrivateStoreOffer.json"
           }
         }
       }
@@ -224,9 +247,6 @@
         ],
         "operationId": "PrivateStorePrivateOffer_Get",
         "description": "Gets information about a specific private offer.",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Private offer information retrieved",
@@ -253,12 +273,6 @@
         ],
         "operationId": "PrivateStorePrivateOffer_CreateOrUpdate",
         "description": "Update or add a private offer to the default collection of the private store.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -283,8 +297,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePrivateStoreOffer": {
-            "$ref": "./examples/UpdatePrivateStorePrivateOffer.json"
+          "PrivateStorePrivateOffer_update": {
+            "$ref": "./examples/PrivateStorePrivateOffer_update.json"
           }
         }
       }
@@ -304,14 +318,17 @@
         ],
         "operationId": "PrivateStore_List",
         "description": "Gets the list of available private stores",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateStoreList"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -340,9 +357,6 @@
         ],
         "operationId": "PrivateStore_Get",
         "description": "Get information about the private store",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -369,9 +383,6 @@
         ],
         "operationId": "PrivateStore_Delete",
         "description": "Deletes the private store. All that is not saved will be lost.",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Private store was deleted successfully ."
@@ -395,12 +406,6 @@
         ],
         "operationId": "PrivateStore_CreateOrUpdate",
         "description": "Changes private store properties",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -422,8 +427,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePrivateStores": {
-            "$ref": "./examples/UpdatePrivateStore.json"
+          "PrivateStores_update": {
+            "$ref": "./examples/PrivateStores_update.json"
           }
         }
       }
@@ -536,6 +541,18 @@
         }
       }
     },
+    "PrivateStoreOperation": {
+      "description": "Set the Operation for the POST method. Ping or Delete",
+      "type": "string",
+      "enum": [
+        "DeletePrivateStoreOffer",
+        "Ping"
+      ],
+      "x-ms-enum": {
+        "name": "Operation",
+        "modelAsString": true
+      }
+    },
     "PrivateStore": {
       "description": "The PrivateStore data structure.",
       "type": "object",
@@ -575,6 +592,37 @@
         "eTag": {
           "description": "Identifier for purposes of race condition",
           "type": "string"
+        },
+        "privateStoreName": {
+          "description": "Private Store Name",
+          "type": "string"
+        },
+        "tenantTag": {
+          "description": "Tenant Tag",
+          "type": "string"
+        },
+        "tenantIds": {
+          "description": "Tenant ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerTag": {
+          "description": "Customer tag",
+          "type": "string"
+        },
+        "hasCommercialAssociation": {
+          "description": "Indicating whether private store has association with Commercial's Billing Account (through billing account's customer tag retrieved from GSM for a subscription",
+          "type": "boolean"
+        },
+        "hasMultiTenantAssociation": {
+          "description": "Indicating whether private store has association with multiple tenants (through tenant's tag retrieved from AAD",
+          "type": "boolean"
+        },
+        "isGov": {
+          "description": "Is government",
+          "type": "boolean"
         }
       }
     },
@@ -636,14 +684,14 @@
           "description": "Private store unique id",
           "type": "string"
         },
-        "createdBy": {
+        "createdAt": {
           "readOnly": true,
-          "description": "Private store offer creator name",
+          "description": "Private store offer creation date",
           "type": "string"
         },
-        "createdDate": {
+        "modifiedAt": {
           "readOnly": true,
-          "description": "Private store offer created date",
+          "description": "Private store offer modification date",
           "type": "string"
         },
         "specificPlanIdsLimitation": {
@@ -651,6 +699,24 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "updateSuppressedDueIdempotence": {
+          "description": "Indicating whether the offer was not updated to db (true = not updated). If the allow list is identical to the existed one in db, the offer would not be updated.",
+          "type": "boolean"
+        },
+        "iconFileUris": {
+          "description": "Icon File Uris",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "plans": {
+          "description": "Offer plans",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
           }
         }
       }
@@ -672,10 +738,34 @@
           "description": "Friendly name for the plan for display in the marketplace",
           "type": "string",
           "readOnly": true
+        },
+        "accessibility": {
+          "description": "Plan accessibility",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Public",
+            "PrivateTenantOnLevel",
+            "PrivateSubscriptionOnLevel"
+          ],
+          "x-ms-enum": {
+            "name": "accessibility",
+            "modelAsString": true
+          }
+        },
+        "altStackReference": {
+          "description": "Alternative stack type",
+          "type": "string",
+          "readOnly": true
+        },
+        "stackType": {
+          "description": "Stack type (classic or arm)",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "Operation": {
+    "SingleOperation": {
       "description": "Microsoft.Marketplace REST API operation",
       "type": "object",
       "properties": {
@@ -708,7 +798,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/SingleOperation"
           },
           "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
         },

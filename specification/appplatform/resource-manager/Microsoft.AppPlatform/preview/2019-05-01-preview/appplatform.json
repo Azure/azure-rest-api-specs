@@ -1587,6 +1587,12 @@
               "$ref": "#/definitions/DeploymentResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response describes the create or update Deployment request is accepted.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
           "200": {
             "description": "Success. The response describes the updated Deployment.",
             "schema": {
@@ -2163,6 +2169,39 @@
         }
       }
     },
+    "/providers/Microsoft.AppPlatform/runtimeVersions": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Lists all of the available runtime versions supported by Microsoft.AppPlatform provider.",
+        "operationId": "RuntimeVersions_ListRuntimeVersions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the details of all supported deployment runtime versions.",
+            "schema": {
+              "$ref": "#/definitions/AvailableRuntimeVersions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeVersions_ListRuntimeVersions": {
+            "$ref": "./examples/RuntimeVersions_ListRuntimeVersions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/skus": {
       "get": {
         "tags": [
@@ -2347,11 +2386,13 @@
       "properties": {
         "name": {
           "description": "Name of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "S0"
         },
         "tier": {
           "description": "Tier of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "Standard"
         },
         "capacity": {
           "format": "int32",
@@ -2429,23 +2470,112 @@
       "properties": {
         "serviceRuntimeSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceCidr": {
           "description": "Azure Spring Cloud service reserved CIDR",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceRuntimeNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outboundIPs": {
+          "description": "Desired outbound IP resources for Azure Spring Cloud instance.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "publicIPs": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              },
+              "description": "A list of public IP addresses."
+            }
+          }
+        },
+        "requiredTraffics": {
+          "description": "Required inbound or outbound traffics for Azure Spring Cloud instance.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RequiredTraffic"
+          }
+        }
+      }
+    },
+    "RequiredTraffic": {
+      "description": "Required inbound or outbound traffic for Azure Spring Cloud instance.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "The protocol of required traffic",
+          "type": "string",
+          "readOnly": true
+        },
+        "port": {
+          "description": "The port of required traffic",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "ips": {
+          "description": "The ip list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "description": "The FQDN list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "description": "The direction of required traffic",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "trafficDirection",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2692,7 +2822,8 @@
             "Succeeded",
             "Failed",
             "Creating",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -2707,11 +2838,16 @@
         },
         "fqdn": {
           "description": "Fully qualified dns Name.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "createdTime": {
           "format": "date-time",
@@ -2742,7 +2878,8 @@
         },
         "mountPath": {
           "description": "Mount path of the temporary disk",
-          "type": "string"
+          "type": "string",
+          "default": "/tmp"
         }
       }
     },
@@ -3108,6 +3245,10 @@
           "$ref": "#/definitions/DeploymentResourceProperties",
           "description": "Properties of the Deployment resource",
           "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Deployment resource"
         }
       }
     },
@@ -3134,7 +3275,8 @@
             "Creating",
             "Updating",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -3191,6 +3333,7 @@
           "description": "Type of the source uploaded",
           "enum": [
             "Jar",
+            "NetCoreZip",
             "Source"
           ],
           "type": "string",
@@ -3233,6 +3376,10 @@
           "description": "JVM parameter",
           "type": "string"
         },
+        "netCoreMainEntryPath": {
+          "description": "The path to the .NET executable relative to zip root",
+          "type": "string"
+        },
         "instanceCount": {
           "format": "int32",
           "description": "Instance count, basic tier should be in range (1, 25), standard tier should be in range (1, 500)",
@@ -3248,9 +3395,11 @@
         },
         "runtimeVersion": {
           "description": "Runtime version",
+          "default": "Java_8",
           "enum": [
             "Java_8",
-            "Java_11"
+            "Java_11",
+            "NetCore_31"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3281,6 +3430,11 @@
         },
         "discoveryStatus": {
           "description": "Discovery status of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the deployment instance",
           "type": "string",
           "readOnly": true
         }
@@ -3506,6 +3660,10 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           }
+        },
+        "sourceMdmNamespace": {
+          "description": "Name of the MDM namespace. Optional.",
+          "type": "string"
         }
       }
     },
@@ -3520,6 +3678,10 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
         }
       }
     },
@@ -3777,6 +3939,57 @@
         }
       },
       "x-ms-external": true
+    },
+    "AvailableRuntimeVersions": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of all supported runtime versions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedRuntimeVersion"
+          },
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "SupportedRuntimeVersion": {
+      "description": "Supported deployment runtime version descriptor.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The raw value which could be passed to deployment CRUD operations.",
+          "enum": [
+            "Java_8",
+            "Java_11",
+            "NetCore_31"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedRuntimeValue",
+            "modelAsString": true
+          }
+        },
+        "platform": {
+          "description": "The platform of this runtime version (possible values: \"Java\" or \".NET\").",
+          "enum": [
+            "Java",
+            ".NET Core"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedRuntimePlatform",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The detailed version (major.minor) of the platform.",
+          "type": "string"
+        }
+      },
+      "readOnly": true
     }
   },
   "parameters": {

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2021-03-25-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "my-resource-group",
+    "scopeName": "my-privatelinkscope",
+    "PrivateLinkScopeTags": {
+      "tags": {
+        "Tag1": "Value1",
+        "Tag2": "Value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.hybridcompute/privateLinkScopes/my-privatelinkscope",
+        "name": "my-privatelinkscope",
+        "type": "Microsoft.HybridCompute/privateLinkScopes",
+        "location": "westus",
+        "tags": {
+          "Tag1": "Value1",
+          "Tag2": "Value2"
+        },
+        "properties": {
+          "privateLinkScopeId": "e5dc51d3-92ed-4d7e-947a-775ea79b4919",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled"
+        }
+      }
+    }
+  }
+}

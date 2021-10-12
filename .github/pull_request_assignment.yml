@@ -1,12 +1,52 @@
 ---
 - rule:
+    # translator data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/TranslatorText/**"
+    reviewers:
+      - kristapratico
+      - maririos
+
+- rule:
+    paths:
+      - "specification/confidentialledger/data-plane/**"
+    reviewers:
+      - christothes 
+      
+- rule:
+    paths:
+      - "specification/@(applicationinsights|operationalinsights)/**"
+    reviewers:
+      - akning-ms
+
+- rule:
+    # eventgrid data-plane PR
+    paths:
+      - "specification/eventgrid/data-plane/**"
+    reviewers:
+      - lmazuel
+
+- rule:
+    # synapse data-plane PR
+    paths:
+      - "specification/synapse/data-plane/**"
+    reviewers:
+      - lmazuel
+
+- rule:
+    # data-plane PR
+    paths:
+      - "specification/**/data-plane/iot**"
+    reviewers:
+      - drwill-ms
+
+- rule:
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
-      - lmazuel
       - tjprescott
 
 - rule:
@@ -14,25 +54,48 @@
       - "specification/network/**"
     reviewers:
       - lirenhe
-      - MyronFanQiu
+      - raych1
+
 
 - rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
+    paths: "specification/common-types/**"
     reviewers:
-      - MyronFanQiu
-
+      - raych1
+      - akning-ms
+      - leni-msft
+      - ruowan
+      - jianyexi
+      - zhenglaizhang
+      
+      
+- rule:
+    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate|servicelinker)/**"
+    reviewers:
+      - raych1
+      
+- rule:
+    paths: "specification/@(security|edgeorder|synapse)/**"
+    reviewers:
+      - ruowan
+      
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - zhenglaizhang
+      
+- rule:
+    paths: "specification/signalr/**"
+    reviewers:
+      - leni-msft
+      
+- rule:
+    paths: "specification/eventhub/**"
+    reviewers:
+      - ruowan
 - rule:
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
-      - fengzhou-msft
-      - yungezz
-
-- rule:
-    paths: "specification/resources/**"
-    reviewers:
-      - raych1
 
 - rule:
     paths:
@@ -42,56 +105,33 @@
 
 - rule:
     paths:
-      - "specification/@(azureactivedirectory|appplatform)/**"
-    reviewers:
-      - njuCZ
-
-- rule:
-    paths:
       - "specification/authorization/**"
     reviewers:
-      - qianwens
-      - yungezz
+      - ruowan
 
 - rule:
     paths:
       - "specification/datafactory/**"
     reviewers:
-      - qianwens
-
-- rule:
-    paths:
-      - "specification/monitor/**"
-    reviewers:
-      - weidongxu-microsoft
-      - MyronFanQiu
+      - leni-msft
 
 - rule:
     paths:
       - "specification/storage/**"
     reviewers:
-      - qianwens
-      - Juliehzl
+      - jianyexi
 
-- rule:
-    paths: "specification/mediaservices/**"
-    reviewers:
+
+- rule:	
+    paths: "specification/mediaservices/**"	
+    reviewers:	
       - allenjzhang
-
+      
 - rule:
     paths:
-      - "specification/@(keyvault|notificationhubs)/**"
-      - "specification/@(databricks|containerregistry)/**"
+      - "specification/containerregistry/**"
     reviewers:
       - fengzhou-msft
-
-- rule:
-    paths:
-      - "specification/@(containerservice|containerinstance)/**"
-    reviewers:
-      - NullMDR
-      - fengzhou-msft
-      - yungezz
 
 - rule:
     paths:
@@ -102,15 +142,15 @@
 
 - rule:
     paths:
-      - "specification/portal/**"
-    reviewers:
-      - NullMDR
-
-- rule:
-    paths:
       - "specification/web/**"
     reviewers:
       - weidongxu-microsoft
+      
+- rule:
+    paths:
+      - "specification/keyvault/**"
+    reviewers:
+      - zhenglaizhang
 
 - rule:
     paths:
@@ -119,36 +159,35 @@
       - josefree
       - akning-ms
 
+
 - rule:
     paths:
-      - "**/package.json"
-      - ".github/**"
-      - "**/azure-pipelines.yml"
-      - ".azure-pipelines/**"
-      - ".azure-pipelines-preproduction/**"
+      - "**/package.json"	
+      - ".github/**"	
+      - "**/azure-pipelines.yml"	
+      - ".azure-pipelines/**"	
+      - ".azure-pipelines-preproduction/**"	
     reviewers:
       - akning-ms
-      - NullMDR
       - raych1
+      - zhenglaizhang
 
 - rule:
     # manager-plane PR
     paths:
       - "**"
     reviewers:
-      - yungezz
-      - erich-wang
-      - NullMDR
-      - raych1
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
-      - xccc-msft
-      - ChenTanyi
-      - fengzhou-msft
-      - njuCZ
+      - raych1
       - akning-ms
-      - markcowl
       - leni-msft
-      - qianwens
       - ruowan
+      - jianyexi
+      - zhenglaizhang
+      - chunyu3
+      - changlong-liu
+      - msyyc
+      - qiaozha
+      - weidong

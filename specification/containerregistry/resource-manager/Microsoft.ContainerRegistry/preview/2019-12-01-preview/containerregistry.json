@@ -473,6 +473,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1855,6 +1860,33 @@
         }
       }
     },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "ExportPipelineProperties": {
       "description": "The properties of an export pipeline.",
       "required": [
@@ -2311,6 +2343,13 @@
           "items": {
             "$ref": "#/definitions/OperationMetricSpecificationDefinition"
           }
+        },
+        "logSpecifications": {
+          "description": "A list of Azure Monitoring log definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecificationDefinition"
+          }
         }
       }
     },
@@ -2340,6 +2379,24 @@
         },
         "internalMetricName": {
           "description": "Internal metric name.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationLogSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring log.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Log name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Log display name.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Log blob duration.",
           "type": "string"
         }
       }
@@ -2780,10 +2837,6 @@
           "default": false,
           "type": "boolean"
         },
-        "storageAccount": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
-        },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "The network rule set for a container registry."
@@ -2828,6 +2881,19 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "networkRuleBypassOptions": {
+          "description": "Whether to allow trusted Azure services to access a network restricted registry.",
+          "default": "AzureServices",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2850,19 +2916,6 @@
           "description": "The timestamp when the status was changed to the current value.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "StorageAccountProperties": {
-      "description": "The properties of a storage account for a container registry. Only applicable to Classic SKU.",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID of the storage account.",
-          "type": "string"
         }
       }
     },
@@ -3089,6 +3142,17 @@
         "identity": {
           "description": "The client id of the identity which will be used to access key vault.",
           "type": "string"
+        },
+        "keyRotationEnabled": {
+          "description": "Auto key rotation status for a CMK enabled registry.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "lastKeyRotationTimestamp": {
+          "format": "date-time",
+          "description": "Timestamp of the last successful key rotation.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3096,6 +3160,10 @@
       "description": "The parameters for updating a container registry.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the container registry."
+        },
         "tags": {
           "description": "The tags for the container registry.",
           "type": "object",
@@ -3106,10 +3174,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
@@ -3151,6 +3215,19 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "networkRuleBypassOptions": {
+          "description": "Whether to allow trusted Azure services to access a network restricted registry.",
+          "default": "AzureServices",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
             "modelAsString": true
           }
         }
@@ -3547,14 +3624,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
@@ -3616,14 +3695,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
@@ -3931,27 +4012,6 @@
         }
       }
     },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Resource": {
       "description": "An Azure resource.",
       "required": [
@@ -3987,9 +4047,68 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource modification (UTC).",
+          "type": "string"
+        }
+      },
+      "readOnly": true
     }
   },
   "parameters": {

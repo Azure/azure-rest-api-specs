@@ -2800,6 +2800,13 @@
             "description": "The name of the virtual machine."
           },
           {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to force delete virtual machines.(Feature in Preview)"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2817,7 +2824,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Force delete a VM": {
+            "$ref": "./examples/ForceDeleteVirtualMachine.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -3748,6 +3760,9 @@
           },
           "Create a scale set with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAScaleSetWithEncryptionAtHost.json"
+          },
+          "Create a scale set with Fpga Network Interfaces.": {
+            "$ref": "./examples/CreateAScaleSetFromWithFpgaNetworkInterface.json"
           }
         }
       },
@@ -5174,7 +5189,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             },
             "description": "Parameters supplied to the Create Virtual Machine Extension operation."
           },
@@ -5189,13 +5204,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "default": {
@@ -5252,7 +5267,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtensionUpdate"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionUpdate"
             },
             "description": "Parameters supplied to the Update Virtual Machine Extension operation."
           },
@@ -5267,7 +5282,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "default": {
@@ -5403,7 +5418,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "default": {
@@ -5467,7 +5482,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtensionsListResult"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsListResult"
             }
           },
           "default": {
@@ -6739,7 +6754,6 @@
           "type": "integer",
           "format": "int32",
           "minimum": 1,
-          "maximum": 3,
           "description": "Number of fault domains that the host group can span."
         },
         "hosts": {
@@ -6757,7 +6771,7 @@
         },
         "supportAutomaticPlacement": {
           "type": "boolean",
-          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. <br><br>Minimum api-version: 2020-06-01."
         }
       },
       "required": [
@@ -6907,7 +6921,6 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "maximum": 2,
           "description": "Fault domain of the dedicated host within a dedicated host group."
         },
         "autoReplaceOnFailure": {
@@ -7335,6 +7348,30 @@
       ],
       "description": "Describes a Virtual Machine Extension."
     },
+    "VirtualMachineScaleSetVMExtension": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Describes a VMSS VM Extension."
+    },
     "VirtualMachineExtensionUpdate": {
       "properties": {
         "properties": {
@@ -7349,6 +7386,30 @@
       ],
       "description": "Describes a Virtual Machine Extension."
     },
+    "VirtualMachineScaleSetVMExtensionUpdate": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineExtensionUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Describes a VMSS VM Extension."
+    },
     "VirtualMachineExtensionsListResult": {
       "properties": {
         "value": {
@@ -7360,6 +7421,18 @@
         }
       },
       "description": "The List Extension operation response"
+    },
+    "VirtualMachineScaleSetVMExtensionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
+          },
+          "description": "The list of VMSS VM extensions"
+        }
+      },
+      "description": "The List VMSS VM Extension operation response"
     },
     "VirtualMachineSoftwarePatchProperties": {
       "properties": {
@@ -7772,7 +7845,7 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "description": "Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)",
+          "description": "Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region]( https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). <br><br> This list of sizes is no longer updated and the **VirtualMachineSizeTypes** string constants will be removed from the subsequent REST API specification. Use [List all available virtual machine sizes in a region]( https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list) to get the latest sizes.",
           "enum": [
             "Basic_A0",
             "Basic_A1",
@@ -8076,7 +8149,7 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types",
+      "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
@@ -8128,7 +8201,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk."
+          "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk."
         },
         "diskEncryptionSet": {
           "$ref": "#/definitions/DiskEncryptionSetParameters",
@@ -8420,7 +8493,7 @@
         },
         "keyData": {
           "type": "string",
-          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
         }
       },
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
@@ -8745,6 +8818,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
@@ -8974,7 +9048,7 @@
         },
         "licenseType": {
           "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
         },
         "vmId": {
           "readOnly": true,
@@ -9409,6 +9483,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
@@ -9854,6 +9929,10 @@
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
         },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
+        },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "The network security group."
@@ -9888,6 +9967,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
         },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
@@ -10258,7 +10341,7 @@
         },
         "licenseType": {
           "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
         },
         "priority": {
           "$ref": "#/definitions/priority",
@@ -10957,7 +11040,7 @@
         },
         "licenseType": {
           "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
         },
         "modelDefinitionApplied": {
           "readOnly": true,
@@ -11480,6 +11563,14 @@
         "groupByResourceName": {
           "type": "boolean",
           "description": "Group query result by Resource Name."
+        },
+        "groupByClientApplicationId": {
+          "type": "boolean",
+          "description": "Group query result by Client Application ID."
+        },
+        "groupByUserAgent": {
+          "type": "boolean",
+          "description": "Group query result by User Agent."
         }
       },
       "required": [
@@ -11553,7 +11644,7 @@
       "properties": {
         "patchMode": {
           "type": "string",
-          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
+          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
           "enum": [
             "Manual",
             "AutomaticByOS",

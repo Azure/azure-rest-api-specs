@@ -34,7 +34,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -47,7 +47,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -73,16 +73,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -95,7 +95,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -127,7 +127,7 @@
             "$ref": "#/parameters/AssociationNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -140,7 +140,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -170,7 +170,7 @@
             "$ref": "#/parameters/AssociationNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -197,7 +197,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -224,7 +224,7 @@
             "$ref": "#/parameters/AssociationNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -237,7 +237,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -252,14 +252,10 @@
   "definitions": {
     "DataCollectionRuleAssociation": {
       "description": "Definition of association of a data collection rule with a monitored Azure resource.",
-      "required": [
-        "dataCollectionRuleId"
-      ],
       "type": "object",
       "properties": {
         "description": {
           "description": "Description of the association.",
-          "maxLength": 256,
           "type": "string"
         },
         "dataCollectionRuleId": {
@@ -291,9 +287,6 @@
     },
     "DataCollectionRuleAssociationProxyOnlyResource": {
       "description": "Definition of generic ARM proxy resource.",
-      "required": [
-        "properties"
-      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -362,120 +355,15 @@
           "type": "string"
         }
       }
-    },
-    "ErrorAdditionalInfo": {
-      "description": "Additional information for common error response.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The additional info type.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "info": {
-          "description": "The additional info.",
-          "type": "object",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "Common error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code which can be used to programmatically identify the class of error.",
-          "type": "string",
-          "readOnly": true,
-          "example": "BadArgument",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "message": {
-          "description": "Describes the error in detail and provides debugging information.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "target": {
-          "description": "The target of the particular error (for example, the name of the property in error).",
-          "type": "string",
-          "readOnly": true,
-          "example": "properties.provisioningState",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "details": {
-          "description": "Additional nested error detail objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "additionalInfo": {
-          "description": "Additional error information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Common error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          ],
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "in": "query",
-      "name": "api-version",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "minLength": 1
-    },
     "AssociationNameParameter": {
       "in": "path",
       "name": "associationName",
-      "description": "The name of the association.",
+      "description": "The name of the association. The name is case insensitive.",
       "required": true,
       "type": "string",
-      "maxLength": 64,
-      "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+$",
       "x-ms-parameter-location": "method"
     },
     "DataCollectionRuleNameParameter": {
@@ -484,20 +372,6 @@
       "description": "The name of the data collection rule. The name is case insensitive.",
       "required": true,
       "type": "string",
-      "maxLength": 64,
-      "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "in": "path",
-      "name": "resourceGroupName",
-      "description": "The name of the resource group. The name is case insensitive.",
-      "required": true,
-      "type": "string",
-      "maxLength": 90,
-      "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+$",
       "x-ms-parameter-location": "method"
     },
     "ResourceUriParameter": {
@@ -509,14 +383,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "SubscriptionIdParameter": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The ID of the target subscription.",
-      "required": true,
-      "type": "string",
-      "minLength": 1
     }
   },
   "securityDefinitions": {

@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-07-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/metastore/create-database-operations/{id}": {
+      "put": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_Register",
+        "description": "Register files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_Register.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be created. The name can contain only alphanumeric characters and should not exceed 24 characters"
+          },
+          {
+            "in": "body",
+            "name": "registerBody",
+            "required": true,
+            "description": "The body for the register request",
+            "schema": {
+              "$ref": "#/definitions/metastoreRegisterObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Job created for the resource creation/updation request",
+            "schema": {
+              "$ref": "#/definitions/metastoreRegistrationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_GetDatabaseOperations",
+        "description": "Gets status of the database",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_GetResourceStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Success Response.",
+            "schema": {
+              "$ref": "#/definitions/metastoreRequestSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/metastore/update-database-operations/{id}": {
+      "put": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_Update",
+        "description": "Update files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be updated"
+          },
+          {
+            "in": "body",
+            "name": "updateBody",
+            "required": true,
+            "description": "The body for the update request",
+            "schema": {
+              "$ref": "#/definitions/metastoreUpdateObject"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Job created for the resource creation/updation request",
+            "schema": {
+              "$ref": "#/definitions/metastoreUpdationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/metastore/databases/{id}": {
+      "delete": {
+        "tags": [
+          "metastore"
+        ],
+        "operationId": "Metastore_Delete",
+        "description": "Remove files in Syms",
+        "x-ms-examples": {
+          "Register files in Syms": {
+            "$ref": "./examples/Metastore_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Job created for the resource Deletion request"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "metastoreRegistrationResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/RequestStatus"
+        }
+      }
+    },
+    "metastoreUpdationResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/RequestStatus"
+        }
+      }
+    },
+    "metastoreRequestSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ResourceStatus"
+        }
+      }
+    },
+    "ResourceStatus": {
+      "description": "Enumerates possible Status of the resource.",
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Created",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceStatus",
+        "modelAsString": true
+      }
+    },
+    "RequestStatus": {
+      "description": "Enumerates possible request statuses.",
+      "type": "string",
+      "enum": [
+        "Running",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RequestStatus",
+        "modelAsString": true
+      }
+    },
+    "metastoreRegisterObject": {
+      "type": "object",
+      "required": [
+        "inputFolder"
+      ],
+      "properties": {
+        "inputFolder": {
+          "type": "string",
+          "example": "https://testsymsstorage.blob.core.windows.net/testsymsstoragefilesystem/CDM/",
+          "description": "The input folder containing CDM files."
+        }
+      }
+    },
+    "metastoreUpdateObject": {
+      "type": "object",
+      "required": [
+        "inputFolder"
+      ],
+      "properties": {
+        "inputFolder": {
+          "type": "string",
+          "example": "https://testsymsstorage.blob.core.windows.net/testsymsstoragefilesystem/CDM/",
+          "description": "The input folder containing CDM files."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

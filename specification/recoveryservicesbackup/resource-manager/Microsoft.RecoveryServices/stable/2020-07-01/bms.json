@@ -279,17 +279,18 @@
       "description": "The resource management error response."
     },
     "VaultStorageConfigOperationResultResponse": {
-      "description": "Operation result response for VaultStorageConfig",
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "type": "string"
-        }
-      },
+      "description": "Operation result response for Vault Storage Config",
       "required": [
         "objectType"
       ],
-      "x-ms-discriminator-value": "objectType"
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
     },
     "PrepareDataMoveRequest": {
       "description": "Prepare DataMove Request",
@@ -337,6 +338,11 @@
     "PrepareDataMoveResponse": {
       "description": "Prepare DataMove Response",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VaultStorageConfigOperationResultResponse"
+        }
+      ],
       "properties": {
         "correlationId": {
           "description": "Co-relationId for move operation",
@@ -349,7 +355,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "PrepareDataMoveResponse"
     },
     "TriggerDataMoveRequest": {
       "description": "Trigger DataMove Request",

@@ -1,0 +1,270 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "Microsoft.Support",
+    "description": "Microsoft Azure Support Resource Provider."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Support/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "This lists all the available Microsoft Support REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get all operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/lookUpResourceId": {
+      "post": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "summary": "This operation fetches ARM resource id of support resource type.",
+        "operationId": "LookUpResourceId_Post",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "lookUpResourceIdRequest",
+            "in": "body",
+            "description": "Look up resource id request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LookUpResourceIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained resource id of support resource type.",
+            "schema": {
+              "$ref": "#/definitions/LookUpResourceIdResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Look up resource id of support resource type": {
+            "$ref": "./examples/LookUpResourceId.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationsListResult": {
+      "description": "The list of operations supported by Microsoft Support resource provider.",
+      "properties": {
+        "value": {
+          "description": "The list of operations supported by Microsoft Support resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "The operation supported by Microsoft Support resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "properties": {
+            "description": {
+              "description": "The description of the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The action that users can perform, based on their permission level.",
+              "type": "string",
+              "readOnly": true
+            },
+            "provider": {
+              "description": "Service provider: Microsoft Support.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "LookUpResourceIdRequest": {
+      "description": "The look up resource Id request body",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "description": "The System generated Id that is unique. Use supportTicketId property for Microsoft.Support/supportTickets resource type.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Support/supportTickets"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource."
+        }
+      }
+    },
+    "LookUpResourceIdResponse": {
+      "description": "The look up resource id response",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource Id of support resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "ExceptionResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ServiceError",
+          "description": "The API error details."
+        }
+      },
+      "description": "The API error."
+    },
+    "ServiceError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceErrorDetail"
+          },
+          "description": "The list of error details.",
+          "readOnly": true
+        }
+      },
+      "description": "The API error details."
+    },
+    "ServiceErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        }
+      },
+      "description": "The error details."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version."
+    }
+  }
+}

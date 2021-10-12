@@ -350,8 +350,7 @@
       "required": [
         "displayName",
         "category",
-        "serializedData",
-        "userId"
+        "serializedData"
       ],
       "properties": {
         "displayName": {
@@ -384,7 +383,12 @@
         },
         "userId": {
           "type": "string",
-          "description": "Unique user id of the specific user that owns this workbook."
+          "description": "Unique user id of the specific user that owns this workbook.",
+          "readOnly": true
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "ResourceId for a source resource."
         }
       }
     },

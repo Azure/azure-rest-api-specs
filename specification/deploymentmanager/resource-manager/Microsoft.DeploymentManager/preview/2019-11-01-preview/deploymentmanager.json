@@ -24,20 +24,6 @@
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/serviceTopologyName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "put": {
         "tags": [
           "ServiceTopologies"
@@ -62,6 +48,18 @@
               "$ref": "#/definitions/ServiceTopologyResource"
             },
             "description": "Source topology object defines the resource."
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -161,17 +159,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "ServiceTopologies"
@@ -352,20 +339,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}/services": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/serviceTopologyName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "Services"
@@ -568,23 +541,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}/services/{serviceName}/serviceUnits": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/serviceTopologyName"
-        },
-        {
-          "$ref": "#/parameters/serviceName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "ServiceUnits"
@@ -764,17 +720,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/steps": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "Steps"
@@ -1049,17 +994,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/rollouts": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "Rollouts"
@@ -1233,17 +1167,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/artifactSources": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "ArtifactSources"

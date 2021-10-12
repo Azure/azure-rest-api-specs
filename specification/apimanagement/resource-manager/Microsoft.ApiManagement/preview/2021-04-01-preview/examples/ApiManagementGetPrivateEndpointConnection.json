@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "privateEndpointConnectionName": "privateEndpointConnectionName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointConnectionName",
+        "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+        "name": "privateEndpointProxyName",
+        "properties": {
+          "provisioningState": "Pending",
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Pending",
+            "description": "Please approve my request, thanks",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}
