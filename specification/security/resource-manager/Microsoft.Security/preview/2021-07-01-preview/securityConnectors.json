@@ -205,6 +205,49 @@
           }
         }
       },
+      "patch": {
+        "x-ms-examples": {
+          "Update a security connector": {
+            "$ref": "./examples/SecurityConnectors/PatchSecurityConnector_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Updates a security connector",
+        "operationId": "SecurityConnectors_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "delete": {
         "x-ms-examples": {
           "Delete a security connector": {
