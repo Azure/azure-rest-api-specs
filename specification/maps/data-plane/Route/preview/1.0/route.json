@@ -1456,7 +1456,7 @@
             "in": "query",
             "description": "Fuel budget in liters that determines maximal range which can be travelled using the specified Combustion Consumption Model.<br> When fuelBudgetInLiters is used, it is mandatory to specify a detailed  Combustion Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           {
             "name": "energyBudgetInkWh",
@@ -1464,21 +1464,21 @@
             "in": "query",
             "description": "Electric energy budget in kilowatt hours (kWh) that determines maximal range which can be travelled using the specified Electric Consumption Model.<br> When energyBudgetInkWh is used, it is mandatory to specify a detailed Electric Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           {
             "name": "timeBudgetInSec",
             "in": "query",
             "description": "Time budget in seconds that determines maximal range which can be travelled using driving time. The Consumption Model will only affect the range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           {
             "name": "distanceBudgetInMeters",
             "in": "query",
             "description": "Distance budget in meters that determines maximal range which can be travelled using driving distance.  The Consumption Model will only affect the range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "type": "number",
-            "format": "float"
+            "format": "double"
           },
           {
             "$ref": "#/parameters/DepartAt"
@@ -1902,14 +1902,14 @@
         "fuelConsumptionInLiters": {
           "description": "Estimated fuel consumption in liters using the Combustion Consumption Model. Included if vehicleEngineType is set to _combustion_ and constantSpeedConsumptionInLitersPerHundredkm is specified. The value will be non-negative.",
           "type": "number",
-          "format": "float",
+          "format": "double",
           "readOnly": true
         },
         "batteryConsumptionInkWh": {
           "x-ms-client-name": "batteryConsumptionInKwH",
           "description": "Estimated electric energy consumption in kilowatt hours (kWh) using the Electric Consumption Model. Included if vehicleEngineType is set to electric and constantSpeedConsumptionInkWhPerHundredkm is specified. The value of batteryConsumptionInkWh includes the recuperated electric energy and can therefore be negative (which indicates gaining energy). If both maxChargeInkWh and currentChargeInkWh are specified, recuperation will be capped to ensure that the battery charge level never exceeds maxChargeInkWh. If neither maxChargeInkWh nor currentChargeInkWh are specified, unconstrained recuperation is assumed in the consumption calculation.",
           "type": "number",
-          "format": "float",
+          "format": "double",
           "readOnly": true
         }
       }
