@@ -45,7 +45,7 @@
         "description": "Retrieves the properties of an existing Azure Cosmos DB Mongo Role Definition with the given Id.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleDefinitionIdParameter"
+            "$ref": "#/parameters/mongoRoleDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -86,7 +86,7 @@
         "description": "Creates or updates an Azure Cosmos DB Mongo Role Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/roleDefinitionIdParameter"
+            "$ref": "#/parameters/mongoRoleDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -226,7 +226,7 @@
         "description": "Retrieves the properties of an existing Azure Cosmos DB Mongo User Definition with the given Id.",
         "parameters": [
           {
-            "$ref": "#/parameters/userDefinitionIdParameter"
+            "$ref": "#/parameters/mongoUserDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -267,7 +267,7 @@
         "description": "Creates or updates an Azure Cosmos DB Mongo User Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/UserDefinitionIdParameter"
+            "$ref": "#/parameters/mongoUserDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -320,7 +320,7 @@
         "description": "Deletes an existing Azure Cosmos DB Mongo User Definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/userDefinitionIdParameter"
+            "$ref": "#/parameters/mongoUserDefinitionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -581,7 +581,7 @@
     }
   },
   "parameters": {
-    "roleDefinitionIdParameter": {
+    "mongoRoleDefinitionIdParameter": {
       "name": "roleDefinitionId",
       "in": "path",
       "required": true,
@@ -589,7 +589,7 @@
       "x-ms-parameter-location": "method",
       "description": "The ID for the Role Definition {dbName.roleName}."
     },
-    "userDefinitionIdParameter": {
+    "mongoUserDefinitionIdParameter": {
       "name": "userDefinitionId",
       "in": "path",
       "required": true,
