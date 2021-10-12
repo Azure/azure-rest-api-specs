@@ -1449,7 +1449,14 @@
             "in": "query",
             "description": "The Coordinate from which the range calculation should start.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "fuelBudgetInLiters",
