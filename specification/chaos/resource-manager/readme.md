@@ -34,8 +34,19 @@ tag: package-2021-09-15-preview
 These settings apply only when `--tag=package-2021-09-15-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2021-09-15-preview'
+directive:
+  - suppress: R3026
+    reason: Patch is not implemented in this version.
+    where:
+      - $.definitions.experiment
+
 input-file:
-  - Microsoft.Chaos/preview/2021-09-15-preview/chaos.json
+  - Microsoft.Chaos/preview/2021-09-15-preview/capabilities.json
+  - Microsoft.Chaos/preview/2021-09-15-preview/experiments.json
+  - Microsoft.Chaos/preview/2021-09-15-preview/operations.json
+  - Microsoft.Chaos/preview/2021-09-15-preview/targets.json
+  - Microsoft.Chaos/preview/2021-09-15-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2021-09-15-preview/capabilityTypes.json
 ```
 
 ---
