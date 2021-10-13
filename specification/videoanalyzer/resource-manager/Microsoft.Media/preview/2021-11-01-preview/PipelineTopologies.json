@@ -871,10 +871,6 @@
         "disableRtspPublishing": {
           "type": "string",
           "description": "When set to 'true' the RTSP playback URL will not be published, disabling low latency streaming. This is used, for example, when the topology is used only for archiving content. Default is 'false'.  If set to 'true', then \"disableArchive\" must be set to 'false'."
-        },
-        "disableVideoPreviewImage": {
-          "type": "string",
-          "description": "When set to 'true' preview images will not be generated. This is used, for example, when the topology is used only for low latency video streaming. Default is 'false'.  If set to 'false', then \"disableArchive\" must be set to 'false'."
         }
       },
       "type": "object",
@@ -983,7 +979,7 @@
         }
       },
       "type": "object",
-      "description": "Pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which captures content from a RTSP camera and archives the content can be reused across many different cameras, as long as the same processing is to be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized. This allows  individual pipelines refer to different values, such as individual cameras' RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for content to be ingested from cameras.\\r\\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  -Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
+      "description": "Pipeline topology describes the processing steps to be applied when processing content for a particular outcome. The topology should be defined according to the scenario to be achieved and can be reused across many pipeline instances which share the same processing characteristics. For instance, a pipeline topology which captures content from a RTSP camera and archives the content can be reused across many different cameras, as long as the same processing is to be applied across all the cameras. Individual instance properties can be defined through the use of user-defined parameters, which allow for a topology to be parameterized. This allows  individual pipelines refer to different values, such as individual cameras' RTSP endpoints and credentials. Overall a topology is composed of the following:\r\n\r\n  - Parameters: list of user defined parameters that can be references across the topology nodes.\r\n  - Sources: list of one or more data sources nodes such as an RTSP source which allows for content to be ingested from cameras.\r\n  - Processors: list of nodes which perform data analysis or transformations.\r\n  - Sinks: list of one or more data sinks which allow for data to be stored or exported to other destinations."
     },
     "LivePipelineProperties": {
       "properties": {
@@ -1342,7 +1338,8 @@
           "readOnly": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "Used for tracking the status of an operation on the live pipeline."
     },
     "PipelineJobOperationStatus": {
       "properties": {
@@ -1362,7 +1359,8 @@
           "readOnly": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": "Used for tracking the status of an operation on the pipeline job."
     },
     "PipelineTopologyCollection": {
       "properties": {
