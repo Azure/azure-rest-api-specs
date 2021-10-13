@@ -30,7 +30,6 @@ clear-output-folder: true
 openapi-type: data-plane
 ```
 
-<<<<<<< HEAD
 ### Release 2021-10-01
 
 These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
@@ -45,8 +44,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-=======
->>>>>>> feature/cognitiveservices/language
 ### Release 2021-07-15-preview
 
 These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
