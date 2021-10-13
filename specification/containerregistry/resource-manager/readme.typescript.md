@@ -5,7 +5,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ``` yaml $(typescript)
 input-file:
-  - Microsoft.ContainerRegistry/preview/2021-06-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2021-08-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 typescript:
   azure-arm: true
