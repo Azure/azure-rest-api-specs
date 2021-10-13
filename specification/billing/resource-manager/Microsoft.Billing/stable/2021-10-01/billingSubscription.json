@@ -234,7 +234,7 @@
             "$ref": "./examples/ValidateSubscriptionMoveFailure.json"
           }
         },
-        "operationId": "BillingSubscriptions_validateMoveEligibility",
+        "operationId": "BillingSubscriptions_ValidateMoveEligibility",
         "description": "Validates if a subscription's charges can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -563,40 +563,6 @@
               "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists the available billing REST API operations.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1192,67 +1158,6 @@
           "$ref": "./billingSubscription.json#/definitions/BillingSubscriptionProperties"
         }
       ]
-    },
-    "Operation": {
-      "description": "A Billing REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "isDataAction": {
-          "description": "Identifies if the operation is a data operation.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Billing.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type such as read, write and delete.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Description of operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "The list of billing operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
