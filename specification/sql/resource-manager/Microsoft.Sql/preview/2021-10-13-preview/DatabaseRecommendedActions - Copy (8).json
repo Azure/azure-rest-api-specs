@@ -1,0 +1,578 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions": {
+      "get": {
+        "tags": [
+          "DatabaseRecommendedActions"
+        ],
+        "description": "Gets list of Database Recommended Actions.",
+        "operationId": "DatabaseRecommendedActions_ListByDatabaseAdvisor",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of database recommended actions.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecommendedAction"
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "List of database recommended actions": {
+            "$ref": "./examples/DatabaseRecommendedActionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}": {
+      "get": {
+        "tags": [
+          "DatabaseRecommendedActions"
+        ],
+        "description": "Gets a database recommended action.",
+        "operationId": "DatabaseRecommendedActions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of Database Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified database recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedAction"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Get database recommended action": {
+            "$ref": "./examples/DatabaseRecommendedActionGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DatabaseRecommendedActions"
+        ],
+        "description": "Updates a database recommended action.",
+        "operationId": "DatabaseRecommendedActions_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of Database Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested recommended action resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedAction"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified database recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedAction"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidRecommendedActionUpsertRequest - The update recommended action request body does not exist or has no properties or state object.\n\n * 400 InvalidRecommendedActionState - The specified state for recommended action is invalid\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update database recommended action": {
+            "$ref": "./examples/DatabaseRecommendedActionUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RecommendedActionProperties": {
+      "description": "Properties for a Database, Server or Elastic Pool Recommended Action.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "recommendationReason": {
+          "description": "Gets the reason for recommending this action. e.g., DuplicateIndex",
+          "type": "string",
+          "readOnly": true
+        },
+        "validSince": {
+          "format": "date-time",
+          "description": "Gets the time since when this recommended action is valid.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastRefresh": {
+          "format": "date-time",
+          "description": "Gets time when this recommended action was last refreshed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/RecommendedActionStateInfo",
+          "description": "Gets the info of the current state the recommended action is in."
+        },
+        "isExecutableAction": {
+          "description": "Gets if this recommended action is actionable by user",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isRevertableAction": {
+          "description": "Gets if changes applied by this recommended action can be reverted by user",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isArchivedAction": {
+          "description": "Gets if this recommended action was suggested some time ago but user chose to ignore this and system added a new recommended action again.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "executeActionStartTime": {
+          "format": "date-time",
+          "description": "Gets the time when system started applying this recommended action on the user resource. e.g., index creation start time",
+          "type": "string",
+          "readOnly": true
+        },
+        "executeActionDuration": {
+          "format": "duration",
+          "description": "Gets the time taken for applying this recommended action on user resource. e.g., time taken for index creation",
+          "type": "string",
+          "readOnly": true
+        },
+        "revertActionStartTime": {
+          "format": "date-time",
+          "description": "Gets the time when system started reverting changes of this recommended action on user resource. e.g., time when index drop is executed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "revertActionDuration": {
+          "format": "duration",
+          "description": "Gets the time taken for reverting changes of this recommended action on user resource. e.g., time taken for dropping the created index.",
+          "type": "string",
+          "readOnly": true
+        },
+        "executeActionInitiatedBy": {
+          "description": "Gets if approval for applying this recommended action was given by user/system.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RecommendedActionInitiatedBy",
+            "modelAsString": false
+          }
+        },
+        "executeActionInitiatedTime": {
+          "format": "date-time",
+          "description": "Gets the time when this recommended action was approved for execution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "revertActionInitiatedBy": {
+          "description": "Gets if approval for reverting this recommended action was given by user/system.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RecommendedActionInitiatedBy",
+            "modelAsString": false
+          }
+        },
+        "revertActionInitiatedTime": {
+          "format": "date-time",
+          "description": "Gets the time when this recommended action was approved for revert.",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "format": "int32",
+          "description": "Gets the impact of this recommended action. Possible values are 1 - Low impact, 2 - Medium Impact and 3 - High Impact",
+          "type": "integer",
+          "readOnly": true
+        },
+        "implementationDetails": {
+          "$ref": "#/definitions/RecommendedActionImplementationInfo",
+          "description": "Gets the implementation details of this recommended action for user to apply it manually.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/RecommendedActionErrorInfo",
+          "description": "Gets the error details if and why this recommended action is put to error state.",
+          "readOnly": true
+        },
+        "estimatedImpact": {
+          "description": "Gets the estimated impact info for this recommended action e.g., Estimated CPU gain, Estimated Disk Space change",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionImpactRecord"
+          },
+          "readOnly": true
+        },
+        "observedImpact": {
+          "description": "Gets the observed/actual impact info for this recommended action e.g., Actual CPU gain, Actual Disk Space change",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionImpactRecord"
+          },
+          "readOnly": true
+        },
+        "timeSeries": {
+          "description": "Gets the time series info of metrics for this recommended action e.g., CPU consumption time series",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionMetricInfo"
+          },
+          "readOnly": true
+        },
+        "linkedObjects": {
+          "description": "Gets the linked objects, if any.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets additional details specific to this recommended action.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionStateInfo": {
+      "description": "Contains information of current state for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "required": [
+        "currentValue"
+      ],
+      "type": "object",
+      "properties": {
+        "currentValue": {
+          "description": "Current state the recommended action is in. Some commonly used states are: Active      -> recommended action is active and no action has been taken yet. Pending     -> recommended action is approved for and is awaiting execution. Executing   -> recommended action is being applied on the user database. Verifying   -> recommended action was applied and is being verified of its usefulness by the system. Success     -> recommended action was applied and improvement found during verification. Pending Revert  -> verification found little or no improvement so recommended action is queued for revert or user has manually reverted. Reverting   -> changes made while applying recommended action are being reverted on the user database. Reverted    -> successfully reverted the changes made by recommended action on user database. Ignored     -> user explicitly ignored/discarded the recommended action. ",
+          "enum": [
+            "Active",
+            "Pending",
+            "Executing",
+            "Verifying",
+            "PendingRevert",
+            "RevertCancelled",
+            "Reverting",
+            "Reverted",
+            "Ignored",
+            "Expired",
+            "Monitoring",
+            "Resolved",
+            "Success",
+            "Error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecommendedActionCurrentState",
+            "modelAsString": true
+          }
+        },
+        "actionInitiatedBy": {
+          "description": "Gets who initiated the execution of this recommended action. Possible Value are: User    -> When user explicity notified system to apply the recommended action. System  -> When auto-execute status of this advisor was set to 'Enabled', in which case the system applied it.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RecommendedActionInitiatedBy",
+            "modelAsString": false
+          }
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Gets the time when the state was last modified",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionImplementationInfo": {
+      "description": "Contains information for manual implementation for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "type": "object",
+      "properties": {
+        "method": {
+          "description": "Gets the method in which this recommended action can be manually implemented. e.g., TSql, AzurePowerShell.",
+          "enum": [
+            "TSql",
+            "AzurePowerShell"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ImplementationMethod",
+            "modelAsString": false
+          }
+        },
+        "script": {
+          "description": "Gets the manual implementation script. e.g., T-SQL script that could be executed on the database.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionErrorInfo": {
+      "description": "Contains error information for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "Gets the reason why the recommended action was put to error state. e.g., DatabaseHasQdsOff, IndexAlreadyExists",
+          "type": "string",
+          "readOnly": true
+        },
+        "isRetryable": {
+          "description": "Gets whether the error could be ignored and recommended action could be retried. Possible values are: Yes/No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IsRetryable",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "RecommendedActionImpactRecord": {
+      "description": "Contains information of estimated or observed impact on various metrics for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "type": "object",
+      "properties": {
+        "dimensionName": {
+          "description": "Gets the name of the impact dimension. e.g., CPUChange, DiskSpaceChange, NumberOfQueriesAffected.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Gets the name of the impact dimension. e.g., CPUChange, DiskSpaceChange, NumberOfQueriesAffected.",
+          "type": "string",
+          "readOnly": true
+        },
+        "absoluteValue": {
+          "format": "double",
+          "description": "Gets the absolute value of this dimension if applicable. e.g., Number of Queries affected",
+          "type": "number",
+          "readOnly": true
+        },
+        "changeValueAbsolute": {
+          "format": "double",
+          "description": "Gets the absolute change in the value of this dimension. e.g., Absolute Disk space change in Megabytes",
+          "type": "number",
+          "readOnly": true
+        },
+        "changeValueRelative": {
+          "format": "double",
+          "description": "Gets the relative change in the value of this dimension. e.g., Relative Disk space change in Percentage",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedActionMetricInfo": {
+      "description": "Contains time series of various impacted metrics for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "type": "object",
+      "properties": {
+        "metricName": {
+          "description": "Gets the name of the metric. e.g., CPU, Number of Queries.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Gets the unit in which metric is measured. e.g., DTU, Frequency",
+          "type": "string",
+          "readOnly": true
+        },
+        "timeGrain": {
+          "description": "Gets the duration of time interval for the value given by this MetricInfo. e.g., PT1H (1 hour)",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Gets the start time of time interval given by this MetricInfo.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "format": "double",
+          "description": "Gets the value of the metric in the time interval given by this MetricInfo.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendedAction": {
+      "description": "Database, Server or Elastic Pool Recommended Action.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Resource kind.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RecommendedActionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
