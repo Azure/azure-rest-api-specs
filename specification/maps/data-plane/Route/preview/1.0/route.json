@@ -1075,7 +1075,7 @@
     "/route/directions/{format}": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
-        "operationId": "RequestRouteDirections",
+        "operationId": "GetRouteDirections",
         "x-ms-examples": {
           "Successfully retrieve a route between an origin and a destination": {
             "$ref": "./examples/GetRouteDirections.json"
@@ -1246,7 +1246,7 @@
       },
       "post": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of a vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
-        "operationId": "RequestRouteDirectionsWithAdditionalParameters",
+        "operationId": "GetRouteDirectionsWithAdditionalParameters",
         "x-ms-examples": {
           "Successfully retrieve a route between an origin and a destination with additional parameters in the body": {
             "$ref": "./examples/PostRouteDirections.json"
