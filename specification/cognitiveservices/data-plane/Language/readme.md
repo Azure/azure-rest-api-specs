@@ -6,14 +6,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Conversation service is 2021-11-01-preview
-
-```yaml
-tag: release_2021_11_01_preview
-add-credentials: true
-clear-output-folder: true
-openapi-type: data-plane
-```
+The current stable release of QuestionAnswering is 2021-10-01 and preview release of Luis Deepstack is 2021-07-15-preview
 
 
 ```yaml
@@ -37,19 +30,7 @@ clear-output-folder: true
 openapi-type: data-plane
 ```
 
-### Release 2021-11-01-preview
-
-These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_11_01_preview'
-input-file: 
-  - preview/2021-11-01-preview/analyzeconversations.json
-title: 
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
+<<<<<<< HEAD
 ### Release 2021-10-01
 
 These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
@@ -64,6 +45,8 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+=======
+>>>>>>> feature/cognitiveservices/language
 ### Release 2021-07-15-preview
 
 These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
