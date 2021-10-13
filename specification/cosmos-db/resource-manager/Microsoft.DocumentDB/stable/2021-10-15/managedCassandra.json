@@ -863,10 +863,11 @@
             },
             "authenticationMethod": {
               "type": "string",
-              "description": "Which authentication method Cassandra should use to authenticate clients. 'None' turns off authentication, so should not be used except in emergencies. 'Cassandra' is the default password based authentication. The default is 'Cassandra'.",
+              "description": "Which authentication method Cassandra should use to authenticate clients. 'None' turns off authentication, so should not be used except in emergencies. 'Cassandra' is the default password based authentication. The default is 'Cassandra'. 'Ldap' is in preview.",
               "enum": [
                 "None",
-                "Cassandra"
+                "Cassandra",
+                "Ldap"
               ],
               "x-ms-enum": {
                 "name": "AuthenticationMethod",
@@ -937,10 +938,6 @@
             "deallocated": {
               "type": "boolean",
               "description": "Whether the cluster and associated data centers has been deallocated."
-            },
-            "connectivity": {
-              "type": "string",
-              "description": "The connectivity method to connect to the Cassandra data centers. Defaults to 'VNetInjection'"
             },
             "cassandraAuditLoggingEnabled": {
               "type": "boolean",
@@ -1280,7 +1277,7 @@
             },
             "managedDiskCustomerKeyUri": {
               "type": "string",
-              "description": "Indicates the Key Uri of the customer key to use for encryption of managed disks."
+              "description": "Key uri to use for encryption of managed disks. Ensure the system assigned identity of the cluster has been assigned appropriate permissions(key get/wrap/unwrap permissions) on the key."
             },
             "sku": {
               "type": "string",
@@ -1297,8 +1294,48 @@
             },
             "availabilityZone": {
               "type": "boolean",
-              "description": "If the data center will have Availability Zone feature apply to the Virtual Machine ScaleSet that host the data center virtual machines"
+              "description": "If the azure data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the cassandra data center virtual machines."
+            },
+            "authenticationMethodLdapProperties": {
+              "$ref": "#/definitions/AuthenticationMethodLdapProperties"
             }
+          }
+        }
+      }
+    },
+    "AuthenticationMethodLdapProperties": {
+      "type": "object",
+      "description": "Ldap authentication method properties. This feature is in preview.",
+      "properties": {
+        "serverHostname": {
+          "description": "Hostname of the LDAP server.",
+          "type": "string"
+        },
+        "serverPort": {
+          "description": "Port of the LDAP server.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceUserDistinguishedName": {
+          "description": "Distinguished name of the look up user account, who can look up user details on authentication.",
+          "type": "string"
+        },
+        "serviceUserPassword": {
+          "description": "Password of the look up user.",
+          "type": "string"
+        },
+        "searchBaseDistinguishedName": {
+          "description": "Distinguished name of the object to start the recursive search of users from.",
+          "type": "string"
+        },
+        "searchFilterTemplate": {
+          "description": "Template to use for searching. Defaults to (cn=%s) where %s will be replaced by the username used to login.",
+          "type": "string"
+        },
+        "serverCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
           }
         }
       }
