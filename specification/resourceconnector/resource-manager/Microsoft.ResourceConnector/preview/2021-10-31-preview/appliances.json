@@ -413,6 +413,7 @@
   "definitions": {
     "HybridConnectionConfig": {
       "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
+      "type": "object",
       "properties": {
         "expirationTime": {
           "description": "Timestamp when this token will be expired.",
@@ -464,6 +465,7 @@
     },
     "applianceCredentialKubeconfig": {
       "description": "Cluster User Credential appliance.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Name which contains the role of the kubeconfig.",
@@ -486,6 +488,7 @@
     },
     "applianceListCredentialResults": {
       "description": "The List Cluster User Credential appliance.",
+      "type": "object",
       "properties": {
         "hybridConnectionConfig": {
           "$ref": "#/definitions/HybridConnectionConfig",
@@ -504,6 +507,7 @@
     },
     "applianceListResult": {
       "description": "The List Appliances operation response.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
@@ -522,6 +526,7 @@
     },
     "applianceOperation": {
       "description": "Appliances operation.",
+      "type": "object",
       "properties": {
         "display": {
           "$ref": "#/definitions/applianceOperationValueDisplay",
@@ -547,6 +552,7 @@
     },
     "applianceOperationValueDisplay": {
       "description": "Describes the properties of an Appliances Operation Value Display.",
+      "type": "object",
       "properties": {
         "description": {
           "description": "The description of the operation.",
@@ -572,6 +578,7 @@
     },
     "applianceOperationsList": {
       "description": "Lists of Appliances operations.",
+      "type": "object",
       "required": [
         "value"
       ],
