@@ -148,6 +148,7 @@ input-file:
 - Microsoft.EventHub/stable/2021-11-01/AuthorizationRules.json
 - Microsoft.EventHub/stable/2021-11-01/consumergroups.json
 - Microsoft.EventHub/stable/2021-11-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2021-11-01/SchemaRegistry.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
