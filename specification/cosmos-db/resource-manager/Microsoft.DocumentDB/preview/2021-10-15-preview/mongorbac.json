@@ -416,6 +416,10 @@
             "modelAsString": false
           }
         },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name for which access is being granted for this Role Definition."
+        },
         "privileges": {
           "type": "array",
           "items": {
@@ -535,6 +539,10 @@
             "$ref": "#/definitions/Role"
           },
           "description": "The set of roles inherited by the User Definition."
+        },
+        "mechanisms": {
+          "type": "string",
+          "description": "The Mongo Auth mechanism. For now, we only support auth mechanism SCRAM-SHA-256."
         }
       },
       "description": "Azure Cosmos DB Mongo User Definition resource object."
@@ -582,7 +590,7 @@
   },
   "parameters": {
     "mongoRoleDefinitionIdParameter": {
-      "name": "roleDefinitionId",
+      "name": "mongoRoleDefinitionId",
       "in": "path",
       "required": true,
       "type": "string",
@@ -590,7 +598,7 @@
       "description": "The ID for the Role Definition {dbName.roleName}."
     },
     "mongoUserDefinitionIdParameter": {
-      "name": "userDefinitionId",
+      "name": "mongoUserDefinitionId",
       "in": "path",
       "required": true,
       "type": "string",
