@@ -384,6 +384,109 @@
         }
       }
     },
+    "Ansys": {
+      "type": "object",
+      "description": "Ansys Common Licensing.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "array",
+          "description": "License Service server.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lmhostid": {
+          "type": "array",
+          "description": "Unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Cadence": {
+      "type": "object",
+      "description": "Cadence License Manager",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "array",
+          "description": "License Service server.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lmhostid": {
+          "type": "array",
+          "description": "Unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mfp": {
+          "type": "array",
+          "description": "License server information for Cadence License Manager.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Mentor": {
+      "type": "object",
+      "description": "Mentor Standard Licensing.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated"
+        },
+        "server": {
+          "type": "array",
+          "description": "License Service server.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lmhostid": {
+          "type": "array",
+          "description": "Unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Synopsys": {
+      "type": "object",
+      "description": "Synopsys Common Licensing",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "array",
+          "description": "License Service server.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmUuid": {
+          "type": "array",
+          "description": "Virtual machine universal unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ChamberPropertiesFormat": {
       "type": "object",
       "properties": {
@@ -398,9 +501,27 @@
             "type": "string"
           }
         },
-        "licenseHostId": {
-          "description": "Gets or sets the licenseHostId.",
-          "type": "string"
+        "licenseServices": {
+          "description": "Gets or sets the license services for each EDA vendor.",
+          "type": "object",
+          "properties": {
+            "cadence": {
+              "$ref": "#/definitions/Cadence",
+              "description": "Gets or sets the cadence properties."
+            },
+            "ansys": {
+              "$ref": "#/definitions/Ansys",
+              "description": "Gets or sets the ansys properties."
+            },
+            "mentor": {
+              "$ref": "#/definitions/Mentor",
+              "description": "Gets or sets the mentor properties."
+            },
+            "synopsys": {
+              "$ref": "#/definitions/Synopsys",
+              "description": "Gets or sets the synopsys properties."
+            }
+          }
         },
         "provisioningState": {
           "$ref": "./hpcworkbench.json#/definitions/ProvisioningState",
