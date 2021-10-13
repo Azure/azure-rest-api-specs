@@ -98,10 +98,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which hourly forecast information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -150,10 +159,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which minute forecast information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "interval",
@@ -199,10 +217,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which quarter-day forecast information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -251,10 +278,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -309,10 +345,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -404,10 +449,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which severe weather alerts are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -453,10 +507,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which daily indices are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -582,7 +645,7 @@
           {
             "value": 8,
             "name": "Dreary",
-            "description": "Dreary"
+            "description": "Dreary (Overcast)"
           },
           {
             "value": 11,
@@ -1161,6 +1224,7 @@
         "forecasts": {
           "type": "array",
           "description": "Forecast data for each returned hour.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/HourlyForecast"
           }
@@ -1284,9 +1348,11 @@
       "type": "object",
       "properties": {
         "summary": {
+          "readOnly": true,
           "$ref": "#/definitions/MinuteForecastSummary"
         },
         "intervalSummaries": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntervalSummary"
@@ -1296,6 +1362,7 @@
         "intervals": {
           "type": "array",
           "description": "Forecast data for each interval in the forecast.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ForecastInterval"
           }
@@ -1465,6 +1532,7 @@
       "type": "object",
       "properties": {
         "forecasts": {
+          "readOnly": true,
           "type": "array",
           "description": "Forecast data for each quarter in the response.",
           "items": {
@@ -1477,6 +1545,7 @@
       "type": "object",
       "properties": {
         "results": {
+          "readOnly": true,
           "description": "Detailed current weather conditions.",
           "type": "array",
           "items": {
@@ -1506,75 +1575,59 @@
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past hour."
         },
-        "past3Hours": {
+        "pastThreeHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past three hours."
         },
-        "past6Hours": {
+        "pastSixHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past six hours. Contains Metric and Imperial Values."
         },
-        "past9Hours": {
+        "pastNineHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past nine hours."
         },
-        "past12Hours": {
+        "pastTwelveHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 12 hours."
         },
-        "past18Hours": {
+        "pastEighteenHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 18 hours."
         },
-        "past24Hours": {
+        "pastTwentyFourHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 24 hours."
         }
       }
     },
+    "PastHoursTemperature": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "minimum"
+        },
+        "maximum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "maximum"
+        }
+      },
+      "description": "Summary of temperature fluctuations over the number of past hours."
+    },
     "TemperatureSummary": {
       "type": "object",
       "properties": {
-        "past6Hours": {
-          "type": "object",
-          "properties": {
-            "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "minimum"
-            },
-            "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "maximum"
-            }
-          },
+        "pastSixHours": {
+          "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 6 hours."
         },
-        "past12Hours": {
-          "type": "object",
-          "properties": {
-            "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "minimum"
-            },
-            "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "maximum"
-            }
-          },
+        "pastTwelveHours": {
+          "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 12 hours."
         },
-        "past24Hours": {
-          "type": "object",
-          "properties": {
-            "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "minimum"
-            },
-            "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "maximum"
-            }
-          },
+        "pastTwentyFourHours": {
+          "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 24 hours."
         }
       }
@@ -1667,7 +1720,7 @@
           "$ref": "#/definitions/PressureTendency",
           "description": "Atmospheric pressure change."
         },
-        "past24HourTemperatureDeparture": {
+        "pastTwentyFourHourTemperatureDeparture": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "Departure from the temperature observed 24 hours ago in specified unit."
         },
@@ -1826,10 +1879,12 @@
       "type": "object",
       "properties": {
         "summary": {
+          "readOnly": true,
           "$ref": "#/definitions/DailyForecastSummary"
         },
         "forecasts": {
           "type": "array",
+          "readOnly": true,
           "description": "Forecast data for each requested day.",
           "items": {
             "$ref": "#/definitions/DailyForecast"
@@ -1983,9 +2038,11 @@
       "description": "This object is returned from a successful Weather Along Route.",
       "properties": {
         "summary": {
+          "readOnly": true,
           "$ref": "#/definitions/WeatherAlongRouteSummary"
         },
         "waypoints": {
+          "readOnly": true,
           "type": "array",
           "description": "Data for each waypoint returned in the same order as specified in the request.",
           "items": {
@@ -2140,6 +2197,7 @@
       "description": "This object is returned from a successful Get Severe Weather Alerts call.",
       "properties": {
         "results": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SevereWeatherAlert"
@@ -2333,6 +2391,7 @@
       "description": "This object is returned from a successful Get Daily Indices call.",
       "properties": {
         "results": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/DailyIndex"
