@@ -83,15 +83,6 @@ directive:
   - suppress: R4009
   - suppress: R4013
   - suppress: R4037
-  - suppress: SECRET_PROPERTY
-    from:
-      - Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
-    where:
-      - $.definitions.RegenAuthKeys.properties.authKey1
-      - $.definitions.RegenAuthKeys.properties.authKey2
-      - $.definitions.AuthenticationKeys.properties.authKey1
-      - $.definitions.AuthenticationKeys.properties.authKey2
-    reason: Secrets are OK to return in a POST response.
 ```
 ### Tag: package-2021-06
 
@@ -324,3 +315,18 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where:
+      - $.definitions.RegenAuthKeys.properties.authKey1
+      - $.definitions.RegenAuthKeys.properties.authKey2
+      - $.definitions.AuthenticationKeys.properties.authKey1
+      - $.definitions.AuthenticationKeys.properties.authKey2
+    reason: Secrets are OK to return in a POST response.
+```
