@@ -473,9 +473,9 @@
             "collection": {
               "type": "string",
               "description": "The collection name the role is applied."
-            },
-          "description": "An array of data actions that are allowed."
-        }
+            }
+          },
+          "description": "An Azure Cosmos DB Mongo DB Resource."
         },
         "actions": {
           "type": "array",
@@ -488,17 +488,17 @@
       "description": "The set of data plane operations permitted through this Role Definition."
     },
     "Role": {
-          "type": "object",
-          "properties": {
-            "db": {
-              "type": "string",
-              "description": "The database name the role is applied."
-            },
-            "role": {
-              "type": "string",
-              "description": "The role name."
-            }
-        }        ,
+      "type": "object",
+      "properties": {
+        "db": {
+          "type": "string",
+          "description": "The database name the role is applied."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role name."
+        }
+      },
       "description": "The set of roles permitted through this Role Definition."
     },
     "MongoRoleDefinitionListResult": {
@@ -587,7 +587,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The ID for the Role Definition."
+      "description": "The ID for the Role Definition {dbName.roleName}."
     },
     "mongoUserDefinitionIdParameter": {
       "name": "userDefinitionId",
@@ -595,7 +595,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The ID for the User Definition."
+      "description": "The ID for the User Definition {dbName.userName}."
     }
   }
 }
