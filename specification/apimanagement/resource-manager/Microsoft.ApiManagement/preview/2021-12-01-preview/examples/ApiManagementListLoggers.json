@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/azuremonitor",
+            "type": "Microsoft.ApiManagement/service/loggers",
+            "name": "azuremonitor",
+            "properties": {
+              "loggerType": "azureMonitor",
+              "isBuffered": true
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/vvktest",
+            "type": "Microsoft.ApiManagement/service/loggers",
+            "name": "vvktest",
+            "properties": {
+              "loggerType": "applicationInsights",
+              "credentials": {
+                "instrumentationKey": "{{Logger-Credentials-5b1a17ef2b3f91153004b10d}}"
+              },
+              "isBuffered": true
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/applicationinsights",
+            "type": "Microsoft.ApiManagement/service/loggers",
+            "name": "applicationinsights",
+            "properties": {
+              "loggerType": "applicationInsights",
+              "description": "miaoappinsight",
+              "credentials": {
+                "instrumentationKey": "{{Logger-Credentials-5b2056062b3f911ae84a3069}}"
+              },
+              "isBuffered": true
+            }
+          }
+        ],
+        "count": 3,
+        "nextLink": ""
+      }
+    }
+  }
+}
