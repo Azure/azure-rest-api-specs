@@ -205,6 +205,49 @@
           }
         }
       },
+      "patch": {
+        "x-ms-examples": {
+          "Update a security connector": {
+            "$ref": "./examples/SecurityConnectors/PatchSecurityConnector_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Updates a security connector",
+        "operationId": "SecurityConnectors_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "delete": {
         "x-ms-examples": {
           "Delete a security connector": {
@@ -346,7 +389,56 @@
               }
             }
           }
-        }
+        },
+        "systemData": {
+          "type": "object",
+          "description": "System information for this resource",
+          "properties": {
+            "createdBy": {
+              "type": "string",
+              "description": "entity which created this resource"
+            },
+            "createdByType": {
+              "type": "string",
+              "description": "Type of entity which created this resource",
+              "enum": [
+                "User",
+                "Application",
+                "ManagedIdentity",
+                "Keys"
+              ],
+              "x-ms-enum": {
+                "name": "createdByType",
+                "modelAsString": true
+              }
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "date when resource was created"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "description": "last entity to modify this resource"
+            },
+            "lastModifiedByType": {
+              "type": "string",
+              "description": "Type of entity which modified this resource",
+              "enum": [
+                "User",
+                "Application",
+                "ManagedIdentity",
+                "Keys"
+              ],
+              "x-ms-enum": {
+                "name": "createdByType",
+                "modelAsString": true
+              }
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "description": "date when resource was last modified"
+            }
+          }
       }
     },
     "cloudOffering": {
