@@ -106,4 +106,8 @@ directive:
       we defined the toplevelresourcelistbysubscription here:
 
       https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: We are consuming the type model declaration from "common". I don't think our service is responsible for updating this error... Plz push back otherwise.
 ```
