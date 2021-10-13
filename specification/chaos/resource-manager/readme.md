@@ -99,4 +99,11 @@ directive:
       We have the top level resource list by subscription operation here: https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
 
       this is a false positive I believe.
+  - suppress: TopLevelResourcesListBySubscription
+    where: $.definitions.target
+    from: targets.json
+    reason: |-
+      we defined the toplevelresourcelistbysubscription here:
+
+      https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
 ```
