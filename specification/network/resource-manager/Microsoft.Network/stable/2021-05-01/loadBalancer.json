@@ -142,6 +142,9 @@
         "x-ms-examples": {
           "Get load balancer": {
             "$ref": "./examples/LoadBalancerGet.json"
+          },
+          "Get load balancer with inbound NAT rule port mapping": {
+            "$ref": "./examples/LoadBalancerGetInboundNatRulePortMapping.json"
           }
         }
       },
@@ -747,7 +750,7 @@
           "LoadBalancers"
         ],
         "operationId": "InboundNatRules_List",
-        "description": "Gets all the inbound nat rules in a load balancer.",
+        "description": "Gets all the inbound NAT rules in a load balancer.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -800,7 +803,7 @@
           "LoadBalancers"
         ],
         "operationId": "InboundNatRules_Delete",
-        "description": "Deletes the specified load balancer inbound nat rule.",
+        "description": "Deletes the specified load balancer inbound NAT rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -821,7 +824,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the inbound nat rule."
+            "description": "The name of the inbound NAT rule."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -862,7 +865,7 @@
           "LoadBalancers"
         ],
         "operationId": "InboundNatRules_Get",
-        "description": "Gets the specified load balancer inbound nat rule.",
+        "description": "Gets the specified load balancer inbound NAT rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -883,7 +886,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the inbound nat rule."
+            "description": "The name of the inbound NAT rule."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -924,7 +927,7 @@
           "LoadBalancers"
         ],
         "operationId": "InboundNatRules_CreateOrUpdate",
-        "description": "Creates or updates a load balancer inbound nat rule.",
+        "description": "Creates or updates a load balancer inbound NAT rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -945,7 +948,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the inbound nat rule."
+            "description": "The name of the inbound NAT rule."
           },
           {
             "name": "inboundNatRuleParameters",
@@ -954,7 +957,7 @@
             "schema": {
               "$ref": "#/definitions/InboundNatRule"
             },
-            "description": "Parameters supplied to the create or update inbound nat rule operation."
+            "description": "Parameters supplied to the create or update inbound NAT rule operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -1385,7 +1388,7 @@
           "LoadBalancers"
         ],
         "operationId": "LoadBalancers_ListInboundNatRulePortMappings",
-        "description": "List of inbound Nat rule port mappings.",
+        "description": "List of inbound NAT rule port mappings.",
         "parameters": [
           {
             "name": "groupName",
@@ -1426,7 +1429,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request for query inbound Nat rule port mapping.",
+            "description": "Successful request for query inbound NAT rule port mapping.",
             "schema": {
               "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings"
             }
@@ -1445,7 +1448,7 @@
           }
         },
         "x-ms-examples": {
-          "Query inbound Nat rule port mapping": {
+          "Query inbound NAT rule port mapping": {
             "$ref": "./examples/QueryInboundNatRulePortMapping.json"
           }
         },
@@ -1722,7 +1725,7 @@
           "items": {
             "$ref": "#/definitions/NatRulePortMapping"
           },
-          "description": "Collection of inbound Nat rule port mappings."
+          "description": "Collection of inbound NAT rule port mappings."
         }
       },
       "description": "Properties of the load balancer backend addresses."
@@ -2081,7 +2084,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InboundNatRulePropertiesFormat",
-          "description": "Properties of load balancer inbound nat rule."
+          "description": "Properties of load balancer inbound NAT rule."
         },
         "name": {
           "type": "string",
@@ -2309,7 +2312,7 @@
           "items": {
             "$ref": "#/definitions/InboundNatPool"
           },
-          "description": "Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound Nat rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules."
+          "description": "Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound NAT rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules."
         },
         "outboundRules": {
           "type": "array",
@@ -2383,7 +2386,7 @@
           "items": {
             "$ref": "#/definitions/InboundNatRule"
           },
-          "description": "A list of inbound nat rules in a load balancer."
+          "description": "A list of inbound NAT rules in a load balancer."
         },
         "nextLink": {
           "readOnly": true,
@@ -2531,7 +2534,7 @@
       "properties": {
         "inboundNatRuleName": {
           "type": "string",
-          "description": "Name of inbound Nat rule."
+          "description": "Name of inbound NAT rule."
         },
         "frontendPort": {
           "type": "integer",
@@ -2568,7 +2571,7 @@
           "items": {
             "$ref": "#/definitions/InboundNatRulePortMapping"
           },
-          "description": "Collection of inbound Nat rule port mappings."
+          "description": "Collection of inbound NAT rule port mappings."
         }
       },
       "description": "The response for a QueryInboundNatRulePortMapping API."
@@ -2579,12 +2582,12 @@
         "inboundNatRuleName": {
           "readOnly": true,
           "type": "string",
-          "description": "Name of inbound Nat rule."
+          "description": "Name of inbound NAT rule."
         },
         "protocol": {
           "readOnly": true,
           "$ref": "#/definitions/TransportProtocol",
-          "description": "The reference to the transport protocol used by the inbound Nat rule."
+          "description": "The reference to the transport protocol used by the inbound NAT rule."
         },
         "frontendPort": {
           "readOnly": true,
