@@ -56,6 +56,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-09-01-preview/sqlPool.json
   - Microsoft.Synapse/preview/2021-09-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2021-09-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-09-01-preview/kustoPool.json
 ```
 ### Tag: package-composite-v2
 
