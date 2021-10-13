@@ -10653,7 +10653,7 @@
       ],
       "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details."
     },
-    "DiskSecurityProfile": {
+    "DiskSecurityProfileProperties": {
       "properties": {
         "securityEncryptionType": {
           "type": "string",
@@ -10672,7 +10672,7 @@
           "description": "Specifies the customer managed disk encryption set resource id for the managed disk that is used for Customer Managed Key encrypted ConfidentialVM OS Disk and VMGuest blob."
         }
       },
-      "description": "Contains the security related information for the resource."
+      "description": "Specifies the Security profile settings for the managed disk."
     },
     "KeyVaultKeyReference": {
       "properties": {
@@ -10829,7 +10829,7 @@
           "description": "Specifies the customer managed disk encryption set resource id for the managed disk."
         },
         "securityProfile": {
-          "$ref": "#/definitions/DiskSecurityProfile",
+          "$ref": "#/definitions/DiskSecurityProfileProperties",
           "description": "Specifies the security profile for the managed disk."
         }
       },
