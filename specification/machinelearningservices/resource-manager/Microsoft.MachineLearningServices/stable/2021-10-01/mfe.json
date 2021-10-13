@@ -7898,9 +7898,6 @@
     },
     "ModelVersion": {
       "description": "Model asset version details.",
-      "required": [
-        "modelUri"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -7929,8 +7926,8 @@
         },
         "modelUri": {
           "description": "The URI path to the model contents.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
