@@ -290,9 +290,10 @@
           "description": "Last Updated Time (ISO-8601 format)."
         },
         "workerCount": {
-          "readOnly": true,
-          "type": "number",
-          "description": "Worker Count"
+          "description": "Worker count",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
         },
         "error": {
           "$ref": "./cosmos-db.json#/definitions/ErrorResponse",
