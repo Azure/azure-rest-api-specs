@@ -7,19 +7,25 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptionAliases/c356b7c7-7545-4686-b843-c1a49cf853fc",
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/aliases/c356b7c7-7545-4686-b843-c1a49cf853fc",
         "name": "c356b7c7-7545-4686-b843-c1a49cf853fc",
-        "type": "Microsoft.Billing/billingAccounts/billingSubscriptionAliases",
+        "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/aliases",
         "properties": {
+          "autoRenew": "Off",
+          "billingFrequency": "P1M",
           "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664",
           "billingProfileDisplayName": "Contoso operations billing profile",
+          "billingProfileName": "2b72f936-0166-47d6-91a3-ef9f84f36664",
+          "billingProfileSpendingLimitDetails": {
+            "type": "None",
+            "startDate": "2021-02-01T00:00:00Z",
+            "status": "None"
+          },
           "billingSubscriptionId": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/418b0e9c-5dc3-4260-918f-30b90619fe07",
-          "billingFrequency": "P1M",
-          "consumptionCostCenter": "ABC1234",
-          "consumptionSubscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
           "displayName": "Subscription 1",
           "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664/invoiceSections/5c562559-e31b-4bfe-b608-f8b5b3fbd073",
           "invoiceSectionDisplayName": "Contoso operations invoice section",
+          "invoiceSectionName": "5c562559-e31b-4bfe-b608-f8b5b3fbd073",
           "lastMonthCharges": {
             "currency": "USD",
             "value": 5000.00
@@ -29,14 +35,14 @@
             "value": 600
           },
           "productCategory": "UsageBased",
-          "productType": "AzureAccessPass",
+          "productType": "Usage Based",
           "productTypeId": "DZH318Z0BPS6",
-          "publisherName": "Microsoft Corporation",
           "purchaseDate": "2021-10-01T00:00:00Z",
           "quantity": 1,
           "skuId": "0001",
-          "skuDescription": "Azure Plan",
-          "status": "Active"
+          "skuDescription": "Microsoft Azure Plan",
+          "status": "Active",
+          "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3"
         }
       }
     }
