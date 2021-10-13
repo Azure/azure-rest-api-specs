@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "managedInstanceName": "sqlcrudtest-4645",
+    "api-version": "2021-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/keys/someVault_someKey_01234567890123456789012345678901",
+            "name": "someVault_someKey_01234567890123456789012345678901",
+            "type": "Microsoft.Sql/managedInstances/keys",
+            "kind": "azurekeyvault",
+            "properties": {
+              "thumbprint": "00112233445566778899AABBCCDDEEFFAABBCCDD",
+              "creationDate": "2020-11-15T00:00:00Z",
+              "autoRotationEnabled": false
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/keys/myVault_myKey_11111111111111111111111111111111",
+            "name": "myVault_myKey_11111111111111111111111111111111",
+            "type": "Microsoft.Sql/managedInstances/keys",
+            "kind": "azurekeyvault",
+            "properties": {
+              "thumbprint": "AAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBB",
+              "creationDate": "2020-11-15T00:00:00Z",
+              "autoRotationEnabled": false
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/keys/ServiceManaged",
+            "name": "ServiceManaged",
+            "type": "Microsoft.Sql/managedInstances/keys",
+            "kind": "servicemanaged",
+            "properties": {}
+          }
+        ]
+      }
+    }
+  }
+}
