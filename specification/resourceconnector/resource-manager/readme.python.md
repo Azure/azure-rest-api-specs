@@ -53,9 +53,9 @@ These settings apply only when `--tag=package-2021-10-31-preview --python` is sp
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2021-10-31-preview'
-namespace: azure.mgmt.resourceconnector.v2020_07_15_privatepreview
+namespace: azure.mgmt.resourceconnector.v2021-10-31-preview
 output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector/v2021-10-31-preview
 python:
-  namespace: azure.mgmt.resourceconnector.v2020_07_15_privatepreview
+  namespace: azure.mgmt.resourceconnector.v2021-10-31-preview
   output-folder: $(python-sdks-folder)/resourceconnector/azure-mgmt-resourceconnector/azure/mgmt/resourceconnector/v2021-10-31-preview
 ```
