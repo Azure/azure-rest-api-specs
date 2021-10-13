@@ -68,11 +68,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of Event Hubs.",
+            "description": "Successfully retrieved the list of SchemaGroups.",
             "schema": {
               "$ref": "#/definitions/SchemaGroupListResult"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -116,7 +125,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "SchemaGroup successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SchemaGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -150,7 +168,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "SchemaGroup successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -188,6 +215,12 @@
             "schema": {
               "$ref": "#/definitions/SchemaGroup"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -195,8 +228,10 @@
   },
   "definitions": {
     "SchemaGroup": {
+      "type": "object",
       "properties": {
         "properties": {
+          "type": "object",
           "x-ms-client-flatten": true,
           "properties": {
             "updatedAtUtc": {
@@ -268,6 +303,7 @@
       "description": "Single item in List or Get Schema Group operation"
     },
     "SchemaGroupListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
