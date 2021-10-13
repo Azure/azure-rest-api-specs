@@ -168,6 +168,93 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images": {
+      "get": {
+        "tags": [
+          "CommunityGalleryImages"
+        ],
+        "operationId": "CommunityGalleryImages_List",
+        "description": "List community gallery images inside a gallery.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunityGalleryImageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery.": {
+            "$ref": "./examples/communityGallery/ListCommunityGalleryImages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions": {
+      "get": {
+        "tags": [
+          "CommunityGalleryImageVersions"
+        ],
+        "operationId": "CommunityGalleryImageVersions_List",
+        "description": "List community gallery image versions inside an image.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryImageNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunityGalleryImageVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery.": {
+            "$ref": "./examples/communityGallery/ListCommunityGalleryImageVersions.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -212,6 +299,25 @@
         }
       ],
       "description": "Specifies information about the Community Gallery that you want to create or update."
+    },
+    "CommunityGalleryImageList": {
+      "description": "The List Community Gallery Images operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryImage"
+          },
+          "description": "A list of community gallery images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of community gallery images. Call ListNext() with this to fetch the next page of community gallery images."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CommunityGalleryImage": {
       "properties": {
@@ -386,6 +492,25 @@
         }
       },
       "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
+    },
+    "CommunityGalleryImageVersionList": {
+      "description": "The List Community Gallery Image versions operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityGalleryImageVersion"
+          },
+          "description": "A list of community gallery image versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of community gallery image versions. Call ListNext() with this to fetch the next page of community gallery image versions."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CommunityGalleryImageVersion": {
       "properties": {
