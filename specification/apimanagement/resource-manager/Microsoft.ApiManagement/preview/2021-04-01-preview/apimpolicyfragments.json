@@ -219,18 +219,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The policy fragment was successfully created.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyFragmentContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
           "200": {
             "description": "The policy fragment was successfully updated.",
             "schema": {
@@ -243,12 +231,31 @@
               }
             }
           },
+          "201": {
+            "description": "The policy fragment was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyFragmentContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Request to create or update the policy fragment was accepted. Location header contains the URL where the status of the long running operation can be checked."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "delete": {
