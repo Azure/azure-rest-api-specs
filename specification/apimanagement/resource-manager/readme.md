@@ -28,15 +28,68 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-2020-12
+tag: package-preview-2021-04
 ```
 
+``` yaml
+modelerfour:
+  lenient-model-deduplication: true
+```
 
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimoutbounddependency.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalrevisions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimprivatelink.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimskus.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/definitions.json
+```
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-01'
+``` yaml $(tag) == 'package-preview-2021-01'
 input-file:
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimapis.json
@@ -78,6 +131,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-01-01-preview/apimusers.json
   - Microsoft.ApiManagement/preview/2021-01-01-preview/definitions.json
 ```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
@@ -478,6 +532,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
@@ -523,7 +578,7 @@ See configuration in [readme.az.md](./readme.az.md)
 ## Suppression
 
 ``` yaml
-directive:  
+directive:
   - suppress: R4009
     from: apimapis.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
@@ -559,53 +614,62 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimnamedvalues.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimgateways.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimgroups.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimcontenttypes.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimdeletedservices.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimdiagnostics.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimemailtemplates.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimidentityprovider.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimissues.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimloggers.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimopenidconnectproviders.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimpolicies.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimportalrevisions.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimsettings.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimtags.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimtenant.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
     from: apimnotifications.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4037
+    from: definitions.json
+    reason: We want customers to be able to supply any valid JSON token, object or otherwise    
+  - suppress: R4009
+    from: apimprivatelink.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimprivatelink.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
 ```
