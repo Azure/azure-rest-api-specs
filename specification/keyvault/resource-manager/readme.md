@@ -168,7 +168,7 @@ directive:
     - R4009 # Vault object is the only one that need to be tracked with SystemData
 ```
 
-``` yaml
+``` yaml ($(csharp) && ($(tag) == 'package-preview-2021-06'))
 directive:
 - from: keyvault.json
   where: $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}'].put.responses
