@@ -48,6 +48,25 @@ input-file:
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
+### Tag: package-2021-08-preview-only
+
+These settings apply only when `--tag=package-2021-08-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2021-08-01-preview/containerregistry.json
+```
+
+### Tag: package-2021-08-preview
+
+These settings apply only when `--tag=package-2021-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2021-08-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
 ### Tag: package-2021-06-preview-only
 
 These settings apply only when `--tag=package-2021-06-preview-only` is specified on the command line.
