@@ -1539,6 +1539,10 @@
           "description": "Private endpoint connection proxy object properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
+          "description": "The provisioning state of the private endpoint connection proxy resource."
         }
       },
       "required": [
@@ -1717,6 +1721,21 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "PrivateEndpointConnectionProxyProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProxyProvisioningState",
+        "modelAsString": true
       }
     }
   },
