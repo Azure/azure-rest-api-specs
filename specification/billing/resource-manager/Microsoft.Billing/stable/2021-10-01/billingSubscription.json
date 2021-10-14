@@ -104,6 +104,10 @@
           "BillingSubscriptions"
         ],
         "operationId": "BillingSubscriptions_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options":{
+          "final-state-via" : "location"
+        },
         "description": "Updates the properties of a billing subscription.",
         "x-ms-examples": {
           "UpdateBillingProperty": {
@@ -208,6 +212,9 @@
                 "format": "int64"
               }
             }
+          },
+          "204": {
+            "description": "Billing subscription not found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -590,17 +597,9 @@
             }
           },
           "201": {
-            "description": "Created. Billing subscription creation is in progress.",
-            "headers": {
-              "Location": {
-                "description": "Location URI to poll for result",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer",
-                "format": "int64"
-              }
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionAlias"
             }
           },
           "202": {
@@ -818,7 +817,7 @@
           "$ref": "#/definitions/Reseller"
         },
         "renewalTermDetails": {
-          "description": "  ",
+          "description": "Renewal term details of the product.",
           "type": "object",
           "$ref": "#/definitions/RenewalTermDetails"
         },
