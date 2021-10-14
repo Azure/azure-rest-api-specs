@@ -1487,12 +1487,12 @@
       "description": "Private endpoint connection proxy object properties.",
       "type": "object",
       "properties": {
-        "eTag":{
+        "eTag": {
           "description": "ETag from NRP.",
           "type": "string",
           "readOnly": true
         },
-        "remotePrivateEndpoint":{
+        "remotePrivateEndpoint": {
           "description": "Remote private endpoint details.",
           "$ref": "#/definitions/RemotePrivateEndpoint"
         }
@@ -1505,38 +1505,38 @@
       "description": "Remote private endpoint details.",
       "type": "object",
       "properties": {
-        "id":{
+        "id": {
           "description": "Remote endpoint resource ID.",
           "type": "string",
           "readOnly": true
         },
-        "vnetTrafficTag":{
+        "vnetTrafficTag": {
           "description": "Virtual network traffic tag.",
           "type": "string",
           "readOnly": true
         },
-        "manualPrivateLinkServiceConnections":{
+        "manualPrivateLinkServiceConnections": {
           "description": "List of private link service connections that need manual approval.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceConnection"
           }
         },
-        "privateLinkServiceConnections":{
+        "privateLinkServiceConnections": {
           "description": "List of automatically approved private link service connections.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceConnection"
           }
         },
-        "privateLinkServiceProxies":{
+        "privateLinkServiceProxies": {
           "description": "List of private link service proxies.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceProxy"
           }
         },
-        "connectionDetails":{
+        "connectionDetails": {
           "description": "List of connection details.",
           "type": "array",
           "items": {
@@ -1552,19 +1552,19 @@
       "description": "Private link service connection details.",
       "type": "object",
       "properties": {
-        "name":{
+        "name": {
           "description": "Private link service connection name.",
           "type": "string",
           "readOnly": true
         },
-        "groupIds":{
+        "groupIds": {
           "description": "List of group IDs.",
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
           }
         },
-        "requestMessage":{
+        "requestMessage": {
           "description": "Request message.",
           "type": "string",
           "readOnly": true
@@ -1580,20 +1580,20 @@
       "properties": {
         "remotePrivateLinkServiceConnectionState": {
           "description": "Remote private link service connection state",
-          "$ref":"../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
         },
-        "remotePrivateEndpointConnection":{
+        "remotePrivateEndpointConnection": {
           "description": "Remote private endpoint connection details.",
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/RemotePrivateEndpointConnection"
             }
           ]
         },
-        "groupConnectivityInformation":{
+        "groupConnectivityInformation": {
           "description": "Group connectivity information.",
           "type": "array",
-          "items":{
+          "items": {
             "$ref": "#/definitions/GroupConnectivityInformation"
           }
         }
@@ -1602,10 +1602,10 @@
         "properties"
       ]
     },
-    "RemotePrivateEndpointConnection":{
+    "RemotePrivateEndpointConnection": {
       "description": "Remote private endpoint connection details.",
       "type": "object",
-      "properties":{
+      "properties": {
         "id": {
           "description": "Remote private endpoint connection ID.",
           "type": "string",
@@ -1617,24 +1617,24 @@
       "description": "Group connectivity details.",
       "type": "object",
       "properties": {
-        "groupId":{
+        "groupId": {
           "description": "Group ID.",
           "type": "string",
           "readOnly": true
         },
-        "memberName":{
+        "memberName": {
           "description": "Member name.",
           "type": "string",
           "readOnly": true
         },
-        "customerVisibleFqdns":{
+        "customerVisibleFqdns": {
           "description": "List of customer visible FQDNs.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "internalFqdn":{
+        "internalFqdn": {
           "description": "Internal FQDN.",
           "type": "string",
           "readOnly": true
@@ -1648,27 +1648,27 @@
       "description": "Private endpoint connection proxy object properties.",
       "type": "object",
       "properties": {
-        "id":{
+        "id": {
           "description": "Connection details ID.",
           "type": "string",
           "readOnly": true
         },
-        "privateIpAddress":{
+        "privateIpAddress": {
           "description": "Private IP address.",
           "type": "string",
           "readOnly": true
         },
-        "linkIdentifier":{
+        "linkIdentifier": {
           "description": "Link ID.",
           "type": "string",
           "readOnly": true
         },
-        "groupId":{
+        "groupId": {
           "description": "Group ID.",
           "type": "string",
           "readOnly": true
         },
-        "memberName":{
+        "memberName": {
           "description": "Member name.",
           "type": "string",
           "readOnly": true
