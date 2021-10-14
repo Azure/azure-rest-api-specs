@@ -38,6 +38,15 @@ input-file:
 - Microsoft.EventGrid/stable/2021-12-01/EventGrid.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsApiResponseSchema
+    from: EventGrid.json
+    reason: Error is complaining about a section that already exists in all previous stable and preview swaggers.
+```
+
 ### Tag: package-2021-06-preview
 
 These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
