@@ -936,6 +936,206 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/validate": {
+      "post": {
+        "description": "Validates a private endpoint connection proxy object. (Network RP only)",
+        "operationId": "PrivateEndpointConnectionProxies_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#definitions/PrivateEndpointConnectionProxy"
+            },
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "description": "Private endpoint connection proxy request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyValidate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Validate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get the specified private endpoint connection proxy associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyGet": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "Creates or updates the specified private endpoint connection proxy resource associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "Deletes the specified private endpoint connection proxy associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyDelete": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/providers/Microsoft.DeviceUpdate/operations": {
       "get": {
         "description": "Returns list of operations for Microsoft.DeviceUpdate resource provider.",
@@ -1263,6 +1463,220 @@
           }
         }
       }
+    },
+    "PrivateEndpointConnectionProxy": {
+      "description": "Private endpoint connection proxy details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Private endpoint connection proxy object properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateEndpointConnectionProxyProperties": {
+      "description": "Private endpoint connection proxy object properties.",
+      "type": "object",
+      "properties": {
+        "eTag":{
+          "description": "ETag from NRP.",
+          "type": "string",
+          "readOnly": true
+        },
+        "remotePrivateEndpoint":{
+          "description": "Remote private endpoint details.",
+          "$ref": "#/definitions/RemotePrivateEndpoint"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RemotePrivateEndpoint": {
+      "description": "Remote private endpoint details.",
+      "type": "object",
+      "properties": {
+        "id":{
+          "description": "Remote endpoint resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vnetTrafficTag":{
+          "description": "Virtual network traffic tag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manualPrivateLinkServiceConnections":{
+          "description": "List of private link service connections that need manual approval.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceConnections":{
+          "description": "List of automatically approved private link service connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceProxies":{
+          "description": "List of private link service proxies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceProxy"
+          }
+        },
+        "connectionDetails":{
+          "description": "List of connection details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetails"
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateLinkServiceConnection": {
+      "description": "Private link service connection details.",
+      "type": "object",
+      "properties": {
+        "name":{
+          "description": "Private link service connection name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupIds":{
+          "description": "List of group IDs.",
+          "type": "array",
+          "items":{
+            "type": "string"
+          }
+        },
+        "requestMessage":{
+          "description": "Request message.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateLinkServiceProxy": {
+      "description": "Private link service proxy details.",
+      "type": "object",
+      "properties": {
+        "remotePrivateLinkServiceConnectionState": {
+          "description": "Remote private link service connection state",
+          "$ref":"../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "remotePrivateEndpointConnection":{
+          "description": "Remote private endpoint connection details.",
+          "allOf":[
+            {
+              "$ref": "#/definitions/RemotePrivateEndpointConnection"
+            }
+          ]
+        },
+        "groupConnectivityInformation":{
+          "description": "Group connectivity information.",
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RemotePrivateEndpointConnection":{
+      "description": "Remote private endpoint connection details.",
+      "type": "object",
+      "properties":{
+        "id": {
+          "description": "Remote private endpoint connection ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "description": "Group connectivity details.",
+      "type": "object",
+      "properties": {
+        "groupId":{
+          "description": "Group ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName":{
+          "description": "Member name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerVisibleFqdns":{
+          "description": "List of customer visible FQDNs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalFqdn":{
+          "description": "Internal FQDN.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ConnectionDetails": {
+      "description": "Private endpoint connection proxy object properties.",
+      "type": "object",
+      "properties": {
+        "id":{
+          "description": "Connection details ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIpAddress":{
+          "description": "Private IP address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkIdentifier":{
+          "description": "Link ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupId":{
+          "description": "Group ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName":{
+          "description": "Member name.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {
@@ -1316,6 +1730,14 @@
       "required": true,
       "type": "string",
       "description": "The group ID of the private link resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionProxyIdParameter": {
+      "name": "privateEndpointConnectionProxyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the private endpoint connection proxy object.",
       "x-ms-parameter-location": "method"
     }
   }
