@@ -34,6 +34,30 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-09-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-09-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
+```
+
 ### Tag: package-composite-v2
 
 These settings apply only when `--tag=package-composite-v2` is specified on the command line.
