@@ -168,6 +168,18 @@ directive:
     - R4009 # Vault object is the only one that need to be tracked with SystemData
 ```
 
+``` yaml
+directive:
+- from: keyvault.json
+  where: $.['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}'].put.responses
+  transform: delete $["404"]
+  reason: Incompatible responses
+- from: keyvault.json
+  where: $.['/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}/purge'].post.responses
+  transform: delete $["404"]
+  reason: Incompatible responses
+```
+
 ---
 
 # Code Generation
