@@ -41,12 +41,6 @@
         ],
         "operationId": "Consortiums_CreateOrUpdate",
         "description": "Creates or updates the specified consortium.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -128,13 +122,6 @@
         ],
         "operationId": "Consortiums_Update",
         "description": "Updates the specified consortium.",
-        "consumes": [
-          "application/merge-patch+json",
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -193,13 +180,6 @@
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-examples": {
           "Update Consortium": {
             "$ref": "./examples/ConsortiumsPatch.json"
@@ -212,9 +192,6 @@
         ],
         "operationId": "Consortiums_Get",
         "description": "Gets information about the specified consortium.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -278,9 +255,6 @@
         ],
         "operationId": "Consortiums_Delete",
         "description": "Deletes the specified consortium.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -349,9 +323,6 @@
         ],
         "operationId": "Consortiums_List",
         "description": "Lists all consortiums.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -613,6 +584,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "gatewayVnetId": {
+          "description": "Specifies the resource id of the gateway vnet.",
+          "type": "string"
         },
         "userInterfaceMode": {
           "description": "Gets or sets the UserInterfaceMode.",
