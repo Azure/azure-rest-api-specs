@@ -753,6 +753,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/commitmentTiers": {
+      "get": {
+        "tags": [
+          "CommitmentTiers"
+        ],
+        "operationId": "CommitmentTiers_List",
+        "description": "List Commitment Tiers.",
+        "x-ms-examples": {
+          "ListCommitmentTiers": {
+            "$ref": "./examples/ListCommitmentTiers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
       "post": {
         "tags": [
@@ -1032,6 +1071,392 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_List",
+        "description": "Gets the deployments associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "ListDeployments": {
+            "$ref": "./examples/ListDeployments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Get",
+        "description": "Gets the specified deployments associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetDeployment": {
+            "$ref": "./examples/GetDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the deployments properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CreateOrUpdate",
+        "description": "Update the state of specified deployments associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "PutDeployment": {
+            "$ref": "./examples/PutDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "The deployment properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the deployment properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Delete",
+        "description": "Deletes the specified deployment associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "DeleteDeployment": {
+            "$ref": "./examples/DeleteDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the deployment successfully."
+          },
+          "202": {
+            "description": "Accepted -- the operation was successfully started and will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content -- The deployment does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans": {
+      "get": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_List",
+        "description": "Gets the commitmentPlans associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "ListCommitmentPlans": {
+            "$ref": "./examples/ListCommitmentPlans.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved commitmentPlans.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}": {
+      "get": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_Get",
+        "description": "Gets the specified commitmentPlans associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetCommitmentPlan": {
+            "$ref": "./examples/GetCommitmentPlan.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/commitmentPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the commitmentPlans properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_CreateOrUpdate",
+        "description": "Update the state of specified commitmentPlans associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "PutCommitmentPlan": {
+            "$ref": "./examples/PutCommitmentPlan.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/commitmentPlanNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            },
+            "description": "The commitmentPlan properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the commitmentPlan properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_Delete",
+        "description": "Deletes the specified commitmentPlan associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "DeleteCommitmentPlan": {
+            "$ref": "./examples/DeleteCommitmentPlan.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/commitmentPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the commitmentPlan successfully."
+          },
+          "202": {
+            "description": "Accepted -- the operation was successfully started and will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content -- The commitmentPlan does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1680,6 +2105,10 @@
         "type": {
           "type": "string",
           "description": "The Type of the resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The Kind of the resource."
         }
       },
       "required": [
@@ -1706,6 +2135,10 @@
         "type": {
           "type": "string",
           "description": "The Type of the resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The Kind of the resource."
         }
       }
     },
@@ -2124,6 +2557,321 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "DeploymentListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Deployment.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          },
+          "description": "Gets the list of Cognitive Services accounts Deployment and their properties."
+        }
+      },
+      "description": "The list of cognitive services accounts operation response."
+    },
+    "Deployment": {
+      "description": "Cognitive Services account deployment.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "Properties of Cognitive Services account deployment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the resource at the time the operation was called.",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "model": {
+          "type": "object",
+          "$ref": "#/definitions/DeploymentModel"
+        },
+        "scaleSettings": {
+          "type": "object",
+          "$ref": "#/definitions/DeploymentScaleSettings"
+        }
+      },
+      "description": "Properties of Cognitive Services account deployment."
+    },
+    "DeploymentModel": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Deployment model format."
+        },
+        "name": {
+          "type": "string",
+          "description": "Deployment model name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Deployment model version."
+        }
+      },
+      "description": "Properties of Cognitive Services account deployment model."
+    },
+    "DeploymentScaleSettings": {
+      "type": "object",
+      "properties": {
+        "scaleType": {
+          "type": "string",
+          "description": "Deployment scale type.",
+          "enum": [
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentScaleType",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deployment capacity."
+        }
+      },
+      "description": "Properties of Cognitive Services account deployment model."
+    },
+    "CommitmentTierListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of CommitmentTier.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommitmentTier"
+          },
+          "description": "Gets the list of Cognitive Services accounts CommitmentTier and their properties."
+        }
+      },
+      "description": "The list of cognitive services accounts operation response."
+    },
+    "CommitmentTier": {
+      "description": "Cognitive Services account commitment tier.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The Kind of the resource."
+        },
+        "skuName": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "hostingModel": {
+          "$ref": "#/definitions/HostingModel",
+          "description": "Account hosting model."
+        },
+        "planType": {
+          "type": "string",
+          "description": "Commitment plan type."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Commitment period commitment tier."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Commitment period commitment max count."
+        },
+        "quota": {
+          "type": "object",
+          "$ref": "#/definitions/CommitmentQuota"
+        },
+        "cost": {
+          "type": "object",
+          "$ref": "#/definitions/CommitmentCost"
+        }
+      }
+    },
+    "CommitmentQuota": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Commitment quota quantity."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Commitment quota unit."
+        }
+      },
+      "description": "Cognitive Services account commitment quota."
+    },
+    "CommitmentCost": {
+      "type": "object",
+      "properties": {
+        "commitmentMeterId": {
+          "type": "string",
+          "description": "Commitment meter Id."
+        },
+        "overageMeterId": {
+          "type": "string",
+          "description": "Overage meter Id."
+        }
+      },
+      "description": "Cognitive Services account commitment cost."
+    },
+    "CommitmentPlanListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of CommitmentPlan.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlan"
+          },
+          "description": "Gets the list of Cognitive Services accounts CommitmentPlan and their properties."
+        }
+      },
+      "description": "The list of cognitive services accounts operation response."
+    },
+    "CommitmentPlan": {
+      "description": "Cognitive Services account commitment plan.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "$ref": "#/definitions/CommitmentPlanProperties",
+          "description": "Properties of Cognitive Services account commitment plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CommitmentPlanProperties": {
+      "type": "object",
+      "properties": {
+        "hostingModel": {
+          "$ref": "#/definitions/HostingModel",
+          "description": "Account hosting model."
+        },
+        "planType": {
+          "type": "string",
+          "description": "Commitment plan type."
+        },
+        "current": {
+          "type": "object",
+          "$ref": "#/definitions/CommitmentPeriod"
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "AutoRenew commitment plan."
+        },
+        "next": {
+          "type": "object",
+          "$ref": "#/definitions/CommitmentPeriod"
+        },
+        "last": {
+          "type": "object",
+          "$ref": "#/definitions/CommitmentPeriod",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of Cognitive Services account commitment plan."
+    },
+    "HostingModel": {
+      "type": "string",
+      "description": "Account hosting model.",
+      "enum": [
+        "Web",
+        "ConnectedContainer",
+        "DisconnectedContainer"
+      ],
+      "x-ms-enum": {
+        "name": "HostingModel",
+        "modelAsString": true
+      }
+    },
+    "CommitmentPeriod": {
+      "type": "object",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "Commitment period commitment tier."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Commitment period commitment count."
+        },
+        "quota": {
+          "type": "object",
+          "$ref": "#/definitions/CommitmentQuota",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Commitment period start date.",
+          "readOnly": true
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Commitment period end date.",
+          "readOnly": true
+        }
+      },
+      "description": "Cognitive Services account commitment period."
     }
   },
   "parameters": {
@@ -2160,6 +2908,22 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "deploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "commitmentPlanNameParameter": {
+      "name": "commitmentPlanName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     }
   }
