@@ -46,6 +46,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 input-file:
   - Microsoft.ContainerRegistry/stable/2021-09-01/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+tag: package-2021-08-preview
 ```
 
 ### Tag: package-2021-08-preview-only
@@ -291,6 +292,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
