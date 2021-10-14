@@ -322,296 +322,290 @@
           "$ref": "#/definitions/SecurityConnectorProperties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "SecurityConnectorProperties": {
-      "type": "object",
-      "description": "A set of properties that defines the security connector configuration.",
-      "properties": {
-        "hierarchyIdentifier": {
-          "type": "string",
-          "description": "The multi cloud resource identifier (account id in case of AWS connector)."
-        },
-        "cloudName": {
-          "type": "string",
-          "description": "The multi cloud resource's cloud name.",
-          "enum": [
-            "Azure",
-            "AWS",
-            "GCP"
-          ],
-          "x-ms-enum": {
-            "name": "cloudName",
-            "modelAsString": true
+      "systemData": {
+        "type": "object",
+        "description": "System information for this resource",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "description": "entity which created this resource"
+          },
+          "createdByType": {
+            "$ref": "#/definitions/IdentityType",
+            "description": "Type of entity which created this resource"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "date when resource was created"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "description": "last entity to modify this resource"
+          },
+          "lastModifiedByType": {
+            "$ref": "#/definitions/IdentityType",
+            "description": "Type of entity which modified this resource"
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "description": "date when resource was last modified"
           }
-        },
-        "offerings": {
-          "type": "array",
-          "description": "A collection of offerings for the security connector.",
-          "items": {
+        }
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+      }
+    ]
+  },
+  "IdentityType": {
+    "description": "The type of identity that creates/modifies resources",
+    "type": "string",
+    "enum": [
+      "User",
+      "Application",
+      "ManagedIdentity",
+      "Key"
+    ],
+    "x-ms-enum": {
+      "name": "IdentityType",
+      "modelAsString": true
+    }
+  },
+  "SecurityConnectorProperties": {
+    "type": "object",
+    "description": "A set of properties that defines the security connector configuration.",
+    "properties": {
+      "hierarchyIdentifier": {
+        "type": "string",
+        "description": "The multi cloud resource identifier (account id in case of AWS connector)."
+      },
+      "cloudName": {
+        "type": "string",
+        "description": "The multi cloud resource's cloud name.",
+        "enum": [
+          "Azure",
+          "AWS",
+          "GCP"
+        ],
+        "x-ms-enum": {
+          "name": "cloudName",
+          "modelAsString": true
+        }
+      },
+      "offerings": {
+        "type": "array",
+        "description": "A collection of offerings for the security connector.",
+        "items": {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      },
+      "organizationalData": {
+        "type": "object",
+        "description": "The multi cloud account's organizational data",
+        "properties": {
+          "organizationMembershipType": {
+            "type": "string",
+            "description": "The multi cloud account's membership type in the organization",
+            "enum": [
+              "Member",
+              "Organization"
+            ],
+            "x-ms-enum": {
+              "name": "organizationMembershipType",
+              "modelAsString": true
+            }
+          },
+          "parentHierarchyId": {
+            "type": "string",
+            "description": "If the multi cloud account is not of membership type organization, this will be the ID of the account's parent"
+          },
+          "stacksetName": {
+            "type": "string",
+            "description": "If the multi cloud account is of membership type organization, this will be the name of the onboarding stackset"
+          },
+          "excludedAccountId": {
+            "type": "array",
+            "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
+            "items": {
+              "type": "string",
+              "description": "account ID"
+            }
+          }
+        }
+      },
+      "cloudOffering": {
+        "type": "object",
+        "description": "The security offering details",
+        "discriminator": "offeringType",
+        "required": [
+          "offeringType"
+        ],
+        "properties": {
+          "offeringType": {
+            "type": "string",
+            "description": "The type of the security offering.",
+            "enum": [
+              "CspmMonitorAws",
+              "DefenderForContainersAws",
+              "DefenderForServersAws"
+            ],
+            "x-ms-enum": {
+              "name": "OfferingType",
+              "modelAsString": true
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The offering description.",
+            "readOnly": true
+          }
+        }
+      },
+      "CspmMonitorAwsOffering": {
+        "type": "object",
+        "description": "The CSPM monitoring for AWS offering configurations",
+        "x-ms-discriminator-value": "CspmMonitorAws",
+        "allOf": [
+          {
             "$ref": "#/definitions/cloudOffering"
           }
-        },
-        "organizationalData": {
-          "type": "object",
-          "description": "The multi cloud account's organizational data",
-          "properties": {
-            "organizationMembershipType": {
-              "type": "string",
-              "description": "The multi cloud account's membership type in the organization",
-              "enum": [
-                "Member",
-                "Organization"
-              ],
-              "x-ms-enum": {
-                "name": "organizationMembershipType",
-                "modelAsString": true
-              }
-            },
-            "parentHierarchyId": {
-              "type": "string",
-              "description": "If the multi cloud account is not of membership type organization, this will be the ID of the account's parent"
-            },
-            "stacksetName": {
-              "type": "string",
-              "description": "If the multi cloud account is of membership type organization, this will be the name of the onboarding stackset"
-            },
-            "excludedAccountId": {
-              "type": "array",
-              "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
-              "items": {
+        ],
+        "properties": {
+          "nativeCloudConnection": {
+            "type": "object",
+            "description": "The native cloud connection configuration",
+            "properties": {
+              "cloudRoleArn": {
                 "type": "string",
-                "description": "account ID"
+                "description": "The cloud role ARN in AWS for this feature"
               }
             }
           }
-        },
-        "systemData": {
-          "type": "object",
-          "description": "System information for this resource",
-          "properties": {
-            "createdBy": {
-              "type": "string",
-              "description": "entity which created this resource"
-            },
-            "createdByType": {
-              "type": "string",
-              "description": "Type of entity which created this resource",
-              "enum": [
-                "User",
-                "Application",
-                "ManagedIdentity",
-                "Keys"
-              ],
-              "x-ms-enum": {
-                "name": "createdByType",
-                "modelAsString": true
+        }
+      },
+      "DefenderForContainersAwsOffering": {
+        "type": "object",
+        "description": "The Defender for Containers AWS offering configurations",
+        "x-ms-discriminator-value": "DefenderForContainersAws",
+        "allOf": [
+          {
+            "$ref": "#/definitions/cloudOffering"
+          }
+        ],
+        "properties": {
+          "kubernetesService": {
+            "type": "object",
+            "description": "The kubernetes service connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
               }
-            },
-            "createdAt": {
-              "type": "string",
-              "description": "date when resource was created"
-            },
-            "lastModifiedBy": {
-              "type": "string",
-              "description": "last entity to modify this resource"
-            },
-            "lastModifiedByType": {
-              "type": "string",
-              "description": "Type of entity which modified this resource",
-              "enum": [
-                "User",
-                "Application",
-                "ManagedIdentity",
-                "Keys"
-              ],
-              "x-ms-enum": {
-                "name": "createdByType",
-                "modelAsString": true
+            }
+          },
+          "kubernetesScubaReader": {
+            "type": "object",
+            "description": "The kubernetes to scuba connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
               }
-            },
-            "lastModifiedAt": {
-              "type": "string",
-              "description": "date when resource was last modified"
             }
-          }
-      }
-    },
-    "cloudOffering": {
-      "type": "object",
-      "description": "The security offering details",
-      "discriminator": "offeringType",
-      "required": [
-        "offeringType"
-      ],
-      "properties": {
-        "offeringType": {
-          "type": "string",
-          "description": "The type of the security offering.",
-          "enum": [
-            "CspmMonitorAws",
-            "DefenderForContainersAws",
-            "DefenderForServersAws"
-          ],
-          "x-ms-enum": {
-            "name": "OfferingType",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "The offering description.",
-          "readOnly": true
-        }
-      }
-    },
-    "CspmMonitorAwsOffering": {
-      "type": "object",
-      "description": "The CSPM monitoring for AWS offering configurations",
-      "x-ms-discriminator-value": "CspmMonitorAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {
-        "nativeCloudConnection": {
-          "type": "object",
-          "description": "The native cloud connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
+          },
+          "cloudWatchToKinesis": {
+            "type": "object",
+            "description": "The cloudwatch to kinesis connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
+            }
+          },
+          "kinesisToS3": {
+            "type": "object",
+            "description": "The kinesis to s3 connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
             }
           }
         }
-      }
-    },
-    "DefenderForContainersAwsOffering": {
-      "type": "object",
-      "description": "The Defender for Containers AWS offering configurations",
-      "x-ms-discriminator-value": "DefenderForContainersAws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {
-        "kubernetesService": {
-          "type": "object",
-          "description": "The kubernetes service connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            }
+      },
+      "DefenderForServersAWSOffering": {
+        "type": "object",
+        "description": "The Defender for Servers AWS offering configurations",
+        "x-ms-discriminator-value": "DefenderForServersAWS",
+        "allOf": [
+          {
+            "$ref": "#/definitions/cloudOffering"
           }
-        },
-        "kubernetesScubaReader": {
-          "type": "object",
-          "description": "The kubernetes to scuba connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
+        ],
+        "properties": {
+          "defenderForServers": {
+            "type": "object",
+            "description": "The Defender for servers connection configuration",
+            "properties": {
+              "cloudRoleArn": {
+                "type": "string",
+                "description": "The cloud role ARN in AWS for this feature"
+              }
             }
-          }
-        },
-        "cloudWatchToKinesis": {
-          "type": "object",
-          "description": "The cloudwatch to kinesis connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            }
-          }
-        },
-        "kinesisToS3": {
-          "type": "object",
-          "description": "The kinesis to s3 connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            }
-          }
-        }
-      }
-    },
-    "DefenderForServersAWSOffering": {
-      "type": "object",
-      "description": "The Defender for Servers AWS offering configurations",
-      "x-ms-discriminator-value": "DefenderForServersAWS",
-      "allOf": [
-        {
-          "$ref": "#/definitions/cloudOffering"
-        }
-      ],
-      "properties": {
-        "defenderForServers": {
-          "type": "object",
-          "description": "The Defender for servers connection configuration",
-          "properties": {
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            }
-          }
-        },
-        "arcAutoProvisioning": {
-          "type": "object",
-          "description": "The ARC autoprovisioning configuration",
-          "properties": {
-            "enabled": {
-              "type": "bool",
-              "description": "Is arc auto provisioning enabled"
-            },
-            "servicePrincipalSecretMetadata": {
-              "type": "object",
-              "description": "Metadata of Service Principal secret for autoprovisioning",
-              "properties": {
-                "expiryDate": {
-                  "type": "string",
-                  "description": "expiration date of service principal secret"
-                },
-                "parameterStoreRegion": {
-                  "type": "string",
-                  "description": "region of parameter store where secret is kept"
-                },
-                "parameterNameInStore": {
-                  "type": "string",
-                  "description": "name of secret resource in parameter store"
+          },
+          "arcAutoProvisioning": {
+            "type": "object",
+            "description": "The ARC autoprovisioning configuration",
+            "properties": {
+              "enabled": {
+                "type": "bool",
+                "description": "Is arc auto provisioning enabled"
+              },
+              "servicePrincipalSecretMetadata": {
+                "type": "object",
+                "description": "Metadata of Service Principal secret for autoprovisioning",
+                "properties": {
+                  "expiryDate": {
+                    "type": "string",
+                    "description": "expiration date of service principal secret"
+                  },
+                  "parameterStoreRegion": {
+                    "type": "string",
+                    "description": "region of parameter store where secret is kept"
+                  },
+                  "parameterNameInStore": {
+                    "type": "string",
+                    "description": "name of secret resource in parameter store"
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "securityConnectorName": {
-      "name": "securityConnectorName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The security connector name.",
-      "x-ms-parameter-location": "method"
     },
-    "securityConnectorInBody": {
-      "name": "securityConnector",
-      "in": "body",
-      "required": true,
-      "description": "The security connector resource",
-      "schema": {
-        "$ref": "#/definitions/SecurityConnector"
+    "parameters": {
+      "securityConnectorName": {
+        "name": "securityConnectorName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The security connector name.",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
+      "securityConnectorInBody": {
+        "name": "securityConnector",
+        "in": "body",
+        "required": true,
+        "description": "The security connector resource",
+        "schema": {
+          "$ref": "#/definitions/SecurityConnector"
+        },
+        "x-ms-parameter-location": "method"
+      }
     }
   }
-}
