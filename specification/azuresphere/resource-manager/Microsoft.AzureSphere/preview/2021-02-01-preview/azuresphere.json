@@ -148,6 +148,12 @@
             "schema": {
               "$ref": "#/definitions/ListImageComponentIdsRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -544,13 +550,10 @@
             "type": "string"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "description": "List devices in product request",
-            "schema": {
-              "$ref": "#/definitions/ListDevicesProductRequest"
-            }
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -1096,12 +1099,10 @@
             "type": "string"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListDeploymentsDeviceGroupRequest"
-            }
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -1174,13 +1175,10 @@
             "type": "string"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "description": "List devices in device group request",
-            "schema": {
-              "$ref": "#/definitions/ListDevicesDeviceGroupRequest"
-            }
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2444,6 +2442,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2501,6 +2505,12 @@
           },
           {
             "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2561,6 +2571,12 @@
           },
           {
             "$ref": "#/parameters/ProductParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2618,6 +2634,12 @@
           },
           {
             "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2675,6 +2697,12 @@
           },
           {
             "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2732,6 +2760,12 @@
           },
           {
             "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2789,6 +2823,12 @@
           },
           {
             "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -2861,11 +2901,6 @@
       "description": "Request of the action to list component identifiers for a list of image identifiers.",
       "required": [
         "imageIdentifiers"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ListRequest"
-        }
       ]
     },
     "UploadImageRequest": {
@@ -2927,16 +2962,6 @@
       "properties": {},
       "description": "Resource deletion accepted."
     },
-    "ListDevicesProductRequest": {
-      "type": "object",
-      "properties": {},
-      "description": "Request of the action to list devices in a product.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ListRequest"
-        }
-      ]
-    },
     "CountDevicesProductResponse": {
       "type": "object",
       "properties": {},
@@ -2988,26 +3013,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/AzureSphereProperties"
-        }
-      ]
-    },
-    "ListDeploymentsDeviceGroupRequest": {
-      "type": "object",
-      "properties": {},
-      "description": "Request of the action to list deployments in a device group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ListRequest"
-        }
-      ]
-    },
-    "ListDevicesDeviceGroupRequest": {
-      "type": "object",
-      "properties": {},
-      "description": "Request of the action to list devices in a device group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ListRequest"
         }
       ]
     },
@@ -3222,21 +3227,6 @@
         }
       },
       "description": "Response of the count for elements."
-    },
-    "ListRequest": {
-      "type": "object",
-      "properties": {
-        "$top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of results that should be included in the response."
-        },
-        "$continuationToken": {
-          "type": "string",
-          "description": "A continuation token used to continue from a previous page of results."
-        }
-      },
-      "description": "Request of an action to list elements."
     },
     "AzureSpherePage_ImageComponent": {
       "type": "object",
@@ -3930,6 +3920,23 @@
       "in": "path",
       "required": true,
       "description": "Certificate serial number. You can use 'active'.",
+      "type": "string"
+    },
+    "TopParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "description": "The maximum number of results that should be included in the response",
+      "type": "integer",
+      "format": "int32"
+    },
+    "SkipTokenParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "$skipToken",
+      "in": "query",
+      "required": false,
+      "description": "A continuation token used to continue from a previous page of results",
       "type": "string"
     }
   }
