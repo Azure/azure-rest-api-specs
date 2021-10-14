@@ -34,6 +34,192 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/start": {
+      "post": {
+        "tags": [
+          "Workloads"
+        ],
+        "summary": "Perform Start operation.",
+        "operationId": "workloads_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the workload name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Workloads Start": {
+            "$ref": "./examples/WorkloadsStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/stop": {
+      "post": {
+        "tags": [
+          "Workloads"
+        ],
+        "summary": "Perform Stop operation.",
+        "operationId": "workloads_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the workload name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Workloads Start": {
+            "$ref": "./examples/WorkloadsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/restart": {
+      "post": {
+        "tags": [
+          "Workloads"
+        ],
+        "summary": "Perform Restart operation.",
+        "operationId": "workloads_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the workload name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Workloads Start": {
+            "$ref": "./examples/WorkloadsRestart.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{workloadName}": {
       "put": {
         "tags": [
@@ -42,9 +228,6 @@
         "operationId": "Workloads_CreateOrUpdate",
         "description": "Creates or updates the specified workload.",
         "consumes": [
-          "application/json"
-        ],
-        "produces": [
           "application/json"
         ],
         "parameters": [

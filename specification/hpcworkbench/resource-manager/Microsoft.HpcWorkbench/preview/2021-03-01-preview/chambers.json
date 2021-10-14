@@ -34,6 +34,301 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/getUploadUri": {
+      "post": {
+        "tags": [
+          "Chambers"
+        ],
+        "summary": "Gets a URI to upload files to the specified Chamber resource.",
+        "operationId": "chambers_GetUploadUri",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the file upload parameters.",
+            "schema": {
+              "$ref": "#/definitions/FileUploadParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Chambers get upload Uri": {
+            "$ref": "./examples/ChambersGetUploadUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/start": {
+      "post": {
+        "tags": [
+          "Chambers"
+        ],
+        "summary": "Perform Start operation.",
+        "operationId": "chambers_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Chambers start": {
+            "$ref": "./examples/ChambersStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/stop": {
+      "post": {
+        "tags": [
+          "Chambers"
+        ],
+        "summary": "Perform Stop operation.",
+        "operationId": "chambers_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Chambers stop": {
+            "$ref": "./examples/ChambersStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/restart": {
+      "post": {
+        "tags": [
+          "Chambers"
+        ],
+        "summary": "Perform Restart operation.",
+        "operationId": "chambers_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Chambers Restart": {
+            "$ref": "./examples/ChambersRestart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/updateLicense": {
+      "post": {
+        "tags": [
+          "Chambers"
+        ],
+        "summary": "Perform UpdateLicenseServices operation.",
+        "operationId": "chambers_UpdateChamberLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "licenseName",
+            "description": "the license name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "enable",
+            "description": "enable boolean",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update chamber license": {
+            "$ref": "./examples/ChambersUpdateChamberLicense.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}": {
       "put": {
         "tags": [
@@ -41,12 +336,6 @@
         ],
         "operationId": "Chambers_CreateOrUpdate",
         "description": "Creates or updates the specified Chamber.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -125,9 +414,6 @@
           "application/merge-patch+json",
           "application/json"
         ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -192,9 +478,6 @@
         ],
         "operationId": "Chambers_Get",
         "description": "Gets information about the specified Chamber.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -251,9 +534,6 @@
         ],
         "operationId": "Chambers_Delete",
         "description": "Deletes the specified Chamber.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -367,6 +647,18 @@
     }
   },
   "definitions": {
+    "FileUploadParameters": {
+      "description": "File Upload Parameters DTO.",
+      "type": "object",
+      "properties": {
+        "fileSize": {
+          "format": "int64",
+          "description": "Gets or sets the size of the file being uploaded.",
+          "type": "integer",
+          "example": 1073741824
+        }
+      }
+    },
     "ChamberPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",

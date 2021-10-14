@@ -41,9 +41,6 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists Operations.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -68,9 +65,6 @@
           "Instances"
         ],
         "operationId": "Instances_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -117,9 +111,6 @@
           "Instances"
         ],
         "operationId": "Instances_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -172,9 +163,6 @@
           "Instances"
         ],
         "operationId": "instances_Get",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -228,12 +216,6 @@
           "Instances"
         ],
         "operationId": "instances_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -294,13 +276,6 @@
           "Instances"
         ],
         "operationId": "instances_Patch",
-        "consumes": [
-          "application/merge-patch+json",
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -347,23 +322,13 @@
           "Instances Update": {
             "$ref": "./examples/InstancesPatch.json"
           }
-        },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
           "Instances"
         ],
         "operationId": "instances_Delete",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -406,14 +371,7 @@
           "Instances Update": {
             "$ref": "./examples/InstancesDelete.json"
           }
-        },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ]
+        }
       }
     }
   },

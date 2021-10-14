@@ -34,6 +34,69 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles/{name}/sync": {
+      "post": {
+        "tags": [
+          "AccessProfiles"
+        ],
+        "operationId": "accessProfiles_Sync",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessProfileOperationsResponse"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create accessProfile": {
+            "$ref": "./examples/AccessProfilesSync.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles/{accessProfileName}": {
       "put": {
         "tags": [
@@ -55,11 +118,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroup",
             "in": "path",
+            "name": "resourceGroup",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "instanceName",
@@ -143,11 +205,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroup",
             "in": "path",
+            "name": "resourceGroup",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "instanceName",
@@ -217,11 +278,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroup",
             "in": "path",
+            "name": "resourceGroup",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "instanceName",
@@ -283,11 +343,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroup",
             "in": "path",
+            "name": "resourceGroup",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "instanceName",
@@ -354,11 +413,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroup",
             "in": "path",
+            "name": "resourceGroup",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "instanceName",
@@ -402,6 +460,14 @@
     }
   },
   "definitions": {
+    "OperationStatus": {
+      "description": "Operation status enumeration.",
+      "enum": [
+        "Success",
+        "Failed"
+      ],
+      "type": "string"
+    },
     "AccessProfilePageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
@@ -416,6 +482,20 @@
           "items": {
             "$ref": "#/definitions/AccessProfile"
           }
+        }
+      }
+    },
+    "AccessProfileOperationsResponse": {
+      "description": "Model class to represent AccessProfile status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
         }
       }
     },
@@ -436,6 +516,24 @@
         }
       },
       "description": "AccessProfile properties."
+    },
+    "OperationResponse": {
+      "description": "Generic model class to represent arm facade operation api response.",
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "type": "string"
+        },
+        "resourceId": {
+          "$ref": "./hpcworkbench.json#/definitions/ArmId"
+        },
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "AccessProfile": {
       "description": "AccessProfile resource",
