@@ -972,9 +972,12 @@
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnectionList": {
+          "PrivateEndpointConnectionProxyList": {
             "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_ListByAccount.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1516,6 +1519,10 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionProxy"
           }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private endpoint connection proxies.",
+          "type": "string"
         }
       }
     },
