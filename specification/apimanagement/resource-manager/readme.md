@@ -70,7 +70,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimoutbounddependency.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicies.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicydescriptions.json
-  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2021-12-01-preview/apimpolicyfragments.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2021-12-01-preview/apimprivatelink.json
