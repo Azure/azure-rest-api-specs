@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Blob Storage",
-    "version": "2020-10-02",
+    "version": "2021-02-12",
     "x-ms-code-generation-settings": {
       "header": "MIT",
       "strictSpecAdherence": false
@@ -6063,6 +6063,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScope"
           }
         ],
         "responses": {
@@ -6129,6 +6132,11 @@
                 "type": "string",
                 "format": "byte",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
+              },
+              "x-ms-encryption-scope": {
+                "x-ms-client-name": "EncryptionScope",
+                "type": "string",
+                "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
               }
             }
           },
@@ -9569,7 +9577,7 @@
       ],
       "properties": {
         "Name": {
-          "type": "string"
+          "$ref": "#/definitions/BlobName"
         },
         "Deleted": {
           "type": "boolean"
@@ -9901,7 +9909,27 @@
       ],
       "properties": {
         "Name": {
-          "type": "string"
+          "$ref": "#/definitions/BlobName"
+        }
+      }
+    },
+    "BlobName": {
+      "type": "object",
+      "properties": {
+        "Encoded": {
+          "xml": {
+            "attribute": true,
+            "name": "Encoded"
+          },
+          "type": "boolean",
+          "description": "Indicates if the blob name is encoded."
+        },
+        "content": {
+          "xml": {
+            "x-ms-text": true
+          },
+          "type": "string",
+          "description": "The name of the blob."
         }
       }
     },
@@ -10914,7 +10942,7 @@
       "type": "string",
       "description": "Specifies the version of the operation to use for this request.",
       "enum": [
-        "2020-10-02"
+        "2021-02-12"
       ]
     },
     "Blob": {
