@@ -403,6 +403,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/stop": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Stop a Service.",
+        "operationId": "Services_Stop",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the stop operation is performed in the background."
+          },
+          "404": {
+            "description": "Not found. The response indicates the service does not exist."
+          },
+          "409": {
+            "description": "Conflict. The response indicates the exiting Service is now updating."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Services_Stop": {
+            "$ref": "./examples/Services_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/start": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Start a Service.",
+        "operationId": "Services_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the stop operation is performed in the background."
+          },
+          "404": {
+            "description": "Not found. The response indicates the service does not exist."
+          },
+          "409": {
+            "description": "Conflict. The response indicates the exiting Service is now updating."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Services_Start": {
+            "$ref": "./examples/Services_Start.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default": {
       "get": {
         "tags": [
