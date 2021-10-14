@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communication.azure.com/",
+    "api-version": "2021-04-07",
+    "roomId": "999126454"
+  },
+  "responses": {
+    "204": {},
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communication.azure.com/",
+    "api-version": "2021-04-07",
+    "roomId": "999126454"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "999126454",
+        "createdDateTime": "2021-08-28T01:38:19.0359921+00:00",
+        "validFrom": "2021-10-16T00:00:00+00:00",
+        "validUntil": "2021-10-22T00:00:00+00:00"
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}
