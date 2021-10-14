@@ -54,13 +54,17 @@
       ],
       "properties": {
         "systemData": {
+          "description": "The system metadata of the experiment resource.",
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
         "identity": {
+          "description": "The identity of the experiment resource.",
           "$ref": "./common.json#/definitions/resourceIdentity"
         },
         "properties": {
+          "description": "The properties of the experiment resource.",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/experimentProperties"
         }
       },
@@ -273,13 +277,16 @@
       "x-ms-discriminator-value": "continuous"
     },
     "keyValuePair": {
+      "description": "A map to describe the settings of an action.",
       "type": "object",
       "properties": {
         "key": {
+          "description": "The name of the setting for the action.",
           "type": "string",
           "minLength": 1
         },
         "value": {
+          "description": "The value of the setting for the action.",
           "type": "string",
           "minLength": 1
         }
@@ -465,10 +472,12 @@
       "type": "object",
       "properties": {
         "status": {
+          "description": "The status of the execution.",
           "type": "string",
           "readOnly": true
         },
         "target": {
+          "description": "The target for the action.",
           "type": "string",
           "readOnly": true
         },
@@ -487,6 +496,7 @@
           "x-nullable": true
         },
         "error": {
+          "description": "The error of the action.",
           "type": "object",
           "$ref": "#/definitions/experimentExecutionActionTargetDetailsError",
           "readOnly": true,
@@ -499,10 +509,12 @@
       "description": "Model that represents the Experiment action target details error model.",
       "properties": {
         "code": {
+          "description": "The error code.",
           "type": "string",
           "readOnly": true
         },
         "message": {
+          "description": "The error message",
           "type": "string",
           "readOnly": true
         }
@@ -547,7 +559,9 @@
           "readOnly": true
         },
         "properties": {
+          "description": "The properties of the experiment execution details.",
           "$ref": "#/definitions/experimentExecutionDetailsProperties",
+          "x-ms-client-flatten": true,
           "readOnly": true
         }
       }
@@ -557,14 +571,17 @@
       "type": "object",
       "properties": {
         "experimentId": {
+          "description": "The id of the experiment.",
           "type": "string",
           "readOnly": true
         },
         "status": {
+          "The value of the status of the experiment execution.",
           "type": "string",
           "readOnly": true
         },
         "failureReason": {
+          "description": "The reason why the execution failed.",
           "type": "string",
           "readOnly": true
         },
@@ -593,9 +610,11 @@
           "readOnly": true
         },
         "runInformation": {
+          "description": "The information of the experiment run.",
           "type": "object",
           "properties": {
             "steps": {
+              "description": "The steps of the experiment run.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/stepStatus"
@@ -612,18 +631,22 @@
       "type": "object",
       "properties": {
         "name": {
+          "description": "The name of the step.",
           "type": "string",
           "readOnly": true
         },
         "id": {
+          "description": "The id of the step.",
           "type": "string",
           "readOnly": true
         },
         "status": {
+          "description": "The value of the status of the step.",
           "type": "string",
           "readOnly": true
         },
         "branches": {
+          "The array of branches.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/branchStatus"
@@ -637,18 +660,22 @@
       "type": "object",
       "properties": {
         "name": {
+          "description": "The name of the branch status.",
           "type": "string",
           "readOnly": true
         },
         "id": {
+          "description": "The id of the branch status.",
           "type": "string",
           "readOnly": true
         },
         "status": {
+          "description": "The status of the branch.",
           "type": "string",
           "readOnly": true
         },
         "actions": {
+          "description": "The array of actions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/actionStatus"
@@ -662,18 +689,22 @@
       "description": "Model that represents the an action and its status.",
       "properties": {
         "name": {
+          "description": "The name of the action status.",
           "type": "string",
           "readOnly": true
         },
         "id": {
+          "description": "The id of the action status.",
           "type": "string",
           "readOnly": true
         },
         "status": {
+          "description": "The status of the action.",
           "type": "string",
           "readOnly": true
         },
         "targets": {
+          "description": "The array of targets."
           "type": "array",
           "items": {
             "$ref": "#/definitions/experimentExecutionActionTargetDetailsProperties"
