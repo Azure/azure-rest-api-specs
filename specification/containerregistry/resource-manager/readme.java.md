@@ -46,7 +46,7 @@ batch:
 These settings apply only when `--tag=package-2021-09 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2021-06-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2021-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerregistry.v2021_09_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerregistry/mgmt-v2021_09_01
