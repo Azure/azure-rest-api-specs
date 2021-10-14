@@ -3159,6 +3159,19 @@
           "description": "ServiceInstanceEntity GUID which uniquely identifies a created resource",
           "type": "string",
           "readOnly": true
+        },
+        "powerState": {
+          "description": "Power state of the Service",
+          "enum": [
+            "Running",
+            "Stopped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PowerState",
+            "modelAsString": true
+          }
         }
       }
     },
