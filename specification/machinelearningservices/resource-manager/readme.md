@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-10-01'
 input-file:
+  - Microsoft.MachineLearningServices/stable/2021-10-01/types.json
   - Microsoft.MachineLearningServices/stable/2021-10-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2021-10-01/mfe.json
   - Microsoft.MachineLearningServices/stable/2021-10-01/workspaceFeatures.json
