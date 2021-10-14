@@ -99,6 +99,66 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscriptions_Update",
+        "description": "Updates the properties of a billing subscription.",
+        "x-ms-examples": {
+          "UpdateBillingProperty": {
+            "$ref": "./examples/UpdateBillingSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionNameParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            },
+            "description": "Request parameters that are provided to the update billing subscription operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "BillingSubscriptions"
