@@ -936,6 +936,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "List all private endpoint connection proxies in a device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionList": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_ListByAccount.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/validate": {
       "post": {
         "description": "Validates a private endpoint connection proxy object. (Network RP only)",
@@ -1460,6 +1502,19 @@
           "x-ms-enum": {
             "name": "GroupIdProvisioningState",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyListResult": {
+      "description": "The available private endpoint connection proxies for an Account (not to be used by anyone, here because of ARM requirements)",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private endpoint connection proxies for an Account",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
           }
         }
       }
