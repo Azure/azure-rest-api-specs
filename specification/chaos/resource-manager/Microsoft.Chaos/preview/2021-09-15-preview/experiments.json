@@ -214,6 +214,10 @@
           "Experiments"
         ],
         "operationId": "Experiments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "original-uri"
+        },
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -265,6 +269,10 @@
           "Experiments"
         ],
         "operationId": "Experiments_Cancel",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "original-uri"
+        },
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -293,7 +301,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Cancel a running Experiment.": {
             "$ref": "./examples/CancelAExperiment.json"
@@ -336,7 +343,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Start a Experiment.": {
             "$ref": "./examples/StartAExperiment.json"
