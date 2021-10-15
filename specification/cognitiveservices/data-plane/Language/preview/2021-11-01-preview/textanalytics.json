@@ -35,7 +35,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
+                "description": "Submit a collection of text records for analysis. Specify one or more unique tasks to be executed.",
                 "operationId": "AnalyzeTextSubmitJob",
                 "summary": "Submit analysis job",
                 "parameters": [
@@ -43,7 +43,7 @@
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "description": "Collection of documents to analyze and tasks to execute.",
+                        "description": "Collection of records to analyze and tasks to execute.",
                         "in": "body",
                         "name": "body",
                         "schema": {
@@ -147,7 +147,7 @@
                     "$ref": "#/definitions/MultiLanguageBatchInput"
                 },
                 "tasks": {
-                    "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
+                    "description": "The set of tasks to execute on the input records. Cannot specify the same task more than once.",
                     "properties": {
                         "entityRecognitionTasks": {
                             "type": "array",
@@ -283,7 +283,7 @@
             "properties": {
                 "errors": {
                     "type": "array",
-                    "description": "Errors by document id.",
+                    "description": "Errors by record id.",
                     "items": {
                         "$ref": "#/definitions/RecordError"
                     }
@@ -308,7 +308,7 @@
         },
         "CustomEntitiesTask": {
             "type": "object",
-            "description": "Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents",
+            "description": "Use custom models to ease the process of information extraction from unstructured records like contracts or financial records",
             "allOf": [
                 {
                     "$ref": "#/definitions/Task"
@@ -605,7 +605,7 @@
                     "properties": {
                         "sentiment": {
                             "type": "string",
-                            "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+                            "description": "Predicted sentiment for record (Negative, Neutral, Positive, or Mixed).",
                             "enum": [
                                 "positive",
                                 "neutral",
@@ -618,7 +618,7 @@
                             }
                         },
                         "confidenceScores": {
-                            "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+                            "description": "Record level sentiment confidence scores between 0 and 1 for each sentiment class.",
                             "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
                         },
                         "sentences": {
@@ -694,7 +694,7 @@
                 "offset": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "The sentence offset from the start of the document."
+                    "description": "The sentence offset from the start of the record."
                 },
                 "length": {
                     "type": "integer",
@@ -938,7 +938,7 @@
                     "properties": {
                         "entities": {
                             "type": "array",
-                            "description": "Recognized entities in the document.",
+                            "description": "Recognized entities in the record.",
                             "items": {
                                 "$ref": "#/definitions/Entity"
                             }
@@ -1559,7 +1559,7 @@
                 "offset": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+                    "description": "The sentence offset from the start of the record, based on the value of the parameter StringIndexType."
                 },
                 "length": {
                     "type": "integer",
@@ -2154,26 +2154,26 @@
         "RequestStatistics": {
             "type": "object",
             "required": [
-                "documentsCount",
-                "validDocumentsCount",
-                "erroneousDocumentsCount",
+                "recordsCount",
+                "validRecordssCount",
+                "erroneousRecordsCount",
                 "transactionsCount"
             ],
             "properties": {
-                "documentsCount": {
+                "recordsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of documents submitted in the request."
+                    "description": "Number of records submitted in the request."
                 },
-                "validDocumentsCount": {
+                "validRecordsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+                    "description": "Number of valid records. This excludes empty, over-size limit or non-supported languages records."
                 },
-                "erroneousDocumentsCount": {
+                "erroneousRecordsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+                    "description": "Number of invalid records. This includes empty, over-size limit or non-supported languages records."
                 },
                 "transactionsCount": {
                     "type": "integer",
@@ -2192,7 +2192,7 @@
             "properties": {
                 "records": {
                     "type": "array",
-                    "description": "The set of documents to process as part of this batch.",
+                    "description": "The set of records to process as part of this batch.",
                     "items": {
                         "$ref": "#/definitions/MultiLanguageInput"
                         }
@@ -2363,7 +2363,7 @@
         "ShowStats": {
             "name": "showStats",
             "in": "query",
-            "description": "(Optional) if set to true, response will contain request and document level statistics.",
+            "description": "(Optional) if set to true, response will contain request and record level statistics.",
             "type": "boolean",
             "required": false,
             "x-ms-parameter-location": "method"
