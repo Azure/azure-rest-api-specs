@@ -291,6 +291,125 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollection"
+        ],
+        "operationId": "ApiSecurityCollections_List",
+        "description": "Get collections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The tenantId of the collection output."
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The pageSize of the collection output."
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of collection output needs to be skipped.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "x-ms-continuation",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The database continuation token."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Collections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Collections_Get_MaximumSet_Gen.json"
+          },
+          "Collections_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Collections_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections/{collectionName}": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollection"
+        ],
+        "operationId": "ApiSecurityCollections_Get",
+        "description": "Get a specific collection by name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "name of the collection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CollectionDocument"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionByName_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CollectionByName_Get_MaximumSet_Gen.json"
+          },
+          "CollectionByName_Get_MinimumSet_Gen": {
+            "$ref": "./examples/CollectionByName_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -338,6 +457,126 @@
         }
       },
       "description": "The response of the List DefenderSetting operation"
+    },
+    "ApiCollectionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results."
+        },
+        "totalApiCollectionsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalApiEndpointsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalKubernetesClustersCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalShadowApiEndpointsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "continuationToken": {
+          "type": "string"
+        }
+      }
+    },
+    "CollectionDocument": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CollectionDocumentProperties",
+          "description": "The collection documents properties."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "description": "collections",
+      "x-ms-azure-resource": false
+    },
+    "CollectionDocumentProperties": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The accountId."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The subscriptionId."
+        },
+        "collectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The collectionId."
+        },
+        "collectionName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The collectionName."
+        },
+        "userFriendlyCollectionName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The userFriendlyCollectionName."
+        },
+        "uriPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The uriPath."
+        },
+        "hostingEnvironment": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The hostingEnvironment."
+        },
+        "apiEndpointActivity": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The apiEndpointActivity."
+        },
+        "numberOfApiEndpoints": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The numberOfApiEndpoints."
+        },
+        "apiDocumentationFound": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The apiDocumentationFound."
+        }
+      },
+      "description": "The collection documents properties."
     }
   },
   "parameters": {
