@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-09-01-privatepreview"
+    "version": "2021-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -706,7 +706,12 @@
         },
         "dataDiskType": {
           "$ref": "#/definitions/DiskType",
-          "description": "Managed data disk type."
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
+        },
+        "dataDiskLetter": {
+          "type": "string",
+          "pattern": "^[a-zA-Z]{1}$",
+          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created."
         },
         "placementProperties": {
           "type": "object",
@@ -796,10 +801,30 @@
           },
           "description": "The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations."
         },
+        "additionalDataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmssDataDisk"
+          },
+          "description": "Additional managed data disks."
+        },
+        "enableEncryptionAtHost": {
+          "type": "boolean",
+          "description": "Enable or disable the Host Encryption for the virtual machines on the node type. This will enable the encryption for all the disks including Resource/Temp disk at host itself. Default: The Encryption at host will be disabled unless this property is set to true for the resource.",
+          "default": false
+        },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
           "readOnly": true,
           "description": "The provisioning state of the node type resource."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "useDefaultPublicLoadBalancer": {
+          "type": "boolean",
+          "description": "Specifies whether the use public load balancer. If not specified and the node type doesn't have its own frontend configuration, it will be attached to the default load balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is true, then the frontend has to be an Internal Load Balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is false or not set, then the custom load balancer must include a public load balancer to provide outbound connectivity."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1038,6 +1063,38 @@
       },
       "description": "Identities for the virtual machine scale set under the node type."
     },
+    "VmssDataDisk": {
+      "type": "object",
+      "required": [
+        "lun",
+        "diskSizeGB",
+        "diskType",
+        "diskLetter"
+      ],
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. Lun 0 is reserved for the service fabric data disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Disk size for each vm in the node type in GBs."
+        },
+        "diskType": {
+          "$ref": "#/definitions/DiskType",
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
+        },
+        "diskLetter": {
+          "type": "string",
+          "pattern": "^[a-zA-Z]{1}$",
+          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created."
+        }
+      },
+      "description": "Managed data disk description."
+    },
     "VMSSExtension": {
       "type": "object",
       "required": [
@@ -1257,6 +1314,22 @@
           },
           "description": "The destination port ranges."
         },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "he destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
         "access": {
           "type": "string",
           "description": "The network traffic is allowed or denied.",
@@ -1355,11 +1428,11 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-09-01-privatepreview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-11-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2021-09-01-privatepreview"
+        "2021-11-01-preview"
       ],
       "x-ms-parameter-location": "client"
     },
