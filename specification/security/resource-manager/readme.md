@@ -44,6 +44,18 @@ directive:
     from: ingestionSettings.json
     where: $.definitions.IngestionConnectionString.properties.value
     reason: Secrets are OK to return in a POST response.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: settings.json
+    reason: Operations API has nothing to do with current additions.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: assignments.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: standards.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -60,6 +72,19 @@ tag: package-composite-v3
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-preview-2021-08
+
+These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-08'
+input-file:
+  - Microsoft.Security/preview/2021-08-01-preview/standards.json
+  - Microsoft.Security/preview/2021-08-01-preview/assignments.json
+
+override-info:
+  title: SecurityCenter
+```
 
 ### Tag: package-composite-v1
 
@@ -462,6 +487,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

@@ -361,6 +361,7 @@
             "required": false,
             "schema": {
               "type": "object",
+              "x-ms-client-name": "DocumentKeysOrIds",
               "properties": {
                 "documentKeys": {
                   "type": "array",
@@ -500,10 +501,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           },
           {
-            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -814,10 +815,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           },
           {
-            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -1061,6 +1062,8 @@
             "in": "body",
             "required": true,
             "schema": {
+              "type": "object",
+              "x-ms-client-name": "SkillNames",
               "properties": {
                 "skillNames": {
                   "type": "array",
@@ -10033,6 +10036,7 @@
     },
     "IgnoreResetRequirementsParameter": {
       "name": "ignoreResetRequirements",
+      "x-ms-client-name": "skipIndexerResetRequirementForCache",
       "in": "query",
       "required": false,
       "type": "boolean",
