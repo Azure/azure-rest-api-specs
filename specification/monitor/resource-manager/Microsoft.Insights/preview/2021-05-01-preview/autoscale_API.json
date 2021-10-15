@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
     "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
@@ -294,7 +291,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List autoscale settings": {
+          "List autoscale settings by subs": {
             "$ref": "./examples/listAutoscaleSettingBySubscription.json"
           }
         }
@@ -809,6 +806,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AutoscaleSetting",
           "description": "The autoscale setting of the resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to the response.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -877,6 +879,11 @@
               "type": "string"
             }
           }
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to ththe response.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
