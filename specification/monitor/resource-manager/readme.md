@@ -128,7 +128,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-05-01-preview-only'
+```yaml $(tag) == 'package-2021-05-01-preview-only'
 input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/autoscale_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
