@@ -231,7 +231,10 @@
           "ConnectedRegistryDelete": {
             "$ref": "./examples/ConnectedRegistryDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries": {
@@ -328,7 +331,10 @@
           "ConnectedRegistryDeactivate": {
             "$ref": "./examples/ConnectedRegistryDeactivate.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}": {
@@ -470,7 +476,10 @@
           "ExportPipelineDelete": {
             "$ref": "./examples/ExportPipelineDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines": {
@@ -709,7 +718,10 @@
           "ImportPipelineDelete": {
             "$ref": "./examples/ImportPipelineDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines": {
@@ -979,7 +991,10 @@
           "PipelineRunDelete": {
             "$ref": "./examples/PipelineRunDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns": {
@@ -1163,7 +1178,10 @@
           "PrivateEndpointConnectionDelete": {
             "$ref": "./examples/PrivateEndpointConnectionDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
@@ -1397,7 +1415,10 @@
           "RegistryDelete": {
             "$ref": "./examples/RegistryDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
@@ -1847,7 +1868,10 @@
           "ReplicationDelete": {
             "$ref": "./examples/ReplicationDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications": {
@@ -2090,7 +2114,10 @@
           "ScopeMapDelete": {
             "$ref": "./examples/ScopeMapDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps": {
@@ -2333,7 +2360,10 @@
           "TokenDelete": {
             "$ref": "./examples/TokenDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens": {
@@ -2631,7 +2661,10 @@
           "WebhookDelete": {
             "$ref": "./examples/WebhookDelete.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
@@ -3100,13 +3133,7 @@
           "type": "string"
         },
         "details": {
-          "description": "an array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerErrorDescription"
-            }
-          ]
+          "$ref": "#/definitions/InnerErrorDescription"
         }
       }
     },
