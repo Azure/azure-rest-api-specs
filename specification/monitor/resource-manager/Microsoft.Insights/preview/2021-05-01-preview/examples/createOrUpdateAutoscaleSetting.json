@@ -6,7 +6,12 @@
     "api-version": "2021-05-01-preview",
     "parameters": {
       "location": "West US",
-      "tags": {},
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/microsoft.insights/autoscalesettings/MySetting",
+      "type": "Microsoft.Insights/autoscaleSettings",
       "properties": {
         "profiles": [
           {
@@ -162,7 +167,8 @@
         "type": "Microsoft.Insights/autoscaleSettings",
         "location": "West US",
         "tags": {
-          "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage"
+          "key1": "value1",
+          "key2": "value2"
         },
         "properties": {
           "profiles": [
@@ -286,6 +292,10 @@
           "enabled": true,
           "name": "MySetting",
           "targetResourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc",
+          "predictiveAutoscalePolicy": {
+            "scaleMode": "Enabled",
+            "scaleLookAheadTime": null
+          },
           "notifications": [
             {
               "operation": "Scale",
@@ -316,7 +326,8 @@
         "type": "Microsoft.Insights/autoscaleSettings",
         "location": "West US",
         "tags": {
-          "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage"
+          "key1": "value1",
+          "key2": "value2"
         },
         "properties": {
           "profiles": [
@@ -440,6 +451,10 @@
           "enabled": true,
           "name": "MySetting",
           "targetResourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc",
+          "predictiveAutoscalePolicy": {
+            "scaleMode": "Enabled",
+            "scaleLookAheadTime": null
+          },
           "notifications": [
             {
               "operation": "Scale",

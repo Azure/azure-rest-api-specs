@@ -302,45 +302,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters."
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
     "ScaleCapacity": {
       "required": [
         "minimum",
@@ -777,7 +738,10 @@
         },
         "predictiveAutoscalePolicy": {
           "$ref": "#/definitions/PredictiveAutoscalePolicy",
-          "description": "the predictive autoscale policy mode."
+          "description": "the predictive autoscale policy mode.",
+          "x-ms-mutability": [
+             "read"
+          ]
         },
         "name": {
           "type": "string",
@@ -795,16 +759,49 @@
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
     },
     "AutoscaleSettingResource": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "required": [
+        "id",
+        "type",
+        "location",
         "properties"
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AutoscaleSetting",

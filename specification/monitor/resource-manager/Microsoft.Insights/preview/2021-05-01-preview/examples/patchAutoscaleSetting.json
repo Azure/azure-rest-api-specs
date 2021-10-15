@@ -6,7 +6,7 @@
     "api-version": "2021-05-01-preview",
     "autoscaleSettingResource": {
       "tags": {
-        "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary"
+        "key1": "value1"
       },
       "properties": {
         "profiles": [
@@ -287,6 +287,10 @@
           "enabled": true,
           "name": "MySetting",
           "targetResourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/TestingMetricsScaleSet/providers/Microsoft.Compute/virtualMachineScaleSets/testingsc",
+          "predictiveAutoscalePolicy": {
+            "scaleMode": "Enabled",
+            "scaleLookAheadTime": null
+          },
           "notifications": [
             {
               "operation": "Scale",
