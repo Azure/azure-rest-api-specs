@@ -1475,7 +1475,7 @@
             }
           },
           "201": {
-            "description": "Created. The response describes the new storage and contains a Location header to query the\r\noperation result.",
+            "description": "Created. The response describes the new storage resource created.",
             "schema": {
               "$ref": "#/definitions/StorageResource"
             }
@@ -4021,15 +4021,10 @@
           "x-ms-client-flatten": false
         },
         "systemData": {
-          "$ref": "#/definitions/systemData"
+          "$ref": "v2/types.json#/definitions/systemData",
+          "readOnly" : true
         }
       }
-    },
-    "systemData": {
-      "description": "Provides details about resource creation and update time",
-      "type": "object",
-      "readOnly": true,
-      "properties": {}
     },
     "StorageProperties": {
       "description": "Storage resource payload.",
@@ -4040,6 +4035,9 @@
       "properties": {
         "storageType": {
           "description": "The type of the storage.",
+          "enum": [
+            "StorageAccount"
+          ],
           "type": "string"
         }
       },
@@ -4065,7 +4063,9 @@
         },
         "accountKey": {
           "description": "The account key of the Azure Storage Account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [ "create", "update" ]
         }
       },
       "x-ms-discriminator-value": "StorageAccount"
@@ -4116,6 +4116,9 @@
       "properties": {
         "type": {
           "description": "The type of the underlying resource to mount as a persistent disk.",
+          "enum": [
+            "AzureFileVolume"
+          ],
           "type": "string"
         },
         "mountPath": {
