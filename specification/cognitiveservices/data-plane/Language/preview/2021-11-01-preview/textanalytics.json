@@ -8,7 +8,7 @@
     "securityDefinitions": {
         "apim_key": {
             "type": "apiKey",
-            "name": "Ocp-Apim-Sumscription-Key",
+            "name": "Ocp-Apim-Subscription-Key",
             "in": "header"
         }
     },
@@ -30,12 +30,10 @@
         "/analyze-text/jobs": {
             "post": {
                 "consumes": [
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "produces": [
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
                 "operationId": "AnalyzeTextSubmitJob",
@@ -50,7 +48,8 @@
                         "name": "body",
                         "schema": {
                             "$ref": "#/definitions/AnalyzeTextJobsInput"
-                        }
+                        },
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -71,7 +70,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Submit Analysis Job Request": {
-                        "$ref": ".//examples//SuccessfulAnalyzeTextJobSubmitRequest.json"
+                        "$ref": "./examples/SuccessfulAnalyzeTextJobSubmitRequest.json"
                     }
                 },
                 "deprecated": false,
@@ -81,8 +80,7 @@
         "/analyze-text/jobs/{jobId}": {
             "get": {
                 "produces": [
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
                 "operationId": "AnalyzeTextJobStatus",
@@ -99,19 +97,19 @@
                     },
                     {
                         "default": 20,
-                        "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+                        "description": "(Optional) Set the maximum number of results per task. When both top and skip are specified, skip is applied first.",
                         "in": "query",
                         "maximum": 50,
                         "minimum": 1,
-                        "name": "$top",
+                        "name": "top",
                         "type": "integer"
                     },
                     {
                         "default": 0,
-                        "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+                        "description": "(Optional) Set the number of elements to offset in the response. When both top and skip are specified, skip is applied first.",
                         "in": "query",
                         "minimum": 0,
-                        "name": "$skip",
+                        "name": "skip",
                         "type": "integer"
                     }
                 ],
@@ -131,7 +129,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Get Text Analysis Job Status Request": {
-                        "$ref": ".//examples//SuccessfulAnalyzeTextJobStatusRequest.json"
+                        "$ref": "./examples/SuccessfulAnalyzeTextJobStatusRequest.json"
                     }
                 },
                 "deprecated": false
@@ -140,29 +138,14 @@
     },
     "definitions": {
         "AnalyzeTextJobsInput": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/JobDescriptor"
-                },
-                {
-                    "$ref": "#/definitions/AnalysisInput"
-                },
-                {
-                    "$ref": "#/definitions/JobManifest"
-                }
-            ]
-        },
-        "JobDescriptor": {
             "properties": {
                 "displayName": {
                     "description": "Optional display name for the analysis job.",
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "JobManifest": {
-            "properties": {
+                },
+                "analysisInput": {
+                    "$ref": "#/definitions/MultiLanguageBatchInput"
+                },
                 "tasks": {
                     "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
                     "properties": {
@@ -225,16 +208,9 @@
                 }
             },
             "required": [
+                "analysisInput",
                 "tasks"
-            ],
-            "type": "object"
-        },
-        "AnalysisInput": {
-            "properties": {
-                "analysisInput": {
-                    "$ref": "#/definitions/MultiLanguageBatchInput"
-                }
-            }
+            ]
         },
         "Task": {
             "type": "object",
@@ -1784,7 +1760,7 @@
         },
         "Pagination": {
             "properties": {
-                "@nextLink": {
+                "nextLink": {
                     "type": "string"
                 }
             },
