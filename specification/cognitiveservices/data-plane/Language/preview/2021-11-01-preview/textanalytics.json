@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Microsoft Cognitive Language Service - Text Analytics",
+        "title": "Microsoft Cognitive Language Service",
         "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.0",
         "version": "2021-11-01-preview"
     },
@@ -35,7 +35,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "description": "Submit a collection of text records for analysis. Specify one or more unique tasks to be executed.",
+                "description": "Submit a text analysis job.",
                 "operationId": "AnalyzeTextSubmitJob",
                 "summary": "Submit analysis job",
                 "parameters": [
@@ -147,7 +147,7 @@
                     "$ref": "#/definitions/MultiLanguageBatchInput"
                 },
                 "tasks": {
-                    "description": "The set of tasks to execute on the input records. Cannot specify the same task more than once.",
+                    "description": "The set of tasks to execute on the input records.",
                     "properties": {
                         "entityRecognitionTasks": {
                             "type": "array",
