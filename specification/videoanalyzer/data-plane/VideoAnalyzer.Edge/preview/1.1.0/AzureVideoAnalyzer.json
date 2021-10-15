@@ -1705,43 +1705,6 @@
       "description": "Defines a Spatial Analysis person line crossing operation. This requires the Azure Cognitive Services Spatial analysis module to be deployed alongside the Video Analyzer module, please see https://aka.ms/ava-spatial-analysis for more information.",
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SpatialAnalysisPersonLineCrossingOperation"
     },
-    "AssetSink": {
-      "type": "object",
-      "properties": {
-        "assetContainerSasUrl": {
-          "type": "string",
-          "description": "An Azure Storage SAS URL which points to container, such as the one created for an Azure Media Services asset.",
-          "example": "https://azurestorage.com/mycontainer?sig=mysecretkey"
-        },
-        "segmentLength": {
-          "type": "string",
-          "example": "PT30S",
-          "description": "When writing media to an asset, wait until at least this duration of media has been accumulated on the Edge. Expressed in increments of 30 seconds, with a minimum of 30 seconds and a recommended maximum of 5 minutes."
-        },
-        "localMediaCachePath": {
-          "type": "string",
-          "description": "Path to a local file system directory for temporary caching of media before writing to an Asset. Used when the Edge device is temporarily disconnected from Azure.",
-          "example": "/var/lib/tmp/"
-        },
-        "localMediaCacheMaximumSizeMiB": {
-          "type": "string",
-          "description": "Maximum amount of disk space that can be used for temporary caching of media."
-        }
-      },
-      "required": [
-        "@type",
-        "assetContainerSasUrl",
-        "localMediaCachePath",
-        "localMediaCacheMaximumSizeMiB"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SinkNodeBase"
-        }
-      ],
-      "description": "Enables a pipeline topology to record media to an Azure Media Services asset for subsequent playback.",
-      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.AssetSink"
-    },
     "RemoteDeviceAdapter": {
       "type": "object",
       "required": [

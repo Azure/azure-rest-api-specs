@@ -42,7 +42,8 @@
           "x-ms-enum": {
             "name": "apiVersionEnum",
             "modelAsString": false
-          }
+          },
+          "x-ms-client-default": "1.1"
         }
       },
       "discriminator": "methodName",
@@ -265,8 +266,9 @@
       ],
       "description": "Deletes an existing remote device adapter."
     },
-    "OnvifDeviceDiscoverRequestBody": {
+    "OnvifDeviceDiscoverRequest": {
       "type": "object",
+      "x-ms-discriminator-value": "onvifDeviceDiscover",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
@@ -278,40 +280,7 @@
           "description": "The amount of time that the ONVIF device discovery will wait for supported device responses."
         }
       },
-      "description": "OnvifDeviceDiscover request body."
-    },
-    "OnvifDeviceDiscoverRequest": {
-      "type": "object",
-      "x-ms-discriminator-value": "onvifDeviceDiscover",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MethodRequest"
-        }
-      ],
-      "properties": {
-        "onvifDeviceDiscoverRequestBody": {
-          "$ref": "#/definitions/OnvifDeviceDiscoverRequestBody"
-        }
-      },
       "description": "Lists all the discoverable ONVIF devices on the same subnet as the Edge Module."
-    },
-    "OnvifDeviceGetRequestBody": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MethodRequest"
-        }
-      ],
-      "required": [
-        "endpoint"
-      ],
-      "properties": {
-        "endpoint": {
-          "description": "ONVIF device endpoint.",
-          "$ref": "./AzureVideoAnalyzer.json#/definitions/EndpointBase"
-        }
-      },
-      "description": "OnvifDeviceGet request body."
     },
     "OnvifDeviceGetRequest": {
       "type": "object",
@@ -322,11 +291,11 @@
         }
       ],
       "required": [
-        "onvifDeviceGetRequestBody"
+        "endpoint"
       ],
       "properties": {
-        "onvifDeviceGetRequestBody": {
-          "$ref": "#/definitions/OnvifDeviceGetRequestBody"
+        "endpoint": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/EndpointBase"
         }
       },
       "description": "Retrieves properties and media profiles of an ONVIF device."
