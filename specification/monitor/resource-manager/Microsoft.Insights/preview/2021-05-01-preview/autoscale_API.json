@@ -303,6 +303,7 @@
   },
   "definitions": {
     "ScaleCapacity": {
+      "type": "object",
       "required": [
         "minimum",
         "maximum",
@@ -325,6 +326,7 @@
       "description": "The number of instances that can be used during this profile."
     },
     "MetricTrigger": {
+      "type": "object",
       "required": [
         "metricName",
         "metricResourceUri",
@@ -429,6 +431,7 @@
       "description": "The trigger that results in a scaling action."
     },
     "ScaleAction": {
+      "type": "object",
       "required": [
         "direction",
         "type",
@@ -476,6 +479,7 @@
       "description": "The parameters for the scaling action."
     },
     "ScaleRule": {
+      "type": "object",
       "required": [
         "scaleAction",
         "metricTrigger"
@@ -493,6 +497,7 @@
       "description": "A rule that provide the triggers and parameters for the scaling action."
     },
     "TimeWindow": {
+      "type": "object",
       "properties": {
         "timeZone": {
           "type": "string",
@@ -516,6 +521,7 @@
       "description": "A specific date-time for the profile."
     },
     "RecurrentSchedule": {
+      "type": "object",
       "required": [
         "timeZone",
         "days",
@@ -554,6 +560,7 @@
       "description": "The scheduling constraints for when the profile begins."
     },
     "Recurrence": {
+      "type": "object",
       "required": [
         "frequency",
         "schedule"
@@ -585,6 +592,7 @@
       "description": "The repeating times at which this profile begins. This element is not used if the FixedDate element is used."
     },
     "AutoscaleProfile": {
+      "type": "object",
       "required": [
         "rules",
         "name",
@@ -618,6 +626,7 @@
       "description": "Autoscale profile."
     },
     "PredictiveAutoscalePolicy": {
+      "type": "object",
       "required": [
         "scaleMode"
       ],
@@ -644,6 +653,7 @@
       "description": "The parameters for enabling predictive autoscale."
     },
     "EmailNotification": {
+      "type": "object",
       "properties": {
         "sendToSubscriptionAdministrator": {
           "type": "boolean",
@@ -666,6 +676,7 @@
       "description": "Email notification of an autoscale event."
     },
     "WebhookNotification": {
+      "type": "object",
       "properties": {
         "serviceUri": {
           "type": "string",
@@ -682,6 +693,7 @@
       "description": "Webhook notification of an autoscale event."
     },
     "AutoscaleNotification": {
+      "type": "object",
       "required": [
         "operation"
       ],
@@ -712,6 +724,7 @@
       "description": "Autoscale notification."
     },
     "AutoscaleSetting": {
+      "type": "object",
       "required": [
         "profiles"
       ],
@@ -738,10 +751,7 @@
         },
         "predictiveAutoscalePolicy": {
           "$ref": "#/definitions/PredictiveAutoscalePolicy",
-          "description": "the predictive autoscale policy mode.",
-          "x-ms-mutability": [
-            "read"
-          ]
+          "description": "the predictive autoscale policy mode."
         },
         "name": {
           "type": "string",
@@ -759,19 +769,15 @@
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
     },
     "AutoscaleSettingResource": {
+      "type": "object",
       "required": [
-        "id",
-        "type",
         "location",
         "properties"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
+          "readOnly": true,
           "description": "Azure resource Id"
         },
         "name": {
@@ -781,10 +787,7 @@
         },
         "type": {
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
+          "readOnly": true,
           "description": "Azure resource type"
         },
         "location": {
@@ -811,9 +814,11 @@
       "description": "The autoscale setting resource."
     },
     "AutoscaleSettingResourcePatch": {
+      "type": "object",
       "description": "The autoscale setting object for patch operations.",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -827,6 +832,7 @@
       }
     },
     "AutoscaleSettingResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -860,6 +866,7 @@
       }
     },
     "ScaleRuleMetricDimension": {
+      "type": "object",
       "required": [
         "DimensionName",
         "Operator",
