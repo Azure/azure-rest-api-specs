@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-09-01-privatepreview",
+    "api-version": "2021-11-01-preview",
     "parameters": {
       "location": "eastus",
       "tags": {},
@@ -62,6 +62,17 @@
               "*"
             ],
             "description": "Test description"
+          },
+          {
+            "name": "AllowARM",
+            "protocol": "*",
+            "sourcePortRange": "*",
+            "sourceAddressPrefix": "AzureResourceManager",
+            "destinationAddressPrefix": "*",
+            "destinationPortRange": "33500-33699",
+            "access": "allow",
+            "priority": 2002,
+            "direction": "inbound"
           }
         ],
         "fabricSettings": [
@@ -98,8 +109,8 @@
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-09-01-privatepreview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-09-01-privatepreview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -168,6 +179,17 @@
                 "*"
               ],
               "description": "Test description"
+            },
+            {
+              "name": "AllowARM",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "AzureResourceManager",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "33500-33699",
+              "access": "allow",
+              "priority": 2002,
+              "direction": "inbound"
             }
           ],
           "adminUserName": "vmadmin",
@@ -193,10 +215,20 @@
           },
           "zonalResiliency": true,
           "enableIpv6": true,
+          "enableServicePublicIP": true,
           "ipTags": [
             {
               "ipTagType": "FirstPartyUsage",
               "tag": "SQL"
+            }
+          ],
+          "auxiliarySubnets": [
+            {
+              "name": "testSubnet1",
+              "enableIpv6": true,
+              "privateEndpointNetworkPolicies": "enabled",
+              "privateLinkServiceNetworkPolicies": "enabled",
+              "networkSecurityGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/networkSecurityGroups/sn1"
             }
           ]
         }
@@ -204,8 +236,8 @@
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-09-01-privatepreview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-09-01-privatepreview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -274,6 +306,17 @@
                 "*"
               ],
               "description": "Test description"
+            },
+            {
+              "name": "AllowARM",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "AzureResourceManager",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "33500-33699",
+              "access": "allow",
+              "priority": 2002,
+              "direction": "inbound"
             }
           ],
           "adminUserName": "vmadmin",
@@ -299,10 +342,21 @@
           },
           "zonalResiliency": true,
           "enableIpv6": true,
+          "enableServicePublicIP": true,
+          "ipv6Address": "0000:0000:0000:0000:0000:0000:0000:0000",
           "ipTags": [
             {
               "ipTagType": "FirstPartyUsage",
               "tag": "SQL"
+            }
+          ],
+          "auxiliarySubnets": [
+            {
+              "name": "testSubnet1",
+              "enableIpv6": true,
+              "privateEndpointNetworkPolicies": "enabled",
+              "privateLinkServiceNetworkPolicies": "enabled",
+              "networkSecurityGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/networkSecurityGroups/sn1"
             }
           ]
         }
