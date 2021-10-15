@@ -81,6 +81,18 @@
     {
       "name": "Scripts",
       "description": ""
+    },
+    {
+      "name": "PlacementPolicies",
+      "description": ""
+    },
+    {
+      "name": "VirtualMachines",
+      "description": ""
+    },
+    {
+      "name": "EncryptionKeys",
+      "description": ""
     }
   ],
   "parameters": {
@@ -218,6 +230,14 @@
       "required": true,
       "type": "string",
       "description": "Name of the cloud link resource",
+      "x-ms-parameter-location": "method"
+    },
+    "placementPolicyName": {
+      "name": "placementPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the VMware vSphere Distributed Resource Scheduler (DRS) placement policy",
       "x-ms-parameter-location": "method"
     },
     "scriptExecutionName": {
@@ -429,6 +449,9 @@
         "x-ms-examples": {
           "PrivateClouds_List": {
             "$ref": "./examples/PrivateClouds_List.json"
+          },
+          "PrivateClouds_List_Stretched": {
+            "$ref": "./examples/PrivateClouds_List_Stretched.json"
           }
         }
       }
@@ -468,6 +491,9 @@
         "x-ms-examples": {
           "PrivateClouds_ListInSubscription": {
             "$ref": "./examples/PrivateClouds_ListInSubscription.json"
+          },
+          "PrivateClouds_ListInSubscription_Stretched": {
+            "$ref": "./examples/PrivateClouds_ListInSubscription_Stretched.json"
           }
         }
       }
@@ -510,6 +536,9 @@
         "x-ms-examples": {
           "PrivateClouds_Get": {
             "$ref": "./examples/PrivateClouds_Get.json"
+          },
+          "PrivateClouds_Get_Stretched": {
+            "$ref": "./examples/PrivateClouds_Get_Stretched.json"
           }
         }
       },
@@ -566,6 +595,9 @@
         "x-ms-examples": {
           "PrivateClouds_CreateOrUpdate": {
             "$ref": "./examples/PrivateClouds_CreateOrUpdate.json"
+          },
+          "PrivateClouds_CreateOrUpdate_Stretched": {
+            "$ref": "./examples/PrivateClouds_CreateOrUpdate_Stretched.json"
           }
         }
       },
@@ -622,6 +654,9 @@
         "x-ms-examples": {
           "PrivateClouds_Update": {
             "$ref": "./examples/PrivateClouds_Update.json"
+          },
+          "PrivateClouds_Update_Stretched": {
+            "$ref": "./examples/PrivateClouds_Update_Stretched.json"
           }
         }
       },
@@ -4160,12 +4195,434 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/virtualMachines": {
+      "get": {
+        "operationId": "VirtualMachines_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "List of virtual machines in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachinesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListClusterVirtualMachines": {
+            "$ref": "./examples/VirtualMachines_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/virtualMachines/{virtualMachineId}": {
+      "get": {
+        "operationId": "VirtualMachines_Get",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Get a virtual machine by id in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/virtualMachineId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/virtualMachines/{virtualMachineId}/restrictMovement": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "VirtualMachines_RestrictMovement",
+        "tags": [
+          "VirtualMachines",
+          "PlacementPolicies"
+        ],
+        "summary": "Enable or disable DRS-driven VM movement restriction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/virtualMachineId"
+          },
+          {
+            "name": "restrictMovement",
+            "description": "Whether VM DRS-driven movement is restricted (Enabled) or not (Disabled)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRestrictMovement"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started flow to set/unset restrictedMovement of VM"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachine_RestrictMovement": {
+            "$ref": "./examples/VirtualMachines_RestrictMovement.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies": {
+      "get": {
+        "operationId": "PlacementPolicies_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "PlacementPolicies"
+        ],
+        "summary": "List placement policies in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PlacementPoliciesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlacementPolicies_List": {
+            "$ref": "./examples/PlacementPolicies_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}": {
+      "get": {
+        "operationId": "PlacementPolicies_Get",
+        "tags": [
+          "PlacementPolicies"
+        ],
+        "summary": "Get a placement policy by name in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/placementPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlacementPolicies_Get": {
+            "$ref": "./examples/PlacementPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PlacementPolicies_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "PlacementPolicies"
+        ],
+        "summary": "Create or update a placement policy in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/placementPolicyName"
+          },
+          {
+            "name": "placementPolicy",
+            "description": "A placement policy in the private cloud cluster",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicy"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicy"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlacementPolicies_CreateOrUpdate": {
+            "$ref": "./examples/PlacementPolicies_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PlacementPolicies_Update",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "PlacementPolicies"
+        ],
+        "summary": "Update a placement policy in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/placementPolicyName"
+          },
+          {
+            "name": "placementPolicyUpdate",
+            "description": "The placement policy properties that may be updated",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicyUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicy"
+            }
+          },
+          "202": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/PlacementPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlacementPolicies_Update": {
+            "$ref": "./examples/PlacementPolicies_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PlacementPolicies_Delete",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "PlacementPolicies"
+        ],
+        "summary": "Delete a placement policy in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/placementPolicyName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The delete has succeeded"
+          },
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
+          },
+          "204": {
+            "description": "No Content. No policy to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlacementPolicies_Delete": {
+            "$ref": "./examples/PlacementPolicies_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptPackages": {
       "get": {
         "tags": [
           "Scripts"
         ],
-        "description": "Return script packages available for a private cloud to run on their Private Cloud",
+        "description": "List script packages available to run on the private cloud",
         "operationId": "ScriptPackages_List",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -4210,7 +4667,7 @@
         "tags": [
           "Scripts"
         ],
-        "description": "Return script package available to run on an Private Cloud",
+        "description": "Get a script package available to run on a private cloud",
         "operationId": "ScriptPackages_Get",
         "parameters": [
           {
@@ -4255,7 +4712,7 @@
         "tags": [
           "Scripts"
         ],
-        "description": "Return script cmdlet resources available for a private cloud to create a script execution resource on their Private Cloud",
+        "description": "List script cmdlet resources available for a private cloud to create a script execution resource on a private cloud",
         "operationId": "ScriptCmdlets_List",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -4355,7 +4812,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "summary": "Get an script execution resource by name in a private cloud",
+        "summary": "List script executions in a private cloud",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -4397,7 +4854,7 @@
         "tags": [
           "Scripts"
         ],
-        "summary": "Get an script execution resource by name in a private cloud",
+        "summary": "Get an script execution by name in a private cloud",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -4441,7 +4898,7 @@
         "tags": [
           "Scripts"
         ],
-        "summary": "Create or update a script execution resource in a private cloud",
+        "summary": "Create or update a script execution in a private cloud",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -4597,6 +5054,7 @@
   },
   "definitions": {
     "Trial": {
+      "type": "object",
       "description": "Subscription trial availability",
       "properties": {
         "status": {
@@ -4622,6 +5080,7 @@
       }
     },
     "Quota": {
+      "type": "object",
       "description": "Subscription quotas",
       "properties": {
         "hostsRemaining": {
@@ -4650,6 +5109,7 @@
       }
     },
     "Resource": {
+      "type": "object",
       "description": "The core properties of ARM resources",
       "properties": {
         "id": {
@@ -4671,6 +5131,7 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "allOf": [
         {
@@ -4701,6 +5162,7 @@
       ]
     },
     "ProxyResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM proxy resource",
       "allOf": [
         {
@@ -4710,6 +5172,7 @@
       "properties": {}
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -4720,6 +5183,7 @@
       "description": "API error response"
     },
     "OperationList": {
+      "type": "object",
       "description": "Pageable list of operations",
       "properties": {
         "value": {
@@ -4747,6 +5211,7 @@
           "readOnly": true
         },
         "display": {
+          "type": "object",
           "description": "Contains the localized display information for this operation",
           "readOnly": true,
           "properties": {
@@ -4929,6 +5394,7 @@
       }
     },
     "ExpressRouteAuthorization": {
+      "type": "object",
       "description": "ExpressRoute Circuit Authorization",
       "allOf": [
         {
@@ -4945,6 +5411,7 @@
       }
     },
     "ExpressRouteAuthorizationProperties": {
+      "type": "object",
       "description": "The properties of an ExpressRoute Circuit Authorization resource",
       "properties": {
         "provisioningState": {
@@ -4970,10 +5437,15 @@
           "description": "The key of the ExpressRoute Circuit Authorization",
           "type": "string",
           "readOnly": true
+        },
+        "expressRouteId": {
+          "type": "string",
+          "description": "The ID of the ExpressRoute Circuit"
         }
       }
     },
     "ExpressRouteAuthorizationList": {
+      "type": "object",
       "description": "A paged list of ExpressRoute Circuit Authorizations",
       "properties": {
         "value": {
@@ -4992,6 +5464,7 @@
       }
     },
     "Circuit": {
+      "type": "object",
       "description": "An ExpressRoute Circuit",
       "properties": {
         "primarySubnet": {
@@ -5016,7 +5489,74 @@
         }
       }
     },
+    "EncryptionKeyVaultProperties": {
+      "type": "object",
+      "description": "An Encryption Key",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key."
+        },
+        "keyVaultUrl": {
+          "type": "string",
+          "description": "The URL of the vault."
+        },
+        "keyState": {
+          "type": "string",
+          "description": "The state of key provided",
+          "readOnly": true,
+          "enum": [
+            "Connected",
+            "AccessDenied"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeyStatus",
+            "modelAsString": true
+          }
+        },
+        "versionType": {
+          "type": "string",
+          "description": "Property of the key if user provided or auto detected",
+          "readOnly": true,
+          "enum": [
+            "Fixed",
+            "AutoDetected"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionVersionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Encryption": {
+      "type": "object",
+      "description": "The properties of customer managed encryption key",
+      "properties": {
+        "status": {
+          "description": "Status of customer managed encryption key",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "description": "The key vault where the encryption key is stored",
+          "$ref": "#/definitions/EncryptionKeyVaultProperties"
+        }
+      }
+    },
     "Endpoints": {
+      "type": "object",
       "description": "Endpoint addresses",
       "properties": {
         "nsxtManager": {
@@ -5037,6 +5577,7 @@
       }
     },
     "IdentitySource": {
+      "type": "object",
       "description": "vCenter Single Sign On Identity Source",
       "properties": {
         "name": {
@@ -5090,7 +5631,36 @@
         }
       }
     },
+    "AvailabilityProperties": {
+      "type": "object",
+      "description": "The properties describing private cloud availability zone distribution",
+      "properties": {
+        "strategy": {
+          "description": "The availability strategy for the private cloud",
+          "type": "string",
+          "enum": [
+            "SingleZone",
+            "DualZone"
+          ],
+          "x-ms-enum": {
+            "name": "AvailabilityStrategy",
+            "modelAsString": true
+          }
+        },
+        "zone": {
+          "description": "The primary availability zone for the private cloud",
+          "type": "integer",
+          "format": "int32"
+        },
+        "secondaryZone": {
+          "description": "The secondary availability zone for the private cloud",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "PrivateCloud": {
+      "type": "object",
       "description": "A private cloud resource",
       "required": [
         "location",
@@ -5110,10 +5680,15 @@
           "description": "The properties of a private cloud resource",
           "$ref": "#/definitions/PrivateCloudProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/PrivateCloudIdentity",
+          "description": "The identity of the private cloud, if configured."
         }
       }
     },
     "PrivateCloudUpdate": {
+      "type": "object",
       "description": "An update to a private cloud resource",
       "properties": {
         "tags": {
@@ -5124,10 +5699,15 @@
           "description": "The updatable properties of a private cloud resource",
           "$ref": "#/definitions/PrivateCloudUpdateProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/PrivateCloudIdentity",
+          "description": "The identity of the private cloud, if configured."
         }
       }
     },
     "PrivateCloudUpdateProperties": {
+      "type": "object",
       "description": "The properties of a private cloud resource that may be updated",
       "properties": {
         "managementCluster": {
@@ -5153,10 +5733,19 @@
           "items": {
             "$ref": "#/definitions/IdentitySource"
           }
+        },
+        "availability": {
+          "description": "Properties describing how the cloud is distributed across availability zones",
+          "$ref": "#/definitions/AvailabilityProperties"
+        },
+        "encryption": {
+          "description": "Customer managed key encryption, can be enabled or disabled",
+          "$ref": "#/definitions/Encryption"
         }
       }
     },
     "PrivateCloudProperties": {
+      "type": "object",
       "description": "The properties of a private cloud resource",
       "required": [
         "managementCluster",
@@ -5245,10 +5834,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "secondaryCircuit": {
+          "description": "A secondary expressRoute circuit from a separate AZ. Only present in a stretched private cloud",
+          "$ref": "#/definitions/Circuit"
         }
       }
     },
     "Cluster": {
+      "type": "object",
       "description": "A cluster resource",
       "required": [
         "sku"
@@ -5271,6 +5865,7 @@
       }
     },
     "ClusterUpdate": {
+      "type": "object",
       "description": "An update of a cluster resource",
       "properties": {
         "properties": {
@@ -5281,12 +5876,20 @@
       }
     },
     "ClusterUpdateProperties": {
+      "type": "object",
       "description": "The properties of a cluster that may be updated",
       "properties": {
         "clusterSize": {
           "description": "The cluster size",
           "type": "integer",
           "format": "int32"
+        },
+        "hosts": {
+          "description": "The hosts",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5307,6 +5910,7 @@
       }
     },
     "CommonClusterProperties": {
+      "type": "object",
       "description": "The common properties of a cluster",
       "properties": {
         "clusterSize": {
@@ -5327,7 +5931,6 @@
         "hosts": {
           "description": "The hosts",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
           }
@@ -5335,6 +5938,7 @@
       }
     },
     "ManagementCluster": {
+      "type": "object",
       "description": "The properties of a management cluster",
       "required": [
         "clusterSize"
@@ -5346,6 +5950,7 @@
       ]
     },
     "ClusterProperties": {
+      "type": "object",
       "description": "The properties of a cluster",
       "allOf": [
         {
@@ -5355,6 +5960,7 @@
       "properties": {}
     },
     "PrivateCloudList": {
+      "type": "object",
       "description": "A paged list of private clouds",
       "properties": {
         "value": {
@@ -5373,6 +5979,7 @@
       }
     },
     "ClusterList": {
+      "type": "object",
       "description": "A paged list of clusters",
       "properties": {
         "value": {
@@ -5391,6 +5998,7 @@
       }
     },
     "Addon": {
+      "type": "object",
       "description": "An addon resource",
       "allOf": [
         {
@@ -5406,6 +6014,7 @@
       }
     },
     "AddonProperties": {
+      "type": "object",
       "description": "The properties of an addon",
       "discriminator": "addonType",
       "properties": {
@@ -5445,6 +6054,7 @@
       ]
     },
     "AddonSrmProperties": {
+      "type": "object",
       "description": "The properties of a Site Recovery Manager (SRM) addon",
       "x-ms-discriminator-value": "SRM",
       "allOf": [
@@ -5457,12 +6067,10 @@
           "description": "The Site Recovery Manager (SRM) license",
           "type": "string"
         }
-      },
-      "required": [
-        "licenseKey"
-      ]
+      }
     },
     "AddonVrProperties": {
+      "type": "object",
       "description": "The properties of a vSphere Replication (VR) addon",
       "x-ms-discriminator-value": "VR",
       "allOf": [
@@ -5482,6 +6090,7 @@
       ]
     },
     "AddonHcxProperties": {
+      "type": "object",
       "description": "The properties of an HCX addon",
       "x-ms-discriminator-value": "HCX",
       "allOf": [
@@ -5500,6 +6109,7 @@
       ]
     },
     "AddonList": {
+      "type": "object",
       "description": "A paged list of addons",
       "properties": {
         "value": {
@@ -5518,6 +6128,7 @@
       }
     },
     "DatastoreList": {
+      "type": "object",
       "description": "A paged list of datastores",
       "properties": {
         "value": {
@@ -5536,6 +6147,7 @@
       }
     },
     "Datastore": {
+      "type": "object",
       "description": "A datastore resource",
       "allOf": [
         {
@@ -5551,6 +6163,7 @@
       }
     },
     "DatastoreProperties": {
+      "type": "object",
       "description": "The properties of a datastore",
       "properties": {
         "provisioningState": {
@@ -5578,10 +6191,29 @@
         "diskPoolVolume": {
           "description": "An iSCSI volume",
           "$ref": "#/definitions/DiskPoolVolume"
+        },
+        "status": {
+          "description": "The operational status of the datastore",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "Accessible",
+            "Inaccessible",
+            "Attached",
+            "Detached",
+            "LostCommunication",
+            "DeadOrError"
+          ],
+          "x-ms-enum": {
+            "name": "DatastoreStatus",
+            "modelAsString": true
+          }
         }
       }
     },
     "NetAppVolume": {
+      "type": "object",
       "description": "An Azure NetApp Files volume from Microsoft.NetApp provider",
       "properties": {
         "id": {
@@ -5594,6 +6226,7 @@
       ]
     },
     "DiskPoolVolume": {
+      "type": "object",
       "description": "An iSCSI volume from Microsoft.StoragePool provider",
       "properties": {
         "targetId": {
@@ -5629,6 +6262,7 @@
       ]
     },
     "AdminCredentials": {
+      "type": "object",
       "description": "Administrative credentials for accessing vCenter and NSX-T",
       "properties": {
         "nsxtUsername": {
@@ -5656,6 +6290,7 @@
       }
     },
     "Sku": {
+      "type": "object",
       "description": "The resource model definition representing SKU",
       "properties": {
         "name": {
@@ -5668,6 +6303,7 @@
       ]
     },
     "HcxEnterpriseSiteList": {
+      "type": "object",
       "description": "A paged list of HCX Enterprise Sites",
       "properties": {
         "value": {
@@ -5686,6 +6322,7 @@
       }
     },
     "HcxEnterpriseSite": {
+      "type": "object",
       "description": "An HCX Enterprise Site resource",
       "allOf": [
         {
@@ -5702,6 +6339,7 @@
       }
     },
     "HcxEnterpriseSiteProperties": {
+      "type": "object",
       "description": "The properties of an HCX Enterprise Site",
       "properties": {
         "activationKey": {
@@ -5727,6 +6365,7 @@
       }
     },
     "GlobalReachConnectionList": {
+      "type": "object",
       "description": "A paged list of global reach connections",
       "properties": {
         "value": {
@@ -5745,6 +6384,7 @@
       }
     },
     "GlobalReachConnection": {
+      "type": "object",
       "description": "A global reach connection resource",
       "allOf": [
         {
@@ -5760,6 +6400,7 @@
       }
     },
     "GlobalReachConnectionProperties": {
+      "type": "object",
       "description": "The properties of a global reach connection",
       "properties": {
         "provisioningState": {
@@ -5802,10 +6443,15 @@
         "peerExpressRouteCircuit": {
           "type": "string",
           "description": "Identifier of the ExpressRoute Circuit to peer with in the global reach connection"
+        },
+        "expressRouteId": {
+          "type": "string",
+          "description": "The ID of the Private Cloud's ExpressRoute Circuit that is participating in the global reach connection"
         }
       }
     },
     "CloudLinkList": {
+      "type": "object",
       "description": "A paged list of cloud links",
       "properties": {
         "value": {
@@ -5824,6 +6470,7 @@
       }
     },
     "CloudLink": {
+      "type": "object",
       "description": "A cloud link resource",
       "allOf": [
         {
@@ -5839,6 +6486,7 @@
       }
     },
     "CloudLinkProperties": {
+      "type": "object",
       "description": "The properties of a cloud link.",
       "properties": {
         "status": {
@@ -5864,6 +6512,7 @@
       }
     },
     "WorkloadNetworkSegmentSubnet": {
+      "type": "object",
       "description": "Subnet configuration for segment",
       "properties": {
         "dhcpRanges": {
@@ -5880,6 +6529,7 @@
       }
     },
     "WorkloadNetworkSegmentPortVif": {
+      "type": "object",
       "description": "Ports and any VIF attached to segment.",
       "properties": {
         "portName": {
@@ -5889,6 +6539,7 @@
       }
     },
     "WorkloadNetworkSegmentProperties": {
+      "type": "object",
       "description": "NSX Segment Properties",
       "properties": {
         "displayName": {
@@ -5915,7 +6566,8 @@
           "description": "Segment status.",
           "type": "string",
           "enum": [
-            "SUCCESS, FAILURE"
+            "SUCCESS",
+            "FAILURE"
           ],
           "x-ms-enum": {
             "name": "SegmentStatusEnum",
@@ -5947,6 +6599,7 @@
       }
     },
     "WorkloadNetworkSegment": {
+      "type": "object",
       "description": "NSX Segment",
       "allOf": [
         {
@@ -5962,6 +6615,7 @@
       }
     },
     "WorkloadNetworkSegmentsList": {
+      "type": "object",
       "description": "A list of NSX Segments",
       "properties": {
         "value": {
@@ -5980,6 +6634,7 @@
       }
     },
     "WorkloadNetworkDhcpEntity": {
+      "type": "object",
       "description": "Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to inherit from",
       "discriminator": "dhcpType",
       "properties": {
@@ -6034,6 +6689,7 @@
       ]
     },
     "WorkloadNetworkDhcpServer": {
+      "type": "object",
       "description": "NSX DHCP Server",
       "x-ms-discriminator-value": "SERVER",
       "allOf": [
@@ -6054,6 +6710,7 @@
       }
     },
     "WorkloadNetworkDhcpRelay": {
+      "type": "object",
       "description": "NSX DHCP Relay",
       "x-ms-discriminator-value": "RELAY",
       "allOf": [
@@ -6074,6 +6731,7 @@
       }
     },
     "WorkloadNetworkDhcp": {
+      "type": "object",
       "description": "NSX DHCP",
       "allOf": [
         {
@@ -6089,6 +6747,7 @@
       }
     },
     "WorkloadNetworkDhcpList": {
+      "type": "object",
       "description": "A list of NSX dhcp entities",
       "properties": {
         "value": {
@@ -6107,6 +6766,7 @@
       }
     },
     "WorkloadNetworkPortMirroringProperties": {
+      "type": "object",
       "description": "NSX Port Mirroring Properties",
       "properties": {
         "displayName": {
@@ -6117,7 +6777,9 @@
           "description": "Direction of port mirroring profile.",
           "type": "string",
           "enum": [
-            "INGRESS, EGRESS, BIDIRECTIONAL"
+            "INGRESS",
+            "EGRESS",
+            "BIDIRECTIONAL"
           ],
           "x-ms-enum": {
             "name": "PortMirroringDirectionEnum",
@@ -6136,7 +6798,8 @@
           "description": "Port Mirroring Status.",
           "type": "string",
           "enum": [
-            "SUCCESS, FAILURE"
+            "SUCCESS",
+            "FAILURE"
           ],
           "x-ms-enum": {
             "name": "PortMirroringStatusEnum",
@@ -6168,6 +6831,7 @@
       }
     },
     "WorkloadNetworkPortMirroring": {
+      "type": "object",
       "description": "NSX Port Mirroring",
       "allOf": [
         {
@@ -6183,6 +6847,7 @@
       }
     },
     "WorkloadNetworkPortMirroringList": {
+      "type": "object",
       "description": "A list of NSX Port Mirroring",
       "properties": {
         "value": {
@@ -6201,6 +6866,7 @@
       }
     },
     "WorkloadNetworkVMGroupProperties": {
+      "type": "object",
       "description": "NSX VM Group Properties",
       "properties": {
         "displayName": {
@@ -6218,7 +6884,8 @@
           "description": "VM Group status.",
           "type": "string",
           "enum": [
-            "SUCCESS, FAILURE"
+            "SUCCESS",
+            "FAILURE"
           ],
           "x-ms-enum": {
             "name": "VMGroupStatusEnum",
@@ -6250,6 +6917,7 @@
       }
     },
     "WorkloadNetworkVMGroup": {
+      "type": "object",
       "description": "NSX VM Group",
       "allOf": [
         {
@@ -6265,6 +6933,7 @@
       }
     },
     "WorkloadNetworkVMGroupsList": {
+      "type": "object",
       "description": "A list of NSX VM Groups",
       "properties": {
         "value": {
@@ -6283,6 +6952,7 @@
       }
     },
     "WorkloadNetworkVirtualMachineProperties": {
+      "type": "object",
       "description": "NSX Virtual Machine Properties",
       "properties": {
         "displayName": {
@@ -6293,7 +6963,9 @@
           "description": "Virtual machine type.",
           "type": "string",
           "enum": [
-            "REGULAR, EDGE, SERVICE"
+            "REGULAR",
+            "EDGE",
+            "SERVICE"
           ],
           "x-ms-enum": {
             "name": "VMTypeEnum",
@@ -6304,6 +6976,7 @@
       }
     },
     "WorkloadNetworkVirtualMachine": {
+      "type": "object",
       "description": "NSX Virtual Machine",
       "allOf": [
         {
@@ -6319,6 +6992,7 @@
       }
     },
     "WorkloadNetworkVirtualMachinesList": {
+      "type": "object",
       "description": "A list of NSX Virtual Machines",
       "properties": {
         "value": {
@@ -6337,6 +7011,7 @@
       }
     },
     "WorkloadNetworkGatewayProperties": {
+      "type": "object",
       "description": "Properties of a NSX Gateway.",
       "properties": {
         "displayName": {
@@ -6351,6 +7026,7 @@
       }
     },
     "WorkloadNetworkGateway": {
+      "type": "object",
       "description": "NSX Gateway.",
       "allOf": [
         {
@@ -6366,6 +7042,7 @@
       }
     },
     "WorkloadNetworkGatewayList": {
+      "type": "object",
       "description": "A list of NSX Gateways",
       "properties": {
         "value": {
@@ -6384,6 +7061,7 @@
       }
     },
     "WorkloadNetworkDnsServiceProperties": {
+      "type": "object",
       "description": "NSX DNS Service Properties",
       "properties": {
         "displayName": {
@@ -6457,6 +7135,7 @@
       }
     },
     "WorkloadNetworkDnsService": {
+      "type": "object",
       "description": "NSX DNS Service",
       "allOf": [
         {
@@ -6472,6 +7151,7 @@
       }
     },
     "WorkloadNetworkDnsServicesList": {
+      "type": "object",
       "description": "A list of NSX DNS Services",
       "properties": {
         "value": {
@@ -6490,6 +7170,7 @@
       }
     },
     "WorkloadNetworkDnsZoneProperties": {
+      "type": "object",
       "description": "NSX DNS Zone Properties",
       "properties": {
         "displayName": {
@@ -6543,6 +7224,7 @@
       }
     },
     "WorkloadNetworkDnsZone": {
+      "type": "object",
       "description": "NSX DNS Zone",
       "allOf": [
         {
@@ -6558,6 +7240,7 @@
       }
     },
     "WorkloadNetworkDnsZonesList": {
+      "type": "object",
       "description": "A list of NSX DNS Zones",
       "properties": {
         "value": {
@@ -6576,6 +7259,7 @@
       }
     },
     "WorkloadNetworkPublicIPProperties": {
+      "type": "object",
       "description": "NSX Public IP Block Properties",
       "properties": {
         "displayName": {
@@ -6611,6 +7295,7 @@
       }
     },
     "WorkloadNetworkPublicIP": {
+      "type": "object",
       "description": "NSX Public IP Block",
       "allOf": [
         {
@@ -6626,6 +7311,7 @@
       }
     },
     "WorkloadNetworkPublicIPsList": {
+      "type": "object",
       "description": "A list of NSX Public IP Blocks",
       "properties": {
         "value": {
@@ -6643,7 +7329,295 @@
         }
       }
     },
+    "VirtualMachineRestrictMovementState": {
+      "description": "Whether VM DRS-driven movement is restricted (enabled) or not (disabled)",
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "virtualMachineRestrictMovementState",
+        "modelAsString": true
+      }
+    },
+    "VirtualMachineRestrictMovement": {
+      "type": "object",
+      "description": "Set VM DRS-driven movement to restricted (enabled) or not (disabled)",
+      "properties": {
+        "restrictMovement": {
+          "$ref": "#/definitions/VirtualMachineRestrictMovementState"
+        }
+      }
+    },
+    "VirtualMachineProperties": {
+      "type": "object",
+      "description": "Virtual Machine Properties",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "moRefId": {
+          "description": "Virtual machine managed object reference id",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "Path to virtual machine's folder starting from datacenter virtual machine folder",
+          "type": "string",
+          "readOnly": true
+        },
+        "restrictMovement": {
+          "$ref": "#/definitions/VirtualMachineRestrictMovementState",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachine": {
+      "type": "object",
+      "description": "Virtual Machine",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Virtual machine properties.",
+          "$ref": "#/definitions/VirtualMachineProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualMachinesList": {
+      "type": "object",
+      "description": "A list of Virtual Machines",
+      "properties": {
+        "value": {
+          "description": "The items to be displayed on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PlacementPolicyProperties": {
+      "type": "object",
+      "description": "Abstract placement policy properties",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "placement policy type",
+          "type": "string",
+          "enum": [
+            "VmVm",
+            "VmHost"
+          ],
+          "x-ms-enum": {
+            "name": "PlacementPolicyType",
+            "modelAsString": true
+          }
+        },
+        "state": {
+          "description": "Whether the placement policy is enabled or disabled",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PlacementPolicyState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "description": "Display name of the placement policy",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Building",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "PlacementPolicyProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "VmVmPlacementPolicyProperties": {
+      "type": "object",
+      "description": "VM-VM placement policy properties",
+      "x-ms-discriminator-value": "VmVm",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PlacementPolicyProperties"
+        }
+      ],
+      "properties": {
+        "vmMembers": {
+          "description": "Virtual machine members list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affinityType": {
+          "description": "placement policy affinity type",
+          "$ref": "#/definitions/AffinityType"
+        }
+      },
+      "required": [
+        "vmMembers",
+        "affinityType"
+      ]
+    },
+    "VmHostPlacementPolicyProperties": {
+      "type": "object",
+      "description": "VM-Host placement policy properties",
+      "x-ms-discriminator-value": "VmHost",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PlacementPolicyProperties"
+        }
+      ],
+      "properties": {
+        "vmMembers": {
+          "description": "Virtual machine members list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hostMembers": {
+          "description": "Host members list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affinityType": {
+          "description": "placement policy affinity type",
+          "$ref": "#/definitions/AffinityType"
+        }
+      },
+      "required": [
+        "vmMembers",
+        "hostMembers",
+        "affinityType"
+      ]
+    },
+    "PlacementPolicy": {
+      "type": "object",
+      "description": "A vSphere Distributed Resource Scheduler (DRS) placement policy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "placement policy properties",
+          "$ref": "#/definitions/PlacementPolicyProperties",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "PlacementPoliciesList": {
+      "type": "object",
+      "description": "Represents list of placement policies",
+      "properties": {
+        "value": {
+          "description": "The items on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PlacementPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PlacementPolicyUpdate": {
+      "type": "object",
+      "description": "An update of a DRS placement policy resource",
+      "properties": {
+        "properties": {
+          "description": "The properties of a placement policy resource that may be updated",
+          "$ref": "#/definitions/PlacementPolicyUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PlacementPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The properties of a placement policy resource that may be updated",
+      "properties": {
+        "state": {
+          "description": "Whether the placement policy is enabled or disabled",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PlacementPolicyState",
+            "modelAsString": true
+          }
+        },
+        "vmMembers": {
+          "description": "Virtual machine members list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hostMembers": {
+          "description": "Host members list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AffinityType": {
+      "description": "Placement policy affinity type",
+      "type": "string",
+      "enum": [
+        "Affinity",
+        "AntiAffinity"
+      ],
+      "x-ms-enum": {
+        "name": "AffinityType",
+        "modelAsString": true
+      }
+    },
     "ScriptPackageProperties": {
+      "type": "object",
       "description": "Properties of a Script Package subresource",
       "properties": {
         "description": {
@@ -6659,6 +7633,7 @@
       }
     },
     "ScriptPackagesList": {
+      "type": "object",
       "description": "A list of the available script packages",
       "properties": {
         "value": {
@@ -6677,6 +7652,7 @@
       }
     },
     "ScriptPackage": {
+      "type": "object",
       "description": "Script Package resources available for execution",
       "allOf": [
         {
@@ -6692,6 +7668,7 @@
       }
     },
     "ScriptParameter": {
+      "type": "object",
       "description": "An parameter that the script will accept",
       "properties": {
         "type": {
@@ -6749,6 +7726,7 @@
       }
     },
     "ScriptCmdlet": {
+      "type": "object",
       "description": "A cmdlet available for script execution",
       "allOf": [
         {
@@ -6764,6 +7742,7 @@
       }
     },
     "ScriptCmdletProperties": {
+      "type": "object",
       "description": "Properties of a pre-canned script",
       "properties": {
         "description": {
@@ -6787,6 +7766,7 @@
       }
     },
     "ScriptCmdletsList": {
+      "type": "object",
       "description": "Pageable list of scripts/cmdlets",
       "properties": {
         "value": {
@@ -6805,6 +7785,7 @@
       }
     },
     "ScriptExecutionParameter": {
+      "type": "object",
       "discriminator": "type",
       "description": "The arguments passed in to the execution",
       "properties": {
@@ -6832,6 +7813,7 @@
       ]
     },
     "ScriptExecution": {
+      "type": "object",
       "description": "An instance of a script executed by a user - custom or AVS",
       "allOf": [
         {
@@ -6847,6 +7829,7 @@
       }
     },
     "ScriptExecutionProperties": {
+      "type": "object",
       "description": "Properties of a user-invoked script",
       "properties": {
         "scriptCmdletId": {
@@ -6960,6 +7943,7 @@
       ]
     },
     "ScriptExecutionsList": {
+      "type": "object",
       "description": "Pageable list of script executions",
       "properties": {
         "value": {
@@ -6978,6 +7962,7 @@
       }
     },
     "ScriptSecureStringExecutionParameter": {
+      "type": "object",
       "description": "a plain text value execution parameter",
       "x-ms-discriminator-value": "SecureValue",
       "allOf": [
@@ -6994,6 +7979,7 @@
       }
     },
     "ScriptStringExecutionParameter": {
+      "type": "object",
       "description": "a plain text value execution parameter",
       "x-ms-discriminator-value": "Value",
       "allOf": [
@@ -7009,6 +7995,7 @@
       }
     },
     "PSCredentialExecutionParameter": {
+      "type": "object",
       "description": "a powershell credential object",
       "x-ms-discriminator-value": "Credential",
       "allOf": [
@@ -7027,6 +8014,34 @@
         }
       },
       "x-ms-secret": true
+    },
+    "PrivateCloudIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of private cloud identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID associated with the private cloud. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the private cloud. The type 'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any identities from the Private Cloud.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Identity for the virtual machine."
     }
   }
 }

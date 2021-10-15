@@ -1,7 +1,8 @@
 {
   "parameters": {
     "api-version": "2021-12-01",
-    "subscriptionId": "{subscription-id}"
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1"
   },
   "responses": {
     "200": {
@@ -16,8 +17,9 @@
             },
             "properties": {
               "availability": {
-                "strategy": "SingleZone",
-                "zone": 1
+                "strategy": "DualZone",
+                "zone": 1,
+                "secondaryZone": 2
               },
               "networkBlock": "192.168.48.0/22",
               "circuit": {
@@ -25,6 +27,12 @@
                 "primarySubnet": "192.168.53.0/30",
                 "secondarySubnet": "192.168.53.4/30",
                 "expressRoutePrivatePeeringID": "/subscriptions/{subscription-id}/resourceGroups/tnt42-cust-p01-dmo01/providers/Microsoft.Network/expressroutecircuits/tnt42-cust-p01-dmo01-er/peerings/AzurePrivatePeering"
+              },
+              "secondaryCircuit": {
+                "expressRouteID": "/subscriptions/{subscription-id}/resourceGroups/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2/providers/Microsoft.Network/expressroutecircuits/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2-xconnect2",
+                "primarySubnet": "192.168.53.0/30",
+                "secondarySubnet": "192.168.53.4/30",
+                "expressRoutePrivatePeeringID": "/subscriptions/{subscription-id}/resourceGroups/tnt42-cust-p01-dmo01/providers/Microsoft.Network/expressroutecircuits/tnt42-cust-p01-dmo01-er2/peerings/AzurePrivatePeering"
               },
               "managementCluster": {
                 "clusterId": 1,
@@ -41,6 +49,9 @@
                 "vcsa": "https://192.168.50.2/",
                 "hcxCloudManager": "https://192.168.50.4/"
               },
+              "externalCloudLinks": [
+                "/subscriptions/12341234-1234-1234-1234-123412341234/resourceGroups/mygroup/providers/Microsoft.AVS/privateClouds/cloud2"
+              ],
               "identitySources": [
                 {
                   "alias": "groupAlias",
