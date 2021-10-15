@@ -1198,7 +1198,8 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "Cluster pool subnet resource id."
+          "description": "Cluster pool subnet resource id.",
+          "pattern": "^/(subscriptions|SUBSCRIPTIONS)/([a-zA-Z0-9\\-]+)/(resourcegroups|resourceGroups|RESOURCEGROUPS)/([a-zA-Z0-9\\-_()\\.]+)/(providers|PROVIDERS)/(microsoft|Microsoft|MICROSOFT)\\.(network|Network|NETWORK)/(virtualnetworks|virtualNetworks|VIRTUALNETWORKS)/([a-zA-Z0-9][a-zA-Z0-9_\\-\\.]{0,62}[a-zA-Z0-9_])/(subnets|SUBNETS)/([a-zA-Z0-9][a-zA-Z0-9_\\-\\.]{0,78}[a-zA-Z0-9_])$"
         }
       }
     },
@@ -1215,7 +1216,8 @@
         },
         "workspaceId": {
           "type": "string",
-          "description": "Log analytics workspace to associate with the OMS agent."
+          "description": "Log analytics workspace to associate with the OMS agent.",
+          "pattern": "^/(subscriptions|SUBSCRIPTIONS)/([a-zA-Z0-9\\-]+)/(resourcegroups|resourceGroups|RESOURCEGROUPS)/([a-zA-Z0-9\\-_()\\.]+)/(providers|PROVIDERS)/(microsoft|Microsoft|MICROSOFT)\\.(operationalinsights|OperationalInsights|OPERATIONALINSIGHTS)/(workspaces|WORKSPACES)/([A-Za-z0-9][A-Za-z0-9\\-]+[A-Za-z0-9])$"
         }
       }
     },
@@ -1225,7 +1227,8 @@
       "properties": {
         "aksClusterResourceId": {
           "type": "string",
-          "description": "ARM Resource ID of the AKS cluster"
+          "description": "ARM Resource ID of the AKS cluster",
+          "pattern": "^/(subscriptions|SUBSCRIPTIONS)/([a-zA-Z0-9\\-]+)/(resourcegroups|resourceGroups|RESOURCEGROUPS)/([a-zA-Z0-9\\-_()\\.]+)/(providers|PROVIDERS)/(microsoft|Microsoft|MICROSOFT)\\.(containerservice|ContainerService|CONTAINERSERVICE)/(managedclusters|managedClusters|MANAGEDCLUSTERS)/([A-Za-z0-9][A-Za-z0-9\\-_]*[A-Za-z0-9]*)$"
         },
         "aksClusterAgentPoolIdentityProfile": {
           "description": "Identity properties of the AKS cluster agentpool MSI",
@@ -1392,15 +1395,18 @@
       "properties": {
         "msiResourceId": {
           "type": "string",
-          "description": "ResourceId of the MSI."
+          "description": "ResourceId of the MSI.",
+          "pattern": "^/(subscriptions|SUBSCRIPTIONS)/([a-zA-Z0-9\\-]+)/(resourcegroups|resourceGroups|RESOURCEGROUPS)/([a-zA-Z0-9\\-_()\\.]+)/(providers|PROVIDERS)/(microsoft|Microsoft|MICROSOFT)\\.(managedidentity|ManagedIdentity|MANAGEDIDENTITY)/(userassignedidentities|userAssignedIdentities|USERASSIGNEDIDENTITIES)/([a-zA-Z0-9\\-\\._~]+)$"
         },
         "msiClientId": {
           "type": "string",
-          "description": "ClientId of the MSI."
+          "description": "ClientId of the MSI.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
         },
         "msiObjectId": {
           "type": "string",
-          "description": "ObjectId of the MSI."
+          "description": "ObjectId of the MSI.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
         }
       }
     },
@@ -1439,7 +1445,8 @@
         },
         "type": {
           "type": "string",
-          "description": "Type of key vault object: secret, key or certificate."
+          "description": "Type of key vault object: secret, key or certificate.",
+          "pattern": "^(key|Key|KEY|secret|Secret|SECRET|certificate|Certificate|CERTIFICATE)$"
         },
         "version": {
           "type": "string",
@@ -1447,7 +1454,8 @@
         },
         "keyVaultObjectName": {
           "type": "string",
-          "description": "Object identifier name of the secret in key vault."
+          "description": "Object identifier name of the secret in key vault.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,126}$"
         }
       }
     },
@@ -1460,7 +1468,8 @@
       "properties": {
         "keyVaultResourceId": {
           "type": "string",
-          "description": "Name of the user Key Vault where all the cluster specific user secrets are stored."
+          "description": "Name of the user Key Vault where all the cluster specific user secrets are stored.",
+          "pattern": "^/(subscriptions|SUBSCRIPTIONS)/([a-zA-Z0-9\\-]+)/(resourcegroups|resourceGroups|RESOURCEGROUPS)/([a-zA-Z0-9\\-_()\\.]+)/(providers|PROVIDERS)/(microsoft|Microsoft|MICROSOFT)\\.(keyvault|KeyVault|KEYVAULT)/(vaults|VAULTS)/([a-zA-Z0-9\\-\\._~]+)$"
         },
         "secrets": {
           "type": "array",
@@ -1709,6 +1718,10 @@
         "computeProfile": {
           "type": "object",
           "description": "The compute profile.",
+          "required": [
+            "vmSize",
+            "count"
+          ],
           "properties": {
             "vmSize": {
               "type": "string",
@@ -1723,9 +1736,6 @@
               "minimum": 1.0
             }
           }
-        },
-        "logAnalyticsProfile": {
-          "$ref": "#/definitions/ClusterLogAnalyticsProfile"
         },
         "clusterProfile": {
           "$ref": "#/definitions/ClusterProfile"
