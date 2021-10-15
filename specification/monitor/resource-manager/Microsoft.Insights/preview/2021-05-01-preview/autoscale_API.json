@@ -811,6 +811,7 @@
           "description": "The autoscale setting of the resource."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "The autoscale setting resource."
     },
     "AutoscaleSettingResourcePatch": {
@@ -855,13 +856,27 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "description": "One of a server-defined set of error codes.",
+              "type": "string"
+            },
+            "message": {
+              "description": "A human-readable representation of the error.",
+              "type": "string"
+            },
+            "target": {
+              "description": "The target of the particular error.",
+              "type": "string"
+            },
+            "details": {
+              "description": "A human-readable representation of the error's details.",
+              "type": "string"
+            }
+          }
         }
       }
     },
