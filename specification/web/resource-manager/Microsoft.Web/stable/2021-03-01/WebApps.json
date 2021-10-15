@@ -1292,7 +1292,7 @@
         ],
         "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
         "description": "Description for Gets site's Authentication / Authorization settings for apps via the V2 format",
-        "operationId": "WebApps_GetAuthSettingsV2",
+        "operationId": "WebApps_ListAuthSettingsV2",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -3564,88 +3564,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
-        "description": "Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
-        "operationId": "WebApps_GetOneDeployStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Invoke the OneDeploy publish web app extension.",
-        "description": "Description for Invoke the OneDeploy publish web app extension.",
-        "operationId": "WebApps_CreateOneDeployOperation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions": {
       "get": {
         "tags": [
@@ -4166,8 +4084,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the management database",
-        "description": "This is to allow calling via powershell and ARM template.",
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "Description for This is to allow calling via powershell and ARM template.",
         "operationId": "WebApps_ListSyncStatus",
         "parameters": [
           {
@@ -4188,8 +4106,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Sync was successful."
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -4227,8 +4145,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Sync was successful."
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -5874,8 +5792,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the management database",
-        "description": "This is to allow calling via powershell and ARM template.",
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "Description for This is to allow calling via powershell and ARM template.",
         "operationId": "WebApps_ListSyncFunctionTriggers",
         "parameters": [
           {
@@ -5897,7 +5815,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Sync was successful.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
@@ -13011,8 +12929,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the management database",
-        "description": "This is to allow calling via powershell and ARM template.",
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "Description for This is to allow calling via powershell and ARM template.",
         "operationId": "WebApps_ListSyncStatusSlot",
         "parameters": [
           {
@@ -13040,8 +12958,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Sync was successful."
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -13086,8 +13004,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Sync was successful."
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -14943,8 +14861,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the management database",
-        "description": "This is to allow calling via powershell and ARM template.",
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "Description for This is to allow calling via powershell and ARM template.",
         "operationId": "WebApps_ListSyncFunctionTriggersSlot",
         "parameters": [
           {
@@ -14973,7 +14891,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Sync was successful.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
@@ -18659,8 +18577,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Sync was successful."
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
@@ -20380,8 +20298,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Sync was successful."
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "App Service error response.",
