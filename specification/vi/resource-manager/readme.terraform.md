@@ -12,5 +12,5 @@ output-folder: $(terraform-output-folder)/vi
 ```
 
 ``` yaml $(tag) == 'package-2021-07-01-preview' && $(terraform)
-gosdk-folder: services/preview/vi/mgmt/2021-09-01-preview/vi
+gosdk-folder: services/preview/vi/mgmt/2021-10-01-preview/vi
 ```
