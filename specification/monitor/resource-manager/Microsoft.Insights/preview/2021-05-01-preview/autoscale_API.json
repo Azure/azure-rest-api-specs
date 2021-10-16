@@ -258,7 +258,7 @@
         }
       }
     },
-    "/{autoscaleResourceUri}/predictiveMetrics": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings/{autoscaleSettingName}/predictiveMetrics": {
       "get": {
         "tags": [
           "Metrics"
@@ -267,7 +267,13 @@
         "description": "get predictive autoscale metric future data",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
             "$ref": "#/parameters/TimespanParameter"
@@ -1039,15 +1045,6 @@
       "type": "string",
       "description": "The autoscale setting name.",
       "x-ms-parameter-location": "method"
-    },
-    "ResourceUriParameter": {
-      "name": "autoscaleResourceUri",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
     },
     "TimespanParameter": {
       "name": "timespan",
