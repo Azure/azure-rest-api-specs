@@ -258,6 +258,57 @@
         }
       }
     },
+    "/{autoscaleResourceUri}/predictiveMetrics": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "PredictiveMetric_Get",
+        "description": "get predictive autoscale etric future data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/TimespanParameter"
+          },
+          {
+            "$ref": "#/parameters/IntervalParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/MetricNamesParameter"
+          },
+          {
+            "$ref": "#/parameters/AggregationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values.",
+            "schema": {
+              "$ref": "#/definitions/PredictiveResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Metric for data": {
+            "$ref": "./examples/GetPredictiveMetric.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a subscription",
@@ -920,6 +971,56 @@
         }
       },
       "description": "Specifies an auto scale rule metric dimension."
+    },
+    "PredictiveResponse": {
+      "type": "object",
+      "properties": {
+        "timespan": {
+          "type": "string",
+          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The metrics being queried"
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "resource of the predictive metric."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PredictiveValue"
+          },
+          "description": "the value of the collection."
+        }
+      },
+      "description": "The response to a metrics query."
+    },
+    "PredictiveValue": {
+      "type": "object",
+      "required": [
+        "timeStamp",
+        "value"
+      ],
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the timestamp for the metric value in ISO 8601 format."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Predictive value in this time bucket."
+        }
+      },
+      "description": "Represents a predictive metric value in the given bucket."
     }
   },
   "parameters": {
@@ -937,6 +1038,56 @@
       "required": true,
       "type": "string",
       "description": "The autoscale setting name.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "name": "autoscaleResourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "TimespanParameter": {
+      "name": "timespan",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
+      "x-ms-parameter-location": "method"
+    },
+    "IntervalParameter": {
+      "name": "interval",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "format": "duration",
+      "description": "The interval (i.e. timegrain) of the query.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamesParameter": {
+      "name": "metricName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
+      "x-ms-parameter-location": "method"
+    },
+    "AggregationParameter": {
+      "name": "aggregation",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The list of aggregation types (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamespaceParameter": {
+      "name": "metricNamespace",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Metric namespace to query metric definitions for.",
       "x-ms-parameter-location": "method"
     }
   }
