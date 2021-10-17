@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-07-01
+tag: package-2021-11-01
 
 directive:
   - where:
@@ -228,6 +228,22 @@ directive:
       - NestedResourcesMustHaveListOperation
     reason:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
+```
+
+### Tag: package-2021-11-01
+
+These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11-01'
+input-file:
+- Microsoft.Compute/stable/2021-11-01/compute.json
+- Microsoft.Compute/stable/2021-11-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-04-01/disk.json
+- Microsoft.Compute/stable/2021-07-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-07-01
