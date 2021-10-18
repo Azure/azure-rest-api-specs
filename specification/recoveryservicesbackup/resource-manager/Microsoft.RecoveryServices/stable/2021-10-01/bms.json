@@ -2587,6 +2587,165 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTriggerValidateOperation": {
+      "post": {
+        "tags": [
+          "ValidateOperation"
+        ],
+        "description": "Validate operation for specified backed up item in the form of an asynchronous operation. Returns tracking headers which can be tracked using GetValidateOperationResult API.",
+        "operationId": "ValidateOperation_Trigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource validate operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Trigger Validate Operation": {
+            "$ref": "./examples/AzureIaasVm/TriggerValidateOperation_RestoreDisk.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ValidateOperationResults"
+        ],
+        "description": "Fetches the result of a triggered validate operation.",
+        "operationId": "ValidateOperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationsResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Results of Validate Operation": {
+            "$ref": "./examples/AzureIaasVm/ValidateOperationResults.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationsStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "ValidateOperationStatuses"
+        ],
+        "description": "Fetches the status of a triggered validate operation. The status can be in progress, completed\r\nor failed. You can refer to the OperationStatus enum for all the possible states of the operation.\r\nIf operation has completed, this method returns the list of errors obtained while validating the operation.",
+        "operationId": "ValidateOperationStatuses_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID represents the operation whose status needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Status of Validate Operation": {
+            "$ref": "./examples/AzureIaasVm/ValidateOperationStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEngines": {
       "get": {
         "tags": [
@@ -11262,6 +11421,22 @@
         }
       },
       "x-ms-discriminator-value": "OperationStatusProvisionILRExtendedInfo"
+    },
+    "OperationStatusValidateOperationExtendedInfo": {
+      "description": "Operation status extended info for ValidateOperation action.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "validateOperationResponse": {
+          "$ref": "#/definitions/ValidateOperationResponse",
+          "description": "Gets the validation operation response"
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusValidateOperationExtendedInfo"
     },
     "PreBackupValidation": {
       "description": "Pre-backup validation for Azure VM Workload provider.",
