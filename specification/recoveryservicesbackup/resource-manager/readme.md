@@ -60,11 +60,12 @@ input-file:
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-08-01/bms.json
   - Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 ```
+
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
