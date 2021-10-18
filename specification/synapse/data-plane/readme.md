@@ -310,6 +310,12 @@ directive:
       - $.definitions.NotebookKernelSpec.properties.display_name
       - $.definitions.NotebookMetadata.properties.language_info
       - $.definitions.Notebook.properties.nbformat_minor
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: checkAccessSynapseRbac.json
+    where:
+      - $.definitions.CheckPrincipalAccessResponse.properties.AccessDecisions
 ```
 
 ---
