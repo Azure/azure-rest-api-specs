@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboarding": {
+      "get": {
+        "x-ms-examples": {
+          "MDE details needed for onboarding": {
+            "$ref": "./examples/MdeOnboarding/GetMdeOnboardings_example.json"
+          }
+        },
+        "tags": [
+          "MdeOnboarding"
+        ],
+        "description": "MDE details needed for onboarding",
+        "operationId": "MdeOnboarding_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MdeOnboardingDataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboarding/{mdeOnboardingType}": {
       "get": {
         "x-ms-examples": {
@@ -118,6 +154,19 @@
         }
       },
       "description": "MDE onboarding data resource."
+    },
+    "MdeOnboardingDataList": {
+      "type": "object",
+      "description": "List of all MDE onboarding data resources",
+      "properties": {
+        "value": {
+          "description": "List of all MDE onboarding data resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MdeOnboardingData"
+          }
+        }
+      }
     }
   },
   "parameters": {
