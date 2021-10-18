@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "api-version": "2020-08-20-preview",
+    "parameters": {
+      "location": "Global",
+      "properties": {
+        "dataLocation": "United States"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource",
+        "name": "MyCommunicationResource",
+        "type": "Microsoft.Communication/CommunicationServices",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "provisioningState": "Succeeded",
+          "hostName": "mycommunicationresource.communications.azure.com"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Communication/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource",
+        "name": "MyCommunicationResource",
+        "type": "Microsoft.Communication/CommunicationServices",
+        "location": "Global",
+        "properties": {
+          "dataLocation": "United States",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

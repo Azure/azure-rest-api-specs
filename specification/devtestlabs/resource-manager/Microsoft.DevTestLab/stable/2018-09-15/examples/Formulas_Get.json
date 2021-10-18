@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{formulaName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/formulas/{formulaName}",
+        "name": "{formulaName}",
+        "type": "Microsoft.DevTestLab/labs/formulas",
+        "properties": {
+          "description": "Formula used to create a Linux VM",
+          "author": "user@contoso.com",
+          "osType": "Linux",
+          "creationDate": "2018-12-22T19:13:35.9922091+00:00",
+          "formulaContent": {
+            "properties": {
+              "notes": "Ubuntu Server 20.10",
+              "size": "Standard_B1ms",
+              "userName": "user",
+              "isAuthenticationWithSshKey": false,
+              "labSubnetName": "Dtl{labName}Subnet",
+              "labVirtualNetworkId": "/virtualnetworks/dtl{labName}",
+              "disallowPublicIpAddress": true,
+              "galleryImageReference": {
+                "offer": "0001-com-ubuntu-server-groovy",
+                "publisher": "canonical",
+                "sku": "20_10",
+                "osType": "Linux",
+                "version": "latest"
+              },
+              "artifacts": [
+                {
+                  "artifactId": "/artifactsources/{artifactSourceName}/artifacts/linux-install-nodejs",
+                  "parameters": []
+                }
+              ],
+              "networkInterface": {
+                "sharedPublicIpAddressConfiguration": {
+                  "inboundNatRules": [
+                    {
+                      "transportProtocol": "Tcp",
+                      "backendPort": 22
+                    }
+                  ]
+                }
+              },
+              "allowClaim": false,
+              "storageType": "Standard"
+            },
+            "location": "{location}"
+          },
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "7a7d20ab-8a50-46fb-8dc6-7c6c1443a01b"
+        }
+      }
+    }
+  }
+}

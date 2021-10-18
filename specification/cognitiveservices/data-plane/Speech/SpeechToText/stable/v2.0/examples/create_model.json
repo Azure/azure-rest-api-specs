@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "modelDefinition": {
+      "modelKind": "Language",
+      "baseModel": {
+        "id": "f2842de0-fc16-4858-8391-e3fd1efb6980"
+      },
+      "datasets": [
+        {
+          "id": "a712c3ba-0e49-4059-a17f-0465426514c7"
+        }
+      ],
+      "locale": "en-US",
+      "name": "Language model",
+      "description": "This is a language model definition"
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "202": {
+      "headers": {}
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "code": "BadRequest",
+        "message": "The request has been incorrect."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
+}

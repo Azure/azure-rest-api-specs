@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-10-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/privateLinkResources/searchService",
+            "name": "searchService",
+            "type": "Microsoft.Search/searchServices/privateLinkResources",
+            "properties": {
+              "groupId": "searchService",
+              "requiredMembers": [
+                "searchService"
+              ],
+              "requiredZoneNames": [
+                "privatelink.search.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

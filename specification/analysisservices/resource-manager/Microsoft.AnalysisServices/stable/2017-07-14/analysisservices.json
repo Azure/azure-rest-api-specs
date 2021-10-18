@@ -71,6 +71,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServer"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -122,6 +128,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServer"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -162,6 +174,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -214,6 +232,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServer"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -253,6 +277,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -292,6 +322,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -321,6 +357,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServers"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -348,6 +390,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -378,6 +426,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuEnumerationForNewResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -421,6 +475,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuEnumerationForExistingResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -501,6 +561,12 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -547,6 +613,12 @@
             "schema": {
               "$ref": "#/definitions/CheckServerNameAvailabilityResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -591,6 +663,12 @@
           },
           "202": {
             "description": "Accepted. The operation is ongoing."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -636,12 +714,219 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.AnalysisServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/OperationsErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.Consumption.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed: UsageDetail, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Operation type: Read, write, delete, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "The origin",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties to expose performance metrics to shoebox.",
+          "properties": {
+            "serviceSpecification": {
+              "description": "Performance metrics to shoebox.",
+              "properties": {
+                "metricSpecifications": {
+                  "description": "The metric specifications.",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/MetricSpecifications"
+                  }
+                },
+                "logSpecifications": {
+                  "description": "The log specifications.",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/LogSpecifications"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "MetricSpecifications": {
+      "description": "Available operation metric specification for exposing performance metrics to shoebox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The displayed name of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "description": "The displayed description of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "description": "The aggregation type of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dimensions": {
+          "description": "The dimensions of metric.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MetricDimensions"
+          }
+        }
+      }
+    },
+    "LogSpecifications": {
+      "description": "The log metric specification for exposing performance metrics to shoebox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The displayed name of log.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "The blob duration for the log.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDimensions": {
+      "description": "Metric dimension.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Dimension name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Dimension display name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Resource": {
       "description": "Represents an instance of an Analysis Services resource.",
       "type": "object",
@@ -840,6 +1125,34 @@
         "gatewayDetails": {
           "$ref": "#/definitions/GatewayDetails",
           "description": "The gateway details configured for the AS server."
+        },
+        "managedMode": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ManagedMode"
+          },
+          "default": 1,
+          "description": "The managed mode of the server (0 = not managed, 1 = managed)."
+        },
+        "serverMonitorMode": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ServerMonitorMode"
+          },
+          "default": 1,
+          "description": "The server monitor mode for AS server"
         }
       }
     },
@@ -882,15 +1195,16 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "enum": [
-            "Live"
+            0
           ],
           "x-ms-enum": {
             "name": "Status",
             "modelAsString": false
           },
-          "description": "Live message of list gateway."
+          "description": "Live message of list gateway. Status: 0 - Live"
         }
       }
     },
@@ -1018,20 +1332,99 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
         }
       }
+    },
+    "OperationsErrorResponse": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "title": "OperationsErrorResponse",
+          "description": "Error message from Operations."
+        }
+      },
+      "description": "An error response from Operations."
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "description": "The error object",
+          "properties": {
+            "code": {
+              "description": "Error code",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              },
+              "description": "The error details."
+            }
+          }
         }
       }
     }

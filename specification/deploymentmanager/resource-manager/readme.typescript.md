@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-deploymentmanager"
   output-folder: "$(typescript-sdks-folder)/sdk/deploymentmanager/arm-deploymentmanager"
+  clear-output-folder: true
   generate-metadata: true
 ```

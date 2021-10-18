@@ -1,0 +1,2084 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "version": "7.2-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificates",
+        "summary": "List certificates in a specified key vault",
+        "description": "The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "name": "includePending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Specifies whether to include certificates which are not completely provisioned."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of certificates along with a link to the next page of certificates.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetCertificates": {
+            "$ref": "./examples/GetCertificates-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}": {
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "DeleteCertificate",
+        "summary": "Deletes a certificate from a specified key vault.",
+        "description": "Deletes all versions of a certificate object along with its associated policy. Delete certificate cannot be used to remove individual versions of a certificate object. This operation requires the certificates/delete permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted certificate.",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCertificate": {
+            "$ref": "./examples/DeleteCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/contacts": {
+      "put": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "SetCertificateContacts",
+        "description": "Sets the certificate contacts for the specified key vault. This operation requires the certificates/managecontacts permission.",
+        "summary": "Sets the certificate contacts for the specified key vault.",
+        "parameters": [
+          {
+            "name": "contacts",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contacts"
+            },
+            "description": "The contacts for the key vault certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The contacts for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/Contacts"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SetCertificateContacts": {
+            "$ref": "./examples/SetCertificateContacts-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificateContacts",
+        "summary": "Lists the certificate contacts for a specified key vault.",
+        "description": "The GetCertificateContacts operation returns the set of certificate contact resources in the specified key vault. This operation requires the certificates/managecontacts permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The contacts for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/Contacts"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCertificateContacts": {
+            "$ref": "./examples/GetCertificateContacts-example.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "DeleteCertificateContacts",
+        "description": "Deletes the certificate contacts for a specified key vault certificate. This operation requires the certificates/managecontacts permission.",
+        "summary": "Deletes the certificate contacts for a specified key vault.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The contacts for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/Contacts"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCertificateContacts": {
+            "$ref": "./examples/DeleteCertificateContacts-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/issuers": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificateIssuers",
+        "summary": "List certificate issuers for a specified key vault.",
+        "description": "The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of certificate issuers in a key vault along with a link to the next page of certificate issuers.",
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuerListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetCertificateIssuers": {
+            "$ref": "./examples/GetCertificateIssuers-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/issuers/{issuer-name}": {
+      "put": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "SetCertificateIssuer",
+        "summary": "Sets the specified certificate issuer.",
+        "description": "The SetCertificateIssuer operation adds or updates the specified certificate issuer. This operation requires the certificates/setissuers permission.",
+        "parameters": [
+          {
+            "name": "issuer-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the issuer."
+          },
+          {
+            "name": "parameter",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuerSetParameters"
+            },
+            "description": "Certificate issuer set parameter."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The issuer for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/IssuerBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SetCertificateIssuer": {
+            "$ref": "./examples/SetCertificateIssuer-example.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "UpdateCertificateIssuer",
+        "summary": "Updates the specified certificate issuer.",
+        "description": "The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity. This operation requires the certificates/setissuers permission.",
+        "parameters": [
+          {
+            "name": "issuer-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the issuer."
+          },
+          {
+            "name": "parameter",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuerUpdateParameters"
+            },
+            "description": "Certificate issuer update parameter."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The issuer for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/IssuerBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCertificateIssuer": {
+            "$ref": "./examples/UpdateCertificateIssuer-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificateIssuer",
+        "summary": "Lists the specified certificate issuer.",
+        "description": "The GetCertificateIssuer operation returns the specified certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.",
+        "parameters": [
+          {
+            "name": "issuer-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the issuer."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The issuer for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/IssuerBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCertificateIssuer": {
+            "$ref": "./examples/GetCertificateIssuer-example.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "DeleteCertificateIssuer",
+        "summary": "Deletes the specified certificate issuer.",
+        "description": "The DeleteCertificateIssuer operation permanently removes the specified certificate issuer from the vault. This operation requires the certificates/manageissuers/deleteissuers permission.",
+        "parameters": [
+          {
+            "name": "issuer-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the issuer."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The issuer for the key vault certificate.",
+            "schema": {
+              "$ref": "#/definitions/IssuerBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCertificateIssuer": {
+            "$ref": "./examples/DeleteCertificateIssuer-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/create": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "CreateCertificate",
+        "summary": "Creates a new certificate.",
+        "description": "If this is the first version, the certificate resource is created. This operation requires the certificates/create permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "description": "The name of the certificate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateCreateParameters"
+            },
+            "description": "The parameters to create a certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Created certificate bundle.",
+            "schema": {
+              "$ref": "#/definitions/CertificateOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateCertificate": {
+            "$ref": "./examples/CreateCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/import": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "ImportCertificate",
+        "summary": "Imports a certificate into a specified key vault.",
+        "description": "Imports an existing valid certificate, containing a private key, into Azure Key Vault. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates. This operation requires the certificates/import permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "description": "The name of the certificate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateImportParameters"
+            },
+            "description": "The parameters to import the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Imported certificate bundle to the vault.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportCertificate": {
+            "$ref": "./examples/ImportCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/versions": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificateVersions",
+        "summary": "List the versions of a certificate.",
+        "description": "The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of certificates in the key vault along with a link to the next page of keys.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetCertificateVersions": {
+            "$ref": "./examples/GetCertificateVersions-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/policy": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificatePolicy",
+        "summary": "Lists the policy for a certificate.",
+        "description": "The GetCertificatePolicy operation returns the specified certificate policy resources in the specified key vault. This operation requires the certificates/get permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate in a given key vault."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The certificate policy.",
+            "schema": {
+              "$ref": "#/definitions/CertificatePolicy"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCertificatePolicy": {
+            "$ref": "./examples/GetCertificatePolicy-example.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "UpdateCertificatePolicy",
+        "summary": "Updates the policy for a certificate.",
+        "description": "Set specified members in the certificate policy. Leave others as null. This operation requires the certificates/update permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate in the given vault."
+          },
+          {
+            "name": "certificatePolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificatePolicy"
+            },
+            "description": "The policy for the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The certificate policy",
+            "schema": {
+              "$ref": "#/definitions/CertificatePolicy"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCertificatePolicy": {
+            "$ref": "./examples/UpdateCertificatePolicy-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/{certificate-version}": {
+      "patch": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "UpdateCertificate",
+        "summary": "Updates the specified attributes associated with the given certificate.",
+        "description": "The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate in the given key vault."
+          },
+          {
+            "name": "certificate-version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the certificate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateUpdateParameters"
+            },
+            "description": "The parameters for certificate update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated certificate.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCertificate": {
+            "$ref": "./examples/UpdateCertificate-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificate",
+        "summary": "Gets information about a certificate.",
+        "description": "Gets information about a specific certificate. This operation requires the certificates/get permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate in the given vault."
+          },
+          {
+            "name": "certificate-version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the certificate. This URI fragment is optional. If not specified, the latest version of the certificate is returned."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved certificate.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCertificate": {
+            "$ref": "./examples/GetCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/pending": {
+      "patch": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "UpdateCertificateOperation",
+        "summary": "Updates a certificate operation.",
+        "description": "Updates a certificate creation operation that is already in progress. This operation requires the certificates/update permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "name": "certificateOperation",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateOperationUpdateParameter"
+            },
+            "description": "The certificate operation response."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A message containing the certificate operation response.",
+            "schema": {
+              "$ref": "#/definitions/CertificateOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCertificateOperation": {
+            "$ref": "./examples/UpdateCertificateOperation-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "GetCertificateOperation",
+        "summary": "Gets the creation operation of a certificate.",
+        "description": "Gets the creation operation associated with a specified certificate. This operation requires the certificates/get permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The certificate operation response.",
+            "schema": {
+              "$ref": "#/definitions/CertificateOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCertificateOperation": {
+            "$ref": "./examples/GetCertificateOperation-example.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "DeleteCertificateOperation",
+        "summary": "Deletes the creation operation for a specific certificate.",
+        "description": "Deletes the creation operation for a specified certificate that is in the process of being created. The certificate is no longer created. This operation requires the certificates/update permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A message containing the certificate operation response.",
+            "schema": {
+              "$ref": "#/definitions/CertificateOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCertificateOperation": {
+            "$ref": "./examples/DeleteCertificateOperation-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/pending/merge": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "MergeCertificate",
+        "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
+        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. This operation requires the certificates/create permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateMergeParameters"
+            },
+            "description": "The parameters to merge certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Merged certificate bundle to the vault.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MergeCertificate": {
+            "$ref": "./examples/MergeCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/{certificate-name}/backup": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "BackupCertificate",
+        "summary": "Backs up the specified certificate.",
+        "description": "Requests that a backup of the specified certificate be downloaded to the client. All versions of the certificate will be downloaded. This operation requires the certificates/backup permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up certificate.",
+            "schema": {
+              "$ref": "#/definitions/BackupCertificateResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BackupCertificate": {
+            "$ref": "./examples/BackupCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/certificates/restore": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "RestoreCertificate",
+        "summary": "Restores a backed up certificate to a vault.",
+        "description": "Restores a backed up certificate, and all its versions, to a vault. This operation requires the certificates/restore permission.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateRestoreParameters"
+            },
+            "description": "The parameters to restore the certificate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored certificate bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RestoreCertificate": {
+            "$ref": "./examples/RestoreCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/deletedcertificates": {
+      "get": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "GetDeletedCertificates",
+        "summary": "Lists the deleted certificates in the specified vault currently available for recovery.",
+        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. This operation requires the certificates/get/list permission. This operation can only be enabled on soft-delete enabled vaults.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "name": "includePending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Specifies whether to include certificates which are not completely provisioned."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetDeletedCertificates": {
+            "$ref": "./examples/GetDeletedCertificates-example.json"
+          }
+        }
+      }
+    },
+    "/deletedcertificates/{certificate-name}": {
+      "get": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "GetDeletedCertificate",
+        "summary": "Retrieves information about the specified deleted certificate.",
+        "description": "The GetDeletedCertificate operation retrieves the deleted certificate information plus its attributes, such as retention interval, scheduled permanent deletion and the current deletion recovery level. This operation requires the certificates/get permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Certificate bundle of the certificate and its attributes",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDeletedCertificate": {
+            "$ref": "./examples/GetDeletedCertificate-example.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "PurgeDeletedCertificate",
+        "summary": "Permanently deletes the specified deleted certificate.",
+        "description": "The PurgeDeletedCertificate operation performs an irreversible deletion of the specified certificate, without possibility for recovery. The operation is not available if the recovery level does not specify 'Purgeable'. This operation requires the certificate/purge permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the certificate was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PurgeDeletedCertificate": {
+            "$ref": "./examples/PurgeDeletedCertificate-example.json"
+          }
+        }
+      }
+    },
+    "/deletedcertificates/{certificate-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "RecoverDeletedCertificate",
+        "summary": "Recovers the deleted certificate back to its current version under /certificates.",
+        "description": "The RecoverDeletedCertificate operation performs the reversal of the Delete operation. The operation is applicable in vaults enabled for soft-delete, and must be issued during the retention interval (available in the deleted certificate's attributes). This operation requires the certificates/recover permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Certificate bundle of the original certificate and its attributes",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RecoverDeletedCertificate": {
+            "$ref": "./examples/RecoverDeletedCertificate-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CertificateAttributes": {
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/Attributes"
+        }
+      ],
+      "properties": {
+        "recoverableDays": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0."
+        },
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
+              }
+            ]
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "description": "The certificate management attributes."
+    },
+    "CertificateItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Certificate identifier."
+        },
+        "attributes": {
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The certificate management attributes."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        },
+        "x5t": {
+          "x-ms-client-name": "X509Thumbprint",
+          "type": "string",
+          "format": "base64url",
+          "description": "Thumbprint of the certificate."
+        }
+      },
+      "description": "The certificate item containing certificate metadata."
+    },
+    "CertificateIssuerItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Certificate Identifier."
+        },
+        "provider": {
+          "type": "string",
+          "description": "The issuer provider."
+        }
+      },
+      "description": "The certificate issuer item containing certificate issuer metadata."
+    },
+    "CertificateBundle": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The certificate id.",
+          "readOnly": true
+        },
+        "kid": {
+          "type": "string",
+          "description": "The key id.",
+          "readOnly": true
+        },
+        "sid": {
+          "type": "string",
+          "description": "The secret id.",
+          "readOnly": true
+        },
+        "x5t": {
+          "x-ms-client-name": "X509Thumbprint",
+          "type": "string",
+          "format": "base64url",
+          "description": "Thumbprint of the certificate.",
+          "readOnly": true
+        },
+        "policy": {
+          "$ref": "#/definitions/CertificatePolicy",
+          "description": "The management policy.",
+          "readOnly": true
+        },
+        "cer": {
+          "type": "string",
+          "format": "byte",
+          "description": "CER contents of x509 certificate."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The content type of the secret."
+        },
+        "attributes": {
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The certificate attributes."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs"
+        }
+      },
+      "description": "A certificate bundle consists of a certificate (X509) plus its attributes."
+    },
+    "DeletedCertificateBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate was deleted, in UTC"
+        }
+      },
+      "description": "A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+    },
+    "DeletedCertificateItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate was deleted, in UTC"
+        }
+      },
+      "description": "The deleted certificate item containing metadata about the deleted certificate."
+    },
+    "CertificateOperation": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The certificate id.",
+          "readOnly": true
+        },
+        "issuer": {
+          "x-ms-client-name": "IssuerParameters",
+          "$ref": "#/definitions/IssuerParameters",
+          "description": "Parameters for the issuer of the X509 component of a certificate."
+        },
+        "csr": {
+          "type": "string",
+          "format": "byte",
+          "description": "The certificate signing request (CSR) that is being used in the certificate operation."
+        },
+        "cancellation_requested": {
+          "type": "boolean",
+          "description": "Indicates if cancellation was requested on the certificate operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the certificate operation."
+        },
+        "status_details": {
+          "type": "string",
+          "description": "The status details of the certificate operation."
+        },
+        "error": {
+          "$ref": "common.json#/definitions/Error",
+          "description": "Error encountered, if any, during the certificate operation."
+        },
+        "target": {
+          "type": "string",
+          "description": "Location which contains the result of the certificate operation."
+        },
+        "request_id": {
+          "type": "string",
+          "description": "Identifier for the certificate operation."
+        }
+      },
+      "description": "A certificate operation is returned in case of asynchronous requests."
+    },
+    "CertificatePolicy": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The certificate id.",
+          "readOnly": true
+        },
+        "key_props": {
+          "x-ms-client-name": "KeyProperties",
+          "$ref": "keys.json#/definitions/KeyProperties",
+          "description": "Properties of the key backing a certificate."
+        },
+        "secret_props": {
+          "x-ms-client-name": "SecretProperties",
+          "$ref": "secrets.json#/definitions/SecretProperties",
+          "description": "Properties of the secret backing a certificate."
+        },
+        "x509_props": {
+          "x-ms-client-name": "X509CertificateProperties",
+          "$ref": "#/definitions/X509CertificateProperties",
+          "description": "Properties of the X509 component of a certificate."
+        },
+        "lifetime_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LifetimeAction"
+          },
+          "description": "Actions that will be performed by Key Vault over the lifetime of a certificate."
+        },
+        "issuer": {
+          "x-ms-client-name": "IssuerParameters",
+          "$ref": "#/definitions/IssuerParameters",
+          "description": "Parameters for the issuer of the X509 component of a certificate."
+        },
+        "attributes": {
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The certificate attributes."
+        }
+      },
+      "description": "Management policy for a certificate."
+    },
+    "X509CertificateProperties": {
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "The subject name. Should be a valid X509 distinguished Name."
+        },
+        "ekus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The enhanced key usage."
+        },
+        "sans": {
+          "x-ms-client-name": "SubjectAlternativeNames",
+          "$ref": "#/definitions/SubjectAlternativeNames",
+          "description": "The subject alternative names."
+        },
+        "key_usage": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "digitalSignature",
+              "nonRepudiation",
+              "keyEncipherment",
+              "dataEncipherment",
+              "keyAgreement",
+              "keyCertSign",
+              "cRLSign",
+              "encipherOnly",
+              "decipherOnly"
+            ],
+            "x-ms-enum": {
+              "name": "KeyUsageType",
+              "modelAsString": true
+            }
+          },
+          "description": "List of key usages."
+        },
+        "validity_months": {
+          "x-ms-client-name": "ValidityInMonths",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The duration that the certificate is valid in months."
+        }
+      },
+      "description": "Properties of the X509 component of a certificate."
+    },
+    "IssuerParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the referenced issuer object or reserved names; for example, 'Self' or 'Unknown'."
+        },
+        "cty": {
+          "x-ms-client-name": "CertificateType",
+          "type": "string",
+          "description": "Certificate type as supported by the provider (optional); for example 'OV-SSL', 'EV-SSL'"
+        },
+        "cert_transparency": {
+          "x-ms-client-name": "CertificateTransparency",
+          "type": "boolean",
+          "description": "Indicates if the certificates generated under this policy should be published to certificate transparency logs."
+        }
+      },
+      "description": "Parameters for the issuer of the X509 component of a certificate."
+    },
+    "LifetimeAction": {
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "The condition that will execute the action."
+        },
+        "action": {
+          "$ref": "#/definitions/Action",
+          "description": "The action that will be executed."
+        }
+      },
+      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a certificate."
+    },
+    "Action": {
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "description": "The type of the action.",
+          "enum": [
+            "EmailContacts",
+            "AutoRenew"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "The action that will be executed."
+    },
+    "Trigger": {
+      "properties": {
+        "lifetime_percentage": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 99,
+          "description": "Percentage of lifetime at which to trigger. Value should be between 1 and 99."
+        },
+        "days_before_expiry": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days before expiry to attempt renewal. Value should be between 1 and validity_in_months multiplied by 27. If validity_in_months is 36, then value should be between 1 and 972 (36 * 27)."
+        }
+      },
+      "description": "A condition to be satisfied for an action to be executed."
+    },
+    "SubjectAlternativeNames": {
+      "properties": {
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Email addresses."
+        },
+        "dns_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Domain names."
+        },
+        "upns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "User principal names."
+        }
+      },
+      "description": "The subject alternate names of a X509 object."
+    },
+    "IssuerBundle": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the issuer object.",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "description": "The issuer provider."
+        },
+        "credentials": {
+          "$ref": "#/definitions/IssuerCredentials",
+          "description": "The credentials to be used for the issuer."
+        },
+        "org_details": {
+          "x-ms-client-name": "OrganizationDetails",
+          "$ref": "#/definitions/OrganizationDetails",
+          "description": "Details of the organization as provided to the issuer."
+        },
+        "attributes": {
+          "$ref": "#/definitions/IssuerAttributes",
+          "description": "Attributes of the issuer object."
+        }
+      },
+      "description": "The issuer for Key Vault certificate."
+    },
+    "IssuerAttributes": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether the issuer is enabled."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Creation time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Last updated time in UTC."
+        }
+      },
+      "description": "The attributes of an issuer managed by the Key Vault service."
+    },
+    "IssuerCredentials": {
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "description": "The user name/account name/account id."
+        },
+        "pwd": {
+          "x-ms-client-name": "Password",
+          "type": "string",
+          "description": "The password/secret/account key."
+        }
+      },
+      "description": "The credentials to be used for the certificate issuer."
+    },
+    "OrganizationDetails": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the organization."
+        },
+        "admin_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdministratorDetails"
+          },
+          "description": "Details of the organization administrator."
+        }
+      },
+      "description": "Details of the organization of the certificate issuer."
+    },
+    "AdministratorDetails": {
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "description": "First name."
+        },
+        "last_name": {
+          "type": "string",
+          "description": "Last name."
+        },
+        "email": {
+          "x-ms-client-name": "EmailAddress",
+          "type": "string",
+          "description": "Email address."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number."
+        }
+      },
+      "description": "Details of the organization administrator of the certificate issuer."
+    },
+    "Contacts": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the contacts collection.",
+          "readOnly": true
+        },
+        "contacts": {
+          "x-ms-client-name": "ContactList",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          },
+          "description": "The contact list for the vault certificates."
+        }
+      },
+      "description": "The contacts for the vault certificates."
+    },
+    "Contact": {
+      "properties": {
+        "email": {
+          "x-ms-client-name": "EmailAddress",
+          "type": "string",
+          "description": "Email address."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number."
+        }
+      },
+      "description": "The contact information for the vault certificates."
+    },
+    "CertificateCreateParameters": {
+      "properties": {
+        "policy": {
+          "x-ms-client-name": "CertificatePolicy",
+          "$ref": "#/definitions/CertificatePolicy",
+          "description": "The management policy for the certificate."
+        },
+        "attributes": {
+          "x-ms-client-name": "CertificateAttributes",
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The attributes of the certificate (optional)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The certificate create parameters."
+    },
+    "CertificateImportParameters": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "base64EncodedCertificate",
+          "type": "string",
+          "description": "Base64 encoded representation of the certificate object to import. This certificate needs to contain the private key."
+        },
+        "pwd": {
+          "x-ms-client-name": "password",
+          "type": "string",
+          "description": "If the private key in base64EncodedCertificate is encrypted, the password used for encryption."
+        },
+        "policy": {
+          "x-ms-client-name": "CertificatePolicy",
+          "$ref": "#/definitions/CertificatePolicy",
+          "description": "The management policy for the certificate."
+        },
+        "attributes": {
+          "x-ms-client-name": "CertificateAttributes",
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The attributes of the certificate (optional)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The certificate import parameters.",
+      "required": [
+        "value"
+      ]
+    },
+    "CertificateUpdateParameters": {
+      "properties": {
+        "policy": {
+          "x-ms-client-name": "CertificatePolicy",
+          "$ref": "#/definitions/CertificatePolicy",
+          "description": "The management policy for the certificate."
+        },
+        "attributes": {
+          "x-ms-client-name": "CertificateAttributes",
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The attributes of the certificate (optional)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The certificate update parameters."
+    },
+    "CertificateMergeParameters": {
+      "properties": {
+        "x5c": {
+          "x-ms-client-name": "x509Certificates",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "description": "The certificate or the certificate chain to merge."
+        },
+        "attributes": {
+          "x-ms-client-name": "CertificateAttributes",
+          "$ref": "#/definitions/CertificateAttributes",
+          "description": "The attributes of the certificate (optional)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The certificate merge parameters",
+      "required": [
+        "x5c"
+      ]
+    },
+    "CertificateIssuerSetParameters": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The issuer provider."
+        },
+        "credentials": {
+          "$ref": "#/definitions/IssuerCredentials",
+          "description": "The credentials to be used for the issuer."
+        },
+        "org_details": {
+          "x-ms-client-name": "OrganizationDetails",
+          "$ref": "#/definitions/OrganizationDetails",
+          "description": "Details of the organization as provided to the issuer."
+        },
+        "attributes": {
+          "$ref": "#/definitions/IssuerAttributes",
+          "description": "Attributes of the issuer object."
+        }
+      },
+      "description": "The certificate issuer set parameters.",
+      "required": [
+        "provider"
+      ]
+    },
+    "CertificateIssuerUpdateParameters": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The issuer provider."
+        },
+        "credentials": {
+          "$ref": "#/definitions/IssuerCredentials",
+          "description": "The credentials to be used for the issuer."
+        },
+        "org_details": {
+          "x-ms-client-name": "OrganizationDetails",
+          "$ref": "#/definitions/OrganizationDetails",
+          "description": "Details of the organization as provided to the issuer."
+        },
+        "attributes": {
+          "$ref": "#/definitions/IssuerAttributes",
+          "description": "Attributes of the issuer object."
+        }
+      },
+      "description": "The certificate issuer update parameters."
+    },
+    "CertificateOperationUpdateParameter": {
+      "properties": {
+        "cancellation_requested": {
+          "type": "boolean",
+          "description": "Indicates if cancellation was requested on the certificate operation."
+        }
+      },
+      "description": "The certificate operation update parameters.",
+      "required": [
+        "cancellation_requested"
+      ]
+    },
+    "CertificateListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of certificates in the key vault along with a link to the next page of certificates."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of certificates."
+        }
+      },
+      "description": "The certificate list result."
+    },
+    "DeletedCertificateListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedCertificateItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted certificates."
+        }
+      },
+      "description": "A list of certificates that have been deleted in this vault."
+    },
+    "CertificateIssuerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateIssuerItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of certificate issuers."
+        }
+      },
+      "description": "The certificate issuer list result."
+    },
+    "PendingCertificateSigningRequestResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The pending certificate signing request as Base64 encoded string."
+        }
+      },
+      "description": "The pending certificate signing request result."
+    },
+    "CertificateRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "certificateBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a certificate bundle."
+        }
+      },
+      "description": "The certificate restore parameters.",
+      "required": [
+        "value"
+      ]
+    },
+    "BackupCertificateResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up certificate."
+        }
+      },
+      "description": "The backup certificate result, containing the backup blob."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}

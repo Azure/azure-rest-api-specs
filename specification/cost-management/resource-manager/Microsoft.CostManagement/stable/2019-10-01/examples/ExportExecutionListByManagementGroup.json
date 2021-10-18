@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "managementGroupId": "TestMG",
+    "scope": "providers/Microsoft.Management/managementGroups/TestMG",
+    "exportName": "TestExport"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport/Run/1e25d58a-a3b0-4916-9542-6e04a89bc100",
+            "properties": {
+              "executionType": "OnDemand",
+              "status": "Completed",
+              "submittedBy": "john.doe@gmail.com",
+              "submittedTime": "2018-08-03T07:52:15.6016681Z",
+              "processingStartTime": "2018-08-03T07:52:16.9123797Z",
+              "processingEndTime": "2018-08-03T07:52:28.0373318Z",
+              "fileName": "ScheduledForTestExport/TestExportSchedule/20180729-20180804/TestExportSchedule_1e25d58a-a3b0-4916-9542-6e04a89bc100.csv",
+              "runSettings": {
+                "format": "Csv",
+                "deliveryInfo": {
+                  "destination": {
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                    "container": "exports",
+                    "rootFolderPath": "ScheduledTestsForJohnDoe"
+                  }
+                },
+                "definition": {
+                  "type": "Usage",
+                  "timeframe": "Custom",
+                  "timePeriod": {
+                    "from": "2018-06-01T00:00:00Z",
+                    "to": "2018-10-31T00:00:00Z"
+                  },
+                  "dataset": {
+                    "granularity": "Daily",
+                    "configuration": {
+                      "columns": [
+                        "Date",
+                        "MeterId",
+                        "InstanceId",
+                        "ResourceLocation",
+                        "PreTaxCost"
+                      ]
+                    },
+                    "aggregation": {
+                      "costSum": {
+                        "name": "PreTaxCost",
+                        "function": "Sum"
+                      }
+                    },
+                    "grouping": [
+                      {
+                        "type": "Dimension",
+                        "name": "SubscriptionName"
+                      }
+                    ],
+                    "filter": {
+                      "and": [
+                        {
+                          "or": [
+                            {
+                              "dimension": {
+                                "name": "ResourceLocation",
+                                "operator": "In",
+                                "values": [
+                                  "East US",
+                                  "West Europe"
+                                ]
+                              }
+                            },
+                            {
+                              "tag": {
+                                "name": "Environment",
+                                "operator": "In",
+                                "values": [
+                                  "UAT",
+                                  "Prod"
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "dimension": {
+                            "name": "ResourceGroup",
+                            "operator": "In",
+                            "values": [
+                              "API"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport/Run/11ac6811-dca3-46ad-b326-4704cf0c58ef",
+            "properties": {
+              "executionType": "Scheduled",
+              "status": "Completed",
+              "submittedBy": "System",
+              "submittedTime": "2018-08-03T09:03:58.5710244Z",
+              "processingStartTime": "2018-08-03T09:03:58.5710244Z",
+              "processingEndTime": "2018-08-03T09:04:19.7223808Z",
+              "fileName": "ScheduledForTestExport/TestExportSchedule/20180729-20180804/TestExportSchedule_11ac6811-dca3-46ad-b326-4704cf0c58ef.csv",
+              "runSettings": {
+                "format": "Csv",
+                "deliveryInfo": {
+                  "destination": {
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                    "container": "exports",
+                    "rootFolderPath": "ScheduledTestsForJohnDoe"
+                  }
+                },
+                "definition": {
+                  "type": "Usage",
+                  "timeframe": "Custom",
+                  "timePeriod": {
+                    "from": "2018-06-01T00:00:00Z",
+                    "to": "2018-10-31T00:00:00Z"
+                  },
+                  "dataset": {
+                    "granularity": "Daily",
+                    "configuration": {
+                      "columns": [
+                        "Date",
+                        "MeterId",
+                        "InstanceId",
+                        "ResourceLocation",
+                        "PreTaxCost"
+                      ]
+                    },
+                    "aggregation": {
+                      "costSum": {
+                        "name": "PreTaxCost",
+                        "function": "Sum"
+                      }
+                    },
+                    "grouping": [
+                      {
+                        "type": "Dimension",
+                        "name": "SubscriptionName"
+                      }
+                    ],
+                    "filter": {
+                      "and": [
+                        {
+                          "or": [
+                            {
+                              "dimension": {
+                                "name": "ResourceLocation",
+                                "operator": "In",
+                                "values": [
+                                  "East US",
+                                  "West Europe"
+                                ]
+                              }
+                            },
+                            {
+                              "tag": {
+                                "name": "Environment",
+                                "operator": "In",
+                                "values": [
+                                  "UAT",
+                                  "Prod"
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "dimension": {
+                            "name": "ResourceGroup",
+                            "operator": "In",
+                            "values": [
+                              "API"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

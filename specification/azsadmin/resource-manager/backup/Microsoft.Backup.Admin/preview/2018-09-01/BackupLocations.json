@@ -5,7 +5,7 @@
     "title": "BackupManagementClient",
     "description": "The Admin Backup Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations": {
       "get": {
         "x-ms-examples": {
           "Returns the list of backup locations.": {
@@ -37,6 +37,12 @@
           },
           {
             "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/SkipParameter"
           }
         ],
         "responses": {
@@ -52,7 +58,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}": {
       "get": {
         "x-ms-examples": {
           "Returns a specific backup location based on name.": {
@@ -129,10 +135,13 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/createBackup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/createBackup": {
       "post": {
         "x-ms-examples": {
           "Back up a specific location.": {
@@ -140,6 +149,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Back up a specific location.",
         "tags": [
           "BackupLocations"
@@ -171,6 +183,55 @@
             "schema": {
               "$ref": "Backups.json#/definitions/Backup"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/pruneExternalStore": {
+      "post": {
+        "x-ms-examples": {
+          "Prune the external backup store": {
+            "$ref": "./examples/BackupLocations/Prune.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Prune the external backup store.",
+        "tags": [
+          "BackupLocations"
+        ],
+        "operationId": "BackupLocations_PruneExternalStore",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PruneBackupStoreOptionParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PruneList"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Error response."
           }
         }
       }
@@ -276,6 +337,52 @@
           "type": "string"
         }
       }
+    },
+    "PruneBackupStoreOperationType": {
+      "description": "Prune backup store operation type.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "DryRun"
+      ],
+      "x-ms-enum": {
+        "name": "PruneBackupStoreOperationType",
+        "modelAsString": false
+      }
+    },
+    "PruneBackupStoreOperationOptionModel": {
+      "type": "object",
+      "description": "Prune backup store operation model.",
+      "properties": {
+        "operationType": {
+          "description": "Operation type.",
+          "$ref": "#/definitions/PruneBackupStoreOperationType"
+        }
+      }
+    },
+    "PruneModel": {
+      "description": "Properties for a prune list.",
+      "properties": {
+        "pathsToDelete": {
+          "description": "Garbage file list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PruneList": {
+      "type": "object",
+      "description": "List of files to delete.",
+      "properties": {
+        "properties": {
+          "description": "Holds information for a backup.",
+          "$ref": "#/definitions/PruneModel",
+          "x-ms-client-flatten": true
+        }
+      }
     }
   },
   "parameters": {
@@ -294,6 +401,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/BackupLocation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PruneBackupStoreOptionParameter": {
+      "name": "option",
+      "in": "body",
+      "description": "Prune operation option.",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/PruneBackupStoreOperationOptionModel"
       },
       "x-ms-parameter-location": "method"
     }
