@@ -867,34 +867,26 @@
     },
     "LimitObject": {
       "description": "The resource quota limit value.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The quota/limit value"
-        },
-        "limitObjectType": {
-          "$ref": "#/definitions/LimitObjectTypes"
-        },
-        "limitType": {
-          "$ref": "#/definitions/LimitTypes"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LimitValue": {
       "x-ms-discriminator-value": "LimitValue",
-      "type": "object",
-      "description": "The resource quota limit.",
       "allOf": [
         {
           "$ref": "#/definitions/LimitJsonObject"
         },
         {
-          "$ref": "#/definitions/LimitObject"
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The quota/limit value"
+            },
+            "limitType": {
+              "$ref": "#/definitions/LimitTypes"
+            }
+          },
+          "required": [
+            "value"
+          ]
         }
       ]
     },
