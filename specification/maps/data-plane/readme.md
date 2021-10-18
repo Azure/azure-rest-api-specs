@@ -23,7 +23,7 @@ To see additional help and options, run:
 ### Basic Information
 
 These are the global settings for MapsClient.
-
+mobility
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
@@ -54,7 +54,6 @@ input-file:
   - Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
