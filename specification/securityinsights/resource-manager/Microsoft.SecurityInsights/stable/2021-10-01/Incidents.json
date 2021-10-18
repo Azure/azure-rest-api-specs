@@ -877,60 +877,6 @@
       },
       "type": "object"
     },
-    "AlertSeverity": {
-      "description": "The severity of the alert",
-      "enum": [
-        "High",
-        "Medium",
-        "Low",
-        "Informational"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AlertSeverity",
-        "values": [
-          {
-            "description": "High severity",
-            "value": "High"
-          },
-          {
-            "description": "Medium severity",
-            "value": "Medium"
-          },
-          {
-            "description": "Low severity",
-            "value": "Low"
-          },
-          {
-            "description": "Informational severity",
-            "value": "Informational"
-          }
-        ]
-      }
-    },
-    "AttackTactic": {
-      "description": "The severity for alerts created by this alert rule.",
-      "enum": [
-        "InitialAccess",
-        "Execution",
-        "Persistence",
-        "PrivilegeEscalation",
-        "DefenseEvasion",
-        "CredentialAccess",
-        "Discovery",
-        "LateralMovement",
-        "Collection",
-        "Exfiltration",
-        "CommandAndControl",
-        "Impact"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AttackTactic"
-      }
-    },
     "AzureResourceEntity": {
       "allOf": [
         {
@@ -1677,7 +1623,7 @@
         "tactics": {
           "description": "The tactics associated with incident",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -3445,7 +3391,7 @@
           "type": "array"
         },
         "severity": {
-          "$ref": "#/definitions/AlertSeverity",
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverity",
           "description": "The severity of the alert"
         },
         "startTimeUtc": {
@@ -3500,7 +3446,7 @@
         "tactics": {
           "description": "The tactics of the alert",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
