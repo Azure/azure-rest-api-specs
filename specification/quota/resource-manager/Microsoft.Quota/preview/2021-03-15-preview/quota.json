@@ -871,24 +871,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/LimitJsonObject"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The quota/limit value"
-            },
-            "limitType": {
-              "$ref": "#/definitions/LimitTypes"
-            }
-          },
-          "required": [
-            "value"
-          ]
         }
-      ]
+      ],
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quota/limit value"
+        },
+        "limitType": {
+          "$ref": "#/definitions/LimitTypes"
+        }
+      }
     },
     "QuotaRequestOneResourceSubmitResponse": {
       "description": "Quota request response.",
