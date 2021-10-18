@@ -4022,7 +4022,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly" : true
         }
       }
     },
@@ -4063,7 +4063,9 @@
         },
         "accountKey": {
           "description": "The account key of the Azure Storage Account.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [ "create", "update" ]
         }
       },
       "x-ms-discriminator-value": "StorageAccount"
