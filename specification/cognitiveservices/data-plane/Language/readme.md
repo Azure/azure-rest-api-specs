@@ -6,7 +6,14 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release is 2021-07-15-preview
+The current preview release of the Conversational Language Understanding service is 2021-11-01-preview.
+
+```yaml
+tag: release_2021_11_01_preview
+add-credentials: true
+clear-output-folder: true
+openapi-type: data-plane
+```
 
 ```yaml
 tag: release_2021_07_15_preview
@@ -19,6 +26,19 @@ openapi-type: data-plane
 tag: release_2021_05_01_preview
 add-credentials: true
 clear-output-folder: true
+```
+
+### Release 2021-11-01-preview
+
+These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_11_01_preview'
+input-file: 
+  - preview/2021-11-01-preview/analyzeconversations.json
+title: 
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Release 2021-07-15-preview
@@ -60,14 +80,3 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
 ```
-### Tag: package-preview-2021-11
-
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2021-11'
-input-file:
-  - preview/2021-11-01-preview/common.json
-  - preview/2021-11-01-preview/questionanswering-authoring.json
-  - preview/2021-11-01-preview/questionanswering.json
-```
-
