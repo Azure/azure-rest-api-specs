@@ -81,7 +81,8 @@
         "tags": [
           "DataTransfer",
           "SqlDedicatedGateway",
-          "GraphAPICompute"
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "x-ms-examples": {
           "DataTransferServiceCreate": {
@@ -92,6 +93,9 @@
           },
           "GraphAPIComputeServiceCreate": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
+          },
+          "MaterializedViewsBuilderServiceCreate": {
+            "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceCreate.json"
           }
         },
         "operationId": "Service_Create",
@@ -145,7 +149,8 @@
         "tags": [
           "DataTransfer",
           "SqlDedicatedGateway",
-          "GraphAPICompute"
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "x-ms-examples": {
           "DataTransferServiceGet": {
@@ -156,6 +161,9 @@
           },
           "SqlDedicatedGatewayServiceGet": {
             "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+          },
+          "MaterializedViewsBuilderServiceGet": {
+            "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceGet.json"
           }
         },
         "operationId": "Service_Get",
@@ -196,7 +204,8 @@
         "tags": [
           "DataTransfer",
           "SqlDedicatedGateway",
-          "GraphAPICompute"
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "x-ms-examples": {
           "DataTransferServiceDelete": {
@@ -207,6 +216,9 @@
           },
           "GraphAPIComputeServiceDelete": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
+          },
+          "MaterializedViewsBuilderServiceDelete": {
+            "$ref": "./examples/CosmosDBMaterializedViewsBuilderServiceDelete.json"
           }
         },
         "operationId": "Service_Delete",
@@ -440,6 +452,36 @@
         }
       }
     },
+    "MaterializedViewsBuilderServiceResource": {
+      "description": "Describes the service response property for MaterializedViewsBuilder.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/MaterializedViewsBuilderServiceResourceProperties"
+        }
+      }
+    },
+    "MaterializedViewsBuilderServiceResourceProperties": {
+      "description": "Properties for MaterializedViewsBuilderServiceResource.",
+      "type": "object",
+      "x-ms-discriminator-value": "MaterializedViewsBuilder",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "properties": {
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/MaterializedViewsBuilderRegionalServiceResource"
+          }
+        }
+      }
+    },
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
       "type": "object",
@@ -502,6 +544,15 @@
         }
       ]
     },
+    "MaterializedViewsBuilderRegionalServiceResource": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegionalServiceResource"
+        }
+      ]
+    },
     "ServiceResourceStatus": {
       "type": "string",
       "enum": [
@@ -537,7 +588,8 @@
       "enum": [
         "SqlDedicatedGateway",
         "DataTransfer",
-        "GraphAPICompute"
+        "GraphAPICompute",
+        "MaterializedViewsBuilder"
       ],
       "description": "ServiceType for the service.",
       "x-ms-enum": {
