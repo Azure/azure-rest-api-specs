@@ -2806,16 +2806,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates a heap dump is generating.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
+            "description": "Accepted. The response indicates a heap dump is generating."
           },
           "200": {
-            "description": "Success. A heap dump was generated.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
+            "description": "Success. A heap dump was generated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2823,6 +2817,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Deployments_GenerateHeapDump": {
@@ -2869,16 +2867,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates a thread dump is generating.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
+            "description": "Accepted. The response indicates a thread dump is generating."
           },
           "200": {
-            "description": "Success. A thread dump was generated.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
+            "description": "Success. A thread dump was generated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2886,6 +2878,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Deployments_GenerateHeapDump": {
@@ -2932,16 +2928,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates a JFR is starting.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
+            "description": "Accepted. The response indicates a JFR is starting."
           },
           "200": {
-            "description": "Success. A JFR generated.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
+            "description": "Success. A JFR generated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2949,6 +2939,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Deployments_StartJFR": {
