@@ -99,3 +99,14 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
 ```
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - preview/2021-11-01-preview/common.json
+  - preview/2021-11-01-preview/questionanswering-authoring.json
+  - preview/2021-11-01-preview/questionanswering.json
+```
+
