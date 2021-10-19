@@ -157,52 +157,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VideoIndexer/userClassicAccounts": {
-      "get": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "UserClassicAccounts_List",
-        "description": "Lists all Azure Video Analyzer for Media classic accounts",
-        "x-ms-examples": {
-          "List accounts": {
-            "$ref": "./examples/ViListUserClassicAccounts.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/UserClassicAccountList"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts": {
       "get": {
         "tags": [
@@ -638,73 +592,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.VideoIndexer/locations/{location}/classicAccounts/{accountName}": {
-      "get": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "ClassicAccounts_GetDetails",
-        "description": "Gets the properties of an Azure Video Analyzer for Media Classic account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Azure Video Analyzer for Media account properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/ClassicAccount"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "User Not Allowed",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get account": {
-            "$ref": "./examples/ViClassicAccount.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -770,90 +657,6 @@
           "$ref": "#/definitions/Tags"
         }
       ]
-    },
-    "ClassicAccountSlim": {
-      "description": "An Azure Video Analyzer for Media classic account.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The account's name",
-          "type": "string",
-          "readOnly": true,
-          "example": "contoso-videoAnalyzer"
-        },
-        "location": {
-          "description": "The account's location",
-          "type": "string",
-          "readOnly": true,
-          "example": "westus"
-        }
-      }
-    },
-    "ClassicAccount": {
-      "description": "An Azure Video Analyzer for Media classic account.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The account's name",
-          "type": "string",
-          "readOnly": true,
-          "example": "contoso-videoAnalyzer"
-        },
-        "location": {
-          "description": "The account's location",
-          "type": "string",
-          "example": "westus"
-        },
-        "mediaServices": {
-          "description": "List of classic account properties",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClassicAccountMediaServices"
-        }
-      }
-    },
-    "ClassicAccountMediaServices": {
-      "description": "Azure Video Analyzer for Media classic account properties",
-      "type": "object",
-      "properties": {
-        "aadApplicationId": {
-          "type": "string",
-          "description": "The aad application id",
-          "example": "912f96dc-1ed3-4d7d-aa67-0adef4bb68ad"
-        },
-        "aadTenantId": {
-          "type": "string",
-          "description": "The aad tenant id",
-          "example": "72f988bf-86f1-41ag-91ab-2d7cd061db47"
-        },
-        "connected": {
-          "type": "boolean",
-          "description": "Represents wether the media services is connected or not"
-        },
-        "eventGridProviderRegistered": {
-          "type": "boolean",
-          "description": "Represents if the media services event grid is connected or not"
-        },
-        "name": {
-          "type": "string",
-          "description": "The media services name",
-          "example": "contosoVideoAnalyzerMediaServices"
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The resource group that the media services belong to",
-          "example": "contoso-videoAnalyzer-rg"
-        },
-        "streamingEndpointStarted": {
-          "type": "boolean",
-          "description": "Represents wether the media services streaming endpoint has started"
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The media services subscriptionId",
-          "example": "586d4f48-8f08-4a4e-96b7-e1892d6dba9e"
-        }
-      }
     },
     "AccountPropertiesForPutRequest": {
       "description": "Azure Video Analyzer for Media account properties",
@@ -959,25 +762,6 @@
       "description": "The list operation response, that contains the data pools and their properties.",
       "type": "object"
     },
-    "UserClassicAccountList": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassicAccountSlim"
-          },
-          "description": "List of classic account names and their location."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "example": "https://management.azure.com/{accountsOperation}?api-version={version}&%24skiptoken={token}"
-        }
-      },
-      "description": "The list operation response, that contains the data pools and their properties.",
-      "type": "object"
-    },
     "GenerateAccessTokenParameters": {
       "description": "Access token generation request's parameters",
       "type": "object",
@@ -1045,7 +829,7 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
         }
       }
     },
