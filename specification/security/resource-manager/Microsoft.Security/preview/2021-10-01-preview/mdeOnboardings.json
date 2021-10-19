@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboarding": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings": {
       "get": {
         "x-ms-examples": {
           "MDE details needed for onboarding": {
-            "$ref": "./examples/MdeOnboarding/GetMdeOnboardings_example.json"
+            "$ref": "./examples/MdeOnboardings/GetMdeOnboardings_example.json"
           }
         },
         "tags": [
           "MdeOnboarding"
         ],
         "description": "MDE details needed for onboarding",
-        "operationId": "MdeOnboarding_List",
+        "operationId": "MdeOnboardings_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -70,27 +70,24 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboarding/{mdeOnboardingType}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings/default": {
       "get": {
         "x-ms-examples": {
-          "MDE details needed for onboarding": {
-            "$ref": "./examples/MdeOnboarding/GetMdeOnboarding_example.json"
+          "The default MDE details needed for onboarding": {
+            "$ref": "./examples/MdeOnboardings/ListMdeOnboardings_example.json"
           }
         },
         "tags": [
           "MdeOnboarding"
         ],
-        "description": "MDE details needed for onboarding",
-        "operationId": "MdeOnboarding_Get",
+        "description": "The default MDE details needed for onboarding",
+        "operationId": "MdeOnboardings_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/MdeOnboardingType"
           }
         ],
         "responses": {
@@ -170,14 +167,6 @@
     }
   },
   "parameters": {
-    "MdeOnboardingType": {
-      "name": "mdeOnboardingType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Type of MDE onboarding",
-      "x-ms-parameter-location": "method"
-    },
     "MdeOnboardingData": {
       "name": "mdeOnboardingData",
       "in": "body",
