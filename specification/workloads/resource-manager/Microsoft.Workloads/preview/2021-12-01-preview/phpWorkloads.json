@@ -1,0 +1,1429 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-12-01-preview",
+    "title": "Workloads Client",
+    "description": "Workloads client provides access to various workload operations"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/phpWorkloads": {
+      "get": {
+        "tags": [
+          "PhpWorkloads"
+        ],
+        "description": "Lists phpWorkload resources in a subscription",
+        "operationId": "PhpWorkloads_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResourceList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/PhpWorkloads_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/phpWorkloads": {
+      "get": {
+        "tags": [
+          "PhpWorkloads"
+        ],
+        "description": "Lists phpWorkload resources in a resource group",
+        "operationId": "PhpWorkloads_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResourceList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/PhpWorkloads_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/phpWorkloads/{phpWorkloadName}": {
+      "get": {
+        "tags": [
+          "PhpWorkloads"
+        ],
+        "description": "Gets a phpWorkload resource",
+        "operationId": "PhpWorkloads_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/PhpWorkloads_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PhpWorkloads"
+        ],
+        "description": "Create or updated phpWorkloads resource",
+        "operationId": "PhpWorkloads_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "phpWorkloadResource",
+            "description": "Resource create or update request payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Resource created or updated successfully",
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResource"
+            }
+          },
+          "201": {
+            "description": "Created - Resource created or updated started",
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/PhpWorkloads_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PhpWorkloads"
+        ],
+        "description": "Update PHP workload resource.",
+        "operationId": "PhpWorkloads_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "ResourcePatchRequestBody",
+            "description": "Workload resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchResourceRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/phpWorkloadResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/PhpWorkloads_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PhpWorkloads"
+        ],
+        "operationId": "PhpWorkloads_Delete",
+        "description": "Delete phpWorkloads resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          },
+          {
+            "name": "delete-infra",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Whether to delete infra along with workload resource.",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Resource deleted"
+          },
+          "202": {
+            "description": "Accepted - Resource deletion in progress"
+          },
+          "204": {
+            "description": "Resource not found"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/PhpWorkloads_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/phpWorkloads/{phpWorkloadName}/wordpressInstances": {
+      "get": {
+        "tags": [
+          "WordpressInstances"
+        ],
+        "description": "Lists WordpressInstances resources under a phpWorkload resource",
+        "operationId": "WordpressInstances_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/wordpressInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/WordpressInstances_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/phpWorkloads/{phpWorkloadName}/wordpressInstances/default": {
+      "get": {
+        "tags": [
+          "WordpressInstances"
+        ],
+        "description": "Gets a WordpressInstances resource",
+        "operationId": "WordpressInstances_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/wordpressInstanceResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/WordpressInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WordpressInstances"
+        ],
+        "description": "Create or updated WordpressInstances resource",
+        "operationId": "WordpressInstances_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "wordpressInstanceResource",
+            "description": "Resource create or update request payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/wordpressInstanceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Resource created or updated successfully",
+            "schema": {
+              "$ref": "#/definitions/wordpressInstanceResource"
+            }
+          },
+          "201": {
+            "description": "Created - Resource created or updated started",
+            "schema": {
+              "$ref": "#/definitions/wordpressInstanceResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/WordpressInstances_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WordpressInstances"
+        ],
+        "operationId": "WordpressInstances_Delete",
+        "description": "Delete WordpressInstances resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PhpWorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Resource deleted"
+          },
+          "204": {
+            "description": "Resource not found"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/phpworkloads/WordpressInstances_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "phpWorkloadResourceList": {
+      "description": "Php workload resource list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phpWorkloadResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
+        }
+      }
+    },
+    "phpWorkloadResource": {
+      "description": "Php workload resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/phpWorkloadResourceProperties"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Indicates which kind of php workload this resource represent e.g Wordpress",
+          "enum": [
+            "Wordpress"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WorkloadKind"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "description": "Php workloads SKU",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserAssignedServiceIdentity"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedServiceIdentityType": {
+      "description": "Type of managed service identity (only None, UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "UserAssignedServiceIdentity": {
+      "description": "Managed service identity (user assigned identities)",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of manage identity",
+          "$ref": "#/definitions/ManagedServiceIdentityType"
+        },
+        "userAssignedIdentities": {
+          "description": "User assigned identities dictionary",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "phpWorkloadResourceProperties": {
+      "description": "Php workload resource properties",
+      "type": "object",
+      "properties": {
+        "infraResourceGroup": {
+          "description": "Resource group where the infra resources will be created in Azure",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "adminUserProfile": {
+          "description": "User profile used for VMs and VMSS",
+          "$ref": "#/definitions/userProfile"
+        },
+        "webNodesProfile": {
+          "description": "VMSS profile",
+          "$ref": "#/definitions/vmssNodesProfile"
+        },
+        "controllerProfile": {
+          "description": "Controller machine profile",
+          "$ref": "#/definitions/nodeProfile"
+        },
+        "networkProfile": {
+          "description": "Network profile",
+          "$ref": "#/definitions/networkProfile"
+        },
+        "databaseProfile": {
+          "description": "Database profile",
+          "$ref": "#/definitions/databaseProfile"
+        },
+        "siteProfile": {
+          "description": "Site profile",
+          "$ref": "#/definitions/siteProfile"
+        },
+        "fileshareProfile": {
+          "description": "File share profile",
+          "$ref": "#/definitions/fileshareProfile"
+        },
+        "phpProfile": {
+          "description": "PHP profile",
+          "$ref": "#/definitions/phpProfile"
+        },
+        "searchProfile": {
+          "description": "Search profile",
+          "$ref": "#/definitions/searchProfile"
+        },
+        "cacheProfile": {
+          "description": "Cache profile",
+          "$ref": "#/definitions/cacheProfile"
+        },
+        "backupProfile": {
+          "description": "Backup profile",
+          "$ref": "#/definitions/backupProfile"
+        },
+        "provisioningState": {
+          "description": "Php workload resource provisioning state",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Created",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhpWorkloadProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "infraResourceGroup",
+        "adminUserProfile",
+        "webNodesProfile",
+        "controllerProfile",
+        "siteProfile",
+        "databaseProfile"
+      ]
+    },
+    "wordpressInstanceResourceList": {
+      "description": "Wordpress instances resource list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/wordpressInstanceResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
+        }
+      }
+    },
+    "wordpressInstanceResource": {
+      "description": "Wordpress instance resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/wordpressInstanceResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "wordpressInstanceResourceProperties": {
+      "type": "object",
+      "description": "Wordpress instance properties",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Application version",
+          "enum": [
+            "5.4.3",
+            "5.4.2",
+            "5.4.1",
+            "5.4"
+          ],
+          "x-ms-enum": {
+            "name": "WordpressVersions",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name used by the application",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "databaseUser": {
+          "type": "string",
+          "description": "User name used by the application to connect to database",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "siteUrl": {
+          "type": "string",
+          "description": "Site Url to access the Wordpress application",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Application instance provisioning state",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Created",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Installing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ApplicationProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "userProfile": {
+      "type": "object",
+      "description": "User settings to configure on a compute resource such as VM, VMSS",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "User name"
+        },
+        "sshPublicKey": {
+          "type": "string",
+          "description": "SSH public key data"
+        }
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ],
+      "required": [
+        "userName",
+        "sshPublicKey"
+      ]
+    },
+    "vmssNodesProfile": {
+      "type": "object",
+      "description": "VMSS settings",
+      "properties": {
+        "autoScaleMinCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of nodes for autoscale",
+          "minimum": 1
+        },
+        "autoScaleMaxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of nodes for autoscale",
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/nodeProfile"
+        }
+      ]
+    },
+    "nodeProfile": {
+      "type": "object",
+      "description": "Node profile",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "VM/VMSS name"
+        },
+        "nodeSku": {
+          "type": "string",
+          "description": "VM SKU for node(s)"
+        },
+        "osImage": {
+          "description": "OS image used for creating the nodes",
+          "$ref": "#/definitions/osImageProfile",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "osDisk": {
+          "description": "OS disk details",
+          "$ref": "#/definitions/diskInfo"
+        },
+        "dataDisks": {
+          "description": "Data disks details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/diskInfo"
+          }
+        },
+        "nodeResourceIds": {
+          "description": "VM/VMSS resource ARM Ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "nodeSku",
+        "osImage",
+        "osDisk"
+      ]
+    },
+    "diskInfo": {
+      "type": "object",
+      "description": "Disk resource creation details",
+      "properties": {
+        "storageType": {
+          "description": "Storage type",
+          "type": "string",
+          "enum": [
+            "Premium_LRS",
+            "Standard_LRS",
+            "StandardSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "DiskStorageType",
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sizeInGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Disk size in GB"
+        }
+      },
+      "required": [
+        "storageType"
+      ]
+    },
+    "osImageProfile": {
+      "type": "object",
+      "description": "OS image profile",
+      "properties": {
+        "publisher": {
+          "description": "OS image publisher",
+          "type": "string",
+          "enum": [
+            "UbuntuServer"
+          ],
+          "x-ms-enum": {
+            "name": "OSImagePublisher",
+            "modelAsString": true
+          }
+        },
+        "offer": {
+          "description": "OS image offer",
+          "type": "string",
+          "enum": [
+            "Canonical"
+          ],
+          "x-ms-enum": {
+            "name": "OSImageOffer",
+            "modelAsString": true
+          }
+        },
+        "sku": {
+          "description": "OS image sku",
+          "type": "string",
+          "enum": [
+            "18.04-LTS",
+            "16.04-LTS"
+          ],
+          "x-ms-enum": {
+            "name": "OSImageSku",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "OS image version",
+          "type": "string",
+          "enum": [
+            "latest"
+          ],
+          "x-ms-enum": {
+            "name": "OSImageVersion",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "networkProfile": {
+      "type": "object",
+      "description": "Workload network profile",
+      "properties": {
+        "loadBalancerType": {
+          "type": "string",
+          "description": "Load balancer type",
+          "enum": [
+            "ApplicationGateway",
+            "LoadBalancer"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "loadBalancerSku": {
+          "type": "string",
+          "description": "Load balancer SKU"
+        },
+        "loadBalancerTier": {
+          "type": "string",
+          "description": "Load balancer tier"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity, applicable only for Application Gateway."
+        },
+        "azureFrontDoorEnabled": {
+          "type": "string",
+          "description": "Enable Azure front door",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFrontDoorEnabled",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "vNetResourceId": {
+          "description": "Virtual network resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "loadBalancerResourceId": {
+          "description": "Azure Loadbalancer or ApplicationGateway resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureFrontDoorResourceId": {
+          "description": "Azure front door resource id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "frontEndPublicIpResourceId": {
+          "description": "Loadbalancer front ent IP address resource Id to access the application web page",
+          "type": "string",
+          "readOnly": true
+        },
+        "outboundPublicIpResourceIds": {
+          "description": "List of outbound public ip resources",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "loadBalancerType"
+      ]
+    },
+    "databaseProfile": {
+      "type": "object",
+      "description": "Workload database profile",
+      "properties": {
+        "type": {
+          "description": "Database type",
+          "type": "string",
+          "enum": [
+            "MySql"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Database server name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "Database version"
+        },
+        "adminUser": {
+          "type": "string",
+          "description": "Admin user name for the database server resource",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "adminUserPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Admin user password for the database server resource",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sku": {
+          "type": "string",
+          "description": "The name of the server SKU, e.g. Standard_D32s_v4"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of the server SKU",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseTier",
+            "modelAsString": false
+          }
+        },
+        "haEnabled": {
+          "type": "string",
+          "description": "Enable HA or not for the server",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HAEnabled",
+            "modelAsString": true
+          }
+        },
+        "storageSku": {
+          "type": "string",
+          "description": "SKU name for file storage"
+        },
+        "storageInGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Database storage size in GB",
+          "minimum": 1
+        },
+        "storageIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Storage IOPS for a server"
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server"
+        },
+        "sslEnforcementEnabled": {
+          "type": "string",
+          "description": "Whether to enable SSL enforcement on the database",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableSslEnforcement",
+            "modelAsString": true
+          }
+        },
+        "serverResourceId": {
+          "description": "Azure Database Server ARM Id",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "adminUser",
+        "adminUserPassword",
+        "sku",
+        "tier"
+      ]
+    },
+    "siteProfile": {
+      "type": "object",
+      "description": "Workload website profile",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "Domain name for the application site URL",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "domainName"
+      ]
+    },
+    "fileshareProfile": {
+      "type": "object",
+      "description": "File share settings",
+      "properties": {
+        "shareType": {
+          "description": "Share type",
+          "type": "string",
+          "enum": [
+            "NfsOnController",
+            "AzureFiles"
+          ],
+          "x-ms-enum": {
+            "name": "FileShareType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "storageType": {
+          "description": "File share backing storage type",
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Standard_GRS",
+            "Standard_ZRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "FileShareStorageType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "shareSizeInGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Fileshare size in GB",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "storageResourceId": {
+          "type": "string",
+          "description": "Fileshare storage resource id",
+          "readOnly": true
+        },
+        "shareName": {
+          "type": "string",
+          "description": "File share name",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "shareType",
+        "storageType"
+      ]
+    },
+    "phpProfile": {
+      "type": "object",
+      "description": "PHP settings for the Php workload",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "PHP version",
+          "enum": [
+            "7.2",
+            "7.3",
+            "7.4"
+          ],
+          "x-ms-enum": {
+            "name": "PHPVersion",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "searchProfile": {
+      "type": "object",
+      "description": "Search engine settings",
+      "properties": {
+        "searchType": {
+          "description": "Search type",
+          "type": "string",
+          "enum": [
+            "Elastic"
+          ],
+          "x-ms-enum": {
+            "name": "SearchType",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/nodeProfile"
+        }
+      ],
+      "required": [
+        "searchType"
+      ]
+    },
+    "cacheProfile": {
+      "type": "object",
+      "description": "Cache settings",
+      "properties": {
+        "name": {
+          "description": "Cache Name",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "skuName": {
+          "description": "Cache SKU Name",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "family": {
+          "description": "Cache Family",
+          "type": "string",
+          "enum": [
+            "C",
+            "P"
+          ],
+          "x-ms-enum": {
+            "name": "RedisCacheFamily",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cache capacity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "cacheResourceId": {
+          "description": "Cache resource ARM Id",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "skuName",
+        "family",
+        "capacity"
+      ]
+    },
+    "backupProfile": {
+      "type": "object",
+      "description": "Azure Backup settings",
+      "properties": {
+        "backupEnabled": {
+          "type": "string",
+          "description": "Whether to enable Azure backup for the Php workload",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableBackup",
+            "modelAsString": true
+          }
+        },
+        "vaultResourceId": {
+          "description": "Backup vault resource ARM Id",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "backupEnabled"
+      ]
+    },
+    "PatchResourceRequestBody": {
+      "description": "Resource patch request body.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserAssignedServiceIdentity"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "PhpWorkloadNameParameter": {
+      "in": "path",
+      "name": "phpWorkloadName",
+      "description": "Php workload name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}
