@@ -1,0 +1,421 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Chaos",
+    "description": "Azure Chaos Resource Provider REST API",
+    "version": "2021-09-15-preview",
+    "x-ms-code-generation-settings": {
+      "name": "ChaosClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{parentResourcePath}/providers/Microsoft.Chaos/artifactSetDefinitions": {
+      "get": {
+        "description": "Get a list of ArtifactSetDefinition resources that extend a regional resource.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSetDefinitions_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Artifact Set Definition resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSetDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all ArtifactSetDefinitions that extend a Experiment resource.": {
+            "$ref": "./examples/ListArtifactSetDefinitions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{parentResourcePath}/providers/Microsoft.Chaos/artifactSetDefinitions/{artifactSetDefinitionName}": {
+      "get": {
+        "description": "Get an ArtifactSetDefinition resource that extends a regional resource.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSetDefinitions_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSetDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifact Set Definition resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSetDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an ArtifactSetDefinition that extends a Experiment resource.": {
+            "$ref": "./examples/GetAnArtifactSetDefinition.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an Artifact Set Definition resource that extends a regional resource.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSetDefinitions_Delete",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSetDefinitionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifact Set Definition resource deletion was successful."
+          },
+          "204": {
+            "description": "Artifact Set Definition resource deletion was successful."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an ArtifactSetDefinition that extends a Experiment resource.": {
+            "$ref": "./examples/DeleteAnArtifactSetDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update an Artifact Set Definition resource that extends a regional resource.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSetDefinitions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSetDefinitionName"
+          },
+          {
+            "name": "artifactSetDefinition",
+            "description": "Artifact Set Definition resource to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSetDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifact Set Definition resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSetDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update an ArtifactSetDefinition that extends a Experiment resource.": {
+            "$ref": "./examples/CreateOrUpdateAnArtifactSetDefinition.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{parentResourcePath}/providers/Microsoft.Chaos/artifactSetSnapshots": {
+      "get": {
+        "description": "Get a list of ArtifactSetSnapshot resources that extend a regional resource.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSetSnapshots_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Artifact Set Snapshot resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSetSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Artifact Set Snapshots that extend a Experiment Status resource.": {
+            "$ref": "./examples/ListArtifactSetSnapshots.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{parentResourcePath}/providers/Microsoft.Chaos/artifactSetSnapshots/{artifactSetSnapshotName}": {
+      "get": {
+        "description": "Get an ArtifactSetSnapshot resource that extends a regional resource.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSetSnapshots_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSetSnapshotName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifact Set Snapshot resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSetSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Artifact Set Snapshot that extends a experiment status resource.": {
+            "$ref": "./examples/GetAnArtifactSetSnapshot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{parentResourcePath}/providers/Microsoft.Chaos/artifactSetSnapshots/{artifactSetSnapshotName}/artifactSnapshots": {
+      "get": {
+        "description": "Get a list of ArtifactSnapshot resources that are children of a given ArtifactSetSnapshot.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSnapshots_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSetSnapshotName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Artifact Snapshot resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Artifact Snapshots for a given Artifact Set Snapshot resource.": {
+            "$ref": "./examples/ListArtifactSnapshots.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{parentResourcePath}/providers/Microsoft.Chaos/artifactSetSnapshots/{artifactSetSnapshotName}/artifactSnapshots/{artifactSnapshotName}": {
+      "get": {
+        "description": "Get an ArtifactSnapshot resources that is a child of a given ArtifactSetSnapshot.",
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "ArtifactSnapshots_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourcePath"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSetSnapshotName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/artifactSnapshotName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifact Snapshot resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/artifacts.json#/definitions/artifactSnapshot"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an ArtifactSnapshot that is a child of a given ArtifactSetSnapshot resource.": {
+            "$ref": "./examples/GetAnArtifactSnapshot.json"
+          }
+        }
+      }
+    }
+  }
+}
