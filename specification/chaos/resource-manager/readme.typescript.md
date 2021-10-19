@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-chaos"
   output-folder: "$(typescript-sdks-folder)/sdk/chaos/arm-chaos"
+  payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
 ```

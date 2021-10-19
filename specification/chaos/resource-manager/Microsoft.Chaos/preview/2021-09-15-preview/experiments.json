@@ -3,10 +3,7 @@
   "info": {
     "title": "Microsoft Azure Chaos",
     "description": "Azure Chaos Resource Provider REST API",
-    "version": "2021-09-15-preview",
-    "x-ms-code-generation-settings": {
-      "name": "ChaosClient"
-    }
+    "version": "2021-09-15-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -217,6 +214,10 @@
           "Experiments"
         ],
         "operationId": "Experiments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -268,6 +269,10 @@
           "Experiments"
         ],
         "operationId": "Experiments_Cancel",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
