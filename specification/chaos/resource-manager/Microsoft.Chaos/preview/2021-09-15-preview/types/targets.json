@@ -16,14 +16,17 @@
       ],
       "properties": {
         "systemData": {
+          "description": "The system metadata of the target resource.",
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
         "location": {
           "type": "string",
-          "description": "Location of the Target Type resource."
+          "description": "Location of the target resource."
         },
         "properties": {
+          "description": "The properties of the target resource.",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/targetProperties"
         }
       },

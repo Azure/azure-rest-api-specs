@@ -7,7 +7,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 1
   clear-output-folder: true
+  client-side-validation: false
   namespace: Microsoft.Chaos
   output-folder: $(csharp-sdks-folder)/chaos/management/Microsoft.Chaos/GeneratedProtocol
 ```
