@@ -7063,6 +7063,11 @@
         "disableLocalAuth": {
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
           "type": "boolean"
+        },
+        "capacity": {
+          "description": "The object that represents all properties related to capacity enforcement on an account.",
+          "type": "object",
+          "$ref": "#/definitions/Capacity"
         }
       }
     },
@@ -7199,6 +7204,11 @@
           "description": "Parameters to indicate the information about the restore.",
           "type": "object",
           "$ref": "#/definitions/RestoreParameters"
+        },
+        "capacity": {
+          "description": "The object that represents all properties related to capacity enforcement on an account.",
+          "type": "object",
+          "$ref": "#/definitions/Capacity"
         }
       },
       "required": [
@@ -7360,6 +7370,11 @@
         "disableLocalAuth": {
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
           "type": "boolean"
+        },
+        "capacity": {
+          "description": "The object that represents all properties related to capacity enforcement on an account.",
+          "type": "object",
+          "$ref": "#/definitions/Capacity"
         }
       }
     },
@@ -8856,6 +8871,18 @@
         "name": {
           "type": "string",
           "description": "Name of the Cosmos DB capability. For example, \"name\": \"EnableCassandra\". Current values also include \"EnableTable\" and \"EnableGremlin\"."
+        }
+      }
+    },
+    "Capacity": {
+      "type": "object",
+      "description": "The object that represents all properties related to capacity enforcement on an account.",
+      "properties": {
+        "totalThroughputLimit": {
+          "type": "integer",
+          "minimum": -1,
+          "format": "int32",
+          "description": "The total throughput limit imposed on the account. A totalThroughputLimit of 2000 imposes a strict limit of max throughput that can be provisioned on that account to be 2000. A totalThroughputLimit of -1 indicates no limits on provisioning of throughput."
         }
       }
     },
