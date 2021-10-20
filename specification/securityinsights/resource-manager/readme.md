@@ -53,6 +53,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/ThreatIntelligence.json
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/operations.json
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/OfficeConsents.json
+- Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueryTemplates.json
 ```
 
 ---
