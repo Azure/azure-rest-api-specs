@@ -1094,6 +1094,13 @@
             "$ref": "#/definitions/Subnet"
           },
           "description": "Auxiliary subnets for the cluster."
+        },
+        "serviceEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpoint"
+          },
+          "description": "Service endpoints for subnets in the cluster."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1178,6 +1185,26 @@
       "enum": [
         "Windows"
       ]
+    },
+    "ServiceEndpoint": {
+      "type": "object",
+      "required": [
+        "service"
+      ],
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The type of the endpoint service."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of locations."
+        }
+      },
+      "description": "The service endpoint properties."
     },
     "Sku": {
       "type": "object",
