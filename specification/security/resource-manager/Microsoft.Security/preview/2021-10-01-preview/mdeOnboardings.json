@@ -127,12 +127,15 @@
     "MdeOnboardingDataProperties": {
       "type": "object",
       "properties": {
-        "onboardingData": {
-          "type": "array",
-          "description": "The MDE onboarding data.",
-          "items": {
-            "$ref": "#/definitions/MdeOnboardingDataParameter"
-          }
+        "onboardingPackageWindows": {
+          "format": "byte",
+          "type": "string",
+          "description": "The onboarding package used to onboard Windows machines to MDE, coded in base64. This can also be used for onboarding using the dedicated VM Extension"
+        },
+        "onboardingPackageLinux": {
+          "format": "byte",
+          "type": "string",
+          "description": "The onboarding package used to onboard Linux machines to MDE, coded in base64. This can also be used for onboarding using the dedicated VM Extension"
         }
       },
       "description": "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE"
