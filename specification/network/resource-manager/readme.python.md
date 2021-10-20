@@ -19,6 +19,7 @@ clear-output-folder: true
 batch:
   - tag: package-2021-03
   - tag: package-2021-02
+  - tag: package-2021-02-preview-only
   - tag: package-2020-11
   - tag: package-2020-08
   - tag: package-2020-07
@@ -53,6 +54,7 @@ batch:
   - tag: package-2016-09
   - tag: package-2015-06split
   - multiapiscript: true
+
 ```
 
 ``` yaml $(multiapiscript)
@@ -60,6 +62,17 @@ output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/netwo
 clear-output-folder: false
 perform-load: false
 ```
+
+### Tag: package-2021-02-preview-only and python
+
+These settings apply only when `--tag=package-2021-02-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-02-preview-only'
+namespace: azure.mgmt.network.v2021_02_01_preview
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2021_02_01_preview
+```
+
 ### Tag: package-2021-03 and python
 
 These settings apply only when `--tag=package-2021-03 --python` is specified on the command line.
