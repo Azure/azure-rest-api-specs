@@ -418,49 +418,22 @@
   },
   "definitions": {
     "WorkbookResource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "identity": {
           "description": "Identity used for BYOS",
-          "$ref": "#/definitions/WorkbookManagedIdentity"
-        },
-        "id": {
-          "type": "string",
-          "description": "Azure resource Id",
-          "x-ms-mutability": [
-            "create",
-            "read"
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+            }
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "type": {
-          "type": "string",
-          "description": "Azure resource type",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         },
         "kind": {
           "type": "string",
@@ -481,10 +454,7 @@
           "type": "string",
           "description": "Resource etag"
         }
-      },
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "description": "An azure resource object"
+      }
     },
     "WorkbooksListResult": {
       "type": "object",
@@ -543,10 +513,11 @@
         },
         "version": {
           "type": "string",
-          "description": "Workbook version"
+          "description": "Workbook schema version format, like 'Notebook/1.0', which should match the workbook in serializedData"
         },
         "timeModified": {
           "type": "string",
+          "format": "date-time",
           "description": "Date and time in UTC of the last modification that was made to this workbook definition.",
           "readOnly": true
         },
@@ -559,7 +530,7 @@
           "items": {
             "type": "string"
           },
-          "description": "A list of 0 or more tags that are associated with this workbook definition"
+          "description": "Being deprecated, please use the other tags field"
         },
         "userId": {
           "type": "string",
@@ -573,7 +544,7 @@
         "storageUri": {
           "type": "string",
           "x-nullable": true,
-          "description": "BYOS Storage Account URI"
+          "description": "The resourceId to the storage account when bring your own storage is used"
         },
         "description": {
           "type": "string",
@@ -583,7 +554,8 @@
         "revision": {
           "type": "string",
           "x-nullable": true,
-          "description": "The unique revision id for this workbook definition"
+          "description": "The unique revision id for this workbook definition",
+          "readOnly": true
         }
       }
     },
@@ -591,7 +563,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
+          "description": "The kind of workbook. Choices are user and shared. However, user is being deprecated",
           "enum": [
             "user",
             "shared"
@@ -696,47 +668,6 @@
             "type": "string"
           },
           "readOnly": true
-        }
-      }
-    },
-    "WorkbookManagedIdentity": {
-      "description": "Customer Managed Identity",
-      "type": "object",
-      "properties": {
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/WorkbookUserAssignedIdentities"
-          }
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "UserAssigned",
-            "None"
-          ]
-        }
-      }
-    },
-    "WorkbookUserAssignedIdentities": {
-      "description": "Customer Managed Identity",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client ID of resource."
         }
       }
     }
