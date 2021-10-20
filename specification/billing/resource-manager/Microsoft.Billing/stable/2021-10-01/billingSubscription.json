@@ -3,7 +3,7 @@
   "info": {
     "version": "2021-10-01",
     "title": "BillingManagementClient",
-    "description": "Billing client provides access to billing resources and logs for Azure subscriptions."
+    "description": "The billing client allows you to view and manage your billing details programmatically."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -227,7 +227,7 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/move": {
       "post": {
-        "description": "Moves a subscription's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Moves a subscription's charges to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -716,8 +716,7 @@
         "billingProfileSpendingLimitDetails": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingProfileSpendingLimitDetails",
-          "title": "The details of the spending limit that is set on the billing profile to which the subscription is billed.",
-          "readOnly": true
+          "title": "The details of the spending limit that is set on the billing profile to which the subscription is billed."
         },
         "consumptionCostCenter": {
           "description": "The cost center applied to the subscription. This field is only available for consumption subscriptions of Microsoft Customer Agreement Type billing accounts.",
@@ -749,8 +748,7 @@
         "enrollmentAccountSubscriptionDetails": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/EnrollmentAccountSubscriptionDetails",
-          "title": "Enrollment Account Subscription details. This field is available only for the Enterprise Agreement Type billing accounts.",
-          "readOnly": true
+          "title": "Enrollment Account Subscription details. This field is available only for the Enterprise Agreement Type billing accounts."
         },
         "invoiceSectionId": {
           "description": "The ID of the invoice section to which the subscription is billed. The field is applicable only for Microsoft Partner Agreement billing accounts.",
@@ -768,17 +766,14 @@
         },
         "lastMonthCharges": {
           "description": "The last month charges. This field is only available for consumption subscriptions of Microsoft Customer Agreement billing accounts.",
-          "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "monthToDateCharges": {
           "description": "The current month to date charges. This field is only available for consumption subscriptions of Microsoft Customer Agreement billing accounts.",
-          "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "nextBillingCycleDetails": {
           "description": "Next billing cycle details of the subscription.",
-          "type": "object",
           "$ref": "#/definitions/NextBillingCycleDetails"
         },
         "offerId": {
@@ -813,12 +808,10 @@
         },
         "reseller": {
           "description": "Reseller for this subscription. The fields is not available for Microsoft Partner Agreement billing accounts.",
-          "readOnly": true,
           "$ref": "#/definitions/Reseller"
         },
         "renewalTermDetails": {
           "description": "Renewal term details of the product.",
-          "type": "object",
           "$ref": "#/definitions/RenewalTermDetails"
         },
         "skuDescription": {
