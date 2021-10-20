@@ -282,6 +282,10 @@
                     "description": "Batch Query object",
                     "type": "object",
                     "properties": {
+                      "optionalId": {
+                        "description": "id of the request which would show in corresponding batchItem",
+                        "type": "string"
+                      },
                       "top": {
                         "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
                         "type": "integer",
@@ -293,14 +297,14 @@
                         "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.",
                         "type": "string"
                       },
-                      "CountryRegionSet": {
+                      "countryRegionSet": {
                         "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.",
                         "type": "array",
                         "items": {
                           "type": "string"
                         }
                       },
-                      "Bbox": {
+                      "bbox": {
                         "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
                         "type": "array",
                         "items": {
@@ -310,11 +314,11 @@
                         "minItems": 4,
                         "maxItems": 4
                       },
-                      "View": {
+                      "view": {
                         "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
                         "type": "string"
                       },
-                      "Location": {
+                      "location": {
                         "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
                         "type": "array",
                         "items": {
@@ -486,6 +490,10 @@
           "items": {
             "type": "object",
             "properties": {
+              "optionalId": {
+                "description": "id of the batchItem which would be the same as the id in the request",
+                "type": "string"
+              },
               "type": {
                 "$ref": "#/definitions/FeatureType"
               },
