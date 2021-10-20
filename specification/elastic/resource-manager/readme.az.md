@@ -21,6 +21,31 @@ cli:
         op: create
         param: name
       name: sku
+directive:
+  - where:
+      command: elastic monitored-resource list
+    set:
+      command: elastic monitor list-resource
+  - where:
+      command: elastic deployment-info list
+    set:
+      command: elastic monitor list-deployment-info
+  - where:
+      group: elastic tag-rule
+    set:
+      group: elastic monitor tag-rule
+  - where:
+      command: elastic vm-host list
+    set:
+      command: elastic monitor list-vm-host
+  - where:
+      command: elastic vm-ingestion detail
+    set:
+      command: elastic monitor list-vm-ingestion-detail
+  - where:
+      command: elastic vm-collection update
+    set:
+      command: elastic monitor update-vm-collection
 ```
 
 
