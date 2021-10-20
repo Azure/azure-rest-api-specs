@@ -41,7 +41,7 @@ These settings apply only when `--tag=1.0-preview` is specified on the command l
 
 ``` yaml $(tag) == '1.0-preview'
 input-file:
-  - preview/2021-09-01-preview/geocoding.json
+  - preview/2021-11-01-preview/geocoding.json
 ```
 
 
