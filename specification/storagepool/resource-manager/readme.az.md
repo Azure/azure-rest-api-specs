@@ -16,6 +16,37 @@ python-sdk-output-folder: "$(az-output-folder)/azext_diskpool/vendored_sdks/stor
 ## Az.DiskPool
 
 ``` yaml
+directive:
+  - where:
+      command: diskpool disk-pool-zone list
+    set:
+      command: disk-pool disk-pool-zone list
+  - where:
+      command: disk-pool disk-pool-zone list
+    set:
+      command: disk-pool disk-pool-zone-list
+  - where:
+      command: disk-pool disk-pool-zone-list
+    set:
+      command: disk-pool list-zones
+  - where:
+      command: diskpool resource-sku list
+    set:
+      command: disk-pool resource-sku list
+  - where:
+      command: disk-pool resource-sku list
+    set:
+      command: disk-pool resource-sku-list
+  - where:
+      command: disk-pool resource-sku-list
+    set:
+      command: disk-pool list-skus
+  - where:
+      command: disk-pool resource-sku-list
+    set:
+      command: disk-pool list-skus
+
+
 cli:
   cli-directive:
       - where:
@@ -30,5 +61,12 @@ cli:
         alias:
           - additional_capabilities
           - a
+      - where:
+          group: diskPool
+        name: disk_pool
+      - where:
+          group: 'DiskPools'
+          op: 'Upgrade'
+        name: 'redeploy'
 
 ```
