@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "continuationToken": null,
+    "api-version": "2021-09-15-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment",
+            "type": "Microsoft.Chaos/experiments",
+            "name": "exampleExperiment",
+            "location": "centraluseuap",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+              "tenantId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+            },
+            "properties": {
+              "steps": [
+                {
+                  "name": "step1",
+                  "branches": [
+                    {
+                      "name": "branch1",
+                      "actions": [
+                        {
+                          "type": "Continuous",
+                          "name": "urn:csci:provider:providername:Shutdown/1.0",
+                          "selectorId": "selector1",
+                          "duration": "PT10M",
+                          "parameters": {
+                            "restartWhenComplete": true
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "selectors": [
+                {
+                  "type": "List",
+                  "id": "selector1",
+                  "targets": [
+                    {
+                      "type": "ResourceId",
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-VirtualMachine"
+                    }
+                  ]
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-07-01T00:00:00.0Z",
+              "createdBy": "User",
+              "createdByType": "b3a41dba-4415-4d36-9ee8-e5eaa86db976",
+              "lastModifiedAt": "2021-07-01T00:00:00.0Z",
+              "lastModifiedBy": "User",
+              "lastModifiedByType": "b3a41dba-4415-4d36-9ee8-e5eaa86db976"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments?continuationToken=&api-version=2021-09-15-preview"
+      }
+    }
+  }
+}
