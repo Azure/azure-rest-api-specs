@@ -23,7 +23,7 @@ To see additional help and options, run:
 ### Basic Information
 
 These are the global settings for MapsClient.
-mobility
+
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
