@@ -727,22 +727,65 @@
     },
     "xTileIndex": {
       "name": "x",
-      "x-ms-client-name": "xTileIndex",
       "in": "query",
       "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
     },
     "yTileIndex": {
       "name": "y",
-      "x-ms-client-name": "yTileIndex",
       "in": "query",
       "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
+    },
+    "zTileIndex": {
+      "name": "zoom",
+      "x-ms-client-name": "z",
+      "in": "query",
+      "description": "Zoom level for the desired tile. \n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "tileIndex"
+      }
+    },
+    "IncludeText": {
+      "name": "text",
+      "x-ms-client-name": "includeText",
+      "in": "query",
+      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "x-ms-enum": {
+        "name": "IncludeText",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "yes",
+            "description": "Include all textual data in response."
+          },
+          {
+            "value": "no",
+            "description": "Exclude textual data from response. Only images and country names will be in response."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   },
