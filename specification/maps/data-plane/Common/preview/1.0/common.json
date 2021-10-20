@@ -66,22 +66,29 @@
     },
     "BatchRequestBody": {
       "description": "This type represents the request body for the Batch service.",
+      "x-ms-client-name": "BatchRequest",
       "type": "object",
       "properties": {
         "batchItems": {
-          "description": "The list of queries to process.",
-          "type": "array",
-          "items": {
-            "description": "Batch Query object",
-            "type": "object",
-            "properties": {
-              "query": {
-                "description": "Partial query string.",
-                "type": "string",
-                "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
-              }
-            }
-          }
+          "$ref": "#/definitions/BatchQueries"
+        }
+      }
+    },
+    "BatchQueries": {
+      "description": "The list of queries to process.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BatchQuery"
+      }
+    },
+    "BatchQuery": {
+      "description": "Batch Query object",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "A query string for the corresponding batch API endpoint. It is the exact query string you would use for a single (non-batch) API request.",
+          "type": "string",
+          "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
         }
       }
     },
