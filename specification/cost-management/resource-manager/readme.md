@@ -26,19 +26,41 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2021-10
 azure-validator: false
 ```
 
 ---
 
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+```
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.CostManagement/stable/2021-01-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-01-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+```
+
 ### Tag: package-preview-2020-12
 
 These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-12'
+``` yaml $(tag) == 'package-preview-2020-12'
 input-file:
-  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.exports.json
   - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.generatedetailedcostreport.json
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
 ```
@@ -47,7 +69,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-03'
+``` yaml $(tag) == 'package-preview-2020-03'
 input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
   - Microsoft.CostManagement/preview/2020-03-01-preview/costallocation.json
@@ -57,12 +79,11 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.exports.json
 ```
-
 
 ### Tag: package-2019-11
 
@@ -132,6 +153,44 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: R4011
+    from: costmanagement.exports.json
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
+  - suppress: R3023
+    from: costmanagement.generatedetailedcostreport.json    
+    reason: 'API change needed, Operations API must be implemented for operations'
+  - suppress: R4018
+    from: costmanagement.json    
+    reason: 'API change needed, Response schema of OperatioAPI does not match Arm Schema'
+  - suppress: R4037
+    from: costmanagement.generatedetailedcostreport.json
+    reason: 'This needs api change - MissingTypeObject' 
+  - suppress: R4009
+    from: costmanagement.exports.json
+    reason: API change needed, we do not yet support systemdata
+  - suppress: R4009
+    from: costmanagement.json
+    reason: API change needed, we do not yet support systemdata
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.exports.json
+    where: $.definitions.CommonExportProperties.properties.partitionData
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.filterEnabled
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.DimensionProperties.properties.groupingEnabled
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeFreshPartialCost
+    reason: 'API change needed'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ForecastDefinition.properties.includeActualCost
+    reason: 'API change needed'    
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
@@ -218,7 +277,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -226,8 +284,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_costmanagement']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js cost-management/resource-manager
 ```
 
 ## C#
@@ -247,6 +303,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -350,8 +410,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

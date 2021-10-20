@@ -1752,7 +1752,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource identifer."
+          "description": "The resource identifier."
         },
         "name": {
           "readOnly": true,
@@ -1854,6 +1854,13 @@
           },
           "description": "The list of Data Lake Store accounts associated with this account."
         },
+        "publicDataLakeStoreAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccountInformation"
+          },
+          "description": "The list of Data Lake Store accounts associated with this account."
+        },
         "storageAccounts": {
           "readOnly": true,
           "type": "array",
@@ -1895,7 +1902,6 @@
           "description": "The list of firewall rules associated with this account."
         },
         "firewallState": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Enabled",
@@ -1908,7 +1914,6 @@
           "description": "The current state of the IP address firewall for this account."
         },
         "firewallAllowAzureIps": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Enabled",
@@ -1921,7 +1926,6 @@
           "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
         },
         "newTier": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Consumption",
@@ -1967,6 +1971,24 @@
           "default": 3,
           "description": "The maximum supported jobs running under the account at the same time."
         },
+        "maxActiveJobCountPerUser": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported active jobs under the account at the same time."
+        },
+        "maxQueuedJobCountPerUser": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported jobs queued under the account at the same time."
+        },
+        "maxJobRunningTimeInMin": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported active jobs under the account at the same time."
+        },
         "systemMaxJobCount": {
           "readOnly": true,
           "type": "integer",
@@ -1987,7 +2009,6 @@
           "description": "The system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account."
         },
         "maxDegreeOfParallelismPerJob": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -2114,7 +2135,6 @@
       ],
       "properties": {
         "properties": {
-          "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataLakeStoreAccountInformationProperties",
           "description": "The Data Lake Store account properties."
@@ -2629,6 +2649,10 @@
           "type": "string",
           "description": "The name for OperationMetaMetricSpecification."
         },
+        "displayDescription": {
+          "type": "string",
+          "description": "The displayName for OperationMetaMetricSpecification."
+        },
         "displayName": {
           "type": "string",
           "description": "The displayName for OperationMetaMetricSpecification."
@@ -2825,6 +2849,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "x-ms-enum": {
             "name": "FirewallState",
             "modelAsString": false
@@ -2837,6 +2862,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "x-ms-enum": {
             "name": "FirewallAllowAzureIpsState",
             "modelAsString": false
@@ -2856,6 +2882,7 @@
             "Commitment_100000AUHours",
             "Commitment_500000AUHours"
           ],
+          "default": "Consumption",
           "x-ms-enum": {
             "name": "TierType",
             "modelAsString": false
@@ -2880,6 +2907,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 1,
+          "default": 32,
           "description": "The maximum supported degree of parallelism per job for this account."
         },
         "minPriorityPerJob": {
@@ -3126,6 +3154,7 @@
         },
         "suffix": {
           "type": "string",
+          "default": "azuredatalakestore.net",
           "description": "The optional suffix for the storage account."
         }
       },

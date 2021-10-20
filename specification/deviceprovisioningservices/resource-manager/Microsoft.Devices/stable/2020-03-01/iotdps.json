@@ -1657,6 +1657,10 @@
         "certificate": {
           "description": "Base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
           "type": "string"
+        },
+        "isVerified": {
+          "description": "True indicates that the certificate will be created in verified state and proof of possession will not be required.",
+          "type": "boolean"
         }
       }
     },
@@ -1714,6 +1718,12 @@
         "isVerified": {
           "description": "Determines whether certificate has been verified.",
           "type": "boolean",
+          "readOnly": true
+        },
+        "certificate": {
+          "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
+          "type": "string",
+          "format": "byte",
           "readOnly": true
         },
         "created": {
@@ -2439,6 +2449,11 @@
             "isVerified": {
               "type": "boolean",
               "description": "Indicate if the certificate is verified by owner of private key."
+            },
+            "certificate": {
+              "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
+              "type": "string",
+              "format": "byte"
             },
             "created": {
               "type": "string",

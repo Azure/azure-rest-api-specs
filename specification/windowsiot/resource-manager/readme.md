@@ -57,6 +57,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -67,8 +68,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_windowsiot']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js windowsiot/resource-manager
 ```
 
 ## C#
@@ -108,21 +107,19 @@ See configuration in [readme.java.md](./readme.java.md)
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: windowsiot
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION
     payload_flattening_threshold: 2
     namespace: windowsiot
     package-name: windowsiot
-    clear_output_folder: false
+    clear-output-folder: false
 ```

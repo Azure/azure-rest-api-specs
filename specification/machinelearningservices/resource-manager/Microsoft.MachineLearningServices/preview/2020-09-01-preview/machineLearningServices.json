@@ -2557,11 +2557,6 @@
           "type": "string",
           "description": "Specifies the resource ID."
         },
-        "amlWorkspaceLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Region of the AML workspace in the id."
-        },
         "type": {
           "readOnly": true,
           "type": "string",
@@ -2825,6 +2820,10 @@
             "name": "QuotaUnit",
             "modelAsString": true
           }
+        },
+        "location": {
+          "description": "Region of the AML workspace in the id.",
+          "type": "string"
         }
       },
       "description": "The properties for Quota update or retrieval."
@@ -2837,10 +2836,6 @@
           "items": {
             "$ref": "#/definitions/QuotaBaseProperties"
           }
-        },
-        "location": {
-          "description": "Region of workspace quota to be updated.",
-          "type": "string"
         }
       },
       "description": "Quota update parameters."
@@ -2938,7 +2933,7 @@
           "type": "string",
           "description": "Specifies the resource ID."
         },
-        "amlWorkspaceLocation": {
+        "location": {
           "readOnly": true,
           "type": "string",
           "description": "Region of the AML workspace in the id."

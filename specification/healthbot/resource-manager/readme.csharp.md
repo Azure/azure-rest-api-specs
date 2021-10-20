@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.Healthbot
-  output-folder: $(csharp-sdks-folder)/healthbot/management/Microsoft.Azure.Management.Healthbot/src/Generated
+  output-folder: $(csharp-sdks-folder)/healthbot/Microsoft.Azure.Management.Healthbot/src/Generated
 ```

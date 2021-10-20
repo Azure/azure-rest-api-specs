@@ -12,7 +12,7 @@
     "parameters": [
       {
         "name": "vaultBaseUrl",
-        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "description": "The vault name, for example https://myhsmvault.managedhsm.azure.net.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -95,12 +95,6 @@
                 "description": "The URI to poll for completion status.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "The response contains the confirmed Security Domain.",
-            "schema": {
-              "$ref": "#/definitions/SecurityDomainObject"
             }
           },
           "default": {
@@ -239,7 +233,7 @@
         "certificates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityDomainCertificateItem"
+            "$ref": "#/definitions/SecurityDomainJsonWebKey"
           },
           "minItems": 3,
           "maxItems": 10,
@@ -256,17 +250,6 @@
       },
       "required": [
         "certificates"
-      ]
-    },
-    "SecurityDomainCertificateItem": {
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/SecurityDomainJsonWebKey",
-          "description": "Customer generated certificate containing public key in JWK format"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TransferKey": {
