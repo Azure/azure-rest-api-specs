@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2021-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-- Azure.Analytics.Purview.Scanning/preview/package-2021-10-01-preview/scanningService.json
+- Azure.Analytics.Purview.Scanning/preview/2021-10-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
