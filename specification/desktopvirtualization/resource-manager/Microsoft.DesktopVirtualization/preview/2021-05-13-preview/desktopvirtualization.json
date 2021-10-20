@@ -4362,37 +4362,9 @@
           "type": "string",
           "description": "The id of the size of a virtual machine connected to a hostpool."
         },
-        "diskType": {
-          "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Premium_LRS",
-            "StandardSSD_LRS",
-            "UltraSSD_LRS"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachineDiskType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard_LRS",
-                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
-              },
-              {
-                "value": "Premium_LRS",
-                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
-              },
-              {
-                "value": "StandardSSD_LRS",
-                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
-              },
-              {
-                "value": "UltraSSD_LRS",
-                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
-              }
-            ]
-          },
-          "description": "The disk type used by virtual machine in hostpool session host."
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoProperties",
+          "description": "Disk information."
         },
         "customConfigurationTemplateUrl": {
           "type": "string",
@@ -4410,10 +4382,46 @@
           "$ref": "#/definitions/DomainInfoProperties",
           "description": "Domain configurations of session hosts."
         },
-        "localAdminCredential": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
-          "description": "Local Admin credential for session hosts."
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Local Admin credentials for session hosts."
         }
+      }
+    },
+    "DiskInfoProperties": {
+      "description": "Disk information.",
+      "type": "object",
+      "properties": {
+        "type": "string",
+        "enum": [
+          "Standard_LRS",
+          "Premium_LRS",
+          "StandardSSD_LRS",
+          "UltraSSD_LRS"
+        ],
+        "x-ms-enum": {
+          "name": "VirtualMachineDiskType",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Standard_LRS",
+              "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+            },
+            {
+              "value": "Premium_LRS",
+              "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+            },
+            {
+              "value": "StandardSSD_LRS",
+              "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+            },
+            {
+              "value": "UltraSSD_LRS",
+              "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
+            }
+          ]
+        },
+        "description": "The disk type used by virtual machine in hostpool session host."
       }
     },
     "ImageInfoProperties": {
@@ -4422,25 +4430,20 @@
       "properties": {
         "type": {
           "enum": [
-            "Gallery",
-            "CustomVHD",
-            "CustomImage"
+            "Marketplace",
+            "CustomVHD"
           ],
           "x-ms-enum": {
             "name": "ImageType",
             "modelAsString": true,
             "values": [
               {
-                "value": "Gallery",
-                "description": "Using default gallery images offered by Azure Marketplace."
+                "value": "Marketplace",
+                "description": "Using default marketplace images offered by Azure Marketplace."
               },
               {
                 "value": "CustomVHD",
                 "description": "Using a VHD stored in a storage blob."
-              },
-              {
-                "value": "CustomImage",
-                "description": "Using custom image or custom shared image."
               }
             ]
           },
@@ -4450,20 +4453,16 @@
         },
         "marketPlaceInfo": {
           "$ref": "#/definitions/MarketPlaceInfoProperties",
-          "description": "The values to uniquely identify a gallery image."
+          "description": "The values to uniquely identify a marketplace image."
         },
-        "managedImageUri": {
-          "type": "string",
-          "description": "The uri to the storage blob which contains the VHD. Image type must be CustomVHD."
-        },
-        "customId": {
-          "type": "string",
-          "description": "The resource id of the custom image or shared image. Image type must be CustomImage."
+        "customInfo": {
+          "$ref": "#/definitions/CustomInfoProperties",
+          "description": "The values to uniquely identify a custom image."
         }
       }
     },
     "MarketPlaceInfoProperties": {
-      "description": "Image configurations of HostPool.",
+      "description": "Marketplace image information.",
       "type": "object",
       "properties": {
         "offer": {
@@ -4484,14 +4483,20 @@
         }
       }
     },
+    "CustomInfoProperties": {
+      "description": "Custom image information.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the custom image."
+        }
+      }
+    },
     "DomainInfoProperties": {
       "description": "Domain configurations of session hosts.",
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The domain a virtual machine connected to a hostpool will join."
-        },
         "joinType": {
           "enum": [
             "ActiveDirectory",
@@ -4515,17 +4520,45 @@
           "description": "The type of domain join done by the virtual machine.",
           "x-nullable": false
         },
-        "mdmProviderGuid": {
-          "type": "string",
-          "description": "The MDM Provider GUID used during MDM enrollment for Azure AD joined virtual machines."
+        "activeDirectoryInfo": {
+          "$ref": "#/definitions/ActiveDirectoryInfoProperties",
+          "description": "Active directory info. Only one should be populated based on the join type."
         },
-        "credential": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
-          "description": "Credential needed to create the virtual machine."
+        "azureActiveDirectoryInfo": {
+          "$ref": "#/definitions/AzureActiveDirectoryInfoProperties",
+          "description": "Azure active directory info. Only one should be populated based on the join type."
         }
       }
     },
-    "KeyVaultCredentialProperties": {
+    "ActiveDirectoryInfoProperties": {
+      "description": "Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Credentials needed to create the virtual machine."
+        },
+        "ouPath": {
+          "type": "string",
+          "description": "The ou path."
+        },
+        "name": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        }
+      }
+    },
+    "AzureActiveDirectoryInfoProperties": {
+      "description": "Azure Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "properties": {
+        "mdmProviderGuid": {
+          "type": "string",
+          "description": "The mdm guid."
+        }
+      }
+    },
+    "KeyVaultCredentialsProperties": {
       "description": "Credentials kept in the keyvault.",
       "type": "object",
       "properties": {
@@ -6041,25 +6074,20 @@
         },
         "imageType": {
           "enum": [
-            "Gallery",
-            "CustomVHD",
-            "CustomImage"
+            "Marketplace",
+            "CustomVHD"
           ],
           "x-ms-enum": {
             "name": "ImageType",
             "modelAsString": true,
             "values": [
               {
-                "value": "Gallery",
-                "description": "Using default gallery images offered by azure market place."
+                "value": "Marketplace",
+                "description": "Using default marketplace images offered by azure market place."
               },
               {
                 "value": "CustomVHD",
                 "description": "Using a VHD stored in a storage blob."
-              },
-              {
-                "value": "CustomImage",
-                "description": "Using custom image or custom shared image."
               }
             ]
           },
