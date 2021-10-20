@@ -1627,31 +1627,6 @@ input-file:
 - Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
 ```
 
-### Tag: package-2017-08
-
-These settings apply only when `--tag=package-2017-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-08'
-input-file:
-- Microsoft.Network/stable/2017-08-01/applicationGateway.json
-- Microsoft.Network/stable/2017-08-01/checkDnsAvailability.json
-- Microsoft.Network/stable/2017-08-01/endpointService.json
-- Microsoft.Network/stable/2017-08-01/expressRouteCircuit.json
-- Microsoft.Network/stable/2017-08-01/loadBalancer.json
-- Microsoft.Network/stable/2017-08-01/network.json
-- Microsoft.Network/stable/2017-08-01/networkInterface.json
-- Microsoft.Network/stable/2017-08-01/networkSecurityGroup.json
-- Microsoft.Network/stable/2017-08-01/networkWatcher.json
-- Microsoft.Network/stable/2017-08-01/publicIpAddress.json
-- Microsoft.Network/stable/2017-08-01/routeFilter.json
-- Microsoft.Network/stable/2017-08-01/routeTable.json
-- Microsoft.Network/stable/2017-08-01/serviceCommunity.json
-- Microsoft.Network/stable/2017-08-01/usage.json
-- Microsoft.Network/stable/2017-08-01/virtualNetwork.json
-- Microsoft.Network/stable/2017-08-01/virtualNetworkGateway.json
-- Microsoft.Network/stable/2017-08-01/vmssNetworkInterface.json
-- Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
-```
 
 ### Tag: package-2017-06
 
