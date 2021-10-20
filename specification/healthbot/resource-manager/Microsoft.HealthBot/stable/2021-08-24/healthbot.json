@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-10",
+    "version": "2021-08-24",
     "title": "Azure Health Bot",
     "description": "Azure Health Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
     "x-ms-code-generation-settings": {
@@ -395,6 +395,36 @@
       "type": "object",
       "description": "The details of the user assigned managed identity used by the Video Analyzer resource."
     },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Properties of the key vault.",
+      "required": [
+        "keyName",
+        "keyVaultUri"
+      ],
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key vault key.",
+          "x-ms-client-name": "KeyName"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key vault key.",
+          "x-ms-client-name": "KeyVersion"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of the key vault.",
+          "x-ms-client-name": "KeyVaultUri"
+        },
+        "userIdentity": {
+          "type": "string",
+          "description": "The user assigned identity (ARM resource id) that has access to the key.",
+          "x-ms-client-name": "UserIdentity"
+        }
+      }
+    },
     "Sku": {
       "type": "object",
       "description": "The resource model definition representing SKU",
@@ -518,6 +548,10 @@
           "type": "string",
           "description": "The link.",
           "readOnly": true
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "KeyVault properties for the resource encryption."
         }
       }
     },
@@ -525,6 +559,10 @@
       "type": "object",
       "description": "Parameters for updating a Azure Health Bot.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/HealthBotProperties",
+          "description": "Properties of Azure Health Bot."
+        },
         "tags": {
           "type": "object",
           "description": "Tags for a Azure Health Bot.",
