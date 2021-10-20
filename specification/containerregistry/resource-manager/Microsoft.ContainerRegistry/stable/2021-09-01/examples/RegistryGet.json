@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-05-01",
+    "api-version": "2021-09-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry"
@@ -20,15 +20,41 @@
           "tier": "Standard"
         },
         "properties": {
-          "loginServer": "myregistry.azurecr.io",
-          "creationDate": "2017-03-01T23:14:37.0707808Z",
+          "loginServer": "myRegistry.azurecr-test.io",
+          "creationDate": "2021-06-15T21:38:26.1537861Z",
           "provisioningState": "Succeeded",
-          "status": {
-            "displayStatus": "Ready",
-            "message": "The registry is ready.",
-            "timestamp": "2017-03-01T23:15:37.0707808Z"
+          "adminUserEnabled": false,
+          "networkRuleSet": {
+            "defaultAction": "Allow",
+            "ipRules": []
           },
-          "adminUserEnabled": true
+          "policies": {
+            "quarantinePolicy": {
+              "status": "disabled"
+            },
+            "trustPolicy": {
+              "type": "Notary",
+              "status": "disabled"
+            },
+            "retentionPolicy": {
+              "days": 7,
+              "lastUpdatedTime": "2021-06-15T21:40:12.8506835+00:00",
+              "status": "disabled"
+            },
+            "exportPolicy": {
+              "status": "enabled"
+            }
+          },
+          "encryption": {
+            "status": "disabled"
+          },
+          "status": null,
+          "dataEndpointEnabled": false,
+          "dataEndpointHostNames": [],
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Enabled",
+          "networkRuleBypassOptions": "AzureServices",
+          "zoneRedundancy": "Disabled"
         }
       }
     }

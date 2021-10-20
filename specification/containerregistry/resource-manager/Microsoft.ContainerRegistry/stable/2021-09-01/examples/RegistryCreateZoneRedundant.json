@@ -4,7 +4,8 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry",
-    "registryUpdateParameters": {
+    "registry": {
+      "location": "westus",
       "tags": {
         "key": "value"
       },
@@ -12,7 +13,7 @@
         "name": "Standard"
       },
       "properties": {
-        "adminUserEnabled": true
+        "zoneRedundancy": "Enabled"
       }
     }
   },
@@ -34,7 +35,7 @@
           "loginServer": "myRegistry.azurecr-test.io",
           "creationDate": "2021-06-15T21:38:26.1537861Z",
           "provisioningState": "Succeeded",
-          "adminUserEnabled": true,
+          "adminUserEnabled": false,
           "networkRuleSet": {
             "defaultAction": "Allow",
             "ipRules": []
@@ -65,7 +66,7 @@
           "privateEndpointConnections": [],
           "publicNetworkAccess": "Enabled",
           "networkRuleBypassOptions": "AzureServices",
-          "zoneRedundancy": "Disabled"
+          "zoneRedundancy": "Enabled"
         }
       }
     },
@@ -85,8 +86,8 @@
         "properties": {
           "loginServer": "myRegistry.azurecr-test.io",
           "creationDate": "2021-06-15T21:38:26.1537861Z",
-          "provisioningState": "Updating",
-          "adminUserEnabled": true,
+          "provisioningState": "Creating",
+          "adminUserEnabled": false,
           "networkRuleSet": {
             "defaultAction": "Allow",
             "ipRules": []
@@ -117,7 +118,7 @@
           "privateEndpointConnections": [],
           "publicNetworkAccess": "Enabled",
           "networkRuleBypassOptions": "AzureServices",
-          "zoneRedundancy": "Disabled"
+          "zoneRedundancy": "Enabled"
         }
       }
     }
