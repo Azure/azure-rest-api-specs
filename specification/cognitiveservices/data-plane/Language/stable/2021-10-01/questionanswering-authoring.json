@@ -1255,7 +1255,7 @@
           "$ref": "#/definitions/SynonymAsset"
         },
         "qnas": {
-          "$ref": "#/definitions/QnaAsset"
+          "$ref": "#/definitions/ImportQnaAsset"
         }
       }
     },
@@ -1310,6 +1310,14 @@
         "nextLink": {
           "type": "string"
         }
+      }
+    },
+    "ImportQnaAsset": {
+      "type": "array",
+      "description": "List of QnA records to import.",
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/ImportQnaRecord"
       }
     },
     "QnaAsset": {
@@ -1406,6 +1414,28 @@
           "type": "integer",
           "description": "The number of times the question was suggested automatically by the Active Learning algorithm.",
           "format": "int32"
+        }
+      }
+    },
+    "ImportQnaRecord": {
+      "description": "Import QnA Record.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RetrieveQnaRecord"
+        },
+        {
+          "$ref": "#/definitions/SourceDisplayNameParameter"
+        }
+      ]
+    },
+    "SourceDisplayNameParameter": {
+      "type": "object",
+      "properties": {
+        "sourceDisplayName": {
+          "description": "Friendly name of the Source.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
         }
       }
     },
