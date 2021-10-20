@@ -37,14 +37,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings": {
       "get": {
         "x-ms-examples": {
-          "MDE details needed for onboarding": {
+          "The configuration or data needed to onboard the machine to MDE": {
             "$ref": "./examples/MdeOnboardings/ListMdeOnboardings_example.json"
           }
         },
         "tags": [
           "MdeOnboarding"
         ],
-        "description": "MDE details needed for onboarding",
+        "description": "The configuration or data needed to onboard the machine to MDE",
         "operationId": "MdeOnboardings_List",
         "parameters": [
           {
@@ -73,14 +73,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/mdeOnboardings/default": {
       "get": {
         "x-ms-examples": {
-          "The default MDE details needed for onboarding": {
+          "The default configuration or data needed to onboard the machine to MDE": {
             "$ref": "./examples/MdeOnboardings/GetMdeOnboardings_example.json"
           }
         },
         "tags": [
           "MdeOnboarding"
         ],
-        "description": "The default MDE details needed for onboarding",
+        "description": "The default configuration or data needed to onboard the machine to MDE",
         "operationId": "MdeOnboardings_Get",
         "parameters": [
           {
@@ -110,7 +110,7 @@
   "definitions": {
     "MdeOnboardingDataParameter": {
       "type": "object",
-      "description": "Data parameter for MDE onboarding",
+      "description": "A configuration or data needed to onboard the machine to MDE",
       "properties": {
         "name": {
           "readOnly": true,
@@ -135,7 +135,7 @@
           }
         }
       },
-      "description": "MDE onboarding data properties."
+      "description": "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE"
     },
     "MdeOnboardingData": {
       "type": "object",
@@ -150,32 +150,20 @@
           "$ref": "#/definitions/MdeOnboardingDataProperties"
         }
       },
-      "description": "MDE onboarding data resource."
+      "description": "The resource of the configuration or data needed to onboard the machine to MDE"
     },
     "MdeOnboardingDataList": {
       "type": "object",
       "description": "List of all MDE onboarding data resources",
       "properties": {
         "value": {
-          "description": "List of all MDE onboarding data resources",
+          "description": "List of the resources of the configuration or data needed to onboard the machine to MDE",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MdeOnboardingData"
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "MdeOnboardingData": {
-      "name": "mdeOnboardingData",
-      "in": "body",
-      "required": true,
-      "description": "MDE onboarding data",
-      "schema": {
-        "$ref": "#/definitions/MdeOnboardingData"
-      },
-      "x-ms-parameter-location": "method"
     }
   }
 }
