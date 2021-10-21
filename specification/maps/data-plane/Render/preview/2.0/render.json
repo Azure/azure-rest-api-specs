@@ -65,12 +65,23 @@
         "microsoft.base.road",
         "microsoft.base.darkgrey",
         "microsoft.base.labels.road",
+        "microsoft.base.labels.darkgrey",
         "microsoft.base.hybrid.road",
+        "microsoft.base.hybrid.darkgrey",
         "microsoft.imagery",
         "microsoft.weather.radar.main",
         "microsoft.weather.infrared.main",
         "microsoft.dem",
-        "microsoft.dem.contours"
+        "microsoft.dem.contours",
+        "microsoft.traffic.absolute",
+        "microsoft.traffic.absolute.main",
+        "microsoft.traffic.relative",
+        "microsoft.traffic.relative.main",
+        "microsoft.traffic.relative.dark",
+        "microsoft.traffic.delay",
+        "microsoft.traffic.delay.main",
+        "microsoft.traffic.reduced.main",
+        "microsoft.traffic.incident"
       ],
       "x-ms-enum": {
         "name": "TilesetID",
@@ -105,8 +116,16 @@
             "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "value": "microsoft.base.labels.darkgrey",
+            "description": "Label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+          },
+          {
             "value": "microsoft.base.hybrid.road",
             "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.base.hybrid.darkgrey",
+            "description": "Road, boundary and label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
             "value": "microsoft.imagery",
@@ -127,18 +146,45 @@
           {
             "value": "microsoft.dem.contours",
             "description": "Digital elevation contour line tiles. Compared to the microsoft.dem option, these tiles are in vector format and intended for visualization purpose. The tiles cover the whole landmass of Earth. Some small islands (e.g., atolls) might not be represented accurately.<br>\n* The vertical unit for measurement of elevation height is meters.<br>\n* The horizontal reference datum is the World Geodetic System 1984 (WGS84-G1150) and the vertical reference datum is the Earth Gravitational Model 2008 (EGM2008).<br>\n* Tile data comes from the [Airbus WorldDEM4Ortho product](https://www.intelligence-airbusds.com/worlddem-streaming/). Urban areas are approximately leveled down to ground level. All other areas are represented by the object surface level (e.g., trees).<br>\n\nSupports zoom levels 9 through 14. Format: vector (pbf)."
+          },
+          {
+            "value": "microsoft.traffic.absolute",
+            "description": "absolute traffic tiles in vector"
+          },
+          {
+            "value": "microsoft.traffic.absolute.main",
+            "description": "absolute traffic tiles in raster in our main style."
+          },
+          {
+            "value": "microsoft.traffic.relative",
+            "description": "relative traffic tiles in vector"
+          },
+          {
+            "value": "microsoft.traffic.relative.main",
+            "description": "relative traffic tiles in raster in our main style."
+          },
+          {
+            "value": "microsoft.traffic.relative.dark",
+            "description": "relative traffic tiles in raster in our dark style."
+          },
+          {
+            "value": "microsoft.traffic.delay",
+            "description": "traffic tiles in vector"
+          },
+          {
+            "value": "microsoft.traffic.delay.main",
+            "description": "traffic tiles in raster in our main style"
+          },
+          {
+            "value": "microsoft.traffic.reduced.main",
+            "description": "reduced traffic tiles in raster in our main style"
+          },
+          {
+            "value": "microsoft.traffic.incident",
+            "description": "incident tiles in vector"
           }
         ]
       },
-      "x-ms-parameter-location": "method"
-    },
-    "MapTileV2Zoom": {
-      "name": "zoom",
-      "in": "query",
-      "description": "Zoom level for the desired tile. Please find TilesetID list below for more details on supported zoom level for each tilesetId.<br>\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   },
@@ -148,8 +194,8 @@
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
         "operationId": "GetMapTileV2",
         "x-ms-examples": {
-          "GetMapTile": {
-            "$ref": "./examples/GetMapTileV2.json"
+          "Successful Tile Request": {
+            "$ref": "./examples/SuccessfulTileRequest.json"
           }
         },
         "parameters": [
@@ -163,7 +209,7 @@
             "$ref": "#/parameters/TilesetId_rv2"
           },
           {
-            "$ref": "#/parameters/MapTileV2Zoom"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
@@ -179,28 +225,7 @@
             "format": "date-time"
           },
           {
-            "name": "tileSize",
-            "in": "query",
-            "description": "The size of the returned map tile in pixels.",
-            "type": "string",
-            "enum": [
-              "256",
-              "512"
-            ],
-            "x-ms-enum": {
-              "name": "TileSize",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "256",
-                  "description": "Return a 256 by 256 pixel tile. Available for all tilesetIds except for\n* microsoft.terra.main"
-                },
-                {
-                  "value": "512",
-                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid\n* microsoft.dem\n* microsoft.imagery"
-                }
-              ]
-            }
+            "$ref": "../1.0/render.json#/parameters/MapTileSize"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -220,9 +245,7 @@
           "200": {
             "description": "The tile returned from a successful API call.",
             "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
+              "$ref": "#/definitions/MapTile"
             },
             "headers": {
               "Content-Type": {
@@ -236,6 +259,14 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "MapTile": {
+      "description": "The tile returned from a successful API call.",
+      "type": "object",
+      "format": "file",
+      "readOnly": true
     }
   }
 }
