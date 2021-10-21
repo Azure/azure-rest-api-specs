@@ -61,13 +61,38 @@
             "sms"
           ],
           "recurrence": "transaction",
-          "contentTypes": [
-            "informationAlerts"
-          ],
           "optInMessage": "CONTOSO Shipping - To confirm your subscription with us, please reply 'Y', and you will be added to our list.",
           "optInReply": "JOIN",
           "confirmationMessage": "CONTOSO Shipping - Welcome message to CONTOSO Shipping. Messaging & data rates may apply.For help, reply \"HELP\" or call/email customercare@contoso.comTo unsubscribe, reply \"STOP\". Visit our terms and conditions at https://www.contoso.com/shipping/termsofservice.",
-          "useCase": "twoWay"
+          "estimatedRampUpTimeInMonths": 10,
+          "directionality": "twoWay",
+          "useCases": [
+            {
+              "contentType": "loyaltyProgramPointsPrizes",
+              "examples": [
+                {
+                  "messages": [
+                    {
+                      "type": "toUser",
+                      "text": "Your password is 123 STOP/HELP"
+                    }
+                  ]
+                },
+                {
+                  "messages": [
+                    {
+                      "type": "toUser",
+                      "text": "Want me to notify you when package in the way?"
+                    },
+                    {
+                      "type": "fromUser",
+                      "text": "Y"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         "trafficDetails": {
           "estimatedVolume": 10,

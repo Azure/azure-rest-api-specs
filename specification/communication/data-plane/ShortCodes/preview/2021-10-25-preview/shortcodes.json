@@ -316,11 +316,7 @@
             "shortCode",
             "alphaId"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NumberType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "countryCode": {
           "description": "ISO 3166 2-char code representing the country e.g. 'US'.",
@@ -352,7 +348,7 @@
           }
         },
         "nextLink": {
-          "description": "Represents the URL link to the next page",
+          "description": "Represents the URL link to the next page.",
           "type": "string"
         }
       }
@@ -538,6 +534,90 @@
         }
       }
     },
+    "MessageExample": {
+      "description": "Represents a message example to be sent from or to the end user.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Indicates whether the message example is supposed to be sent to or from the end user e.g. toUser",
+          "enum": [
+            "toUser",
+            "fromUser"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MessageExampleType",
+            "modelAsString": true
+          }
+        },
+        "text": {
+          "description": "Actual example text for the message e.g. 'Want me to notify you when package in the way?'",
+          "type": "string"
+        }
+      }
+    },
+    "MessageExampleSequence": {
+      "description": "A sequence of example messages to and from the end user.",
+      "type": "object",
+      "properties": {
+        "messages": {
+          "description": "Example messages to be sent to and from the end user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageExample"
+          }
+        }
+      }
+    },
+    "UseCase": {
+      "description": "Describes a messaging use case for a given content type by providing example messages.",
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "description": "Indicates the messaging content type used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc.",
+          "enum": [
+            "ringTones",
+            "smsChat",
+            "video",
+            "loyaltyProgramPointsPrizes",
+            "gifting",
+            "inApplicationBilling",
+            "textToScreen",
+            "games",
+            "audioChat",
+            "mmsPictures",
+            "sweepstakesContestAuction",
+            "financialBanking",
+            "premiumWap",
+            "queryService",
+            "wallpaperScreensaver",
+            "voting",
+            "application",
+            "mobileGivingDonations",
+            "coupons",
+            "loyaltyProgram",
+            "noPointsPrizes",
+            "informationalAlerts",
+            "microBilling",
+            "trivia",
+            "entertainmentAlerts",
+            "other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContentType",
+            "modelAsString": true
+          }
+        },
+        "examples": {
+          "description": "Example messages to be sent to and from the end user for the indicated content type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageExampleSequence"
+          }
+        }
+      }
+    },
     "MessageDetails": {
       "type": "object",
       "properties": {
@@ -569,46 +649,6 @@
             "modelAsString": true
           }
         },
-        "contentTypes": {
-          "description": "Indicates the messaging content types used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc.",
-          "type": "array",
-          "items": {
-            "description": "Indicates the messaging content type used in the program.",
-            "enum": [
-              "ringTones",
-              "smsChat",
-              "video",
-              "loyaltyProgramPointsPrizes",
-              "gifting",
-              "inApplicationBilling",
-              "textToScreen",
-              "games",
-              "audioChat",
-              "mmsPictures",
-              "sweepstakesContestAuction",
-              "financialBanking",
-              "premiumWap",
-              "queryService",
-              "wallpaperScreensaver",
-              "voting",
-              "application",
-              "mobileGivingDonations",
-              "coupons",
-              "loyaltyProgram",
-              "noPointsPrizes",
-              "informationalAlerts",
-              "microBilling",
-              "trivia",
-              "entertainmentAlerts",
-              "other"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ContentType",
-              "modelAsString": true
-            }
-          }
-        },
         "optInMessage": {
           "type": "string"
         },
@@ -619,16 +659,28 @@
         "confirmationMessage": {
           "type": "string"
         },
-        "useCase": {
-          "description": "Messaging use case describing directionality e.g. oneWay or twoWay",
+        "estimatedRampUpTimeInMonths": {
+          "format": "int32",
+          "description": "Numbers of months in which is expected to start sending messages from the short code.",
+          "type": "integer"
+        },
+        "directionality": {
+          "description": "Describes directionality e.g. oneWay or twoWay",
           "enum": [
             "oneWay",
             "twoWay"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "UseCase",
+            "name": "MessageDirectionality",
             "modelAsString": true
+          }
+        },
+        "useCases": {
+          "description": "Provides message exchange examples from and to end user for each supported message content type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UseCase"
           }
         }
       }
