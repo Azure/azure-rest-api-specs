@@ -1,13 +1,19 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-06-17-preview",
     "title": "WorkbookClient",
-    "description": "Azure client for Workbook."
+    "description": "Azure client for Workbook.",
+    "version": "2021-08-25"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
   ],
   "security": [
     {
@@ -78,11 +84,36 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
         }
       }
     },
+    "ErrorFieldContract": {
+      "type": "array",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
     "Operation": {
-      "description": "CDN REST API operation",
+      "description": "Azure Workbooks REST API operation",
       "type": "object",
       "properties": {
         "name": {
@@ -91,9 +122,10 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
-              "description": "Service provider: Microsoft.Cdn",
+              "description": "Service provider: Microsoft.Insights",
               "type": "string"
             },
             "resource": {
@@ -109,14 +141,15 @@
       }
     },
     "OperationListResult": {
-      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Azure Workbooks operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of CDN operations supported by the CDN resource provider."
+          "description": "List of Workbook operations supported by the Microsoft.Insights resource provider."
         },
         "nextLink": {
           "type": "string",
