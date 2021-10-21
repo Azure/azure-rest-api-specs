@@ -40,10 +40,10 @@
           "RoleAssignments"
         ],
         "operationId": "RoleAssignments_ListForResource",
-        "description": "Gets role assignments for a resource.",
+        "description": "List role assignments for a resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceProviderNamespaceParameter"
@@ -79,17 +79,26 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role assignments.",
+            "description": "Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,7 +107,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for resource": {
             "$ref": "./examples/GetRoleAssignmentsForResource.json"
           }
         }
@@ -110,10 +119,10 @@
           "RoleAssignments"
         ],
         "operationId": "RoleAssignments_ListForResourceGroup",
-        "description": "Gets role assignments for a resource group.",
+        "description": "List role assignments for a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "$filter",
@@ -123,21 +132,24 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role assignments.",
+            "description": "Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
           "default": {
-            "description": "error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
@@ -148,7 +160,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for resource group": {
             "$ref": "./examples/GetRoleAssignmentsForResourceGroup.json"
           }
         }
@@ -160,7 +172,7 @@
           "RoleAssignments"
         ],
         "operationId": "RoleAssignments_Delete",
-        "description": "Deletes a role assignment.",
+        "description": "Delete a role assignment.",
         "parameters": [
           {
             "name": "scope",
@@ -178,28 +190,31 @@
             "description": "The name of the role assignment to delete."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role assignment.",
+            "description": "Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
           },
           "204": {
-            "description": "Deleted - Indicates correct deletion without returning additional info"
+            "description": "Indicates correct deletion without returning additional info"
           },
           "default": {
-            "description": "error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Delete role assignment by name": {
             "$ref": "./examples/DeleteRoleAssignmentByName.json"
           }
         }
@@ -209,7 +224,7 @@
           "RoleAssignments"
         ],
         "operationId": "RoleAssignments_Create",
-        "description": "Creates a role assignment.",
+        "description": "Create a role assignment.",
         "parameters": [
           {
             "name": "scope",
@@ -236,25 +251,25 @@
             "description": "Parameters for the role assignment."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
-            "description": "Created - Returns information about the role assignment.",
+            "description": "Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
           },
           "default": {
-            "description": "error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Create role assignment": {
             "$ref": "./examples/PutRoleAssignment.json"
           }
         }
@@ -282,25 +297,28 @@
             "description": "The name of the role assignment to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role assignment.",
+            "description": "Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
           },
           "default": {
-            "description": "error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get role assignment by name": {
             "$ref": "./examples/GetRoleAssignmentByName.json"
           }
         }
@@ -312,7 +330,7 @@
           "RoleAssignments"
         ],
         "operationId": "RoleAssignments_DeleteById",
-        "description": "Deletes a role assignment.",
+        "description": "Delete a role assignment.",
         "parameters": [
           {
             "name": "roleId",
@@ -323,19 +341,31 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role assignment.",
+            "description": "Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "204": {
+            "description": "Role assignment was already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Delete role assignment by ID": {
             "$ref": "./examples/DeleteRoleAssignmentById.json"
           }
         }
@@ -365,19 +395,25 @@
             "description": "Parameters for the role assignment."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
-            "description": "Created - Returns the role assignment.",
+            "description": "Returns the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Create role assignment by ID": {
             "$ref": "./examples/PutRoleAssignmentById.json"
           }
         }
@@ -398,19 +434,28 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the role assignment.",
+            "description": "Returns the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get role assignment by ID": {
             "$ref": "./examples/GetRoleAssignmentById.json"
           }
         }
@@ -432,21 +477,24 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role assignments.",
+            "description": "Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
           "default": {
-            "description": "error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
@@ -457,7 +505,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for subscription": {
             "$ref": "./examples/GetAllRoleAssignments.json"
           }
         }
@@ -487,18 +535,21 @@
             "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role assignments.",
+            "description": "Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
           "default": {
-            "description": "error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
@@ -509,7 +560,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for scope": {
             "$ref": "./examples/GetRoleAssignmentByScope.json"
           }
         }
@@ -528,6 +579,7 @@
           "description": "The Delegation flag for the role assignment"
         }
       },
+      "type": "object",
       "description": "Role Assignments filter"
     },
     "RoleAssignmentPropertiesWithScope": {
@@ -551,13 +603,7 @@
             "User",
             "Group",
             "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
-            "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone"
+            "ForeignGroup"
           ],
           "x-ms-enum": {
             "name": "PrincipalType",
@@ -603,6 +649,7 @@
           "description": "Id of the delegated managed identity resource"
         }
       },
+      "type": "object",
       "description": "Role assignment properties with scope."
     },
     "RoleAssignment": {
@@ -628,6 +675,7 @@
           "description": "Role assignment properties."
         }
       },
+      "type": "object",
       "description": "Role Assignments"
     },
     "RoleAssignmentListResult": {
@@ -644,6 +692,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role assignment list operation result."
     },
     "RoleAssignmentProperties": {
@@ -663,14 +712,9 @@
             "User",
             "Group",
             "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
-            "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone"
+            "ForeignGroup"
           ],
+          "default": "User",
           "x-ms-enum": {
             "name": "PrincipalType",
             "modelAsString": true
@@ -691,12 +735,17 @@
         "conditionVersion": {
           "type": "string",
           "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "delegatedManagedIdentityResourceId": {
+          "type": "string",
+          "description": "Id of the delegated managed identity resource"
         }
       },
       "required": [
         "roleDefinitionId",
         "principalId"
       ],
+      "type": "object",
       "description": "Role assignment properties."
     },
     "RoleAssignmentCreateParameters": {
@@ -710,38 +759,26 @@
       "required": [
         "properties"
       ],
+      "type": "object",
       "description": "Role assignment create parameters."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceProviderNamespaceParameter": {
       "name": "resourceProviderNamespace",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The namespace of the resource provider.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdQueryParameter": {
+      "name": "tenantId",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Tenant ID for cross-tenant request",
       "x-ms-parameter-location": "method"
     }
   }

@@ -5,7 +5,7 @@
     "resourceGroupName": "myResourceGroup",
     "diskPoolName": "myDiskPool",
     "iscsiTargetName": "myIscsiTarget",
-    "iscsiTargetPayload": {
+    "iscsiTargetCreatePayload": {
       "properties": {
         "targetIqn": "iqn.2005-03.org.iscsi:server1",
         "tpgs": [
@@ -24,7 +24,7 @@
                 ],
                 "credentials": {
                   "username": "some_username",
-                  "password": "<password>"
+                  "password": "some_password"
                 }
               }
             ],
@@ -38,7 +38,7 @@
     }
   },
   "responses": {
-    "202": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.StoragePool/diskPools/myDiskPool/iscsiTargets/myIscsiTarget",
         "name": "myIscsiTarget",
@@ -64,7 +64,12 @@
               "attributes": {
                 "authentication": true,
                 "prodModeWriteProtect": false
-              }
+              },
+              "endpoints": [
+                "10.0.0.1:3260"
+              ],
+              "tag": 1,
+              "port": 3260
             }
           ],
           "provisioningState": "Pending",
@@ -98,7 +103,12 @@
               "attributes": {
                 "authentication": true,
                 "prodModeWriteProtect": false
-              }
+              },
+              "endpoints": [
+                "10.0.0.1:3260"
+              ],
+              "tag": 1,
+              "port": 3260
             }
           ],
           "provisioningState": "Pending",

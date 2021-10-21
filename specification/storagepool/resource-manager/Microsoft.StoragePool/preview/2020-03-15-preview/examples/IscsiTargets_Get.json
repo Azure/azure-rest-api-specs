@@ -16,8 +16,6 @@
           "targetIqn": "iqn.2005-03.org.iscsi:server1",
           "tpgs": [
             {
-              "tag": 1,
-              "port": 3260,
               "luns": [
                 {
                   "managedDiskAzureResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_1",
@@ -38,7 +36,9 @@
               },
               "endpoints": [
                 "10.0.0.1:3260"
-              ]
+              ],
+              "tag": 1,
+              "port": 3260
             }
           ],
           "provisioningState": "Succeeded",

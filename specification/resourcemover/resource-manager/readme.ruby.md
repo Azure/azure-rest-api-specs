@@ -3,17 +3,17 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
-package-name: azure_mgmt_regionmove
-package-version: 2019-10-01-preview
+package-name: azure_mgmt_resourcemover
+package-version: 2021-01-01
 azure-arm: true
 ```
 
-### Tag: package-2019-10-01-preview and ruby
+### Tag: package-2021-01-01 and ruby
 
-These settings apply only when `--tag=package-2019-10-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2019-10-01-preview' && $(ruby)
-namespace: Microsoft.Migrate
-output-folder: $(ruby-sdks-folder)/regionmove
+```yaml $(tag) == 'package-2021-01-01' && $(ruby)
+namespace: Microsoft.Migrate.ResourceMover
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_resourcemover
 ```

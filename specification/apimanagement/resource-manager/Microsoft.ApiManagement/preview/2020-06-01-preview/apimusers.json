@@ -570,6 +570,60 @@
         "x-ms-odata": "./definitions.json#/definitions/SubscriptionContract"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions/{sid}": {
+      "get": {
+        "tags": [
+          "Subscription"
+        ],
+        "operationId": "UserSubscription_Get",
+        "description": "Gets the specified Subscription entity associated with a particular user.",
+        "x-ms-examples": {
+          "ApiManagementGetUserSubscription": {
+            "$ref": "./examples/ApiManagementGetUserSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Subscription entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SubscriptionContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities": {
       "get": {
         "tags": [

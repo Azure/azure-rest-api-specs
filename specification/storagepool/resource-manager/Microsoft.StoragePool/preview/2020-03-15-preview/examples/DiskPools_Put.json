@@ -4,7 +4,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "diskPoolName": "myDiskPool",
-    "diskPoolPayload": {
+    "diskPoolCreatePayload": {
       "location": "westus",
       "tags": {
         "key": "value"
@@ -21,15 +21,13 @@
           {
             "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_1"
           }
-        ]
-      },
-      "sku": {
-        "name": "Standard_ABC"
+        ],
+        "tier": "Basic"
       }
     }
   },
   "responses": {
-    "202": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.StoragePool/diskPools/myDiskPool",
         "name": "myDiskPool",
@@ -60,7 +58,8 @@
           ],
           "availabilityZones": [
             "1"
-          ]
+          ],
+          "tier": "Basic"
         }
       }
     },
@@ -95,7 +94,8 @@
           ],
           "availabilityZones": [
             "1"
-          ]
+          ],
+          "tier": "Basic"
         }
       }
     }
