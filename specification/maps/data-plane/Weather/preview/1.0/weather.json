@@ -558,11 +558,11 @@
     },
     "/weather/historical/actuals/daily/{format}": {
       "get": {
-        "description": "**Get Daily Climo Actuals**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as past daily actuals for a given coordinate location.",
-        "operationId": "Weather_GetDailyClimoActuals",
+        "description": "**Get Daily Historical Actuals**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as past daily actuals for a given coordinate location.",
+        "operationId": "Weather_GetDailyHistoricalActuals",
         "x-ms-examples": {
-          "DailyClimoActuals": {
-            "$ref": "./examples/GetDailyClimoActuals.json"
+          "DailyHistoricalActuals": {
+            "$ref": "./examples/GetDailyHistoricalActuals.json"
           }
         },
         "parameters": [
@@ -606,7 +606,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DailyClimoActualsResponse"
+              "$ref": "#/definitions/DailyHistoricalActualsResponse"
             }
           },
           "default": {
@@ -617,11 +617,11 @@
     },
     "/weather/historical/records/daily/{format}": {
       "get": {
-        "description": "**Get Daily Climo Records**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as past daily records for a given coordinate location.",
-        "operationId": "Weather_GetDailyClimoRecords",
+        "description": "**Get Daily Historical Records**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as past daily records for a given coordinate location.",
+        "operationId": "Weather_GetDailyHistoricalRecords",
         "x-ms-examples": {
-          "DailyClimoRecords": {
-            "$ref": "./examples/GetDailyClimoRecords.json"
+          "DailyHistoricalRecords": {
+            "$ref": "./examples/GetDailyHistoricalRecords.json"
           }
         },
         "parameters": [
@@ -665,7 +665,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DailyClimoRecordsResponse"
+              "$ref": "#/definitions/DailyHistoricalRecordsResponse"
             }
           },
           "default": {
@@ -676,11 +676,11 @@
     },
     "/weather/historical/normals/daily/{format}": {
       "get": {
-        "description": "**Get Daily Climo Normals**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as past daily normals for a given coordinate location.",
-        "operationId": "Weather_GetDailyClimoNormals",
+        "description": "**Get Daily Historical Normals**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as past daily normals for a given coordinate location.",
+        "operationId": "Weather_GetDailyHistoricalNormals",
         "x-ms-examples": {
-          "DailyClimoNormals": {
-            "$ref": "./examples/GetDailyClimoNormals.json"
+          "DailyHistoricalNormals": {
+            "$ref": "./examples/GetDailyHistoricalNormals.json"
           }
         },
         "parameters": [
@@ -724,7 +724,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DailyClimoNormalsResponse"
+              "$ref": "#/definitions/DailyHistoricalNormalsResponse"
             }
           },
           "default": {
@@ -2621,19 +2621,19 @@
         }
       }
     },
-    "DailyClimoActualsResponse": {
+    "DailyHistoricalActualsResponse": {
       "type": "object",
       "properties": {
-        "climoActuals": {
+        "historicalActuals": {
           "type": "array",
-          "description": "Climo actuals for each requested day.",
+          "description": "Historical actuals for each requested day.",
           "items": {
-            "$ref": "#/definitions/DailyClimoActuals"
+            "$ref": "#/definitions/DailyHistoricalActuals"
           }
         }
       }
     },
-    "DailyClimoActuals": {
+    "DailyHistoricalActuals": {
       "type": "object",
       "properties": {
         "date": {
@@ -2663,19 +2663,19 @@
         }
       }
     },
-    "DailyClimoRecordsResponse": {
+    "DailyHistoricalRecordsResponse": {
       "type": "object",
       "properties": {
-        "climoRecords": {
+        "historicalRecords": {
           "type": "array",
-          "description": "Climo records for each requested day.",
+          "description": "Historical records for each requested day.",
           "items": {
-            "$ref": "#/definitions/DailyClimoRecords"
+            "$ref": "#/definitions/DailyHistoricalRecords"
           }
         }
       }
     },
-    "DailyClimoRecords": {
+    "DailyHistoricalRecords": {
       "type": "object",
       "properties": {
         "date": {
@@ -2697,19 +2697,19 @@
         }
       }
     },
-    "DailyClimoNormalsResponse": {
+    "DailyHistoricalNormalsResponse": {
       "type": "object",
       "properties": {
-        "climoNormals": {
+        "historicalNormals": {
           "type": "array",
-          "description": "Climo normals for each requested day.",
+          "description": "Historical normals for each requested day.",
           "items": {
-            "$ref": "#/definitions/DailyClimoNormals"
+            "$ref": "#/definitions/DailyHistoricalNormals"
           }
         }
       }
     },
-    "DailyClimoNormals": {
+    "DailyHistoricalNormals": {
       "type": "object",
       "properties": {
         "date": {
@@ -2731,24 +2731,24 @@
         }
       }
     },
-    "ClimoSummaryResponse": {
+    "HistoricalSummaryResponse": {
       "type": "object",
       "properties": {
-        "climoActuals": {
-          "$ref": "#/definitions/MonthlyClimoActuals",
-          "description": "Climo actuals for the requested month."
+        "historicalActuals": {
+          "$ref": "#/definitions/MonthlyHistoricalActuals",
+          "description": "Historical actuals for the requested month."
         },
-        "climoRecords": {
-          "$ref": "#/definitions/MonthlyClimoRecords",
-          "description": "Climo records for the requested month."
+        "historicalRecords": {
+          "$ref": "#/definitions/MonthlyHistoricalRecords",
+          "description": "Historical records for the requested month."
         },
-        "climoNormals": {
-          "$ref": "#/definitions/MonthlyClimoNormals",
-          "description": "Climo normals for the requested month."
+        "historicalNormals": {
+          "$ref": "#/definitions/MonthlyHistoricalNormals",
+          "description": "Historical normals for the requested month."
         }
       }
     },
-    "MonthlyClimoActuals": {
+    "MonthlyHistoricalActuals": {
       "type": "object",
       "properties": {
         "temperature": {
@@ -2773,7 +2773,7 @@
         }
       }
     },
-    "MonthlyClimoRecords": {
+    "MonthlyHistoricalRecords": {
       "type": "object",
       "properties": {
         "temperature": {
@@ -2790,7 +2790,7 @@
         }
       }
     },
-    "MonthlyClimoNormals": {
+    "MonthlyHistoricalNormals": {
       "type": "object",
       "properties": {
         "temperature": {
