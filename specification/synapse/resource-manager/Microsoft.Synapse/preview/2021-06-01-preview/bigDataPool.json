@@ -450,7 +450,7 @@
           }
         },
         "sparkConfigProperties": {
-          "$ref": "#/definitions/LibraryRequirements",
+          "$ref": "#/definitions/SparkConfigProperties",
           "description": "Spark configuration file to specify additional properties"
         },
         "sparkVersion": {
@@ -567,8 +567,7 @@
         "uploadedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The last update time of the library.",
-          "readOnly": true
+          "description": "The last update time of the library."
         },
         "type": {
           "type": "string",
@@ -604,6 +603,39 @@
         "filename": {
           "type": "string",
           "description": "The filename of the library requirements file."
+        }
+      }
+    },
+    "SparkConfigProperties": {
+      "type": "object",
+      "description": "SparkConfig Properties for a Big Data pool powered by Apache Spark",
+      "title": "Spark pool Config Properties",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The last update time of the spark config properties file."
+        },
+        "content": {
+          "type": "string",
+          "description": "The spark config properties."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The filename of the spark config properties file."
+        },
+        "configurationType": {
+          "enum": [
+            "File",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config properties file.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
         }
       }
     }

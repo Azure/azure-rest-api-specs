@@ -90,6 +90,10 @@
         "ssisProperties": {
           "description": "SSIS properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        },
+        "customerVirtualNetwork": {
+          "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
+          "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
         }
       }
     },
@@ -153,6 +157,10 @@
           "description": "Time to live (in minutes) setting of the cluster which will execute data flow job.",
           "type": "integer",
           "minimum": 0
+        },
+        "cleanup": {
+          "description": "Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.",
+          "type": "boolean"
         }
       },
       "additionalProperties": {
@@ -178,6 +186,10 @@
             "type": "string",
             "description": "The ID of the public IP address."
           }
+        },
+        "subnetId": {
+          "description": "The ID of subnet, to which this Azure-SSIS integration runtime will be joined.",
+          "type": "string"
         }
       },
       "additionalProperties": {
@@ -245,6 +257,16 @@
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "IntegrationRuntimeCustomerVirtualNetwork": {
+      "description": "The definition and properties of virtual network to which Azure-SSIS integration runtime will join.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The ID of subnet to which Azure-SSIS integration runtime will join.",
+          "type": "string"
+        }
       }
     },
     "IntegrationRuntimeSsisCatalogInfo": {
@@ -598,6 +620,64 @@
       "required": [
         "resourceId"
       ]
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse": {
+      "description": "Azure-SSIS integration runtime outbound network dependency endpoints.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of outbound network dependency endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint": {
+      "description": "Azure-SSIS integration runtime outbound network dependency endpoints for one category.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of outbound network dependency.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints for outbound network dependency.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpoint": {
+      "description": "The endpoint for Azure-SSIS integration runtime outbound network dependency.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of endpoint.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The details of endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails": {
+      "description": "The details of Azure-SSIS integration runtime outbound network dependency endpoint.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "description": "The port of endpoint.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "IntegrationRuntimeStatus": {
       "description": "Integration runtime status.",
