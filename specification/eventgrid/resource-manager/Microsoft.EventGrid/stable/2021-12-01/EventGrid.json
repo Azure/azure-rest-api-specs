@@ -3448,6 +3448,48 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.EventGrid/extensionTopics/default": {
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "summary": "Get properties of an extension topic.",
+        "description": "Get the properties of an extension topic.",
+        "operationId": "ExtensionTopics_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The identifier of the resource to which extension topic is queried. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace. For example, use '/subscriptions/{subscriptionId}/' for a subscription, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for Azure resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionTopics_Get": {
+            "$ref": "./examples/ExtensionTopics_Get.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.EventGrid/topicTypes": {
       "get": {
         "tags": [
@@ -4196,6 +4238,10 @@
           "$ref": "#/definitions/EventSubscriptionDestination",
           "description": "Information about the destination where events have to be delivered for the event subscription."
         },
+        "deliveryWithResourceIdentity": {
+          "$ref": "#/definitions/DeliveryWithResourceIdentity",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
         "filter": {
           "$ref": "#/definitions/EventSubscriptionFilter",
           "description": "Information about the filter for the event subscription."
@@ -4233,6 +4279,10 @@
         "deadLetterDestination": {
           "$ref": "#/definitions/DeadLetterDestination",
           "description": "The DeadLetter destination of the event subscription."
+        },
+        "deadLetterWithResourceIdentity": {
+          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
         }
       }
     },
@@ -4705,6 +4755,56 @@
       },
       "discriminator": "operatorType"
     },
+    "DeliveryWithResourceIdentity": {
+      "description": "Information about the delivery for an event subscription with resource identity.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EventSubscriptionIdentity",
+          "description": "The identity to use when delivering events."
+        },
+        "destination": {
+          "$ref": "#/definitions/EventSubscriptionDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "DeadLetterWithResourceIdentity": {
+      "description": "Information about the deadletter destination with resource identity.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EventSubscriptionIdentity",
+          "description": "The identity to use when dead-lettering events."
+        },
+        "deadLetterDestination": {
+          "$ref": "#/definitions/DeadLetterDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "EventSubscriptionIdentity": {
+      "description": "The identity information with the event subscription.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventSubscriptionIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "description": "The user identity associated with the resource.",
+          "type": "string"
+        }
+      }
+    },
     "WebHookEventSubscriptionDestination": {
       "description": "Information about the webhook destination for an event subscription.",
       "type": "object",
@@ -5018,6 +5118,10 @@
           "$ref": "#/definitions/EventSubscriptionDestination",
           "description": "Information about the destination where events have to be delivered for the event subscription."
         },
+        "deliveryWithResourceIdentity": {
+          "$ref": "#/definitions/DeliveryWithResourceIdentity",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (topic / domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
         "filter": {
           "$ref": "#/definitions/EventSubscriptionFilter",
           "description": "Information about the filter for the event subscription."
@@ -5054,6 +5158,10 @@
         "deadLetterDestination": {
           "$ref": "#/definitions/DeadLetterDestination",
           "description": "The DeadLetter destination of the event subscription."
+        },
+        "deadLetterWithResourceIdentity": {
+          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (topic / domain) to acquire the authentication tokens being used during delivery / dead-lettering."
         }
       }
     },
@@ -5428,6 +5536,10 @@
           "description": "Properties of the topic.",
           "x-ms-client-flatten": true
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
+        },
         "systemData": {
           "description": "The system metadata relating to Topic resource.",
           "type": "object",
@@ -5446,6 +5558,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Topic resource identity information."
         },
         "properties": {
           "$ref": "#/definitions/TopicUpdateParameterProperties",
@@ -5525,6 +5641,42 @@
         "keyName": {
           "description": "Key name to regenerate key1 or key2",
           "type": "string"
+        }
+      }
+    },
+    "ExtensionTopicProperties": {
+      "description": "Properties of the Extension Topic",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the extension topic.",
+          "type": "string"
+        },
+        "systemTopic": {
+          "description": "System topic resource id which is mapped to the source.",
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionTopic": {
+      "description": "Event grid Extension Topic. This is used for getting Event Grid related metrics for Azure resources.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionTopicProperties",
+          "description": "Properties of the extension topic",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to the Extension Topic resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
