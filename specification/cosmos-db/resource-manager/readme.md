@@ -30,7 +30,6 @@ openapi-type: arm
 tag: package-2021-10
 ```
 
-
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
@@ -43,12 +42,16 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-10-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2021-10-15/rbac.json
   - Microsoft.DocumentDB/stable/2021-10-15/restorable.json
+  - Microsoft.DocumentDB/stable/2021-10-15/managedCassandra.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
+
 ### Tag: package-2021-07-preview
 
 These settings apply only when `--tag=package-2021-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-preview'
+```yaml $(tag) == 'package-2021-07-preview'
 input-file:
   - Microsoft.DocumentDB/preview/2021-07-01-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2021-07-01-preview/notebook.json
@@ -465,3 +468,4 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+

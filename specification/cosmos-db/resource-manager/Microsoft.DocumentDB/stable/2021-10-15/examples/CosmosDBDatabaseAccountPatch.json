@@ -46,13 +46,17 @@
           "type": "Periodic",
           "periodicModeProperties": {
             "backupIntervalInMinutes": 240,
-            "backupRetentionIntervalInHours": 720
+            "backupRetentionIntervalInHours": 720,
+            "backupStorageRedundancy": "Local"
           }
         },
         "networkAclBypass": "AzureServices",
         "networkAclBypassResourceIds": [
           "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
-        ]
+        ],
+        "capacity": {
+          "totalThroughputLimit": 2000
+        }
       }
     }
   },
@@ -163,13 +167,17 @@
             "type": "Periodic",
             "periodicModeProperties": {
               "backupIntervalInMinutes": 240,
-              "backupRetentionIntervalInHours": 720
+              "backupRetentionIntervalInHours": 720,
+              "backupStorageRedundancy": "Local"
             }
           },
           "networkAclBypass": "AzureServices",
           "networkAclBypassResourceIds": [
             "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
-          ]
+          ],
+          "capacity": {
+            "totalThroughputLimit": 2000
+          }
         }
       }
     }
