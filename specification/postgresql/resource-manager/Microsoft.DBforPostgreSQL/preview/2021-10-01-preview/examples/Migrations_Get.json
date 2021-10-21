@@ -1,15 +1,10 @@
 {
   "parameters": {
-    "api-version": "2021-09-01-privatepreview",
+    "api-version": "2021-10-01-preview",
     "targetDBServerSubscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "targetDBServerResourceGroupName": "testrg",
     "targetDBServerName": "testtarget",
-    "migrationName": "testmigration",
-    "parameters": {
-      "properties": {
-        "setupLogicalReplicationOnSourceDBIfNeeded": true
-      }
-    }
+    "migrationName": "testmigration"
   },
   "responses": {
     "200": {
@@ -55,7 +50,7 @@
             "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
             "subnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default"
           },
-          "setupLogicalReplicationOnSourceDBIfNeeded": true,
+          "setupLogicalReplicationOnSourceDBIfNeeded": false,
           "overwriteDBsInTarget": false,
           "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
           "startDataMigration": false,

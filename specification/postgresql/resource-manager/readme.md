@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-migration-2021-09-privatepreview i
 
 ``` yaml $(tag) == 'package-migration-2021-09-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-09-01-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/preview/2021-10-01-preview/Migrations.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 ```
 
