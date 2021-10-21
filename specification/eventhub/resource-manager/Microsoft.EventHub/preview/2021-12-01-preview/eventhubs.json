@@ -275,16 +275,16 @@
         },
         "targetId": {
           "type": "string",
-          "description": "Consumer Group Id or SAS Key Name or AAD App ID on which Event Hub will be throttled. In case this value is not supplied"
+          "description": "Consumer Group Id or SAS Key Name or AAD App ID on which Event Hub will be throttled. In case this value is not supplied, the limit will be applicable on entire event hub"
         },
         "metricId": {
           "type": "string",
           "description": "Metric Id on which the throttle limit should be set, MetricId can be discovered by hovering over Metric in the Metrics section of Event Hub Namespace inside Azure Portal"
         },
-        "throttleLimit": {
+        "rateLimit": {
           "format": "int64",
           "type": "integer",
-          "description": "Throttling Limit applicable on the rule"
+          "description": "Throttling Rate Limit applicable on the rule. Rate Limit is always per sec"
         }
       },
       "description": "Properties to configure throttling limits for eventhub"
