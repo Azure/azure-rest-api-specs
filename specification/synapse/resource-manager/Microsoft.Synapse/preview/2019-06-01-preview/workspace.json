@@ -1050,6 +1050,20 @@
         }
       }
     },
+    "GitHubClientSecret": {
+      "description": "Client secret information for factory's bring your own app repository configuration",
+      "type": "object",
+      "properties": {
+        "byoaSecretAkvUrl": {
+          "description": "Bring your own app client secret AKV URL",
+          "type": "string"
+        },
+        "byoaSecretName": {
+          "description": "Bring your own app client secret name in AKV",
+          "type": "string"
+        }
+      }
+    },
     "WorkspaceRepositoryConfiguration": {
       "description": "Git integration settings",
       "type": "object",
@@ -1090,6 +1104,14 @@
           "description": "The VSTS tenant ID",
           "type": "string",
           "format": "uuid"
+        },
+        "clientId": {
+          "description": "GitHub bring your own app client id",
+          "type": "string"
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/GitHubClientSecret",
+          "description": "GitHub bring your own app client secret information."
         }
       }
     },

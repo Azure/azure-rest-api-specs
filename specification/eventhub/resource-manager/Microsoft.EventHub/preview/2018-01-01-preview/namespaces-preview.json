@@ -615,6 +615,11 @@
               "type": "string",
               "description": "Provisioning state of the Namespace."
             },
+            "status": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Status of the Namespace."
+            },
             "createdAt": {
               "readOnly": true,
               "format": "date-time",
@@ -704,7 +709,6 @@
         },
         "capacity": {
           "format": "int32",
-          "maximum": 20,
           "minimum": 0,
           "type": "integer",
           "description": "The Event Hubs throughput units, value should be 0 to 20 throughput units."

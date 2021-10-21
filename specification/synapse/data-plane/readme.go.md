@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 ```
 
@@ -38,6 +38,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-artifacts-2019-06-01-preview' && $(go)
 namespace: artifacts
 output-folder: $(go-sdk-folder)/services/preview/synapse/2019-06-01-preview/$(namespace)
+```
+
+### Tag:  package-artifacts-2021-06-01-preview and go
+
+These settings apply only when `--tag=package-artifacts-2021-06-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-artifacts-2021-06-01-preview' && $(go)
+namespace: artifacts
+output-folder: $(go-sdk-folder)/services/preview/synapse/2021-06-01-preview/$(namespace)
 ```
 
 ### Tag:  package-access-control-2020-02-01-preview and go

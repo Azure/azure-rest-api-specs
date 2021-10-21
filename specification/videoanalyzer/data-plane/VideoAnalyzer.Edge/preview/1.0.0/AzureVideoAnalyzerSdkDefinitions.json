@@ -1,0 +1,209 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Azure Video Analyzer for Edge",
+    "description": "Azure Video Analyzer helpers for IoT Edge direct method calls.",
+    "contact": {
+      "email": "videoanalyzerhelp@microsoft.com"
+    }
+  },
+  "security": [
+    {
+      "sharedAccessSignature": []
+    }
+  ],
+  "paths": {},
+  "securityDefinitions": {
+    "sharedAccessSignature": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "MethodRequest": {
+      "type": "object",
+      "required": [
+        "methodName"
+      ],
+      "properties": {
+        "methodName": {
+          "type": "string",
+          "description": "Direct method method name.",
+          "readOnly": true
+        },
+        "@apiVersion": {
+          "type": "string",
+          "description": "Video Analyzer API version.",
+          "enum": [
+            "1.0"
+          ],
+          "x-ms-enum": {
+            "name": "apiVersionEnum",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "methodName",
+      "description": "Base class for direct method calls."
+    },
+    "PipelineTopologySetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologySet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "pipelineTopology"
+      ],
+      "properties": {
+        "pipelineTopology": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
+        }
+      },
+      "description": "Creates a new pipeline topology or updates an existing one."
+    },
+    "PipelineTopologySetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        },
+        {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
+        }
+      ],
+      "description": "Pipeline topology resource representation."
+    },
+    "LivePipelineSetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineSet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "livePipeline"
+      ],
+      "properties": {
+        "livePipeline": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
+        }
+      },
+      "description": "Creates a new live pipeline or updates an existing one."
+    },
+    "LivePipelineSetRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        },
+        {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
+        }
+      ],
+      "description": "Live pipeline resource representation."
+    },
+    "MethodRequestEmptyBodyBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        }
+      }
+    },
+    "PipelineTopologyListRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologyList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "description": "List all existing pipeline topologies."
+    },
+    "PipelineTopologyGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologyGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Retrieves an existing pipeline topology."
+    },
+    "PipelineTopologyDeleteRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "pipelineTopologyDelete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deletes an existing pipeline topology."
+    },
+    "LivePipelineListRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineList",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequest"
+        }
+      ],
+      "description": "List all existing live pipelines."
+    },
+    "LivePipelineGetRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineGet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Retrieves an existing live pipeline."
+    },
+    "LivePipelineActivateRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineActivate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Activates an existing live pipeline."
+    },
+    "LivePipelineDeactivateRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineDeactivate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deactivates an existing live pipeline."
+    },
+    "LivePipelineDeleteRequest": {
+      "type": "object",
+      "x-ms-discriminator-value": "livePipelineDelete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodRequestEmptyBodyBase"
+        }
+      ],
+      "description": "Deletes an existing live pipeline."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "scope": "providers/Microsoft.Billing/billingAccounts/1234:5678/customers/2468"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/customers/2468/providers/Microsoft.Consumption/credits/balanceSummary1",
+        "name": "balanceSummary1",
+        "type": "Microsoft.Consumption/credits/balanceSummary",
+        "properties": {
+          "creditCurrency": "USD",
+          "billingCurrency": "USD",
+          "balanceSummary": {
+            "estimatedBalance": {
+              "currency": "USD",
+              "value": 600.00
+            },
+            "estimatedBalanceInBillingCurrency": {
+              "exchangeRate": 72.34625000000003,
+              "exchangeRateMonth": 202103,
+              "currency": "",
+              "value": 5486.739600000003
+            },
+            "currentBalance": {
+              "currency": "USD",
+              "value": 100.00
+            },
+            "currentBalanceInBillingCurrency": {
+              "exchangeRate": 0,
+              "exchangeRateMonth": 202101,
+              "currency": "",
+              "value": 7342.250000000026
+            }
+          },
+          "pendingCreditAdjustments": {
+            "currency": "USD",
+            "value": 500.00
+          },
+          "expiredCredit": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "pendingEligibleCharges": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "reseller": {
+            "resellerId": "55258",
+            "resellerDescription": "Reseller"
+          }
+        }
+      }
+    }
+  }
+}

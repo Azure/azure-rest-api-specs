@@ -26,7 +26,16 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07-01-preview
+tag: package-2021-03-01-preview
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=2021-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+- Microsoft.AppConfiguration/preview/2021-03-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -86,8 +95,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-powershell
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
@@ -96,8 +105,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js appconfiguration/resource-manager
 ```
 
 ## C#
@@ -140,9 +147,19 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValueProperties.properties.locked
     reason: This is data plane level information proxied through the RP and cannot be changed.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.ConfigurationStoreProperties.properties.disableLocalAuth
+    reason: This is a standardized ARM API.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.ConfigurationStorePropertiesUpdateParameters.properties.disableLocalAuth
+    reason: This is a standardized ARM API.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.OperationDefinition.properties.isDataAction
+    reason: This is a standardized ARM API.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

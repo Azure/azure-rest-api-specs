@@ -31,12 +31,16 @@ openapi-subtype: rpaas
 tag: package-2021-02-01-preview
 ```
 
+### Tag: package-2020-07-01-preview
+
 ```yaml $(tag) == 'package-2020-07-01-preview'
 version: 2020-07-01-preview
 version-with-underscores: 2020_07_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2020-07-01-preview/adp.json
 ```
+
+### Tag: package-2021-02-01-preview
 
 ```yaml $(tag) == 'package-2021-02-01-preview'
 version: 2021-02-01-preview
@@ -65,8 +69,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_adp']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js adp/resource-manager
 ```
 
 ## Go
@@ -89,6 +91,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

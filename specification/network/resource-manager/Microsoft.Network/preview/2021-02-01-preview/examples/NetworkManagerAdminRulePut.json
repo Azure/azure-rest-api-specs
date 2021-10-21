@@ -5,18 +5,20 @@
     "resourceGroupName": "rg1",
     "networkManagerName": "testNetworkManager",
     "configurationName": "myTestSecurityConfig",
+    "ruleCollectionName": "testRuleCollection",
     "ruleName": "SampleAdminRule",
     "adminRule": {
+      "kind": "Custom",
       "properties": {
         "description": "This is Sample Admin Rule",
         "protocol": "Tcp",
-        "source": [
+        "sources": [
           {
             "addressPrefixType": "ServiceTag",
             "addressPrefix": "Internet"
           }
         ],
-        "destination": [
+        "destinations": [
           {
             "addressPrefixType": "IPPrefix",
             "addressPrefix": "*"
@@ -30,21 +32,17 @@
         ],
         "access": "Deny",
         "priority": 1,
-        "direction": "Inbound",
-        "appliesToGroups": [
-          {
-            "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
-          }
-        ]
+        "direction": "Inbound"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityConfigurations/myTestSecurityConfig/adminRules/SampleAdminRule",
-        "type": "Microsoft.Network/networkManagers/securityConfigurations/AdminRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
         "name": "SampleAdminRule",
+        "kind": "Custom",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -56,13 +54,13 @@
         "properties": {
           "description": "This is Sample Admin Rule",
           "protocol": "Tcp",
-          "source": [
+          "sources": [
             {
               "addressPrefixType": "ServiceTag",
               "addressPrefix": "Internet"
             }
           ],
-          "destination": [
+          "destinations": [
             {
               "addressPrefixType": "IPPrefix",
               "addressPrefix": "*"
@@ -77,20 +75,16 @@
           "access": "Deny",
           "priority": 1,
           "direction": "Inbound",
-          "appliesToGroups": [
-            {
-              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
-            }
-          ],
           "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityConfigurations/myTestSecurityConfig/adminRules/SampleAdminRule",
-        "type": "Microsoft.Network/networkManagers/securityConfigurations/AdminRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/rules/SampleAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
         "name": "SampleAdminRule",
+        "kind": "Custom",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -102,13 +96,13 @@
         "properties": {
           "description": "This is Sample Admin Rule",
           "protocol": "Tcp",
-          "source": [
+          "sources": [
             {
               "addressPrefixType": "ServiceTag",
               "addressPrefix": "Internet"
             }
           ],
-          "destination": [
+          "destinations": [
             {
               "addressPrefixType": "IPPrefix",
               "addressPrefix": "*"
@@ -123,11 +117,6 @@
           "access": "Deny",
           "priority": 1,
           "direction": "Inbound",
-          "appliesToGroups": [
-            {
-              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
-            }
-          ],
           "provisioningState": "Succeeded"
         }
       }

@@ -560,7 +560,7 @@
         },
         "filter": {
           "type": "object",
-          "description": "Has filter expression to use in the query.",
+          "description": "The filter expression to use in the query. Please reference our Query API REST documentation for how to properly format the filter.",
           "$ref": "#/definitions/QueryFilter"
         }
       }
@@ -588,6 +588,9 @@
           "description": "The name of the aggregation function to use.",
           "type": "string",
           "enum": [
+            "Avg",
+            "Max",
+            "Min",
             "Sum"
           ],
           "x-ms-enum": {

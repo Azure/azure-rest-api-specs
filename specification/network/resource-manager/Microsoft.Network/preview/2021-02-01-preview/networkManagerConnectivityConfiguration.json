@@ -250,8 +250,8 @@
         "connectivityTopology": {
           "type": "string",
           "enum": [
-            "HubAndSpokeTopology",
-            "MeshTopology"
+            "HubAndSpoke",
+            "Mesh"
           ],
           "x-ms-enum": {
             "name": "ConnectivityTopology",
@@ -259,12 +259,23 @@
           },
           "description": "Connectivity topology type."
         },
-        "hubId": {
-          "type": "string",
-          "description": "The hub vnet Id."
+        "hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hub"
+          },
+          "description": "List of hubItems"
         },
         "isGlobal": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "IsGlobal",
+            "modelAsString": true
+          },
           "description": "Flag if global mesh is supported."
         },
         "appliesToGroups": {
@@ -280,7 +291,15 @@
           "description": "The provisioning state of the connectivity configuration resource."
         },
         "deleteExistingPeering": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteExistingPeering",
+            "modelAsString": true
+          },
           "description": "Flag if need to remove current existing peerings."
         }
       },
@@ -288,6 +307,20 @@
         "connectivityTopology"
       ],
       "description": "Properties of network manager connectivity configuration"
+    },
+    "Hub": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type."
+        }
+      },
+      "description": "Hub Item."
     },
     "connectivityGroupItem": {
       "type": "object",
@@ -297,11 +330,27 @@
           "description": "Network group Id."
         },
         "useHubGateway": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "UseHubGateway",
+            "modelAsString": true
+          },
           "description": "Flag if need to use hub gateway."
         },
         "isGlobal": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "IsGlobal",
+            "modelAsString": true
+          },
           "description": "Flag if global is supported."
         },
         "groupConnectivity": {

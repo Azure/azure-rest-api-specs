@@ -9,6 +9,7 @@
     "Resource": {
       "title": "Resource",
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -32,6 +33,7 @@
       "x-ms-client-name": "AzureEntityResource",
       "title": "Entity Resource",
       "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
+      "type": "object",
       "properties": {
         "etag": {
           "type": "string",
@@ -48,6 +50,7 @@
     "TrackedResource": {
       "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -82,6 +85,7 @@
     "ProxyResource": {
       "title": "Proxy Resource",
       "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -90,6 +94,7 @@
     },
     "ResourceModelWithAllowedPropertySet": {
       "description": "The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -181,6 +186,7 @@
     },
     "Sku": {
       "description": "The resource model definition representing SKU",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -220,6 +226,7 @@
     },
     "Identity": {
       "description": "Identity for the resource.",
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -245,6 +252,7 @@
       }
     },
     "Plan": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -277,6 +285,7 @@
     "ErrorResponse": {
       "title": "Error Response",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
       "properties": {
         "code": {
           "readOnly": true,
@@ -312,6 +321,7 @@
       }
     },
     "ErrorAdditionalInfo": {
+      "type": "object",
       "properties": {
         "type": {
           "readOnly": true,
@@ -343,6 +353,7 @@
         },
         "display": {
           "description": "Localized display information for this particular operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
@@ -396,6 +407,7 @@
     },
     "OperationListResult": {
       "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -550,7 +562,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group. The name is case insensitive.",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"
