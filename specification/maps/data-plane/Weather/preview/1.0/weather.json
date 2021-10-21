@@ -732,56 +732,6 @@
           }
         }
       }
-    },
-    "/weather/climo/summary/{format}": {
-      "get": {
-        "description": "**Get Climo Month Summary**\n  \n  \n**Applies to**: G1 and G2 pricing tiers.\n\n\nThe service returns climatology data such as month summary for a given coordinate location.",
-        "operationId": "Weather_GetClimoSummary",
-        "x-ms-examples": {
-          "ClimoSummary": {
-            "$ref": "./examples/GetClimoSummary.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/WeatherApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "name": "query",
-            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "in": "query",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "yearMonth",
-            "description": "Year and month in ISO 8601 format, for example, 2019-10.",
-            "in": "query",
-            "type": "string",
-            "required": true
-          },
-          {
-            "$ref": "#/parameters/WeatherDataUnit"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClimoSummaryResponse"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
     }
   },
   "definitions": {
