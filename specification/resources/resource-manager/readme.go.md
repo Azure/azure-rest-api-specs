@@ -20,7 +20,7 @@ go:
 
 ``` yaml $(go) && $(package-resources) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resources/armresources
+module-name: sdk/resourcemanager/resources/armresources
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -35,6 +35,7 @@ batch:
   - tag: package-features-2021-07
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
+  - tag: package-policy-2021-07
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2020-03
@@ -132,6 +133,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-locks-2015-01' && $(go)
 namespace: locks
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-01-01/locks
+```
+
+### Tag: package-policy-2021-07 and go
+
+These settings apply only when `--tag=package-policy-2021-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-policy-2021-07' && $(go)
+namespace: policy
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-07-01/policy
 ```
 
 ### Tag: package-policy-2021-06 and go

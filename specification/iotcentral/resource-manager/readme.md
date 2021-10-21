@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for IotCentral.
 
 ---
+
 ## Getting Started
+
 To build the SDK for IotCentral, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,18 +15,39 @@ To build the SDK for IotCentral, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for IotCentral.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09-01
+tag: package-2021-06
 ```
 
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
+```
 ### Tag: package-2018-09-01
 
 These settings apply only when `--tag=package-2018-09-01` is specified on the command line.
@@ -44,6 +67,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -131,6 +155,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-

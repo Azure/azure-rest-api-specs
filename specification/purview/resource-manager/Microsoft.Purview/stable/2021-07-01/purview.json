@@ -1019,8 +1019,13 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku",
-          "description": "Gets or sets the Sku."
+          "description": "Gets or sets the Sku.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountSku"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1030,7 +1035,7 @@
       "properties": {
         "capacity": {
           "format": "int32",
-          "description": "Gets or sets the sku capacity. Possible values include: 4, 16",
+          "description": "Gets or sets the sku capacity.",
           "type": "integer"
         },
         "name": {
@@ -1916,13 +1921,12 @@
       "required": true,
       "type": "string"
     },
-    "accountName": {
-      "name": "accountName",
-      "in": "path",
-      "description": "The name of the account.",
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "resourceGroupName": {
       "name": "resourceGroupName",
@@ -1932,12 +1936,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
