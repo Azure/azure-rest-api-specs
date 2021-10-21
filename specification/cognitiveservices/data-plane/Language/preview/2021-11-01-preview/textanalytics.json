@@ -35,7 +35,7 @@
                 "produces": [
                     "application/json"
                 ],
-                "description": "Submit a collection of text records for analysis. Specify one or more unique tasks to be executed.",
+                "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
                 "operationId": "AnalyzeTextSubmitJob",
                 "summary": "Submit text analysis job",
                 "parameters": [
@@ -43,7 +43,7 @@
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "description": "Collection of records to analyze and tasks to execute.",
+                        "description": "Collection of documents to analyze and tasks to execute.",
                         "in": "body",
                         "name": "body",
                         "schema": {
@@ -147,7 +147,7 @@
                     "$ref": "#/definitions/MultiLanguageBatchInput"
                 },
                 "tasks": {
-                    "description": "The set of tasks to execute on the input records.",
+                    "description": "The set of tasks to execute on the input documents.",
                     "properties": {
                         "entityRecognitionTasks": {
                             "type": "array",
@@ -247,7 +247,7 @@
                     "type": "array",
                     "description": "Errors by record id.",
                     "items": {
-                        "$ref": "#/definitions/RecordError"
+                        "$ref": "#/definitions/DocumentError"
                     }
                 },
                 "statistics": {
@@ -285,7 +285,7 @@
                     "type": "array",
                     "description": "Errors by record id.",
                     "items": {
-                        "$ref": "#/definitions/RecordError"
+                        "$ref": "#/definitions/DocumentError"
                     }
                 },
                 "statistics": {
@@ -308,7 +308,7 @@
         },
         "CustomEntitiesTask": {
             "type": "object",
-            "description": "Use custom models to ease the process of information extraction from unstructured records like contracts or financial records",
+            "description": "Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents",
             "allOf": [
                 {
                     "$ref": "#/definitions/Task"
@@ -348,16 +348,16 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/EntitiesRecordResult"
+                                "$ref": "#/definitions/EntitiesDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
@@ -401,28 +401,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/SingleClassificationRecordResult"
+                                "$ref": "#/definitions/SingleClassificationDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "SingleClassificationRecordResult": {
+        "SingleClassificationDocumentResult": {
             "type": "object",
             "required": [
                 "classification"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -490,28 +490,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/MultiClassificationRecordResult"
+                                "$ref": "#/definitions/MultiClassificationDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "MultiClassificationRecordResult": {
+        "MultiClassificationDocumentResult": {
             "type": "object",
             "required": [
                 "classifications"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -581,25 +581,25 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Sentiment analysis per record.",
                             "items": {
-                                "$ref": "#/definitions/SentimentRecordResult"
+                                "$ref": "#/definitions/SentimentDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "SentimentRecordResult": {
+        "SentimentDocumentResult": {
             "type": "object",
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -618,7 +618,7 @@
                             }
                         },
                         "confidenceScores": {
-                            "description": "Record level sentiment confidence scores between 0 and 1 for each sentiment class.",
+                            "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
                             "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
                         },
                         "sentences": {
@@ -911,28 +911,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/EntitiesRecordResult"
+                                "$ref": "#/definitions/EntitiesDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "EntitiesRecordResult": {
+        "EntitiesDocumentResult": {
             "type": "object",
             "required": [
                 "entities"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -1038,28 +1038,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/LinkedEntitiesRecordResult"
+                                "$ref": "#/definitions/LinkedEntitiesDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "LinkedEntitiesRecordResult": {
+        "LinkedEntitiesDocumentResult": {
             "type": "object",
             "required": [
                 "entities"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -1210,21 +1210,21 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/PiiEntitiesRecordResult"
+                                "$ref": "#/definitions/PiiEntitiesDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "PiiEntitiesRecordResult": {
+        "PiiEntitiesDocumentResult": {
             "type": "object",
             "required": [
                 "redactedText",
@@ -1232,7 +1232,7 @@
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -1502,28 +1502,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/ExtractedSummaryRecordResult"
+                                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "ExtractedSummaryRecordResult": {
+        "ExtractedSummaryDocumentResult": {
             "type": "object",
             "required": [
                 "sentences"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -1608,28 +1608,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/KeyPhrasesRecordResult"
+                                "$ref": "#/definitions/KeyPhrasesDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "KeyPhrasesRecordResult": {
+        "KeyPhrasesDocumentResult": {
             "type": "object",
             "required": [
                 "keyPhrases"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -1689,28 +1689,28 @@
                 },
                 {
                     "properties": {
-                        "records": {
+                        "documents": {
                             "type": "array",
                             "description": "Response by record",
                             "items": {
-                                "$ref": "#/definitions/LanguageDetectionRecordResult"
+                                "$ref": "#/definitions/LanguageDetectionDocumentResult"
                             }
                         }
                     },
                     "required": [
-                        "records"
+                        "documents"
                     ]
                 }
             ]
         },
-        "LanguageDetectionRecordResult": {
+        "LanguageDetectionDocumentResult": {
             "type": "object",
             "required": [
                 "detectedLanguage"
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 },
                 {
                     "properties": {
@@ -2060,7 +2060,7 @@
                 ]
             }
         },
-        "RecordResult": {
+        "DocumentResult": {
             "type": "object",
             "required": [
                 "id",
@@ -2075,16 +2075,16 @@
                     "type": "array",
                     "description": "Warnings encountered while processing record.",
                     "items": {
-                        "$ref": "#/definitions/RecordWarning"
+                        "$ref": "#/definitions/DocumentWarning"
                     }
                 },
                 "statistics": {
                     "description": "if showStats=true was specified in the request this field will contain information about the record payload.",
-                    "$ref": "#/definitions/RecordStatistics"
+                    "$ref": "#/definitions/DocumentStatistics"
                 }
             }
         },
-        "RecordError": {
+        "DocumentError": {
             "type": "object",
             "required": [
               "id",
@@ -2093,16 +2093,16 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Record Id."
+                "description": "Document Id."
               },
               "error": {
                 "type": "object",
-                "description": "Record Error.",
+                "description": "Document Error.",
                 "$ref": "#/definitions/Error"
               }
             }
         },
-        "RecordWarning": {
+        "DocumentWarning": {
             "type": "object",
             "required": [
                 "code",
@@ -2131,7 +2131,7 @@
                 }
             }
         },
-        "RecordStatistics": {
+        "DocumentStatistics": {
             "type": "object",
             "required": [
                 "charactersCount",
@@ -2154,26 +2154,26 @@
         "RequestStatistics": {
             "type": "object",
             "required": [
-                "recordsCount",
-                "validRecordssCount",
-                "erroneousRecordsCount",
+                "documentsCount",
+                "validDocumentsCount",
+                "erroneousDocumentsCount",
                 "transactionsCount"
             ],
             "properties": {
-                "recordsCount": {
+                "documentsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of records submitted in the request."
+                    "description": "Number of documents submitted in the request."
                 },
-                "validRecordsCount": {
+                "validDocumentsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of valid records. This excludes empty, over-size limit or non-supported languages records."
+                    "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
                 },
-                "erroneousRecordsCount": {
+                "erroneousDocumentsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of invalid records. This includes empty, over-size limit or non-supported languages records."
+                    "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
                 },
                 "transactionsCount": {
                     "type": "integer",
@@ -2185,14 +2185,14 @@
         },
         "MultiLanguageBatchInput": {
             "type": "object",
-            "description": "Contains a set of input records to be analyzed by the service.",
+            "description": "Contains a set of input documents to be analyzed by the service.",
             "required": [
-                "records"
+                "documents"
             ],
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "The set of records to process as part of this batch.",
+                    "description": "The set of documents to process as part of this batch.",
                     "items": {
                         "$ref": "#/definitions/MultiLanguageInput"
                         }
@@ -2334,7 +2334,7 @@
                 "ExtractionFailure",
                 "InvalidRequestBodyFormat",
                 "EmptyRequest",
-                "MissingInputRecords",
+                "MissingInputDocuments",
                 "InvalidDocument",
                 "ModelVersionIncorrect",
                 "InvalidDocumentBatch",
