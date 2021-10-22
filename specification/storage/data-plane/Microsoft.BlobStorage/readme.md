@@ -25,7 +25,7 @@ These are the global settings for the BlobStorage API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-10
+tag: package-2021-02
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -39,15 +39,31 @@ input-file:
 - preview/2020-10-02/blob.json
 ```
 
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12'
+input-file:
+- preview/2020-12-06/blob.json
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02'
+input-file:
+- preview/2021-02-12/blob.json
+```
+
 ### Suppression
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: preview/2020-10-02/blob.json
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
-    from: preview/2020-10-02/blob.json
   - suppress: XmsExamplesRequired
-    from: preview/2020-10-02/blob.json
+  - suppress: LongRunningOperationsWithLongRunningExtension
 ```
 ---
