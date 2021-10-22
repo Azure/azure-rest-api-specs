@@ -9,7 +9,10 @@
     "body": {
       "displayName": "Event Hub",
       "type": "eventhubs@v1",
-      "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Key];EntityPath=entityPath1"
+      "authorization": {
+        "type": "connectionString",
+        "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Key];EntityPath=entityPath1"
+      }
     }
   },
   "responses": {
@@ -18,7 +21,10 @@
         "id": "destination1",
         "displayName": "Event Hub",
         "type": "eventhubs@v1",
-        "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=*****;EntityPath=entityPath1",
+        "authorization": {
+          "type": "connectionString",
+          "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=*****;EntityPath=entityPath1"
+        },
         "status": "waiting"
       }
     }

@@ -116,6 +116,36 @@
       ],
       "type": "object",
       "properties": {
+        "authorization": {
+          "$ref": "#/definitions/BlobStorageV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "BlobStorageV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "BlobStorageV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobStorageV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
         "connectionString": {
           "description": "The connection string for accessing the blob storage account.",
           "type": "string"
@@ -127,6 +157,29 @@
       },
       "required": [
         "connectionString",
+        "containerName"
+      ]
+    },
+    "BlobStorageV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobStorageV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "endpointUri": {
+          "description": "The storage account's blob service endpoint URL.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Name of the container where data should be written in the storage account.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "endpointUri",
         "containerName"
       ]
     },
@@ -685,6 +738,36 @@
       ],
       "type": "object",
       "properties": {
+        "authorization": {
+          "$ref": "#/definitions/EventHubsV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "EventHubsV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "EventHubsV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventHubsV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
         "connectionString": {
           "description": "The connection string for accessing the Event Hubs namespace, including the `EntityPath` of the event hub.",
           "type": "string"
@@ -692,6 +775,29 @@
       },
       "required": [
         "connectionString"
+      ]
+    },
+    "EventHubsV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventHubsV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the Event Hubs namespace.",
+          "type": "string"
+        },
+        "eventHubName": {
+          "description": "The Event Hubs instance name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostName",
+        "eventHubName"
       ]
     },
     "Export": {
@@ -1226,6 +1332,36 @@
       ],
       "type": "object",
       "properties": {
+        "authorization": {
+          "$ref": "#/definitions/ServiceBusQueueV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "ServiceBusQueueV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ServiceBusQueueV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusQueueV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
         "connectionString": {
           "description": "The connection string for accessing the Service Bus namespace, including the `EntityPath` of the queue.",
           "type": "string"
@@ -1233,6 +1369,29 @@
       },
       "required": [
         "connectionString"
+      ]
+    },
+    "ServiceBusQueueV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusQueueV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the Service Bus namespace.",
+          "type": "string"
+        },
+        "queueName": {
+          "description": "The Service Bus queue name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostName",
+        "queueName"
       ]
     },
     "ServiceBusTopicV1Destination": {
@@ -1244,6 +1403,36 @@
       ],
       "type": "object",
       "properties": {
+        "authorization": {
+          "$ref": "#/definitions/ServiceBusTopicV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "ServiceBusTopicV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ServiceBusTopicV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusTopicV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
         "connectionString": {
           "description": "The connection string for accessing the Service Bus namespace, including the `EntityPath` of the topic.",
           "type": "string"
@@ -1251,6 +1440,29 @@
       },
       "required": [
         "connectionString"
+      ]
+    },
+    "ServiceBusTopicV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusTopicV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the Service Bus namespace.",
+          "type": "string"
+        },
+        "topicName": {
+          "description": "The Service Bus topic name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostName",
+        "topicName"
       ]
     },
     "ServicePrincipalUser": {
@@ -1895,6 +2107,11 @@
       "get": {
         "operationId": "Destinations_ListExports",
         "summary": "List all exports connected to the given destination.",
+        "x-ms-examples": {
+          "List all exports connected to the given destination": {
+            "$ref": "./examples/dataexports_destinations_exports_list.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -1920,6 +2137,11 @@
       "get": {
         "operationId": "Exports_List",
         "summary": "Get the list of exports in an application.",
+        "x-ms-examples": {
+          "List data exports": {
+            "$ref": "./examples/dataexports_exports_list.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -1942,6 +2164,11 @@
       "get": {
         "operationId": "Exports_Get",
         "summary": "Get an export by ID.",
+        "x-ms-examples": {
+          "Get data export by ID": {
+            "$ref": "./examples/dataexports_exports_get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -1963,6 +2190,11 @@
         "operationId": "Exports_Create",
         "summary": "Create or update an export",
         "description": "Create or update a definition for exporting data. Also used to connect or disconnect an export from destinations.",
+        "x-ms-examples": {
+          "Create data export with ID": {
+            "$ref": "./examples/dataexports_exports_create.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -1993,6 +2225,11 @@
         "operationId": "Exports_Update",
         "summary": "Patch an export.",
         "description": "Perform an incremental update to an export.",
+        "x-ms-examples": {
+          "Update a data export": {
+            "$ref": "./examples/dataexports_exports_update.json"
+          }
+        },
         "consumes": [
           "application/json",
           "application/json-patch+json"
@@ -2026,6 +2263,11 @@
       "delete": {
         "operationId": "Exports_Remove",
         "summary": "Delete an export.",
+        "x-ms-examples": {
+          "Delete a data export with ID": {
+            "$ref": "./examples/dataexports_exports_delete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
@@ -2045,6 +2287,11 @@
       "get": {
         "operationId": "Exports_ListDestinations",
         "summary": "List all destinations connected to the given export.",
+        "x-ms-examples": {
+          "List all destinations in given export": {
+            "$ref": "./examples/dataexports_exports_destinations_list.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/Version"

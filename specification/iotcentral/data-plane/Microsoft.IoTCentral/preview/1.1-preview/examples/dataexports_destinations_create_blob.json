@@ -9,8 +9,10 @@
     "body": {
       "displayName": "Blob Storage",
       "type": "blobstorage@v1",
-      "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=[key];EndpointSuffix=core.windows.net",
-      "containerName": "test"
+      "authorization": {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=[key];EndpointSuffix=core.windows.net",
+        "containerName": "test"
+      }
     }
   },
   "responses": {
@@ -19,8 +21,11 @@
         "id": "destination1",
         "displayName": "Blob Storage",
         "type": "blobstorage@v1",
-        "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=*****;EndpointSuffix=core.windows.net",
-        "containerName": "test",
+        "authorization": {
+          "type": "connectionString",
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=*****;EndpointSuffix=core.windows.net",
+          "containerName": "test"
+        },
         "status": "waiting"
       }
     }

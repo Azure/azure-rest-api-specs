@@ -9,7 +9,10 @@
     "body": {
       "displayName": "Service Bus Queue",
       "type": "servicebusqueue@v1",
-      "connectionString": "Endpoint=sb://[namespance].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=[key];EntityPath=[name]"
+      "authorization": {
+        "type": "connectionString",
+        "connectionString": "Endpoint=sb://[namespance].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=[key];EntityPath=[name]"
+      }
     }
   },
   "responses": {
@@ -18,7 +21,10 @@
         "id": "destination1",
         "displayName": "Service Bus Queue",
         "type": "servicebusqueue@v1",
-        "connectionString": "Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=*****;EntityPath=[name]",
+        "authorization": {
+          "type": "connectionString",
+          "connectionString": "Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=*****;EntityPath=[name]"
+        },
         "status": "waiting"
       }
     }
