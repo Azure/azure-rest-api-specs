@@ -12,9 +12,17 @@ The current preview release is 2021-11-01-preview
 tag: release_2021_11_01_preview
 add-credentials: true
 clear-output-folder: true
+openapi-type: data-plane
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
+```
+
+```yaml
+tag: release_2021_07_15_preview
+add-credentials: true
+clear-output-folder: true
+openapi-type: data-plane
 ```
 
 ### Release 2021-11-01-preview
@@ -24,6 +32,20 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 ``` yaml $(tag) == 'release_2021_11_01_preview'
 input-file:
 - preview/2021-11-01-preview/textanalytics.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2021-07-15-preview
+
+These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_07_15_preview'
+input-file:
+- preview/2021-07-15-preview/questionanswering.json
+- preview/2021-07-15-preview/questionanswering-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
