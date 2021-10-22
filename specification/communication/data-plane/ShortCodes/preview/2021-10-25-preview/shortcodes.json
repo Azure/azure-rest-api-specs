@@ -353,7 +353,7 @@
         }
       }
     },
-    "Note": {
+    "ReviewNote": {
       "description": "Holds a note about a Program Brief that has gone thru stages of review process.",
       "type": "object",
       "properties": {
@@ -547,7 +547,7 @@
       "description": "Represents a message example to be sent from or to the end user.",
       "type": "object",
       "properties": {
-        "type": {
+        "direction": {
           "description": "Indicates whether the message example is supposed to be sent to or from the end user e.g. toUser",
           "enum": [
             "toUser",
@@ -555,7 +555,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "MessageExampleType",
+            "name": "MessageDirection",
             "modelAsString": true
           }
         },
@@ -582,8 +582,8 @@
       "description": "Describes a messaging use case for a given content type by providing example messages.",
       "type": "object",
       "properties": {
-        "contentType": {
-          "description": "Indicates the messaging content type used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen'.",
+        "contentCategory": {
+          "description": "Indicates the messaging content category used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen'.",
           "enum": [
             "ringTones",
             "smsChat",
@@ -614,7 +614,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ContentType",
+            "name": "MessageContentCategory",
             "modelAsString": true
           }
         },
@@ -630,18 +630,18 @@
     "MessageDetails": {
       "type": "object",
       "properties": {
-        "types": {
-          "description": "Applicable message types used in the program e.g. SMS, MMS.",
+        "supportedProtocols": {
+          "description": "Applicable message protocols used in the program e.g. SMS, MMS.",
           "type": "array",
           "items": {
-            "description": "Applicable message types to be used in a program.",
+            "description": "Applicable message protocols to be used in a program.",
             "enum": [
               "sms",
               "mms"
             ],
             "type": "string",
             "x-ms-enum": {
-              "name": "MessageType",
+              "name": "MessageProtocol",
               "modelAsString": true
             }
           }
@@ -699,7 +699,7 @@
     "TrafficDetails": {
       "type": "object",
       "properties": {
-        "estimatedVolume": {
+        "totalMonthlyVolume": {
           "format": "int32",
           "description": "Estimated total messages per month.",
           "maximum": 2147483647,
@@ -762,11 +762,11 @@
           "description": "Number provisioned for the Program Brief e.g. 555555, 'CONTOSO'",
           "type": "string"
         },
-        "notes": {
+        "reviewNotes": {
           "description": "Notes added to the Program Brief after being reviewed to help customer understand\r\nreview results and necessary follow up actions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Note"
+            "$ref": "#/definitions/ReviewNote"
           }
         },
         "costs": {

@@ -11,7 +11,7 @@
         "id": "146b433f-d774-40b9-9138-55d386208725",
         "status": "approved",
         "number": "123456",
-        "notes": [
+        "reviewNotes": [
           {
             "message": "Program Brief is approved.",
             "date": "2021-07-11T21:36:24.8898166+00:00"
@@ -65,7 +65,7 @@
           }
         },
         "messageDetails": {
-          "types": [
+          "supportedProtocols": [
             "sms"
           ],
           "recurrence": "transaction",
@@ -76,12 +76,12 @@
           "directionality": "twoWay",
           "useCases": [
             {
-              "contentType": "loyaltyProgramPointsPrizes",
+              "contentCategory": "loyaltyProgramPointsPrizes",
               "examples": [
                 {
                   "messages": [
                     {
-                      "type": "toUser",
+                      "direction": "toUser",
                       "text": "Your password is 123 STOP/HELP"
                     }
                   ]
@@ -89,11 +89,11 @@
                 {
                   "messages": [
                     {
-                      "type": "toUser",
+                      "direction": "toUser",
                       "text": "Want me to notify you when package in the way?"
                     },
                     {
-                      "type": "fromUser",
+                      "direction": "fromUser",
                       "text": "Y"
                     }
                   ]
@@ -103,7 +103,7 @@
           ]
         },
         "trafficDetails": {
-          "estimatedVolume": 10,
+          "totalMonthlyVolume": 10,
           "monthlyAverageMessagesFromUser": 2,
           "monthlyAverageMessagesToUser": 1,
           "isSpiky": false,

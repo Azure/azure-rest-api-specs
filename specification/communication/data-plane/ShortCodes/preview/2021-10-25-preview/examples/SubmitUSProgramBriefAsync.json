@@ -57,7 +57,7 @@
           }
         },
         "messageDetails": {
-          "types": [
+          "supportedProtocols": [
             "sms"
           ],
           "recurrence": "transaction",
@@ -68,12 +68,12 @@
           "directionality": "twoWay",
           "useCases": [
             {
-              "contentType": "loyaltyProgramPointsPrizes",
+              "contentCategory": "loyaltyProgramPointsPrizes",
               "examples": [
                 {
                   "messages": [
                     {
-                      "type": "toUser",
+                      "direction": "toUser",
                       "text": "Your password is 123 STOP/HELP"
                     }
                   ]
@@ -81,11 +81,11 @@
                 {
                   "messages": [
                     {
-                      "type": "toUser",
+                      "direction": "toUser",
                       "text": "Want me to notify you when package in the way?"
                     },
                     {
-                      "type": "fromUser",
+                      "direction": "fromUser",
                       "text": "Y"
                     }
                   ]
@@ -95,7 +95,7 @@
           ]
         },
         "trafficDetails": {
-          "estimatedVolume": 10,
+          "totalMonthlyVolume": 10,
           "monthlyAverageMessagesFromUser": 2,
           "monthlyAverageMessagesToUser": 1,
           "isSpiky": false,
