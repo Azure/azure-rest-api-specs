@@ -9,23 +9,25 @@
   },
   "responses": {
     "200": {
-      "id": "export1",
-      "displayName": "Test Export 1",
-      "enabled": false,
-      "source": "telemetry",
-      "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
-      "enrichments": {
-        "abc": {
-          "path": "$templateDisplayName"
-        }
-      },
-      "destinations": [
-        {
-          "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
-          "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
-        }
-      ],
-      "status": "notStarted"
+      "body": {
+        "id": "export1",
+        "displayName": "Test Export 1",
+        "enabled": false,
+        "source": "telemetry",
+        "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
+        "enrichments": {
+          "abc": {
+            "path": "$templateDisplayName"
+          }
+        },
+        "destinations": [
+          {
+            "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
+            "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
+          }
+        ],
+        "status": "notStarted"
+      }
     }
   }
 }

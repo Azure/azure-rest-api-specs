@@ -237,7 +237,7 @@
           "type": "string"
         },
         "table": {
-          "description": "The table within the Data Explorer database that will recieve the data.",
+          "description": "The table within the Data Explorer database that will receive the data.",
           "type": "string"
         },
         "authorization": {
@@ -4770,7 +4770,9 @@
       "description": "The version of the API being called.",
       "x-ms-parameter-location": "client",
       "type": "string",
-      "default": "1.1-preview",
+      "enum": [
+        "1.1-preview"
+      ],
       "required": true
     },
     "filter": {

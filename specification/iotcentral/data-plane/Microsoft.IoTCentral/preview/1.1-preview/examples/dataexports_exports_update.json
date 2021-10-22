@@ -18,23 +18,25 @@
   },
   "responses": {
     "200": {
-      "id": "export1",
-      "displayName": "Test Export Update",
-      "enabled": true,
-      "source": "telemetry",
-      "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
-      "enrichments": {
-        "abc": {
-          "path": "$provisioned"
-        }
-      },
-      "destinations": [
-        {
-          "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
-          "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
-        }
-      ],
-      "status": "starting"
+      "body": {
+        "id": "export1",
+        "displayName": "Test Export Update",
+        "enabled": true,
+        "source": "telemetry",
+        "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
+        "enrichments": {
+          "abc": {
+            "path": "$provisioned"
+          }
+        },
+        "destinations": [
+          {
+            "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
+            "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
+          }
+        ],
+        "status": "starting"
+      }
     }
   }
 }
