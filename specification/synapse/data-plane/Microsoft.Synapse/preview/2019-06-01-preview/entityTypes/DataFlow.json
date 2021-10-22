@@ -58,6 +58,26 @@
         }
       }
     },
+    "Flowlet": {
+      "x-ms-discriminator-value": "Flowlet",
+      "description": "Data flow flowlet",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFlow"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Flowlet type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowletTypeProperties"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
     "MappingDataFlowTypeProperties": {
       "description": "Mapping data flow type properties.",
       "type": "object",
@@ -86,6 +106,13 @@
         "script": {
           "type": "string",
           "description": "DataFlow script."
+        },
+        "scriptLines": {
+          "type": "array",
+          "description": "Data flow script lines.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -100,6 +127,10 @@
         "description": {
           "description": "Transformation description.",
           "type": "string"
+        },
+        "flowlet": {
+          "description": "Flowlet Reference",
+          "$ref": "../artifacts.json#/definitions/DataFlowReference"
         }
       },
       "required": [
@@ -126,6 +157,10 @@
         "schemaLinkedService": {
           "description": "Schema linked service reference.",
           "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
+        },
+        "flowlet": {
+          "description": "Flowlet Reference",
+          "$ref": "../artifacts.json#/definitions/DataFlowReference"
         }
       }
     },
@@ -149,6 +184,51 @@
         "schemaLinkedService": {
           "description": "Schema linked service reference.",
           "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
+        },
+        "flowlet": {
+          "description": "Flowlet Reference",
+          "$ref": "../artifacts.json#/definitions/DataFlowReference"
+        }
+      }
+    },
+    "FlowletTypeProperties": {
+      "description": "Flowlet type properties.",
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "List of sources in Flowlet.",
+          "items": {
+            "$ref": "#/definitions/DataFlowSource"
+          }
+        },
+        "sinks": {
+          "type": "array",
+          "description": "List of sinks in Flowlet.",
+          "items": {
+            "$ref": "#/definitions/DataFlowSink"
+          }
+        },
+        "transformations": {
+          "type": "array",
+          "description": "List of transformations in Flowlet.",
+          "items": {
+            "$ref": "#/definitions/Transformation"
+          }
+        },
+        "script": {
+          "type": "string",
+          "description": "Flowlet script."
+        },
+        "scriptLines": {
+          "type": "array",
+          "description": "Flowlet script lines.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
         }
       }
     }

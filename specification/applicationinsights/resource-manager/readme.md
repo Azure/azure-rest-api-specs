@@ -257,6 +257,15 @@ input-file:
   - Microsoft.Insights/stable/2021-08-01/workbookOperations_API.json
 ```
 
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+```
+
 ### Tag: package-2021-03-only
 
 These settings apply only when `--tag=package-2021-03-only` is specified on the command line.
@@ -272,7 +281,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-03-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-03-only'
+``` yaml $(tag) == 'package-preview-2021-03-only'
 input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
@@ -290,7 +299,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10-only'
+``` yaml $(tag) == 'package-2020-10-only'
 input-file:
   - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
@@ -301,7 +310,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-10-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-10-only'
+``` yaml $(tag) == 'package-preview-2020-10-only'
 input-file:
   - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
 ```
@@ -559,5 +568,3 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 - Microsoft.Insights/preview/2018-06-17-preview/workbookOperations_API.json
 ```
-
-
