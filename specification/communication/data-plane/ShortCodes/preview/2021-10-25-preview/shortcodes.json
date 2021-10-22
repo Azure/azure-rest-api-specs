@@ -439,6 +439,7 @@
           "type": "string"
         },
         "url": {
+          "format": "uri",
           "description": "URL for the program or company.",
           "type": "string"
         },
@@ -461,14 +462,17 @@
           }
         },
         "signUpUrl": {
+          "format": "uri",
           "description": "URL for \"call to action\" image for the program.",
           "type": "string"
         },
         "termsOfServiceUrl": {
+          "format": "uri",
           "description": "URL for program terms of service.",
           "type": "string"
         },
         "privacyPolicyUrl": {
+          "format": "uri",
           "description": "URL for privacy policy.",
           "type": "string"
         },
@@ -488,10 +492,12 @@
           "type": "string"
         },
         "phone": {
+          "format": "tel",
           "description": "Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111.",
           "type": "string"
         },
         "email": {
+          "format": "email",
           "description": "Contact email address number for the authorized user for the customer.",
           "type": "string"
         }
@@ -502,10 +508,12 @@
       "type": "object",
       "properties": {
         "tollFreeNumber": {
+          "format": "tel",
           "description": "Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212",
           "type": "string"
         },
         "email": {
+          "format": "email",
           "description": "Customer support email address for the customer submitting the Program Brief.",
           "type": "string"
         }
@@ -519,6 +527,7 @@
           "type": "string"
         },
         "url": {
+          "format": "uri",
           "description": "Company URL for customer submitting Program Brief.",
           "type": "string"
         },
@@ -574,7 +583,7 @@
       "type": "object",
       "properties": {
         "contentType": {
-          "description": "Indicates the messaging content type used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc.",
+          "description": "Indicates the messaging content type used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen'.",
           "enum": [
             "ringTones",
             "smsChat",
@@ -659,9 +668,11 @@
         "confirmationMessage": {
           "type": "string"
         },
-        "estimatedRampUpTimeInMonths": {
+        "estimatedRampUpTimeInDays": {
           "format": "int32",
-          "description": "Numbers of months in which is expected to start sending messages from the short code.",
+          "description": "Numbers of days in which is expected to start sending messages from the short code.",
+          "maximum": 2147483647,
+          "minimum": 0,
           "type": "integer"
         },
         "directionality": {
@@ -691,16 +702,22 @@
         "estimatedVolume": {
           "format": "int32",
           "description": "Estimated total messages per month.",
+          "maximum": 2147483647,
+          "minimum": 0,
           "type": "integer"
         },
         "monthlyAverageMessagesFromUser": {
           "format": "int32",
           "description": "Estimated number of Mobile-Originated messages likely to be received from a user per month.",
+          "maximum": 2147483647,
+          "minimum": 0,
           "type": "integer"
         },
         "monthlyAverageMessagesToUser": {
           "format": "int32",
           "description": "Estimated number of Mobile-Terminated messages likely to be sent per user per month.",
+          "maximum": 2147483647,
+          "minimum": 0,
           "type": "integer"
         },
         "isSpiky": {
