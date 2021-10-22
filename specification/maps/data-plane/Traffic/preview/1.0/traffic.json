@@ -666,7 +666,6 @@
           "description": "Flow Segment Data property",
           "type": "object",
           "readOnly": true,
-          "x-ms-client-flatten": true,
           "properties": {
             "frc": {
               "description": "Functional Road Class. This indicates the road type:\n  0: Motorway, freeway or other major road.\n  1: Major road, less important than a motorway.\n  2: Other major road.\n  3: Secondary road.\n  4: Local connecting road.\n  5: Local road of high importance.\n  6: Local road.",
@@ -706,7 +705,6 @@
             "coordinates": {
               "description": "Includes the coordinates describing the shape of the segment. Coordinates are shifted from the road depending on the zoom level to support high quality visualization in every scale.",
               "type": "object",
-              "x-ms-client-flatten": true,
               "properties": {
                 "coordinate": {
                   "description": "Coordinate array",
@@ -742,7 +740,6 @@
           "description": "Main response element",
           "type": "object",
           "readOnly": true,
-          "x-ms-client-flatten": true,
           "properties": {
             "@id": {
               "description": "ID of the traffic model for this incident",
@@ -922,8 +919,8 @@
               },
               {
                 "value": "4",
-                "name": "Undefined",
-                "description": "Undefined (used for road closures and other indefinite delays)"
+                "name": "Indefinite",
+                "description": "Indefinite (used for road closures and other indefinite delays)"
               }
             ]
           }
@@ -954,7 +951,7 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "x-ms-client-name": "length"
+          "x-ms-client-name": "lengthInMeters"
         },
         "r": {
           "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
@@ -981,19 +978,19 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "x-ms-client-name": "delay"
+          "x-ms-client-name": "delayInSeconds"
         },
         "t": {
           "description": "To: the name of the intersection or location where the traffic due to the incident ends",
           "type": "string",
           "readOnly": true,
-          "x-ms-client-name": "locationNameTo"
+          "x-ms-client-name": "trafficEndLocation"
         },
         "f": {
           "description": "From: the name of the intersection or location where the traffic due to the incident starts",
           "type": "string",
           "readOnly": true,
-          "x-ms-client-name": "locationNameFrom"
+          "x-ms-client-name": "trafficStartLocation"
         },
         "d": {
           "description": "Description of the incident in the language requested",
@@ -1016,7 +1013,6 @@
         "viewpResp": {
           "description": "Viewport Response object",
           "type": "object",
-          "x-ms-client-flatten": true,
           "readOnly": true,
           "properties": {
             "trafficState": {
