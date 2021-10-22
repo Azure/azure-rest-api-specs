@@ -1183,6 +1183,155 @@
         }
       }
     },
+    "HostNameBinding": {
+      "description": "A hostname binding object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HostNameBinding resource specific properties",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Hostname.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "siteName": {
+              "description": "App Service app name.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "domainId": {
+              "description": "Fully qualified ARM domain resource URI.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "azureResourceName": {
+              "description": "Azure resource name.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "azureResourceType": {
+              "description": "Azure resource type.",
+              "enum": [
+                "Website",
+                "TrafficManager"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AzureResourceType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "customHostNameDnsRecordType": {
+              "description": "Custom DNS record type.",
+              "enum": [
+                "CName",
+                "A"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CustomHostNameDnsRecordType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hostNameType": {
+              "description": "Hostname type.",
+              "enum": [
+                "Verified",
+                "Managed"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "HostNameType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "sslState": {
+              "description": "SSL type",
+              "enum": [
+                "Disabled",
+                "SniEnabled",
+                "IpBasedEnabled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "SslState",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "thumbprint": {
+              "description": "SSL certificate thumbprint",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "virtualIP": {
+              "description": "Virtual IP address assigned to the hostname if IP based SSL is enabled.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HostNameBindingCollection": {
+      "description": "Collection of hostname bindings.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostNameBinding"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "HostNameSslState": {
       "description": "SSL-enabled hostname.",
       "type": "object",
