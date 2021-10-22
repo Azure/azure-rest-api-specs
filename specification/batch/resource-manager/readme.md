@@ -25,6 +25,8 @@ To see additional help and options, run:
 These are the global settings for the Batch API.
 
 ``` yaml
+title: BatchManagementClient
+description: Batch Client
 openapi-type: arm
 tag: package-2021-06
 ```
@@ -220,6 +222,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby

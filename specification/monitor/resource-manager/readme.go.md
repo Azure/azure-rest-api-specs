@@ -11,7 +11,7 @@ go:
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/monitor/armmonitor
+module-name: sdk/resourcemanager/monitor/armmonitor
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -38,7 +38,7 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-11
   - tag: package-2020-10-only
-  - tag: package-2021-04
+  - tag: package-2021-07
 ```
 
 ### Tag: package-2017-09 and go
@@ -113,13 +113,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/monitor/mgmt/2020-10-01/$(namespace)
 ```
 
-### Tag: package-2021-04 and go
+### Tag: package-2021-07 and go
 
-These settings apply only when `--tag=package-2021-04 --go` is specified on the command line.
+These settings apply only when `--tag=package-2021-07 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2021-04' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-04-01-preview/$(namespace)
+``` yaml $(tag) == 'package-2021-07' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-07-01-preview/$(namespace)
 directive:
 - from: activityLogAlerts_API.json
   where: $.parameters
