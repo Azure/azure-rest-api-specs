@@ -474,8 +474,9 @@
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
-    "OpeningHours": {
+    "OperatingHours": {
       "name": "openingHours",
+      "x-ms-client-name": "operatingHours",
       "description": "Hours of operation for a POI (Points of Interest). The availability of hours of operation will vary based on the data available. If not passed, then no opening hours information will be returned. \nSupported value: nextSevenDays",
       "type": "string",
       "in": "query",
@@ -483,7 +484,7 @@
         "nextSevenDays"
       ],
       "x-ms-enum": {
-        "name": "OpeningHoursRange",
+        "name": "OperatingHoursRange",
         "modelAsString": true,
         "values": [
           {
@@ -531,7 +532,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PolygonResponse"
+              "$ref": "#/definitions/PolygonResult"
             }
           },
           "default": {
@@ -634,7 +635,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
-            "$ref": "#/parameters/OpeningHours"
+            "$ref": "#/parameters/OperatingHours"
           }
         ],
         "responses": {
@@ -722,7 +723,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
-            "$ref": "#/parameters/OpeningHours"
+            "$ref": "#/parameters/OperatingHours"
           }
         ],
         "responses": {
@@ -741,7 +742,7 @@
     "/search/nearby/{format}": {
       "get": {
         "description": "**Nearby Search**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nIf you have a use case for only retrieving POI results around a specific location, the nearby search method may be the right choice. This endpoint will only return POI results, and does not take in a search query parameter.",
-        "operationId": "Search_SearchNearby",
+        "operationId": "Search_SearchNearbyPointOfInterest",
         "x-ms-examples": {
           "Search for any points of interest (POI) within 5 miles of Manhattan NY and return the top 10 results": {
             "$ref": "./examples/GetSearchNearby.json"
@@ -883,7 +884,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
-            "$ref": "#/parameters/OpeningHours"
+            "$ref": "#/parameters/OperatingHours"
           }
         ],
         "responses": {
@@ -1350,7 +1351,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
-            "$ref": "#/parameters/OpeningHours"
+            "$ref": "#/parameters/OperatingHours"
           }
         ],
         "responses": {
@@ -1426,7 +1427,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
           },
           {
-            "$ref": "#/parameters/OpeningHours"
+            "$ref": "#/parameters/OperatingHours"
           }
         ],
         "responses": {
@@ -1843,23 +1844,22 @@
     }
   },
   "definitions": {
-    "PolygonResponse": {
+    "PolygonResult": {
       "description": "This object is returned from a successful Search Polygon call",
       "type": "object",
       "properties": {
         "additionalData": {
           "description": "Results array",
-          "x-ms-client-name": "polygonResults",
-          "x-ms-client-flatten": true,
+          "x-ms-client-name": "polygons",
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PolygonResult"
+            "$ref": "#/definitions/Polygon"
           }
         }
       }
     },
-    "PolygonResult": {
+    "Polygon": {
       "type": "object",
       "properties": {
         "providerID": {
@@ -2235,7 +2235,8 @@
           }
         },
         "openingHours": {
-          "$ref": "#/definitions/OpeningHours"
+          "x-ms-client-name": "operatingHours",
+          "$ref": "#/definitions/OperatingHours"
         }
       }
     },
@@ -2285,7 +2286,7 @@
         }
       }
     },
-    "OpeningHours": {
+    "OperatingHours": {
       "description": "Opening hours for a POI (Points of Interest).",
       "type": "object",
       "properties": {
@@ -2299,26 +2300,26 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/OpeningHoursTimeRange"
+            "$ref": "#/definitions/OperatingHoursTimeRange"
           }
         }
       }
     },
-    "OpeningHoursTimeRange": {
+    "OperatingHoursTimeRange": {
       "description": "Open time range for a day",
       "type": "object",
       "properties": {
         "startTime": {
           "description": "The point in the next 7 days range when a given POI is being opened, or the beginning of the range if it was opened before the range.",
-          "$ref": "#/definitions/OpeningHoursTime"
+          "$ref": "#/definitions/OperatingHoursTime"
         },
         "endTime": {
           "description": "The point in the next 7 days range when a given POI is being closed, or the beginning of the range if it was closed before the range.",
-          "$ref": "#/definitions/OpeningHoursTime"
+          "$ref": "#/definitions/OperatingHoursTime"
         }
       }
     },
-    "OpeningHoursTime": {
+    "OperatingHoursTime": {
       "description": "Represents a date and time",
       "type": "object",
       "properties": {
@@ -2548,7 +2549,8 @@
       "description": "Straight line distance between the result and geobias location in meters.",
       "type": "number",
       "format": "double",
-      "readOnly": true
+      "readOnly": true,
+      "x-ms-client-name": "distanceInMeters"
     },
     "EntityType": {
       "description": "Geography entity type. Present only when entityType was requested and is available.",
