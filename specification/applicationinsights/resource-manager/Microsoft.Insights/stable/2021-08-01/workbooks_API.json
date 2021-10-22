@@ -557,6 +557,8 @@
       }
     },
     "WorkbookUpdateParameters": {
+      "description": "The parameters that can be provided when updating workbook properties properties.",
+      "type": "object",
       "properties": {
         "kind": {
           "type": "string",
@@ -575,18 +577,23 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
           "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
         }
-      },
-      "description": "The parameters that can be provided when updating workbook properties properties."
+      }
     },
     "WorkbookPropertiesUpdateParameters": {
       "description": "Properties that contain a workbook for PATCH operation.",
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
