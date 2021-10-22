@@ -212,15 +212,6 @@
                 "tasks"
             ]
         },
-        "Task": {
-            "type": "object",
-            "description": "Base task object.",
-            "properties": {
-                "taskName": {
-                    "type": "string"
-                }
-            }
-        },
         "TaskParameters": {
             "type": "object",
             "description": "Base parameters object for a text analysis task.",
@@ -309,28 +300,24 @@
         "CustomEntitiesTask": {
             "type": "object",
             "description": "Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/CustomTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/EntitiesTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/EntitiesTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "CustomEntitiesTaskResult": {
             "type": "object",
@@ -365,25 +352,21 @@
         "CustomSingleClassificationTask": {
             "type": "object",
             "description": "Use custom models to classify text into single label taxonomy",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/CustomTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "CustomSingleClassificationTaskResult": {
             "type": "object",
@@ -454,25 +437,21 @@
         "CustomMultiClassificationTask": {
             "type": "object",
             "description": "Use custom models to classify text into multi label taxonomy",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/CustomTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "CustomMultiClassificationTaskResult": {
             "type": "object",
@@ -541,29 +520,24 @@
         "SentimentAnalysisTask": {
             "type": "object",
             "description": "TODO",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/SentimentAnalysisTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/SentimentAnalysisTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "SentimentTaskResult": {
             "type": "object",
@@ -871,29 +845,24 @@
         "EntitiesTask": {
             "type": "object",
             "description": "TODO",
-            "allOf":[
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/EntitiesTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/EntitiesTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "EntitiesTaskResult": {
             "type": "object",
@@ -998,29 +967,24 @@
         "EntityLinkingTask": {
             "type": "object",
             "description": "TODO",
-            "allOf":[
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/EntityLinkingTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/EntityLinkingTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "EntityLinkingTaskResult": {
             "type": "object",
@@ -1170,29 +1134,24 @@
         "PiiTask": {
             "type": "object",
             "description": "TODO",
-            "allOf":[
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PiiTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PiiTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "PiiTaskResult": {
             "type": "object",
@@ -1462,29 +1421,24 @@
         "ExtractiveSummarizationTask": {
             "type": "object",
             "description": "TODO",
-            "allOf":[
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "ExtractiveSummarizationTaskResult": {
             "type": "object",
@@ -1571,26 +1525,21 @@
         "KeyPhraseTask": {
             "type": "object",
             "description": "TODO",
-            "allOf":[
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "KeyPhraseTaskResult": {
             "type": "object",
@@ -1657,29 +1606,24 @@
         "LanguageDetectionTask": {
             "type": "object",
             "description": "TODO",
-            "allOf":[
-                {
-                    "$ref": "#/definitions/Task"
+            "properties": {
+                "taskName":{
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/TaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/PreBuiltTaskParameters"
-                                },
-                                {
-                                    "$ref": "#/definitions/LanguageDetectionTaskParameters"
-                                }
-                            ]
+                "parameters": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/TaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/PreBuiltTaskParameters"
+                        },
+                        {
+                            "$ref": "#/definitions/LanguageDetectionTaskParameters"
                         }
-                    }
+                    ]
                 }
-            ]
+            }
         },
         "LanguageDetectionResult": {
             "type": "object",
