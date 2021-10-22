@@ -40,6 +40,16 @@ input-file:
 - Microsoft.EdgeOrder/preview/2020-12-01-preview/edgeorder.json
 ```
 ---
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+- Microsoft.EdgeOrder/stable/2021-12-01/edgeorder.json
+```
+---
 # Code Generation
 
 
