@@ -132,9 +132,6 @@
         "x-ms-examples": {
           "WorkbooksList": {
             "$ref": "./examples/WorkbooksList.json"
-          },
-          "WorkbooksManagedList": {
-            "$ref": "./examples/WorkbooksManagedList.json"
           }
         }
       }
@@ -298,12 +295,12 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "workbookProperties",
+            "name": "WorkbookUpdateParameters",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookUpdateParameters"
             }
           }
         ],
@@ -556,6 +553,69 @@
           "x-nullable": true,
           "description": "The unique revision id for this workbook definition",
           "readOnly": true
+        }
+      }
+    },
+    "WorkbookUpdateParameters": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "SharedTypeKind",
+            "modelAsString": true
+          }
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a workbook for an Azure resource.",
+          "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
+        }
+      },
+      "description": "The parameters that can be provided when updating workbook properties properties."
+    },
+    "WorkbookPropertiesUpdateParameters": {
+      "description": "Properties that contain a workbook for PATCH operation.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name (display name) of the workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of 0 or more tags that are associated with this workbook definition"
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The description of the workbook."
+        },
+        "revision": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The unique revision id for this workbook definition"
         }
       }
     },
