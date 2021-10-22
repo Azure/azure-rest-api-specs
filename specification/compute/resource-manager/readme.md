@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2021-10-03
+tag: package-2021-10-01
 
 directive:
   - where:
@@ -232,16 +232,16 @@ directive:
 
 ### Tag: package-2021-10-03
 
-These settings apply only when `--tag=package-2021-10-03` is specified on the command line.
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-10-03'
+``` yaml $(tag) == 'package-2021-10-01'
 input-file:
 - Microsoft.Compute/stable/2021-07-01/compute.json
 - Microsoft.Compute/stable/2021-07-01/runCommands.json
 - Microsoft.Compute/stable/2021-07-01/skus.json
 - Microsoft.Compute/stable/2021-04-01/disk.json
-- Microsoft.Compute/stable/2021-10-03/gallery.json
-- Microsoft.Compute/stable/2021-10-03/sharedGallery.json
+- Microsoft.Compute/stable/2021-10-01/gallery.json
+- Microsoft.Compute/stable/2021-10-01/sharedGallery.json
 - Microsoft.Compute/stable/2021-07-01/communityGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
