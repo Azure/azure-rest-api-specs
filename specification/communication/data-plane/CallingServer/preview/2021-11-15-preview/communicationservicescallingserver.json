@@ -1326,10 +1326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the mute participant response.",
-            "schema": {
-              "$ref": "#/definitions/MuteParticipantResult"
-            }
+            "description": "Returns the mute participant response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -1385,10 +1382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the unmute participant response.",
-            "schema": {
-              "$ref": "#/definitions/UnmuteParticipantResult"
-            }
+            "description": "Returns the unmute participant response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -2763,30 +2757,6 @@
         }
       }
     },
-    "MuteParticipantResult": {
-      "description": "The response payload for mute participant operation.",
-      "required": [
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatus"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultInfo": {
-          "$ref": "#/definitions/CallingOperationResultDetails",
-          "description": "The result info for the operation."
-        }
-      }
-    },
     "UnmuteParticipantRequest": {
       "description": "The request payload for unmuting any participant",
       "required": [
@@ -2801,30 +2771,6 @@
         "operationContext": {
           "description": "The operation context.",
           "type": "string"
-        }
-      }
-    },
-    "UnmuteParticipantResult": {
-      "description": "The response payload for unmute participant operation.",
-      "required": [
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The operation id.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/CallingOperationStatus"
-        },
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        },
-        "resultInfo": {
-          "$ref": "#/definitions/CallingOperationResultDetails",
-          "description": "The result info for the operation."
         }
       }
     },
