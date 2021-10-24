@@ -52,6 +52,102 @@
         }
       }
     },
+    "/providers/Microsoft.CustomerLockbox/tenantOptedIn/{tenantId}": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Get Customer Lockbox request",
+        "operationId": "Get_TenantOptedIn",
+        "x-ms-examples": {
+          "check if a TenantId is Optedin": {
+            "$ref": "./examples/TenantOptedIn.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieval of Opt-in status for Tenant successful.",
+            "schema": {
+              "$ref": "#/definitions/TenantOptInResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CustomerLockbox/enableLockbox": {
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Enable Tenant for Lockbox ",
+        "operationId": "Post_EnableLockbox",
+        "x-ms-examples": {
+          "Enable Tenant in Lockbox": {
+            "$ref": "./examples/EnableLockbox.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Enabling Tenant for Lockbox successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CustomerLockbox/disableLockbox": {
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Disable Tenant for Lockbox ",
+        "operationId": "Post_DisableLockbox",
+        "x-ms-examples": {
+          "Disable a tenant in Lockbox": {
+            "$ref": "./examples/DisableLockbox.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Disabling Tenant for Lockbox successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}": {
       "get": {
         "tags": [
@@ -91,7 +187,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}/UpdateApproval": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}/updateApproval": {
       "post": {
         "tags": [
           "Requests"
@@ -189,6 +285,7 @@
   "definitions": {
     "OperationListResult": {
       "description": "Result of the request to list Customer Lockbox operations. It contains a list of operations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of Customer Lockbox operations supported by the Microsoft.StreamAnalytics resource provider.",
@@ -222,6 +319,7 @@
         },
         "display": {
           "description": "Contains the localized display information for this particular operation / action.",
+          "type": "object",
           "readOnly": true,
           "properties": {
             "provider": {
@@ -258,8 +356,20 @@
         }
       }
     },
+    "TenantOptInResponse": {
+      "description": "TenantOptIn Response object",
+      "type": "object",
+      "properties": {
+        "isOptedIn": {
+          "type": "boolean",
+          "description": "True if tenant is opted in, false otherwise ",
+          "readOnly": true
+        }
+      }
+    },
     "RequestListResult": {
       "description": "Object containing a list of streaming jobs.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -416,6 +526,7 @@
     "ErrorResponse": {
       "x-ms-external": true,
       "description": "An error response from the Lockbox service.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorBody",
@@ -426,6 +537,7 @@
     "ErrorBody": {
       "x-ms-external": true,
       "description": "An error response body from the Lockbox service.",
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -451,6 +563,7 @@
     "ErrorAdditionalInfo": {
       "x-ms-external": true,
       "description": "An error additional info for the Lockbox service.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -474,6 +587,14 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdParameter": {
+      "name": "tenantId",
+      "in": "path",
+      "description": "The Azure tenant ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
