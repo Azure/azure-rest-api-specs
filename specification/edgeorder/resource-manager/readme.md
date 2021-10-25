@@ -28,8 +28,18 @@ These are the global settings for the EdgeOrder API.
 title: EdgeOrderManagementClient
 description: Edge Order API's
 openapi-type: arm
-tag: package-2020-12-preview
+tag: package-2021-12
 ```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+- Microsoft.EdgeOrder/stable/2021-12-01/edgeorder.json
+```
+---
 
 ### Tag: package-2020-12-preview
 
@@ -41,15 +51,6 @@ input-file:
 ```
 ---
 
-### Tag: package-2021-12
-
-These settings apply only when `--tag=package-2021-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-12'
-input-file:
-- Microsoft.EdgeOrder/stable/2021-12-01/edgeorder.json
-```
----
 # Code Generation
 
 
