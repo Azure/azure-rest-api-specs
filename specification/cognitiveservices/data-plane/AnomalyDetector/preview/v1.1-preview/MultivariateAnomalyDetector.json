@@ -1,6 +1,45 @@
 {
   "swagger": "2.0",
-  "basePath": "/",
+  "info": {
+    "version": "1.1-preview",
+    "title": "Anomaly Detector Client",
+    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two kinds of mode, one is for stateless using, another is for stateful using. In stateless mode, there are three functionalities. Entire Detect is for detecting the whole series with model trained by the time series, Last Detect is detecting last point with model trained by points before. ChangePoint Detect is for detecting trend changes in time series. In stateful mode, user can store time series, the stored time series will be used for detection anomalies. Under this mode, user can still use the above three functionalities by only giving a time range without preparing time series in client side. Besides the above three functionalities, stateful model also provide group based detection and labeling service. By leveraging labeling service user can provide labels for each detection result, these labels will be used for retuning or regenerating detection models. Inconsistency detection is a kind of group based detection, this detection will find inconsistency ones in a set of time series. By using anomaly detector service, business customers can discover incidents and establish a logic flow for root cause analysis."
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "MultivariateAnomalyDetection"
+    }
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Ocp-Apim-Subscription-Key"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/anomalydetector/v1.1-preview",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/multivariate/models": {
       "post": {
@@ -75,34 +114,15 @@
         ]
       }
     },
-    "/multivariate/models/{model_id}": {
+    "/multivariate/models/{modelId}": {
       "parameters": [
         {
-          "name": "model_id",
+          "name": "modelId",
           "in": "path",
           "required": true,
           "type": "string"
         }
       ],
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "summary": "Delete Multivariate Model",
-        "description": "delete model",
-        "operationId": "DeleteMultivariateModel",
-        "tags": [
-          "MultivariateAnomalyDetection"
-        ]
-      },
       "get": {
         "responses": {
           "200": {
@@ -124,12 +144,31 @@
         "tags": [
           "MultivariateAnomalyDetection"
         ]
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Delete Multivariate Model",
+        "description": "delete model",
+        "operationId": "DeleteMultivariateModel",
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ]
       }
     },
-    "/multivariate/models/{model_id}/detect": {
+    "/multivariate/models/{modelId}/detect": {
       "parameters": [
         {
-          "name": "model_id",
+          "name": "modelId",
           "in": "path",
           "required": true,
           "type": "string"
@@ -167,10 +206,10 @@
         ]
       }
     },
-    "/multivariate/models/{model_id}/detect/jobs": {
+    "/multivariate/models/{modelId}/detect/jobs": {
       "parameters": [
         {
-          "name": "model_id",
+          "name": "modelId",
           "in": "path",
           "required": true,
           "type": "string"
@@ -182,7 +221,7 @@
             "description": "Submit a multivariate anomaly detection task successfully.",
             "headers": {
               "Location": {
-                "description": "{endpoint}/anomalydetector/v1.0-preview/results/{result_id}",
+                "description": "{endpoint}/anomalydetector/v1.0-preview/results/{resultId}",
                 "type": "string"
               }
             }
@@ -212,10 +251,10 @@
         ]
       }
     },
-    "/multivariate/models/{model_id}/export": {
+    "/multivariate/models/{modelId}/export": {
       "parameters": [
         {
-          "name": "model_id",
+          "name": "modelId",
           "in": "path",
           "required": true,
           "type": "string"
@@ -250,23 +289,10 @@
         ]
       }
     },
-    "/multivariate/ping": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "get_ping",
-        "tags": [
-          "MultivariateAnomalyDetection"
-        ]
-      }
-    },
-    "/multivariate/results/{result_id}": {
+    "/multivariate/results/{resultId}": {
       "parameters": [
         {
-          "name": "result_id",
+          "name": "resultId",
           "in": "path",
           "required": true,
           "type": "string"
@@ -296,35 +322,60 @@
       }
     }
   },
-  "info": {
-    "title": "Multivariate Anomaly Detection API",
-    "version": "1.0-preview",
-    "description": "Multivariate Time-Series Anomaly Detection API"
-  },
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "securityDefinitions": {
-    "apiKeyHeader": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "apim-subscription-id"
+  "x-ms-paths": {
+    "/multivariate/models?$skip=0&$top=5": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "List Multivariate Models",
+        "operationId": "ListMultivariateModel",
+        "parameters": [
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "description": "$skip indicates how many models will be skipped."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 5,
+            "description": "$top indicates how many models will be fetched."
+          }
+        ],
+        "tags": [
+          "MultivariateAnomalyDetection"
+        ],
+        "x-ms-examples": {
+          "List Multivariate model": {
+            "$ref": "./examples/ListModel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "models"
+        },
+        "description": "List models of a subscription"
+      }
     }
   },
-  "security": [
-    {
-      "apiKeyHeader": []
-    }
-  ],
-  "tags": [
-    {
-      "name": "MultivariateAnomalyDetection"
-    }
-  ],
-  "definitions": {
+   "definitions": {
     "Model": {
       "required": [
         "endTime",
@@ -1194,7 +1245,7 @@
       "required": [
         "contributorScores",
         "contributors",
-        "correlcationChanges"
+        "correlationChanges"
       ],
       "properties": {
         "contributors": {
@@ -1428,12 +1479,15 @@
       "type": "object"
     }
   },
-  "responses": {
-    "ParseError": {
-      "description": "When a mask can't be parsed"
-    },
-    "MaskError": {
-      "description": "When any error occurs on mask"
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
