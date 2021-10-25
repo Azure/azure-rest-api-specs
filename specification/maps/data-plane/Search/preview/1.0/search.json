@@ -642,7 +642,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -730,7 +730,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -803,7 +803,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -891,7 +891,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -930,7 +930,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointOfInterestCategoryTreeResponse"
+              "$ref": "#/definitions/PointOfInterestCategoryTreeResult"
             }
           },
           "default": {
@@ -1009,7 +1009,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -1118,7 +1118,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ReverseSearchAddressResponse"
+              "$ref": "#/definitions/ReverseSearchAddressResult"
             }
           },
           "default": {
@@ -1174,7 +1174,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ReverseSearchCrossStreetAddressResponse"
+              "$ref": "#/definitions/ReverseSearchCrossStreetAddressResult"
             }
           },
           "default": {
@@ -1186,7 +1186,7 @@
     "/search/address/structured/{format}": {
       "get": {
         "description": "**Structured Address Geocoding**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nAzure Address Geocoding can also be accessed for  structured address look up exclusively. The geocoding search index will be queried for everything above the  street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete  addresses. It will also handle everything from exact  street addresses or street or intersections as well as higher level geographies such as city centers,  counties, states etc.",
-        "operationId": "Search_SearchAddressStructured",
+        "operationId": "Search_SearchStructuredAddress",
         "x-ms-examples": {
           "Search address in Redmond, WA in structured form": {
             "$ref": "./examples/GetSearchAddressStructured.json"
@@ -1286,7 +1286,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -1339,12 +1339,12 @@
             "$ref": "#/parameters/SearchIndexSet"
           },
           {
-            "name": "searchInsideGeometryRequestBody",
+            "name": "SearchInsideGeometryRequestBody",
             "in": "body",
             "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) to search in and should be a GeoJSON compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchInsideGeometryRequestBody"
+              "$ref": "#/definitions/SearchInsideGeometryRequest"
             }
           },
           {
@@ -1358,7 +1358,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -1399,11 +1399,12 @@
           },
           {
             "name": "searchAlongRouteRequestBody",
+            "x-ms-client-name": "route",
             "in": "body",
             "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchAlongRouteRequestBody"
+              "$ref": "#/definitions/SearchAlongRouteRequest"
             }
           },
           {
@@ -1434,7 +1435,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             }
           },
           "default": {
@@ -1476,7 +1477,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/SearchAddressBatchProcessResult"
             }
           },
           "408": {
@@ -1526,7 +1527,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/SearchAddressBatchProcessResult"
             }
           },
           "202": {
@@ -1564,7 +1565,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/SearchAddressBatchProcessResult"
             }
           },
           "202": {
@@ -1609,7 +1610,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/SearchAddressBatchProcessResult"
             }
           },
           "408": {
@@ -1659,7 +1660,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/SearchAddressBatchProcessResult"
             }
           },
           "202": {
@@ -1697,7 +1698,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/SearchAddressBatchProcessResult"
             }
           },
           "202": {
@@ -1742,7 +1743,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ReverseSearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/ReverseSearchAddressBatchProcessResult"
             }
           },
           "408": {
@@ -1792,7 +1793,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ReverseSearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/ReverseSearchAddressBatchProcessResult"
             }
           },
           "202": {
@@ -1830,7 +1831,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ReverseSearchAddressBatchProcessResponse"
+              "$ref": "#/definitions/ReverseSearchAddressBatchProcessResult"
             }
           },
           "202": {
@@ -1878,7 +1879,7 @@
         }
       }
     },
-    "SearchAddressResponse": {
+    "SearchAddressResult": {
       "description": "This object is returned from a successful Search calls.",
       "type": "object",
       "properties": {
@@ -1894,7 +1895,7 @@
           "items": {
             "description": "This type represents the Search API result object.",
             "readOnly": true,
-            "$ref": "#/definitions/SearchAddressResult"
+            "$ref": "#/definitions/SearchAddressResultItem"
           }
         }
       }
@@ -1919,7 +1920,19 @@
           ],
           "x-ms-enum": {
             "name": "QueryType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NEARBY",
+                "name": "NEARBY",
+                "description": "Search was performed around a certain latitude and longitude with a defined radius"
+              },
+              {
+                "value": "NON_NEAR",
+                "name": "GLOBAL",
+                "description": "Search was performed globally, without biasing to a certain latitude and longitude, and no defined radius"
+              }
+            ]
           }
         },
         "queryTime": {
@@ -1962,7 +1975,7 @@
         }
       }
     },
-    "SearchAddressResult": {
+    "SearchAddressResultItem": {
       "description": "Result object for a Search API response.",
       "type": "object",
       "readOnly": true,
@@ -1980,7 +1993,7 @@
             "Cross Street"
           ],
           "x-ms-enum": {
-            "name": "ResultType",
+            "name": "SearchAddressResultType",
             "modelAsString": true
           }
         },
@@ -2045,7 +2058,7 @@
         }
       }
     },
-    "PointOfInterestCategoryTreeResponse": {
+    "PointOfInterestCategoryTreeResult": {
       "description": "This object is returned from a successful POI Category Tree call",
       "type": "object",
       "properties": {
@@ -2095,7 +2108,7 @@
         }
       }
     },
-    "ReverseSearchAddressResponse": {
+    "ReverseSearchAddressResult": {
       "description": "This object is returned from a successful Search Address Reverse call",
       "type": "object",
       "properties": {
@@ -2109,12 +2122,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ReverseSearchAddressResult"
+            "$ref": "#/definitions/ReverseSearchAddressResultItem"
           }
         }
       }
     },
-    "ReverseSearchAddressResult": {
+    "ReverseSearchAddressResultItem": {
       "description": "Result object for a Search Address Reverse response",
       "type": "object",
       "properties": {
@@ -2139,7 +2152,7 @@
         }
       }
     },
-    "ReverseSearchCrossStreetAddressResponse": {
+    "ReverseSearchCrossStreetAddressResult": {
       "description": "This object is returned from a successful Search Address Reverse CrossStreet call",
       "type": "object",
       "properties": {
@@ -2153,12 +2166,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ReverseSearchCrossStreetAddressResult"
+            "$ref": "#/definitions/ReverseSearchCrossStreetAddressResultItem"
           }
         }
       }
     },
-    "ReverseSearchCrossStreetAddressResult": {
+    "ReverseSearchCrossStreetAddressResultItem": {
       "description": "Result object for a Search Address Reverse Cross Street response",
       "type": "object",
       "properties": {
@@ -2172,7 +2185,7 @@
         }
       }
     },
-    "SearchInsideGeometryRequestBody": {
+    "SearchInsideGeometryRequest": {
       "description": "This type represents the request body for the Search Inside Geometry service.",
       "type": "object",
       "properties": {
@@ -2181,7 +2194,7 @@
         }
       }
     },
-    "SearchAlongRouteRequestBody": {
+    "SearchAlongRouteRequest": {
       "description": "This type represents the request body for the Search Along Route service.",
       "type": "object",
       "properties": {
@@ -2649,7 +2662,7 @@
         }
       }
     },
-    "SearchAddressBatchProcessResponse": {
+    "SearchAddressBatchProcessResult": {
       "description": "This object is returned from a successful Search Address Batch service call.",
       "type": "object",
       "allOf": [
@@ -2683,7 +2696,7 @@
           "readOnly": true,
           "allOf": [
             {
-              "$ref": "#/definitions/SearchAddressResponse"
+              "$ref": "#/definitions/SearchAddressResult"
             },
             {
               "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
@@ -2692,7 +2705,7 @@
         }
       }
     },
-    "ReverseSearchAddressBatchProcessResponse": {
+    "ReverseSearchAddressBatchProcessResult": {
       "description": "This object is returned from a successful Search Address Reverse Batch service call.",
       "type": "object",
       "allOf": [
@@ -2726,7 +2739,7 @@
           "readOnly": true,
           "allOf": [
             {
-              "$ref": "#/definitions/ReverseSearchAddressResponse"
+              "$ref": "#/definitions/ReverseSearchAddressResult"
             },
             {
               "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
