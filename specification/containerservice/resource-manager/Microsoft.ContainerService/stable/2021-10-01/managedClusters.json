@@ -3466,18 +3466,13 @@
               "minimum": 1,
               "description": "The desired number of IPv4 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. ",
               "default": 1
-            }
-          },
-          "description": "Desired managed outbound IPs for the cluster load balancer."
-        },
-        "managedIPv6OutboundIPs": {
-          "properties": {
+            },
             "countIPv6": {
               "type": "integer",
               "format": "int32",
               "maximum": 100,
               "minimum": 0,
-              "description": "The desired number of IPv6 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. This must be used with a dual-stack cluster. ",
+              "description": "The desired number of IPv6 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 0 for single-stack and 1 for dual-stack. ",
               "default": 0
             }
           },
