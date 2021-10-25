@@ -32,9 +32,9 @@ tag: package-preview-2021-07
 
 ### Tag: package-preview-2021-07
 
-These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-07-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07'
+```yaml $(tag) == 'package-preview-2021-07-02'
 input-file:
   - Microsoft.Devices/preview/2021-07-02-preview/iothub.json
 ```
