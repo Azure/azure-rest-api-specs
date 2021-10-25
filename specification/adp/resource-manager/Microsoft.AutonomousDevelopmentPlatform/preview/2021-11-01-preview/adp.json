@@ -654,6 +654,7 @@
   },
   "definitions": {
     "AccountCheckNameAvailabilityParameters": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -680,6 +681,7 @@
     },
     "CheckNameAvailabilityResult": {
       "description": "The checkNameAvailability operation response",
+      "type": "object",
       "properties": {
         "nameAvailable": {
           "readOnly": true,
@@ -810,6 +812,11 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataPoolProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -827,6 +834,11 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataPoolBaseProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -868,11 +880,6 @@
           },
           "description": "Gets or sets the collection of locations where Data Pool resources should be created"
         },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        },
         "tags": {
           "$ref": "#/definitions/Tags"
         }
@@ -910,7 +917,8 @@
         "storageAccountCount": {
           "description": "The amount of storage accounts provisioned per Data Pool. Default: 5",
           "type": "integer",
-          "minimum": 1
+          "minimum": 1,
+          "format": "int32"
         }
       },
       "required": [
@@ -919,6 +927,7 @@
     },
     "storageSku": {
       "description": "The Storage SKU.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The SKU name",

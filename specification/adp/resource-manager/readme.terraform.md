@@ -18,3 +18,7 @@ gosdk-folder: services/preview/adp/mgmt/2020-07-01-preview/adp
 ``` yaml $(tag) == 'package-2021-02-01-preview' && $(terraform)
 gosdk-folder: services/preview/adp/mgmt/2021-02-01-preview/adp
 ```
+
+``` yaml $(tag) == 'package-2021-11-01-preview' && $(terraform)
+gosdk-folder: services/preview/adp/mgmt/2021-11-01-preview/adp
+```
