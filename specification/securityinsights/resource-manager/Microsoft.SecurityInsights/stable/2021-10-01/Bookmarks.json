@@ -48,16 +48,16 @@
         "operationId": "Bookmarks_List",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -93,16 +93,16 @@
         "operationId": "Bookmarks_Get",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/BookmarkId"
@@ -118,7 +118,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -136,16 +136,16 @@
         "operationId": "Bookmarks_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/BookmarkId"
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -188,16 +188,16 @@
         "operationId": "Bookmarks_Delete",
         "parameters": [
           {
-            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/BookmarkId"
@@ -213,7 +213,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "SecurityInsights.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -224,7 +224,7 @@
     "Bookmark": {
       "allOf": [
         {
-          "$ref": "SecurityInsights.json#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a bookmark in Azure Security Insights.",
@@ -267,7 +267,7 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that created the bookmark",
           "type": "object"
         },
@@ -278,7 +278,7 @@
         "labels": {
           "description": "List of labels relevant to this bookmark",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
           },
           "type": "array"
         },
@@ -300,7 +300,7 @@
           "type": "string"
         },
         "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
@@ -384,35 +384,6 @@
           "type": "string"
         }
       },
-      "type": "object"
-    },
-    "Label": {
-      "description": "Label that will be used to tag and filter on.",
-      "type": "string"
-    },
-    "UserInfo": {
-      "description": "User information that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user.",
-          "format": "uuid",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "required": [
-        "objectId"
-      ],
       "type": "object"
     }
   },
