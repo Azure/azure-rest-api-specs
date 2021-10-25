@@ -403,6 +403,108 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/stop": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Stop a Service.",
+        "operationId": "Services_Stop",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the stop operation is performed in the background."
+          },
+          "404": {
+            "description": "Not found. The response indicates the service does not exist.",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict. The response indicates the exiting Service is now updating.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Services_Stop": {
+            "$ref": "./examples/Services_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/start": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Start a Service.",
+        "operationId": "Services_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the stop operation is performed in the background."
+          },
+          "404": {
+            "description": "Not found. The response indicates the service does not exist.",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict. The response indicates the exiting Service is now updating.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Services_Start": {
+            "$ref": "./examples/Services_Start.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default": {
       "get": {
         "tags": [
@@ -2768,6 +2870,189 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/generateHeapDump": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Generate Heap Dump",
+        "operationId": "Deployments_GenerateHeapDump",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "diagnosticParameters",
+            "in": "body",
+            "description": "Parameters for the diagnostic operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates a heap dump is generating."
+          },
+          "200": {
+            "description": "Success. A heap dump was generated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_GenerateHeapDump": {
+            "$ref": "./examples/Deployments_GenerateHeapDump.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/generateThreadDump": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Generate Thread Dump",
+        "operationId": "Deployments_GenerateThreadDump",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "diagnosticParameters",
+            "in": "body",
+            "description": "Parameters for the diagnostic operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates a thread dump is generating."
+          },
+          "200": {
+            "description": "Success. A thread dump was generated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_GenerateHeapDump": {
+            "$ref": "./examples/Deployments_GenerateThreadDump.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/StartJFR": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Start JFR",
+        "operationId": "Deployments_StartJFR",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "diagnosticParameters",
+            "in": "body",
+            "description": "Parameters for the diagnostic operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates a JFR is starting."
+          },
+          "200": {
+            "description": "Success. A JFR generated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_StartJFR": {
+            "$ref": "./examples/Deployments_StartJFR.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/Spring": {
       "get": {
         "tags": [
@@ -3061,6 +3346,19 @@
           "description": "ServiceInstanceEntity GUID which uniquely identifies a created resource",
           "type": "string",
           "readOnly": true
+        },
+        "powerState": {
+          "description": "Power state of the Service",
+          "enum": [
+            "Running",
+            "Stopped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PowerState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4587,6 +4885,24 @@
       "properties": {
         "url": {
           "description": "URL of the log file",
+          "type": "string"
+        }
+      }
+    },
+    "DiagnosticParameters": {
+      "description": "Diagnostic parameters of diagnostic operations",
+      "type": "object",
+      "properties": {
+        "appInstance": {
+          "description": "App instance name",
+          "type": "string"
+        },
+        "filePath": {
+          "description": "Your target file path in your own BYOS",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration of your JFR. 1 min can be represented by 1m or 60s.",
           "type": "string"
         }
       }
