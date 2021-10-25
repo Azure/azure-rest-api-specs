@@ -42,6 +42,8 @@ input-file:
   - Microsoft.SecurityInsights/stable/2021-10-01/operations.json
   - Microsoft.SecurityInsights/stable/2021-10-01/OnboardingStates.json
   - Microsoft.SecurityInsights/stable/2021-10-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/DataConnectors.json
 ```
 
 ### Tag: package-2021-04-01-only
