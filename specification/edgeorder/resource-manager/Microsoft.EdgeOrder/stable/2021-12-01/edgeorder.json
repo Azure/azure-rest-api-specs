@@ -528,7 +528,7 @@
         "tags": [
           "Addresses"
         ],
-        "description": "Creates a new address with the specified parameters. Existing address can be updated with this API.",
+        "description": "Creates a new address with the specified parameters. Existing address can be updated with this API",
         "operationId": "CreateAddress",
         "consumes": [
           "application/json"
@@ -580,9 +580,6 @@
         "x-ms-examples": {
           "CreateAddress": {
             "$ref": "./examples/CreateAddress.json"
-          },
-          "UpdateAddress": {
-            "$ref": "./examples/UpdateAddress.json"
           }
         }
       },
@@ -633,6 +630,72 @@
         "x-ms-examples": {
           "DeleteAddressByName": {
             "$ref": "./examples/DeleteAddressByName.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Addresses"
+        ],
+        "description": "Updates the properties of an existing address.",
+        "operationId": "UpdateAddress",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/addressNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "addressUpdateParameter",
+            "in": "body",
+            "description": "Address update parameters from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddressUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted request for address update."
+          },
+          "200": {
+            "description": "Address resource object.",
+            "schema": {
+              "$ref": "#/definitions/AddressResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UpdateAddress": {
+            "$ref": "./examples/UpdateAddress.json"
           }
         }
       }
@@ -2377,6 +2440,11 @@
               }
             ]
           }
+        },
+        "managementRpDetails": {
+          "$ref": "#/definitions/ResourceProviderDetails",
+          "description": "Parent RP details - this returns only the first or default parent RP from the entire list",
+          "readOnly": true
         },
         "managementRpDetailsList": {
           "description": "List of parent RP details supported for configuration.",
