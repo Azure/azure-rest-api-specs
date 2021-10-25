@@ -2843,6 +2843,188 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/volumeGroups": {
+      "get": {
+        "summary": "Describe all volume groups",
+        "description": "List all volume groups for given account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Volume Group"
+        ],
+        "operationId": "VolumeGroups_ListByNetAppAccount",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "VolumeGroups_List": {
+            "$ref": "examples/VolumeGroups_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/volumeGroups/{volumeGroupName}": {
+      "get": {
+        "summary": "Describe a Volume Group",
+        "description": "Get details of the specified volume group",
+        "tags": [
+          "Volume Group"
+        ],
+        "operationId": "VolumeGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeGroupDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Get": {
+            "$ref": "examples/VolumeGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Volume Group"
+        ],
+        "operationId": "VolumeGroups_Create",
+        "summary": "Create the specified volume group and volumes. Creating volume group will create all the volumes specified in request body implicitly. Once volumes are created using volume group, those will be treated as regular volumes thereafter.",
+        "description": "Create a volume group along with specified volumes",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Volume Group object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volumeGroupDetails"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Volume group created",
+            "schema": {
+              "$ref": "#/definitions/volumeGroupDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VolumeGroups_Create": {
+            "$ref": "examples/VolumeGroups_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Volume Group"
+        ],
+        "operationId": "VolumeGroups_Delete",
+        "summary": "Delete a volume group",
+        "description": "Delete the specified volume group only if there are no volumes under volume group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VolumeGroups_Delete": {
+            "$ref": "examples/VolumeGroups_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4181,6 +4363,39 @@
           "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.",
           "example": 4,
           "default": 0
+        },
+        "volumeGroupName": {
+          "type": "string",
+          "description": "Volume Group Name",
+          "readOnly": true
+        },
+        "capacityPoolResourceId": {
+          "type": "string",
+          "description": "Pool Resource Id used in case of creating a volume through volume group"
+        },
+        "proximityPlacementGroup": {
+          "type": "string",
+          "description": "Proximity placement group associated with the volume",
+          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.Compute/proximityPlacementGroups/testppg"
+        },
+        "t2Network": {
+          "type": "string",
+          "description": "T2 network information",
+          "example": "Test-T2-Alias",
+          "readOnly": true
+        },
+        "volumeSpecName": {
+          "type": "string",
+          "description": "Volume spec name is the application specific designation or identifier for the particular volume in a volume group for e.g. data, log",
+          "example": "Data"
+        },
+        "placementRules": {
+          "title": "Volume placement rules",
+          "description": "Application specific placement rules for the particular volume",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/placementKeyValuePairs"
+          }
         }
       }
     },
@@ -5617,6 +5832,239 @@
           }
         ]
       }
+    },
+    "volumeGroupList": {
+      "description": "List of volume group resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volume Groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volumeGroup"
+          }
+        }
+      }
+    },
+    "volumeGroup": {
+      "description": "Volume group resource",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Volume group properties",
+          "$ref": "#/definitions/volumeGroupListProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "volumeGroupDetails": {
+      "description": "Volume group resource for create",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Volume group properties",
+          "$ref": "#/definitions/volumeGroupProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "volumeGroupMetaData": {
+      "description": "Volume group properties",
+      "type": "object",
+      "properties": {
+        "groupDescription": {
+          "type": "string",
+          "description": "Group Description",
+          "example": "group description"
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "Application Type",
+          "enum": [
+            "SAP-HANA"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          },
+          "example": "SAP-HANA"
+        },
+        "applicationIdentifier": {
+          "type": "string",
+          "description": "Application specific identifier",
+          "example": "SH1"
+        },
+        "globalPlacementRules": {
+          "title": "Global volume placement rules",
+          "description": "Application specific placement rules for the volume group",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/placementKeyValuePairs"
+          }
+        },
+        "deploymentSpecId": {
+          "type": "string",
+          "description": "Application specific identifier of deployment rules for the volume group",
+          "example": "12345678-1234-1234-1234-123456676765"
+        },
+        "volumesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of volumes in volume group",
+          "example": 5,
+          "readOnly": true
+        }
+      }
+    },
+    "volumeGroupProperties": {
+      "description": "Volume group properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Azure lifecycle management",
+          "example": "Available",
+          "readOnly": true
+        },
+        "groupMetaData": {
+          "title": "groupMetaData",
+          "description": "Volume group details",
+          "type": "object",
+          "$ref": "#/definitions/volumeGroupMetaData"
+        },
+        "volumes": {
+          "description": "List of volumes from group",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volumeGroupVolumeProperties"
+          }
+        }
+      }
+    },
+    "volumeGroupListProperties": {
+      "description": "Volume group properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Azure lifecycle management",
+          "example": "Available",
+          "readOnly": true
+        },
+        "groupMetaData": {
+          "title": "groupMetaData",
+          "description": "Volume group details",
+          "type": "object",
+          "$ref": "#/definitions/volumeGroupMetaData"
+        }
+      }
+    },
+    "volumeGroupVolumeProperties": {
+      "description": "Volume resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Volume properties",
+          "$ref": "#/definitions/volumeProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "placementKeyValuePairs": {
+      "description": "Application specific parameters for the placement of volumes in the volume group",
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for an application specific parameter for the placement of volumes in the volume group",
+          "example": "key1"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for an application specific parameter for the placement of volumes in the volume group",
+          "example": "value1"
+        }
+      }
     }
   },
   "parameters": {
@@ -5722,6 +6170,17 @@
       "in": "path",
       "required": true,
       "description": "The name of the Quota Limit",
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeGroupName": {
+      "name": "volumeGroupName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the volumeGroup",
       "x-ms-parameter-location": "method"
     }
   }
