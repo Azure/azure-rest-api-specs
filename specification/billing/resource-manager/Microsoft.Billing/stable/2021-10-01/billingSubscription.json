@@ -349,7 +349,7 @@
         "x-ms-long-running-operation-options":{
           "final-state-via" : "location"
         },
-        "description": "Merges two existing subscriptions into a new subscription with quantity greater than the existing subscriptions individually.",
+        "description": "Merges the billing subscription provided in the request with a target billing subscription.",
         "x-ms-examples": {
           "MergeSubscription": {
             "$ref": "./examples/MergeSubscription.json"
@@ -684,7 +684,7 @@
       "type": "object",
       "properties": {
         "autoRenew": {
-          "description": "Indicates whether auto renewal is turned on or off for a product.",
+          "description": "Indicates whether auto renewal is turned on or off for a subscription.",
           "type": "string",
           "enum": [
             "Off",
@@ -696,7 +696,7 @@
           }
         },
         "billingFrequency": {
-          "description": "The billing frequency in ISO8601 format of product in the subscription. Example: P1M, P3M, P1Y",
+          "description": "The billing frequency of the subscription in the ISO8601 format. Example: P1M, P3M, P1Y",
           "type": "string"
         },
         "billingProfileId": {
@@ -704,7 +704,7 @@
           "type": "string"
         },
         "billingProfileDisplayName": {
-          "description": "The name of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
+          "description": "The display name of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
           "type": "string",
           "readOnly": true
         },
@@ -755,7 +755,7 @@
           "type": "string"
         },
         "invoiceSectionDisplayName": {
-          "description": "The name of the invoice section to which the subscription is billed. The field is applicable only for Microsoft Partner Agreement billing accounts.",
+          "description": "The display name of the invoice section to which the subscription is billed. The field is applicable only for Microsoft Partner Agreement billing accounts.",
           "type": "string",
           "readOnly": true
         },
@@ -951,11 +951,11 @@
       "type": "object",
       "properties": {
         "targetBillingSubscriptionName": {
-          "description": "The ID of the target billing subscription with which the billing subscription in request will be merged.",
+          "description": "The ID of the target billing subscription that will be merged with the source subscription provided in the request.",
           "type": "string"
         },
         "quantity": {
-          "description": "The quantity of the product of target subscription to which the subscription in request needs to be merged into.",
+          "description": "The quantity of the source billing subscription that will be merged with the target billing subscription.",
           "type": "integer",
           "format": "int32"
         }
