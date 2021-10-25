@@ -334,18 +334,7 @@
                     "$ref": "#/definitions/CustomResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "$ref": "#/definitions/EntitiesDocumentResult"
-                            }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                    "$ref": "#/definitions/EntitiesDocuments"
                 }
             ]
         },
@@ -383,19 +372,30 @@
                     "$ref": "#/definitions/CustomResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
+                    "$ref": "#/definitions/SingleClassificationDocuments"
+                }
+            ]
+        },
+        "SingleClassificationDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            { 
                                 "$ref": "#/definitions/SingleClassificationDocumentResult"
                             }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                        ]
+                    }
                 }
+            },
+            "required": [
+                "documents"
             ]
         },
         "SingleClassificationDocumentResult": {
@@ -403,18 +403,11 @@
             "required": [
                 "classification"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "classification": {
-                            "$ref": "#/definitions/ClassificationResult"
-                        }
-                    }
+            "properties": {
+                "classification": {
+                    "$ref": "#/definitions/ClassificationResult"
                 }
-            ]
+            }
         },
         "ClassificationResult": {
             "type": "object",
@@ -468,41 +461,42 @@
                     "$ref": "#/definitions/CustomResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "$ref": "#/definitions/MultiClassificationDocumentResult"
-                            }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                    "$ref": "#/definitions/MultiClassificationDocuments"
                 }
             ]
+        },
+        "MultiClassificationDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
+                                "$ref": "#/definitions/MultiClassificationDocumentResult"
+                            }
+                        ]
+                    }
+                }
+            }
         },
         "MultiClassificationDocumentResult": {
             "type": "object",
             "required": [
                 "classifications"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "classifications": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ClassificationResult"
-                            }
-                        }
+            "properties": {
+                "classifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ClassificationResult"
                     }
                 }
-            ]
+            }
         },
         "SentimentAnalysisTaskParameters": {
             "type": "object",
@@ -554,61 +548,66 @@
                     "$ref": "#/definitions/PreBuiltResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Sentiment analysis per record.",
-                            "items": {
+                    "$ref": "#/definitions/SentimentDocuments"
+                }
+            ]
+        },
+        "SentimentDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "description": "Sentiment analysis per record.",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
                                 "$ref": "#/definitions/SentimentDocumentResult"
                             }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                        ]
+                        
+                    }
                 }
+            },
+            "required": [
+                "documents"
             ]
         },
         "SentimentDocumentResult": {
             "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
+            "properties": {
+                "sentiment": {
+                    "type": "string",
+                    "description": "Predicted sentiment for record (Negative, Neutral, Positive, or Mixed).",
+                    "enum": [
+                        "positive",
+                        "neutral",
+                        "negative",
+                        "mixed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "DocumentSentimentValue",
+                        "modelAsString": false
+                    }
                 },
-                {
-                    "properties": {
-                        "sentiment": {
-                            "type": "string",
-                            "description": "Predicted sentiment for record (Negative, Neutral, Positive, or Mixed).",
-                            "enum": [
-                                "positive",
-                                "neutral",
-                                "negative",
-                                "mixed"
-                            ],
-                            "x-ms-enum": {
-                                "name": "DocumentSentimentValue",
-                                "modelAsString": false
-                            }
-                        },
-                        "confidenceScores": {
-                            "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
-                            "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
-                        },
-                        "sentences": {
-                            "type": "array",
-                            "description": "Sentence level sentiment analysis.",
-                            "items": {
-                                "$ref": "#/definitions/SentenceSentiment"
-                            }
-                        }
-                    },
-                    "required": [
-                        "sentiment",
-                        "confidenceScores",
-                        "sentences"
-                    ]
+                "confidenceScores": {
+                    "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+                    "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
+                },
+                "sentences": {
+                    "type": "array",
+                    "description": "Sentence level sentiment analysis.",
+                    "items": {
+                        "$ref": "#/definitions/SentenceSentiment"
+                    }
                 }
+            },
+            "required": [
+                "sentiment",
+                "confidenceScores",
+                "sentences"
             ]
         },
         "SentimentConfidenceScorePerLabel": {
@@ -879,42 +878,45 @@
                     "$ref": "#/definitions/PreBuiltResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "$ref": "#/definitions/EntitiesDocumentResult"
-                            }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                    "$ref": "#/definitions/EntitiesDocuments"
                 }
             ]
+        },
+        "EntitiesDocuments": {
+            "type": "object",
+            "required": [
+                "documents"
+            ],
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
+                                "$ref": "#/definitions/EntitiesDocumentResult"
+                            }
+                        ]
+                    }
+                }
+            }
         },
         "EntitiesDocumentResult": {
             "type": "object",
             "required": [
                 "entities"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "entities": {
-                            "type": "array",
-                            "description": "Recognized entities in the record.",
-                            "items": {
-                                "$ref": "#/definitions/Entity"
-                            }
-                        }
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Entity"
                     }
                 }
-            ]
+            }
         },
         "Entity": {
             "type": "object",
@@ -1001,19 +1003,30 @@
                     "$ref": "#/definitions/PreBuiltResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
+                    "$ref": "#/definitions/LinkedEntitiesDocuments"
+                }
+            ]
+        },
+        "LinkedEntitiesDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
                                 "$ref": "#/definitions/LinkedEntitiesDocumentResult"
                             }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                        ]
+                    }
                 }
+            },
+            "required": [
+                "documents"
             ]
         },
         "LinkedEntitiesDocumentResult": {
@@ -1021,22 +1034,15 @@
             "required": [
                 "entities"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "entities": {
-                            "type": "array",
-                            "description": "Recognized well known entities in the record.",
-                            "items": {
-                                "$ref": "#/definitions/LinkedEntity"
-                            }
-                        }
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "description": "Recognized well known entities in the record.",
+                    "items": {
+                        "$ref": "#/definitions/LinkedEntity"
                     }
                 }
-            ]
+            }
         },
         "LinkedEntity": {
             "type": "object",
@@ -1168,19 +1174,30 @@
                     "$ref": "#/definitions/PreBuiltResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
+                    "$ref": "#/definitions/PiiEntitiesDocuments"
+                }
+            ]
+        },
+        "PiiEntitiesDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
                                 "$ref": "#/definitions/PiiEntitiesDocumentResult"
                             }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                        ]
+                        
+                    }
                 }
+            },
+            "required": [
+                "documents"
             ]
         },
         "PiiEntitiesDocumentResult": {
@@ -1189,26 +1206,19 @@
                 "redactedText",
                 "entities"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
+            "properties": {
+                "redactedText": {
+                    "type": "string",
+                    "description": "Returns redacted text."
                 },
-                {
-                    "properties": {
-                        "redactedText": {
-                            "type": "string",
-                            "description": "Returns redacted text."
-                        },
-                        "entities": {
-                            "type": "array",
-                            "description": "Recognized entities in the record.",
-                            "items": {
-                                "$ref": "#/definitions/Entity"
-                            }
-                        }
+                "entities": {
+                    "type": "array",
+                    "description": "Recognized entities in the record.",
+                    "items": {
+                        "$ref": "#/definitions/Entity"
                     }
                 }
-            ]
+            }
         },
         "PiiCategories": {
             "description": "(Optional) describes the PII categories to return",
@@ -1455,19 +1465,30 @@
                     "$ref": "#/definitions/PreBuiltResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
+                    "$ref": "#/definitions/ExtractedSummaryDocuments"
+                }
+            ]
+        },
+        "ExtractedSummaryDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
                                 "$ref": "#/definitions/ExtractedSummaryDocumentResult"
                             }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                        ]
+                    }
                 }
+            },
+            "required": [
+                "documents"
             ]
         },
         "ExtractedSummaryDocumentResult": {
@@ -1475,22 +1496,15 @@
             "required": [
                 "sentences"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "sentences": {
-                            "type": "array",
-                            "description": "A ranked list of sentences representing the extracted summary.",
-                            "items": {
-                                "$ref": "#/definitions/ExtractedSummarySentence"
-                            }
-                        }
+            "properties": {
+                "sentences": {
+                    "type": "array",
+                    "description": "A ranked list of sentences representing the extracted summary.",
+                    "items": {
+                        "$ref": "#/definitions/ExtractedSummarySentence"
                     }
                 }
-            ]
+            }
         },
         "ExtractedSummarySentence": {
             "type": "object",
@@ -1556,42 +1570,45 @@
                     "$ref": "#/definitions/PreBuiltResult"
                 },
                 {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "$ref": "#/definitions/KeyPhrasesDocumentResult"
-                            }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
+                    "$ref": "#/definitions/KeyPhraseDocuments"
                 }
             ]
         },
-        "KeyPhrasesDocumentResult": {
+        "KeyPhraseDocuments": {
+            "type": "object",
+            "properties": {
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DocumentResult"
+                            },
+                            {
+                                "$ref": "#/definitions/KeyPhraseDocumentResult"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "documents"
+            ]
+        },
+        "KeyPhraseDocumentResult": {
             "type": "object",
             "required": [
                 "keyPhrases"
             ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "keyPhrases": {
-                            "type": "array",
-                            "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input record.",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
+            "properties": {
+                "keyPhrases": {
+                    "type": "array",
+                    "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input record.",
+                    "items": {
+                        "type": "string"
                     }
                 }
-            ]
+            }
         },
         "AnalyzeTextJobState": {
             "allOf": [
