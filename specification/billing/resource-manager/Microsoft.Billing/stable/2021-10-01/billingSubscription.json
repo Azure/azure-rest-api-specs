@@ -765,11 +765,11 @@
           "readOnly": true
         },
         "lastMonthCharges": {
-          "description": "The last month charges. This field is only available for consumption subscriptions of Microsoft Customer Agreement billing accounts.",
+          "description": "The last month's charges. This field is only available for usage based subscriptions of Microsoft Customer Agreement billing accounts.",
           "$ref": "#/definitions/Amount"
         },
         "monthToDateCharges": {
-          "description": "The current month to date charges. This field is only available for consumption subscriptions of Microsoft Customer Agreement billing accounts.",
+          "description": "The current month to date charges. This field is only available for usage based subscriptions of Microsoft Customer Agreement billing accounts.",
           "$ref": "#/definitions/Amount"
         },
         "nextBillingCycleDetails": {
@@ -782,23 +782,23 @@
           "readOnly": true
         },
         "productCategory": {
-          "description": "Category of the subscription. Possible values include: AzureSupport, Hardware, ReservationOrder, SaaS, SavingsPlanOrder, Software, UsageBased, Other",
+          "description": "The category of the subscription. Possible values include: AzureSupport, Hardware, ReservationOrder, SaaS, SavingsPlanOrder, Software, UsageBased, Other",
           "type": "string",
           "readOnly": true
         },
         "productType": {
-          "description": "Type of the product for which the subscription is purchased",
+          "description": "The type of the product for which the subscription is purchased",
           "type": "string",
           "readOnly": true
         },
         "productTypeId": {
-          "description": "Id of the product for which the subscription is purchased",
+          "description": "The ID of the product for which the subscription is purchased",
           "type": "string"
         },
         "purchaseDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Purchase date of the product in UTC time.",
+          "description": "The purchase date of the subscription in UTC time.",
           "readOnly": true
         },
         "quantity": {
@@ -807,11 +807,11 @@
           "format": "int64"
         },
         "reseller": {
-          "description": "Reseller for this subscription. The fields is not available for Microsoft Partner Agreement billing accounts.",
+          "description": "The reseller for which the subscription is created. The field is available for Microsoft Partner Agreement billing accounts..",
           "$ref": "#/definitions/Reseller"
         },
         "renewalTermDetails": {
-          "description": "Renewal term details of the product.",
+          "description": "The term details of the subscription at the next renewal.",
           "$ref": "#/definitions/RenewalTermDetails"
         },
         "skuDescription": {
@@ -850,7 +850,7 @@
           "readOnly": true
         },
         "suspensionReasons": {
-          "description": "The suspension reason for a subscription. This field is not available for Enterprise Agreement billing accounts.",
+          "description": "The suspension reason for the subscription. This field is not available for Enterprise Agreement billing accounts.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -864,19 +864,19 @@
         "termStartDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Start date of the term in UTC time.",
+          "description": "The start date of the term in UTC time.",
           "readOnly": true
         },
         "termEndDate": {
           "type": "string",
           "format": "date-time",
-          "description": "End date of the term in UTC time.",
+          "description": "The end date of the term in UTC time.",
           "readOnly": true
         }
       }
     },
     "BillingProfileSpendingLimitDetails": {
-      "description": "Billing profile spending limit details of the product.",
+      "description": "The spending limit details of the billing profiles to which the subscription is billed.",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -893,17 +893,17 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Start date of the spending limit.",
+          "description": "The start date of the spending limit.",
           "readOnly": true
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "End date of the spending limit.",
+          "description": "The end date of the spending limit.",
           "readOnly": true
         },
         "status": {
-          "description": "The spending limit status.",
+          "description": "The status of the spending limit.",
           "type": "string",
           "enum": [
             "Unknown",
@@ -920,7 +920,7 @@
           }
         },
         "type": {
-          "description": "The spending limit type.",
+          "description": "The type of spending limit.",
           "type": "string",
           "enum": [
             "Unknown",
@@ -966,7 +966,7 @@
       "type": "object",
       "properties": {
         "billingFrequency": {
-          "description": "The billing frequency in ISO8601 format of the target product to which the subscription needs to be split into. Example: P1M, P3M, P1Y",
+          "description": "The billing frequency of the target subscription in the ISO8601 format. Example: P1M, P3M, P1Y",
           "type": "string"
         },
         "quantity": {
@@ -1019,24 +1019,24 @@
       }
     },
     "NextBillingCycleDetails": {
-      "description": "Billing cycle details of the product.",
+      "description": "The next billing cycle details of the subscription.",
       "type": "object",
       "readOnly": true,
       "properties": {
         "billingFrequency": {
-          "description": "Billing frequency of the product under the subscription.",
+          "description": "The billing frequency of the subscription in the next billing cycle.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "RenewalTermDetails": {
-      "description": "Renewal term details of the product.",
+      "description": "The term details of the subscription at renewal.",
       "type": "object",
       "readOnly": true,
       "properties": {
         "billingFrequency": {
-          "description": "Billing frequency of the product under the subscription.",
+          "description": "The billing frequency of the subscription.",
           "type": "string",
           "readOnly": true
         },
@@ -1056,7 +1056,7 @@
           "readOnly": true
         },
         "termDuration": {
-          "description": "The duration. Example P1Y and P1M",
+          "description": "The term duration of the subscription. Example P1M and P1Y",
           "type": "string",
           "readOnly": true
         }
