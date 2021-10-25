@@ -519,7 +519,7 @@
         },
         "SentimentAnalysisTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for a Sentiment Analysis task.",
             "properties": {
                 "taskName":{
                     "type": "string"
@@ -844,7 +844,7 @@
         },
         "EntitiesTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for an Entities Recognition task.",
             "properties": {
                 "taskName":{
                     "type": "string"
@@ -966,7 +966,7 @@
         },
         "EntityLinkingTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for an Entity Linking task.",
             "properties": {
                 "taskName":{
                     "type": "string"
@@ -1133,7 +1133,7 @@
         },
         "PiiTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for a PII Entities Recognition task.",
             "properties": {
                 "taskName":{
                     "type": "string"
@@ -1420,7 +1420,7 @@
         },
         "ExtractiveSummarizationTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for an Extractive Summarization task.",
             "properties": {
                 "taskName":{
                     "type": "string"
@@ -1524,7 +1524,7 @@
         },
         "KeyPhraseTask": {
             "type": "object",
-            "description": "TODO",
+            "description": "An object representing the task definition for a Key Phrase Extraction task.",
             "properties": {
                 "taskName":{
                     "type": "string"
@@ -1592,102 +1592,6 @@
                     }
                 }
             ]
-        },
-        "LanguageDetectionTaskParameters": {
-            "type": "object",
-            "description": "Parameters object for a Language Detection task.",
-            "properties": {
-                "regionHint": {
-                    "type": "string",
-                    "description": "TODO"
-                }
-            }
-        },
-        "LanguageDetectionTask": {
-            "type": "object",
-            "description": "TODO",
-            "properties": {
-                "taskName":{
-                    "type": "string"
-                },
-                "parameters": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/TaskParameters"
-                        },
-                        {
-                            "$ref": "#/definitions/PreBuiltTaskParameters"
-                        },
-                        {
-                            "$ref": "#/definitions/LanguageDetectionTaskParameters"
-                        }
-                    ]
-                }
-            }
-        },
-        "LanguageDetectionResult": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "documents": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "$ref": "#/definitions/LanguageDetectionDocumentResult"
-                            }
-                        }
-                    },
-                    "required": [
-                        "documents"
-                    ]
-                }
-            ]
-        },
-        "LanguageDetectionDocumentResult": {
-            "type": "object",
-            "required": [
-                "detectedLanguage"
-            ],
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DocumentResult"
-                },
-                {
-                    "properties": {
-                        "detectedLanguage": {
-                            "description": "Detected Language.",
-                            "$ref": "#/definitions/DetectedLanguage"
-                        }
-                    }
-                }
-            ]
-        },
-        "DetectedLanguage": {
-            "type": "object",
-            "required": [
-                "name",
-                "iso6391Name",
-                "confidenceScore"
-            ],
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Long name of a detected language (e.g. English, French)."
-                    },
-                "iso6391Name": {
-                    "type": "string",
-                    "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
-                },
-                "confidenceScore": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
-                }
-            }
         },
         "AnalyzeTextJobState": {
             "allOf": [
