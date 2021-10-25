@@ -702,21 +702,15 @@
     },
     "Tags": {
       "type": "object",
-      "description": "Resource tags",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags"
-        }
-      }
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "description": "Resource tags"
     },
     "Account": {
       "type": "object",
@@ -749,13 +743,11 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccountProperties"
-        }
-      },
-      "allOf": [
-        {
+        },
+        "tags":{
           "$ref": "#/definitions/Tags"
         }
-      ]
+      }
     },
     "AccountProperties": {
       "type": "object",
@@ -874,6 +866,9 @@
           "readOnly": true,
           "description": "The system meta data relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
         }
       }
     },
@@ -900,6 +895,42 @@
         "encryption": {
           "description": "Encryption properties of a Data Pool location",
           "$ref": "#/definitions/DataPoolEncryption"
+        },
+        "storageSku": {
+          "description": "The Storage SKU. Default: Standard_ZRS.",
+          "$ref": "#/definitions/storageSku",
+          "x-nullable": true
+        },
+        "storageAccountCount": {
+          "description": "The amount of storage accounts provisioned per Data Pool. Default: 5",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "storageSku": {
+      "description": "The Storage SKU.",
+      "properties": {
+        "name": {
+          "description": "The SKU name",
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Standard_GRS",
+            "Standard_Ragrs",
+            "Standard_ZRS",
+            "Premium_LRS",
+            "Premium_ZRS",
+            "Standard_Gzrs",
+            "Standard_Ragzrs"
+          ],
+          "x-ms-enum": {
+            "name": "StorageSkuName",
+            "modelAsString": true
+          }
         }
       },
       "required": [
