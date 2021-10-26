@@ -239,6 +239,10 @@ directive:
     from: kusto.json
     where: $.definitions.Database.required
     reason: Discriminator kind is required also in patch
+  - suppress: OAV131
+    from: kusto.json
+    where: $.definitions.Database.required
+    reason: Discriminator kind is required also in patch
   - suppress: ListInOperationName
     from: kusto.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/addPrincipals"].post.operationId'
