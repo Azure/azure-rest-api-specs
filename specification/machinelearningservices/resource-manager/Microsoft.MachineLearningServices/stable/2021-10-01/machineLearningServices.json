@@ -209,6 +209,7 @@
         ],
         "description": "Updates a machine learning workspace with the specified parameters.",
         "operationId": "Workspaces_Update",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update Workspace": {
             "$ref": "./examples/Workspace/update.json"
@@ -243,6 +244,9 @@
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
+          },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error response describing why the operation failed",
