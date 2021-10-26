@@ -25,15 +25,15 @@ batch:
   - tag: package-2021-09-01-preview
 ```
 
-### Tag: package-2021-09-01-preview and java
+### Tag: package-2021-10-01 and java
 
-These settings apply only when `--tag=package-2021-09-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2021-10-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2021-04-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.signalr.v2021_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/signalr/mgmt-v2021_09_01_preview
+  namespace: com.microsoft.azure.management.signalr.v2021_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/signalr/mgmt-v2021_10_01
 regenerate-manager: true
 generate-interface: true
 ```
