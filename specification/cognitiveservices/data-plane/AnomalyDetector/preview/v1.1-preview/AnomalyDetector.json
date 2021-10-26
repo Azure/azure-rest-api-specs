@@ -337,7 +337,7 @@
         },
         "imputeStrategy": {
           "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"",
-          "$ref": "#/definitions/ImputeStrategy"
+          "$ref": "#/definitions/ImputeSrtategy"
         }
       }
     },
@@ -368,7 +368,8 @@
         "isPositiveAnomaly",
         "lowerMargins",
         "period",
-        "upperMargins"
+        "upperMargins",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -426,6 +427,15 @@
             "type": "boolean",
             "x-nullable": false
           }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
         }
       }
     },
@@ -439,7 +449,8 @@
         "lowerMargin",
         "period",
         "upperMargin",
-        "suggestedWindow"
+        "suggestedWindow",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -478,6 +489,11 @@
         "isPositiveAnomaly": {
           "type": "boolean",
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "The severity score of the lates point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0."
         }
       }
     },
