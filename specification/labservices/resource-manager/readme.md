@@ -44,6 +44,7 @@ input-file:
   - Microsoft.LabServices/preview/2021-11-15-preview/Schedules.json
   - Microsoft.LabServices/preview/2021-11-15-preview/Users.json
   - Microsoft.LabServices/preview/2021-11-15-preview/VirtualMachines.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Usages.json
 ```
 ### Tag: package-preview-2021-10
 
