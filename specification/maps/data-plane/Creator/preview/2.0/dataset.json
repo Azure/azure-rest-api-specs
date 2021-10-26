@@ -66,9 +66,8 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "DescriptionDataset": {
+    "DatasetDescription": {
       "name": "description",
-      "x-ms-client-name": "DescriptionDataset",
       "description": "The description to be given to the dataset.",
       "type": "string",
       "in": "query",
@@ -126,7 +125,7 @@
             "$ref": "#/parameters/AppendDatasetId"
           },
           {
-            "$ref": "#/parameters/DescriptionDataset"
+            "$ref": "#/parameters/DatasetDescription"
           }
         ],
         "responses": {
@@ -142,7 +141,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all previously successfully created datasets.\n\n### Submit List Request\n\nTo list all your datasets, you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe List API returns the complete list of all datasets in `json` format. The response contains the following fields (if they are not null or empty):\n> created - The timestamp the dataset was created.\n> datasetId - The id for the dataset.\n> description - The description for the dataset.\n> datasetSources - The source data that was used when the create request was issued.\n> ontology - The source [ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) that was used in the conversion service for the input data.<br/>\n\nThe `datasetSources` describes the source data that was used when the create request was issued and contains the following elements (if they are not null or empty):\n\n> conversionIds - The list of `conversionId` (null if none were provided).\n> appendDatasetId - The `datasetId` that was used for an append operation (null if none was used).\n>featureCounts - The counts for each feature type in the dataset.<br/>\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, `datasetSources`, and `ontology` of 3 dataset resources:\n\n\n```json\n{\n  \"datasets\": [\n    {\n      \"timestamp\": \"2020-01-01T22:50:48.123Z\",\n      \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n      \"description\": \"Some description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],      },\n      \"ontology\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    },\n    {\n      \"timestamp\": \"2020-01-01T22:57:53.123Z\",\n      \"datasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n      \"description\": \"Create from upload '0c1288fa-2058-4a1b-b68d-13a5f5af7d7c'.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n        ],\n        \"appendDatasetId\": \"46d1edb6-d29e-4786-9589-dbd4efd7a977\"\n      },\n      \"ontology\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    }\n  ]\n}\n```",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all previously successfully created datasets.\n\n### Submit List Request\n\nTo list all your datasets, you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe List API returns the complete list of all datasets in `json` format. The response contains the following fields (if they are not null or empty):\n> created - The timestamp the dataset was created.\n> datasetId - The id for the dataset.\n> description - The description for the dataset.\n> datasetSources - The source data that was used when the create request was issued.\n> ontology - The source [ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) that was used in the conversion service for the input data.<br/>\n\nThe `datasetSources` describes the source data that was used when the create request was issued and contains the following elements (if they are not null or empty):\n\n> conversionIds - The list of `conversionId` (null if none were provided).\n> appendDatasetId - The `datasetId` that was used for an append operation (null if none was used).\n>featureCounts - The counts for each feature type in the dataset.<br/>\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, `datasetSources`, and `ontology` of 3 dataset resources:\n\n\n```json\n{\n  \"datasets\": [\n    {\n      \"timestamp\": \"2020-01-01T22:50:48.123Z\",\n      \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n      \"description\": \"Some description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],      },\n      \"\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    },\n    {\n      \"timestamp\": \"2020-01-01T22:57:53.123Z\",\n      \"datasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n      \"description\": \"Create from upload '0c1288fa-2058-4a1b-b68d-13a5f5af7d7c'.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n        ],\n        \"appendDatasetId\": \"46d1edb6-d29e-4786-9589-dbd4efd7a977\"\n      },\n      \"ontology\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    }\n  ]\n}\n```",
         "operationId": "Dataset_List",
         "x-ms-examples": {
           "List all the previously created datasets": {
@@ -165,7 +164,7 @@
           "200": {
             "description": "The dataset request completed successfully. The response body contains the previously created dataset.",
             "schema": {
-              "$ref": "#/definitions/DatasetListResponse"
+              "$ref": "#/definitions/DatasetListResult"
             }
           },
           "default": {
@@ -198,7 +197,7 @@
           "200": {
             "description": "The get dataset request completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DatasetDetailInfo"
+              "$ref": "#/definitions/Dataset"
             }
           },
           "default": {
@@ -270,7 +269,7 @@
     }
   },
   "definitions": {
-    "DatasetListResponse": {
+    "DatasetListResult": {
       "description": "The response model for the Dataset List API. The response body will contain a list of all the previously created datasets.",
       "type": "object",
       "properties": {
@@ -279,7 +278,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/DatasetDetailInfo"
+            "$ref": "#/definitions/Dataset"
           }
         },
         "nextLink": {
@@ -289,13 +288,14 @@
         }
       }
     },
-    "DatasetDetailInfo": {
+    "Dataset": {
       "description": "Detail information for the dataset.",
       "type": "object",
       "properties": {
         "created": {
           "description": "The created timestamp for the dataset.",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "datasetId": {
