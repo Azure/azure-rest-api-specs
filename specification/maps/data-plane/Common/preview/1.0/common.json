@@ -64,40 +64,37 @@
         }
       }
     },
-    "BatchRequestBody": {
+    "BatchRequest": {
       "description": "This type represents the request body for the Batch service.",
-      "x-ms-client-name": "BatchRequest",
       "type": "object",
       "properties": {
         "batchItems": {
-          "$ref": "#/definitions/BatchQueries"
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchRequestItem"
+          }
         }
       }
     },
-    "BatchQueries": {
-      "description": "The list of queries to process.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/BatchQuery"
-      }
-    },
-    "BatchQuery": {
-      "description": "Batch Query object",
+    "BatchRequestItem": {
+      "description": "Batch request object",
       "type": "object",
       "properties": {
         "query": {
-          "description": "A query string for the corresponding batch API endpoint. It is the exact query string you would use for a single (non-batch) API request.",
+          "description": "This parameter contains a query string used to perform an unstructured geocoding operation. The query string will be passed verbatim to the search API for processing.",
           "type": "string",
           "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
         }
       }
     },
-    "BatchResponse": {
+    "BatchResult": {
       "description": "This object is returned from a successful Batch service call. Extend with 'batchItems' property.",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary for the batch request",
+          "description": "Summary of the results for the batch request",
+          "x-ms-client-name": "BatchSummary",
           "type": "object",
           "readOnly": true,
           "properties": {
@@ -115,7 +112,7 @@
         }
       }
     },
-    "BatchItem": {
+    "BatchResultItem": {
       "description": "An item returned from Batch API. Extend with 'response' property.",
       "type": "object",
       "properties": {

@@ -920,7 +920,7 @@
           "200": {
             "description": "Matrix request successfully processed. The response body contains all of the results.",
             "schema": {
-              "$ref": "#/definitions/RouteMatrixResponse"
+              "$ref": "#/definitions/RouteMatrixResult"
             }
           },
           "202": {
@@ -958,7 +958,7 @@
           "200": {
             "description": "Matrix request successfully processed. The response body contains all of the results.",
             "schema": {
-              "$ref": "#/definitions/RouteMatrixResponse"
+              "$ref": "#/definitions/RouteMatrixResult"
             }
           },
           "202": {
@@ -1060,7 +1060,7 @@
           "200": {
             "description": "Matrix request successfully processed. The response body contains all of the results.",
             "schema": {
-              "$ref": "#/definitions/RouteMatrixResponse"
+              "$ref": "#/definitions/RouteMatrixResult"
             }
           },
           "408": {
@@ -1576,7 +1576,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteRangeResponse"
+              "$ref": "#/definitions/RouteRangeResult"
             }
           },
           "default": {
@@ -1614,7 +1614,7 @@
             "description": "The list of route directions queries/requests to process. The list can contain a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequestBody"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequest"
             }
           }
         ],
@@ -1622,7 +1622,7 @@
           "200": {
             "description": "Batch request successfully processed. The response body contains all the batch results.",
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsBatchResponse"
+              "$ref": "#/definitions/RouteDirectionsBatchResult"
             }
           },
           "202": {
@@ -1660,7 +1660,7 @@
           "200": {
             "description": "Batch request successfully processed. The response body contains all the batch results.",
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsBatchResponse"
+              "$ref": "#/definitions/RouteDirectionsBatchResult"
             }
           },
           "202": {
@@ -1697,7 +1697,7 @@
             "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequestBody"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchRequest"
             }
           }
         ],
@@ -1705,7 +1705,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsBatchResponse"
+              "$ref": "#/definitions/RouteDirectionsBatchResult"
             }
           },
           "408": {
@@ -2440,7 +2440,7 @@
         }
       }
     },
-    "RouteRangeResponse": {
+    "RouteRangeResult": {
       "description": "This object is returned from a successful Route Reachable Range call",
       "type": "object",
       "properties": {
@@ -2505,7 +2505,7 @@
         }
       }
     },
-    "RouteMatrixResponse": {
+    "RouteMatrixResult": {
       "description": "This object is returned from a successful Route Matrix call. For ex, if 2 origins and 3 destinations are provided, there are going to 2 arrays with 3 elements in each. Each element's content depends on the options provided in the query.",
       "type": "object",
       "properties": {
@@ -2522,7 +2522,7 @@
             "type": "array",
             "readOnly": true,
             "items": {
-              "$ref": "#/definitions/RouteMatrixResult"
+              "$ref": "#/definitions/RouteMatrix"
             }
           }
         },
@@ -2548,7 +2548,7 @@
         }
       }
     },
-    "RouteMatrixResult": {
+    "RouteMatrix": {
       "description": "Matrix result object",
       "type": "object",
       "readOnly": true,
@@ -2586,12 +2586,12 @@
         }
       }
     },
-    "RouteDirectionsBatchResponse": {
+    "RouteDirectionsBatchResult": {
       "description": "This object is returned from a successful Route Directions Batch service call.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResult"
         }
       ],
       "properties": {
@@ -2610,7 +2610,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResultItem"
         }
       ],
       "properties": {
