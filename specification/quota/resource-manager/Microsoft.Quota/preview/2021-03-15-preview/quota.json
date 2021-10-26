@@ -449,9 +449,9 @@
     },
     "/providers/Microsoft.Quota/operations": {
       "get": {
-        "summary": "GET operations.",
+        "summary": "GET quota operations.",
         "description": "List all the operations supported by the Microsoft.Quota resource provider.",
-        "operationId": "Operation_List",
+        "operationId": "QuotaOperation_List",
         "x-ms-examples": {
           "GetOperations": {
             "$ref": "./examples/GetOperations.json"
@@ -868,14 +868,17 @@
     "LimitObject": {
       "description": "The resource quota limit value.",
       "type": "object",
+      "x-ms-discriminator-value": "LimitValue",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LimitJsonObject"
+        }
+      ],
       "properties": {
         "value": {
           "type": "integer",
           "format": "int32",
           "description": "The quota/limit value"
-        },
-        "limitObjectType": {
-          "$ref": "#/definitions/LimitObjectTypes"
         },
         "limitType": {
           "$ref": "#/definitions/LimitTypes"
@@ -883,19 +886,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "LimitValue": {
-      "x-ms-discriminator-value": "LimitValue",
-      "type": "object",
-      "description": "The resource quota limit.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LimitJsonObject"
-        },
-        {
-          "$ref": "#/definitions/LimitObject"
-        }
       ]
     },
     "QuotaRequestOneResourceSubmitResponse": {
