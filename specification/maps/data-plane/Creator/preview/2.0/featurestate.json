@@ -512,7 +512,7 @@
           "description": "An array of stateset style rules. The style rule could be a numeric or string or a boolean type style rule.  Refer to NumberRule, StringRule and BooleanRule definitions [here](https://aka.ms/AzureMapsStatesetStyles). ",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StyleRule"
+            "$ref": "#/definitions/StyleRuleType"
           }
         }
       }
@@ -574,7 +574,7 @@
         "type": "string"
       }
     },
-    "StyleRule": {
+    "StyleRuleType": {
       "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRule, StringRuleObject and BooleanRule definitions [here](https://aka.ms/AzureMapsStatesetStyles). ",
       "discriminator": "type",
       "type": "object",
@@ -596,23 +596,20 @@
             "string"
           ],
           "x-ms-enum": {
-            "name": "StyleType",
+            "name": "StyleRuleType",
             "modelAsString": true,
             "values": [
               {
                 "value": "boolean",
-                "description": "Boolean type of stateset style.",
-                "name": "BooleanStyleRule"
+                "description": "Boolean type of stateset style."
               },
               {
                 "value": "number",
-                "description": "Number type of stateset style.",
-                "name": "NumberStyleRule"
+                "description": "Number type of stateset style."
               },
               {
                 "value": "string",
-                "description": "String type of stateset style.",
-                "name": "StringStyleRule"
+                "description": "String type of stateset style."
               }
             ]
           }
@@ -625,7 +622,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRule"
+          "$ref": "#/definitions/StyleRuleType"
         }
       ],
       "properties": {
@@ -647,7 +644,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRule"
+          "$ref": "#/definitions/StyleRuleType"
         }
       ],
       "properties": {
@@ -669,7 +666,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRule"
+          "$ref": "#/definitions/StyleRuleType"
         }
       ],
       "properties": {
