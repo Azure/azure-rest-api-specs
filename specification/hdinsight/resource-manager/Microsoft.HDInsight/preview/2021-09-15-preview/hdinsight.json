@@ -1562,24 +1562,46 @@
           "description": "Web connectivity endpoint details.",
           "allOf": [
             {
-              "$ref": "#/definitions/ConnectivityEndpoint"
+              "$ref": "#/definitions/WebConnectivityEndpoint"
             }
           ]
+        },
+        "ssh": {
+          "type": "array",
+          "description": "List of SSH connectivity endpoints.",
+          "items": {
+            "$ref": "#/definitions/SshConnectivityEndpoint"
+          }
         }
       },
       "readOnly": true
     },
-    "ConnectivityEndpoint": {
+    "WebConnectivityEndpoint": {
       "type": "object",
-      "description": "Connectivity endpoint details.",
+      "description": "Web connectivity endpoint details.",
       "required": [
         "fqdn"
       ],
       "properties": {
         "fqdn": {
           "type": "string",
-          "description": "FQDN for connecting to the endpoint.",
+          "description": "Web connectivity endpoint.",
           "example": "clusterName.clusterPoolName.eastus.projecthilo.net"
+        }
+      },
+      "readOnly": true
+    },
+    "SshConnectivityEndpoint": {
+      "type": "object",
+      "description": "SSH connectivity endpoint details.",
+      "required": [
+        "endpoint"
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "SSH connectivity endpoint.",
+          "example": "clusterName.clusterPoolName.eastus.projecthilo.net/ssh/host/podPrefix-0"
         }
       },
       "readOnly": true
