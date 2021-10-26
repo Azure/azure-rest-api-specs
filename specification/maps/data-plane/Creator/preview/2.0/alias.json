@@ -107,7 +107,7 @@
           "201": {
             "description": "Content created successfully. The response body contains the newly created alias id `aliasId`.",
             "schema": {
-              "$ref": "#/definitions/AliasesCreateResponse"
+              "$ref": "#/definitions/Alias"
             },
             "headers": {
               "Access-Control-Expose-Headers": {
@@ -145,7 +145,7 @@
           "200": {
             "description": "List alias request completed successfully. The response body contains a list of all the previously created aliases.",
             "schema": {
-              "$ref": "#/definitions/AliasListResponse"
+              "$ref": "#/definitions/AliasListResult"
             }
           },
           "default": {
@@ -181,7 +181,7 @@
           "200": {
             "description": "Alias was assigned successfully.",
             "schema": {
-              "$ref": "#/definitions/AliasListItem"
+              "$ref": "#/definitions/Alias"
             }
           },
           "default": {
@@ -219,10 +219,10 @@
       },
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch the details of a previously created alias.\n\n### Submit Get Details Request\n\nTo get the details of your alias, you will issue a `GET` request with the `aliasId` in the path.\n\n### Get Details Response\n\nThe Get Details API returns the previously created alias in `json` format. The response contains the following details for the alias resource:\n  > createdTimestamp - The timestamp that the alias was created.\n  > aliasId - The id for the alias.\n  > creatorDataItemId - The id for the creator data item that this alias references (could be null if the alias has not been assigned).\n  > lastUpdatedTimestamp - The last time the alias was assigned to a resource.\n\nHere's a sample response:\n```json\n{\n  \"createdTimestamp\": \"2020-02-13T21:19:11.123Z\",\n  \"aliasId\": \"a8a4b8bb-ecf4-fb27-a618-f41721552766\",\n  \"creatorDataItemId\": \"e89aebb9-70a3-8fe1-32bb-1fbd0c725f14\",\n  \"lastUpdatedTimestamp\": \"2020-02-13T21:19:22.123Z\"\n}\n```",
-        "operationId": "Alias_GetDetails",
+        "operationId": "Alias_Get",
         "x-ms-examples": {
           "Get a previously created alias": {
-            "$ref": "./examples/alias/Alias_GetDetails.json"
+            "$ref": "./examples/alias/Alias_Get.json"
           }
         },
         "parameters": [
@@ -240,7 +240,7 @@
           "200": {
             "description": "Get alias request completed successfully. The response body contains the previously created alias.",
             "schema": {
-              "$ref": "#/definitions/AliasListItem"
+              "$ref": "#/definitions/Alias"
             }
           },
           "default": {
@@ -251,35 +251,7 @@
     }
   },
   "definitions": {
-    "AliasesCreateResponse": {
-      "description": "The response model for the Alias Create API for the case when the alias was successfully created.",
-      "type": "object",
-      "properties": {
-        "createdTimestamp": {
-          "description": "The created timestamp for the alias.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "aliasId": {
-          "description": "The id for the alias.",
-          "type": "string",
-          "readOnly": true
-        },
-        "creatorDataItemId": {
-          "description": "The id for the creator data item that this alias references (could be null if the alias has not been assigned).",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastUpdatedTimestamp": {
-          "description": "The timestamp of the last time the alias was assigned.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      }
-    },
-    "AliasListResponse": {
+    "AliasListResult": {
       "description": "The response model for the List API. Returns a list of all the previously created aliases.",
       "type": "object",
       "properties": {
@@ -288,7 +260,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/AliasListItem"
+            "$ref": "#/definitions/Alias"
           }
         },
         "nextLink": {
@@ -298,13 +270,14 @@
         }
       }
     },
-    "AliasListItem": {
+    "Alias": {
       "description": "Detailed information for the alias.",
       "type": "object",
       "properties": {
         "createdTimestamp": {
           "description": "The created timestamp for the alias.",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "aliasId": {

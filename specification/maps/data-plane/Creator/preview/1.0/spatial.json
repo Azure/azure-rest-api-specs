@@ -112,24 +112,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "SpatialLatitude": {
-      "name": "lat",
-      "x-ms-client-name": "Latitude",
-      "description": "The latitude of the location being passed.  Example: 48.36.",
-      "type": "number",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "SpatialLongitude": {
-      "name": "lon",
-      "x-ms-client-name": "Longitude",
-      "description": "The longitude of the location being passed.  Example: -124.63.",
-      "type": "number",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
     "SearchGeofenceRequestBody": {
       "name": "searchGeofenceRequestBody",
       "in": "body",
@@ -196,12 +178,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SpatialLatitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLatitudeAbbreviated"
           },
           {
-            "$ref": "#/parameters/SpatialLongitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLongitudeAbbreviated"
           },
           {
+            "x-ms-client-name": "altitude",
             "name": "z",
             "in": "query",
             "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion is used. Example: 200.",
@@ -215,6 +198,7 @@
             "type": "string"
           },
           {
+            "x-ms-client-name": "searchBufferInMeters",
             "name": "searchBuffer",
             "in": "query",
             "description": "The radius of the buffer around the geofence in meters that defines how far to search inside and outside the border of the fence against the coordinate that was provided when calculating the result.  The minimum value is 0, and the maximum is 500.  The default value is 50.",
@@ -242,7 +226,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/GeofenceResponse"
+              "$ref": "#/definitions/Geofence"
             }
           },
           "default": {
@@ -276,12 +260,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SpatialLatitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLatitudeAbbreviated"
           },
           {
-            "$ref": "#/parameters/SpatialLongitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLongitudeAbbreviated"
           },
           {
+            "x-ms-client-name": "altitude",
             "name": "z",
             "in": "query",
             "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion geofencing is applied. Example: 200.",
@@ -325,7 +310,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/GeofenceResponse"
+              "$ref": "#/definitions/Geofence"
             }
           },
           "default": {
@@ -367,7 +352,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BufferResponse"
+              "$ref": "#/definitions/BufferResult"
             }
           },
           "default": {
@@ -408,7 +393,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BufferResponse"
+              "$ref": "#/definitions/BufferResult"
             }
           },
           "default": {
@@ -437,10 +422,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "$ref": "#/parameters/SpatialLatitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLatitudeAbbreviated"
           },
           {
-            "$ref": "#/parameters/SpatialLongitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLongitudeAbbreviated"
           },
           {
             "name": "numberOfClosestPoints",
@@ -486,10 +471,10 @@
             "$ref": "#/parameters/SpatialUploadUdid"
           },
           {
-            "$ref": "#/parameters/SpatialLatitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLatitudeAbbreviated"
           },
           {
-            "$ref": "#/parameters/SpatialLongitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLongitudeAbbreviated"
           },
           {
             "name": "numberOfClosestPoints",
@@ -531,10 +516,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "$ref": "#/parameters/SpatialLatitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLatitudeAbbreviated"
           },
           {
-            "$ref": "#/parameters/SpatialLongitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLongitudeAbbreviated"
           },
           {
             "$ref": "#/parameters/PointInPolygonRequestBody"
@@ -544,7 +529,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointInPolygonResponse"
+              "$ref": "#/definitions/PointInPolygonResult"
             }
           },
           "default": {
@@ -554,10 +539,10 @@
       },
       "get": {
         "description": "**Applies to**: S1 pricing tier.\n\nThis API returns a boolean value indicating whether a point is inside a set of polygons. The set of polygons is provided by a GeoJSON file which is uploaded via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and referenced by a unique udid. The GeoJSON file may contain Polygon and MultiPolygon geometries, other geometries will be ignored if provided. If the point is inside or on the boundary of one of these polygons, the value returned is true. In all other cases, the value returned is false. When the point is inside multiple polygons, the result will give intersecting geometries section to show all valid geometries(referenced by geometryId) in user data. The maximum number of vertices accepted to form a Polygon is 10,000.\n\n \nTo test this API, you can upload the sample data from [Post Point In Polygon API](https://docs.microsoft.com/en-us/rest/api/maps/spatial/postpointinpolygon#examples) examples(Request Body) via [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) and replace the [udid] from the [sample request below](https://docs.microsoft.com/en-us/rest/api/maps/spatial/getpointinpolygon#examples) with the udid returned by Data Upload API.",
-        "operationId": "Spatial_GetPointInPolygon",
+        "operationId": "Spatial_EvaluatePointInPolygon",
         "x-ms-examples": {
           "GetPointInPolygon": {
-            "$ref": "./examples/spatial/Spatial_GetPointInPolygon.json"
+            "$ref": "./examples/spatial/Spatial_EvaluatePointInPolygon.json"
           }
         },
         "parameters": [
@@ -574,17 +559,17 @@
             "$ref": "#/parameters/SpatialUploadUdid"
           },
           {
-            "$ref": "#/parameters/SpatialLatitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLatitudeAbbreviated"
           },
           {
-            "$ref": "#/parameters/SpatialLongitude"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/PositionLongitudeAbbreviated"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointInPolygonResponse"
+              "$ref": "#/definitions/PointInPolygonResult"
             }
           },
           "default": {
@@ -624,7 +609,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GreatCircleDistanceResponse"
+              "$ref": "#/definitions/GreatCircleDistanceResult"
             }
           },
           "default": {
@@ -635,24 +620,6 @@
     }
   },
   "definitions": {
-    "SpatialCoordinate": {
-      "description": "A location represented as a latitude and longitude",
-      "type": "object",
-      "properties": {
-        "lat": {
-          "description": "Latitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        },
-        "lon": {
-          "description": "Longitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        }
-      }
-    },
     "GeofenceGeometry": {
       "description": "The geofencing geometry.",
       "type": "object",
@@ -664,6 +631,7 @@
           "readOnly": true
         },
         "udId": {
+          "x-ms-client-name": "udid",
           "description": "The unique id returned from [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) after uploading a valid GeoJSON FeatureCollection object. Please refer to  [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details. All the feature's properties should  contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
           "type": "string",
           "readOnly": true
@@ -674,7 +642,7 @@
           "readOnly": true
         },
         "distance": {
-          "description": "Distance from the coordinate to the closest border of the geofence. Positive means the  coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border, then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.",
+          "description": "Distance from the coordinate to the closest border of the geofence (in meters except when special values -999/999 are used). Positive means the  coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border, then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.",
           "type": "number",
           "readOnly": true
         },
@@ -689,13 +657,14 @@
           "readOnly": true
         },
         "nearestZ": {
+          "x-ms-client-name": "nearestElevation",
           "description": "Sea level in meter of the nearest point on the 2D extrusion geometry. This will only be presented in response when value is provided for 'zInMeter' in the request.",
           "type": "number",
           "readOnly": true
         }
       }
     },
-    "GeofenceResponse": {
+    "Geofence": {
       "description": "This object is returned from a geofence proximity call.",
       "type": "object",
       "properties": {
@@ -746,28 +715,31 @@
         }
       }
     },
-    "BufferResponse": {
+    "BufferSummary": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "udid": {
+          "description": "The udid for the user data if one exists",
+          "type": "string",
+          "readOnly": true
+        },
+        "information": {
+          "description": "The information about what happened during the call.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BufferResult": {
       "description": "This object is returned from a successful Spatial Buffer call.",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary of the call.",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "udid": {
-              "description": "The udid for the user data if one exists",
-              "type": "string",
-              "readOnly": true
-            },
-            "information": {
-              "description": "The information about what happened during the call.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/BufferSummary"
         },
         "result": {
+          "x-ms-client-name": "features",
           "description": "The FeatureCollection of buffers for the input.",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
         }
@@ -781,7 +753,11 @@
           "$ref": "#/definitions/ClosestPointSummary"
         },
         "result": {
-          "$ref": "#/definitions/ClosestPointResult"
+          "description": "Closest Point Result Array",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClosestPoint"
+          }
         }
       }
     },
@@ -791,7 +767,7 @@
       "readOnly": true,
       "properties": {
         "sourcePoint": {
-          "$ref": "#/definitions/SpatialCoordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content",
@@ -805,14 +781,7 @@
         }
       }
     },
-    "ClosestPointResult": {
-      "description": "Closest Point Result Array",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ClosestPointResultEntry"
-      }
-    },
-    "ClosestPointResultEntry": {
+    "ClosestPoint": {
       "description": "Closest Point Result Entry Object",
       "type": "object",
       "readOnly": true,
@@ -823,7 +792,7 @@
           "readOnly": true
         },
         "position": {
-          "$ref": "#/definitions/SpatialCoordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         },
         "geometryId": {
           "description": "The unique id identifies a geometry",
@@ -832,7 +801,7 @@
         }
       }
     },
-    "PointInPolygonResponse": {
+    "PointInPolygonResult": {
       "description": "Returns true if point is within the polygon, false otherwise",
       "type": "object",
       "properties": {
@@ -840,7 +809,24 @@
           "$ref": "#/definitions/PointInPolygonSummary"
         },
         "result": {
-          "$ref": "#/definitions/PointInPolygonResult"
+          "description": "Point In Polygon Result Object",
+          "type": "object",
+          "properties": {
+            "pointInPolygons": {
+              "x-ms-client-name": "isPointInPolygons",
+              "description": "Point In Polygons Property",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "intersectingGeometries": {
+              "description": "Geometries array",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/GeometryId"
+              }
+            }
+          }
         }
       }
     },
@@ -850,7 +836,7 @@
       "readOnly": true,
       "properties": {
         "sourcePoint": {
-          "$ref": "#/definitions/SpatialCoordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content. Udid is not applicable for POST spatial operations(set to null)",
@@ -864,46 +850,30 @@
         }
       }
     },
-    "PointInPolygonResult": {
-      "description": "Point In Polygon Result Object",
-      "type": "object",
-      "properties": {
-        "pointInPolygons": {
-          "description": "Point In Polygons Property",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "intersectingGeometries": {
-          "description": "Geometries array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/GeometryId"
-          }
-        }
-      }
-    },
     "GeometryId": {
       "description": "The Spatial geometry",
       "type": "string",
       "readOnly": true
     },
-    "GreatCircleDistanceResponse": {
+    "GreatCircleDistanceSummary": {
+      "description": "Summary object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "sourcePoint": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
+        },
+        "targetPoint": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
+        }
+      }
+    },
+    "GreatCircleDistanceResult": {
       "description": "This object is returned from a successful Great Circle Distance call",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "sourcePoint": {
-              "$ref": "#/definitions/SpatialCoordinate"
-            },
-            "targetPoint": {
-              "$ref": "#/definitions/SpatialCoordinate"
-            }
-          }
+          "$ref": "#/definitions/GreatCircleDistanceSummary"
         },
         "result": {
           "description": "Result Object",
