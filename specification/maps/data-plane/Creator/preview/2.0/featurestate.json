@@ -511,7 +511,7 @@
           "description": "An array of stateset style rules. The style rule could be a numeric or string or a boolean type style rule.  Refer to NumberRule, StringRule and BooleanRule definitions [here](https://aka.ms/AzureMapsStatesetStyles). ",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StyleRuleType"
+            "$ref": "#/definitions/StyleRule"
           }
         }
       }
@@ -573,7 +573,7 @@
         "type": "string"
       }
     },
-    "StyleRuleType": {
+    "StyleRule": {
       "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRule, StringRuleObject and BooleanRule definitions [here](https://aka.ms/AzureMapsStatesetStyles). ",
       "discriminator": "type",
       "type": "object",
@@ -595,7 +595,7 @@
             "string"
           ],
           "x-ms-enum": {
-            "name": "RuleType",
+            "name": "StyleRuleType",
             "modelAsString": true,
             "values": [
               {
@@ -621,7 +621,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleType"
+          "$ref": "#/definitions/StyleRule"
         }
       ],
       "properties": {
@@ -643,7 +643,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleType"
+          "$ref": "#/definitions/StyleRule"
         }
       ],
       "properties": {
@@ -665,7 +665,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleType"
+          "$ref": "#/definitions/StyleRule"
         }
       ],
       "properties": {
