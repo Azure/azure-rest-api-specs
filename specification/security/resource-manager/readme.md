@@ -66,13 +66,24 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2021-07
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.Security/preview/2021-07-02-preview/customAssessmentAutomation.json
+  - Microsoft.Security/preview/2021-07-02-preview/customEntityStoreAssignment.json
+  - Microsoft.Security/preview/2021-07-02-preview/securityConnectors.json
+```
 ### Tag: package-preview-2021-08
 
 These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
@@ -454,7 +465,7 @@ override-info:
 
 These settings apply only when `--tag=package-2021-07-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07-preview-only'
+``` yaml $(tag) == 'package-2021-07-preview-only'
 input-file:
   - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
   - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -464,15 +475,17 @@ input-file:
 
 These settings apply only when `--tag=package-2021-10-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10-preview-only'
+``` yaml $(tag) == 'package-2021-10-preview-only'
 input-file:
   - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 ```
 
 # Needed when there is more than one input file
+
 override-info:
-  title: SecurityCenter
-```
+title: SecurityCenter
+
+``` 
 
 ### Tag: package-2021-06-only
 
