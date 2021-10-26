@@ -156,6 +156,16 @@
         }
       }
     },
+    "BoundingBox": {
+      "x-ms-client-name": "boundingBox",
+      "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
     "GeoJsonPosition": {
       "description": "A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
       "type": "array",
@@ -720,6 +730,30 @@
             "description": "Unified View (Others)"
           }
         ]
+      }
+    },
+    "PositionLatitudeAbbreviated": {
+      "name": "lat",
+      "x-ms-client-name": "Latitude",
+      "description": "The latitude of the location being passed.  Example: 48.36.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "position"
+      }
+    },
+    "PositionLongitudeAbbreviated": {
+      "name": "lon",
+      "x-ms-client-name": "Longitude",
+      "description": "The longitude of the location being passed.  Example: -124.63.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "position"
       }
     },
     "xTileIndex": {
