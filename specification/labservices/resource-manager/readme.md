@@ -42,6 +42,7 @@ input-file:
   - Microsoft.LabServices/preview/2021-10-01-preview/Images.json
   - Microsoft.LabServices/preview/2021-10-01-preview/Labs.json
   - Microsoft.LabServices/preview/2021-10-01-preview/Users.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Usages.json
   - Microsoft.LabServices/preview/2021-10-01-preview/VirtualMachines.json
   - Microsoft.LabServices/preview/2021-10-01-preview/Schedules.json
 ```
