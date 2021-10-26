@@ -695,12 +695,32 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollectionData"
         },
         {
           "$ref": "#/definitions/ExtendedGeoJsonFeatureCollectionData"
         }
-      ]
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type: FeatureCollection.",
+          "type": "string",
+          "enum": [
+            "FeatureCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "FeatureCollection",
+                "description": "`GeoJSON FeatureCollection` object.",
+                "name": "GeoJsonFeatureCollection"
+              }
+            ]
+          }
+        }
+      }
     },
     "ExtendedGeoJsonFeatureCollectionData": {
       "type": "object",
