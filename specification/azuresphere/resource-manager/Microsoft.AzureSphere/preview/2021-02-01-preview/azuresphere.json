@@ -62,7 +62,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/countDevices": {
       "post": {
-        "operationId": "Catalogs_countDevices",
+        "operationId": "Catalogs_CountDevices",
         "summary": "Counts the devices that belong to a catalog.",
         "consumes": [
           "application/json"
@@ -115,7 +115,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listImageComponentIds": {
       "post": {
-        "operationId": "Catalogs_listImageComponentIds",
+        "operationId": "Catalogs_ListImageComponentIds",
         "summary": "Retrieves a set of image identifiers with corresponding component identifiers.",
         "consumes": [
           "application/json"
@@ -186,7 +186,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/uploadImage": {
       "post": {
-        "operationId": "Catalogs_uploadImage",
+        "operationId": "Catalogs_UploadImage",
         "summary": "Uploads an image in a catalog.",
         "consumes": [
           "application/json"
@@ -517,7 +517,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/listDevices": {
       "post": {
-        "operationId": "Products_listDevices",
+        "operationId": "Products_ListDevices",
         "summary": "List the devices that belong to a product.",
         "consumes": [
           "application/json"
@@ -586,7 +586,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/countDevices": {
       "post": {
-        "operationId": "Products_countDevices",
+        "operationId": "Products_CountDevices",
         "summary": "Counts the devices that belong to a product.",
         "consumes": [
           "application/json"
@@ -646,7 +646,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/generateDefaultDeviceGroups": {
       "post": {
-        "operationId": "Products_generateDefaultDeviceGroups",
+        "operationId": "Products_GenerateDefaultDeviceGroups",
         "summary": "Creates default device groups under the specified product.",
         "consumes": [
           "application/json"
@@ -988,9 +988,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}/deploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deploy": {
       "post": {
-        "operationId": "DeviceGroups_deploy",
+        "operationId": "DeviceGroups_Deploy",
         "summary": "Deploys a list of images to a device group.",
         "consumes": [
           "application/json"
@@ -1060,9 +1060,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}/listDeployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/listDeployments": {
       "post": {
-        "operationId": "DeviceGroups_listDeployments",
+        "operationId": "DeviceGroups_ListDeployments",
         "summary": "List the deployments for the device group.",
         "consumes": [
           "application/json"
@@ -1133,9 +1133,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}/listDevices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/listDevices": {
       "post": {
-        "operationId": "DeviceGroups_listDevices",
+        "operationId": "DeviceGroups_ListDevices",
         "summary": "List the devices assigned to the device group.",
         "consumes": [
           "application/json"
@@ -1206,9 +1206,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}/countDevices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices": {
       "post": {
-        "operationId": "DeviceGroups_countDevices",
+        "operationId": "DeviceGroups_CountDevices",
         "summary": "Counts the devices that belong to a device group.",
         "consumes": [
           "application/json"
@@ -1230,18 +1230,21 @@
             "name": "catalogName",
             "in": "path",
             "required": true,
+            "description": "Catalog name",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
+            "description": "Product name",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
+            "description": "Device group name",
             "type": "string"
           }
         ],
@@ -1270,7 +1273,159 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/move": {
+      "post": {
+        "operationId": "DeviceGroups_Move",
+        "summary": "Move the device into the device group.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "required": true,
+            "description": "Product name",
+            "type": "string"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "required": true,
+            "description": "Device group name",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Assign device to device group request",
+            "schema": {
+              "$ref": "#/definitions/MoveDeviceDeviceGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Async response of the move device to a device group action",
+            "schema": {
+              "$ref": "#/definitions/MoveDeviceDeviceGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "DeviceGroups"
+        ],
+        "x-ms-examples": {
+          "Move the device into the specified device group.": {
+            "$ref": "./examples/PostMoveDeviceToDeviceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/remove": {
+      "post": {
+        "operationId": "DeviceGroups_Remove",
+        "summary": "Remove the device from the device group.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "required": true,
+            "description": "Product name",
+            "type": "string"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "required": true,
+            "description": "Device group name",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Remove the device from the device group request",
+            "schema": {
+              "$ref": "#/definitions/RemoveDeviceDeviceGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Async response of the remove device from a device group action",
+            "schema": {
+              "$ref": "#/definitions/RemoveDeviceDeviceGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "DeviceGroups"
+        ],
+        "x-ms-examples": {
+          "Remove the device from the specified device group.": {
+            "$ref": "./examples/PostRemoveDeviceToDeviceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}": {
       "get": {
         "operationId": "DeviceGroups_Get",
         "summary": "Get a DeviceGroup",
@@ -1364,7 +1519,7 @@
             "schema": {
               "$ref": "#/definitions/DeviceGroup"
             },
-            "description": "Request object for put /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}"
+            "description": "Request object for put /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}"
           }
         ],
         "responses": {
@@ -1431,7 +1586,7 @@
             "schema": {
               "$ref": "#/definitions/DeviceGroup"
             },
-            "description": "Request object for patch /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}"
+            "description": "Request object for patch /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}"
           }
         ],
         "responses": {
@@ -1550,7 +1705,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageId}/metadata": {
       "post": {
-        "operationId": "Images_metadata",
+        "operationId": "Images_Metadata",
         "summary": "Gets the metadata of the image",
         "consumes": [
           "application/json"
@@ -1803,7 +1958,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/devices/{deviceId}/listImages": {
       "post": {
-        "operationId": "Devices_listImages",
+        "operationId": "Devices_ListImages",
         "summary": "Get the list of images that should be installed on a given device.",
         "consumes": [
           "application/json"
@@ -1866,7 +2021,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/devices/{deviceId}/createDeviceCapabilityImage": {
       "post": {
-        "operationId": "Devices_createDeviceCapabilityImage",
+        "operationId": "Devices_CreateDeviceCapabilityImage",
         "summary": "Creates a signed device capability image.",
         "consumes": [
           "application/json"
@@ -1929,75 +2084,6 @@
         "x-ms-examples": {
           "List the deployments for the device group.": {
             "$ref": "./examples/PostCreateDeviceCapabilityImage.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/devices/{deviceId}/assign": {
-      "post": {
-        "operationId": "Devices_assign",
-        "summary": "Move the device into the specified device group.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "description": "Catalog name",
-            "type": "string"
-          },
-          {
-            "name": "deviceId",
-            "in": "path",
-            "required": true,
-            "description": "Device identifier",
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "description": "Assign device resource group request",
-            "schema": {
-              "$ref": "#/definitions/AssignDeviceResourceGroupRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Async response of the assign device to device group action",
-            "schema": {
-              "$ref": "#/definitions/DeviceAssignResultResponse"
-            }
-          },
-          "default": {
-            "description": "An Azure Sphere Error",
-            "schema": {
-              "$ref": "#/definitions/AzureSphereErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "tags": [
-          "Devices"
-        ],
-        "x-ms-examples": {
-          "Move the device into the specified device group.": {
-            "$ref": "./examples/PostAssignDeviceToDeviceGroup.json"
           }
         }
       }
@@ -2140,7 +2226,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveCertChain": {
       "post": {
-        "operationId": "Certificates_retrieveCertChain",
+        "operationId": "Certificates_RetrieveCertChain",
         "summary": "Retrieve the certificate chain",
         "consumes": [
           "application/json"
@@ -2200,7 +2286,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/proofOfPossessionNonce": {
       "post": {
-        "operationId": "Certificates_proofOfPossessionNonce",
+        "operationId": "Certificates_ProofOfPossessionNonce",
         "summary": "Takes a proof of possession nonce generated by DPS and generates a certificate signed by the catalog certificate.",
         "consumes": [
           "application/json"
@@ -2546,7 +2632,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups": {
       "get": {
         "operationId": "DeviceGroups_ListByProducts",
         "summary": "List all DeviceGroup by productName",
@@ -2944,7 +3030,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "description": "An Azure Sphere catalog",
+      "description": "Azure Sphere Catalog",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -3023,6 +3109,52 @@
       "allOf": [
         {
           "$ref": "#/definitions/CountElementsResponse"
+        }
+      ]
+    },
+    "MoveDeviceDeviceGroupRequest": {
+      "type": "object",
+      "properties": {
+        "deviceName": {
+          "type": "string",
+          "description": "Device name."
+        }
+      },
+      "description": "Request of the action to move a device into the device group.",
+      "required": [
+        "deviceName"
+      ]
+    },
+    "MoveDeviceDeviceGroupResponse": {
+      "type": "object",
+      "properties": {},
+      "description": "Async response of the move device to a device group action",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
+        }
+      ]
+    },
+    "RemoveDeviceDeviceGroupRequest": {
+      "type": "object",
+      "properties": {
+        "deviceName": {
+          "type": "string",
+          "description": "Device name."
+        }
+      },
+      "description": "Request of the action to remove a device from the device group.",
+      "required": [
+        "deviceName"
+      ]
+    },
+    "RemoveDeviceDeviceGroupResponse": {
+      "type": "object",
+      "properties": {},
+      "description": "Async response of the remove device from a device group action",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSphereProperties"
         }
       ]
     },
@@ -3128,29 +3260,6 @@
         }
       },
       "description": "Signed device capability image response."
-    },
-    "AssignDeviceResourceGroupRequest": {
-      "type": "object",
-      "properties": {
-        "deviceGroupName": {
-          "type": "string",
-          "description": "Device group name."
-        }
-      },
-      "description": "Request of the action to move the device into the specified device group.",
-      "required": [
-        "deviceGroupName"
-      ]
-    },
-    "DeviceAssignResultResponse": {
-      "type": "object",
-      "properties": {},
-      "description": "Async response of the assign device to device group action",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureSphereProperties"
-        }
-      ]
     },
     "Device": {
       "type": "object",
