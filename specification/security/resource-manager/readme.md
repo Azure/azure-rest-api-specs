@@ -84,7 +84,7 @@ input-file:
 
 override-info:
   title: SecurityCenter
-```
+``` 
 
 ### Tag: package-composite-v1
 
@@ -471,8 +471,8 @@ input-file:
 
 # Needed when there is more than one input file
 override-info:
-  title: SecurityCenter
-```
+ title: SecurityCenter
+``` 
 
 ### Tag: package-2021-06-only
 
