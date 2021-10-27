@@ -13,25 +13,12 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-```yaml $(multiapi)
-clear-output-folder: true
-batch:
-  - tag: package-2020-07-01-preview
-  - tag: package-2021-02-01-preview
-  - tag: package-2021-11-01-preview
-  - multiapiscript: true
+``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-adp/azure/mgmt/adp
 ```
 
-``` yaml $(multiapi)
-output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/
-clear-output-folder: false
-perform-load: false
-```
-
-``` yaml !$(multiapi)
-namespace: azure.mgmt.adp.v$(version-with-underscores)
-output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(version-with-underscores)
-python:
-  namespace: azure.mgmt.adp.v$(version-with-underscores)
-  output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(version-with-underscores)
+``` yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-adp
 ```
