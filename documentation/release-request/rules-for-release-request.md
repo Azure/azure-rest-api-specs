@@ -5,12 +5,12 @@ Kake release request in [website](https://portal.azure-devex-tools.com/tools/req
 
 # Some guidance and rules when you fill the release issue
 
-### Expected release date for SDKs (PST)
+### 1. Expected release date for SDKs (PST)
 ![img.png](expected-release-date.png)
 
 SDK team need some time to prepare and test, so it is better to leave at least 1 week for them.
 
-### Link to PR or spec (if PR unavailable)
+### 2. Link to PR or spec (if PR unavailable)
 ![img.png](link.png)
 
 Two kinds of link is supported:
@@ -24,7 +24,7 @@ in `Comments` to clarify which is needed.
 Note: `make sure` the content you want is `merged` into [main repo: azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs).
 It is not permitted if PR is `open` or in [private repo: azure-rest-api-specs-pr](https://github.com/Azure/azure-rest-api-specs-pr).
 
-### ReadMe tag to be released
+### 3. ReadMe tag to be released
 ![img.png](tag.png)
 
 Make sure the tag is defined in `readme.md`(for example: https:https://github.com/Azure/azure-rest-api-specs/blob/main/specification/advisor/resource-manager/readme.md)
@@ -33,7 +33,7 @@ release request.
 
 ![img.png](default-tag.png)
 
-#### Comments
+#### 4. Comments
 ![img.png](comments.png)
 
 If anything needs to clarify, write it in `Comments`
