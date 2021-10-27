@@ -33,11 +33,11 @@ tag: package-features-2021-07
 ```
 
 ``` yaml $(package-locks)
-tag: package-locks-2016-09
+tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2020-09
+tag: package-policy-2021-07
 ```
 
 ``` yaml $(package-resources)
@@ -64,7 +64,40 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-05
 ```
 
+### Tag: package-policy-2021-07
 
+These settings apply only when `--tag=package-policy-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2021-07'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2021-07-01/policyExemptions.json
+- Microsoft.Authorization/stable/2021-07-01/policyPricings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2021-06
+
+These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2021-06'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
 
 ### Tag: package-privatelinks-2020-05
 
@@ -74,6 +107,16 @@ These settings apply only when `--tag=package-privatelinks-2020-05` is specified
 input-file:
 - Microsoft.Authorization/stable/2020-05-01/privateLinks.json
 ```
+
+### Tag: package-locks-2020-05
+
+These settings apply only when `--tag=package-locks-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2020-05'
+input-file:
+- Microsoft.Authorization/stable/2020-05-01/locks.json
+```
+
 
 ### Tag: package-resources-2021-04
 
@@ -101,6 +144,15 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+### Tag: package-locks-2017-04
+
+These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2017-04'
+input-file:
+- Microsoft.Authorization/stable/2017-04-01/locks.json
+```
+
 
 ### Tag: package-preview-2020-08
 
@@ -636,6 +688,10 @@ directive:
     from: policyExemptions.json
     where: $.paths
     reason: policy exemption under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyPricings.json
+    where: $.paths
+    reason: policy pricing under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -656,9 +712,17 @@ directive:
     from: policyExemptions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyPricings.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties
+    reason: Currently systemData is not allowed
+  - suppress: BodyTopLevelProperties
+    from: policyPricings.json
+    where: $.definitions.PolicyPricing.properties
     reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: resources.json
@@ -814,6 +878,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas

@@ -49,7 +49,7 @@
   ],
   "responses": {},
   "parameters": {
-    "ConversionApiVersionV2": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -80,6 +80,20 @@
       "type": "string",
       "in": "query",
       "required": true,
+      "enum": [
+        "facility-2.0"
+      ],
+      "x-ms-enum": {
+        "name": "OutputOntology",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "facility-2.0",
+            "description": "Facility ontology defines how Azure Maps Creator internally stores facility data in a Creator dataset."
+          }
+        ]
+      },
+      "x-ms-client-default": "facility-2.0",
       "x-ms-parameter-location": "method"
     },
     "DescriptionDwgConversion": {
@@ -117,7 +131,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ConversionApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/UdidQuery"
@@ -154,7 +168,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ConversionApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "x-ms-pageable": {
@@ -165,7 +179,7 @@
           "200": {
             "description": "List request completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConversionListResponse"
+              "$ref": "#/definitions/ConversionListResult"
             }
           },
           "default": {
@@ -188,7 +202,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ConversionApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/ConversionId"
@@ -198,7 +212,7 @@
           "200": {
             "description": "Returns details of the specified conversion.",
             "schema": {
-              "$ref": "#/definitions/ConversionListDetailInfo"
+              "$ref": "#/definitions/Conversion"
             }
           },
           "default": {
@@ -219,7 +233,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/ConversionApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/ConversionId"
@@ -249,7 +263,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ConversionApiVersionV2"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/ConversionOperationId"
@@ -267,7 +281,7 @@
     }
   },
   "definitions": {
-    "ConversionListResponse": {
+    "ConversionListResult": {
       "description": "The response model for the Conversion List API.",
       "type": "object",
       "properties": {
@@ -276,7 +290,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ConversionListDetailInfo"
+            "$ref": "#/definitions/Conversion"
           }
         },
         "nextLink": {
@@ -286,7 +300,7 @@
         }
       }
     },
-    "ConversionListDetailInfo": {
+    "Conversion": {
       "description": "Detail information for the conversion requests.",
       "type": "object",
       "properties": {
@@ -315,6 +329,10 @@
         },
         "featureCounts": {
           "description": "A summary of feature counts in this conversion.",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          },
           "type": "object",
           "readOnly": true
         }

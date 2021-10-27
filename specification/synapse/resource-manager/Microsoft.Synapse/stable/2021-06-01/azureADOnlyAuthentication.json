@@ -1,0 +1,295 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications/{azureADOnlyAuthenticationName}": {
+      "get": {
+        "operationId": "AzureADOnlyAuthentications_Get",
+        "summary": "Get Azure Active Directory only authentication property",
+        "description": "Gets a Azure Active Directory only authentication property",
+        "tags": [
+          "WorkspaceAzureADOnlyAuthentications"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./azureADOnlyAuthentication.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "./azureADOnlyAuthentication.json#/parameters/azureADOnlyAuthenticationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Azure Active Directory Only Authentication property": {
+            "$ref": "./examples/GetAzureADOnlyAuthentication.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureADOnlyAuthentications_Create",
+        "summary": "Create or Update Azure Active Directory only authentication property",
+        "description": "Create or Update a Azure Active Directory only authentication property for the workspaces",
+        "tags": [
+          "WorkspaceAzureADOnlyAuthentications"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./azureADOnlyAuthentication.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "./azureADOnlyAuthentication.json#/parameters/azureADOnlyAuthenticationNameParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            },
+            "in": "body",
+            "name": "AzureADOnlyAuthenticationInfo",
+            "description": "Azure Active Directory Property",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            },
+            "description": "OK"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthentication"
+            },
+            "description": "Created"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or Update Azure Active Directory Only Authentication property": {
+            "$ref": "./examples/CreateOrUpdateAzureADOnlyAuthentication.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/azureADOnlyAuthentications": {
+      "get": {
+        "operationId": "AzureADOnlyAuthentications_List",
+        "summary": "Gets a list of Azure Active Directory only authentication property",
+        "description": "Gets a list of Azure Active Directory only authentication property for a workspace",
+        "tags": [
+          "WorkspaceAzureADOnlyAuthentications"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./azureADOnlyAuthentication.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthenticationListResult"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of Azure Active Directory Only Authentication property": {
+            "$ref": "./examples/ListAzureADOnlyAuthentication.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureADOnlyAuthenticationProperties": {
+      "description": "Properties of a active directory only authentication.",
+      "required": [
+        "azureADOnlyAuthentication"
+      ],
+      "type": "object",
+      "properties": {
+        "azureADOnlyAuthentication": {
+          "description": "Azure Active Directory only Authentication enabled.",
+          "type": "boolean"
+        },
+        "state": {
+          "description": "property configuration state",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Consistent",
+            "InConsistent",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "state value",
+            "modelAsString": true
+          }
+        },
+        "creationDate": {
+          "description": "property configuration date",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureADOnlyAuthentication": {
+      "description": "Azure Active Directory Only Authentication Info",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "azureADOnlyAuthentication resource properties",
+          "$ref": "#/definitions/AzureADOnlyAuthenticationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureADOnlyAuthenticationListResult": {
+      "description": "A list of active directory only authentications.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureADOnlyAuthentication"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "azureADOnlyAuthenticationNameParameter": {
+      "type": "string",
+      "in": "path",
+      "name": "azureADOnlyAuthenticationName",
+      "description": "name of the property",
+      "required": true,
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "AzureADOnlyAuthenticationName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
