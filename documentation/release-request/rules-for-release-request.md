@@ -33,7 +33,7 @@ release request.
 
 ![img.png](default-tag.png)
 
-#### 4. Comments
+### 4. Comments
 ![img.png](comments.png)
 
 If anything needs to clarify, write it in `Comments`
