@@ -852,14 +852,14 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Node type update parameters"
+          "description": "Node type update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "sku": {
           "$ref": "#/definitions/NodeTypeSku",
           "description": "The node type sku."
-        },
-        "additionalProperties": {
-          "type": "string"
         }
       },
       "description": "Node type update request"
