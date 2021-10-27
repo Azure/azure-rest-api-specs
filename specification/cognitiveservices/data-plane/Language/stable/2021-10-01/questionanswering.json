@@ -33,7 +33,7 @@
         "operationId": "QuestionAnswering_GetAnswers",
         "parameters": [
           {
-            "$ref": "#/parameters/KnowledgeBaseQueryOptions"
+            "$ref": "#/parameters/AnswersOptions"
           },
           {
             "$ref": "common.json#/parameters/ProjectNameQueryParameter"
@@ -55,7 +55,7 @@
           "200": {
             "description": "A successful response to get answers from knowledge base.",
             "schema": {
-              "$ref": "#/definitions/KnowledgeBaseAnswers"
+              "$ref": "#/definitions/AnswersResult"
             }
           },
           "default": {
@@ -78,7 +78,7 @@
         "operationId": "QuestionAnswering_GetAnswersFromText",
         "parameters": [
           {
-            "$ref": "#/parameters/TextQueryOptions"
+            "$ref": "#/parameters/AnswersFromTextOptions"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -94,7 +94,7 @@
           "200": {
             "description": "A successful response to get answers from input text.",
             "schema": {
-              "$ref": "#/definitions/TextAnswers"
+              "$ref": "#/definitions/AnswersFromTextResult"
             }
           },
           "default": {
@@ -113,7 +113,7 @@
     }
   },
   "definitions": {
-    "KnowledgeBaseQueryOptions": {
+    "AnswersOptions": {
       "type": "object",
       "description": "Parameters to query a knowledge base.",
       "additionalProperties": false,
@@ -145,13 +145,13 @@
         },
         "context": {
           "description": "Context object with previous QnA's information.",
-          "$ref": "#/definitions/KnowledgeBaseAnswerRequestContext"
+          "$ref": "#/definitions/KnowledgeBaseAnswerContext"
         },
         "rankerType": {
           "type": "string",
           "description": "Type of ranker to be used.",
           "x-ms-enum": {
-            "name": "RankerType",
+            "name": "RankerKind",
             "modelAsString": true,
             "values": [
               {
@@ -175,7 +175,7 @@
         },
         "answerSpanRequest": {
           "description": "To configure Answer span prediction feature.",
-          "$ref": "#/definitions/AnswerSpanRequest"
+          "$ref": "#/definitions/ShortAnswerOptions"
         },
         "includeUnstructuredSources": {
           "type": "boolean",
@@ -183,14 +183,20 @@
         }
       }
     },
-    "AnswerSpanRequest": {
+    "ShortAnswerOptions": {
       "type": "object",
       "description": "To configure Answer span prediction feature.",
       "additionalProperties": false,
+      "required": [
+        "enable"
+      ],
       "properties": {
         "enable": {
           "type": "boolean",
-          "description": "Enable or disable Answer Span prediction."
+          "description": "Enable or disable Answer Span prediction.",
+          "enum": [
+            true
+          ]
         },
         "confidenceScoreThreshold": {
           "type": "number",
@@ -208,7 +214,7 @@
         }
       }
     },
-    "KnowledgeBaseAnswerRequestContext": {
+    "KnowledgeBaseAnswerContext": {
       "type": "object",
       "description": "Context object with previous QnA's information.",
       "additionalProperties": false,
@@ -227,7 +233,7 @@
         }
       }
     },
-    "KnowledgeBaseAnswers": {
+    "AnswersResult": {
       "type": "object",
       "description": "Represents List of Question Answers.",
       "additionalProperties": false,
@@ -436,7 +442,7 @@
         }
       }
     },
-    "TextQueryOptions": {
+    "AnswersFromTextOptions": {
       "type": "object",
       "description": "The question and text record parameters to answer.",
       "required": [
@@ -453,7 +459,7 @@
           "type": "array",
           "description": "Text records to be searched for given question.",
           "items": {
-            "$ref": "#/definitions/TextRecord"
+            "$ref": "#/definitions/TextDocument"
           }
         },
         "language": {
@@ -464,7 +470,7 @@
         }
       }
     },
-    "TextAnswers": {
+    "AnswersFromTextResult": {
       "type": "object",
       "description": "Represents the answer results.",
       "additionalProperties": false,
@@ -515,7 +521,7 @@
         }
       }
     },
-    "TextRecord": {
+    "TextDocument": {
       "type": "object",
       "description": "Represent input text record to be queried.",
       "additionalProperties": false,
@@ -536,23 +542,23 @@
     }
   },
   "parameters": {
-    "KnowledgeBaseQueryOptions": {
+    "AnswersOptions": {
       "name": "knowledgeBaseQueryOptions",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/KnowledgeBaseQueryOptions"
+        "$ref": "#/definitions/AnswersOptions"
       },
       "x-nullable": true,
       "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
     },
-    "TextQueryOptions": {
+    "AnswersFromTextOptions": {
       "name": "textQueryOptions",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/TextQueryOptions"
+        "$ref": "#/definitions/AnswersFromTextOptions"
       },
       "x-nullable": true,
       "description": "Post body of the request.",
