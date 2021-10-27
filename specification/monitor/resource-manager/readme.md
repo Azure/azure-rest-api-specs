@@ -36,6 +36,41 @@ title: MonitorManagementClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2021-04
+
+directive:
+  - suppress: Example Validations
+    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+```
+
+### Tag: package-2021-09
+
+These settings apply only when `--tag=package-2021-09` is specified on the command line
+
+``` yaml $(tag) == 'package-2021-09'
+input-file:
+- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
+- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2021-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
 
 ### Tag: package-2021-07
@@ -124,8 +159,9 @@ input-file:
 
 These settings apply only when `--tag=package-2021-05-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-05-01-preview-only'
+```yaml $(tag) == 'package-2021-05-01-preview-only'
 input-file:
+- Microsoft.Insights/preview/2021-05-01-preview/autoscale_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
@@ -710,6 +746,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -818,6 +855,9 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: metricDefinitions_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: DefaultErrorResponseSchema
+    from: actionGroups_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: OperationsAPIImplementation
     from: operations_API.json
     where: $.paths
@@ -834,7 +874,10 @@ directive:
     from: autoscale_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-    
+  - suppress: OperationsAPIImplementation
+    from: actionGroups_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
 ``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
@@ -857,7 +900,7 @@ directive:
   reason: Incompatible values (2020-10-01)
 ```
 
-``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07')
+``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07' || $(tag) == 'package-2021-09')
 directive:
 - from: scheduledQueryRule_API.json
   where: $.parameters
