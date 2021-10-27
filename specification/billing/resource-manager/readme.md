@@ -26,7 +26,7 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-10
 ```
 
 ### Tag: package-2021-10
@@ -34,6 +34,8 @@ tag: package-2020-05
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-10'
+title: BillingManagementClient
+description: Billing Client
 input-file:
 - Microsoft.Billing/stable/2021-10-01/billingSubscription.json
 - Microsoft.Billing/stable/2021-10-01/payment.json
