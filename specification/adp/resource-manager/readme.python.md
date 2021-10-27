@@ -9,6 +9,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-adp
 clear-output-folder: true
 no-namespace-folders: true
+python-mode: create
 modelerfour:
   lenient-model-deduplication: true
 ```
