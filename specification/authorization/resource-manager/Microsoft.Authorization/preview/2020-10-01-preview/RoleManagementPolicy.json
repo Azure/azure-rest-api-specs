@@ -58,7 +58,7 @@
             "description": "The name (guid) of the role management policy to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -113,7 +113,7 @@
             "description": "Parameters for the role management policy."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -162,7 +162,7 @@
             "description": "The name (guid) of the role management policy to upsert."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -203,7 +203,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -251,7 +251,7 @@
           "description": "The role management policy is default policy."
         },
         "lastModifiedBy": {
-          "$ref": "#/definitions/Principal"
+          "$ref": "./common-types.json#/definitions/Principal"
         },
         "lastModifiedDateTime": {
           "type": "string",
@@ -281,6 +281,7 @@
           "$ref": "#/definitions/PolicyProperties"
         }
       },
+      "type": "object",
       "description": "Role management policy properties with scope."
     },
     "RoleManagementPolicy": {
@@ -306,6 +307,7 @@
           "description": "Role management policy properties."
         }
       },
+      "type": "object",
       "description": "Role management policy"
     },
     "RoleManagementPolicyListResult": {
@@ -322,6 +324,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role management policy list operation result."
     },
     "RoleManagementPolicyRule": {
@@ -671,30 +674,8 @@
             }
           }
         }
-      }
-    },
-    "Principal": {
-      "readOnly": true,
-      "type": "object",
-      "description": "The name of the entity last modified it",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the principal made changes"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The name of the principal made changes"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of principal such as user , group etc"
-        },
-        "email": {
-          "type": "string",
-          "description": "Email of principal"
-        }
-      }
+      },
+      "type": "object"
     },
     "CloudError": {
       "x-ms-external": true,
@@ -703,6 +684,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
+      "type": "object",
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
@@ -717,16 +699,8 @@
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         }
       },
+      "type": "object",
       "description": "An error response from the service."
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
     }
   }
 }
