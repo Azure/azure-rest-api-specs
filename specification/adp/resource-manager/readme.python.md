@@ -28,7 +28,7 @@ clear-output-folder: false
 perform-load: false
 ```
 
-``` yaml
+``` yaml !$(multiapi)
 namespace: azure.mgmt.adp.v$(version-with-underscores)
 output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(version-with-underscores)
 python:
