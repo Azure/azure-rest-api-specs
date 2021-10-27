@@ -4320,6 +4320,9 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
+      "required": [
+        "properties"
+      ],
       "properties": {
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -4335,6 +4338,12 @@
     "SessionHostConfigurationProperties": {
       "description": "Session host configurations of HostPool.",
       "type": "object",
+      "required": [
+        "vmSizeId",
+        "diskInfo",
+        "imageInfo",
+        "domainInfo"
+      ],
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the Session Host Configuration.",
@@ -4391,6 +4400,9 @@
     "DiskInfoProperties": {
       "description": "Disk information.",
       "type": "object",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -4429,6 +4441,9 @@
     "ImageInfoProperties": {
       "description": "Image configurations of session host in a HostPool.",
       "type": "object",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "enum": [
@@ -4466,6 +4481,12 @@
     "MarketplaceInfoProperties": {
       "description": "Marketplace image information.",
       "type": "object",
+      "required": [
+        "offer",
+        "publisher",
+        "sku",
+        "exactVersion"
+      ],
       "properties": {
         "offer": {
           "type": "string",
@@ -4488,6 +4509,9 @@
     "CustomInfoProperties": {
       "description": "Custom image information.",
       "type": "object",
+      "required": [
+        "resourceId"
+      ],
       "properties": {
         "resourceId": {
           "type": "string",
@@ -4498,6 +4522,9 @@
     "DomainInfoProperties": {
       "description": "Domain configurations of session hosts.",
       "type": "object",
+      "required": [
+        "joinType"
+      ],
       "properties": {
         "joinType": {
           "enum": [
@@ -4535,6 +4562,10 @@
     "ActiveDirectoryInfoProperties": {
       "description": "Active directory info. Only one should be populated based on the join type.",
       "type": "object",
+      "required": [
+        "credentials",
+        "domainName"
+      ],
       "properties": {
         "credentials": {
           "$ref": "#/definitions/KeyVaultCredentialsProperties",
@@ -4563,6 +4594,11 @@
     "KeyVaultCredentialsProperties": {
       "description": "Credentials kept in the keyvault.",
       "type": "object",
+      "required": [
+        "username",
+        "passwordKeyVaultResourceId",
+        "passwordKeyVaultSecretName"
+      ],
       "properties": {
         "username": {
           "type": "string",
