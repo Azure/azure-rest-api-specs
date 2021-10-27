@@ -1,0 +1,2037 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureArcData/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Azure Data Services on Azure Arc API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists all of the available Azure Data Services on Azure Arc API operations.": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_List",
+        "summary": "List sqlManagedInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_ListByResourceGroup",
+        "description": "Gets all sqlManagedInstances in a resource group.",
+        "summary": "List sqlManagedInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Get",
+        "description": "Retrieves a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of SQL Managed Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Instance tags.": {
+            "$ref": "./examples/GetSqlManagedInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Create",
+        "description": "Creates or replaces a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of SQL Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sqlManagedInstance",
+            "in": "body",
+            "description": "The SQL Managed Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a SQL Managed Instance": {
+            "$ref": "./examples/CreateOrUpdateSqlManagedInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Delete",
+        "description": "Deletes a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of Sql Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Managed Instance."
+          },
+          "202": {
+            "description": "Resource deletion is in progress.."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Managed Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Instance.": {
+            "$ref": "./examples/DeleteSqlManagedInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Update",
+        "description": "Updates a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of sqlManagedInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Managed Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a sql Instance tags.": {
+            "$ref": "./examples/UpdateSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_List",
+        "summary": "List sqlServerInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_ListByResourceGroup",
+        "description": "Gets all sqlServerInstances in a resource group.",
+        "summary": "List sqlServerInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Get",
+        "description": "Retrieves a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "Name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/GetSqlServerInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Create",
+        "description": "Creates or replaces a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "The name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sqlServerInstance",
+            "in": "body",
+            "description": "The SQL Server Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Delete",
+        "description": "Deletes a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "The name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server Instance."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Server Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Server Instance.": {
+            "$ref": "./examples/DeleteSqlServerInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Update",
+        "description": "Updates a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "Name of sqlServerInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/UpdateSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInSubscription",
+        "summary": "List dataController resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a subscription.": {
+            "$ref": "./examples/ListSubscriptionDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInGroup",
+        "summary": "List dataController resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}": {
+      "put": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PutDataController",
+        "description": "Creates or replaces a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Data Controller.": {
+            "$ref": "./examples/CreateOrUpdateDataController.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_DeleteDataController",
+        "description": "Deletes a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the DataController."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified DataController does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a dataController.": {
+            "$ref": "./examples/DeleteDataController.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_GetDataController",
+        "description": "Retrieves a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a data controller.": {
+            "$ref": "./examples/GetDataController.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PatchDataController",
+        "description": "Updates a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "dataControllerResource",
+            "description": "The update data controller resource",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataControllerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a dataController tags.": {
+            "$ref": "./examples/UpdateDataController.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CommonSku": {
+      "description": "The resource model definition representing SKU for ARM resources",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.  It is typically a letter+number code"
+        },
+        "dev": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether dev/test is enabled. When the dev field is set to true, the resource is used for dev/test purpose. "
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SqlManagedInstanceSku": {
+      "description": "The resource model definition representing SKU for Azure Managed Instance - Azure Arc",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "vCore"
+          ],
+          "description": "The name of the SKU."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "GeneralPurpose",
+            "BusinessCritical"
+          ],
+          "x-ms-enum": {
+            "name": "SqlManagedInstanceSkuTier",
+            "modelAsString": false
+          },
+          "default": "GeneralPurpose",
+          "description": "The pricing tier for the instance."
+        },
+        "dev": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether dev/test is enabled. When the dev field is set to true, the resource is used for dev/test purpose. "
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Identity": {
+      "description": "Identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      },
+      "description": "Plan for the resource.",
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ]
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Azure Data Services on Azure Arc operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Azure Data Services on Azure Arc operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation / action."
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "user",
+            "system"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "name",
+        "display",
+        "isDataAction"
+      ]
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized friendly description for the operation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ]
+    },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PageOfDataControllerResource": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/DataControllerResource"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results."
+        }
+      }
+    },
+    "DataControllerResource": {
+      "description": "Data controller resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataControllerProperties",
+          "description": "The data controller's properties",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DataControllerUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Used for updating a data controller resource."
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "family": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        }
+      }
+    },
+    "DataControllerProperties": {
+      "description": "The data controller properties.",
+      "type": "object",
+      "properties": {
+        "infrastructure": {
+          "type": "string",
+          "enum": [
+            "azure",
+            "gcp",
+            "aws",
+            "alibaba",
+            "onpremises",
+            "other"
+          ],
+          "x-ms-enum": {
+            "name": "infrastructure",
+            "modelAsString": false
+          },
+          "default": "other",
+          "description": "The infrastructure the data controller is running on."
+        },
+        "onPremiseProperty": {
+          "$ref": "#/definitions/OnPremiseProperty"
+        },
+        "k8sRaw": {
+          "type": "object",
+          "description": "The raw kubernetes information"
+        },
+        "uploadWatermark": {
+          "$ref": "#/definitions/UploadWatermark"
+        },
+        "lastUploadedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
+        },
+        "basicLoginInformation": {
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Deprecated. Azure Arc Data Services data controller no longer expose any endpoint. All traffic are exposed through Kubernetes native API."
+        },
+        "metricsDashboardCredential": {
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Login credential for metrics dashboard on the Kubernetes cluster."
+        },
+        "logsDashboardCredential": {
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Login credential for logs dashboard on the Kubernetes cluster."
+        },
+        "logAnalyticsWorkspaceConfig": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceConfig"
+        },
+        "uploadServicePrincipal": {
+          "$ref": "#/definitions/UploadServicePrincipal",
+          "description": "Deprecated. Service principal is deprecated in favor of Arc Kubernetes service extension managed identity."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "If a CustomLocation is provided, this contains the ARM id of the connected cluster the custom location belongs to."
+        },
+        "extensionId": {
+          "type": "string",
+          "description": "If a CustomLocation is provided, this contains the ARM id of the extension the custom location belongs to."
+        }
+      }
+    },
+    "UploadWatermark": {
+      "description": "Properties on upload watermark.  Mostly timestamp for each upload data type",
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for metrics from kubernetes cluster. Defaults to current date time"
+        },
+        "logs": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for logs from kubernetes cluster. Defaults to current date time"
+        },
+        "usages": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date for usages from kubernetes cluster. Defaults to current date time"
+        }
+      }
+    },
+    "OnPremiseProperty": {
+      "description": "Properties from the Kubernetes data controller",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A globally unique ID identifying the associated Kubernetes cluster"
+        },
+        "publicSigningKey": {
+          "type": "string",
+          "description": "Certificate that contains the Kubernetes cluster public key used to verify signing"
+        },
+        "signingCertificateThumbprint": {
+          "type": "string",
+          "description": "Unique thumbprint returned to customer to verify the certificate being uploaded"
+        }
+      },
+      "required": [
+        "id",
+        "publicSigningKey"
+      ]
+    },
+    "SqlManagedInstanceProperties": {
+      "description": "Properties of sqlManagedInstance.",
+      "type": "object",
+      "properties": {
+        "dataControllerId": {
+          "type": "string",
+          "description": "null"
+        },
+        "admin": {
+          "type": "string",
+          "description": "The instance admin user"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The instance start time"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The instance end time"
+        },
+        "k8sRaw": {
+          "$ref": "#/definitions/SqlManagedInstanceK8sRaw",
+          "description": "The raw kubernetes information"
+        },
+        "basicLoginInformation": {
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Username and password for basic authentication."
+        },
+        "lastUploadedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "licenseType": {
+          "type": "string",
+          "enum": [
+            "BasePrice",
+            "LicenseIncluded"
+          ],
+          "x-ms-enum": {
+            "name": "arcSqlManagedInstanceLicenseType",
+            "modelAsString": false
+          },
+          "default": "BasePrice",
+          "description": "The license type to apply for this managed instance."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "If a CustomLocation is provided, this contains the ARM id of the connected cluster the custom location belongs to."
+        },
+        "extensionId": {
+          "type": "string",
+          "description": "If a CustomLocation is provided, this contains the ARM id of the extension the custom location belongs to."
+        }
+      }
+    },
+    "SqlManagedInstance": {
+      "description": "A SqlManagedInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlManagedInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/SqlManagedInstanceSku",
+          "description": "Resource sku."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlManagedInstanceUpdate": {
+      "description": "An update to a SQL Managed Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlManagedInstanceListResult": {
+      "description": "A list of SqlManagedInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlManagedInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerInstanceProperties": {
+      "description": "Properties of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SQL Server version.",
+          "enum": [
+            "SQL Server 2019",
+            "SQL Server 2017",
+            "SQL Server 2016"
+          ],
+          "x-ms-enum": {
+            "name": "sqlVersion",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "description": "SQL Server edition.",
+          "enum": [
+            "Evaluation",
+            "Enterprise",
+            "Standard",
+            "Web",
+            "Developer",
+            "Express"
+          ],
+          "x-ms-enum": {
+            "name": "editionType",
+            "modelAsString": true
+          }
+        },
+        "containerResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers)."
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the resource was created.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The number of logical processors used by the SQL Server instance."
+        },
+        "status": {
+          "type": "string",
+          "description": "The cloud connectivity status.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "patchLevel": {
+          "type": "string",
+          "description": "SQL Server update level."
+        },
+        "collation": {
+          "type": "string",
+          "description": "SQL Server collation."
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "SQL Server current version."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "SQL Server instance name."
+        },
+        "tcpDynamicPorts": {
+          "type": "string",
+          "description": "Dynamic TCP ports used by SQL Server."
+        },
+        "tcpStaticPorts": {
+          "type": "string",
+          "description": "Static TCP ports used by SQL Server."
+        },
+        "productId": {
+          "type": "string",
+          "description": "SQL Server product ID."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "enum": [
+            "Paid",
+            "Free",
+            "HADR",
+            "Undefined"
+          ],
+          "x-ms-enum": {
+            "name": "arcSqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "azureDefenderStatusLastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last Azure Defender status update."
+        },
+        "azureDefenderStatus": {
+          "type": "string",
+          "description": "Status of Azure Defender.",
+          "enum": [
+            "Protected",
+            "Unprotected",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "defenderStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "containerResourceId",
+        "status"
+      ]
+    },
+    "SqlServerInstance": {
+      "description": "A SqlServerInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlServerInstanceUpdate": {
+      "description": "An update to a SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlServerInstanceListResult": {
+      "description": "A list of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "null"
+        }
+      },
+      "description": "An error response from the Azure Data on Azure Arc service."
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "ODataError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A language-independent error name."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          },
+          "description": "The error details."
+        }
+      },
+      "type": "object",
+      "description": "Information about an error."
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      }
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "BasicLoginInformation": {
+      "type": "object",
+      "description": "Username and password for basic login authentication.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Login username."
+        },
+        "password": {
+          "type": "string",
+          "description": "Login password.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "SqlManagedInstanceK8sRaw": {
+      "type": "object",
+      "description": "The raw kubernetes information.",
+      "properties": {
+        "spec": {
+          "$ref": "#/definitions/SqlManagedInstanceK8sSpec"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "SqlManagedInstanceK8sSpec": {
+      "type": "object",
+      "description": "The kubernetes spec information.",
+      "properties": {
+        "scheduling": {
+          "$ref": "#/definitions/K8sScheduling"
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This option specifies the number of SQL Managed Instance replicas that will be deployed in your Kubernetes cluster for high availability purposes. If sku.tier is BusinessCritical, allowed values are '2' or '3' with default of '3'. If sku.tier is GeneralPurpose, replicas must be '1'."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "K8sScheduling": {
+      "type": "object",
+      "description": "The kubernetes scheduling information.",
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/K8sSchedulingOptions"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "K8sSchedulingOptions": {
+      "type": "object",
+      "description": "The kubernetes scheduling options. It describes restrictions used to help Kubernetes select appropriate nodes to host the database service",
+      "properties": {
+        "resources": {
+          "$ref": "#/definitions/K8sResourceRequirements"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "K8sResourceRequirements": {
+      "type": "object",
+      "description": "The kubernetes resource limits and requests used to restrict or reserve resource usage.",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Requests for a kubernetes resource type (e.g 'cpu', 'memory'). The 'cpu' request must be less than or equal to 'cpu' limit. Default 'cpu' is 2, minimum is 1. Default 'memory' is '4Gi', minimum is '2Gi. If sku.tier is GeneralPurpose, maximum 'cpu' is 24 and maximum 'memory' is '128Gi'."
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Limits for a kubernetes resource type (e.g 'cpu', 'memory'). The 'cpu' request must be less than or equal to 'cpu' limit. Default 'cpu' is 2, minimum is 1. Default 'memory' is '4Gi', minimum is '2Gi. If sku.tier is GeneralPurpose, maximum 'cpu' is 24 and maximum 'memory' is '128Gi'."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "LogAnalyticsWorkspaceConfig": {
+      "type": "object",
+      "description": "Log analytics workspace id and primary key",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Azure Log Analytics workspace ID"
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary key of the workspace",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "UploadServicePrincipal": {
+      "type": "object",
+      "description": "Service principal for uploading billing, metrics and logs.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Client ID of the service principal for uploading data."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Tenant ID of the service principal."
+        },
+        "authority": {
+          "type": "string",
+          "description": "Authority for the service principal. Example: https://login.microsoftonline.com/"
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Secret of the service principal",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the Azure subscription",
+      "x-ms-parameter-location": "client"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure resource group",
+      "x-ms-parameter-location": "method"
+    },
+    "location": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure region to use for the request",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
