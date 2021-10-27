@@ -703,6 +703,15 @@
           "description": "The ID of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
           "type": "string"
         },
+        "billingPolicies": {
+          "type": "object",
+          "description": "Dictionary of additional billing policies associated with the subscription.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "readOnly": true
+        },
         "billingProfileDisplayName": {
           "description": "The display name of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
           "type": "string",
@@ -712,11 +721,6 @@
           "description": "The name of the billing profile to which the subscription is billed. This field is only applicable for Microsoft Customer Agreement billing accounts.",
           "type": "string",
           "readOnly": true
-        },
-        "billingProfileSpendingLimitDetails": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BillingProfileSpendingLimitDetails",
-          "title": "The details of the spending limit that is set on the billing profile to which the subscription is billed."
         },
         "consumptionCostCenter": {
           "description": "The cost center applied to the subscription. This field is only available for consumption subscriptions of Microsoft Customer Agreement Type billing accounts.",
@@ -872,77 +876,6 @@
           "format": "date-time",
           "description": "The end date of the term in UTC time.",
           "readOnly": true
-        }
-      }
-    },
-    "BillingProfileSpendingLimitDetails": {
-      "description": "The spending limit details of the billing profiles to which the subscription is billed.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "amount": {
-          "description": "The spending limit value.",
-          "type": "number",
-          "readOnly": true
-        },
-        "currency": {
-          "description": "The spending limit currency.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start date of the spending limit.",
-          "readOnly": true
-        },
-        "endDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end date of the spending limit.",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The status of the spending limit.",
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "None",
-            "Active",
-            "Expired",
-            "LimitReached",
-            "LimitRemoved"
-          ],
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "BillingSubscriptionCreditStatus",
-            "modelAsString": true
-          }
-        },
-        "type": {
-          "description": "The type of spending limit.",
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "None",
-            "FreeAccount",
-            "AzureForStudents",
-            "AcademicSponsorship",
-            "AzureConsumptionCredit",
-            "AzurePassSponsorship",
-            "MpnSponsorship",
-            "MSDN",
-            "NonProfitSponsorship",
-            "Sponsorship",
-            "StartupSponsorship",
-            "AzureForStudentsStarter",
-            "VisualStudio"
-          ],
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SpendingLimitType",
-            "modelAsString": true
-          }
         }
       }
     },
