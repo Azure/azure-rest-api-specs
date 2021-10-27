@@ -5795,7 +5795,7 @@
         }
       },
       "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
       },
       "description": "Defines parameters for a search index that influence semantic capabilities."
     },
@@ -5812,7 +5812,7 @@
         "prioritizedFields": {
           "$ref": "#/definitions/PrioritizedFields",
           "x-nullable": false,
-          "description": "Describe how the service should process document fields in the context of semantic capabilities.",
+          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
         }
       },
       "required": [
@@ -5820,35 +5820,35 @@
         "prioritizedFields"
       ],
       "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
       },
       "description": "Defines a specific configuration to be used in the context of semantic capabilities."
     },
     "PrioritizedFields": {
       "properties": {
-        "TitleField": {
+        "titleField": {
           "$ref": "#/definitions/SemanticField",
-          "description": "Define which field to be used as the title of the document in the context of semantic capabilities."
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
         },
         "prioritizedContentFields": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField/"
           },
-          "description": "Define the fields to be processed in the context of semantic capabilities. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represent their priority. Fields with lower priority may get truncated if the content is too long."
+          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represent their priority. Fields with lower priority may get truncated if the content is long."
         },
-        "PrioritizedKeywordsFields": {
+        "prioritizedKeywordsFields": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField/"
           },
-          "description": "Define the fields to be processed in the context of semantic capabilities. For the best result, the selected fields should contain text in keyword form. The order of the fields in the array represent their priority. Fields with lower priority may get truncated if the content is too long."
+          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represent their priority. Fields with lower priority may get truncated if the content is long."
         }
       },
       "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
       },
-      "description": "Describe how the service should process document fields in the context of semantic capabilities."
+      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
     },
     "SemanticField": {
       "properties": {
@@ -5858,7 +5858,7 @@
           "x-nullable": false
         }
       },
-      "description": "Define a single field to be used in the context of semantic capabilities."
+      "description": "A field that is used as part of the semantic configuration."
     },
     "DataSourceCredentials": {
       "properties": {
@@ -7533,7 +7533,7 @@
           "$ref": "#/definitions/Semantic",
           "description": "Defines parameters for a search index that influence semantic capabilities.",
           "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/azure/search/semantic-search-overview"
+            "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
           },
           "x-nullable": true
         },
