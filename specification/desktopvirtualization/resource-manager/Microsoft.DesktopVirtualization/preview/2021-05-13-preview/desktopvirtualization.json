@@ -4470,11 +4470,11 @@
         },
         "marketplaceInfo": {
           "$ref": "#/definitions/MarketplaceInfoProperties",
-          "description": "The values to uniquely identify a marketplace image."
+          "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
         },
         "customInfo": {
           "$ref": "#/definitions/CustomInfoProperties",
-          "description": "The values to uniquely identify a custom image."
+          "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
         }
       }
     },
@@ -4563,7 +4563,6 @@
       "description": "Active directory info. Only one should be populated based on the join type.",
       "type": "object",
       "required": [
-        "credentials",
         "domainName"
       ],
       "properties": {
