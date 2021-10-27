@@ -101,7 +101,8 @@
             "maximum": 50,
             "minimum": 1,
             "name": "top",
-            "type": "integer"
+            "type": "integer", 
+            "format": "int32"
           },
           {
             "default": 0,
@@ -109,7 +110,8 @@
             "in": "query",
             "minimum": 0,
             "name": "skip",
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -137,13 +139,14 @@
   },
   "definitions": {
     "AnalyzeTextJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
           "type": "string"
         },
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageBatchInput"
+          "$ref": "#/definitions/AnalysisInput"
         },
         "tasks": {
           "description": "The set of tasks to execute on the input documents.",
@@ -211,6 +214,16 @@
         "tasks"
       ]
     },
+    "AnalysisInput": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "$ref": "#/definitions/MultiLanguageInput"
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 1
+    },
     "TaskParameters": {
       "type": "object",
       "description": "Base parameters object for a text analysis task.",
@@ -232,6 +245,7 @@
       }
     },
     "PreBuiltResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
@@ -270,6 +284,7 @@
       ]
     },
     "CustomResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
@@ -377,6 +392,9 @@
     },
     "SingleClassificationDocuments": {
       "type": "object",
+      "required": [
+          "documents"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -392,10 +410,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "documents"
-      ]
+      }
     },
     "SingleClassificationDocumentResult": {
       "type": "object",
@@ -1410,6 +1425,7 @@
       "properties": {
         "sentenceCount": {
           "type": "integer",
+          "format": "int32",
           "default": 3
         },
         "sortBy": {
@@ -1710,16 +1726,20 @@
         "tasks": {
           "properties": {
             "completed": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "failed": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "inProgress": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "total": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "customEntityRecognitionTasks": {
               "type": "array",
@@ -1872,6 +1892,7 @@
           "type": "string"
         },
         "status": {
+          "type": "string",
           "enum": [
             "notStarted",
             "running",
