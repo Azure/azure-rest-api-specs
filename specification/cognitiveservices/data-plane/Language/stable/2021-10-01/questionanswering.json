@@ -139,6 +139,7 @@
         "confidenceScoreThreshold": {
           "type": "number",
           "format": "double",
+          "x-ms-client-name": "confidenceThreshold",
           "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
           "maximum": 1,
           "minimum": 0
@@ -149,6 +150,7 @@
         },
         "rankerType": {
           "type": "string",
+          "x-ms-client-name": "rankerKind",
           "description": "Type of ranker to be used.",
           "x-ms-enum": {
             "name": "RankerKind",
@@ -174,6 +176,7 @@
           "$ref": "#/definitions/QueryFilters"
         },
         "answerSpanRequest": {
+          "x-ms-client-name": "shortAnswerOptions",
           "description": "To configure Answer span prediction feature.",
           "$ref": "#/definitions/ShortAnswerOptions"
         },
@@ -201,12 +204,14 @@
         "confidenceScoreThreshold": {
           "type": "number",
           "format": "double",
+          "x-ms-client-name": "confidenceThreshold",
           "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
           "maximum": 1,
           "minimum": 0
         },
         "topAnswersWithSpan": {
           "type": "integer",
+          "x-ms-client-name": "top",
           "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
           "format": "int32",
           "maximum": 10,
@@ -229,6 +234,7 @@
         },
         "previousUserQuery": {
           "type": "string",
+          "x-ms-client-name": "previousQuestion",
           "description": "Previous user query."
         }
       }
@@ -265,13 +271,15 @@
         },
         "confidenceScore": {
           "type": "number",
-          "description": "Answer confidence score, value ranges from 0 to 1.",
           "format": "double",
+          "x-ms-client-name": "confidence",
+          "description": "Answer confidence score, value ranges from 0 to 1.",
           "maximum": 1,
           "minimum": 0
         },
         "id": {
           "type": "integer",
+          "x-ms-client-name": "qnaId",
           "description": "ID of the QnA result.",
           "format": "int32"
         },
@@ -292,6 +300,7 @@
         },
         "answerSpan": {
           "type": "object",
+          "x-ms-client-name": "shortAnswer",
           "description": "Answer span object of QnA with respect to user's question.",
           "$ref": "#/definitions/AnswerSpan"
         }
@@ -425,6 +434,7 @@
         },
         "confidenceScore": {
           "type": "number",
+          "x-ms-client-name": "confidence",
           "description": "Predicted score of answer span, value ranges from 0 to 1.",
           "format": "double",
           "maximum": 1,
@@ -457,6 +467,7 @@
         },
         "records": {
           "type": "array",
+          "x-ms-client-name": "textDocuments",
           "description": "Text records to be searched for given question.",
           "items": {
             "$ref": "#/definitions/TextDocument"
@@ -495,6 +506,7 @@
         },
         "confidenceScore": {
           "type": "number",
+          "x-ms-client-name": "confidence",
           "description": "answer confidence score, value ranges from 0 to 1.",
           "format": "double",
           "maximum": 1,
@@ -506,6 +518,7 @@
         },
         "answerSpan": {
           "type": "object",
+          "x-ms-client-name": "shortAnswer",
           "description": "Answer span object with respect to user's question.",
           "$ref": "#/definitions/AnswerSpan"
         },
