@@ -70,7 +70,40 @@
           },
           "provisioningState": "Succeeded",
           "consistencyMode": "ApplicationConsistent",
-          "timeCreated": "2021-10-25T23:54:29.2796325+00:00"
+          "timeCreated": "2021-10-25T23:54:29.2796325+00:00",
+          "instanceView": {
+            "diskRestorePoints": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/rpName/diskRestorePoints/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f_22b4bdfe-6c54-4f72-84d8-85d8860f0c57",
+                "replicationStatus": {
+                  "status": {
+                    "code": "ReplicationState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Succeeded"
+                  },
+                  "completionPercent": 100
+                }
+              },
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/testingexcludedisk_DataDisk_1_68785190-1acb-4d5e-a8ae-705b45f3dca5",
+                "replicationStatus": {
+                  "status": {
+                    "code": "ReplicationState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Succeeded"
+                  },
+                  "completionPercent": 100
+                }
+              }
+            ],
+            "statuses": [
+              {
+                "code": "ReplicationState/succeeded",
+                "level": "Info",
+                "displayStatus": "Succeeded"
+              }
+            ]
+          }
         }
       }
     }
