@@ -15,10 +15,10 @@ modelerfour:
 
 ``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-adp/azure/mgmt/adp
+output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-adp
+output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp
 ```
