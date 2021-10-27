@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "policyMode": "Microsoft.KeyVault.Data"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Authorization/dataPolicyManifests/Microsoft.KeyVault.Data",
+        "type": "Microsoft.Authorization/dataPolicyManifests",
+        "name": "Microsoft.KeyVault.Data",
+        "properties": {
+          "namespaces": [
+            "Microsoft.KeyVault"
+          ],
+          "policyMode": "Microsoft.KeyVault.Data",
+          "isBuiltInOnly": true,
+          "resourceTypeAliases": [
+            {
+              "resourceType": "vaults/certificates",
+              "aliases": [
+                {
+                  "name": "Microsoft.KeyVault.Data/vaults/certificates/keyProperties.keyType",
+                  "paths": [
+                    {
+                      "path": "keyProperties.keyType",
+                      "apiVersions": [
+                        "2019-01-01"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "name": "Audit"
+            },
+            {
+              "name": "Deny"
+            }
+          ],
+          "fieldValues": [
+            "type"
+          ],
+          "resourceFunctions": {
+            "standard": [
+              "subscription",
+              "resourceGroup"
+            ],
+            "custom": [
+              {
+                "name": "vault",
+                "fullyQualifiedResourceType": "Microsoft.KeyVault/vaults",
+                "defaultProperties": [
+                  "location",
+                  "tags"
+                ],
+                "allowCustomProperties": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

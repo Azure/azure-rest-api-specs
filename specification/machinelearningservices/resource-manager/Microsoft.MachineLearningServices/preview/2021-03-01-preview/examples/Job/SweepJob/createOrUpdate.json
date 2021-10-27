@@ -1,0 +1,217 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "testworkspace",
+    "api-version": "2021-03-01-preview",
+    "id": "testJob",
+    "body": {
+      "properties": {
+        "jobType": "Sweep",
+        "searchSpace": {
+          "name": {}
+        },
+        "objective": {
+          "primaryMetric": "string",
+          "goal": "Minimize"
+        },
+        "algorithm": "Grid",
+        "description": "string",
+        "timeout": "PT1M",
+        "identity": {
+          "identityType": "AMLToken"
+        },
+        "compute": {
+          "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mycompute",
+          "instanceCount": 1
+        },
+        "maxTotalTrials": 1,
+        "maxConcurrentTrials": 1,
+        "trial": {
+          "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
+          "command": "python file.py test",
+          "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
+          "timeout": "PT1M",
+          "inputDataBindings": {
+            "test": {
+              "dataId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/data/mydataset/versions/1",
+              "pathOnCompute": "path/on/compute"
+            }
+          },
+          "outputDataBindings": {
+            "test": {
+              "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/datastore/mydatastore",
+              "pathOnCompute": "path/on/compute"
+            }
+          },
+          "distribution": {
+            "distributionType": "PyTorch",
+            "processCount": 2
+          },
+          "environmentVariables": {
+            "MY_ENV_VAR1": "string",
+            "MY_ENV_VAR2": "string"
+          }
+        },
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "properties": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/jobs/testJob",
+        "name": "testJob",
+        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "properties": {
+          "jobType": "Sweep",
+          "searchSpace": {
+            "name": {}
+          },
+          "objective": {
+            "primaryMetric": "string",
+            "goal": "Minimize"
+          },
+          "algorithm": "Grid",
+          "description": "string",
+          "timeout": "PT1M",
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "compute": {
+            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mycompute",
+            "instanceCount": 1
+          },
+          "maxTotalTrials": 1,
+          "maxConcurrentTrials": 1,
+          "trial": {
+            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
+            "command": "python file.py test",
+            "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
+            "timeout": "PT1M",
+            "inputDataBindings": {
+              "test": {
+                "dataId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/data/mydataset/versions/1",
+                "pathOnCompute": "path/on/compute"
+              }
+            },
+            "outputDataBindings": {
+              "test": {
+                "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/datastore/mydatastore",
+                "pathOnCompute": "path/on/compute"
+              }
+            },
+            "distribution": {
+              "distributionType": "PyTorch",
+              "processCount": 2
+            },
+            "environmentVariables": {
+              "MY_ENV_VAR1": "string",
+              "MY_ENV_VAR2": "string"
+            }
+          },
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-08T01:18:36.134Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-08T01:18:36.134Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "string",
+        "name": "string",
+        "type": "string",
+        "properties": {
+          "jobType": "Sweep",
+          "searchSpace": {
+            "name": {}
+          },
+          "objective": {
+            "primaryMetric": "string",
+            "goal": "Minimize"
+          },
+          "algorithm": "Grid",
+          "description": "string",
+          "timeout": "PT1M",
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "compute": {
+            "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mycompute",
+            "instanceCount": 1
+          },
+          "maxTotalTrials": 1,
+          "maxConcurrentTrials": 1,
+          "trial": {
+            "codeId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
+            "command": "python file.py test",
+            "environmentId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
+            "timeout": "PT1M",
+            "inputDataBindings": {
+              "test": {
+                "dataId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/data/mydataset/versions/1",
+                "pathOnCompute": "path/on/compute"
+              }
+            },
+            "outputDataBindings": {
+              "test": {
+                "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/datastore/mydatastore",
+                "pathOnCompute": "path/on/compute"
+              }
+            },
+            "distribution": {
+              "distributionType": "PyTorch",
+              "processCount": 2
+            },
+            "environmentVariables": {
+              "MY_ENV_VAR1": "string",
+              "MY_ENV_VAR2": "string"
+            }
+          },
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-08T01:18:36.134Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-08T01:18:36.134Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

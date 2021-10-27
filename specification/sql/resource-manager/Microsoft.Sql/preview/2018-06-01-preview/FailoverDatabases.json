@@ -38,6 +38,21 @@
             "type": "string"
           },
           {
+            "name": "replicaType",
+            "in": "query",
+            "description": "The type of replica to be failed over.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Primary",
+              "ReadableSecondary"
+            ],
+            "x-ms-enum": {
+              "name": "ReplicaType",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -49,7 +64,7 @@
             "description": "Successfully completed database failover."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 DatabaseFailoverThrottled - There was a recent failover on the database or pool if database belongs in an elastic pool.\n\n * 400 DatabaseFailoverNotSupported - This database type does not support customer initiated failovers.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 DatabaseNotInStateToFailover - The database is currently in a state such that failover cannot be issued."
+            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 DatabaseFailoverThrottled - There was a recent failover on the database or pool if database belongs in an elastic pool.\n\n * 400 DatabaseFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 DatabaseNotInStateToFailover - The database is currently in a state such that failover cannot be issued."
           },
           "202": {
             "description": "Database failover is in progress."

@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-servicemap"
   output-folder: "$(typescript-sdks-folder)/sdk/service-map/arm-servicemap"
+  clear-output-folder: true
   override-client-name: ServicemapManagementClient
   generate-metadata: true
 ```

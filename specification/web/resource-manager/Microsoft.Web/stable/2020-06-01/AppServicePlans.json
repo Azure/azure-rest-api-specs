@@ -1,0 +1,1744 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-06-01",
+    "title": "AppServicePlans API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/serverfarms": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all App Service plans for a subscription.",
+        "description": "Description for Get all App Service plans for a subscription.",
+        "operationId": "AppServicePlans_List",
+        "parameters": [
+          {
+            "name": "detailed",
+            "in": "query",
+            "description": "Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.\n Retrieval of all properties may increase the API latency.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlanCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Service plans": {
+            "$ref": "./examples/ListAppServicePlans.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all App Service plans in a resource group.",
+        "description": "Description for Get all App Service plans in a resource group.",
+        "operationId": "AppServicePlans_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlanCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Service plans by resource group": {
+            "$ref": "./examples/ListAppServicePlansByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get an App Service plan.",
+        "description": "Description for Get an App Service plan.",
+        "operationId": "AppServicePlans_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service plan": {
+            "$ref": "./examples/GetAppServicePlan.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Creates or updates an App Service Plan.",
+        "description": "Description for Creates or updates an App Service Plan.",
+        "operationId": "AppServicePlans_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appServicePlan",
+            "in": "body",
+            "description": "Details of the App Service plan.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update App Service plan": {
+            "$ref": "./examples/CreateOrUpdateAppServicePlan.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Delete an App Service plan.",
+        "description": "Description for Delete an App Service plan.",
+        "operationId": "AppServicePlans_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete App Service plan": {
+            "$ref": "./examples/DeleteAppServicePlan.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Creates or updates an App Service Plan.",
+        "description": "Description for Creates or updates an App Service Plan.",
+        "operationId": "AppServicePlans_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appServicePlan",
+            "in": "body",
+            "description": "Details of the App Service plan.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServicePlanPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Service plan": {
+            "$ref": "./examples/PatchAppServicePlan.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/capabilities": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "List all capabilities of an App Service plan.",
+        "description": "Description for List all capabilities of an App Service plan.",
+        "operationId": "AppServicePlans_ListCapabilities",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/Capability"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Retrieve a Hybrid Connection in use in an App Service plan.",
+        "description": "Description for Retrieve a Hybrid Connection in use in an App Service plan.",
+        "operationId": "AppServicePlans_GetHybridConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "Name of the Service Bus namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "Name of the Service Bus relay.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/HybridConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Delete a Hybrid Connection in use in an App Service plan.",
+        "description": "Description for Delete a Hybrid Connection in use in an App Service plan.",
+        "operationId": "AppServicePlans_DeleteHybridConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "Name of the Service Bus namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "Name of the Service Bus relay.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted hybrid connection"
+          },
+          "204": {
+            "description": "Hybrid connection does not exist"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}/listKeys": {
+      "post": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get the send key name and value of a Hybrid Connection.",
+        "description": "Description for Get the send key name and value of a Hybrid Connection.",
+        "operationId": "AppServicePlans_ListHybridConnectionKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the Service Bus namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The name of the Service Bus relay.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnectionKey"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}/sites": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all apps that use a Hybrid Connection in an App Service Plan.",
+        "description": "Description for Get all apps that use a Hybrid Connection in an App Service Plan.",
+        "operationId": "AppServicePlans_ListWebAppsByHybridConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "Name of the Hybrid Connection namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "Name of the Hybrid Connection relay.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionPlanLimits/limit": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get the maximum number of Hybrid Connections allowed in an App Service plan.",
+        "description": "Description for Get the maximum number of Hybrid Connections allowed in an App Service plan.",
+        "operationId": "AppServicePlans_GetHybridConnectionPlanLimit",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnectionLimits"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionRelays": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Retrieve all Hybrid Connections in use in an App Service plan.",
+        "description": "Description for Retrieve all Hybrid Connections in use in an App Service plan.",
+        "operationId": "AppServicePlans_ListHybridConnections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/restartSites": {
+      "post": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Restart all apps in an App Service plan.",
+        "description": "Description for Restart all apps in an App Service plan.",
+        "operationId": "AppServicePlans_RestartWebApps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "softRestart",
+            "in": "query",
+            "description": "Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/sites": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all apps associated with an App Service plan.",
+        "description": "Description for Get all apps associated with an App Service plan.",
+        "operationId": "AppServicePlans_ListWebApps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip to a web app in the list of webapps associated with app service plan. If specified, the resulting list will contain web apps starting from (including) the skipToken. Otherwise, the resulting list contains web apps from the start of the list",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supported filter: $filter=state eq running. Returns only web apps that are currently running",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "List page size. If specified, results are paged.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/WebAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/skus": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Gets all selectable SKUs for a given App Service Plan",
+        "description": "Description for Gets all selectable SKUs for a given App Service Plan",
+        "operationId": "AppServicePlans_GetServerFarmSkus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/usages": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Gets server farm usage information",
+        "description": "Description for Gets server farm usage information",
+        "operationId": "AppServicePlans_ListUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2').",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CsmUsageQuotaCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all Virtual Networks associated with an App Service plan.",
+        "description": "Description for Get all Virtual Networks associated with an App Service plan.",
+        "operationId": "AppServicePlans_ListVnets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/VnetInfo"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get a Virtual Network associated with an App Service plan.",
+        "description": "Description for Get a Virtual Network associated with an App Service plan.",
+        "operationId": "AppServicePlans_GetVnetFromServerFarm",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetInfo"
+            }
+          },
+          "404": {
+            "description": "Virtual network could not be found."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/gateways/{gatewayName}": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get a Virtual Network gateway.",
+        "description": "Description for Get a Virtual Network gateway.",
+        "operationId": "AppServicePlans_GetVnetGateway",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Name of the gateway. Only the 'primary' gateway is supported.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetGateway"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Update a Virtual Network gateway.",
+        "description": "Description for Update a Virtual Network gateway.",
+        "operationId": "AppServicePlans_UpdateVnetGateway",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Name of the gateway. Only the 'primary' gateway is supported.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Definition of the gateway.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetGateway"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetGateway"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all routes that are associated with a Virtual Network in an App Service plan.",
+        "description": "Description for Get all routes that are associated with a Virtual Network in an App Service plan.",
+        "operationId": "AppServicePlans_ListRoutesForVnet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/VnetRoute"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get a Virtual Network route in an App Service plan.",
+        "description": "Description for Get a Virtual Network route in an App Service plan.",
+        "operationId": "AppServicePlans_GetRouteForVnet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the Virtual Network route.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/VnetRoute"
+              }
+            }
+          },
+          "404": {
+            "description": "Specified route does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Create or update a Virtual Network route in an App Service plan.",
+        "description": "Description for Create or update a Virtual Network route in an App Service plan.",
+        "operationId": "AppServicePlans_CreateOrUpdateVnetRoute",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the Virtual Network route.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "Definition of the Virtual Network route.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetRoute"
+            }
+          },
+          "400": {
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
+          },
+          "404": {
+            "description": "Route not found."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Delete a Virtual Network route in an App Service plan.",
+        "description": "Description for Delete a Virtual Network route in an App Service plan.",
+        "operationId": "AppServicePlans_DeleteVnetRoute",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the Virtual Network route.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted Virtual Network route."
+          },
+          "404": {
+            "description": "Specified Virtual Network route does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Create or update a Virtual Network route in an App Service plan.",
+        "description": "Description for Create or update a Virtual Network route in an App Service plan.",
+        "operationId": "AppServicePlans_UpdateVnetRoute",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the Virtual Network route.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "Definition of the Virtual Network route.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/VnetRoute"
+            }
+          },
+          "400": {
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
+          },
+          "404": {
+            "description": "Route not found."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
+      "post": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Reboot a worker machine in an App Service plan.",
+        "description": "Description for Reboot a worker machine in an App Service plan.",
+        "operationId": "AppServicePlans_RebootWorker",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "in": "path",
+            "description": "Name of worker machine, which typically starts with RD.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppServicePlanPatchResource": {
+      "description": "ARM resource for a app service plan.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AppServicePlanPatchResource resource specific properties",
+          "properties": {
+            "workerTierName": {
+              "description": "Target worker tier assigned to the App Service plan.",
+              "type": "string"
+            },
+            "status": {
+              "description": "App Service plan status.",
+              "enum": [
+                "Ready",
+                "Pending",
+                "Creating"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "StatusOptions",
+                "modelAsString": false
+              }
+            },
+            "subscription": {
+              "description": "App Service plan subscription.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "./CommonDefinitions.json#/definitions/HostingEnvironmentProfile",
+              "description": "Specification for the App Service Environment to use for the App Service plan.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "maximumNumberOfWorkers": {
+              "format": "int32",
+              "description": "Maximum number of instances that can be assigned to this App Service plan.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "geoRegion": {
+              "description": "Geographical location for the App Service plan.",
+              "type": "string",
+              "readOnly": true
+            },
+            "perSiteScaling": {
+              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
+              "default": false,
+              "type": "boolean"
+            },
+            "maximumElasticWorkerCount": {
+              "format": "int32",
+              "description": "Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan",
+              "type": "integer"
+            },
+            "numberOfSites": {
+              "format": "int32",
+              "description": "Number of apps assigned to this App Service plan.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "isSpot": {
+              "description": "If <code>true</code>, this App Service Plan owns spot instances.",
+              "type": "boolean"
+            },
+            "spotExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm expires. Valid only if it is a spot server farm.",
+              "type": "string"
+            },
+            "freeOfferExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm free offer expires.",
+              "type": "string"
+            },
+            "resourceGroup": {
+              "description": "Resource group of the App Service plan.",
+              "type": "string",
+              "readOnly": true
+            },
+            "reserved": {
+              "description": "This needs to set to <code>true</code> when creating a Linux App Service Plan, along with <code>kind</code> set to <code>Linux</code>. It should be <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "isXenon": {
+              "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
+              "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "targetWorkerCount": {
+              "format": "int32",
+              "description": "Scaling worker count.",
+              "type": "integer"
+            },
+            "targetWorkerSizeId": {
+              "format": "int32",
+              "description": "Scaling worker size ID.",
+              "type": "integer"
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the App Service Environment.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HybridConnectionCollection": {
+      "description": "Collection of hostname bindings.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/HybridConnection"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HybridConnectionKey": {
+      "description": "Hybrid Connection key contract. This has the send key name and value for a Hybrid Connection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HybridConnectionKey resource specific properties",
+          "properties": {
+            "sendKeyName": {
+              "description": "The name of the send key.",
+              "type": "string",
+              "readOnly": true
+            },
+            "sendKeyValue": {
+              "description": "The value of the send key.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HybridConnectionLimits": {
+      "description": "Hybrid Connection limits contract. This is used to return the plan limits of Hybrid Connections.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HybridConnectionLimits resource specific properties",
+          "properties": {
+            "current": {
+              "format": "int32",
+              "description": "The current number of Hybrid Connections.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "maximum": {
+              "format": "int32",
+              "description": "The maximum number of Hybrid Connections allowed.",
+              "type": "integer",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResourceCollection": {
+      "description": "Collection of resources.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
