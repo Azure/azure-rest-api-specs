@@ -25,10 +25,8 @@ To see additional help and options, run:
 These are the global settings for the Billing API.
 
 ``` yaml
-title: BillingManagementClient
-description: Billing Client
 openapi-type: arm
-tag: package-2021-10
+tag: package-2020-05
 ```
 
 ### Tag: package-2021-10
