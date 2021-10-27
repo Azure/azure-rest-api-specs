@@ -22,13 +22,13 @@ batch:
   - multiapiscript: true
 ```
 
-``` yaml $(multiapiscript)
+``` yaml $(multiapi)
 output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/
 clear-output-folder: false
 perform-load: false
 ```
 
-``` yaml !$(multiapiscript)
+``` yaml !$(multiapi)
 namespace: azure.mgmt.adp.v$(version-with-underscores)
 output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(version-with-underscores)
 python:
