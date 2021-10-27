@@ -218,7 +218,11 @@
       "type": "object",
       "properties": {
         "documents": {
-          "$ref": "#/definitions/MultiLanguageInput"
+          "type": "array",
+          "description": "The set of documents to process as part of this batch.",
+          "items": {
+            "$ref": "#/definitions/MultiLanguageInput"
+          }
         }
       },
       "minProperties": 1,
