@@ -230,7 +230,7 @@ directive:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
 
-### Tag: package-2021-10-03
+### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
 
