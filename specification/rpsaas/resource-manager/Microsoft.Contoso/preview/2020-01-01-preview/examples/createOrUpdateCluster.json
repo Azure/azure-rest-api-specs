@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "clustersName": "testCluster",
+    "resourceGroupName": "testRG",
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "clusters": {
+      "location": "East US",
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/"
+      },
+      "properties": {
+        "cluster": "test-cluster",
+        "datacenter": "dc1",
+        "dummyVolume": {
+          "sizeLimit": "1Gi"
+        },
+        "serviceAccountName": "cassandra",
+        "nodes": 5
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "testCluster",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/towers/testTower",
+        "type": "Microsoft.Contoso/cluster",
+        "location": "East US",
+        "properties": {
+          "cluster": "test-cluster2",
+          "datacenter": "dc1",
+          "dummyVolume": {
+            "sizeLimit": "1Gi"
+          },
+          "serviceAccountName": "cassandra",
+          "nodes": 3
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "testCluster2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/towers/testTower",
+        "type": "Microsoft.Contoso/clusters",
+        "location": "East US",
+        "properties": {
+          "cluster": "test-cluster2",
+          "datacenter": "dc1",
+          "dummyVolume": {
+            "sizeLimit": "1Gi"
+          },
+          "serviceAccountName": "cassandra",
+          "nodes": 3
+        }
+      }
+    }
+  }
+}
