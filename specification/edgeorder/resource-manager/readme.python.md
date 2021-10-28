@@ -10,10 +10,11 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.edgeorder
 package-name: azure-mgmt-edgeorder
-no-namespace-folders: true
 package-version: 1.0.0b1
+title: EdgeOrderManagementClient
+description: The EdgeOrder Client.
 clear-output-folder: true
-no-namespace-folder: true
+no-namespace-folders: true
 ```
 ### Python multi-api
 
@@ -37,7 +38,6 @@ These settings apply only when `--tag=package-2020-12-preview --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-12-preview' && $(python) && $(track2)
-namespace: azure.mgmt.edgeorder.v2020_12_01_preview
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2020_12_01_preview
 ```
 
@@ -47,6 +47,5 @@ These settings apply only when `--tag=package-2021-12 --python` is specified on 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2021-12' && $(python) && $(track2)
-namespace: azure.mgmt.edgeorder.v2021_12_01
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2021_12_01
 ```
