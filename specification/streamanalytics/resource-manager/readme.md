@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-10-preview` is specified on t
 
 This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2020-10-01-preview version.
 
-```yaml $(tag) == 'package-2020-03-preview'
+```yaml $(tag) == 'package-2020-10-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2020-10-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2020-10-01-preview/inputs.json
