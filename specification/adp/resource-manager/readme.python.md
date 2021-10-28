@@ -7,10 +7,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-adp
-clear-output-folder: true
 no-namespace-folders: true
-modelerfour:
-  lenient-model-deduplication: true
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
 ``` yaml $(python-mode) == 'update' && $(track2)
@@ -21,4 +20,9 @@ output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp
 ``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp
+```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```
