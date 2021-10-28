@@ -194,10 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingSubscription"
-            }
+            "description": "OK. The request has succeeded."
           },
           "202": {
             "description": "Accepted",
@@ -694,6 +691,10 @@
             "name": "AutoRenew",
             "modelAsString": true
           }
+        },
+        "beneficiaryTenantId": {
+          "description": "The provisioning tenant of the subscription.",
+          "type": "string"
         },
         "billingFrequency": {
           "description": "The billing frequency of the subscription in the ISO8601 format. Example: P1M, P3M, P1Y",
