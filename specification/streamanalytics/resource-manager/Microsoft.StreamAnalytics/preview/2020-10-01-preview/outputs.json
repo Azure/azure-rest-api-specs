@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2017-04-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -299,9 +299,6 @@
           "Get an Azure Data Warehouse output": {
             "$ref": "./examples/Output_Get_DataWarehouse.json"
           },
-          "Get an Azure Function output": {
-            "$ref": "./examples/Output_Get_AzureFunction.json"
-          },
           "Get an Event Hub output with JSON serialization": {
             "$ref": "./examples/Output_Get_EventHub_JSON.json"
           },
@@ -470,8 +467,8 @@
   },
   "definitions": {
     "Output": {
-      "description": "An output object, containing all information associated with the named output. All outputs are contained under a streaming job.",
       "type": "object",
+      "description": "An output object, containing all information associated with the named output. All outputs are contained under a streaming job.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -486,18 +483,20 @@
       }
     },
     "OutputProperties": {
-      "description": "The properties that are associated with an output.",
       "type": "object",
+      "description": "The properties that are associated with an output.",
       "properties": {
         "datasource": {
           "$ref": "#/definitions/OutputDataSource",
           "description": "Describes the data source that output will be written to. Required on PUT (CreateOrReplace) requests."
         },
         "timeWindow": {
-          "type": "string"
+          "type": "string",
+          "description": "The time frame for filtering Stream Analytics job outputs."
         },
         "sizeWindow": {
-          "type": "number"
+          "type": "number",
+          "description": "The size window to constrain a Stream Analytics output to."
         },
         "serialization": {
           "$ref": "./inputs.json#/definitions/Serialization",
@@ -516,8 +515,8 @@
       }
     },
     "OutputDataSource": {
-      "description": "Describes the data source that output will be written to.",
       "type": "object",
+      "description": "Describes the data source that output will be written to.",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -529,36 +528,9 @@
         "type"
       ]
     },
-    "RawOutputDatasource": {
-      "description": "Describes a raw output data source. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an output of this data source type to an existing job.",
-      "type": "object",
-      "x-ms-discriminator-value": "Raw",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OutputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "The properties that are associated with a raw output. Required on PUT (CreateOrReplace) requests.",
-          "$ref": "#/definitions/RawOutputDatasourceProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RawOutputDatasourceProperties": {
-      "description": "The properties that are associated with a raw output.",
-      "type": "object",
-      "properties": {
-        "payloadUri": {
-          "description": "The SAS URL to a blob where the output should be written. If this property is not set, output data will be written into a temporary storage, and a SAS URL to that temporary storage will be included in the result.",
-          "type": "string"
-        }
-      }
-    },
     "BlobOutputDataSource": {
-      "description": "Describes a blob output data source.",
       "type": "object",
+      "description": "Describes a blob output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
         {
@@ -574,8 +546,8 @@
       }
     },
     "BlobOutputDataSourceProperties": {
-      "description": "The properties that are associated with a blob output.",
       "type": "object",
+      "description": "The properties that are associated with a blob output.",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/BlobDataSourceProperties"
@@ -589,8 +561,8 @@
       }
     },
     "AzureTableOutputDataSource": {
-      "description": "Describes an Azure Table output data source.",
       "type": "object",
+      "description": "Describes an Azure Table output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/Table",
       "allOf": [
         {
@@ -606,8 +578,8 @@
       }
     },
     "AzureTableOutputDataSourceProperties": {
-      "description": "The properties that are associated with an Azure Table output.",
       "type": "object",
+      "description": "The properties that are associated with an Azure Table output.",
       "properties": {
         "accountName": {
           "type": "string",
@@ -615,7 +587,8 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests."
+          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
         },
         "table": {
           "type": "string",
@@ -644,8 +617,8 @@
       }
     },
     "EventHubOutputDataSource": {
-      "description": "Describes an Event Hub output data source.",
       "type": "object",
+      "description": "Describes an Event Hub output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/EventHub",
       "allOf": [
         {
@@ -661,8 +634,8 @@
       }
     },
     "EventHubV2OutputDataSource": {
-      "description": "Describes an Event Hub output data source.",
       "type": "object",
+      "description": "Describes an Event Hub output data source.",
       "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
       "allOf": [
         {
@@ -678,8 +651,8 @@
       }
     },
     "EventHubOutputDataSourceProperties": {
-      "description": "The properties that are associated with an Event Hub output.",
       "type": "object",
+      "description": "The properties that are associated with an Event Hub output.",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/EventHubDataSourceProperties"
@@ -692,6 +665,7 @@
         },
         "propertyColumns": {
           "type": "array",
+          "description": "The properties associated with this Event Hub output.",
           "items": {
             "type": "string"
           }
@@ -699,8 +673,8 @@
       }
     },
     "AzureSqlDatabaseOutputDataSource": {
-      "description": "Describes an Azure SQL database output data source.",
       "type": "object",
+      "description": "Describes an Azure SQL database output data source.",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
       "allOf": [
         {
@@ -716,8 +690,8 @@
       }
     },
     "AzureSqlDatabaseOutputDataSourceProperties": {
-      "description": "The properties that are associated with an Azure SQL database output.",
       "type": "object",
+      "description": "The properties that are associated with an Azure SQL database output.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlDatabaseDataSourceProperties"
@@ -726,8 +700,8 @@
       "properties": {}
     },
     "AzureSynapseOutputDataSource": {
-      "description": "Describes an Azure Synapse output data source.",
       "type": "object",
+      "description": "Describes an Azure Synapse output data source.",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/DataWarehouse",
       "allOf": [
         {
@@ -743,8 +717,8 @@
       }
     },
     "AzureSynapseOutputDataSourceProperties": {
-      "description": "The properties that are associated with an Azure Synapse output.",
       "type": "object",
+      "description": "The properties that are associated with an Azure Synapse output.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSynapseDataSourceProperties"
@@ -753,8 +727,8 @@
       "properties": {}
     },
     "AzureSynapseDataSourceProperties": {
-      "description": "The properties that are associated with an Azure SQL database data source.",
       "type": "object",
+      "description": "The properties that are associated with an Azure SQL database data source.",
       "properties": {
         "server": {
           "type": "string",
@@ -774,13 +748,14 @@
         },
         "password": {
           "type": "string",
-          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
         }
       }
     },
     "DocumentDbOutputDataSource": {
-      "description": "Describes a DocumentDB output data source.",
       "type": "object",
+      "description": "Describes a DocumentDB output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/DocumentDB",
       "allOf": [
         {
@@ -796,8 +771,8 @@
       }
     },
     "DocumentDbOutputDataSourceProperties": {
-      "description": "The properties that are associated with a DocumentDB output.",
       "type": "object",
+      "description": "The properties that are associated with a DocumentDB output.",
       "properties": {
         "accountId": {
           "type": "string",
@@ -825,52 +800,9 @@
         }
       }
     },
-    "AzureFunctionOutputDataSource": {
-      "description": "Defines the metadata of AzureFunctionOutputDataSource",
-      "type": "object",
-      "x-ms-discriminator-value": "Microsoft.AzureFunction",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OutputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureFunctionOutputDataSourceProperties",
-          "description": "The properties that are associated with a Azure Function output. Required on PUT (CreateOrReplace) requests.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AzureFunctionOutputDataSourceProperties": {
-      "description": "The properties that are associated with a DocumentDB output.",
-      "type": "object",
-      "properties": {
-        "functionAppName": {
-          "description": "The name of your Azure Functions app.",
-          "type": "string"
-        },
-        "functionName": {
-          "description": "The name of the function in your Azure Functions app.",
-          "type": "string"
-        },
-        "apiKey": {
-          "description": "If you want to use an Azure Function from another subscription, you can do so by providing the key to access your function.",
-          "type": "string"
-        },
-        "maxBatchSize": {
-          "description": "A property that lets you set the maximum size for each output batch that's sent to your Azure function. The input unit is in bytes. By default, this value is 262,144 bytes (256 KB).",
-          "type": "number"
-        },
-        "maxBatchCount": {
-          "description": "A property that lets you specify the maximum number of events in each batch that's sent to Azure Functions. The default value is 100.",
-          "type": "number"
-        }
-      }
-    },
     "ServiceBusQueueOutputDataSource": {
-      "description": "Describes a Service Bus Queue output data source.",
       "type": "object",
+      "description": "Describes a Service Bus Queue output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Queue",
       "allOf": [
         {
@@ -886,8 +818,8 @@
       }
     },
     "ServiceBusQueueOutputDataSourceProperties": {
-      "description": "The properties that are associated with a Service Bus Queue output.",
       "type": "object",
+      "description": "The properties that are associated with a Service Bus Queue output.",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/ServiceBusDataSourceProperties"
@@ -907,15 +839,13 @@
         },
         "systemPropertyColumns": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The system properties associated with the Service Bus Queue. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc."
         }
       }
     },
     "ServiceBusTopicOutputDataSource": {
-      "description": "Describes a Service Bus Topic output data source.",
       "type": "object",
+      "description": "Describes a Service Bus Topic output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Topic",
       "allOf": [
         {
@@ -931,8 +861,8 @@
       }
     },
     "ServiceBusTopicOutputDataSourceProperties": {
-      "description": "The properties that are associated with a Service Bus Topic output.",
       "type": "object",
+      "description": "The properties that are associated with a Service Bus Topic output.",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/ServiceBusDataSourceProperties"
@@ -952,6 +882,7 @@
         },
         "systemPropertyColumns": {
           "type": "object",
+          "description": "The system properties associated with the Service Bus Topic Output. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc.",
           "additionalProperties": {
             "type": "string"
           }
@@ -959,8 +890,8 @@
       }
     },
     "PowerBIOutputDataSource": {
-      "description": "Describes a Power BI output data source.",
       "type": "object",
+      "description": "Describes a Power BI output data source.",
       "x-ms-discriminator-value": "PowerBI",
       "allOf": [
         {
@@ -976,8 +907,8 @@
       }
     },
     "PowerBIOutputDataSourceProperties": {
-      "description": "The properties that are associated with a Power BI output.",
       "type": "object",
+      "description": "The properties that are associated with a Power BI output.",
       "allOf": [
         {
           "$ref": "#/definitions/OAuthBasedDataSourceProperties"
@@ -1007,8 +938,8 @@
       }
     },
     "AzureDataLakeStoreOutputDataSource": {
-      "description": "Describes an Azure Data Lake Store output data source.",
       "type": "object",
+      "description": "Describes an Azure Data Lake Store output data source.",
       "x-ms-discriminator-value": "Microsoft.DataLake/Accounts",
       "allOf": [
         {
@@ -1024,8 +955,8 @@
       }
     },
     "AzureDataLakeStoreOutputDataSourceProperties": {
-      "description": "The properties that are associated with an Azure Data Lake Store.",
       "type": "object",
+      "description": "The properties that are associated with an Azure Data Lake Store.",
       "allOf": [
         {
           "$ref": "#/definitions/OAuthBasedDataSourceProperties"
@@ -1059,7 +990,6 @@
       }
     },
     "OutputListResult": {
-      "description": "Object containing a list of outputs under a streaming job.",
       "type": "object",
       "properties": {
         "value": {
@@ -1075,11 +1005,12 @@
           "readOnly": true,
           "description": "The link (url) to the next page of results."
         }
-      }
+      },
+      "description": "Object containing a list of outputs under a streaming job."
     },
     "AzureSqlDatabaseDataSourceProperties": {
-      "description": "The properties that are associated with an Azure SQL database data source.",
       "type": "object",
+      "description": "The properties that are associated with an Azure SQL database data source.",
       "properties": {
         "server": {
           "type": "string",
@@ -1107,7 +1038,7 @@
         },
         "maxWriterCount": {
           "type": "number",
-          "description": "Max Write r count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
+          "description": "Max Writer count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
         },
         "authenticationMode": {
           "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
@@ -1116,8 +1047,8 @@
       }
     },
     "OAuthBasedDataSourceProperties": {
-      "description": "The properties that are associated with data sources that use OAuth as their authentication model.",
       "type": "object",
+      "description": "The properties that are associated with data sources that use OAuth as their authentication model.",
       "properties": {
         "refreshToken": {
           "type": "string",
@@ -1134,8 +1065,8 @@
       }
     },
     "SubResource": {
-      "description": "The base sub-resource model definition.",
       "type": "object",
+      "description": "The base sub-resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,

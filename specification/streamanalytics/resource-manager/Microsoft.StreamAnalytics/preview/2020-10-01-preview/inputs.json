@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2017-04-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -422,8 +422,8 @@
   },
   "definitions": {
     "Input": {
-      "description": "An input object, containing all information associated with the named input. All inputs are contained under a streaming job.",
       "type": "object",
+      "description": "An input object, containing all information associated with the named input. All inputs are contained under a streaming job.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -437,8 +437,8 @@
       }
     },
     "InputProperties": {
-      "description": "The properties that are associated with an input.",
       "type": "object",
+      "description": "The properties that are associated with an input.",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -460,7 +460,8 @@
           "description": "The current entity tag for the input. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
         },
         "compression": {
-          "$ref": "#/definitions/Compression"
+          "$ref": "#/definitions/Compression",
+          "description": "Describes how input data is compressed"
         },
         "partitionKey": {
           "type": "string",
@@ -472,8 +473,8 @@
       ]
     },
     "StreamInputProperties": {
-      "description": "The properties that are associated with an input containing stream data.",
       "type": "object",
+      "description": "The properties that are associated with an input containing stream data.",
       "x-ms-discriminator-value": "Stream",
       "allOf": [
         {
@@ -488,8 +489,8 @@
       }
     },
     "ReferenceInputProperties": {
-      "description": "The properties that are associated with an input containing reference data.",
       "type": "object",
+      "description": "The properties that are associated with an input containing reference data.",
       "x-ms-discriminator-value": "Reference",
       "allOf": [
         {
@@ -504,8 +505,8 @@
       }
     },
     "StreamInputDataSource": {
-      "description": "Describes an input data source that contains stream data.",
       "type": "object",
+      "description": "Describes an input data source that contains stream data.",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -518,8 +519,8 @@
       ]
     },
     "BlobStreamInputDataSource": {
-      "description": "Describes a blob input data source that contains stream data.",
       "type": "object",
+      "description": "Describes a blob input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
         {
@@ -535,8 +536,8 @@
       }
     },
     "BlobStreamInputDataSourceProperties": {
-      "description": "The properties that are associated with a blob input containing stream data.",
       "type": "object",
+      "description": "The properties that are associated with a blob input containing stream data.",
       "allOf": [
         {
           "$ref": "#/definitions/BlobDataSourceProperties"
@@ -551,8 +552,8 @@
       }
     },
     "EventHubStreamInputDataSource": {
-      "description": "Describes an Event Hub input data source that contains stream data.",
       "type": "object",
+      "description": "Describes an Event Hub input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/EventHub",
       "allOf": [
         {
@@ -568,8 +569,8 @@
       }
     },
     "EventHubV2StreamInputDataSource": {
-      "description": "Describes an Event Hub input data source that contains stream data.",
       "type": "object",
+      "description": "Describes an Event Hub input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
       "allOf": [
         {
@@ -585,8 +586,8 @@
       }
     },
     "EventHubStreamInputDataSourceProperties": {
-      "description": "The properties that are associated with a Event Hub input containing stream data.",
       "type": "object",
+      "description": "The properties that are associated with a Event Hub input containing stream data.",
       "allOf": [
         {
           "$ref": "#/definitions/EventHubDataSourceProperties"
@@ -600,8 +601,8 @@
       }
     },
     "IoTHubStreamInputDataSource": {
-      "description": "Describes an IoT Hub input data source that contains stream data.",
       "type": "object",
+      "description": "Describes an IoT Hub input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.Devices/IotHubs",
       "allOf": [
         {
@@ -617,8 +618,8 @@
       }
     },
     "IoTHubStreamInputDataSourceProperties": {
-      "description": "The properties that are associated with a IoT Hub input containing stream data.",
       "type": "object",
+      "description": "The properties that are associated with a IoT Hub input containing stream data.",
       "properties": {
         "iotHubNamespace": {
           "type": "string",
@@ -642,26 +643,9 @@
         }
       }
     },
-    "RawStreamInputDataSource": {
-      "description": "Describes a raw input data source that contains stream data. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input of this data source type to an existing job.",
-      "type": "object",
-      "x-ms-discriminator-value": "Raw",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamInputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RawInputDatasourceProperties",
-          "description": "The properties that are associated with a raw input. Required on PUT (CreateOrReplace) requests.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "ReferenceInputDataSource": {
-      "description": "Describes an input data source that contains reference data.",
       "type": "object",
+      "description": "Describes an input data source that contains reference data.",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -674,8 +658,8 @@
       ]
     },
     "BlobReferenceInputDataSource": {
-      "description": "Describes a blob input data source that contains reference data.",
       "type": "object",
+      "description": "Describes a blob input data source that contains reference data.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
       "allOf": [
         {
@@ -691,8 +675,8 @@
       }
     },
     "BlobReferenceInputDataSourceProperties": {
-      "description": "The properties that are associated with a blob input containing reference data.",
       "type": "object",
+      "description": "The properties that are associated with a blob input containing reference data.",
       "allOf": [
         {
           "$ref": "#/definitions/BlobDataSourceProperties"
@@ -700,26 +684,9 @@
       ],
       "properties": {}
     },
-    "RawReferenceInputDataSource": {
-      "description": "Describes a raw input data source that contains reference data. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input of this data source type to an existing job.",
-      "type": "object",
-      "x-ms-discriminator-value": "Raw",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ReferenceInputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RawInputDatasourceProperties",
-          "description": "The properties that are associated with a raw input containing reference data. Required on PUT (CreateOrReplace) requests.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "BlobDataSourceProperties": {
-      "description": "The properties that are associated with a blob data source.",
       "type": "object",
+      "description": "The properties that are associated with a blob data source.",
       "properties": {
         "storageAccounts": {
           "type": "array",
@@ -746,23 +713,9 @@
         }
       }
     },
-    "RawInputDatasourceProperties": {
-      "description": "The properties that are associated with a raw input.",
-      "type": "object",
-      "properties": {
-        "payload": {
-          "description": "The JSON serialized content of the input data. Either payload or payloadUri must be set, but not both. ",
-          "type": "string"
-        },
-        "payloadUri": {
-          "description": "The SAS URL to a blob containing the JSON serialized content of the input data. Either payload or payloadUri must be set, but not both.",
-          "type": "string"
-        }
-      }
-    },
     "StorageAccount": {
-      "description": "The properties that are associated with an Azure Storage account",
       "type": "object",
+      "description": "The properties that are associated with an Azure Storage account",
       "properties": {
         "accountName": {
           "type": "string",
@@ -775,8 +728,8 @@
       }
     },
     "ServiceBusDataSourceProperties": {
-      "description": "The common properties that are associated with Service Bus data sources (Queues, Topics, Event Hubs, etc.).",
       "type": "object",
+      "description": "The common properties that are associated with Service Bus data sources (Queues, Topics, Event Hubs, etc.).",
       "properties": {
         "serviceBusNamespace": {
           "type": "string",
@@ -797,8 +750,8 @@
       }
     },
     "EventHubDataSourceProperties": {
-      "description": "The common properties that are associated with Event Hub data sources.",
       "type": "object",
+      "description": "The common properties that are associated with Event Hub data sources.",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceBusDataSourceProperties"
@@ -812,8 +765,8 @@
       }
     },
     "Diagnostics": {
-      "description": "Describes conditions applicable to the Input, Output, or the job overall, that warrant customer attention.",
       "type": "object",
+      "description": "Describes conditions applicable to the Input, Output, or the job overall, that warrant customer attention.",
       "properties": {
         "conditions": {
           "readOnly": true,
@@ -826,8 +779,8 @@
       }
     },
     "DiagnosticCondition": {
-      "description": "Condition applicable to the resource, or to the job overall, that warrant customer attention.",
       "type": "object",
+      "description": "Condition applicable to the resource, or to the job overall, that warrant customer attention.",
       "properties": {
         "since": {
           "readOnly": true,
@@ -847,7 +800,6 @@
       }
     },
     "InputListResult": {
-      "description": "Object containing a list of inputs under a streaming job.",
       "type": "object",
       "properties": {
         "value": {
@@ -863,14 +815,16 @@
           "readOnly": true,
           "description": "The link (url) to the next page of results."
         }
-      }
+      },
+      "description": "Object containing a list of inputs under a streaming job."
     },
     "Serialization": {
-      "description": "Describes how data from an input is serialized or how data is serialized when written to an output.",
       "type": "object",
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output.",
       "discriminator": "type",
       "properties": {
         "type": {
+          "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
           "$ref": "#/definitions/EventSerializationType"
         }
       },
@@ -878,9 +832,23 @@
         "type"
       ]
     },
+    "EventSerializationType": {
+      "type": "string",
+      "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
+      "enum": [
+        "Csv",
+        "Avro",
+        "Json",
+        "Parquet"
+      ],
+      "x-ms-enum": {
+        "name": "EventSerializationType",
+        "modelAsString": true
+      }
+    },
     "ParquetSerialization": {
-      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Parquet format.",
       "type": "object",
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Parquet format.",
       "x-ms-discriminator-value": "Parquet",
       "allOf": [
         {
@@ -896,44 +864,13 @@
       }
     },
     "ParquetSerializationProperties": {
-      "description": "The properties that are associated with the Parquet serialization type.",
       "type": "object",
+      "description": "The properties that are associated with the Parquet serialization type.",
       "properties": {}
     },
-    "CustomClrSerialization": {
-      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in custom format.",
-      "type": "object",
-      "x-ms-discriminator-value": "CustomClr",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Serialization"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CustomClrSerializationProperties",
-          "description": "The properties that are associated with the CustomClr serialization type. Required on PUT (CreateOrReplace) requests.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CustomClrSerializationProperties": {
-      "description": "The properties that are associated with the CustomClr serialization type.",
-      "type": "object",
-      "properties": {
-        "serializationDllPath": {
-          "type": "string",
-          "description": "The serialization library path."
-        },
-        "serializationClassName": {
-          "type": "string",
-          "description": "The serialization class name."
-        }
-      }
-    },
     "CsvSerialization": {
-      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in CSV format.",
       "type": "object",
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in CSV format.",
       "x-ms-discriminator-value": "Csv",
       "allOf": [
         {
@@ -949,8 +886,8 @@
       }
     },
     "CsvSerializationProperties": {
-      "description": "The properties that are associated with the CSV serialization type.",
       "type": "object",
+      "description": "The properties that are associated with the CSV serialization type.",
       "properties": {
         "fieldDelimiter": {
           "type": "string",
@@ -963,8 +900,8 @@
       }
     },
     "JsonSerialization": {
-      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in JSON format.",
       "type": "object",
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in JSON format.",
       "x-ms-discriminator-value": "Json",
       "allOf": [
         {
@@ -980,8 +917,8 @@
       }
     },
     "JsonSerializationProperties": {
-      "description": "The properties that are associated with the JSON serialization type.",
       "type": "object",
+      "description": "The properties that are associated with the JSON serialization type.",
       "properties": {
         "encoding": {
           "$ref": "#/definitions/Encoding",
@@ -994,8 +931,8 @@
       }
     },
     "AvroSerialization": {
-      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Avro format.",
       "type": "object",
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Avro format.",
       "x-ms-discriminator-value": "Avro",
       "allOf": [
         {
@@ -1011,8 +948,8 @@
       }
     },
     "AvroSerializationProperties": {
-      "description": "The properties that are associated with the Avro serialization type.",
       "type": "object",
+      "description": "The properties that are associated with the Avro serialization type.",
       "properties": {}
     },
     "Encoding": {
@@ -1039,8 +976,8 @@
       }
     },
     "ResourceTestStatus": {
-      "description": "Describes the status of the test operation along with error information, if applicable.",
       "type": "object",
+      "description": "Describes the status of the test operation along with error information, if applicable.",
       "properties": {
         "status": {
           "readOnly": true,
@@ -1055,8 +992,8 @@
       }
     },
     "ErrorResponse": {
-      "description": "Describes the error that occurred.",
       "type": "object",
+      "description": "Describes the error that occurred.",
       "properties": {
         "code": {
           "readOnly": true,
@@ -1071,8 +1008,8 @@
       }
     },
     "SubResource": {
-      "description": "The base sub-resource model definition.",
       "type": "object",
+      "description": "The base sub-resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1092,42 +1029,34 @@
       "x-ms-azure-resource": true
     },
     "Compression": {
-      "description": "Describes how input data is compressed",
       "type": "object",
+      "description": "Describes how input data is compressed",
       "properties": {
         "type": {
-          "type": "string"
+          "description": "Indicates the type of compression that the input uses. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/CompressionType"
         }
       },
       "required": [
         "type"
       ]
     },
-    "Identity": {
-      "description": "Describes how identity is verified",
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenantId of the identity."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The principalId of the identity."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of identity, can be SystemAssigned or UserAssigned."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The user assigned identities associated with the streaming job resource."
-        }
+    "CompressionType": {
+      "type": "string",
+      "description": "Indicates the type of compression that the input uses. Required on PUT (CreateOrReplace) requests.",
+      "enum": [
+        "None",
+        "GZip",
+        "Deflate"
+      ],
+      "x-ms-enum": {
+        "name": "CompressionType",
+        "modelAsString": true
       }
     },
     "AzureSqlReferenceInputDataSource": {
-      "description": "Describes an Azure SQL database reference input data source.",
       "type": "object",
+      "description": "Describes an Azure SQL database reference input data source.",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
       "allOf": [
         {
@@ -1136,12 +1065,14 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureSqlReferenceInputDataSourceProperties"
+          "description": "The properties that are associated with SQL DB input containing reference data. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/AzureSqlReferenceInputDataSourceProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
     "AzureSqlReferenceInputDataSourceProperties": {
-      "description": "Describes Azure SQL database reference input data source properties.",
+      "description": "The properties that are associated with SQL DB input containing reference data. Required on PUT (CreateOrReplace) requests.",
       "type": "object",
       "properties": {
         "server": {
@@ -1158,15 +1089,17 @@
         },
         "password": {
           "description": "This element is associated with the datasource element. This is the password that will be used to connect to the SQL Database instance.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "table": {
           "description": "This element is associated with the datasource element. The name of the table in the Azure SQL database..",
           "type": "string"
         },
         "refreshType": {
-          "description": "This element is associated with the datasource element. This element is of enum type. It indicates what kind of data refresh option do we want to use:Static/RefreshPeriodicallyWithFull/RefreshPeriodicallyWithDelta",
-          "type": "string"
+          "type": "object",
+          "description": "Indicates the type of data refresh option.",
+          "$ref": "#/definitions/RefreshType"
         },
         "refreshRate": {
           "description": "This element is associated with the datasource element. This indicates how frequently the data will be fetched from the database. It is of DateTime format.",
@@ -1182,18 +1115,16 @@
         }
       }
     },
-    "EventSerializationType": {
+    "RefreshType": {
       "type": "string",
-      "description": "Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.",
+      "description": "Indicates the type of data refresh option.",
       "enum": [
-        "Csv",
-        "Avro",
-        "Json",
-        "CustomClr",
-        "Parquet"
+        "Static",
+        "RefreshPeriodicallyWithFull",
+        "RefreshPeriodicallyWithDelta"
       ],
       "x-ms-enum": {
-        "name": "EventSerializationType",
+        "name": "RefreshType",
         "modelAsString": true
       }
     }

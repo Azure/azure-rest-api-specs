@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2017-04-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -239,8 +239,8 @@
   },
   "definitions": {
     "Transformation": {
-      "description": "A transformation object, containing all information associated with the named transformation. All transformations are contained under a streaming job.",
       "type": "object",
+      "description": "A transformation object, containing all information associated with the named transformation. All transformations are contained under a streaming job.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -255,13 +255,18 @@
       }
     },
     "TransformationProperties": {
-      "description": "The properties that are associated with a transformation.",
       "type": "object",
+      "description": "The properties that are associated with a transformation.",
       "properties": {
         "streamingUnits": {
           "type": "integer",
           "format": "int32",
           "description": "Specifies the number of streaming units that the streaming job uses."
+        },
+        "validStreamingUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the valid streaming units a streaming job can scale to."
         },
         "query": {
           "type": "string",
@@ -275,8 +280,8 @@
       }
     },
     "SubResource": {
-      "description": "The base sub-resource model definition.",
       "type": "object",
+      "description": "The base sub-resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,

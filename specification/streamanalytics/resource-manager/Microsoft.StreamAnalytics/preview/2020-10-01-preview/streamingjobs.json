@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2017-04-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -33,6 +33,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.StreamAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Stream Analytics related operations.",
+        "x-ms-examples": {
+          "List available operations for the Stream Analytics resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}": {
       "put": {
         "tags": [
@@ -486,27 +522,122 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/scale": {
+      "post": {
+        "tags": [
+          "StreamingJobs"
+        ],
+        "operationId": "StreamingJobs_Scale",
+        "description": "Scales a streaming job when the job is running.",
+        "x-ms-examples": {
+          "Scale a streaming job": {
+            "$ref": "./examples/StreamingJob_Scale.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scaleJobParameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScaleStreamingJobParameters"
+            },
+            "description": "Parameters applicable to a scale streaming job operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The scale streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
-    "External": {
-      "description": "The storage account where the custom code artifacts are located.",
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of Stream Analytics operations supported by the Microsoft.StreamAnalytics resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Stream Analytics REST API operation",
       "type": "object",
       "properties": {
-        "storageAccount": {
-          "$ref": "./inputs.json#/definitions/StorageAccount"
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
         },
-        "container": {
-          "type": "string"
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
-        "path": {
-          "type": "string"
+        "display": {
+          "type": "object",
+          "description": "Contains the localized display information for this particular operation / action.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The localized friendly name for the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The localized friendly description for the operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     },
     "StreamingJob": {
-      "description": "A streaming job object, containing all information associated with the named streaming job.",
       "type": "object",
+      "description": "A streaming job object, containing all information associated with the named streaming job.",
       "allOf": [
         {
           "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
@@ -519,18 +650,18 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "./inputs.json#/definitions/Identity",
+          "$ref": "#/definitions/Identity",
           "description": "Describes the system-assigned managed identity assigned to this job that can be used to authenticate with inputs and outputs."
         }
       }
     },
     "StreamingJobProperties": {
-      "description": "The properties that are associated with a streaming job.",
       "type": "object",
+      "description": "The properties that are associated with a streaming job.",
       "properties": {
         "sku": {
           "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
-          "$ref": "#/definitions/StreamingJobSku"
+          "$ref": "#/definitions/Sku"
         },
         "jobId": {
           "readOnly": true,
@@ -637,6 +768,7 @@
           "description": "The current entity tag for the streaming job. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
         },
         "jobStorageAccount": {
+          "description": "The properties that are associated with an Azure Storage account with MSI",
           "$ref": "#/definitions/JobStorageAccount"
         },
         "contentStoragePolicy": {
@@ -652,10 +784,6 @@
             "modelAsString": true
           }
         },
-        "externals": {
-          "$ref": "#/definitions/External",
-          "description": "The storage account where the custom code artifacts are located."
-        },
         "cluster": {
           "$ref": "#/definitions/ClusterInfo",
           "description": "The cluster which streaming jobs will run on."
@@ -663,8 +791,8 @@
       }
     },
     "ClusterInfo": {
-      "description": "The properties associated with a Stream Analytics cluster.",
       "type": "object",
+      "description": "The properties associated with a Stream Analytics cluster.",
       "properties": {
         "id": {
           "description": "The resource id of cluster.",
@@ -672,9 +800,9 @@
         }
       }
     },
-    "StreamingJobSku": {
-      "description": "The properties that are associated with a SKU.",
+    "Sku": {
       "type": "object",
+      "description": "The properties that are associated with a SKU.",
       "properties": {
         "name": {
           "type": "string",
@@ -683,14 +811,14 @@
             "Standard"
           ],
           "x-ms-enum": {
-            "name": "StreamingJobSkuName",
+            "name": "SkuName",
             "modelAsString": true
           }
         }
       }
     },
     "StreamingJobListResult": {
-      "description": "Object containing a list of streaming jobs.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -705,11 +833,12 @@
           "readOnly": true,
           "description": "The link (url) to the next page of results."
         }
-      }
+      },
+      "description": "Object containing a list of streaming jobs."
     },
     "StartStreamingJobParameters": {
-      "description": "Parameters supplied to the Start Streaming Job operation.",
       "type": "object",
+      "description": "Parameters supplied to the Start Streaming Job operation.",
       "properties": {
         "outputStartMode": {
           "$ref": "#/definitions/OutputStartMode",
@@ -733,6 +862,17 @@
       "x-ms-enum": {
         "name": "OutputStartMode",
         "modelAsString": true
+      }
+    },
+    "ScaleStreamingJobParameters": {
+      "type": "object",
+      "description": "Parameters supplied to the Scale Streaming Job operation.",
+      "properties": {
+        "streamingUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of streaming units that the streaming job will scale to."
+        }
       }
     },
     "EventsOutOfOrderPolicy": {
@@ -763,7 +903,8 @@
       "type": "string",
       "description": "Controls certain runtime behaviors of the streaming job.",
       "enum": [
-        "1.0"
+        "1.0",
+        "1.2"
       ],
       "x-ms-enum": {
         "name": "CompatibilityLevel",
@@ -771,8 +912,8 @@
       }
     },
     "JobStorageAccount": {
-      "description": "The properties that are associated with an Azure Storage account with MSI",
       "type": "object",
+      "description": "The properties that are associated with an Azure Storage account with MSI",
       "allOf": [
         {
           "$ref": "./inputs.json#/definitions/StorageAccount"
@@ -782,6 +923,24 @@
         "authenticationMode": {
           "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
           "description": "Authentication Mode."
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Describes how identity is verified",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The identity tenantId"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The identity principal ID"
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type"
         }
       }
     }
