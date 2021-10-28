@@ -8582,6 +8582,20 @@
           "items": {
             "$ref": "#/definitions/DatabaseRestoreResource"
           }
+        },
+        "gremlinDatabasesToRestore": {
+          "type": "array",
+          "description": "List of specific gremlin databases available for restore.",
+          "items": {
+            "$ref": "#/definitions/GremlinDatabaseRestoreResource"
+          }
+        },
+        "tablesToRestore": {
+          "type": "array",
+          "description": "List of specific tables available for restore.",
+          "items": {
+            "$ref": "#/definitions/TableName"
+          }
         }
       }
     },
@@ -8602,9 +8616,34 @@
         }
       }
     },
+    "GremlinDatabaseRestoreResource": {
+      "type": "object",
+      "description": "Specific Gremlin Databases to restore.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the gremlin database available for restore."
+        },
+        "graphNames": {
+          "type": "array",
+          "description": "The names of the graphs available for restore.",
+          "items": {
+            "$ref": "#/definitions/GraphName"
+          }
+        }
+      }
+    },
     "CollectionName": {
       "type": "string",
       "description": "The name of the collection."
+    },
+    "GraphName": {
+      "type": "string",
+      "description": "The name of the graph."
+    },
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table."
     },
     "BackupPolicy": {
       "type": "object",
