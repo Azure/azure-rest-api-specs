@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Workloads/monitors/mySapMonitor1",
+            "name": "mySapMonitor1",
+            "type": "Microsoft.Workloads/workloads",
+            "location": "westus",
+            "tags": {
+              "key": "value"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "errors": [
+                {
+                  "code": "0000",
+                  "message": "Error message",
+                  "target": "",
+                  "details": "Error details",
+                  "innerError": "Error stack trace"
+                }
+              ],
+              "monitoringRegion": "eastus",
+              "routingPreference": "RouteAll",
+              "managedResourceGroupId": "sapmon-rg-00000000000000",
+              "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/example-rg/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+              "logAnalyticsWorkspaceId": "00000000-0000-0000-0000-000000000000",
+              "monitorVersion": "v1.0",
+              "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Workloads/workloads/mySapMonitor2",
+            "name": "mySapMonitor2",
+            "type": "Microsoft.Workloads/workloads",
+            "location": "westus",
+            "tags": {
+              "key": "value"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "errors": [
+                {
+                  "code": "0000",
+                  "message": "Error message",
+                  "target": "",
+                  "details": "Error details",
+                  "innerError": "Error stack trace"
+                }
+              ],
+              "monitoringRegion": "westus",
+              "routingPreference": "Default",
+              "managedResourceGroupId": "sapmon-rg-00000000000000",
+              "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/example-rg/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+              "logAnalyticsWorkspaceId": "00000000-0000-0000-0000-000000000000",
+              "monitorVersion": "v1.0",
+              "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
