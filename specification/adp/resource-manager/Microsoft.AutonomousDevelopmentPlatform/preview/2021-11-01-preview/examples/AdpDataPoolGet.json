@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "accountName": "sampleacct",
     "dataPoolName": "sampledp",
     "resourceGroupName": "adpClient",
     "api-version": "2021-11-01-preview",
@@ -8,11 +9,16 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.AutonomousDevelopmentPlatform/dataPools/dp1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.AutonomousDevelopmentPlatform/accounts/adp1/dataPools/dp1",
         "name": "dp1",
-        "type": "Microsoft.AutonomousDevelopmentPlatform/dataPools",
+        "type": "Microsoft.AutonomousDevelopmentPlatform/accounts/dataPools",
         "properties": {
-          "storageLocation": "westeurope"
+          "dataPoolId": "id",
+          "locations": [
+            {
+              "name": "westus"
+            }
+          ]
         }
       }
     }
