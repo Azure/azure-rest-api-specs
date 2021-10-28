@@ -28,7 +28,7 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-2020-03-preview
+tag: package-pure-2020-03
 ```
 
 ### Tag: package-2020-03-preview
