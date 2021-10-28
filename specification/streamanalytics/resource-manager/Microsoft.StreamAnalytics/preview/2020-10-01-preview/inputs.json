@@ -1108,13 +1108,20 @@
       "type": "object",
       "properties": {
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "The tenantId of the identity."
         },
         "principalId": {
-          "type": "string"
+          "type": "string",
+          "description": "The principalId of the identity."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "The type of identity, can be SystemAssigned or UserAssigned."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The user assigned identities associated with the streaming job resource."
         }
       }
     },
