@@ -6065,11 +6065,43 @@
             "Pending",
             "Started",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "MissedPrimaryWindow",
+            "MissedSecondaryWindow"
           ],
           "x-ms-enum": {
             "name": "UpdateState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Initial",
+                "description": "Scheduled agent update initialized."
+              },
+              {
+                "value": "Pending",
+                "description": "Scheduled agent update pending."
+              },
+              {
+                "value": "Started",
+                "description": "Scheduled agent update started."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Scheduled agent update succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Scheduled agent update failed."
+              },
+              {
+                "value": "MissedPrimaryWindow",
+                "description": "Scheduled agent update missed primary window."
+              },
+              {
+                "value": "MissedSecondaryWindow",
+                "description": "Scheduled agent update missed secondary window."
+              }
+            ]
           },
           "type": "string",
           "description": "Update state of a SessionHost."
