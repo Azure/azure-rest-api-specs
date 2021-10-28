@@ -54,6 +54,8 @@ version: 2021-10-27-preview
 version-with-underscores: 2021_10_27_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ```yaml
