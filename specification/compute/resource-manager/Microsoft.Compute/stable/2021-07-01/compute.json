@@ -12621,6 +12621,10 @@
             "$ref": "#/definitions/VaultSecretGroup"
           },
           "description": "Specifies set of certificates that should be installed onto the virtual machines in the scale set. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
+        },
+        "allowExtensionOperations": {
+          "type": "boolean",
+          "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. <br><br>This may only be set to False when no extensions are present on the virtual machine scale set."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."
