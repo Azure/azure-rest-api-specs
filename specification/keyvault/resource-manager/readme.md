@@ -26,22 +26,22 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-preview-2021-11
 ```
 
 
-### Tag: package-2021-10
+### Tag: package-preview-2021-11
 
-These settings apply only when `--tag=package-2021-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+```yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - Microsoft.KeyVault/stable/2021-10-01/common.json
-  - Microsoft.KeyVault/stable/2021-10-01/keys.json
-  - Microsoft.KeyVault/stable/2021-10-01/keyvault.json
-  - Microsoft.KeyVault/stable/2021-10-01/managedHsm.json
-  - Microsoft.KeyVault/stable/2021-10-01/providers.json
-  - Microsoft.KeyVault/stable/2021-10-01/secrets.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/secrets.json
 ```
 ### Tag: package-preview-2021-06
 
@@ -198,6 +198,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
