@@ -1723,7 +1723,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update VM extension.": {
-            "$ref": "./examples/compute/UpdateVMExtensionWithSuppressFailureEnabled.json"
+            "$ref": "./examples/compute/UpdateVMExtension.json"
           }
         }
       },
@@ -5425,6 +5425,9 @@
           },
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/compute/CreateAScaleSetWithSpotRestorePolicy.json"
+          },
+          "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
+            "$ref": "./examples/compute/CreateAScaleSetWithProtectedSettingsFromKeyVault.json"
           }
         }
       },
@@ -9554,6 +9557,10 @@
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -9595,6 +9602,10 @@
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -13380,6 +13391,10 @@
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
