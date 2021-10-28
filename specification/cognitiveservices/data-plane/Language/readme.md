@@ -6,7 +6,15 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release is 2021-07-15-preview
+The current stable release of QuestionAnswering is 2021-10-01 and preview release of Luis Deepstack is 2021-07-15-preview
+
+
+```yaml
+tag: release_2021_10_01
+add-credentials: true
+clear-output-folder: true
+openapi-type: data-plane
+```
 
 ```yaml
 tag: release_2021_07_15_preview
@@ -19,6 +27,20 @@ openapi-type: data-plane
 tag: release_2021_05_01_preview
 add-credentials: true
 clear-output-folder: true
+```
+
+### Release 2021-10-01
+
+These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_10_01'
+input-file: 
+  - stable/2021-10-01/questionanswering.json
+  - stable/2021-10-01/questionanswering-authoring.json
+title: 
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Release 2021-07-15-preview
@@ -57,6 +79,5 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
 ```
