@@ -25,6 +25,12 @@ batch:
   - tag: package-2021-12
   - multiapiscript: true
 ```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/
+clear-output-folder: false
+perform-load: false
+```
 ### Tag: package-2020-12-preview and python
 
 These settings apply only when `--tag=package-2020-12-preview --python` is specified on the command line.
