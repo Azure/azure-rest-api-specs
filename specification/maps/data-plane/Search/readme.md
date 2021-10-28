@@ -44,6 +44,15 @@ input-file:
   - preview/1.0/search.json
 ```
 
+### Tag: 2.0-preview
+
+These settings apply only when `--tag=2.0-preview` is specified on the command line.
+
+``` yaml $(tag) == '2.0-preview'
+input-file:
+  - preview/2021-11-01-preview/geocoding.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
