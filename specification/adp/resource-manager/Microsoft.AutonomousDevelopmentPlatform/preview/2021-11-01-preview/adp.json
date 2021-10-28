@@ -1260,9 +1260,15 @@
             "modelAsString": true
           }
         },
+        "AccessUri": {
+          "description": "The Data Plane access uri.",
+          "type": "string",
+          "readOnly": true
+        },
         "encryption": {
-          "description": "Encryption properties of the Data Pool",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/encryptionProperties"
+          "description": "The encryption properties. Defaults to Microsoft managed encryption.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/KeyVaultProperties",
+          "x-nullable": true
         },
         "storageSku": {
           "description": "The Storage SKU. Default: Standard_ZRS.",
