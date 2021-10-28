@@ -22,7 +22,7 @@
           "BillingSubscriptions"
         ],
         "operationId": "BillingSubscriptions_ListByBillingAccount",
-        "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement and Enterprise Agreement.",
+        "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement and Microsoft Online Services Program.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -64,7 +64,7 @@
           "BillingSubscriptions"
         ],
         "operationId": "BillingSubscriptions_Get",
-        "description": "Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement and Enterprise Agreement.",
+        "description": "Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement and Microsoft Online Services Program.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -740,19 +740,19 @@
           "type": "string"
         },
         "enrollmentAccountId": {
-          "description": "The enrollment Account ID associated with the subscription. This field is available only for the Enterprise Agreement Type billing accounts.",
+          "description": "The enrollment Account ID associated with the subscription. This field is available only for the Enterprise Agreement billing accounts.",
           "type": "string",
           "readOnly": true
         },
         "enrollmentAccountDisplayName": {
-          "description": "The enrollment Account name associated with the subscription. This field is available only for the Enterprise Agreement Type billing accounts.",
+          "description": "The enrollment Account name associated with the subscription. This field is available only for the Enterprise Agreement billing accounts.",
           "type": "string",
           "readOnly": true
         },
         "enrollmentAccountSubscriptionDetails": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/EnrollmentAccountSubscriptionDetails",
-          "title": "Enrollment Account Subscription details. This field is available only for the Enterprise Agreement Type billing accounts."
+          "title": "Enrollment Account Subscription details. This field is available only for the Enterprise Agreement billing accounts."
         },
         "invoiceSectionId": {
           "description": "The ID of the invoice section to which the subscription is billed. The field is applicable only for Microsoft Partner Agreement billing accounts.",
@@ -819,12 +819,12 @@
           "$ref": "#/definitions/RenewalTermDetails"
         },
         "skuDescription": {
-          "description": "The SKU description of the product for which the subscription is purchased. This field is only available  for Microsoft Customer Agreement billing accounts.",
+          "description": "The SKU description of the product for which the subscription is purchased. This field is only available for Microsoft Customer Agreement billing accounts.",
           "type": "string",
           "readOnly": true
         },
         "skuId": {
-          "description": "The SKU ID of the product for which the subscription is purchased. This field is only available  for Microsoft Customer Agreement billing accounts.",
+          "description": "The SKU ID of the product for which the subscription is purchased. This field is only available for Microsoft Customer Agreement billing accounts.",
           "type": "string"
         },
         "status": {
@@ -849,7 +849,7 @@
           }
         },
         "subscriptionId": {
-          "description": "The ID of the usage-based subscription. This field is only available for usage-based subscriptions of Microsoft Customer Agreement Type billing accounts.",
+          "description": "The ID of the usage-based subscription. This field is only available for usage-based subscriptions of Microsoft Customer Agreement billing accounts.",
           "type": "string",
           "readOnly": true
         },
@@ -922,12 +922,12 @@
       }
     },
     "EnrollmentAccountSubscriptionDetails": {
-      "description": "The billing properties that can be modified. Available only for the Enterprise Agreement Type.",
+      "description": "The billing properties that can be modified. This field is available only for the Enterprise Agreement billing accounts.",
       "type": "object",
       "readOnly": true,
       "properties": {
         "subscriptionEnrollmentAccountStatus": {
-          "description": "The current enrollment account status of the subscription. This field is available only for the Enterprise Agreement Type. ",
+          "description": "The current enrollment account status of the subscription. This field is available only for the Enterprise Agreement billing accounts.",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -944,7 +944,7 @@
           }
         },
         "enrollmentAccountStartDate": {
-          "description": "The enrollment Account and the subscription association start date. This field is available only for the Enterprise Agreement Type.",
+          "description": "The enrollment Account and the subscription association start date. This field is available only for the Enterprise Agreement billing accounts.",
           "format": "date-time",
           "type": "string",
           "readOnly": true
