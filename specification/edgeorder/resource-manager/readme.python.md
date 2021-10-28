@@ -21,8 +21,8 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && $(track2)
-package-name: azure-mgmt-edgeorder
 batch:
+  - package-name: azure-mgmt-edgeorder
   - tag: package-2020-12-preview
   - tag: package-2021-12
   - multiapiscript: true
