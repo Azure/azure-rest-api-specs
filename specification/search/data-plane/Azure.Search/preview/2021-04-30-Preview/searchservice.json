@@ -337,7 +337,7 @@
         "tags": [
           "Indexers"
         ],
-        "operationId": "Indexers_ResetDocs",
+        "operationId": "Indexers_ResetDocuments",
         "x-ms-examples": {
           "SearchServiceResetDocs": {
             "$ref": "./examples/SearchServiceResetDocs.json"
@@ -6585,7 +6585,7 @@
           "description": "The outcome of this indexer execution."
         },
         "currentState": {
-          "$ref": "#/definitions/IndexerCurrentState",
+          "$ref": "#/definitions/IndexerState",
           "readOnly": true,
           "description": "All of the state that defines and dictates the indexer's current execution."
         },
@@ -6778,29 +6778,29 @@
       },
       "description": "Details the status of an individual indexer execution."
     },
-    "IndexerCurrentState": {
+    "IndexerState": {
       "properties": {
         "mode": {
           "$ref": "#/definitions/IndexingMode",
           "readOnly": true,
           "description": "The mode the indexer is running in."
         },
-        "allDocsInitialChangeTrackingState": {
+        "allDocumentsInitialChangeTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state used when indexing starts on all documents in the datasource."
         },
-        "allDocsFinalChangeTrackingState": {
+        "allDocumentsFinalChangeTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state value when indexing finishes on all documents in the datasource."
         },
-        "resetDocsInitialChangeTrackingState": {
+        "resetDocumentsInitialChangeTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state used when indexing starts on select, reset documents in the datasource."
         },
-        "resetDocsFinalChangeTrackingState": {
+        "resetDocumentsFinalChangeTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state value when indexing finishes on select, reset documents in the datasource."
