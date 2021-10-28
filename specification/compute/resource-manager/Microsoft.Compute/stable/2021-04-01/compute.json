@@ -8293,30 +8293,6 @@
       },
       "description": "Describes a data disk."
     },
-    "RestorePointProvisioningDetails": {
-      "properties": {
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the creation time of the restore point."
-        },
-        "totalUsedSizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the total size of the data in all the disks which are part of the restore point."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the status of the Create restore point operation."
-        },
-        "statusMessage": {
-          "type": "string",
-          "description": "Gets the status message of the Create restore point operation."
-        }
-      },
-      "description": "Restore Point Provisioning details."
-    },
     "RestorePoint": {
       "properties": {
         "properties": {
@@ -8365,10 +8341,10 @@
           },
           "description": "Gets the consistency mode for the restore point. Please refer to https://aka.ms/RestorePoints for more details."
         },
-        "provisioningDetails": {
-          "$ref": "#/definitions/RestorePointProvisioningDetails",
-          "readOnly": true,
-          "description": "Gets the provisioning details set by the server during Create restore point operation."
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time of the restore point."
         }
       },
       "description": "The restore point properties."
