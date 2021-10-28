@@ -12,7 +12,11 @@ python-sdk-output-folder: "$(az-output-folder)/azext_adp/vendored_sdks/adp"
 
 directive:
 - from: swagger-document
-  where: $.definitions.DataPoolLocation
+  where: $.definitions.LegacyDataPoolLocation
+  transform: >
+    $.properties.encryption["x-ms-client-flatten"] = true;
+- from: swagger-document
+  where: $.definitions.DataPool
   transform: >
     $.properties.encryption["x-ms-client-flatten"] = true;
 ```

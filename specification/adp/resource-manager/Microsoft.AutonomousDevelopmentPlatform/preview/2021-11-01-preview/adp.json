@@ -73,37 +73,37 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/checkNameAvailability": {
       "post": {
         "tags": [
-          "Accounts"
+          "Operations"
         ],
-        "operationId": "Accounts_CheckNameAvailability",
-        "description": "Checks that the account name is valid and is not already in use",
+        "operationId": "Operations_CheckNameAvailability",
+        "description": "Checks that the resource is valid and is not already in use",
         "x-ms-examples": {
-          "AccountCheckNameAvailability": {
-            "$ref": "./examples/AdpAccountCheckNameAvailability.json"
+          "CheckNameAvailability": {
+            "$ref": "./examples/AdpCheckNameAvailability.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AccountCheckNameAvailabilityParameters"
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
             },
             "description": "The checkNameAvailability parameters."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Operation to check the account name availability was successful",
+            "description": "OK -- Operation to check the name availability was successful",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -398,9 +398,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/accounts/{accountName}/dataPools": {
       "get": {
         "tags": [
-          "DataPools"
+          "LegacyDataPools"
         ],
-        "operationId": "DataPools_List",
+        "operationId": "LegacyDataPools_List",
         "description": "Lists the data pools under the ADP account",
         "parameters": [
           {
@@ -420,7 +420,7 @@
           "200": {
             "description": "The list of data pools that was successfully retrieved",
             "schema": {
-              "$ref": "#/definitions/DataPoolList"
+              "$ref": "#/definitions/LegacyDataPoolList"
             }
           },
           "default": {
@@ -435,7 +435,7 @@
         },
         "x-ms-examples": {
           "List Data Pools": {
-            "$ref": "./examples/AdpDataPoolsList.json"
+            "$ref": "./examples/AdpLegacyDataPoolsList.json"
           }
         }
       }
@@ -443,9 +443,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/accounts/{accountName}/dataPools/{dataPoolName}": {
       "get": {
         "tags": [
-          "DataPools"
+          "LegacyDataPools"
         ],
-        "operationId": "DataPools_Get",
+        "operationId": "LegacyDataPools_Get",
         "description": "Gets the properties of a Data Pool",
         "parameters": [
           {
@@ -462,6 +462,295 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Data Pool that was successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Data Pool": {
+            "$ref": "./examples/AdpLegacyDataPoolGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LegacyDataPools"
+        ],
+        "operationId": "LegacyDataPools_Update",
+        "description": "Updates the properties of an existing Data Pool",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The parameters to provide for the Data Pool",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPoolPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Data Pool was updated successfully",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPool"
+            }
+          },
+          "201": {
+            "description": "The Data Pool will be updated asynchronously",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Data Pool": {
+            "$ref": "./examples/AdpLegacyDataPoolPatch.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LegacyDataPools"
+        ],
+        "operationId": "LegacyDataPools_CreateOrUpdate",
+        "description": "Creates or updates a Data Pool",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The parameters to provide for the Data Pool",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Data Pool was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPool"
+            }
+          },
+          "201": {
+            "description": "The Data Pool will be updated asynchronously",
+            "schema": {
+              "$ref": "#/definitions/LegacyDataPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Data Pool": {
+            "$ref": "./examples/AdpLegacyDataPoolPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LegacyDataPools"
+        ],
+        "operationId": "LegacyDataPools_Delete",
+        "description": "Deletes a Data Pool",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Data Pool was successfully deleted"
+          },
+          "202": {
+            "description": "The Data Pool will be deleted asynchronously"
+          },
+          "204": {
+            "description": "The Data Pool does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Data Pool": {
+            "$ref": "./examples/AdpLegacyDataPoolDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/dataPools": {
+      "get": {
+        "tags": [
+          "DataPools"
+        ],
+        "operationId": "DataPools_List",
+        "description": "List all ADP Data Pools available under the subscription",
+        "x-ms-examples": {
+          "List Data Pools": {
+            "$ref": "./examples/AdpDataPoolList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataPoolList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/dataPools": {
+      "get": {
+        "tags": [
+          "DataPools"
+        ],
+        "operationId": "DataPools_ListByResourceGroup",
+        "description": "List all ADP Data Pools available under the resource group",
+        "x-ms-examples": {
+          "List Data Pools by resource group": {
+            "$ref": "./examples/AdpDataPoolListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataPoolList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/dataPools/{dataPoolName}": {
+      "get": {
+        "tags": [
+          "DataPools"
+        ],
+        "operationId": "DataPools_Get",
+        "description": "Gets the properties of a Data Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -493,26 +782,23 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DataPoolNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "parameters",
             "description": "The parameters to provide for the Data Pool",
             "schema": {
-              "$ref": "#/definitions/DataPoolPatch"
+              "$ref": "#/definitions/DataPool"
             }
           }
         ],
@@ -554,19 +840,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DataPoolNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -612,19 +895,16 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DataPoolNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -653,60 +933,32 @@
     }
   },
   "definitions": {
-    "AccountCheckNameAvailabilityParameters": {
+    "CheckNameAvailabilityParameters": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The account name",
+          "description": "The resource name",
           "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         },
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.AutonomousDevelopmentPlatform/accounts"
+            "Microsoft.AutonomousDevelopmentPlatform/accounts",
+            "Microsoft.AutonomousDevelopmentPlatform/dataPools"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": true
           },
-          "description": "The type of resource, Microsoft.AutonomousDevelopmentPlatform/accounts"
+          "description": "The type of resource"
         }
       },
       "required": [
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availability of the account name"
-    },
-    "CheckNameAvailabilityResult": {
-      "description": "The checkNameAvailability operation response",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used"
-        },
-        "reason": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the reason that an account name could not be used. The reason element is only returned if nameAvailable is false",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "x-ms-enum": {
-            "name": "CheckNameAvailabilityReason",
-            "modelAsString": true
-          }
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets an error message explaining the reason value in more detail"
-        }
-      }
+      "description": "The parameters used to check the availability of a resource name"
     },
     "Tags": {
       "type": "object",
@@ -803,15 +1055,15 @@
         }
       }
     },
-    "DataPool": {
+    "LegacyDataPool": {
       "type": "object",
-      "description": "ADP Data Pool",
+      "description": "ADP Legacy Data Pool",
       "properties": {
         "properties": {
           "description": "List of data pool properties",
           "type": "object",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataPoolProperties"
+          "$ref": "#/definitions/LegacyDataPoolProperties"
         },
         "systemData": {
           "readOnly": true,
@@ -825,7 +1077,7 @@
         }
       ]
     },
-    "DataPoolPatch": {
+    "LegacyDataPoolPatch": {
       "type": "object",
       "description": "ADP Data Pool",
       "properties": {
@@ -833,7 +1085,7 @@
           "description": "List of data pool properties",
           "type": "object",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataPoolBaseProperties"
+          "$ref": "#/definitions/LegacyDataPoolBaseProperties"
         },
         "systemData": {
           "readOnly": true,
@@ -847,7 +1099,7 @@
         }
       ]
     },
-    "DataPoolBaseProperties": {
+    "LegacyDataPoolBaseProperties": {
       "type": "object",
       "description": "Data Pool properties",
       "properties": {
@@ -876,7 +1128,7 @@
         "locations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataPoolLocation"
+            "$ref": "#/definitions/LegacyDataPoolLocation"
           },
           "description": "Gets or sets the collection of locations where Data Pool resources should be created"
         },
@@ -885,19 +1137,19 @@
         }
       }
     },
-    "DataPoolProperties": {
+    "LegacyDataPoolProperties": {
       "type": "object",
       "description": "Data Pool properties",
       "allOf": [
         {
-          "$ref": "#/definitions/DataPoolBaseProperties"
+          "$ref": "#/definitions/LegacyDataPoolBaseProperties"
         }
       ],
       "required": [
         "locations"
       ]
     },
-    "DataPoolLocation": {
+    "LegacyDataPoolLocation": {
       "type": "object",
       "description": "Location of a Data Pool",
       "properties": {
@@ -907,11 +1159,11 @@
         },
         "encryption": {
           "description": "Encryption properties of a Data Pool location",
-          "$ref": "#/definitions/DataPoolEncryption"
+          "$ref": "#/definitions/LegacyDataPoolEncryption"
         },
         "storageSku": {
           "description": "The Storage SKU. Default: Standard_ZRS.",
-          "$ref": "#/definitions/storageSku",
+          "$ref": "#/definitions/StorageSku",
           "x-nullable": true
         },
         "storageAccountCount": {
@@ -925,34 +1177,25 @@
         "name"
       ]
     },
-    "storageSku": {
-      "description": "The Storage SKU.",
+    "LegacyDataPoolList": {
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The SKU name",
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LegacyDataPool"
+          },
+          "description": "List of data pools and their properties"
+        },
+        "nextLink": {
           "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Standard_GRS",
-            "Standard_Ragrs",
-            "Standard_ZRS",
-            "Premium_LRS",
-            "Premium_ZRS",
-            "Standard_Gzrs",
-            "Standard_Ragzrs"
-          ],
-          "x-ms-enum": {
-            "name": "StorageSkuName",
-            "modelAsString": true
-          }
+          "description": "URL to get the next set of operation list results if there are any"
         }
       },
-      "required": [
-        "name"
-      ]
+      "description": "The list operation response, that contains the data pools and their properties"
     },
-    "DataPoolEncryption": {
+    "LegacyDataPoolEncryption": {
       "type": "object",
       "description": "Encryption properties of a Data Pool",
       "properties": {
@@ -979,6 +1222,71 @@
         "userAssignedIdentity"
       ]
     },
+    "DataPool": {
+      "type": "object",
+      "description": "ADP Data Pool",
+      "properties": {
+        "properties": {
+          "description": "List of data pool properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataPoolProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataPoolProperties": {
+      "type": "object",
+      "description": "Data Pool properties",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the data pool at the time the operation was called",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "encryption": {
+          "description": "Encryption properties of the Data Pool",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/encryptionProperties"
+        },
+        "storageSku": {
+          "description": "The Storage SKU. Default: Standard_ZRS.",
+          "$ref": "#/definitions/StorageSku",
+          "x-nullable": true
+        },
+        "storageLocation": {
+          "type": "string",
+          "description": "The location where Data Pool data will be stored. Defaults to the location property.",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "storageAccountCount": {
+          "description": "The amount of storage accounts provisioned per Data Pool. Default: 5",
+          "type": "integer",
+          "minimum": 1,
+          "format": "int32",
+          "x-nullable": true
+        }
+      }
+    },
     "DataPoolList": {
       "type": "object",
       "properties": {
@@ -996,6 +1304,33 @@
         }
       },
       "description": "The list operation response, that contains the data pools and their properties"
+    },
+    "StorageSku": {
+      "description": "The Storage SKU.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The SKU name",
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Standard_GRS",
+            "Standard_Ragrs",
+            "Standard_ZRS",
+            "Premium_LRS",
+            "Premium_ZRS",
+            "Standard_Gzrs",
+            "Standard_Ragzrs"
+          ],
+          "x-ms-enum": {
+            "name": "StorageSkuName",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "Operation": {
       "type": "object",
