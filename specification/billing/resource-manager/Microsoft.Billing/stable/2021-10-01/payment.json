@@ -21,7 +21,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodOwnedByUser_List.",
+        "operationId": "PaymentMethods_ListByUser",
         "description": "Lists the payment methods owned by the caller.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -60,7 +60,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodOwnedByUser_Get",
+        "operationId": "PaymentMethods_GetByUser",
         "description": "Gets a payment method owned by the caller.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -97,7 +97,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodOwnedByUser_Delete",
+        "operationId": "PaymentMethods_DeleteByUser",
         "description": "Deletes a payment method owned by the caller.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -178,7 +178,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodAtBillingAccount_Get",
+        "operationId": "PaymentMethods_GetByBillingAccount",
         "description": "Gets a payment method available for a billing account. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -271,7 +271,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "PaymentMethodsListByBillingProfile": {
+          "PaymentMethodsGetByBillingProfile": {
             "$ref": "./examples/PaymentMethodAtBillingProfile_Get.json"
           }
         },
@@ -308,15 +308,15 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodAtBillingProfile_Remove",
+        "operationId": "PaymentMethods_DeleteAtBillingProfile",
         "x-ms-long-running-operation": true,
         "description": "Deletes a payment method link and removes the payment method from a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "PaymentMethodAtBillingProfileRemove": {
-            "$ref": "./examples/PaymentMethodAtBillingProfile_Remove.json"
+          "PaymentMethodAtBillingProfileDelete": {
+            "$ref": "./examples/PaymentMethodAtBillingProfile_Delete.json"
           }
         },
         "parameters": [
