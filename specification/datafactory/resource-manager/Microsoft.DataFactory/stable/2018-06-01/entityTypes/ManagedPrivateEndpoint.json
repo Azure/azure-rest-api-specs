@@ -20,6 +20,8 @@
     "ManagedPrivateEndpoint": {
       "description": "Properties of a managed private endpoint",
       "type": "object",
+      "discriminator": "type",
+      "required": ["type"],
       "properties": {
         "connectionState": {
           "description": "The managed private endpoint connection state",
