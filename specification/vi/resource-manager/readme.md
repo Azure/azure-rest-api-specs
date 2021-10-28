@@ -58,13 +58,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-```yaml
-title: ViManagementClient
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2021-10-18-preview
-```
-
 ### Tag: package-2021-10-18-preview
 
 These settings apply only when `--tag=2021-10-18-preview` is specified on the command line.
