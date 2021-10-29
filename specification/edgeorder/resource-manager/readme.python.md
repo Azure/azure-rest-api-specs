@@ -22,7 +22,6 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && $(track2)
 batch:
-  - package-name: azure-mgmt-edgeorder
   - tag: package-2020-12-preview
   - tag: package-2021-12
   - multiapiscript: true
@@ -39,6 +38,7 @@ These settings apply only when `--tag=package-2020-12-preview --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-12-preview' && $(python) && $(track2)
+namespace: azure.mgmt.edgeorder.v2020_12_01_preview
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2020_12_01_preview
 ```
 
@@ -48,5 +48,6 @@ These settings apply only when `--tag=package-2021-12 --python` is specified on 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2021-12' && $(python) && $(track2)
+namespace: azure.mgmt.edgeorder.v2021_12_01
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2021_12_01
 ```
