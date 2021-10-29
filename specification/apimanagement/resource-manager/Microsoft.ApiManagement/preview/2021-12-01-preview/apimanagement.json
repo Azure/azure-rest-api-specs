@@ -542,15 +542,15 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "PolicyFragmentIdParameter": {
-      "name": "policyFragmentId",
+    "IdParameter": {
+      "name": "id",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The identifier of the policy fragment.",
+      "description": "A resource identifier.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     },
     "PolicyFragmentExportFormat": {
