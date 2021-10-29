@@ -488,7 +488,7 @@
         },
         "parameters": [
           {
-            "$ref": "./billingSubscription.json#/parameters/billingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -530,7 +530,7 @@
         },
         "parameters": [
           {
-            "$ref": "./billingSubscription.json#/parameters/billingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/billingSubscriptionAliasNameParameter"
@@ -568,7 +568,7 @@
         },
         "parameters": [
           {
-            "$ref": "./billingSubscription.json#/parameters/billingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/billingSubscriptionAliasNameParameter"
@@ -589,12 +589,6 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingSubscriptionAlias"
-            }
-          },
-          "201": {
-            "description": "Created.",
             "schema": {
               "$ref": "#/definitions/BillingSubscriptionAlias"
             }
@@ -1141,7 +1135,7 @@
       },
       "allOf": [
         {
-          "$ref": "./billingSubscription.json#/definitions/BillingSubscriptionProperties"
+          "$ref": "#/definitions/BillingSubscriptionProperties"
         }
       ]
     }
