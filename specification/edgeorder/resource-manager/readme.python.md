@@ -25,6 +25,7 @@ batch:
   - tag: package-2020-12-preview
   - tag: package-2021-12
   - multiapiscript: true
+package-name: azure-mgmt-edgeorder
 ```
 
 ``` yaml $(multiapiscript)
