@@ -126,6 +126,7 @@ input-file:
 - Microsoft.EventHub/preview/2021-12-01-preview/AuthorizationRules.json
 - Microsoft.EventHub/preview/2021-12-01-preview/consumergroups.json
 - Microsoft.EventHub/preview/2021-12-01-preview/CheckNameAvailability.json
+- Microsoft.EventHub/preview/2021-12-01-preview/SchemaRegistry.json
 ```
 
 ### Tag: package-2018-01-preview
