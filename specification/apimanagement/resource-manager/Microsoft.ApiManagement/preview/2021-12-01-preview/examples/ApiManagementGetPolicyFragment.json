@@ -4,7 +4,7 @@
     "resourceGroupName": "rg1",
     "api-version": "2021-12-01-preview",
     "subscriptionId": "subid",
-    "policyFragmentId": "policyFragment1"
+    "id": "policyFragment1"
   },
   "responses": {
     "200": {
@@ -13,6 +13,8 @@
         "type": "Microsoft.ApiManagement/service/policyFragments",
         "name": "policyFragment1",
         "properties": {
+          "format": "xml",
+          "description": "A policy fragment example",
           "value": "<json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n<rewrite-uri template=\"/resource\" />"
         }
       }
