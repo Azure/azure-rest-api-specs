@@ -43,11 +43,9 @@ input-file:
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
-    from: preview/2018-03-28/queue.json
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
-    from: preview/2018-03-28/queue.json
   - suppress: XmsExamplesRequired
-    from: preview/2018-03-28/queue.json
+  - suppress: LongRunningOperationsWithLongRunningExtension
 ```
 ---

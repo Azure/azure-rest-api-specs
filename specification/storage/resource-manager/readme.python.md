@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch:
+  - tag: package-2021-06
   - tag: package-2021-04
   - tag: package-2021-02
   - tag: package-2021-01
@@ -43,6 +44,15 @@ clear-output-folder: false
 perform-load: false
 ```
 
+### Tag: package-2021-06 and python
+
+These settings apply only when `--tag=package-2021-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-06'
+namespace: azure.mgmt.storage.v2021_06_01
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/v2021_06_01
+```
 ### Tag: package-2021-04 and python
 
 These settings apply only when `--tag=package-2021-04 --python` is specified on the command line.
