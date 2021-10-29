@@ -37,6 +37,38 @@
                     "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
                   }
                 },
+                "throttleRules": [
+                  {
+                    "ruleName": "Ingress1",
+                    "targetId": "AppId=Guid1",
+                    "metricId": "IncomingBytes",
+                    "rateLimit": 137429547
+                  },
+                  {
+                    "ruleName": "Egress1",
+                    "targetId": "ConsumerGroupName=AmqpGroup1",
+                    "metricId": "OutgoingBytes",
+                    "rateLimit": 3951729
+                  },
+                  {
+                    "ruleName": "Egress2",
+                    "targetId": "SASKey=SASKeyName",
+                    "metricId": "OutgoingMessages",
+                    "rateLimit": 6967
+                  },
+                  {
+                    "ruleName": "Egress3",
+                    "targetId": "KafkaClientId=KafkaClientId",
+                    "metricId": "OutgoingBytes",
+                    "rateLimit": 3951729
+                  },
+                  {
+                    "ruleName": "Ingress2",
+                    "targetId": "SASKey=SASKeyName",
+                    "metricId": "IncomingMessages",
+                    "rateLimit": 3456
+                  }
+                ],
                 "intervalInSeconds": 120,
                 "sizeLimitInBytes": 10485763
               }

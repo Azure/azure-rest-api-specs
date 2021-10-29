@@ -266,6 +266,29 @@
       },
       "description": "Properties to configure capture description for eventhub"
     },
+    "ThrottleRule": {
+      "type": "object",
+      "properties": {
+        "ruleName": {
+          "type": "string",
+          "description": "The name of the throttling rule"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Consumer Group Id or SAS Key Name or AAD App ID on which Event Hub will be throttled. In case this value is not supplied, the limit will be applicable on entire event hub"
+        },
+        "metricId": {
+          "type": "string",
+          "description": "Metric Id on which the throttle limit should be set, MetricId can be discovered by hovering over Metric in the Metrics section of Event Hub Namespace inside Azure Portal"
+        },
+        "rateLimit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Throttling Rate Limit applicable on the rule. Rate Limit is always per sec"
+        }
+      },
+      "description": "Properties to configure throttling limits for eventhub"
+    },
     "Eventhub": {
       "properties": {
         "properties": {
@@ -325,6 +348,13 @@
             "captureDescription": {
               "$ref": "#/definitions/CaptureDescription",
               "description": "Properties of capture description"
+            },
+            "throttleRules": {
+              "description": "List of Throttling Rules",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ThrottleRule"
+              }
             }
           },
           "description": "Properties supplied to the Create Or Update Event Hub operation."
