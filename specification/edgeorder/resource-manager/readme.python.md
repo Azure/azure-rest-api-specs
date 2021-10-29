@@ -5,7 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(python) $(track2)
+``` yaml (track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.edgeorder
@@ -20,12 +20,11 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi) && $(track2)
+```yaml $(multiapi) && $(track2)
 batch:
   - tag: package-2020-12-preview
   - tag: package-2021-12
   - multiapiscript: true
-package-name: azure-mgmt-edgeorder
 ```
 
 ``` yaml $(multiapiscript)
