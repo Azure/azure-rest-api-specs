@@ -53,7 +53,7 @@ tag: package-monitoring-2020-12-01
 
 These settings apply only when `--tag=package-artifacts-2021-07-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-artifacts-composite-v1'
+``` yaml $(tag) == 'package-artifacts-2021-07-01-preview'
 input-file:
   - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
   - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
