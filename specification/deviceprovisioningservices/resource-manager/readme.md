@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-- Microsoft.Devices/stable/2020-10-15/iotdps.json
+- Microsoft.Devices/stable/2021-10-15/iotdps.json
 ```
 
 ---
