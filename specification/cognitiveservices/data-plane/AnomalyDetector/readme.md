@@ -107,3 +107,13 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+### Tag: package-preview-1.2
+
+These settings apply only when `--tag=package-preview-1.2` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-1.2'
+input-file:
+  - preview/1.2/AnomalyDetector.json
+  - preview/1.2/MultivariateAnomalyDetector.json
+```
+
