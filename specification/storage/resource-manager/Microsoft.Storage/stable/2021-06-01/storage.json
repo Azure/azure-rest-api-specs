@@ -514,7 +514,8 @@
               "kerb"
             ],
             "x-ms-enum": {
-              "name": "ListKeyExpand"
+              "name": "ListKeyExpand",
+              "modelAsString": false
             },
             "description": "Specifies type of the key to be listed. Possible value is kerb."
           }
@@ -1707,14 +1708,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created -- Create encryption scope operation completed successfully.",
+          "200": {
+            "description": "OK -- Update encryption scope operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EncryptionScope"
             }
           },
-          "200": {
-            "description": "OK -- Update encryption scope operation completed successfully.",
+          "201": {
+            "description": "Created -- Create encryption scope operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EncryptionScope"
             }
@@ -4215,13 +4216,13 @@
       "properties": {
         "daysAfterModificationGreaterThan": {
           "type": "number",
-          "multipleOf": 1.0,
+          "multipleOf": 1,
           "minimum": 0,
           "description": "Value indicating the age in days after last modification"
         },
         "daysAfterLastAccessTimeGreaterThan": {
           "type": "number",
-          "multipleOf": 1.0,
+          "multipleOf": 1,
           "minimum": 0,
           "description": "Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy"
         }
@@ -4232,7 +4233,7 @@
       "properties": {
         "daysAfterCreationGreaterThan": {
           "type": "number",
-          "multipleOf": 1.0,
+          "multipleOf": 1,
           "minimum": 0,
           "description": "Value indicating the age in days after creation"
         }

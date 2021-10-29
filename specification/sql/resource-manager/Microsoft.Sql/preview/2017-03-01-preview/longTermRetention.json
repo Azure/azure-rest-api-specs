@@ -128,11 +128,11 @@
           "200": {
             "description": "Successfully deleted the backup."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -438,11 +438,11 @@
           "200": {
             "description": "Successfully deleted the backup."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -741,11 +741,11 @@
               "$ref": "#/definitions/BackupLongTermRetentionPolicy"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionPolicyNotSupported - Long Term Retention is not supported on this database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionPolicyNotSupported - Long Term Retention is not supported on this database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-long-running-operation": true,
@@ -973,7 +973,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "SqlVirtualMachineInstanceNameParameter": {
       "name": "sqlVirtualMachineInstanceName",

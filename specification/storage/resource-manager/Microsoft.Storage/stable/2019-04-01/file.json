@@ -257,14 +257,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created -- Create Share operation completed successfully.",
+          "200": {
+            "description": "OK -- The Share is already created.",
             "schema": {
               "$ref": "#/definitions/FileShare"
             }
           },
-          "200": {
-            "description": "OK -- The Share is already created.",
+          "201": {
+            "description": "Created -- Create Share operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FileShare"
             }
@@ -570,7 +570,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "ShareName": {
       "name": "shareName",

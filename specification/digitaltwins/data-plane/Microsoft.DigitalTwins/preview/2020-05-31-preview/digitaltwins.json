@@ -464,6 +464,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Asynchronous Success"
+          },
           "204": {
             "description": "Success",
             "headers": {
@@ -472,9 +475,6 @@
                 "type": "string"
               }
             }
-          },
-          "202": {
-            "description": "Asynchronous Success"
           },
           "default": {
             "description": "Default response.",
@@ -977,6 +977,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Asynchronous Success"
+          },
           "204": {
             "description": "Success",
             "headers": {
@@ -985,9 +988,6 @@
                 "type": "string"
               }
             }
-          },
-          "202": {
-            "description": "Asynchronous Success"
           },
           "default": {
             "description": "Default response.",
@@ -1454,7 +1454,10 @@
       "type": "string",
       "enum": [
         "2020-05-31-preview"
-      ]
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "max-item-count": {
       "name": "x-ms-max-item-count",
@@ -1478,7 +1481,10 @@
       "enum": [
         "*"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "if-match": {
       "name": "If-Match",

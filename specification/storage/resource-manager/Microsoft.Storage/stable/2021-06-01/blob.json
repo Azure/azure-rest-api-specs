@@ -256,14 +256,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created -- Create Container operation completed successfully.",
+          "200": {
+            "description": "OK -- The Container is already created.",
             "schema": {
               "$ref": "#/definitions/BlobContainer"
             }
           },
-          "200": {
-            "description": "OK -- The Container is already created.",
+          "201": {
+            "description": "Created -- Create Container operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BlobContainer"
             }
@@ -1564,7 +1564,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "BlobServicesName": {
       "name": "BlobServicesName",
@@ -1575,7 +1578,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     }
   },
   "securityDefinitions": {

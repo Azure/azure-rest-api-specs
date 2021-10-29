@@ -87,14 +87,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
+          "200": {
+            "description": "Success. The response describes the updated Service.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Service.",
+          "201": {
+            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -532,11 +532,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
           "200": {
             "description": "Success. The response indicates the resource is deleted."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -833,11 +833,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
           "200": {
             "description": "Success. The response indicates the resource is deleted."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1581,6 +1581,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
           "201": {
             "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
             "schema": {
@@ -1589,12 +1595,6 @@
           },
           "202": {
             "description": "Accepted. The response describes the create or update Deployment request is accepted.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
-          },
-          "200": {
-            "description": "Success. The response describes the updated Deployment.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
@@ -1698,14 +1698,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Deployment.",
+          "202": {
+            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
@@ -2872,8 +2872,8 @@
         "sizeInGB": {
           "format": "int32",
           "description": "Size of the temporary disk in GB",
-          "maximum": 5.0,
-          "minimum": 0.0,
+          "maximum": 5,
+          "minimum": 0,
           "type": "integer"
         },
         "mountPath": {
@@ -2890,15 +2890,15 @@
         "sizeInGB": {
           "format": "int32",
           "description": "Size of the persistent disk in GB",
-          "maximum": 50.0,
-          "minimum": 0.0,
+          "maximum": 50,
+          "minimum": 0,
           "type": "integer"
         },
         "usedInGB": {
           "format": "int32",
           "description": "Size of the used persistent disk in GB",
-          "maximum": 50.0,
-          "minimum": 0.0,
+          "maximum": 50,
+          "minimum": 0,
           "type": "integer",
           "readOnly": true
         },
@@ -4001,7 +4001,10 @@
       "type": "string",
       "enum": [
         "2019-05-01-preview"
-      ]
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",

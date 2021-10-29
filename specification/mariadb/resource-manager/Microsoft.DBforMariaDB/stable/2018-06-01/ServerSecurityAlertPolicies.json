@@ -118,11 +118,11 @@
               "$ref": "#/definitions/ServerSecurityAlertPolicy"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation of setting security alert policies failed."
-          },
           "202": {
             "description": "Created request to set the server threat detection policy."
+          },
+          "default": {
+            "description": "Error response describing why the operation of setting security alert policies failed."
           }
         },
         "x-ms-long-running-operation": true,
@@ -286,7 +286,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     }
   },
   "securityDefinitions": {

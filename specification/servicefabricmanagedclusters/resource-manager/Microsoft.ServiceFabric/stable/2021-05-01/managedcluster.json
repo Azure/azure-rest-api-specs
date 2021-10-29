@@ -305,14 +305,14 @@
           "final-state-via": "location"
         },
         "responses": {
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "The resource was not found."
-          },
-          "200": {
-            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -1085,7 +1085,10 @@
       "description": "Cluster operating system, the default will be Windows",
       "enum": [
         "Windows"
-      ]
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "Sku": {
       "required": [
@@ -1354,7 +1357,10 @@
       "enum": [
         "2021-05-01"
       ],
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "clusterNameParameter": {
       "name": "clusterName",
@@ -1381,7 +1387,10 @@
       "enum": [
         "Windows"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "locationForClusterCodeVersions": {
       "name": "location",

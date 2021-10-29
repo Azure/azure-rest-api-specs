@@ -244,14 +244,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted.  The response includes the Azure-AsyncOperation header. To get the progress of the operation, call the GET operation on the URL in the Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations."
-          },
           "200": {
             "description": "OK. Internal use only. Used for SDK return values.",
             "schema": {
               "$ref": "#/definitions/AsyncOperationStatus"
             }
+          },
+          "202": {
+            "description": "Accepted.  The response includes the Azure-AsyncOperation header. To get the progress of the operation, call the GET operation on the URL in the Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations."
           }
         },
         "x-ms-long-running-operation": true
@@ -622,7 +622,10 @@
           "description": "Specifies the package type. Valid values are Graph (Specifies a web service published through the Machine Learning Studio) and Code (Specifies a web service published using code such as Python). Note: Code is not supported at this time.",
           "enum": [
             "Graph"
-          ]
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "payloadsInBlobStorage": {
           "type": "boolean",

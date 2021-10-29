@@ -82,7 +82,8 @@
               "ActiveDirectory"
             ],
             "x-ms-enum": {
-              "name": "AdministratorName"
+              "name": "AdministratorName",
+              "modelAsString": false
             }
           },
           {
@@ -132,7 +133,8 @@
               "ActiveDirectory"
             ],
             "x-ms-enum": {
-              "name": "AdministratorName"
+              "name": "AdministratorName",
+              "modelAsString": false
             }
           },
           {
@@ -158,17 +160,17 @@
               "$ref": "#/definitions/ManagedInstanceAdministrator"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 PrincipalNotFoundInTenant - AzureAD Lookup returned no results for this name.\n\n * 400 ManagedInstanceIsBusy - Managed Instance is busy with another request.\n\n * 400 InvalidPrincipalType - This principal type is not supported in Windows Azure SQL Database.\n\n * 400 TenantNotFoundInActiveDirectory - Tenant is not available in active directory.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActiveDirectoryLookupTimedOut - The operation could not be completed at this time. Please try again later.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "201": {
             "description": "Successfully created the managed instance administrator.",
             "schema": {
               "$ref": "#/definitions/ManagedInstanceAdministrator"
             }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 PrincipalNotFoundInTenant - AzureAD Lookup returned no results for this name.\n\n * 400 ManagedInstanceIsBusy - Managed Instance is busy with another request.\n\n * 400 InvalidPrincipalType - This principal type is not supported in Windows Azure SQL Database.\n\n * 400 TenantNotFoundInActiveDirectory - Tenant is not available in active directory.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActiveDirectoryLookupTimedOut - The operation could not be completed at this time. Please try again later.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-long-running-operation": true,
@@ -204,7 +206,8 @@
               "ActiveDirectory"
             ],
             "x-ms-enum": {
-              "name": "AdministratorName"
+              "name": "AdministratorName",
+              "modelAsString": false
             }
           },
           {
@@ -218,11 +221,11 @@
           "200": {
             "description": "Successfully deleted the managed instance administrator."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 PrincipalNotFoundInTenant - AzureAD Lookup returned no results for this name.\n\n * 400 ManagedInstanceIsBusy - Managed Instance is busy with another request.\n\n * 400 InvalidPrincipalType - This principal type is not supported in Windows Azure SQL Database.\n\n * 400 TenantNotFoundInActiveDirectory - Tenant is not available in active directory.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActiveDirectoryLookupTimedOut - The operation could not be completed at this time. Please try again later.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 PrincipalNotFoundInTenant - AzureAD Lookup returned no results for this name.\n\n * 400 ManagedInstanceIsBusy - Managed Instance is busy with another request.\n\n * 400 InvalidPrincipalType - This principal type is not supported in Windows Azure SQL Database.\n\n * 400 TenantNotFoundInActiveDirectory - Tenant is not available in active directory.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActiveDirectoryLookupTimedOut - The operation could not be completed at this time. Please try again later.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-long-running-operation": true,
@@ -397,7 +400,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "SqlVirtualMachineInstanceNameParameter": {
       "name": "sqlVirtualMachineInstanceName",

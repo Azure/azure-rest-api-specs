@@ -29,16 +29,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CommunicationRelayConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -109,7 +109,10 @@
       "enum": [
         "2021-02-22-preview1"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     }
   },
   "securityDefinitions": {

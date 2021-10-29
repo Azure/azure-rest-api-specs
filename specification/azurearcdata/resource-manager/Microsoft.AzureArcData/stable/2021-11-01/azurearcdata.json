@@ -276,14 +276,14 @@
           "202": {
             "description": "Resource deletion is in progress.."
           },
+          "204": {
+            "description": "The specified SQL Managed Instance does not exist."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "204": {
-            "description": "The specified SQL Managed Instance does not exist."
           }
         },
         "x-ms-examples": {
@@ -572,14 +572,14 @@
           "202": {
             "description": "Resource deletion is in progress."
           },
+          "204": {
+            "description": "The specified SQL Server Instance does not exist."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "204": {
-            "description": "The specified SQL Server Instance does not exist."
           }
         },
         "x-ms-examples": {
@@ -820,14 +820,14 @@
           "202": {
             "description": "Resource deletion is in progress."
           },
+          "204": {
+            "description": "The specified DataController does not exist."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "204": {
-            "description": "The specified DataController does not exist."
           }
         },
         "x-ms-examples": {
@@ -977,7 +977,10 @@
           "enum": [
             "vCore"
           ],
-          "description": "The name of the SKU."
+          "description": "The name of the SKU.",
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "tier": {
           "type": "string",

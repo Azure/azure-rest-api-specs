@@ -50,13 +50,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Created or updated vault",
             "schema": {
               "$ref": "#/definitions/Vault"
             }
           },
-          "200": {
+          "201": {
             "description": "Created or updated vault",
             "schema": {
               "$ref": "#/definitions/Vault"
@@ -114,13 +114,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Patched vault",
             "schema": {
               "$ref": "#/definitions/Vault"
             }
           },
-          "200": {
+          "201": {
             "description": "Patched vault",
             "schema": {
               "$ref": "#/definitions/Vault"
@@ -292,13 +292,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The updated access policies",
             "schema": {
               "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
           },
-          "200": {
+          "201": {
             "description": "The updated access policies",
             "schema": {
               "$ref": "#/definitions/VaultAccessPolicyParameters"
@@ -573,7 +573,10 @@
             "enum": [
               "resourceType eq 'Microsoft.KeyVault/vaults'"
             ],
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
             "name": "$top",
@@ -591,7 +594,10 @@
             "enum": [
               "2015-11-01"
             ],
-            "description": "Azure Resource Manager Api Version."
+            "description": "Azure Resource Manager Api Version.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"

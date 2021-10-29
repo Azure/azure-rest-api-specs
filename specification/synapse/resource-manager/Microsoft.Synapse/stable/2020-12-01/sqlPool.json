@@ -547,13 +547,13 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": ""
-          },
           "200": {
             "schema": {
               "$ref": "#/definitions/MetadataSyncConfig"
             },
+            "description": ""
+          },
+          "404": {
             "description": ""
           },
           "default": {
@@ -612,13 +612,13 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": ""
-          },
           "200": {
             "schema": {
               "$ref": "#/definitions/MetadataSyncConfig"
             },
+            "description": ""
+          },
+          "404": {
             "description": ""
           },
           "default": {
@@ -828,14 +828,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GeoBackupPolicy"
             }
           },
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/GeoBackupPolicy"
             }
@@ -1083,17 +1083,17 @@
               "$ref": "#/definitions/RestorePoint"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "201": {
             "description": "Successfully created the restore point request.",
             "schema": {
               "$ref": "#/definitions/RestorePoint"
             }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
           }
         },
         "consumes": [],
@@ -1652,7 +1652,10 @@
             "enum": [
               "default"
             ],
-            "x-ms-parameter-location": "method"
+            "x-ms-parameter-location": "method",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -1712,7 +1715,10 @@
             "enum": [
               "default"
             ],
-            "x-ms-parameter-location": "method"
+            "x-ms-parameter-location": "method",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
             "name": "parameters",
@@ -1731,14 +1737,14 @@
               "$ref": "#/definitions/SqlPoolBlobAuditingPolicy"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 InvalidBlobAuditActionsAndGroupsForDW - Unsupported audit actions or action groups for DW.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
-          },
           "201": {
             "description": "Successfully created the Sql pool blob auditing policy.",
             "schema": {
               "$ref": "#/definitions/SqlPoolBlobAuditingPolicy"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 InvalidBlobAuditActionsAndGroupsForDW - Unsupported audit actions or action groups for DW.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
         },
         "consumes": [],
@@ -2184,14 +2190,14 @@
               "$ref": "#/definitions/SensitivityLabel"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - Label ID must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - Information type ID must be a GUID\n\n * 400 LabelMissing - Label is missing\n\n * 400 InformationTypeMissing - Information Type is missing\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
-          },
           "201": {
             "description": "Successfully created the sensitivity label.",
             "schema": {
               "$ref": "#/definitions/SensitivityLabel"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - Label ID must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - Information type ID must be a GUID\n\n * 400 LabelMissing - Label is missing\n\n * 400 InformationTypeMissing - Information Type is missing\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
           }
         },
         "consumes": [],
@@ -2980,11 +2986,11 @@
           "200": {
             "description": "Successfully executed a Vulnerability Assessment scan."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 InvalidVulnerabilityAssessmentScanIdLength - The vulnerability assessment scan ID length must be below {0} characters.\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 DatabaseVulnerabilityAssessmentScanIsAlreadyInProgress - Vulnerability Assessment scan is already in progress.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
-          },
           "202": {
             "description": "Successfully started a Vulnerability Assessment scan."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 InvalidVulnerabilityAssessmentScanIdLength - The vulnerability assessment scan ID length must be below {0} characters.\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 DatabaseVulnerabilityAssessmentScanIsAlreadyInProgress - Vulnerability Assessment scan is already in progress.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
         },
         "x-ms-long-running-operation": true,
@@ -3051,14 +3057,14 @@
               "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentScansExport"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 DatabaseVulnerabilityAssessmentScanIsAlreadyInProgress - Vulnerability Assessment scan is already in progress.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
-          },
           "201": {
             "description": "Scan result was converted successfully.",
             "schema": {
               "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentScansExport"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 DatabaseVulnerabilityAssessmentScanIsAlreadyInProgress - Vulnerability Assessment scan is already in progress.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
         },
         "consumes": [],
@@ -3248,14 +3254,14 @@
               "$ref": "#/definitions/SqlPoolSecurityAlertPolicy"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidDatabaseSecurityAlertPolicyCreateRequest - The create database Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 DatabaseSecurityAlertPolicyInProgress - Set database security alert policy is already in progress\n\n * 409 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetDatabaseSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
-          },
           "201": {
             "description": "Successfully created the Sql pool security alert policy.",
             "schema": {
               "$ref": "#/definitions/SqlPoolSecurityAlertPolicy"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidDatabaseSecurityAlertPolicyCreateRequest - The create database Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 DatabaseSecurityAlertPolicyInProgress - Set database security alert policy is already in progress\n\n * 409 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetDatabaseSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
           }
         },
         "consumes": [],
@@ -3653,14 +3659,14 @@
               "$ref": "#/definitions/SqlPoolVulnerabilityAssessment"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
-          },
           "201": {
             "description": "Successfully created the vulnerability assessment.",
             "schema": {
               "$ref": "#/definitions/SqlPoolVulnerabilityAssessment"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
         },
         "consumes": [],
@@ -3779,7 +3785,10 @@
             "enum": [
               "default"
             ],
-            "x-ms-parameter-location": "method"
+            "x-ms-parameter-location": "method",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -3838,7 +3847,10 @@
             "enum": [
               "default"
             ],
-            "x-ms-parameter-location": "method"
+            "x-ms-parameter-location": "method",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
             "name": "parameters",
@@ -4799,17 +4811,17 @@
               "$ref": "#/definitions/WorkloadGroup"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidWorkloadGroupNameParameter - Invalid workload group name\n\n * 400 InvalidMinResourcePercentParameter - Invalid min resource percent for this workload group.\n\n * 400 InvalidMinResourcePercentPerRequestParameter - Invalid min resource percent per query for this workload group.\n\n * 400 InvalidMaxResourcePercentParameter - Invalid max resource percent to allocate for this workload group.\n\n * 400 InvalidMaxResourcePercentPerRequestParameter - Invalid max resource percent per query for this workload group.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidQueryExecutionTimeoutParameter - Invalid query execution timeout value for this workload group.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
-          "202": {
-            "description": "Create or update for the workload group accepted."
-          },
           "201": {
             "description": "Successfully created the workload group.",
             "schema": {
               "$ref": "#/definitions/WorkloadGroup"
             }
+          },
+          "202": {
+            "description": "Create or update for the workload group accepted."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidWorkloadGroupNameParameter - Invalid workload group name\n\n * 400 InvalidMinResourcePercentParameter - Invalid min resource percent for this workload group.\n\n * 400 InvalidMinResourcePercentPerRequestParameter - Invalid min resource percent per query for this workload group.\n\n * 400 InvalidMaxResourcePercentParameter - Invalid max resource percent to allocate for this workload group.\n\n * 400 InvalidMaxResourcePercentPerRequestParameter - Invalid max resource percent per query for this workload group.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidQueryExecutionTimeoutParameter - Invalid query execution timeout value for this workload group.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-long-running-operation": true,
@@ -4867,14 +4879,14 @@
           "200": {
             "description": "Successfully deleted the workload group."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
           "202": {
             "description": "Deleting the workload group is in progress."
           },
           "204": {
             "description": "The specified workload group does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-long-running-operation": true,
@@ -5065,17 +5077,17 @@
               "$ref": "#/definitions/WorkloadClassifier"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidMemberNameParameter - Invalid member name parameter for this workload classifier.\n\n * 400 InvalidStartTimeAndEndTimeParameters - Invalid start time and end time parameters for the workload classifier.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
-          "202": {
-            "description": "Create or update for the workload classifier is in progress."
-          },
           "201": {
             "description": "Successfully created the workload classifier.",
             "schema": {
               "$ref": "#/definitions/WorkloadClassifier"
             }
+          },
+          "202": {
+            "description": "Create or update for the workload classifier is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidMemberNameParameter - Invalid member name parameter for this workload classifier.\n\n * 400 InvalidStartTimeAndEndTimeParameters - Invalid start time and end time parameters for the workload classifier.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-long-running-operation": true,
@@ -5140,14 +5152,14 @@
           "200": {
             "description": "Successfully deleted the workload classifier."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
           "202": {
             "description": "Deleting the workload classifier is in progress."
           },
           "204": {
             "description": "The specified workload classifier does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-long-running-operation": true,

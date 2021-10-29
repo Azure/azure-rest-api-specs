@@ -433,13 +433,13 @@
         ],
         "x-ms-request-id": "request-id",
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Indexer"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Indexer"
@@ -502,10 +502,10 @@
         ],
         "x-ms-request-id": "request-id",
         "responses": {
-          "404": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "404": {
             "description": ""
           }
         }
@@ -3749,7 +3749,8 @@
         "analyzingInfixMatching"
       ],
       "x-ms-enum": {
-        "name": "SuggesterSearchMode"
+        "name": "SuggesterSearchMode",
+        "modelAsString": false
       },
       "description": "Describes the type of suggester to use."
     },

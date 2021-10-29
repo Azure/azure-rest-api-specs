@@ -499,6 +499,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Asynchronous Success"
+          },
           "204": {
             "description": "Success",
             "headers": {
@@ -507,9 +510,6 @@
                 "type": "string"
               }
             }
-          },
-          "202": {
-            "description": "Asynchronous Success"
           },
           "default": {
             "description": "Default response.",
@@ -1060,6 +1060,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Asynchronous Success"
+          },
           "204": {
             "description": "Success",
             "headers": {
@@ -1068,9 +1071,6 @@
                 "type": "string"
               }
             }
-          },
-          "202": {
-            "description": "Asynchronous Success"
           },
           "default": {
             "description": "Default response.",
@@ -1554,7 +1554,10 @@
       "type": "string",
       "enum": [
         "2020-10-31"
-      ]
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "max-items-per-page": {
       "name": "max-items-per-page",
@@ -1580,6 +1583,9 @@
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
+      },
+      "x-ms-enum": {
+        "modelAsString": false
       }
     },
     "if-match": {

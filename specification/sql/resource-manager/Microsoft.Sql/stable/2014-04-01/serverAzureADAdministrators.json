@@ -105,6 +105,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -113,12 +119,6 @@
           },
           "204": {
             "description": "No Content",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
-            }
-          },
-          "200": {
-            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServerAzureADAdministrator"
             }
@@ -214,7 +214,8 @@
             "ActiveDirectory"
           ],
           "x-ms-enum": {
-            "name": "AdministratorType"
+            "name": "AdministratorType",
+            "modelAsString": false
           }
         },
         "login": {
@@ -295,7 +296,8 @@
         "activeDirectory"
       ],
       "x-ms-enum": {
-        "name": "ServerAdministratorName"
+        "name": "ServerAdministratorName",
+        "modelAsString": false
       },
       "x-ms-parameter-location": "method"
     }

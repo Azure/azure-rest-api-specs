@@ -384,13 +384,13 @@
         ],
         "x-ms-request-id": "request-id",
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Indexer"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Indexer"
@@ -435,10 +435,10 @@
         ],
         "x-ms-request-id": "request-id",
         "responses": {
-          "404": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "404": {
             "description": ""
           }
         }
@@ -6459,7 +6459,10 @@
         "return=representation"
       ],
       "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "SearchServiceNameParameter": {
       "name": "searchServiceName",

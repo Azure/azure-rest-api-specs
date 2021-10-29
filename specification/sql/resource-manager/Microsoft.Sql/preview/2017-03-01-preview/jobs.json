@@ -146,17 +146,17 @@
               "$ref": "#/definitions/JobAgent"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "201": {
             "description": "Successfully created the job agent.",
             "schema": {
               "$ref": "#/definitions/JobAgent"
             }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
           }
         },
         "x-ms-long-running-operation": true,
@@ -200,14 +200,14 @@
           "200": {
             "description": "Successfully deleted the job agent."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server."
-          },
           "202": {
             "description": "Accepted"
           },
           "204": {
             "description": "The specified job agent does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server."
           }
         },
         "x-ms-long-running-operation": true,
@@ -260,11 +260,11 @@
               "$ref": "#/definitions/JobAgent"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
-          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
           }
         },
         "x-ms-long-running-operation": true,
@@ -426,14 +426,14 @@
               "$ref": "#/definitions/JobCredential"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidJobCredentialUsername - Invalid credential username.\n\n * 403 JobCredentialPermissionError - Azure Resource Manager does not have permission to use or manage the credential.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
           "201": {
             "description": "Successfully created the credential.",
             "schema": {
               "$ref": "#/definitions/JobCredential"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidJobCredentialUsername - Invalid credential username.\n\n * 403 JobCredentialPermissionError - Azure Resource Manager does not have permission to use or manage the credential.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-examples": {
@@ -480,11 +480,11 @@
           "200": {
             "description": "Successfully deleted the credential."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 403 JobCredentialPermissionError - Azure Resource Manager does not have permission to use or manage the credential.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
           "204": {
             "description": "A credential with the specified name does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 403 JobCredentialPermissionError - Azure Resource Manager does not have permission to use or manage the credential.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -699,11 +699,11 @@
               "$ref": "#/definitions/JobExecution"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-long-running-operation": true,
@@ -932,17 +932,17 @@
               "$ref": "#/definitions/JobExecution"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "201": {
             "description": "Successfully started an execution for the job.",
             "schema": {
               "$ref": "#/definitions/JobExecution"
             }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1104,14 +1104,14 @@
               "$ref": "#/definitions/Job"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidDuration - Invalid duration.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
           "201": {
             "description": "Successfully created the job.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidDuration - Invalid duration.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-examples": {
@@ -1161,11 +1161,11 @@
           "200": {
             "description": "Successfully deleted the job."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
           "204": {
             "description": "The specified job does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -1664,14 +1664,14 @@
               "$ref": "#/definitions/JobStep"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 JobStepIdMismatch - Step Id in the specified Job Step URI does not match step id in provided Job Step Resource.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingJobAccountNameWithUrl - The provided job account name did not match the name in the Url.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
           "201": {
             "description": "Successfully added the job step.",
             "schema": {
               "$ref": "#/definitions/JobStep"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 JobStepIdMismatch - Step Id in the specified Job Step URI does not match step id in provided Job Step Resource.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingJobAccountNameWithUrl - The provided job account name did not match the name in the Url.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-examples": {
@@ -1728,11 +1728,11 @@
           "200": {
             "description": "Successfully deleted the job step."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
           "204": {
             "description": "The specified job step does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -2210,14 +2210,14 @@
               "$ref": "#/definitions/JobTargetGroup"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingJobAccountNameWithUrl - The provided job account name did not match the name in the Url.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
-          },
           "201": {
             "description": "Successfully created the target group.",
             "schema": {
               "$ref": "#/definitions/JobTargetGroup"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingJobAccountNameWithUrl - The provided job account name did not match the name in the Url.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
           }
         },
         "x-ms-examples": {
@@ -2267,11 +2267,11 @@
           "200": {
             "description": "Successfully deleted the target group."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
-          },
           "204": {
             "description": "A target group with the specified name does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -2989,7 +2989,7 @@
         "retryIntervalBackoffMultiplier": {
           "format": "float",
           "description": "The backoff multiplier for the time between retries.",
-          "default": 2.0,
+          "default": 2,
           "type": "number"
         }
       }
@@ -3206,7 +3206,10 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "SqlVirtualMachineInstanceNameParameter": {
       "name": "sqlVirtualMachineInstanceName",

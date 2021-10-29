@@ -84,14 +84,14 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "503": {
-            "description": "Service unavailable",
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "500": {
-            "description": "Server error",
+          "503": {
+            "description": "Service unavailable",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -166,14 +166,14 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "503": {
-            "description": "Service unavailable",
+          "500": {
+            "description": "Server error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "500": {
-            "description": "Server error",
+          "503": {
+            "description": "Service unavailable",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -759,7 +759,10 @@
       ],
       "description": "This must be set to 'true'.",
       "required": true,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     }
   }
 }

@@ -125,11 +125,11 @@
           "final-state-via": "location"
         },
         "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously."
-          },
           "200": {
             "description": "The operation completed successfully."
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "The detailed error response.",
@@ -185,11 +185,11 @@
           "final-state-via": "location"
         },
         "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously."
-          },
           "200": {
             "description": "The operation completed successfully."
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "The detailed error response.",
@@ -245,11 +245,11 @@
           "final-state-via": "location"
         },
         "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously."
-          },
           "200": {
             "description": "The operation completed successfully."
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "The detailed error response.",
@@ -515,14 +515,14 @@
           "final-state-via": "location"
         },
         "responses": {
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "The resource was not found."
-          },
-          "200": {
-            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -1361,7 +1361,10 @@
       "enum": [
         "2021-09-01-privatepreview"
       ],
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "x-ms-enum": {
+        "modelAsString": false
+      }
     },
     "clusterNameParameter": {
       "name": "clusterName",

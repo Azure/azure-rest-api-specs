@@ -75,20 +75,23 @@
             "enum": [
               "*"
             ],
-            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'."
+            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobDetailRootJsonObject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -124,16 +127,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobDetailRootJsonObject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -169,7 +172,10 @@
             "enum": [
               "true"
             ],
-            "description": "If showall is set to 'true', the request will return all jobs the user has permission to view, not only the jobs belonging to the user."
+            "description": "If showall is set to 'true', the request will return all jobs the user has permission to view, not only the jobs belonging to the user.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
             "name": "fields",
@@ -179,16 +185,13 @@
             "enum": [
               "*"
             ],
-            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'."
+            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
@@ -197,6 +200,12 @@
               "items": {
                 "$ref": "#/definitions/JobListJsonObject"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -248,7 +257,10 @@
             "enum": [
               "true"
             ],
-            "description": "If showall is set to 'true', the request will return all jobs the user has permission to view, not only the jobs belonging to the user."
+            "description": "If showall is set to 'true', the request will return all jobs the user has permission to view, not only the jobs belonging to the user.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           },
           {
             "name": "fields",
@@ -258,16 +270,13 @@
             "enum": [
               "*"
             ],
-            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'."
+            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'.",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
@@ -276,6 +285,12 @@
               "items": {
                 "$ref": "#/definitions/JobListJsonObject"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -315,16 +330,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -364,16 +379,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -413,16 +428,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -462,16 +477,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -511,16 +526,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }
@@ -554,16 +569,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/JobOperationsErrorResponse"
-            }
-          },
           "200": {
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/AppState"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
             }
           }
         }

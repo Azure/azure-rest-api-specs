@@ -112,17 +112,17 @@
               "$ref": "#/definitions/ServerTrustGroup"
             }
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ServerTrustGroupCreateRequestInvalid - The resource or resource properties in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembers - The group members property in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount - The group members property has an invalid number of servers\n\n * 400 ServerTrustGroupCreateRequestInvalidServer - The given serverId field in create server trust group request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestDuplicateServer - One or more of the provided servers are duplicates.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopes - The trust scope property in the request body is empty or invalid.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopesValue - The trust scope property in the request body has an invalid value.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
-          },
-          "202": {
-            "description": "Accepted"
-          },
           "201": {
             "description": "Successfully created the server trust group.",
             "schema": {
               "$ref": "#/definitions/ServerTrustGroup"
             }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ServerTrustGroupCreateRequestInvalid - The resource or resource properties in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembers - The group members property in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount - The group members property has an invalid number of servers\n\n * 400 ServerTrustGroupCreateRequestInvalidServer - The given serverId field in create server trust group request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestDuplicateServer - One or more of the provided servers are duplicates.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopes - The trust scope property in the request body is empty or invalid.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopesValue - The trust scope property in the request body has an invalid value.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           }
         },
         "x-ms-long-running-operation": true,
@@ -167,14 +167,14 @@
           "200": {
             "description": "Successfully deleted the server trust group."
           },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ServerTrustGroupCreateRequestInvalid - The resource or resource properties in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembers - The group members property in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount - The group members property has an invalid number of servers\n\n * 400 ServerTrustGroupCreateRequestInvalidServer - The given serverId field in create server trust group request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestDuplicateServer - One or more of the provided servers are duplicates.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopes - The trust scope property in the request body is empty or invalid.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopesValue - The trust scope property in the request body has an invalid value.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
-          },
           "202": {
             "description": "Accepted"
           },
           "204": {
             "description": "The specified server trust group does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ServerTrustGroupCreateRequestInvalid - The resource or resource properties in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembers - The group members property in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount - The group members property has an invalid number of servers\n\n * 400 ServerTrustGroupCreateRequestInvalidServer - The given serverId field in create server trust group request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestDuplicateServer - One or more of the provided servers are duplicates.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopes - The trust scope property in the request body is empty or invalid.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopesValue - The trust scope property in the request body has an invalid value.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           }
         },
         "x-ms-long-running-operation": true,
@@ -297,7 +297,10 @@
             "enum": [
               "GlobalTransactions"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         }
       }
