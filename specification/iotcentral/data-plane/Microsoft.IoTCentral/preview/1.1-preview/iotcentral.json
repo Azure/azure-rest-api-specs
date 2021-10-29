@@ -107,6 +107,82 @@
       ],
       "discriminator": "type"
     },
+    "BlobStorageV1Destination": {
+      "x-ms-discriminator-value": "blobstorage@v1",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Destination"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/BlobStorageV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "BlobStorageV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "BlobStorageV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobStorageV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string for accessing the blob storage account.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Name of the container where data should be written in the storage account.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
+    },
+    "BlobStorageV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobStorageV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "endpointUri": {
+          "description": "The storage account's blob service endpoint URL.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Name of the container where data should be written in the storage account.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "endpointUri",
+        "containerName"
+      ]
+    },
     "CloudPropertyJobData": {
       "x-ms-discriminator-value": "cloudProperty",
       "allOf": [
@@ -140,6 +216,181 @@
         {
           "$ref": "#/definitions/JobData"
         }
+      ]
+    },
+    "DataExplorerV1Destination": {
+      "x-ms-discriminator-value": "dataexplorer@v1",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Destination"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "clusterUrl": {
+          "description": "The resource URI of the Data Explorer instance.",
+          "type": "string"
+        },
+        "database": {
+          "description": "Name Data Explorer database where data should be written.",
+          "type": "string"
+        },
+        "table": {
+          "description": "The table within the Data Explorer database that will receive the data.",
+          "type": "string"
+        },
+        "authorization": {
+          "$ref": "#/definitions/DataExplorerV1DestinationAuth"
+        }
+      },
+      "required": [
+        "clusterUrl",
+        "database",
+        "table",
+        "authorization"
+      ]
+    },
+    "DataExplorerV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "DataExplorerV1DestinationServicePrincipalAuth": {
+      "x-ms-discriminator-value": "servicePrincipal",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataExplorerV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Service Principal client ID.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Service Principal tenant ID.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "Service Principal client secret.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientId",
+        "tenantId",
+        "clientSecret"
+      ]
+    },
+    "DataExportError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The code for the error that occurred.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The description of the error that occurred.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataExportStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indication of the current health and operation of the export or destination.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Errors encountered by the export or destination.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataExportError"
+          },
+          "readOnly": true
+        },
+        "lastExportTime": {
+          "description": "The timestamp of the last message that was sent to the export or destination.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "Destination": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataExportStatus"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the destination.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the destination.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of destination configuration.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "DestinationCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of destinations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destination"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of destinations.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DestinationReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the destination where data should be sent."
+        },
+        "transform": {
+          "type": "string",
+          "description": "Query for transforming the message structure to a particular output."
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "Device": {
@@ -327,6 +578,48 @@
       "type": "object",
       "additionalProperties": true
     },
+    "DeviceRelationship": {
+      "type": "object",
+      "description": "An object representing the relationship between an upstream and a downstream device.",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of this relationship.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name which describes this relationship between given devices from source device template.",
+          "type": "string"
+        },
+        "source": {
+          "description": "The device ID of the source (parent) device.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The device ID of the target (child) device.",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceRelationshipCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of device relationships.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceRelationship"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of device relationships.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DeviceTelemetry": {
       "type": "object",
       "properties": {
@@ -369,6 +662,10 @@
         },
         "capabilityModel": {
           "description": "The capability model utilized by this device template.",
+          "type": "object"
+        },
+        "deploymentManifest": {
+          "description": "Deployment manifest associated to this device template.",
           "type": "object"
         }
       },
@@ -415,6 +712,201 @@
         "email"
       ]
     },
+    "Enrichment": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "description": "The device template or interface which defines the target capability for the enrichment.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The path to the target capability within the device template or the system property to use.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The raw value used for the enrichment."
+        }
+      }
+    },
+    "EventHubsV1Destination": {
+      "x-ms-discriminator-value": "eventhubs@v1",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Destination"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/EventHubsV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "EventHubsV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "EventHubsV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventHubsV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string for accessing the Event Hubs namespace, including the `EntityPath` of the event hub.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "EventHubsV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventHubsV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the Event Hubs namespace.",
+          "type": "string"
+        },
+        "eventHubName": {
+          "description": "The Event Hubs instance name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostName",
+        "eventHubName"
+      ]
+    },
+    "Export": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataExportStatus"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the export.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the export.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Toggle to start/stop an export from sending data.",
+          "type": "boolean"
+        },
+        "source": {
+          "description": "The type of data to export.",
+          "type": "string",
+          "enum": [
+            "telemetry",
+            "properties",
+            "deviceLifecycle",
+            "deviceTemplateLifecycle",
+            "deviceConnectivity"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationSource",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "telemetry",
+                "name": "Telemetry",
+                "description": "Destination source from device telemetry"
+              },
+              {
+                "value": "properties",
+                "name": "Properties",
+                "description": "Destination source from device properties"
+              },
+              {
+                "value": "deviceLifecycle",
+                "name": "DeviceLifecycle",
+                "description": "Destination source from device lifecycle"
+              },
+              {
+                "value": "deviceTemplateLifecycle",
+                "name": "DeviceTemplateLifecycle",
+                "description": "Destination source from device template lifecycle"
+              },
+              {
+                "value": "deviceConnectivity",
+                "name": "DeviceConnectivity",
+                "description": "Destination source from device connectivity"
+              }
+            ]
+          }
+        },
+        "filter": {
+          "description": "Query defining which events from the source should be exported.",
+          "type": "string"
+        },
+        "enrichments": {
+          "description": "Additional pieces of information to include with each sent message. Data is represented as a set of key/value pairs, where the key is the name of the enrichment that will appear in the output message and the value identifies the data to send.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Enrichment"
+          }
+        },
+        "destinations": {
+          "description": "The list of destinations to which the export should send data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DestinationReference"
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "enabled",
+        "source",
+        "destinations"
+      ]
+    },
+    "ExportCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of exports.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Export"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of exports.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "FileUpload": {
       "type": "object",
       "properties": {
@@ -431,7 +923,7 @@
           "type": "string"
         },
         "sasTtl": {
-          "description": "ISO 8601 duration standard, The amount of time the device’s request to upload a file is valid before it expires.​",
+          "description": "ISO 8601 duration standard, The amount of time the device’s request to upload a file is valid before it expires.",
           "type": "string"
         },
         "state": {
@@ -522,6 +1014,15 @@
           "description": "Indicates whether the job is starting, running, etc.",
           "type": "string",
           "readOnly": true
+        },
+        "organizations": {
+          "description": "List of organizations of the job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 1
         }
       },
       "required": [
@@ -746,6 +1247,32 @@
         }
       ]
     },
+    "QueryRequest": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "Query to be executed.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "QueryResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
     "Role": {
       "type": "object",
       "properties": {
@@ -793,6 +1320,148 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ServiceBusQueueV1Destination": {
+      "x-ms-discriminator-value": "servicebusqueue@v1",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Destination"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/ServiceBusQueueV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "ServiceBusQueueV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ServiceBusQueueV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusQueueV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string for accessing the Service Bus namespace, including the `EntityPath` of the queue.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "ServiceBusQueueV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusQueueV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the Service Bus namespace.",
+          "type": "string"
+        },
+        "queueName": {
+          "description": "The Service Bus queue name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostName",
+        "queueName"
+      ]
+    },
+    "ServiceBusTopicV1Destination": {
+      "x-ms-discriminator-value": "servicebustopic@v1",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Destination"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/ServiceBusTopicV1DestinationAuth"
+        }
+      },
+      "required": [
+        "authorization"
+      ]
+    },
+    "ServiceBusTopicV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ServiceBusTopicV1DestinationConnectionStringAuth": {
+      "x-ms-discriminator-value": "connectionString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusTopicV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string for accessing the Service Bus namespace, including the `EntityPath` of the topic.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "ServiceBusTopicV1DestinationSystemAssignedManagedIdentityAuth": {
+      "x-ms-discriminator-value": "systemAssignedManagedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceBusTopicV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the Service Bus namespace.",
+          "type": "string"
+        },
+        "topicName": {
+          "description": "The Service Bus topic name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostName",
+        "topicName"
       ]
     },
     "ServicePrincipalUser": {
@@ -923,6 +1592,154 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "WebhookV1Destination": {
+      "x-ms-discriminator-value": "webhook@v1",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Destination"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The URL to invoke when exporting data.",
+          "type": "string"
+        },
+        "queryCustomizations": {
+          "description": "Additional query parameters that should be added to each request.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WebhookV1DestinationCustomization"
+          }
+        },
+        "headerCustomizations": {
+          "description": "Additional headers that should be added to each request.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WebhookV1DestinationCustomization"
+          }
+        },
+        "authorization": {
+          "$ref": "#/definitions/WebhookV1DestinationAuth"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "WebhookV1DestinationAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The kind of authentication to use.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "WebhookV1DestinationCustomization": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value to use for this webhook customization.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Whether to consider the value to be a secret and hide it when retrieving the destination configuration.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebhookV1DestinationHeaderAuth": {
+      "x-ms-discriminator-value": "header",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebhookV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value to use for the Authorization header when making requests.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebhookV1DestinationOAuthAuth": {
+      "x-ms-discriminator-value": "oauth",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebhookV1DestinationAuth"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "tokenUrl": {
+          "description": "URL where an access token can be retrieved.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "OAuth2 client ID used when retrieving the token.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "OAuth2 client secret used to retrieve the token.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "OAuth2 audience.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "OAuth2 scope.",
+          "type": "string"
+        },
+        "requestType": {
+          "description": "Content-Type for the token request.",
+          "type": "string",
+          "enum": [
+            "auto",
+            "json",
+            "urlencoded"
+          ],
+          "x-ms-enum": {
+            "name": "OAuthRequestType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "auto",
+                "name": "Auto",
+                "description": "Use automatic Content-Type for token request"
+              },
+              {
+                "value": "json",
+                "name": "Json",
+                "description": "Content-Type as JSON for token request"
+              },
+              {
+                "value": "urlencoded",
+                "name": "UrlEncoded",
+                "description": "Content-Type as UrlEncoded for token request"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "tokenUrl",
+        "clientId",
+        "clientSecret"
       ]
     },
     "X509": {
@@ -1118,6 +1935,381 @@
         }
       }
     },
+    "/dataExport/destinations": {
+      "get": {
+        "operationId": "Destinations_List",
+        "summary": "Get the list of destinations in an application.",
+        "x-ms-examples": {
+          "List data export destinations": {
+            "$ref": "./examples/dataexports_destinations_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DestinationCollection"
+            }
+          }
+        }
+      }
+    },
+    "/dataExport/destinations/{destinationId}": {
+      "get": {
+        "operationId": "Destinations_Get",
+        "summary": "Get a destination by ID.",
+        "x-ms-examples": {
+          "Get a data export destination": {
+            "$ref": "./examples/dataexports_destinations_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DestinationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Destination"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Destinations_Create",
+        "summary": "Create or update a destination",
+        "description": "Create or update a definition for where to send data.",
+        "x-ms-examples": {
+          "Create a webhook destination": {
+            "$ref": "./examples/dataexports_destinations_create_webhook.json"
+          },
+          "Create an azure blob storage destination": {
+            "$ref": "./examples/dataexports_destinations_create_blob.json"
+          },
+          "Create an azure data explorer destination": {
+            "$ref": "./examples/dataexports_destinations_create_adx.json"
+          },
+          "Create an azure event hub destination": {
+            "$ref": "./examples/dataexports_destinations_create_eventhub.json"
+          },
+          "Create an azure service bus queue destination": {
+            "$ref": "./examples/dataexports_destinations_create_queue.json"
+          },
+          "Create an azure service bus topic destination": {
+            "$ref": "./examples/dataexports_destinations_create_topic.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DestinationId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination body.",
+            "schema": {
+              "$ref": "#/definitions/Destination"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Destination"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Destinations_Update",
+        "summary": "Patch a destination.",
+        "description": "Perform an incremental update to a destination.",
+        "x-ms-examples": {
+          "Update an webhook destination": {
+            "$ref": "./examples/dataexports_destinations_update_webhook.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DestinationId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Destination"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Destinations_Remove",
+        "summary": "Delete a destination.",
+        "x-ms-examples": {
+          "Delete data export destination": {
+            "$ref": "./examples/dataexports_destinations_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DestinationId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/dataExport/destinations/{destinationId}/exports": {
+      "get": {
+        "operationId": "Destinations_ListExports",
+        "summary": "List all exports connected to the given destination.",
+        "x-ms-examples": {
+          "List all exports connected to the given destination": {
+            "$ref": "./examples/dataexports_destinations_exports_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DestinationId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExportCollection"
+            }
+          }
+        }
+      }
+    },
+    "/dataExport/exports": {
+      "get": {
+        "operationId": "Exports_List",
+        "summary": "Get the list of exports in an application.",
+        "x-ms-examples": {
+          "List data exports": {
+            "$ref": "./examples/dataexports_exports_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExportCollection"
+            }
+          }
+        }
+      }
+    },
+    "/dataExport/exports/{exportId}": {
+      "get": {
+        "operationId": "Exports_Get",
+        "summary": "Get an export by ID.",
+        "x-ms-examples": {
+          "Get data export by ID": {
+            "$ref": "./examples/dataexports_exports_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ExportId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Exports_Create",
+        "summary": "Create or update an export",
+        "description": "Create or update a definition for exporting data. Also used to connect or disconnect an export from destinations.",
+        "x-ms-examples": {
+          "Create data export with ID": {
+            "$ref": "./examples/dataexports_exports_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ExportId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Export body.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Exports_Update",
+        "summary": "Patch an export.",
+        "description": "Perform an incremental update to an export.",
+        "x-ms-examples": {
+          "Update a data export": {
+            "$ref": "./examples/dataexports_exports_update.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ExportId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Export patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Exports_Remove",
+        "summary": "Delete an export.",
+        "x-ms-examples": {
+          "Delete a data export with ID": {
+            "$ref": "./examples/dataexports_exports_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ExportId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/dataExport/exports/{exportId}/destinations": {
+      "get": {
+        "operationId": "Exports_ListDestinations",
+        "summary": "List all destinations connected to the given export.",
+        "x-ms-examples": {
+          "List all destinations in given export": {
+            "$ref": "./examples/dataexports_exports_destinations_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/ExportId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DestinationCollection"
+            }
+          }
+        }
+      }
+    },
     "/deviceGroups": {
       "get": {
         "operationId": "DeviceGroups_List",
@@ -1148,7 +2340,7 @@
     "/deviceTemplates": {
       "get": {
         "operationId": "DeviceTemplates_List",
-        "summary": "Get the list of device templates in an application",
+        "summary": "Get the list of device templates in an application with basic ODATA support ($top, $filter, $orderby), [more details](https://aka.ms/iotcentralodatasupport).",
         "x-ms-examples": {
           "List device templates": {
             "$ref": "./examples/devicetemplates_list.json"
@@ -1157,6 +2349,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
           }
         ],
         "x-ms-pageable": {
@@ -1177,7 +2378,7 @@
         "operationId": "DeviceTemplates_Get",
         "summary": "Get a device template by ID",
         "x-ms-examples": {
-          "Get a device template by Id": {
+          "Get a device template by ID": {
             "$ref": "./examples/devicetemplates_get.json"
           }
         },
@@ -1237,7 +2438,7 @@
         "summary": "Update the cloud properties and overrides of an existing device template via patch.",
         "x-ms-examples": {
           "Update a device template": {
-            "$ref": "./examples/devicetemplates_create.json"
+            "$ref": "./examples/devicetemplates_update.json"
           }
         },
         "parameters": [
@@ -1271,7 +2472,7 @@
         "summary": "Delete a device template",
         "description": "Delete an existing device template by device ID.",
         "x-ms-examples": {
-          "Delete a device template by Id": {
+          "Delete a device template by ID": {
             "$ref": "./examples/devicetemplates_delete.json"
           }
         },
@@ -1293,7 +2494,7 @@
     "/devices": {
       "get": {
         "operationId": "Devices_List",
-        "summary": "Get the list of devices in an application",
+        "summary": "Get the list of devices in an application with basic ODATA support ($top, $filter, $orderby), [more details](https://aka.ms/iotcentralodatasupport).",
         "x-ms-examples": {
           "List devices": {
             "$ref": "./examples/devices_list.json"
@@ -1302,6 +2503,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/orderBy"
           }
         ],
         "x-ms-pageable": {
@@ -1323,7 +2533,7 @@
         "summary": "Get a device by ID",
         "description": "Get details about an existing device by device ID.",
         "x-ms-examples": {
-          "Get device by Id": {
+          "Get device by ID": {
             "$ref": "./examples/devices_get.json"
           }
         },
@@ -2537,6 +3747,171 @@
         }
       }
     },
+    "/devices/{deviceId}/relationships/": {
+      "get": {
+        "operationId": "Devices_ListRelationships",
+        "summary": "Given the ID for an upstream device, will return the upstream and the downstream relationships associated with that gateway. These downstream relationships are only those associated with the direct downstream level (they don’t work recursively).",
+        "description": "List all relationships based on device ID",
+        "x-ms-examples": {
+          "List device relationships": {
+            "$ref": "./examples/devices_relationships_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationshipCollection"
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/relationships/{relationshipId}": {
+      "get": {
+        "operationId": "Devices_GetRelationship",
+        "summary": "Given the ID for a device and a relationship ID associated with this device, get the details of the relationship.",
+        "description": "Get device relationship by ID",
+        "x-ms-examples": {
+          "Get device relationship by ID": {
+            "$ref": "./examples/devices_relationships_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Devices_CreateRelationship",
+        "summary": "Given the ID for a device and a relationship ID associated with this device, create a new relationship for between the given device and a second device specified in the body.",
+        "description": "Create a device relationship",
+        "x-ms-examples": {
+          "Create a new device relationship": {
+            "$ref": "./examples/devices_relationships_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device relationship body.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateRelationship",
+        "summary": "Patch a given relationship given the relationship ID and a given device ID.",
+        "description": "Update device relationship",
+        "x-ms-examples": {
+          "Update a device relationship": {
+            "$ref": "./examples/devices_relationships_update.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device relationship patch body.",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceRelationship"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Devices_RemoveRelationship",
+        "summary": "Given the ID for a device and an associated relationship ID, delete the relationship. The given device ID can be that of the upstream or downstream device.",
+        "description": "Delete a device relationship",
+        "x-ms-examples": {
+          "Delete a device relationship": {
+            "$ref": "./examples/devices_relationships_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/RelationshipId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/devices/{deviceId}/telemetry/{telemetryName}": {
       "get": {
         "operationId": "Devices_GetTelemetryValue",
@@ -2694,7 +4069,7 @@
         "summary": "Get a job by ID",
         "description": "Get details about a running or completed job by job ID.",
         "x-ms-examples": {
-          "Get a job by Id": {
+          "Get a job by ID": {
             "$ref": "./examples/jobs_get.json"
           }
         },
@@ -2868,7 +4243,7 @@
     "/organizations": {
       "get": {
         "operationId": "Organizations_List",
-        "summary": "Get the list of organizations the user has access to in an application.",
+        "summary": "Get the list of organizations the user has access to in an application",
         "x-ms-examples": {
           "List organizations": {
             "$ref": "./examples/organizations_list.json"
@@ -3029,6 +4404,39 @@
         }
       }
     },
+    "/query": {
+      "post": {
+        "operationId": "Query_Run",
+        "summary": "Run a query and obtain the result",
+        "x-ms-examples": {
+          "List devices": {
+            "$ref": "./examples/query_run.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query, more details in [IoT central query language](https://aka.ms/iotcql)",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/QueryResponse"
+            }
+          }
+        }
+      }
+    },
     "/roles": {
       "get": {
         "operationId": "Roles_List",
@@ -3061,7 +4469,7 @@
         "operationId": "Roles_Get",
         "summary": "Get a role by ID.",
         "x-ms-examples": {
-          "Get role by Id": {
+          "Get role by ID": {
             "$ref": "./examples/roles_get.json"
           }
         },
@@ -3281,6 +4689,14 @@
       "type": "string",
       "required": true
     },
+    "DestinationId": {
+      "in": "path",
+      "name": "destinationId",
+      "description": "Unique ID for the destination.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
     "DeviceId": {
       "in": "path",
       "name": "deviceId",
@@ -3297,6 +4713,14 @@
       "type": "string",
       "required": true
     },
+    "ExportId": {
+      "in": "path",
+      "name": "exportId",
+      "description": "Unique ID for the export.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
     "JobId": {
       "in": "path",
       "name": "jobId",
@@ -3309,6 +4733,14 @@
       "in": "path",
       "name": "moduleName",
       "description": "Name of the device module.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
+    "RelationshipId": {
+      "in": "path",
+      "name": "relationshipId",
+      "description": "Unique ID of a relationship between devices.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
@@ -3339,6 +4771,30 @@
         "1.1-preview"
       ],
       "required": true
+    },
+    "filter": {
+      "in": "query",
+      "name": "$filter",
+      "description": "Filter string for results.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": false
+    },
+    "orderBy": {
+      "in": "query",
+      "name": "$orderby",
+      "description": "The order by string for results.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": false
+    },
+    "top": {
+      "in": "query",
+      "name": "$top",
+      "description": "Page size of returned results.",
+      "x-ms-parameter-location": "method",
+      "type": "integer",
+      "required": false
     }
   },
   "securityDefinitions": {
