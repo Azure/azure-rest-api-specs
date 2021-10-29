@@ -1254,6 +1254,34 @@
         "contactDetails": {
           "$ref": "#/definitions/ContactDetails",
           "description": "Contact details for the address"
+        },
+		"addressValidationStatus": {
+          "description": "Status of address validation",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Ambiguous"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddressValidationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Address provided is valid."
+              },
+              {
+                "value": "Invalid",
+                "description": "Address provided is invalid or not supported."
+              },
+              {
+                "value": "Ambiguous",
+                "description": "Address provided is ambiguous, please choose one of the alternate addresses returned."
+              }
+            ]
+          }
         }
       }
     },
