@@ -784,6 +784,10 @@
             "modelAsString": true
           }
         },
+        "externals": {
+          "$ref": "#/definitions/External",
+          "description": "The storage account where the custom code artifacts are located."
+        },
         "cluster": {
           "$ref": "#/definitions/ClusterInfo",
           "description": "The cluster which streaming jobs will run on."
@@ -945,6 +949,21 @@
         "userAssignedIdentities": {
           "type": "object",
           "description": "The user assigned identities associated with the streaming job resource."
+        }
+      }
+    },
+    "External": {
+      "description": "The storage account where the custom code artifacts are located.",
+      "type": "object",
+      "properties": {
+        "storageAccount": {
+          "$ref": "./inputs.json#/definitions/StorageAccount"
+        },
+        "container": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
         }
       }
     }

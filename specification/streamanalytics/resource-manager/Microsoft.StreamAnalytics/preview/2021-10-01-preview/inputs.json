@@ -643,6 +643,23 @@
         }
       }
     },
+    "RawStreamInputDataSource": {
+      "description": "Describes a raw input data source that contains stream data. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input of this data source type to an existing job.",
+      "type": "object",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties",
+          "description": "The properties that are associated with a raw input. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ReferenceInputDataSource": {
       "type": "object",
       "description": "Describes an input data source that contains reference data.",
@@ -684,6 +701,23 @@
       ],
       "properties": {}
     },
+    "RawReferenceInputDataSource": {
+      "description": "Describes a raw input data source that contains reference data. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input of this data source type to an existing job.",
+      "type": "object",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReferenceInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties",
+          "description": "The properties that are associated with a raw input containing reference data. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "BlobDataSourceProperties": {
       "type": "object",
       "description": "The properties that are associated with a blob data source.",
@@ -710,6 +744,20 @@
         "timeFormat": {
           "type": "string",
           "description": "The time format. Wherever {time} appears in pathPattern, the value of this property is used as the time format instead."
+        }
+      }
+    },
+    "RawInputDatasourceProperties": {
+      "description": "The properties that are associated with a raw input.",
+      "type": "object",
+      "properties": {
+        "payload": {
+          "description": "The JSON serialized content of the input data. Either payload or payloadUri must be set, but not both. ",
+          "type": "string"
+        },
+        "payloadUri": {
+          "description": "The SAS URL to a blob containing the JSON serialized content of the input data. Either payload or payloadUri must be set, but not both.",
+          "type": "string"
         }
       }
     },
@@ -867,6 +915,37 @@
       "type": "object",
       "description": "The properties that are associated with the Parquet serialization type.",
       "properties": {}
+    },
+    "CustomClrSerialization": {
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in custom format.",
+      "type": "object",
+      "x-ms-discriminator-value": "CustomClr",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Serialization"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomClrSerializationProperties",
+          "description": "The properties that are associated with the CustomClr serialization type. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CustomClrSerializationProperties": {
+      "description": "The properties that are associated with the CustomClr serialization type.",
+      "type": "object",
+      "properties": {
+        "serializationDllPath": {
+          "type": "string",
+          "description": "The serialization library path."
+        },
+        "serializationClassName": {
+          "type": "string",
+          "description": "The serialization class name."
+        }
+      }
     },
     "CsvSerialization": {
       "type": "object",
