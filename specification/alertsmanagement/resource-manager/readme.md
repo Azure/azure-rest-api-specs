@@ -155,7 +155,7 @@ These settings apply only when `--tag=package-2021-07-22` is specified on the co
 ``` yaml $(tag) == 'package-2021-07-22-preview'
 input-file:
 - Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
----
+```
 
 # Code Generation
 
