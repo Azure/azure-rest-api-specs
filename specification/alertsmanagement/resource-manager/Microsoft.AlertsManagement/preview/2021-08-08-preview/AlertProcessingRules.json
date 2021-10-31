@@ -29,7 +29,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "description": "List all alert processing rules of the subscription",
+        "description": "List all alert processing rules in a subscription",
         "operationId": "AlertProcessingRules_ListBySubscription",
         "parameters": [
           {
@@ -72,7 +72,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
         "operationId": "AlertProcessingRules_ListByResourceGroup",
-        "description": "List all alert processing rules of the subscription, created in given resource group",
+        "description": "List all alert processing rules in a resource group",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -116,7 +116,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}": {
       "get": {
-        "description": "Get alert processing rule by name",
+        "description": "Get an alert processing rule by name",
         "operationId": "AlertProcessingRules_GetByName",
         "parameters": [
           {
@@ -163,7 +163,7 @@
         }
       },
       "put": {
-        "operationId": "AlertProcessingRules_CreateUpdate",
+        "operationId": "AlertProcessingRules_CreateOrUpdate",
         "description": "Create or update an alert processing rule",
         "parameters": [
           {
@@ -246,7 +246,7 @@
         }
       },
       "delete": {
-        "description": "Delete a given alert processing rule",
+        "description": "Delete an alert processing rule",
         "operationId": "AlertProcessingRules_Delete",
         "parameters": [
           {
@@ -299,7 +299,7 @@
         }
       },
       "patch": {
-        "description": "Update enabled flag and/or tags for the given alert processing rule",
+        "description": "Enable, disable, or update tags for an alert processing rule",
         "operationId": "AlertProcessingRules_Update",
         "parameters": [
           {
