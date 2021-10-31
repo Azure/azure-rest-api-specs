@@ -106,8 +106,9 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "StateKeyNameDelete": {
+    "StateKeyName": {
       "name": "stateKeyName",
+      "x-ms-client-name": "keyName",
       "description": "The Name of the state to be deleted.",
       "type": "string",
       "in": "query",
@@ -139,12 +140,12 @@
             "$ref": "#/parameters/FeatureStateSetDescription"
           },
           {
-            "name": "statesetCreateRequestBody",
+            "name": "styleRules",
             "in": "body",
             "description": "The stateset style JSON data.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StylesObject"
+              "$ref": "#/definitions/StyleRules"
             }
           }
         ],
@@ -152,7 +153,7 @@
           "200": {
             "description": "Stateset created.",
             "schema": {
-              "$ref": "#/definitions/StatesetCreatedResponse"
+              "$ref": "#/definitions/StatesetCreatedResult"
             }
           },
           "default": {
@@ -162,7 +163,7 @@
       },
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n This API allows the caller to fetch a list of all previously successfully created statesets.",
-        "operationId": "FeatureState_ListStateset",
+        "operationId": "FeatureState_ListStatesets",
         "x-ms-examples": {
           "List all the previously created statesets": {
             "$ref": "./examples/featurestate/Featurestate_List.json"
@@ -184,7 +185,7 @@
           "200": {
             "description": "The list stateset request completed successfully. The response body contains a list of all the previously created statesets.",
             "schema": {
-              "$ref": "#/definitions/StatesetListResponse"
+              "$ref": "#/definitions/StatesetListResult"
             }
           },
           "default": {
@@ -196,7 +197,7 @@
     "/featureStateSets/{statesetId}": {
       "put": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis PUT API allows the user to update the stateset style rules.",
-        "operationId": "FeatureState_PutStateset",
+        "operationId": "FeatureState_UpdateStateset",
         "x-ms-examples": {
           "Update stateset style rules with a statesetId": {
             "$ref": "./examples/featurestate/Featurestate_UpdateStateset.json"
@@ -213,12 +214,12 @@
             "$ref": "#/parameters/StatesetIdInPath"
           },
           {
-            "name": "statesetStyleUpdateRequestBody",
+            "name": "styleRules",
             "in": "body",
             "description": "The stateset style JSON data. Only style rules are allowed to be updated, update on keyname and type is not allowed.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StylesObject"
+              "$ref": "#/definitions/StyleRules"
             }
           }
         ],
@@ -282,7 +283,7 @@
           "200": {
             "description": "Get request completed successfully.",
             "schema": {
-              "$ref": "#/definitions/StatesetGetResponse"
+              "$ref": "#/definitions/Stateset"
             }
           },
           "default": {
@@ -314,7 +315,7 @@
             "$ref": "#/parameters/FeatureIdSet"
           },
           {
-            "name": "featureStateUpdateRequestBody",
+            "name": "featureStates",
             "in": "body",
             "description": "The feature state JSON data. A feature can have only one state at a given point in time. The specified state keyname must have been defined during the stateset creation.",
             "required": true,
@@ -354,7 +355,7 @@
             "$ref": "#/parameters/FeatureIdDelete"
           },
           {
-            "$ref": "#/parameters/StateKeyNameDelete"
+            "$ref": "#/parameters/StateKeyName"
           }
         ],
         "responses": {
@@ -367,11 +368,11 @@
         }
       },
       "get": {
-        "operationId": "FeatureState_GetStates",
+        "operationId": "FeatureState_ListStates",
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n This API returns the current state information associated with the given feature in the given stateset.",
         "x-ms-examples": {
           "Get the current states of a feature": {
-            "$ref": "./examples/featurestate/Featurestate_GetStates.json"
+            "$ref": "./examples/featurestate/Featurestate_ListStates.json"
           }
         },
         "parameters": [
@@ -403,7 +404,7 @@
     }
   },
   "definitions": {
-    "StatesetGetResponse": {
+    "Stateset": {
       "description": "The response model for the successful Stateset Get API.",
       "type": "object",
       "properties": {
@@ -420,11 +421,12 @@
           }
         },
         "statesetStyle": {
-          "$ref": "#/definitions/StylesObject"
+          "x-ms-client-name": "styleRules",
+          "$ref": "#/definitions/StyleRules"
         }
       }
     },
-    "StatesetListResponse": {
+    "StatesetListResult": {
       "description": "The response model for the successful Stateset List API.",
       "type": "object",
       "properties": {
@@ -432,7 +434,7 @@
           "description": "A list of statesets information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StatesetInfoObject"
+            "$ref": "#/definitions/StatesetInfo"
           }
         },
         "nextLink": {
@@ -442,32 +444,23 @@
         }
       }
     },
-    "StatesetInfoObject": {
+    "StatesetInfo": {
       "description": "The stateset information detail.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Stateset"
+        }
+      ],
       "properties": {
         "statesetId": {
           "description": "The stateset ID of this stateset.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description associated with the stateset.",
           "type": "string",
           "readOnly": true
-        },
-        "datasetIds": {
-          "description": "Dataset ID associated with the stateset.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "statesetStyle": {
-          "$ref": "#/definitions/StylesObject"
         }
       }
     },
-    "StatesetCreatedResponse": {
+    "StatesetCreatedResult": {
       "description": "The response model for the successful Stateset Create API.",
       "type": "object",
       "properties": {
@@ -486,12 +479,12 @@
           "description": "The feature states array.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FeatureStateObject"
+            "$ref": "#/definitions/FeatureState"
           }
         }
       }
     },
-    "FeatureStateObject": {
+    "FeatureState": {
       "description": "Single feature state model.",
       "type": "object",
       "properties": {
@@ -509,25 +502,26 @@
         }
       }
     },
-    "StylesObject": {
+    "StyleRules": {
       "description": "The styles model.",
       "type": "object",
       "properties": {
         "styles": {
-          "description": "An array of stateset styles. The style rule could be a numeric or string or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
+          "x-ms-client-name": "styleRules",
+          "description": "An array of stateset style rules. The style rule could be a numeric or string or a boolean type style rule.  Refer to NumberRule, StringRule and BooleanRule definitions [here](https://aka.ms/AzureMapsStatesetStyles). ",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StyleObject"
+            "$ref": "#/definitions/StyleRule"
           }
         }
       }
     },
-    "NumberRuleObject": {
+    "NumberRule": {
       "description": "The numeric rule. The color is selected from the first range it falls into.",
       "type": "object",
       "properties": {
         "range": {
-          "$ref": "#/definitions/RangeObject"
+          "$ref": "#/definitions/Range"
         },
         "color": {
           "description": "The color when value is within the range. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
@@ -535,7 +529,7 @@
         }
       }
     },
-    "RangeObject": {
+    "Range": {
       "description": "The numeric value range for this style rule. If the value is in the range, all the conditions must hold true.",
       "type": "object",
       "properties": {
@@ -557,7 +551,7 @@
         }
       }
     },
-    "BooleanRuleObject": {
+    "BooleanRule": {
       "description": "The boolean rule. The color is selected based on the logic value of the key.",
       "type": "object",
       "properties": {
@@ -579,8 +573,8 @@
         "type": "string"
       }
     },
-    "StyleObject": {
-      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
+    "StyleRule": {
+      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRule, StringRuleObject and BooleanRule definitions [here](https://aka.ms/AzureMapsStatesetStyles). ",
       "discriminator": "type",
       "type": "object",
       "required": [
@@ -601,36 +595,33 @@
             "string"
           ],
           "x-ms-enum": {
-            "name": "StyleObjectType",
+            "name": "StyleRuleType",
             "modelAsString": true,
             "values": [
               {
                 "value": "boolean",
-                "description": "Boolean type of stateset style.",
-                "name": "BooleanTypeStyleRule"
+                "description": "Boolean type of stateset style."
               },
               {
                 "value": "number",
-                "description": "Number type of stateset style.",
-                "name": "NumberTypeStyleRule"
+                "description": "Number type of stateset style."
               },
               {
                 "value": "string",
-                "description": "String type of stateset style.",
-                "name": "StringTypeStyleRule"
+                "description": "String type of stateset style."
               }
             ]
           }
         }
       }
     },
-    "BooleanTypeStyleRule": {
+    "BooleanStyleRule": {
       "description": "The boolean type style rule object.",
       "x-ms-discriminator-value": "boolean",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleObject"
+          "$ref": "#/definitions/StyleRule"
         }
       ],
       "properties": {
@@ -638,7 +629,7 @@
           "description": "Boolean style rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BooleanRuleObject"
+            "$ref": "#/definitions/BooleanRule"
           }
         }
       },
@@ -646,13 +637,13 @@
         "rules"
       ]
     },
-    "NumberTypeStyleRule": {
+    "NumberStyleRule": {
       "description": "The numeric type style rule object.",
       "x-ms-discriminator-value": "number",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleObject"
+          "$ref": "#/definitions/StyleRule"
         }
       ],
       "properties": {
@@ -660,7 +651,7 @@
           "description": "Numeric style rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NumberRuleObject"
+            "$ref": "#/definitions/NumberRule"
           }
         }
       },
@@ -668,13 +659,13 @@
         "rules"
       ]
     },
-    "StringTypeStyleRule": {
+    "StringStyleRule": {
       "description": "The string type style rule object.",
       "x-ms-discriminator-value": "string",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleObject"
+          "$ref": "#/definitions/StyleRule"
         }
       ],
       "properties": {

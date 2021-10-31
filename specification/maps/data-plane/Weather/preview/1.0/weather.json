@@ -82,7 +82,7 @@
         "description": "**Get Hourly Forecast**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nRequest detailed weather forecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days), and 240 hours (10 days) for the given the given coordinate location.  The API returns details such as temperature, humidity, wind, precipitation, and ultraviolet (UV) index.\n\nIn S0 you can request hourly forecast for the next 1, 12, 24 hours (1 day), and 72 hours (3 days). In S1 you can also request hourly forecast for the next 120 (5 days) and 240 hours (10 days).",
         "operationId": "GetHourlyForecast",
         "x-ms-examples": {
-          "GetHourlyForecast": {
+          "Successfully retrieve detailed weather forecast by the hour": {
             "$ref": "./examples/GetHourlyForecast.json"
           }
         },
@@ -98,10 +98,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which hourly forecast information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -134,7 +143,7 @@
         "description": "**Get Minute Forecast**\n  \n  \n**Applies to**: S1 pricing tier.\n\n\nGet Minute Forecast service returns minute-by-minute forecasts for a given location for the next 120 minutes.  Users can request weather forecasts in the interval of 1, 5 and 15 minutes.  The response will include details such as the type of precipitation (including rain, snow, or a mixture of both), start time, and precipitation intensity value (dBZ).",
         "operationId": "GetMinuteForecast",
         "x-ms-examples": {
-          "GetMinuteForecast": {
+          "Successfully retrieve minute-by-minute forecasts for a given location": {
             "$ref": "./examples/GetMinuteForecast.json"
           }
         },
@@ -150,10 +159,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which minute forecast information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "interval",
@@ -183,7 +201,7 @@
         "description": "**Get Quarter-Day Forecast**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nService returns detailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for a given location. Response data is presented by quarters of the day - morning, afternoon, evening, and overnight. Details such as temperature, humidity, wind, precipitation, and UV index are returned.",
         "operationId": "GetQuarterDayForecast",
         "x-ms-examples": {
-          "GetQuarterDayForecast": {
+          "Successfully retrieve detailed weather forecast by a given location": {
             "$ref": "./examples/GetQuarterDayForecast.json"
           }
         },
@@ -199,10 +217,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which quarter-day forecast information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -235,7 +262,7 @@
         "description": "**Get Current Conditions**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Current Conditions service returns detailed current weather conditions such as precipitation, temperature and wind for a given coordinate location. Also, observations from the past 6 or 24 hours for a particular location can be retrieved. The basic information returned with the response include details such as observation date and time, brief description of the weather conditions, weather icon, precipitation indicator flags, and temperature. Additional details such as RealFeel™ Temperature and UV index are also returned.",
         "operationId": "GetCurrentConditions",
         "x-ms-examples": {
-          "GetCurrentConditions": {
+          "Successfully retrieve detailed current weather conditions for a given coordinate location": {
             "$ref": "./examples/GetCurrentConditions.json"
           }
         },
@@ -251,10 +278,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -293,7 +329,7 @@
         "description": "**Get Daily Forecast**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe service returns detailed weather forecast such as temperature and wind by day for the next 1, 5, 10, 15, 25, or 45 days for a given coordinate location.  The response include details such as temperature, wind, precipitation, air quality, and UV index.\n\nIn S0 you can request daily forecast for the next 1, 5, 10, and 15 days. In S1 you can also request daily forecast for the next 25 days, and 45 days.",
         "operationId": "GetDailyForecast",
         "x-ms-examples": {
-          "GetDailyForecast": {
+          "Successfully retrieve detailed daily weather forecast for a given coordinate location": {
             "$ref": "./examples/GetDailyForecast.json"
           }
         },
@@ -309,10 +345,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which current conditions information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -345,7 +390,7 @@
         "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
         "operationId": "GetWeatherAlongRoute",
         "x-ms-examples": {
-          "GetWeatherAlongRoute": {
+          "Successfully retrieve detailed weather casts along a route described as a sequence of waypoints": {
             "$ref": "./examples/GetWeatherAlongRoute.json"
           }
         },
@@ -388,7 +433,7 @@
         "description": "**Get Severe Weather Alerts**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSevere weather phenomenon can significantly impact our everyday life and business operations. For example, severe weather conditions such as tropical storms, high winds or flooding can close roads and force logistics companies to reroute their fleet causing delays in reaching destinations and breaking the cold chain of refrigerated food products.  Azure Maps Severe Weather Alerts API returns the severe weather alerts that are available worldwide from both official Government Meteorological Agencies and leading global to regional weather alert providers. The service can return details such as alert type, category, level and detailed description about the active severe alerts for the requested location, like hurricanes, thunderstorms, lightning, heat waves or forest fires.",
         "operationId": "GetSevereWeatherAlerts",
         "x-ms-examples": {
-          "GetSevereWeatherAlerts": {
+          "Successfully retrieve severe weather alerts": {
             "$ref": "./examples/GetSevereWeatherAlerts.json"
           }
         },
@@ -404,10 +449,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which severe weather alerts are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -437,7 +491,7 @@
         "description": "**Get Daily Indices**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThere may be times when you want to know if the weather conditions are optimal for a specific activity, for example, for outdoor construction, indoor activities, running or farming including soil moisture information.  Azure Maps Indices API returns index values that will guide end users to plan future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like for playing golf, and retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
         "operationId": "GetDailyIndices",
         "x-ms-examples": {
-          "GetDailyIndices": {
+          "Successfully retrieve daily indices values from current day": {
             "$ref": "./examples/GetDailyIndices.json"
           }
         },
@@ -453,10 +507,19 @@
           },
           {
             "name": "query",
-            "description": "Coordinates of the location for which daily indices are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "x-ms-client-name": "coordinates",
             "in": "query",
-            "type": "string",
-            "required": true
+            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -495,7 +558,424 @@
     }
   },
   "definitions": {
+    "IconCode": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        41
+      ],
+      "x-ms-enum": {
+        "name": "IconCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": 1,
+            "name": "Sunny",
+            "description": "Sunny"
+          },
+          {
+            "value": 2,
+            "name": "Mostly Sunny",
+            "description": "Mostly Sunny"
+          },
+          {
+            "value": 3,
+            "name": "Partly Sunny",
+            "description": "Partly Sunny"
+          },
+          {
+            "value": 4,
+            "name": "Intermittent Clouds",
+            "description": "Intermittent Clouds"
+          },
+          {
+            "value": 5,
+            "name": "Hazy Sunshine",
+            "description": "Hazy Sunshine"
+          },
+          {
+            "value": 6,
+            "name": "Mostly Cloudy",
+            "description": "Mostly Cloudy"
+          },
+          {
+            "value": 7,
+            "name": "Cloudy",
+            "description": "Cloudy"
+          },
+          {
+            "value": 8,
+            "name": "Dreary",
+            "description": "Dreary (Overcast)"
+          },
+          {
+            "value": 11,
+            "name": "Fog",
+            "description": "Fog"
+          },
+          {
+            "value": 12,
+            "name": "Showers",
+            "description": "Showers"
+          },
+          {
+            "value": 13,
+            "name": "Mostly Cloudy with Showers",
+            "description": "Mostly Cloudy with Showers"
+          },
+          {
+            "value": 14,
+            "name": "Partly Sunny with Showers",
+            "description": "Partly Sunny with Showers"
+          },
+          {
+            "value": 15,
+            "name": "Thunderstorms",
+            "description": "Thunderstorms"
+          },
+          {
+            "value": 16,
+            "name": "Mostly Cloudy with Thunderstorms",
+            "description": "Mostly Cloudy with Thunderstorms"
+          },
+          {
+            "value": 17,
+            "name": "Partly Sunny with Thunderstorms",
+            "description": "Partly Sunny with Thunderstorms"
+          },
+          {
+            "value": 18,
+            "name": "Rain",
+            "description": "Rain"
+          },
+          {
+            "value": 19,
+            "name": "Flurries",
+            "description": "Flurries"
+          },
+          {
+            "value": 20,
+            "name": "Mostly Cloudy with Flurries",
+            "description": "Mostly Cloudy with Flurries"
+          },
+          {
+            "value": 21,
+            "name": "Partly Sunny with Flurries",
+            "description": "Partly Sunny with Flurries"
+          },
+          {
+            "value": 22,
+            "name": "Snow",
+            "description": "Snow"
+          },
+          {
+            "value": 23,
+            "name": "Mostly Cloudy with Snow",
+            "description": "Mostly Cloudy with Snow"
+          },
+          {
+            "value": 24,
+            "name": "Ice",
+            "description": "Ice"
+          },
+          {
+            "value": 25,
+            "name": "Sleet",
+            "description": "Sleet"
+          },
+          {
+            "value": 26,
+            "name": "Freezing Rain",
+            "description": "Freezing Rain"
+          },
+          {
+            "value": 29,
+            "name": "Rain and Snow",
+            "description": "Rain and Snow"
+          },
+          {
+            "value": 30,
+            "name": "Hot",
+            "description": "Hot"
+          },
+          {
+            "value": 31,
+            "name": "Cold",
+            "description": "Cold"
+          },
+          {
+            "value": 32,
+            "name": "Windy",
+            "description": "Windy"
+          },
+          {
+            "value": 33,
+            "name": "Clear",
+            "description": "Clear"
+          },
+          {
+            "value": 34,
+            "name": "Mostly Clear",
+            "description": "Mostly Clear"
+          },
+          {
+            "value": 35,
+            "name": "Partly Cloudy",
+            "description": "Partly Cloudy"
+          },
+          {
+            "value": 36,
+            "name": "Intermittent Clouds",
+            "description": "Intermittent Clouds"
+          },
+          {
+            "value": 37,
+            "name": "Hazy Moonlight",
+            "description": "Hazy Moonlight"
+          },
+          {
+            "value": 39,
+            "name": "Partly Cloudy with Showers",
+            "description": "Partly Cloudy with Showers"
+          },
+          {
+            "value": 41,
+            "name": "Partly Cloudy with Thunderstorms",
+            "description": "Partly Cloudy with Thunderstorms"
+          }
+        ]
+      }
+    },
+    "UnitType": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        31
+      ],
+      "x-ms-enum": {
+        "name": "UnitType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": 0,
+            "name": "Feet",
+            "description": "feet"
+          },
+          {
+            "value": 1,
+            "name": "Inches",
+            "description": "inches"
+          },
+          {
+            "value": 2,
+            "name": "Miles",
+            "description": "miles"
+          },
+          {
+            "value": 3,
+            "name": "Millimeter",
+            "description": "millimeter"
+          },
+          {
+            "value": 4,
+            "name": "Centimeter",
+            "description": "centimeter"
+          },
+          {
+            "value": 5,
+            "name": "Meter",
+            "description": "meter"
+          },
+          {
+            "value": 6,
+            "name": "Kilometer",
+            "description": "kilometer"
+          },
+          {
+            "value": 7,
+            "name": "KilometersPerHour",
+            "description": "kilometersPerHour"
+          },
+          {
+            "value": 8,
+            "name": "Knots",
+            "description": "knots"
+          },
+          {
+            "value": 9,
+            "name": "MilesPerHour",
+            "description": "milesPerHour"
+          },
+          {
+            "value": 10,
+            "name": "MetersPerSecond",
+            "description": "metersPerSecond"
+          },
+          {
+            "value": 11,
+            "name": "HectoPascals",
+            "description": "hectoPascals"
+          },
+          {
+            "value": 12,
+            "name": "InchesOfMercury",
+            "description": "inchesOfMercury"
+          },
+          {
+            "value": 13,
+            "name": "KiloPascals",
+            "description": "kiloPascals"
+          },
+          {
+            "value": 14,
+            "name": "Millibars",
+            "description": "millibars"
+          },
+          {
+            "value": 15,
+            "name": "MillimetersOfMercury",
+            "description": "millimetersOfMercury"
+          },
+          {
+            "value": 16,
+            "name": "PoundsPerSquareInch",
+            "description": "poundsPerSquareInch"
+          },
+          {
+            "value": 17,
+            "name": "Celsius",
+            "description": "celsius"
+          },
+          {
+            "value": 18,
+            "name": "Fahrenheit",
+            "description": "fahrenheit"
+          },
+          {
+            "value": 19,
+            "name": "Kelvin",
+            "description": "kelvin"
+          },
+          {
+            "value": 20,
+            "name": "Percent",
+            "description": "percent"
+          },
+          {
+            "value": 21,
+            "name": "Float",
+            "description": "float"
+          },
+          {
+            "value": 22,
+            "name": "Integer",
+            "description": "integer"
+          },
+          {
+            "value": 31,
+            "name": "MicrogramsPerCubicMeterOfAir",
+            "description": "MicrogramsPerCubicMeterOfAir"
+          }
+        ]
+      }
+    },
+    "PrecipitationType": {
+      "type": "string",
+      "description": "Specifies the type of precipitation (\"Rain\" \"Snow\" \"Ice\" or \"Mix\"). If dbz is zero, precipitationType is not present in the response.",
+      "enum": [
+        "Rain",
+        "Snow",
+        "Ice",
+        "Mix"
+      ],
+      "x-ms-enum": {
+        "name": "PrecipitationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Rain",
+            "description": "Rain"
+          },
+          {
+            "value": "Snow",
+            "description": "Snow"
+          },
+          {
+            "value": "Ice",
+            "description": "Ice"
+          },
+          {
+            "value": "Mix",
+            "description": "Mix"
+          }
+        ]
+      }
+    },
     "WeatherUnit": {
+      "x-ms-client-name": "WeatherValue",
       "description": "Specific value of a given unit related to weather.",
       "type": "object",
       "properties": {
@@ -505,13 +985,12 @@
           "description": "Rounded value."
         },
         "unit": {
+          "x-ms-client-name": "unitLabel",
           "type": "string",
           "description": "Type of unit for the returned value."
         },
         "unitType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/UnitType"
         }
       }
     },
@@ -538,6 +1017,7 @@
           "description": "Wind direction in Azimuth degrees,  starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359."
         },
         "localizedDescription": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Direction abbreviation in the specified language."
         }
@@ -558,13 +1038,12 @@
           "description": "Type of unit for the speed value."
         },
         "unitType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/UnitType"
         }
       }
     },
     "WeatherUnitRange": {
+      "x-ms-client-name": "WeatherValueRange",
       "type": "object",
       "description": "Returned temperature values.",
       "properties": {
@@ -586,20 +1065,57 @@
     "HazardIndex": {
       "type": "integer",
       "format": "int32",
-      "description": "A severity/hazard index.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency."
+      "description": "A severity/hazard index.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "x-ms-enum": {
+        "name": "HazardIndex",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": 0,
+            "name": "NoHazard",
+            "description": "No hazard"
+          },
+          {
+            "value": 1,
+            "name": "Informed",
+            "description": "Be informed"
+          },
+          {
+            "value": 2,
+            "name": "PayAttention",
+            "description": "Pay attention"
+          },
+          {
+            "value": 3,
+            "name": "TakeAction",
+            "description": "Take action"
+          },
+          {
+            "value": 4,
+            "name": "Emergency",
+            "description": "Emergency"
+          }
+        ]
+      }
     },
     "HourlyForecast": {
       "type": "object",
       "properties": {
         "date": {
+          "x-ms-client-name": "dateTime",
           "type": "string",
           "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00.",
           "format": "date-time"
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "iconPhrase": {
           "type": "string",
@@ -647,6 +1163,7 @@
           "description": "Visibility in specified unit. A measure of the distance at which an object or light can be clearly discerned."
         },
         "ceiling": {
+          "x-ms-client-name": "cloudCeiling",
           "$ref": "#/definitions/WeatherUnit",
           "description": "Cloud ceiling in specified unit. The ceiling is a measurement of the height of the base of the lowest clouds."
         },
@@ -654,6 +1171,7 @@
           "$ref": "#/definitions/UVIndex"
         },
         "uvIndexPhrase": {
+          "x-ms-client-name": "uvIndexDescription",
           "type": "string",
           "description": "Phrase associated with the `uvIndex`."
         },
@@ -706,6 +1224,7 @@
         "forecasts": {
           "type": "array",
           "description": "Forecast data for each returned hour.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/HourlyForecast"
           }
@@ -720,10 +1239,12 @@
           "description": "Summary phrase for the next 60 minutes. Phrase length is approximately 60 characters."
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "Short summary phrase for the next 120 minutes. Phrase length is approximately 25 characters."
         },
         "briefPhrase": {
+          "x-ms-client-name": "briefDescription",
           "type": "string",
           "description": "Summary phrase for the next 120 minutes. Phrase length is approximately 60 characters."
         },
@@ -732,9 +1253,7 @@
           "description": "Long summary phrase for the next 120 minutes. Phrase length is 60+ characters."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         }
       },
       "description": "Phrase summaries for the entire forecast period."
@@ -758,10 +1277,12 @@
           "description": "The number of minutes for which the summary applies."
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "Short summary phrase. Phrase length is approximately 25 characters."
         },
         "briefPhrase": {
+          "x-ms-client-name": "briefDescription",
           "type": "string",
           "description": "Brief summary phrase. Phrase length is approximately 60 characters."
         },
@@ -770,9 +1291,7 @@
           "description": "Long summary phrase. Phrase length is 60+ characters."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         }
       }
     },
@@ -790,11 +1309,13 @@
           "description": "The first minute for the interval."
         },
         "dbz": {
+          "x-ms-client-name": "decibelRelativeToZ",
           "type": "number",
           "format": "double",
           "description": "A unit that represents forecasted precipitation intensity."
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A short phrase describing precipitation condition for the interval."
         },
@@ -811,13 +1332,10 @@
           "description": "The band color that maps to the precipitation type and threshold. If dbz is zero, not present in the response."
         },
         "precipitationType": {
-          "type": "string",
-          "description": "Specifies the type of precipitation (\"rain\" \"snow\" \"ice\" or \"mix\"). If dbz is zero, precipitationType is not present in the response."
+          "$ref": "#/definitions/PrecipitationType"
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "cloudCover": {
           "type": "integer",
@@ -830,9 +1348,11 @@
       "type": "object",
       "properties": {
         "summary": {
+          "readOnly": true,
           "$ref": "#/definitions/MinuteForecastSummary"
         },
         "intervalSummaries": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntervalSummary"
@@ -842,6 +1362,7 @@
         "intervals": {
           "type": "array",
           "description": "Forecast data for each interval in the forecast.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ForecastInterval"
           }
@@ -876,7 +1397,9 @@
       "type": "object",
       "properties": {
         "date": {
+          "x-ms-client-name": "dateTime",
           "type": "string",
+          "format": "date-time",
           "description": "Date of the forecast as example, 2019-10-27T00:00:00"
         },
         "effectiveDate": {
@@ -900,27 +1423,29 @@
             "values": [
               {
                 "value": 0,
+                "name": "FirstQuarter",
                 "description": "7:00 am - 1:00 pm / 7:00- 13:00"
               },
               {
                 "value": 1,
+                "name": "SecondQuarter",
                 "description": "1:00 pm - 7:00 pm/ 13:00- 19:00"
               },
               {
                 "value": 2,
+                "name": "ThirdQuarter",
                 "description": "7:00 pm - 1:00 am/ 19:00 - 01:00"
               },
               {
                 "value": 3,
+                "name": "ForthQuarter",
                 "description": "1:00 am - 7:00 am/ 01:00 - 07:00"
               }
             ]
           }
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "iconPhrase": {
           "type": "string",
@@ -969,8 +1494,7 @@
           "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
         },
         "precipitationType": {
-          "type": "string",
-          "description": "Specifies the type of precipitation (\"rain\" \"snow\" \"ice\" or \"mix\"). If dbz = zero, precipitationType is not present in the response."
+          "$ref": "#/definitions/PrecipitationType"
         },
         "precipitationIntensity": {
           "type": "string",
@@ -1008,6 +1532,7 @@
       "type": "object",
       "properties": {
         "forecasts": {
+          "readOnly": true,
           "type": "array",
           "description": "Forecast data for each quarter in the response.",
           "items": {
@@ -1020,6 +1545,7 @@
       "type": "object",
       "properties": {
         "results": {
+          "readOnly": true,
           "description": "Detailed current weather conditions.",
           "type": "array",
           "items": {
@@ -1032,6 +1558,7 @@
       "type": "object",
       "properties": {
         "localizedDescription": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Description of the pressure tendency in specified language"
         },
@@ -1048,75 +1575,59 @@
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past hour."
         },
-        "past3Hours": {
+        "pastThreeHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past three hours."
         },
-        "past6Hours": {
+        "pastSixHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past six hours. Contains Metric and Imperial Values."
         },
-        "past9Hours": {
+        "pastNineHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past nine hours."
         },
-        "past12Hours": {
+        "pastTwelveHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 12 hours."
         },
-        "past18Hours": {
+        "pastEighteenHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 18 hours."
         },
-        "past24Hours": {
+        "pastTwentyFourHours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 24 hours."
         }
       }
     },
+    "PastHoursTemperature": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "minimum"
+        },
+        "maximum": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "maximum"
+        }
+      },
+      "description": "Summary of temperature fluctuations over the number of past hours."
+    },
     "TemperatureSummary": {
       "type": "object",
       "properties": {
-        "past6Hours": {
-          "type": "object",
-          "properties": {
-            "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "minimum"
-            },
-            "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "maximum"
-            }
-          },
+        "pastSixHours": {
+          "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 6 hours."
         },
-        "past12Hours": {
-          "type": "object",
-          "properties": {
-            "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "minimum"
-            },
-            "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "maximum"
-            }
-          },
+        "pastTwelveHours": {
+          "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 12 hours."
         },
-        "past24Hours": {
-          "type": "object",
-          "properties": {
-            "minimum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "minimum"
-            },
-            "maximum": {
-              "$ref": "#/definitions/WeatherUnit",
-              "description": "maximum"
-            }
-          },
+        "pastTwentyFourHours": {
+          "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 24 hours."
         }
       }
@@ -1130,19 +1641,19 @@
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
         },
         "phrase": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Phrase description of the current weather condition.  Displayed in specified language."
         },
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "hasPrecipitation": {
           "type": "boolean",
           "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
         },
         "isDayTime": {
+          "x-ms-client-name": "isDaytime",
           "type": "boolean",
           "description": "Indicates the time of the day. True indicates 'day',', false indicates 'night."
         },
@@ -1179,6 +1690,7 @@
           "$ref": "#/definitions/UVIndex"
         },
         "uvIndexPhrase": {
+          "x-ms-client-name": "uvIndexDescription",
           "type": "string",
           "description": "Phrase associated with the `uvIndex`."
         },
@@ -1196,6 +1708,7 @@
           "description": "Percent representing cloud cover."
         },
         "ceiling": {
+          "x-ms-client-name": "cloudCeiling",
           "$ref": "#/definitions/WeatherUnit",
           "description": "Cloud ceiling in specified unit. The ceiling is a measurement of the height of the base of the lowest clouds."
         },
@@ -1207,7 +1720,7 @@
           "$ref": "#/definitions/PressureTendency",
           "description": "Atmospheric pressure change."
         },
-        "past24HourTemperatureDeparture": {
+        "pastTwentyFourHourTemperatureDeparture": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "Departure from the temperature observed 24 hours ago in specified unit."
         },
@@ -1279,6 +1792,7 @@
       "type": "object",
       "properties": {
         "name": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Name of the pollen or pollutant. For example, grass, mold, weed, air quality, tree and UV index."
         },
@@ -1297,6 +1811,7 @@
           "description": "Value associated with the air quality or pollution category. These values range from 1 to 6. 1 implying good conditions, 6 implying hazardous conditions."
         },
         "type": {
+          "x-ms-client-name": "airQualityType",
           "type": "string",
           "description": "Only exists for air quality. Examples include ozone and particle pollution."
         }
@@ -1306,6 +1821,7 @@
       "type": "object",
       "properties": {
         "date": {
+          "x-ms-client-name": "dateTime",
           "type": "string",
           "format": "date-time",
           "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
@@ -1328,23 +1844,27 @@
           "description": "Hours of sun."
         },
         "degreeDaySummary": {
+          "x-ms-client-name": "meanTemperatureDeviation",
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary of Heating Degree Day or Cooling Degree Day information"
+          "description": "Summary for mean temperature of Heating Degree Day or Cooling Degree Day information"
         },
         "airAndPollen": {
+          "x-ms-client-name": "airQuality",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AirAndPollen"
           },
-          "description": "airAndPollen"
+          "description": "Air quality"
         },
         "day": {
+          "x-ms-client-name": "daytimeForecast",
           "$ref": "#/definitions/DayOrNight",
-          "description": "Day"
+          "description": "Day forecast detail"
         },
         "night": {
+          "x-ms-client-name": "nighttimeForecast",
           "$ref": "#/definitions/DayOrNight",
-          "description": "Night"
+          "description": "Night forecast detail"
         },
         "sources": {
           "description": "Source(s) of the forecast data.",
@@ -1359,10 +1879,12 @@
       "type": "object",
       "properties": {
         "summary": {
+          "readOnly": true,
           "$ref": "#/definitions/DailyForecastSummary"
         },
         "forecasts": {
           "type": "array",
+          "readOnly": true,
           "description": "Forecast data for each requested day.",
           "items": {
             "$ref": "#/definitions/DailyForecast"
@@ -1390,12 +1912,11 @@
       }
     },
     "DayOrNight": {
+      "x-ms-client-name": "DailyForecastDetail",
       "type": "object",
       "properties": {
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "iconPhrase": {
           "type": "string",
@@ -1409,14 +1930,14 @@
           "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
         },
         "precipitationType": {
-          "type": "string",
-          "description": "Specifies the type of precipitation (\"rain\" \"snow\" \"ice\" or \"mix\"). If dbz = zero, precipitationType is not present in the response."
+          "$ref": "#/definitions/PrecipitationType"
         },
         "precipitationIntensity": {
           "type": "string",
           "description": "Description of the intensity."
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "Phrase description of the forecast in specified language. Azure Maps attempts to keep this phrase under 30 characters in length, but some languages/weather events may result in a longer phrase length, exceeding 30 characters."
         },
@@ -1505,9 +2026,7 @@
       "type": "object",
       "properties": {
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "hazards": {
           "$ref": "#/definitions/WeatherHazards"
@@ -1519,9 +2038,11 @@
       "description": "This object is returned from a successful Weather Along Route.",
       "properties": {
         "summary": {
+          "readOnly": true,
           "$ref": "#/definitions/WeatherAlongRouteSummary"
         },
         "waypoints": {
+          "readOnly": true,
           "type": "array",
           "description": "Data for each waypoint returned in the same order as specified in the request.",
           "items": {
@@ -1562,18 +2083,19 @@
       }
     },
     "WeatherWaypoint": {
+      "x-ms-client-name": "WaypointForecast",
       "type": "object",
       "properties": {
         "iconCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "$ref": "#/definitions/IconCode"
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         },
         "isDayTime": {
+          "x-ms-client-name": "isDaytime",
           "type": "boolean",
           "description": "Indicates the time of the day. True indicates 'day',', false indicates 'night."
         },
@@ -1623,6 +2145,7 @@
           "$ref": "#/definitions/HazardIndex"
         },
         "hazardDetails": {
+          "x-ms-client-name": "details",
           "type": "array",
           "description": "Details of the weather hazards affecting the trip.",
           "items": {
@@ -1642,6 +2165,7 @@
           "description": "A unique identifier (non-displayable) for each type of hazard: LightRain, ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow, ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail, SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh, WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning, SevereThunderstormWarning."
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
@@ -1662,6 +2186,7 @@
           "description": "A unique identifier (non-displayable) for each type of hazard: LightRain, ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow, ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail, SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh, WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning, SevereThunderstormWarning."
         },
         "shortPhrase": {
+          "x-ms-client-name": "shortDescription",
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
@@ -1672,6 +2197,7 @@
       "description": "This object is returned from a successful Get Severe Weather Alerts call.",
       "properties": {
         "results": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SevereWeatherAlert"
@@ -1707,6 +2233,7 @@
           "description": "Number signifying the importance or ranking order of the given alert within the country/region it has originated. A lower number signifies a higher priority. For example, 1 is the highest priority. The number varies by country/region and can change over time as each country/region evolves their alert systems."
         },
         "class": {
+          "x-ms-client-name": "classification",
           "type": "string",
           "description": "Classification of the alert. This field is not available for all countries and therefore not always returned."
         },
@@ -1728,6 +2255,7 @@
           "description": "A disclaimer regarding the source of the alert information. This field is not always available. For example, disclaimer may include details about the delays or potential issues related to the alarm."
         },
         "alertAreas": {
+          "x-ms-client-name": "alertDetails",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlertArea"
@@ -1741,16 +2269,19 @@
       "description": "Description of a severe weather alert.",
       "properties": {
         "localized": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Description of the alert in the specified language. By default English (en-US) is returned if the language parameter is not specified in the request."
         },
         "english": {
+          "x-ms-client-name": "status",
           "type": "string",
           "description": "Description of the alert in English (en-US)."
         }
       }
     },
     "AlertArea": {
+      "x-ms-client-name": "AlertDetails",
       "type": "object",
       "description": "Information about a severe weather alert issued within an affected area(s). If multiple alerts are active for the same location, the alerts will be returned in order of `priority` within the API response, with the highest priority alert being returned at the top of the response.",
       "properties": {
@@ -1759,6 +2290,7 @@
           "description": "The name of an area which is affected by the alert. The location that was requested falls under the alert area."
         },
         "summary": {
+          "x-ms-client-name": "description",
           "type": "string",
           "description": "Text summarizing the alert in the returned area."
         },
@@ -1777,10 +2309,12 @@
           "description": "The latest status of the alert in the current area."
         },
         "alertDetails": {
+          "x-ms-client-name": "details",
           "type": "string",
           "description": "Full details associated with the alert. Returned if `details`=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
         },
         "alertDetailsLanguageCode": {
+          "x-ms-client-name": "language",
           "type": "string",
           "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language parameter. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
         }
@@ -1843,7 +2377,7 @@
           },
           {
             "value": "Continue",
-            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
+            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
           },
           {
             "value": "Update",
@@ -1857,6 +2391,7 @@
       "description": "This object is returned from a successful Get Daily Indices call.",
       "properties": {
         "results": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/DailyIndex"
@@ -1889,6 +2424,7 @@
           "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
         },
         "category": {
+          "x-ms-client-name": "categoryDescription",
           "type": "string",
           "description": "Textual description for `categoryValue` corresponding to the level that the index value falls under, for example \"Very Good\"."
         },
@@ -1898,8 +2434,9 @@
           "description": "Level that the index value falls under, represented by an integer. This value can be 1 through 5 and should be used in combination with the `ascending` flag because it can differ among indices. For example, the following values apply for Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, and Extreme=5."
         },
         "ascending": {
+          "x-ms-client-name": "isAscending",
           "type": "boolean",
-          "description": "Describes the direction of the `value` and `categoryValue`. For example, when `ascending`=True, the poorest index value is 0 and the best index value is 10. When `ascending`=True, the poorest index value is 10 and the best index value is 0."
+          "description": "Describes the direction of the `value` and `categoryValue`. For example, when set to `true`, the poorest index value is 0 and the best index value is 10. When set to `true`, the poorest index value is 10 and the best index value is 0."
         },
         "description": {
           "type": "string",
