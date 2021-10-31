@@ -230,6 +230,13 @@
               "$ref": "#/definitions/DataConnector"
             }
           },
+          "400": {
+            "description": "Bad request - schema validation error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectorSchemaValidationError"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1263,6 +1270,23 @@
       "required": [
         "tenantId"
       ]
+    },
+    "DataConnectorSchemaValidationError": {
+      "description": "Error on validating the connector schema.",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "type": "object"
     },
     "MCASDataConnector": {
       "allOf": [
