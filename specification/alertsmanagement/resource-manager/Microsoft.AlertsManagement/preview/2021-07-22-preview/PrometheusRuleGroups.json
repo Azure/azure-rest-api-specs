@@ -1,0 +1,598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-07-22-preview",
+    "title": "Azure Alerts Management Service Resource Provider",
+    "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.AlertsManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List all operations available through Azure Alerts Management Resource Provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved operations list.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/prometheusRuleGroups": {
+      "get": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Retrieve Prometheus rule group definitions in a subscription.",
+        "operationId": "PrometheusRuleGroups_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of Prometheus rule groups",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupsErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ListResourcePrometheusRuleGroups": {
+            "$ref": "./examples/listPrometheusRuleGroups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups":
+    {
+      "get": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Retrieve Prometheus rule group definitions in a resource group.",
+        "operationId": "PrometheusRuleGroups_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of Prometheus rule groups",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupsErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ListResourcePrometheusRuleGroups": {
+            "$ref": "./examples/listPrometheusRuleGroups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}":
+    {
+      "get": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Retrieve a Prometheus rule group definition.",
+        "operationId": "PrometheusRuleGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of Prometheus rule groups",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupsErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrometheusRuleGroup": {
+            "$ref": "./examples/getPrometheusRuleGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Create or update a Prometheus rule group definition.",
+        "operationId": "PrometheusRuleGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResource"
+            },
+            "description": "The parameters of the rule group to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupsErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreatePrometheusRuleGroup": {
+            "$ref": "./examples/createOrUpdatePrometheusRuleGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Update an Prometheus rule group definition.",
+        "operationId": "PrometheusRuleGroups_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResourcePatch"
+            },
+            "description": "The parameters of the rule group to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupsErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchPrometheusRuleGroup": {
+            "$ref": "./examples/patchPrometheusRuleGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Delete a Prometheus rule group definition.",
+        "operationId": "PrometheusRuleGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to delete a Prometheus rule group"
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupsErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletePrometheusRuleGroup": {
+            "$ref": "./examples/deletePrometheusRuleGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "PrometheusRuleGroupAction": {
+      "description": "An alert action.",
+      "properties": {
+        "actionGroupId": {
+          "type": "string",
+          "description": "the id of the action group to use."
+        },
+        "actionProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The dictionary of custom properties for the action."
+          },
+          "description": "The properties of an action group object."
+        }
+      }
+    },
+    "PrometheusRuleGroupProperties": {
+      "required": [
+        "description",
+        "scopes",
+        "rules"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "the description of the Prometheus rule group that will be included in the alert email."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of resource id's that this rule group is scoped to."
+        },
+        "interval": {
+          "type": "string",
+          "description": "the interval in which to run the Prometheus rule group."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrometheusRule"
+          },
+          "description": "defines the rules in the Prometheus rule group."
+        },
+        "lastUpdatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the rule was updated in ISO8601 format."
+        }
+      },
+      "description": "An alert rule."
+    },
+    "PrometheusRuleGroupResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrometheusRuleGroupProperties",
+          "description": "The Prometheus rule group properties of the resource."
+        }
+      },
+      "description": "The Prometheus rule group resource."
+    },
+    "PrometheusRule": {
+      "type": "object",
+      "properties": {
+        "record": {
+          "type": "string",
+          "description": "the name of the recording rule."
+        },
+        "alert": {
+          "type": "string",
+          "description": "the name of the alert rule."
+        },
+        "expression": {
+          "type": "string",
+          "description": "the expression to run for the rule."
+        },
+        "severity": {
+          "type": "string",
+          "description": "the expression to run for the rule."
+        },
+        "for": {
+          "type": "string",
+          "description": "the amount of time alert must be active before firing."
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "labels for rule group"
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "annotations for rule group"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrometheusRuleGroupAction"
+          },
+          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+        },
+        "resolveConfiguration": {
+          "$ref": "#/definitions/PrometheusRuleResolveConfiguration",
+          "description": "defines the configuration for resolving fired alerts."
+        }
+      },
+      "PrometheusRuleResolveConfiguration": {
+        "type": "object",
+        "properties": {
+          "autoResolved": {
+            "type": "boolean",
+            "description": "the flag that indicates whether or not to auto resolve a fired alert."
+          },
+          "timeToResolve": {
+            "type": "string",
+            "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved."
+          }
+        },
+        "description": "Specifies the Prometheus alert rule configuration."
+      },
+      "PrometheusRuleGroupsErrorResponse": {
+        "description": "Describes the format of Error response.",
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/PrometheusRuleGroupsErrorResponseBody"
+          }
+        }
+      },
+      "PrometheusRuleGroupsErrorResponseBody": {
+        "description": "Describes the format of Error response.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "string"
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string"
+          }
+        }
+      },
+      "operation": {
+        "description": "Operation provided by provider",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the operation"
+          },
+          "display": {
+            "type": "object",
+            "description": "Properties of the operation",
+            "properties": {
+              "provider": {
+                "type": "string",
+                "description": "Provider name"
+              },
+              "resource": {
+                "type": "string",
+                "description": "Resource name"
+              },
+              "operation": {
+                "type": "string",
+                "description": "Operation name"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the operation"
+              }
+            }
+          }
+        }
+      },
+      "operationsList": {
+        "description": "Lists the operations available in the AlertsManagement RP.",
+        "properties": {
+          "nextLink": {
+            "description": "URL to fetch the next set of operations.",
+            "type": "string"
+          },
+          "value": {
+            "description": "Array of operations",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/operation"
+            }
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "parameters": {
+        "SubscriptionIdParameter": {
+          "name": "subscriptionId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The Azure subscription Id."
+        },
+        "ApiVersionParameter": {
+          "name": "api-version",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "description": "Client Api Version."
+        },
+        "ResourceGroupNameParameter": {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group.",
+          "x-ms-parameter-location": "method"
+        },
+        "RuleGroupNameParameter": {
+          "name": "ruleName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the rule group.",
+          "x-ms-parameter-location": "method"
+        }
+      }
+    }
