@@ -234,7 +234,7 @@
             "description": "Bad request - schema validation error",
             "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/DataConnectorSchemaValidationError"
+              "$ref": "#/definitions/DataConnectorBadRequestError"
             }
           },
           "default": {
@@ -1271,8 +1271,8 @@
         "tenantId"
       ]
     },
-    "DataConnectorSchemaValidationError": {
-      "description": "Error on validating the connector schema.",
+    "DataConnectorBadRequestError": {
+      "description": "Bad request error.",
       "properties": {
         "error": {
           "type": "object",
