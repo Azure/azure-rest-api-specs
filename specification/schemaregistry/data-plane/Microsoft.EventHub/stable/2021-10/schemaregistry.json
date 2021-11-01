@@ -14,7 +14,9 @@
       }
     ]
   },
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -37,7 +39,9 @@
           }
         },
         "operationId": "SchemaGroups_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -155,7 +159,9 @@
           }
         },
         "operationId": "Schema_GetVersions",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "groupName",
@@ -212,7 +218,9 @@
         "consumes": [
           "application/json; serialization=avro"
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "groupName",
@@ -306,7 +314,9 @@
           "application/json",
           "application/json; serialization=avro"
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "groupName",
@@ -439,7 +449,9 @@
           "$ref": "#/definitions/ErrorDetail"
         }
       },
-      "required": ["error"]
+      "required": [
+        "error"
+      ]
     },
     "ErrorDetail": {
       "description": "Error response returned from Azure Schema Registry service.",
@@ -460,7 +472,10 @@
           "description": "Error message details to help user understand/debug failure."
         }
       },
-      "required": ["code", "message"]
+      "required": [
+        "code",
+        "message"
+      ]
     }
   },
   "parameters": {
