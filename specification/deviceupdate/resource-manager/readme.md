@@ -49,12 +49,8 @@ directive:
     reason: Managed Identity type can be case in-sensitive
   - suppress: BodyTopLevelProperties
     from: deviceupdate.json
-    where: $.definitions.PrivateEndpointConnectionProxy.properties.remotePrivateEndpoint
-    reason: remotePrivateEndpoint is a top level property
-  - suppress: BodyTopLevelProperties
-    from: deviceupdate.json
-    where: $.definitions.PrivateEndpointConnectionProxy.properties.provisioningState
-    reason: provisioningState is a top level property
+    where: $.definitions.PrivateEndpointConnectionProxy
+    reason: Internal NRP resource, all properties are top level properties
 ```
 
 ---
