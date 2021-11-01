@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-10'
 input-file:
-  - Microsoft.EventHub/preview/2021-10/schemaregistry.json
+  - Microsoft.EventHub/stable/2021-10/schemaregistry.json
 ```
