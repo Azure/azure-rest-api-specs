@@ -479,127 +479,128 @@
           "$ref": "#/definitions/PrometheusRuleResolveConfiguration",
           "description": "defines the configuration for resolving fired alerts."
         }
-      },
-      "PrometheusRuleResolveConfiguration": {
-        "type": "object",
-        "properties": {
-          "autoResolved": {
-            "type": "boolean",
-            "description": "the flag that indicates whether or not to auto resolve a fired alert."
-          },
-          "timeToResolve": {
-            "type": "string",
-            "description":
-              "the duration a rule must evaluate as healthy before the fired alert is automatically resolved."
-          }
+      }
+    },
+    "PrometheusRuleResolveConfiguration": {
+      "type": "object",
+      "properties": {
+        "autoResolved": {
+          "type": "boolean",
+          "description": "the flag that indicates whether or not to auto resolve a fired alert."
         },
-        "description": "Specifies the Prometheus alert rule configuration."
-      },
-      "PrometheusRuleGroupsErrorResponse": {
-        "description": "Describes the format of Error response.",
-        "type": "object",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/PrometheusRuleGroupsErrorResponseBody"
-          }
+        "timeToResolve": {
+          "type": "string",
+          "description":
+            "the duration a rule must evaluate as healthy before the fired alert is automatically resolved."
         }
       },
-      "PrometheusRuleGroupsErrorResponseBody": {
-        "description": "Describes the format of Error response.",
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Error code",
-            "type": "string"
-          },
-          "message": {
-            "description": "Error message indicating why the operation failed.",
-            "type": "string"
-          }
+      "description": "Specifies the Prometheus alert rule configuration."
+    },
+    "PrometheusRuleGroupsErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/PrometheusRuleGroupsErrorResponseBody"
         }
-      },
-      "operation": {
-        "description": "Operation provided by provider",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the operation"
-          },
-          "display": {
-            "type": "object",
-            "description": "Properties of the operation",
-            "properties": {
-              "provider": {
-                "type": "string",
-                "description": "Provider name"
-              },
-              "resource": {
-                "type": "string",
-                "description": "Resource name"
-              },
-              "operation": {
-                "type": "string",
-                "description": "Operation name"
-              },
-              "description": {
-                "type": "string",
-                "description": "Description of the operation"
-              }
+      }
+    },
+    "PrometheusRuleGroupsErrorResponseBody": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "operation": {
+      "description": "Operation provided by provider",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
             }
           }
         }
-      },
-      "operationsList": {
-        "description": "Lists the operations available in the AlertsManagement RP.",
-        "properties": {
-          "nextLink": {
-            "description": "URL to fetch the next set of operations.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Array of operations",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/operation"
-            }
+      }
+    },
+    "operationsList": {
+      "description": "Lists the operations available in the AlertsManagement RP.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
           }
-        },
-        "required": [
-          "value"
-        ]
-      },
-      "parameters": {
-        "SubscriptionIdParameter": {
-          "name": "subscriptionId",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The Azure subscription Id."
-        },
-        "ApiVersionParameter": {
-          "name": "api-version",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "description": "Client Api Version."
-        },
-        "ResourceGroupNameParameter": {
-          "name": "resourceGroupName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the resource group.",
-          "x-ms-parameter-location": "method"
-        },
-        "RuleGroupNameParameter": {
-          "name": "ruleName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the rule group.",
-          "x-ms-parameter-location": "method"
         }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The Azure subscription Id."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      },
+      "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the resource group.",
+        "x-ms-parameter-location": "method"
+      },
+      "RuleGroupNameParameter": {
+        "name": "ruleName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the rule group.",
+        "x-ms-parameter-location": "method"
       }
     }
   }
 }
+
