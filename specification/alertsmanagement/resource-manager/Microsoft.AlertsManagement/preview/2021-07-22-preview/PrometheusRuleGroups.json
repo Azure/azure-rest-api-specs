@@ -27,31 +27,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AlertsManagement/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "description": "List all operations available through Azure Alerts Management Resource Provider.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved operations list.",
-            "schema": {
-              "$ref": "#/definitions/operationsList"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/prometheusRuleGroups": {
       "get": {
         "tags": [
@@ -91,8 +66,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups":
-    {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups": {
       "get": {
         "tags": [
           "PrometheusRuleGroups"
@@ -134,8 +108,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}":
-    {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}": {
       "get": {
         "tags": [
           "PrometheusRuleGroups"
@@ -249,7 +222,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrometheusRuleGroupResourcePatch"
+              "$ref": "#/definitions/PrometheusRuleGroupResource"
             },
             "description": "The parameters of the rule group to update."
           }
@@ -430,6 +403,18 @@
       },
       "description": "The Prometheus rule group resource."
     },
+    "PrometheusRuleGroupResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrometheusRuleGroupResource"
+          },
+          "description": "the values for the alert rule resources."
+        }
+      },
+      "description": "Represents a collection of alert rule resources."
+    },
     "PrometheusRule": {
       "type": "object",
       "properties": {
@@ -472,8 +457,7 @@
           "items": {
             "$ref": "#/definitions/PrometheusRuleGroupAction"
           },
-          "description":
-            "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "resolveConfiguration": {
           "$ref": "#/definitions/PrometheusRuleResolveConfiguration",
@@ -490,8 +474,7 @@
         },
         "timeToResolve": {
           "type": "string",
-          "description":
-            "the duration a rule must evaluate as healthy before the fired alert is automatically resolved."
+          "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved."
         }
       },
       "description": "Specifies the Prometheus alert rule configuration."
@@ -518,88 +501,38 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
     },
-    "operation": {
-      "description": "Operation provided by provider",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "display": {
-          "type": "object",
-          "description": "Properties of the operation",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider name"
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource name"
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation name"
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation"
-            }
-          }
-        }
-      }
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     },
-    "operationsList": {
-      "description": "Lists the operations available in the AlertsManagement RP.",
-      "properties": {
-        "nextLink": {
-          "description": "URL to fetch the next set of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/operation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
     },
-    "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The Azure subscription Id."
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
-      },
-      "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the resource group.",
-        "x-ms-parameter-location": "method"
-      },
-      "RuleGroupNameParameter": {
-        "name": "ruleGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the rule group.",
-        "x-ms-parameter-location": "method"
-      }
+    "RuleGroupNameParameter": {
+      "name": "ruleGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the rule group.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
