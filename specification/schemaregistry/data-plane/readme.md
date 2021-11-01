@@ -26,14 +26,14 @@ These are the global settings for the schemaregistry.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-11-01-preview
+tag: package-2021-10
 ```
 
-### Tag: package-2021-11-01-preview
+### Tag: package-2021-10
 
-These settings apply only when `--tag=package-2021-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11-01-preview'
+```yaml $(tag) == 'package-2021-10'
 input-file:
-  - Microsoft.EventHub/preview/2021-11-01-preview/schemaregistry.json
+  - Microsoft.EventHub/preview/2021-10/schemaregistry.json
 ```

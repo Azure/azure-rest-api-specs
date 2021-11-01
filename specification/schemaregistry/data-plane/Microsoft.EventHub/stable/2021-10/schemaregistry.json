@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Schema Registry",
-    "version": "2021-11-01-preview",
+    "version": "2021-10",
     "description": "Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC."
   },
   "x-ms-parameterized-host": {
@@ -14,9 +14,7 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -39,9 +37,7 @@
           }
         },
         "operationId": "SchemaGroups_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -159,9 +155,7 @@
           }
         },
         "operationId": "Schema_GetVersions",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "groupName",
@@ -216,13 +210,9 @@
         },
         "operationId": "Schema_QueryIdByContent",
         "consumes": [
-          "text/plain",
-          "application/json",
           "application/json; serialization=avro"
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "groupName",
@@ -239,13 +229,6 @@
             "type": "string",
             "maxLength": 50,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "type": "string",
-            "description": "Serialization type for the schema being retrieved.",
-            "required": true
           },
           {
             "name": "schemaContent",
@@ -323,9 +306,7 @@
           "application/json",
           "application/json; serialization=avro"
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "groupName",
@@ -342,13 +323,6 @@
             "type": "string",
             "maxLength": 50,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "type": "string",
-            "description": "Serialization type for the schema being registered.",
-            "required": true
           },
           {
             "name": "schemaContent",
@@ -465,9 +439,7 @@
           "$ref": "#/definitions/ErrorDetail"
         }
       },
-      "required": [
-        "error"
-      ]
+      "required": ["error"]
     },
     "ErrorDetail": {
       "description": "Error response returned from Azure Schema Registry service.",
@@ -488,10 +460,7 @@
           "description": "Error message details to help user understand/debug failure."
         }
       },
-      "required": [
-        "code",
-        "message"
-      ]
+      "required": ["code", "message"]
     }
   },
   "parameters": {
