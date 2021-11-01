@@ -1,0 +1,1435 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RemediationsClient",
+    "version": "2021-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments": {
+      "post": {
+        "operationId": "Remediations_ListDeploymentsAtManagementGroup",
+        "description": "Gets all deployments for a remediation at management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation deployments.",
+            "schema": {
+              "$ref": "#/definitions/RemediationDeploymentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deployments for a remediation at management group scope": {
+            "$ref": "./examples/Remediations_ListDeploymentsManagementGroupScope.json"
+          }
+        }
+      }
+    },
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtManagementGroup",
+        "description": "Cancels a remediation at management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at management group scope": {
+            "$ref": "./examples/Remediations_CancelManagementGroupScope.json"
+          }
+        }
+      }
+    },
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations": {
+      "get": {
+        "operationId": "Remediations_ListForManagementGroup",
+        "description": "Gets all remediations for the management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediations.",
+            "schema": {
+              "$ref": "#/definitions/RemediationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List remediations at management group scope": {
+            "$ref": "./examples/Remediations_ListManagementGroupScope.json"
+          },
+          "List remediations at management group scope with query parameters": {
+            "$ref": "./examples/Remediations_ListManagementGroupScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}": {
+      "put": {
+        "operationId": "Remediations_CreateOrUpdateAtManagementGroup",
+        "description": "Creates or updates a remediation at management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            },
+            "description": "The remediation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "201": {
+            "description": "The created remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create remediation at management group scope": {
+            "$ref": "./examples/Remediations_CreateManagementGroupScope.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Remediations_GetAtManagementGroup",
+        "description": "Gets an existing remediation at management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get remediation at management group scope": {
+            "$ref": "./examples/Remediations_GetManagementGroupScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Remediations_DeleteAtManagementGroup",
+        "description": "Deletes an existing remediation at management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "204": {
+            "description": "The remediation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete remediation at management group scope": {
+            "$ref": "./examples/Remediations_DeleteManagementGroupScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments": {
+      "post": {
+        "operationId": "Remediations_ListDeploymentsAtSubscription",
+        "description": "Gets all deployments for a remediation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation deployments.",
+            "schema": {
+              "$ref": "#/definitions/RemediationDeploymentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deployments for a remediation at subscription scope": {
+            "$ref": "./examples/Remediations_ListDeploymentsSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtSubscription",
+        "description": "Cancels a remediation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at subscription scope": {
+            "$ref": "./examples/Remediations_CancelSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/remediations": {
+      "get": {
+        "operationId": "Remediations_ListForSubscription",
+        "description": "Gets all remediations for the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediations.",
+            "schema": {
+              "$ref": "#/definitions/RemediationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List remediations at subscription scope": {
+            "$ref": "./examples/Remediations_ListSubscriptionScope.json"
+          },
+          "List remediations at subscription scope with query parameters": {
+            "$ref": "./examples/Remediations_ListSubscriptionScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}": {
+      "put": {
+        "operationId": "Remediations_CreateOrUpdateAtSubscription",
+        "description": "Creates or updates a remediation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            },
+            "description": "The remediation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "201": {
+            "description": "The created remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create remediation at subscription scope": {
+            "$ref": "./examples/Remediations_CreateSubscriptionScope.json"
+          },
+          "Create remediation at subscription scope with all properties": {
+            "$ref": "./examples/Remediations_CreateSubscriptionScope_AllProperties.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Remediations_GetAtSubscription",
+        "description": "Gets an existing remediation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get remediation at subscription scope": {
+            "$ref": "./examples/Remediations_GetSubscriptionScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Remediations_DeleteAtSubscription",
+        "description": "Deletes an existing remediation at subscription scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "204": {
+            "description": "The remediation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete remediation at subscription scope": {
+            "$ref": "./examples/Remediations_DeleteSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments": {
+      "post": {
+        "operationId": "Remediations_ListDeploymentsAtResourceGroup",
+        "description": "Gets all deployments for a remediation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation deployments.",
+            "schema": {
+              "$ref": "#/definitions/RemediationDeploymentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deployments for a remediation at resource group scope": {
+            "$ref": "./examples/Remediations_ListDeploymentsResourceGroupScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtResourceGroup",
+        "description": "Cancels a remediation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at resource group scope": {
+            "$ref": "./examples/Remediations_CancelResourceGroupScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/remediations": {
+      "get": {
+        "operationId": "Remediations_ListForResourceGroup",
+        "description": "Gets all remediations for the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediations.",
+            "schema": {
+              "$ref": "#/definitions/RemediationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List remediations at resource group scope": {
+            "$ref": "./examples/Remediations_ListResourceGroupScope.json"
+          },
+          "List remediations at resource group scope with query parameters": {
+            "$ref": "./examples/Remediations_ListResourceGroupScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/remediations/{remediationName}": {
+      "put": {
+        "operationId": "Remediations_CreateOrUpdateAtResourceGroup",
+        "description": "Creates or updates a remediation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            },
+            "description": "The remediation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "201": {
+            "description": "The created remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create remediation at resource group scope": {
+            "$ref": "./examples/Remediations_CreateResourceGroupScope.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Remediations_GetAtResourceGroup",
+        "description": "Gets an existing remediation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get remediation at resource group scope": {
+            "$ref": "./examples/Remediations_GetResourceGroupScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Remediations_DeleteAtResourceGroup",
+        "description": "Deletes an existing remediation at resource group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "204": {
+            "description": "The remediation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete remediation at resource group scope": {
+            "$ref": "./examples/Remediations_DeleteResourceGroupScope.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/listDeployments": {
+      "post": {
+        "operationId": "Remediations_ListDeploymentsAtResource",
+        "description": "Gets all deployments for a remediation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation deployments.",
+            "schema": {
+              "$ref": "#/definitions/RemediationDeploymentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deployments for a remediation at individual resource scope": {
+            "$ref": "./examples/Remediations_ListDeploymentsResourceScope.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}/cancel": {
+      "post": {
+        "operationId": "Remediations_CancelAtResource",
+        "description": "Cancel a remediation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The remediation that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a remediation at individual resource scope": {
+            "$ref": "./examples/Remediations_CancelResourceScope.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/remediations": {
+      "get": {
+        "operationId": "Remediations_ListForResource",
+        "description": "Gets all remediations for a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediations.",
+            "schema": {
+              "$ref": "#/definitions/RemediationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List remediations at individual resource scope": {
+            "$ref": "./examples/Remediations_ListResourceScope.json"
+          },
+          "List remediations at individual resource scope with query parameters": {
+            "$ref": "./examples/Remediations_ListResourceScope_WithQuery.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/remediations/{remediationName}": {
+      "put": {
+        "operationId": "Remediations_CreateOrUpdateAtResource",
+        "description": "Creates or updates a remediation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            },
+            "description": "The remediation parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "201": {
+            "description": "The created remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create remediation at individual resource scope": {
+            "$ref": "./examples/Remediations_CreateResourceScope.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Remediations_GetAtResource",
+        "description": "Gets an existing remediation at resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get remediation at individual resource scope": {
+            "$ref": "./examples/Remediations_GetResourceScope.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Remediations_DeleteAtResource",
+        "description": "Deletes an existing remediation at individual resource scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/remediationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted remediation.",
+            "schema": {
+              "$ref": "#/definitions/Remediation"
+            }
+          },
+          "204": {
+            "description": "The remediation did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete remediation at individual resource scope": {
+            "$ref": "./examples/Remediations_DeleteResourceScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RemediationListResult": {
+      "description": "List of remediations.",
+      "properties": {
+        "value": {
+          "description": "Array of remediation definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Remediation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemediationDeploymentsListResult": {
+      "description": "List of deployments for a remediation.",
+      "properties": {
+        "value": {
+          "description": "Array of deployments for the remediation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemediationDeployment"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemediationDeployment": {
+      "description": "Details of a single deployment created by the remediation.",
+      "properties": {
+        "remediatedResourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource that is being remediated by the deployment.",
+          "readOnly": true
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "Resource ID of the template deployment that will remediate the resource.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the remediation deployment.",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "Location of the resource that is being remediated.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "Error encountered while remediated the resource.",
+          "readOnly": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the remediation was created.",
+          "readOnly": true
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the remediation deployment was last updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "Remediation": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RemediationProperties",
+          "description": "Properties for the remediation."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the remediation.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the remediation.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the remediation.",
+          "readOnly": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "description": "The remediation definition.",
+      "x-ms-azure-resource": true
+    },
+    "RemediationProperties": {
+      "properties": {
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The resource ID of the policy assignment that should be remediated."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition reference ID of the individual definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition."
+        },
+        "resourceDiscoveryMode": {
+          "type": "string",
+          "enum": [
+            "ExistingNonCompliant",
+            "ReEvaluateCompliance"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceDiscoveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ExistingNonCompliant",
+                "description": "Remediate resources that are already known to be non-compliant."
+              },
+              {
+                "value": "ReEvaluateCompliance",
+                "description": "Re-evaluate the compliance state of resources and then remediate the resources found to be non-compliant."
+              }
+            ]
+          },
+          "description": "The way resources to remediate are discovered. Defaults to ExistingNonCompliant if not specified."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The status of the remediation.",
+          "readOnly": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the remediation was created.",
+          "readOnly": true
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the remediation was last updated.",
+          "readOnly": true
+        },
+        "filters": {
+          "$ref": "#/definitions/RemediationFilters",
+          "description": "The filters that will be applied to determine which resources to remediate."
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/RemediationDeploymentSummary",
+          "description": "The deployment status summary for all deployments created by the remediation.",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "The remediation status message. Provides additional details regarding the state of the remediation.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The remediation correlation Id. Can be used to find events related to the remediation in the activity log.",
+          "readOnly": true
+        },
+        "resourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Determines the max number of resources that can be remediated by the remediation job. If not provided, the default resource count is used."
+        },
+        "parallelDeployments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used."
+        },
+        "failureThreshold": {
+          "type": "object",
+          "properties": {
+            "percentage": {
+              "type": "number",
+              "format": "float",
+              "description": "A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold."
+            }
+          },
+          "description": "The remediation failure threshold settings"
+        }
+      },
+      "description": "The remediation properties."
+    },
+    "RemediationFilters": {
+      "properties": {
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The resource locations that will be remediated."
+        }
+      },
+      "description": "The filters that will be applied to determine which resources to remediate."
+    },
+    "RemediationDeploymentSummary": {
+      "properties": {
+        "totalDeployments": {
+          "type": "integer",
+          "description": "The number of deployments required by the remediation.",
+          "readOnly": true
+        },
+        "successfulDeployments": {
+          "type": "integer",
+          "description": "The number of deployments required by the remediation that have succeeded.",
+          "readOnly": true
+        },
+        "failedDeployments": {
+          "type": "integer",
+          "description": "The number of deployments required by the remediation that have failed.",
+          "readOnly": true
+        }
+      },
+      "description": "The deployment status summary for all deployments created by the remediation."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional scenario specific error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypedErrorInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TypedErrorInfo": {
+      "description": "Scenario specific error details.",
+      "properties": {
+        "type": {
+          "description": "The type of included error details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The scenario specific error details.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "remediationNameParameter": {
+      "name": "remediationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the remediation.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group ID.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceIdParameter": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource ID.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "topParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Maximum number of records to return.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Top"
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData filter expression.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Filter"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Microsoft Azure subscription ID."
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
