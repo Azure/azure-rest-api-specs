@@ -221,7 +221,7 @@
             "description": "Parameters for the update operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateDomainProperties"
+              "$ref": "#/definitions/UpdateDomainRequestParameters"
             }
           },
           {
@@ -659,6 +659,21 @@
         },
         "spfManagement": {
           "$ref": "#/definitions/SPFManagement"
+        }
+      }
+    },
+    "UpdateDomainRequestParameters": {
+      "description": "A class that describes the PATCH request parameters of a Domains resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "CommunicationServices.json#/definitions/TaggedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDomainProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
