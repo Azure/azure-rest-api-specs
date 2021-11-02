@@ -174,7 +174,11 @@
             "$ref": "#/definitions/AttackPathGraph"
           },
           "recommendations": {
-            "$ref": "#/definitions/AttackPathRecommendationsList"
+            "type": "array",
+            "description": "recommendations that can help mitigate the attack vector",
+            "items": {
+              "$ref": "#/definitions/AttackPathRecommendation"
+            }
           },
           "bestPractices": {
             "readOnly": true,
@@ -185,16 +189,9 @@
             "type": "array",
             "description": "categories of risk this attack vector exposing the organization to",
             "items": {
-              "$ref": "#/definitions/RiskCategory"
+              "type": "string"
             }
           }
-        }
-      },
-      "AttackPathRecommendationsList": {
-        "type": "array",
-        "description": "recommendations that can help mitigate the attack vector",
-        "items": {
-          "$ref": "#/definitions/AttackPathRecommendation"
         }
       },
       "AttackPathRecommendation": {
@@ -269,11 +266,6 @@
         "type": "object",
         "additionalProperties": true,
         "description": "Changing set of properties describing the connection relation"      
-      },
-      "RiskCategory": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Risk category"      
       }
     },
     "parameters": {
