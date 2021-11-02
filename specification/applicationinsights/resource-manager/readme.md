@@ -247,6 +247,16 @@ input-file:
   - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
 ```
 
+### Tag: package-2021-08-01-only
+
+These settings apply only when `--tag=package-2021-08-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-only'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+  - Microsoft.Insights/stable/2021-08-01/workbookOperations_API.json
+```
+
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
