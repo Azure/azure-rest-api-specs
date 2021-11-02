@@ -222,7 +222,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrometheusRuleGroupResource"
+              "$ref": "#/definitions/PrometheusRuleGroupResourcePatch"
             },
             "description": "The parameters of the rule group to update."
           }
@@ -410,6 +410,7 @@
       "type": "object",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -453,6 +454,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "the expression to run for the rule."
         },
         "for": {
