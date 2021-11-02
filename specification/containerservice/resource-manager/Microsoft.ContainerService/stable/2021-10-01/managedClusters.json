@@ -3167,7 +3167,16 @@
         "ipFamilies": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "description": "The IP version to use for cluster networking and IP assignment.",
+            "enum": [
+              "IPv4",
+              "IPv6"
+            ],
+            "x-ms-enum": {
+              "name": "ipFamily",
+              "modelAsString": true
+            }
           },
           "title": "The IP families used to specify IP versions available to the cluster.",
           "description": "IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
