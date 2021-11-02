@@ -1,209 +1,219 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Security Insights",
-      "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-      "version": "2022-01-01-preview",
-      "x-ms-code-generation-settings": {
-        "name": "SecurityInsightsClient"
-      }
-    },
-    "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/MitreCoverage": {
-        "get": {
-          "tags": [
-            "MitreCoverage"
-          ],
-          "description": "Fetches Products Mitre Coverage from Data sources",
-          "operationId": "Get",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Products Mitre Coverages fetched",
-              "schema": {
-                "$ref": "#/definitions/ProductsMitreCoverage"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed."
-            }
-          },
-          "x-ms-examples": {
-            "Get": {
-              "$ref": "./examples/MitreCoverage/Get.json"
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "SystemData": {
-        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SystemData"
-      },
-      "ArmMitreCoverage": {
-        "type": "object",
-        "properties": {
-          "productName": {
-            "description": "Gets Or sets the product name that covers a specific tactic and technique.",
-            "type": "string",
-            "example": "MDATP"
-          },
-          "vendorName": {
-            "description": "Gets Or sets the vendor of the Product",
-            "type": "string",
-            "example": "Microsoft"
-          },
-          "coverageSize": {
-            "format": "int32",
-            "description": "Gets Or sets the Coverage Size of the product for a specific tactic and technique.",
-            "type": "integer",
-            "example": 2
-          },
-          "technique": {
-            "description": "Gets Or sets MITRE technique code",
-            "type": "string",
-            "example": "T1595"
-          },
-          "tactic": {
-            "description": "Gets Or sets MITRE Tactic",
-            "type": "string",
-            "example": "Reconnaissance"
-          }
-        }
-      },
-      "ArmMitreCoverageArmObjectWrapper": {
-        "description": "A wrapper to the resource of type T, which contains Arm's first level fields such as id, name and type, with the resource properties",
-        "required": [
-          "properties"
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-01-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "SecurityInsightsClient"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/MitreCoverage": {
+      "get": {
+        "tags": [
+          "MitreCoverage"
         ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Gets or sets full Arm id of the resource",
-            "type": "string"
+        "description": "Fetches Products Mitre Coverage from Data sources",
+        "operationId": "Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
-          "name": {
-            "description": "Gets or sets the resource name (the last token of the Id)",
-            "type": "string"
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
-          "etag": {
-            "description": "Gets or sets a string that represent the last time the object was modified and prevent from modifying non-updated object. If value is '*' so it should be accepted anyway",
-            "type": "string"
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
-          "type": {
-            "description": "Gets or sets the resource type. Should be in convention of '{resourceProviderNamespace}/{resourceType}'",
-            "type": "string"
-          },
-          "kind": {
-            "description": "Gets or sets the resource kind. If specified, it should distinct resources of the same Type but with different resource stractures",
-            "type": "string"
-          },
-          "systemData": {
-            "description": "Gets or sets the resource systemData. contains information about resource creation / modification.",
-            "allOf": [
-              {
-                "$ref": "#/definitions/SystemData"
-              }
-            ]
-          },
-          "tags": {
-            "description": "Gets or sets the resource tags. Map of string keys to string values to be serialized and deserizlied",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Products Mitre Coverages fetched",
+            "schema": {
+              "$ref": "#/definitions/ProductsMitreCoverage"
             }
           },
-          "properties": {
-            "description": "Gets or sets nested level of properties which contains the resource content",
-            "allOf": [
-              {
-                "$ref": "#/definitions/ArmMitreCoverage"
-              }
-            ],
-            "x-ms-client-flatten": true
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Get": {
+            "$ref": "./examples/MitreCoverage/Get.json"
           }
         }
-      },
-      "ProductsMitreCoverage": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "Gets or sets array of arm object wrappers",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ArmMitreCoverageArmObjectWrapper"
+      }
+    }
+  },
+  "definitions": {
+    "SystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ArmMitreCoverage": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "description": "Gets Or sets the product name that covers a specific tactic and technique.",
+          "type": "string",
+          "example": "MDATP"
+        },
+        "vendorName": {
+          "description": "Gets Or sets the vendor of the Product",
+          "type": "string",
+          "example": "Microsoft"
+        },
+        "coverageSize": {
+          "format": "int32",
+          "description": "Gets Or sets the Coverage Size of the product for a specific tactic and technique.",
+          "type": "integer",
+          "example": 2
+        },
+        "technique": {
+          "description": "Gets Or sets MITRE technique code",
+          "type": "string",
+          "example": "T1595"
+        },
+        "tactic": {
+          "description": "Gets Or sets MITRE Tactic",
+          "type": "string",
+          "example": "Reconnaissance"
+        }
+      }
+    },
+    "ArmMitreCoverageArmObjectWrapper": {
+      "description": "A wrapper to the resource of type T, which contains Arm's first level fields such as id, name and type, with the resource properties",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets full Arm id of the resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the resource name (the last token of the Id)",
+          "type": "string"
+        },
+        "etag": {
+          "description": "Gets or sets a string that represent the last time the object was modified and prevent from modifying non-updated object. If value is '*' so it should be accepted anyway",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the resource type. Should be in convention of '{resourceProviderNamespace}/{resourceType}'",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Gets or sets the resource kind. If specified, it should distinct resources of the same Type but with different resource stractures",
+          "type": "string"
+        },
+        "systemData": {
+          "description": "Gets or sets the resource systemData. contains information about resource creation / modification.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
             }
-          },
-          "nextLink": {
-            "description": "Gets or sets should be in format of: \"{originalRequestUrl}?$skipToken={opaqueString}\" | null\r\nnextLink value must be a valid Uri.\r\nnextLink value must be null or not returned to mark not support or to finish fetching.",
+          ]
+        },
+        "tags": {
+          "description": "Gets or sets the resource tags. Map of string keys to string values to be serialized and deserizlied",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         },
-        "x-ms-azure-resource": true
+        "properties": {
+          "description": "Gets or sets nested level of properties which contains the resource content",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArmMitreCoverage"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
       }
     },
-    "parameters": {
-      "SubscriptionIdParameter": {
-        "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-      },
-      "ResourceGroupNameParameter": {
-        "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-      },
-      "ApiVersionParameter": {
-        "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-      },
-      "WorkspaceNameParameter": {
-        "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceNameParameter"
-      }
-    },
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "flow": "implicit",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
+    "ProductsMitreCoverage": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets array of arm object wrappers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmMitreCoverageArmObjectWrapper"
+          }
         },
-        "description": "Azure Active Directory OAuth2 Flow"
-      }
-    },
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ],
-    "tags": [
-      {
-        "name": "MitreCoverage",
-        "description": "Read Mitre Coverage"
-      }
-    ],
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "consumes": [
-      "application/json"
-    ]
-  }
+        "nextLink": {
+          "description": "Gets or sets should be in format of: \"{originalRequestUrl}?$skipToken={opaqueString}\" | null\r\nnextLink value must be a valid Uri.\r\nnextLink value must be null or not returned to mark not support or to finish fetching.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "MitreCoverage",
+      "description": "Read Mitre Coverage"
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}
