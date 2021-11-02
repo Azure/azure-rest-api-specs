@@ -1,0 +1,290 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Security Center",
+      "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+      "version": "2022-04-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/attackPaths": {
+        "get": {
+          "x-ms-examples": {
+            "List security assessments": {
+              "$ref": "./examples/AttackPaths/ListAttackPaths_example.json"
+            }
+          },
+          "tags": [
+            "AttackPaths"
+          ],
+          "description": "List all the attack vectors that are associated with the subscription",
+          "operationId": "AttackPaths_List",
+          "parameters": [
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/AttackPathList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/attackPaths/{attackPathName}": {
+        "get": {
+          "x-ms-examples": {
+            "Get an attack vector on a subscription from a security data location": {
+              "$ref": "./examples/AttackPaths/GetAttackPathSubscriptionLocation_example.json"
+            }
+          },
+          "tags": [
+            "AttackPaths"
+          ],
+          "description": "Get an attack vector that is associated with a subscription",
+          "operationId": "AttackPaths_GetSubscriptionLevelAttackPaths",
+          "parameters": [
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+            },
+            {
+              "$ref": "#/parameters/AttackPathName"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/AttackPath"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "AttackPathList": {
+        "type": "object",
+        "description": "Page of attack vectors list",
+        "properties": {
+          "value": {
+            "description": "Collection of attack vectors in this page",
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AttackPath"
+            }
+          },
+          "nextLink": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The URI to fetch the next page."
+          }
+        }
+      },
+      "AttackPath": {
+        "type": "object",
+        "description": "Attack vector",
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/AttackPathProperties"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          }
+        ]
+      },
+      "AttackPathProperties": {
+        "type": "object",
+        "description": "Describes properties of an attack vector.",
+        "properties": {
+          "displayName": {
+            "readOnly": true,
+            "type": "string",
+            "description": "User friendly display name of the attack vector"
+          },
+          "description": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Detailed description of the attack vector and what it means"
+          },
+          "potentialImpact": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Potential steps attackers can take to leverage the attack vector"
+          },
+          "graph": {
+            "$ref": "#/definitions/AttackPathGraph"
+          },
+          "recommendations": {
+            "$ref": "#/definitions/AttackPathRecommendationsList"
+          },
+          "bestPractices": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Best practices to prevent this attack vector"
+          },
+          "riskCategories": {
+            "type": "array",
+            "description": "categories of risk this attack vector exposing the organization to",
+            "items": {
+              "$ref": "#/definitions/RiskCategory"
+            }
+          }
+        }
+      },
+      "AttackPathRecommendationsList": {
+        "type": "array",
+        "description": "recommendations that can help mitigate the attack vector",
+        "items": {
+          "$ref": "#/definitions/AttackPathRecommendation"
+        }
+      },
+      "AttackPathRecommendation": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Properties describing a recommendation belongs to the attack vector"
+      },
+      "AttackPathGraph": {
+        "type": "object",
+        "description": "Describes properties of an attack vector.",
+        "properties": {
+          "AttackPathNodes": {
+            "type": "array",
+            "description": "nodes composing the attack vector",
+            "items": {
+              "$ref": "#/definitions/AttackPathNode"
+            }
+          },
+          "AttackPathEdges": {
+            "type": "array",
+            "description": "connections between the nodes composing the attack vector",
+            "items": {
+              "$ref": "#/definitions/AttackPathEdge"
+            }
+          }
+        }
+      },
+      "AttackPathNode": {
+        "type": "object",
+        "description": "an entity which is part of the attack vector",
+        "properties": {
+          "entityName": {
+            "readOnly": true,
+            "type": "string",
+            "description": ""
+          },
+          "entityType": {
+            "readOnly": true,
+            "type": "string",
+            "description": ""    
+          },
+          "entityExtendedProperties": {
+            "$ref": "#/definitions/EntityExtendedProperties"
+          }
+        }
+      },
+      "EntityExtendedProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Changing set of properties depending on the node entity type"
+      },
+      "AttackPathEdge": {
+        "type": "object",
+        "description": "a connection relation between two attack vector entities",
+        "properties": {
+          "sourceEntity": {
+            "readOnly": true,
+            "type": "string",
+            "description": ""
+          },
+          "targetEntity": {
+            "readOnly": true,
+            "type": "string",
+            "description": ""    
+          },
+          "edgeExtendedProperties": {
+            "$ref": "#/definitions/EdgeExtendedProperties"
+          }
+        }
+      },
+      "EdgeExtendedProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Changing set of properties describing the connection relation"      
+      },
+      "RiskCategory": {
+        "readOnly": true,
+        "type": "string",
+        "description": "Risk category"      
+      }
+    },
+    "parameters": {
+      "AttackPathName": {
+        "name": "attackPathName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Name of the attack vector object",
+        "x-ms-parameter-location": "method"
+      }
+    }
+  }
+  
