@@ -233,30 +233,6 @@
       ],
       "x-ms-discriminator-value": "AzureBlobStorage"
     },
-    "DataTransferCreateJobProperties": {
-      "description": "Properties to create Data Transfer Job.",
-      "type": "object",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/DataTransferDataSourceSink",
-          "description": "Source DataStore details"
-        },
-        "destination": {
-          "$ref": "#/definitions/DataTransferDataSourceSink",
-          "description": "Destination DataStore details"
-        },
-        "workerCount": {
-          "description": "Worker count",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
-        }
-      },
-      "required": [
-        "source",
-        "destination"
-      ]
-    },
     "DataTransferJobProperties": {
       "description": "The properties of a DataTransfer Job",
       "type": "object",
@@ -297,22 +273,32 @@
           "format": "int32"
         },
         "error": {
+          "readOnly": true,
           "$ref": "./cosmos-db.json#/definitions/ErrorResponse",
           "description": "Error response for Faulted job"
         }
-      }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
     },
     "CreateJobRequest": {
       "description": "Parameters to create Data Transfer Job",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataTransferCreateJobProperties",
+          "$ref": "#/definitions/DataTransferJobProperties",
           "description": "Data Transfer Create Job Properties"
         }
       },
       "required": [
         "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./cosmos-db.json#/definitions/ARMProxyResource"
+        }
       ]
     },
     "DataTransferJobGetResults": {
@@ -344,6 +330,7 @@
           "description": "List of Data Transfer jobs and their properties."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "URL to get the next set of Data Transfer job list results if there are any."
         }
