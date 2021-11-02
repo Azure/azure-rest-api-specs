@@ -8,7 +8,7 @@ This is the AutoRest configuration file for SecurityInsights.
 
 ## Getting Started
 
-To build the SDK for SecurityInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for SecurityInsights, simply [Install AutoRest](https://github.com/Azure/autorest/tree/main/packages/apps/autorest#install) and in this folder, run:
 
 > `autorest`
 
@@ -48,6 +48,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-01-01-preview/Watchlists.json
   - Microsoft.SecurityInsights/preview/2022-01-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2022-01-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2022-01-01-preview/MitreCoverage.json
 ```
 ### Tag: package-2021-04-01-only
 
