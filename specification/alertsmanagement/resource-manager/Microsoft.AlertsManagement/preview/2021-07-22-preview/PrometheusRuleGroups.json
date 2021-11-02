@@ -6,15 +6,9 @@
     "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -29,9 +23,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/prometheusRuleGroups": {
       "get": {
-        "tags": [
-          "PrometheusRuleGroups"
-        ],
+        "tags": [ "PrometheusRuleGroups" ],
         "description": "Retrieve Prometheus rule group definitions in a subscription.",
         "operationId": "PrometheusRuleGroups_ListBySubscription",
         "parameters": [
@@ -68,9 +60,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups": {
       "get": {
-        "tags": [
-          "PrometheusRuleGroups"
-        ],
+        "tags": [ "PrometheusRuleGroups" ],
         "description": "Retrieve Prometheus rule group definitions in a resource group.",
         "operationId": "PrometheusRuleGroups_ListByResourceGroup",
         "parameters": [
@@ -110,9 +100,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}": {
       "get": {
-        "tags": [
-          "PrometheusRuleGroups"
-        ],
+        "tags": [ "PrometheusRuleGroups" ],
         "description": "Retrieve a Prometheus rule group definition.",
         "operationId": "PrometheusRuleGroups_Get",
         "parameters": [
@@ -150,9 +138,7 @@
         }
       },
       "put": {
-        "tags": [
-          "PrometheusRuleGroups"
-        ],
+        "tags": [ "PrometheusRuleGroups" ],
         "description": "Create or update a Prometheus rule group definition.",
         "operationId": "PrometheusRuleGroups_CreateOrUpdate",
         "parameters": [
@@ -199,9 +185,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "PrometheusRuleGroups"
-        ],
+        "tags": [ "PrometheusRuleGroups" ],
         "description": "Update an Prometheus rule group definition.",
         "operationId": "PrometheusRuleGroups_Update",
         "parameters": [
@@ -248,9 +232,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "PrometheusRuleGroups"
-        ],
+        "tags": [ "PrometheusRuleGroups" ],
         "description": "Delete a Prometheus rule group definition.",
         "operationId": "PrometheusRuleGroups_Delete",
         "parameters": [
@@ -291,6 +273,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -310,10 +293,7 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "x-ms-mutability": [ "create", "read" ]
         },
         "tags": {
           "type": "object",
@@ -323,13 +303,12 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
+      "required": [ "location" ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
     "PrometheusRuleGroupAction": {
+      "type": "object",
       "description": "An alert action.",
       "properties": {
         "actionGroupId": {
@@ -347,11 +326,8 @@
       }
     },
     "PrometheusRuleGroupProperties": {
-      "required": [
-        "description",
-        "scopes",
-        "rules"
-      ],
+      "type": "object",
+      "required": [ "description", "scopes", "rules" ],
       "properties": {
         "description": {
           "type": "string",
@@ -391,9 +367,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "required": [
-        "properties"
-      ],
+      "required": [ "properties" ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -403,7 +377,25 @@
       },
       "description": "The Prometheus rule group resource."
     },
+    "PrometheusRuleGroupResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrometheusRuleGroupProperties",
+          "description": "The alert rule properties of the resource."
+        }
+      },
+      "description": "The health alert resource for patch operations."
+    },
     "PrometheusRuleGroupResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -536,4 +528,3 @@
     }
   }
 }
-
