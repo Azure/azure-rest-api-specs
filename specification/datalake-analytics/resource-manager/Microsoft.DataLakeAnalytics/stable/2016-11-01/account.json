@@ -636,6 +636,9 @@
           "200": {
             "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
           },
+          "204": {
+            "description": "The specified datalake storage account does not exist or was already deleted."
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -1885,21 +1888,6 @@
           },
           "description": "The list of hiveMetastores associated with this account."
         },
-        "hierarchicalQueue": {
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "root": {
-              "type": "object"
-            }
-          },
-          "description": "The hierarchical queue associated with this account."
-        },
-        "hierarchicalQueueState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The hierarchical queue state associated with this account."
-        },
         "virtualNetworkRules": {
           "readOnly": true,
           "type": "array",
@@ -2133,6 +2121,12 @@
             "$ref": "#/definitions/DataLakeAnalyticsAccountBasic"
           },
           "description": "The results of the list operation."
+        },
+        "count": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of data lake analytics accounts under this subscription."
         },
         "nextLink": {
           "readOnly": true,

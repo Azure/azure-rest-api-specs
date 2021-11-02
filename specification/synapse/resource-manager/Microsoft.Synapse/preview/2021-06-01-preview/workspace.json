@@ -931,6 +931,14 @@
         "filesystem": {
           "description": "Filesystem name",
           "type": "string"
+        },
+        "resourceId": {
+          "description": "ARM resource Id of this storage account",
+          "type": "string"
+        },
+        "createManagedPrivateEndpoint": {
+          "description": "Create managed private endpoint to this storage account or not",
+          "type": "boolean"
         }
       }
     },
@@ -1283,6 +1291,18 @@
         "cspWorkspaceAdminProperties": {
           "description": "Initial workspace AAD admin properties for a CSP subscription",
           "$ref": "#/definitions/CspWorkspaceAdminProperties"
+        },
+        "settings": {
+          "description": "Workspace settings",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object",
+          "readOnly": true
+        },
+        "azureADOnlyAuthentication": {
+          "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
+          "type": "boolean"
         }
       }
     },
