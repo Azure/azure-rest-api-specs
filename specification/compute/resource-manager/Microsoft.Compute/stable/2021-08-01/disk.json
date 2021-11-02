@@ -1661,6 +1661,9 @@
         "x-ms-examples": {
           "Get an incremental disk restorePoint resource.": {
             "$ref": "./examples/GetDiskRestorePointResources.json"
+          },
+          "Get an incremental disk restorePoint when source resource is from a different region": {
+            "$ref": "./examples/GetDiskRestorePointWhenSourceResourceIsFromDifferentRegion.json"
           }
         }
       }
@@ -3415,7 +3418,7 @@
         },
         "sourceResourceId": {
           "type": "string",
-          "description": "arm id of source disk",
+          "description": "arm id of source disk or source disk restore point.",
           "readOnly": true
         },
         "osType": {
@@ -3482,7 +3485,17 @@
         },
         "completionPercent": {
           "type": "number",
-          "description": "Percentage complete for the background copy when a resource is created via the CopyStart operation."
+          "description": "Percentage complete for the background copy of disk restore point when source resource is from a different region."
+        },
+        "replicationState": {
+          "type": "string",
+          "description": "Replication state of disk restore point when source resource is from a different region.",
+          "readOnly": true
+        },
+        "sourceResourceLocation": {
+          "type": "string",
+          "description": "Location of source disk or source disk restore point when source resource is from a different region.",
+          "readOnly": true
         }
       },
       "description": "Properties of an incremental disk restore point"
