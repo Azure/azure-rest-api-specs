@@ -203,7 +203,7 @@
             "description": "Rename request",
             "required": true,
             "schema": {
-              "$ref": "./artifacts.json#/definitions/ArtifactRenameRequest"
+              "$ref": "#/definitions/ArtifactRenameRequest"
             }
           }
         ],
@@ -294,6 +294,19 @@
               }
             }
           }
+        }
+      }
+    },
+    "ArtifactRenameRequest": {
+      "description": "Request body structure for rename artifact.",
+      "type": "object",
+      "properties": {
+        "newName": {
+          "description": "New name of the artifact.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+          "minLength": 1,
+          "maxLength": 260
         }
       }
     }
