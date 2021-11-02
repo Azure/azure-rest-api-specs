@@ -20,13 +20,16 @@
             "alert": "Billing_Processing_Very_Slow",
             "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
             "severity": 2,
-            "for": "5m",
+            "for": "PT5M",
             "labels": {
               "team": "prod"
             },
+            "annotations": {
+              "annotationName1": "annotationValue1"
+            },
             "resolveConfiguration": {
               "autoResolved": true,
-              "timeToResolve": "10m"
+              "timeToResolve": "PT10M"
             },
             "actions": [
               {
@@ -54,7 +57,7 @@
           "scopes": [
             "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/Microsoft.Observability/monitoringAcount/myMonitoringAccount"
           ],
-          "interval" : "PT5M",
+          "interval": "PT5M",
           "rules": [
             {
               "record": "job_type:billing_jobs_duration_seconds:99p5m",
