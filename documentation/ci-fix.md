@@ -117,6 +117,8 @@ If service is deployed before PR merge, this check is passed. otherwise, it will
 
 __Error Message:__ API Readiness check failed. Please make sure your service is deployed.
 
+__Details:__
+
 ```
 "code: InvalidResourceType,
 message: The resource type 'operations' could not be found in the namespace 'Microsoft.Contoso' for api version '2022-11-01-preview'. The supported api-versions are '2018-03-01-preview,
