@@ -6,15 +6,9 @@
     "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -36,9 +30,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK. Successfully retrieved operations list.",
@@ -100,9 +92,7 @@
           }
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     }
   },
   "parameters": {
