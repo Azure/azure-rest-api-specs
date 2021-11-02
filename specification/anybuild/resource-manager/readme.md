@@ -39,6 +39,15 @@ input-file:
   - Microsoft.AnyBuild/stable/2020-08-26/anybuild.json
 ```
 
+### Tag: package-2021-11-01
+
+These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11-01'
+input-file:
+  - Microsoft.AnyBuild/stable/2021-11-01/anybuild.json
+```
+
 ---
 
 # Code Generation

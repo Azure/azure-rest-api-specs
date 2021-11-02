@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-08-26",
+    "version": "2021-11-01",
     "title": "anybuild",
     "description": "AnyBuild is a remote execution service that accelerates builds via distribution and caching.",
     "x-ms-code-generation-settings": {
@@ -528,9 +528,9 @@
           "format": "int32",
           "description": "The number of cores supported by each agent in the pool."
         },
-        "agentOs": {
-          "$ref": "#/definitions/AgentOs",
-          "description": "Details about operating system to use for agents in the pool."
+        "os": {
+          "$ref": "#/definitions/Os",
+          "description": "Operating system type to use for agents in the pool."
         },
         "capacity": {
           "$ref": "#/definitions/PoolCapacity",
@@ -545,21 +545,16 @@
         }
       }
     },
-    "AgentOs": {
-      "description": "Describes the type of operating system to use for agents in this pool.",
-      "required": [
-        "osOffer",
-        "osSKU"
+    "Os": {
+      "description": "Describes the type of operating system to use for agents in this pool. Specific Linux distributions and Windows releases are not required to be specified here, as AnyBuild is compatible with numerous distributions and versions. See documentation at https://aka.ms/AnyBuild for current compatibility information.",
+      "enum": [
+        "Linux",
+        "Windows"
       ],
-      "properties": {
-        "osOffer": {
-          "type": "string",
-          "description": "The offer of base image used to create agents in the pool. For more information see [ImageReference.offer](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachinescalesets/get#imagereference)."
-        },
-        "osSKU": {
-          "type": "string",
-          "description": "The SKU of base image used to create agents in the pool. For more information see [ImageReference.sku](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachinescalesets/get#imagereference)."
-        }
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Os",
+        "modelAsString": true
       }
     },
     "PoolCapacity": {
@@ -572,11 +567,15 @@
         "minimum": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
+          "maximum": 1000,
           "description": "The minimum number of agents in the pool."
         },
         "maximum": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
+          "maximum": 1000,
           "description": "The maximum number of agents in the pool."
         }
       }
@@ -635,11 +634,15 @@
         "hour": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
+          "maximum": 23,
           "description": "Hour when pool schedule begins or ends. Values supported are 0 to 23 on the 24-hour clock (AM/PM times are not supported)."
         },
         "minute": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
+          "maximum": 59,
           "description": "Minute when pool schedule begins or ends."
         }
       }
