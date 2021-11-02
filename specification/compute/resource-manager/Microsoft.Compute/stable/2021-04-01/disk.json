@@ -2909,6 +2909,18 @@
         "acceleratedNetwork": {
           "type": "boolean",
           "description": "True if the image from which the OS disk is created supports accelerated networking."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "The architecture of the image.",
+          "enum": [
+            "x64",
+            "Arm64"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": true
+          }
         }
       },
       "description": "List of supported capabilities (like accelerated networking) persisted on the disk resource for VM use."
