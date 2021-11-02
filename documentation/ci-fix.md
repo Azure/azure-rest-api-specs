@@ -109,6 +109,26 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
+## ApiReadinessCheck
+
+ApiReadinessCheck is to check whether Azure resource provider is deployed on Azure by calling operations list rest api. Generally Azure service should be ready before swagger PR merged into main branch.
+
+If service is deployed before PR merge, this check is passed. otherwise, it will report error.
+
+__Error Message:__ API Readiness check failed. Please make sure your service is deployed.
+
+```
+"code: InvalidResourceType,
+message: The resource type 'operations' could not be found in the namespace 'Microsoft.Contoso' for api version '2022-11-01-preview'. The supported api-versions are '2018-03-01-preview,
+2018-10-01,
+2020-05-01,
+2020-07-01-preview,
+2021-04-01-preview,
+2021-06-01-preview,
+2021-09-01-preview,
+2021-10-01'."
+```
+__How to fix:__ Deploy service to Azure before PR merge.
 
 ## SDK Track2 Validation
 
