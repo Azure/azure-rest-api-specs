@@ -38,47 +38,6 @@
         "name"
       ]
     },
-    "IdentityType": {
-      "description": "The type of identity that creates/modifies resources",
-      "type": "string",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true
-      }
-    },
-    "Identity": {
-      "description": "Identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "Plan": {
       "type": "object",
       "properties": {
@@ -118,39 +77,6 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
-    },
-    "SystemData": {
-      "description": "Read only system data",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "An identifier for the identity that created the resource"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
     },
     "ResourceSku": {
       "type": "object",
