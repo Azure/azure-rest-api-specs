@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/operationsList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -73,6 +79,12 @@
             "schema": {
               "$ref": "#/definitions/alertsMetaData"
             }
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/errorResponse"
           }
         },
         "x-ms-examples": {
@@ -768,6 +780,7 @@
       }
     },
     "alert": {
+      "type": "object",
       "description": "An alert created in alert management service.",
       "allOf": [
         {
@@ -781,6 +794,7 @@
       }
     },
     "alertsList": {
+      "type": "object",
       "description": "List the alerts.",
       "properties": {
         "nextLink": {
@@ -969,6 +983,7 @@
       }
     },
     "alertModification": {
+      "type": "object",
       "description": "Alert Modification details",
       "allOf": [
         {
@@ -1000,6 +1015,7 @@
       }
     },
     "alertModificationItem": {
+      "type": "object",
       "description": "Alert modification item.",
       "properties": {
         "modificationEvent": {
@@ -1047,6 +1063,7 @@
       }
     },
     "alertsSummary": {
+      "type": "object",
       "description": "Summary of alerts based on the input filters and 'groupby' parameters.",
       "allOf": [
         {
@@ -1110,6 +1127,7 @@
       }
     },
     "alertsMetaData": {
+      "type": "object",
       "description": "alert meta data information.",
       "properties": {
         "properties": {
@@ -1138,6 +1156,7 @@
       }
     },
     "MonitorServiceList": {
+      "type": "object",
       "title": "Monitor service details",
       "description": "Monitor service details",
       "required": [
@@ -1162,6 +1181,7 @@
       }
     },
     "MonitorServiceDetails": {
+      "type": "object",
       "description": "Details of a monitor service",
       "properties": {
         "name": {
