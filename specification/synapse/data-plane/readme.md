@@ -182,15 +182,6 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
 ```
 
-### Tag: package-kql-script-2021-11-preview
-
-These settings apply only when `--tag=package-kql-script-2021-11-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-kql-script-2021-11-preview'
-input-file:
-  - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
-```
-
 ### Tag: package-artifacts-2020-12-01
 
 These settings apply only when `--tag=package-artifacts-2020-12-01` is specified on the command line.
