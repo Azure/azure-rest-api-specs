@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-09-01-preview
+tag: package-2021-10-01
 ```
 
 ### Suppression
@@ -40,7 +40,9 @@ directive:
     - $.definitions.Dimension.properties.toBeExportedForShoebox
     - $.definitions.Operation.properties.isDataAction
     - $.definitions.SignalRTlsSettings.properties.clientCertEnabled
-    reason:  The boolean properties 'nameAvailable' and 'isDataAction' is standard property defined by Azure API spec. 'toBeExportedForShoebox' by Geneva metrics team. Keep 'clientCertEnabled' bool to be consistent with SignalR and not break existing customers.
+    - $.definitions.SignalRProperties.properties.disableLocalAuth
+    - $.definitions.SignalRProperties.properties.disableAadAuth
+    reason:  The boolean properties 'nameAvailable' and 'isDataAction' is standard property defined by Azure API spec. 'toBeExportedForShoebox' by Geneva metrics team. Keep 'clientCertEnabled' bool to be consistent with SignalR and not break existing customers. 'disableLocalAuth' and 'disableAadAuth' by Identity team.
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
   - suppress: AvoidNestedProperties
@@ -54,6 +56,10 @@ directive:
     where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
     reason: It's indeed an UPDATE operation, but PUT is required per NRP requirement.
+  - suppress: InvalidSkuModel
+    where:
+    - $.definitions.Sku
+    reason: It's required by spec of enumerating SKUs for an existing resource
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -63,6 +69,15 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 ``` yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
 - Microsoft.SignalRService/preview/2021-09-01-preview/signalr.json
+```
+
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01'
+input-file:
+- Microsoft.SignalRService/stable/2021-10-01/signalr.json
 ```
 
 ### Tag: package-2021-06-01-preview
