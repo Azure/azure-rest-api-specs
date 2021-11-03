@@ -3740,6 +3740,10 @@
           "title": "The pod identity profile of the Managed Cluster.",
           "description": "See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on AAD pod identity integration."
         },
+        "oidcIssuerProfile": {
+          "$ref": "#/definitions/ManagedClusterOIDCIssuerProfile",
+          "description": "The OIDC issuer profile of the Managed Cluster."
+        },
         "nodeResourceGroup": {
           "type": "string",
           "description": "The name of the resource group containing agent pool nodes."
@@ -4405,6 +4409,20 @@
       },
       "title": "The pod identity profile of the Managed Cluster.",
       "description": "See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on pod identity integration."
+    },
+    "ManagedClusterOIDCIssuerProfile": {
+      "properties": {
+        "issuerURL": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The OIDC issuer url of this cluster."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the OIDC issuer is enabled."
+        }
+      },
+      "description": "The OIDC issuer profile of the Managed Cluster."
     },
     "ManagedClusterUpgradeProfile": {
       "properties": {
