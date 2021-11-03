@@ -1,0 +1,666 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyPrivateLinksClient",
+    "version": "2021-11-01-preview",
+    "description": "Securely connect to Azure Policy Service using private links."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyPrivateLinks/{privateLinkName}": {
+      "put": {
+        "tags": [
+          "PolicyPrivateLinks"
+        ],
+        "operationId": "PolicyPrivateLinks_Put",
+        "description": "Create a private link for Azure Policy Service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkResource"
+            },
+            "description": "Azure Policy Service private link resource details."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The policy service link successfully created.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkResource"
+            }
+          },
+          "200": {
+            "description": "The policy service link successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Create Azure Policy Service Private Link.": {
+            "$ref": "./examples/PutPolicyPrivateLink.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PolicyPrivateLinks"
+        ],
+        "operationId": "PolicyPrivateLinks_Patch",
+        "description": "Update tags of policy private link resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkResource"
+            },
+            "description": "Azure Policy Service private link resource details."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The policy service link successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Update Azure Policy Service Private Link.": {
+            "$ref": "./examples/UpdatePolicyPrivateLink.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyPrivateLinks"
+        ],
+        "operationId": "PolicyPrivateLinks_Get",
+        "description": "Get Azure Policy Service private link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. Returns information about the Azure Policy Service private link.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Policy Service Private Link": {
+            "$ref": "./examples/GetPolicyPrivateLink.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PolicyPrivateLinks"
+        ],
+        "operationId": "PolicyPrivateLinks_Delete",
+        "description": "Delete Azure Policy Service private link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource successfuly deleted."
+          },
+          "204": {
+            "description": "The specified resource does not exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Delete Azure Policy Service Private Link.": {
+            "$ref": "./examples/DeletePolicyPrivateLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyPrivateLinks": {
+      "get": {
+        "tags": [
+          "PolicyPrivateLinks"
+        ],
+        "operationId": "PolicyPrivateLinks_ListBySubscription",
+        "description": "Get all the Azure Policy Service private links in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns an array of private links.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinksListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Policy Service private links in a subscription.": {
+            "$ref": "./examples/ListPolicyPrivateLinksBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyPrivateLinks": {
+      "get": {
+        "tags": [
+          "PolicyPrivateLinks"
+        ],
+        "operationId": "PolicyPrivateLinks_ListByResourceGroup",
+        "description": "Gets all the Azure Policy Service private links in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns an array of private links.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinksListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Policy Service private links in a resource group.": {
+            "$ref": "./examples/ListPolicyPrivateLinksByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.PolicyInsights/policyPrivateLinkAssociations/{privateLinkAssociationName}": {
+      "put": {
+        "tags": [
+          "PolicyPrivateLinkAssociations"
+        ],
+        "operationId": "PolicyPrivateLinkAssociations_Put",
+        "description": "Create a private link association on a scope that should be protected by the Azure Policy service private link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkAssociationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
+            },
+            "description": "Azure Policy Service private link association resource details."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created the new policy private link association.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
+            }
+          },
+          "200": {
+            "description": "Updated the policy private link association.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Create a private link association for a policy private link.": {
+            "$ref": "./examples/PutPolicyPrivateLinkAssociation.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyPrivateLinkAssociations"
+        ],
+        "operationId": "PolicyPrivateLinkAssociations_Get",
+        "description": "Get the Azure Policy private link association resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkAssociationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
+            },
+            "description": "Azure Policy Service private link association resource details."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the policy private link association.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Get the policy private link association resource.": {
+            "$ref": "./examples/GetPolicyPrivateLinkAssociation.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PolicyPrivateLinkAssociations"
+        ],
+        "operationId": "PolicyPrivateLinkAssociations_Delete",
+        "description": "Delete policy private link association.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkAssociationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The policy private link association deleted successfully."
+          },
+          "204": {
+            "description": "The policy private link association doesn't exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy private link association.": {
+            "$ref": "./examples/DeletePolicyPrivateLinkAssociation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyPrivateLinkAssociations": {
+      "get": {
+        "tags": [
+          "PolicyPrivateLinkAssociations"
+        ],
+        "operationId": "PolicyPrivateLinkAssociations_ListBySubscription",
+        "description": "Get the list of policy private link associations corresponding to a given subscription that match the optional query parameter $filter. Valid values for $filter are: 'atScope()' or 'policyPrivateLinkId eq '{value}''. If $filter is not provided, the unfiltered list includes all the policy private link associations corresponding to the subscription, including those that apply directly on subscription, as well as any applied to objects contained within the subscription. If $filter=atScope() is provided, the returned list includes all policy private link associations that apply to the subscription, which is everything in the unfiltered list except those applied to objects contained within the subscription. If $filter=policyPrivateLinkId eq '{value}' is provided, the returned list includes all policy private link associations of the policy private link whose id is {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Get all private link associations for subscription scope.": {
+            "$ref": "./examples/ListPolicyPrivateLinkAssociationsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyPrivateLinkAssociations": {
+      "get": {
+        "tags": [
+          "PolicyPrivateLinkAssociations"
+        ],
+        "operationId": "PolicyPrivateLinkAssociations_ListByResourceGroup",
+        "description": "Get the list of policy private link associations corresponding to resource group in the given subscription that match the optional query parameter $filter. Valid values for $filter are: 'atScope()' or 'policyPrivateLinkId eq '{value}''. If $filter is not provided, the unfiltered list includes all the policy private link associations corresponding to the resource group, including those that apply directly or from subscription, as well as any applied to objects contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy private link associations that apply to the resource group, which is everything in the unfiltered list except those applied to objects contained within the resource group. If $filter=policyPrivateLinkId eq '{value}' is provided, the returned list includes all policy private link associations of the policy private link whose id is {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPrivateLinkAssociationFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPrivateLinkAssociationsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Get all private link associations for a resource group scope.": {
+            "$ref": "./examples/ListPolicyPrivateLinkAssociationsByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PolicyPrivateLinkResource": {
+      "title": "Policy Private Link resource",
+      "description": "The resource model definition for policy service private link.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyPrivateLinkResourceProperties",
+          "description": "The policy private link resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "PolicyPrivateLinkResourceProperties": {
+      "title": "PolicyPrivateLinkResourceProperties",
+      "description": "The policy private link resource properties.",
+      "type": "object",
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private endpoint connections.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyPrivateLinksListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyPrivateLinkResource"
+          },
+          "description": "An array of Azure Policy service private links."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "PolicyPrivateLinkAssociationResource": {
+      "title": "Policy Private Link Associations Resource",
+      "description": "The resource model definition for policy private link associations resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyPrivateLinkAssociationResourceProperties",
+          "description": "The policy private link association resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "PolicyPrivateLinkAssociationResourceProperties": {
+      "type": "object",
+      "properties": {
+        "policyPrivateLinkId": {
+          "type": "string",
+          "description": "The Azure policy private link resource ID."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "The public network access is 'Disabled' by default. When set to 'Enabled', connections via public and private endpoints are allowed. When set to 'Disabled', only connections via private endpoints are allowed and all connections via public endpoints are denied.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessOptions",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of the policy private link association.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyPrivateLinkAssociationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
+          },
+          "description": "An array of Azure policy private link associations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PolicyPrivateLinkNameParameter": {
+      "name": "privateLinkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Policy service private link resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyPrivateLinkScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the policy private link association. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "PolicyPrivateLinkAssociationNameParameter": {
+      "name": "privateLinkAssociationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the policy private link association resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyPrivateLinkAssociationFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()' or 'policyPrivateLinkId eq '{value}''. If $filter is not provided, no filtering is performed.",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

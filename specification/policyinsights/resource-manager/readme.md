@@ -134,6 +134,15 @@ directive:
     transform: delete $['post']['x-ms-pageable']['operationName']
 ```
 
+### Tag: package-privatelinks-2021-11
+
+These settings apply only when `--tag=package-privatelinks-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-privatelinks-2021-11'
+input-file:
+- Microsoft.PolicyInsights/preview/2021-11-01-preview/policyPrivateLinks.json
+```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
