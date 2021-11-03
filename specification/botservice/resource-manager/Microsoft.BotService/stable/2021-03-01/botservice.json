@@ -1392,6 +1392,15 @@
           "type": "boolean",
           "description": "Whether the bot is developerAppInsightsApiKey set"
         },
+        "migrationToken": {
+          "type": "string",
+          "description": "Token used to migrate non Azure bot to azure subscription",
+          "readOnly": true
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+        },
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot"
@@ -1408,6 +1417,10 @@
           "type": "string",
           "readOnly": true,
           "description": "Provisioning state of the resource"
+        },
+        "publishingCredentials": {
+          "type": "string",
+          "description": "Publishing credentials of the resource"
         }
       },
       "description": "The parameters to provide for the Bot.",
@@ -1484,6 +1497,11 @@
         "etag": {
           "type": "string",
           "description": "Entity Tag of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -1669,6 +1687,14 @@
         "incomingCallRoute": {
           "type": "string",
           "description": "Webhook for Microsoft Teams channel calls"
+        },
+        "deploymentEnvironment": {
+          "type": "string",
+          "description": "Deployment environment for Microsoft Teams channel calls"
+        },
+        "acceptedTerms": {
+          "type": "boolean",
+          "description": "Whether this channel accepted terms"
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
@@ -1850,6 +1876,10 @@
         "etag": {
           "type": "string",
           "description": "Entity Tag of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource"
         },
         "location": {
           "type": "string",
@@ -2442,6 +2472,23 @@
           "type": "string",
           "description": "Default Name for the Service Provider",
           "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Meta data for the Service Provider",
+          "readOnly": true,
+          "properties": {
+            "constraints": {
+              "description": "the constraints of the bot meta data.",
+              "type": "object",
+              "properties": {
+                  "required": {
+                      "description": "Whether required the constraints of the bot meta data.",
+                      "type": "boolean"
+                  }
+              }
+            }
+          }
         }
       },
       "description": "Extra Parameters specific to each Service Provider"
