@@ -140,6 +140,42 @@
       "required": false,
       "x-ms-parameter-location": "client"
     },
+    "ContentType": {
+      "name": "content-type",
+      "description": "The media type of the original data that is being uploaded.",
+      "type": "string",
+      "enum": [
+        "application/json",
+        "application/octet-stream",
+        "application/geo+json",
+        "application/vnd.geo+json",
+        "application/zip"
+      ],
+      "x-ms-enum": {
+        "name": "TypesOfContent",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "application/json"
+          },
+          {
+            "value": "application/octet-stream"
+          },
+          {
+            "value": "application/geo+json"
+          },
+          {
+            "value": "application/vnd.geo+json"
+          },
+          {
+            "value": "application/zip"
+          }
+        ]
+      },
+      "in": "header",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
     "SubscriptionKey": {
       "name": "subscription-key",
       "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
@@ -372,6 +408,9 @@
             "$ref": "#/parameters/ClientId"
           },
           {
+            "$ref": "#/parameters/ContentType"
+          },
+          {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
@@ -391,42 +430,6 @@
             "schema": {
               "type": "object"
             }
-          },
-          {
-            "name": "content-type",
-            "in": "body",
-            "description": "The media type of the original data that is being uploaded.",
-            "type": "string",
-            "enum": [
-              "application/json",
-              "application/octet-stream",
-              "application/geo+json",
-              "application/vnd.geo+json",
-              "application/zip"
-            ],
-            "x-ms-enum": {
-              "name": "TypesOfContent",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "application/json"
-                },
-                {
-                  "value": "application/octet-stream"
-                },
-                {
-                  "value": "application/geo+json"
-                },
-                {
-                  "value": "application/vnd.geo+json"
-                },
-                {
-                  "value": "application/zip"
-                }
-              ]
-            },
-            "required": true
-
           }
         ],
         "responses": {
