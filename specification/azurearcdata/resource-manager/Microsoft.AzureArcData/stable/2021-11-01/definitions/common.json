@@ -110,65 +110,6 @@
         "product"
       ]
     },
-    "Resource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "type": "object",
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "ProxyResource": {
       "type": "object",
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
