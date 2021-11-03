@@ -647,18 +647,6 @@
     }
   },
   "definitions": {
-    "FileUploadParameters": {
-      "description": "File Upload Parameters DTO.",
-      "type": "object",
-      "properties": {
-        "fileSize": {
-          "format": "int64",
-          "description": "Gets or sets the size of the file being uploaded.",
-          "type": "integer",
-          "example": 1073741824
-        }
-      }
-    },
     "ChamberPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
@@ -676,6 +664,18 @@
         }
       }
     },
+    "FileUploadParameters": {
+      "description": "File Upload Parameters DTO.",
+      "type": "object",
+      "properties": {
+        "fileSize": {
+          "format": "int64",
+          "description": "Gets or sets the size of the file being uploaded.",
+          "type": "integer",
+          "example": 1073741824
+        }
+      }
+    },
     "Ansys": {
       "type": "object",
       "description": "Ansys Common Licensing.",
@@ -685,13 +685,10 @@
           "description": "Switch to show if License Service is activated."
         },
         "server": {
-          "type": "array",
-          "description": "License Service server.",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "License Service server."
         },
-        "lmhostid": {
+        "lmhostId": {
           "type": "array",
           "description": "Unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
           "items": {
@@ -709,13 +706,10 @@
           "description": "Switch to show if License Service is activated."
         },
         "server": {
-          "type": "array",
-          "description": "License Service server.",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "License Service server."
         },
-        "lmhostid": {
+        "lmhostId": {
           "type": "array",
           "description": "Unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
           "items": {
@@ -740,13 +734,10 @@
           "description": "Switch to show if License Service is activated"
         },
         "server": {
-          "type": "array",
-          "description": "License Service server.",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "License Service server."
         },
-        "lmhostid": {
+        "lmhostId": {
           "type": "array",
           "description": "Unique identifier of HPC Workbench chamber license servers used by FlexNet Licensing Service.",
           "items": {
@@ -764,11 +755,8 @@
           "description": "Switch to show if License Service is activated."
         },
         "server": {
-          "type": "array",
-          "description": "License Service server.",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "License Service server."
         },
         "vmUuid": {
           "type": "array",
@@ -782,17 +770,6 @@
     "ChamberPropertiesFormat": {
       "type": "object",
       "properties": {
-        "sku": {
-          "$ref": "./hpcworkbench.json#/definitions/Sku",
-          "description": "Gets or sets the SKU."
-        },
-        "zones": {
-          "description": "Gets or sets the Zones.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "licenseServices": {
           "description": "Gets or sets the license services for each EDA vendor.",
           "type": "object",

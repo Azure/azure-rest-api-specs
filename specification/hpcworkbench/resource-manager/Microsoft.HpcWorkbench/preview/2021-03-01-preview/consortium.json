@@ -614,6 +614,14 @@
         "licenseActivated": {
           "description": "The license activated.",
           "type": "boolean"
+        },
+        "replyUrlEtx": {
+          "description": "The reply URL of ETX Server for Azure AD app.",
+          "type": "string"
+        },
+        "replyUrlOtds": {
+          "description": "The reply URL of OTDS for Azure AD app.",
+          "type": "string"
         }
       },
       "description": "Etx properties."
@@ -662,6 +670,19 @@
         }
       }
     },
+    "NetworkAcls": {
+      "type": "object",
+      "description": "Access configuration properties.",
+      "properties": {
+        "allowedAddressSpaces": {
+          "type": "array",
+          "description": "Gets or sets the AllowedAddressSpaces.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ConsortiumPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
@@ -682,58 +703,6 @@
     "ConsortiumPropertiesFormat": {
       "type": "object",
       "properties": {
-        "sku": {
-          "description": "Gets or sets the SKU.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Gets or sets the Kind.",
-          "type": "string"
-        },
-        "managedBy": {
-          "description": "Gets or sets the Managed By value.",
-          "type": "string"
-        },
-        "zones": {
-          "description": "Gets or sets the Zones.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "plan": {
-          "description": "Gets or sets the Plan.",
-          "type": "object"
-        },
-        "identity": {
-          "description": "Gets or sets the Identity.",
-          "type": "object"
-        },
-        "vmSize": {
-          "description": "Gets or sets the VmSize.",
-          "type": "string"
-        },
-        "licenseKey": {
-          "x-ms-secret": true,
-          "description": "Value of License Key",
-          "readOnly": true,
-          "type": "string"
-        },
-        "allowedPublicIps": {
-          "description": "Gets or sets the AllowedPublicIps.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "gatewayVnetId": {
-          "description": "Specifies the resource id of the gateway vnet.",
-          "type": "string"
-        },
-        "userInterfaceMode": {
-          "description": "Gets or sets the UserInterfaceMode.",
-          "type": "string"
-        },
         "accessConfigurations": {
           "type": "object",
           "items": {
@@ -747,6 +716,13 @@
             "$ref": "#/definitions/RemoteDesktop"
           },
           "description": "Gets or sets the Remote Desktop."
+        },
+        "networkAcls": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/NetworkAcls"
+          },
+          "description": "Specifies set of source IP address ranges to allow access the HPC Workbench instance."
         },
         "provisioningState": {
           "$ref": "./hpcworkbench.json#/definitions/ProvisioningState",
@@ -777,7 +753,8 @@
       "description": "License Key Parameters",
       "properties": {
         "licenseKey": {
-          "description": "Gets or sets LicenseKey",
+          "x-ms-secret": true,
+          "description": "Value of License Key",
           "type": "string"
         }
       }

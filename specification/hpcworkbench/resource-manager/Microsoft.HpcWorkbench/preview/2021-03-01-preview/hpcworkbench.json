@@ -484,6 +484,8 @@
     },
     "Resource": {
       "type": "object",
+      "description": "Common resource representation.",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "readOnly": true,
@@ -515,23 +517,26 @@
           "description": "system data",
           "title": "system data",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Name of SKU.",
+          "$ref": "#/definitions/Sku"
         }
-      },
-      "description": "Common resource representation.",
-      "x-ms-azure-resource": true
+      }
     },
     "CidrBlock": {
       "description": "this is an extension of IPAddress which includes logic related to Classes Interdomain Routing (CIDR) formatted IP Addresses.  \r\nE.g. 192.168.0.0/24, most people's default class C RFC 1918 IP space for their home router",
       "type": "string"
     },
-    "AppOpenIdClient": {
+    "AppOidc": {
       "type": "object",
       "properties": {
         "clientId": {
           "type": "string",
           "description": "Client Id"
         },
-        "clientSecret": {
+        "secretUri": {
           "type": "string",
           "description": "Client secret"
         }
@@ -540,19 +545,16 @@
     "InstancePropertiesFormat": {
       "type": "object",
       "properties": {
-        "sku": {
-          "type": "string",
-          "description": "Sku of the instance."
-        },
-        "environment": {
-          "type": "string",
-          "description": "Environment of the instance."
-        },
-        "instanceAddressSpace": {
+        "addressSpace": {
           "$ref": "#/definitions/CidrBlock"
         },
-        "appOpenIdClient": {
-          "$ref": "#/definitions/AppOpenIdClient"
+        "appOidc": {
+          "$ref": "#/definitions/AppOidc"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Name of SKU.",
+          "$ref": "#/definitions/Sku"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
