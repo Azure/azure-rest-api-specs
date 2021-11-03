@@ -307,35 +307,19 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "tenantId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The tenantId of the collection output."
-          },
-          {
-            "name": "pageSize",
+            "name": "top",
             "in": "query",
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The pageSize of the collection output."
+            "description": "The maximum number of records of the collection output."
           },
           {
-            "name": "skip",
+            "name": "skipToken",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of collection output needs to be skipped.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "x-ms-continuation",
-            "in": "header",
-            "required": false,
             "type": "string",
-            "description": "The database continuation token."
+            "description": "The number of collection output needs to be skipped."
           }
         ],
         "responses": {
@@ -358,9 +342,6 @@
         "x-ms-examples": {
           "Collections_Get_MaximumSet_Gen": {
             "$ref": "./examples/Collections_Get_MaximumSet_Gen.json"
-          },
-          "Collections_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Collections_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -404,9 +385,118 @@
         "x-ms-examples": {
           "CollectionByName_Get_MaximumSet_Gen": {
             "$ref": "./examples/CollectionByName_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections/{collectionId}/collectiondetails": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollectionDetails"
+        ],
+        "operationId": "ApiSecurityCollectionDetails_List",
+        "description": "Get collection details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
-          "CollectionByName_Get_MinimumSet_Gen": {
-            "$ref": "./examples/CollectionByName_Get_MinimumSet_Gen.json"
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The collectionId of the collection details output."
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of records of the collection output."
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The number of collection output needs to be skipped.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionDetailList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiSecurityCollectionDetails_List_MaximumSet_Gen": {
+            "$ref": "./examples/ApiSecurityCollectionDetails_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections/{collectionId}/collectiondetails/{collectionDetailsResourceName}": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollectionDetails"
+        ],
+        "operationId": "ApiSecurityCollectionDetails_Get",
+        "description": "Get a specific collection detail by name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the collection."
+          },
+          {
+            "name": "collectionDetailsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "resource name of the collection detail."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CollectionDetailsDocument"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiSecurityCollectionDetails_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ApiSecurityCollectionDetails_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -470,25 +560,6 @@
         "nextLink": {
           "type": "string",
           "description": "Link to the next set of results."
-        },
-        "totalApiCollectionsCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "totalApiEndpointsCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "totalKubernetesClustersCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "totalShadowApiEndpointsCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "continuationToken": {
-          "type": "string"
         }
       }
     },
@@ -519,7 +590,7 @@
         }
       },
       "description": "collections",
-      "x-ms-azure-resource": false
+      "x-ms-azure-resource": true
     },
     "CollectionDocumentProperties": {
       "type": "object",
@@ -559,24 +630,119 @@
           "readOnly": true,
           "description": "The hostingEnvironment."
         },
-        "apiEndpointActivity": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The apiEndpointActivity."
-        },
-        "numberOfApiEndpoints": {
+        "numberOfInactiveApiEndpoints": {
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "description": "The numberOfApiEndpoints."
+          "description": "The numberOfInactiveApiEndpoints."
+        },
+        "numberOfTotalApiEndpoints": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The numberOfTotalApiEndpoints."
         },
         "apiDocumentationFound": {
           "type": "boolean",
           "readOnly": true,
           "description": "The apiDocumentationFound."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioningState."
         }
       },
       "description": "The collection documents properties."
+    },
+    "ApiCollectionDetailList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionDetailsDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next link of the collection details."
+        }
+      }
+    },
+    "CollectionDetailsDocument": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CollectionDetailsDocumentProperties",
+          "description": "The collection details document properties."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "description": "collection details",
+      "x-ms-azure-resource": true
+    },
+    "CollectionDetailsDocumentProperties": {
+      "type": "object",
+      "properties": {
+        "endPoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The endPoint."
+        },
+        "httpMethod": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The httpMethod."
+        },
+        "discoveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "triggerDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endpointType": {
+          "$ref": "#/definitions/EndpointTypes"
+        },
+        "isEndpointActive": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioningState."
+        }
+      }
+    },
+    "EndpointTypes": {
+      "type": "string",
+      "enum": [
+        "API",
+        "UndocumentedApi"
+      ],
+      "x-ms-enum": {
+        "name": "endpointTypes",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
