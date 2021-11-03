@@ -1705,34 +1705,11 @@
         }
       }
     },
-    "PrivateLinkConnectionApprovalRequest": {
-      "description": "A request to approve or reject a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequestResource": {
-      "description": "Private Endpoint Connection Approval ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
-          "description": "Core resource properties",
-          "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "PrivateLinkConnectionState": {
       "description": "The state of a private link connection",
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
         "status": {
@@ -1966,6 +1943,9 @@
       "properties": {
         "properties": {
           "description": "RemotePrivateEndpointConnectionARMResource resource specific properties",
+          "required": [
+            "privateLinkServiceConnectionState"
+          ],
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -1974,7 +1954,8 @@
             },
             "privateEndpoint": {
               "$ref": "#/definitions/ArmIdWrapper",
-              "description": "PrivateEndpoint of a remote private endpoint connection"
+              "description": "PrivateEndpoint of a remote private endpoint connection",
+              "readOnly": true
             },
             "privateLinkServiceConnectionState": {
               "$ref": "#/definitions/PrivateLinkConnectionState"
@@ -1984,7 +1965,8 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
