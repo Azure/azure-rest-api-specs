@@ -51,6 +51,10 @@ directive:
     from: deviceupdate.json
     where: $.definitions.PrivateEndpointConnectionProxy
     reason: Internal NRP resource, all properties are top level properties
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: deviceupdate.json
+    where: $.definitions.GroupConnectivityInformation
+    reason: Internal NRP API, additional properties in the request
 ```
 
 ---
