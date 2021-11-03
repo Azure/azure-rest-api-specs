@@ -3578,6 +3578,9 @@
         "x-ms-examples": {
           "Create or update a restore point collection.": {
             "$ref": "./examples/compute/CreateOrUpdateARestorePointCollection.json"
+          },
+          "Create or update a restore point collection for cross region copy.": {
+            "$ref": "./examples/compute/CreateOrUpdateARestorePointCollectionForCrossRegionCopy.json"
           }
         },
         "parameters": [
@@ -3889,6 +3892,9 @@
         "x-ms-examples": {
           "Create a restore point": {
             "$ref": "./examples/compute/CreateARestorePoint.json"
+          },
+          "Copy a restore point to a different region": {
+            "$ref": "./examples/compute/CopyRestorePointBetweenRegions.json"
           }
         },
         "parameters": [
@@ -4087,6 +4093,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RestorePointInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
