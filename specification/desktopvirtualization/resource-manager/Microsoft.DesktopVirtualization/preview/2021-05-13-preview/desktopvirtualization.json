@@ -1748,7 +1748,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SessionHostConfiguration"
+              "$ref": "#/definitions/SessionHostConfigurationPatch"
             }
           }
         ],
@@ -4397,12 +4397,129 @@
         }
       }
     },
+    "SessionHostConfigurationPatch": {
+      "type": "object",
+      "description": "Represents a SessionHostConfigurationPatch definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostConfigurationPatch",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostConfigurationPatchProperties"
+        }
+      }
+    },
+    "SessionHostConfigurationPatchProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Session Host Configuration.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when session host configuration was last modified and something was changed.",
+          "readOnly": true
+        },
+        "vmSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoPatchProperties",
+          "description": "Disk information."
+        },
+        "customConfigurationTemplateUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
+        },
+        "customConfigurationParameterUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the parameter file to be run on the virtual machine after provisioning."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoPatchProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoPatchProperties",
+          "description": "Domain configurations of session hosts."
+        },
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsPatchProperties",
+          "description": "Local Admin credentials for session hosts."
+        }
+      }
+    },
     "DiskInfoProperties": {
       "description": "Disk information.",
       "type": "object",
       "required": [
         "type"
       ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS",
+            "UltraSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineDiskType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+              },
+              {
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+              },
+              {
+                "value": "UltraSSD_LRS",
+                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
+              }
+            ]
+          },
+          "description": "The disk type used by virtual machine in hostpool session host."
+        }
+      }
+    },
+    "DiskInfoPatchProperties": {
+      "description": "Disk information.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -4478,6 +4595,43 @@
         }
       }
     },
+    "ImageInfoPatchProperties": {
+      "description": "Image configurations of session host in a HostPool.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Marketplace",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "ImageType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Marketplace",
+                "description": "Using default marketplace images offered by Azure Marketplace."
+              },
+              {
+                "value": "Custom",
+                "description": "Using a custom image."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-nullable": false
+        },
+        "marketplaceInfo": {
+          "$ref": "#/definitions/MarketplaceInfoPatchProperties",
+          "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
+        },
+        "customInfo": {
+          "$ref": "#/definitions/CustomInfoPatchProperties",
+          "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
+        }
+      }
+    },
     "MarketplaceInfoProperties": {
       "description": "Marketplace image information.",
       "type": "object",
@@ -4506,12 +4660,44 @@
         }
       }
     },
+    "MarketplaceInfoPatchProperties": {
+      "description": "Marketplace image information.",
+      "type": "object",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The exact version of the image."
+        }
+      }
+    },
     "CustomInfoProperties": {
       "description": "Custom image information.",
       "type": "object",
       "required": [
         "resourceId"
       ],
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the custom image."
+        }
+      }
+    },
+    "CustomInfoPatchProperties": {
+      "description": "Custom image information.",
+      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -4559,6 +4745,43 @@
         }
       }
     },
+    "DomainInfoPatchProperties": {
+      "description": "Domain configurations of session hosts.",
+      "type": "object",
+      "properties": {
+        "joinType": {
+          "enum": [
+            "ActiveDirectory",
+            "AzureActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ActiveDirectory",
+                "description": "Using microsoft active directory."
+              },
+              {
+                "value": "AzureActiveDirectory",
+                "description": "Using microsoft azure active directory."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of domain join done by the virtual machine.",
+          "x-nullable": false
+        },
+        "activeDirectoryInfo": {
+          "$ref": "#/definitions/ActiveDirectoryInfoPatchProperties",
+          "description": "Active directory info. Only one should be populated based on the join type."
+        },
+        "azureActiveDirectoryInfo": {
+          "$ref": "#/definitions/AzureActiveDirectoryInfoPatchProperties",
+          "description": "Azure active directory info. Only one should be populated based on the join type."
+        }
+      }
+    },
     "ActiveDirectoryInfoProperties": {
       "description": "Active directory info. Only one should be populated based on the join type.",
       "type": "object",
@@ -4568,6 +4791,24 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Credentials needed to create the virtual machine."
+        },
+        "ouPath": {
+          "type": "string",
+          "description": "The ou path."
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        }
+      }
+    },
+    "ActiveDirectoryInfoPatchProperties": {
+      "description": "Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsPatchProperties",
           "description": "Credentials needed to create the virtual machine."
         },
         "ouPath": {
@@ -4590,6 +4831,16 @@
         }
       }
     },
+    "AzureActiveDirectoryInfoPatchProperties": {
+      "description": "Azure Active directory info. Only one should be populated based on the join type.",
+      "type": "object",
+      "properties": {
+        "mdmProviderGuid": {
+          "type": "string",
+          "description": "The mdm guid."
+        }
+      }
+    },
     "KeyVaultCredentialsProperties": {
       "description": "Credentials kept in the keyvault.",
       "type": "object",
@@ -4598,6 +4849,24 @@
         "passwordKeyVaultResourceId",
         "passwordKeyVaultSecretName"
       ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user name to the account."
+        },
+        "passwordKeyVaultResourceId": {
+          "type": "string",
+          "description": "The keyvault resource id to the keyvault secrets."
+        },
+        "passwordKeyVaultSecretName": {
+          "type": "string",
+          "description": "The keyvault secret name the password is stored in."
+        }
+      }
+    },
+    "KeyVaultCredentialsPatchProperties": {
+      "description": "Credentials kept in the keyvault.",
+      "type": "object",
       "properties": {
         "username": {
           "type": "string",
