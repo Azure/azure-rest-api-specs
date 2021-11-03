@@ -8,7 +8,7 @@ This is the AutoRest configuration file for SecurityInsights.
 
 ## Getting Started
 
-To build the SDK for SecurityInsights, simply [Install AutoRest](https://github.com/Azure/autorest/tree/main/packages/apps/autorest#install) and in this folder, run: 
+To build the SDK for SecurityInsights, simply [Install AutoRest](https://github.com/Azure/autorest/tree/main/packages/apps/autorest#install) and in this folder, run:
 
 > `autorest`
 
