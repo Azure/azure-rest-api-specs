@@ -375,9 +375,6 @@
           },
           {
             "$ref": "#/parameters/DataConnectorId"
-          },
-          {
-            "$ref": "#/parameters/DataConnectorDisconnectBody"
           }
         ],
         "responses": {
@@ -1958,10 +1955,6 @@
         }
       }
     },
-    "DataConnectorDisconnectBody": {
-      "description": "Represents Codeless API Polling disconnect body.",
-      "type": "object"
-    },
     "CodelessApiPollingDataConnector": {
       "allOf": [
         {
@@ -2522,16 +2515,6 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/DataConnectorConnectBody"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "DataConnectorDisconnectBody": {
-      "description": "The data connector",
-      "in": "body",
-      "name": "disconnectBody",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/DataConnectorDisconnectBody"
       },
       "x-ms-parameter-location": "method"
     },
