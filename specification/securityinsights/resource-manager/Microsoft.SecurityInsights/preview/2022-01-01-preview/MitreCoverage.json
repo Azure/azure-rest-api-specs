@@ -53,28 +53,27 @@
     }
   },
   "definitions": {
-    "SystemData": {
+    "ArmMitreCoverageArmObjectWrapper": {
+      "description": "A wrapper to the resource of type T, which contains Arm's first level fields such as id, name and type, with the resource properties",
+      "required": [
+        "properties"
+      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
       "properties": {
-        "createdBy": {
-          "type": "string"
-        },
-        "createdByType": {
-          "type": "string"
-        },
-        "createdAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "type": "string"
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "type": "string"
+        "properties": {
+          "description": "Gets or sets nested level of properties which contains the resource content",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArmMitreCoverage"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -106,61 +105,6 @@
           "description": "Gets Or sets MITRE Tactic",
           "type": "string",
           "example": "Reconnaissance"
-        }
-      }
-    },
-    "ArmMitreCoverageArmObjectWrapper": {
-      "description": "A wrapper to the resource of type T, which contains Arm's first level fields such as id, name and type, with the resource properties",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Gets or sets full Arm id of the resource",
-          "type": "string"
-        },
-        "name": {
-          "description": "Gets or sets the resource name (the last token of the Id)",
-          "type": "string"
-        },
-        "etag": {
-          "description": "Gets or sets a string that represent the last time the object was modified and prevent from modifying non-updated object. If value is '*' so it should be accepted anyway",
-          "type": "string"
-        },
-        "type": {
-          "description": "Gets or sets the resource type. Should be in convention of '{resourceProviderNamespace}/{resourceType}'",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Gets or sets the resource kind. If specified, it should distinct resources of the same Type but with different resource structures",
-          "type": "string"
-        },
-        "systemData": {
-          "description": "Gets or sets the resource systemData. contains information about resource creation / modification.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ]
-        },
-        "tags": {
-          "description": "Gets or sets the resource tags. Map of string keys to string values to be serialized and deserialized",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": "Gets or sets nested level of properties which contains the resource content",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ArmMitreCoverage"
-            }
-          ],
-          "x-ms-client-flatten": true
         }
       }
     },
