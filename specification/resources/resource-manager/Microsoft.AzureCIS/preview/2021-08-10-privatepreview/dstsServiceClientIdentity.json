@@ -311,6 +311,10 @@
       "type": "object",
       "description": "DscmResource details",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning State of the resource."
+        },
         "dstsInstance": {
           "type": "string",
           "description": "Dsts instance on which the ServiceClientIdentity should be created. If not specified, the ServiceClientIdentity is created on the regional dsts instance corresponding to the resource location. Example: useast-dsts.dsts.core.windows.net"
@@ -329,10 +333,6 @@
       "type": "object",
       "description": "DstsServiceClientIdentity Response",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning State of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/DstsServiceClientIdentityResource",
           "description": "DstsServiceClientIdentityResource detail"
