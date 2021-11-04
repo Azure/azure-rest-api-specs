@@ -8113,6 +8113,54 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/reboot": {
+      "post": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHost_Reboot",
+        "description": "Reboot the dedicated host. The operation will complete successfully once the dedicated host has booted and is running. For VM health after the reboot, please check the Resource Health Center in the Azure Portal.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-ms-examples": {
+          "Reboot Dedicated Host.": {
+            "$ref": "./examples/compute/DedicatedHostReboot.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
