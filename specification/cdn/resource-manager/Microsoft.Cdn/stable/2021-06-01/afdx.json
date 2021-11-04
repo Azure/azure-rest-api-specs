@@ -4073,6 +4073,14 @@
         }
       }
     },
+    "AzureFirstPartyManagedCertificate": {
+      "description": "Azure FirstParty Managed Certificate provided by other first party rp's to enable HTTPS.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ]
+    },    
     "ValidateSecretInput": {
       "description": "Input of the secret to be validated.",
       "type": "object",
@@ -4566,7 +4574,8 @@
       "enum": [
         "UrlSigningKey",
         "CustomerCertificate",
-        "ManagedCertificate"
+        "ManagedCertificate",
+		    "AzureFirstPartyManagedCertificate"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4641,6 +4650,16 @@
         }
       }
     },
+    "AzureFirstPartyManagedCertificateParameters": {
+      "description": "Azure FirstParty Managed Certificate provided by other first party rp's to enable HTTPS.",
+      "x-ms-discriminator-value": "AzureFirstPartyManagedCertificate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ]
+    },    
     "RuleSetListResult": {
       "description": "Result of the request to list rule sets. It contains a list of rule set objects and a URL link to get the next set of results.",
       "properties": {
