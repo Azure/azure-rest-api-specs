@@ -76,14 +76,14 @@
       "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/attackPaths/{attackPathName}": {
         "get": {
           "x-ms-examples": {
-            "Get an attack vector on a subscription from a security data location": {
+            "Get an attack path on a subscription from a security data location": {
               "$ref": "./examples/AttackPaths/GetAttackPathSubscriptionLocation_example.json"
             }
           },
           "tags": [
             "AttackPaths"
           ],
-          "description": "Get an attack vector that is associated with a subscription",
+          "description": "Get an attack path that is associated with a subscription",
           "operationId": "AttackPaths_GetSubscriptionLevelAttackPaths",
           "parameters": [
             {
@@ -138,7 +138,7 @@
       },
       "AttackPath": {
         "type": "object",
-        "description": "Attack vector",
+        "description": "Attack path",
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
@@ -153,29 +153,29 @@
       },
       "AttackPathProperties": {
         "type": "object",
-        "description": "Describes properties of an attack vector.",
+        "description": "Describes properties of an attack path.",
         "properties": {
           "displayName": {
             "readOnly": true,
             "type": "string",
-            "description": "User friendly display name of the attack vector"
+            "description": "User friendly display name of the attack path"
           },
           "description": {
             "readOnly": true,
             "type": "string",
-            "description": "Detailed description of the attack vector and what it means"
+            "description": "Detailed description of the attack path and what it means"
           },
           "potentialImpact": {
             "readOnly": true,
             "type": "string",
-            "description": "Potential steps attackers can take to leverage the attack vector"
+            "description": "Potential steps attackers can take to leverage the attack path"
           },
           "graph": {
             "$ref": "#/definitions/AttackPathGraph"
           },
           "recommendations": {
             "type": "array",
-            "description": "recommendations that can help mitigate the attack vector",
+            "description": "recommendations that can help mitigate the attack path",
             "items": {
               "$ref": "#/definitions/AttackPathRecommendation"
             }
@@ -183,11 +183,11 @@
           "bestPractices": {
             "readOnly": true,
             "type": "string",
-            "description": "Best practices to prevent this attack vector"
+            "description": "Best practices to prevent this attack path"
           },
           "riskCategories": {
             "type": "array",
-            "description": "categories of risk this attack vector exposing the organization to",
+            "description": "categories of risk this attack path exposing the organization to",
             "items": {
               "type": "string"
             }
@@ -197,22 +197,29 @@
       "AttackPathRecommendation": {
         "type": "object",
         "additionalProperties": true,
-        "description": "Properties describing a recommendation belongs to the attack vector"
+        "description": "Properties describing a recommendation belongs to the attack path",
+        "properties": {
+          "recommendationId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "identifier of a recommendation that can help mitigate the attack path"
+          }
+        }
       },
       "AttackPathGraph": {
         "type": "object",
-        "description": "Describes properties of an attack vector.",
+        "description": "Describes properties of an attack path.",
         "properties": {
           "AttackPathNodes": {
             "type": "array",
-            "description": "nodes composing the attack vector",
+            "description": "nodes composing the attack path",
             "items": {
               "$ref": "#/definitions/AttackPathNode"
             }
           },
           "AttackPathEdges": {
             "type": "array",
-            "description": "connections between the nodes composing the attack vector",
+            "description": "connections between the nodes composing the attack path",
             "items": {
               "$ref": "#/definitions/AttackPathEdge"
             }
@@ -221,51 +228,89 @@
       },
       "AttackPathNode": {
         "type": "object",
-        "description": "an entity which is part of the attack vector",
+        "description": "an entity which is part of the attack path",
         "properties": {
-          "entityName": {
+          "displayName": {
             "readOnly": true,
             "type": "string",
-            "description": ""
+            "description": "display name of the entity"
           },
-          "entityType": {
+          "mapIdentifier": {
             "readOnly": true,
             "type": "string",
-            "description": ""    
+            "description": "an identifier for the node"
           },
-          "entityExtendedProperties": {
-            "$ref": "#/definitions/EntityExtendedProperties"
+          "label": {
+            "readOnly": true,
+            "type": "string",
+            "description": "the type of the entity"    
+          },
+          "tags": {
+            "readOnly": true,
+            "type": "array",
+            "description": "node categories",
+            "items": {
+              "$ref": "#/definitions/GraphNodeTag"
+            }   
+          },
+          "entityIdentifiers": {
+            "readOnly": true,
+            "type": "array",
+            "description": "identifiers that can be used to refer the actual entity",
+            "items": {
+              "$ref": "#/definitions/EntityIdentifieraaa"
+            }
           }
         }
-      },
-      "EntityExtendedProperties": {
-        "type": "object",
-        "additionalProperties": true,
-        "description": "Changing set of properties depending on the node entity type"
       },
       "AttackPathEdge": {
         "type": "object",
-        "description": "a connection relation between two attack vector entities",
+        "description": "a connection relation between two attack path entities",
         "properties": {
-          "sourceEntity": {
+          "sourceNode": {
             "readOnly": true,
             "type": "string",
             "description": ""
           },
-          "targetEntity": {
+          "targetNode": {
             "readOnly": true,
             "type": "string",
             "description": ""    
           },
-          "edgeExtendedProperties": {
-            "$ref": "#/definitions/EdgeExtendedProperties"
+          "mapIdentifier": {
+            "readOnly": true,
+            "type": "string",
+            "description": "an identifier for the edge"
+          },
+          "label": {
+            "readOnly": true,
+            "type": "string",
+            "description": "the type of the entity"    
+          },
+          "tags": {
+            "type": "array",
+            "description": "node categories",
+            "items": {
+              "$ref": "#/definitions/GraphNodeTag"
+            }   
           }
         }
       },
-      "EdgeExtendedProperties": {
+      "GraphNodeTag": {
         "type": "object",
-        "additionalProperties": true,
-        "description": "Changing set of properties describing the connection relation"      
+        "description": "",
+        "properties": {
+          "tagKey": {
+            "readOnly": true,
+            "type": "string",
+            "description": "tag key"  
+          },
+          "tagValue": {
+            "readOnly": true,
+            "type": "string",
+            "description": "tag value" 
+          }
+        }    
       }
     },
     "parameters": {
@@ -274,7 +319,7 @@
         "in": "path",
         "required": true,
         "type": "string",
-        "description": "Name of the attack vector object",
+        "description": "Name of the attack path object",
         "x-ms-parameter-location": "method"
       }
     }
