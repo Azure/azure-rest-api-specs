@@ -3,7 +3,7 @@
   "info": {
     "title": "StorageManagementClient",
     "description": "The Azure Storage Management API.",
-    "version": "2021-06-01"
+    "version": "2021-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -143,6 +143,9 @@
           },
           "StorageAccountCreateEnablePublicNetworkAccess.": {
             "$ref": "./examples/StorageAccountCreateEnablePublicNetworkAccess.json"
+          },
+          "StorageAccountCreateUserAssignedIdentityWithFederatedClientId.": {
+            "$ref": "./examples/StorageAccountCreateUserAssignedIdentityWithFederatedCliendId.json"
           }
         },
         "parameters": [
@@ -291,6 +294,9 @@
           },
           "StorageAccountUpdateWithImmutabilityPolicy": {
             "$ref": "./examples/StorageAccountUpdateWithImmutabilityPolicy.json"
+          },
+          "StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId": {
+            "$ref": "./examples/StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId.json"
           }
         },
         "parameters": [
@@ -1663,6 +1669,248 @@
             "description": "OK -- revoke user delegation keys succeeded."
           }
         }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers": {
+        "get": {
+          "tags": [
+            "LocalUsers"
+          ],
+          "operationId": "LocalUsers_List",
+          "description": "List the local users associated with the storage account.",
+          "x-ms-examples": {
+            "ListLocalUsers": {
+              "$ref": "./examples/LocalUsersList.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- List local users successfully.",
+              "schema": {
+                "$ref": "#/definitions/LocalUsers"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}": {
+      "get": {
+        "tags": [
+          "LocalUsers"
+        ],
+        "operationId": "LocalUsers_Get",
+        "description": "Get the local user of the storage account by username.",
+        "x-ms-examples": {
+          "GetLocalUser": {
+            "$ref": "./examples/LocalUserGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the local user properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalUser"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LocalUsers"
+        ],
+        "operationId": "LocalUsers_CreateOrUpdate",
+        "description": "Create or update the properties of a local user associated with the storage account",
+        "x-ms-examples": {
+          "CreateLocalUser": {
+            "$ref": "./examples/LocalUserCreate.json"
+          },
+          "UpdateLocalUser": {
+            "$ref": "./examples/LocalUserUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Username"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocalUser"
+            },
+            "description": "The local user associated with a storage account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Put local user successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalUser"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LocalUsers"
+        ],
+        "operationId": "LocalUsers_Delete",
+        "description": "Deletes the local user associated with the specified storage account.",
+        "x-ms-examples": {
+          "DeleteLocalUser": {
+            "$ref": "./examples/LocalUserDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the local user successfully."
+          },
+          "204": {
+            "description": "No Content -- The local user does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}/listKeys": {
+      "post": {
+        "tags": [
+          "LocalUsers"
+        ],
+        "operationId": "LocalUsers_ListKeys",
+        "description": "List the local user keys.",
+        "x-ms-examples": {
+          "ListLocalUserKeys": {
+            "$ref": "./examples/LocalUserListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the local user keys successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalUserKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}/regeneratePassword": {
+      "post": {
+        "tags": [
+          "LocalUsers"
+        ],
+        "operationId": "LocalUsers_RegeneratePassword",
+        "description": "Regenerate the local user password.",
+        "x-ms-examples": {
+          "RegenerateLocalUserPassword": {
+            "$ref": "./examples/LocalUserRegeneratePassword.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Regenerate local user password successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalUserProperties"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}": {
@@ -2364,6 +2612,11 @@
           "type": "string",
           "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.",
           "x-ms-client-name": "EncryptionUserAssignedIdentity"
+        },
+        "federatedIdentityClientId": {
+          "type": "string",
+          "description": "ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account.",
+          "x-ms-client-name": "EncryptionFederatedIdentityClientId"
         }
       },
       "description": "Encryption identity for the storage account."
@@ -2586,6 +2839,18 @@
         "azureStorageSid": {
           "type": "string",
           "description": "Specifies the security identifier (SID) for Azure Storage."
+        },
+        "samAccountName": {
+          "type": "string",
+          "description": "Specifies the Active Directory SAMAccountName for Azure Storage."
+        },
+        "accountType": {
+          "type": "string",
+          "description": "Specifies the Active Directory account type for Azure Storage.",
+          "enum": [
+            "User",
+            "Computer"
+          ]
         }
       },
       "required": [
@@ -4448,6 +4713,128 @@
       },
       "description": "Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters."
     },
+    "LocalUsers": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalUser"
+          },
+          "description": "The local users associated with the storage account."
+        }
+      },
+      "description": "List storage account local users."
+    },
+    "LocalUser": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LocalUserProperties",
+          "x-ms-client-flatten": true,
+          "description": "Storage account local user properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The local user associated with the storage accounts."
+    },
+    "LocalUserProperties": {
+      "properties": {
+        "permissionScopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PermissionScope"
+          },
+          "description": "The permission scopes of the local user."
+        },
+        "homeDirectory": {
+          "type": "string",
+          "description": "Optional, local user home directory."
+        },
+        "sshAuthorizedKeys": {
+          "$ref": "#/definitions/SshAuthorizedKeys"
+        },
+        "sid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique Security Identifier that is generated by the server."
+        },
+        "sharedKey": {
+          "$ref": "#/definitions/SharedKey"
+        },
+        "sshPassword": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Auto generated password by the server for SSH authentication if hasSshPassword is set to true on the creation of local user."
+        },
+        "hasSharedKey": {
+          "type": "boolean",
+          "description": "Indicates whether shared key exists. Set it to false to remove existing shared key."
+        },
+        "hasSshKey": {
+          "type": "boolean",
+          "description": "Indicates whether ssh key exists. Set it to false to remove existing SSH key."
+        },
+        "hasSshPassword": {
+          "type": "boolean",
+          "description": "Indicates whether ssh password exists. Set it to false to remove existing SSH password."
+        }
+      },
+      "description": "The Storage Account Local User properties."
+    },
+    "LocalUserKeys": {
+      "properties": {
+        "sshAuthorizedKeys": {
+          "$ref": "#/definitions/SshAuthorizedKeys"
+        },
+        "sharedKey": {
+          "$ref": "#/definitions/SharedKey"
+        }
+      },
+      "description": "The Storage Account Local User keys."
+    },
+    "PermissionScope": {
+      "properties": {
+        "permissions": {
+          "type": "string",
+          "description": "The permissions for the local user. Possible values include: Read (r), Write (w), Delete (d), List (l), and Create (c)."
+        },
+        "service": {
+          "type": "string",
+          "description": "The service used by the local user, e.g. blob, file."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of resource, normally the container name or the file share name, used by the local user."
+        }
+      }
+    },
+    "SshAuthorizedKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SshPublicKey"
+      },
+      "description": "Optional, local user ssh authorized keys for SFTP."
+    },
+    "SshPublicKey": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional. It is used to store the function/usage of the key"
+        },
+        "key": {
+          "type": "string",
+          "description": "Ssh public key base64 encoded. The format should be: '<keyType> <keyData>', e.g. ssh-rsa AAAABBBB"
+        }
+      }
+    },
+    "SharedKey": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Auto generated by the server for SMB authentication."
+    },
     "ListBlobInventoryPolicy": {
       "properties": {
         "value": {
@@ -4728,6 +5115,16 @@
       "type": "string",
       "description": "For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.",
       "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "Username": {
+      "name": "username",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.",
+      "minLength": 3,
+      "maxLength": 64,
       "x-ms-parameter-location": "method"
     },
     "BlobInventoryPolicyName": {
