@@ -388,14 +388,14 @@ directive:
   from: ContainerApps.json
   reason: SystemData will implement in next version.
 - suppress: R4009
-   from: ContainerAppsRevisions.json
-   reason: SystemData will implement in next version.
+  from: ContainerAppsRevisions.json
+  reason: SystemData will implement in next version.
 - suppress: R3026
-   from: ContainerApps.json
-   reason: Patch operation will be implemented in later version.
+  from: ContainerApps.json
+  reason: Patch operation will be implemented in later version.
 - suppress: R3026
-   from: ContainerAppsRevisions.json
-   reason: Patch operation will be implemented in later version.
+  from: ContainerAppsRevisions.json
+  reason: Patch operation will be implemented in later version.
 ```
 
 ### Tag: package-2021-01-15
