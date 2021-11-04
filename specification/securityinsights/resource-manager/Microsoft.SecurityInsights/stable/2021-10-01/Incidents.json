@@ -1540,7 +1540,7 @@
           "type": "object"
         },
         "incidentInfo": {
-          "$ref": "#/definitions/IncidentInfo",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
           "type": "object"
         }
@@ -1745,61 +1745,6 @@
         "entityKind",
         "count"
       ],
-      "type": "object"
-    },
-    "IncidentInfo": {
-      "description": "Describes related incident information for the bookmark",
-      "properties": {
-        "incidentId": {
-          "description": "Incident Id",
-          "type": "string"
-        },
-        "severity": {
-          "description": "The severity of the incident",
-          "enum": [
-            "Critical",
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "CaseSeverity",
-            "values": [
-              {
-                "description": "Critical severity",
-                "value": "Critical"
-              },
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
-        },
-        "title": {
-          "description": "The title of the incident",
-          "type": "string"
-        },
-        "relationName": {
-          "description": "Relation Name",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "IncidentLabel": {
@@ -2019,35 +1964,8 @@
         },
         "severity": {
           "description": "The severity of the incident",
-          "enum": [
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentSeverity",
-            "values": [
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
         },
         "status": {
           "description": "The status of the incident",
