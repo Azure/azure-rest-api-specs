@@ -39,7 +39,7 @@ input-file:
   - Microsoft.SecurityInsights/stable/2021-10-01/Incidents.json
   - Microsoft.SecurityInsights/stable/2021-10-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2021-10-01/Watchlists.json
-  - Microsoft.SecurityInsights/stable/2021-10-01/Operations.json
+  - Microsoft.SecurityInsights/stable/2021-10-01/operations.json
   - Microsoft.SecurityInsights/stable/2021-10-01/OnboardingStates.json
   - Microsoft.SecurityInsights/stable/2021-10-01/AlertRules.json
   - Microsoft.SecurityInsights/stable/2021-10-01/Bookmarks.json
