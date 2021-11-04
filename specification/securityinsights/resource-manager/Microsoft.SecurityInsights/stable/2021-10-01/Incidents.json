@@ -915,29 +915,6 @@
       },
       "type": "object"
     },
-    "ClientInfo": {
-      "description": "Information on the client (user or application) that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the client.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the client.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the client.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "description": "The user principal name of the client.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "CloudApplicationEntity": {
       "allOf": [
         {
@@ -1520,7 +1497,7 @@
           "type": "string"
         },
         "createdBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that created the bookmark",
           "type": "object"
         },
@@ -1536,7 +1513,7 @@
         "labels": {
           "description": "List of labels relevant to this bookmark",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
           },
           "type": "array"
         },
@@ -1558,7 +1535,7 @@
           "type": "string"
         },
         "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
@@ -1720,7 +1697,7 @@
           "type": "string"
         },
         "author": {
-          "$ref": "#/definitions/ClientInfo",
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo",
           "description": "Describes the client that created the comment",
           "readOnly": true,
           "type": "object"
@@ -2275,10 +2252,6 @@
         }
       },
       "type": "object"
-    },
-    "Label": {
-      "description": "Label that will be used to tag and filter on.",
-      "type": "string"
     },
     "MailboxEntity": {
       "allOf": [
@@ -3670,28 +3643,6 @@
           "description": "A full URL the entity points to",
           "readOnly": true,
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "UserInfo": {
-      "description": "User information that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user.",
-          "format": "uuid",
-          "type": "string",
-          "x-nullable": true
         }
       },
       "type": "object"
