@@ -1758,6 +1758,237 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers/{vmmServerName}/inventoryItems/{inventoryItemName}": {
+      "put": {
+        "tags": [
+          "InventoryItems"
+        ],
+        "operationId": "InventoryItems_Create",
+        "summary": "Implements InventoryItem PUT method.",
+        "description": "Create Or Update InventoryItem.",
+        "x-ms-examples": {
+          "CreateInventoryItem": {
+            "$ref": "./examples/CreateInventoryItem.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "vmmServerName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VMMServer."
+          },
+          {
+            "in": "path",
+            "name": "inventoryItemName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the inventoryItem."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InventoryItems"
+        ],
+        "operationId": "InventoryItems_Get",
+        "summary": "Implements GET InventoryItem method.",
+        "description": "Shows an inventory item.",
+        "x-ms-examples": {
+          "GetInventoryItem": {
+            "$ref": "./examples/GetInventoryItem.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "vmmServerName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VMMServer."
+          },
+          {
+            "in": "path",
+            "name": "inventoryItemName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the inventoryItem."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InventoryItems"
+        ],
+        "operationId": "InventoryItems_Delete",
+        "summary": "Implements inventoryItem DELETE method.",
+        "description": "Deletes an inventoryItem.",
+        "x-ms-examples": {
+          "DeleteInventoryItem": {
+            "$ref": "./examples/DeleteInventoryItem.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "vmmServerName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VMMServer."
+          },
+          {
+            "in": "path",
+            "name": "inventoryItemName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the inventoryItem."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers/{vmmServerName}/inventoryItems": {
+      "get": {
+        "tags": [
+          "InventoryItems"
+        ],
+        "operationId": "InventoryItems_ListByVMMServer",
+        "summary": "Implements GET for the list of Inventory Items in the VMMServer.",
+        "description": "Returns the list of inventoryItems in the given VMMServer.",
+        "x-ms-examples": {
+          "InventoryItemsListByVMMServer": {
+            "$ref": "./examples/ListInventoryItemsByVMMServer.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "vmmServerName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VMMServer."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InventoryItemsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2921,6 +3152,179 @@
           "description": "Url to follow for getting next page of resources."
         }
       }
+    },
+    "InventoryItemsList": {
+      "description": "List of InventoryItems.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of InventoryItems.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of InventoryItems",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InventoryItem"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InventoryItem": {
+      "description": "Defines the inventory item.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/InventoryItemProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "InventoryItemProperties": {
+      "description": "Defines the resource properties.",
+      "required": [
+        "inventoryType"
+      ],
+      "discriminator": "inventoryType",
+      "type": "object",
+      "properties": {
+        "inventoryType": {
+          "description": "They inventory type.",
+          "$ref": "#/definitions/InventoryType"
+        },
+        "managedResourceId": {
+          "description": "Gets the tracked resource id corresponding to the inventory resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uuid": {
+          "description": "Gets the UUID (which is assigned by VMM) for the inventory item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "inventoryItemName": {
+          "description": "Gets the Managed Object name in VMM for the inventory item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InventoryType": {
+      "type": "string",
+      "description": "The inventory type.",
+      "enum": [
+        "Cloud",
+        "VirtualNetwork",
+        "VirtualMachineTemplate",
+        "VirtualMachine"
+      ],
+      "x-ms-enum": {
+        "name": "InventoryType",
+        "modelAsString": true
+      }
+    },
+    "CloudInventoryItem": {
+      "description": "The Cloud inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Cloud"
+    },
+    "VirtualNetworkInventoryItem": {
+      "description": "The Virtual network inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VirtualNetwork"
+    },
+    "VirtualMachineTemplateInventoryItem": {
+      "description": "The Virtual machine template inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "properties": {
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "VirtualMachineTemplate"
+    },
+    "VirtualMachineInventoryItem": {
+      "description": "The Virtual machine inventory item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InventoryItemProperties"
+        }
+      ],
+      "properties": {
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerState": {
+          "description": "Gets the power state of the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the nic ip addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "VirtualMachine"
     },
     "ResourceProviderOperation": {
       "type": "object",
