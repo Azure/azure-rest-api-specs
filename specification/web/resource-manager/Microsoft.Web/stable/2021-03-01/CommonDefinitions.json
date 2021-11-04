@@ -1237,6 +1237,24 @@
         }
       }
     },
+    "EnvironmentVar": {
+      "description": "Container App container environment variable.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Environment variable name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Non-secret environment variable value.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the environment variable value.",
+          "type": "string"
+        }
+      }
+    },
     "ErrorEntity": {
       "description": "Body of the error response returned from the API.",
       "type": "object",
