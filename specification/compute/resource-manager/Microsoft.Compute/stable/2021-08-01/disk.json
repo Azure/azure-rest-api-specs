@@ -117,6 +117,12 @@
           },
           "Create a managed disk with security profile": {
             "$ref": "./examples/CreateAManagedDiskWithSecurityProfile.json"
+          },
+          "Create a managed disk from ImportSecure create option": {
+            "$ref": "./examples/CreateAManagedDiskFromImportSecure.json"
+          },
+          "Create a managed disk from UploadPreparedSecure create option": {
+            "$ref": "./examples/CreateAManagedDiskFromUploadPreparedSecure.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -375,6 +381,9 @@
         "x-ms-examples": {
           "Get a sas on a managed disk.": {
             "$ref": "./examples/BeginGetAccessManagedDisk.json"
+          },
+          "Get sas on managed disk and VM guest state blob": {
+            "$ref": "./examples/BeginGetAccessManagedDiskWithVMGuestState.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2293,6 +2302,10 @@
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         },
+        "securityProfile": {
+          "$ref": "#/definitions/DiskSecurityProfile",
+          "description": "Contains the security related information for the resource."
+        },
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a snapshot supports hibernation."
@@ -2459,7 +2472,8 @@
       "enum": [
         "EncryptionAtRestWithPlatformKey",
         "EncryptionAtRestWithCustomerKey",
-        "EncryptionAtRestWithPlatformAndCustomerKeys"
+        "EncryptionAtRestWithPlatformAndCustomerKeys",
+        "ConfidentialVmEncryptedWithCustomerKey"
       ],
       "x-ms-enum": {
         "name": "EncryptionType",
@@ -2476,6 +2490,10 @@
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
             "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          },
+          {
+            "value": "ConfidentialVmEncryptedWithCustomerKey",
+            "description": "Confidential VM supported disk encrypted with customer managed key."
           }
         ]
       }
@@ -2485,7 +2503,8 @@
       "description": "The type of key used to encrypt the data of the disk.",
       "enum": [
         "EncryptionAtRestWithCustomerKey",
-        "EncryptionAtRestWithPlatformAndCustomerKeys"
+        "EncryptionAtRestWithPlatformAndCustomerKeys",
+        "ConfidentialVmEncryptedWithCustomerKey"
       ],
       "x-ms-enum": {
         "name": "DiskEncryptionSetType",
@@ -2498,6 +2517,10 @@
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
             "description": "Resource using diskEncryptionSet would be encrypted at rest with two layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          },
+          {
+            "value": "ConfidentialVmEncryptedWithCustomerKey",
+            "description": "Confidential VM supported disk encrypted with customer managed key."
           }
         ]
       }
@@ -2777,7 +2800,9 @@
             "Copy",
             "Restore",
             "Upload",
-            "CopyStart"
+            "CopyStart",
+            "ImportSecure",
+            "UploadPreparedSecure"
           ],
           "x-ms-enum": {
             "name": "DiskCreateOption",
@@ -2814,6 +2839,14 @@
               {
                 "value": "CopyStart",
                 "description": "Create a new disk by using a deep copy process, where the resource creation is considered complete only after all data has been copied from the source."
+              },
+              {
+                "value": "ImportSecure",
+                "description": "Similar to Import create option. Create new disk by importing additional VM guest state blob specified by securityDataUri in storage account specified by storageAccountId"
+              },
+              {
+                "value": "UploadPreparedSecure",
+                "description": "Similar to Upload create option. Create a new disk and upload using write token in both disk and VM guest state blob"
               }
             ]
           },
@@ -2926,7 +2959,10 @@
       "type": "string",
       "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
       "enum": [
-        "TrustedLaunch"
+        "TrustedLaunch",
+        "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+        "ConfidentialVM_DiskEncryptedWithPlatformKey",
+        "ConfidentialVM_DiskEncryptedWithCustomerKey"
       ],
       "x-ms-enum": {
         "name": "DiskSecurityTypes",
@@ -2935,6 +2971,18 @@
           {
             "value": "TrustedLaunch",
             "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+          },
+          {
+            "value": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+            "description": "Indicates Confidential VM disk with only VMGS blob encrypted"
+          },
+          {
+            "value": "ConfidentialVM_DiskEncryptedWithPlatformKey",
+            "description": "Indicates Confidential VM disk with both OS disk blob and VMGS blob encrypted with a platform managed key"
+          },
+          {
+            "value": "ConfidentialVM_DiskEncryptedWithCustomerKey",
+            "description": "Indicates Confidential VM disk with both OS disk blob and VMGS blob encrypted with a customer managed key"
           }
         ]
       }
@@ -2943,7 +2991,11 @@
       "properties": {
         "securityType": {
           "$ref": "#/definitions/DiskSecurityType"
-        }
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "ResourceId of the disk encryption set associated to Confidential VM supported disk encrypted with customer managed key"
+        },
       },
       "description": "Contains the security related information for the resource."
     },
@@ -2965,7 +3017,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Time duration in seconds until the SAS access expires."
-        }
+        },
+        "getSecureVMGuestStateSAS": {
+          "type": "boolean",
+          "description": "Set this flag to true to get additional SAS for VM guest state blob"
+        },
       },
       "required": [
         "access",
@@ -2979,6 +3035,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A SAS uri for accessing a disk."
+        },
+        "securityDataAccessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a VM guest state blob."
         }
       },
       "description": "A disk access SAS uri."
