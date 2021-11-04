@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "endpoint": "mynamespace.servicebus.windows.net",
+    "groupName": "sample-sr-group",
+    "schemaName": "sample-schema-name",
+    "schemaContent": "{\"type\":\"record\",\"name\":\"ExampleUser\",\"namespace\":\"com.azure.schemaregistry.samples\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favoriteNumber\",\"type\":\"int\"}]}",
+    "api-version": "2021-10"
+  },
+  "responses": {
+    "204": {
+      "headers": {
+        "Location": "https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-schema-name/versions/3?api-version=2021-11",
+        "Schema-Id": "a489dc4916744e3db72dda8f9693f342",
+        "Schema-Id-Location": "https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2021-11&schema-id=a489dc4916744e3db72dda8f9693f342",
+        "Schema-Group-Name": "sample-sr-group",
+        "Schema-Name": "sample-schema-name",
+        "Schema-Version": 3
+      }
+    },
+    "415": {}
+  }
+}
