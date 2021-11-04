@@ -87,6 +87,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReasonParameter"
           }
         ],
         "responses": {
@@ -204,6 +207,15 @@
       "description": "The identifier of the resource.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "ReasonParameter": {
+      "name": "reason",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The reason for the call.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": false
     }
   }
 }
