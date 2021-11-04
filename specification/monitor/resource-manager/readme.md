@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-04
+tag: package-2021-08
 
 directive:
   - suppress: Example Validations
@@ -73,6 +73,12 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
 
+``` yaml
+description: Monitor Management Client
+openapi-type: arm
+tag: package-2021-08
+```
+
 ### Tag: package-2021-09-01-only
 
 These settings apply only when `--tag=package-2021-09-01-only` is specified on the command line.
@@ -80,6 +86,15 @@ These settings apply only when `--tag=package-2021-09-01-only` is specified on t
 ``` yaml $(tag) == 'package-2021-09-01-only'
 input-file:
 - Microsoft.Insights/stable/2021-09-01/actionGroups_API.json
+```
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/scheduledQueryRule_API.json
 ```
 
 ### Tag: package-2021-07
