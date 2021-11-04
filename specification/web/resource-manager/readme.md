@@ -224,6 +224,18 @@ directive:
 - where: $.definitions.TriggeredJobRun.properties.web_job_id
   suppress: R3016
   reason: This requires a breaking change in kudu runtime API.
+- suppress: R4009
+  from: ContainerApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ContainerAppsRevisions.json
+  reason: SystemData will implement in next version.
+- suppress: R3026
+  from: ContainerApps.json
+  reason: Patch operation will be implemented in later version.
+- suppress: R3026
+  from: ContainerAppsRevisions.json
+  reason: Patch operation will be implemented in later version.
 ```
 
 ### Tag: package-2021-02
@@ -384,18 +396,6 @@ directive:
 - where: $.definitions.TriggeredJobRun.properties.web_job_id
   suppress: R3016
   reason: This requires a breaking change in kudu runtime API.
-- suppress: R4009
-  from: ContainerApps.json
-  reason: SystemData will implement in next version.
-- suppress: R4009
-  from: ContainerAppsRevisions.json
-  reason: SystemData will implement in next version.
-- suppress: R3026
-  from: ContainerApps.json
-  reason: Patch operation will be implemented in later version.
-- suppress: R3026
-  from: ContainerAppsRevisions.json
-  reason: Patch operation will be implemented in later version.
 ```
 
 ### Tag: package-2021-01-15
