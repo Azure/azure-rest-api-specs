@@ -37,7 +37,7 @@
           "200": {
             "description": "Products Mitre Coverages fetched",
             "schema": {
-              "$ref": "#/definitions/ProductsMitreCoverage"
+              "$ref": "#/definitions/ProductsMitreCoverageList"
             }
           },
           "default": {
@@ -53,7 +53,7 @@
     }
   },
   "definitions": {
-    "ArmMitreCoverageArmObjectWrapper": {
+    "ProductMitreCoverageModel": {
       "description": "A wrapper to the resource of type T, which contains Arm's first level fields such as id, name and type, with the resource properties",
       "required": [
         "properties"
@@ -70,52 +70,57 @@
           "type": "object",
           "allOf": [
             {
-              "$ref": "#/definitions/ArmMitreCoverage"
+              "$ref": "#/definitions/ProductMitreCoverageProperties"
             }
           ],
           "x-ms-client-flatten": true
         }
       }
     },
-    "ArmMitreCoverage": {
+    "ProductMitreCoverageProperties": {
       "type": "object",
       "properties": {
         "productName": {
           "description": "Gets Or sets the product name that covers a specific tactic and technique.",
           "type": "string",
+          "readOnly": true,
           "example": "MDATP"
         },
         "vendorName": {
-          "description": "Gets Or sets the vendor of the Product",
+          "description": "Gets Or sets the vendor of the Product.",
           "type": "string",
+          "readOnly": true,
           "example": "Microsoft"
         },
         "coverageSize": {
           "format": "int32",
           "description": "Gets Or sets the Coverage Size of the product for a specific tactic and technique.",
           "type": "integer",
+          "readOnly": true,
           "example": 2
         },
         "technique": {
-          "description": "Gets Or sets MITRE technique code",
+          "description": "Gets Or sets MITRE technique code.",
           "type": "string",
+          "readOnly": true,
           "example": "T1595"
         },
         "tactic": {
-          "description": "Gets Or sets MITRE Tactic",
+          "description": "Gets Or sets MITRE Tactic.",
           "type": "string",
+          "readOnly": true,
           "example": "Reconnaissance"
         }
       }
     },
-    "ProductsMitreCoverage": {
+    "ProductsMitreCoverageList": {
       "type": "object",
       "properties": {
         "value": {
           "description": "Gets or sets array of arm object wrappers",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ArmMitreCoverageArmObjectWrapper"
+            "$ref": "#/definitions/ProductMitreCoverageModel"
           }
         },
         "nextLink": {
