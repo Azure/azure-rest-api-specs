@@ -1423,6 +1423,7 @@
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
+          "default": null,
           "description": "Maintenance window properties of a server.",
           "x-ms-mutability": [
             "update",
@@ -1482,10 +1483,6 @@
     },
     "Server": {
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
-          "description": "The Azure Active Directory identity of the server."
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1529,7 +1526,12 @@
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window properties of a server."
+          "default": null,
+          "description": "Maintenance window properties of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -1631,6 +1633,7 @@
         "backupRetentionDays": {
           "type": "integer",
           "format": "int32",
+          "default": 7,
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
@@ -2025,7 +2028,17 @@
         },
         "failoverMode": {
           "type": "string",
-          "description": "Failover mode."
+          "description": "Failover mode.",
+          "enum": [
+            "PlannedFailover",
+            "ForcedFailover",
+            "PlannedSwitchover",
+            "ForcedSwitchover"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverMode",
+            "modelAsString": true
+          }
         }
       },
       "description": "Represents server restart parameters."

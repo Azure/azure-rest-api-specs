@@ -32,5 +32,5 @@ These settings apply only when `--tag=package-2020-02-02 --go` is specified on h
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2020-02-02' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/appinsights/mgmt/2020-02-02-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2020-02-02/$(namespace)
 ```
