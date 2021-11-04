@@ -34,7 +34,7 @@ tag: package-spark-2020-12-01
 ```
 
 ``` yaml $(package-artifacts)
-tag: package-artifacts-2021-07-01-preview
+tag: package-artifacts-composite-v2
 ```
 
 ``` yaml $(package-access-control)
@@ -170,6 +170,40 @@ These settings apply only when `--tag=package-kql-script-2021-06-preview` is spe
 ``` yaml $(tag) == 'package-kql-script-2021-06-preview'
 input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/kqlScripts.json
+```
+
+### Tag: package-artifacts-composite-v2
+
+These settings apply only when `--tag=package-artifacts-composite-v2` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-composite-v2'
+input-file:
+  - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
 ```
 
 ### Tag: package-artifacts-2020-12-01
