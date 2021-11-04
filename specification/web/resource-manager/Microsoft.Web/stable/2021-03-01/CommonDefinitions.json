@@ -611,6 +611,60 @@
         }
       }
     },
+    "Container": {
+      "description": "Container App container definition.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Container image tag.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Custom container name.",
+          "type": "string"
+        },
+        "command": {
+          "description": "Container start command.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "Container start command arguments.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "description": "Container environment variables.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVar"
+          }
+        },
+        "resources": {
+          "$ref": "#/definitions/ContainerResources",
+          "description": "Container resource requirements."
+        }
+      }
+    },
+    "ContainerResources": {
+      "description": "Container App container resource requirements.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "Required CPU in cores, e.g. 0.5",
+          "type": "number"
+        },
+        "memory": {
+          "description": "Required memory, e.g. \"250Mb\"",
+          "type": "string"
+        }
+      }
+    },
     "CorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
       "type": "object",
@@ -744,6 +798,99 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "CustomScaleRule": {
+      "description": "Container App container Custom scaling rule.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the custom scale rule\neg: azure-servicebus, redis etc.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata properties to describe custom scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          }
+        }
+      }
+    },
+    "Dapr": {
+      "description": "Container App Dapr configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Boolean indicating if the Dapr side car is enabled",
+          "type": "boolean"
+        },
+        "appId": {
+          "description": "Dapr application identifier",
+          "type": "string"
+        },
+        "appPort": {
+          "format": "int32",
+          "description": "Port on which the Dapr side car",
+          "type": "integer"
+        },
+        "components": {
+          "description": "Collection of Dapr components",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprComponent"
+          }
+        }
+      }
+    },
+    "DaprComponent": {
+      "description": "Dapr component configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Component name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Component type",
+          "type": "string"
+        },
+        "version": {
+          "description": "Component version",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Component metadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprMetadata"
+          }
+        }
+      }
+    },
+    "DaprMetadata": {
+      "description": "Container App Dapr component metadata.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metadata property name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Metadata property value.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the metadata property value.",
+          "type": "string"
         }
       }
     },
@@ -1388,6 +1535,26 @@
           "description": "Resource type of the App Service Environment.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "HttpScaleRule": {
+      "description": "Container App container Custom scaling rule.",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata properties to describe http scale rule.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "description": "Authentication secrets for the custom scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          }
         }
       }
     },
@@ -2053,6 +2220,28 @@
         }
       }
     },
+    "QueueScaleRule": {
+      "description": "Container App container Azure Queue based scaling rule.",
+      "type": "object",
+      "properties": {
+        "queueName": {
+          "description": "Queue name.",
+          "type": "string"
+        },
+        "queueLength": {
+          "format": "int32",
+          "description": "Queue length.",
+          "type": "integer"
+        },
+        "auth": {
+          "description": "Authentication secrets for the queue scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleAuth"
+          }
+        }
+      }
+    },
     "RampUpRule": {
       "description": "Routing rules for ramp up testing. This rule allows to redirect static traffic % to a slot or to gradually change routing % based on performance.",
       "type": "object",
@@ -2253,6 +2442,65 @@
         },
         "qid": {
           "description": "Question id of sample utterance (for stackoverflow questions titles).",
+          "type": "string"
+        }
+      }
+    },
+    "Scale": {
+      "description": "Container App scaling configurations.",
+      "type": "object",
+      "properties": {
+        "minReplicas": {
+          "format": "int32",
+          "description": "Optional. Minimum number of container replicas.",
+          "type": "integer"
+        },
+        "maxReplicas": {
+          "format": "int32",
+          "description": "Optional. Maximum number of container replicas. Defaults to 10 if not set.",
+          "type": "integer"
+        },
+        "rules": {
+          "description": "Scaling rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRule"
+          }
+        }
+      }
+    },
+    "ScaleRule": {
+      "description": "Container App container scaling rule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Scale Rule Name",
+          "type": "string"
+        },
+        "azureQueue": {
+          "$ref": "#/definitions/QueueScaleRule",
+          "description": "Azure Queue based scaling."
+        },
+        "custom": {
+          "$ref": "#/definitions/CustomScaleRule",
+          "description": "Custom scale rule."
+        },
+        "http": {
+          "$ref": "#/definitions/HttpScaleRule",
+          "description": "HTTP requests based scaling."
+        }
+      }
+    },
+    "ScaleRuleAuth": {
+      "description": "Auth Secrets for Container App Scale Rule",
+      "type": "object",
+      "properties": {
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the auth params.",
+          "type": "string"
+        },
+        "triggerParameter": {
+          "description": "Trigger Parameter that uses the secret",
           "type": "string"
         }
       }
@@ -3246,6 +3494,31 @@
           "description": "Unique resource Id",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "Template": {
+      "description": "Container App versioned application definition.\nDefines the desired state of an immutable revision.\nAny changes to this section Will result in a new revision being created",
+      "type": "object",
+      "properties": {
+        "revisionSuffix": {
+          "description": "User friendly suffix that is appended to the revision name",
+          "type": "string"
+        },
+        "containers": {
+          "description": "List of container definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          }
+        },
+        "scale": {
+          "$ref": "#/definitions/Scale",
+          "description": "Scaling properties for the Container App."
+        },
+        "dapr": {
+          "$ref": "#/definitions/Dapr",
+          "description": "Dapr configuration for the Container App."
         }
       }
     },
