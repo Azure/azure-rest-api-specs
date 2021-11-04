@@ -4478,6 +4478,14 @@
             "name": "EnabledState",
             "modelAsString": true
           }
+        },
+        "originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "maximum": 240,
+          "exclusiveMinimum": false
         }
       }
     },
@@ -4620,7 +4628,19 @@
         {
           "$ref": "#/definitions/SecretParameters"
         }
-      ]
+      ],
+      "properties": {
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "CustomerCertificateParameters": {
       "description": "Customer Certificate used for https",
@@ -4647,6 +4667,34 @@
         "useLatestVersion": {
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
+        },
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectAlternativeNames": {
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4925,7 +4973,7 @@
           "maximum": 50,
           "minimum": 0
         },
-        "responseBasedAfdOriginErrorDetectionSettings": {
+        "responseBasedAFDOriginErrorDetectionSettings": {
           "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResponseBasedOriginErrorDetectionParameters"
@@ -5348,7 +5396,8 @@
                 "enum": [
                   "count",
                   "bytes",
-                  "bitsPerSecond"
+                  "bitsPerSecond",
+                  "milliSeconds"
                 ]
               },
               "groups": {

@@ -2478,12 +2478,17 @@
           "description": "Provisioning status of the profile.",
           "type": "string"
         },
-        "frontdoorId": {
+        "frontDoorId": {
           "readOnly": true,
           "type": "string",
           "description": "The Id of the frontdoor."
         },
-		"originResponseTimeoutSeconds": {
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
+        },
+		    "originResponseTimeoutSeconds": {
           "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
           "type": "integer",
           "format": "int32",
@@ -3136,6 +3141,13 @@
           "description": "Describes if this is negate condition or not",
           "type": "boolean"
         },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
           "type": "array",
@@ -3451,6 +3463,13 @@
           "description": "Describes if this is negate condition or not",
           "type": "boolean"
         },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
           "type": "array",
@@ -3657,6 +3676,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -4433,6 +4459,12 @@
         "privateLinkApprovalMessage": {
           "description": "A custom message to be included in the approval request to connect to the Private Link.",
           "type": "string"
+        },
+        "privateEndpointStatus": {
+          "description": "The approval status for the connection to the Private Link",
+          "$ref": "#/definitions/PrivateEndpointStatus",
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -4668,19 +4700,9 @@
         },
         "privateEndpointStatus": {
           "description": "The approval status for the connection to the Private Link",
+          "$ref": "#/definitions/PrivateEndpointStatus",
           "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected",
-            "Timeout"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateEndpointStatus",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
       }
     },
@@ -5684,6 +5706,21 @@
       "x-ms-enum": {
         "name": "QueryStringCachingBehavior",
         "modelAsString": false
+      }
+    },
+    "PrivateEndpointStatus": {
+      "description": "The approval status for the connection to the Private Link",
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointStatus",
+        "modelAsString": true
       }
     },
     "Sku": {
