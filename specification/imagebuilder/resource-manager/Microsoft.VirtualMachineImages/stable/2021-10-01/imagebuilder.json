@@ -3,7 +3,7 @@
   "info": {
     "title": "VirtualMachineImageTemplate",
     "description": "Virtual Machine Image Template",
-    "version": "2020-02-14"
+    "version": "2021-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -161,7 +161,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -220,7 +220,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -267,7 +267,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -310,7 +310,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -359,7 +359,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -408,7 +408,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -454,7 +454,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -502,7 +502,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -535,12 +535,17 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Retrieve operations list": {
+            "$ref": "./examples/OperationsList.json"
+          }
         }
       }
     }
@@ -548,6 +553,7 @@
   "definitions": {
     "ImageTemplateListResult": {
       "description": "The result of List image templates operation",
+      "type": "object",
       "properties": {
         "value": {
           "description": "An array of image templates",
@@ -563,6 +569,7 @@
       }
     },
     "ImageTemplateSource": {
+      "type": "object",
       "description": "Describes a virtual machine image source for building, customizing and distributing",
       "discriminator": "type",
       "properties": {
@@ -576,6 +583,7 @@
       ]
     },
     "ImageTemplatePlatformImageSource": {
+      "type": "object",
       "description": "Describes an image source from [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages).",
       "x-ms-discriminator-value": "PlatformImage",
       "allOf": [
@@ -598,7 +606,12 @@
         },
         "version": {
           "type": "string",
-          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). If 'latest' is specified here, the version is evaluated when the image build takes place, not when the template is submitted. Specifying 'latest' could cause ROUNDTRIP_INCONSISTENT_PROPERTY issue which will be fixed."
+          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). If 'latest' is specified here, the version is evaluated when the image build takes place, not when the template is submitted."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.",
+          "readOnly": true
         },
         "planInfo": {
           "$ref": "#/definitions/PlatformImagePurchasePlan",
@@ -607,6 +620,7 @@
       }
     },
     "ImageTemplateManagedImageSource": {
+      "type": "object",
       "description": "Describes an image source that is a managed image in customer subscription.",
       "x-ms-discriminator-value": "ManagedImage",
       "allOf": [
@@ -625,6 +639,7 @@
       ]
     },
     "ImageTemplateSharedImageVersionSource": {
+      "type": "object",
       "description": "Describes an image source that is an image version in a shared image gallery.",
       "x-ms-discriminator-value": "SharedImageVersion",
       "allOf": [
@@ -643,6 +658,7 @@
       ]
     },
     "ImageTemplateCustomizer": {
+      "type": "object",
       "description": "Describes a unit of image customization",
       "discriminator": "type",
       "properties": {
@@ -660,6 +676,7 @@
       ]
     },
     "ImageTemplateShellCustomizer": {
+      "type": "object",
       "description": "Runs a shell script during the customization phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
       "x-ms-discriminator-value": "Shell",
       "allOf": [
@@ -687,6 +704,7 @@
       }
     },
     "ImageTemplateRestartCustomizer": {
+      "type": "object",
       "description": "Reboots a VM and waits for it to come back online (Windows). Corresponds to Packer windows-restart provisioner",
       "x-ms-discriminator-value": "WindowsRestart",
       "allOf": [
@@ -710,6 +728,7 @@
       }
     },
     "ImageTemplateWindowsUpdateCustomizer": {
+      "type": "object",
       "description": "Installs Windows Updates. Corresponds to Packer Windows Update Provisioner (https://github.com/rgl/packer-provisioner-windows-update)",
       "x-ms-discriminator-value": "WindowsUpdate",
       "allOf": [
@@ -737,6 +756,7 @@
       }
     },
     "ImageTemplatePowerShellCustomizer": {
+      "type": "object",
       "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
       "x-ms-discriminator-value": "PowerShell",
       "allOf": [
@@ -781,6 +801,7 @@
       }
     },
     "ImageTemplateFileCustomizer": {
+      "type": "object",
       "description": "Uploads files to VMs (Linux, Windows). Corresponds to Packer file provisioner",
       "x-ms-discriminator-value": "File",
       "allOf": [
@@ -910,6 +931,7 @@
       ]
     },
     "PlatformImagePurchasePlan": {
+      "type": "object",
       "description": "Purchase plan configuration for platform image.",
       "properties": {
         "planName": {
@@ -932,27 +954,41 @@
       ]
     },
     "VirtualNetworkConfig": {
+      "type": "object",
       "description": "Virtual Network configuration.",
       "properties": {
         "subnetId": {
           "type": "string",
           "description": "Resource id of a pre-existing subnet."
+        },
+        "proxyVmSize": {
+          "type": "string",
+          "default": "",
+          "description": "Size of the proxy virtual machine used to pass traffic to the build virtual machine. Omit or specify empty string to use the default (Standard_A1_v2)."
         }
       }
     },
     "ImageTemplateVmProfile": {
+      "type": "object",
       "description": "Describes the virtual machine used to build, customize and capture images",
       "properties": {
         "vmSize": {
           "type": "string",
           "default": "",
-          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2)."
+          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D2ds_v4)."
         },
         "osDiskSizeGB": {
           "type": "integer",
           "minimum": 0,
           "default": 0,
           "description": "Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size."
+        },
+        "userAssignedIdentities": {
+          "type": "array",
+          "description": "Optional array of resource IDs of user assigned managed identities to be configured on the build VM. This may include the identity of the image template.",
+          "items": {
+            "type": "string"
+          }
         },
         "vnetConfig": {
           "$ref": "#/definitions/VirtualNetworkConfig",
@@ -976,6 +1012,7 @@
       "description": "Provisioning state of the resource"
     },
     "ProvisioningError": {
+      "type": "object",
       "description": "Describes the error happened when create or update an image template",
       "properties": {
         "provisioningErrorCode": {
@@ -1006,6 +1043,7 @@
       }
     },
     "ImageTemplateLastRunStatus": {
+      "type": "object",
       "description": "Describes the latest status of running an image template",
       "properties": {
         "startTime": {
@@ -1055,6 +1093,7 @@
       }
     },
     "ImageTemplateProperties": {
+      "type": "object",
       "description": "Describes the properties of an image template",
       "properties": {
         "source": {
@@ -1108,6 +1147,7 @@
       ]
     },
     "ImageTemplateIdentity": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1144,6 +1184,7 @@
       "description": "Identity for the image template."
     },
     "RunOutputProperties": {
+      "type": "object",
       "description": "Describes the properties of a run output",
       "properties": {
         "artifactId": {
@@ -1162,6 +1203,7 @@
       }
     },
     "ImageTemplate": {
+      "type": "object",
       "description": "Image template is an ARM resource managed by Microsoft.VirtualMachineImages provider",
       "properties": {
         "properties": {
@@ -1172,6 +1214,10 @@
         "identity": {
           "$ref": "#/definitions/ImageTemplateIdentity",
           "description": "The identity of the image template, if configured."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -1184,6 +1230,7 @@
       ]
     },
     "ImageTemplateUpdateParameters": {
+      "type": "object",
       "properties": {
         "identity": {
           "$ref": "#/definitions/ImageTemplateIdentity",
@@ -1200,6 +1247,7 @@
       "description": "Parameters for updating an image template."
     },
     "RunOutput": {
+      "type": "object",
       "description": "Represents an output that was created by running an image template.",
       "allOf": [
         {
@@ -1215,6 +1263,7 @@
       }
     },
     "RunOutputCollection": {
+      "type": "object",
       "description": "The result of List run outputs operation",
       "properties": {
         "value": {
@@ -1231,6 +1280,7 @@
       }
     },
     "Resource": {
+      "type": "object",
       "description": "The Resource model definition.",
       "properties": {
         "id": {
@@ -1270,6 +1320,7 @@
       "x-ms-azure-resource": true
     },
     "SubResource": {
+      "type": "object",
       "description": "The Sub Resource model definition.",
       "properties": {
         "id": {
@@ -1301,6 +1352,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "title": "The object that describes the operation.",
           "properties": {
             "provider": {
@@ -1337,6 +1389,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
       "properties": {
         "value": {
@@ -1352,63 +1405,99 @@
         }
       }
     },
-    "ApiErrorBase": {
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Details about the error."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "description": "An error response from the Azure VM Image Builder service."
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
           "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptionType": {
-          "type": "string",
-          "description": "The exception type."
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
-        "errorDetail": {
+        "target": {
           "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "ApiError": {
-      "properties": {
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApiErrorBase"
+            "$ref": "#/definitions/CloudErrorBody"
           },
-          "description": "The Api error details"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
+          "description": "A list of additional details about the error."
         }
       },
-      "description": "Api error."
+      "description": "An error response from the Azure VM Image Builder service."
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     }
   },
   "parameters": {
