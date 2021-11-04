@@ -3578,9 +3578,6 @@
         "x-ms-examples": {
           "Create or update a restore point collection.": {
             "$ref": "./examples/compute/CreateOrUpdateARestorePointCollection.json"
-          },
-          "Create or update a restore point collection for cross region copy.": {
-            "$ref": "./examples/compute/CreateOrUpdateARestorePointCollectionForCrossRegionCopy.json"
           }
         },
         "parameters": [
@@ -3892,9 +3889,6 @@
         "x-ms-examples": {
           "Create a restore point": {
             "$ref": "./examples/compute/CreateARestorePoint.json"
-          },
-          "Copy a restore point to a different region": {
-            "$ref": "./examples/compute/CopyRestorePointBetweenRegions.json"
           }
         },
         "parameters": [
@@ -4051,60 +4045,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}/instanceView": {
-      "get": {
-        "operationId": "RestorePoints_GetInstanceView",
-        "description": "Retrieves information about the run-time state of a restore point.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "restorePointCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the restore point collection."
-          },
-          {
-            "name": "restorePointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the restore point."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestorePointInstanceView"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Restore Point Instance View.": {
-            "$ref": "./examples/compute/GetRestorePointInstanceView.json"
           }
         }
       }
@@ -8400,56 +8340,6 @@
       ],
       "description": "Restore Point details."
     },
-    "RestorePointInstanceView": {
-      "type": "object",
-      "properties": {
-        "diskRestorePoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiskRestorePointInstanceView"
-          },
-          "description": "The disk restore points information."
-        },
-        "statuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "description": "The resource status information."
-        }
-      },
-      "description": "The instance view of a restore point."
-    },
-    "DiskRestorePointInstanceView": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/ApiEntityReference",
-          "description": "Disk restore point Id."
-        },
-        "replicationStatus": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/DiskRestorePointReplicationStatus"
-          },
-          "description": "The disk restore point replication status information."
-        }
-      },
-      "description": "The instance view of a disk restore point."
-    },
-    "DiskRestorePointReplicationStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "description": "The resource status information."
-        }
-      },
-      "description": "The instance view of a disk restore point."
-    },
     "RestorePointProperties": {
       "type": "object",
       "properties": {
@@ -8488,15 +8378,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Gets the creation time of the restore point."
-        },
-        "sourceRestorePoint": {
-          "$ref": "#/definitions/ApiEntityReference",
-          "description": "Source Restore point Id from which copy of the Restore point is to be created."
-        },
-        "instanceView": {
-          "$ref": "#/definitions/RestorePointInstanceView",
-          "readOnly": true,
-          "description": "The restore point instance view."
         }
       },
       "description": "The restore point properties."
