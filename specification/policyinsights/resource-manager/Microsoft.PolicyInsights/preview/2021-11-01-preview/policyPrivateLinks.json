@@ -114,7 +114,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicyPrivateLinkResource"
+              "$ref": "#/definitions/PolicyPrivateLinkPatchResource"
             },
             "description": "Azure Policy Service private link resource details."
           }
@@ -201,7 +201,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource successfuly deleted."
+            "description": "The resource successfully deleted."
           },
           "204": {
             "description": "The specified resource does not exist."
@@ -259,7 +259,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyPrivateLinks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyPrivateLinks": {
       "get": {
         "tags": [
           "PolicyPrivateLinks"
@@ -465,6 +465,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "description": "Error response describing why the operation failed."
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
           }
         },
         "x-ms-examples": {
@@ -507,6 +510,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "description": "Error response describing why the operation failed."
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
           }
         },
         "x-ms-examples": {
@@ -520,7 +526,7 @@
   "definitions": {
     "PolicyPrivateLinkResource": {
       "title": "Policy Private Link resource",
-      "description": "The resource model definition for policy service private link.",
+      "description": "The resource model definition for policy private link.",
       "type": "object",
       "properties": {
         "properties": {
@@ -534,7 +540,33 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true
+      "required": [
+        "location"
+      ]
+    },
+    "PolicyPrivateLinkPatchResource": {
+      "title": "Policy Private Link patch resource",
+      "description": "The resource model definition to use when patching the policy private link.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyPrivateLinkResourceProperties",
+          "description": "The policy private link resource properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
     },
     "PolicyPrivateLinkResourceProperties": {
       "title": "PolicyPrivateLinkResourceProperties",
@@ -581,8 +613,7 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ],
-      "x-ms-azure-resource": true
+      ]
     },
     "PolicyPrivateLinkAssociationResourceProperties": {
       "type": "object",
@@ -660,7 +691,12 @@
       "required": false,
       "type": "string",
       "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()' or 'policyPrivateLinkId eq '{value}''. If $filter is not provided, no filtering is performed.",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Filter"
     }
   }
 }

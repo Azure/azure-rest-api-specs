@@ -1,28 +1,39 @@
 {
+  "parameters": {
+    "privateLinkAssociationName": "sample-private-link-association",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group",
+    "api-version": "2021-11-01-preview",
     "parameters": {
-      "privateLinkAssociationName": "sample-private-link-association",
-      "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group",
-      "api-version": "2021-11-01-preview",
-      "parameters": {
+      "properties": {
+        "policyPrivateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinks/sample-policy-private-link",
+        "publicNetworkAccess": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
         "properties": {
           "policyPrivateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinks/sample-policy-private-link",
-          "publicNetworkAccess": "Enabled"
-        }
+          "publicNetworkAccess": "Enabled",
+          "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinkAssociations/sample-private-link-association",
+        "type": "Microsoft.PolicyInsights/policyPrivateLinkAssociations",
+        "name": "sample-private-link-association"
       }
     },
-    "responses": {
-      "200": {
-        "body": {
-          "properties": {
-            "policyPrivateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinks/sample-policy-private-link",
-            "publicNetworkAccess": "Enabled",
-            "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group"
-          },
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinkAssociations/sample-private-link-association",
-          "type": "Microsoft.PolicyInsights/policyPrivateLinkAssociations",
-          "name": "sample-private-link-association"
-        }
+    "200": {
+      "body": {
+        "properties": {
+          "policyPrivateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinks/sample-policy-private-link",
+          "publicNetworkAccess": "Enabled",
+          "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.PolicyInsights/policyPrivateLinkAssociations/sample-private-link-association",
+        "type": "Microsoft.PolicyInsights/policyPrivateLinkAssociations",
+        "name": "sample-private-link-association"
       }
     }
   }
-  
+}
