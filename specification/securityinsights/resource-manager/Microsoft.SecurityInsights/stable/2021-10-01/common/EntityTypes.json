@@ -233,11 +233,14 @@
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/EntityKind"
         }
       ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
       "description": "Specific entity.",
       "discriminator": "kind",
       "type": "object",
