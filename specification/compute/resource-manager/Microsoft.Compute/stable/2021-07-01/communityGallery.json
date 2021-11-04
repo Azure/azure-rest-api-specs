@@ -551,27 +551,27 @@
     "CommunityGalleryImageVersionStorageProfile": {
       "properties": {
         "osDiskImage": {
-          "$ref": "#/definitions/GalleryOSDiskImage"
+          "$ref": "#/definitions/CommunityGalleryOSDiskImage"
         },
         "dataDiskImages": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GalleryDataDiskImage"
+            "$ref": "#/definitions/CommunityGalleryDataDiskImage"
           },
           "description": "A list of data disk images."
         }
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "GalleryOSDiskImage": {
+    "CommunityGalleryOSDiskImage": {
       "allOf": [
         {
-          "$ref": "#/definitions/GalleryDiskImage"
+          "$ref": "#/definitions/CommunityGalleryDiskImage"
         }
       ],
       "description": "This is the OS disk image."
     },
-    "GalleryDataDiskImage": {
+    "CommunityGalleryDataDiskImage": {
       "properties": {
         "lun": {
           "type": "integer",
@@ -581,7 +581,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/GalleryDiskImage"
+          "$ref": "#/definitions/CommunityGalleryDiskImage"
         }
       ],
       "required": [
@@ -589,7 +589,7 @@
       ],
       "description": "This is the data disk image."
     },
-    "GalleryDiskImage": {
+    "CommunityGalleryDiskImage": {
       "properties": {
         "sizeInGB": {
           "readOnly": true,
