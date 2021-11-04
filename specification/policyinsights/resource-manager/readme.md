@@ -136,13 +136,20 @@ directive:
     transform: delete $['post']['x-ms-pageable']['operationName']
 ```
 
-### Tag: package-privatelinks-2021-11
+### Tag: package-2021-11-preview
 
-These settings apply only when `--tag=package-privatelinks-2021-11` is specified on the command line.
+These settings apply only when `--tag=package-2021-11-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-privatelinks-2021-11'
+``` yaml $(tag) == 'package-2021-11-preview'
 input-file:
 - Microsoft.PolicyInsights/preview/2021-11-01-preview/policyPrivateLinks.json
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
+- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
 ```
 
 ### Tag: package-2021-10

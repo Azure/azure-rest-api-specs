@@ -39,7 +39,7 @@
         "tags": [
           "PolicyPrivateLinks"
         ],
-        "operationId": "PolicyPrivateLinks_Put",
+        "operationId": "PolicyPrivateLinks_CreateOrUpdate",
         "description": "Create a private link for Azure Policy Service.",
         "parameters": [
           {
@@ -94,7 +94,7 @@
         "tags": [
           "PolicyPrivateLinks"
         ],
-        "operationId": "PolicyPrivateLinks_Patch",
+        "operationId": "PolicyPrivateLinks_Update",
         "description": "Update tags of policy private link resource.",
         "parameters": [
           {
@@ -247,10 +247,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "description": "Error response describing why the operation failed."
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Azure Policy Service private links in a subscription.": {
@@ -289,10 +289,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "description": "Error response describing why the operation failed."
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Azure Policy Service private links in a resource group.": {
@@ -306,7 +306,7 @@
         "tags": [
           "PolicyPrivateLinkAssociations"
         ],
-        "operationId": "PolicyPrivateLinkAssociations_Put",
+        "operationId": "PolicyPrivateLinkAssociations_CreateOrUpdate",
         "description": "Create a private link association on a scope that should be protected by the Azure Policy service private link.",
         "parameters": [
           {
@@ -369,15 +369,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyPrivateLinkAssociationResource"
-            },
-            "description": "Azure Policy Service private link association resource details."
           }
         ],
         "responses": {
@@ -465,10 +456,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "description": "Error response describing why the operation failed."
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get all private link associations for subscription scope.": {
@@ -510,10 +501,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "description": "Error response describing why the operation failed."
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get all private link associations for a resource group scope.": {
@@ -584,6 +575,8 @@
       }
     },
     "PolicyPrivateLinksListResult": {
+      "title": "PolicyPrivateLinksListResponse",
+      "description": "The policy private links list response.",
       "type": "object",
       "properties": {
         "value": {
@@ -605,6 +598,7 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PolicyPrivateLinkAssociationResourceProperties",
           "description": "The policy private link association resource properties."
         }
@@ -616,6 +610,8 @@
       ]
     },
     "PolicyPrivateLinkAssociationResourceProperties": {
+      "title": "PolicyPrivateLinkAssociationResourceProperties",
+      "description": "The policy private link associations resource properties.",
       "type": "object",
       "properties": {
         "policyPrivateLinkId": {
@@ -643,6 +639,8 @@
       }
     },
     "PolicyPrivateLinkAssociationsListResult": {
+      "title": "PolicyPrivateLinkAssociationsListResponse",
+      "description": "The policy private link associations list response.",
       "type": "object",
       "properties": {
         "value": {
