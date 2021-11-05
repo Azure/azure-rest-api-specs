@@ -1165,46 +1165,29 @@
       "type": "object"
     },
     "AnomalyInterpretation": {
-      "required": [
-        "contributorScores",
-        "contributors",
-        "correlationChanges"
-      ],
       "properties": {
-        "contributors": {
-          "type": "array",
-          "description": "contributors",
-          "items": {
-            "type": "string"
-          }
+        "variable": {
+          "type": "string"
         },
-        "contributorScores": {
-          "type": "array",
-          "description": "contributor scores",
-          "items": {
-            "type": "number"
-          }
+        "contributionScore": {
+          "type": "number"
         },
         "correlationChanges": {
-          "type": "array",
-          "description": "correlation changes",
-          "items": {
-            "$ref": "#/definitions/CorrelationChanges"
-          }
+          "$ref": "#/definitions/CorrelationChanges"
         }
       },
       "type": "object"
     },
     "CorrelationChanges": {
       "properties": {
-        "variables": {
+        "changedVariables": {
           "type": "array",
           "description": "correlated variables",
           "items": {
             "type": "string"
           }
         },
-        "changes": {
+        "changedValues": {
           "type": "array",
           "description": "changes in correlation",
           "items": {
