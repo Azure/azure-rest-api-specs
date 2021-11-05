@@ -18,7 +18,6 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2021-05
-  - tag: package-2021-03
   - tag: package-2021-02
   - tag: package-2021-02-preview-only
   - tag: package-2020-11
@@ -83,15 +82,6 @@ namespace: azure.mgmt.network.v2021_02_01_preview
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2021_02_01_preview
 ```
 
-### Tag: package-2021-03 and python
-
-These settings apply only when `--tag=package-2021-03 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2021-03'
-namespace: azure.mgmt.network.v2021_03_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2021_03_01
-```
 
 ### Tag: package-2021-02 and python
 
