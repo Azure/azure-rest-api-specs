@@ -18,13 +18,11 @@
           "srs-kustomization2": {
             "path": "./test/alt-path",
             "syncIntervalInSeconds": 300,
-            "validation": "client",
             "dependsOn": null
           },
           "srs-kustomization3": {
             "path": "./test/another-path",
-            "syncIntervalInSeconds": 300,
-            "validation": "client"
+            "syncIntervalInSeconds": 300
           }
         }
       }
@@ -60,16 +58,14 @@
               "timeoutInSeconds": 600,
               "syncIntervalInSeconds": 300,
               "retryIntervalInSeconds": 600,
-              "prune": false,
-              "validation": "client"
+              "prune": false
             },
             "srs-kustomization3": {
               "path": "./test/another-path",
               "timeoutInSeconds": 600,
               "syncIntervalInSeconds": 300,
               "retryIntervalInSeconds": null,
-              "prune": false,
-              "validation": "client"
+              "prune": false
             }
           },
           "statuses": [

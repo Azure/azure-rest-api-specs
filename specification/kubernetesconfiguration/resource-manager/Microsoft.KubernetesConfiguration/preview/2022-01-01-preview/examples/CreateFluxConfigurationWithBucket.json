@@ -11,16 +11,14 @@
       "properties": {
         "scope": "cluster",
         "namespace": "srs-namespace",
-        "sourceKind": "GitRepository",
+        "sourceKind": "Bucket",
         "suspend": false,
-        "gitRepository": {
-          "url": "https://github.com/Azure/arc-k8s-demo",
-          "timeoutInSeconds": 600,
-          "syncIntervalInSeconds": 600,
-          "repositoryRef": {
-            "branch": "master"
-          },
-          "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl"
+        "bucket": {
+          "url": "https://fluxminiotest.az.minio.io",
+          "bucketName": "flux",
+          "syncIntervalInSeconds": 1000,
+          "timeoutInSeconds": 1000,
+          "accessKey": "fluxminiotest"
         },
         "kustomizations": {
           "srs-kustomization1": {
@@ -67,19 +65,15 @@
         "properties": {
           "scope": "cluster",
           "namespace": "srs-namespace",
-          "sourceKind": "GitRepository",
+          "sourceKind": "Bucket",
           "suspend": false,
-          "gitRepository": {
-            "url": "https://github.com/Azure/arc-k8s-demo",
-            "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600,
-            "repositoryRef": {
-              "branch": "master",
-              "tag": null,
-              "semver": null,
-              "commit": null
-            },
-            "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl"
+          "gitRepository": null,
+          "bucket": {
+            "url": "https://fluxminiotest.az.minio.io",
+            "bucketName": "flux",
+            "syncIntervalInSeconds": 1000,
+            "timeoutInSeconds": 1000,
+            "accessKey": "fluxminiotest"
           },
           "kustomizations": {
             "srs-kustomization1": {
@@ -201,17 +195,13 @@
           "namespace": "srs-namespace",
           "sourceKind": "GitRepository",
           "suspend": false,
-          "gitRepository": {
-            "url": "https://github.com/Azure/arc-k8s-demo",
-            "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600,
-            "repositoryRef": {
-              "branch": "master",
-              "tag": null,
-              "semver": null,
-              "commit": null
-            },
-            "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl"
+          "gitRepository": null,
+          "bucket": {
+            "url": "https://fluxminiotest.az.minio.io",
+            "bucketName": "flux",
+            "syncIntervalInSeconds": 1000,
+            "timeoutInSeconds": 1000,
+            "accessKey": "fluxminiotest"
           },
           "kustomizations": {
             "srs-kustomization1": {

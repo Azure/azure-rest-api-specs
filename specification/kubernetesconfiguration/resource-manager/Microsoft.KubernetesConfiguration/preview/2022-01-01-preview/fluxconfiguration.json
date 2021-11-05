@@ -95,6 +95,9 @@
         "x-ms-examples": {
           "Create Flux Configuration": {
             "$ref": "./examples/CreateFluxConfiguration.json"
+          },
+          "Create Flux Configuration with Bucket Source Kind": {
+            "$ref": "./examples/CreateFluxConfigurationWithBucket.json"
           }
         },
         "parameters": [
@@ -424,7 +427,8 @@
       "description": "Source Kind to pull the configuration data from.",
       "type": "string",
       "enum": [
-        "GitRepository"
+        "GitRepository",
+        "Bucket"
       ],
       "x-ms-enum": {
         "name": "SourceKindType",
@@ -465,11 +469,59 @@
           "x-nullable": true
         },
         "httpsUser": {
-          "description": "Base64-encoded HTTPS username used to access private git repositories over HTTPS",
+          "description": "Plaintext HTTPS username used to access private git repositories over HTTPS",
           "type": "string",
           "x-nullable": true
         },
-        "httpsCAFile": {
+        "httpsCACert": {
+          "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS",
+          "type": "string",
+          "x-nullable": true
+        },
+        "localAuthRef": {
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "GitRepositoryPatchDefinition": {
+      "description": "Parameters to reconcile to the GitRepository source kind type.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "url": {
+          "description": "The URL to sync for the flux configuration git repository.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "repositoryRef": {
+          "description": "The source reference for the GitRepository object.",
+          "$ref": "#/definitions/RepositoryRefDefinition"
+        },
+        "sshKnownHosts": {
+          "description": "Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH",
+          "type": "string",
+          "x-nullable": true
+        },
+        "httpsUser": {
+          "description": "Plaintext HTTPS username used to access private git repositories over HTTPS",
+          "type": "string",
+          "x-nullable": true
+        },
+        "httpsCACert": {
           "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS",
           "type": "string",
           "x-nullable": true
@@ -503,6 +555,94 @@
         },
         "commit": {
           "description": "The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "BucketDefinition": {
+      "description": "Parameters to reconcile to the GitRepository source kind type.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "url": {
+          "description": "The URL to sync for the flux configuration S3 bucket.",
+          "type": "string"
+        },
+        "bucketName": {
+          "description": "The bucket name to sync from the url endpoint for the flux configuration.",
+          "type": "string"
+        },
+        "insecure": {
+          "description": "Specify whether to use insecure communication when puling data from the S3 bucket.",
+          "type": "boolean",
+          "default": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "default": 600,
+          "x-nullable": true
+        },
+        "accessKey": {
+          "description": "Plaintext access key used to securely access the S3 bucket",
+          "type": "string",
+          "x-nullable": true
+        },
+        "localAuthRef": {
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "BucketPatchDefinition": {
+      "description": "Parameters to reconcile to the GitRepository source kind type.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "url": {
+          "description": "The URL to sync for the flux configuration S3 bucket.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "bucketName": {
+          "description": "The bucket name to sync from the url endpoint for the flux configuration.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "insecure": {
+          "description": "Specify whether to use insecure communication when puling data from the S3 bucket.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the cluster git repository source with the remote.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "accessKey": {
+          "description": "Plaintext access key used to securely access the S3 bucket",
+          "type": "string",
+          "x-nullable": true
+        },
+        "localAuthRef": {
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.",
           "type": "string",
           "x-nullable": true
         }
@@ -552,14 +692,59 @@
           "type": "boolean",
           "default": false
         },
-        "validation": {
-          "description": "Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.",
-          "$ref": "#/definitions/KustomizationValidationDefinition"
-        },
         "force": {
           "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
           "type": "boolean",
           "default": false
+        }
+      }
+    },
+    "KustomizationPatchDefinition": {
+      "description": "The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "path": {
+          "description": "The path in the source reference to reconcile on the cluster.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dependsOn": {
+          "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/DependsOnDefinition"
+          },
+          "x-nullable": true
+        },
+        "timeoutInSeconds": {
+          "description": "The maximum time to attempt to reconcile the Kustomization on the cluster.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "syncIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "retryIntervalInSeconds": {
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "prune": {
+          "description": "Enable/disable garbage collections of Kubernetes objects created by this Kustomization.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "force": {
+          "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
+          "type": "boolean",
+          "x-nullable": true
         }
       }
     },
@@ -745,7 +930,8 @@
             },
             "sourceKind": {
               "description": "Source Kind to pull the configuration data from.",
-              "$ref": "#/definitions/SourceKindDefinition"
+              "$ref": "#/definitions/SourceKindDefinition",
+              "default": "GitRepository"
             },
             "suspend": {
               "description": "Whether this configuration should suspend its reconciliation of its kustomizations and sources.",
@@ -756,6 +942,11 @@
               "description": "Parameters to reconcile to the GitRepository source kind type.",
               "type": "object",
               "$ref": "#/definitions/GitRepositoryDefinition"
+            },
+            "bucket": {
+              "description": "Parameters to reconcile to the Bucket source kind type.",
+              "type": "object",
+              "$ref": "#/definitions/BucketDefinition"
             },
             "kustomizations": {
               "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
@@ -846,17 +1037,23 @@
           "properties": {
             "sourceKind": {
               "description": "Source Kind to pull the configuration data from.",
-              "$ref": "#/definitions/SourceKindDefinition"
+              "$ref": "#/definitions/SourceKindDefinition",
+              "x-nullable": true
             },
             "suspend": {
               "description": "Whether this configuration should suspend its reconciliation of its kustomizations and sources.",
               "type": "boolean",
-              "default": false
+              "x-nullable": true
             },
             "gitRepository": {
               "description": "Parameters to reconcile to the GitRepository source kind type.",
               "type": "object",
-              "$ref": "#/definitions/GitRepositoryDefinition"
+              "$ref": "#/definitions/GitRepositoryPatchDefinition"
+            },
+            "bucket": {
+              "description": "Parameters to reconcile to the Bucket source kind type.",
+              "type": "object",
+              "$ref": "#/definitions/BucketDefinition"
             },
             "kustomizations": {
               "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
@@ -864,7 +1061,7 @@
               "x-nullable": true,
               "additionalProperties": {
                 "type": "object",
-                "$ref": "#/definitions/KustomizationDefinition"
+                "$ref": "#/definitions/KustomizationPatchDefinition"
               }
             },
             "configurationProtectedSettings": {
