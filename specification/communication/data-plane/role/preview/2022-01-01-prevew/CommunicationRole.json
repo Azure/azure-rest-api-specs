@@ -1,0 +1,412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RbacRoleClient",
+    "description": "Azure Communication RBAC Role service",
+    "version": "2022-01-01-preview"
+  },
+  "paths": {
+    "/roles": {
+      "post": {
+        "tags": [
+          "Rbac"
+        ],
+        "summary": "Create a new RBAC role.",
+        "operationId": "RbacRole_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Created - Returns the created identity.",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a RBAC Role": {
+            "$ref": "./examples/CreateRbacRole.json"
+          }
+        }
+      }
+    },
+    "/roles/{id}": {
+      "put": {
+        "tags": [
+          "Rbac"
+        ],
+        "summary": "Update a RBAC role.",
+        "operationId": "RbacRole_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the updated role.",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a RBAC Role": {
+            "$ref": "./examples/UpdateRbacRole.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rbac"
+        ],
+        "summary": "Delete a RBAC role.",
+        "operationId": "RbacRole_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "NoContent - The RBAC role is deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a RBAC Role": {
+            "$ref": "./examples/DeleteRbacRole.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rbac"
+        ],
+        "summary": "Get a RBAC role.",
+        "operationId": "RbacRole_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the RBAC role.",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a RBAC Role": {
+            "$ref": "./examples/GetRbacRole.json"
+          }
+        }
+      }
+    },
+    "/roles/:listCustomRoles": {
+      "get": {
+        "tags": [
+          "Rbac"
+        ],
+        "summary": "List RBAC custom roles.",
+        "operationId": "RbacRole_ListCustom",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the RBAC roles.",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List custom RBAC roles": {
+            "$ref": "./examples/ListCustomRbacRole.json"
+          }
+        }
+      }
+    },
+    "/roles/:listBuiltinRoles": {
+      "get": {
+        "tags": [
+          "Rbac"
+        ],
+        "summary": "List RBAC built-in roles.",
+        "operationId": "RbacRole_ListBuiltin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the RBAC roles.",
+            "schema": {
+              "$ref": "#/definitions/RbacRoleListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List built-in RBAC roles": {
+            "$ref": "./examples/ListBuiltinRbacRole.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RbacPermissions": {
+      "enum": [
+        "communication.services/calling/audio/receive/action",
+        "communication.services/calling/video/receive/action",
+        "muteThemselves",
+        "communication.services/calling/mute/others/audio/action",
+        "communication.services/calling/mute/others/video/action",
+        "communication.services/calling/audio/send/action",
+        "communication.services/calling/video/send/action",
+        "communication.services/calling/screenshare/send/action",
+        "communication.services/calling/mute/others/screenshare/action",
+        "communication.services/calling/recording/action",
+        "communication.services/calling/transcript/action",
+        "communication.services/calling/livecaptions/action",
+        "communication.services/calling/admitLobby/action",
+        "communication.services/calling/participants/add/action",
+        "communication.services/calling/participants/remove/action",
+        "communication.services/calling/managePSTNParticipants/action",
+        "communication.services/chat/me/messages/send/action",
+        "communication.services/chat/me/messages/read",
+        "communication.services/chat/me/messages/edit/action",
+        "communication.services/chat/me/messages/delete/action",
+        "communication.services/chat/others/messages/edit/action",
+        "communication.services/chat/others/messages/delete/action",
+        "communication.services/chat/participants/add/action",
+        "communication.services/chat/participants/remove/action",
+        "communication.services/chat/participants/updateRole/action",
+        "communication.services/chat/participants/read"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RbacPermissions",
+        "modelAsString": true
+      }
+    },
+    "RbacRoleListResponse": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RbacRoleListResponseElement"
+          }
+        },
+        "maxItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "@nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "RbacRoleListResponseElement": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "RbacRoleRequest": {
+      "required": [
+        "displayName",
+        "permissions"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RbacPermissions"
+          }
+        }
+      }
+    },
+    "RbacRoleResponse": {
+      "required": [
+        "id",
+        "lastModified",
+        "permissions",
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastModified": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RbacPermissions"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  }
+}
