@@ -1304,7 +1304,8 @@
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
           "type": "string",
-          "format": "base64url"
+          "format": "base64url",
+          "x-ms-client-name": "encodedPolicy"
         }
       }
     },
@@ -1840,7 +1841,8 @@
         "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The attestation assertion for the target of the key release."
+          "description": "The attestation assertion for the target of the key release.",
+          "x-ms-client-name": "targetAttestationToken"
         },
         "nonce": {
           "type": "string",
