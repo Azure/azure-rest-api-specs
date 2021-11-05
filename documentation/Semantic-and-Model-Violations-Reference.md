@@ -64,6 +64,7 @@ This document lists the set of automated rules that can be validated against swa
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
 | [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
+| [DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING](#DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING) | [OAV132](#DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING) |
 | [DISCRIMINATOR_NOT_REQUIRED](#DISCRIMINATOR_NOT_REQUIRED) | [OAV131](#DISCRIMINATOR_NOT_REQUIRED) |
 | [RESPONSE_BODY_NOT_IN_EXAMPLE](#RESPONSE_BODY_NOT_IN_EXAMPLE) | [OAV130](#RESPONSE_BODY_NOT_IN_EXAMPLE) |
 | [DOUBLE_FORWARD_SLASHES_IN_URL](#DOUBLE_FORWARD_SLASHES_IN_URL) | [OAV129](#DOUBLE_FORWARD_SLASHES_IN_URL) |
@@ -617,6 +618,14 @@ This document lists the set of automated rules that can be validated against swa
 **Description**: The property used as discriminator has a value {0} but it's not found in swagger spec.
 
 **How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
+
+### <a name="DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING" />DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING
+
+**Output Message**: The property type of discriminator must be string.
+
+**Description**: If a property is declared as discriminator, the property type must be string and nothing else.
+
+**How to fix the violation**: Set the property type to string in swagger.
 
 
 ### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED
