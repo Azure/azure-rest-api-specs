@@ -26,16 +26,82 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-12-31-preview
+tag: package-chat-2021-03-07
 ```
 
-### Tag: package-2021-12-31-preview
+### Tag: package-2020-09-21-preview2
 
-These settings apply only when `--tag=package-2021-12-31-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-09-21-preview2` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-12-31-preview'
+```yaml $(tag) == 'package-2020-09-21-preview2'
 input-file:
-  - preview/2021-12-31-preview/CommunicationMediaComposition.json
+  - preview/2020-09-21-preview2/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2020-11-01-preview3
+
+These settings apply only when `--tag=package-2020-11-01-preview3` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-01-preview3'
+input-file:
+  - preview/2020-11-01-preview3/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2021-01-27-preview4
+
+These settings apply only when `--tag=package-2021-01-27-preview4` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01-27-preview4'
+input-file:
+  - preview/2021-01-27-preview4/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-2021-03-01-preview5
+
+These settings apply only when `--tag=package-2021-03-01-preview5` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview5'
+input-file:
+  - preview/2021-03-01-preview5/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-chat-2021-03-07
+
+These settings apply only when `--tag=package-chat-2021-03-07` is specified on the command line.
+
+```yaml $(tag) == 'package-chat-2021-03-07'
+input-file:
+  - stable/2021-03-07/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-chat-2021-04-05-preview6
+
+These settings apply only when `--tag=package-2021-04-05-preview6` is specified on the command line.
+
+```yaml $(tag) == 'package-chat-2021-04-05-preview6'
+input-file:
+  - preview/2021-04-05-preview6/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-chat-2021-09-07
+
+These settings apply only when `--tag=package-2021-09-07` is specified on the command line.
+
+```yaml $(tag) == 'package-chat-2021-09-07'
+input-file:
+  - stable/2021-09-07/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
@@ -64,3 +130,33 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Swift
+
+These settings apply only when `--swift` is specified on the command line.
+
+```yaml $(swift)
+clear-output-folder: false
+namespace: AzureCommunicationChat
+title: AzureCommunicationChat
+package-name: AzureCommunicationChat
+package-version: 1.0.0
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credential: true
+generate-as-internal: >
+    AzureCommunicationChatClient=ChatClientInternal
+    CreateChatThreadResult=CreateChatThreadResultInternal
+    CreateChatThreadRequest=CreateChatThreadRequestInternal
+    ChatMessage=ChatMessageInternal
+    ChatMessageContent=ChatMessageContentInternal
+    ChatParticipant=ChatParticipantInternal
+    ChatMessageReadReceipt=ChatMessageReadReceiptInternal
+    ChatThreadProperties=ChatThreadPropertiesInternal
+directive:
+# Rename CommunicationError to ChatError
+- from: swagger-document
+  where: '$.definitions.CommunicationError'
+  transform: >
+    $["x-ms-client-name"] = "ChatError";
+```
+
