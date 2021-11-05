@@ -136,6 +136,9 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
+## Pyhton
+
+See configuration in [readme.pyhton.md](./readme.python.md)
 
 ## Go
 
@@ -199,3 +202,6 @@ input-file:
 title: SubscriptionClient
 description: The subscription client
 ```
+
+
+
