@@ -80,7 +80,7 @@
         },
         "operationId": "Schema_GetById",
         "produces": [
-          "application/json; serialization=avro"
+          "application/json; serialization=Avro"
         ],
         "parameters": [
           {
@@ -128,8 +128,8 @@
               }
             },
             "schema": {
-              "description": "String representation (UTF-8) of the registered schema.",
-              "type": "string"
+              "description": "Binary representation of the registered schema.",
+              "type": "file"
             }
           },
           "default": {
@@ -214,7 +214,7 @@
         },
         "operationId": "Schema_QueryIdByContent",
         "consumes": [
-          "application/json; serialization=avro"
+          "application/json; serialization=Avro"
         ],
         "produces": [
           "application/json"
@@ -242,7 +242,8 @@
             "description": "String representation (UTF-8) of the registered schema.",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "binary"
             }
           },
           {
@@ -308,7 +309,7 @@
         },
         "operationId": "Schema_Register",
         "consumes": [
-          "application/json; serialization=avro"
+          "application/json; serialization=Avro"
         ],
         "produces": [
           "application/json"
@@ -336,7 +337,8 @@
             "description": "String representation (UTF-8) of the schema being registered.",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "binary"
             }
           },
           {
