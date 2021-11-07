@@ -1529,6 +1529,26 @@
         "version": {
           "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
           "type": "string"
+        },
+        "eventGroupingSettings": {
+          "$ref": "#/definitions/EventGroupingSettings",
+          "description": "The event grouping settings."
+        },
+        "customDetails": {
+          "description": "Dictionary of string key-value pairs of columns to be attached to the alert",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entityMappings": {
+          "$ref": "#/definitions/EntityMappings",
+          "description": "Array of the entity mappings of the alert rule"
+        },
+        "alertDetailsOverride": {
+          "type": "object",
+          "$ref": "#/definitions/AlertDetailsOverride",
+          "description": "The alert details override settings"
         }
       },
       "type": "object"
