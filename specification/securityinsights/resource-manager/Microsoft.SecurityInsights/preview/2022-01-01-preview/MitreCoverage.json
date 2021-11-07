@@ -21,16 +21,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -54,7 +54,7 @@
   },
   "definitions": {
     "ProductMitreCoverageModel": {
-      "description": "A wrapper to the resource of type T, which contains Arm's first level fields such as id, name and type, with the resource properties",
+      "description": "The Product Mitre Coverage Properties model.",
       "required": [
         "properties"
       ],
@@ -81,50 +81,127 @@
       "type": "object",
       "properties": {
         "productName": {
-          "description": "Gets Or sets the product name that covers a specific tactic and technique.",
+          "description": "Gets the product name that covers a specific tactic and technique.",
           "type": "string",
           "readOnly": true,
           "example": "MDATP"
         },
         "vendorName": {
-          "description": "Gets Or sets the vendor of the Product.",
+          "description": "Gets the vendor of the Product.",
           "type": "string",
           "readOnly": true,
           "example": "Microsoft"
         },
         "coverageSize": {
           "format": "int32",
-          "description": "Gets Or sets the Coverage Size of the product for a specific tactic and technique.",
+          "description": "Gets the Coverage Size of the product for a specific tactic and technique.",
           "type": "integer",
           "readOnly": true,
           "example": 2
         },
         "technique": {
-          "description": "Gets Or sets MITRE technique code.",
+          "description": "Gets MITRE technique code.",
           "type": "string",
           "readOnly": true,
           "example": "T1595"
         },
         "tactic": {
-          "description": "Gets Or sets MITRE Tactic.",
+          "description": "Gets MITRE Tactic.",
+          "enum": [
+            "Reconnaissance",
+            "ResourceDevelopment",
+            "InitialAccess",
+            "Execution",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact",
+            "PreAttack",
+            "ImpairProcessControl",
+            "InhibitResponseFunction"
+          ],
           "type": "string",
           "readOnly": true,
-          "example": "Reconnaissance"
+          "example": "Reconnaissance",
+          "x-ms-enum": {
+            "name": "AttackTactic",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Reconnaissance"
+              },
+              {
+                "value": "ResourceDevelopment"
+              },
+              {
+                "value": "InitialAccess"
+              },
+              {
+                "value": "Execution"
+              },
+              {
+                "value": "Persistence"
+              },
+              {
+                "value": "PrivilegeEscalation"
+              },
+              {
+                "value": "DefenseEvasion"
+              },
+              {
+                "value": "CredentialAccess"
+              },
+              {
+                "value": "Discovery"
+              },
+              {
+                "value": "LateralMovement"
+              },
+              {
+                "value": "Collection"
+              },
+              {
+                "value": "Exfiltration"
+              },
+              {
+                "value": "CommandAndControl"
+              },
+              {
+                "value": "Impact"
+              },
+              {
+                "value": "PreAttack"
+              },
+              {
+                "value": "ImpairProcessControl"
+              },
+              {
+                "value": "InhibitResponseFunction"
+              }
+            ]
+          }
         }
       }
     },
     "ProductsMitreCoverageList": {
+      "description": "List Of Products Mitre Coverage records",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets array of arm object wrappers",
+          "description": "List of Mitre coverages.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProductMitreCoverageModel"
           }
         },
         "nextLink": {
-          "description": "Gets or sets should be in format of: \"{originalRequestUrl}?$skipToken={opaqueString}\" | null\r\nnextLink value must be a valid Uri.\r\nnextLink value must be null or not returned to mark not support or to finish fetching.",
+          "description": "Next link to scroll over the results",
           "type": "string"
         }
       }
