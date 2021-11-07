@@ -72,48 +72,6 @@
             "nextLinkName": "nextLink"
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/attackPaths/{attackPathName}": {
-        "get": {
-          "x-ms-examples": {
-            "Get an attack path on a subscription from a security data location": {
-              "$ref": "./examples/AttackPaths/GetAttackPathSubscriptionLocation_example.json"
-            }
-          },
-          "tags": [
-            "AttackPaths"
-          ],
-          "description": "Get an attack path that is associated with a subscription",
-          "operationId": "AttackPaths_GetSubscriptionLevelAttackPaths",
-          "parameters": [
-            {
-              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-            },
-            {
-              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
-            },
-            {
-              "$ref": "#/parameters/AttackPathName"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/AttackPath"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-              }
-            }
-          }
-        }
       }
     },
     "definitions": {
