@@ -13,6 +13,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-netapp-2021-06-01
   - tag: package-netapp-2021-04-01
   - tag: package-netapp-2021-04-01-preview
   - tag: package-netapp-2021-02-01
@@ -32,6 +33,15 @@ batch:
   - tag: package-netapp-2019-06-01
   - tag: package-netapp-2019-05-01
   - tag: package-2017-08-15
+```
+
+### Tag: package-netapp-2021-06-01 and go
+
+These settings apply only when `--tag=package-netapp-2021-06-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-netapp-2021-06-01' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-06-01/$(namespace)
 ```
 
 ### Tag: package-netapp-2021-04-01 and go

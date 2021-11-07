@@ -5,14 +5,7 @@
     "version": "1.0",
     "description": "Azure Maps Time Zone REST APIs"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{geography}.atlas.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-      }
-    ]
-  },
+  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
@@ -49,7 +42,7 @@
   ],
   "responses": {},
   "parameters": {
-    "TimezoneApiVersion": {
+    "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API.",
       "type": "string",
@@ -110,6 +103,7 @@
     },
     "TimezoneTransitionsFrom": {
       "name": "transitionsFrom",
+      "x-ms-client-name": "daylightSavingsTimeFrom",
       "in": "query",
       "description": "Alternatively, use alias \"tf\". The start date from which daylight savings time (DST) transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
       "type": "string",
@@ -118,6 +112,7 @@
     },
     "TimezoneTransitionsYears": {
       "name": "transitionsYears",
+      "x-ms-client-name": "daylightSavingsTimeLastingYears",
       "in": "query",
       "description": "Alternatively, use alias \"ty\". The number of years from \"transitionsFrom\" for which DST transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
       "type": "integer",
@@ -128,9 +123,9 @@
     "/timezone/byId/{format}": {
       "get": {
         "description": "__Time Zone by Id__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
-        "operationId": "Timezone_GetTimezoneByID",
+        "operationId": "GetTimezoneByID",
         "x-ms-examples": {
-          "GetTimezoneByID": {
+          "Successfully retrieve timezone by ID": {
             "$ref": "./examples/GetTimezoneByID.json"
           }
         },
@@ -139,7 +134,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/TimezoneApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TimezoneAcceptLanguage"
@@ -157,10 +152,11 @@
             "$ref": "#/parameters/TimezoneTransitionsYears"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
+            "x-ms-client-name": "timezoneId",
             "in": "query",
             "description": "The IANA time zone ID.",
             "required": true,
@@ -171,7 +167,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TimezoneByIdResult"
+              "$ref": "#/definitions/TimezoneResult"
             }
           },
           "default": {
@@ -183,9 +179,9 @@
     "/timezone/byCoordinates/{format}": {
       "get": {
         "description": "__Time Zone by Coordinates__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair. In addition, the API provides sunset and sunrise times for a given location.",
-        "operationId": "Timezone_GetTimezoneByCoordinates",
+        "operationId": "GetTimezoneByCoordinates",
         "x-ms-examples": {
-          "GetTimezoneByCoordinates": {
+          "Successfully retrieve timezone by coordinates": {
             "$ref": "./examples/GetTimezoneByCoordinates.json"
           }
         },
@@ -194,7 +190,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/TimezoneApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TimezoneAcceptLanguage"
@@ -212,21 +208,29 @@
             "$ref": "#/parameters/TimezoneTransitionsYears"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
             "in": "query",
-            "description": "Coordinates of the point for which time zone information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "description": "Coordinates of the point for which time zone information is requested. This parameter is a list of coordinates, containing a pair of coordinate(lat, long). When this endpoint is called directly, coordinates are passed in as a single string containing coordinates, separated by commas.",
             "required": true,
-            "type": "string"
+            "x-ms-client-name": "coordinates",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TimezoneByCoordinatesResult"
+              "$ref": "#/definitions/TimezoneResult"
             }
           },
           "default": {
@@ -237,10 +241,10 @@
     },
     "/timezone/enumWindows/{format}": {
       "get": {
-        "description": "__Enumerate Windows Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of Windows Time Zone IDs.",
-        "operationId": "Timezone_GetTimezoneEnumWindows",
+        "description": "__Windows Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of Windows Time Zone IDs.",
+        "operationId": "GetWindowsTimezoneIds",
         "x-ms-examples": {
-          "GetTimezoneEnumWindows": {
+          "Successfully retrieve Windows timezone Ids": {
             "$ref": "./examples/GetTimezoneEnumWindows.json"
           }
         },
@@ -249,10 +253,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/TimezoneApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           }
         ],
         "responses": {
@@ -270,10 +274,10 @@
     },
     "/timezone/enumIana/{format}": {
       "get": {
-        "description": "__Enumerate IANA Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
-        "operationId": "Timezone_GetTimezoneEnumIANA",
+        "description": "__IANA Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
+        "operationId": "GetIANATimezoneIds",
         "x-ms-examples": {
-          "GetTimezoneEnumIANA": {
+          "Successfully retrieve Iana timezone Ids": {
             "$ref": "./examples/GetTimezoneEnumIANA.json"
           }
         },
@@ -282,10 +286,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/TimezoneApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           }
         ],
         "responses": {
@@ -303,10 +307,10 @@
     },
     "/timezone/ianaVersion/{format}": {
       "get": {
-        "description": "__Time Zone IANA Version__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns the current IANA version number.",
-        "operationId": "Timezone_GetTimezoneIANAVersion",
+        "description": "__Time Zone IANA Version__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns the current IANA version number as Metadata.",
+        "operationId": "GetIANAVersion",
         "x-ms-examples": {
-          "GetTimezoneIANAVersion": {
+          "Successfully retrieve Iana version metadata": {
             "$ref": "./examples/GetTimezoneIANAVersion.json"
           }
         },
@@ -315,10 +319,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/TimezoneApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           }
         ],
         "responses": {
@@ -337,9 +341,9 @@
     "/timezone/windowsToIana/{format}": {
       "get": {
         "description": "__Windows to IANA Time Zone__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
-        "operationId": "Timezone_GetTimezoneWindowsToIANA",
+        "operationId": "ConvertWindowsTimezoneToIANA",
         "x-ms-examples": {
-          "GetTimezoneWindowsToIANA": {
+          "Successfully retrieve corresponding timezone Iana": {
             "$ref": "./examples/GetTimezoneWindowsToIANA.json"
           }
         },
@@ -348,14 +352,15 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/TimezoneApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
             "in": "query",
+            "x-ms-client-name": "windowsTimezoneId",
             "description": "The Windows time zone ID.",
             "required": true,
             "type": "string"
@@ -363,6 +368,7 @@
           {
             "name": "territory",
             "in": "query",
+            "x-ms-client-name": "windowsTerritoryCode",
             "description": "Windows Time Zone territory code.",
             "type": "string"
           }
@@ -431,8 +437,8 @@
         }
       }
     },
-    "TimezoneByIdResult": {
-      "description": "This object is returned from a successful Timezone By ID call",
+    "TimezoneResult": {
+      "description": "This object is returned from a successful Timezone By ID call or By Coordinates call",
       "type": "object",
       "properties": {
         "Version": {
@@ -447,27 +453,7 @@
           "format": "date-time"
         },
         "TimeZones": {
-          "$ref": "#/definitions/TimeZonesById"
-        }
-      }
-    },
-    "TimezoneByCoordinatesResult": {
-      "description": "This object is returned from a successful Timezone By Coordinates call",
-      "type": "object",
-      "properties": {
-        "Version": {
-          "description": "Version property",
-          "type": "string",
-          "readOnly": true
-        },
-        "ReferenceUtcTimestamp": {
-          "description": "Reference Utc Timestamp property",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "TimeZones": {
-          "$ref": "#/definitions/TimeZonesByCoordinates"
+          "$ref": "#/definitions/TimezoneIds"
         }
       }
     },
@@ -475,10 +461,10 @@
       "description": "This object is returned from a successful Timezone Enum Windows call",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/TimezoneEnumWindow"
+        "$ref": "#/definitions/TimezoneWindows"
       }
     },
-    "TimezoneEnumWindow": {
+    "TimezoneWindows": {
       "type": "object",
       "properties": {
         "WindowsId": {
@@ -512,7 +498,7 @@
       "description": "This object is returned from a successful Timezone IANA Version call",
       "type": "object",
       "properties": {
-        "version": {
+        "Version": {
           "description": "Version property",
           "type": "string",
           "readOnly": true
@@ -529,45 +515,37 @@
     "IanaId": {
       "type": "object",
       "properties": {
-        "id": {
+        "Id": {
           "description": "Id property",
           "type": "string",
           "readOnly": true
         },
-        "isAlias": {
+        "IsAlias": {
           "description": "IsAlias property",
           "type": "boolean",
           "readOnly": true
         },
-        "aliasOf": {
+        "AliasOf": {
           "description": "AliasOf property",
           "type": "string",
           "readOnly": true
         },
-        "hasZone1970Location": {
-          "description": "HasZone1970Location property",
+        "HasZone1970Location": {
+          "description": "This attribute returns `True` if the IanaId has any country/zone associated with it.",
           "type": "boolean",
           "readOnly": true
         }
       }
     },
-    "TimeZonesById": {
-      "description": "TimeZoneById array",
+    "TimezoneIds": {
+      "description": "TimeZoneId array",
       "type": "array",
       "readOnly": true,
       "items": {
-        "$ref": "#/definitions/TimezoneById"
+        "$ref": "#/definitions/TimezoneId"
       }
     },
-    "TimeZonesByCoordinates": {
-      "description": "TimeZoneByCoordinates array",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/TimeZoneByCoordinates"
-      }
-    },
-    "TimezoneById": {
+    "TimezoneId": {
       "type": "object",
       "properties": {
         "Id": {
@@ -596,51 +574,7 @@
           "$ref": "#/definitions/TimezoneNames"
         },
         "ReferenceTime": {
-          "$ref": "#/definitions/ReferenceTimeById"
-        },
-        "RepresentativePoint": {
-          "$ref": "#/definitions/RepresentativePoint"
-        },
-        "TimeTransitions": {
-          "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/TimeTransition"
-          }
-        }
-      }
-    },
-    "TimeZoneByCoordinates": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "Aliases": {
-          "description": "An array of time zone ID aliases.  Only returned when [options]=*zoneinfo* or *all*.\n\nNote: may be null.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "Countries": {
-          "description": "An array of country records. Only returned when [options]=*zoneinfo* or *all*.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/CountryRecord"
-          }
-        },
-        "Names": {
-          "$ref": "#/definitions/TimezoneNames"
-        },
-        "ReferenceTime": {
-          "$ref": "#/definitions/ReferenceTimeByCoordinates"
+          "$ref": "#/definitions/ReferenceTime"
         },
         "RepresentativePoint": {
           "$ref": "#/definitions/RepresentativePoint"
@@ -681,44 +615,7 @@
         }
       }
     },
-    "ReferenceTimeById": {
-      "description": "Details in effect at the local time.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "Tag": {
-          "description": "Time zone name in effect at the reference timestamp (i.e. PST or PDT depending whether Daylight Savings Time is in effect).",
-          "type": "string",
-          "readOnly": true
-        },
-        "StandardOffset": {
-          "description": "UTC offset in effect at the `ReferenceUTCTimestamp`.",
-          "type": "string",
-          "readOnly": true
-        },
-        "DaylightSavings": {
-          "description": "Time saving in minutes in effect at the `ReferenceUTCTimestamp`.",
-          "type": "string",
-          "readOnly": true
-        },
-        "WallTime": {
-          "description": "Current wall time at the given time zone as shown in the `Tag` property.",
-          "type": "string",
-          "readOnly": true
-        },
-        "PosixTzValidYear": {
-          "description": "The year this POSIX string is valid for. Note: A POSIX string will only be valid in the given year.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "PosixTz": {
-          "description": "POSIX string used to set the time zone environment variable.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ReferenceTimeByCoordinates": {
+    "ReferenceTime": {
       "description": "Details in effect at the local time.",
       "type": "object",
       "readOnly": true,
@@ -754,13 +651,15 @@
           "readOnly": true
         },
         "Sunrise": {
-          "description": "Sunrise at the given time zone as shown in the `Tag` property.",
+          "description": "Sunrise at the given time zone as shown in the `Tag` property. The sunrise is described in the ISO8601 format. (Only be populated if the call is byCoordinates)",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "Sunset": {
-          "description": "Sunset at the given time zone as shown in the `Tag` property.",
+          "description": "Sunset at the given time zone as shown in the `Tag` property. The sunset is described in the ISO8601 format.(Only be populated if the call is byCoordinates)",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }
