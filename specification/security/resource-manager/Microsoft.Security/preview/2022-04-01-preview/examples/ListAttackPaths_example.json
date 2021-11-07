@@ -8,153 +8,70 @@
             "body": {
                 "value":[
                     {
-                        "id": "",
-                        "name": "",
-                        "type": "",
+                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/attackPaths/21300918-b2e3-0346-785f-c77ff57d243b",
+                        "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+                        "type": "Microsoft.Security/attackPaths",
                         "properties": {
-                            "displayName": "",
-                            "description": "",
-                            "potentialImpact": "",
+                            "displayName": "Risky user account has high-privileged permissions to a subscription",
+                            "attackPathType": "66a1d478-4d24-42d4-a119-70bfb1a76929",
+                            "description": "User account <user account> is <has no MFA enabled / external user account to the organization> and has <permissions type> permissions to a subscription",
+                            "potentialImpact": "Attacker can potentially breach the user account and user his permissions on the subscription to manage the resources within it (create resources, delete resources)",
                             "graph": {
                                 "AttackPathNodes": [
                                     {
-                                        "entityName": "",
-                                        "entityType": "",
-                                        "entityExtendedProperties": {
-                                            "details": {
-                                                "detail1": "detailValue1",
-                                                "detail2": "detailValue2"
-                                            },
-                                            "insights": {
-                                                "insight1": "insightValue1"
-                                            }
+                                        "displayName": "7d6fbc99-0db4-485b-8882-7a39d20bac65",
+                                        "mapIdentifier": "b0efc5e9-13ce-ca76-222d-460fa86c8912",
+                                        "label": "Account",
+                                        "tags": [
+                                            {"key": "Environment", "value": "Azure"}
+                                        ],
+                                        "entityIdentifiers": {
+                                            "Type": "Account",
+                                            "PrincipalOid": "7d6fbc990db4485b88827a39d20bac65"
+                                        },
+                                        "entityDetails": {
                                         }
                                     },
                                     {
-                                        "entityName": "",
-                                        "entityType": "",
-                                        "entityExtendedProperties": {
-                                            "details": {
-                                                "detail3": "detailValue3"
-                                            },
-                                            "insights": {
-                                                "insight2": "insightValue2"
-                                            }
+                                        "displayName": "ebe59759-e1a0-4110-a32f-889ceeca0936",
+                                        "mapIdentifier": "0e442e97-c9a0-d8d3-69da-3886443f16c7",
+                                        "label": "subscriptions",
+                                        "tags": [
+                                            {"key": "Environment", "value": "Azure"}
+                                        ],
+                                        "entityIdentifiers": {
+                                            "Type": "AzureResource",
+                                            "AzureResourceId": "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936"
+                                        },
+                                        "entityDetails": {
                                         }
                                     }
-
                                 ],
                                 "AttackPathEdges": [
                                     {
-                                        "sourceEntity": {
-
-                                        },
-                                        "targetEntity": {
-
-                                        },
-                                        "edgeExtendedProperties": {
-
-                                        }                                        
-                                    },
-                                    {
-                                        "sourceEntity": {
-
-                                        },
-                                        "targetEntity": {
-
-                                        },
-                                        "edgeExtendedProperties": {
-
-                                        }                                        
+                                        "sourceNode": "b0efc5e9-13ce-ca76-222d-460fa86c8912",
+                                        "targetNode": "0e442e97-c9a0-d8d3-69da-3886443f16c7",
+                                        "mapIdentifier": "58fd30a7-bd37-5da4-bfbb-34fa93e0b12a",
+                                        "label": "AssignedWithPermissions",
+                                        "tags": [
+                                            {"key": "Category", "value": "Permissions"}
+                                        ],
+                                        "entityDetails": {
+                                        }                                      
                                     }
                                 ]
 
                             },
                             "recommendations": [
                                 {
-
+                                    "assessmentType": "57e98606-6b1e-6193-0e3d-fe621387c16b"
                                 },
                                 {
-
+                                    "assessmentType": "94290b00-4d0c-d7b4-7cea-064a9554e681"
                                 }
                             ],
                             "bestPractices": "",
-                            "riskCategories": ["", ""]
-                        }
-                    },
-                    {
-                        "id": "",
-                        "name": "",
-                        "type": "",
-                        "properties": {
-                            "displayName": "",
-                            "description": "",
-                            "potentialImpact": "",
-                            "graph": {
-                                "AttackPathNodes": [
-                                    {
-                                        "entityName": "",
-                                        "entityType": "",
-                                        "entityExtendedProperties": {
-                                            "details": {
-                                                "detail1": "detailValue1",
-                                                "detail2": "detailValue2"
-                                            },
-                                            "insights": {
-                                                "insight1": "insightValue1"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "entityName": "",
-                                        "entityType": "",
-                                        "entityExtendedProperties": {
-                                            "details": {
-                                                "detail3": "detailValue3"
-                                            },
-                                            "insights": {
-                                                "insight2": "insightValue2"
-                                            }
-                                        }
-                                    }
-
-                                ],
-                                "AttackPathEdges": [
-                                    {
-                                        "sourceEntity": {
-
-                                        },
-                                        "targetEntity": {
-
-                                        },
-                                        "edgeExtendedProperties": {
-
-                                        }                                        
-                                    },
-                                    {
-                                        "sourceEntity": {
-
-                                        },
-                                        "targetEntity": {
-
-                                        },
-                                        "edgeExtendedProperties": {
-
-                                        }                                        
-                                    }
-                                ]
-
-                            },
-                            "recommendations": [
-                                {
-
-                                },
-                                {
-
-                                }
-                            ],
-                            "bestPractices": "",
-                            "riskCategories": ["", ""]
+                            "riskCategories": ["Subscription takeover"]
                         }
                     }
                 ]

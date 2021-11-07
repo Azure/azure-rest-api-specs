@@ -160,6 +160,11 @@
             "type": "string",
             "description": "User friendly display name of the attack path"
           },
+          "attackPathType": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Id representing the attack type. attack paths of the same type on different resources will have the same value."
+          },
           "description": {
             "readOnly": true,
             "type": "string",
@@ -271,12 +276,12 @@
           "sourceNode": {
             "readOnly": true,
             "type": "string",
-            "description": ""
+            "description": "source node"
           },
           "targetNode": {
             "readOnly": true,
             "type": "string",
-            "description": ""    
+            "description": "target node"    
           },
           "mapIdentifier": {
             "readOnly": true,
@@ -306,12 +311,12 @@
         "type": "object",
         "description": "",
         "properties": {
-          "tagKey": {
+          "key": {
             "readOnly": true,
             "type": "string",
             "description": "tag key"  
           },
-          "tagValue": {
+          "value": {
             "readOnly": true,
             "type": "string",
             "description": "tag value" 
