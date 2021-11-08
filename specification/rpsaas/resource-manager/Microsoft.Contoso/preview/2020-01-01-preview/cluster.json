@@ -389,36 +389,8 @@
           },
           "description": "The tags."
         },
-        "cluster": {
-          "type": "string",
-          "description": "The cluster."
-        },
-        "datacenter": {
-          "type": "string",
-          "description": "The datacenter."
-        },
-        "dummyVolume": {
-          "type": "object",
-          "description": "The dummy volume.",
-          "properties": {
-            "medium": {
-              "type": "string",
-              "description": "The medium."
-            },
-            "sizeLimit": {
-              "type": "string",
-              "description": "The size limit."
-            }
-          }
-        },
-        "nodes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of nodes."
-        },
-        "serviceAccountName": {
-          "type": "string",
-          "description": "The service account name."
+        "properties": {
+          "$ref": "#/definitions/clusterProperties"
         }
       },
       "description": "The clusters resource patch definition."
