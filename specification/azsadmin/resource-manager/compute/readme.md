@@ -25,7 +25,7 @@ These are the global settings for the Compute API.
 title: ComputeAdminClient
 description: Compute Admin Client
 openapi-type: arm
-tag: package-2021-04-01
+tag: package-2021-09-01
 
 directive:
   - where:
@@ -36,11 +36,11 @@ directive:
       - CRP cannot support the list API for scale units due to the undesired load that would inflict on the system
 ```
 
-### Tag: package-2021-04-01
+### Tag: package-2021-09-01
 
-These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-04-01'
+``` yaml $(tag) == 'package-2021-09-01'
 input-file:
    - Microsoft.Compute.Admin/preview/2015-12-01-preview/Compute.json
    - Microsoft.Compute.Admin/preview/2015-12-01-preview/PlatformImages.json
@@ -48,8 +48,8 @@ input-file:
    - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
    - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
    - Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
-   - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
-   - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
+   - Microsoft.Compute.Admin/stable/2021-09-01/Disks.json
+   - Microsoft.Compute.Admin/stable/2021-09-01/DiskMigrationJobs.json
 ```
 
 ---
@@ -79,8 +79,8 @@ input-file:
      - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
      - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
      - Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
-     - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
-     - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
+     - Microsoft.Compute.Admin/stable/2021-09-01/Disks.json
+     - Microsoft.Compute.Admin/stable/2021-09-01/DiskMigrationJobs.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
@@ -106,6 +106,8 @@ input-file:
    - $(this-folder)/Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
    - $(this-folder)/Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
    - $(this-folder)/Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2021-09-01/Disks.json
+   - $(this-folder)/Microsoft.Compute.Admin/stable/2021-09-01/DiskMigrationJobs.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
