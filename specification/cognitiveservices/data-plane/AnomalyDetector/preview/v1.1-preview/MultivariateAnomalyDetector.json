@@ -297,18 +297,29 @@
           "format": "uuid",
           "required": true,
           "type": "string"
-        },
-        {
-          "name": "lastDetectionRequest",
-          "description": "Request for last detection.",
-          "required": true,
-          "in": "body",
-          "schema": {
-            "$ref": "#/definitions/LastDetectionRequest"
-          }
         }
       ],
       "post": {
+        "summary": "Detect anomalies in the last a few points of the request body.",
+        "description": "Synchronized API for anomaly detection.",
+        "operationId": "LastDetectAnomaly",
+        "parameters": [
+          {
+            "name": "lastDetectionRequest",
+            "description": "Request for last detection.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LastDetectionRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Detection has successfully completed.",
@@ -323,9 +334,6 @@
             }
           }
         },
-        "summary": "Detect anomalies in the last a few points of the request body.",
-        "description": "Synchronized API for anomaly detection.",
-        "operationId": "LastDetectAnomaly",
         "x-ms-examples": {
           "Detect anomaly with multivariate Model": {
             "$ref": "./examples/LastDetectAnomaly.json"
@@ -1149,7 +1157,7 @@
         "results": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnomalyValue"
+            "$ref": "#/definitions/AnomalyState"
           }
         },
         "errors": {
