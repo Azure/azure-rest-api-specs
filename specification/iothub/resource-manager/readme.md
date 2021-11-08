@@ -40,6 +40,14 @@ input-file:
 ```
 ### Tag: package-2021-07
 
+These settings apply only when `--tag=package-2021-07-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-07-02'
+input-file:
+  - Microsoft.Devices/stable/2021-07-02/iothub.json
+```
+### Tag: package-2021-07
+
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-07'
