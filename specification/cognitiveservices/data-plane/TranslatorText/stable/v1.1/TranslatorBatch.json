@@ -5,33 +5,6 @@
     "version": "v1.1"
   },
   "paths": {
-    "/v2.0-preview.1/document/single": {
-      "post": {
-        "tags": [
-          null
-        ],
-        "summary": "Post Stream method.",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "X-MT-JobTable",
-            "description": "job json in the header",
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "X-MT-DocumentTable",
-            "description": "document json in the header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/batches": {
       "post": {
         "tags": [
@@ -1125,11 +1098,6 @@
     "BatchRequestOptions": {
       "type": "object",
       "properties": {
-        "experimental": {
-          "description": "Whether this requets will use experimental feature (if applicable)",
-          "type": "boolean",
-          "example": true
-        },
         "convertPdfToWordOutput": {
           "description": "If set to true, any pdf source document will output both pdf and word translated documents",
           "type": "boolean",
