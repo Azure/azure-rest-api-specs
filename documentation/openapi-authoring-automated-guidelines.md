@@ -3500,3 +3500,56 @@ The following would be invalid by default (unless you do it on purpose , then a 
     }
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r4038"></a>R4038 ExtensionResourcePathPattern
+
+**Category** : SDK Error
+
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**Output Message** : The path '{api path}' which is for extension routing resource type, shouldn't include the parent scope.
+
+**Description**: Path (operation) for 'extension routing type' (that has additional /providers/ segment in parent scope) must be of the form '{scope}/provider/RPNamespace/resourceTypeName' (shouldn't include parent scope)
+
+**CreatedAt**: Novembor 8, 2021
+
+**LastModifiedAt**: Novembor 8, 2021
+
+**Why this rule is important**: ARM will not pass the parent scope to the RPaaS, so the api will failed in the RPaaS validation.
+
+**How to fix the violation**:
+move the parent resource URI to the parameter 'scope' whose type is string.
+
+The following would be invalid:
+```json
+"/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}/providers/Microsoft.MyProvider/defenderSettings/default"
+```
+The following would be valid :
+
+```json
+"{scope}/providers/Microsoft.MyProvider/defenderSettings/default"
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4039"></a>R4039 ParametersOrder
+
+**Category** : SDK Error
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : The paramters should be arranged as the order in the path.
+
+**Description**: This rule ensure the parameters order should be arranged as the order in the path. This might introduce a breaking change when you're trying to fix it , so if there are violations that occur in an operation that already shipped in an existing version , you can suppress it. 
+
+**CreatedAt**: Novembor 8, 2021
+
+**LastModifiedAt**: Novembor 8, 2021
+
+**Why this rule is important**: autorest (and therefore) SDK generates parameter in the exact order of the Swagger. There are special cases: body is always last, and required comes before optional, but for the rest it follows the order.
+
+**How to fix the violation**:
+re-order the parameters as the order in the api path.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
