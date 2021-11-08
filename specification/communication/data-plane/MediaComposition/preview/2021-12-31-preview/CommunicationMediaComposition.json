@@ -356,8 +356,11 @@
             "$ref": "#/definitions/MediaInput"
           }
         },
-        "mediaOutput": {
-          "$ref": "#/definitions/MediaOutput"
+        "mediaOutputs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaOutput"
+          }
         },
         "sources": {
           "type": "object",
@@ -393,7 +396,7 @@
     "MediaOutput": {
       "type": "object",
       "properties": {
-        "mediaOutputType": {
+        "mediaType": {
           "$ref": "#/definitions/MediaType"
         },
         "groupCall": {
