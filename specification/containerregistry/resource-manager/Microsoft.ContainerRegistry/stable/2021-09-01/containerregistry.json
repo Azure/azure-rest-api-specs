@@ -632,6 +632,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets a private link resource by a specified group name for a container registry.",
+        "operationId": "Registries_GetPrivateLinkResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the private link resource was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryGetPrivateLinkResource": {
+            "$ref": "./examples/RegistryGetPrivateLinkResource.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listCredentials": {
       "post": {
         "tags": [
@@ -1366,11 +1405,6 @@
           "type": "string"
         }
       }
-    },
-    "IActionResult": {
-      "description": "This type exists in ASP.NET Core but not in legacy ASP.NET, so creating a dummy type\r\nhere so that it can be used as a return type in a controller which makes the compiler happy.\r\nNote that we still derive from IHttpActionResult because that is the out-of-box supported type\r\nby legacy ASP.NET. So the gist is that if an controller action returns an instance of IActionResult, legacy\r\nASP.NET checks if the instance type implements IHttpActionResult and if yes, calls a particular method on it.",
-      "type": "object",
-      "properties": {}
     },
     "OperationListResult": {
       "description": "The result of a request to list container registry operations.",
@@ -3160,14 +3194,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     }
@@ -3233,6 +3269,14 @@
       "name": "privateEndpointConnectionName",
       "in": "path",
       "description": "The name of the private endpoint connection.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "description": "The name of the private link resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
