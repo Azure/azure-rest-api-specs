@@ -154,7 +154,7 @@
           "200": {
             "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
             "schema": {
-              "$ref": "#/definitions/TilesetListResponse"
+              "$ref": "#/definitions/TilesetListResult"
             }
           },
           "default": {
@@ -187,7 +187,7 @@
           "200": {
             "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
             "schema": {
-              "$ref": "#/definitions/TilesetDetailInfo"
+              "$ref": "#/definitions/Tileset"
             }
           },
           "default": {
@@ -256,7 +256,7 @@
     }
   },
   "definitions": {
-    "TilesetListResponse": {
+    "TilesetListResult": {
       "description": "The response model for the Tileset List API. Returns a list of all tilesets.",
       "type": "object",
       "properties": {
@@ -265,7 +265,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TilesetDetailInfo"
+            "$ref": "#/definitions/Tileset"
           }
         },
         "nextLink": {
@@ -275,7 +275,7 @@
         }
       }
     },
-    "TilesetDetailInfo": {
+    "Tileset": {
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
@@ -309,11 +309,7 @@
         },
         "bbox": {
           "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "number"
-          }
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BoundingBox"
         }
       }
     }
