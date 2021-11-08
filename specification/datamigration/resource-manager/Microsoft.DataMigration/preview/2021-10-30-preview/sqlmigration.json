@@ -194,7 +194,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/operations/{migrationOperationId}/cancel": {
+    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cancel": {
       "post": {
         "tags": [
           "DatabaseMigrations"
@@ -206,12 +206,13 @@
             "$ref": "#/parameters/TargetDbNameParameter"
           },
           {
-            "name": "migrationOperationId",
-            "in": "path",
+            "name": "parameters",
+            "in": "body",
             "description": "Required migration operation ID for which cancel will be initiated.",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "schema": {
+              "$ref": "#/definitions/MigrationOperationInput"
+            }
           },
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -239,7 +240,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/operations/{migrationOperationId}/cutover": {
+    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cutover": {
       "post": {
         "tags": [
           "DatabaseMigrations"
@@ -251,12 +252,13 @@
             "$ref": "#/parameters/TargetDbNameParameter"
           },
           {
-            "name": "migrationOperationId",
-            "in": "path",
+            "name": "parameters",
+            "in": "body",
             "description": "Required migration operation ID for which cutover will be initiated.",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "schema": {
+              "$ref": "#/definitions/MigrationOperationInput"
+            }
           },
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -1286,6 +1288,17 @@
         "nextLink": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MigrationOperationInput": {
+      "description": "Migration Operation Input",
+      "type": "object",
+      "properties": {
+        "migrationOperationId": {
+          "format": "uuid",
+          "description": "ID tracking migration operation.",
+          "type": "string"
         }
       }
     },
