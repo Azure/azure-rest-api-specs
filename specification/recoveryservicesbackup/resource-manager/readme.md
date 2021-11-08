@@ -35,6 +35,14 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
+```yaml $(package-passivestamp)
+tag: package-passivestamp-2018-12-20
+```
+
+```yaml $(package-activestamp)
+tag: package-2021-10-01
+```
+
 ### Validations
 
 Run validations when `--validate` is specified on command line
@@ -46,6 +54,13 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-passivestamp-2018-12-20
+These settings apply only when `--tag=package-passivestamp-2018-12-20` is specified on the command line.
+
+``` yaml $(tag) == 'package-passivestamp-2018-12-20'
+input-file:
+-  Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+```
 
 ### Tag: package-2021-10
 
@@ -54,8 +69,8 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 ```yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-10-01/bms.json
-  - Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 ```
+
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
