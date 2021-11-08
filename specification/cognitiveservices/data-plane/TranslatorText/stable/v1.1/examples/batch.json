@@ -5,7 +5,7 @@
     "resourceGroupName": "TestResourceGroup",
     "endpoint": "{endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "batchRequest": {
+    "body": {
       "inputs": [
         {
           "source": {
@@ -25,6 +25,7 @@
               "glossaries": [
                 {
                   "glossaryUrl": "https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf",
+                  "format": "XLIFF",
                   "storageSource": "AzureBlob"
                 }
               ],
@@ -37,20 +38,7 @@
               "storageSource": "AzureBlob"
             }
           ],
-          "storageType": "Folder",
-          "formats": [
-            {
-              "source": "PortableDocumentFormat",
-              "targets": [
-                {
-                  "target": "PortableDocumentFormat"
-                },
-                {
-                  "target": "OpenXmlWord"
-                }
-              ]
-            }
-          ]
+          "storageType": "Folder"
         }
       ]
     }
