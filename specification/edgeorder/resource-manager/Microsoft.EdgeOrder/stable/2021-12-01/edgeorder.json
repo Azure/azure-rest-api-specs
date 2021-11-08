@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-12-01-preview",
+    "version": "2021-12-01",
     "title": "Edge Ordering Service-Customer"
   },
   "host": "management.azure.com",
@@ -528,7 +528,7 @@
         "tags": [
           "Addresses"
         ],
-        "description": "Creates a new address with the specified parameters. Existing address cannot be updated with this API and should instead be updated with the Update address API.",
+        "description": "Creates a new address with the specified parameters. Existing address can be updated with this API",
         "operationId": "CreateAddress",
         "consumes": [
           "application/json"
@@ -1254,6 +1254,34 @@
         "contactDetails": {
           "$ref": "#/definitions/ContactDetails",
           "description": "Contact details for the address"
+        },
+        "addressValidationStatus": {
+          "description": "Status of address validation",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Ambiguous"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddressValidationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Address provided is valid."
+              },
+              {
+                "value": "Invalid",
+                "description": "Address provided is invalid or not supported."
+              },
+              {
+                "value": "Ambiguous",
+                "description": "Address provided is ambiguous, please choose one of the alternate addresses returned."
+              }
+            ]
+          }
         }
       }
     },
