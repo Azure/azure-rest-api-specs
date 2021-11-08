@@ -297,6 +297,15 @@
           "format": "uuid",
           "required": true,
           "type": "string"
+        },
+        {
+          "name": "lastDetectionRequest",
+          "description": "Request for last detection.",
+          "required": true,
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/LastDetectionRequest"
+          }
         }
       ],
       "post": {
@@ -322,17 +331,6 @@
             "$ref": "./examples/LastDetectAnomaly.json"
           }
         },
-        "parameters": [
-          {
-            "name": "lastDetectionRequest",
-            "description": "Request for last detection.",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/LastDetectionRequest"
-            }
-          }
-        ],
         "tags": [
           "MultivariateAnomalyDetection"
         ]
