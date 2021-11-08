@@ -69,6 +69,33 @@
     "Label": {
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
+    },
+    "CloudError": {
+      "description": "Error response structure.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Error data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "CloudErrorBody": {
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
