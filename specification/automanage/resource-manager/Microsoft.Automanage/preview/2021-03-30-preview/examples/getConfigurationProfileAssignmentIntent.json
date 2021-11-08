@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "configurationProfileAssignmentIntentName": "default",
+    "api-version": "2021-03-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.Automanage/configurationProfileAssignmentIntents/default",
+        "name": "default",
+        "type": "Microsoft.Automanage/ConfigurationProfileAssignmentIntents",
+        "properties": {
+          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines",
+          "configurationProfile": "Production",
+          "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/accounts/automanageAccount",
+          "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        }
+      }
+    }
+  }
+}
