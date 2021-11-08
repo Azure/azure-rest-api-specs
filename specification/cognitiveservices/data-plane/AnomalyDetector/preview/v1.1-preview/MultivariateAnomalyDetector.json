@@ -631,7 +631,7 @@
             "Subsequent",
             "Linear",
             "Zero",
-            "Fixed",
+            "Pad",
             "NotFill"
           ],
           "x-ms-enum": {
@@ -640,8 +640,8 @@
           }
         },
         "paddingValue": {
-          "type": "number",
-          "description": "An optional field. Required when fillNAMethod is Fixed."
+          "type": "integer",
+          "description": "An optional field. Required when fillNAMethod is Pad."
         }
       },
       "type": "object"
@@ -1033,7 +1033,6 @@
     "AnomalyValue": {
       "required": [
         "isAnomaly",
-        "score",
         "severity"
       ],
       "properties": {
