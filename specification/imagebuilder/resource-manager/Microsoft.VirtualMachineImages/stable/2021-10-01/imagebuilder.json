@@ -1216,8 +1216,8 @@
           "description": "The identity of the image template, if configured."
         },
         "systemData": {
-          "$ref": "#/definitions/systemData",
-          "readOnly": true
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
         }
       },
       "allOf": [
@@ -1412,10 +1412,6 @@
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
           "description": "Details about the error."
-        },
-        "systemData": {
-          "$ref": "#/definitions/systemData",
-          "readOnly": true
         }
       },
       "description": "An error response from the Azure VM Image Builder service."
@@ -1445,59 +1441,6 @@
         }
       },
       "description": "An error response from the Azure VM Image Builder service."
-    },
-    "systemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
     }
   },
   "parameters": {
