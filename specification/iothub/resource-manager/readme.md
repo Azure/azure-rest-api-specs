@@ -30,7 +30,7 @@ tag: package-preview-2021-07
 ```
 
 
-### Tag: package-preview-2021-07
+### Tag: package-preview-2021-07-02
 
 These settings apply only when `--tag=package-preview-2021-07-02` is specified on the command line.
 
@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-preview-2021-07-02` is specified o
 input-file:
   - Microsoft.Devices/preview/2021-07-02-preview/iothub.json
 ```
-### Tag: package-2021-07
+### Tag: package-2021-07-02
 
 These settings apply only when `--tag=package-2021-07-02` is specified on the command line.
 
