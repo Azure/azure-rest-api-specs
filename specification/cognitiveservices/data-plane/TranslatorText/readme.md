@@ -41,6 +41,12 @@ This setting is for batch document translator and only applied when `--tag=relea
 input-file: stable/v1.0/TranslatorBatch.json
 ```
 
+### 1.1 Batch API
+This setting is for batch document translator and only applied when `--tag=release_1_1` is specified on the command line.
+``` yaml $(tag) == 'release_1_1'
+input-file: stable/v1.0/TranslatorBatch.json
+```
+
 ### Release 3.0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
