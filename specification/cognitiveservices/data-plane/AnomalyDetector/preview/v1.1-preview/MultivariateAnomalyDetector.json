@@ -60,14 +60,14 @@
             }
           }
         },
-	"summary": "Train a Multivariate Anomaly Detection Model",
+        "summary": "Train a Multivariate Anomaly Detection Model",
         "operationId": "TrainMultivariateModel",
         "parameters": [
           {
-	    "name": "modelRequest",
-	    "in": "body",
+            "name": "modelRequest",
+            "in": "body",
             "required": true,
-	    "description": "Training request",
+            "description": "Training request",
             "schema": {
               "$ref": "#/definitions/ModelInfo"
             }
@@ -76,7 +76,7 @@
         "tags": [
           "MultivariateAnomalyDetection"
         ],
-	"x-ms-examples": {
+        "x-ms-examples": {
           "Train Multivariate model": {
             "$ref": "./examples/TrainModel.json"
           }
@@ -88,7 +88,7 @@
       "parameters": [
         {
           "name": "modelId",
-	  "description": "Model identifier.",
+          "description": "Model identifier.",
           "format": "uuid",
           "in": "path",
           "required": true,
@@ -110,13 +110,13 @@
             }
           }
         },
-	"summary": "Get Multivariate Model",
+        "summary": "Get Multivariate Model",
         "description": "Get detailed information of multivariate model, including the training status and variables used in the model.",
         "operationId": "GetMultivariateModel",
         "tags": [
           "MultivariateAnomalyDetection"
         ],
-	"x-ms-examples": {
+        "x-ms-examples": {
           "Get multivariate model": {
             "$ref": "./examples/GetModel.json"
           }
@@ -134,7 +134,7 @@
             }
           }
         },
-	"x-ms-examples": {
+        "x-ms-examples": {
           "Delete multivariate model": {
             "$ref": "./examples/DeleteModel.json"
           }
@@ -151,9 +151,9 @@
       "parameters": [
         {
           "name": "modelId",
-	  "description": "Model identifier.",
+          "description": "Model identifier.",
           "in": "path",
-	  "format": "uuid",
+          "format": "uuid",
           "required": true,
           "type": "string"
         }
@@ -176,18 +176,18 @@
             }
           }
         },
-	"summary": "Detect Multivariate Anomaly",
+        "summary": "Detect Multivariate Anomaly",
         "description": "Submit detection multivariate anomaly task with the trained model of modelId, the input schema should be the same with the training request. Thus request will be complete asynchronously and will return a resultId for querying the detection result.The request should be a source link to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be as follows: the first column is timestamp and the second column is value.",
         "operationId": "DetectAnomaly",
-	"x-ms-examples": {
+        "x-ms-examples": {
           "Detect anomaly with multivariate Model": {
             "$ref": "./examples/DetectAnomaly.json"
           }
         },
         "parameters": [
           {
-	    "name": "detectionRequest",
-	    "description": "Detect anomaly request",
+            "name": "detectionRequest",
+            "description": "Detect anomaly request",
             "required": true,
             "in": "body",
             "schema": {
@@ -200,15 +200,15 @@
         ]
       }
     },
-     "/multivariate/results/{resultId}": {
+    "/multivariate/results/{resultId}": {
       "parameters": [
         {
           "name": "resultId",
-	  "description": "Result identifier.",
+          "description": "Result identifier.",
           "in": "path",
           "required": true,
           "type": "string",
-	  "format": "uuid"
+          "format": "uuid"
         }
       ],
       "get": {
@@ -226,14 +226,14 @@
             }
           }
         },
-	"x-ms-examples": {
+        "x-ms-examples": {
           "Get detection result": {
             "$ref": "./examples/GetResult.json"
           }
         },
         "summary": "Get Multivariate Anomaly Detection Result",
         "operationId": "GetDetectionResult",
-	"description": "Get multivariate anomaly detection result based on resultId returned by the DetectAnomalyAsync api",
+        "description": "Get multivariate anomaly detection result based on resultId returned by the DetectAnomalyAsync api",
         "tags": [
           "MultivariateAnomalyDetection"
         ]
@@ -243,11 +243,11 @@
       "parameters": [
         {
           "name": "modelId",
-	  "description": "Model identifier.",
+          "description": "Model identifier.",
           "in": "path",
           "required": true,
           "type": "string",
-	  "format": "uuid"
+          "format": "uuid"
         }
       ],
       "get": {
@@ -259,8 +259,8 @@
                 "description": "application/zip",
                 "type": "string"
               }
-	    },
-	    "schema": {
+            },
+            "schema": {
               "type": "object",
               "format": "file"
             }
@@ -272,7 +272,7 @@
             }
           }
         },
-	"x-ms-examples": {
+        "x-ms-examples": {
           "Get detection result": {
             "$ref": "./examples/ExportModel.json"
           }
@@ -408,19 +408,19 @@
       "properties": {
         "modelId": {
           "type": "string",
-	  "format": "uuid",
+          "format": "uuid",
           "description": "Model identifier.",
           "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
         },
         "createdTime": {
           "type": "string",
-	  "format": "date-time",
+          "format": "date-time",
           "description": "Date and time (UTC) when the model was created.",
           "example": "2020-06-30T00:00:00Z"
         },
         "lastUpdatedTime": {
           "type": "string",
-	  "format": "date-time",
+          "format": "date-time",
           "description": "Date and time (UTC) when the model was last updated.",
           "example": "2020-06-30T00:00:00Z"
         },
@@ -625,7 +625,7 @@
             "Inner",
             "Outer"
           ],
-	  "x-ms-enum": {
+          "x-ms-enum": {
             "name": "alignMode",
             "modelAsString": false
           }
@@ -639,10 +639,10 @@
             "Subsequent",
             "Linear",
             "Zero",
-            "Fixed",
+            "Pad",
             "NotFill"
           ],
-	  "x-ms-enum": {
+          "x-ms-enum": {
             "name": "fillNAMethod",
             "modelAsString": false
           }
@@ -779,19 +779,19 @@
       "properties": {
         "modelId": {
           "type": "string",
-	  "format": "uuid",
-	  "description": "Model identifier.",
+          "format": "uuid",
+          "description": "Model identifier.",
           "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
         },
         "createdTime": {
           "type": "string",
-	  "format": "date-time",
+          "format": "date-time",
           "description": "Date and time (UTC) when the model was created.",
           "example": "2020-06-30T00:00:00Z"
         },
         "lastUpdatedTime": {
           "type": "string",
-	  "format": "date-time",
+          "format": "date-time",
           "description": "Date and time (UTC) when the model was last updated.",
           "example": "2020-06-30T00:00:00Z"
         },
@@ -827,13 +827,13 @@
         "currentCount": {
           "type": "integer",
           "description": "Current count of trained multivariate models.",
-	  "x-nullable": false,
+          "x-nullable": false,
           "example": 10
         },
         "maxCount": {
           "type": "integer",
           "description": "Max number of models that can be trained for this subscription.",
-	  "x-nullable": false,
+          "x-nullable": false,
           "example": 20
         },
         "nextLink": {
@@ -847,7 +847,7 @@
     "DetectionRequest": {
       "required": [
         "source",
-	"endTime",
+        "endTime",
         "startTime"
       ],
       "properties": {
@@ -881,7 +881,7 @@
       "properties": {
         "resultId": {
           "type": "string",
-	  "format": "uuid",
+          "format": "uuid",
           "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
         },
         "summary": {
@@ -915,7 +915,7 @@
             "READY",
             "FAILED"
           ],
-	  "x-ms-enum": {
+          "x-ms-enum": {
             "name": "DetectionStatus",
             "modelAsString": false
           }
@@ -1021,7 +1021,7 @@
       "properties": {
         "timestamp": {
           "type": "string",
-	  "format": "date-time",
+          "format": "date-time",
           "description": "timestamp",
           "example": "2020-01-01T00:00:00Z"
         },
@@ -1041,7 +1041,6 @@
     "AnomalyValue": {
       "required": [
         "isAnomaly",
-        "score",
         "severity"
       ],
       "properties": {
