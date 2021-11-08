@@ -3235,7 +3235,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Optional parameter to force delete virtual machines.(Feature in Preview)"
+            "description": "Optional parameter to force delete virtual machines."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -7197,7 +7197,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimage": {
       "post": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -7253,7 +7253,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimageall": {
       "post": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -7300,7 +7300,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/deallocate": {
       "post": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -7347,7 +7347,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}": {
       "put": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -7533,7 +7533,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView": {
       "get": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -8326,30 +8326,6 @@
       },
       "description": "Describes a data disk."
     },
-    "RestorePointProvisioningDetails": {
-      "properties": {
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the creation time of the restore point."
-        },
-        "totalUsedSizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the total size of the data in all the disks which are part of the restore point."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the status of the Create restore point operation."
-        },
-        "statusMessage": {
-          "type": "string",
-          "description": "Gets the status message of the Create restore point operation."
-        }
-      },
-      "description": "Restore Point Provisioning details."
-    },
     "RestorePoint": {
       "properties": {
         "properties": {
@@ -8398,10 +8374,10 @@
           },
           "description": "Gets the consistency mode for the restore point. Please refer to https://aka.ms/RestorePoints for more details."
         },
-        "provisioningDetails": {
-          "$ref": "#/definitions/RestorePointProvisioningDetails",
-          "readOnly": true,
-          "description": "Gets the provisioning details set by the server during Create restore point operation."
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time of the restore point."
         }
       },
       "description": "The restore point properties."
