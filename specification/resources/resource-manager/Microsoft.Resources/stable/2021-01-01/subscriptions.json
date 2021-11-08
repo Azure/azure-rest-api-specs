@@ -34,37 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Resources/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists all of the available Microsoft.Resources REST API operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/locations": {
       "get": {
         "tags": [

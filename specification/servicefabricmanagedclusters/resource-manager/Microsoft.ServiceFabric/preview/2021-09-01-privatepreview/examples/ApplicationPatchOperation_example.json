@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "api-version": "2021-09-01-privatepreview",
+    "parameters": {
+      "tags": {
+        "a": "b"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/applications",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp",
+        "name": "myApp",
+        "tags": {
+          "a": "b"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "version": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applicationTypes/myAppType/versions/1.0",
+          "parameters": {
+            "param1": "value1"
+          },
+          "upgradePolicy": {
+            "applicationHealthPolicy": {
+              "considerWarningAsError": true,
+              "maxPercentUnhealthyDeployedApplications": 0,
+              "defaultServiceTypeHealthPolicy": {
+                "maxPercentUnhealthyServices": 0,
+                "maxPercentUnhealthyPartitionsPerService": 0,
+                "maxPercentUnhealthyReplicasPerPartition": 0
+              },
+              "serviceTypeHealthPolicyMap": {
+                "service1": {
+                  "maxPercentUnhealthyReplicasPerPartition": 30,
+                  "maxPercentUnhealthyPartitionsPerService": 30,
+                  "maxPercentUnhealthyServices": 30
+                }
+              }
+            },
+            "rollingUpgradeMonitoringPolicy": {
+              "failureAction": "Rollback",
+              "healthCheckRetryTimeout": "00:10:00",
+              "healthCheckWaitDuration": "00:02:00",
+              "healthCheckStableDuration": "00:05:00",
+              "upgradeDomainTimeout": "00:15:00",
+              "upgradeTimeout": "01:00:00"
+            },
+            "upgradeReplicaSetCheckTimeout": 3600,
+            "forceRestart": false,
+            "instanceCloseDelayDuration": 600,
+            "upgradeMode": "UnmonitoredAuto",
+            "recreateApplication": false
+          }
+        }
+      }
+    }
+  }
+}

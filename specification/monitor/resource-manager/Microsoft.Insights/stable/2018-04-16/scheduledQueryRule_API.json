@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}": {
       "put": {
         "description": "Creates or updates an log search rule.",
         "tags": [
@@ -226,7 +226,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/scheduledQueryRules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
           "scheduledQueryRules"
@@ -269,7 +269,7 @@
         "x-ms-odata": "#/definitions/LogSearchRuleResource"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/scheduledQueryRules": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
           "scheduledQueryRules"
@@ -318,6 +318,7 @@
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -343,6 +344,7 @@
           ]
         },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -385,8 +387,10 @@
       "description": "The Log Search Rule resource."
     },
     "LogSearchRuleResourcePatch": {
+      "type": "object",
       "properties": {
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -401,6 +405,7 @@
       "description": "The log search rule resource for patch operations."
     },
     "LogSearchRuleResourceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -583,6 +588,7 @@
       "description": "Set value to 'ResultAccount'"
     },
     "LogSearchRule": {
+      "type": "object",
       "description": "Log Search Rule Definition",
       "properties": {
         "createdWithApiVersion": {
@@ -660,6 +666,7 @@
       ]
     },
     "LogSearchRulePatch": {
+      "type": "object",
       "description": "Log Search Rule Definition for Patching",
       "properties": {
         "enabled": {
