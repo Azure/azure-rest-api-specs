@@ -830,7 +830,13 @@
           "x-nullable": false,
           "example": 10
         },
-        "lastUpdatedTime": {
+        "maxCount": {
+          "type": "integer",
+          "description": "Max number of models that can be trained for this subscription.",
+          "x-nullable": false,
+          "example": 20
+        },
+        "nextLink": {
           "type": "string",
           "description": "The link to fetch more models."
         }
@@ -914,13 +920,6 @@
             "modelAsString": false
           }
         },
-        "timestamps": {
-          "type": "array",
-          "description": "Error message when detection is failed.",
-          "items": {
-            "type": "string"
-          }
-        },
         "errors": {
           "type": "array",
           "description": "Error message when detection is failed.",
@@ -957,6 +956,30 @@
             },
             {
               "variable": "ad_series_init",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "cpu",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "data_in_speed",
+              "filledNARatio": 0,
+              "effectiveCount": 26,
+              "startTime": "2019-04-01T00:00:00Z",
+              "endTime": "2019-04-01T00:25:00Z",
+              "errors": []
+            },
+            {
+              "variable": "data_out_speed",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
@@ -1056,11 +1079,7 @@
       },
       "type": "object"
     },
-    "LastDetectionRequest": {
-      "required": [
-        "length",
-        "variables"
-      ],
+    "AnomalyContributor": {
       "properties": {
         "contributionScore": {
           "type": "number",
@@ -1069,77 +1088,7 @@
           "minimum": 0,
           "maximum": 2
         },
-        "length": {
-          "type": "integer",
-          "description": "length",
-          "example": 2
-        }
-      },
-      "type": "object"
-    },
-    "VariableValues": {
-      "required": [
-        "name",
-        "timestamps",
-        "values"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "variable name",
-          "example": "variable_1"
-        },
-        "timestamps": {
-          "type": "array",
-          "description": "timestamps",
-          "items": {
-            "type": "string"
-          }
-        },
-        "values": {
-          "type": "array",
-          "description": "values",
-          "items": {
-            "type": "number"
-          }
-        }
-      },
-      "type": "object"
-    },
-    "LastDetectionResult": {
-      "required": [
-        "results"
-      ],
-      "properties": {
-        "variableStates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VariableState"
-          }
-        },
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AnomalyValue"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "type": "object"
-    },
-    "AnomalyInterpretation": {
-      "required": [
-        "contributorScores",
-        "contributors",
-        "correlationChanges"
-      ],
-      "properties": {
-        "resultId": {
+        "variable": {
           "type": "string",
           "description": "Name of the variable.",
           "example": "Variable_1"
@@ -1202,7 +1151,7 @@
         "variableStates": {
           "type": "array",
           "items": {
-            "type": "number"
+            "$ref": "#/definitions/VariableState"
           }
         },
         "results": {
