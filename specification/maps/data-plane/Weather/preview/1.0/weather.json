@@ -737,10 +737,10 @@
         "description": "**Get government-issued Storms**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nSearch government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
         "operationId": "Weather_StormSearch",
         "x-ms-examples": {
-          "StormSearch": {
+          "Search Storms": {
             "$ref": "./examples/GetStormSearch.json"
           },
-          "StormSearch with three conditions": {
+          "Search Storms With Three Properties": {
             "$ref": "./examples/GetFullStormSearch.json"
           }
         },
@@ -782,7 +782,7 @@
         "description": "**Government-issued forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all Government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
         "operationId": "Weather_StormForecast",
         "x-ms-examples": {
-          "Get Storm Forecasts": {
+          "StormForecast": {
             "$ref": "./examples/GetStormForecast.json"
           }
         },
@@ -2993,10 +2993,12 @@
         },
         "beginDateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "DateTime of the beginning of the window of movement, displayed in ISO8601 format."
         },
         "endDateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "DateTime of the end of the window of movement, displayed in ISO8601 format."
         },
         "beginStatus": {
