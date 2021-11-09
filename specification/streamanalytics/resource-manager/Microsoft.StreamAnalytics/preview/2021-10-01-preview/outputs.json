@@ -1,0 +1,1173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StreamAnalyticsManagementClient",
+    "version": "2021-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/outputs/{outputName}": {
+      "put": {
+        "tags": [
+          "Outputs"
+        ],
+        "operationId": "Outputs_CreateOrReplace",
+        "description": "Creates an output or replaces an already existing output under an existing streaming job.",
+        "x-ms-examples": {
+          "Create an Azure SQL database output": {
+            "$ref": "./examples/Output_Create_AzureSQL.json"
+          },
+          "Create an Azure Table output": {
+            "$ref": "./examples/Output_Create_AzureTable.json"
+          },
+          "Create a blob output with CSV serialization": {
+            "$ref": "./examples/Output_Create_Blob_CSV.json"
+          },
+          "Create a DocumentDB output": {
+            "$ref": "./examples/Output_Create_DocumentDB.json"
+          },
+          "Create an Event Hub output with JSON serialization": {
+            "$ref": "./examples/Output_Create_EventHub_JSON.json"
+          },
+          "Create a Service Bus Queue output with Avro serialization": {
+            "$ref": "./examples/Output_Create_ServiceBusQueue_Avro.json"
+          },
+          "Create a Service Bus Topic output with CSV serialization": {
+            "$ref": "./examples/Output_Create_ServiceBusTopic_CSV.json"
+          },
+          "Create a Power BI output": {
+            "$ref": "./examples/Output_Create_PowerBI.json"
+          },
+          "Create an Azure Data Lake Store output with JSON serialization": {
+            "$ref": "./examples/Output_Create_AzureDataLakeStore_JSON.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "output",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "description": "The definition of the output that will be used to create a new output or replace the existing one under the streaming job."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new output to be created, but to prevent updating an existing output. Other values will result in a 412 Pre-condition Failed response."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OutputNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The output was successfully created or replaced.",
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "The output was successfully created or replaced.",
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Outputs"
+        ],
+        "operationId": "Outputs_Update",
+        "description": "Updates an existing output under an existing streaming job. This can be used to partially update (ie. update one or two properties) an output without affecting the rest the job or output definition.",
+        "x-ms-examples": {
+          "Update an Azure SQL database output": {
+            "$ref": "./examples/Output_Update_AzureSQL.json"
+          },
+          "Update an Azure Table output": {
+            "$ref": "./examples/Output_Update_AzureTable.json"
+          },
+          "Update a blob output with CSV serialization": {
+            "$ref": "./examples/Output_Update_Blob.json"
+          },
+          "Update a DocumentDB output": {
+            "$ref": "./examples/Output_Update_DocumentDB.json"
+          },
+          "Update an Event Hub output with JSON serialization": {
+            "$ref": "./examples/Output_Update_EventHub.json"
+          },
+          "Update a Service Bus Queue output with Avro serialization": {
+            "$ref": "./examples/Output_Update_ServiceBusQueue.json"
+          },
+          "Update a Service Bus Topic output with CSV serialization": {
+            "$ref": "./examples/Output_Update_ServiceBusTopic.json"
+          },
+          "Update a Power BI output": {
+            "$ref": "./examples/Output_Update_PowerBI.json"
+          },
+          "Update an Azure Data Lake Store output with JSON serialization": {
+            "$ref": "./examples/Output_Update_AzureDataLakeStore.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "output",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "description": "An Output object. The properties specified here will overwrite the corresponding properties in the existing output (ie. Those properties will be updated). Any properties that are set to null here will mean that the corresponding property in the existing output will remain the same and not change as a result of this PATCH operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OutputNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The output was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Outputs"
+        ],
+        "operationId": "Outputs_Delete",
+        "description": "Deletes an output from the streaming job.",
+        "x-ms-examples": {
+          "Delete an output": {
+            "$ref": "./examples/Output_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OutputNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The output was successfully deleted."
+          },
+          "204": {
+            "description": "The output does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Outputs"
+        ],
+        "operationId": "Outputs_Get",
+        "description": "Gets details about the specified output.",
+        "x-ms-examples": {
+          "Get an Azure SQL database output": {
+            "$ref": "./examples/Output_Get_AzureSQL.json"
+          },
+          "Get an Azure Table output": {
+            "$ref": "./examples/Output_Get_AzureTable.json"
+          },
+          "Get a blob output with CSV serialization": {
+            "$ref": "./examples/Output_Get_Blob_CSV.json"
+          },
+          "Get a DocumentDB output": {
+            "$ref": "./examples/Output_Get_DocumentDB.json"
+          },
+          "Get an Azure Data Warehouse output": {
+            "$ref": "./examples/Output_Get_DataWarehouse.json"
+          },
+          "Get an Azure Function output": {
+            "$ref": "./examples/Output_Get_AzureFunction.json"
+          },
+          "Get an Event Hub output with JSON serialization": {
+            "$ref": "./examples/Output_Get_EventHub_JSON.json"
+          },
+          "Get a Service Bus Queue output with Avro serialization": {
+            "$ref": "./examples/Output_Get_ServiceBusQueue_Avro.json"
+          },
+          "Get a Service Bus Topic output with CSV serialization": {
+            "$ref": "./examples/Output_Get_ServiceBusTopic_CSV.json"
+          },
+          "Get a Power BI output": {
+            "$ref": "./examples/Output_Get_PowerBI.json"
+          },
+          "Get an Azure Data Lake Store output with JSON serialization": {
+            "$ref": "./examples/Output_Get_AzureDataLakeStore_JSON.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OutputNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified output.",
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/outputs": {
+      "get": {
+        "tags": [
+          "Outputs"
+        ],
+        "operationId": "Outputs_ListByStreamingJob",
+        "description": "Lists all of the outputs under the specified streaming job.",
+        "x-ms-examples": {
+          "List all outputs in a streaming job": {
+            "$ref": "./examples/Output_ListByStreamingJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the outputs under the specified streaming job.",
+            "schema": {
+              "$ref": "#/definitions/OutputListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/outputs/{outputName}/test": {
+      "post": {
+        "tags": [
+          "Outputs"
+        ],
+        "operationId": "Outputs_Test",
+        "description": "Tests whether an output’s datasource is reachable and usable by the Azure Stream Analytics service.",
+        "x-ms-examples": {
+          "Test the connection for an output": {
+            "$ref": "./examples/Output_Test.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "output",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Output"
+            },
+            "description": "If the output specified does not already exist, this parameter must contain the full output definition intended to be tested. If the output specified already exists, this parameter can be left null to test the existing output as is or if specified, the properties specified will overwrite the corresponding properties in the existing output (exactly like a PATCH operation) and the resulting output will be tested."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OutputNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The test operation completed successfully.",
+            "schema": {
+              "$ref": "./inputs.json#/definitions/ResourceTestStatus"
+            }
+          },
+          "202": {
+            "description": "The test request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Output": {
+      "type": "object",
+      "description": "An output object, containing all information associated with the named output. All outputs are contained under a streaming job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OutputProperties",
+          "description": "The properties that are associated with an output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OutputProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an output.",
+      "properties": {
+        "datasource": {
+          "$ref": "#/definitions/OutputDataSource",
+          "description": "Describes the data source that output will be written to. Required on PUT (CreateOrReplace) requests."
+        },
+        "timeWindow": {
+          "type": "string",
+          "description": "The time frame for filtering Stream Analytics job outputs."
+        },
+        "sizeWindow": {
+          "type": "number",
+          "description": "The size window to constrain a Stream Analytics output to."
+        },
+        "serialization": {
+          "$ref": "./inputs.json#/definitions/Serialization",
+          "description": "Describes how data from an input is serialized or how data is serialized when written to an output. Required on PUT (CreateOrReplace) requests."
+        },
+        "diagnostics": {
+          "readOnly": true,
+          "$ref": "./inputs.json#/definitions/Diagnostics",
+          "description": "Describes conditions applicable to the Input, Output, or the job overall, that warrant customer attention."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
+        }
+      }
+    },
+    "OutputDataSource": {
+      "type": "object",
+      "description": "Describes the data source that output will be written to.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Indicates the type of data source output will be written to. Required on PUT (CreateOrReplace) requests."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "RawOutputDatasource": {
+      "description": "Describes a raw output data source. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an output of this data source type to an existing job.",
+      "type": "object",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that are associated with a raw output. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/RawOutputDatasourceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RawOutputDatasourceProperties": {
+      "description": "The properties that are associated with a raw output.",
+      "type": "object",
+      "properties": {
+        "payloadUri": {
+          "description": "The SAS URL to a blob where the output should be written. If this property is not set, output data will be written into a temporary storage, and a SAS URL to that temporary storage will be included in the result.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobOutputDataSource": {
+      "type": "object",
+      "description": "Describes a blob output data source.",
+      "x-ms-discriminator-value": "Microsoft.Storage/Blob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobOutputDataSourceProperties",
+          "description": "The properties that are associated with a blob output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BlobOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a blob output.",
+      "allOf": [
+        {
+          "$ref": "./inputs.json#/definitions/BlobDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "AzureTableOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Azure Table output data source.",
+      "x-ms-discriminator-value": "Microsoft.Storage/Table",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureTableOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure Table output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureTableOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure Table output.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the Azure Storage account. Required on PUT (CreateOrReplace) requests."
+        },
+        "accountKey": {
+          "type": "string",
+          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the Azure Table. Required on PUT (CreateOrReplace) requests."
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "This element indicates the name of a column from the SELECT statement in the query that will be used as the partition key for the Azure Table. Required on PUT (CreateOrReplace) requests."
+        },
+        "rowKey": {
+          "type": "string",
+          "description": "This element indicates the name of a column from the SELECT statement in the query that will be used as the row key for the Azure Table. Required on PUT (CreateOrReplace) requests."
+        },
+        "columnsToRemove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "If specified, each item in the array is the name of a column to remove (if present) from output event entities."
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of rows to write to the Azure Table at a time."
+        }
+      }
+    },
+    "EventHubOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Event Hub output data source.",
+      "x-ms-discriminator-value": "Microsoft.ServiceBus/EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventHubOutputDataSourceProperties",
+          "description": "The properties that are associated with an Event Hub output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventHubV2OutputDataSource": {
+      "type": "object",
+      "description": "Describes an Event Hub output data source.",
+      "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventHubOutputDataSourceProperties",
+          "description": "The properties that are associated with an Event Hub output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventHubOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Event Hub output.",
+      "allOf": [
+        {
+          "$ref": "./inputs.json#/definitions/EventHubDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "partitionKey": {
+          "type": "string",
+          "description": "The key/column that is used to determine to which partition to send event data."
+        },
+        "propertyColumns": {
+          "type": "array",
+          "description": "The properties associated with this Event Hub output.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureSqlDatabaseOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Azure SQL database output data source.",
+      "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureSqlDatabaseOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure SQL database output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureSqlDatabaseOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure SQL database output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlDatabaseDataSourceProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "AzureSynapseOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Azure Synapse output data source.",
+      "x-ms-discriminator-value": "Microsoft.Sql/Server/DataWarehouse",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureSynapseOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure Synapse output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureSynapseOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure Synapse output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSynapseDataSourceProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "AzureSynapseDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure SQL database data source.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "The name of the SQL server containing the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the table in the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "user": {
+          "type": "string",
+          "description": "The user name that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DocumentDbOutputDataSource": {
+      "type": "object",
+      "description": "Describes a DocumentDB output data source.",
+      "x-ms-discriminator-value": "Microsoft.Storage/DocumentDB",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DocumentDbOutputDataSourceProperties",
+          "description": "The properties that are associated with a DocumentDB output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DocumentDbOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a DocumentDB output.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The DocumentDB account name or ID. Required on PUT (CreateOrReplace) requests."
+        },
+        "accountKey": {
+          "type": "string",
+          "description": "The account key for the DocumentDB account. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the DocumentDB database. Required on PUT (CreateOrReplace) requests."
+        },
+        "collectionNamePattern": {
+          "type": "string",
+          "description": "The collection name pattern for the collections to be used. The collection name format can be constructed using the optional {partition} token, where partitions start from 0. See the DocumentDB section of https://docs.microsoft.com/en-us/rest/api/streamanalytics/stream-analytics-output for more information. Required on PUT (CreateOrReplace) requests."
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "The name of the field in output events used to specify the key for partitioning output across collections. If 'collectionNamePattern' contains the {partition} token, this property is required to be specified."
+        },
+        "documentId": {
+          "type": "string",
+          "description": "The name of the field in output events used to specify the primary key which insert or update operations are based on."
+        }
+      }
+    },
+    "AzureFunctionOutputDataSource": {
+      "description": "Defines the metadata of AzureFunctionOutputDataSource",
+      "type": "object",
+      "x-ms-discriminator-value": "Microsoft.AzureFunction",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFunctionOutputDataSourceProperties",
+          "description": "The properties that are associated with a Azure Function output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureFunctionOutputDataSourceProperties": {
+      "description": "The properties that are associated with a DocumentDB output.",
+      "type": "object",
+      "properties": {
+        "functionAppName": {
+          "description": "The name of your Azure Functions app.",
+          "type": "string"
+        },
+        "functionName": {
+          "description": "The name of the function in your Azure Functions app.",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "If you want to use an Azure Function from another subscription, you can do so by providing the key to access your function.",
+          "type": "string"
+        },
+        "maxBatchSize": {
+          "description": "A property that lets you set the maximum size for each output batch that's sent to your Azure function. The input unit is in bytes. By default, this value is 262,144 bytes (256 KB).",
+          "type": "number"
+        },
+        "maxBatchCount": {
+          "description": "A property that lets you specify the maximum number of events in each batch that's sent to Azure Functions. The default value is 100.",
+          "type": "number"
+        }
+      }
+    },
+    "ServiceBusQueueOutputDataSource": {
+      "type": "object",
+      "description": "Describes a Service Bus Queue output data source.",
+      "x-ms-discriminator-value": "Microsoft.ServiceBus/Queue",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceBusQueueOutputDataSourceProperties",
+          "description": "The properties that are associated with a Service Bus Queue output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServiceBusQueueOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a Service Bus Queue output.",
+      "allOf": [
+        {
+          "$ref": "./inputs.json#/definitions/ServiceBusDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "queueName": {
+          "type": "string",
+          "description": "The name of the Service Bus Queue. Required on PUT (CreateOrReplace) requests."
+        },
+        "propertyColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A string array of the names of output columns to be attached to Service Bus messages as custom properties."
+        },
+        "systemPropertyColumns": {
+          "type": "object",
+          "description": "The system properties associated with the Service Bus Queue. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc."
+        }
+      }
+    },
+    "ServiceBusTopicOutputDataSource": {
+      "type": "object",
+      "description": "Describes a Service Bus Topic output data source.",
+      "x-ms-discriminator-value": "Microsoft.ServiceBus/Topic",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceBusTopicOutputDataSourceProperties",
+          "description": "The properties that are associated with a Service Bus Topic output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServiceBusTopicOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a Service Bus Topic output.",
+      "allOf": [
+        {
+          "$ref": "./inputs.json#/definitions/ServiceBusDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "topicName": {
+          "type": "string",
+          "description": "The name of the Service Bus Topic. Required on PUT (CreateOrReplace) requests."
+        },
+        "propertyColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A string array of the names of output columns to be attached to Service Bus messages as custom properties."
+        },
+        "systemPropertyColumns": {
+          "type": "object",
+          "description": "The system properties associated with the Service Bus Topic Output. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PowerBIOutputDataSource": {
+      "type": "object",
+      "description": "Describes a Power BI output data source.",
+      "x-ms-discriminator-value": "PowerBI",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PowerBIOutputDataSourceProperties",
+          "description": "The properties that are associated with a Power BI output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PowerBIOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a Power BI output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OAuthBasedDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "description": "The name of the Power BI dataset. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the Power BI table under the specified dataset. Required on PUT (CreateOrReplace) requests."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The ID of the Power BI group."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "The name of the Power BI group. Use this property to help remember which specific Power BI group id was used."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "AzureDataLakeStoreOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Azure Data Lake Store output data source.",
+      "x-ms-discriminator-value": "Microsoft.DataLake/Accounts",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDataLakeStoreOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure Data Lake Store output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureDataLakeStoreOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure Data Lake Store.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OAuthBasedDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the Azure Data Lake Store account. Required on PUT (CreateOrReplace) requests."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the user used to obtain the refresh token. Required on PUT (CreateOrReplace) requests."
+        },
+        "filePathPrefix": {
+          "type": "string",
+          "description": "The location of the file to which the output should be written to. Required on PUT (CreateOrReplace) requests."
+        },
+        "dateFormat": {
+          "type": "string",
+          "description": "The date format. Wherever {date} appears in filePathPrefix, the value of this property is used as the date format instead."
+        },
+        "timeFormat": {
+          "type": "string",
+          "description": "The time format. Wherever {time} appears in filePathPrefix, the value of this property is used as the time format instead."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "OutputListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Output"
+          },
+          "readOnly": true,
+          "description": "A list of outputs under a streaming job. Populated by a 'List' operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Object containing a list of outputs under a streaming job."
+    },
+    "AzureSqlDatabaseDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure SQL database data source.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "The name of the SQL server containing the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "user": {
+          "type": "string",
+          "description": "The user name that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the table in the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        },
+        "maxBatchCount": {
+          "type": "number",
+          "description": "Max Batch count for write to Sql database, the default value is 10,000. Optional on PUT requests."
+        },
+        "maxWriterCount": {
+          "type": "number",
+          "description": "Max Writer count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "OAuthBasedDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with data sources that use OAuth as their authentication model.",
+      "properties": {
+        "refreshToken": {
+          "type": "string",
+          "description": "A refresh token that can be used to obtain a valid access token that can then be used to authenticate with the data source. A valid refresh token is currently only obtainable via the Azure Portal. It is recommended to put a dummy string value here when creating the data source and then going to the Azure Portal to authenticate the data source which will update this property with a valid refresh token. Required on PUT (CreateOrReplace) requests."
+        },
+        "tokenUserPrincipalName": {
+          "type": "string",
+          "description": "The user principal name (UPN) of the user that was used to obtain the refresh token. Use this property to help remember which user was used to obtain the refresh token."
+        },
+        "tokenUserDisplayName": {
+          "type": "string",
+          "description": "The user display name of the user that was used to obtain the refresh token. Use this property to help remember which user was used to obtain the refresh token."
+        }
+      }
+    },
+    "SubResource": {
+      "type": "object",
+      "description": "The base sub-resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "OutputNameParameter": {
+      "name": "outputName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the output.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
