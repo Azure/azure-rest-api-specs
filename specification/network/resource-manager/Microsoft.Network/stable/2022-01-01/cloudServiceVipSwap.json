@@ -71,6 +71,12 @@
           }
         ],
         "responses": {
+           "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          },
           "200": {
             "description": "Request successful. The operation returns the slot type for the specified cloud service.",
             "schema": {
@@ -88,7 +94,7 @@
         "tags": [
           "VipSwap"
         ],
-        "operationId": "VipSwap_Put",
+        "operationId": "VipSwap_Create",
         "description": "Performs vip swap operation on swappable cloud services.",
         "parameters": [
           {
@@ -142,10 +148,9 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Put vip swap operation.": {
-            "$ref": "./examples/PutSwapResource.json"
+            "$ref": "./examples/CreateSwapResource.json"
           }
         }
       }
@@ -157,9 +162,11 @@
         "SlotType": {
           "description": "Specifies slot info on a cloud service",
           "type": "string",
+          "x-nullable": true,
           "enum": [
             "Production",
-            "Staging"
+            "Staging",
+            null
           ],
           "x-ms-enum": {
             "name": "SlotType",
