@@ -140,6 +140,47 @@
       "required": false,
       "x-ms-parameter-location": "client"
     },
+    "ContentType": {
+      "name": "content-type",
+      "description": "The media type of the original data that is being uploaded.",
+      "type": "string",
+      "in": "header",
+      "required": true,
+      "enum": [
+        "application/json",
+        "application/octet-stream",
+        "application/geo+json",
+        "application/vnd.geo+json",
+        "application/zip"
+      ],
+      "x-ms-enum": {
+        "name": "Types Of Content",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "application/json",
+            "description": "application/json MIME type"
+          },
+          {
+            "value": "application/octet-stream",
+            "description": "application/octet-stream MIME type"
+          },
+          {
+            "value": "application/geo+json",
+            "description": "application/geo+json MIME type"
+          },
+          {
+            "value": "application/vnd.geo+json",
+            "description": "vnd GeoJson MIME type"
+          },
+          {
+            "value": "application/zip",
+            "description": "application/zip MIME type"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "SubscriptionKey": {
       "name": "subscription-key",
       "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
@@ -372,6 +413,9 @@
             "$ref": "#/parameters/ClientId"
           },
           {
+            "$ref": "#/parameters/ContentType"
+          },
+          {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
@@ -383,47 +427,6 @@
           {
             "$ref": "#/parameters/Description"
           },
-          {
-              "name": "content-type",
-              "description": "The media type of the original data that is being uploaded.",
-              "type": "string",
-              "in": "header",
-              "required": true,
-              "enum": [
-                "application/json",
-                "application/octet-stream",
-                "application/geo+json",
-                "application/vnd.geo+json",
-                "application/zip"
-              ],
-              "x-ms-enum": {
-                "name": "Types Of Content",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "application/json",
-                    "description": "application/json MIME type"
-                  },
-                  {
-                    "value": "application/octet-stream",
-                    "description": "application/octet-stream MIME type"
-                  },
-                  {
-                    "value": "application/geo+json",
-                    "description": "application/geo+json MIME type"
-                  },
-                  {
-                    "value": "application/vnd.geo+json",
-                    "description": "vnd GeoJson MIME type"
-                  },
-                  {
-                    "value": "application/zip",
-                    "description": "application/zip MIME type"
-                  }
-                ]
-              },
-              "x-ms-parameter-location": "method"
-            },
           {
             "name": "UpdateContent",
             "in": "body",
