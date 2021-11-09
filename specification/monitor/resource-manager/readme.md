@@ -914,9 +914,7 @@ directive:
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
-``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') 
-
-$(csharp) || $(validation) || $(typescript)
+``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation) || $(typescript)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
