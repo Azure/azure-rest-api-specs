@@ -9,12 +9,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/mitreCoverage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/mitreCoverageRecords": {
       "get": {
         "tags": [
-          "MitreCoverage"
+          "MitreCoverageRecords"
         ],
-        "description": "Fetches Products Mitre Coverage from Data sources",
+        "description": "Fetches Products Mitre Coverage records from Data sources",
         "operationId": "Get",
         "produces": [
           "application/json"
@@ -44,9 +44,12 @@
             "description": "Error response describing why the operation failed."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get": {
-            "$ref": "./examples/MitreCoverage/Get.json"
+            "$ref": "./examples/MitreCoverageRecords/Get.json"
           }
         }
       }
@@ -77,6 +80,9 @@
         }
       }
     },
+    "AttackTactic": {
+      "$ref": "../../../common/1.0/types.json#/parameters/AttackTactic"
+    },
     "ProductMitreCoverageProperties": {
       "type": "object",
       "properties": {
@@ -106,86 +112,7 @@
           "example": "T1595"
         },
         "tactic": {
-          "description": "Gets MITRE Tactic.",
-          "enum": [
-            "Reconnaissance",
-            "ResourceDevelopment",
-            "InitialAccess",
-            "Execution",
-            "Persistence",
-            "PrivilegeEscalation",
-            "DefenseEvasion",
-            "CredentialAccess",
-            "Discovery",
-            "LateralMovement",
-            "Collection",
-            "Exfiltration",
-            "CommandAndControl",
-            "Impact",
-            "PreAttack",
-            "ImpairProcessControl",
-            "InhibitResponseFunction"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "example": "Reconnaissance",
-          "x-ms-enum": {
-            "name": "AttackTactic",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Reconnaissance"
-              },
-              {
-                "value": "ResourceDevelopment"
-              },
-              {
-                "value": "InitialAccess"
-              },
-              {
-                "value": "Execution"
-              },
-              {
-                "value": "Persistence"
-              },
-              {
-                "value": "PrivilegeEscalation"
-              },
-              {
-                "value": "DefenseEvasion"
-              },
-              {
-                "value": "CredentialAccess"
-              },
-              {
-                "value": "Discovery"
-              },
-              {
-                "value": "LateralMovement"
-              },
-              {
-                "value": "Collection"
-              },
-              {
-                "value": "Exfiltration"
-              },
-              {
-                "value": "CommandAndControl"
-              },
-              {
-                "value": "Impact"
-              },
-              {
-                "value": "PreAttack"
-              },
-              {
-                "value": "ImpairProcessControl"
-              },
-              {
-                "value": "InhibitResponseFunction"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AttackTactic"
         }
       }
     },
@@ -201,7 +128,7 @@
           }
         },
         "nextLink": {
-          "description": "Next link to scroll over the results",
+          "description": "Next link to scroll over the results.",
           "type": "string"
         }
       }
