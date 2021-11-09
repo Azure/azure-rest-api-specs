@@ -229,6 +229,15 @@ directive:
     reason:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
+### Tag: package-2022-01-01
+
+These settings apply only when `--tag=package-2022-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-01'
+input-file:
+- Microsoft.Compute/stable/2022-01-01/compute.json
+- Microsoft.Compute/stable/2022-01-01/cloudService.json
+```
 
 ### Tag: package-2021-07-01
 
