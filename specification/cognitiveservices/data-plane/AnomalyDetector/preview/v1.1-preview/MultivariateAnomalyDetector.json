@@ -300,7 +300,6 @@
         }
       ],
       "post": {
-        "summary": "Detect anomalies in the last a few points of the request body.",
         "description": "Synchronized API for anomaly detection.",
         "operationId": "LastDetectAnomaly",
         "parameters": [
@@ -484,7 +483,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "An optional field. The name of the model whose maximum length is 24.",
+          "description": "An optional field. The maximum length supported for the name of model is 24 characters.",
           "example": "DevOps-MultiAD",
           "maxLength": 24
         },
@@ -501,7 +500,7 @@
         },
         "diagnosticsInfo": {
           "$ref": "#/definitions/DiagnosticsInfo",
-          "description": "Diagnostics Information for inspecting model/variable states."
+          "description": "Diagnostics information for inspecting states of model or variable."
         }
       },
       "type": "object",
@@ -740,7 +739,7 @@
         },
         "filledNARatio": {
           "type": "number",
-          "description": "Proportion of NaN values filled of the variable.",
+          "description": "Proportion of NaN values filled in a variable.",
           "minimum": 0,
           "maximum": 1
         },
@@ -830,13 +829,7 @@
           "x-nullable": false,
           "example": 10
         },
-        "maxCount": {
-          "type": "integer",
-          "description": "Max number of models that can be trained for this subscription.",
-          "x-nullable": false,
-          "example": 20
-        },
-        "nextLink": {
+        "lastUpdatedTime": {
           "type": "string",
           "description": "The link to fetch more models."
         }
@@ -920,6 +913,13 @@
             "modelAsString": false
           }
         },
+        "timestamps": {
+          "type": "array",
+          "description": "Error message when detection is failed.",
+          "items": {
+            "type": "string"
+          }
+        },
         "errors": {
           "type": "array",
           "description": "Error message when detection is failed.",
@@ -956,30 +956,6 @@
             },
             {
               "variable": "ad_series_init",
-              "filledNARatio": 0,
-              "effectiveCount": 26,
-              "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
-            },
-            {
-              "variable": "cpu",
-              "filledNARatio": 0,
-              "effectiveCount": 26,
-              "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
-            },
-            {
-              "variable": "data_in_speed",
-              "filledNARatio": 0,
-              "effectiveCount": 26,
-              "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
-            },
-            {
-              "variable": "data_out_speed",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
@@ -1058,14 +1034,14 @@
         },
         "severity": {
           "type": "number",
-          "description": "Indicates the significance of the anomaly. The higher the severity, the more significant the anomaly.",
+          "description": "A number between 0 and 1, indicating the significance of the anomaly. The higher the severity, the more significant the anomaly.",
           "example": 0.8,
           "minimum": 0,
           "maximum": 1
         },
         "score": {
           "type": "number",
-          "description": "Raw score from the model.",
+          "description": "Raw score calculated from the model, indicating the significance of an anomaly.",
           "example": 0.3,
           "minimum": 0,
           "maximum": 2
@@ -1079,16 +1055,90 @@
       },
       "type": "object"
     },
-    "AnomalyContributor": {
+    "LastDetectionRequest": {
+      "required": [
+        "length",
+        "variables"
+      ],
       "properties": {
         "contributionScore": {
           "type": "number",
           "description": "Percentage of contributions to the anomaly. The higher the contribution score, the more likely to be the root cause. ",
           "example": 0.6,
           "minimum": 0,
-          "maximum": 2
+          "maximum": 1
         },
-        "variable": {
+        "length": {
+          "type": "integer",
+          "description": "length",
+          "example": 2
+        }
+      },
+      "type": "object"
+    },
+    "VariableValues": {
+      "required": [
+        "name",
+        "timestamps",
+        "values"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "variable name",
+          "example": "variable_1"
+        },
+        "timestamps": {
+          "type": "array",
+          "description": "timestamps",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "values",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "LastDetectionResult": {
+      "required": [
+        "results"
+      ],
+      "properties": {
+        "variableStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyValue"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "AnomalyInterpretation": {
+      "required": [
+        "contributorScores",
+        "contributors",
+        "correlationChanges"
+      ],
+      "properties": {
+        "resultId": {
           "type": "string",
           "description": "Name of the variable.",
           "example": "Variable_1"
@@ -1151,7 +1201,7 @@
         "variableStates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VariableState"
+            "type": "number"
           }
         },
         "results": {
