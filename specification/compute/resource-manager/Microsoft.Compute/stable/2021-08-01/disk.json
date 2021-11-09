@@ -2889,6 +2889,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default."
+        },
+        "securityDataUri": {
+          "type": "string",
+          "description": "If createOption is ImportSecure, this is the URI of a VM guest state blob to be imported."
         }
       },
       "required": [
@@ -2995,7 +2999,7 @@
         "securityType": {
           "$ref": "#/definitions/DiskSecurityType"
         },
-        "diskEncryptionSetId": {
+        "secureVMdiskEncryptionSetId": {
           "type": "string",
           "description": "ResourceId of the disk encryption set associated to Confidential VM supported disk encrypted with customer managed key"
         }
