@@ -4031,12 +4031,29 @@
             "description": "The name of the restore point."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "RestorePointExpandOptions",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
           "Get a restore point": {
             "$ref": "./examples/compute/GetRestorePoint.json"
+          },
+          "Get restore point instance view": {
+            "$ref": "./examples/compute/GetRestorePointInstanceView.json"
           }
         },
         "responses": {
@@ -4054,61 +4071,7 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}/instanceView": {
-      "get": {
-        "operationId": "RestorePoints_GetInstanceView",
-        "description": "Retrieves information about the run-time state of a restore point.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "restorePointCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the restore point collection."
-          },
-          {
-            "name": "restorePointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the restore point."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestorePointInstanceView"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Restore Point Instance View.": {
-            "$ref": "./examples/compute/GetRestorePointInstanceView.json"
-          }
-        }
-      }
-    },
+    }, 
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes": {
       "get": {
         "tags": [
