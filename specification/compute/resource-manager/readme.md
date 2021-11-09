@@ -235,7 +235,6 @@ These settings apply only when `--tag=package-2022-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-01-01'
 input-file:
-- Microsoft.Compute/stable/2022-01-01/compute.json
 - Microsoft.Compute/stable/2022-01-01/cloudService.json
 ```
 
