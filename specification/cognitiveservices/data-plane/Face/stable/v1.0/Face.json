@@ -3100,6 +3100,19 @@
         "mask": {
           "description": "Properties describing the presence of a mask on a given face.",
           "$ref": "#/definitions/Mask"
+        },
+        "qualityForRecognition": {
+          "type": "string",
+          "description": "Properties describing the overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on.",
+          "x-ms-enum": {
+            "name": "QualityForRecognition",
+            "modelAsString": false
+          },
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ]
         }
       }
     },
@@ -3402,6 +3415,20 @@
           "x-nullable": false
         }
       }
+    },
+    "QualityForRecognition": {
+      "type": "string",
+      "description": "An enum value indicating quality of image for recognition.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "QualityForRecognition",
+        "modelAsString": false
+      },
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ]
     },
     "FindSimilarRequest": {
       "type": "object",
@@ -4233,7 +4260,8 @@
           "blur",
           "exposure",
           "noise",
-          "mask"
+          "mask",
+          "qualityForRecognition"
         ]
       }
     },
