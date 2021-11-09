@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2021-09-01-only
   - tag: package-2021-05-01-preview-only
   - tag: package-2021-04-only
   - tag: package-2020-10-only
