@@ -868,7 +868,7 @@ directive:
   reason: Incompatible values (2020-10-01)
 ```
 
-``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07')
+``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07' || $(tag) == 'package-2021-09-01-only' || $(tag) == 'package-2021-07-01-preview-only')
 directive:
 - from: scheduledQueryRule_API.json
   where: $.parameters
