@@ -86,6 +86,7 @@ These settings apply only when `--tag=package-2021-09-01-only` is specified on t
 ``` yaml $(tag) == 'package-2021-09-01-only'
 input-file:
 - Microsoft.Insights/stable/2021-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2021-09-01/privateLinkScopes_API.json
 ```
 
 ### Tag: package-2021-08
@@ -127,16 +128,6 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
 ```
-
-### Tag: package-2021-09-01-only
-
-These settings apply only when `--tag=package-2021-09-01-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-09-01-only'
-input-file:
-- Microsoft.Insights/stable/2021-09-01/privateLinkScopes_API.json
-```
-
 
 ### Tag: package-2021-07-01-preview-only
 
