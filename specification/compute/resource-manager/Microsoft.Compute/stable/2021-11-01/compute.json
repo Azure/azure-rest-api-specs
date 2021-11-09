@@ -5425,6 +5425,9 @@
           },
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/compute/CreateAScaleSetWithSpotRestorePolicy.json"
+          },
+          "Create a scale set with vm size properties": {
+            "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithVMSizeProperties.json"
           }
         }
       },
@@ -11033,6 +11036,16 @@
       },
       "description": "Contains the list of gallery applications that should be made available to the VM/VMSS"
     },
+    "VirtualMachineScaleSetHardwareProfile": {
+      "type": "object",
+      "properties": {
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. <br><br> Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        }
+      },
+      "description": "Specifies the hardware settings for the virtual machine scale set."
+    },
     "AdditionalCapabilities": {
       "properties": {
         "ultraSSDEnabled": {
@@ -13499,6 +13512,10 @@
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
+          "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
