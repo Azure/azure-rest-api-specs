@@ -701,7 +701,7 @@
     },
     "/weather/tropical/storms/active/{format}": {
       "get": {
-        "description": "**Get Active Storms**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet all government-issued active storms.",
+        "description": "**Get Active Storms**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
         "operationId": "Weather_GetActiveStorms",
         "x-ms-examples": {
           "GetActiveStorms": {
@@ -734,7 +734,7 @@
     },
     "/weather/tropical/storms/{format}": {
       "get": {
-        "description": "**Get government-issued Storms**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSearch government-issued storms by year, basin ID, and government ID.",
+        "description": "**Get government-issued Storms**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nSearch government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
         "operationId": "Weather_StormSearch",
         "x-ms-examples": {
           "StormSearch": {
@@ -779,10 +779,10 @@
     },
     "/weather/tropical/storms/forecasts/{format}": {
       "get": {
-        "description": "**Government-issued forecasts**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet all Government-issued forecasts.",
+        "description": "**Government-issued forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all Government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
         "operationId": "Weather_StormForecast",
         "x-ms-examples": {
-          "StormForecast": {
+          "Get Storm Forecasts": {
             "$ref": "./examples/GetStormForecast.json"
           }
         },
@@ -837,13 +837,13 @@
     },
     "/weather/tropical/storms/locations/{format}": {
       "get": {
-        "description": "**Locations for an individual government-issued storm**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet locations of an individual government-issued storm.",
+        "description": "**Locations for an individual government-issued storm**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet locations of an individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
         "operationId": "Weather_StormLocations",
         "x-ms-examples": {
-          "StormLocations": {
+          "Get Storm Locations": {
             "$ref": "./examples/GetStormLocations.json"
           },
-          "StormStormCurrentLocation": {
+          "Get Storm Current Location": {
             "$ref": "./examples/GetStormCurrentLocation.json"
           }
         },
@@ -2786,14 +2786,14 @@
     },
     "ActiveStormResponse": {
       "type": "object",
-      "description": "all government-issued active storms",
+      "description": "All government-issued active storms",
       "properties": {
         "results": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActiveStorm"
           },
-          "description": "all government-issued active storms"
+          "description": "All government-issued active storms"
         }
       }
     },
