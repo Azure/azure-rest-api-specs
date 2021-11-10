@@ -66,7 +66,7 @@ input-file:
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
-- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+- Microsoft.Insights/stable/2021-09-01/privateLinkScopes_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
@@ -925,7 +925,7 @@ directive:
   reason: Incompatible values (2020-10-01)
 ```
 
-``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07' || $(tag) == 'package-2021-09-01-only' || $(tag) == 'package-2021-07-01-preview-only')
+``` yaml !$(python) && !$(go) && !$(java) && ($(tag) == 'package-2021-04' || $(tag) == 'package-2021-07' || $(tag) == 'package-2021-09' || $(tag) == 'package-2021-09-01-only' || $(tag) == 'package-2021-07-01-preview-only')
 directive:
 - from: scheduledQueryRule_API.json
   where: $.parameters
