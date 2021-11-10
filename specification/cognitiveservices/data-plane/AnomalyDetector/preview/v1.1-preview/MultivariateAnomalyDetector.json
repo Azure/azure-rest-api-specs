@@ -1086,7 +1086,7 @@
           "description": "Percentage of contributions to the anomaly. The higher the contribution score, the more likely to be the root cause. ",
           "example": 0.6,
           "minimum": 0,
-          "maximum": 2
+          "maximum": 1
         },
         "variable": {
           "type": "string",
@@ -1098,7 +1098,7 @@
     },
     "LastDetectionRequest": {
       "required": [
-        "length",
+        "detectingPoints",
         "variables"
       ],
       "properties": {
@@ -1109,9 +1109,9 @@
             "$ref": "#/definitions/VariableValues"
           }
         },
-        "length": {
+        "detectingPoints": {
           "type": "integer",
-          "description": "length",
+          "description": "number of timestamps on which the model detects",
           "example": 2
         }
       },
