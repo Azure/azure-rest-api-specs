@@ -275,108 +275,7 @@
             "description": "The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "batchItems": {
-                  "description": "The list of queries to process.",
-                  "type": "array",
-                  "items": {
-                    "description": "Batch Query object",
-                    "type": "object",
-                    "properties": {
-                      "optionalId": {
-                        "description": "id of the request which would show in corresponding batchItem",
-                        "type": "string"
-                      },
-                      "top": {
-                        "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
-                        "type": "integer",
-                        "default": 5,
-                        "minimum": 1,
-                        "maximum": 20
-                      },
-                      "addressLine": {
-                        "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.",
-                        "type": "string"
-                      },
-                      "countryRegionSet": {
-                        "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.",
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "bbox": {
-                        "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
-                        "type": "array",
-                        "items": {
-                          "type": "number",
-                          "format": "double"
-                        },
-                        "minItems": 4,
-                        "maxItems": 4
-                      },
-                      "view": {
-                        "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
-                        "type": "string"
-                      },
-                      "location": {
-                        "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
-                        "type": "array",
-                        "items": {
-                          "type": "number",
-                          "format": "double"
-                        },
-                        "minItems": 2,
-                        "maxItems": 2
-                      },
-                      "adminDistrict": {
-                        "description": "The country subdivision portion of an address, such as WA.",
-                        "type": "string"
-                      },
-                      "adminDistrict2": {
-                        "description": "The county for the structured address, such as King.",
-                        "type": "string"
-                      },
-                      "adminDistrict3": {
-                        "description": "The named area for the structured address.",
-                        "type": "string"
-                      },
-                      "locality": {
-                        "description": "The locality portion of an address, such as Seattle.",
-                        "type": "string"
-                      },
-                      "postalCode": {
-                        "description": "The postal code portion of an address.",
-                        "type": "string"
-                      },
-                      "strictMatch": {
-                        "description": "Restrict the geocoding result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.",
-                        "type": "string",
-                        "default": "notstrict",
-                        "enum": [
-                          "notstrict",
-                          "strict"
-                        ],
-                        "x-ms-enum": {
-                          "name": "StrictMatchEnum",
-                          "modelAsString": true,
-                          "values": [
-                            {
-                              "value": "notstrict",
-                              "description": "Do not restrict results to the specified countryRegion and adminDistrict."
-                            },
-                            {
-                              "value": "strict",
-                              "description": "Restrict results to the specified countryRegion and adminDistrict."
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/GeocodingBatchRequestBody"
             }
           }
         ],
@@ -434,6 +333,13 @@
         "format": "double"
       }
     },
+    "UsageType": {
+      "type": "string",
+      "enum": [
+        "Display",
+        "Route"
+      ]
+    },
     "GeocodePoints": {
       "description": "A collection of geocode points that differ in how they were calculated and their suggested use. For a description of the points in this collection, see the Geocode Point Fields",
       "type": "array",
@@ -455,13 +361,138 @@
           "usageTypes": {
             "type": "array",
             "items": {
-              "type": "string",
-              "enum": [
-                "Display",
-                "Route"
-              ]
+              "$ref": "#/definitions/UsageType"
             }
           }
+        }
+      }
+    },
+    "GeocodingBatchRequestItem": {
+      "description": "Batch Query object",
+      "type": "object",
+      "properties": {
+        "optionalId": {
+          "description": "id of the request which would show in corresponding batchItem",
+          "type": "string"
+        },
+        "top": {
+          "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
+          "type": "integer",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 20
+        },
+        "addressLine": {
+          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.",
+          "type": "string"
+        },
+        "countryRegionSet": {
+          "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bbox": {
+          "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "view": {
+          "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
+          "type": "string"
+        },
+        "location": {
+          "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "adminDistrict": {
+          "description": "The country subdivision portion of an address, such as WA.",
+          "type": "string"
+        },
+        "adminDistrict2": {
+          "description": "The county for the structured address, such as King.",
+          "type": "string"
+        },
+        "adminDistrict3": {
+          "description": "The named area for the structured address.",
+          "type": "string"
+        },
+        "locality": {
+          "description": "The locality portion of an address, such as Seattle.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The postal code portion of an address.",
+          "type": "string"
+        },
+        "strictMatch": {
+          "description": "Restrict the geocoding result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.",
+          "type": "string",
+          "default": "notstrict",
+          "enum": [
+            "notstrict",
+            "strict"
+          ],
+          "x-ms-enum": {
+            "name": "StrictMatchEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "notstrict",
+                "description": "Do not restrict results to the specified countryRegion and adminDistrict."
+              },
+              {
+                "value": "strict",
+                "description": "Restrict results to the specified countryRegion and adminDistrict."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "GeocodingBatchRequestBody": {
+      "description": "The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeocodingBatchRequestItem"
+          }
+        }
+      }
+    },
+    "GeocodingBatchResponseItem": {
+      "type": "object",
+      "properties": {
+        "optionalId": {
+          "description": "id of the batchItem which would be the same as the id in the request",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/FeatureType"
+        },
+        "features": {
+          "$ref": "#/definitions/Features"
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -490,73 +521,58 @@
           "description": "Array containing the batch results.",
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "optionalId": {
-                "description": "id of the batchItem which would be the same as the id in the request",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/definitions/FeatureType"
-              },
-              "features": {
-                "$ref": "#/definitions/FeaturesItem"
-              },
-              "nextLink": {
-                "$ref": "#/definitions/NextLink"
-              },
-              "error": {
-                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
-              }
-            }
+            "$ref": "#/definitions/GeocodingBatchResponseItem"
           }
         }
       }
     },
-    "FeaturesItem": {
+    "Features": {
       "type": "array",
       "items": {
-        "type": "object",
+        "$ref": "#/definitions/FeaturesItem"
+      }
+    },
+    "FeaturesItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "must be Feature",
+          "enum": [
+            "Feature"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "ID for feature returned"
+        },
         "properties": {
-          "type": {
-            "type": "string",
-            "description": "must be Feature",
-            "enum": [
-              "Feature"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "ID for feature returned"
-          },
+          "type": "object",
           "properties": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection",
-                "readOnly": true
-              },
-              "confidence": {
-                "$ref": "#/definitions/Confidence"
-              },
-              "matchCodes": {
-                "$ref": "#/definitions/MatchCodes"
-              },
-              "address": {
-                "$ref": "#/definitions/Address"
-              },
-              "geocodePoints": {
-                "$ref": "#/definitions/GeocodePoints"
-              }
+            "type": {
+              "type": "string",
+              "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection",
+              "readOnly": true
+            },
+            "confidence": {
+              "$ref": "#/definitions/Confidence"
+            },
+            "matchCodes": {
+              "$ref": "#/definitions/MatchCodes"
+            },
+            "address": {
+              "$ref": "#/definitions/Address"
+            },
+            "geocodePoints": {
+              "$ref": "#/definitions/GeocodePoints"
             }
-          },
-          "geometry": {
-            "$ref": "#/definitions/GeoJSONPoint"
-          },
-          "bbox": {
-            "$ref": "#/definitions/Bbox"
           }
+        },
+        "geometry": {
+          "$ref": "#/definitions/GeoJSONPoint"
+        },
+        "bbox": {
+          "$ref": "#/definitions/Bbox"
         }
       }
     },
@@ -568,7 +584,7 @@
           "$ref": "#/definitions/FeatureType"
         },
         "features": {
-          "$ref": "#/definitions/FeaturesItem"
+          "$ref": "#/definitions/Features"
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
