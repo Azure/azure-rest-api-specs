@@ -15,6 +15,8 @@ module-name: sdk/resourcemanager/keyvault/armkeyvault
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+modelerfour:
+  seal-single-value-enum-by-default: true
 ```
 
 ### Go multi-api
