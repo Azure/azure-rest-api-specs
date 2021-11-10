@@ -1058,29 +1058,6 @@
         ]
       }
     },
-    "AttackTactic": {
-      "description": "The severity for alerts created by this alert rule.",
-      "enum": [
-        "InitialAccess",
-        "Execution",
-        "Persistence",
-        "PrivilegeEscalation",
-        "DefenseEvasion",
-        "CredentialAccess",
-        "Discovery",
-        "LateralMovement",
-        "Collection",
-        "Exfiltration",
-        "CommandAndControl",
-        "Impact",
-        "PreAttack"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AttackTactic"
-      }
-    },
     "AzureResourceEntity": {
       "allOf": [
         {
@@ -1895,7 +1872,7 @@
         "tactics": {
           "description": "The tactics associated with incident",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -3759,7 +3736,7 @@
         "tactics": {
           "description": "The tactics of the alert",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"

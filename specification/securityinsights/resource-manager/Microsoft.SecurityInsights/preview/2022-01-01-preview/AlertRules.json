@@ -836,29 +836,6 @@
         ]
       }
     },
-    "AttackTactic": {
-      "description": "The severity for alerts created by this alert rule.",
-      "enum": [
-        "InitialAccess",
-        "Execution",
-        "Persistence",
-        "PrivilegeEscalation",
-        "DefenseEvasion",
-        "CredentialAccess",
-        "Discovery",
-        "LateralMovement",
-        "Collection",
-        "Exfiltration",
-        "CommandAndControl",
-        "Impact",
-        "PreAttack"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AttackTactic"
-      }
-    },
     "MLBehaviorAnalyticsAlertRule": {
       "allOf": [
         {
@@ -911,7 +888,7 @@
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -946,7 +923,7 @@
             "tactics": {
               "description": "The tactics of the alert rule template.",
               "items": {
-                "$ref": "#/definitions/AttackTactic"
+                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
               },
               "type": "array"
             }
@@ -1017,7 +994,7 @@
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -1052,7 +1029,7 @@
             "tactics": {
               "description": "The tactics of the alert rule template",
               "items": {
-                "$ref": "#/definitions/AttackTactic"
+                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
               },
               "type": "array"
             }
@@ -1123,7 +1100,7 @@
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -1158,7 +1135,7 @@
             "tactics": {
               "description": "The tactics of the alert rule template",
               "items": {
-                "$ref": "#/definitions/AttackTactic"
+                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
               },
               "type": "array"
             }
@@ -1353,7 +1330,7 @@
         "tactics": {
           "description": "The tactics of the alert rule",
           "items": {
-            "$ref": "#/definitions/AttackTactic"
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "type": "array"
         },
@@ -1398,7 +1375,7 @@
             "tactics": {
               "description": "The tactics of the alert rule template",
               "items": {
-                "$ref": "#/definitions/AttackTactic"
+                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
               },
               "type": "array"
             }

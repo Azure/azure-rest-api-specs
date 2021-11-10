@@ -83,6 +83,9 @@
         }
       }
     },
+    "AttackTactic": {
+      "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+    },
     "ProductMitreCoverageProperties": {
       "type": "object",
       "properties": {
@@ -113,85 +116,13 @@
         },
         "tactic": {
           "description": "Gets MITRE Tactic.",
-          "enum": [
-            "Reconnaissance",
-            "ResourceDevelopment",
-            "InitialAccess",
-            "Execution",
-            "Persistence",
-            "PrivilegeEscalation",
-            "DefenseEvasion",
-            "CredentialAccess",
-            "Discovery",
-            "LateralMovement",
-            "Collection",
-            "Exfiltration",
-            "CommandAndControl",
-            "Impact",
-            "PreAttack",
-            "ImpairProcessControl",
-            "InhibitResponseFunction"
-          ],
           "type": "string",
-          "readOnly": true,
-          "example": "Reconnaissance",
-          "x-ms-enum": {
-            "name": "AttackTactic",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Reconnaissance"
-              },
-              {
-                "value": "ResourceDevelopment"
-              },
-              {
-                "value": "InitialAccess"
-              },
-              {
-                "value": "Execution"
-              },
-              {
-                "value": "Persistence"
-              },
-              {
-                "value": "PrivilegeEscalation"
-              },
-              {
-                "value": "DefenseEvasion"
-              },
-              {
-                "value": "CredentialAccess"
-              },
-              {
-                "value": "Discovery"
-              },
-              {
-                "value": "LateralMovement"
-              },
-              {
-                "value": "Collection"
-              },
-              {
-                "value": "Exfiltration"
-              },
-              {
-                "value": "CommandAndControl"
-              },
-              {
-                "value": "Impact"
-              },
-              {
-                "value": "PreAttack"
-              },
-              {
-                "value": "ImpairProcessControl"
-              },
-              {
-                "value": "InhibitResponseFunction"
-              }
-            ]
-          }
+          "allOf": [
+            {
+              "$ref": "#/definitions/AttackTactic"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
