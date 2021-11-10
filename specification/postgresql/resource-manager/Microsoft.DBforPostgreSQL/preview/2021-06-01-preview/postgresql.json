@@ -1877,6 +1877,31 @@
         "source": {
           "type": "string",
           "description": "Source of the configuration."
+        },
+        "isDynamicConfig": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration dynamic or static."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration read-only or not."
+        },
+        "isConfigPendingRestart": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration is pending restart or not."
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Configuration unit."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Configuration documentation link."
         }
       },
       "description": "The properties of a configuration."
@@ -2023,19 +2048,36 @@
       "properties": {
         "message": {
           "type": "string",
-          "description": "Error Message."
+          "description": "Error Message.",
+          "readOnly": true
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicates whether the resource name is available."
+          "description": "Indicates whether the resource name is available.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "name of the PostgreSQL server."
+          "description": "name of the PostgreSQL server.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "type of the server"
+          "description": "type of the server",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The name availability reason.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       },
       "description": "Represents a resource name availability."
