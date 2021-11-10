@@ -3507,9 +3507,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r4038"></a>R4038 ExtensionResourcePathPattern
 
-**Category** : SDK Error
+**Category** : RPaaS Error
 
-**Applies to** : ARM and Data plane OpenAPI(swagger) specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message** : The path '{api path}' which is for extension routing resource type, shouldn't include the parent scope.
 
