@@ -418,23 +418,6 @@
     }
   },
   "definitions": {
-    "AzureResource": {
-      "properties": {
-        "identity": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource identity"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
     "TestNotificationResponse": {
       "description": "The response when test notification succeeded",
       "type": "object",
@@ -539,10 +522,15 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
+        "identity": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource identity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ActionGroup",
