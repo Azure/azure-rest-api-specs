@@ -15,6 +15,11 @@ module-name: sdk/resourcemanager/hdinsight/armhdinsight
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- from: cluster.json
+  where: $.definitions.Resource
+  transform: >
+    $["title"] = "Resource"
 ```
 
 ### Go multi-api
