@@ -1759,6 +1759,315 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/availabilitySets/{availabilitySetName}": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Get",
+        "summary": "Gets an AvailabilitySet.",
+        "description": "Implements AvailabilitySet GET method.",
+        "x-ms-examples": {
+          "GetAvailabilitySet": {
+            "$ref": "./examples/GetAvailabilitySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "availabilitySetName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the AvailabilitySet."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the AvailabilitySet resource.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_CreateOrUpdate",
+        "description": "Onboards the ScVmm availability set as an Azure resource.",
+        "summary": "Implements AvailabilitySets PUT method.",
+        "x-ms-examples": {
+          "CreateAvailabilitySet": {
+            "$ref": "./examples/CreateAvailabilitySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "availabilitySetName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the AvailabilitySet."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Request payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creates or Updates the AvailabilitySets resource.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "201": {
+            "description": "Creates or Updates the AvailabilitySets resource.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Delete",
+        "description": "Deregisters the ScVmm availability set from Azure.",
+        "summary": "Implements AvailabilitySet DELETE method.",
+        "x-ms-examples": {
+          "DeleteAvailabilitySet": {
+            "$ref": "./examples/DeleteAvailabilitySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "availabilitySetName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the AvailabilitySet."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the AvailabilitySets resource."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Update",
+        "summary": "Implements the AvailabilitySets PATCH method.",
+        "description": "Updates the AvailabilitySets resource.",
+        "x-ms-examples": {
+          "UpdateAvailabilitySet": {
+            "$ref": "./examples/UpdateAvailabilitySet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "availabilitySetName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the AvailabilitySet."
+          },
+          {
+            "name": "body",
+            "description": "AvailabilitySets patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListByResourceGroup",
+        "summary": "Implements GET AvailabilitySets in a resource group.",
+        "description": "List of AvailabilitySets in a resource group.",
+        "x-ms-examples": {
+          "ListAvailabilitySetsByResourceGroup": {
+            "$ref": "./examples/ListAvailabilitySetsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all AvailabilitySets under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListBySubscription",
+        "summary": "Implements GET AvailabilitySets in a subscription.",
+        "description": "List of AvailabilitySets in a subscription.",
+        "x-ms-examples": {
+          "ListAvailabilitySetsBySubscription": {
+            "$ref": "./examples/ListAvailabilitySetsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all AvailabilitySets under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/vmmServers/{vmmServerName}/inventoryItems/{inventoryItemName}": {
       "put": {
         "tags": [
@@ -2111,7 +2420,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -2241,7 +2550,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -2341,7 +2650,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -2373,6 +2682,93 @@
         }
       }
     },
+    "AvailabilitySetProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "availabilitySetName": {
+          "type": "string",
+          "description": "Name of the availability set.",
+          "minLength": 1
+        },
+        "vmmServerId": {
+          "type": "string",
+          "description": "ARM Id of the vmmServer resource in which this resource resides."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "AvailabilitySet": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/AvailabilitySetProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "description": "The AvailabilitySets resource definition."
+    },
+    "AvailabilitySetListResult": {
+      "type": "object",
+      "description": "List of AvailabilitySets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of AvailabilitySets.",
+          "items": {
+            "$ref": "#/definitions/AvailabilitySet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
       "properties": {
@@ -2387,6 +2783,24 @@
         "templateId": {
           "type": "string",
           "description": "ARM Id of the template resource to use for deploying the vm."
+        },
+        "availabilitySets": {
+          "description": "Availability Sets in vm.",
+          "type": "array",
+          "items": {
+            "description": "Availability Set model",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.",
+                "type": "string"
+              },
+              "name": {
+                "description": "Gets or sets the name of the availability set.",
+                "type": "string"
+              }
+            }
+          }
         },
         "osProfile": {
           "description": "OS properties.",
@@ -2921,7 +3335,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -3121,7 +3535,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
