@@ -1157,60 +1157,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/reboot": {
-      "post": {
-        "tags": [
-          "DedicatedHost"
-        ],
-        "operationId": "DedicatedHosts_Reboot",
-        "description": "Reboot the dedicated host. The operation will complete successfully once the dedicated host has booted and is running. For VM health after the reboot, please check the Resource Health Center in the Azure Portal.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "hostGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the dedicated host group."
-          },
-          {
-            "name": "hostName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the dedicated host."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reboot Dedicated Host.": {
-            "$ref": "./examples/compute/DedicatedHostReboot.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys": {
       "get": {
         "tags": [
@@ -8165,6 +8111,60 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/reboot": {
+      "post": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHosts_Reboot",
+        "description": "Reboot the dedicated host. The operation will complete successfully once the dedicated host has booted and is running. For VM health after the reboot, please check the Resource Health Center in the Azure Portal.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reboot Dedicated Host.": {
+            "$ref": "./examples/compute/DedicatedHostReboot.json"
+          }
         }
       }
     }
