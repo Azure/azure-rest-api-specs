@@ -631,12 +631,12 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "#/definitions/WorkbookErrorDefinition",
           "description": "The error details."
         }
       }
     },
-    "ErrorDefinition": {
+    "WorkbookErrorDefinition": {
       "description": "Error definition.",
       "type": "object",
       "properties": {
@@ -653,13 +653,13 @@
         "innerError": {
           "description": "Internal error details.",
           "items": {
-            "$ref": "#/definitions/InnerErrorTrace"
+            "$ref": "#/definitions/WorkbookInnerErrorTrace"
           },
           "readOnly": true
         }
       }
     },
-    "InnerErrorTrace": {
+    "WorkbookInnerErrorTrace": {
       "description": "Error details",
       "type": "object",
       "properties": {
