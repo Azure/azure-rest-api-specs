@@ -83,29 +83,6 @@
         }
       }
     },
-    "AttackTactic": {
-      "description": "The severity for alerts created by this alert rule.",
-      "enum": [
-        "InitialAccess",
-        "Execution",
-        "Persistence",
-        "PrivilegeEscalation",
-        "DefenseEvasion",
-        "CredentialAccess",
-        "Discovery",
-        "LateralMovement",
-        "Collection",
-        "Exfiltration",
-        "CommandAndControl",
-        "Impact",
-        "PreAttack"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AttackTactic"
-      }
-    },
     "ProductMitreCoverageProperties": {
       "type": "object",
       "properties": {
@@ -136,13 +113,85 @@
         },
         "tactic": {
           "description": "Gets MITRE Tactic.",
-          "type": "string",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AttackTactic"
-            }
+          "enum": [
+            "Reconnaissance",
+            "ResourceDevelopment",
+            "InitialAccess",
+            "Execution",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact",
+            "PreAttack",
+            "ImpairProcessControl",
+            "InhibitResponseFunction"
           ],
-          "readOnly": true
+          "type": "string",
+          "readOnly": true,
+          "example": "Reconnaissance",
+          "x-ms-enum": {
+            "name": "AttackTactic",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Reconnaissance"
+              },
+              {
+                "value": "ResourceDevelopment"
+              },
+              {
+                "value": "InitialAccess"
+              },
+              {
+                "value": "Execution"
+              },
+              {
+                "value": "Persistence"
+              },
+              {
+                "value": "PrivilegeEscalation"
+              },
+              {
+                "value": "DefenseEvasion"
+              },
+              {
+                "value": "CredentialAccess"
+              },
+              {
+                "value": "Discovery"
+              },
+              {
+                "value": "LateralMovement"
+              },
+              {
+                "value": "Collection"
+              },
+              {
+                "value": "Exfiltration"
+              },
+              {
+                "value": "CommandAndControl"
+              },
+              {
+                "value": "Impact"
+              },
+              {
+                "value": "PreAttack"
+              },
+              {
+                "value": "ImpairProcessControl"
+              },
+              {
+                "value": "InhibitResponseFunction"
+              }
+            ]
+          }
         }
       }
     },
@@ -184,7 +233,7 @@
   ],
   "tags": [
     {
-      "name": "MitreCoverage",
+      "name": "MitreCoverageRecords",
       "description": "Read Mitre Coverage"
     }
   ],
