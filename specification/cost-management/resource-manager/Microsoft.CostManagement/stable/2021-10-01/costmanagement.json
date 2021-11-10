@@ -642,6 +642,9 @@
               "$ref": "#/definitions/QueryResult"
             }
           },
+          "204": {
+            "description": "No Content. Resource is not available."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -849,6 +852,9 @@
               "$ref": "#/definitions/DimensionsListResult"
             }
           },
+          "204": {
+            "description": "No Content. Resource is not available."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1037,6 +1043,9 @@
               "$ref": "#/definitions/QueryResult"
             }
           },
+          "204": {
+            "description": "No Content. Resource is not available."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1166,9 +1175,13 @@
           "description": "Has time period for pulling data for the report.",
           "$ref": "#/definitions/ReportConfigTimePeriod"
         },
-        "dataset": {
+        "dataSet": {
           "description": "Has definition for data in this report config.",
           "$ref": "#/definitions/ReportConfigDataset"
+        },
+        "includeMonetaryCommitment": {
+          "description": "If true, report includes monetary commitment.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -1464,6 +1477,16 @@
           "format": "date-time",
           "readOnly": true
         },
+        "dateRange": {
+          "description": "Date range of the current view.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "Currency of the current view.",
+          "type": "string",
+          "readOnly": true
+        },
         "query": {
           "description": "Query body configuration. Required.",
           "type": "object",
@@ -1618,6 +1641,21 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "sku": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SKU of the resource."
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ETag of the resource."
         },
         "tags": {
           "readOnly": true,
