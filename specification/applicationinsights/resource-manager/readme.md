@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2021-08-01
+tag: package-2021-11-01
 ```
 
 ### Suppression
@@ -222,11 +222,11 @@ directive:
   
 ```
 
-### Tag: package-2021-08-01
+### Tag: package-2021-11-01
 
-These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-08-01'
+``` yaml $(tag) == 'package-2021-11-01'
 input-file:
   - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -247,11 +247,11 @@ input-file:
   - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
 ```
 
-### Tag: package-2021-08-01-only
+### Tag: package-2021-11-01-only
 
-These settings apply only when `--tag=package-2021-08-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2021-11-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-08-01-only'
+``` yaml $(tag) == 'package-2021-11-01-only'
 input-file:
   - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-08-01/workbookOperations_API.json
