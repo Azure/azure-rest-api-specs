@@ -397,7 +397,7 @@
         },
         "interval": {
           "type": "string",
-          "description": "the interval in which to run the Prometheus rule group."
+          "description": "the interval in which to run the Prometheus rule group represented in ISO 8601 duration format."
         },
         "rules": {
           "type": "array",
@@ -405,12 +405,6 @@
             "$ref": "#/definitions/PrometheusRule"
           },
           "description": "defines the rules in the Prometheus rule group."
-        },
-        "lastUpdatedTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Last time the rule was updated in ISO8601 format."
         }
       },
       "description": "An alert rule."
@@ -537,33 +531,10 @@
         },
         "timeToResolve": {
           "type": "string",
-          "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved."
+          "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format."
         }
       },
       "description": "Specifies the Prometheus alert rule configuration."
-    },
-    "PrometheusRuleGroupsErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/PrometheusRuleGroupsErrorResponseBody"
-        }
-      }
-    },
-    "PrometheusRuleGroupsErrorResponseBody": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
