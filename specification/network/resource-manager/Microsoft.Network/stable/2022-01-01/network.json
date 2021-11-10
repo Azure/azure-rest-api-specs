@@ -36,6 +36,7 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -53,6 +54,7 @@
       "description": "Common error details representation."
     },
     "Error": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -81,6 +83,7 @@
       "description": "Common error representation."
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -91,6 +94,7 @@
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "code": {
@@ -116,6 +120,7 @@
       "description": "An error response from the service."
     },
     "AzureAsyncOperationResult": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -138,6 +143,7 @@
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
     },
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -169,6 +175,7 @@
       "x-ms-azure-resource": true
     },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -179,6 +186,7 @@
       "x-ms-azure-resource": true
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -191,6 +199,7 @@
       "description": "Tags object for patch operations."
     },
     "ManagedServiceIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -218,21 +227,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
-            }
-          },
+          "$ref": "#/definitions/additionalProperties",
           "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
@@ -313,6 +308,7 @@
       }
     },
     "ExtendedLocation": {
+      "type": "object",
       "description": "ExtendedLocation complex type.",
       "properties": {
         "name": {
@@ -354,6 +350,23 @@
         "modelAsString": true
       },
       "description": "Client API version."
+    }
+  },
+  "definitions": {
+    "additionalProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
+        }
+      }
     }
   }
 }
