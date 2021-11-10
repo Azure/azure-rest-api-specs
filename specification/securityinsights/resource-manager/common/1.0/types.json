@@ -35,6 +35,25 @@
       "type": "object",
       "x-ms-external": true
     },
+    "EntityCommonProperties": {
+      "description": "Entity common property bag.",
+      "properties": {
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "friendlyName": {
+          "description": "The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ResourceWithEtag": {
       "allOf": [
         {
@@ -97,6 +116,25 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupName": {
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "resourceGroupName",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionId": {
+      "description": "Azure subscription ID",
+      "in": "path",
+      "name": "subscriptionId",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "required": true,
+      "type": "string"
     },
     "ODataFilter": {
       "description": "Filters the results, based on a Boolean condition. Optional.",
