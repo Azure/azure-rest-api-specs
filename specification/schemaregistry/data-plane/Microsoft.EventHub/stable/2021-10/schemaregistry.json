@@ -280,6 +280,18 @@
               }
             }
           },
+          "415": {
+            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
             "headers": {
@@ -370,6 +382,18 @@
                 "type": "integer",
                 "description": "Version of the returned schema."
               }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "default": {
