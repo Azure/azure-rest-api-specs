@@ -308,6 +308,15 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PromotionCheckEligibilityResponsePromptionProperties"
+        }
+      }
+    },
+    "PromotionCheckEligibilityResponsePromptionProperties": {
+      "type": "object",
+      "properties": {
+        "promotion": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PromotionCheckEligibilityResponseProperties"
         }
       }
@@ -315,36 +324,34 @@
     "PromotionCheckEligibilityResponseProperties": {
       "type": "object",
       "properties": {
-        "promotion": {
-          "id": {
-            "type": "string",
-            "description": "Name of the promotion"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the promotion"
-          },
-          "eligible": {
-            "type": "boolean",
-            "description": "Specifies whether the subscription is eligible for the promotion"
-          },
-          "reason": {
-            "type": "string",
-            "description": "Reason in case the subscription is not eligible for promotion."
-          },
-          "details": {
-            "type": "string",
-            "description": "Details in case the subscription is not eligible for promotion."
-          },
-          "eligibilitySubscriptionId": {
-            "type": "string",
-            "description": "Subscription Id on which the eligibility check was performed."
-          },
-          "expiryDate": {
-            "type": "string",
-            "format": "date",
-            "description": "Date till when the promotion is available."
-          }
+        "id": {
+          "type": "string",
+          "description": "Name of the promotion"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the promotion"
+        },
+        "eligible": {
+          "type": "boolean",
+          "description": "Specifies whether the subscription is eligible for the promotion"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason in case the subscription is not eligible for promotion."
+        },
+        "details": {
+          "type": "string",
+          "description": "Details in case the subscription is not eligible for promotion."
+        },
+        "eligibilitySubscriptionId": {
+          "type": "string",
+          "description": "Subscription Id on which the eligibility check was performed."
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date till when the promotion is available."
         }
       }
     },
