@@ -14,7 +14,7 @@ clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-creator/azure/maps/creator/
+output-folder: $(python-sdks-folder)/maps/azure-maps-creator/azure/maps/creator/_generated
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true

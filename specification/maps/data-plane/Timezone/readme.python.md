@@ -18,5 +18,5 @@ output-folder: $(python-sdks-folder)/maps/azure-maps-timezone/azure/maps/timezon
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-timezone/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-timezone/
 ```

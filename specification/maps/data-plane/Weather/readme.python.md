@@ -18,5 +18,5 @@ output-folder: $(python-sdks-folder)/maps/azure-maps-weather/azure/maps/weather/
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-weather/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-weather/
 ```

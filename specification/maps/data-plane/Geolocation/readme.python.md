@@ -18,5 +18,5 @@ output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation/azure/maps/geol
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-geolocation/
 ```

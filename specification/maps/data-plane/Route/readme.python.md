@@ -18,5 +18,5 @@ output-folder: $(python-sdks-folder)/maps/azure-maps-route/azure/maps/route/_gen
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-route/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-route/
 ```

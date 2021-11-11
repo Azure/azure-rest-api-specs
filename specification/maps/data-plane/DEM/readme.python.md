@@ -18,5 +18,5 @@ output-folder: $(python-sdks-folder)/maps/azure-maps-elevation/azure/maps/elevat
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-elevation/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-elevation/
 ```

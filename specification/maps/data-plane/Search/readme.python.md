@@ -18,5 +18,5 @@ output-folder: $(python-sdks-folder)/maps/azure-maps-search/azure/maps/search/_g
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps-search/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-search/
 ```
