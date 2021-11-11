@@ -426,6 +426,9 @@
         "x-ms-examples": {
           "MachineDefinitions_CreateWithCustomImage": {
             "$ref": "./examples/MachineDefinitions_CreateWithCustomImage.json"
+          },
+          "MachineDefinitions_CreateWithGalleryImage": {
+            "$ref": "./examples/MachineDefinitions_CreateWithGalleryImage.json"
           }
         }
       },
@@ -765,6 +768,96 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/networksettings/{networkSettingName}/healthchecks": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSettingName"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Network Settings"
+        ],
+        "description": "Lists health check status details",
+        "operationId": "NetworkSettings_ListHealthDetails",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HealthCheckStatusDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSettings_ListHealthDetails": {
+            "$ref": "./examples/NetworkSettings_ListHealthDetails.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fidalgo/networksettings/{networkSettingName}/healthchecks/latest": {
+      "get": {
+        "tags": [
+          "Network Settings"
+        ],
+        "description": "Gets health check status details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSettingName"
+          }
+        ],
+        "operationId": "NetworkSettings_GetHealthDetails",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HealthCheckStatusDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSettings_GetHealthDetails": {
+            "$ref": "./examples/NetworkSettings_GetHealthDetails.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -918,6 +1011,10 @@
       "description": "Properties of a Machine Definition. These properties can be updated after the resource has been created.",
       "type": "object",
       "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image reference information."
+        },
         "imageType": {
           "enum": [
             "Custom",
@@ -932,6 +1029,28 @@
         },
         "imageId": {
           "description": "The image identifier of the virtual machine image.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "Image reference information",
+      "properties": {
+        "id": {
+          "description": "Image resource ID.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The image publisher.",
+          "type": "string"
+        },
+        "offer": {
+          "description": "The image offer.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The image sku.",
           "type": "string"
         }
       }
@@ -1037,6 +1156,11 @@
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
           "readOnly": true
+        },
+        "healthCheckStatus": {
+          "description": "Overall health status of the network connection. Health checks are run on creation, update, and periodically to validate the network connection.",
+          "$ref": "#/definitions/HealthCheckStatus",
+          "readOnly": true
         }
       }
     },
@@ -1049,6 +1173,131 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSettings"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthCheckStatus": {
+      "description": "Health check status values",
+      "enum": [
+        "Pending",
+        "Running",
+        "Passed",
+        "Failed",
+        "Warning",
+        "Unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HealthCheckStatus",
+        "modelAsString": true
+      }
+    },
+    "HealthCheckStatusDetails": {
+      "description": "",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Health check status details properties.",
+          "$ref": "#/definitions/HealthCheckStatusDetailsProperties"
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthCheckStatusDetailsProperties": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "description": "Start time of last execution of the health checks.",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "type": "string",
+          "description": "End time of last execution of the health checks.",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "healthChecks": {
+          "description": "Details for each health check item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthCheck"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HealthCheck": {
+      "description": "An individual health check item",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the health check item.",
+          "$ref": "#/definitions/HealthCheckStatus",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of this health check item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "description": "Start time of health check item.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "description": "End time of the health check item.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "errorType": {
+          "description": "The type of error that occurred during this health check.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action to fix the corresponding error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalDetails": {
+          "description": "Additional details about the health check or the recommended action.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthCheckStatusDetailsListResult": {
+      "description": "Result of the network health check list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthCheckStatusDetails"
           },
           "readOnly": true
         },

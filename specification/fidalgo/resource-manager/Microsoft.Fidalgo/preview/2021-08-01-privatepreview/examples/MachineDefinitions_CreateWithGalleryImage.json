@@ -7,9 +7,12 @@
     "body": {
       "properties": {
         "imageReference": {
-          "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.Compute/images/image2"
+          "publisher": "MicrosoftWindowsDesktop",
+          "offer": "windows-11-preview",
+          "sku": "win11-21h2-ent-cpc-m365"
         }
-      }
+      },
+      "location": "centralus"
     }
   },
   "responses": {
@@ -20,7 +23,9 @@
         "type": "Microsoft.Fidalgo/machinedefinitions",
         "properties": {
           "imageReference": {
-            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.Compute/images/image2"
+            "publisher": "MicrosoftWindowsDesktop",
+            "offer": "windows-11-preview",
+            "sku": "win11-21h2-ent-cpc-m365"
           },
           "provisioningState": "Succeeded"
         },
@@ -35,16 +40,18 @@
         "location": "centralus"
       }
     },
-    "202": {
+    "201": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/machinedefinitions/{machineDefinitionName}",
         "name": "{machineDefinitionName}",
         "type": "Microsoft.Fidalgo/machinedefinitions",
         "properties": {
           "imageReference": {
-            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.Compute/images/image2"
+            "publisher": "MicrosoftWindowsDesktop",
+            "offer": "windows-11-preview",
+            "sku": "win11-21h2-ent-cpc-m365"
           },
-          "provisioningState": "Accepted"
+          "provisioningState": "Created"
         },
         "systemData": {
           "createdBy": "user1",
