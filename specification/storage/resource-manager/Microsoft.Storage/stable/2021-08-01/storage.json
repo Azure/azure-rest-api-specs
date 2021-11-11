@@ -1678,45 +1678,45 @@
             "description": "OK -- revoke user delegation keys succeeded."
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers": {
-        "get": {
-          "tags": [
-            "LocalUsers"
-          ],
-          "operationId": "LocalUsers_List",
-          "description": "List the local users associated with the storage account.",
-          "x-ms-examples": {
-            "ListLocalUsers": {
-              "$ref": "./examples/LocalUsersList.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/StorageAccountName"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK -- List local users successfully.",
-              "schema": {
-                "$ref": "#/definitions/LocalUsers"
-              }
-            }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers": {
+      "get": {
+        "tags": [
+          "LocalUsers"
+        ],
+        "operationId": "LocalUsers_List",
+        "description": "List the local users associated with the storage account.",
+        "x-ms-examples": {
+          "ListLocalUsers": {
+            "$ref": "./examples/LocalUsersList.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List local users successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalUsers"
+            }
+          }
         }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": null
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}": {
@@ -1837,9 +1837,6 @@
         "responses": {
           "200": {
             "description": "OK -- Delete the local user successfully."
-          },
-          "204": {
-            "description": "No Content -- The local user does not exist."
           }
         }
       }
@@ -3647,7 +3644,7 @@
             "name": "AllowedCopyScope",
             "modelAsString": true
           },
-          "description":  "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
+          "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
         }
       },
       "description": "Properties of the storage account."
@@ -4884,7 +4881,12 @@
           "type": "string",
           "description": "The name of resource, normally the container name or the file share name, used by the local user."
         }
-      }
+      },
+      "required": [
+        "permissions",
+        "service",
+        "resourceName"
+      ]
     },
     "SshAuthorizedKeys": {
       "type": "array",
