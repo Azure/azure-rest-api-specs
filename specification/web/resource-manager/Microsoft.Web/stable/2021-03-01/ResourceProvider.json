@@ -299,6 +299,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnameSites": {
+      "get": {
+        "summary": "Get custom hostnames under subscription",
+        "operationId": "ListCustomHostNameSites",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get custom hostnames under subscription": {
+            "$ref": "./examples/ListCustomHostNameSites.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deploymentLocations": {
       "get": {
         "summary": "Gets list of available geo regions plus ministamps",
