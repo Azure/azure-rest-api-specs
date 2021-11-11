@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2021-08
+tag: package-2021-09
 
 directive:
   - suppress: Example Validations
@@ -71,12 +71,6 @@ input-file:
 - Microsoft.Insights/stable/2021-04-01/dataCollectionEndpoints_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/stable/2021-04-01/dataCollectionRules_API.json
-```
-
-``` yaml
-description: Monitor Management Client
-openapi-type: arm
-tag: package-2021-08
 ```
 
 ### Tag: package-2021-09-01-only
