@@ -836,6 +836,15 @@
       "description": "Information specific to the monitor service that gives more contextual details about the alert.",
       "readOnly": true
     },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean"
+        }
+      }
+    },
     "essentials": {
       "type": "object",
       "description": "This object contains consistent fields across different monitor services.",
@@ -980,6 +989,9 @@
           "type": "string",
           "description": "User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
         }
       }
     },
