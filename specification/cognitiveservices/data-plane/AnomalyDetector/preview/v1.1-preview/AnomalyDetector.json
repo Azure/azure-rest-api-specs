@@ -243,6 +243,63 @@
       "x-nullable": false,
       "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
     },
+    "ImputeMode": {
+      "type": "string",
+      "description": "Define the impute method, can be one of auto, previous, linear, fixed, zero, notFill.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "ImputeMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "auto"
+          },
+          {
+            "value": "previous"
+          },
+          {
+            "value": "linear"
+          },
+          {
+            "value": "fixed"
+          },
+          {
+            "value": "zero"
+          },
+          {
+            "value": "notFill"
+          }
+        ],
+        "enum": [
+          "auto",
+          "previous",
+          "linear",
+          "fixed",
+          "zero",
+          "notFill"
+        ]
+      }
+    },
+    "ImputeValue": {
+      "type": "number",
+      "format": "float",
+      "x-nullable": false,
+      "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
+    },
+    "ImputeSrtategy": {
+      "type": "object",
+      "required": [
+        "imputeMode"
+      ],
+      "properties": {
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode"
+        },
+        "imputeValue": {
+          "$ref": "#/definitions/ImputeValue"
+        }
+      }
+    },
     "DetectRequest": {
       "type": "object",
       "required": [
@@ -277,6 +334,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
+        },
+        "imputeStrategy": {
+          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"",
+          "$ref": "#/definitions/ImputeSrtategy"
         }
       }
     },
@@ -378,7 +439,8 @@
         "lowerMargin",
         "period",
         "upperMargin",
-        "suggestedWindow"
+        "suggestedWindow",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -417,7 +479,15 @@
         "isPositiveAnomaly": {
           "type": "boolean",
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
-        }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
       }
     },
     "ChangePointDetectRequest": {
@@ -488,6 +558,7 @@
           }
         }
       }
+    }
     }
   },
   "parameters": {
