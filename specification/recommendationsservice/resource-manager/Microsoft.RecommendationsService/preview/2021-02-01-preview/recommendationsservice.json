@@ -349,6 +349,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/status": {
+      "post": {
+        "operationId": "Accounts_GetStatus",
+        "description": "Returns RecommendationsService Account status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the account.",
+            "schema": {
+              "$ref": "#/definitions/AccountStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RecommendationsService Account status - Modeling resource exists": {
+            "$ref": "./examples/Accounts_GetStatus_ModelingExists.json"
+          },
+          "Get account status - no Modeling resource exists": {
+            "$ref": "./examples/Accounts_GetStatus_NoModelingExists.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/modeling": {
       "get": {
         "operationId": "Modeling_ListByAccountResource",
@@ -1299,6 +1341,55 @@
         "tags": {
           "description": "Resource tags.",
           "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "AccountStatus": {
+      "description": "Account status.",
+      "type": "object",
+      "properties": {
+        "scopesStatuses": {
+          "description": "The list of scopes statuses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeStatuses"
+          }
+        }
+      }
+    },
+    "ScopeStatuses": {
+      "description": "Scope statuses.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "The scope that the statuses refers to.",
+          "type": "string"
+        },
+        "statuses": {
+          "description": "Scope stage statuses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StageStatus"
+          }
+        }
+      }
+    },
+    "StageStatus": {
+      "description": "Stage status.",
+      "type": "object",
+      "properties": {
+        "stage": {
+          "description": "The stage name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the stage.",
+          "type": "string"
+        },
+        "time": {
+          "description": "The time of the status.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     }
