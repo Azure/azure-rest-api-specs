@@ -4,11 +4,13 @@
     "location": "centralus",
     "api-version": "2021-12-01-preview",
     "body": {
-      "deploymentLocation": "westcentralus",
+      "appLocation": "westcentralus",
       "environment": "Non-Prod",
       "sapProduct": "ECC",
       "saps": 20000,
-      "dbMemory": 16384
+      "dbMemory": 16384,
+      "databaseType": "HANA",
+      "dbScaleMethod": "ScaleUp"
     }
   },
   "responses": {
@@ -18,7 +20,9 @@
         "dbVmSku": "Standard_D8s_v3",
         "centralServerVmSku": "Standard_D4s_v3",
         "applicationServerVmSku": "Standard_D2s_v3",
-        "applicationServerInstanceCount": 10
+        "applicationServerInstanceCount": 10,
+        "databaseInstanceCount": 1,
+        "centralServerInstanceCount": 1
       }
     }
   }

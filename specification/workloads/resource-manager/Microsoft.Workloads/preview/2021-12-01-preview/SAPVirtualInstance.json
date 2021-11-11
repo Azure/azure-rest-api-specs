@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/getSapSizingRecommendation": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSizingRecommendations": {
       "post": {
         "tags": [
           "SAPRecommendations"
@@ -77,6 +77,53 @@
         "x-ms-examples": {
           "SAPSizingRecommendations": {
             "$ref": "./examples/sapvirtualinstances/SAPSizingRecommendations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSapSupportedSku": {
+      "post": {
+        "tags": [
+          "SAPSupportedSku"
+        ],
+        "description": "Get SAP supported SKUs.",
+        "operationId": "SAPSupportedSku",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "SAPSupportedSku",
+            "description": "SAP Supported SKU Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SAPSupportedSkusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SAP Supported SKU Result.",
+            "schema": {
+              "$ref": "#/definitions/SAPSupportedResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPSupportedSku": {
+            "$ref": "./examples/sapvirtualinstances/SAPSupportedSkus.json"
           }
         }
       }
@@ -1319,7 +1366,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "HealthState",
+        "name": "SAPHealthState",
         "modelAsString": true
       }
     },
@@ -1331,7 +1378,22 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "DeploymentType",
+        "name": "SAPDeploymentType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "DatabaseScaleMethod": {
+      "description": "The database scale method.",
+      "enum": [
+        "ScaleUp"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SAPDatabaseScaleMethod",
         "modelAsString": true
       },
       "x-ms-mutability": [
@@ -1347,7 +1409,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ConfigurationType",
+        "name": "SAPConfigurationType",
         "modelAsString": true
       },
       "x-ms-mutability": [
@@ -1398,7 +1460,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "EnvironmentType",
+        "name": "SAPEnvironmentType",
         "modelAsString": true
       },
       "x-ms-mutability": [
@@ -1451,6 +1513,22 @@
         "modelAsString": true
       },
       "x-ms-mutability": [
+        "read"
+      ]
+    },
+    "SAPDatabaseType": {
+      "description": "Defines the supported SAP Database types.",
+      "enum": [
+        "HANA",
+        "DB2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SAPDatabaseType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
         "read"
       ]
     },
@@ -1715,9 +1793,19 @@
           "description": "The database VM SKU.",
           "type": "string"
         },
+        "databaseInstanceCount": {
+          "description": "The database server instance count.",
+          "type": "integer",
+          "format": "int64"
+        },
         "centralServerVmSku": {
           "description": "The central server VM SKU.",
           "type": "string"
+        },
+        "centralServerInstanceCount": {
+          "description": "The central server instance count.",
+          "type": "integer",
+          "format": "int64"
         },
         "applicationServerVmSku": {
           "description": "The application server VM SKU.",
@@ -1734,7 +1822,7 @@
       "description": "The SAP Sizing Recommendation request.",
       "type": "object",
       "properties": {
-        "deploymentLocation": {
+        "appLocation": {
           "type": "string",
           "description": "The geo-location where the resource is to be created."
         },
@@ -1757,15 +1845,24 @@
           "description": "The database memory configuration.",
           "type": "integer",
           "format": "int64"
+        },
+        "databaseType": {
+          "description": "The database type.",
+          "$ref": "#/definitions/SAPDatabaseType"
+        },
+        "dbScaleMethod": {
+          "description": "The DB scale method.",
+          "$ref": "#/definitions/DatabaseScaleMethod"
         }
       },
       "required": [
-        "deploymentLocation",
+        "appLocation",
         "environment",
         "sapProduct",
         "deploymentType",
         "saps",
-        "dbMemory"
+        "dbMemory",
+        "databaseType"
       ]
     },
     "SAPSizingRecommendationResult": {
@@ -1780,6 +1877,59 @@
         }
       },
       "discriminator": "deploymentType"
+    },
+    "SAPSupportedSkusRequest": {
+      "description": "The SAP request to get list of supported SKUs.",
+      "type": "object",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the resource is to be created."
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType"
+        },
+        "databaseType": {
+          "description": "The database type. Eg: HANA, DB2, etc",
+          "$ref": "#/definitions/SAPDatabaseType"
+        }
+      },
+      "required": [
+        "appLocation",
+        "sapProduct",
+        "databaseType"
+      ]
+    },
+    "SAPSupportedSku": {
+      "description": "The SAP supported SKU.",
+      "type": "object",
+      "properties": {
+        "vmSku": {
+          "type": "string",
+          "description": "The VM Sku."
+        },
+        "isAppServerCertified": {
+          "description": "True if the Sku is certified for App server in the SAP system.",
+          "type": "boolean"
+        },
+        "isDatabaseCertified": {
+          "description": "True if the Sku is certified for Database server in the SAP system.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SAPSupportedResourceSkusResult": {
+      "description": "The list of supported SKUs for different resources which are part of SAP deployment.",
+      "type": "object",
+      "properties": {
+        "supportedSkus": {
+          "description": "Gets the list of SAP supported SKUs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SAPSupportedSku"
+          }
+        }
+      }
     },
     "VirtualMachineConfiguration": {
       "description": "Defines the virtual machine configuration.",
@@ -1839,11 +1989,17 @@
         "virtualMachineConfiguration": {
           "description": "Gets or sets the virtual machine configuration.",
           "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "instanceCount": {
+          "description": "The number of central server VMs.",
+          "type": "integer",
+          "format": "int64"
         }
       },
       "required": [
         "subnetId",
-        "virtualMachineConfiguration"
+        "virtualMachineConfiguration",
+        "instanceCount"
       ],
       "x-ms-azure-resource": true
     },
@@ -1858,11 +2014,17 @@
         "virtualMachineConfiguration": {
           "description": "Gets or sets the virtual machine configuration.",
           "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "instanceCount": {
+          "description": "The number of database VMs.",
+          "type": "integer",
+          "format": "int64"
         }
       },
       "required": [
         "subnetId",
-        "virtualMachineConfiguration"
+        "virtualMachineConfiguration",
+        "instanceCount"
       ],
       "x-ms-azure-resource": true
     },
@@ -1925,11 +2087,16 @@
       "description": "Deploy SAP Infrastructure Details.",
       "type": "object",
       "required": [
-        "deploymentType"
+        "deploymentType",
+        "appResourceGroup"
       ],
       "properties": {
         "deploymentType": {
           "$ref": "#/definitions/DeploymentType"
+        },
+        "appResourceGroup": {
+          "type": "string",
+          "description": "The application resource group where SAP system resources will be deployed."
         }
       },
       "discriminator": "deploymentType"
@@ -2019,11 +2186,16 @@
       "description": "The SAP Configuration.",
       "type": "object",
       "required": [
-        "configurationType"
+        "configurationType",
+        "appLocation"
       ],
       "properties": {
         "configurationType": {
           "$ref": "#/definitions/ConfigurationType"
+        },
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the resource is to be created."
         }
       },
       "discriminator": "configurationType"
