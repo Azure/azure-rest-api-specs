@@ -1,12 +1,13 @@
 {
   "parameters": {
     "api-version": "2021-08-08-preview",
-    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
+    "resourceGroupName": "alertscorrelationrg"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com:443/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/actionRules?api-version=2021-08-08-preview&ctoken=%2bRID%3aPlwOAPHEGwB9UwEAAAAgCw%3d%3d%23RT%3a2%23TRC%3a500%23RTD%3aqtQyMDE4LTA2LTEyVDE1OjEyOjE1",
+        "nextLink": "https://management.azure.com:443/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules?api-version=2021-08-08-preview&ctoken=%2bRID%3aPlwOAPHEGwB9UwEAAAAgCw%3d%3d%23RT%3a2%23TRC%3a500%23RTD%3aqtQyMDE4LTA2LTEyVDE1OjEyOjE1",
         "value": [
           {
             "systemData": {
@@ -47,8 +48,8 @@
                 }
               ],
               "schedule": {
-                "effectiveFrom": "2018-01-10T22:05:09",
-                "effectiveUntil": "2018-12-10T22:05:09",
+                "effectiveFrom": "2018-09-12T06:00:00",
+                "effectiveUntil": "2018-09-20T14:00:00",
                 "timeZone": "Pacific Standard Time",
                 "recurrences": [
                   {
@@ -63,7 +64,7 @@
                   "actionType": "RemoveAllActionGroups"
                 }
               ],
-              "description": "Action rule on resource group for daily suppression",
+              "description": "Alert processing rule on resource group for daily suppression",
               "enabled": true
             },
             "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
@@ -100,18 +101,26 @@
                     "Percentage CPU greater than 80%",
                     "Metric alert on resource foo"
                   ]
+                },
+                {
+                  "field": "AlertContext",
+                  "operator": "DoesNotContain",
+                  "values": [
+                    "testresource",
+                    "foo"
+                  ]
                 }
               ],
-              "description": "Action rule on resource group for adding action group",
-              "enabled": true,
               "actions": [
                 {
                   "actionType": "AddActionGroups",
                   "actionGroupIds": [
-                    "actiongGroup1"
+                    "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.insights/actiongroups/testAG"
                   ]
                 }
-              ]
+              ],
+              "description": "Alert processing rule on resource group for sending email",
+              "enabled": true
             },
             "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
             "type": "Microsoft.AlertsManagement/actionRules",
