@@ -173,7 +173,9 @@
             "InvalidSeries",
             "InvalidJsonFormat",
             "RequiredGranularity",
-            "RequiredSeries"
+            "RequiredSeries",
+            "InvalidImputeMode",
+            "InvalidImputeValue"
           ],
           "x-ms-enum": {
             "name": "AnomalyDetectorErrorCodes",
@@ -286,20 +288,6 @@
       "x-nullable": false,
       "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
     },
-    "ImputeStrategy": {
-      "type": "object",
-      "required": [
-        "imputeMode"
-      ],
-      "properties": {
-        "imputeMode": {
-          "$ref": "#/definitions/ImputeMode"
-        },
-        "imputeValue": {
-          "$ref": "#/definitions/ImputeValue"
-        }
-      }
-    },
     "DetectRequest": {
       "type": "object",
       "required": [
@@ -335,9 +323,13 @@
           "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
         },
-        "imputeStrategy": {
-          "$ref": "#/definitions/ImputeStrategy",
-          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\""
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode",
+          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"."
+        },
+        "imputeValue": {
+          "$ref": "#/definitions/ImputeValue",
+          "description": "Used to specify the value to fill, it's used when granularity is not \"none\" and imputeMode is \"fixed\"."
         }
       }
     },
@@ -368,7 +360,8 @@
         "isPositiveAnomaly",
         "lowerMargins",
         "period",
-        "upperMargins"
+        "upperMargins",
+        "severity"
       ],
       "properties": {
         "period": {
