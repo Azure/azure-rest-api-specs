@@ -578,7 +578,7 @@
         "description": "**Get Current Air Quality**\n\n**Applies to**: S1 and G2 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for current air quality.",
         "operationId": "Weather_GetCurrentAirQuality",
         "x-ms-examples": {
-          "CurrentAirQuality": {
+          "Get Current Air Quality": {
             "$ref": "./examples/GetCurrentAirQuality.json"
           }
         },
@@ -590,7 +590,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -599,8 +599,17 @@
             "name": "query",
             "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
             "in": "query",
-            "type": "string",
-            "required": true
+            "required": true,
+            "x-ms-client-name": "coordinates",
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "$ref": "#/parameters/Pollutants"
@@ -621,10 +630,10 @@
     },
     "/weather/airQuality/forecast/daily/{format}": {
       "get": {
-        "description": "**Get Air Quality Daily Forecast**\n\n**Applies to**: S1 and G2 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for upcoming few days air quality. The service can provide forecast air quality for future one to four days.",
+        "description": "**Get Air Quality Daily Forecast**\n\n**Applies to**: S1 and G2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetAirQualityDailyForecast",
         "x-ms-examples": {
-          "DailyAirQualityForecast": {
+          "Get Daily Air Quality Forecast": {
             "$ref": "./examples/GetDailyAirQuality.json"
           }
         },
@@ -636,7 +645,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -645,15 +654,26 @@
             "name": "query",
             "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
             "in": "query",
-            "type": "string",
-            "required": true
+            "required": true,
+            "x-ms-client-name": "coordinates",
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "duration",
             "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1, 2, 3, 4, 5, 6, and 7. Default value is 1.",
             "default": 1,
             "in": "query",
-            "type": "integer"
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 7
           }
         ],
         "responses": {
@@ -674,7 +694,7 @@
         "description": "**Get Air Quality Hourly forecast**\n\n**Applies to**: S1 and G2 pricing tiers.\n\nThe service provides the detailed information about the concentration of pollutant and overall status for current air quality.",
         "operationId": "Weather_GetAirQualityHourlyForecast",
         "x-ms-examples": {
-          "HourlyAirQualityForecast": {
+          "Get Hourly Air Quality Forecast": {
             "$ref": "./examples/GetHourlyAirQuality.json"
           }
         },
@@ -686,7 +706,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -695,8 +715,17 @@
             "name": "query",
             "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
             "in": "query",
-            "type": "string",
-            "required": true
+            "required": true,
+            "x-ms-client-name": "coordinates",
+            "x-ms-parameter-location": "method",
+            "type": "array",
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
             "name": "duration",
