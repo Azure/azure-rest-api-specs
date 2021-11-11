@@ -286,7 +286,7 @@
       "x-nullable": false,
       "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
     },
-    "ImputeSrtategy": {
+    "ImputeStrategy": {
       "type": "object",
       "required": [
         "imputeMode"
@@ -336,8 +336,8 @@
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
         },
         "imputeStrategy": {
-          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"",
-          "$ref": "#/definitions/ImputeSrtategy"
+          "$ref": "#/definitions/ImputeStrategy",
+          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\""
         }
       }
     },
@@ -426,6 +426,15 @@
             "type": "boolean",
             "x-nullable": false
           }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
         }
       }
     },
@@ -481,13 +490,10 @@
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
         },
         "severity": {
-          "type": "array",
-          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
-          "items": {
-            "type": "number",
-            "format": "float",
-            "x-nullable": false
-          }
+          "type": "number",
+          "format": "float",
+          "description": "The severity score for the last input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "x-nullable": false
         }
       }
     },
