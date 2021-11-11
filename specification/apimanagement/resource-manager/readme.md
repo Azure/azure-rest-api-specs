@@ -126,6 +126,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimquotas.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimregions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimschema.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsettings.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimskus.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimsubscriptions.json
@@ -623,10 +624,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AZ
-
-See configuration in [readme.az.md](./readme.az.md)
-
 ## Suppression
 
 ``` yaml
@@ -704,6 +701,9 @@ directive:
     from: apimportalrevisions.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
+    from: apimschema.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
     from: apimsettings.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
   - suppress: R4009
@@ -718,6 +718,9 @@ directive:
   - suppress: R4037
     from: definitions.json
     reason: We want customers to be able to supply any valid JSON token, object or otherwise    
+  - suppress: R4009
+    from: apimprivatelink.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimprivatelink.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
