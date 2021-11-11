@@ -732,7 +732,46 @@
             "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96. Default value is 1 hour.",
             "default": 1,
             "in": "query",
-            "type": "integer"
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              12,
+              24,
+              48,
+              72,
+              96
+            ],
+            "x-ms-enum": {
+              "name": "HourlyDuration",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": 1,
+                  "description": "1 Hours"
+                },
+                {
+                  "value": 12,
+                  "description": "12 Hours"
+                },
+                {
+                  "value": 24,
+                  "description": "24 Hours"
+                },
+                {
+                  "value": 48,
+                  "description": "48 Hours"
+                },
+                {
+                  "value": 72,
+                  "description": "72 Hours"
+                },
+                {
+                  "value": 96,
+                  "description": "96 Hours"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Pollutants"
