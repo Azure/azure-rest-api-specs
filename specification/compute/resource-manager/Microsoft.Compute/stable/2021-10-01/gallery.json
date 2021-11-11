@@ -609,6 +609,9 @@
           },
           "Create or update a simple Gallery Image Version using shallow replication mode.": {
             "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryImageVersionWithShallowReplicationMode.json"
+          },
+          "Create or update a simple gallery image version with target extended locations specified.": {
+            "$ref": "./examples/gallery/CreateOrUpdateASimpleGalleryImageVersionWithTargetExtendedLocations.json"
           }
         }
       },
@@ -2315,6 +2318,13 @@
           },
           "description": "The target regions where the Image Version is going to be replicated to. This property is updatable."
         },
+        "targetExtendedLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetExtendedLocation"
+          },
+          "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable."
+        },
         "replicaCount": {
           "type": "integer",
           "format": "int32",
@@ -2395,6 +2405,61 @@
         "name"
       ],
       "description": "Describes the target region information."
+    },
+    "TargetExtendedLocation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation"
+        },
+        "extendedLocationReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas of the Image Version to be created per extended location. This property is updatable."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionImages"
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+        }
+      }
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of the extendedLocation.",
+      "enum": [
+        "EdgeZone",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true
+      }
     },
     "EncryptionImages": {
       "properties": {
