@@ -7320,6 +7320,12 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         }
       }
     },
@@ -8700,12 +8706,9 @@
           "description": "The category of the agreement signed by a customer.",
           "readOnly": true,
           "enum": [
-            "AffiliatePurchaseTerms",
-            "IndirectForGovernmentAgreement",
             "MicrosoftCustomerAgreement",
-            "MicrosoftPartnerAgreement",
-            "Other",
-            "UKCloudComputeFramework"
+            "AffiliatePurchaseTerms",
+            "Other"
           ],
           "x-ms-enum": {
             "name": "category",

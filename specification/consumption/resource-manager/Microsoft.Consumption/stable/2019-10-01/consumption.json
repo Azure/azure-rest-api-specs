@@ -40,7 +40,7 @@
           "UsageDetails"
         ],
         "operationId": "UsageDetails_List",
-        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.",
+        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later. For more information on using this API, including how to specify a date range, please see: https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/manage-automation",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -116,7 +116,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter usageDetails by properties/resourceGroup, properties/resourceName, properties/resourceId, properties/chargeType, properties/reservationId, properties/publisherType or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:). PublisherType Filter accepts two values azure and marketplace and it is currently supported for Web Direct Offer Type",
+            "description": "May be used to filter usageDetails by properties/resourceGroup, properties/instanceName, properties/resourceId, properties/chargeType, properties/reservationId, properties/publisherType or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:). PublisherType Filter accepts two values azure and marketplace and it is currently supported for Web Direct Offer Type",
             "in": "query",
             "required": false,
             "type": "string"
@@ -620,7 +620,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
       "get": {
         "tags": [
           "Balances"
@@ -812,7 +812,7 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "Start date. Only applicable when querying with billing profile",
+            "description": "Start date. Required only when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -820,14 +820,14 @@
           {
             "name": "endDate",
             "in": "query",
-            "description": "End date. Only applicable when querying with billing profile",
+            "description": "End date. Required only when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
           {
             "name": "$filter",
-            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
+            "description": "The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not required when querying with billing profile",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3013,9 +3013,9 @@
           "type": "string",
           "description": "Resource sku"
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "Resource etag."
+          "description": "Resource eTag."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3227,6 +3227,11 @@
           "description": "The link (url) to the previous page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "totalCost": {
+          "description": "The total amount of cost.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3393,6 +3398,11 @@
           "description": "Properties for modern reservation recommendation",
           "$ref": "#/definitions/ModernReservationRecommendationProperties",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "description": "Resource eTag.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -3491,6 +3501,16 @@
         },
         "skuName": {
           "description": "This is the ARM Sku name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "The Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The Azure subscription ID.",
           "type": "string",
           "readOnly": true
         }

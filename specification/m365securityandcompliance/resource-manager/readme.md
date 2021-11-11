@@ -63,8 +63,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js m365securityandcompliance/resource-manager
 ```
 
 ## C#
@@ -143,7 +141,5 @@ See configuration in [readme.python.md](./readme.python.md)
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

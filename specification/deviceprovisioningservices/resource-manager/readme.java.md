@@ -19,6 +19,11 @@ java:
   generate-interface: true
   clear-output-folder: true
   output-folder: $(azure-libraries-for-java-folder)/deviceprovisioningservices
+
+directive:
+  rename-model:
+    from: 'SharedAccessSignatureAuthorizationRule[AccessRightsDescription]'
+    to: SharedAccessSignatureAuthorizationRule
 ```
 
 ## Tag: package-2020-03 and java
