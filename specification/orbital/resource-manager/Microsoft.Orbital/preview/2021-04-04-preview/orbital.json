@@ -36,7 +36,7 @@
           "Operations"
         ],
         "description": "Lists all of the available Orbital Rest API operations.",
-        "operationId": "Orbital_ListOperations",
+        "operationId": "Operations_List",
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/OperationsList.json"
@@ -72,7 +72,7 @@
           "Spacecraft"
         ],
         "description": "Return list of spacecrafts",
-        "operationId": "Orbital_ListSpacecraftsBySubscription",
+        "operationId": "Spacecrafts_ListBySubscription",
         "x-ms-examples": {
           "List of Spacecraft by Subscription": {
             "$ref": "./examples/SpacecraftsBySubscriptionList.json"
@@ -111,7 +111,7 @@
           "Spacecraft"
         ],
         "description": "Return list of spacecrafts",
-        "operationId": "Orbital_ListSpacecraftsByResourceGroup",
+        "operationId": "Spacecrafts_List",
         "x-ms-examples": {
           "List of Spacecraft by Resource Group": {
             "$ref": "./examples/SpacecraftsByResourceGroupList.json"
@@ -152,7 +152,7 @@
         "tags": [
           "Spacecraft"
         ],
-        "operationId": "Orbital_GetSpacecraft",
+        "operationId": "Spacecrafts_Get",
         "description": "Gets the specified spacecraft in a specified resource group",
         "parameters": [
           {
@@ -193,7 +193,7 @@
           "Spacecraft"
         ],
         "description": "Creates or updates a spacecraft resource",
-        "operationId": "Orbital_CreateOrUpdateSpacecraft",
+        "operationId": "Spacecrafts_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupName"
@@ -252,7 +252,7 @@
         "tags": [
           "Spacecraft"
         ],
-        "operationId": "Orbital_DeleteSpacecraft",
+        "operationId": "Spacecrafts_Delete",
         "description": "Deletes a specified spacecraft resource.",
         "parameters": [
           {
@@ -299,7 +299,7 @@
         "tags": [
           "Spacecraft"
         ],
-        "operationId": "Orbital_UpdateTagsSpacecraft",
+        "operationId": "Spacecrafts_UpdateTags",
         "x-ms-examples": {
           "Update Spacecraft tags": {
             "$ref": "./examples/SpacecraftUpdateTags.json"
@@ -348,10 +348,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Orbital/spacecrafts/{spacecraftName}/contacts": {
       "get": {
         "tags": [
-          "Spacecraft"
+          "Contact"
         ],
         "description": "Returns list of contacts by spacecraftName",
-        "operationId": "Orbital_ListContactsBySpacecraftName",
+        "operationId": "Contacts_List",
         "x-ms-examples": {
           "List of Contacts": {
             "$ref": "./examples/ContactsBySpacecraftNameList.json"
@@ -395,7 +395,7 @@
         "tags": [
           "Contact"
         ],
-        "operationId": "Orbital_GetContact",
+        "operationId": "Contacts_Get",
         "description": "Gets the specified contact in a specified resource group",
         "parameters": [
           {
@@ -439,7 +439,7 @@
           "Contact"
         ],
         "description": "Creates a contact.",
-        "operationId": "Orbital_CreateContact",
+        "operationId": "Contacts_Create",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupName"
@@ -500,7 +500,7 @@
         "tags": [
           "Contact"
         ],
-        "operationId": "Orbital_DeleteContact",
+        "operationId": "Contacts_Delete",
         "description": "Deletes a specified contact",
         "parameters": [
           {
@@ -553,7 +553,7 @@
           "Contact"
         ],
         "description": "Return list of available contacts",
-        "operationId": "Orbital_ListAvailableContacts",
+        "operationId": "Spacecrafts_ListAvailableContacts",
         "x-ms-examples": {
           "List of Contact": {
             "$ref": "./examples/AvailableContactsList.json"
@@ -608,7 +608,7 @@
         "tags": [
           "Contact Profile"
         ],
-        "operationId": "Orbital_GetContactProfile",
+        "operationId": "ContactProfiles_Get",
         "description": "Gets the specified contact Profile in a specified resource group",
         "parameters": [
           {
@@ -649,7 +649,7 @@
           "Contact Profile"
         ],
         "description": "Creates or updates a contact profile",
-        "operationId": "Orbital_CreateOrUpdateContactProfile",
+        "operationId": "ContactProfiles_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupName"
@@ -708,7 +708,7 @@
         "tags": [
           "Contact Profile"
         ],
-        "operationId": "Orbital_DeleteContactProfile",
+        "operationId": "ContactProfiles_Delete",
         "description": "Deletes a specified contact profile resource.",
         "parameters": [
           {
@@ -755,7 +755,7 @@
         "tags": [
           "Contact Profile"
         ],
-        "operationId": "Orbital_UpdateTagsContactProfile",
+        "operationId": "ContactProfiles_UpdateTags",
         "x-ms-examples": {
           "Update Contact Profile tags": {
             "$ref": "./examples/ContactProfileUpdateTag.json"
@@ -807,7 +807,7 @@
           "Contact Profile"
         ],
         "description": "Returns list of contact profiles",
-        "operationId": "Orbital_ListContactProfilesBySubscription",
+        "operationId": "ContactProfiles_ListBySubscription",
         "x-ms-examples": {
           "List of Contact Profiles by Subscription": {
             "$ref": "./examples/ContactProfilesBySubscriptionList.json"
@@ -846,7 +846,7 @@
           "Contact Profile"
         ],
         "description": "Returns list of contact profiles",
-        "operationId": "Orbital_ListContactProfilesByResourceGroup",
+        "operationId": "ContactProfiles_List",
         "x-ms-examples": {
           "List of Contact Profiles by Resource Group": {
             "$ref": "./examples/ContactProfilesByResourceGroupList.json"
