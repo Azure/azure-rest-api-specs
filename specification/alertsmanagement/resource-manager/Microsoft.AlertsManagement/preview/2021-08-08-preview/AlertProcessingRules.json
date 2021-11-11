@@ -3,7 +3,7 @@
   "info": {
     "version": "2021-08-08-preview",
     "title": "Azure Alerts Management Service Resource Provider",
-    "description": "APIs for Azure action rules CRUD operations."
+    "description": "APIs for Azure alert processing rules CRUD operations."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -29,8 +29,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "description": "List all action rules of the subscription",
-        "operationId": "ActionRules_ListBySubscription",
+        "description": "List all alert processing rules in a subscription.",
+        "operationId": "AlertProcessingRules_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -41,7 +41,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Return the list of action rules",
+            "description": "OK. Return the list of alert processing rules.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -49,7 +49,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ActionRulesList"
+              "$ref": "#/definitions/AlertProcessingRulesList"
             }
           },
           "default": {
@@ -63,16 +63,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetActionRulesSubscriptionWide": {
-            "$ref": "./examples/ActionRules_List_Subscription.json"
+          "GetAlertProcessingRulesSubscriptionWide": {
+            "$ref": "./examples/AlertProcessingRules_List_Subscription.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "operationId": "ActionRules_ListByResourceGroup",
-        "description": "List all action rules of the subscription, created in given resource group",
+        "operationId": "AlertProcessingRules_ListByResourceGroup",
+        "description": "List all alert processing rules in a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -86,7 +86,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Return the list of action rules",
+            "description": "OK. Return the list of alert processing rules.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -94,7 +94,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ActionRulesList"
+              "$ref": "#/definitions/AlertProcessingRulesList"
             }
           },
           "default": {
@@ -108,16 +108,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetActionRulesResourceGroupWide": {
-            "$ref": "./examples/ActionRules_List_ResourceGroup.json"
+          "GetAlertProcessingRulesResourceGroupWide": {
+            "$ref": "./examples/AlertProcessingRules_List_ResourceGroup.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{actionRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}": {
       "get": {
-        "description": "Get action rule by name",
-        "operationId": "ActionRules_GetByName",
+        "description": "Get an alert processing rule by name.",
+        "operationId": "AlertProcessingRules_GetByName",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -126,9 +126,9 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "actionRuleName",
+            "name": "alertProcessingRuleName",
             "in": "path",
-            "description": "The name of the action rule that needs to be fetched",
+            "description": "The name of the alert processing rule that needs to be fetched.",
             "required": true,
             "type": "string"
           },
@@ -138,7 +138,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the specific action rule",
+            "description": "OK. Returns the specific alert processing rule.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -146,7 +146,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ActionRule"
+              "$ref": "#/definitions/AlertProcessingRule"
             }
           },
           "default": {
@@ -157,14 +157,14 @@
           }
         },
         "x-ms-examples": {
-          "GetActionRuleById": {
-            "$ref": "./examples/ActionRules_GetById.json"
+          "GetAlertProcessingRuleById": {
+            "$ref": "./examples/AlertProcessingRules_GetById.json"
           }
         }
       },
       "put": {
-        "operationId": "ActionRules_CreateUpdate",
-        "description": "Create or update an action rule",
+        "operationId": "AlertProcessingRules_CreateOrUpdate",
+        "description": "Create or update an alert processing rule.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -173,19 +173,19 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "actionRuleName",
+            "name": "alertProcessingRuleName",
             "in": "path",
-            "description": "The name of the action rule that needs to be created/updated",
+            "description": "The name of the alert processing rule that needs to be created/updated.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "actionRule",
+            "name": "alertProcessingRule",
             "in": "body",
-            "description": "Action rule to be created/updated",
+            "description": "Alert processing rule to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActionRule"
+              "$ref": "#/definitions/AlertProcessingRule"
             }
           },
           {
@@ -194,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the updated action rule",
+            "description": "OK. Returns the updated alert processing rule.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -202,11 +202,11 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ActionRule"
+              "$ref": "#/definitions/AlertProcessingRule"
             }
           },
           "201": {
-            "description": "Created. Returns the created action rule",
+            "description": "Created. Returns the created alert processing rule.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -214,7 +214,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ActionRule"
+              "$ref": "#/definitions/AlertProcessingRule"
             }
           },
           "default": {
@@ -226,28 +226,28 @@
         },
         "x-ms-examples": {
           "Create or update a rule that adds an action group to all alerts in a subscription": {
-            "$ref": "./examples/ActionRules_Create_or_update_add_action_group_all_alerts_in_subscription.json"
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_add_action_group_all_alerts_in_subscription.json"
           },
           "Create or update a rule that adds two action groups to all Sev0 and Sev1 alerts in two resource groups": {
-            "$ref": "./examples/ActionRules_Create_or_update_add_two_action_groups_all_Sev0_Sev1_two_resource_groups.json"
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_add_two_action_groups_all_Sev0_Sev1_two_resource_groups.json"
           },
           "Create or update a rule that removes all action groups from alerts on a specific VM during a one-off maintenance window (1800-2000 at a specific date, Pacific Standard Time)": {
-            "$ref": "./examples/ActionRules_Create_or_update_remove_all_action_groups_specific_VM_one-off_maintenance_window.json"
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_remove_all_action_groups_specific_VM_one-off_maintenance_window.json"
           },
           "Create or update a rule that removes all action groups from all alerts on any VM in two resource groups during a recurring maintenance window (2200-0400 every Sat and Sun, India Standard Time)": {
-            "$ref": "./examples/ActionRules_Create_or_update_remove_all_action_groups_recurring_maintenance_window.json"
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_remove_all_action_groups_recurring_maintenance_window.json"
           },
           "Create or update a rule that removes all action groups outside business hours (Mon-Fri 09:00-17:00, Eastern Standard Time)": {
-            "$ref": "./examples/ActionRules_Create_or_update_remove_all_action_groups_outside_business_hours.json"
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_remove_all_action_groups_outside_business_hours.json"
           },
           "Create or update a rule that removes all action groups from all alerts in a subscription coming from a specific alert rule": {
-            "$ref": "./examples/ActionRules_Create_or_update_remove_all_action_groups_from_specific_alert_rule.json"
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_remove_all_action_groups_from_specific_alert_rule.json"
           }
         }
       },
       "delete": {
-        "description": "Delete a given action rule",
-        "operationId": "ActionRules_Delete",
+        "description": "Delete an alert processing rule.",
+        "operationId": "AlertProcessingRules_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -256,9 +256,9 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "actionRuleName",
+            "name": "alertProcessingRuleName",
             "in": "path",
-            "description": "The name of the action rule that needs to be deleted",
+            "description": "The name of the alert processing rule that needs to be deleted.",
             "required": true,
             "type": "string"
           },
@@ -268,7 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to delete an action rule",
+            "description": "Successful request to delete an alert processing rule.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -277,7 +277,7 @@
             }
           },
           "204": {
-            "description": "No content: the request was successful, but the response is empty",
+            "description": "No content: the request was successful, but the response is empty.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -293,14 +293,14 @@
           }
         },
         "x-ms-examples": {
-          "DeleteActionRule": {
-            "$ref": "./examples/ActionRules_Delete.json"
+          "DeleteAlertProcessingRule": {
+            "$ref": "./examples/AlertProcessingRules_Delete.json"
           }
         }
       },
       "patch": {
-        "description": "Update enabled flag and/or tags for the given action rule",
-        "operationId": "ActionRules_Update",
+        "description": "Enable, disable, or update tags for an alert processing rule.",
+        "operationId": "AlertProcessingRules_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -309,14 +309,14 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "actionRuleName",
+            "name": "alertProcessingRuleName",
             "in": "path",
-            "description": "The name that needs to be updated",
+            "description": "The name that needs to be updated.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "actionRulePatch",
+            "name": "alertProcessingRulePatch",
             "in": "body",
             "required": true,
             "schema": {
@@ -330,7 +330,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the created/updated action rule",
+            "description": "OK. Returns the created/updated alert processing rule.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -338,7 +338,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ActionRule"
+              "$ref": "#/definitions/AlertProcessingRule"
             }
           },
           "default": {
@@ -349,8 +349,8 @@
           }
         },
         "x-ms-examples": {
-          "PatchActionRule": {
-            "$ref": "./examples/ActionRules_Patch.json"
+          "PatchAlertProcessingRule": {
+            "$ref": "./examples/AlertProcessingRules_Patch.json"
           }
         }
       }
@@ -375,7 +375,7 @@
     },
     "api-version": {
       "name": "api-version",
-      "description": "client API version",
+      "description": "Client API version.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -443,7 +443,7 @@
       }
     },
     "ManagedResource": {
-      "description": "An azure managed resource object",
+      "description": "An azure managed resource object.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -472,18 +472,18 @@
     },
     "Scopes": {
       "type": "array",
-      "description": "List of ARM IDs which will be the target of the given action rule.",
+      "description": "List of ARM IDs which will be the target of the given alert processing rule.",
       "items": {
         "type": "string"
       }
     },
     "Condition": {
       "type": "object",
-      "description": "Condition to trigger an action rule",
+      "description": "Condition to trigger an alert processing rule.",
       "properties": {
         "field": {
           "type": "string",
-          "description": "Field for a given condition",
+          "description": "Field for a given condition.",
           "enum": [
             "Severity",
             "MonitorService",
@@ -504,7 +504,7 @@
         },
         "operator": {
           "type": "string",
-          "description": "Operator for a given condition",
+          "description": "Operator for a given condition.",
           "enum": [
             "Equals",
             "NotEquals",
@@ -527,14 +527,14 @@
     },
     "Conditions": {
       "type": "array",
-      "description": "Conditions in alert instance to be matched for a given action rule. Default value is all. Multiple values could be provided with comma separation.",
+      "description": "Conditions in alert instance to be matched for a given alert processing rule. Default value is all. Multiple values could be provided with comma separation.",
       "items": {
         "$ref": "#/definitions/Condition"
       }
     },
     "Schedule": {
       "type": "object",
-      "description": "Scheduling configuration for a given action rule",
+      "description": "Scheduling configuration for a given alert processing rule.",
       "properties": {
         "effectiveFrom": {
           "type": "string",
@@ -548,11 +548,11 @@
         },
         "timeZone": {
           "type": "string",
-          "description": "Scheduling time zone"
+          "description": "Scheduling time zone."
         },
         "recurrences": {
           "type": "array",
-          "description": "List of recurrences",
+          "description": "List of recurrences.",
           "items": {
             "$ref": "#/definitions/Recurrence"
           }
@@ -561,7 +561,7 @@
     },
     "Recurrence": {
       "type": "object",
-      "description": "Recurrence object",
+      "description": "Recurrence object.",
       "discriminator": "recurrenceType",
       "required": [
         "recurrenceType"
@@ -569,7 +569,7 @@
       "properties": {
         "recurrenceType": {
           "type": "string",
-          "description": "Specifies when the recurrence should be applied",
+          "description": "Specifies when the recurrence should be applied.",
           "enum": [
             "Daily",
             "Weekly",
@@ -582,18 +582,18 @@
         },
         "startTime": {
           "type": "string",
-          "description": "Start time for recurrence"
+          "description": "Start time for recurrence."
         },
         "endTime": {
           "type": "string",
-          "description": "End time for recurrence"
+          "description": "End time for recurrence."
         }
       }
     },
     "DailyRecurrence": {
       "x-ms-discriminator-value": "Daily",
       "type": "object",
-      "description": "Daily recurrence object",
+      "description": "Daily recurrence object.",
       "required": [
         "startTime",
         "endTime"
@@ -607,7 +607,7 @@
     "WeeklyRecurrence": {
       "x-ms-discriminator-value": "Weekly",
       "type": "object",
-      "description": "Weekly recurrence object",
+      "description": "Weekly recurrence object.",
       "required": [
         "daysOfWeek"
       ],
@@ -619,7 +619,7 @@
       "properties": {
         "daysOfWeek": {
           "type": "array",
-          "description": "Specifies the values for weekly recurrence pattern",
+          "description": "Specifies the values for weekly recurrence pattern.",
           "items": {
             "$ref": "#/definitions/DaysOfWeek"
           }
@@ -629,7 +629,7 @@
     "MonthlyRecurrence": {
       "x-ms-discriminator-value": "Monthly",
       "type": "object",
-      "description": "Monthly recurrence object",
+      "description": "Monthly recurrence object.",
       "required": [
         "daysOfMonth"
       ],
@@ -641,7 +641,7 @@
       "properties": {
         "daysOfMonth": {
           "type": "array",
-          "description": "Specifies the values for monthly recurrence pattern",
+          "description": "Specifies the values for monthly recurrence pattern.",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -651,7 +651,7 @@
     },
     "DaysOfWeek": {
       "type": "string",
-      "description": "Days of week",
+      "description": "Days of week.",
       "enum": [
         "Sunday",
         "Monday",
@@ -666,8 +666,9 @@
         "modelAsString": true
       }
     },
-    "ActionRule": {
-      "description": "Action rule object containing target scopes, conditions and scheduling logic",
+    "AlertProcessingRule": {
+      "type": "object",
+      "description": "Alert processing rule object containing target scopes, conditions and scheduling logic.",
       "allOf": [
         {
           "$ref": "#/definitions/ManagedResource"
@@ -675,55 +676,56 @@
       ],
       "properties": {
         "properties": {
-          "description": "Action rule properties",
-          "$ref": "#/definitions/ActionRuleProperties"
+          "description": "Alert processing rule properties.",
+          "$ref": "#/definitions/AlertProcessingRuleProperties"
         },
         "systemData": {
-          "description": "Action rule system data",
+          "description": "Alert processing rule system data.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
-    "ActionRuleProperties": {
-      "description": "Action rule properties defining scopes, conditions and scheduling logic for action rule",
+    "AlertProcessingRuleProperties": {
+      "type": "object",
+      "description": "Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.",
       "required": [
         "scopes",
         "actions"
       ],
       "properties": {
         "scopes": {
-          "description": "Scopes on which action rule will apply",
+          "description": "Scopes on which alert processing rule will apply.",
           "$ref": "#/definitions/Scopes"
         },
         "conditions": {
-          "description": "Conditions on which alerts will be filtered",
+          "description": "Conditions on which alerts will be filtered.",
           "$ref": "#/definitions/Conditions"
         },
         "schedule": {
-          "description": "Scheduling for action rule",
+          "description": "Scheduling for alert processing rule.",
           "$ref": "#/definitions/Schedule"
         },
         "actions": {
           "type": "array",
-          "description": "Actions to be applied",
+          "description": "Actions to be applied.",
           "items": {
             "$ref": "#/definitions/Action"
           }
         },
         "description": {
           "type": "string",
-          "description": "Description of action rule"
+          "description": "Description of alert processing rule."
         },
         "enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Indicates if the given action rule is enabled or disabled"
+          "description": "Indicates if the given alert processing rule is enabled or disabled."
         }
       }
     },
     "Action": {
       "type": "object",
-      "description": "Action to be applied",
+      "description": "Action to be applied.",
       "discriminator": "actionType",
       "required": [
         "actionType"
@@ -731,7 +733,7 @@
       "properties": {
         "actionType": {
           "type": "string",
-          "description": "Action that should be applied",
+          "description": "Action that should be applied.",
           "enum": [
             "AddActionGroups",
             "RemoveAllActionGroups"
@@ -746,7 +748,7 @@
     "AddActionGroups": {
       "x-ms-discriminator-value": "AddActionGroups",
       "type": "object",
-      "description": "Add action groups to action rule",
+      "description": "Add action groups to alert processing rule.",
       "required": [
         "actionGroupIds"
       ],
@@ -757,7 +759,7 @@
       ],
       "properties": {
         "actionGroupIds": {
-          "description": "List of action group Ids to add to action rule",
+          "description": "List of action group Ids to add to alert processing rule.",
           "type": "array",
           "items": {
             "type": "string"
@@ -768,44 +770,45 @@
     "RemoveAllActionGroups": {
       "x-ms-discriminator-value": "RemoveAllActionGroups",
       "type": "object",
-      "description": "Indicates if all action groups should be removed",
+      "description": "Indicates if all action groups should be removed.",
       "allOf": [
         {
           "$ref": "#/definitions/Action"
         }
       ]
     },
-    "ActionRulesList": {
-      "description": "List of action rules",
+    "AlertProcessingRulesList": {
+      "type": "object",
+      "description": "List of alert processing rules.",
       "properties": {
         "nextLink": {
           "type": "string",
-          "description": "URL to fetch the next set of action rules"
+          "description": "URL to fetch the next set of alert processing rules."
         },
         "value": {
           "type": "array",
-          "description": "List of action rules",
+          "description": "List of alert processing rules.",
           "items": {
-            "$ref": "#/definitions/ActionRule"
+            "$ref": "#/definitions/AlertProcessingRule"
           }
         }
       }
     },
     "PatchProperties": {
-      "description": "Action rule properties supported by patch",
+      "description": "Alert processing rule properties supported by patch.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the given action rule is enabled or disabled"
+          "description": "Indicates if the given alert processing rule is enabled or disabled."
         }
       }
     },
     "PatchObject": {
-      "description": "Data contract for patch",
+      "description": "Data contract for patch.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties supported by patch operation",
+          "description": "Properties supported by patch operation.",
           "$ref": "#/definitions/PatchProperties"
         },
         "tags": {
@@ -813,7 +816,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Tags to be updated"
+          "description": "Tags to be updated."
         }
       }
     }
