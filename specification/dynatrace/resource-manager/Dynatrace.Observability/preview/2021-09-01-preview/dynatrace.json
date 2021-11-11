@@ -1525,6 +1525,10 @@
           "$ref": "#/definitions/EnvironmentInfo",
           "description": "Dynatrace Environment Information",
           "readOnly": true
+        },
+        "singleSignOnProperties": {
+          "$ref": "#/definitions/DynatraceSingleSignOnProperties",
+          "description": "The details of a Dynatrace single sign-on."
         }
       },
       "description": "Properties of the Dynatrace environment."
@@ -1649,11 +1653,7 @@
           "readOnly": true
         }
       },
-      "description": "The details of a DynaTrace single sign-on.",
-      "required": [
-        "singleSignOnUrl",
-        "aadDomains"
-      ]
+      "description": "The details of a Dynatrace single sign-on."
     },
     "SendingMetricsStatus": {
       "type": "string",
