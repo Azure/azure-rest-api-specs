@@ -482,10 +482,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ValidationToken"
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. Please poll the targeted custom domain and check the 'validationProperties' field for the new validation token values."
             }
           },
           "default": {
@@ -4180,6 +4178,7 @@
             "Unknown",
             "Submitting",
             "Pending",
+            "Rejected,"
             "TimedOut",
             "PendingRevalidation",
             "Approved"
