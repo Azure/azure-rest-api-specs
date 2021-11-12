@@ -664,7 +664,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SBNamespaceProperties",
+          "$ref": "#/definitions/SBNamespaceUpdateProperties",
           "description": "Properties of the namespace."
         },
         "identity": {
@@ -715,7 +715,64 @@
         },
         "zoneRedundant": {
           "type": "boolean",
-          "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones."
+          "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones.",
+          "x-ms-mutability": ["create", "read"]
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Properties of BYOK Encryption description"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "This property disables SAS authentication for the Service Bus namespace."
+        },
+        "alternateName": {
+          "type": "string",
+          "description": "Alternate name for namespace"
+        }
+      },
+      "description": "Properties of the namespace."
+    },
+    "SBNamespaceUpdateProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the namespace."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of the namespace."
+        },
+        "createdAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The time the namespace was created"
+        },
+        "updatedAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The time the namespace was updated."
+        },
+        "serviceBusEndpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Endpoint you can use to perform Service Bus operations."
+        },
+        "metricId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier for Azure Insights metrics"
         },
         "encryption": {
           "$ref": "#/definitions/Encryption",
