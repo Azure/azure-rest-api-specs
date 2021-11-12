@@ -80,7 +80,7 @@
     "/weather/forecast/hourly/{format}": {
       "get": {
         "description": "**Get Hourly Forecast**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nRequest detailed weather forecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days), and 240 hours (10 days) for the given the given coordinate location.  The API returns details such as temperature, humidity, wind, precipitation, and ultraviolet (UV) index.\n\nIn S0 you can request hourly forecast for the next 1, 12, 24 hours (1 day), and 72 hours (3 days). In S1 you can also request hourly forecast for the next 120 (5 days) and 240 hours (10 days).",
-        "operationId": "GetHourlyForecast",
+        "operationId": "Weather_GetHourlyForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed weather forecast by the hour": {
             "$ref": "./examples/GetHourlyForecast.json"
@@ -141,7 +141,7 @@
     "/weather/forecast/minute/{format}": {
       "get": {
         "description": "**Get Minute Forecast**\n  \n  \n**Applies to**: S1 pricing tier.\n\n\nGet Minute Forecast service returns minute-by-minute forecasts for a given location for the next 120 minutes.  Users can request weather forecasts in the interval of 1, 5 and 15 minutes.  The response will include details such as the type of precipitation (including rain, snow, or a mixture of both), start time, and precipitation intensity value (dBZ).",
-        "operationId": "GetMinuteForecast",
+        "operationId": "Weather_GetMinuteForecast",
         "x-ms-examples": {
           "Successfully retrieve minute-by-minute forecasts for a given location": {
             "$ref": "./examples/GetMinuteForecast.json"
@@ -199,7 +199,7 @@
     "/weather/forecast/quarterDay/{format}": {
       "get": {
         "description": "**Get Quarter-Day Forecast**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nService returns detailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for a given location. Response data is presented by quarters of the day - morning, afternoon, evening, and overnight. Details such as temperature, humidity, wind, precipitation, and UV index are returned.",
-        "operationId": "GetQuarterDayForecast",
+        "operationId": "Weather_GetQuarterDayForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed weather forecast by a given location": {
             "$ref": "./examples/GetQuarterDayForecast.json"
@@ -260,7 +260,7 @@
     "/weather/currentConditions/{format}": {
       "get": {
         "description": "**Get Current Conditions**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Current Conditions service returns detailed current weather conditions such as precipitation, temperature and wind for a given coordinate location. Also, observations from the past 6 or 24 hours for a particular location can be retrieved. The basic information returned with the response include details such as observation date and time, brief description of the weather conditions, weather icon, precipitation indicator flags, and temperature. Additional details such as RealFeel™ Temperature and UV index are also returned.",
-        "operationId": "GetCurrentConditions",
+        "operationId": "Weather_GetCurrentConditions",
         "x-ms-examples": {
           "Successfully retrieve detailed current weather conditions for a given coordinate location": {
             "$ref": "./examples/GetCurrentConditions.json"
@@ -327,7 +327,7 @@
     "/weather/forecast/daily/{format}": {
       "get": {
         "description": "**Get Daily Forecast**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe service returns detailed weather forecast such as temperature and wind by day for the next 1, 5, 10, 15, 25, or 45 days for a given coordinate location.  The response include details such as temperature, wind, precipitation, air quality, and UV index.\n\nIn S0 you can request daily forecast for the next 1, 5, 10, and 15 days. In S1 you can also request daily forecast for the next 25 days, and 45 days.",
-        "operationId": "GetDailyForecast",
+        "operationId": "Weather_GetDailyForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed daily weather forecast for a given coordinate location": {
             "$ref": "./examples/GetDailyForecast.json"
@@ -388,7 +388,7 @@
     "/weather/route/{format}": {
       "get": {
         "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
-        "operationId": "GetWeatherAlongRoute",
+        "operationId": "Weather_GetWeatherAlongRoute",
         "x-ms-examples": {
           "Successfully retrieve detailed weather casts along a route described as a sequence of waypoints": {
             "$ref": "./examples/GetWeatherAlongRoute.json"
@@ -431,7 +431,7 @@
     "/weather/severe/alerts/{format}": {
       "get": {
         "description": "**Get Severe Weather Alerts**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSevere weather phenomenon can significantly impact our everyday life and business operations. For example, severe weather conditions such as tropical storms, high winds or flooding can close roads and force logistics companies to reroute their fleet causing delays in reaching destinations and breaking the cold chain of refrigerated food products.  Azure Maps Severe Weather Alerts API returns the severe weather alerts that are available worldwide from both official Government Meteorological Agencies and leading global to regional weather alert providers. The service can return details such as alert type, category, level and detailed description about the active severe alerts for the requested location, like hurricanes, thunderstorms, lightning, heat waves or forest fires.",
-        "operationId": "GetSevereWeatherAlerts",
+        "operationId": "Weather_GetSevereWeatherAlerts",
         "x-ms-examples": {
           "Successfully retrieve severe weather alerts": {
             "$ref": "./examples/GetSevereWeatherAlerts.json"
@@ -489,7 +489,7 @@
     "/weather/indices/daily/{format}": {
       "get": {
         "description": "**Get Daily Indices**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThere may be times when you want to know if the weather conditions are optimal for a specific activity, for example, for outdoor construction, indoor activities, running or farming including soil moisture information.  Azure Maps Indices API returns index values that will guide end users to plan future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like for playing golf, and retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
-        "operationId": "GetDailyIndices",
+        "operationId": "Weather_GetDailyIndices",
         "x-ms-examples": {
           "Successfully retrieve daily indices values from current day": {
             "$ref": "./examples/GetDailyIndices.json"
@@ -600,8 +600,13 @@
         35,
         36,
         37,
+        38,
         39,
-        41
+        40,
+        41,
+        42,
+        43,
+        44
       ],
       "x-ms-enum": {
         "name": "IconCode",
@@ -614,27 +619,27 @@
           },
           {
             "value": 2,
-            "name": "Mostly Sunny",
+            "name": "MostlySunny",
             "description": "Mostly Sunny"
           },
           {
             "value": 3,
-            "name": "Partly Sunny",
+            "name": "PartlySunny",
             "description": "Partly Sunny"
           },
           {
             "value": 4,
-            "name": "Intermittent Clouds",
+            "name": "IntermittentClouds",
             "description": "Intermittent Clouds"
           },
           {
             "value": 5,
-            "name": "Hazy Sunshine",
+            "name": "HazySunshine",
             "description": "Hazy Sunshine"
           },
           {
             "value": 6,
-            "name": "Mostly Cloudy",
+            "name": "MostlyCloudy",
             "description": "Mostly Cloudy"
           },
           {
@@ -659,12 +664,12 @@
           },
           {
             "value": 13,
-            "name": "Mostly Cloudy with Showers",
+            "name": "MostlyCloudyWithShowers",
             "description": "Mostly Cloudy with Showers"
           },
           {
             "value": 14,
-            "name": "Partly Sunny with Showers",
+            "name": "PartlySunnyWithShowers",
             "description": "Partly Sunny with Showers"
           },
           {
@@ -674,12 +679,12 @@
           },
           {
             "value": 16,
-            "name": "Mostly Cloudy with Thunderstorms",
+            "name": "MostlyCloudyWithThunderstorms",
             "description": "Mostly Cloudy with Thunderstorms"
           },
           {
             "value": 17,
-            "name": "Partly Sunny with Thunderstorms",
+            "name": "PartlySunnyWithThunderstorms",
             "description": "Partly Sunny with Thunderstorms"
           },
           {
@@ -694,12 +699,12 @@
           },
           {
             "value": 20,
-            "name": "Mostly Cloudy with Flurries",
+            "name": "MostlyCloudyWithFlurries",
             "description": "Mostly Cloudy with Flurries"
           },
           {
             "value": 21,
-            "name": "Partly Sunny with Flurries",
+            "name": "PartlySunnyWithFlurries",
             "description": "Partly Sunny with Flurries"
           },
           {
@@ -709,7 +714,7 @@
           },
           {
             "value": 23,
-            "name": "Mostly Cloudy with Snow",
+            "name": "MostlyCloudyWithSnow",
             "description": "Mostly Cloudy with Snow"
           },
           {
@@ -724,12 +729,12 @@
           },
           {
             "value": 26,
-            "name": "Freezing Rain",
+            "name": "FreezingRain",
             "description": "Freezing Rain"
           },
           {
             "value": 29,
-            "name": "Rain and Snow",
+            "name": "RainAndSnow",
             "description": "Rain and Snow"
           },
           {
@@ -764,23 +769,48 @@
           },
           {
             "value": 36,
-            "name": "Intermittent Clouds",
-            "description": "Intermittent Clouds"
+            "name": "IntermittentCloudsNight",
+            "description": "Intermittent Clouds (Night)"
           },
           {
             "value": 37,
-            "name": "Hazy Moonlight",
+            "name": "HazyMoonlight",
             "description": "Hazy Moonlight"
           },
           {
+            "value": 38,
+            "name": "MostlyCloudyNight",
+            "description": "Mostly Cloudy (Night)"
+          },
+          {
             "value": 39,
-            "name": "Partly Cloudy with Showers",
+            "name": "PartlyCloudyWithShowers",
             "description": "Partly Cloudy with Showers"
+          },
+          {
+            "value": 40,
+            "name": "MostlyCloudyWithShowersNight",
+            "description": "Mostly Cloudy with Showers (Night)"
           },
           {
             "value": 41,
             "name": "Partly Cloudy with Thunderstorms",
             "description": "Partly Cloudy with Thunderstorms"
+          },
+          {
+            "value": 42,
+            "name": "MostlyCloudyWithThunderstormsNight",
+            "description": "Mostly Cloudy with Thunderstorms (Night)"
+          },
+          {
+            "value": 43,
+            "name": "MostlyCloudyWithFlurriesNight",
+            "description": "Mostly Cloudy with Flurries (Night)"
+          },
+          {
+            "value": 44,
+            "name": "MostlyCloudyWithSnowNight",
+            "description": "Mostly Cloudy with Snow (Night)"
           }
         ]
       }
