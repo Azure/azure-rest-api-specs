@@ -30,8 +30,15 @@ openapi-type: data-plane
 tag: 2.0-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
+license-header: MICROSOFT_MIT_SMALL
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
+track2: true
+verbose: true
+sdk-integration: true
+modelerfour:
+  additional-checks: false
+  lenient-model-deduplication: true
 ```
 
 
