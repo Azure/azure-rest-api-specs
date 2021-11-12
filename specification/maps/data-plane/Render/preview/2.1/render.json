@@ -56,7 +56,8 @@
     "/map/tile": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
-        "operationId": "GetMapTileV2",
+        "operationId": "RenderV2_GetMapTile",
+        "x-ms-client-name": "GetMapTile",
         "x-ms-examples": {
           "Successful Tile Request": {
             "$ref": "./examples/SuccessfulTileRequest.json"
@@ -127,7 +128,7 @@
     "/map/tileset": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
-        "operationId": "GetMapTileset",
+        "operationId": "RenderV2_GetMapTileset",
         "x-ms-examples": {
           "Successful Tileset Request": {
             "$ref": "./examples/SuccessfulTilesetRequest.json"
@@ -163,7 +164,7 @@
     "/map/attribution": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Attribution API allows users to request map copyright attribution information for a section of a tileset.",
-        "operationId": "GetMapAttribution",
+        "operationId": "RenderV2_GetMapAttribution",
         "x-ms-examples": {
           "Successful Attribution Request": {
             "$ref": "./examples/SuccessfulAttributionRequest.json"
@@ -220,7 +221,7 @@
     "/map/statetile": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nFetches state tiles in vector format typically to be integrated into indoor maps module of map control or SDK. The map control will call this API after user turns on dynamic styling (see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid))",
-        "operationId": "GetMapStateTile",
+        "operationId": "RenderV2_GetMapStateTile",
         "x-ms-examples": {
           "Successful State Tile Request": {
             "$ref": "./examples/SuccessfulStateTileRequest.json"
@@ -276,7 +277,7 @@
     "/map/copyright/caption/{format}": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\n\nCopyrights API is designed to serve copyright information for Render Tile \nservice. In addition to basic copyright for the whole map, API is serving \nspecific groups of copyrights for some countries.\n\nAs an alternative to copyrights for map request, one can receive captions\nfor displaying the map provider information on the map.",
-        "operationId": "GetCopyrightCaption",
+        "operationId": "RenderV2_GetCopyrightCaption",
         "x-ms-examples": {
           "Successful Copyright Caption Request": {
             "$ref": "./examples/SuccessfulCopyrightCaptionRequest.json"
@@ -309,7 +310,7 @@
     "/map/static/{format}": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nThe static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20. The static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20. The supported resolution range for the map image is from 1x1 to 8192x8192. If you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice. \n\nService also provides Image Composition functionality to get a static image back with additional data like; pushpins and geometry overlays with following S0 and S1 capabilities. \n\nIn S0 you can:\n- Render up to 5 pushpins specified in the request\n- Provide one custom image for the pins referenced in the request\n- Add labels to the pushpins\n\nIn S1 you can:\n- Render pushpins through [Azure Maps Data Service](https://aka.ms/AzureMapsMapDataService)\n- Specify multiple pushpin styles\n- Render circle, polyline and polygon geometry types.\n- Render of supported GeoJSON geometry types uploaded through [Azure Maps Data Service](https://aka.ms/AzureMapsMapDataService)\n\nPlease see [How-to-Guide](https://aka.ms/AzureMapsHowToGuideImageCompositor) for detailed examples.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the\nAPI.\n<br><br>\nThe supported Lat and Lon ranges when using the **bbox** parameter, are as follows:\n<br><br>\n\n  |Zoom Level | Max Lon Range   | Max Lat Range|\n  |:----------|:----------------|:-------------|\n  |0          | 360.0           | 170.0        | \n  |1          | 360.0           | 170.0        |\n  |2          | 360.0           | 170.0        |\n  |3          | 360.0           | 170.0        |\n  |4          | 360.0           | 170.0        |\n  |5          | 180.0           | 85.0         |\n  |6          | 90.0            | 42.5         |\n  |7          | 45.0            | 21.25        |\n  |8          | 22.5            | 10.625       |\n  |9          | 11.25           | 5.3125       |\n  |10         | 5.625           | 2.62625      |\n  |11         | 2.8125          | 1.328125     |\n  |12         | 1.40625         | 0.6640625    |\n  |13         | 0.703125        | 0.33203125   |\n  |14         | 0.3515625       | 0.166015625  |\n  |15         | 0.17578125      | 0.0830078125 |  \n  |16         | 0.087890625     | 0.0415039063 | \n  |17         | 0.0439453125    | 0.0207519531 |\n  |18         | 0.0219726563    | 0.0103759766 |\n  |19         | 0.0109863281    | 0.0051879883 |\n  |20         | 0.0054931641    | 0.0025939941 |",
-        "operationId": "GetMapStaticImage",
+        "operationId": "RenderV2_GetMapStaticImage",
         "x-ms-examples": {
           "Successful Static Image Request": {
             "$ref": "./examples/SuccessfulStaticImageRequest.json"
@@ -486,7 +487,7 @@
     "/map/copyright/bounding/{format}": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns copyright information for a given bounding box. Bounding-box requests should specify the minimum and maximum longitude and latitude (EPSG-3857) coordinates",
-        "operationId": "GetCopyrightFromBoundingBox",
+        "operationId": "RenderV2_GetCopyrightFromBoundingBox",
         "x-ms-examples": {
           "SuccessfulBoundingBoxCopyrightRequest": {
             "$ref": "./examples/SuccessfulBoundingBoxCopyrightRequest.json"
@@ -528,7 +529,7 @@
     "/map/copyright/tile/{format}": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nReturns the copyright information for a given tile. To obtain the copyright information for a particular tile, the request should specify the tile's zoom level and x and y coordinates (see: Zoom Levels and Tile Grid).",
-        "operationId": "GetCopyrightForTile",
+        "operationId": "RenderV2_GetCopyrightForTile",
         "x-ms-examples": {
           "Successful Tile Copyright Request": {
             "$ref": "./examples/SuccessfulTileCopyrightRequest.json"
@@ -573,7 +574,7 @@
     "/map/copyright/world/{format}": {
       "get": {
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nReturns the copyright information for the world. To obtain the default copyright information for the whole world, do not specify a tile or bounding box.",
-        "operationId": "GetCopyrightForWorld",
+        "operationId": "RenderV2_GetCopyrightForWorld",
         "x-ms-examples": {
           "Successful World Copyright Request": {
             "$ref": "./examples/SuccessfulWorldCopyrightRequest.json"
