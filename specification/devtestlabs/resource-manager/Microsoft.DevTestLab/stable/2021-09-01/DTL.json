@@ -50,7 +50,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProviderOperationResult"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -760,6 +760,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -1164,6 +1167,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -1451,6 +1457,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -1796,6 +1805,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -2268,6 +2280,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -2551,6 +2566,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -2934,6 +2952,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -3222,6 +3243,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -3448,6 +3472,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -3752,6 +3779,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -4040,6 +4070,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -4340,6 +4373,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -4763,6 +4799,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -5065,6 +5104,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -5377,6 +5419,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -5842,6 +5887,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -6199,6 +6247,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -7205,6 +7256,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "NoContent"
           },
@@ -7556,6 +7610,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -7856,6 +7913,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -8073,6 +8133,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -11068,44 +11131,6 @@
         }
       }
     },
-    "OperationMetadata": {
-      "type": "object",
-      "description": "The REST API operation supported by DevTestLab ResourceProvider.",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operations",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationMetadataDisplay"
-        }
-      }
-    },
-    "OperationMetadataDisplay": {
-      "type": "object",
-      "description": "The object that describes the operations",
-      "properties": {
-        "provider": {
-          "description": "Friendly name of the resource provider",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Resource type on which the operation is performed.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Operation type: read, write, delete, listKeys/action, etc.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Friendly name of the operation",
-          "type": "string"
-        }
-      }
-    },
     "OperationResult": {
       "type": "object",
       "description": "An Operation Result",
@@ -11476,24 +11501,6 @@
           "description": "Backend port of the target virtual machine.",
           "type": "integer",
           "format": "int32"
-        }
-      }
-    },
-    "ProviderOperationResult": {
-      "type": "object",
-      "description": "Result of the request to list REST API operations",
-      "properties": {
-        "value": {
-          "description": "List of operations supported by the resource provider.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationMetadata"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
