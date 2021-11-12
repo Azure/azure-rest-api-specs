@@ -169,13 +169,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Name of schema being registered.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[A-Za-z0-9][^\\\\/$:]*$"
+            "$ref": "#/parameters/SchemaName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -228,13 +222,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Name of requested schema.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[A-Za-z0-9][^\\\\/$:]*$"
+            "$ref": "#/parameters/SchemaName"
           },
           {
             "name": "schemaContent",
@@ -333,13 +321,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Name of schema being registered.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "pattern": "^[A-Za-z0-9][^\\\\/$:]*$"
+            "$ref": "#/parameters/SchemaName"
           },
           {
             "name": "schemaContent",
@@ -512,6 +494,16 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "SchemaName": {
+      "name": "schemaName",
+      "in": "path",
+      "description": "Name of schema.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "pattern": "^[A-Za-z0-9][^\\\\/$:]*$",
+      "x-ms-parameter-location": "method"
     }
   }
 }
