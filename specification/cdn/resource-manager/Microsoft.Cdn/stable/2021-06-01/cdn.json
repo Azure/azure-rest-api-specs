@@ -2488,13 +2488,13 @@
           "type": "string",
           "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
         },
-		    "originResponseTimeoutSeconds": {
+        "originResponseTimeoutSeconds": {
           "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
           "type": "integer",
           "format": "int32",
           "minimum": 16,
           "exclusiveMinimum": false
-        }        
+        }
       }
     },
     "ProfileListResult": {
@@ -5452,6 +5452,22 @@
         "modelAsString": false
       }
     },
+    "OperationListResult": {
+      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of CDN operations supported by the CDN resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
     "Operation": {
       "description": "CDN REST API operation",
       "type": "object",
@@ -5478,25 +5494,160 @@
               "description": "Operation type: Read, write, delete, etc.",
               "readOnly": true,
               "type": "string"
+            },
+            "description": {
+              "description": "Description of operation.",
+              "readOnly": true,
+              "type": "string"
             }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The origin of operations."
+        },
+        "properties": {
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "OperationProperties",
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include log specifications.",
+      "properties": {
+        "logSpecifications": {
+          "description": "Log specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
           }
         }
       }
     },
-    "OperationsListResult": {
-      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+    "LogSpecification": {
+      "description": "Log specification of operation.",
       "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of CDN operations supported by the CDN resource provider."
-        },
-        "nextLink": {
+        "name": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "Name of log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of specification."
+        },
+        "logFilterPattern": {
+          "type": "string",
+          "description": "Pattern to filter based on name"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The metric unit. Possible values include: 'Bytes', 'Count', 'Milliseconds'."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The metric aggregation type. Possible values include: 'Average', 'Count', 'Total'."
+        },
+        "availabilities": {
+          "description": "Retention policies of a resource metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of metric",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          }
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Property to specify whether to fill gap with zero."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern to filter based on name"
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Property to specify metric is internal or not."
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "Type of operation: get, read, delete, etc.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of dimension."
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
         }
       }
     },
