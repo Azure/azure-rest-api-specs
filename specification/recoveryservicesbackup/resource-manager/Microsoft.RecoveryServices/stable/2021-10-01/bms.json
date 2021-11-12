@@ -5199,6 +5199,14 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureIaaSVMJobExtendedInfo",
           "description": "Additional information for this job."
+        },
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
+        "isUserTriggered": {
+          "description": "Indicated that whether the job is adhoc(true) or scheduled(false)",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureIaaSVMJob"
@@ -5619,6 +5627,10 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureStorageJobExtendedInfo",
           "description": "Additional information about the job."
+        },
+        "isUserTriggered": {
+          "description": "Indicated that whether the job is adhoc(true) or scheduled(false)",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureStorageJob"
@@ -5777,6 +5789,10 @@
           "type": "integer"
         },
         "policyState": {
+          "description": "Indicates consistency of policy object and policy applied to this backup item.",
+          "type": "string"
+        },
+        "recoveryModel": {
           "description": "Indicates consistency of policy object and policy applied to this backup item.",
           "type": "string"
         }
@@ -6591,6 +6607,32 @@
         "crossRegionRestoreFlag": {
           "description": "Opt in details of Cross Region Restore feature.",
           "type": "boolean"
+        },
+        "dedupState": {
+          "description": "Vault Dedup state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dedupState",
+            "modelAsString": true
+          }
+        },
+        "xcoolState": {
+          "description": "Vault x-cool state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "xcoolState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -11217,6 +11259,14 @@
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group name of Recovery Services Vault.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaaSVMProtectableItem"
@@ -11761,6 +11811,10 @@
             "name": "ContainerType",
             "modelAsString": true
           }
+        },
+        "protectableObjectType": {
+          "description": "Type of the protectable object associated with this container",
+          "type": "string"
         }
       },
       "discriminator": "containerType"
