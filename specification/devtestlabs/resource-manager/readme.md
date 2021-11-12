@@ -120,90 +120,87 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ``` yaml
 directive:
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.ArtifactSource
+  - from: DTL.json
+    suppress: R3006 # BodyTopLevelProperties
+    where: 
+      - $.definitions.Lab.properties
+      - $.definitions.ArtifactSource.properties
+      - $.definitions.LabCost.properties
+      - $.definitions.CustomImage.properties
+      - $.definitions.Formula.properties
+      - $.definitions.NotificationChannel.properties
+      - $.definitions.Policy.properties
+      - $.definitions.Schedule.properties
+      - $.definitions.LabSecret.properties
+      - $.definitions.ServiceRunner.properties
+      - $.definitions.SharedGallery.properties
+      - $.definitions.SharedImage.properties
+      - $.definitions.User.properties
+      - $.definitions.Disk.properties
+      - $.definitions.Environment.properties
+      - $.definitions.Secret.properties
+      - $.definitions.ServiceFabric.properties
+      - $.definitions.VirtualMachine.properties
+      - $.definitions.VirtualNetwork.properties
+      - $.definitions.BastionHost.properties
+      - $.definitions.ArmTemplate.properties
+      - $.definitions.Artifact.properties
+      - $.definitions.Cost.properties
+      - $.definitions.GalleryImage.properties
+      - $.definitions.PolicySet.properties
+    reason: Currently systemData is not allowed.
+  - suppress: TrackedResourceListByResourceGroup
     from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.ArmTemplate
+    where:
+      - $.definitions.ArtifactSource
+      - $.definitions.Formula
+      - $.definitions.CustomImage
+      - $.definitions.NotificationChannel
+      - $.definitions.Policy
+      - $.definitions.Schedule
+      - $.definitions.LabSecret
+      - $.definitions.ServiceRunner
+      - $.definitions.SharedGallery
+      - $.definitions.SharedImage
+      - $.definitions.User
+      - $.definitions.Disk
+      - $.definitions.Environment
+      - $.definitions.Secret
+      - $.definitions.ServiceFabric
+      - $.definitions.VirtualMachine
+      - $.definitions.VirtualNetwork
+      - $.definitions.BastionHost
+    reason: Tooling issue
+  - suppress: R3018  # EnumInsteadOfBoolean
     from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Artifact
+    where:
+      - $.definitions.LabSecretProperties.properties.enabledForArmEnvironments
+      - $.definitions.LabSecretProperties.properties.enabledForVmCreation
+      - $.definitions.LabSecretProperties.properties.enabledForArtifacts
+      - $.definitions.GalleryImageProperties.properties.enabled
+      - $.definitions.ArmTemplateProperties.properties.enabled
+      - $.definitions.CustomImageProperties.properties.isPlanAuthorized
+      - $.definitions.CustomImagePropertiesCustom.properties.sysPrep
+      - $.definitions.GalleryImageProperties.properties.isPlanAuthorized
+      - $.definitions.LabAnnouncementProperties.properties.expired
+      - $.definitions.LabProperties.properties.disableAutoUpgradeCseMinorVersion
+      - $.definitions.VirtualMachineCreationParameterProperties.properties.isAuthenticationWithSshKey
+      - $.definitions.VirtualMachineCreationParameterProperties.properties.disallowPublicIpAddress
+      - $.definitions.VirtualMachineCreationParameterProperties.properties.allowClaim
+      - $.definitions.VirtualMachineCreationParameterProperties.properties.canApplyArtifacts
+      - $.definitions.VirtualMachineProperties.properties.isAuthenticationWithSshKey
+      - $.definitions.VirtualMachineProperties.properties.disallowPublicIpAddress
+      - $.definitions.VirtualMachineProperties.properties.allowClaim
+      - $.definitions.VirtualMachineProperties.properties.canApplyArtifacts
+      - $.definitions.PolicySetResult.properties.hasError
+    reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+  - suppress: R3026  # EnumInsteadOfBoolean
     from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.CustomImage
+    where:
+      - $.definitions.ServiceRunner
+    reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+  - suppress: TrackedResourceListByImmediateParent
     from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Formula
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.GalleryImage
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.NotificationChannel
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Policy
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.LabSecret
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.SharedGallery
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.SharedImage
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Disk
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Environment
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.ServiceFabric
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.VirtualNetwork
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.BastionHost
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.User
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.ApplicableSchedule
-    from: DTL.json
-    reason: tags and location are defined on "$.definitions.Resource" which is our base type.
-  - suppress: LongRunningOperationsWithLongRunningExtension
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/locations/{locationName}/operations/{name}"].get'
-    from: DTL.json
-    reason: |-
-      This was years ago, where if "isMonitor" is specified, we return "Accepted" if an operation is still running. To get rid of it, would be a breaking change.
-      Adding x-ms-long-running would be incorrect in the regular case (where isMonitor isn't supplied)
-  - suppress: ListInOperationName
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies"].post'
-    from: DTL.json
-    reason: 'While evaluatePolicies returns a list, it''s the result of an operation and not just listing resources under another resource.'
-  - suppress: RequiredSystemDataInNewApiVersions
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}"].get'
-    from: DTL.json
-    reason: SystemData is specified. Not sure why it's not picked up.
+    where: $.definitions
+    reason: Tooling issue - the listed resources do have a list by immediate parent.
 ```
