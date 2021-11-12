@@ -1823,11 +1823,17 @@
           "Restore to New Azure IaasVm with IaasVMRestoreRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest.json"
           },
+          "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_IdentityBasedRestoreDetails.json"
+          },
           "Restore to New Azure IaasVm with IaasVMRestoreWithRehydrationRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreWithRehydrationRequest.json"
           },
           "Restore Disks with IaasVMRestoreRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreRequest.json"
+          },
+          "Restore Disks with IaasVMRestoreRequest with IdentityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreRequest_IdentityBasedRestoreDetails.json"
           },
           "Restore Disks with IaasVMRestoreWithRehydrationRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreWithRehydrationRequest.json"
@@ -2583,6 +2589,9 @@
         "x-ms-examples": {
           "Validate Operation": {
             "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk.json"
+          },
+          "Validate Operation with identityBasedRestoreDetails": {
+            "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk_IdentityBasedRestoreDetails.json"
           }
         }
       }
@@ -5194,6 +5203,58 @@
       },
       "x-ms-discriminator-value": "AzureIaaSVMJob"
     },
+    "AzureIaaSVMJobV2": {
+      "description": "Azure IaaS VM workload-specific job object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "properties": {
+        "actionsInfo": {
+          "description": "Gets or sets the state/actions applicable on this job like cancel/retry.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "Cancellable",
+              "Retriable"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobSupportedAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
+        "duration": {
+          "format": "duration",
+          "description": "Time elapsed during the execution of this job.",
+          "type": "string"
+        },
+        "errorDetails": {
+          "description": "Error details on execution of this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMErrorInfo"
+          }
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the backup item is a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMJobExtendedInfo",
+          "description": "Additional information for this job."
+        }
+      },
+      "x-ms-discriminator-value": "AzureIaaSVMJobV2"
+    },
     "AzureIaaSVMJobExtendedInfo": {
       "description": "Azure IaaS VM workload-specific additional information for job.",
       "type": "object",
@@ -5936,7 +5997,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformation"
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
           }
         },
         "recoveryPointMoveReadinessInfo": {
@@ -6782,6 +6843,10 @@
         "diskExclusionProperties": {
           "$ref": "#/definitions/DiskExclusionProperties",
           "description": "Extended Properties for Disk Exclusion."
+        },
+        "linuxVmApplicationName": {
+          "description": "Linux VM name",
+          "type": "string"
         }
       }
     },
@@ -6829,6 +6894,20 @@
           "format": "int32",
           "description": "To specify duration of the backup window",
           "type": "integer"
+        }
+      }
+    },
+    "IdentityBasedRestoreDetails": {
+      "description": "IaaS VM workload specific restore details for restores using managed identity",
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Gets the class type.",
+          "type": "string"
+        },
+        "targetStorageAccountId": {
+          "description": "Fully qualified ARM ID of the target storage account.",
+          "type": "string"
         }
       }
     },
@@ -6990,7 +7069,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformation"
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
           }
         },
         "isManagedVirtualMachine": {
@@ -7132,6 +7211,10 @@
         "identityInfo": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Managed Identity information required to access customer storage account."
+        },
+        "identityBasedRestoreDetails": {
+          "$ref": "#/definitions/IdentityBasedRestoreDetails",
+          "description": "IaaS VM workload specific restore details for restores using managed identity."
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
@@ -8096,6 +8179,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "isArchiveEnabled": {
+          "description": "Flag to identify whether datasource is protected in archive",
+          "type": "boolean"
+        },
+        "policyName": {
+          "description": "Name of the policy used for protection",
+          "type": "string"
         }
       },
       "discriminator": "protectedItemType"
@@ -8446,6 +8537,46 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "RecoveryPointTierInformationV2": {
+      "description": "RecoveryPoint Tier Information V2",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPointTierInformation"
+        }
+      ],
+      "properties": {
+        "type": {
+          "description": "Recovery point tier type.",
+          "enum": [
+            "Invalid",
+            "InstantRP",
+            "HardenedRP",
+            "ArchivedRP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Recovery point tier status.",
+          "enum": [
+            "Invalid",
+            "Valid",
+            "Disabled",
+            "Deleted",
+            "Rehydrated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierStatus",
+            "modelAsString": true
           }
         }
       }
@@ -9064,6 +9195,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "isSoftDeleteFeatureStateEditable": {
+          "description": "Is soft delete feature state editable",
+          "type": "boolean"
         }
       }
     },
