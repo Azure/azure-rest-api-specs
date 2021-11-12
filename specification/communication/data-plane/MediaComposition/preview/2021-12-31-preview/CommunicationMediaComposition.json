@@ -30,12 +30,15 @@
               "$ref": "#/definitions/MediaCompositionBody"
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
+          "Get Media Composition": {
             "$ref": "./examples/MediaComposition_GetMediaComposition.json"
           }
         }
@@ -73,12 +76,15 @@
               "$ref": "#/definitions/MediaCompositionBody"
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
+          "Create new Media Composition": {
             "$ref": "./examples/MediaComposition_CreateMediaComposition.json"
           }
         }
@@ -116,12 +122,15 @@
               "$ref": "#/definitions/MediaCompositionBody"
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
+          "Update Media Composition - Change source": {
             "$ref": "./examples/MediaComposition_UpdateMediaComposition.json"
           }
         }
@@ -142,10 +151,16 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
+          "Delete Media Composition": {
             "$ref": "./examples/MediaComposition_DeleteMediaComposition.json"
           }
         }
@@ -158,9 +173,7 @@
         ],
         "operationId": "MediaComposition_Start",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -177,12 +190,15 @@
               "$ref": "#/definitions/CompositionStreamState"
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
+          "Start Media Composition": {
             "$ref": "./examples/MediaComposition_StartMediaComposition.json"
           }
         }
@@ -195,9 +211,7 @@
         ],
         "operationId": "MediaComposition_Stop",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -214,12 +228,15 @@
               "$ref": "#/definitions/CompositionStreamState"
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Issue Turn Credentials": {
+          "Stop Media Composition": {
             "$ref": "./examples/MediaComposition_StopMediaComposition.json"
           }
         }
