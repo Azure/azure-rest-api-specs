@@ -662,6 +662,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3202,6 +3208,62 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "An error response from the Azure Container Registry service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Azure container registry build API error body."
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "An error response from the Azure Container Registry service.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/definitions/InnerErrorDescription",
+          "description": "an array of additional nested error response info objects, as described by this contract.",
+          "type": "array"
+        }
+      }
+    },
+    "InnerErrorDescription": {
+      "description": "inner error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
         }
       }
     }
