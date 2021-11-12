@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "cassandra-prod-rg",
     "api-version": "2021-10-15-preview",
     "clusterName": "cassandra-prod",
@@ -32,8 +32,11 @@
   },
   "responses": {
     "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationsStatus/318653d0-3da5-4814-b8f6-429f2af0b2a4?api-version=2021-10-15-preview"
+      },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
         "name": "cassandra-prod",
         "type": "Microsoft.DocumentDB/cassandraClusters",
         "location": "West US",
@@ -42,7 +45,7 @@
         },
         "properties": {
           "provisioningState": "Updating",
-          "delegatedManagementSubnetId": "/subscriptions/536e130b-d7d6-4ac7-98a5-de20d69588d2/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "delegatedManagementSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
           "cassandraVersion": "3.11",
           "hoursBetweenBackups": 24,
           "authenticationMethod": "Cassandra",
@@ -98,14 +101,14 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
         "name": "cassandra-prod",
         "type": "Microsoft.DocumentDB/cassandraClusters",
         "location": "West US",
         "tags": {},
         "properties": {
           "provisioningState": "Succeeded",
-          "delegatedManagementSubnetId": "/subscriptions/536e130b-d7d6-4ac7-98a5-de20d69588d2/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "delegatedManagementSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
           "cassandraVersion": "3.11",
           "hoursBetweenBackups": 24,
           "authenticationMethod": "Cassandra",
