@@ -2598,6 +2598,21 @@
             "$ref": "#/definitions/DeepCreatedOriginGroup"
           }
         },
+        "customDomains": {
+          "description": "The custom domains under the endpoint.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "hostName": {
+              "description": "The host name of the custom domain. Must be a domain name.",
+              "type": "string"
+            },
+            "validationData": {
+              "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
+              "type": "string"
+            }
+          }
+        },
         "resourceState": {
           "description": "Resource status of the endpoint.",
           "readOnly": true,
