@@ -1712,6 +1712,12 @@
             "schema": {
               "$ref": "#/definitions/LocalUsers"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1753,6 +1759,12 @@
             "description": "OK -- Get the local user properties successfully.",
             "schema": {
               "$ref": "#/definitions/LocalUser"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1803,6 +1815,12 @@
             "schema": {
               "$ref": "#/definitions/LocalUser"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1837,6 +1855,15 @@
         "responses": {
           "200": {
             "description": "OK -- Delete the local user successfully."
+          },
+          "204": {
+            "description": "No content -- Delete the local user successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1847,7 +1874,7 @@
           "LocalUsers"
         ],
         "operationId": "LocalUsers_ListKeys",
-        "description": "List the local user keys.",
+        "description": "List SSH authorized keys and shared key of the local user.",
         "x-ms-examples": {
           "ListLocalUserKeys": {
             "$ref": "./examples/LocalUserListKeys.json"
@@ -1875,6 +1902,12 @@
             "description": "OK -- Get the local user keys successfully.",
             "schema": {
               "$ref": "#/definitions/LocalUserKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1914,6 +1947,12 @@
             "description": "OK -- Regenerate local user password successfully.",
             "schema": {
               "$ref": "#/definitions/LocalUserProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4794,6 +4833,9 @@
             "$ref": "#/definitions/LocalUser"
           },
           "description": "The local users associated with the storage account."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "description": "List storage account local users."
@@ -4805,6 +4847,9 @@
           "$ref": "#/definitions/LocalUserProperties",
           "x-ms-client-flatten": true,
           "description": "Storage account local user properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
