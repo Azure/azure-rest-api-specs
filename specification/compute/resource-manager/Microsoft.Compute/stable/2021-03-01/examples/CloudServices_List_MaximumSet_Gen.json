@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "resourceGroupName": "rgcloudService",
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2021-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{cs-name}",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+            "type": "Microsoft.Compute/cloudServices",
+            "location": "eastus2euap",
+            "properties": {
+              "configuration": "{ServiceConfiguration}",
+              "upgradeMode": "Auto",
+              "roleProfile": {
+                "roles": [
+                  {
+                    "name": "ContosoFrontend",
+                    "sku": {
+                      "name": "Standard_D1_v2",
+                      "tier": "Standard",
+                      "capacity": 2
+                    }
+                  },
+                  {
+                    "name": "ContosoBackend",
+                    "sku": {
+                      "name": "Standard_D1_v2",
+                      "tier": "Standard",
+                      "capacity": 2
+                    }
+                  }
+                ]
+              },
+              "osProfile": {
+                "secrets": []
+              },
+              "networkProfile": {
+                "loadBalancerConfigurations": [
+                  {
+                    "name": "contosolb",
+                    "properties": {
+                      "frontendIPConfigurations": [
+                        {
+                          "name": "contosofe",
+                          "properties": {
+                            "publicIPAddress": {
+                              "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                            },
+                            "subnet": {
+                              "id": "aaaaaaaaaaaaaaaaaaaaaaaa"
+                            },
+                            "privateIPAddress": "aaaaaaaaaaaaaaa"
+                          }
+                        }
+                      ]
+                    },
+                    "id": "aaaaaaaaaa"
+                  }
+                ],
+                "swappableCloudService": {
+                  "id": "aaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+              },
+              "extensionProfile": {
+                "extensions": [
+                  {
+                    "name": "RDPExtension",
+                    "properties": {
+                      "autoUpgradeMinorVersion": true,
+                      "provisioningState": "Succeeded",
+                      "rolesAppliedTo": [
+                        "*"
+                      ],
+                      "publisher": "Microsoft.Windows.Azure.Extensions",
+                      "type": "RDP",
+                      "typeHandlerVersion": "1.2.1",
+                      "settings": "<PublicConfig><UserName>userazure</UserName><Expiration>01/12/2022 16:29:02</Expiration></PublicConfig>",
+                      "protectedSettings": "aaaaaaa",
+                      "protectedSettingsFromKeyVault": {
+                        "sourceVault": {
+                          "id": "aaaaaaaaaaaaaaaaaaaaaaaa"
+                        },
+                        "secretUrl": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+                      },
+                      "forceUpdateTag": "aaaaaaaaaaaaaaa"
+                    }
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "uniqueId": "4ccb4323-4740-4545-bb81-780b27375947",
+              "packageUrl": "aaaaaaaa",
+              "configurationUrl": "aaaaaaaaaaaaaaaaaaaaa",
+              "startCloudService": true,
+              "allowModelOverride": true
+            },
+            "tags": {
+              "key7351": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "nextLink": "aaa"
+      }
+    }
+  }
+}

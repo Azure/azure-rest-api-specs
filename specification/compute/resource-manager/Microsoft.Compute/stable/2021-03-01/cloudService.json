@@ -45,12 +45,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
@@ -59,12 +53,24 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Cloud Service Role Instance": {
             "$ref": "./examples/DeleteCloudServiceRoleInstance.json"
+          },
+          "CloudServiceRoleInstances_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Delete_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Delete_MinimumSet_Gen.json"
           }
         }
       },
@@ -116,22 +122,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RoleInstance"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service Role Instance": {
             "$ref": "./examples/GetCloudServiceRoleInstance.json"
+          },
+          "CloudServiceRoleInstances_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Get_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_Get_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -171,22 +183,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RoleInstanceInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Instance View of Cloud Service Role Instance": {
             "$ref": "./examples/GetInstanceViewOfCloudServiceRoleInstance.json"
+          },
+          "CloudServiceRoleInstances_GetInstanceView_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_GetInstanceView_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_GetInstanceView_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_GetInstanceView_MinimumSet_Gen.json"
           }
         }
       }
@@ -233,22 +251,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RoleInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Role Instances in a Cloud Service": {
             "$ref": "./examples/ListCloudServiceRolesInstances.json"
+          },
+          "CloudServiceRoleInstances_List_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_List_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_List_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -291,23 +315,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Restart Cloud Service Role Instance": {
             "$ref": "./examples/RestartCloudServiceRoleInstance.json"
+          },
+          "CloudServiceRoleInstances_Restart_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Restart_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_Restart_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Restart_MinimumSet_Gen.json"
           }
         }
       }
@@ -347,23 +377,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Reimage Cloud Service Role Instance": {
             "$ref": "./examples/ReimageCloudServiceRoleInstance.json"
+          },
+          "CloudServiceRoleInstances_Reimage_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Reimage_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_Reimage_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Reimage_MinimumSet_Gen.json"
           }
         }
       }
@@ -403,23 +439,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Rebuild Cloud Service Role Instance": {
             "$ref": "./examples/RebuildCloudServiceRoleInstance.json"
+          },
+          "CloudServiceRoleInstances_Rebuild_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Rebuild_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_Rebuild_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_Rebuild_MinimumSet_Gen.json"
           }
         }
       }
@@ -462,18 +504,26 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "format": "binary",
               "type": "file"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudServiceRoleInstances_GetRemoteDesktopFile_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_GetRemoteDesktopFile_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoleInstances_GetRemoteDesktopFile_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoleInstances_GetRemoteDesktopFile_MinimumSet_Gen.json"
           }
         }
       }
@@ -513,22 +563,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudServiceRole"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service Role": {
             "$ref": "./examples/GetCloudServiceRole.json"
+          },
+          "CloudServiceRoles_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoles_Get_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoles_Get_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoles_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -561,22 +617,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudServiceRoleListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Roles in a Cloud Service": {
             "$ref": "./examples/ListCloudServiceRoles.json"
+          },
+          "CloudServiceRoles_List_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoles_List_MaximumSet_Gen.json"
+          },
+          "CloudServiceRoles_List_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceRoles_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -622,12 +684,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
@@ -638,6 +694,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/CloudService"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -654,6 +716,12 @@
           },
           "Create New Cloud Service with Single Role and Certificate from Key Vault": {
             "$ref": "./examples/CreateCloudServiceWithSingleRoleAndCertificate.json"
+          },
+          "CloudServices_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "CloudServices_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
       },
@@ -694,16 +762,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudService"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -711,6 +779,12 @@
         "x-ms-examples": {
           "Update existing Cloud Service to add tags": {
             "$ref": "./examples/UpdateCloudServiceToIncludeTags.json"
+          },
+          "CloudServices_Update_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Update_MaximumSet_Gen.json"
+          },
+          "CloudServices_Update_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -743,12 +817,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
@@ -757,12 +825,24 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Cloud Service": {
             "$ref": "./examples/DeleteCloudService.json"
+          },
+          "CloudServices_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Delete_MaximumSet_Gen.json"
+          },
+          "CloudServices_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Delete_MinimumSet_Gen.json"
           }
         }
       },
@@ -795,22 +875,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudService"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service with Multiple Roles and RDP Extension": {
             "$ref": "./examples/GetCloudServiceWithMultiRoleAndRDP.json"
+          },
+          "CloudServices_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Get_MaximumSet_Gen.json"
+          },
+          "CloudServices_Get_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -845,22 +931,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudServiceInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service Instance View with Multiple Roles": {
             "$ref": "./examples/GetCloudServiceInstanceViewWithMultiRole.json"
+          },
+          "CloudServices_GetInstanceView_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_GetInstanceView_MaximumSet_Gen.json"
+          },
+          "CloudServices_GetInstanceView_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_GetInstanceView_MinimumSet_Gen.json"
           }
         }
       }
@@ -881,22 +973,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Cloud Services in a Subscription": {
             "$ref": "./examples/ListCloudServicesInSubscription.json"
+          },
+          "CloudServices_ListAll_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_ListAll_MaximumSet_Gen.json"
+          },
+          "CloudServices_ListAll_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_ListAll_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -927,22 +1025,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CloudServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Cloud Services in a Resource Group": {
             "$ref": "./examples/ListCloudServicesInResourceGroup.json"
+          },
+          "CloudServices_List_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_List_MaximumSet_Gen.json"
+          },
+          "CloudServices_List_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -980,23 +1084,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Start Cloud Service": {
             "$ref": "./examples/StartCloudService.json"
+          },
+          "CloudServices_Start_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Start_MaximumSet_Gen.json"
+          },
+          "CloudServices_Start_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Start_MinimumSet_Gen.json"
           }
         }
       }
@@ -1031,23 +1141,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Stop or PowerOff Cloud Service": {
             "$ref": "./examples/PowerOffCloudService.json"
+          },
+          "CloudServices_PowerOff_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_PowerOff_MaximumSet_Gen.json"
+          },
+          "CloudServices_PowerOff_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_PowerOff_MinimumSet_Gen.json"
           }
         }
       }
@@ -1090,23 +1206,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Restart Cloud Service Role Instances": {
             "$ref": "./examples/RestartCloudServiceRoleInstances.json"
+          },
+          "CloudServices_Restart_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Restart_MaximumSet_Gen.json"
+          },
+          "CloudServices_Restart_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Restart_MinimumSet_Gen.json"
           }
         }
       }
@@ -1149,23 +1271,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Reimage Cloud Service Role Instances": {
             "$ref": "./examples/ReimageCloudServiceRoleInstances.json"
+          },
+          "CloudServices_Reimage_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Reimage_MaximumSet_Gen.json"
+          },
+          "CloudServices_Reimage_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Reimage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1208,23 +1336,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Rebuild Cloud Service Role Instances": {
             "$ref": "./examples/RebuildCloudServiceRoleInstances.json"
+          },
+          "CloudServices_Rebuild_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_Rebuild_MaximumSet_Gen.json"
+          },
+          "CloudServices_Rebuild_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_Rebuild_MinimumSet_Gen.json"
           }
         }
       }
@@ -1267,23 +1401,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Cloud Service Role Instances": {
             "$ref": "./examples/DeleteCloudServiceRoleInstances.json"
+          },
+          "CloudServices_DeleteInstances_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServices_DeleteInstances_MaximumSet_Gen.json"
+          },
+          "CloudServices_DeleteInstances_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServices_DeleteInstances_MinimumSet_Gen.json"
           }
         }
       }
@@ -1334,23 +1474,29 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update Cloud Service to specified Domain": {
             "$ref": "./examples/UpdateCloudServiceUpdateDomain.json"
+          },
+          "CloudServicesUpdateDomain_WalkUpdateDomain_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServicesUpdateDomain_WalkUpdateDomain_MaximumSet_Gen.json"
+          },
+          "CloudServicesUpdateDomain_WalkUpdateDomain_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServicesUpdateDomain_WalkUpdateDomain_MinimumSet_Gen.json"
           }
         }
       },
@@ -1391,22 +1537,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/UpdateDomain"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service Update Domain": {
             "$ref": "./examples/GetCloudServiceUpdateDomain.json"
+          },
+          "CloudServicesUpdateDomain_GetUpdateDomain_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServicesUpdateDomain_GetUpdateDomain_MaximumSet_Gen.json"
+          },
+          "CloudServicesUpdateDomain_GetUpdateDomain_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServicesUpdateDomain_GetUpdateDomain_MinimumSet_Gen.json"
           }
         }
       }
@@ -1441,22 +1593,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/UpdateDomainListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Update Domains in Cloud Service": {
             "$ref": "./examples/ListCloudServiceUpdateDomains.json"
+          },
+          "CloudServicesUpdateDomain_ListUpdateDomains_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServicesUpdateDomain_ListUpdateDomains_MaximumSet_Gen.json"
+          },
+          "CloudServicesUpdateDomain_ListUpdateDomains_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServicesUpdateDomain_ListUpdateDomains_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1494,22 +1652,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSVersion"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service OS Version": {
             "$ref": "./examples/GetCloudServiceOSVersion.json"
+          },
+          "CloudServiceOperatingSystems_GetOSVersion_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_GetOSVersion_MaximumSet_Gen.json"
+          },
+          "CloudServiceOperatingSystems_GetOSVersion_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_GetOSVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -1537,22 +1701,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Cloud Service OS Versions in a subscription": {
             "$ref": "./examples/ListCloudServiceOSVersions.json"
+          },
+          "CloudServiceOperatingSystems_ListOSVersions_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_ListOSVersions_MaximumSet_Gen.json"
+          },
+          "CloudServiceOperatingSystems_ListOSVersions_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_ListOSVersions_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1590,22 +1760,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSFamily"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "Get Cloud Service OS Family": {
             "$ref": "./examples/GetCloudServiceOSFamily.json"
+          },
+          "CloudServiceOperatingSystems_GetOSFamily_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_GetOSFamily_MaximumSet_Gen.json"
+          },
+          "CloudServiceOperatingSystems_GetOSFamily_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_GetOSFamily_MinimumSet_Gen.json"
           }
         }
       }
@@ -1633,22 +1809,28 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSFamilyListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List Cloud Service OS Families in a subscription": {
             "$ref": "./examples/ListCloudServiceOSFamilies.json"
+          },
+          "CloudServiceOperatingSystems_ListOSFamilies_MaximumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_ListOSFamilies_MaximumSet_Gen.json"
+          },
+          "CloudServiceOperatingSystems_ListOSFamilies_MinimumSet_Gen": {
+            "$ref": "./examples/CloudServiceOperatingSystems_ListOSFamilies_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {

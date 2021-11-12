@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "roleInstanceName": "aaaaaaaaaaaaaaaaaaaaaa",
+    "resourceGroupName": "rgcloudService",
+    "cloudServiceName": "aaa",
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2021-03-01",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{roleInstance-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/{roleInstance-name}",
+        "type": "Microsoft.Compute/cloudServices/roleInstances",
+        "location": "eastus2euap",
+        "sku": {
+          "name": "Standard_D1_v2",
+          "tier": "Standard"
+        },
+        "properties": {
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/{roleInstance-name}/networkInterfaces/nic1"
+              }
+            ]
+          },
+          "instanceView": {
+            "platformUpdateDomain": 1,
+            "platformFaultDomain": 14,
+            "privateId": "aaaaaaaaaaaaaaaaa",
+            "statuses": [
+              {
+                "code": "aaaaaaaaaaaaaaaaaaaaa",
+                "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+                "message": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+                "time": "2021-11-12T02:36:42.299Z",
+                "level": "Info"
+              }
+            ]
+          }
+        },
+        "tags": {
+          "key5261": "aaaaaaa"
+        }
+      }
+    }
+  }
+}
