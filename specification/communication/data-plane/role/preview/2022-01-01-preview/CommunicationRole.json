@@ -1,18 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "RbacRoleClient",
-    "description": "Azure Communication RBAC Role service",
+    "title": "CommunicationRoleClient",
+    "description": "Azure Communication Role service",
     "version": "2022-01-01-preview"
   },
   "paths": {
     "/roles": {
       "post": {
         "tags": [
-          "Rbac"
+          "Role"
         ],
-        "summary": "Create a new RBAC role.",
-        "operationId": "RbacRole_Create",
+        "summary": "Create a new communication role.",
+        "operationId": "CommunicationRole_Create",
         "consumes": [
           "application/json"
         ],
@@ -27,7 +27,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/RbacRoleRequest"
+              "$ref": "#/definitions/CommunicationRoleCreateRequest"
             }
           }
         ],
@@ -39,28 +39,67 @@
             }
           },
           "201": {
-            "description": "Created - Returns the created identity.",
+            "description": "Created - Returns the created role.",
             "schema": {
-              "$ref": "#/definitions/RbacRoleResponse"
+              "$ref": "#/definitions/CommunicationRoleResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Create a RBAC Role": {
-            "$ref": "./examples/CreateRbacRole.json"
+          "Create a Communication Role": {
+            "$ref": "./examples/CreateRole.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Get all communication roles.",
+        "operationId": "CommunicationRole_GetAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Filter the result on their role type"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the communication roles.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationRoleGetAllResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get allcommunication roles": {
+            "$ref": "./examples/GetAllRoles.json"
           }
         }
       }
     },
     "/roles/{id}": {
-      "put": {
+      "patch": {
         "tags": [
-          "Rbac"
+          "Role"
         ],
-        "summary": "Update a RBAC role.",
-        "operationId": "RbacRole_Update",
+        "summary": "Update a communication role.",
+        "operationId": "CommunicationRole_Update",
         "consumes": [
-          "application/json"
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
@@ -79,7 +118,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/RbacRoleRequest"
+              "$ref": "#/definitions/CommunicationRoleUpdateRequest"
             }
           }
         ],
@@ -93,22 +132,22 @@
           "200": {
             "description": "OK - Returns the updated role.",
             "schema": {
-              "$ref": "#/definitions/RbacRoleResponse"
+              "$ref": "#/definitions/CommunicationRoleResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Update a RBAC Role": {
-            "$ref": "./examples/UpdateRbacRole.json"
+          "Update a Communication Role": {
+            "$ref": "./examples/UpdateRole.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Rbac"
+          "Role"
         ],
-        "summary": "Delete a RBAC role.",
-        "operationId": "RbacRole_Delete",
+        "summary": "Delete a communication role.",
+        "operationId": "CommunicationRole_Delete",
         "produces": [
           "application/json"
         ],
@@ -131,21 +170,21 @@
             }
           },
           "204": {
-            "description": "NoContent - The RBAC role is deleted."
+            "description": "NoContent - The communication role is deleted."
           }
         },
         "x-ms-examples": {
-          "Delete a RBAC Role": {
-            "$ref": "./examples/DeleteRbacRole.json"
+          "Delete a Communication Role": {
+            "$ref": "./examples/DeleteRole.json"
           }
         }
       },
       "get": {
         "tags": [
-          "Rbac"
+          "Role"
         ],
-        "summary": "Get a RBAC role.",
-        "operationId": "RbacRole_Get",
+        "summary": "Get a communication role.",
+        "operationId": "CommunicationRole_Get",
         "produces": [
           "application/json"
         ],
@@ -168,94 +207,80 @@
             }
           },
           "200": {
-            "description": "OK - Returns the RBAC role.",
+            "description": "OK - Returns the communication role.",
             "schema": {
-              "$ref": "#/definitions/RbacRoleResponse"
+              "$ref": "#/definitions/CommunicationRoleResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get a RBAC Role": {
-            "$ref": "./examples/GetRbacRole.json"
-          }
-        }
-      }
-    },
-    "/roles/:listCustomRoles": {
-      "get": {
-        "tags": [
-          "Rbac"
-        ],
-        "summary": "List RBAC custom roles.",
-        "operationId": "RbacRole_ListCustom",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "OK - Returns the RBAC roles.",
-            "schema": {
-              "$ref": "#/definitions/RbacRoleListResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List custom RBAC roles": {
-            "$ref": "./examples/ListCustomRbacRole.json"
-          }
-        }
-      }
-    },
-    "/roles/:listBuiltinRoles": {
-      "get": {
-        "tags": [
-          "Rbac"
-        ],
-        "summary": "List RBAC built-in roles.",
-        "operationId": "RbacRole_ListBuiltin",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "OK - Returns the RBAC roles.",
-            "schema": {
-              "$ref": "#/definitions/RbacRoleListResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List built-in RBAC roles": {
-            "$ref": "./examples/ListBuiltinRbacRole.json"
+          "Get a Communication Role": {
+            "$ref": "./examples/GetRole.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "RbacPermissions": {
+    "CommunicationRoleCreatePermissions": {
+      "required": [
+        "dataActions"
+      ],
+      "type": "object",
+      "properties": {
+        "dataActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationRolePermissionActions"
+          }
+        }
+      }
+    },
+    "CommunicationRoleCreateRequest": {
+      "required": [
+        "displayName",
+        "isEnabled",
+        "permissions"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The human readable name of the Role",
+          "type": "string"
+        },
+        "permissions": {
+          "$ref": "#/definitions/CommunicationRoleCreatePermissions"
+        },
+        "isEnabled": {
+          "description": "Is Role enabled for assignments.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CommunicationRoleGetAllResponse": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The query response content",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationRoleResponse"
+          }
+        },
+        "maxItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "@nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationRolePermissionActions": {
+      "description": "The available action permisions list",
       "enum": [
         "communication.services/calling/audio/receive/action",
         "communication.services/calling/video/receive/action",
@@ -286,91 +311,88 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RbacPermissions",
+        "name": "CommunicationRolePermissionActions",
         "modelAsString": true
       }
     },
-    "RbacRoleListResponse": {
+    "CommunicationRoleResponse": {
       "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RbacRoleListResponseElement"
-          }
-        },
-        "maxItems": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "@nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "RbacRoleListResponseElement": {
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "RbacRoleRequest": {
-      "required": [
+        "createdOn",
         "displayName",
-        "permissions"
-      ],
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "permissions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RbacPermissions"
-          }
-        }
-      }
-    },
-    "RbacRoleResponse": {
-      "required": [
         "id",
-        "lastModified",
+        "isEnabled",
         "permissions",
-        "version"
+        "type",
+        "updatedOn"
       ],
       "type": "object",
       "properties": {
         "id": {
+          "description": "The unique identifier for the Role",
           "type": "string"
         },
-        "resourceId": {
-          "type": "string"
+        "type": {
+          "$ref": "#/definitions/CommunicationRoleType"
         },
-        "version": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "lastModified": {
+        "createdOn": {
           "format": "date-time",
+          "description": "The datetime the Role was created",
+          "type": "string"
+        },
+        "updatedOn": {
+          "format": "date-time",
+          "description": "The datetime the role was last modified",
           "type": "string"
         },
         "displayName": {
+          "description": "The human readable name of the Role",
           "type": "string"
         },
         "permissions": {
+          "$ref": "#/definitions/CommunicationRoleCreatePermissions"
+        },
+        "isEnabled": {
+          "description": "Is Role enabled for assignments.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CommunicationRoleType": {
+      "description": "The role type enum. Defined the possible types for a role",
+      "enum": [
+        "builtIn",
+        "custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationRoleType",
+        "modelAsString": true
+      }
+    },
+    "CommunicationRoleUpdatePermissions": {
+      "type": "object",
+      "properties": {
+        "dataActions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RbacPermissions"
+            "$ref": "#/definitions/CommunicationRolePermissionActions"
           }
+        }
+      }
+    },
+    "CommunicationRoleUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The human readable name of the Role",
+          "type": "string"
+        },
+        "permissions": {
+          "$ref": "#/definitions/CommunicationRoleUpdatePermissions"
+        },
+        "isenabled": {
+          "description": "Is Role enabled for assignments.",
+          "type": "boolean"
         }
       }
     }
