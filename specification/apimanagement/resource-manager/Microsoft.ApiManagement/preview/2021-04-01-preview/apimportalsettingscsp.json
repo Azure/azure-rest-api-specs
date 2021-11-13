@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "Content Security Policy of the portal that helps to detect and mitigate certain types of, attacks like XSS and data injection.",
+  "x-apim-code-public": "true",
+  "properties": {
+    "mode": {
+      "allOf": [
+        {
+          "$ref": "apimportalsettingscspmode.json"
+        },
+        {
+          "description": "The mode of CSP policy of the developer portal."
+        }
+      ]
+    },
+    "reportUri": {
+      "type": "string",
+      "description": "The URL used by browser to report CSP violations."
+    },
+    "allowedResources": {
+      "description": "Allowed sources, e.g. \"*.trusted.com\", \"trusted.com\", \"https://\".",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
