@@ -21,8 +21,3 @@ output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp
 ```
-
-``` yaml $(python) && $(track2)
-modelerfour:
-  lenient-model-deduplication: true
-```
