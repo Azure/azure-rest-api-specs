@@ -118,6 +118,9 @@
           "Get a Office ATP data connector": {
             "$ref": "./examples/dataConnectors/GetOffice365AdvancedThreatProtectionById.json"
           },
+          "Get a Office IRM data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftInsiderRiskManagementById.json"
+          },
           "Get a Dynamics365 data connector": {
             "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
           },
@@ -317,6 +320,9 @@
           },
           "Check requirements for OfficeATP.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsOfficeATP.json"
+          },
+          "Check requirements for OfficeIRM.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsOfficeIRM.json"
           },
           "Check requirements for Dynamics365.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
@@ -696,6 +702,32 @@
         }
       ],
       "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+      "type": "object"
+    },
+    "OfficeIRMCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents OfficeIRM (Microsoft Insider Risk Management) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeIRMCheckRequirementsProperties",
+          "description": "OfficeIRM (Microsoft Insider Risk Management) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeIRM"
+    },
+    "OfficeIRMCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "OfficeIRM (Microsoft Insider Risk Management) requirements check properties.",
       "type": "object"
     },
     "TICheckRequirements": {
@@ -1394,6 +1426,35 @@
         }
       ],
       "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
+      "type": "object"
+    },
+    "OfficeIRMDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents OfficeIRM (Microsoft Insider Risk Management) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeIRMDataConnectorProperties",
+          "description": "OfficeIRM (Microsoft Insider Risk Management) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeIRM"
+    },
+    "OfficeIRMDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ],
+      "description": "OfficeIRM (Microsoft Insider Risk Management) data connector properties.",
       "type": "object"
     },
     "MDATPDataConnector": {
