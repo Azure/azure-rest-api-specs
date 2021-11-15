@@ -210,10 +210,10 @@
           },
           "tags": {
             "readOnly": true,
-            "type": "array",
+            "type": "object",
             "description": "node categories",
-            "items": {
-              "$ref": "#/definitions/GraphNodeTag"
+            "additionalProperties": {
+              "type": "string"
             }   
           },
           "entityIdentifiers": {
@@ -253,11 +253,12 @@
             "description": "the type of the entity"    
           },
           "tags": {
-            "type": "array",
-            "description": "node categories",
-            "items": {
-              "$ref": "#/definitions/GraphNodeTag"
-            }   
+            "readOnly": true,
+            "type": "object",
+            "description": "edge categories",
+            "additionalProperties": {
+              "type": "string"
+            }    
           },
           "entityDetails": {
             "type": "object",
@@ -281,11 +282,11 @@
             "description": "the type of the entity"    
           },
           "tags": {
-            "type": "array",
-            "description": "node categories",
-            "items": {
-              "$ref": "#/definitions/GraphNodeTag"
-            }   
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "insight categories"
           },
           "entityDetails": {
             "type": "object",
@@ -293,22 +294,6 @@
             "description": "more details on the edge that are relevant to understand the attack path"            
           }
         }
-      },
-      "GraphNodeTag": {
-        "type": "object",
-        "description": "",
-        "properties": {
-          "key": {
-            "readOnly": true,
-            "type": "string",
-            "description": "tag key"  
-          },
-          "value": {
-            "readOnly": true,
-            "type": "string",
-            "description": "tag value" 
-          }
-        }    
       }
     },
     "parameters": {
