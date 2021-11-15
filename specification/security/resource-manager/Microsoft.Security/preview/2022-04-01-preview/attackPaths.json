@@ -140,7 +140,7 @@
             "type": "array",
             "description": "recommendations that can help mitigate the attack path",
             "items": {
-              "$ref": "#/definitions/AttackPathRecommendation"
+              "type": "string"
             }
           },
           "bestPractices": {
@@ -154,17 +154,11 @@
             "items": {
               "type": "string"
             }
-          }
-        }
-      },
-      "AttackPathRecommendation": {
-        "type": "object",
-        "description": "Properties describing a recommendation belongs to the attack path",
-        "properties": {
-          "recommendationId": {
+          },
+          "refreshInterval": {
             "readOnly": true,
             "type": "string",
-            "description": "identifier of a recommendation that can help mitigate the attack path"
+            "description": "The amount of time takes to refresh this attack path"
           }
         }
       },
@@ -184,6 +178,13 @@
             "description": "connections between the nodes composing the attack path",
             "items": {
               "$ref": "#/definitions/AttackPathEdge"
+            }
+          },
+          "AttackPathInsights": {
+            "type": "array",
+            "description": "relevant security-related insights on resources in this attack path",
+            "items": {
+              "$ref": "#/definitions/AttackPathInsight"
             }
           }
         }
@@ -245,6 +246,34 @@
             "readOnly": true,
             "type": "string",
             "description": "an identifier for the edge"
+          },
+          "label": {
+            "readOnly": true,
+            "type": "string",
+            "description": "the type of the entity"    
+          },
+          "tags": {
+            "type": "array",
+            "description": "node categories",
+            "items": {
+              "$ref": "#/definitions/GraphNodeTag"
+            }   
+          },
+          "entityDetails": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "more details on the edge that are relevant to understand the attack path"            
+          }
+        }
+      },
+      "AttackPathInsight": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "mapIdentifier": {
+            "readOnly": true,
+            "type": "string",
+            "description": "an identifier for the insight"
           },
           "label": {
             "readOnly": true,
