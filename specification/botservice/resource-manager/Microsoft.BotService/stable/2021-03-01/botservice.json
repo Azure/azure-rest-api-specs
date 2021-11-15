@@ -1381,8 +1381,17 @@
           "description": "The CMK encryption status"
         },
         "publicNetworkAccess": {
-          "type": "boolean",
-          "description": "Whether the bot is in an isolated network"
+          "description": "Whether the bot is in an isolated network",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Disabled"
         },
         "isStreamingSupported": {
           "type": "boolean",
