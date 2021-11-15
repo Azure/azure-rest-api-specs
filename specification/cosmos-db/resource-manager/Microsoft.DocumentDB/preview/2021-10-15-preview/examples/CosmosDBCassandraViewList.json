@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-10-15-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "keyspaceName": "keyspacename"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspacename/views/viewname",
+            "name": "viewname",
+            "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/views",
+            "tags": {},
+            "properties": {
+              "resource": {
+                "id": "viewname",
+                "viewDefinition": "SELECT columna, columnb, columnc FROM keyspacename.srctablename WHERE columna IS NOT NULL AND columnc IS NOT NULL PRIMARY (columnc, columna)"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
