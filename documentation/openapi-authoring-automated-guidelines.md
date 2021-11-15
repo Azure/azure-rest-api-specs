@@ -3519,10 +3519,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: November 8, 2021
 
-**Why this rule is important**: ARM will not pass the parent scope to the RPaaS, so the api will failed in the RPaaS validation.
+**Why this rule is important**: The parent scope won't be passed over to PRaaS, and the API will fail in RPaaS validation.
 
 **How to fix the violation**:
-move the parent resource URI to the parameter 'scope' whose type is string.
+Move the parent resource URI to the 'scope' parameter which is string type.
 
 The following would be invalid:
 ```json
@@ -3542,15 +3542,17 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
-**Output Message** : The parameters should be arranged as the order in the path.
+**Output Message** : The parameters should be kept in the same order as they present in the path.
 
-**Description**: This rule ensure the parameters order should be arranged as the order in the path. This might introduce a breaking change when you're trying to fix it , so if there are violations that occur in an operation that already shipped in an existing version , you can suppress it. 
+**Description**: The rule is to ensure the parameters in the same order as they are ranked in the path. Since it can introduce a breaking change when updating parameter order, for services that have already shipped public versions, you may request to suppress the rule following the process documented here: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process
 
 **CreatedAt**: November 8, 2021
 
 **LastModifiedAt**: November 8, 2021
 
-**Why this rule is important**: autorest (and therefore) SDK generates parameter in the exact order of the Swagger. There are special cases: body is always last, and required comes before optional, but for the rest it follows the order.
+**Why this rule is important**: AutoRest generates SDKs with parameters in the order as they are defined in the Swagger. The only exceptional cases are:
+1. 'body' should be always at last;
+2. 'required' should be always placed before 'optional'
 
 **How to fix the violation**:
 re-order the parameters as the order in the api path.
