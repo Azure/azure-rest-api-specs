@@ -1155,6 +1155,14 @@
         }
       }
     },
+    "NginxDeploymentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "enableDiagnosticsSupport": {
+          "type": "boolean"
+        }
+      }
+    },
     "NginxDeploymentUpdateParameters": {
       "type": "object",
       "properties": {
@@ -1170,8 +1178,8 @@
         "location": {
           "type": "string"
         },
-        "enableDiagnosticsSupport": {
-          "type": "boolean"
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentUpdateProperties"
         }
       }
     },
