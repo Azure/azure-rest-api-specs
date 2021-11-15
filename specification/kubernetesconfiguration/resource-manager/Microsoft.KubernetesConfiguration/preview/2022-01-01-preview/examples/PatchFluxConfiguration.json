@@ -31,8 +31,9 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/{operationId}",
-        "x-ms-async-operation-timeout": "PT48H"
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId",
+        "x-ms-async-operation-timeout": "PT48H",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId?api-version=2022-01-01-preview"
       },
       "description": "Extension properties and details of the Patch operation, including AsyncOperation url.",
       "body": {
@@ -142,16 +143,6 @@
           "complianceState": "Compliant",
           "provisioningState": "Succeeded",
           "errorMessage": ""
-        }
-      }
-    },
-    "409": {
-      "headers": {},
-      "description": "Conflict failure, as another Patch operation is in progress",
-      "body": {
-        "error": {
-          "code": "PatchConflict",
-          "message": "The PATCH method cannot be completed due to a conflict. (ProvisioningState of fluxConfiguration: Updating). Please wait for a few minutes for the ProvisioningState to change to Succeeded, Failed or Canceled and retry again. If the problem persists, please contact Microsoft support."
         }
       }
     }

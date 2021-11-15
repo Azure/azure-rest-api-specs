@@ -181,7 +181,8 @@
     "201": {
       "headers": {
         "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
-        "x-ms-async-operation-timeout": "PT48H"
+        "x-ms-async-operation-timeout": "PT48H",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId?api-version=2022-01-01-preview"
       },
       "description": "Details of the Kubernetes Flux Configuration's current status.",
       "body": {
@@ -306,16 +307,6 @@
           "complianceState": "Compliant",
           "provisioningState": "Succeeded",
           "errorMessage": ""
-        }
-      }
-    },
-    "409": {
-      "headers": {},
-      "description": "Conflict failure, as another operation is in progress",
-      "body": {
-        "error": {
-          "code": "CreateConflict",
-          "message": "The PUT method cannot be completed due to a conflict. (ProvisioningState of fluxConfiguration: Creating). Please wait for a few minutes for the ProvisioningState to change to Succeeded, Failed or Canceled and retry again. If the problem persists, please contact Microsoft support."
         }
       }
     }

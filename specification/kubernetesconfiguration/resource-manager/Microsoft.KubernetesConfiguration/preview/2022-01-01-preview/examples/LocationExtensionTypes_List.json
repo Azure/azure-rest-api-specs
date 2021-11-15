@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "aaaaaaaaaa",
-    "location": "aaaaaa",
+    "subscriptionId": "subId1",
+    "location": "eastus",
     "api-version": "2022-01-01-preview"
   },
   "responses": {
@@ -11,33 +11,35 @@
           {
             "properties": {
               "releaseTrains": [
-                "aaaaaaaaaaaaaaaaaaaaaa"
+                "stable",
+                "preview",
+                "pilot"
               ],
               "clusterTypes": "connectedClusters",
               "supportedScopes": {
-                "defaultScope": "aaaaaaaaaaa",
+                "defaultScope": "cluster",
                 "clusterScopeSettings": {
                   "properties": {
                     "allowMultipleInstances": true,
-                    "defaultReleaseNamespace": "aaaaaaaaaaaaaaaaaaaaaaa"
+                    "defaultReleaseNamespace": "kube-system"
                   },
-                  "id": "aaaaaaaaaaaaaaaa",
-                  "name": "aaaaaaaaaa",
-                  "type": "aaaaaaaaaaaaaaaaaaa"
+                  "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.ContainerService/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.example",
+                  "name": "microsoft.example",
+                  "type": "Microsoft.KubernetesConfiguration/extensionTypes"
                 }
               }
             },
             "systemData": {
-              "createdBy": "aaaaaaaa",
-              "createdByType": "User",
-              "createdAt": "2021-04-14T22:44:27.144Z",
-              "lastModifiedBy": "aaaaaaaaa",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-04-14T22:44:27.144Z"
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2020-09-08T05:10:57.027Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2020-09-08T05:10:57.027Z"
             }
           }
         ],
-        "nextLink": "aaaaaaaaaaaaaaaaaaaaa"
+        "nextLink": null
       }
     }
   }
