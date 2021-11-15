@@ -3467,8 +3467,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3485,6 +3484,7 @@
     },
     "LegacySingleScopeReservationRecommendationProperties": {
       "description": "The properties of the legacy reservation recommendation for single scope.",
+      "type": "object",
       "x-ms-discriminator-value": "Single",
       "properties": {
         "subscriptionId": {
@@ -3502,6 +3502,7 @@
     },
     "LegacySharedScopeReservationRecommendationProperties": {
       "description": "The properties of the legacy reservation recommendation for shared scope.",
+      "type": "object",
       "x-ms-discriminator-value": "Shared",
       "allOf": [
         {
