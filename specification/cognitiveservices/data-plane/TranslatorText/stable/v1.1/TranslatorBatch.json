@@ -18,9 +18,6 @@
           "text/json",
           "application/*+json"
         ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "required": true,
@@ -42,56 +39,6 @@
                 "format": ""
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.  Check input parameters",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized.  Please check your credentials",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Server temporary unavailable",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
