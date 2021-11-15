@@ -3391,6 +3391,7 @@
     },
     "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
       "discriminator": "scope",
       "properties": {
         "lookBackPeriod": {
@@ -3477,7 +3478,10 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
     },
     "LegacySingleScopeReservationRecommendationProperties": {
       "description": "The properties of the legacy reservation recommendation for single scope.",
