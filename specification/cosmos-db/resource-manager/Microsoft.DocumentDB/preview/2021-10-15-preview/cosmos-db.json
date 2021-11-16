@@ -2047,6 +2047,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The client encryption key create or update operation will complete asynchronously."
+          },
           "200": {
             "description": "The client encryption key create or update operation was completed successfully.",
             "schema": {
@@ -8132,7 +8135,11 @@
       "type": "object",
       "description": "Cosmos DB client encryption key resource object.",
       "properties": {
-        "encryptionAlgorithm": {
+        "id": {
+          "type": "string",
+          "description": "Name of the ClientEncryptionKey"
+        },
+		    "encryptionAlgorithm": {
           "type": "string",
           "description": "Encryption algorithm that will be used along with this client encryption key to encrypt/decrypt data."
         },
