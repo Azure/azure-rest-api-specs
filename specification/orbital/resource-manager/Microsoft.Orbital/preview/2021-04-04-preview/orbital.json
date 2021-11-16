@@ -51,7 +51,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1200,60 +1200,6 @@
           ],
           "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
-        }
-      }
-    },
-    "OperationListResult": {
-      "type": "object",
-      "description": "Result of the request to list Orbital operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Orbital operations supported by the Orbital resource provider."
-        }
-      }
-    },
-    "Operation": {
-      "description": "Orbital REST API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates whether the operation applies to data-plane."
-        },
-        "display": {
-          "type": "object",
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft Orbital.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description of the operation.",
-              "type": "string"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "The origin of operations."
         }
       }
     },
