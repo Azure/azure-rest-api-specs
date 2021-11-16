@@ -612,6 +612,21 @@
             "microBilling",
             "trivia",
             "entertainmentAlerts",
+            "accountNotification",
+            "ageGatedContent",
+            "conversationalMessaging",
+            "deliveryNotification",
+            "education",
+            "emergencyAlerts",
+            "fraudAlerts",
+            "loanArrangement",
+            "onBehalfOfCarrier",
+            "political",
+            "promotionalMarketing",
+            "publicServiceAnnouncements",
+            "securityAlerts",
+            "socialMedia",
+            "twoFactorAuthentication",
             "other"
           ],
           "type": "string",
@@ -678,13 +693,6 @@
         "confirmationMessage": {
           "type": "string"
         },
-        "estimatedRampUpTimeInDays": {
-          "format": "int32",
-          "description": "Numbers of days in which is expected to start sending messages from the short code.",
-          "maximum": 2147483647,
-          "minimum": 0,
-          "type": "integer"
-        },
         "directionality": {
           "description": "Describes directionality e.g. oneWay or twoWay",
           "enum": [
@@ -737,6 +745,13 @@
         "spikeDetails": {
           "description": "If isSpiky=true, then explain additional details about the traffic pattern\r\ne.g. 'Higher traffic expected during holiday season and Black Friday.'.",
           "type": "string"
+        },
+        "estimatedRampUpTimeInDays": {
+          "format": "int32",
+          "description": "Numbers of days in which is expected to start sending messages from the short code.",
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },

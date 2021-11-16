@@ -36,4 +36,4 @@ Users will be able to easily create, manage and delete a Azure Video Analyzer fo
 
 ## Type Model
 Resource provider namespace: Microsoft.VideoIndexer
-Resource type: accounts. <b><u>type model is still under develop.</u></b>. The resource type properties can be found [here](./Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json#L413)
+Resource type: accounts. <b><u>type model is still under develop.</u></b>. The resource type properties can be found [here](./Microsoft.VideoIndexer/preview/2021-10-27-preview/vi.json#L413)
