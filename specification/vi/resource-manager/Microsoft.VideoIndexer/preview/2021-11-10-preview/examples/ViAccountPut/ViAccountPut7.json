@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "accountName": "contosto-videoanalyzer",
+    "resourceGroupName": "contosto-videoanalyzer-rg",
+    "api-version": "2021-11-10-preview",
+    "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
+    "parameters": {
+      "location": "NorthEurope",
+      "properties": {
+        "mediaServices": {
+          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
+          "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
+        "name": "contosto-videoanalyzer",
+        "location": "NorthEurope",
+        "type": "Microsoft.VideoIndexer/accounts",
+        "tags": {},
+        "properties": {
+          "tenantId": "8c406f87-77ac-4ebb-a401-e8562450630e",
+          "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
+          "accountName": "contosto-videoanalyzer",
+          "mediaServices": {
+            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
+            "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+          },
+          "totalSecondsIndexed": 0,
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {
+              "principalId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13",
+              "clientId": "92e65ecf-0fae-432e-8272-fedb6edb96c7"
+            }
+          }
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "EVENT_GRID_NOT_REGISTERED",
+          "message": "Microsoft.EventGrid resource provider is not registered in subscription"
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "RersourceGroupNotFound",
+          "message": "Resource group 'contosto-videoanalyzer-rg' could not be found."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ALREADY_EXISTS",
+          "message": "Account with '74f866ea-f74f-4103-a916-4742f8bc0009' already exists"
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}
