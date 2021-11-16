@@ -3151,6 +3151,9 @@
           },
           "Create a VM from a shared gallery image": {
             "$ref": "./examples/compute/CreateAVmFromASharedGalleryImage.json"
+          },
+          "Create a VM with securityType ConfidentialVM": {
+            "$ref": "./examples/compute/CreateAVmWithSecurityTypeConfidentialVM.json"
           }
         }
       },
@@ -5425,6 +5428,9 @@
           },
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/compute/CreateAScaleSetWithSpotRestorePolicy.json"
+          },
+          "Create a scale set with SecurityType as COnfidentialVM": {
+            "$ref": "./examples/compute/CreateAScaleSetWithSecurityTypeConfidentailVM.json"
           }
         }
       },
@@ -10634,7 +10640,7 @@
       "properties": {
         "securityEncryptionType": {
           "type": "string",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. <br><br> Default: It can be set for only Confidential VMs.",
+          "description": "Specifies the EncryptionType of the managed disk. <br> It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. <br><br> NOTE: It can be set for only Confidential VMs.",
           "enum": [
             "VMGuestStateOnly",
             "DiskWithVMGuestState"
