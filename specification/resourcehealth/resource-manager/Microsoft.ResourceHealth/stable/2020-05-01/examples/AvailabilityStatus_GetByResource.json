@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "resourceUri": "resourceUri",
+    "api-version": "2020-05-01",
+    "$expand": "recommendedactions"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines /rhctestenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current",
+        "name": "current",
+        "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+        "location": "eastus",
+        "properties": {
+          "availabilityState": "Unavailable",
+          "summary": "We're sorry, we couldn't automatically recover your virtual machine",
+          "reasonType": "Unplanned",
+          "reasonChronicity": "Persistent",
+          "detailedStatus": "Disk problems are preventing us from automatically recovering your virtual machine",
+          "occurredTime": "2016-03-29T09:12:00Z",
+          "reportedTime": "2016-05-04T14:11:29.7598931Z",
+          "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
+          "resolutionETA": "2016-03-29T09:37:00Z",
+          "recommendedActions": [
+            {
+              "action": "To start this virtual machine, open the resource blade and click Start",
+              "actionUrl": "<#ResourceBlade>",
+              "actionUrlText": "resource blade"
+            },
+            {
+              "action": "If you are experiencing problems you believe are caused by Azure, contact support",
+              "actionUrl": "<#SupportCase>",
+              "actionUrlText": "contact support"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

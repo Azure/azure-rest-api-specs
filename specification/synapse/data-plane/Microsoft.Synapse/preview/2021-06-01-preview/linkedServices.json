@@ -1,0 +1,330 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01-preview",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/linkedservices": {
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_GetLinkedServicesByWorkspace",
+        "x-ms-examples": {
+          "LinkedServices_ListByWorkspace": {
+            "$ref": "./examples/LinkedServices_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists linked services.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "artifacts.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/linkedservices/{linkedServiceName}": {
+      "put": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_CreateOrUpdateLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Create": {
+            "$ref": "./examples/LinkedServices_Create.json"
+          },
+          "LinkedServices_Update": {
+            "$ref": "./examples/LinkedServices_Update.json"
+          }
+        },
+        "description": "Creates or updates a linked service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linkedService entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "linkedService",
+            "description": "Linked service resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_GetLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Get": {
+            "$ref": "./examples/LinkedServices_Get.json"
+          }
+        },
+        "description": "Gets a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linked service entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_DeleteLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Delete": {
+            "$ref": "./examples/LinkedServices_Delete.json"
+          }
+        },
+        "description": "Deletes a linked service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/linkedservices/{linkedServiceName}/rename": {
+      "post": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_RenameLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Rename": {
+            "$ref": "./examples/LinkedServices_Rename.json"
+          }
+        },
+        "description": "Renames a linked service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "./artifacts.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedServiceListResponse": {
+      "description": "A list of linked service resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedServiceResource": {
+      "description": "Linked service resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "artifacts.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
+          "description": "Properties of linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "linkedServiceName": {
+      "name": "linkedServiceName",
+      "description": "The linked service name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

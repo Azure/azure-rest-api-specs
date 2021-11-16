@@ -789,6 +789,10 @@
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -836,6 +840,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "disableChunking": {
+          "type": "object",
+          "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -2360,6 +2368,44 @@
     },
     "SqlServerSource": {
       "description": "A copy activity SQL server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
+    "AmazonRdsForSqlServerSource": {
+      "description": "A copy activity Amazon RDS for SQL Server source.",
       "type": "object",
       "allOf": [
         {
@@ -7248,8 +7294,32 @@
       "properties": {
         "sinks": {
           "type": "object",
-          "description": "List of Power Query activity sinks mapped to a queryName.",
+          "description": "(Deprecated. Please use Queries). List of Power Query activity sinks mapped to a queryName.",
           "additionalProperties": {
+            "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
+          }
+        },
+        "queries": {
+          "type": "array",
+          "description": "List of mapping for Power Query mashup query to sink dataset(s).",
+          "items": {
+            "$ref": "#/definitions/PowerQuerySinkMapping"
+          }
+        }
+      }
+    },
+    "PowerQuerySinkMapping": {
+      "description": "Map Power Query mashup query to sink dataset(s).",
+      "type": "object",
+      "properties": {
+        "queryName": {
+          "description": "Name of the query in Power Query mashup document.",
+          "type": "string"
+        },
+        "dataflowSinks": {
+          "type": "array",
+          "description": "List of sinks mapped to Power Query mashup query.",
+          "items": {
             "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
           }
         }
