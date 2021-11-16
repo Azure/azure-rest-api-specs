@@ -3,11 +3,10 @@
     "api-version": "2021-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "resourceName": "myAccount",
+    "accountName": "myAccount",
     "deviceName": "myDevice",
     "device": {
       "properties": {
-        "deviceType": "myNewDeviceType",
         "metadata": {
           "manufacturer": "Microsoft"
         }
@@ -19,7 +18,7 @@
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/devices/myDevice",
         "name": "myDevice",
-        "type": "Microsoft.AzurePercept/devices",
+        "type": "Microsoft.AzurePercept/accounts/devices",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
@@ -31,7 +30,6 @@
         "properties": {
           "source": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myIoTHub",
           "sourceId": "Device-01-With_Camera",
-          "deviceType": "myNewDeviceType",
           "metadata": {
             "manufacturer": "Microsoft"
           }
