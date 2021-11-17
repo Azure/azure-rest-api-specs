@@ -16,6 +16,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kubernetesconfigura
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-preview-2022-01
   - tag: package-preview-2021-11
   - tag: package-2021-09
   - tag: package-preview-2021-05
@@ -23,6 +24,19 @@ batch:
   - tag: package-preview-2020-10
   - tag: package-2020-07-01-preview
   - tag: package-2019-11-01-preview
+```
+
+### Tag: package-preview-2022-01 and java
+
+These settings apply only when `--tag=package-preview-2022-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2022_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2022_01_01_preview
+  regenerate-manager: true
+  generate-interface: true
 ```
 
 ### Tag: package-preview-2021-11 and java
