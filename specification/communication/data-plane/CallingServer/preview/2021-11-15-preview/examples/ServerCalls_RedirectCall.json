@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2021-11-15-preview",
+    "redirectCallRequest": {
+      "incomingCallContext": "80c927ad-f173-42e0-aeeb-31e84143fafc",
+      "targets": [
+        {
+          "communicationUser": {
+            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_b3b14421-9c7a-4c89-9779-b16f9bdd69b2"
+          }
+        }
+      ],
+      "callbackUri": "https://app.contoso.com/callback",
+      "timeoutInSeconds": 20
+    }
+  },
+  "responses": {
+    "202": {},
+    "400": {
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "The request contains invalid data."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "401",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "403",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "404",
+          "message": "Resource not found on the server."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "500",
+          "message": "Internal server error."
+        }
+      }
+    }
+  }
+}
