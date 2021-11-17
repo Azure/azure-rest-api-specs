@@ -64,6 +64,8 @@ This document lists the set of automated rules that can be validated against swa
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
 | [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
+| [DISCRIMINATOR_VALUE_NOT_IN_ENUM](#DISCRIMINATOR_VALUE_NOT_IN_ENUM) | [OAV133](#DISCRIMINATOR_VALUE_NOT_IN_ENUM) |
+| [DISCRIMINATOR_MISSING_IN_PARENT](#DISCRIMINATOR_MISSING_IN_PARENT) | [OAV134](#DISCRIMINATOR_MISSING_IN_PARENT) |
 | [DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING](#DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING) | [OAV132](#DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING) |
 | [DISCRIMINATOR_NOT_REQUIRED](#DISCRIMINATOR_NOT_REQUIRED) | [OAV131](#DISCRIMINATOR_NOT_REQUIRED) |
 | [RESPONSE_BODY_NOT_IN_EXAMPLE](#RESPONSE_BODY_NOT_IN_EXAMPLE) | [OAV130](#RESPONSE_BODY_NOT_IN_EXAMPLE) |
@@ -619,6 +621,22 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
 
+### <a name="DISCRIMINATOR_VALUE_NOT_IN_ENUM" />DISCRIMINATOR_VALUE_NOT_IN_ENUM
+
+**Output Message**: The value of x-ms-dicriminator-value is not in the discriminator enum list: {0}.
+
+**Description**: If a discriminator has an enum list, the x-ms-dicriminator-value must in the enum list.
+
+**How to fix the violation**: Add the value into the enum list or correct the value.
+
+### <a name="DISCRIMINATOR_MISSING_IN_PARENT" />DISCRIMINATOR_MISSING_IN_PARENT
+
+**Output Message**: Discriminator is missing in the parent of the x-ms-dicriminator-value: {0}.
+
+**Description**: x-ms-dicriminator-value is defined, but its parent doesn't have discriminator field.
+
+**How to fix the violation**: Check whether it needs. If needs, add discriminator field in parent.
+
 ### <a name="DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING" />DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING
 
 **Output Message**: The property type of discriminator must be string.
@@ -626,7 +644,6 @@ This document lists the set of automated rules that can be validated against swa
 **Description**: If a property is declared as discriminator, the property type must be string and nothing else.
 
 **How to fix the violation**: Set the property type to string in swagger.
-
 
 ### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED
 
