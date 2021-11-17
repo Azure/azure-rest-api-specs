@@ -655,11 +655,12 @@
         },
         "innerError": {
           "description": "Object containing more specific information than  the current object about the error.",
-          "allOf": [
-            {
+          "type": "object",
+          "properties": {
+            "innerError": {
               "$ref": "#/definitions/Error"
             }
-          ],
+          },
           "readOnly": true
         }
       }
@@ -745,7 +746,7 @@
           ],
           "readOnly": true
         },
-        "monitoringRegion": {
+        "appLocation": {
           "type": "string",
           "description": "The monitor resources will be deployed in the monitoring region. The subnet region should be same as the monitoring region."
         },
@@ -773,11 +774,6 @@
         "logAnalyticsWorkspaceId": {
           "type": "string",
           "description": "The workspace ID of the log analytics workspace to be used for monitoring."
-        },
-        "monitorVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The version of the payload."
         },
         "monitorSubnet": {
           "type": "string",
@@ -892,6 +888,11 @@
             }
           ],
           "readOnly": true
+        },
+        "providerVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version of the payload."
         }
       },
       "description": "Describes the properties of a provider instance.",
