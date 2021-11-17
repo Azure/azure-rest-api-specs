@@ -1,0 +1,2703 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Language Authoring CLU APIs",
+    "version": "2021-11-01-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language/analyze-conversations",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/language/analyze-conversations/projects/{projectName}/deployments": {
+      "get": {
+        "description": "List all deployments.",
+        "operationId": "Deployments_GetDeploymentsList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of deployments to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentObjectList"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
+      "get": {
+        "description": "Get a deployment info.",
+        "operationId": "Deployments_GetDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Deployment info.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobResultObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      },
+      "put": {
+        "description": "Trigger a new deployment or replace an existing one.",
+        "operationId": "Deployments_TriggerDeploymentJob",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createOrReplaceDeploymentJobObject",
+            "description": "The new deployment info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrReplaceDeploymentJobObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a deployment.",
+        "operationId": "Deployments_TriggerDeleteDeployment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+      "get": {
+        "description": "Get deployment job status and result details.",
+        "operationId": "Deployments_GetDeploymentJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobStatusObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/deployments/:swap": {
+      "post": {
+        "description": "Trigger job to swap two deployments.",
+        "operationId": "Deployments_TriggerSwapDeployments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "swappingDeploymentJobObject",
+            "description": "The job object to swap two deployments.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwapDeploymentsJobObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The swap deployments job result and location header for the status of the job.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobStatusObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "409": {
+            "description": "Deployment job already inprogress."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
+      "get": {
+        "description": "Gets a swap deployment job status and result details.",
+        "operationId": "Deployments_GetSwapDeploymentJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The swap deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobStatusObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/prebuilts": {
+      "get": {
+        "description": "Get list of Supported prebuilts for conversational projects.",
+        "operationId": "CLU_Projects_GetSupportedPrebuilts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "languages",
+            "description": "The languages to get supported prebuilt entities for. If unspecified, prebuilts for all supported languages are returned.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported prebuilts.",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltsGetObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/:import": {
+      "post": {
+        "description": "Triggers a job to import a project in JSON format. If a project with the same name already exists, the data of that project is replaced.",
+        "operationId": "Projects_TriggerImportProjectJob",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "format",
+            "description": "The format of the project to import. The currently supported format is json format.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "projectFileImportObject",
+            "description": "The project data to import.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonProjectObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
+      "get": {
+        "description": "Get import or replace project job status and result details.",
+        "operationId": "Projects_GetImportProjectJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/ProjectFileImportJobStatusObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/:export": {
+      "post": {
+        "description": "Triggers a job to export project data in JSON format.",
+        "operationId": "Projects_TriggerExportProjectJob",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "format",
+            "description": "The format of the project to export. The currently supported format is `JSON`.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "ProjectFileExportObject",
+            "description": "The export job create object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectFileExportObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
+      "get": {
+        "description": "Get export job status details.",
+        "operationId": "Projects_GetExportProjectJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/ProjectFileExportJobStatusObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}": {
+      "put": {
+        "description": "Creates a new or update a project.",
+        "operationId": "Projects_CreateOrUpdateProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "projectCreateObject",
+            "description": "The project parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CluProjectCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of the updated project, if it already exists.",
+            "schema": {
+              "$ref": "#/definitions/CluProjectGetObject"
+            }
+          },
+          "201": {
+            "description": "The metadata of the created project.",
+            "schema": {
+              "$ref": "#/definitions/CluProjectGetObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      },
+      "get": {
+        "description": "Gets a project info.",
+        "operationId": "Projects_GetProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of the project.",
+            "schema": {
+              "$ref": "#/definitions/CluProjectGetObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a project.",
+        "operationId": "Projects_DeleteProject",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully triggered the project deletion operation..",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects": {
+      "get": {
+        "description": "Returns the list of projects.",
+        "operationId": "Projects_GetProjectsList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of projects to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of projects.",
+            "schema": {
+              "$ref": "#/definitions/CluProjectGetObjectList"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/deletion/jobs/{jobId}": {
+      "get": {
+        "description": "Get project deletion job status and result details.",
+        "operationId": "Projects_GetProjectDeletionJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The project deletion job result.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeletionJobStatusObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The operation does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/languages": {
+      "get": {
+        "description": "Get List of Supported languages.",
+        "operationId": "Projects_GetSupportedCultures",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "projectType",
+            "description": "The CLU project type to get the supported languages for.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported languages.",
+            "schema": {
+              "$ref": "#/definitions/LanguagesGetObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/:train": {
+      "post": {
+        "description": "Trigger training job.",
+        "operationId": "Training_TriggerTrainingJob",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "trainingJobCreateObject",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainingJobCreateObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "operation-location header for the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "409": {
+            "description": "Training job already inprogress."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
+      "get": {
+        "description": "Get training job status and result details.",
+        "operationId": "Training_GetTrainingJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The training job result.",
+            "schema": {
+              "$ref": "#/definitions/TrainingJobResultObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project or the job does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/train/jobs": {
+      "get": {
+        "description": "Get training jobs.",
+        "operationId": "Training_GetTrainingJobsList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of training jobs to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of the training jobs.",
+            "schema": {
+              "$ref": "#/definitions/TrainingJobStatusObjectList"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project or the job does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/models": {
+      "get": {
+        "description": "List all trained models.",
+        "operationId": "Models_GetTrainedModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of trained models to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The offset in the response.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all trained models.",
+            "schema": {
+              "$ref": "#/definitions/TrainedModelObjectList"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/models/{trainedModelName}": {
+      "get": {
+        "description": "Get a trained model info.",
+        "operationId": "Models_GetTrainedModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelName",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trianed model info",
+            "schema": {
+              "$ref": "#/definitions/TrainedModelObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a trained model.",
+        "operationId": "Models_DeleteTrainedModel",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelName",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/models/{trainedModelName}/evaluation": {
+      "get": {
+        "description": "Get trained model evaluation report.",
+        "operationId": "Models_GetTrainedModelEvaluation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelName",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all evaluation results.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResultObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/projects/{projectName}/models/{trainedModelName}/verification": {
+      "get": {
+        "description": "Get trained model verification report.",
+        "operationId": "Models_GetTrainedModelVerification",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectName",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "trainedModelName",
+            "description": "The trained model name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all verification results.",
+            "schema": {
+              "$ref": "#/definitions/VerificationResultsObject"
+            }
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\\r\\n\\r\\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \\r\\n\\r\\nReasons can include:\\r\\n\\r\\n* used endpoint subscription key, instead of authoring key\\r\\n* invalid, malformed, or empty authoring key\\r\\n* authoring key doesn't match region\\r\\n* you are not the owner or collaborator\\r\\n* invalid order of API calls."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
+          },
+          "404": {
+            "description": "The project does not exist."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeploymentObjectList": {
+      "required": [
+        "deployments",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "deployments": {
+          "description": "Gets or sets the deployments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentJobResultObject"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentJobResultObject": {
+      "required": [
+        "name",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the deployment name.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "Gets or sets the deployment modelId.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the deployment last trained time.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the deployment last deployed time.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateOrReplaceDeploymentJobObject": {
+      "required": [
+        "trainedModelLabel"
+      ],
+      "type": "object",
+      "properties": {
+        "trainedModelLabel": {
+          "description": "Represents the trained model name.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentJobStatusObject": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status",
+        "errors"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the jobId.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorObject"
+          }
+        }
+      }
+    },
+    "JobErrorObject": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the error code.",
+          "enum": [
+            "unknown",
+            "notFound",
+            "invalidOperation"
+          ],
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets or sets the Error Message.",
+          "type": "string"
+        }
+      }
+    },
+    "SwapDeploymentsJobObject": {
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ],
+      "type": "object",
+      "properties": {
+        "firstDeploymentName": {
+          "description": "Represents the first deployment name.",
+          "type": "string"
+        },
+        "secondDeploymentName": {
+          "description": "Represents the second deployment name.",
+          "type": "string"
+        }
+      }
+    },
+    "PrebuiltsGetObject": {
+      "required": [
+        "prebuiltsPerLanguage"
+      ],
+      "type": "object",
+      "properties": {
+        "prebuiltsPerLanguage": {
+          "description": "The prebuilts per language.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrebuiltsPerLanguageGetObject"
+          }
+        }
+      }
+    },
+    "PrebuiltsPerLanguageGetObject": {
+      "required": [
+        "language",
+        "prebuilts"
+      ],
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "The language.",
+          "type": "string"
+        },
+        "prebuilts": {
+          "description": "The prebuilts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrebuiltGetObject"
+          }
+        }
+      }
+    },
+    "PrebuiltGetObject": {
+      "required": [
+        "name",
+        "semanticType",
+        "semanticSubtype",
+        "description",
+        "examples"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The display name.",
+          "type": "string"
+        },
+        "semanticType": {
+          "description": "The entity semantic type.",
+          "type": "string"
+        },
+        "semanticSubtype": {
+          "description": "The entity semantic subtype.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.",
+          "type": "string"
+        },
+        "examples": {
+          "description": "English examples for the entity.",
+          "type": "string"
+        }
+      }
+    },
+    "JsonProjectObject": {
+      "required": [
+        "metadata"
+      ],
+      "type": "object",
+      "properties": {
+        "api-version": {
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Represents the project metadata.",
+          "$ref": "#/definitions/CluProjectMetadataObject"
+        },
+        "assets": {
+          "description": "Represents the project assets.",
+          "$ref": "#/definitions/CluProjectAssetsObject"
+        }
+      }
+    },
+    "CluProjectMetadataObject": {
+      "required": [
+        "type",
+        "language",
+        "settings"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Represents the new project name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Represents the new project description.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Represents the project type.",
+          "enum": [
+            "conversation",
+            "workflow"
+          ],
+          "type": "string"
+        },
+        "multilingual": {
+          "description": "Represents whether the project is multilignual or not.",
+          "type": "boolean"
+        },
+        "language": {
+          "description": "Represents the new project language.",
+          "type": "string"
+        },
+        "settings": {
+          "description": "Gets or sets the project settings.",
+          "$ref": "#/definitions/ProjectSettingsObject"
+        }
+      }
+    },
+    "ProjectSettingsObject": {
+      "required": [
+        "confidenceThreshold"
+      ],
+      "type": "object",
+      "properties": {
+        "confidenceThreshold": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "CluProjectAssetsObject": {
+      "type": "object",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonIntentObject"
+          }
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonEntityObject"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonExampleObject"
+          }
+        }
+      }
+    },
+    "JsonIntentObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "orchestration": {
+          "$ref": "#/definitions/JsonOrchestrationObject"
+        }
+      }
+    },
+    "JsonOrchestrationObject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Luis",
+            "Clu",
+            "Qna"
+          ],
+          "type": "string"
+        },
+        "luisOrchestration": {
+          "$ref": "#/definitions/JsonLuisOrchestrationObject"
+        },
+        "cluOrchestration": {
+          "$ref": "#/definitions/JsonCluOrchestrationObject"
+        },
+        "qnaOrchestration": {
+          "$ref": "#/definitions/JsonQnaOrchestrationObject"
+        }
+      }
+    },
+    "JsonLuisOrchestrationObject": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "format": "uuid",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "appVersion": {
+          "type": "string"
+        },
+        "slotName": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonCluOrchestrationObject": {
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "type": "string"
+        },
+        "deploymentName": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonQnaOrchestrationObject": {
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonEntityObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "compositionSetting": {
+          "enum": [
+            "returnLongestOverlap",
+            "requireExactOverlap",
+            "returnAllOverlaps",
+            "returnUnion"
+          ],
+          "type": "string"
+        },
+        "list": {
+          "$ref": "#/definitions/JsonListObject"
+        },
+        "prebuiltEntities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPrebuiltEntityObject"
+          }
+        }
+      }
+    },
+    "JsonListObject": {
+      "type": "object",
+      "properties": {
+        "sublists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonSublistsObject"
+          }
+        }
+      }
+    },
+    "JsonSublistsObject": {
+      "type": "object",
+      "properties": {
+        "listKey": {
+          "type": "string"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonSynonymsObject"
+          }
+        }
+      }
+    },
+    "JsonSynonymsObject": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JsonPrebuiltEntityObject": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "semanticType": {
+          "type": "string"
+        },
+        "semanticSubtype": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonExampleObject": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonEntityLabelObject"
+          }
+        }
+      }
+    },
+    "JsonEntityLabelObject": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ProjectFileImportJobStatusObject": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status",
+        "errors"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the jobId.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorObject"
+          }
+        }
+      }
+    },
+    "ProjectFileExportObject": {
+      "required": [
+        "assetsToExport"
+      ],
+      "type": "object",
+      "properties": {
+        "assetsToExport": {
+          "description": "Gets or sets the assets to export.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProjectFileExportJobStatusObject": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status",
+        "errors"
+      ],
+      "type": "object",
+      "properties": {
+        "resultUrl": {
+          "type": "string"
+        },
+        "jobId": {
+          "description": "Gets or sets the jobId.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorObject"
+          }
+        }
+      }
+    },
+    "CluProjectCreateObject": {
+      "required": [
+        "type",
+        "settings",
+        "name",
+        "language"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Represents the project type.",
+          "enum": [
+            "conversation",
+            "workflow"
+          ],
+          "type": "string"
+        },
+        "settings": {
+          "description": "Gets or sets the project settings.",
+          "$ref": "#/definitions/ProjectSettingsObject"
+        },
+        "name": {
+          "description": "Gets or sets the new project name.",
+          "type": "string"
+        },
+        "multiLingual": {
+          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Gets or sets the new project description.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Gets or sets the new project culture.",
+          "type": "string"
+        }
+      }
+    },
+    "CluProjectGetObject": {
+      "required": [
+        "type",
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "settings",
+        "name",
+        "language"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Represents the project type.",
+          "enum": [
+            "conversation",
+            "workflow"
+          ],
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Represents the project creation datetime.",
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "Represents the project creation datetime.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Represents the project last trained datetime.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Represents the project last deployed datetime.",
+          "type": "string"
+        },
+        "settings": {
+          "description": "Gets or sets the project settings.",
+          "$ref": "#/definitions/ProjectSettingsObject"
+        },
+        "name": {
+          "description": "Gets or sets the new project name.",
+          "type": "string"
+        },
+        "multiLingual": {
+          "description": "Gets or sets a value indicating whether gets or sets whether the project is multilingual or not.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Gets or sets the new project description.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Gets or sets the new project culture.",
+          "type": "string"
+        }
+      }
+    },
+    "CluProjectGetObjectList": {
+      "required": [
+        "projects",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "projects": {
+          "description": "Gets or sets the projects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CluProjectGetObject"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDeletionJobStatusObject": {
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status",
+        "errors"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the jobId.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorObject"
+          }
+        }
+      }
+    },
+    "LanguagesGetObject": {
+      "required": [
+        "languages"
+      ],
+      "type": "object",
+      "properties": {
+        "languages": {
+          "description": "Gets or sets the languages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageGetObject"
+          }
+        }
+      }
+    },
+    "LanguageGetObject": {
+      "required": [
+        "name",
+        "languageCode"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the language name.",
+          "type": "string"
+        },
+        "languageCode": {
+          "description": "Gets or sets the language code.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingJobCreateObject": {
+      "required": [
+        "modelLabel"
+      ],
+      "type": "object",
+      "properties": {
+        "modelLabel": {
+          "description": "Represents Training Model Name.",
+          "type": "string"
+        },
+        "runVerification": {
+          "description": "Represents the option to run verifications. By default, verifications are turned on.",
+          "type": "boolean"
+        }
+      }
+    },
+    "TrainingJobResultObject": {
+      "required": [
+        "result",
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "expirationDateTime",
+        "status",
+        "errors"
+      ],
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Represents Training Tasks Detailed Result.",
+          "$ref": "#/definitions/TrainingJobTaskResultObject"
+        },
+        "jobId": {
+          "description": "Gets or sets the jobId.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the created time.",
+          "type": "string"
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the last updated time.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "Gets or sets the expiration time.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the job status.",
+          "enum": [
+            "unknown",
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallyCompleted"
+          ],
+          "type": "string"
+        },
+        "errors": {
+          "description": "Gets or sets the errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorObject"
+          }
+        }
+      }
+    },
+    "TrainingJobTaskResultObject": {
+      "required": [
+        "trainedModelLabel",
+        "trainStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "trainedModelLabel": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "trainStatus": {
+          "description": "Represents model train status.",
+          "$ref": "#/definitions/TrainingJobStatusResultStatusObject"
+        },
+        "evaluationStatus": {
+          "description": "Represents model evaluation status.",
+          "$ref": "#/definitions/TrainingJobStatusResultStatusObject"
+        }
+      }
+    },
+    "TrainingJobStatusResultStatusObject": {
+      "required": [
+        "percentComplete",
+        "elapsedTime"
+      ],
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        },
+        "elapsedTime": {
+          "description": "Represents the elapsed time.\n            This string is in the format hh:mm:ss",
+          "type": "string"
+        }
+      }
+    },
+    "TrainingJobStatusObjectList": {
+      "required": [
+        "jobs",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "jobs": {
+          "description": "Gets or sets the jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrainingJobResultObject"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainedModelObjectList": {
+      "required": [
+        "trainedModels",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "trainedModels": {
+          "description": "Gets or sets the jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrainedModelObject"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the next page link.",
+          "type": "string"
+        }
+      }
+    },
+    "TrainedModelObject": {
+      "required": [
+        "label",
+        "modelId",
+        "lastTrainedDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "Represents the Id of this model.\n            The model Id has the format \"{version}-{yyyyMMddThhmmss}-{Guid.NewGuid()}\".\n            This is used almost as a thumbprint for the model and isn't consumed in any of the APIs.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "Represents trained model last trained time.",
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationResultObject": {
+      "required": [
+        "entityEvaluation",
+        "intentEvaluation"
+      ],
+      "type": "object",
+      "properties": {
+        "entityEvaluation": {
+          "description": "Contains the data related to entity evaluation.",
+          "$ref": "#/definitions/EvaluationResultEntityObject"
+        },
+        "intentEvaluation": {
+          "description": "Contains the data related to intent evaluation.",
+          "$ref": "#/definitions/EvaluationResultIntentObject"
+        }
+      }
+    },
+    "EvaluationResultEntityObject": {
+      "required": [
+        "confusionMatrix",
+        "entities",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "confusionMatrix": {
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same entity)\n            the matrix is between the actual entity that was labelled and the entity that was predicted.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/ConfusionMatrixObject"
+            }
+          }
+        },
+        "entities": {
+          "description": "Represents the entities evaluation",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluationResultIntentAndEntityObject"
+          }
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall",
+          "type": "number"
+        }
+      }
+    },
+    "ConfusionMatrixObject": {
+      "required": [
+        "normalizedValue",
+        "rawValue"
+      ],
+      "type": "object",
+      "properties": {
+        "normalizedValue": {
+          "format": "float",
+          "description": "Represents normalized value in percentages.",
+          "type": "number"
+        },
+        "rawValue": {
+          "format": "float",
+          "description": "Represents raw value.",
+          "type": "number"
+        }
+      }
+    },
+    "EvaluationResultIntentAndEntityObject": {
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositivesCount",
+        "trueNegativesCount",
+        "falsePositivesCount",
+        "falseNegativesCount"
+      ],
+      "type": "object",
+      "properties": {
+        "f1": {
+          "format": "double",
+          "description": "Represents the model precision",
+          "type": "number"
+        },
+        "precision": {
+          "format": "double",
+          "description": "Represents the model recall",
+          "type": "number"
+        },
+        "recall": {
+          "format": "double",
+          "description": "Represents the model F1 score",
+          "type": "number"
+        },
+        "truePositivesCount": {
+          "format": "int32",
+          "description": "Represents the count of true positives",
+          "type": "integer"
+        },
+        "trueNegativesCount": {
+          "format": "int32",
+          "description": "Represents the count of true negatives",
+          "type": "integer"
+        },
+        "falsePositivesCount": {
+          "format": "int32",
+          "description": "Represents the count of false positives",
+          "type": "integer"
+        },
+        "falseNegativesCount": {
+          "format": "int32",
+          "description": "Represents the count of false negatives",
+          "type": "integer"
+        }
+      }
+    },
+    "EvaluationResultIntentObject": {
+      "required": [
+        "confusionMatrix",
+        "intents",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "confusionMatrix": {
+          "description": "Represents the confusion matrix between two intents (the two intents can be the same intent)\n            the matrix is between the actual intent that was labelled and the intent that was predicted.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/ConfusionMatrixObject"
+            }
+          }
+        },
+        "intents": {
+          "description": "Represents the intents evaluation.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluationResultIntentAndEntityObject"
+          }
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall",
+          "type": "number"
+        }
+      }
+    },
+    "VerificationResultsObject": {
+      "required": [
+        "entityVerification",
+        "intentVerification"
+      ],
+      "type": "object",
+      "properties": {
+        "entityVerification": {
+          "description": "Represents the verification result for entity extraction for a list of examples.",
+          "$ref": "#/definitions/VerificationResultEntityObject"
+        },
+        "intentVerification": {
+          "description": "Represents the verification result for intent classification for a list of examples.",
+          "$ref": "#/definitions/VerificationResultIntentObject"
+        }
+      }
+    },
+    "VerificationResultEntityObject": {
+      "required": [
+        "examples"
+      ],
+      "type": "object",
+      "properties": {
+        "examples": {
+          "description": "Represents the entity verification result for a list of examples.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerificationResultEntityExampleObject"
+          }
+        }
+      }
+    },
+    "VerificationResultEntityExampleObject": {
+      "required": [
+        "entities",
+        "text",
+        "language"
+      ],
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "Represents the entity labelled examples.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerificationResultExampleEntityObject"
+          }
+        },
+        "text": {
+          "description": "Represents the example text.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the example language.",
+          "type": "string"
+        }
+      }
+    },
+    "VerificationResultExampleEntityObject": {
+      "required": [
+        "labeledEntities",
+        "predictedEntities",
+        "regionOffset",
+        "regionLength"
+      ],
+      "type": "object",
+      "properties": {
+        "labeledEntities": {
+          "description": "Represents the entity labels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerificationResultExampleEntityLabelObject"
+          }
+        },
+        "predictedEntities": {
+          "description": "Represents the predicted entity labels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerificationResultExampleEntityLabelObject"
+          }
+        },
+        "regionOffset": {
+          "format": "int32",
+          "description": "Represents the region offset.",
+          "type": "integer"
+        },
+        "regionLength": {
+          "format": "int32",
+          "description": "Represents the region length.",
+          "type": "integer"
+        }
+      }
+    },
+    "VerificationResultExampleEntityLabelObject": {
+      "required": [
+        "entityName",
+        "offset",
+        "length"
+      ],
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "description": "Represents the entity name.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "Represents the entity offset index relative to the original text.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "Represents the entity length.",
+          "type": "integer"
+        }
+      }
+    },
+    "VerificationResultIntentObject": {
+      "required": [
+        "examples"
+      ],
+      "type": "object",
+      "properties": {
+        "examples": {
+          "description": "Represents the intent verification results for a list of examples.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerificationResultIntentExampleObject"
+          }
+        }
+      }
+    },
+    "VerificationResultIntentExampleObject": {
+      "required": [
+        "intents",
+        "text",
+        "language"
+      ],
+      "type": "object",
+      "properties": {
+        "intents": {
+          "description": "Represents the intent labeled examples.",
+          "$ref": "#/definitions/VerificationResultExampleIntentObject"
+        },
+        "text": {
+          "description": "Represents the example text.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the example language.",
+          "type": "string"
+        }
+      }
+    },
+    "VerificationResultExampleIntentObject": {
+      "required": [
+        "labeledIntents",
+        "predictedIntents"
+      ],
+      "type": "object",
+      "properties": {
+        "labeledIntents": {
+          "description": "Represents the intent names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "predictedIntents": {
+          "description": "Represents the predicted intent names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
