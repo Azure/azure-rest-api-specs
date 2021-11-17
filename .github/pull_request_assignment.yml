@@ -1,76 +1,8 @@
 ---
 - rule:
-    # translator data-plane PR
-    paths:
-      - "specification/cognitiveservices/data-plane/TranslatorText/**"
+    paths: "documentation/**"
     reviewers:
-      - kristapratico
-      - maririos
-
-- rule:
-    paths:
-      - "specification/confidentialledger/data-plane/**"
-    reviewers:
-      - christothes 
-      
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - akning-ms
-
-- rule:
-    # eventgrid data-plane PR
-    paths:
-      - "specification/eventgrid/data-plane/**"
-    reviewers:
-      - lmazuel
-
-- rule:
-    # synapse data-plane PR
-    paths:
-      - "specification/synapse/data-plane/**"
-    reviewers:
-      - lmazuel
-
-- rule:
-    # data-plane PR
-    paths:
-      - "specification/**/data-plane/iot**"
-    reviewers:
-      - drwill-ms
-
-- rule:
-    # data-plane PR
-    paths:
-      - "specification/**/data-plane/**"
-    reviewers:
-      - anuchandy
-      - jhendrixMSFT
-      - tjprescott
-
-- rule:
-    paths:
-      - "specification/network/**"
-    reviewers:
-      - lirenhe
-      - raych1
-
-
-- rule:
-    paths: "specification/common-types/**"
-    reviewers:
-      - raych1
-      - akning-ms
-      - leni-msft
       - ruowan
-      - jianyexi
-      - zhenglaizhang
-      
-      
-- rule:
-    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate|servicelinker)/**"
-    reviewers:
       - raych1
       
 - rule:
@@ -79,115 +11,40 @@
       - ruowan
       
 - rule:
-    paths: "specification/sql/**"
-    reviewers:
-      - zhenglaizhang
-      
-- rule:
-    paths: "specification/signalr/**"
-    reviewers:
-      - leni-msft
-      
-- rule:
-    paths: "specification/eventhub/**"
+    paths: "specification/**/Microsoft.Network/**"
     reviewers:
       - ruowan
-- rule:
-    paths: "specification/compute/**"
-    reviewers:
-      - ArcturusZhang
+      - NullMDR
+      - Dreamgoing
 
 - rule:
-    paths:
-      - "specification/machinelearningservices/**"
+    paths: 
+      - "specification/@(containerservice|databricks|containerregistry|compute)/**"
+      - "specification/@(docker)/**"
     reviewers:
-      - ArcturusZhang
+      - ruowan
+      - Dreamgoing
 
 - rule:
-    paths:
-      - "specification/authorization/**"
+    paths: "specification/**/date-plane/**"
     reviewers:
+      - Dreamgoing
+
+- rule:
+    paths: 
+      - "specification/**/resource-manager/**"
+    reviewers:
+      - NullMDR
       - ruowan
 
 - rule:
-    paths:
-      - "specification/datafactory/**"
+    paths: 
+     - "**/package.json"
+     - "package.json"
     reviewers:
-      - leni-msft
-
-- rule:
-    paths:
-      - "specification/storage/**"
-    reviewers:
-      - jianyexi
-
-
-- rule:	
-    paths: "specification/mediaservices/**"	
-    reviewers:	
-      - allenjzhang
-      
-- rule:
-    paths:
-      - "specification/containerregistry/**"
-    reviewers:
-      - fengzhou-msft
-
-- rule:
-    paths:
-      - "specification/mixedreality/**"
-      - "specification/hdinsight/**"
-    reviewers:
-      - leni-msft
-
-- rule:
-    paths:
-      - "specification/web/**"
-    reviewers:
-      - weidongxu-microsoft
-      
-- rule:
-    paths:
-      - "specification/keyvault/**"
-    reviewers:
-      - zhenglaizhang
-
-- rule:
-    paths:
-      - "documentation/**"
-    reviewers:
-      - josefree
-      - akning-ms
-
-
-- rule:
-    paths:
-      - "**/package.json"	
-      - ".github/**"	
-      - "**/azure-pipelines.yml"	
-      - ".azure-pipelines/**"	
-      - ".azure-pipelines-preproduction/**"	
-    reviewers:
-      - akning-ms
-      - raych1
-      - zhenglaizhang
-
-- rule:
-    # manager-plane PR
-    paths:
-      - "**"
-    reviewers:
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - raych1
-      - akning-ms
-      - leni-msft
       - ruowan
-      - jianyexi
-      - zhenglaizhang
-      - chunyu3
-      - changlong-liu
-      - msyyc
-      - qiaozha
-      - weidong
+
+- rule:
+    paths: "**"
+    reviewers:
+      - ruowan
