@@ -56,6 +56,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
@@ -85,6 +90,11 @@
           },
           "204": {
             "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceLinks": {
+            "$ref": "./examples/DeleteResourceLinks.json"
           }
         }
       },
@@ -129,6 +139,11 @@
               "$ref": "#/definitions/ResourceLink"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Or Update Resource Links": {
+            "$ref": "./examples/CreateOrUpdateResourceLinks.json"
+          }
         }
       },
       "get": {
@@ -156,6 +171,11 @@
             "schema": {
               "$ref": "#/definitions/ResourceLink"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Resource Links": {
+            "$ref": "./examples/GetResourceLinks.json"
           }
         }
       }
@@ -193,7 +213,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ResourceLinkFilter"
+        "x-ms-odata": "#/definitions/ResourceLinkFilter",
+        "x-ms-examples": {
+          "List Resource Links At Subscription": {
+            "$ref": "./examples/ListResourceLinksAtSubscription.json"
+          }
+        }
       }
     },
     "/{scope}/providers/Microsoft.Resources/links": {
@@ -241,7 +266,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ResourceLinkFilter"
+        "x-ms-odata": "#/definitions/ResourceLinkFilter",
+        "x-ms-examples": {
+          "List Resource Links At Source Scope": {
+            "$ref": "./examples/ListResourceLinksAtSourceScope.json"
+          }
+        }
       }
     }
   },
