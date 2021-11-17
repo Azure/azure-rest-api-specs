@@ -3514,6 +3514,13 @@
             "description": "The name of the resource group."
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -3541,6 +3548,13 @@
         "operationId": "VirtualMachines_ListAll",
         "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
