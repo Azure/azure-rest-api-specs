@@ -299,6 +299,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnameSites": {
+      "get": {
+        "summary": "Get custom hostnames under this subscription",
+        "operationId": "ListCustomHostNameSites",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomHostnameSitesCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get custom hostnames under subscription": {
+            "$ref": "./examples/ListCustomHostNameSites.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deploymentLocations": {
       "get": {
         "summary": "Gets list of available geo regions plus ministamps",
@@ -794,6 +830,57 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "CustomHostnameSites": {
+      "description": "A hostname and its assigned sites",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CustomHostnameSites resource specific properties",
+          "type": "object",
+          "properties": {
+            "customHostname": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            },
+            "siteResourceIds": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/Identifier"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CustomHostnameSitesCollection": {
+      "description": "Collection of custom hostname sites",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomHostnameSites"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
