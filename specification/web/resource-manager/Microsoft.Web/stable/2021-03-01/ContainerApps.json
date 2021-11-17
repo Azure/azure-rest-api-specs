@@ -254,6 +254,49 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/containerApps/{name}/listSecrets": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "List secrets for a container app",
+        "operationId": "ContainerApps_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretsCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/ListContainerAppSecrets.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -370,6 +413,22 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SecretsCollection": {
+      "description": "Container App Secrets Collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          }
         }
       }
     },
