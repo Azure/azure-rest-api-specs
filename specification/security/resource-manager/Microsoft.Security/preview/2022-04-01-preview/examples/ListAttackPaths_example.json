@@ -17,9 +17,9 @@
                             "description": "User account <user account> is <has no MFA enabled / external user account to the organization> and has <permissions type> permissions to a subscription",
                             "potentialImpact": "Attacker can potentially breach the user account and user his permissions on the subscription to manage the resources within it (create resources, delete resources)",
                             "graph": {
-                                "AttackPathNodes": [
+                                "Nodes": [
                                     {
-                                        "displayName": "7d6fbc99-0db4-485b-8882-7a39d20bac65",
+                                        "name": "7d6fbc99-0db4-485b-8882-7a39d20bac65",
                                         "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapVertexes/b0efc5e9-13ce-ca76-222d-460fa86c8912",
                                         "label": "Account",
                                         "tags": {
@@ -29,11 +29,11 @@
                                             "Type": "Account",
                                             "PrincipalOid": "7d6fbc990db4485b88827a39d20bac65"
                                         },
-                                        "entityDetails": {
+                                        "additionalData": {
                                         }
                                     },
                                     {
-                                        "displayName": "ebe59759-e1a0-4110-a32f-889ceeca0936",
+                                        "name": "ebe59759-e1a0-4110-a32f-889ceeca0936",
                                         "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapVertexes/0e442e97-c9a0-d8d3-69da-3886443f16c7",
                                         "label": "subscriptions",
                                         "tags": {
@@ -43,26 +43,26 @@
                                             "Type": "AzureResource",
                                             "AzureResourceId": "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936"
                                         },
-                                        "entityDetails": {
+                                        "additionalData": {
                                         }
                                     }
                                 ],
-                                "AttackPathEdges": [
+                                "Edges": [
                                     {
-                                        "sourceNode": "b0efc5e9-13ce-ca76-222d-460fa86c8912",
-                                        "targetNode": "0e442e97-c9a0-d8d3-69da-3886443f16c7",
+                                        "sourceNodeId": "b0efc5e9-13ce-ca76-222d-460fa86c8912",
+                                        "targetNodeId": "0e442e97-c9a0-d8d3-69da-3886443f16c7",
                                         "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapEdges/58fd30a7-bd37-5da4-bfbb-34fa93e0b12a",
                                         "label": "AssignedWithPermissions",
                                         "tags": {
                                             "Category": "Permissions"
                                         },
-                                        "entityDetails": {
+                                        "additionalData": {
                                         }                                      
                                     }
                                 ]
 
                             },
-                            "recommendations": [
+                            "assessments": [
                                     "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/c0cb17b2-0607-48a7-b0e0-903ed22de39b",
                                     "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/2c79b4af-f830-b61e-92b9-63dfa30f16e4",                            ,
                                     "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/c3b6ae71-f1f0-31b4-e6c1-d5951285d03d",                                ,

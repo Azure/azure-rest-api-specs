@@ -136,9 +136,9 @@
           "graph": {
             "$ref": "#/definitions/AttackPathGraph"
           },
-          "recommendations": {
+          "assessments": {
             "type": "array",
-            "description": "recommendations that can help mitigate the attack path",
+            "description": "assessments that can help mitigate the attack path",
             "items": {
               "type": "string"
             }
@@ -166,14 +166,14 @@
         "type": "object",
         "description": "Describes properties of an attack path.",
         "properties": {
-          "AttackPathNodes": {
+          "Nodes": {
             "type": "array",
             "description": "nodes composing the attack path",
             "items": {
               "$ref": "#/definitions/AttackPathNode"
             }
           },
-          "AttackPathEdges": {
+          "Edges": {
             "type": "array",
             "description": "connections between the nodes composing the attack path",
             "items": {
@@ -193,7 +193,7 @@
         "type": "object",
         "description": "an entity which is part of the attack path",
         "properties": {
-          "displayName": {
+          "name": {
             "readOnly": true,
             "type": "string",
             "description": "display name of the entity"
@@ -221,7 +221,7 @@
             "additionalProperties": true,
             "description": "identifiers that can be used to refer the actual entity"
           },
-          "entityDetails": {
+          "additionalData": {
             "type": "object",
             "additionalProperties": true,
             "description": "more details on the node entity that are relevant to understand the attack path"            
@@ -232,12 +232,12 @@
         "type": "object",
         "description": "a connection relation between two attack path entities",
         "properties": {
-          "sourceNode": {
+          "sourceNodeId": {
             "readOnly": true,
             "type": "string",
             "description": "source node"
           },
-          "targetNode": {
+          "targetNodeId": {
             "readOnly": true,
             "type": "string",
             "description": "target node"    
@@ -260,7 +260,7 @@
               "type": "string"
             }    
           },
-          "entityDetails": {
+          "additionalData": {
             "type": "object",
             "additionalProperties": true,
             "description": "more details on the edge that are relevant to understand the attack path"            
@@ -288,7 +288,7 @@
             },
             "description": "insight categories"
           },
-          "entityDetails": {
+          "additionalData": {
             "type": "object",
             "additionalProperties": true,
             "description": "more details on the edge that are relevant to understand the attack path"            
