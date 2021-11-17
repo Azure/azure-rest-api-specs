@@ -70,6 +70,8 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 input-file:
   - Microsoft.RecoveryServices/stable/2021-10-01/bms.json
 ```
+<!-- prettier-ignore-start -->
+<!-- Older packages containing multiple versions -->
 
 ### Tag: package-2021-08
 
@@ -256,6 +258,8 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-06-01/recoveryservicesbackup.json
 - Microsoft.RecoveryServices/stable/2016-06-01/registeredIdentities.json
 ```
+<!-- Older packages that contain multiple versions -->
+<!-- prettier-ignore-end -->
 
 ### Tag: package-2016-08
 
@@ -283,7 +287,6 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 input-file:
 - Microsoft.RecoveryServices/stable/2017-07-01/bms.json
 ```
-
 ---
 
 # Code Generation
