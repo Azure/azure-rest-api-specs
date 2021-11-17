@@ -583,7 +583,7 @@
         "tags": [
           "ExposureControl"
         ],
-        "summary": "Gets enabled status for the input feature list at the account level.",
+        "summary": "Gets enabled status for the input feature list at the account level. \r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "operationId": "Features_AccountGet",
         "parameters": [
@@ -635,7 +635,7 @@
         "tags": [
           "ExposureControl"
         ],
-        "summary": "Gets enabled status for the input feature list at the location and subscription level.",
+        "summary": "Gets enabled status for the input feature list at the location and subscription level. \r\nStatus of enabled features will be true. Status of disabled features will be false. \r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "operationId": "Features_SubscriptionGet",
         "parameters": [
@@ -2074,12 +2074,13 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionId": {
       "name": "subscriptionId",
@@ -2096,13 +2097,12 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "accountName": {
-      "name": "accountName",
-      "in": "path",
-      "description": "The name of the account.",
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     }
   },
   "securityDefinitions": {
