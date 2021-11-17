@@ -578,6 +578,111 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/getFeatures": {
+      "post": {
+        "tags": [
+          "ExposureControl"
+        ],
+        "summary": "Gets enabled status for the input feature list at the account level.",
+        "description": "Gets details from a list of feature names.",
+        "operationId": "Features_AccountGet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "featureRequest",
+            "in": "body",
+            "description": "Request body with feature names",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Features_AccountGet": {
+            "$ref": "./examples/Features_AccountGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/location/{location}/getFeatures": {
+      "post": {
+        "tags": [
+          "ExposureControl"
+        ],
+        "summary": "Gets enabled status for the input feature list at the location and subscription level.",
+        "description": "Gets details from a list of feature names.",
+        "operationId": "Features_SubscriptionGet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of feature",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureRequest",
+            "in": "body",
+            "description": "Request body with feature names",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Features_SubscriptionGet": {
+            "$ref": "./examples/Features_SubscriptionGet.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Purview/operations": {
       "get": {
         "tags": [
@@ -1168,12 +1273,21 @@
         "type": {
           "description": "Identity Type",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "type",
             "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -1237,6 +1351,7 @@
       }
     },
     "CloudConnectors": {
+      "description": "External Cloud Service connectors",
       "type": "object",
       "properties": {
         "awsExternalId": {
@@ -1299,6 +1414,22 @@
         },
         "storageAccount": {
           "description": "Gets the managed storage account resource identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Uses client ID and Principal ID",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Gets or Sets Client ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Gets or Sets Principal ID",
           "type": "string",
           "readOnly": true
         }
@@ -1411,6 +1542,10 @@
       "description": "The account update properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity related info to add/remove userAssignedIdentities."
+        },
         "properties": {
           "$ref": "#/definitions/AccountProperties",
           "description": "The account properties."
@@ -1429,12 +1564,10 @@
       "type": "object",
       "properties": {
         "atlasKafkaPrimaryEndpoint": {
-          "x-ms-secret": true,
           "description": "Gets or sets the primary connection string.",
           "type": "string"
         },
         "atlasKafkaSecondaryEndpoint": {
-          "x-ms-secret": true,
           "description": "Gets or sets the secondary connection string.",
           "type": "string"
         }
@@ -1485,6 +1618,33 @@
         "subscriptionId": {
           "description": "The subscription ID of the account that is set as the default.",
           "type": "string"
+        }
+      }
+    },
+    "BatchFeatureRequest": {
+      "description": "Exposure Control settings request model",
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Set of features",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BatchFeatureStatus": {
+      "description": "Container for Exposure Control features",
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Features with enabled status",
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
         }
       }
     },
@@ -1914,17 +2074,17 @@
     }
   },
   "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
     "api-version": {
       "name": "api-version",
       "in": "query",
       "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
       "required": true,
       "type": "string"
     },
