@@ -237,6 +237,7 @@
   },
   "definitions": {
     "PrivateEndpoint": {
+      "type": "object",
       "description": "Complete information about the private endpoint.",
       "allOf": [
         {
@@ -245,6 +246,7 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "The properties associated with a private endpoint.",
           "$ref": "#/definitions/PrivateEndpointProperties"
         },
@@ -256,6 +258,7 @@
       }
     },
     "PrivateEndpointProperties": {
+      "type": "object",
       "description": "The properties associated with a private endpoint.",
       "properties": {
         "createdDate": {
@@ -273,6 +276,7 @@
       }
     },
     "PrivateLinkServiceConnection": {
+      "type": "object",
       "description": "A grouping of information about the connection to the remote resource.",
       "properties": {
         "properties": {
@@ -283,6 +287,7 @@
       }
     },
     "PrivateLinkServiceConnectionProperties": {
+      "type": "object",
       "description": "Bag of properties defining a privatelinkServiceConnection.",
       "properties": {
         "privateLinkServiceId": {
@@ -308,6 +313,7 @@
       }
     },
     "PrivateLinkConnectionState": {
+      "type": "object",
       "description": "A collection of read-only information about the state of the connection to the private remote resource.",
       "properties": {
         "status": {
@@ -328,6 +334,7 @@
       }
     },
     "PrivateEndpointListResult": {
+      "type": "object",
       "description": "A list of private endpoints.",
       "properties": {
         "value": {

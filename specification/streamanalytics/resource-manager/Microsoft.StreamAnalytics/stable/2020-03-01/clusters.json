@@ -366,6 +366,7 @@
   },
   "definitions": {
     "Cluster": {
+      "type": "object",
       "description": "A Stream Analytics Cluster object",
       "allOf": [
         {
@@ -382,12 +383,14 @@
           "readOnly": true
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "The properties associated with a Stream Analytics cluster.",
           "$ref": "#/definitions/ClusterProperties"
         }
       }
     },
     "ClusterProperties": {
+      "type": "object",
       "description": "The properties associated with a Stream Analytics cluster.",
       "properties": {
         "createdDate": {
@@ -419,6 +422,7 @@
       }
     },
     "ClusterListResult": {
+      "type": "object",
       "description": "A list of clusters populated by a 'list' operation.",
       "properties": {
         "value": {
@@ -437,6 +441,7 @@
       }
     },
     "ClusterJob": {
+      "type": "object",
       "description": "A streaming job.",
       "properties": {
         "id": {
@@ -456,6 +461,7 @@
       }
     },
     "ClusterJobListResult": {
+      "type": "object",
       "description": "A list of streaming jobs. Populated by a List operation.",
       "properties": {
         "value": {
@@ -474,6 +480,7 @@
       }
     },
     "ClusterSku": {
+      "type": "object",
       "description": "The SKU of the cluster. This determines the size/capacity of the cluster. Required on PUT (CreateOrUpdate) requests.",
       "properties": {
         "name": {
