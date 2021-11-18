@@ -33,7 +33,18 @@ tag: package-preview-2022-01
 
 ---
 
+### Tag: package-2022-01-15-preview
 
+These settings apply only when `--tag=package-2022-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-01-15-preview'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/operations.json
+```
 ### Tag: package-preview-2022-01
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
