@@ -72,6 +72,7 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
+  - suppress: XmsExamplesRequired
   - suppress: LongRunningOperationsWithLongRunningExtension
   - suppress: OAV107
 ```
