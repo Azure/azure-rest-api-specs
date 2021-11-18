@@ -42,7 +42,6 @@ APIs must only be added to this section when the API is publicly available in at
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
-- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
@@ -155,6 +154,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 
 
 # Needed when there is more than one input file
