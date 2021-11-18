@@ -17,20 +17,20 @@
   ],
   "paths": {
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/fetchAllSubscriptionsInTenant": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/PrivateStoreIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
       "post": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_FetchAllSubscriptionsInTenant",
         "description": "Fetch all subscriptions in tenant, only for marketplace admin",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -75,6 +75,7 @@
   },
   "definitions": {
     "SubscriptionsList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -94,6 +95,7 @@
       "description": "Subscription list operation response."
     },
     "Subscription": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
