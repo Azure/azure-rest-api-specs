@@ -37,6 +37,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -73,6 +79,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -112,6 +124,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -149,6 +167,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
@@ -189,6 +213,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK"
           },
@@ -225,6 +255,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -261,6 +297,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -300,6 +342,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -339,6 +387,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -392,11 +446,13 @@
         },
         "subscriptionCount": {
           "description": "Current subscription count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maxSubscriptionsPerAccount": {
           "description": "Maximum subscriptions per account.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "basePlanIds": {
           "description": "Identifiers of the base plans that become available to the tenant immediately when a tenant subscribes to the offer.",
@@ -454,7 +510,8 @@
         },
         "maxAcquisitionCount": {
           "description": "Maximum number of instances that can be acquired by a single subscription. If not specified, the assumed value is 1.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -489,7 +546,8 @@
         },
         "maxAcquisitionCount": {
           "description": "The maximum acquisition count by subscribers",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

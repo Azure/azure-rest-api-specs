@@ -6,22 +6,18 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.guestconfig
-  package-name: azure-mgmt-guestconfig
-  package-version: 0.1.0
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.guestconfig
+package-name: azure-mgmt-guestconfig
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/machinelearning/azure-mgmt-guestconfig/azure/mgmt/guestconfig
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/machinelearning/azure-mgmt-guestconfig/azure/mgmt/guestconfig
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/machinelearning/azure-mgmt-guestconfig
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/machinelearning/azure-mgmt-guestconfig
 ```

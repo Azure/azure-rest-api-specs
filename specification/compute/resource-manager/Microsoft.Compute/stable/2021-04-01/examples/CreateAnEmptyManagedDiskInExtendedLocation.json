@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-04-01",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "extendedLocation": {
+        "type": "EdgeZone",
+        "name": "{edge-zone-id}"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": 200
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk",
+        "extendedLocation": {
+          "type": "EdgeZone",
+          "name": "{edge-zone-id}"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk",
+        "extendedLocation": {
+          "type": "EdgeZone",
+          "name": "{edge-zone-id}"
+        }
+      }
+    }
+  }
+}

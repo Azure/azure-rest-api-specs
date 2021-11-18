@@ -186,7 +186,8 @@
             "type": "string",
             "enum": [
               "simple",
-              "full"
+              "full",
+              "semantic"
             ],
             "x-ms-enum": {
               "name": "QueryType",
@@ -201,6 +202,11 @@
                   "value": "full",
                   "name": "Full",
                   "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
+                },
+                {
+                  "value": "semantic",
+                  "name": "Semantic",
+                  "description": "Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus."
                 }
               ]
             },
@@ -241,6 +247,93 @@
               "type": "string"
             },
             "description": "The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "queryLanguage",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "en-us"
+            ],
+            "x-ms-enum": {
+              "name": "QueryLanguage",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Query language not specified."
+                },
+                {
+                  "value": "en-us",
+                  "name": "EnUs",
+                  "description": "English (US)"
+                }
+              ]
+            },
+            "description": "The language of the query.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "speller",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "lexicon"
+            ],
+            "x-ms-enum": {
+              "name": "Speller",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Speller not enabled."
+                },
+                {
+                  "value": "lexicon",
+                  "name": "Lexicon",
+                  "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
+                }
+              ]
+            },
+            "description": "Improve search recall by spell-correcting individual search query terms.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "answers",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "Answers",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return answers for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -992,6 +1085,51 @@
       "additionalProperties": true,
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval."
     },
+    "AnswerResult": {
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The score value represents how relevant the answer is to the the query relative to other answers returned for the query."
+        },
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The key of the document the answer was extracted from."
+        },
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The text passage extracted from the document contents as the answer."
+        },
+        "highlights": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
+    },
+    "CaptionResult": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A representative text passage extracted from the document most relevant to the search query."
+        },
+        "highlights": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.."
+    },
     "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
@@ -1019,6 +1157,16 @@
           "readOnly": true,
           "x-ms-client-name": "Facets",
           "description": "The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions."
+        },
+        "@search.answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Answers",
+          "x-nullable": true,
+          "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
         },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
@@ -1057,6 +1205,14 @@
           "x-nullable": false,
           "description": "The relevance score of the document compared to other documents returned by the query."
         },
+        "@search.rerankerScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "RerankerScore",
+          "x-nullable": true,
+          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
+        },
         "@search.highlights": {
           "type": "object",
           "additionalProperties": {
@@ -1068,6 +1224,16 @@
           "readOnly": true,
           "x-ms-client-name": "Highlights",
           "description": "Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query."
+        },
+        "@search.captions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaptionResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Captions",
+          "x-nullable": true,
+          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
         }
       },
       "required": [
@@ -1215,7 +1381,8 @@
       "type": "string",
       "enum": [
         "simple",
-        "full"
+        "full",
+        "semantic"
       ],
       "x-ms-enum": {
         "name": "QueryType",
@@ -1230,10 +1397,87 @@
             "value": "full",
             "name": "Full",
             "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
+          },
+          {
+            "value": "semantic",
+            "name": "Semantic",
+            "description": "Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus."
           }
         ]
       },
-      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
+      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax and 'semantic' if query syntax is not needed."
+    },
+    "Speller": {
+      "type": "string",
+      "enum": [
+        "none",
+        "lexicon"
+      ],
+      "x-ms-enum": {
+        "name": "Speller",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Speller not enabled."
+          },
+          {
+            "value": "lexicon",
+            "name": "Lexicon",
+            "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
+          }
+        ]
+      },
+      "description": "Improve search recall by spell-correcting individual search query terms."
+    },
+    "Answers": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "Answers",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return answers for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1."
+    },
+    "QueryLanguage": {
+      "type": "string",
+      "enum": [
+        "none",
+        "en-us"
+      ],
+      "x-ms-enum": {
+        "name": "QueryLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Query language not specified."
+          },
+          {
+            "value": "en-us",
+            "name": "EnUs",
+            "description": "English"
+          }
+        ]
+      },
+      "description": "The language of the query."
     },
     "ScoringStatistics": {
       "type": "string",
@@ -1371,6 +1615,18 @@
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
           "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match."
+        },
+        "queryLanguage": {
+          "$ref": "#/definitions/QueryLanguage",
+          "description": "A value that specifies the language of the search query."
+        },
+        "speller": {
+          "$ref": "#/definitions/Speller",
+          "description": "A value that specified the type of the speller to use to spell-correct individual search query terms."
+        },
+        "answers": {
+          "$ref": "#/definitions/Answers",
+          "description": "A value that specifies whether answers should be returned as part of the search response."
         },
         "select": {
           "type": "string",

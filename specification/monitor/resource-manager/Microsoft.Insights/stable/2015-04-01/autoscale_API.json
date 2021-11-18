@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a resource group",
         "tags": [
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/autoscalesettings/{autoscaleSettingName}": {
       "put": {
         "description": "Creates or updates an autoscale setting.",
         "tags": [
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/autoscalesettings": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/autoscalesettings": {
       "get": {
         "description": "Lists the autoscale settings for a subscription",
         "tags": [
@@ -386,6 +386,10 @@
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors."
         },
+        "metricResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource the rule monitors."
+        },
         "timeGrain": {
           "type": "string",
           "format": "duration",
@@ -398,7 +402,8 @@
             "Average",
             "Min",
             "Max",
-            "Sum"
+            "Sum",
+            "Count"
           ],
           "x-ms-enum": {
             "name": "MetricStatisticType",
@@ -453,6 +458,10 @@
             "$ref": "#/definitions/ScaleRuleMetricDimension"
           },
           "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}]."
+        },
+        "dividePerInstance": {
+          "type": "boolean",
+          "description": "a value indicating whether metric should divide per instance."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -483,7 +492,8 @@
           "enum": [
             "ChangeCount",
             "PercentChangeCount",
-            "ExactCount"
+            "ExactCount",
+            "ServiceAllowedNextValue"
           ],
           "x-ms-enum": {
             "name": "ScaleType",
@@ -649,11 +659,13 @@
       "properties": {
         "sendToSubscriptionAdministrator": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription administrator."
+          "description": "a value indicating whether to send email to subscription administrator.",
+          "default": false
         },
         "sendToSubscriptionCoAdministrators": {
           "type": "boolean",
-          "description": "a value indicating whether to send email to subscription co-administrators."
+          "description": "a value indicating whether to send email to subscription co-administrators.",
+          "default": false
         },
         "customEmails": {
           "type": "array",
@@ -743,6 +755,10 @@
         "targetResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource that the autoscale setting should be added to."
+        },
+        "targetResourceLocation": {
+          "type": "string",
+          "description": "the location of the resource that the autoscale setting should be added to."
         }
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."

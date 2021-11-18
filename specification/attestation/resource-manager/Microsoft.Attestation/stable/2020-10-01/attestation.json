@@ -267,7 +267,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProvider/{providerName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -664,9 +664,6 @@
     },
     "AttestationProvider": {
       "description": "Attestation service response message.",
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -807,15 +804,6 @@
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
         }
       }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "properties": {
-        "provisioningState": {
-          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "Provisioning state of the private endpoint connection."
-        }
-      },
-      "description": "Properties of the private endpoint connection resource."
     }
   },
   "parameters": {

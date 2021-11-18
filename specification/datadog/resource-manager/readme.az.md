@@ -9,4 +9,10 @@ az:
   package-name: azure-mgmt-datadog
 az-output-folder: $(azure-cli-extension-folder)/src/datadog
 python-sdk-output-folder: "$(az-output-folder)/azext_datadog/vendored_sdks/datadog"
+
+directive:
+  - where:
+      group: marketplace-agreement
+    set:
+      group: terms
 ```
