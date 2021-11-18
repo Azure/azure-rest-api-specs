@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2021-04-04-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "contactProfileName": "AQUA_DIRECTPLAYBACK_WITH_UPLINK"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AQUA_DIRECTPLAYBACK_WITH_UPLINK",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/contactProfiles/AQUA_DIRECTPLAYBACK_WITH_UPLINK",
+        "location": "westus",
+        "properties": {
+          "minimumViableContactDuration": "PT1M",
+          "minimumElevationDegrees": 10,
+          "autoTrackingConfiguration": "xBand",
+          "links": [
+            {
+              "polarization": "RHCP",
+              "direction": "uplink",
+              "gainOverTemperature": 0,
+              "eirpdBW": 45,
+              "channels": [
+                {
+                  "centerFrequencyMHz": 2106.4063,
+                  "bandwidthMHz": 0.036,
+                  "endPoint": {
+                    "ipAddress": "10.0.1.0",
+                    "endPointName": "AQUA_command",
+                    "port": "4000",
+                    "protocol": "TCP"
+                  },
+                  "modulationConfiguration": "AQUA_UPLINK_BPSK",
+                  "demodulationConfiguration": "na",
+                  "encodingConfiguration": "AQUA_CMD_CCSDS",
+                  "decodingConfiguration": "na"
+                }
+              ]
+            },
+            {
+              "polarization": "RHCP",
+              "direction": "downlink",
+              "gainOverTemperature": 25,
+              "eirpdBW": 0,
+              "channels": [
+                {
+                  "centerFrequencyMHz": 8160,
+                  "bandwidthMHz": 150,
+                  "endPoint": {
+                    "ipAddress": "10.0.2.0",
+                    "endPointName": "AQUA_directplayback",
+                    "port": "4000",
+                    "protocol": "TCP"
+                  },
+                  "modulationConfiguration": "na",
+                  "demodulationConfiguration": "AQUA_DOWNLINK_QPSK",
+                  "encodingConfiguration": "na",
+                  "decodingConfiguration": "AQUA_DIRECTPLAYBACK_CCSDS"
+                }
+              ]
+            }
+          ]
+        },
+        "type": "Microsoft.Orbital/contactProfiles"
+      }
+    }
+  }
+}
