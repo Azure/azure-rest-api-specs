@@ -1,7 +1,6 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "ApiVersion": "v3.2-preview.2",
     "Endpoint": "{Endpoint}",
     "input": {
       "documents": [
@@ -73,6 +72,28 @@
         ],
         "errors": [],
         "modelVersion": "2019-10-01"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Invalid Request.",
+          "innererror": {
+            "code": "MissingInputRecords",
+            "message": "Missing input records."
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error"
+        }
       }
     }
   }

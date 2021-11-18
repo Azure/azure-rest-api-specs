@@ -1,7 +1,6 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "ApiVersion": "v3.2-preview.2",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
     "input": {
@@ -34,7 +33,29 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.2/analyze/jobs/{jobId}"
+        "Operation-Location": "{endpoint}/text/analytics/v3.1-preview.5/analyze/jobs/{jobId}"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Invalid Request.",
+          "innererror": {
+            "code": "MissingInputRecords",
+            "message": "Missing input records."
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error"
+        }
       }
     }
   }

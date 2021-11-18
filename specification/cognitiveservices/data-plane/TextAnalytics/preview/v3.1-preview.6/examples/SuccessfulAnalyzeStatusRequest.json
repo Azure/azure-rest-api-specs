@@ -1,7 +1,6 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "ApiVersion": "v3.2-preview.2",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}"
   },
@@ -22,7 +21,7 @@
           "total": 2,
           "entityRecognitionTasks": [
             {
-              "taskName": "Recognize Entities (2020-04-01)",
+              "name": "Recognize Entities (2020-04-01)",
               "lastUpdateDateTime": "2020-10-01T15:01:03Z",
               "status": "succeeded",
               "results": {
@@ -84,6 +83,28 @@
               }
             }
           ]
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Not Found",
+          "innererror": {
+            "code": "JobIdNotFound",
+            "message": "Job ID not found."
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error"
         }
       }
     }
