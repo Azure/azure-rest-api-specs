@@ -11,23 +11,23 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.ContainerService/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.example",
+        "name": "microsoft.example",
+        "type": "Microsoft.KubernetesConfiguration/extensionTypes",
         "properties": {
           "releaseTrains": [
             "stable",
             "preview",
             "pilot"
           ],
-          "clusterTypes": "connectedClusters",
+          "clusterTypes": [
+            "connectedClusters"
+          ],
           "supportedScopes": {
             "defaultScope": "cluster",
             "clusterScopeSettings": {
-              "properties": {
-                "allowMultipleInstances": true,
-                "defaultReleaseNamespace": "kube-system"
-              },
-              "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.ContainerService/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.example",
-              "name": "microsoft.example",
-              "type": "Microsoft.KubernetesConfiguration/extensionTypes"
+              "allowMultipleInstances": true,
+              "defaultReleaseNamespace": "kube-system"
             }
           }
         },
