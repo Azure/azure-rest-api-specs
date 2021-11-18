@@ -26,7 +26,7 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-12-01
+tag: package-composite-v3
 ```
 ### Composite packages
 
@@ -45,6 +45,7 @@ APIs must only be added to this section when the API is publicly available in at
 input-file:
 - Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
 - Microsoft.Marketplace/stable/2021-12-01/Marketplace.json
+title: MarketplaceManagementClient
 ```
 
 ### Tag: package-composite-v2
