@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(python) && $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2021-09
   - tag: package-2021-08-preview-only
   - tag: package-2021-06-preview-only
   - tag: package-2020-11-preview-only
@@ -38,6 +39,16 @@ batch:
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2021-09-only and python
+
+These settings apply only when `--tag=package-2021-09-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-09-only' && $(python)
+namespace: azure.mgmt.containerregistry.v2021_09_01
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_09_01
 ```
 
 ### Tag: package-2021-08-preview-only and python
