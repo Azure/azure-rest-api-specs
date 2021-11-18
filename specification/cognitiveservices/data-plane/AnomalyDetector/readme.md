@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview`.
+The current release is `release_1_1_preview_1`.
 
 ``` yaml
-tag: release_1_1_preview
+tag: release_1_1_preview_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -28,6 +28,15 @@ These settings apply only when `--tag=release_1_1_preview` is specified on the c
 input-file: 
   - preview/v1.1-preview/AnomalyDetector.json
   - preview/v1.1-preview/MultivariateAnomalyDetector.json
+```
+
+### Release 1.1-preview-1
+These settings apply only when `--tag=release_1_1_preview_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview_1'
+input-file: 
+  - preview/v1.1-preview-1/AnomalyDetector.json
+  - preview/v1.1-preview-1/MultivariateAnomalyDetector.json
 ```
 
 ## Swagger to SDK
