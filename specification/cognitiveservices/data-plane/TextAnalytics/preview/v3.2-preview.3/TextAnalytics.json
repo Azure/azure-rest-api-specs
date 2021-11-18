@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v3.1-preview.5",
+    "version": "v3.2-preview.3",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
       "email": "mlapi@microsoft.com"
     },
     "title": "Text Analytics Client",
-    "description": "The Text Analytics API is a suite of natural language processing (NLP)  services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. Functionality for analysis of text specific to the healthcare domain and personal information are also available in the API. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
+    "description": "The Text Analytics API is a suite of natural language processing (NLP) services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. Functionality for analysis of text specific to the healthcare domain and personal information are also available in the API. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -23,11 +23,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.1-preview.5",
+    "hostTemplate": "{Endpoint}/text/analytics/{ApiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   },
@@ -64,19 +67,11 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -129,19 +124,11 @@
               "$ref": "#/definitions/AnalyzeJobState"
             }
           },
-          "404": {
-            "description": "Job ID not found.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -193,19 +180,11 @@
               "$ref": "#/definitions/HealthcareJobState"
             }
           },
-          "404": {
-            "description": "Job ID not found.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -237,19 +216,11 @@
               }
             }
           },
-          "404": {
-            "description": "Job ID not found.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -297,19 +268,11 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -358,19 +321,11 @@
               "$ref": "#/definitions/EntitiesResult"
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -427,19 +382,11 @@
               "$ref": "#/definitions/PiiResult"
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -487,19 +434,11 @@
               "$ref": "#/definitions/EntityLinkingResult"
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -544,19 +483,11 @@
               "$ref": "#/definitions/KeyPhraseResult"
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -601,19 +532,11 @@
               "$ref": "#/definitions/LanguageResult"
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -667,19 +590,11 @@
               "$ref": "#/definitions/SentimentResponse"
             }
           },
-          "400": {
-            "description": "Bad Request.",
+          "default": {
+            "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           }
         },
         "x-ms-examples": {
@@ -725,6 +640,30 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/SentimentAnalysisTask"
+              }
+            },
+            "extractiveSummarizationTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExtractiveSummarizationTask"
+              }
+            },
+            "customEntityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomEntitiesTask"
+              }
+            },
+            "customSingleClassificationTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomSingleClassificationTask"
+              }
+            },
+            "customMultiClassificationTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomMultiClassificationTask"
               }
             }
           },
@@ -823,7 +762,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorCodeValue",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Error code."
         },
@@ -877,6 +816,126 @@
         }
       }
     },
+    "ExtractiveSummarizationTask": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "loggingOptOut": {
+              "default": false,
+              "type": "boolean"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
+            },
+            "sentenceCount": {
+              "default": 3,
+              "type": "integer"
+            },
+            "sortBy": {
+              "default": "Offset",
+              "enum": [
+                "Offset",
+                "Rank"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "taskName": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomEntitiesTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "project-name": {
+              "type": "string"
+            },
+            "deployment-name": {
+              "type": "string"
+            },
+            "loggingOptOut": {
+              "default": false,
+              "type": "boolean"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
+            }
+          },
+          "type": "object",
+          "required": [
+            "project-name",
+            "deployment-name"
+          ]
+        },
+        "taskName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomSingleClassificationTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "project-name": {
+              "type": "string"
+            },
+            "deployment-name": {
+              "type": "string"
+            },
+            "loggingOptOut": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          "type": "object",
+          "required": [
+            "project-name",
+            "deployment-name"
+          ]
+        },
+        "taskName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomMultiClassificationTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "project-name": {
+              "type": "string"
+            },
+            "deployment-name": {
+              "type": "string"
+            },
+            "loggingOptOut": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          "type": "object",
+          "required": [
+            "project-name",
+            "deployment-name"
+          ]
+        },
+        "taskName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "PiiTask": {
       "properties": {
         "parameters": {
@@ -897,7 +956,7 @@
               "default": true,
               "type": "boolean"
             },
-            "pii-categories": {
+            "piiCategories": {
               "$ref": "#/definitions/PiiCategories"
             },
             "stringIndexType": {
@@ -905,6 +964,9 @@
             }
           },
           "type": "object"
+        },
+        "taskName": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -926,6 +988,9 @@
             }
           },
           "type": "object"
+        },
+        "taskName": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -951,6 +1016,9 @@
             }
           },
           "type": "object"
+        },
+        "taskName": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -1031,6 +1099,285 @@
         }
       ]
     },
+    "ExtractiveSummarizationResult": {
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/ExtractedDocumentSummary"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      }
+    },
+    "ExtractedDocumentSummary": {
+      "type": "object",
+      "required": [
+        "id",
+        "sentences",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "sentences": {
+          "type": "array",
+          "description": "A ranked list of sentences representing the extracted summary.",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummarySentence"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
+          }
+        },
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
+        }
+      }
+    },
+    "ExtractedSummarySentence": {
+      "type": "object",
+      "required": [
+        "text",
+        "rankScore",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The extracted sentence text."
+        },
+        "rankScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
+    "CustomEntitiesResult": {
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "projectName",
+        "deploymentName"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentEntities"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      }
+    },
+    "CustomSingleClassificationResult": {
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "projectName",
+        "deploymentName"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/SingleClassificationDocument"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      }
+    },
+    "CustomMultiClassificationResult": {
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "projectName",
+        "deploymentName"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/MultiClassificationDocument"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      }
+    },
+    "SingleClassificationDocument": {
+      "type": "object",
+      "required": [
+        "id",
+        "classification",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "classification": {
+          "$ref": "#/definitions/ClassificationResult"
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
+          }
+        },
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
+        }
+      }
+    },
+    "MultiClassificationDocument": {
+      "type": "object",
+      "required": [
+        "id",
+        "classifications",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "classifications": {
+          "type": "array",
+          "description": "Recognized classification results in the document.",
+          "items": {
+            "$ref": "#/definitions/ClassificationResult"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
+          }
+        },
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
+        }
+      }
+    },
+    "ClassificationResult": {
+      "type": "object",
+      "required": [
+        "category",
+        "confidenceScore"
+      ],
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Classification type."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the recognized classification."
+        }
+      }
+    },
     "SentimentResponse": {
       "type": "object",
       "required": [
@@ -1068,7 +1415,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "name": {
+        "taskName": {
           "type": "string"
         },
         "status": {
@@ -1089,7 +1436,8 @@
       },
       "required": [
         "status",
-        "lastUpdateDateTime"
+        "lastUpdateDateTime",
+        "taskName"
       ],
       "type": "object"
     },
@@ -1097,14 +1445,6 @@
       "properties": {
         "tasks": {
           "properties": {
-            "details": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/TaskState"
-                }
-              ],
-              "type": "object"
-            },
             "completed": {
               "type": "integer"
             },
@@ -1183,6 +1523,62 @@
                   },
                   {
                     "$ref": "#/definitions/SentimentTaskResult"
+                  }
+                ]
+              }
+            },
+            "extractiveSummarizationTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
+                  }
+                ]
+              }
+            },
+            "customEntityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/CustomEntitiesTaskResult"
+                  }
+                ]
+              }
+            },
+            "customSingleClassificationTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/CustomSingleClassificationTaskResult"
+                  }
+                ]
+              }
+            },
+            "customMultiClassificationTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "$ref": "#/definitions/CustomMultiClassificationTaskResult"
                   }
                 ]
               }
@@ -1663,6 +2059,9 @@
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "resolutions": {
+          "$ref": "#/definitions/EntityResolutions"
         }
       }
     },
@@ -1817,7 +2216,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "#/definitions/HealthcareEntityProperties"
         },
         {
           "$ref": "#/definitions/HealthcareLinkingProperties"
@@ -1947,6 +2346,77 @@
         "id": {
           "description": "Entity id in the given source catalog.",
           "type": "string"
+        }
+      }
+    },
+    "HealthcareEntityProperties": {
+      "type": "object",
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "x-ms-enum": {
+            "name": "healthcareEntityCategory",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Healthcare Entity Category.",
+          "enum": [
+            "BODY_STRUCTURE",
+            "AGE",
+            "GENDER",
+            "EXAMINATION_NAME",
+            "DATE",
+            "DIRECTION",
+            "FREQUENCY",
+            "MEASUREMENT_VALUE",
+            "MEASUREMENT_UNIT",
+            "RELATIONAL_OPERATOR",
+            "TIME",
+            "GENE_OR_PROTEIN",
+            "VARIANT",
+            "ADMINISTRATIVE_EVENT",
+            "CARE_ENVIRONMENT",
+            "HEALTHCARE_PROFESSION",
+            "DIAGNOSIS",
+            "SYMPTOM_OR_SIGN",
+            "CONDITION_QUALIFIER",
+            "MEDICATION_CLASS",
+            "MEDICATION_NAME",
+            "DOSAGE",
+            "MEDICATION_FORM",
+            "MEDICATION_ROUTE",
+            "FAMILY_RELATION",
+            "TREATMENT_NAME"
+          ]
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
         }
       }
     },
@@ -2093,6 +2563,38 @@
         }
       }
     },
+    "ExtractiveSummarizationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
+        }
+      }
+    },
+    "CustomEntitiesTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomEntitiesResult"
+        }
+      }
+    },
+    "CustomSingleClassificationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomSingleClassificationResult"
+        }
+      }
+    },
+    "CustomMultiClassificationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomMultiClassificationResult"
+        }
+      }
+    },
     "HealthcareTaskResult": {
       "properties": {
         "results": {
@@ -2141,8 +2643,7 @@
             "succeeded",
             "failed",
             "cancelled",
-            "cancelling",
-            "partiallyCompleted"
+            "cancelling"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2268,6 +2769,9 @@
             }
           },
           "type": "object"
+        },
+        "taskName": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -2289,6 +2793,9 @@
             }
           },
           "type": "object"
+        },
+        "taskName": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -2661,9 +3168,112 @@
       },
       "type": "array",
       "uniqueItems": true
+    },
+    "EntityResolutions": {
+      "properties": {
+        "dateTime.TimeRange": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeRangeResolution"
+          }
+        },
+        "dateTime.Time": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeResolution"
+          }
+        },
+        "quantity.Dimension": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionResolution"
+          }
+        }
+      }
+    },
+    "TimeRangeResolution": {
+      "type": "object",
+      "properties": {
+        "timex": {
+          "type": "string",
+          "description": "timex expression representation"
+        },
+        "start": {
+          "type": "string",
+          "description": "beginning date/time of the interval"
+        },
+        "end": {
+          "type": "string",
+          "description": "ending date/time of the interval"
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "TimeResolution": {
+      "type": "object",
+      "properties": {
+        "timex": {
+          "type": "string",
+          "description": "timex expression representation"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "time"
+          ],
+          "description": "The resolution type"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual time that the extracted text denote."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "DimensionResolution": {
+      "type": "object",
+      "properties": {
+        "subtype": {
+          "type": "string",
+          "description": "Dimension subtype (e.g., speed, volume)"
+        },
+        "unit": {
+          "type": "string",
+          "description": "The measured unit"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual value that the extracted text denote."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
     }
   },
   "parameters": {
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Text Analytics API version (for example, v3.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "v3.2-preview.2"
+      ],
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
     "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
