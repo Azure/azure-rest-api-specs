@@ -250,7 +250,12 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource."
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          }
+        ]
       }
     },
     "ExtensionTypeProperties": {
@@ -268,14 +273,9 @@
         "clusterTypes": {
           "description": "Cluster types",
           "readOnly": true,
-          "type": "string",
-          "enum": [
-            "connectedClusters",
-            "managedClusters"
-          ],
-          "x-ms-enum": {
-            "name": "clusterTypes",
-            "modelAsString": false
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "supportedScopes": {
@@ -290,7 +290,7 @@
       "description": "List versions for an Extension",
       "type": "object",
       "properties": {
-        "versions": {
+        "value": {
           "description": "Versions available for this Extension Type",
           "type": "array",
           "items": {
@@ -307,17 +307,17 @@
                   "type": "string"
                 }
               }
+            },
+            "systemData": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+              "readOnly": true,
+              "description": "Metadata pertaining to creation and last modification of the resource."
             }
           }
         },
         "nextLink": {
           "description": "The link to fetch the next page of Extension Types",
           "type": "string"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "Metadata pertaining to creation and last modification of the resource."
         }
       }
     },
@@ -339,27 +339,15 @@
       "type": "object",
       "description": "Extension scope settings",
       "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "Extension scope settings",
-          "properties": {
-            "allowMultipleInstances": {
-              "type": "boolean",
-              "description": "Describes if multiple instances of the extension are allowed"
-            },
-            "defaultReleaseNamespace": {
-              "type": "string",
-              "description": "Default extension release namespace"
-            }
-          }
+        "allowMultipleInstances": {
+          "type": "boolean",
+          "description": "Describes if multiple instances of the extension are allowed"
+        },
+        "defaultReleaseNamespace": {
+          "type": "string",
+          "description": "Default extension release namespace"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     }
   },
   "parameters": {
