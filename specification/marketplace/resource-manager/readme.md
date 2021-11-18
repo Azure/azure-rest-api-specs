@@ -26,7 +26,7 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-06-01
+tag: package-2021-12-01
 ```
 ### Composite packages
 
