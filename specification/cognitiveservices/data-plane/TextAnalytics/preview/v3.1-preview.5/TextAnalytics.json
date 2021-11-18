@@ -1663,6 +1663,9 @@
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "resolutions": {
+          "$ref": "#/definitions/EntityResolutions"
         }
       }
     },
@@ -2661,6 +2664,97 @@
       },
       "type": "array",
       "uniqueItems": true
+    },
+    "EntityResolutions":{
+      "properties": {
+        "DateTime.TimeRange":{
+          "type":"array",
+          "items":{
+            "$ref": "#/definitions/TimeRangeResolution"
+          }
+        },
+        "DateTime.Time":{
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/TimeResolution"
+          }
+        },
+        "Quantity.Dimension":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionResolution"
+          }
+        }
+      }
+    },
+    "TimeRangeResolution":{
+      "type":"object",
+      "properties": {
+        "timex":{
+          "type":"string",
+          "description": "timex expression representation"
+        },
+        "start":{
+          "type":"string",
+          "description": "beginning date/time of the interval"
+        },
+        "end":{
+          "type":"string",
+          "description": "ending date/time of the interval"
+        },
+        "confidenceScore":{
+          "type":"number",
+          "format": "double",
+          "description": "The probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "TimeResolution":{
+      "type":"object",
+      "properties": {
+        "timex":{
+          "type":"string",
+          "description": "timex expression representation"
+        },
+        "type":{
+          "type":"string",
+          "enum":[
+            "time"
+          ],
+          "description": "The resolution type"
+        },
+        "value":{
+          "type":"string",
+          "description": "The actual time that the extracted text denote."
+        },
+        "confidenceScore":{
+          "type":"number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "DimensionResolution":{
+      "type":"object",
+      "properties": {
+        "subtype":{
+          "type":"string",
+          "description": "Dimension subtype (e.g., speed, volume)"
+        },
+        "unit":{
+          "type":"string",
+          "description": "The measured unit"
+        },
+        "value":{
+          "type":"string",
+          "description": "The actual value that the extracted text denote."
+        },
+        "confidenceScore":{
+          "type":"number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
     }
   },
   "parameters": {
