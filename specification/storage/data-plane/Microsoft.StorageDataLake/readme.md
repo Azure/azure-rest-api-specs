@@ -81,7 +81,6 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: These parameters are predfined by storage specifications 
   - suppress: XmsPathsMustOverloadPaths
-  - suppress: XmsExamplesRequired
   - suppress: OperationIdNounConflictingModelNames
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
   - suppress: LongRunningOperationsWithLongRunningExtension
