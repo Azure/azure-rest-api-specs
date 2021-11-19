@@ -724,4 +724,7 @@ directive:
   - suppress: R4009
     from: apimprivatelink.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
+  - suppress: R4009
+    from: apimportalsettings.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
 ```
