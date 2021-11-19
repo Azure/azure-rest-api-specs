@@ -3945,6 +3945,43 @@
       },
       "description": "Delegation settings contract properties."
     },
+    "PortalSettingsCsp": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalSettingsCspProperties",
+          "description": "Delegation settings contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The developer portal Content Security Policy (CSP) settings."
+    },
+    "PortalSettingsCspProperties": {
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "A delegation Url."
+        },
+        "allowedSources": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
+        },
+        "subscriptions": {
+          "$ref": "#/definitions/SubscriptionsDelegationSettingsProperties",
+          "description": "Subscriptions delegation settings."
+        },
+        "userRegistration": {
+          "$ref": "#/definitions/RegistrationDelegationSettingsProperties",
+          "description": "User registration delegation settings."
+        }
+      },
+      "description": "The developer portal Content Security Policy (CSP) settings contract properties."
+    },
     "PortalSettingsCollection": {
       "properties": {
         "value": {
