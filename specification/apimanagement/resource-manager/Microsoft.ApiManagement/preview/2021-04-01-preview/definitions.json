@@ -3945,12 +3945,39 @@
       },
       "description": "Delegation settings contract properties."
     },
+    "PortalSettingsCors": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalSettingsCorsProperties",
+          "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings."
+    },
+    "PortalSettingsCorsProperties": {
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed origins, e.g. `https://trusted.com`."
+        }
+      },
+      "description": "The developer portal Cross-Origin Resource Sharing (CORS) settings contract properties."
+    },
     "PortalSettingsCsp": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PortalSettingsCspProperties",
-          "description": "Delegation settings contract properties."
+          "description": "The developer portal Content Security Policy (CSP) settings contract properties."
         }
       },
       "allOf": [
@@ -3964,20 +3991,44 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "A delegation Url."
+          "description": "The mode of the developer portal Content Security Policy (CSP).",
+          "enum": [
+            "enabled",
+            "disabled",
+            "reportOnly"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PortalSettingsCspMode",
+            "values": [
+              {
+                "value": "enabled",
+                "description": "The browser will block requests not matching allowed origins.",
+                "x-apim-code-enumValue": 1
+              },
+              {
+                "value": "disabled",
+                "description": "The browser will not apply the origin restrictions.",
+                "x-apim-code-enumValue": 2
+              },
+              {
+                "value": "reportOnly",
+                "description": "The browser will report requests not matching allowed origins without blocking them.",
+                "x-apim-code-enumValue": 4
+              }
+            ]
+          }
+        },
+        "reportUri": {
+          "type": "string",
+          "description": "The URL used by the browser to report CSP violations."
         },
         "allowedSources": {
-          "x-ms-secret": true,
-          "type": "string",
-          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
-        },
-        "subscriptions": {
-          "$ref": "#/definitions/SubscriptionsDelegationSettingsProperties",
-          "description": "Subscriptions delegation settings."
-        },
-        "userRegistration": {
-          "$ref": "#/definitions/RegistrationDelegationSettingsProperties",
-          "description": "User registration delegation settings."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed sources, e.g. `*.trusted.com`, `trusted.com`, `https://`."
         }
       },
       "description": "The developer portal Content Security Policy (CSP) settings contract properties."
