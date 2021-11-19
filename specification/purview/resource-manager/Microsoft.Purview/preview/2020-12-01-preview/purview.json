@@ -534,7 +534,7 @@
         "tags": [
           "ExposureControl"
         ],
-        "summary": "Gets enabled status for the input feature list at the account level. \r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
+        "summary": "Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "operationId": "Features_AccountGet",
         "parameters": [
@@ -586,7 +586,7 @@
         "tags": [
           "ExposureControl"
         ],
-        "summary": "Gets enabled status for the input feature list at the location and subscription level. \r\nStatus of enabled features will be true. Status of disabled features will be false. \r\nFeatures that don't exist will be excluded from the results.",
+        "summary": "Gets a list of features and their status for the location and subscription.\r\nStatus of enabled features will be true. Status of disabled features will be false. \r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "operationId": "Features_SubscriptionGet",
         "parameters": [
@@ -1557,7 +1557,7 @@
       }
     },
     "BatchFeatureStatus": {
-      "description": "Container for Exposure Control features",
+      "description": "List of features with enabled status",
       "type": "object",
       "properties": {
         "features": {
@@ -1986,14 +1986,6 @@
     }
   },
   "parameters": {
-    "accountName": {
-      "name": "accountName",
-      "in": "path",
-      "description": "The name of the account.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
@@ -2002,6 +1994,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    },
     "api-version": {
       "name": "api-version",
       "in": "query",
@@ -2009,12 +2008,13 @@
       "required": true,
       "type": "string"
     },
-    "subscriptionId": {
-      "name": "subscriptionId",
+    "accountName": {
+      "name": "accountName",
       "in": "path",
-      "description": "The subscription identifier",
+      "description": "The name of the account.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

@@ -583,7 +583,7 @@
         "tags": [
           "ExposureControl"
         ],
-        "summary": "Gets enabled status for the input feature list at the account level. \r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
+        "summary": "Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "operationId": "Features_AccountGet",
         "parameters": [
@@ -635,7 +635,7 @@
         "tags": [
           "ExposureControl"
         ],
-        "summary": "Gets enabled status for the input feature list at the location and subscription level. \r\nStatus of enabled features will be true. Status of disabled features will be false. \r\nFeatures that don't exist will be excluded from the results.",
+        "summary": "Gets a list of features and their status for the location and subscription.\r\nStatus of enabled features will be true. Status of disabled features will be false. \r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "operationId": "Features_SubscriptionGet",
         "parameters": [
@@ -1636,7 +1636,7 @@
       }
     },
     "BatchFeatureStatus": {
-      "description": "Container for Exposure Control features",
+      "description": "List of features with enabled status",
       "type": "object",
       "properties": {
         "features": {
@@ -2074,6 +2074,21 @@
     }
   },
   "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "accountName": {
       "name": "accountName",
       "in": "path",
@@ -2086,21 +2101,6 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "The subscription identifier",
-      "required": true,
-      "type": "string"
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
       "required": true,
       "type": "string"
     }
