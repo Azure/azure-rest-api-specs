@@ -8463,13 +8463,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/importVirtualMachine": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/importLabVirtualMachine": {
       "post": {
         "tags": [
           "Labs"
         ],
         "description": "Import a virtual machine into a different lab. This operation can take a while to complete.",
-        "operationId": "Labs_ImportVirtualMachine",
+        "operationId": "Labs_ImportLabVirtualMachine",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -8490,12 +8490,12 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "importVirtualMachineRequest",
+            "name": "importLabVirtualMachineRequest",
             "in": "body",
             "description": "This represents the payload required to import a virtual machine from a different lab into the current one",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportVirtualMachineRequest"
+              "$ref": "#/definitions/ImportLabVirtualMachineRequest"
             }
           }
         ],
@@ -8511,8 +8511,8 @@
           }
         },
         "x-ms-examples": {
-          "Labs_ImportVirtualMachine": {
-            "$ref": "./examples/Labs_ImportVirtualMachine.json"
+          "Labs_ImportLabVirtualMachine": {
+            "$ref": "./examples/Labs_ImportLabVirtualMachine.json"
           }
         }
       }
@@ -8607,6 +8607,311 @@
         "x-ms-examples": {
           "Operations_Get": {
             "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}": {
+      "get": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "Get schedule.",
+        "operationId": "GlobalSchedules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the schedule.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Get": {
+            "$ref": "./examples/GlobalSchedules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "Create or replace an existing schedule.",
+        "operationId": "GlobalSchedules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the schedule.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "schedule",
+            "in": "body",
+            "description": "A schedule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_CreateOrUpdate": {
+            "$ref": "./examples/GlobalSchedules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "Delete schedule.",
+        "operationId": "GlobalSchedules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the schedule.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Delete": {
+            "$ref": "./examples/GlobalSchedules_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "Allows modifying tags of schedules. All other properties will be ignored.",
+        "operationId": "GlobalSchedules_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the schedule.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Schedule",
+            "in": "body",
+            "description": "Allows modifying tags of schedules. All other properties will be ignored.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchedulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Update": {
+            "$ref": "./examples/GlobalSchedules_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}/execute": {
+      "post": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "Execute a schedule. This operation can take a while to complete.",
+        "operationId": "GlobalSchedules_Execute",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the schedule.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Execute": {
+            "$ref": "./examples/GlobalSchedules_Execute.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}/retarget": {
+      "post": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "Updates a schedule's target resource Id. This operation can take a while to complete.",
+        "operationId": "GlobalSchedules_Retarget",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the schedule.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "retargetScheduleProperties",
+            "in": "body",
+            "description": "Properties for retargeting a virtual machine schedule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RetargetScheduleProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Retarget": {
+            "$ref": "./examples/GlobalSchedules_Retarget.json"
           }
         }
       }
@@ -10290,7 +10595,7 @@
         }
       }
     },
-    "ImportVirtualMachineRequest": {
+    "ImportLabVirtualMachineRequest": {
       "type": "object",
       "description": "This represents the payload required to import a virtual machine from a different lab into the current one",
       "properties": {
@@ -10880,7 +11185,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "LabSuppportEnabled",
+            "name": "LabSupportEnabled",
             "modelAsString": true
           }
         },
@@ -11520,6 +11825,20 @@
       "properties": {
         "size": {
           "description": "Specifies the size of the virtual machine.",
+          "type": "string"
+        }
+      }
+    },
+    "RetargetScheduleProperties": {
+      "type": "object",
+      "description": "Properties for retargeting a virtual machine schedule.",
+      "properties": {
+        "currentResourceId": {
+          "description": "The resource Id of the virtual machine on which the schedule operates",
+          "type": "string"
+        },
+        "targetResourceId": {
+          "description": "The resource Id of the virtual machine that the schedule should be retargeted to",
           "type": "string"
         }
       }
