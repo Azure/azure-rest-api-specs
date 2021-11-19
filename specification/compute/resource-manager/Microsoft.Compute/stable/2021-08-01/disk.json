@@ -529,6 +529,9 @@
         "x-ms-examples": {
           "Update a snapshot.": {
             "$ref": "./examples/UpdateASnapshot.json"
+          },
+          "Update a snapshot with accelerated networking.": {
+            "$ref": "./examples/UpdateASnapshotWithAcceleratedNetwork.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2693,6 +2696,10 @@
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "supportedCapabilities": {
+          "$ref": "#/definitions/SupportedCapabilities",
+          "description": "List of supported capabilities (like accelerated networking) for the image from which the OS disk was created."
         }
       },
       "description": "Snapshot resource update properties."
