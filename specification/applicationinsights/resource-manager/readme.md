@@ -256,6 +256,24 @@ input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
 
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+```
+
+### Tag: package-2021-03-08-only
+
+These settings apply only when `--tag=package-2021-03-08-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-08-only'
+input-file:
+  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
+```
+
 ### Tag: package-2021-03-only
 
 These settings apply only when `--tag=package-2021-03-only` is specified on the command line.
