@@ -78,6 +78,9 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
     from: extensions.json
+  - suppress: TopLevelResourcesListBySubscription
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    from: extensionTypes.json
   - suppress: BodyTopLevelProperties
     where: $.definitions.Extension.properties
     from: extensions.json
