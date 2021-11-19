@@ -64,7 +64,7 @@ This document lists the set of automated rules that can be validated against swa
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
 | [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
-| [INVALID_DISCRIMINATOR_VALUE](#INVALID_DISCRIMINATOR_VALUE) | [OAV133](#INVALID_DISCRIMINATOR_VALUE) |
+| [INVALID_XMS_DISCRIMINATOR_VALUE](#INVALID_XMS_DISCRIMINATOR_VALUE) | [OAV133](#INVALID_XMS_DISCRIMINATOR_VALUE) |
 | [DISCRIMINATOR_PROPERTY_NOT_FOUND](#DISCRIMINATOR_PROPERTY_NOT_FOUND) | [OAV134](#DISCRIMINATOR_PROPERTY_NOT_FOUND) |
 | [INVALID_DISCRIMINATOR_TYPE](#INVALID_DISCRIMINATOR_TYPE) | [OAV132](#INVALID_DISCRIMINATOR_TYPE) |
 | [DISCRIMINATOR_NOT_REQUIRED](#DISCRIMINATOR_NOT_REQUIRED) | [OAV131](#DISCRIMINATOR_NOT_REQUIRED) |
@@ -621,7 +621,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
 
-### <a name="INVALID_DISCRIMINATOR_VALUE" />INVALID_DISCRIMINATOR_VALUE
+### <a name="INVALID_XMS_DISCRIMINATOR_VALUE" />INVALID_XMS_DISCRIMINATOR_VALUE
 
 **Output Message**: The value of x-ms-dicriminator-value is not in the discriminator enum list: {0}.
 
@@ -631,11 +631,11 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="DISCRIMINATOR_PROPERTY_NOT_FOUND" />DISCRIMINATOR_PROPERTY_NOT_FOUND
 
-**Output Message**: Discriminator is missing in the parent of the x-ms-dicriminator-value: {0}.
+**Output Message**: Missing discriminator in base model. This derived model has x-ms-dicriminator-value: {0}.
 
-**Description**: x-ms-dicriminator-value is defined, but its parent doesn't have discriminator field.
+**Description**: x-ms-dicriminator-value is defined, but base model doesn't have discriminator field.
 
-**How to fix the violation**: Check whether it needs. If needs, add discriminator field in parent.
+**How to fix the violation**: Check whether it needs. If needs, add discriminator field in base model.
 
 ### <a name="INVALID_DISCRIMINATOR_TYPE" />INVALID_DISCRIMINATOR_TYPE
 
