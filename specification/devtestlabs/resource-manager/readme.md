@@ -203,4 +203,12 @@ directive:
     from: DTL.json
     where: $.definitions
     reason: Tooling issue - the listed resources do have a list by immediate parent.
+  - suppress: R1003  # ListInOperationName
+    from: DTL.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policySets/{name}/evaluatePolicies"]
+    reason: This action is also named this way in previous SDK versions. Changing it would be a breaking change.
+  - suppress: R4014  # AllResourcesMustHaveGetOperation
+    from: DTL.json
+    where: $.definitions.PolicySet
+    reason: This operation doesn't make sense in the context of policysets and has never been supported.
 ```

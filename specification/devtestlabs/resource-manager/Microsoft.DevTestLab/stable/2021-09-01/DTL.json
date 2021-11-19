@@ -1599,6 +1599,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryImages/{name}": {
+      "get": {
+        "tags": [
+          "GalleryImages"
+        ],
+        "description": "Get gallery image.",
+        "operationId": "GalleryImages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/labName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "The name of the gallery image.",
+            "x-ms-parameter-location": "method",
+            "required": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GalleryImages_Get": {
+            "$ref": "./examples/GalleryImages_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationChannels": {
       "get": {
         "tags": [
@@ -9328,7 +9378,7 @@
             "StorageAccount"
           ],
           "x-ms-enum": {
-            "name": "SourceType",
+            "name": "SourceControlType",
             "modelAsString": true
           }
         },
@@ -9356,7 +9406,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Status",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -9410,7 +9460,7 @@
             "StandardSSD"
           ],
           "x-ms-enum": {
-            "name": "DiskType",
+            "name": "StorageType",
             "modelAsString": true
           }
         }
@@ -9635,7 +9685,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "DisplayOnChart",
+            "name": "CostThresholdStatus",
             "modelAsString": true
           }
         },
@@ -9647,7 +9697,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "SendNotificationWhenExceeded",
+            "name": "CostThresholdStatus",
             "modelAsString": true
           }
         },
@@ -9797,7 +9847,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "OsType",
+            "name": "CustomImageOsType",
             "modelAsString": true
           }
         }
@@ -9869,7 +9919,7 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "HostCaching",
+            "name": "HostCachingOption",
             "modelAsString": true
           }
         }
@@ -9993,7 +10043,7 @@
             "StandardSSD"
           ],
           "x-ms-enum": {
-            "name": "DiskType",
+            "name": "StorageType",
             "modelAsString": true
           }
         },
@@ -10060,7 +10110,7 @@
             "EncryptionAtRestWithCustomerKey"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "EncryptionType",
             "modelAsString": true
           }
         }
@@ -10231,7 +10281,7 @@
             "Cost"
           ],
           "x-ms-enum": {
-            "name": "EventName",
+            "name": "NotificationChannelEventType",
             "modelAsString": true
           }
         }
@@ -10512,7 +10562,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "FileUploadOptions",
+            "name": "FileUploadOption",
             "modelAsString": true
           }
         }
@@ -10563,7 +10613,7 @@
             "SystemAssignedUserAssigned"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "ManagedIdentityType",
             "modelAsString": true
           }
         },
@@ -10687,7 +10737,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "LabAnnouncementEnabled",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -10905,7 +10955,7 @@
             "StandardSSD"
           ],
           "x-ms-enum": {
-            "name": "LabStorageType",
+            "name": "StorageType",
             "modelAsString": true
           }
         },
@@ -10937,7 +10987,7 @@
             "Enabled"
           ],
           "x-ms-enum": {
-            "name": "PremiumDataDisks",
+            "name": "PremiumDataDisk",
             "modelAsString": true
           }
         },
@@ -10995,7 +11045,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "BrowserConnect",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -11015,7 +11065,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "IsolateLabResources",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -11185,7 +11235,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "LabSupportEnabled",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -11377,7 +11427,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Status",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -11412,7 +11462,7 @@
             "Cost"
           ],
           "x-ms-enum": {
-            "name": "EventName",
+            "name": "NotificationChannelEventType",
             "modelAsString": true
           }
         },
@@ -11516,7 +11566,7 @@
             "NetworkAuthenticationRequired"
           ],
           "x-ms-enum": {
-            "name": "StatusCode",
+            "name": "HttpStatusCode",
             "modelAsString": true
           }
         },
@@ -11635,7 +11685,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Status",
+            "name": "PolicyStatus",
             "modelAsString": true
           }
         },
@@ -11655,7 +11705,7 @@
             "ScheduleEditPermission"
           ],
           "x-ms-enum": {
-            "name": "FactName",
+            "name": "PolicyFactName",
             "modelAsString": true
           }
         },
@@ -11675,7 +11725,7 @@
             "MaxValuePolicy"
           ],
           "x-ms-enum": {
-            "name": "EvaluatorType",
+            "name": "PolicyEvaluatorType",
             "modelAsString": true
           }
         },
@@ -11905,7 +11955,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Status",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -12003,7 +12053,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Status",
+            "name": "EnableStatus",
             "modelAsString": true
           }
         },
@@ -12352,7 +12402,7 @@
             "Enabled"
           ],
           "x-ms-enum": {
-            "name": "AllowAllImages",
+            "name": "EnableState",
             "modelAsString": true
           }
         },
@@ -12521,7 +12571,7 @@
             "Default"
           ],
           "x-ms-enum": {
-            "name": "AllowPublicIp",
+            "name": "UsagePermissionType",
             "modelAsString": true
           }
         }
@@ -12548,7 +12598,7 @@
             "Default"
           ],
           "x-ms-enum": {
-            "name": "UseInVmCreationPermission",
+            "name": "UsagePermissionType",
             "modelAsString": true
           }
         },
@@ -12561,7 +12611,7 @@
             "Default"
           ],
           "x-ms-enum": {
-            "name": "UsePublicIpAddressPermission",
+            "name": "UsagePermissionType",
             "modelAsString": true
           }
         },
@@ -12620,7 +12670,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Status",
+            "name": "TargetCostStatus",
             "modelAsString": true
           }
         },
@@ -12654,7 +12704,7 @@
             "Custom"
           ],
           "x-ms-enum": {
-            "name": "CycleType",
+            "name": "ReportingCycleType",
             "modelAsString": true
           }
         }
