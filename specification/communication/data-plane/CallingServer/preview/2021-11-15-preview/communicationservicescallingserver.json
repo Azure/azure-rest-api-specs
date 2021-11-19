@@ -2311,10 +2311,6 @@
         "audioFileId": {
           "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
           "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback Uri to receive PlayAudio status notifications.",
-          "type": "string"
         }
       }
     },
@@ -2350,7 +2346,7 @@
           "description": "The operation context provided by client.",
           "type": "string"
         },
-        "resultInfo": {
+        "resultDetails": {
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result info for the operation."
         }
@@ -2424,7 +2420,7 @@
           "description": "The operation context provided by client.",
           "type": "string"
         },
-        "resultInfo": {
+        "resultDetails": {
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result info for the operation."
         }
@@ -2507,6 +2503,10 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
+        "callbackUri": {
+          "description": "The callback URI.",
+          "type": "string"
+        },
         "alternateCallerId": {
           "$ref": "#/definitions/PhoneNumberIdentifier",
           "description": "The alternate identity of source participant."
@@ -2517,10 +2517,6 @@
         },
         "operationContext": {
           "description": "The operation context.",
-          "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback URI.",
           "type": "string"
         }
       }
@@ -2574,20 +2570,20 @@
     "PlayAudioToParticipantWithCallLocatorRequest": {
       "description": "The request payload for playing audio with call locator to participant.",
       "required": [
-        "callLocator",
         "identifier",
+        "callLocator",
         "audioFileUri",
         "loop"
       ],
       "type": "object",
       "properties": {
-        "callLocator": {
-          "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
-        },
         "identifier": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identifier of the participant to play audio to."
+        },
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The call locator."
         },
         "audioFileUri": {
           "description": "The media resource uri of the play audio request. \r\nCurrently only Wave file (.wav) format audio prompts are supported.\r\nMore specifically, the audio content in the wave file must be mono (single-channel),\r\n16-bit samples with a 16,000 (16KHz) sampling rate.",
@@ -2652,10 +2648,6 @@
         "operationContext": {
           "description": "The operation context.",
           "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback URI.",
-          "type": "string"
         }
       }
     },
@@ -2712,10 +2704,6 @@
         },
         "audioFileId": {
           "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
-          "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback Uri to receive PlayAudio status notifications.",
           "type": "string"
         }
       }
