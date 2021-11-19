@@ -250,13 +250,13 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource."
-        },
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-          }
-        ]
-      }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ExtensionTypeProperties": {
       "description": "Properties of the connected cluster.",
@@ -291,7 +291,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Versions available for this Extension Type",
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "object",
