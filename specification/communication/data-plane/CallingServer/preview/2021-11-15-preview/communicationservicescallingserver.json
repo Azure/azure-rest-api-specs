@@ -3081,7 +3081,7 @@
       "description": "The request payload for redirecting the call.",
       "required": [
         "incomingCallContext",
-        "targets"
+        "target"
       ],
       "type": "object",
       "properties": {
@@ -3089,21 +3089,9 @@
           "description": "The context associated with the call.",
           "type": "string"
         },
-        "targets": {
-          "description": "The target identity to redirect the call to.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifier"
-          }
-        },
-        "callbackUri": {
-          "description": "The callback uri.",
-          "type": "string"
-        },
-        "timeoutInSeconds": {
-          "format": "int32",
-          "description": "The timeout for the redirect in seconds.",
-          "type": "integer"
+        "target": {
+          "$ref": "#/definitions/CommunicationIdentifier",
+          "description": "The target identity to redirect the call to."
         }
       }
     },
