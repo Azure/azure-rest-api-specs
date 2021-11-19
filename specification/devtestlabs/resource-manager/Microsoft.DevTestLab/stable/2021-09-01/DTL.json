@@ -2777,7 +2777,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Schedule"
+              "$ref": "#/definitions/ScheduleList"
             }
           },
           "default": {
@@ -8663,7 +8663,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LabVhd"
+              "$ref": "#/definitions/LabVhdList"
             }
           },
           "default": {
@@ -8723,6 +8723,68 @@
         "x-ms-examples": {
           "Operations_Get": {
             "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules": {
+      "get": {
+        "tags": [
+          "GlobalSchedules"
+        ],
+        "description": "List schedules in a resource group.",
+        "operationId": "GlobalSchedules_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')'"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "type": "string",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduleList"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Schedule",
+        "x-ms-examples": {
+          "GlobalSchedules_ListByResourceGroup": {
+            "$ref": "./examples/GlobalSchedules_ListByResourceGroup.json"
           }
         }
       }
@@ -9136,7 +9198,7 @@
     },
     "ArmTemplateList": {
       "type": "object",
-      "description": "The list operation response, that contains the armTemplates and their properties",
+      "description": "Contains a list of armTemplates and their properties",
       "properties": {
         "value": {
           "description": "List of ArmTemplate and its properties",
@@ -9300,7 +9362,7 @@
     },
     "ArtifactList": {
       "type": "object",
-      "description": "The list operation response, that contains the artifacts and their properties",
+      "description": "Contains a list of artifacts and their properties",
       "properties": {
         "value": {
           "description": "List of Artifact and its properties",
@@ -9403,7 +9465,7 @@
     },
     "ArtifactSourceList": {
       "type": "object",
-      "description": "The list operation response, that contains the artifactSources and their properties",
+      "description": "Contains a list of artifactSources and their properties",
       "properties": {
         "value": {
           "description": "List of ArtifactSource and its properties",
@@ -9564,7 +9626,7 @@
     },
     "BastionHostList": {
       "type": "object",
-      "description": "The list operation response, that contains the bastionHosts and their properties",
+      "description": "Contains a list of bastionHosts and their properties",
       "properties": {
         "value": {
           "description": "List of BastionHost and its properties",
@@ -9805,7 +9867,7 @@
     },
     "CustomImageList": {
       "type": "object",
-      "description": "The list operation response, that contains the customImages and their properties",
+      "description": "Contains a list of customImages and their properties",
       "properties": {
         "value": {
           "description": "List of CustomImage and its properties",
@@ -10076,7 +10138,7 @@
     },
     "DiskList": {
       "type": "object",
-      "description": "The list operation response, that contains the disks and their properties",
+      "description": "Contains a list of disks and their properties",
       "properties": {
         "value": {
           "description": "List of Disk and its properties",
@@ -10231,7 +10293,7 @@
     },
     "EnvironmentList": {
       "type": "object",
-      "description": "The list operation response, that contains the environments and their properties",
+      "description": "Contains a list of environments and their properties",
       "properties": {
         "value": {
           "description": "List of Environment and its properties",
@@ -10414,7 +10476,7 @@
     },
     "FormulaList": {
       "type": "object",
-      "description": "The list operation response, that contains the formulas and their properties",
+      "description": "Contains a list of formulas and their properties",
       "properties": {
         "value": {
           "description": "List of Formula and its properties",
@@ -10523,7 +10585,7 @@
     },
     "GalleryImageList": {
       "type": "object",
-      "description": "The list operation response, that contains the galleryImages and their properties",
+      "description": "Contains a list of galleryImages and their properties",
       "properties": {
         "value": {
           "description": "List of GalleryImage and its properties",
@@ -10964,7 +11026,7 @@
     },
     "LabList": {
       "type": "object",
-      "description": "The list operation response, that contains the labs and their properties",
+      "description": "Contains a list of labs and their properties",
       "properties": {
         "value": {
           "description": "List of Lab and its properties",
@@ -11232,7 +11294,7 @@
     },
     "LabSecretList": {
       "type": "object",
-      "description": "The list operation response, that contains the secrets and their properties",
+      "description": "Contains a list of secrets and their properties",
       "properties": {
         "value": {
           "description": "List of LabSecret and its properties",
@@ -11332,6 +11394,24 @@
         }
       }
     },
+    "LabVhdList": {
+      "type": "object",
+      "description": "Contains a list of LabVhd and their properties",
+      "properties": {
+        "value": {
+          "description": "List of LabVhd and its properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabVhd"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any",
+          "type": "string"
+        }
+      }
+    },
     "LinuxOsInfo": {
       "type": "object",
       "description": "Information about a Linux OS.",
@@ -11421,7 +11501,7 @@
     },
     "NotificationChannelList": {
       "type": "object",
-      "description": "The list operation response, that contains the notificationChannels and their properties",
+      "description": "Contains a list of notificationChannels and their properties",
       "properties": {
         "value": {
           "description": "List of NotificationChannel and its properties",
@@ -11720,7 +11800,7 @@
     },
     "PolicyList": {
       "type": "object",
-      "description": "The list operation response, that contains the policies and their properties",
+      "description": "Contains a list of policies and their properties",
       "properties": {
         "value": {
           "description": "List of Policy and its properties",
@@ -11850,7 +11930,7 @@
     },
     "PolicySetList": {
       "type": "object",
-      "description": "The list operation response, that contains the policySets and their properties",
+      "description": "Contains a list of policySets and their properties",
       "properties": {
         "value": {
           "description": "List of PolicySet and its properties",
@@ -12092,7 +12172,7 @@
     },
     "ScheduleList": {
       "type": "object",
-      "description": "The list operation response, that contains the schedules and their properties",
+      "description": "Contains a list of schedules and their properties",
       "properties": {
         "value": {
           "description": "List of Schedule and its properties",
@@ -12214,7 +12294,7 @@
     },
     "SecretList": {
       "type": "object",
-      "description": "The list operation response, that contains the secrets and their properties",
+      "description": "Contains a list of secrets and their properties",
       "properties": {
         "value": {
           "description": "List of Secret and its properties",
@@ -12286,7 +12366,7 @@
     },
     "ServiceFabricList": {
       "type": "object",
-      "description": "The list operation response, that contains the serviceFabrics and their properties",
+      "description": "Contains a list of serviceFabrics and their properties",
       "properties": {
         "value": {
           "description": "List of ServiceFabric and its properties",
@@ -12375,7 +12455,7 @@
     },
     "ServiceRunnerList": {
       "type": "object",
-      "description": "The list operation response, that contains the serviceRunners and their properties",
+      "description": "Contains a list of serviceRunners and their properties",
       "properties": {
         "value": {
           "description": "List of ServiceRunner and its properties",
@@ -12437,7 +12517,7 @@
     },
     "SharedGalleryList": {
       "type": "object",
-      "description": "The list operation response, that contains the sharedGalleries and their properties",
+      "description": "Contains a list of sharedGalleries and their properties",
       "properties": {
         "value": {
           "description": "List of SharedGallery and its properties",
@@ -12521,7 +12601,7 @@
     },
     "SharedImageList": {
       "type": "object",
-      "description": "The list operation response, that contains the sharedImages and their properties",
+      "description": "Contains a list of sharedImages and their properties",
       "properties": {
         "value": {
           "description": "List of SharedImage and its properties",
@@ -12839,7 +12919,7 @@
     },
     "UserList": {
       "type": "object",
-      "description": "The list operation response, that contains the users and their properties",
+      "description": "Contains a list of users and their properties",
       "properties": {
         "value": {
           "description": "List of User and its properties",
@@ -13191,7 +13271,7 @@
     },
     "VirtualMachineList": {
       "type": "object",
-      "description": "The list operation response, that contains the virtualMachines and their properties",
+      "description": "Contains a list of virtualMachines and their properties",
       "properties": {
         "value": {
           "description": "List of VirtualMachine and its properties",
@@ -13463,7 +13543,7 @@
     },
     "VirtualNetworkList": {
       "type": "object",
-      "description": "The list operation response, that contains the virtualNetworks and their properties",
+      "description": "Contains a list of virtualNetworks and their properties",
       "properties": {
         "value": {
           "description": "List of VirtualNetwork and its properties",
