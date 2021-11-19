@@ -57,8 +57,6 @@ input-file:
   - Microsoft.Sql/preview/2021-05-01-preview/Databases.json
   - Microsoft.Sql/preview/2021-05-01-preview/DeletedServers.json
   - Microsoft.Sql/preview/2021-05-01-preview/EndpointCertificate.json
-  - Microsoft.Sql/preview/2021-05-01-preview/EndpointCertificateGet.json
-  - Microsoft.Sql/preview/2021-05-01-preview/EndpointCertificateListByInstance.json
   - Microsoft.Sql/preview/2021-05-01-preview/ElasticPoolOperations.json
   - Microsoft.Sql/preview/2021-05-01-preview/ElasticPools.json
   - Microsoft.Sql/preview/2021-05-01-preview/EncryptionProtectors.json
