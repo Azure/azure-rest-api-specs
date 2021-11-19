@@ -80,8 +80,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobTargetGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobVersions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/LocationCapabilities.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionManagedInstanceBackups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/MaintenanceWindowOptions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/MaintenanceWindows.json
@@ -107,7 +105,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstanceOperations.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstancePrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstancePrivateLinkResources.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstanceTdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
@@ -143,17 +140,20 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/BackupShortTermRetentionPolicies.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/ManagedInstances.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 
 
