@@ -120,6 +120,9 @@ input-file:
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimpolicydescriptions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettingsCors.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettingsCsp.json
+  - Microsoft.ApiManagement/preview/2021-04-01-preview/apimportalsettingsCspMode.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimprivatelink.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2021-04-01-preview/apimproductsByTags.json

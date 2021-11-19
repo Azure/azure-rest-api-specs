@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "The settings for Content Security Policy (CSP) of the developer portal.",
+  "x-apim-code-public": "true",
+  "properties": {
+    "mode": {
+      "allOf": [
+        {
+          "$ref": "apimportalsettingscspmode.json"
+        },
+        {
+          "description": "The mode of Content Security Policy (CSP) for the developer portal."
+        }
+      ]
+    },
+    "reportUri": {
+      "type": "string",
+      "description": "The URL used by the browser to report CSP violations."
+    },
+    "allowedSources": {
+      "description": "Allowed sources, e.g. \"*.trusted.com\", \"trusted.com\".",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

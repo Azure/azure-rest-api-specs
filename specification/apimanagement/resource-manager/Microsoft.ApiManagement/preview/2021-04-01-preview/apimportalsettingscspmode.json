@@ -1,0 +1,31 @@
+{
+  "type": "string",
+  "description": "Content security policy mode.",
+  "x-apim-public": "true",
+  "x-apim-code-flags": true,
+  "enum": [
+    "http",
+    "https"
+  ],
+  "x-ms-enum": {
+    "modelAsString": true,
+    "name": "cspmode",
+    "values": [
+      {
+        "value": "enabled",
+        "description": "The browser will block requests not matching allowed origins.",
+        "x-apim-code-enumValue": 1
+      },
+      {
+        "value": "disabled",
+        "description": "The browser will not apply CSP.",
+        "x-apim-code-enumValue": 2
+      },
+      {
+        "value": "reportOnly",
+        "description": "The browser will report requests not matching allowed origins without blocking them.",
+        "x-apim-code-enumValue": 4
+      }
+    ]
+  }
+}
