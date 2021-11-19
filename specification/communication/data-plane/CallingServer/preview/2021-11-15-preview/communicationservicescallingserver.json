@@ -1151,10 +1151,7 @@
           "200": {
             "description": "Returns the get participant response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CallParticipant"
-              }
+              "$ref": "#/definitions/CallParticipant"
             }
           },
           "400": {
@@ -2199,6 +2196,7 @@
     "CallConnectionState": {
       "description": "The state of the call connection.",
       "enum": [
+        "unknown",
         "connecting",
         "connected",
         "transferring",
@@ -2483,7 +2481,8 @@
       "description": "A participant in a call.",
       "required": [
         "identifier",
-        "isMuted"
+        "isMuted",
+        "isStreamingVideo"
       ],
       "type": "object",
       "properties": {
@@ -2497,6 +2496,10 @@
         },
         "isMuted": {
           "description": "Is participant muted",
+          "type": "boolean"
+        },
+        "isStreamingVideo": {
+          "description": "Is participant streaming video",
           "type": "boolean"
         }
       }
@@ -3072,10 +3075,6 @@
         },
         "callRejectReason": {
           "$ref": "#/definitions/CallRejectReason"
-        },
-        "callbackUri": {
-          "description": "The callback uri.",
-          "type": "string"
         }
       }
     },
@@ -3156,7 +3155,6 @@
       }
     },
     "AddParticipantResultEvent": {
-      "description": "The add participant result event.",
       "required": [
         "status"
       ],
