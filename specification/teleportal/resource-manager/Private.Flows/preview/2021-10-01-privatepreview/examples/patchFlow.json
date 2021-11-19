@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "api-version": "2021-10-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "flow": {},
+    "tags": {
+      "tag": "value"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/12345/providers/Private.SpoolService/operations/67890?api-version=2021-10-01-privatepreview"
+      },
+      "body": {
+        "tags": {
+          "tag": "value"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Private.Flows/flows/testFlow",
+        "type": "Microsoft.Contoso/flows",
+        "location": "East US",
+        "properties": {
+          "storageAccountName": "testsa",
+          "storageContainerName": "testcontainer"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "tags": {
+          "tag": "value"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Private.Flows/flows/testFlow",
+        "type": "Microsoft.Contoso/flows",
+        "location": "East US",
+        "properties": {
+          "storageAccountName": "testsa",
+          "storageContainerName": "testcontainer"
+        }
+      }
+    }
+  }
+}
