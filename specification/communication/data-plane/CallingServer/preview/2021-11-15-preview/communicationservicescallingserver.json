@@ -2585,6 +2585,10 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
+        "callbackUri": {
+          "description": "The callback Uri to receive PlayAudio status notifications.",
+          "type": "string"
+        },
         "audioFileUri": {
           "description": "The media resource uri of the play audio request. \r\nCurrently only Wave file (.wav) format audio prompts are supported.\r\nMore specifically, the audio content in the wave file must be mono (single-channel),\r\n16-bit samples with a 16,000 (16KHz) sampling rate.",
           "type": "string"
@@ -2599,10 +2603,6 @@
         },
         "audioFileId": {
           "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
-          "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback Uri to receive PlayAudio status notifications.",
           "type": "string"
         }
       }
@@ -2947,6 +2947,10 @@
           "$ref": "#/definitions/CallLocator",
           "description": "The call locator."
         },
+        "callbackUri": {
+          "description": "The callback Uri to receive PlayAudio status notifications.",
+          "type": "string"
+        },
         "audioFileUri": {
           "description": "The media resource uri of the play audio request. \r\nCurrently only Wave file (.wav) format audio prompts are supported.\r\nMore specifically, the audio content in the wave file must be mono (single-channel),\r\n16-bit samples with a 16,000 (16KHz) sampling rate.",
           "type": "string"
@@ -2961,10 +2965,6 @@
         },
         "audioFileId": {
           "description": "An id for the media in the AudioFileUri, using which we cache the media resource.",
-          "type": "string"
-        },
-        "callbackUri": {
-          "description": "The callback Uri to receive PlayAudio status notifications.",
           "type": "string"
         }
       }
@@ -3128,7 +3128,7 @@
       ],
       "type": "object",
       "properties": {
-        "resultInfo": {
+        "resultDetails": {
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
@@ -3165,7 +3165,7 @@
       ],
       "type": "object",
       "properties": {
-        "resultInfo": {
+        "resultDetails": {
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
@@ -3247,7 +3247,7 @@
       ],
       "type": "object",
       "properties": {
-        "resultInfo": {
+        "resultDetails": {
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
