@@ -74,5 +74,6 @@ directive:
   - suppress: XmsPathsMustOverloadPaths
   - suppress: XmsExamplesRequired
   - suppress: LongRunningOperationsWithLongRunningExtension
+  - suppress: OAV107
 ```
 ---
