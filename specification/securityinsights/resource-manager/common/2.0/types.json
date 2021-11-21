@@ -72,16 +72,17 @@
     },
     "CloudError": {
       "description": "Error response structure.",
+      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error data",
-          "x-ms-client-flatten": true
+          "description": "Error data"
         }
       },
       "type": "object"
     },
     "CloudErrorBody": {
+      "x-ms-external": true,
       "description": "Error details.",
       "properties": {
         "code": {
