@@ -286,14 +286,9 @@
             "$ref": "#/responses/202Accepted"
           },
           "400": {
-            "description": "test desc",
-            "content": {
-              "application/json":
-              {
-                "schema": {
-                  "$ref": "#/responses/400"
-                }
-              }
+            "x-ms-o-data-error-response": true,
+            "schema": {
+              "$ref": "#/responses/400"
             }
           },
           "401": {
