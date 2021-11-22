@@ -54,6 +54,7 @@
       "name": "pollutants",
       "in": "query",
       "type": "boolean",
+      "x-ms-client-name": "include_pollutant_details",
       "required": false,
       "description": "Boolean value that returns detailed information about each pollutant. By default is True.",
       "x-ms-parameter-location": "method"
@@ -122,31 +123,31 @@
         "values": [
           {
             "value": "AL",
-            "description": "AL"
+            "description": "Atlantic"
           },
           {
             "value": "EP",
-            "description": "EP"
+            "description": "Eastern Pacific"
           },
           {
             "value": "SI",
-            "description": "SI"
+            "description": "Southwest Indian Ocean"
           },
           {
             "value": "NI",
-            "description": "NI"
+            "description": "North Indian Ocean"
           },
           {
             "value": "CP",
-            "description": "CP"
+            "description": "Central Pacific"
           },
           {
             "value": "NP",
-            "description": "NP"
+            "description": "Northwest Pacific"
           },
           {
             "value": "SP",
-            "description": "SP"
+            "description": "South Pacific"
           }
         ]
       },
@@ -205,6 +206,7 @@
     "RequiredWeatherGovernmentId": {
       "name": "govId",
       "description": "Government storm Id",
+      "x-ms-client-name": "government_storm_id",
       "type": "integer",
       "format": "int32",
       "required": true,
@@ -222,6 +224,7 @@
     "WeatherDetails": {
       "name": "details",
       "description": "When true, wind radii summary data is included in the response",
+      "x-ms-client-name": "include_details",
       "in": "query",
       "type": "boolean",
       "default": false,
@@ -230,6 +233,7 @@
     "WeatherRadiiGeometry": {
       "name": "radiiGeometry",
       "description": "When true, wind radii summary data and geoJSON details are included in the response",
+      "x-ms-client-name": "include_geometric_details",
       "in": "query",
       "type": "boolean",
       "default": false,
@@ -753,6 +757,7 @@
       "get": {
         "description": "**Get Tropical Storm Search**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nSearch government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
         "operationId": "Weather_GetTropicalStormSearch",
+        "x-ms-client-name": "SearchTropicalStorm",
         "x-ms-examples": {
           "Get Tropical Storm Search": {
             "$ref": "./examples/GetStormSearch.json"
@@ -796,7 +801,7 @@
     },
     "/weather/tropical/storms/forecasts/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
+        "description": "**Get Tropical Storm Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet individual government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
         "operationId": "Weather_GetTropicalStormForecast",
         "x-ms-examples": {
           "Get Tropical Storm Forecasts": {
@@ -834,6 +839,7 @@
           {
             "name": "windowGeometry",
             "description": "When true, window geometry data (geoJSON) is included in the response",
+            "x-ms-client-name": "include_window_geometry",
             "in": "query",
             "type": "boolean",
             "default": false
@@ -854,7 +860,7 @@
     },
     "/weather/tropical/storms/locations/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Locations**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet locations of an individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
+        "description": "**Get Tropical Storm Locations**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet location of individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
         "operationId": "Weather_GetTropicalStormLocations",
         "x-ms-examples": {
           "Get Tropical Storm Locations": {
@@ -895,6 +901,7 @@
           {
             "name": "current",
             "description": "When true, return the current storm location",
+            "x-ms-client-name": "get_current_storm_location",
             "in": "query",
             "type": "boolean",
             "default": false
@@ -1087,26 +1094,32 @@
               "modelAsString": true,
               "values": [
                 {
+                  "name": "OneHour",
                   "value": 1,
                   "description": "1 Hours"
                 },
                 {
+                  "name": "TwelveHours",
                   "value": 12,
                   "description": "12 Hours"
                 },
                 {
+                  "name": "TwentyHours",
                   "value": 24,
                   "description": "24 Hours"
                 },
                 {
+                  "name": "FortyEightHours",
                   "value": 48,
                   "description": "48 Hours"
                 },
                 {
+                  "name": "SeventyTwoHours",
                   "value": 72,
                   "description": "72 Hours"
                 },
                 {
+                  "name": "NinetySixHours",
                   "value": 96,
                   "description": "96 Hours"
                 }
