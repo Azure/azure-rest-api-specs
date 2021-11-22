@@ -825,6 +825,52 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkMhsmNameAvailability/{name}": {
+      "post": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_CheckMhsmNameAvailability",
+        "description": "Checks that the managed hsm name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the mhsm name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckMhsmNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a vault name": {
+            "$ref": "./examples/checkMhsmNameAvailability.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1489,6 +1535,34 @@
         "name": "GeoReplicationRegionProvisioningState",
         "modelAsString": true
       }
+    },
+    "CheckMhsmNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason that a managed hsm name could not be used. The reason element is only returned if NameAvailable is false.",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckMhsmNameAvailability operation response."
     }
   },
   "parameters": {
