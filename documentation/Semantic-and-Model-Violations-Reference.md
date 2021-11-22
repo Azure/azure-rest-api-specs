@@ -639,7 +639,7 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="INVALID_DISCRIMINATOR_TYPE" />INVALID_DISCRIMINATOR_TYPE
 
-**Output Message**: The property type of discriminator must be string.
+**Output Message**: The property type of discriminator must be string: {0}.
 
 **Description**: If a property is declared as discriminator, the property type must be string and nothing else.
 
