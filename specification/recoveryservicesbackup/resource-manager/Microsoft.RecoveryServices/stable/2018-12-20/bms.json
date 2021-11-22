@@ -474,6 +474,9 @@
               "$ref": "#/definitions/CrrAccessTokenResource"
             }
           },
+          "400": {
+            "description": "BadRequest"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -865,7 +868,6 @@
       }
     },
     "NewErrorResponse": {
-      "type": "object",
       "properties": {
         "error": {
           "type": "object",
@@ -928,7 +930,6 @@
       }
     },
     "AADPropertiesResource": {
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2353,7 +2354,6 @@
       }
     },
     "CrrJobRequestResource": {
-      "type": "object",
       "description": "Request object for fetching CRR jobs.",
       "allOf": [
         {
