@@ -1,0 +1,770 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on entities like API, Product, and Subscription associated with your Azure API Management deployment.",
+    "version": "2021-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Properties of the Error Response."
+        }
+      },
+      "description": "Error Response."
+    },
+    "ErrorResponseBody": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error Body contract."
+    },
+    "RegionContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Region name.",
+          "readOnly": true
+        },
+        "isMasterRegion": {
+          "description": "whether Region is the master region.",
+          "type": "boolean"
+        },
+        "isDeleted": {
+          "description": "whether Region is deleted.",
+          "type": "boolean"
+        }
+      },
+      "description": "Region profile."
+    },
+    "RegionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionContract"
+          },
+          "description": "Lists of Regions."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Lists Regions operation response details."
+    }
+  },
+  "parameters": {
+    "AccessParameter": {
+      "name": "accessName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "access",
+        "gitAccess"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AccessIdName"
+      },
+      "description": "The identifier of the Access configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "SettingsParameter": {
+      "name": "settingsType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "public"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "settingsTypeName"
+      },
+      "description": "The identifier of the settings.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiIdParameter": {
+      "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "API identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiIdRevParameter": {
+      "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "ApiVersionSetIdParameter": {
+      "name": "versionSetId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Api Version Set identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "AppTypeParameter": {
+      "name": "appType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Determines the type of application which send the create user request. Default is legacy publisher portal.",
+      "enum": [
+        "portal",
+        "developerPortal"
+      ],
+      "x-ms-enum": {
+        "name": "AppType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "portal",
+            "description": "User create request was sent by legacy developer portal."
+          },
+          {
+            "value": "developerPortal",
+            "description": "User create request was sent by new developer portal."
+          }
+        ]
+      },
+      "default": "portal",
+      "x-ms-parameter-location": "method"
+    },
+    "AttachmentIdParameter": {
+      "name": "attachmentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Attachment identifier within an Issue. Must be unique in the current Issue.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "AuthenticationServerIdParameter": {
+      "name": "authsid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the authorization server.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "BackendIdParameter": {
+      "name": "backendId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "CacheIdParameter": {
+      "name": "cacheId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier).",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "CertificateIdParameter": {
+      "name": "certificateId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the certificate entity. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "CommentIdParameter": {
+      "name": "commentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Comment identifier within an Issue. Must be unique in the current Issue.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "configuration"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "configurationIdName"
+      },
+      "description": "The identifier of the Git Configuration Operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiagnosticIdParameter": {
+      "name": "diagnosticId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Diagnostic identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "EmailParameter": {
+      "name": "email",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Email identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Group identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "x-ms-parameter-location": "method"
+    },
+    "IdentityProviderNameParameter": {
+      "name": "identityProviderName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "facebook",
+        "google",
+        "microsoft",
+        "twitter",
+        "aad",
+        "aadB2C"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "facebook",
+            "description": "Facebook as Identity provider."
+          },
+          {
+            "value": "google",
+            "description": "Google as Identity provider."
+          },
+          {
+            "value": "microsoft",
+            "description": "Microsoft Live as Identity provider."
+          },
+          {
+            "value": "twitter",
+            "description": "Twitter as Identity provider."
+          },
+          {
+            "value": "aad",
+            "description": "Azure Active Directory as Identity provider."
+          },
+          {
+            "value": "aadB2C",
+            "description": "Azure Active Directory B2C as Identity provider."
+          }
+        ]
+      },
+      "description": "Identity Provider Type identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchOptionalParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "description": "ETag of the Entity. Not required when creating an entity, but required when updating an entity.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchRequiredParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": true,
+      "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IssueIdParameter": {
+      "name": "issueId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Issue identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "LoggerIdParameter": {
+      "name": "loggerId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "description": "Logger identifier. Must be unique in the API Management service instance.",
+      "x-ms-parameter-location": "method"
+    },
+    "NotificationNameParameter": {
+      "name": "notificationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "RequestPublisherNotificationMessage",
+        "PurchasePublisherNotificationMessage",
+        "NewApplicationNotificationMessage",
+        "BCC",
+        "NewIssuePublisherNotificationMessage",
+        "AccountClosedPublisher",
+        "QuotaLimitApproachingPublisherNotificationMessage"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RequestPublisherNotificationMessage",
+            "description": "The following email recipients and users will receive email notifications about subscription requests for API products requiring approval."
+          },
+          {
+            "value": "PurchasePublisherNotificationMessage",
+            "description": "The following email recipients and users will receive email notifications about new API product subscriptions."
+          },
+          {
+            "value": "NewApplicationNotificationMessage",
+            "description": "The following email recipients and users will receive email notifications when new applications are submitted to the application gallery."
+          },
+          {
+            "value": "BCC",
+            "description": "The following recipients will receive blind carbon copies of all emails sent to developers."
+          },
+          {
+            "value": "NewIssuePublisherNotificationMessage",
+            "description": "The following email recipients and users will receive email notifications when a new issue or comment is submitted on the developer portal."
+          },
+          {
+            "value": "AccountClosedPublisher",
+            "description": "The following email recipients and users will receive email notifications when developer closes his account."
+          },
+          {
+            "value": "QuotaLimitApproachingPublisherNotificationMessage",
+            "description": "The following email recipients and users will receive email notifications when subscription usage gets close to usage quota."
+          }
+        ]
+      },
+      "description": "Notification Name Identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "NotifySubscriptionStateChangeParameter": {
+      "name": "notify",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Notify change in Subscription State. \n - If false, do not send any email notification for change of state of subscription \n - If true, send email notification of change of state of subscription ",
+      "x-ms-parameter-location": "method"
+    },
+    "OpenIdConnectIdParameter": {
+      "name": "opid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the OpenID Connect Provider.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyExportFormat": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Policy Export Format.",
+      "enum": [
+        "xml",
+        "rawxml"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyExportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "xml",
+            "description": "The contents are inline and Content type is an XML document."
+          },
+          {
+            "value": "rawxml",
+            "description": "The contents are inline and Content type is a non XML encoded policy document."
+          }
+        ]
+      },
+      "default": "xml",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyIdParameter": {
+      "name": "policyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "policy"
+      ],
+      "description": "The identifier of the Policy.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PolicyIdName"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PortalRevisionIdParameter": {
+      "name": "portalRevisionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Portal revision identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "x-ms-parameter-location": "method"
+    },
+    "ProductIdParameter": {
+      "name": "productId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Product identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "x-ms-parameter-location": "method"
+    },
+    "NamedValueIdParameter": {
+      "name": "namedValueId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the NamedValue.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaCounterKeyParameter": {
+      "name": "quotaCounterKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaPeriodKeyParameter": {
+      "name": "quotaPeriodKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota period key identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "ReleaseIdParameter": {
+      "name": "releaseId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Release identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SchemaIdParameter": {
+      "name": "schemaId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the API Management service.",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionEntityIdParameter": {
+      "name": "sid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription entity Identifier. The entity represents the association between a user and a product in API Management.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "TagIdParameter": {
+      "name": "tagId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Tag identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "TagDescriptionIdParameter": {
+      "name": "tagDescriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "TemplateNameParameter": {
+      "name": "templateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "applicationApprovedNotificationMessage",
+        "accountClosedDeveloper",
+        "quotaLimitApproachingDeveloperNotificationMessage",
+        "newDeveloperNotificationMessage",
+        "emailChangeIdentityDefault",
+        "inviteUserNotificationMessage",
+        "newCommentNotificationMessage",
+        "confirmSignUpIdentityDefault",
+        "newIssueNotificationMessage",
+        "purchaseDeveloperNotificationMessage",
+        "passwordResetIdentityDefault",
+        "passwordResetByAdminNotificationMessage",
+        "rejectDeveloperNotificationMessage",
+        "requestDeveloperNotificationMessage"
+      ],
+      "x-ms-enum": {
+        "name": "TemplateName",
+        "modelAsString": true
+      },
+      "description": "Email Template Name Identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "UserIdParameter": {
+      "name": "userId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "User identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "GatewayIdParameter": {
+      "name": "gatewayId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "GatewayHostnameConfigurationIdParameter": {
+      "name": "hcId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ContentTypeIdParameter": {
+      "name": "contentTypeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Content type identifier.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "ContentItemIdParameter": {
+      "name": "contentItemId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Content item identifier.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

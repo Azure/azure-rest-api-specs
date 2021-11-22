@@ -2836,6 +2836,13 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "logSpecifications": {
+          "description": "Log specification of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
         }
       }
     },
@@ -2884,6 +2891,10 @@
           "type": "string",
           "description": "The internal metric name."
         },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "boolean"
+        },
         "sourceMdmAccount": {
           "type": "string",
           "description": "The source MDM account."
@@ -2914,6 +2925,24 @@
         "resourceIdDimensionNameOverride": {
           "type": "string",
           "description": "Account Resource Id."
+        },
+        "isInternal": {
+          "description": "Whether the metric is internal.",
+          "type": "boolean"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of log specification.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of log specification.",
+          "type": "string"
         }
       }
     },
@@ -3846,7 +3875,7 @@
         },
         "volumeType": {
           "type": "string",
-          "description": "What type of volume is this",
+          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection",
           "example": "DataProtection"
         },
         "dataProtection": {

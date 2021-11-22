@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2021-11-10-preview",
+    "location": "NorthEurope",
+    "accountName": "contosto-videoanalyzer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "contosto-videoanalyzer",
+        "location": "NorthEurope",
+        "mediaServices": {
+          "aadApplicationId": "912f96dc-1ed3-4d7d-aa67-0adef4bb68ad",
+          "aadTenantId": "72f988bf-86f1-41ag-91ab-2d7cd061db47",
+          "connected": true,
+          "eventGridProviderRegistered": true,
+          "name": "contosoVideoanalyzerMediaServices",
+          "resourceGroup": "contoso-videoanalyzer-rg",
+          "streamingEndpointStarted": false,
+          "subscriptionId": "586d4f48-8f08-4a4e-96b7-e1892d6dba9e"
+        }
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "AccountName is empty"
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "USER_NOT_ALLOWED",
+          "message": "User is not account owner for account - contoso-videoanalyzer"
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "ACCOUNT_NOT_FOUND",
+          "message": "Classic account not found or has been deleted and is pending deletion has been deleted and is pending deletion - contoso-videoanalyzer"
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}

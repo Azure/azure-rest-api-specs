@@ -1,0 +1,1256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-10-preview",
+    "title": "vi",
+    "description": "Microsoft Azure Video Analyzer for Media"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.VideoIndexer/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Azure Video Analyzer for Media provider operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/ViOperationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VideoIndexer/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "NameAvailability"
+        ],
+        "operationId": "Accounts_CheckNameAvailability",
+        "description": "Checks that the Video Indexer account name is valid and is not already in use.",
+        "x-ms-examples": {
+          "Check free account name availability": {
+            "$ref": "./examples/ViAccountCheckNameAvailabilityFree.json"
+          },
+          "Check taken account name availability": {
+            "$ref": "./examples/ViAccountCheckNameAvailabilityTaken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "checkNameAvailabilityParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountCheckNameAvailabilityParameters"
+            },
+            "description": "The name of the Video Indexer account. Name must be unique globally"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Operation to check the Video Indexer account name availability was successful. Ok does not indicate the name is available, the body of the response does.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VideoIndexer/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_List",
+        "description": "List all Azure Video Analyzer for Media accounts available under the subscription",
+        "x-ms-examples": {
+          "List accounts": {
+            "$ref": "./examples/ViAccountsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_ListByResourceGroup",
+        "description": "List all Azure Video Analyzer for Media accounts available under the resource group",
+        "x-ms-examples": {
+          "List accounts by resource group": {
+            "$ref": "./examples/ViAccountsListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts/{accountName}": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Get",
+        "description": "Gets the properties of an Azure Video Analyzer for Media account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Video Analyzer for Media account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get account": {
+            "$ref": "./examples/ViAccountGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Update",
+        "x-ms-long-running-operation": false,
+        "description": "Updates the properties of an existing Azure Video Analyzer for Media account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The parameters to provide for the current Azure Video Analyzer for Media account.",
+            "schema": {
+              "$ref": "#/definitions/AccountPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch example #1": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch1.json"
+          },
+          "Patch example #2": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch2.json"
+          },
+          "Patch example #3": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch3.json"
+          },
+          "Patch example #4": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch4.json"
+          },
+          "Patch example #5": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch5.json"
+          },
+          "Patch example #6": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch6.json"
+          },
+          "Patch example #7": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch7.json"
+          },
+          "Patch example #8": {
+            "$ref": "./examples/ViAccountPatch/ViAccountPatch8.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_CreateOrUpdate",
+        "description": "Creates or updates an Azure Video Analyzer for Media account.",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The parameters to provide for the Azure Video Analyzer for Media account.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put example #1": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut1.json"
+          },
+          "Put example #2": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut2.json"
+          },
+          "Put example #3": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut3.json"
+          },
+          "Put example #4": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut4.json"
+          },
+          "Put example #5": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut5.json"
+          },
+          "Put example #6": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut6.json"
+          },
+          "Put example #7": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut7.json"
+          },
+          "Put example #8": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut8.json"
+          },
+          "Put example #9": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut9.json"
+          },
+          "Put example #10": {
+            "$ref": "./examples/ViAccountPut/ViAccountPut10.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Delete",
+        "description": "Delete an Azure Video Analyzer for Media account.",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Video Analyzer for Media account was successfully deleted."
+          },
+          "202": {
+            "description": "The Azure Video Analyzer for Media account will be deleted asynchronously."
+          },
+          "204": {
+            "description": "The Azure Video Analyzer for Media account does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete account": {
+            "$ref": "./examples/ViAccountDelete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.VideoIndexer/locations/{location}/userClassicAccounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "UserClassicAccounts_List",
+        "description": "Lists all Azure Video Analyzer for Media classic accounts",
+        "x-ms-examples": {
+          "List accounts": {
+            "$ref": "./examples/ViListUserClassicAccounts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserClassicAccountList"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.VideoIndexer/locations/{location}/classicAccounts/{accountName}": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "ClassicAccounts_GetDetails",
+        "description": "Gets the properties of an Azure Video Analyzer for Media Classic account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Video Analyzer for Media account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClassicAccount"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "User Not Allowed",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get account": {
+            "$ref": "./examples/ViClassicAccounts.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts/{accountName}/generateAccessToken": {
+      "post": {
+        "tags": [
+          "AccessToken"
+        ],
+        "operationId": "Generate_AccessToken",
+        "description": "Generate an Azure Video Analyzer for Media access token.",
+        "x-ms-examples": {
+          "Generate accessToken for video contributor #1": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoContributerAccessToken1.json"
+          },
+          "Generate accessToken for video contributor #2": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoContributerAccessToken2.json"
+          },
+          "Generate accessToken for video reader #1": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoReaderAccessToken1.json"
+          },
+          "Generate accessToken for video reader #2": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoReaderAccessToken2.json"
+          },
+          "Generate accessToken for project contributor #1": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectContributerAccessToken1.json"
+          },
+          "Generate accessToken for project contributor #2": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectContributerAccessToken2.json"
+          },
+          "Generate accessToken for project reader #1": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectReaderAccessToken1.json"
+          },
+          "Generate accessToken for project reader #2": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectReaderAccessToken2.json"
+          },
+          "Generate accessToken for account contributor": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateAccountContributerAccessToken.json"
+          },
+          "Generate accessToken for account reader": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateAccountReaderAccessToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "x-ms-client-flatten": true,
+            "description": "The parameters for generating access token",
+            "schema": {
+              "$ref": "#/definitions/GenerateAccessTokenParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Video Analyzer for Media account's access token properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Tags": {
+      "type": "object",
+      "description": "Resource tags",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags"
+        }
+      }
+    },
+    "Account": {
+      "description": "An Azure Video Analyzer for Media account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "List of account properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccountPropertiesForPutRequest"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountPatch": {
+      "type": "object",
+      "description": "Azure Video Analyzer for Media account",
+      "properties": {
+        "properties": {
+          "description": "List of account properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccountPropertiesForPatchRequest"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tags"
+        }
+      ]
+    },
+    "AccountPropertiesForPutRequest": {
+      "description": "Azure Video Analyzer for Media account properties",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The account's tenant id",
+          "type": "string",
+          "readOnly": true,
+          "example": "2b9bcf6d-39d5-460a-a6bb-7b40b7ccf139"
+        },
+        "accountId": {
+          "description": "The account's data-plane ID",
+          "type": "string",
+          "example": "3575690b-a569-449c-ab7b-11020f948f76"
+        },
+        "accountName": {
+          "description": "The account's name",
+          "type": "string",
+          "readOnly": true,
+          "example": "contoso-videoAnalyzer"
+        },
+        "mediaServices": {
+          "description": "The media services details",
+          "type": "object",
+          "$ref": "#/definitions/MediaServicesForPutRequest"
+        },
+        "totalSecondsIndexed": {
+          "description": "An integer representing the total seconds that have been indexed on the account",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the account at the time the operation was called.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccountPropertiesForPatchRequest": {
+      "description": "Azure Video Analyzer for Media account properties",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The account's tenant id",
+          "type": "string",
+          "readOnly": true,
+          "example": "2b9bcf6d-39d5-460a-a6bb-7b40b7ccf139"
+        },
+        "accountId": {
+          "description": "The account's data-plane ID",
+          "readOnly": true,
+          "type": "string",
+          "example": "3575690b-a569-449c-ab7b-11020f948f76"
+        },
+        "mediaServices": {
+          "description": "The media services details",
+          "type": "object",
+          "$ref": "#/definitions/MediaServicesForPatchRequest"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the account at the time the operation was called.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccountList": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "description": "List of accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "example": "https://management.azure.com/{accountsOperation}?api-version={version}&%24skiptoken={token}"
+        }
+      },
+      "description": "The list operation response, that contains the data pools and their properties.",
+      "type": "object"
+    },
+    "GenerateAccessTokenParameters": {
+      "description": "Access token generation request's parameters",
+      "type": "object",
+      "required": [
+        "permissionType",
+        "scope"
+      ],
+      "properties": {
+        "permissionType": {
+          "type": "string",
+          "description": "The requested permission",
+          "enum": [
+            "Contributor",
+            "Reader"
+          ],
+          "x-ms-enum": {
+            "name": "permissionType",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "type": "string",
+          "description": "The requested media type",
+          "enum": [
+            "Video",
+            "Account",
+            "Project"
+          ],
+          "x-ms-enum": {
+            "name": "scope",
+            "modelAsString": true
+          }
+        },
+        "videoId": {
+          "description": "The video ID",
+          "type": "string",
+          "example": "07ec9e38d4"
+        },
+        "projectId": {
+          "description": "The project ID",
+          "type": "string"
+        }
+      }
+    },
+    "MediaServicesForPutRequest": {
+      "description": "The media services details",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The media services resource id",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoAnalyzer-ms"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity to be used to grant permissions",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
+        }
+      }
+    },
+    "MediaServicesForPatchRequest": {
+      "description": "The media services details",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity to be used to grant permissions",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
+        }
+      }
+    },
+    "AccessToken": {
+      "description": "Azure Video Analyzer for Media access token.",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The access token.",
+          "x-ms-secret": true,
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjI0NDc3MzMsImV4cCI6MTY1Mzk4MzczMywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0"
+        }
+      }
+    },
+    "UserClassicAccountList": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassicAccountSlim"
+          },
+          "description": "List of classic account names and their location."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "example": "https://management.azure.com/{accountsOperation}?api-version={version}&%24skiptoken={token}"
+        }
+      },
+      "description": "The list of user classic accounts.",
+      "type": "object"
+    },
+    "ClassicAccountSlim": {
+      "description": "An Azure Video Analyzer for Media classic account.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The account's name",
+          "type": "string",
+          "readOnly": true,
+          "example": "contoso-videoanalyzer"
+        },
+        "location": {
+          "description": "The account's location",
+          "type": "string",
+          "readOnly": true,
+          "example": "westus"
+        }
+      }
+    },
+    "ClassicAccount": {
+      "description": "An Azure Video Analyzer for Media classic account.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The account's name",
+          "type": "string",
+          "readOnly": true,
+          "example": "contoso-videoanalyzer"
+        },
+        "location": {
+          "description": "The account's location",
+          "type": "string",
+          "example": "westus"
+        },
+        "mediaServices": {
+          "description": "List of classic account properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClassicAccountMediaServices"
+        }
+      }
+    },
+    "ClassicAccountMediaServices": {
+      "description": "Azure Video Analyzer for Media classic account properties",
+      "type": "object",
+      "properties": {
+        "aadApplicationId": {
+          "type": "string",
+          "description": "The aad application id",
+          "example": "912f96dc-1ed3-4d7d-aa67-0adef4bb68ad"
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "The aad tenant id",
+          "example": "72f988bf-86f1-41ag-91ab-2d7cd061db47"
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "Represents wether the media services is connected or not"
+        },
+        "eventGridProviderRegistered": {
+          "type": "boolean",
+          "description": "Represents if the media services event grid is connected or not"
+        },
+        "name": {
+          "type": "string",
+          "description": "The media services name",
+          "example": "contosoVideoanalyzerMediaServices"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group that the media services belong to",
+          "example": "contoso-videoanalyzer-rg"
+        },
+        "streamingEndpointStarted": {
+          "type": "boolean",
+          "description": "Represents wether the media services streaming endpoint has started"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The media services subscriptionId",
+          "example": "586d4f48-8f08-4a4e-96b7-e1892d6dba9e"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "readOnly": true,
+          "type": "string",
+          "example": "Microsoft.VideoIndexer/accounts/read"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "readOnly": true,
+          "type": "boolean",
+          "example": false
+        },
+        "actionType": {
+          "description": "Indicates the action type.",
+          "readOnly": true,
+          "type": "string",
+          "example": "Internal"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "readOnly": true,
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "readOnly": true,
+          "type": "string",
+          "example": "user"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "readOnly": true,
+          "type": "string",
+          "example": "Microsoft Azure Video Analyzer for Media"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "readOnly": true,
+          "type": "string",
+          "example": "accounts"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "readOnly": true,
+          "type": "string",
+          "example": "Read accounts"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "readOnly": true,
+          "type": "string",
+          "example": "Read accounts details"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Available operations of the service.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of operation list results if there are any.",
+          "example": "https://management.azure.com/{operation}?api-version={version}&%24skiptoken={token}"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AccountCheckNameAvailabilityParameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The VideoIndexer account name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.VideoIndexer/accounts"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          },
+          "description": "The type of resource, Microsoft.VideoIndexer/accounts"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The parameters used to check the availability of the Video Indexer account name."
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the reason that a Video Indexer account name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "enum": [
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets an error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    }
+  },
+  "parameters": {
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Video Analyzer for Media account.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*",
+      "maxLength": 50,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
