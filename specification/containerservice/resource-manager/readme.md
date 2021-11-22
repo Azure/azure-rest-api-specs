@@ -722,6 +722,18 @@ input-file:
 - Microsoft.ContainerService/stable/2016-03-30/containerService.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+```
+
 ---
 
 # Code Generation
