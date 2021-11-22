@@ -519,6 +519,9 @@
           "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
           },
+          "Create/Update AAD Managed Cluster with EnableNamespaceResources": {
+            "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableNamespaceResources.json"
+          },
           "Create Managed Cluster with PPG": {
             "$ref": "./examples/ManagedClustersCreate_PPG.json"
           },
@@ -3755,6 +3758,10 @@
         "enablePodSecurityPolicy": {
           "type": "boolean",
           "description": "(DEPRECATING) Whether to enable Kubernetes pod security policy (preview). This feature is set for removal on October 15th, 2020. Learn more at aka.ms/aks/azpodpolicy."
+        },
+        "enableNamespaceResources": {
+          "type": "boolean",
+          "description": "Enable namespace as ARM resource."
         },
         "networkProfile": {
           "$ref": "#/definitions/ContainerServiceNetworkProfile",
