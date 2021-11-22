@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-01-15-preview",
+    "version": "2021-09-01",
     "title": "ExtensionsClient",
     "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters."
   },
@@ -55,13 +55,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -124,13 +124,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -174,13 +174,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -237,13 +237,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -266,6 +266,13 @@
             "description": "Request received successfully, and the resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/Extension"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -302,13 +309,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -333,16 +340,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations": {
       "get": {
         "tags": [
-          "Extension Operation Status"
+          "Operations in a Cluster"
         ],
-        "operationId": "OperationStatus_Get",
-        "description": "Get Async Operation status",
+        "operationId": "OperationStatus_List",
+        "description": "List Async Operations, currently in progress, in a cluster",
         "x-ms-examples": {
-          "ExtensionAsyncOperationStatus Get": {
-            "$ref": "./examples/GetExtensionAsyncOperationStatus.json"
+          "AsyncOperationStatus List": {
+            "$ref": "./examples/ListAsyncOperationStatus.json"
           }
         },
         "parameters": [
@@ -353,13 +360,64 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-01-15-preview/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operations in a cluster",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Operation Status"
+        ],
+        "operationId": "OperationStatus_Get",
+        "description": "Get Async Operation status",
+        "x-ms-examples": {
+          "AsyncOperationStatus Get": {
+            "$ref": "./examples/GetAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -377,9 +435,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Extension Operation Status",
+            "description": "Operation Status",
             "schema": {
-              "$ref": "../../common/2022-01-15-preview/definitions.json#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -390,11 +448,48 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.KubernetesConfiguration/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "description": "List all the available operations the KubernetesConfiguration resource provider supports, in this api-version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
     "ScopeCluster": {
       "description": "Specifies that the scope of the extension is Cluster",
+      "x-nullable": true,
       "type": "object",
       "properties": {
         "releaseNamespace": {
@@ -405,6 +500,7 @@
     },
     "ScopeNamespace": {
       "description": "Specifies that the scope of the extension is Namespace",
+      "x-nullable": true,
       "type": "object",
       "properties": {
         "targetNamespace": {
@@ -418,17 +514,28 @@
       "type": "object",
       "properties": {
         "cluster": {
-          "type": "object",
-          "x-nullable": true,
-          "description": "Specifies that the scope of the extension is Cluster",
           "$ref": "#/definitions/ScopeCluster"
         },
         "namespace": {
-          "type": "object",
-          "x-nullable": true,
-          "description": "Specifies that the scope of the extension is Namespace",
           "$ref": "#/definitions/ScopeNamespace"
         }
+      }
+    },
+    "provisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioning state of the extension resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
       }
     },
     "ExtensionStatus": {
@@ -517,10 +624,7 @@
               }
             },
             "provisioningState": {
-              "description": "Status of installation of this extension.",
-              "type": "string",
-              "readOnly": true,
-              "$ref": "../../common/2022-01-15-preview/definitions.json#/definitions/ProvisioningStateDefinition"
+              "$ref": "#/definitions/provisioningState"
             },
             "statuses": {
               "description": "Status from this extension.",
@@ -531,9 +635,6 @@
               }
             },
             "errorInfo": {
-              "description": "Error information from the Agent - e.g. errors during installation.",
-              "type": "object",
-              "readOnly": true,
               "x-nullable": true,
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
             },
@@ -617,6 +718,121 @@
         }
       }
     },
+    "ResourceProviderOperation": {
+      "description": "Supported operation of this resource provider.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Operation name, in format of {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Resource provider: Microsoft KubernetesConfiguration.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of this operation.",
+              "type": "string"
+            }
+          }
+        },
+        "isDataAction": {
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "Result of the request to list operations.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to the next set of results, if any."
+        }
+      }
+    },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional information, if available.",
+          "type": "object",
+          "x-nullable": true,
+          "x-ms-client-flatten": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "x-nullable": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "OperationStatusList": {
+      "description": "The async operations in progress, in the cluster.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationStatusResult"
+          },
+          "description": "List of async operations in progress, in the cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of Operation Result objects, if any."
+        }
+      }
+    },
     "patchExtension": {
       "description": "The Extension Patch Request object.",
       "type": "object",
@@ -669,6 +885,38 @@
       "description": "Name of the Extension.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterRpParameter": {
+      "name": "clusterRp",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.ContainerService",
+        "Microsoft.Kubernetes"
+      ],
+      "description": "The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterResourceNameParameter": {
+      "name": "clusterResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "managedClusters",
+        "connectedClusters"
+      ],
+      "description": "The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or connectedClusters (for OnPrem K8S clusters).",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the kubernetes cluster.",
       "x-ms-parameter-location": "method"
     }
   }
