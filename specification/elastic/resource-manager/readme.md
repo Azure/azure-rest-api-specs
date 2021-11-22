@@ -48,6 +48,15 @@ input-file:
   - Microsoft.Elastic/preview/2021-09-01-preview/elastic.json
 ```
 
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+  - Microsoft.Elastic/preview/2021-10-01-preview/elastic.json
+```
+
 ### Tag: package-2020-07-01
 
 These settings apply only when `--tag=package-2020-07-01` is specified on the command line.
@@ -89,6 +98,12 @@ directive:
   - suppress: SECRET_PROPERTY
     from:
       - Microsoft.Elastic/preview/2021-09-01-preview/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Elastic/preview/2021-10-01-preview/elastic.json
     where:
       - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.
