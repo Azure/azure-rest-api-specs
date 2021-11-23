@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes": {
       "get": {
         "tags": [
-         "ListChanges"
+          "ListChanges"
         ],
         "operationId": "ChangeResources_List",
         "x-ms-examples": {
@@ -66,10 +66,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref" : "#/parameters/top"
+            "$ref": "#/parameters/top"
           },
           {
-            "$ref" : "#/parameters/skipToken"
+            "$ref": "#/parameters/skipToken"
           }
         ],
         "responses": {
@@ -80,28 +80,28 @@
             }
           },
           "default": {
-            "description" : "Error response describing why the operation failed.",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             },
-            "x-ms-error-response" : true,
-            "headers" :{
-              "x-ms-error-code" : {
-                "x-ms-client-name" : "ErrorCode",
-                "type" : "string"
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName" : "odata.nextLink"
+          "nextLinkName": "odata.nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes/{changeResourceId}": {
       "get": {
         "tags": [
-         "GetChange"
+          "GetChange"
         ],
         "operationId": "ChangeResource_Get",
         "x-ms-examples": {
@@ -141,15 +141,15 @@
             }
           },
           "default": {
-            "description" : "Error response describing why the operation failed.",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             },
-            "x-ms-error-response" : true,
-            "headers" :{
-              "x-ms-error-code" : {
-                "x-ms-client-name" : "ErrorCode",
-                "type" : "string"
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
@@ -166,7 +166,7 @@
           "type": "string",
           "description": "The link used to get the next page of Change Resources"
         },
-        "value":{
+        "value": {
           "description": "The list of resources",
           "type": "array",
           "items": {
@@ -184,23 +184,27 @@
           "type": "string",
           "readOnly": true
         },
-        "changeType":{
+        "changeType": {
           "description": "The type of change that was captured in the resource",
           "type": "string",
           "readOnly": true,
-          "enum": ["Update", "Delete", "Create"]
+          "enum": [
+            "Update",
+            "Delete",
+            "Create"
+          ]
         },
-        "changesCount" : {
+        "changesCount": {
           "type": "integer",
           "readOnly": true,
-          "description" : "The number of changes this resource captures"
+          "description": "The number of changes this resource captures"
         },
-       "changeAttributes": {
+        "changeAttributes": {
           "$ref": "#/definitions/ChangeAttributes"
         },
-        "changes":{
+        "changes": {
           "$ref": "#/definitions/ChangesMap"
-       }
+        }
       }
     },
     "ChangeAttributes": {
@@ -217,12 +221,12 @@
           "type": "string",
           "readOnly": true
         },
-        "previousResourceSnapshotId":{
+        "previousResourceSnapshotId": {
           "description": "The GUID of the 'before' snapshot used to generate this change resource. Compared with the 'new' snapshot to generate this change resource based on the differences between the two snapshots",
           "type": "string",
           "readOnly": true
         },
-        "newResourceSnapshotId":{
+        "newResourceSnapshotId": {
           "description": "The GUID of the 'after' snapshot used to generate this change resource. Compared with the 'previous' snapshot to generate this change resource based on the differences between the two snapshots",
           "type": "string",
           "readOnly": true
@@ -232,7 +236,7 @@
     "ChangesMap": {
       "description": "A hashmap with changed property name as a key and the change details as the value",
       "type": "object",
-      "additionalProperties" : {
+      "additionalProperties": {
         "$ref": "#/definitions/ChangeBase"
       }
     },
@@ -249,47 +253,56 @@
           "description": "The type of change that occurred",
           "type": "string",
           "readOnly": true,
-          "enum": ["Insert", "Update", "Remove"]
+          "enum": [
+            "Insert",
+            "Update",
+            "Remove"
+          ]
         },
         "changeCategory": {
           "description": "The entity that made the change",
           "type": "string",
           "readOnly": true,
-          "enum": ["User", "System"]
+          "enum": [
+            "User",
+            "System"
+          ]
         },
-        "beforeValue":{
+        "beforeValue": {
           "description": "The target resource property value before the change",
           "type": "string",
           "readOnly": true
         },
-        "afterValue":{
+        "afterValue": {
           "description": "The target resource property value before the change",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "ResourceResult" : {
+    "ResourceResult": {
       "description": "An Azure resource",
       "type": "object",
       "properties": {
-        "id" : {
+        "id": {
           "description": "The fully qualified ID of the resource, including the resource name and resource type.",
           "type": "string",
           "readOnly": true
         },
-        "name" : {
+        "name": {
           "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
-        "type" : {
+        "type": {
           "description": "The resource type",
           "type": "string",
           "readOnly": true,
-          "enum": ["Microsoft.Resources/changes"]
+          "enum": [
+            "Microsoft.Resources/changes"
+          ]
         },
-        "tenantId" :{
+        "tenantId": {
           "description": "The tenant Id",
           "type": "string",
           "readOnly": true
@@ -309,28 +322,28 @@
           "type": "string",
           "readOnly": true
         },
-        "properties" : {
+        "properties": {
           "$ref": "#/definitions/ChangeResourceResultBase"
         }
       }
     },
-    "Error" : {
-      "type" : "object",
-      "description" : "The error object",
-      "properties" : {
+    "Error": {
+      "type": "object",
+      "description": "The error object",
+      "properties": {
         "message": {
-          "description" : "A human-readable representation of the error.",
+          "description": "A human-readable representation of the error.",
           "type": "string"
         },
-        "code" : {
-          "description" : "One of a server-defined set of error codes.",
+        "code": {
+          "description": "One of a server-defined set of error codes.",
           "type": "string"
         }
       }
     }
   },
   "parameters": {
-   "SubscriptionIdParameter": {
+    "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
