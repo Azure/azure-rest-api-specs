@@ -729,6 +729,278 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configurationServices/{configurationServiceName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Application Configuration Service and its properties.",
+        "operationId": "ConfigurationServices_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Application Configuration Service.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationServices_Get": {
+            "$ref": "./examples/ConfigurationServices_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create the default Application Configuration Service or update the existing Application Configuration Service.",
+        "operationId": "ConfigurationServices_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationServiceNameParameter"
+          },
+          {
+            "name": "configurationServiceResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Application Configuration Service.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created Application Configuration Service and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Application Configuration Service is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConfigurationServices_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationServices_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Disable the default Application Configuration Service.",
+        "operationId": "ConfigurationServices_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the default Application Configuration Service has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the default Application Configuration Service is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the default Application Configuration Service doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConfigurationServices_Delete": {
+            "$ref": "./examples/ConfigurationServices_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configurationServices": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handles requests to list all resources in a Service.",
+        "operationId": "ConfigurationServices_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of configuration service in the Service.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConfigurationServices_List": {
+            "$ref": "./examples/ConfigurationServices_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configurationServices/{configurationServiceName}/validate": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Check if the Application Configuration Service settings are valid.",
+        "operationId": "ConfigurationServices_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationServiceNameParameter"
+          },
+          {
+            "name": "settings",
+            "in": "body",
+            "description": "Application Configuration Service settings to be validated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the validation result of Application Configuration Service.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceSettingsValidateResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the ConfigurationServiceSettings is validating.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationServiceSettingsValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ConfigurationServices_Validate": {
+            "$ref": "./examples/ConfigurationServices_Validate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default": {
       "get": {
         "tags": [
@@ -3457,6 +3729,247 @@
         }
       }
     },
+    "ConfigurationServiceResourceCollection": {
+      "description": "Object that includes an array of configuration service resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of configuration service resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationServiceResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ConfigurationServiceResource": {
+      "description": "Application Configuration Service resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationServiceProperties"
+        }
+      }
+    },
+    "ConfigurationServiceProperties": {
+      "description": "Application Configuration Service properties payload",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the Application Configuration Service.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ConfigurationServiceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/ConfigurationServiceResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        },
+        "instances": {
+          "description": "Collection of instances belong to Application Configuration Service.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationServiceInstance"
+          },
+          "readOnly": true
+        },
+        "settings": {
+          "$ref": "#/definitions/ConfigurationServiceSettings"
+        }
+      }
+    },
+    "ConfigurationServiceResourceRequests": {
+      "description": "Resource request payload of Application Configuration Service",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "cpu": {
+          "description": "Cpu allocated to each Application Configuration Service instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "memory": {
+          "description": "Memory allocated to each Application Configuration Service instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceCount": {
+          "format": "int32",
+          "description": "Instance count of the Application Configuration Service",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationServiceSettings": {
+      "description": "The settings of Application Configuration Service.",
+      "type": "object",
+      "properties": {
+        "gitProperty": {
+          "$ref": "#/definitions/ConfigurationServiceGitProperty"
+        }
+      }
+    },
+    "ConfigurationServiceGitProperty": {
+      "description": "Property of git environment.",
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "$ref": "#/definitions/ConfigurationServiceGitPropertyRepository"
+        }
+      }
+    },
+    "ConfigurationServiceGitPropertyRepository": {
+      "description": "Repositories of Application Configuration Service git property.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ConfigurationServiceGitRepository"
+      }
+    },
+    "ConfigurationServiceSettingsValidateResult": {
+      "description": "Validation result for configuration service settings",
+      "type": "object",
+      "properties": {
+        "gitPropertyValidationResult": {
+          "$ref": "#/definitions/ConfigurationServiceGitPropertyValidateResult"
+        }
+      }
+    },
+    "ConfigurationServiceGitPropertyValidateResult": {
+      "description": "Validation result for configuration service settings",
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "description": "Indicate if the configuration service settings are valid",
+          "type": "boolean"
+        },
+        "gitReposValidationResult": {
+          "description": "The detail validation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationMessages"
+          }
+        }
+      }
+    },
+    "ValidationMessages": {
+      "description": "Validate messages of the configuration service git repositories",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the configuration service git repository.",
+          "type": "string"
+        },
+        "messages": {
+          "description": "Detailed validation messages.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConfigurationServiceInstance": {
+      "description": "Collection of instances belong to the Application Configuration Service",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Application Configuration Service instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the Application Configuration Service instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationServiceGitRepository": {
+      "description": "Git repository property payload for Application Configuration Service",
+      "required": [
+        "name",
+        "patterns",
+        "uri",
+        "label"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the repository",
+          "type": "string"
+        },
+        "patterns": {
+          "description": "Collection of patterns of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uri": {
+          "description": "URI of the repository",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label of the repository",
+          "type": "string"
+        },
+        "searchPaths": {
+          "description": "Searching path of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "description": "Username of git repository basic auth.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password of git repository basic auth.",
+          "type": "string"
+        },
+        "hostKey": {
+          "description": "Public sshKey of git repository.",
+          "type": "string"
+        },
+        "hostKeyAlgorithm": {
+          "description": "SshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Private sshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "strictHostKeyChecking": {
+          "description": "Strict host key checking or not.",
+          "type": "boolean"
+        }
+      }
+    },
     "Sku": {
       "description": "Sku of Azure Spring Cloud",
       "type": "object",
@@ -5590,6 +6103,14 @@
       "name": "storageName",
       "in": "path",
       "description": "The name of the storage resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationServiceNameParameter": {
+      "name": "configurationServiceName",
+      "in": "path",
+      "description": "The name of Application Configuration Service.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
