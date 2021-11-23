@@ -238,6 +238,21 @@
       "type": "boolean",
       "default": false,
       "x-ms-parameter-location": "method"
+    },
+    "Position": {
+      "name": "query",
+      "in": "query",
+      "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "array",
+      "collectionFormat": "csv",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
     }
   },
   "paths": {
@@ -261,20 +276,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -322,20 +324,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "name": "interval",
@@ -380,20 +369,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -441,20 +417,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -508,20 +471,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "#/parameters/WeatherDataUnit"
@@ -612,20 +562,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -670,20 +607,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
@@ -943,20 +867,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "name": "query",
-            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "in": "query",
-            "required": true,
-            "x-ms-client-name": "coordinates",
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "$ref": "#/parameters/Pollutants"
@@ -998,20 +909,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "name": "query",
-            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "in": "query",
-            "required": true,
-            "x-ms-client-name": "coordinates",
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "name": "duration",
@@ -1059,20 +957,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
           },
           {
-            "name": "query",
-            "description": "Coordinates of the location for which air quality is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "in": "query",
-            "required": true,
-            "x-ms-client-name": "coordinates",
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "name": "duration",
@@ -1163,20 +1048,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "name": "startDate",
@@ -1231,20 +1103,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "name": "startDate",
@@ -1299,20 +1158,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
-            "name": "query",
-            "x-ms-client-name": "coordinates",
-            "in": "query",
-            "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-            "required": true,
-            "x-ms-parameter-location": "method",
-            "type": "array",
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
+            "$ref": "#/parameters/Position"
           },
           {
             "name": "startDate",
