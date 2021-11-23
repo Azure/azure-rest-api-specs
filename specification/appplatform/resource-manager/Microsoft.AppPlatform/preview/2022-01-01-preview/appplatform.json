@@ -3418,6 +3418,14 @@
             "name": "PowerState",
             "modelAsString": true
           }
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "default": false,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -4904,6 +4912,11 @@
         },
         "startTime": {
           "description": "Start time of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "zone": {
+          "description": "Availability zone information of the deployment instance",
           "type": "string",
           "readOnly": true
         }
