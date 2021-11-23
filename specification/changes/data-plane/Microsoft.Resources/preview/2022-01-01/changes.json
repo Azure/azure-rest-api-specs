@@ -2,19 +2,24 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-01-01",
-    "title": "changes",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "changesClient"
-    }
+    "title": "ChangesClient",
+    "description": "The Resource Changes Client"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -29,33 +34,123 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/operations": {
+     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
+        "tags": [
+         "ListChanges"
+        ],
+        "operationId": "ChangeResources_List",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+          "ListChanges": {
+            "$ref": "./examples/ListChanges.json"
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "description": "Obtains a list of change resources from the past 14 days for the target resource",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref" : "#/parameters/top"
+          },
+          {
+            "$ref" : "#/parameters/skipToken"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/ResourceListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description" : "Error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            },
+            "x-ms-error-response" : true,
+            "headers" :{
+              "x-ms-error-code" : {
+                "x-ms-client-name" : "ErrorCode",
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName" : "odata.nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes/{changeResourceId}": {
+      "get": {
+        "tags": [
+         "GetChange"
+        ],
+        "operationId": "ChangeResource_Get",
+        "x-ms-examples": {
+          "ListChanges": {
+            "$ref": "./examples/GetChange.json"
+          }
+        },
+        "description": "Obtains the specified change resource for the target resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeResourceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceResult"
+            }
+          },
+          "default": {
+            "description" : "Error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            },
+            "x-ms-error-response" : true,
+            "headers" :{
+              "x-ms-error-code" : {
+                "x-ms-client-name" : "ErrorCode",
+                "type" : "string"
+              }
             }
           }
         }
@@ -63,50 +158,179 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "ResourceListResult": {
+      "description": "The list of resources",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "odata.nextLink": {
           "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+          "description": "The link used to get the next page of Change Resources"
         },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
+        "value":{
+          "description": "The list of resources",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
+            "$ref": "#/definitions/ResourceResult"
+          }
+        }
+      }
+    },
+    "ChangeResourceResultBase": {
+      "description": "Change Resource",
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "description": "The fully qualified ID of the target resource that was changed",
+          "type": "string",
           "readOnly": true
+        },
+        "changeType":{
+          "description": "The type of change that was captured in the resource",
+          "type": "string",
+          "readOnly": true,
+          "enum": ["Update", "Delete", "Create"]
+        },
+        "changesCount" : {
+          "type": "integer",
+          "readOnly": true,
+          "description" : "The number of changes this resource captures"
+        },
+       "changeAttributes": {
+          "$ref": "#/definitions/ChangeAttributes"
+        },
+        "changes":{
+          "$ref": "#/definitions/ChangesMap"
+       }
+      }
+    },
+    "ChangeAttributes": {
+      "description": "Details about the change resource",
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "description": "The ARM correlation ID of the change resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "description": "The time the change(s) on the target resource ocurred",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousResourceSnapshotId":{
+          "description": "The GUID of the 'before' snapshot used to generate this change resource. Compared with the 'new' snapshot to generate this change resource based on the differences between the two snapshots",
+          "type": "string",
+          "readOnly": true
+        },
+        "newResourceSnapshotId":{
+          "description": "The GUID of the 'after' snapshot used to generate this change resource. Compared with the 'previous' snapshot to generate this change resource based on the differences between the two snapshots",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ChangesMap": {
+      "description": "A hashmap with changed property name as a key and the change details as the value",
+      "type": "object",
+      "additionalProperties" : {
+        "$ref": "#/definitions/ChangeBase"
+      }
+    },
+    "ChangeBase": {
+      "description": "An individual change on the target resource",
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "description": "The target resource property that underwent the change",
+          "type": "string",
+          "readOnly": true
+        },
+        "propertyChangeType": {
+          "description": "The type of change that occurred",
+          "type": "string",
+          "readOnly": true,
+          "enum": ["Insert", "Update", "Remove"]
+        },
+        "changeCategory": {
+          "description": "The entity that made the change",
+          "type": "string",
+          "readOnly": true,
+          "enum": ["User", "System"]
+        },
+        "beforeValue":{
+          "description": "The target resource property value before the change",
+          "type": "string",
+          "readOnly": true
+        },
+        "afterValue":{
+          "description": "The target resource property value before the change",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceResult" : {
+      "description": "An Azure resource",
+      "type": "object",
+      "properties": {
+        "id" : {
+          "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name" : {
+          "description": "The name of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "type" : {
+          "description": "The resource type",
+          "type": "string",
+          "readOnly": true,
+          "enum": ["Microsoft.Resources/changes"]
+        },
+        "tenantId" :{
+          "description": "The tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the target resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "The resource group of the target resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The subscription of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties" : {
+          "$ref": "#/definitions/ChangeResourceResultBase"
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "description" : "The error object",
+      "properties" : {
+        "message": {
+          "description" : "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "code" : {
+          "description" : "One of a server-defined set of error codes.",
+          "type": "string"
         }
       }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+   "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
@@ -121,12 +345,60 @@
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
+    "ResourceProviderNamespaceParameter": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource provider namespace.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource type.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
+    },
+    "ChangeResourceIdParameter": {
+      "name": "changeResourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the change resource"
+    },
+    "top": {
+      "required": false,
+      "default": 100,
+      "description": "(Optional) Set the maximum number of results per response.",
+      "in": "query",
+      "maximum": 999,
+      "minimum": 1,
+      "name": "top",
+      "type": "integer"
+    },
+    "skipToken": {
+      "required": false,
+      "description": "(Optional) The page-continuation token",
+      "in": "query",
+      "name": "skipToken",
+      "type": "string"
     }
   }
 }
