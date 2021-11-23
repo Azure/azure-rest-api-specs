@@ -4417,6 +4417,488 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apiPortals/{apiPortalName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the API portal and its properties.",
+        "operationId": "ApiPortals_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding API portal.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiPortals_Get": {
+            "$ref": "./examples/ApiPortals_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create the default API portal or update the existing API portal.",
+        "operationId": "ApiPortals_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          },
+          {
+            "name": "apiPortalResource",
+            "in": "body",
+            "description": "The API portal for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiPortalResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated API portal.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created API portal and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting API portal is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ApiPortals_CreateOrUpdate": {
+            "$ref": "./examples/ApiPortals_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the default API portal.",
+        "operationId": "ApiPortals_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the default API portal has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the default API portal is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the default API portal doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ApiPortals_Delete": {
+            "$ref": "./examples/ApiPortals_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apiPortals": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handles requests to list all resources in a Service.",
+        "operationId": "ApiPortals_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of API portals in the Service.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiPortals_List": {
+            "$ref": "./examples/ApiPortals_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apiPortals/{apiPortalName}/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the API portal custom domain.",
+        "operationId": "ApiPortalCustomDomains_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalCustomDomainParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding API portal custom domain.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalCustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiPortalCustomDomains_Get": {
+            "$ref": "./examples/ApiPortalCustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update the API portal custom domain.",
+        "operationId": "ApiPortalCustomDomains_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalCustomDomainParameter"
+          },
+          {
+            "name": "apiPortalCustomDomainResource",
+            "in": "body",
+            "description": "The API portal custom domain for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiPortalCustomDomainResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Spring Cloud Gateway route configs.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalCustomDomainResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created Spring Cloud Gateway custom domain and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalCustomDomainResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Spring Cloud Gateway custom domain is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalCustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ApiPortalCustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/ApiPortalCustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the API portal custom domain.",
+        "operationId": "ApiPortalCustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalCustomDomainParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the API portal custom domain has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the API portal custom domain is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the API portal custom domain doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ApiPortalCustomDomains_Delete": {
+            "$ref": "./examples/ApiPortalCustomDomains_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apiPortals/{apiPortalName}/domains": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handle requests to list all API portal custom domains.",
+        "operationId": "ApiPortalCustomDomains_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of API portal custom domains.",
+            "schema": {
+              "$ref": "#/definitions/ApiPortalCustomDomainResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiPortalCustomDomains_List": {
+            "$ref": "./examples/ApiPortalCustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apiPortals/{apiPortalName}/validateDomain": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Check the domains are valid as well as not in use.",
+        "operationId": "ApiPortals_ValidateDomain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiPortalNameParameter"
+          },
+          {
+            "name": "validatePayload",
+            "in": "body",
+            "description": "Custom domain payload to be validated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainValidatePayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the name is available.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiPortals_ValidateDomain": {
+            "$ref": "./examples/ApiPortals_ValidateDomain.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7450,6 +7932,174 @@
           "type": "string"
         }
       }
+    },
+    "ApiPortalResourceCollection": {
+      "description": "Object that includes an array of API portal resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of API portal resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiPortalResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ApiPortalResource": {
+      "description": "API portal resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiPortalProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the API portal resource"
+        }
+      }
+    },
+    "ApiPortalProperties": {
+      "description": "API portal properties payload",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the API portal.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ApiPortalProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "public": {
+          "description": "Indicates whether the API portal exposes endpoint.",
+          "type": "boolean"
+        },
+        "url": {
+          "description": "URL of the API portal, exposed when 'public' is true.",
+          "type": "string",
+          "readOnly": true
+        },
+        "httpsOnly": {
+          "description": "Indicate if only https is allowed.",
+          "type": "boolean"
+        },
+        "sourceUrls": {
+          "description": "Collection of OpenAPI source URL locations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ssoProperties": {
+          "$ref": "#/definitions/SsoProperties"
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/ApiPortalResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        },
+        "instances": {
+          "description": "Collection of instances belong to API portal.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiPortalInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ApiPortalResourceRequests": {
+      "description": "Resource requests of the API portal",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Cpu allocated to each API portal instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "memory": {
+          "description": "Memory allocated to each API portal instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiPortalInstance": {
+      "description": "Collection of instances belong to the API portal",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the API portal instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the API portal instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiPortalCustomDomainResource": {
+      "description": "Custom domain of the API portal",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiPortalCustomDomainProperties"
+        }
+      }
+    },
+    "ApiPortalCustomDomainProperties": {
+      "description": "The properties of custom domain for API portal",
+      "type": "object",
+      "properties": {
+        "thumbprint": {
+          "description": "The thumbprint of bound certificate.",
+          "type": "string"
+        }
+      }
+    },
+    "ApiPortalCustomDomainResourceCollection": {
+      "description": "Object that includes an array of API portal custom domain resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of API portal custom domain resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiPortalCustomDomainResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -7568,6 +8218,22 @@
       "name": "domainName",
       "in": "path",
       "description": "The name of the Spring Cloud Gateway custom domain.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiPortalNameParameter": {
+      "name": "apiPortalName",
+      "in": "path",
+      "description": "The name of API portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiPortalCustomDomainParameter": {
+      "name": "domainName",
+      "in": "path",
+      "description": "The name of the API portal custom domain.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
