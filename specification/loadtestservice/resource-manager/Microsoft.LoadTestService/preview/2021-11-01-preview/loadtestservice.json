@@ -280,11 +280,11 @@
           },
           {
             "in": "body",
-            "name": "ResourcePatchRequestBody",
+            "name": "LoadTestResourcePatchRequestBody",
             "description": "LoadTest resource update data",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourcePatchRequestBody"
+              "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
             }
           }
         ],
@@ -394,7 +394,7 @@
         }
       ]
     },
-    "ResourcePatchRequestBody": {
+    "LoadTestResourcePatchRequestBody": {
       "description": "LoadTest resource patch request body.",
       "type": "object",
       "properties": {
@@ -406,14 +406,16 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
           "description": "The type of identity used for the resource."
         },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "properties": {
           "description": "Load Test resource properties",
-          "$ref": "#/definitions/LoadTestProperties",
-          "x-ms-client-flatten": true
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "Description of the resource.",
+              "maxLength": 512,
+              "type": "string"
+            }
+          }
         }
       }
     },
