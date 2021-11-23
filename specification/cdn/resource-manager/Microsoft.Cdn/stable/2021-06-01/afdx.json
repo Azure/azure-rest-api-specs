@@ -484,7 +484,6 @@
         "responses": {
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. Please poll the targeted custom domain and check the 'validationProperties' field for the new validation token values."
-            }
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
@@ -4178,7 +4177,7 @@
             "Unknown",
             "Submitting",
             "Pending",
-            "Rejected,"
+            "Rejected",
             "TimedOut",
             "PendingRevalidation",
             "Approved"
@@ -4214,6 +4213,11 @@
     "AFDDomainUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
+        "profileName" : {
+          "description": "The name of the profile which holds the domain.",
+          "type": "string",
+          "readOnly": true
+        },
         "tlsSettings": {
           "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default.",
           "type": "object",
@@ -4321,6 +4325,11 @@
       ],
       "type": "object",
       "properties": {
+        "profileName" : {
+          "description": "The name of the profile which holds the security policy.",
+          "type": "string",
+          "readOnly": true
+        },
         "type": {
           "description": "The type of the Security policy to create.",
           "enum": [
@@ -4466,6 +4475,11 @@
     "AFDEndpointPropertiesUpdateParameters": {
       "description": "The JSON object containing endpoint update parameters.",
       "properties": {
+        "profileName" : {
+            "description": "The name of the profile which holds the endpoint.",
+            "type": "string",
+            "readOnly": true
+        },
         "enabledState": {
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
           "enum": [
@@ -4557,6 +4571,11 @@
         }
       ],
       "properties": {
+        "profileName" : {
+          "description": "The name of the profile which holds the secret.",
+          "type": "string",
+          "readOnly": true
+        },
         "parameters": {
           "description": "object which contains secret parameters",
           "$ref": "#/definitions/SecretParameters"
@@ -4746,7 +4765,14 @@
         {
           "$ref": "#/definitions/AFDStateProperties"
         }
-      ]
+      ],
+      "properties": {
+        "profileName" : {
+          "description": "The name of the profile which holds the rule set.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "AFDOrigin": {
       "description": "CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.",
@@ -4791,6 +4817,11 @@
     "AFDOriginUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin.",
       "properties": {
+        "originGroupName": {
+          "description": "The name of the origin group which contains this origin.",
+          "type": "string",
+          "readOnly": true
+        },
         "azureOrigin": {
           "description": "Resource reference to the Azure origin resource.",
           "type": "object",
@@ -4956,6 +4987,11 @@
     "AFDOriginGroupUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin group.",
       "properties": {
+        "profileName" : {
+          "description": "The name of the profile which holds the origin group.",
+          "type": "string",
+          "readOnly": true
+        },
         "loadBalancingSettings": {
           "description": "Load balancing settings for a backend pool",
           "$ref": "#/definitions/LoadBalancingSettingsParameters"
@@ -4972,7 +5008,7 @@
           "maximum": 50,
           "minimum": 0
         },
-        "responseBasedAFDOriginErrorDetectionSettings": {
+        "responseBasedAfdOriginErrorDetectionSettings": {
           "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResponseBasedOriginErrorDetectionParameters"
@@ -5088,6 +5124,11 @@
     "RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
+        "endpointName": {
+          "description": "The name of the endpoint which holds the route.",
+          "type": "string",
+          "readOnly": true
+        },
         "customDomains": {
           "description": "Domains referenced by this endpoint.",
           "type": "array",
@@ -5129,7 +5170,7 @@
         "cacheConfiguration": {
           "description": "The caching configuration for this route. To disable caching, do not provide a cacheConfiguration object.",
           "type": "object",
-          "$ref": "#/definitions/CacheConfiguration"
+          "$ref": "#/definitions/AfdRouteCacheConfiguration"
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
@@ -5182,7 +5223,7 @@
         }
       }
     },
-    "CacheConfiguration": {
+    "AfdRouteCacheConfiguration": {
       "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
       "type": "object",
       "properties": {
@@ -5272,8 +5313,13 @@
       }
     },
     "RuleUpdatePropertiesParameters": {
-      "description": "The JSON object that contains the properties of the domain to create.",
+      "description": "The JSON object that contains the properties of the rule to update.",
       "properties": {
+        "ruleSetName": {
+          "description": "The name of the rule set containing the rule.",
+          "type": "string",
+          "readOnly": true
+        },
         "order": {
           "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
           "type": "integer",
@@ -5359,7 +5405,7 @@
       "properties": {
         "error": {
           "description": "The error object.",
-          "$ref": "./cdn.json#/definitions/ErrorResponse"
+          "$ref": "./cdn.json#/definitions/ErrorDetail"
         }
       }
     },

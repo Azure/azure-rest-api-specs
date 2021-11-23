@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/cdnWebApplicationFirewallPolicies": {
       "get": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/cdnWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -261,6 +261,12 @@
           },
           "204": {
             "description": "No Content. The request has been accepted but the policy was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -271,7 +277,7 @@
         "x-ms-long-running-operation": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/CdnWebApplicationFirewallManagedRuleSets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/cdnWebApplicationFirewallManagedRuleSets": {
       "get": {
         "tags": [
           "WebApplicationFirewallManagedRuleSets"
@@ -616,7 +622,7 @@
             "PostArgs"
           ],
           "x-ms-enum": {
-            "name": "MatchVariable",
+            "name": "WafMatchVariable",
             "modelAsString": true
           }
         },
@@ -713,6 +719,7 @@
         "anomalyScore": {
           "description": "Verizon only : If the rule set supports anomaly detection mode, this describes the threshold for blocking requests.",
           "type": "integer",
+          "format": "int32",
           "maximum": 20,
           "exclusiveMaximum": false,
           "minimum": 0,
