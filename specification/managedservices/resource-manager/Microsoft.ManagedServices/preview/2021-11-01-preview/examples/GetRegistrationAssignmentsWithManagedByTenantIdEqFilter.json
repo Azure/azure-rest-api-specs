@@ -1,7 +1,8 @@
 {
   "parameters": {
     "scope": "subscription/0afefe50-734e-4610-8a82-a144ahf49dea",
-    "api-version": "2021-11-01-preview"
+    "api-version": "2021-11-01-preview",
+    "$filter": "$filter=managedByTenantId in (01c0bcd5-4f47-4e4b-b492-418b7e2a8854, 41483f89-116e-478b-b3f8-becc8ddff342)"
   },
   "responses": {
     "200": {
@@ -67,14 +68,33 @@
             },
             "id": "/subscriptions/0afefe50-734e-4610-8c82-a144aff49dea/providers/Microsoft.ManagedServices/registrationAssignments/484a7d5f-9729-4b87-bc9b-26610985a013",
             "type": "Microsoft.ManagedServices/registrationAssignments",
-            "name": "484a7d5f-9729-4b87-bc9b-26610985a013",
+            "name": "484a7d5f-9729-4b87-bc9b-26610985a013"
+          },
+          {
+            "properties": {
+              "description": "Test 2",
+              "managedByTenantId": "41483f89-116e-478b-b3f8-becc8ddff342",
+              "registrationDefinitionName": "DefinitionName",
+              "authorizations": [
+                {
+                  "principalId": "a2e38003-c234-42dc-a769-3ca55be53098",
+                  "principalIdDisplayName": "Support User",
+                  "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "managedByTenantName": "Test Tenant"
+            },
+            "id": "/subscriptions/0afefe50-734e-4610-8a82-a144ahf49dea/providers/Microsoft.ManagedServices/registrationDefinitions/2a60751f-03d6-45a1-8797-24678246d54d",
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "name": "2a60751f-03d6-45a1-8797-24678246d54d",
             "systemData": {
-              "createdBy": "testuser@outlook.com",
+              "createdBy": "testuser@msp.com",
               "createdByType": "User",
-              "createdAt": "2021-11-22T19:56:05.0703382Z",
-              "lastModifiedBy": "testuser@outlook.com",
+              "createdAt": "2021-11-21T08:56:05.0703382Z",
+              "lastModifiedBy": "testuser@msp.com",
               "lastModifiedByType": "User",
-              "lastModifiedAt": "2021-11-22T19:56:05.0703382Z"
+              "lastModifiedAt": "2021-11-22T08:56:05.0703382Z"
             }
           }
         ]
