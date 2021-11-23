@@ -3715,6 +3715,708 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Spring Cloud Gateway and its properties.",
+        "operationId": "Gateways_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Spring Cloud Gateway.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Get": {
+            "$ref": "./examples/Gateways_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create the default Spring Cloud Gateway or update the existing Spring Cloud Gateway.",
+        "operationId": "Gateways_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "name": "gatewayResource",
+            "in": "body",
+            "description": "The gateway for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Spring Cloud Gateway.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created Spring Cloud Gateway and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Spring Cloud Gateway is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Gateways_CreateOrUpdate": {
+            "$ref": "./examples/Gateways_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Disable the default Spring Cloud Gateway.",
+        "operationId": "Gateways_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the default Spring Cloud Gateway has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the default Spring Cloud Gateway is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the default Spring Cloud Gateway doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Gateways_Delete": {
+            "$ref": "./examples/Gateways_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handles requests to list all resources in a Service.",
+        "operationId": "Gateways_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of gateways in the Service.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gateways_List": {
+            "$ref": "./examples/Gateways_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}/routeConfigs/{routeConfigName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Spring Cloud Gateway route configs.",
+        "operationId": "GatewayRouteConfigs_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayRouteConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Spring Cloud Gateway route configs.",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GatewayRouteConfigs_Get": {
+            "$ref": "./examples/GatewayRouteConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create the default Spring Cloud Gateway route configs or update the existing Spring Cloud Gateway route configs.",
+        "operationId": "GatewayRouteConfigs_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayRouteConfigNameParameter"
+          },
+          {
+            "name": "gatewayRouteConfigResource",
+            "in": "body",
+            "description": "The Spring Cloud Gateway route config for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Spring Cloud Gateway route configs.",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteConfigResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created Spring Cloud Gateway route configs and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteConfigResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Spring Cloud Gateway route config is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "GatewayRouteConfigs_CreateOrUpdate": {
+            "$ref": "./examples/GatewayRouteConfigs_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the Spring Cloud Gateway route config.",
+        "operationId": "GatewayRouteConfigs_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayRouteConfigNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the Spring Cloud Gateway route config has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Spring Cloud Gateway route config is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the Spring Cloud Gateway route config doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "GatewayRouteConfigs_Delete": {
+            "$ref": "./examples/GatewayRouteConfigs_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}/routeConfigs": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handle requests to list all Spring Cloud Gateway route configs.",
+        "operationId": "GatewayRouteConfigs_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Spring Cloud Gateway route configs.",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteConfigResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GatewayRouteConfigs_List": {
+            "$ref": "./examples/GatewayRouteConfigs_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Spring Cloud Gateway custom domain.",
+        "operationId": "GatewayCustomDomains_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayCustomDomainParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Spring Cloud Gateway custom domain.",
+            "schema": {
+              "$ref": "#/definitions/GatewayCustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GatewayCustomDomains_Get": {
+            "$ref": "./examples/GatewayCustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update the Spring Cloud Gateway custom domain.",
+        "operationId": "GatewayCustomDomains_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayCustomDomainParameter"
+          },
+          {
+            "name": "gatewayCustomDomainResource",
+            "in": "body",
+            "description": "The gateway custom domain resource for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayCustomDomainResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Spring Cloud Gateway custom domain.",
+            "schema": {
+              "$ref": "#/definitions/GatewayCustomDomainResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created Spring Cloud Gateway custom domain and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/GatewayCustomDomainResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Spring Cloud Gateway custom domain is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/GatewayCustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "GatewayCustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/GatewayCustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the Spring Cloud Gateway custom domain.",
+        "operationId": "GatewayCustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayCustomDomainParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the Spring Cloud Gateway custom domain has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Spring Cloud Gateway custom domain is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the Spring Cloud Gateway custom domain doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "GatewayCustomDomains_Delete": {
+            "$ref": "./examples/GatewayCustomDomains_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}/domains": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handle requests to list all Spring Cloud Gateway custom domains.",
+        "operationId": "GatewayCustomDomains_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Spring Cloud Gateway custom domains.",
+            "schema": {
+              "$ref": "#/definitions/GatewayCustomDomainResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GatewayCustomDomains_List": {
+            "$ref": "./examples/GatewayCustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}/validateDomain": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Check the domains are valid as well as not in use.",
+        "operationId": "Gateways_ValidateDomain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayNameParameter"
+          },
+          {
+            "name": "validatePayload",
+            "in": "body",
+            "description": "Custom domain payload to be validated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainValidatePayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the name is available.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_ValidateDomain": {
+            "$ref": "./examples/Gateways_ValidateDomain.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6330,6 +7032,424 @@
         }
       },
       "readOnly": true
+    },
+    "GatewayResourceCollection": {
+      "description": "Object that includes an array of gateway resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of gateway resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayResource": {
+      "description": "Spring Cloud Gateway resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Spring Cloud Gateway resource"
+        }
+      }
+    },
+    "GatewayProperties": {
+      "description": "Spring Cloud Gateway properties payload",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the Spring Cloud Gateway.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GatewayProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "public": {
+          "description": "Indicates whether the Spring Cloud Gateway exposes endpoint.",
+          "type": "boolean"
+        },
+        "url": {
+          "description": "URL of the Spring Cloud Gateway, exposed when 'public' is true.",
+          "type": "string",
+          "readOnly": true
+        },
+        "httpsOnly": {
+          "description": "Indicate if only https is allowed.",
+          "type": "boolean"
+        },
+        "ssoProperties": {
+          "$ref": "#/definitions/SsoProperties"
+        },
+        "apiMetadataProperties": {
+          "$ref": "#/definitions/GatewayApiMetadataProperties"
+        },
+        "corsProperties": {
+          "$ref": "#/definitions/GatewayCorsProperties"
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/GatewayResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        },
+        "instances": {
+          "description": "Collection of instances belong to Spring Cloud Gateway.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayInstance"
+          },
+          "readOnly": true
+        },
+        "operatorRuntimeState": {
+          "$ref": "#/definitions/GatewayOperatorRuntimeState",
+          "readOnly": true
+        }
+      }
+    },
+    "SsoProperties": {
+      "description": "Single sign-on related configuration",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "It defines the specific actions applications can be allowed to do on a user's behalf",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientId": {
+          "description": "The public identifier for the application",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The secret known only to the application and the authorization server",
+          "type": "string"
+        },
+        "issuerUri": {
+          "description": "The URI of Issuer Identifier",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayApiMetadataProperties": {
+      "description": "API metadata property for Spring Cloud Gateway",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Title describing the context of the APIs available on the Gateway instance (default: `Spring Cloud Gateway for K8S`)",
+          "type": "string"
+        },
+        "description": {
+          "description": "Detailed description of the APIs available on the Gateway instance (default: `Generated OpenAPI 3 document that describes the API routes configured.`)",
+          "type": "string"
+        },
+        "documentation": {
+          "description": "Location of additional documentation for the APIs available on the Gateway instance",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of APIs available on this Gateway instance (default: `unspecified`).",
+          "type": "string"
+        },
+        "serverUrl": {
+          "description": "Base URL that API consumers will use to access APIs on the Gateway instance.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayCorsProperties": {
+      "description": "Cross-Origin Resource Sharing property",
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "description": "Allowed origins to make cross-site requests. The special value `*` allows all domains.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedMethods": {
+          "description": "Allowed HTTP methods on cross-site requests. The special value `*` allows all methods. If not set, `GET` and `HEAD` are allowed by default.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedHeaders": {
+          "description": "Allowed headers in cross-site requests. The special value `*` allows actual requests to send any header.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAge": {
+          "format": "int32",
+          "description": "How long, in seconds, the response from a pre-flight request can be cached by clients.",
+          "type": "integer"
+        },
+        "allowCredentials": {
+          "description": "Whether user credentials are supported on cross-site requests. Valid values: `true`, `false`.",
+          "type": "boolean"
+        },
+        "exposedHeaders": {
+          "description": "HTTP response headers to expose for cross-site requests.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GatewayResourceRequests": {
+      "description": "Resource request payload of Spring Cloud Gateway.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Cpu allocated to each Spring Cloud Gateway instance.",
+          "type": "string"
+        },
+        "memory": {
+          "description": "Memory allocated to each Spring Cloud Gateway instance.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayOperatorRuntimeState": {
+      "description": "Runtime state of the Spring Cloud Gateway Operator.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "cpu": {
+          "description": "Cpu allocated to each Spring Cloud Gateway Operator instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memory": {
+          "description": "Memory allocated to each Spring Cloud Gateway Operator instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceCount": {
+          "format": "int32",
+          "description": "Instance count of the Spring Cloud Gateway Operator.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "instances": {
+          "description": "Collection of instances belong to the Spring Cloud Gateway Operator.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayInstance": {
+      "description": "Collection of instances belong to the Spring Cloud Gateway",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Name of the Spring Cloud Gateway instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the Spring Cloud Gateway instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayRouteConfigResource": {
+      "description": "Spring Cloud Gateway route config resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayRouteConfigProperties"
+        }
+      }
+    },
+    "GatewayRouteConfigProperties": {
+      "description": "API route config of the Spring Cloud Gateway",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the Spring Cloud Gateway route config.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GatewayProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "appName": {
+          "description": "Name of the Azure Spring Cloud app, required unless route defines `uri`.",
+          "type": "string"
+        },
+        "routes": {
+          "description": "Array of API routes, each route contains properties such as `title`, `uri`, `ssoEnabled`, `predicates`, `filters`.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayApiRoute"
+          }
+        }
+      }
+    },
+    "GatewayApiRoute": {
+      "description": "API route config of the Spring Cloud Gateway",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "A title, will be applied to methods in the generated OpenAPI documentation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description, will be applied to methods in the generated OpenAPI documentation.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Full uri, will override `appName`.",
+          "type": "string"
+        },
+        "ssoEnabled": {
+          "description": "Enable sso validation.",
+          "type": "boolean"
+        },
+        "tokenRelay": {
+          "description": "Pass currently-authenticated user's identity token to application service, default is 'false'",
+          "type": "boolean"
+        },
+        "predicates": {
+          "description": "A number of conditions to evaluate a route for each request. Each predicate may be evaluated against request headers and parameter values. All of the predicates associated with a route must evaluate to true for the route to be matched to the request.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "description": "To modify the request before sending it to the target endpoint, or the received response.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "order": {
+          "description": "Route processing order.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "description": "Classification tags, will be applied to methods in the generated OpenAPI documentation.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GatewayRouteConfigResourceCollection": {
+      "description": "Object that includes an array of Spring Cloud Gateway route config resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Spring Cloud Gateway route config resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayRouteConfigResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayCustomDomainResource": {
+      "description": "Custom domain of the Spring Cloud Gateway",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayCustomDomainProperties"
+        }
+      }
+    },
+    "GatewayCustomDomainProperties": {
+      "description": "The properties of custom domain for Spring Cloud Gateway",
+      "type": "object",
+      "properties": {
+        "thumbprint": {
+          "description": "The thumbprint of bound certificate.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayCustomDomainResourceCollection": {
+      "description": "Object that includes an array of Spring Cloud Gateway custom domain resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Spring Cloud Gateway custom domain resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomDomainResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -6424,6 +7544,30 @@
       "name": "serviceRegistryName",
       "in": "path",
       "description": "The name of Service Registry.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GatewayNameParameter": {
+      "name": "gatewayName",
+      "in": "path",
+      "description": "The name of Spring Cloud Gateway.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GatewayRouteConfigNameParameter": {
+      "name": "routeConfigName",
+      "in": "path",
+      "description": "The name of the Spring Cloud Gateway route config.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GatewayCustomDomainParameter": {
+      "name": "domainName",
+      "in": "path",
+      "description": "The name of the Spring Cloud Gateway custom domain.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
