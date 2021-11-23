@@ -87,14 +87,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
+          "200": {
+            "description": "Success. The response describes the updated Service.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Service.",
+          "201": {
+            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -146,6 +146,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is deleted successfully."
+          },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
           },
@@ -1029,14 +1032,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
           "200": {
             "description": "Success. The response indicates the resource is deleted."
           },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1353,14 +1356,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
+          "200": {
+            "description": "Success. The response indicates the resource is deleted."
           },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
           },
-          "200": {
-            "description": "Success. The response indicates the resource is deleted."
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2386,14 +2389,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Deployment.",
+          "201": {
+            "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
@@ -2454,11 +2457,11 @@
           "200": {
             "description": "Success. The response indicates the resource is deleted."
           },
-          "204": {
-            "description": "Success. The response indicates the resource doesn't exist."
-          },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2513,14 +2516,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
           },
-          "200": {
-            "description": "Success. The response describes the updated Deployment.",
+          "202": {
+            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentResource"
             }
@@ -2907,11 +2910,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The response indicates a heap dump is generating."
-          },
           "200": {
             "description": "Success. A heap dump was generated."
+          },
+          "202": {
+            "description": "Accepted. The response indicates a heap dump is generating."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2968,11 +2971,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The response indicates a thread dump is generating."
-          },
           "200": {
             "description": "Success. A thread dump was generated."
+          },
+          "202": {
+            "description": "Accepted. The response indicates a thread dump is generating."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3029,11 +3032,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted. The response indicates a JFR is starting."
-          },
           "200": {
             "description": "Success. A JFR generated."
+          },
+          "202": {
+            "description": "Accepted. The response indicates a JFR is starting."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3304,9 +3307,65 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource modification (UTC).",
+          "type": "string"
+        }
+      },
+      "readOnly": true
     },
     "ClusterResourceProperties": {
       "description": "Service properties payload",
@@ -3763,7 +3822,7 @@
       }
     },
     "GitPatternRepository": {
-      "description": "Git repository property payload",
+      "description": "Git repository property payload for config server",
       "required": [
         "name",
         "uri"
@@ -4317,10 +4376,6 @@
           "$ref": "#/definitions/StorageProperties",
           "description": "Properties of the storage resource payload.",
           "x-ms-client-flatten": false
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
         }
       }
     },
@@ -5358,6 +5413,7 @@
       }
     },
     "CloudError": {
+      "type": "object",
       "description": "An error response from the service.",
       "properties": {
         "error": {
@@ -5368,6 +5424,7 @@
       "x-ms-external": true
     },
     "CloudErrorBody": {
+      "type": "object",
       "description": "An error response from the service.",
       "properties": {
         "code": {
