@@ -64,7 +64,9 @@ This document lists the set of automated rules that can be validated against swa
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
 | [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
-| [DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING](#DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING) | [OAV132](#DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING) |
+| [INVALID_XMS_DISCRIMINATOR_VALUE](#INVALID_XMS_DISCRIMINATOR_VALUE) | [OAV133](#INVALID_XMS_DISCRIMINATOR_VALUE) |
+| [DISCRIMINATOR_PROPERTY_NOT_FOUND](#DISCRIMINATOR_PROPERTY_NOT_FOUND) | [OAV134](#DISCRIMINATOR_PROPERTY_NOT_FOUND) |
+| [INVALID_DISCRIMINATOR_TYPE](#INVALID_DISCRIMINATOR_TYPE) | [OAV132](#INVALID_DISCRIMINATOR_TYPE) |
 | [DISCRIMINATOR_NOT_REQUIRED](#DISCRIMINATOR_NOT_REQUIRED) | [OAV131](#DISCRIMINATOR_NOT_REQUIRED) |
 | [RESPONSE_BODY_NOT_IN_EXAMPLE](#RESPONSE_BODY_NOT_IN_EXAMPLE) | [OAV130](#RESPONSE_BODY_NOT_IN_EXAMPLE) |
 | [DOUBLE_FORWARD_SLASHES_IN_URL](#DOUBLE_FORWARD_SLASHES_IN_URL) | [OAV129](#DOUBLE_FORWARD_SLASHES_IN_URL) |
@@ -619,14 +621,29 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
 
-### <a name="DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING" />DISCRIMINATOR_PROPERTY_TYPE_NOT_STRING
+### <a name="INVALID_XMS_DISCRIMINATOR_VALUE" />INVALID_XMS_DISCRIMINATOR_VALUE
 
-**Output Message**: The property type of discriminator must be string.
+**Output Message**: The value of x-ms-dicriminator-value is not in the discriminator enum list: {0}.
+
+**Description**: If a discriminator has an enum list, the x-ms-dicriminator-value must in the enum list.
+
+**How to fix the violation**: Add the value into the enum list or correct the value.
+
+### <a name="DISCRIMINATOR_PROPERTY_NOT_FOUND" />DISCRIMINATOR_PROPERTY_NOT_FOUND
+
+**Output Message**: Missing discriminator in base model. This derived model has x-ms-dicriminator-value: {0}.
+
+**Description**: x-ms-dicriminator-value is defined, but base model doesn't have discriminator field.
+
+**How to fix the violation**: Check whether it needs. If needs, add discriminator field in base model.
+
+### <a name="INVALID_DISCRIMINATOR_TYPE" />INVALID_DISCRIMINATOR_TYPE
+
+**Output Message**: The property type of discriminator must be string: {0}.
 
 **Description**: If a property is declared as discriminator, the property type must be string and nothing else.
 
 **How to fix the violation**: Set the property type to string in swagger.
-
 
 ### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED
 
