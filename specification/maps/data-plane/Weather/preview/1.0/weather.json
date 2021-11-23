@@ -54,7 +54,7 @@
       "name": "pollutants",
       "in": "query",
       "type": "boolean",
-      "x-ms-client-name": "include_pollutant_details",
+      "x-ms-client-name": "includePollutantDetails",
       "required": false,
       "description": "Boolean value that returns detailed information about each pollutant. By default is True.",
       "x-ms-parameter-location": "method"
@@ -206,7 +206,7 @@
     "RequiredWeatherGovernmentId": {
       "name": "govId",
       "description": "Government storm Id",
-      "x-ms-client-name": "government_storm_id",
+      "x-ms-client-name": "governmentStormId",
       "type": "integer",
       "format": "int32",
       "required": true,
@@ -224,7 +224,7 @@
     "WeatherDetails": {
       "name": "details",
       "description": "When true, wind radii summary data is included in the response",
-      "x-ms-client-name": "include_details",
+      "x-ms-client-name": "includeDetails",
       "in": "query",
       "type": "boolean",
       "default": false,
@@ -233,7 +233,7 @@
     "WeatherRadiiGeometry": {
       "name": "radiiGeometry",
       "description": "When true, wind radii summary data and geoJSON details are included in the response",
-      "x-ms-client-name": "include_geometric_details",
+      "x-ms-client-name": "includeGeometricDetails",
       "in": "query",
       "type": "boolean",
       "default": false,
@@ -722,10 +722,10 @@
     },
     "/weather/tropical/storms/active/{format}": {
       "get": {
-        "description": "**Get Tropical Active Storms**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
-        "operationId": "Weather_GetTropicalActiveStorms",
+        "description": "**Get Tropical Storms Active**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
+        "operationId": "Weather_GetTropicalStormsActive",
         "x-ms-examples": {
-          "Get Tropical Active Storms": {
+          "Get Tropical Storms Active": {
             "$ref": "./examples/GetActiveStorms.json"
           }
         },
@@ -839,7 +839,7 @@
           {
             "name": "windowGeometry",
             "description": "When true, window geometry data (geoJSON) is included in the response",
-            "x-ms-client-name": "include_window_geometry",
+            "x-ms-client-name": "includeWindowGeometry",
             "in": "query",
             "type": "boolean",
             "default": false
@@ -901,7 +901,7 @@
           {
             "name": "current",
             "description": "When true, return the current storm location",
-            "x-ms-client-name": "get_current_storm_location",
+            "x-ms-client-name": "getCurrentStormLocation",
             "in": "query",
             "type": "boolean",
             "default": false
@@ -1104,7 +1104,7 @@
                   "description": "12 Hours"
                 },
                 {
-                  "name": "TwentyHours",
+                  "name": "TwentyFourHours",
                   "value": 24,
                   "description": "24 Hours"
                 },
