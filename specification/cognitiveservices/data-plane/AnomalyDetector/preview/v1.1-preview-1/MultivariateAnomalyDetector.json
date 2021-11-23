@@ -138,17 +138,17 @@
       }
     },
     "/multivariate/models/{modelId}": {
-      "parameters": [
-        {
-          "name": "modelId",
-          "description": "Model identifier.",
-          "format": "uuid",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "get": {
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "format": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Get multivariate model details successfully.",
@@ -176,6 +176,16 @@
         }
       },
       "delete": {
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "format": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "204": {
             "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
@@ -201,16 +211,6 @@
       }
     },
     "/multivariate/models/{modelId}/detect": {
-      "parameters": [
-        {
-          "name": "modelId",
-          "description": "Model identifier.",
-          "in": "path",
-          "format": "uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "post": {
         "responses": {
           "201": {
@@ -239,6 +239,14 @@
         },
         "parameters": [
           {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "in": "path",
+            "format": "uuid",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "detectionRequest",
             "description": "Detect anomaly request",
             "required": true,
@@ -254,17 +262,17 @@
       }
     },
     "/multivariate/results/{resultId}": {
-      "parameters": [
-        {
-          "name": "resultId",
-          "description": "Result identifier.",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "format": "uuid"
-        }
-      ],
       "get": {
+        "parameters": [
+          {
+            "name": "resultId",
+            "description": "Result identifier.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Get Multivariate Anomaly Detection Result by Result Id.",
@@ -293,17 +301,17 @@
       }
     },
     "/multivariate/models/{modelId}/export": {
-      "parameters": [
-        {
-          "name": "modelId",
-          "description": "Model identifier.",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "format": "uuid"
-        }
-      ],
       "get": {
+        "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Export the multivariate model as a zip package.",
@@ -342,21 +350,19 @@
       }
     },
     "/multivariate/models/{modelId}/last/detect": {
-      "parameters": [
-        {
-          "name": "modelId",
-          "description": "Model identifier.",
-          "in": "path",
-          "format": "uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "post": {
         "summary": "Detect anomalies in the last a few points of the request body.",
         "description": "Synchronized API for anomaly detection.",
         "operationId": "LastDetectAnomaly",
         "parameters": [
+          {
+            "name": "modelId",
+            "description": "Model identifier.",
+            "in": "path",
+            "format": "uuid",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "lastDetectionRequest",
             "description": "Request for last detection.",
