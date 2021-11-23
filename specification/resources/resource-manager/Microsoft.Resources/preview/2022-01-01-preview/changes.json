@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-01-01",
+    "version": "2022-01-01-preview",
     "title": "ChangesClient",
     "description": "The Resource Changes Client"
   },
@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-examples": {
+          "ListChanges": {
+            "$ref": "./examples/Operations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/changes": {
       "get": {
         "tags": [
@@ -76,20 +112,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ResourceListResult"
+              "$ref": "#/definitions/ChangeResourceListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -105,7 +134,7 @@
         ],
         "operationId": "ChangeResource_Get",
         "x-ms-examples": {
-          "ListChanges": {
+          "GetChange": {
             "$ref": "./examples/GetChange.json"
           }
         },
@@ -137,20 +166,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ResourceResult"
+              "$ref": "#/definitions/ChangeResourceResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -158,7 +180,60 @@
     }
   },
   "definitions": {
-    "ResourceListResult": {
+    "Operation": {
+      "description": "Microsoft.Resources operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Resource provider of the operation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource of the operation",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Localized friendly name for the operation",
+              "type": "string"
+            },
+            "description": {
+              "description": "Localized friendly name for the operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Resources operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "ChangeResourceListResult": {
       "description": "The list of resources",
       "type": "object",
       "properties": {
@@ -170,13 +245,31 @@
           "description": "The list of resources",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceResult"
+            "$ref": "#/definitions/ChangeResourceResult"
           }
         }
       }
     },
-    "ChangeResourceResultBase": {
+    "ChangeResourceResult": {
       "description": "Change Resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ChangeProperties"
+        }
+      }
+    },
+    "ChangeProperties": {
+      "description": "The properties of a change",
       "type": "object",
       "properties": {
         "targetResourceId": {
@@ -196,6 +289,7 @@
         },
         "changesCount": {
           "type": "integer",
+          "format": "int64",
           "readOnly": true,
           "description": "The number of changes this resource captures"
         },
@@ -203,7 +297,7 @@
           "$ref": "#/definitions/ChangeAttributes"
         },
         "changes": {
-          "$ref": "#/definitions/ChangesMap"
+          "$ref": "#/definitions/ChangesDict"
         }
       }
     },
@@ -233,8 +327,8 @@
         }
       }
     },
-    "ChangesMap": {
-      "description": "A hashmap with changed property name as a key and the change details as the value",
+    "ChangesDict": {
+      "description": "A dictionary with changed property name as a key and the change details as the value",
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/ChangeBase"
@@ -268,76 +362,15 @@
             "System"
           ]
         },
-        "beforeValue": {
+        "previousValue": {
           "description": "The target resource property value before the change",
           "type": "string",
           "readOnly": true
         },
-        "afterValue": {
-          "description": "The target resource property value before the change",
+        "newValue": {
+          "description": "The target resource property value after the change",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ResourceResult": {
-      "description": "An Azure resource",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The fully qualified ID of the resource, including the resource name and resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource type",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Microsoft.Resources/changes"
-          ]
-        },
-        "tenantId": {
-          "description": "The tenant Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the target resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "description": "The resource group of the target resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "subscriptionId": {
-          "description": "The subscription of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ChangeResourceResultBase"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "The error object",
-      "properties": {
-        "message": {
-          "description": "A human-readable representation of the error.",
-          "type": "string"
-        },
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
         }
       }
     }
@@ -406,6 +439,7 @@
       "minimum": 1,
       "name": "top",
       "type": "integer",
+      "format": "int64",
       "x-ms-parameter-location": "method"
     },
     "skipToken": {

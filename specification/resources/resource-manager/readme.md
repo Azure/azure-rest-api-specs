@@ -64,6 +64,19 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-05
 ```
 
+``` yaml $(package-changes)
+tag: package-changes-2022-01
+```
+
+### Tag: package-changes-2022-01
+
+These settings apply only when `--tag=package-changes-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-package-changes-2022-01'
+input-file:
+- Microsoft.Resources/preview/2022-01-01-preview/changes.json
+```
+
 ### Tag: package-policy-2021-06
 
 These settings apply only when `--tag=package-policy-2021-06` is specified on the command line.
