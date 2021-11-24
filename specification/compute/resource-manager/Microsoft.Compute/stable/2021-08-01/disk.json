@@ -385,7 +385,7 @@
           "Get a sas on a managed disk.": {
             "$ref": "./examples/BeginGetAccessManagedDisk.json"
           },
-          "Get sas on managed disk and VM guest state blob": {
+          "Get sas on managed disk and VM guest state": {
             "$ref": "./examples/BeginGetAccessManagedDiskWithVMGuestState.json"
           }
         },
@@ -2475,8 +2475,7 @@
       "enum": [
         "EncryptionAtRestWithPlatformKey",
         "EncryptionAtRestWithCustomerKey",
-        "EncryptionAtRestWithPlatformAndCustomerKeys",
-        "ConfidentialVmEncryptedWithCustomerKey"
+        "EncryptionAtRestWithPlatformAndCustomerKeys"
       ],
       "x-ms-enum": {
         "name": "EncryptionType",
@@ -2493,10 +2492,6 @@
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
             "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
-          },
-          {
-            "value": "ConfidentialVmEncryptedWithCustomerKey",
-            "description": "Confidential VM supported disk encrypted with customer managed key."
           }
         ]
       }
@@ -2523,7 +2518,7 @@
           },
           {
             "value": "ConfidentialVmEncryptedWithCustomerKey",
-            "description": "Confidential VM supported disk encrypted with customer managed key."
+            "description": "Confidential VM supported disk and VM guest state would be encrypted with customer managed key."
           }
         ]
       }
@@ -2845,11 +2840,11 @@
               },
               {
                 "value": "ImportSecure",
-                "description": "Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional VM guest state blob specified by securityDataUri in storage account specified by storageAccountId"
+                "description": "Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId"
               },
               {
                 "value": "UploadPreparedSecure",
-                "description": "Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state blob"
+                "description": "Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state"
               }
             ]
           },
@@ -2892,7 +2887,7 @@
         },
         "securityDataUri": {
           "type": "string",
-          "description": "If createOption is ImportSecure, this is the URI of a VM guest state blob to be imported."
+          "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM guest state."
         }
       },
       "required": [
@@ -2981,15 +2976,15 @@
           },
           {
             "value": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
-            "description": "Indicates Confidential VM disk with only VM guest state blob encrypted"
+            "description": "Indicates Confidential VM disk with only VM guest state encrypted"
           },
           {
             "value": "ConfidentialVM_DiskEncryptedWithPlatformKey",
-            "description": "Indicates Confidential VM disk with both OS disk blob and VM guest state blob encrypted with a platform managed key"
+            "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key"
           },
           {
             "value": "ConfidentialVM_DiskEncryptedWithCustomerKey",
-            "description": "Indicates Confidential VM disk with both OS disk blob and VM guest state blob encrypted with a customer managed key"
+            "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key"
           }
         ]
       }
@@ -3027,7 +3022,7 @@
         },
         "getSecureVMGuestStateSAS": {
           "type": "boolean",
-          "description": "Set this flag to true to get additional SAS for VM guest state blob"
+          "description": "Set this flag to true to get additional SAS for VM guest state"
         }
       },
       "required": [
@@ -3046,7 +3041,7 @@
         "securityDataAccessSAS": {
           "readOnly": true,
           "type": "string",
-          "description": "A SAS uri for accessing a VM guest state blob."
+          "description": "A SAS uri for accessing a VM guest state."
         }
       },
       "description": "A disk access SAS uri."
