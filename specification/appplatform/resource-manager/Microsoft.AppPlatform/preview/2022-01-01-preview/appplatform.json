@@ -1682,6 +1682,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/setActiveDeployment": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Set existing Deployment under the app as active",
+        "operationId": "Apps_SetActiveDeployment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "activeDeploymentCollection",
+            "in": "body",
+            "description": "A list of Deployment name to be active.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveDeploymentCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the active deployment.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeploymentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apps_SetActiveDeployment": {
+            "$ref": "./examples/Apps_SetActiveDeployment.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/bindings/{bindingName}": {
       "get": {
         "tags": [
@@ -5987,13 +6041,21 @@
           "type": "string",
           "readOnly": true
         },
+        "addonConfigs": {
+          "description": "Collection of addons",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfile"
+          }
+        },
         "provisioningState": {
           "description": "Provisioning state of the App",
           "enum": [
             "Succeeded",
             "Failed",
             "Creating",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -6001,10 +6063,6 @@
             "name": "AppResourceProvisioningState",
             "modelAsString": true
           }
-        },
-        "activeDeploymentName": {
-          "description": "Name of the active deployment of the App",
-          "type": "string"
         },
         "fqdn": {
           "description": "Fully qualified dns Name.",
@@ -6018,12 +6076,6 @@
           "description": "Indicate if only https is allowed.",
           "type": "boolean",
           "default": false
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "Date time when the resource is created",
-          "type": "string",
-          "readOnly": true
         },
         "temporaryDisk": {
           "$ref": "#/definitions/TemporaryDisk",
@@ -6131,6 +6183,20 @@
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
           "type": "string"
+        }
+      }
+    },
+    "ActiveDeploymentCollection": {
+      "description": "Object that includes an array of Deployment resource name and set them as active.",
+      "type": "object",
+      "properties": {
+        "activeDeployments": {
+          "description": "Collection of Deployment name.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6679,11 +6745,6 @@
           "$ref": "#/definitions/UserSourceInfo",
           "description": "Uploaded source information of the deployment."
         },
-        "appName": {
-          "description": "App name of the deployment",
-          "type": "string",
-          "readOnly": true
-        },
         "deploymentSettings": {
           "$ref": "#/definitions/DeploymentSettings",
           "description": "Deployment settings of the Deployment"
@@ -6706,13 +6767,8 @@
         "status": {
           "description": "Status of the Deployment",
           "enum": [
-            "Unknown",
             "Stopped",
-            "Running",
-            "Failed",
-            "Allocating",
-            "Upgrading",
-            "Compiling"
+            "Running"
           ],
           "type": "string",
           "readOnly": true,
@@ -6723,14 +6779,7 @@
         },
         "active": {
           "description": "Indicates whether the Deployment is active",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "Date time when the resource is created",
-          "type": "string",
-          "readOnly": true
+          "type": "boolean"
         },
         "instances": {
           "description": "Collection of instances belong to the Deployment",
@@ -6746,36 +6795,120 @@
     "UserSourceInfo": {
       "description": "Source information for a deployment",
       "type": "object",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "description": "Type of the source uploaded",
-          "enum": [
-            "Jar",
-            "NetCoreZip",
-            "Source",
-            "Container"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UserSourceType",
-            "modelAsString": true
-          }
-        },
-        "relativePath": {
-          "description": "Relative path of the storage which stores the source",
           "type": "string"
         },
         "version": {
           "description": "Version of the source",
           "type": "string"
-        },
+        }
+      },
+      "discriminator": "type"
+    },
+    "UploadedUserSourceInfo": {
+      "description": "Source with uploaded location",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSourceInfo"
+        }
+      ],
+      "properties": {
+        "relativePath": {
+          "description": "Relative path of the storage which stores the source",
+          "type": "string"
+        }
+      }
+    },
+    "JarUploadedUserSourceInfo": {
+      "description": "Uploaded Jar binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
+        "runtimeVersion": {
+          "description": "Runtime version of the Jar file",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Jar"
+    },
+    "SourceUploadedUserSourceInfo": {
+      "description": "Uploaded Java source code binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
         "artifactSelector": {
           "description": "Selector for the artifact to be used for the deployment for multi-module projects. This should be\r\nthe relative path to the target module/project.",
           "type": "string"
         },
+        "runtimeVersion": {
+          "description": "Runtime version of the source file",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Source"
+    },
+    "NetCoreZipUploadedUserSourceInfo": {
+      "description": "Uploaded Jar binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
+        "netCoreMainEntryPath": {
+          "description": "The path to the .NET executable relative to zip root",
+          "type": "string"
+        },
+        "runtimeVersion": {
+          "description": "Runtime version of the .Net file",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "NetCoreZip"
+    },
+    "BuildResultUserSourceInfo": {
+      "description": "Reference to a build result",
+      "type": "object",
+      "x-ms-discriminator-value": "BuildResult",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSourceInfo"
+        }
+      ],
+      "properties": {
+        "buildResultId": {
+          "description": "Resource id of an existing succeeded build result under the same Spring instance.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomContainerUserSourceInfo": {
+      "description": "Custom container user source info",
+      "type": "object",
+      "x-ms-discriminator-value": "Container",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSourceInfo"
+        }
+      ],
+      "properties": {
         "customContainer": {
-          "$ref": "#/definitions/CustomContainer",
-          "description": "Custom container payload"
+          "$ref": "#/definitions/CustomContainer"
         }
       }
     },
@@ -6831,29 +6964,9 @@
       "description": "Deployment settings payload",
       "type": "object",
       "properties": {
-        "cpu": {
-          "format": "int32",
-          "description": "Required CPU. This should be 1 for Basic tier, and in range [1, 4] for Standard tier. This is deprecated starting from API version 2022-01-01-preview. Please use the resourceRequests field to set the CPU size.",
-          "default": 1,
-          "type": "integer"
-        },
-        "memoryInGB": {
-          "format": "int32",
-          "description": "Required Memory size in GB. This should be in range [1, 2] for Basic tier, and in range [1, 8] for Standard tier. This is deprecated starting from API version 2022-01-01-preview. Please use the resourceRequests field to set the the memory size.",
-          "default": 1,
-          "type": "integer"
-        },
         "resourceRequests": {
           "$ref": "#/definitions/ResourceRequests",
           "description": "The requested resource quantity for required CPU and Memory. It is recommended that using this field to represent the required CPU and Memory, the old field cpu and memoryInGB will be deprecated later."
-        },
-        "jvmOptions": {
-          "description": "JVM parameter",
-          "type": "string"
-        },
-        "netCoreMainEntryPath": {
-          "description": "The path to the .NET executable relative to zip root",
-          "type": "string"
         },
         "environmentVariables": {
           "description": "Collection of environment variables",
@@ -6862,29 +6975,42 @@
             "type": "string"
           }
         },
-        "runtimeVersion": {
-          "description": "Runtime version",
-          "default": "Java_8",
-          "enum": [
-            "Java_8",
-            "Java_11",
-            "NetCore_31"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RuntimeVersion",
-            "modelAsString": true
+        "addonConfigs": {
+          "description": "Collection of addons",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfile"
           }
         },
         "containerProbeSettings": {
-          "description": "Container liveness and readiness probe settings",
+          "$ref": "#/definitions/ContainerProbeSettings"
+        }
+      }
+    },
+    "AddonProfile": {
+      "description": "Deployment addon profile",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the add-on is enabled or not"
+        },
+        "properties": {
           "type": "object",
-          "properties": {
-            "disableProbe": {
-              "description": "Indicates whether disable the liveness and readiness probe",
-              "type": "boolean"
-            }
-          }
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs for configurations of add-on"
+        }
+      }
+    },
+    "ContainerProbeSettings": {
+      "description": "Container liveness and readiness probe settings",
+      "type": "object",
+      "properties": {
+        "disableProbe": {
+          "description": "Indicates whether disable the liveness and readiness probe",
+          "type": "boolean"
         }
       }
     },
@@ -7488,6 +7614,7 @@
           "enum": [
             "Java_8",
             "Java_11",
+            "Java_17",
             "NetCore_31"
           ],
           "type": "string",
