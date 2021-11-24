@@ -18,11 +18,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalydetector/v1.1-preview",
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   },
@@ -173,7 +176,9 @@
             "InvalidSeries",
             "InvalidJsonFormat",
             "RequiredGranularity",
-            "RequiredSeries"
+            "RequiredSeries",
+            "InvalidImputeMode",
+            "InvalidImputeFixedValue"
           ],
           "x-ms-enum": {
             "name": "AnomalyDetectorErrorCodes",
@@ -243,6 +248,49 @@
       "x-nullable": false,
       "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
     },
+    "ImputeMode": {
+      "type": "string",
+      "description": "Define the impute method, can be one of auto, previous, linear, fixed, zero, notFill.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "ImputeMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "auto"
+          },
+          {
+            "value": "previous"
+          },
+          {
+            "value": "linear"
+          },
+          {
+            "value": "fixed"
+          },
+          {
+            "value": "zero"
+          },
+          {
+            "value": "notFill"
+          }
+        ]
+      },
+      "enum": [
+        "auto",
+        "previous",
+        "linear",
+        "fixed",
+        "zero",
+        "notFill"
+      ]
+    },
+    "ImputeFixedValue": {
+      "type": "number",
+      "format": "float",
+      "x-nullable": false,
+      "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
+    },
     "DetectRequest": {
       "type": "object",
       "required": [
@@ -260,8 +308,8 @@
           "$ref": "#/definitions/TimeGranularity"
         },
         "customInterval": {
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
-          "$ref": "#/definitions/CustomInterval"
+          "$ref": "#/definitions/CustomInterval",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         },
         "period": {
           "type": "integer",
@@ -277,6 +325,14 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
+        },
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode",
+          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"."
+        },
+        "imputeFixedValue": {
+          "$ref": "#/definitions/ImputeFixedValue",
+          "description": "Used to specify the value to fill, it's used when granularity is not \"none\" and imputeMode is \"fixed\"."
         }
       }
     },
@@ -307,7 +363,8 @@
         "isPositiveAnomaly",
         "lowerMargins",
         "period",
-        "upperMargins"
+        "upperMargins",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -365,6 +422,15 @@
             "type": "boolean",
             "x-nullable": false
           }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
         }
       }
     },
@@ -378,7 +444,8 @@
         "lowerMargin",
         "period",
         "upperMargin",
-        "suggestedWindow"
+        "suggestedWindow",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -417,6 +484,12 @@
         "isPositiveAnomaly": {
           "type": "boolean",
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "The severity score for the last input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "x-nullable": false
         }
       }
     },
@@ -439,8 +512,8 @@
           "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid."
         },
         "customInterval": {
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
-          "$ref": "#/definitions/CustomInterval"
+          "$ref": "#/definitions/CustomInterval",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         },
         "period": {
           "type": "integer",
@@ -497,6 +570,18 @@
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Anomaly Detector API version (for example, v1.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "v1.1-preview-1"
+      ],
       "in": "path",
       "x-ms-skip-url-encoding": true
     }
