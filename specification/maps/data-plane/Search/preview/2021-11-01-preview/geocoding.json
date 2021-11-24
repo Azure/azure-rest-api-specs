@@ -111,7 +111,7 @@
     "CountryRegionSet": {
       "name": "countryRegionSet",
       "in": "query",
-      "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.",
+      "description": "Comma separated string of country or region codes(ISO 3166-1 Alpha-2), e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.",
       "required": false,
       "type": "array",
       "items": {
@@ -204,7 +204,7 @@
           {
             "name": "strictMatch",
             "in": "query",
-            "description": "Restrict the geocoding result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.",
+            "description": "Restrict the geocoding result to the country or region that is specified in the countryRegionSet field and the state, province or territory specified in the adminDistrict field.",
             "required": false,
             "type": "string",
             "default": "notstrict",
@@ -219,12 +219,12 @@
                 {
                   "name": "NotStrict",
                   "value": "notstrict",
-                  "description": "Do not restrict results to the specified countryRegion and adminDistrict."
+                  "description": "Do not restrict results to the specified countryRegionSet and adminDistrict."
                 },
                 {
                   "name": "Strict",
                   "value": "strict",
-                  "description": "Restrict results to the specified countryRegion and adminDistrict."
+                  "description": "Restrict results to the specified countryRegionSet and adminDistrict."
                 }
               ]
             },
@@ -324,7 +324,7 @@
       }
     },
     "Bbox": {
-      "description": "information on the coordinate range for point Geometry.  Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+      "description": "Information on the coordinate range for point Geometry.  Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
       "type": "array",
       "minItems": 4,
       "maxItems": 4,
@@ -350,6 +350,7 @@
             "$ref": "#/definitions/GeoJSONPoint"
           },
           "calculationMethod": {
+            "description": "The method that was used to compute the geocode point.\n- `Interpolation`: The geocode point was matched to a point on a road using interpolation.\n- `InterpolationOffset`: The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street.\n- `Parcel`: The geocode point was matched to the center of a parcel.\n- `Rooftop`: The geocode point was matched to the rooftop of a building.",
             "type": "string",
             "enum": [
               "Interpolation",
@@ -359,6 +360,7 @@
             ]
           },
           "usageTypes": {
+            "description": "The best use for the geocode point.\nEach geocode point is defined as a `Route` point, a `Display` point or both.\nUse `Route` points if you are creating a route to the location. Use `Display` points if you are showing the location on a map. For example, if the location is a park, a `Route` point may specify an entrance to the park where you can enter with a car, and a `Display` point may be a point that specifies the center of the park.",
             "type": "array",
             "items": {
               "$ref": "#/definitions/UsageType"
@@ -404,7 +406,7 @@
           "maxItems": 4
         },
         "view": {
-          "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
+          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
           "type": "string"
         },
         "location": {
@@ -611,6 +613,7 @@
           "readOnly": true
         },
         "adminDistricts": {
+          "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
           "type": "array",
           "items": {
             "type": "object",
@@ -654,6 +657,7 @@
       }
     },
     "MatchCodes": {
+      "description": "One or more match code values that represent the geocoding level for each location in the response.\n\nFor example, a geocoded location with match codes of `Good` and `Ambiguous` means that more than one geocode location was found for the location information and that the geocode service did not have search up-hierarchy to find a match.\n\nSimilarly, a geocoded location with match codes of `Ambiguous` and `UpHierarchy` implies that a geocode location could not be found that matched all the provided location information, so the geocode service had to search up-hierarchy and found multiple matches at that level. An example of up an `Ambiguous` and `UpHierarchy` result is when you provide complete address information, but the geocode service cannot locate a match for the street address and instead returns information for more than one RoadBlock value.\n\nThe possible values are:\n\n`Good`: The location has only one match or all returned matches are considered strong matches. For example, a query for New York returns several Good matches.\n\n`Ambiguous`: The location is one of a set of possible matches. For example, when you query for the street address 128 Main St., the response may return two locations for 128 North Main St. and 128 South Main St. because there is not enough information to determine which option to choose.\n\n`UpHierarchy`: The location represents a move up the geographic hierarchy. This occurs when a match for the location request was not found, so a less precise result is returned. For example, if a match for the requested address cannot be found, then a match code of `UpHierarchy` with a RoadBlock entity type may be returned.",
       "type": "array",
       "items": {
         "type": "string",
@@ -665,6 +669,7 @@
       }
     },
     "Confidence": {
+      "description": "The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified. The following description provides more information about how confidence scores are assigned and how results are ranked.\n\nIf the confidence is set to `High`, one or more strong matches were found. Multiple `High` confidence matches are sorted in ranked order by importance when applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a user location or a map area (see User Context Parameters), then the ranking may change appropriately. For example, a location query for \"Paris\" returns \"Paris, France\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always ranked first due to importance unless a user location indicates that the user is in or very close to Paris, TX or the map view indicates that the user is searching in that area.\n\nIn some situations, the returned match may not be at the same level as the information provided in the request. For example, a request may specify address information and the geocode service may only be able to match a postal code. In this case, if the geocode service has a confidence that the postal code matches the data, the confidence is set to `Medium` and the match code is set to `UpHierarchy` to specify that it could not match all of the information and had to search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no additional information to rank the locations (such as user location or the relative importance of the location), the confidence is set to `Medium`. For example, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\" and \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to geocode a specific location, a less precise location value may be returned and the confidence is set to `Medium`. For example, if an address is provided, but a match is not found for the house number, the geocode result with a Roadblock entity type may be returned.",
       "type": "string",
       "enum": [
         "High",
