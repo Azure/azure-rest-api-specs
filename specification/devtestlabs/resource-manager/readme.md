@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.DevTestLab/stable/2021-09-01/DTL.json
+  - Microsoft.DevTestLab/stable/2021-09-01/types.json
 ```
 
 ### Tag: package-2018-09
@@ -171,7 +172,33 @@ directive:
       - $.definitions.VirtualNetwork
       - $.definitions.BastionHost
     reason: Tooling issue
-  - suppress: R3018  # EnumInsteadOfBoolean
+  - suppress: R3010 # TrackedResourceListByImmediateParent
+    from: DTL.json
+    where:
+      - $.definitions.ArmTemplate
+      - $.definitions.Artifact
+      - $.definitions.ArtifactSource
+      - $.definitions.CustomImage
+      - $.definitions.Formula
+      - $.definitions.GalleryImage
+      - $.definitions.NotificationChannel
+      - $.definitions.Schedule
+      - $.definitions.LabSecret
+      - $.definitions.ServiceRunner
+      - $.definitions.SharedGallery
+      - $.definitions.SharedImage
+      - $.definitions.User
+      - $.definitions.Disk
+      - $.definitions.Environment
+      - $.definitions.Secret
+      - $.definitions.ServiceFabric
+      - $.definitions.Schedule
+      - $.definitions.LabCost
+      - $.definitions.VirtualMachine
+      - $.definitions.VirtualNetwork
+      - $.definitions.BastionHost
+    reason: These have never been supported.
+  - suppress: R3018 # EnumInsteadOfBoolean
     from: DTL.json
     where:
       - $.definitions.LabSecretProperties.properties.enabledForArmEnvironments
@@ -184,16 +211,25 @@ directive:
       - $.definitions.GalleryImageProperties.properties.isPlanAuthorized
       - $.definitions.LabAnnouncementProperties.properties.expired
       - $.definitions.LabProperties.properties.disableAutoUpgradeCseMinorVersion
-      - $.definitions.VirtualMachineCreationParameterProperties.properties.isAuthenticationWithSshKey
-      - $.definitions.VirtualMachineCreationParameterProperties.properties.disallowPublicIpAddress
-      - $.definitions.VirtualMachineCreationParameterProperties.properties.allowClaim
-      - $.definitions.VirtualMachineCreationParameterProperties.properties.canApplyArtifacts
-      - $.definitions.VirtualMachineProperties.properties.isAuthenticationWithSshKey
-      - $.definitions.VirtualMachineProperties.properties.disallowPublicIpAddress
-      - $.definitions.VirtualMachineProperties.properties.allowClaim
-      - $.definitions.VirtualMachineProperties.properties.canApplyArtifacts
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.isAuthenticationWithSshKey
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.disallowPublicIpAddress
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.allowClaim
+      - $.definitions.LabVirtualMachineCreationParameterProperties.properties.canApplyArtifacts
+      - $.definitions.LabVirtualMachineProperties.properties.isAuthenticationWithSshKey
+      - $.definitions.LabVirtualMachineProperties.properties.disallowPublicIpAddress
+      - $.definitions.LabVirtualMachineProperties.properties.allowClaim
+      - $.definitions.LabVirtualMachineProperties.properties.canApplyArtifacts
       - $.definitions.PolicySetResult.properties.hasError
     reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+  - suppress: R3018  # EnumInsteadOfBoolean
+    from: types.json
+    where:
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.sku
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.plan
+      - $.definitions.CheckNameAvailabilityResponse.properties.nameAvailable
+      - $.definitions.Operation.properties.isDataAction
+    reason: This is a copy of the common types from ARM.
   - suppress: R3026  # EnumInsteadOfBoolean
     from: DTL.json
     where:
@@ -205,10 +241,41 @@ directive:
     reason: Tooling issue - the listed resources do have a list by immediate parent.
   - suppress: R1003  # ListInOperationName
     from: DTL.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policySets/{name}/evaluatePolicies"]
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/locations/{location}/operations/{name}"].get.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policySets/{name}/evaluatePolicies"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies"].post.operationId
     reason: This action is also named this way in previous SDK versions. Changing it would be a breaking change.
   - suppress: R4014  # AllResourcesMustHaveGetOperation
     from: DTL.json
     where: $.definitions.PolicySet
     reason: This operation doesn't make sense in the context of policysets and has never been supported.
+  - suppress: R4021 # DescriptionAndTitleMissing
+    from: types.json
+    where:
+      - $.definitions.KeyVaultProperties
+      - $.definitions.Operation.properties.isDataAction
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.sku
+      - $.definitions.ResourceModelWithAllowedPropertySet.properties.plan
+    reason: This is a copy of the common types from ARM.
+  - suppress: R4041 # XmsIdentifierValidation
+    from: DTL.json
+    where:
+       - $.definitions.ComputeVmProperties.properties.statuses
+    reason: No natural id property
+  - suppress: R4041 # XmsIdentifierValidation
+    from: types.json
+    where:
+        - $.definitions.ErrorDetail.properties.details
+        - $.definitions.ErrorDetail.properties.additionalInfo
+        - $.definitions.OperationListResult.properties.value
+        - $.definitions.ErrorDetail.properties.details
+        - $.definitions.ErrorDetail.properties.additionalInfo
+        - $.definitions.OperationListResult.properties.value
+    reason: This is a copy of the common types from ARM.
+  - suppress: R2054 # SecurityDefinitionsStructure
+    from: types.json
+    where: $
+    reason: This is a copy of the common types from ARM.
 ```
