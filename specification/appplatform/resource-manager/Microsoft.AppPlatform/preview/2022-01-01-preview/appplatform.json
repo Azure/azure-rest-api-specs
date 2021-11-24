@@ -1200,6 +1200,953 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List build services resource.",
+        "operationId": "BuildService_ListBuildServices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the Build Services.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildService_ListBuildServices": {
+            "$ref": "./examples/BuildService_ListBuildServices.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a build service resource.",
+        "operationId": "BuildService_GetBuildService",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the Build Service.",
+            "schema": {
+              "$ref": "#/definitions/BuildService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetBuildService": {
+            "$ref": "./examples/BuildService_GetBuildService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/getResourceUploadUrl": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get an resource upload URL for build service, which may be artifacts or source archive.",
+        "operationId": "BuildService_GetResourceUploadUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the resource upload URL.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUploadDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetResourceUploadUrl": {
+            "$ref": "./examples/BuildService_GetResourceUploadUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/getSupportedBuildpacks": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get all supported buildpacks.",
+        "operationId": "BuildService_SupportedBuildpacks",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes all supported buildpacks.",
+            "schema": {
+              "$ref": "#/definitions/SupportedBuildpacksDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_SupportedBuildpacks": {
+            "$ref": "./examples/BuildService_SupportedBuildpacks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/getSupportedStacks": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get all supported stacks.",
+        "operationId": "BuildService_SupportedStacks",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes all supported stacks.",
+            "schema": {
+              "$ref": "#/definitions/SupportedStacksDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_SupportedStacks": {
+            "$ref": "./examples/BuildService_SupportedStacks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/agentPools": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List build service agent pool.",
+        "operationId": "BuildServiceAgentPool_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes build service agent pool.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildServiceAgentPool_List": {
+            "$ref": "./examples/BuildServiceAgentPool_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/agentPools/{agentPoolName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get build service agent pool.",
+        "operationId": "BuildServiceAgentPool_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceAgentPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes build service agent pool.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildServiceAgentPool_Get": {
+            "$ref": "./examples/BuildServiceAgentPool_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update build service agent pool.",
+        "operationId": "BuildServiceAgentPool_UpdatePut",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceAgentPoolNameParameter"
+          },
+          {
+            "name": "tier",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolTierProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes build service agent pool.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new build service agent pool and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response describes the new build service agent pool and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "BuildServiceAgentPool_UpdatePut": {
+            "$ref": "./examples/BuildServiceAgentPool_UpdatePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Update build service agent pool.",
+        "operationId": "BuildServiceAgentPool_UpdatePatch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceAgentPoolNameParameter"
+          },
+          {
+            "name": "tier",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolTierProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes build service agent pool.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response describes the build service agent pool is updating and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/BuildServiceAgentPoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "BuildServiceAgentPool_UpdatePatch": {
+            "$ref": "./examples/BuildServiceAgentPool_UpdatePatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builders": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List KPack builders result.",
+        "operationId": "BuildServiceBuilder_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the Builder List",
+            "schema": {
+              "$ref": "#/definitions/BuilderResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildServiceBuilder_List": {
+            "$ref": "./examples/BuildServiceBuilder_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builders/{builderName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a KPack builder.",
+        "operationId": "BuildServiceBuilder_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuilderNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the Builder",
+            "schema": {
+              "$ref": "#/definitions/BuilderResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildServiceBuilder_Get": {
+            "$ref": "./examples/BuildServiceBuilder_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update a KPack builder.",
+        "operationId": "BuildServiceBuilder_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuilderNameParameter"
+          },
+          {
+            "name": "builderResource",
+            "in": "body",
+            "description": "The target builder for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuilderResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the Builder",
+            "schema": {
+              "$ref": "#/definitions/BuilderResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new Builder and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/BuilderResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Builder is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/BuilderResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "BuildServiceBuilder_CreateOrUpdate": {
+            "$ref": "./examples/BuildServiceBuilder_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete a KPack builder.",
+        "operationId": "BuildServiceBuilder_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuilderNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the builder resource has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the builder resource is deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the builder resource doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "BuildServiceBuilder_Delete": {
+            "$ref": "./examples/BuildServiceBuilder_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List KPack builds.",
+        "operationId": "BuildService_ListBuilds",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the builds.",
+            "schema": {
+              "$ref": "#/definitions/BuildCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildService_ListBuilds": {
+            "$ref": "./examples/BuildService_ListBuilds.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds/{buildName}": {
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update a KPack build.",
+        "operationId": "BuildService_CreateOrUpdateBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          },
+          {
+            "name": "build",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Build"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Build.",
+            "schema": {
+              "$ref": "#/definitions/Build"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new Build and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/Build"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Build is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/Build"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_CreateOrUpdateBuild": {
+            "$ref": "./examples/BuildService_CreateOrUpdateBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds/{buildName}/results": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List KPack build results.",
+        "operationId": "BuildService_ListBuildResults",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the build results.",
+            "schema": {
+              "$ref": "#/definitions/BuildResultCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildService_ListBuildResults": {
+            "$ref": "./examples/BuildService_ListBuildResults.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds/{buildName}/results/{buildResultName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a KPack build result.",
+        "operationId": "BuildService_GetBuildResult",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildResultNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the build result.",
+            "schema": {
+              "$ref": "#/definitions/BuildResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetBuildResult": {
+            "$ref": "./examples/BuildService_GetBuildResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds/{buildName}/results/{buildResultName}/getLog": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a KPack build result log download URL.",
+        "operationId": "BuildService_GetBuildResultLog",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildResultNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Build result log exists and can be downloaded.",
+            "schema": {
+              "$ref": "#/definitions/BuildResultLog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetBuildResultLog": {
+            "$ref": "./examples/BuildService_GetBuildResultLog.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default": {
       "get": {
         "tags": [
@@ -5166,6 +6113,504 @@
         }
       }
     },
+    "BuildServiceCollection": {
+      "description": "Object that includes an array of Build service resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Build service resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildService"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildService": {
+      "description": "Build service resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildServiceProperties",
+          "description": "Properties of the build resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildServiceProperties": {
+      "description": "Build service resource properties payload",
+      "type": "object",
+      "properties": {
+        "kPackVersion": {
+          "description": "The installed KPack version in this build service.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the KPack build result",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildServiceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "runtimeState": {
+          "description": "The runtime resource configuration of this build service.",
+          "type": "object",
+          "properties": {
+            "cpu": {
+              "description": "vCPU allocated to the entire build service node pool.",
+              "type": "string",
+              "readOnly": true
+            },
+            "memory": {
+              "description": "Memory allocated to the entire build service node pool.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "BuildCollection": {
+      "description": "Object that includes an array of Build resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Build resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Build"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "Build": {
+      "description": "Build resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildProperties",
+          "description": "Properties of the build resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildProperties": {
+      "description": "Build resource properties payload",
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "description": "The relative path of source code",
+          "type": "string"
+        },
+        "builder": {
+          "description": "The name of builder to build the source code",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the KPack build result",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "env": {
+          "description": "The environment variables for this build",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "triggeredBuildResult": {
+          "$ref": "#/definitions/TriggeredBuildResult",
+          "description": " The build result triggered by this build"
+        }
+      }
+    },
+    "TriggeredBuildResult": {
+      "description": "The build result triggered by a build",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique build id of this build result",
+          "type": "string"
+        }
+      }
+    },
+    "BuildResultCollection": {
+      "description": "Object that includes an array of Build result resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Build result resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildResult": {
+      "description": "Build result resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildResultProperties",
+          "description": "Properties of the build result resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildResultProperties": {
+      "description": "Build result resource properties payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of this build result",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the KPack build result",
+          "enum": [
+            "Queuing",
+            "Building",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildResultProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "buildPodName": {
+          "description": "The build pod name which can be used to get the build log streaming.",
+          "type": "string"
+        },
+        "buildStages": {
+          "description": "All of the build stage (init-container and container) resources in build pod.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildStageProperties"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "BuildStageProperties": {
+      "description": "The build stage (init-container and container) resources in build pod.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of this build stage resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The provisioning state of this build stage resource.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KPackBuildStageProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BuildResultLog": {
+      "description": "Build result log resource properties payload",
+      "type": "object",
+      "properties": {
+        "blobUrl": {
+          "description": "The public download URL of this build result log",
+          "type": "string"
+        }
+      }
+    },
+    "BuilderResourceCollection": {
+      "description": "Object that includes an array of Builder resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Builder resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuilderResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "BuilderResource": {
+      "description": "KPack Builder resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuilderProperties",
+          "description": "Property of the Builder resource."
+        }
+      }
+    },
+    "BuilderProperties": {
+      "description": "KPack Builder properties payload",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Builder provision status.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuilderProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "stack": {
+          "description": "Builder cluster stack property.",
+          "type": "object",
+          "$ref": "#/definitions/StackProperties"
+        },
+        "buildpackGroups": {
+          "description": "Builder buildpack groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildpacksGroupProperties"
+          }
+        }
+      }
+    },
+    "StackProperties": {
+      "description": "KPack ClusterStack properties payload",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the ClusterStack.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the ClusterStack",
+          "type": "string"
+        }
+      }
+    },
+    "BuildpacksGroupProperties": {
+      "description": "Buildpack group properties of the Builder",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Buildpack group name",
+          "type": "string"
+        },
+        "buildpacks": {
+          "description": "Buildpacks in the buildpack group",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/BuildpackProperties"
+          }
+        }
+      }
+    },
+    "BuildpackProperties": {
+      "description": "Buildpack properties payload",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the buildpack",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the buildpack",
+          "type": "string"
+        },
+        "optional": {
+          "description": "optional property of the buildpack",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportedBuildpacksDefinition": {
+      "description": "Supported buildpacks definition payload",
+      "type": "object",
+      "properties": {
+        "buildpacks": {
+          "description": "A dictionary of all supported buildpacks",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildServiceSupportedItem"
+          }
+        }
+      }
+    },
+    "SupportedStacksDefinition": {
+      "description": "Supported stacks definition payload",
+      "type": "object",
+      "properties": {
+        "stacks": {
+          "description": "A dictionary of all supported stacks",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildServiceSupportedItem"
+          }
+        }
+      }
+    },
+    "BuildServiceSupportedItem": {
+      "description": "The supported item in build service",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of this resource",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of this resource",
+          "type": "string"
+        }
+      }
+    },
+    "BuildServiceAgentPoolResourceCollection": {
+      "description": "Object that includes an array of build service agent pool resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of build service agent pool resource",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildServiceAgentPoolResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildServiceAgentPoolResource": {
+      "description": "The build service agent pool resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "build service agent pool properties",
+          "type": "object",
+          "$ref": "#/definitions/BuildServiceAgentPoolProperties"
+        }
+      }
+    },
+    "BuildServiceAgentPoolProperties": {
+      "description": "Build service agent pool properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the build service agent pool",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "build service agent pool tier properties",
+          "type": "object",
+          "$ref": "#/definitions/BuildServiceAgentPoolTierProperties"
+        }
+      }
+    },
+    "BuildServiceAgentPoolTierProperties": {
+      "description": "Build service agent pool tier properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of build service agent pool tier",
+          "type": "string"
+        },
+        "cpu": {
+          "description": "The cpu property of build service agent pool tier",
+          "type": "string",
+          "readOnly": true
+        },
+        "memory": {
+          "description": "The memory property of build service agent pool tier",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ConfigurationServiceResourceCollection": {
       "description": "Object that includes an array of configuration service resources and a possible link for next set",
       "type": "object",
@@ -8273,6 +9718,54 @@
       "name": "deploymentName",
       "in": "path",
       "description": "The name of the Deployment resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildServiceNameParameter": {
+      "name": "buildServiceName",
+      "in": "path",
+      "description": "The name of the build service resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildServiceAgentPoolNameParameter": {
+      "name": "agentPoolName",
+      "in": "path",
+      "description": "The name of the build service agent pool resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuilderNameParameter": {
+      "name": "builderName",
+      "in": "path",
+      "description": "The name of the builder resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildNameParameter": {
+      "name": "buildName",
+      "in": "path",
+      "description": "The name of the build resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildResultNameParameter": {
+      "name": "buildResultName",
+      "in": "path",
+      "description": "The name of the build result resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildResultLogNameParameter": {
+      "name": "buildResultLogName",
+      "in": "path",
+      "description": "The name of the build result log resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
