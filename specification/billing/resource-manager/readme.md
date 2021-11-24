@@ -34,9 +34,15 @@ tag: package-2020-05
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-10'
+title: BillingManagementClient
+description: Billing Client
 input-file:
+- Microsoft.Billing/stable/2021-10-01/billingSubscription.json
 - Microsoft.Billing/stable/2021-10-01/payment.json
 directive:
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2021-10-01/billingSubscription.json
+    reason: systemData is not in this API version
   - suppress: R4009
     from: Microsoft.Billing/stable/2021-10-01/payment.json
     reason: systemData is not in this API version
