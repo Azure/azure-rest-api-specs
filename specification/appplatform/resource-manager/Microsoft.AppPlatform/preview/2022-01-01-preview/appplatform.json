@@ -1001,6 +1001,205 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/serviceRegistries/{serviceRegistryName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Service Registry and its properties.",
+        "operationId": "ServiceRegistries_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceRegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Service Registry.",
+            "schema": {
+              "$ref": "#/definitions/ServiceRegistryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceRegistries_Get": {
+            "$ref": "./examples/ServiceRegistries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create the default Service Registry or update the existing Service Registry.",
+        "operationId": "ServiceRegistries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceRegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Service Registry.",
+            "schema": {
+              "$ref": "#/definitions/ServiceRegistryResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new created Service Registry and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ServiceRegistryResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Service Registry is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ServiceRegistryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ServiceRegistries_CreateOrUpdate": {
+            "$ref": "./examples/ServiceRegistries_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Disable the default Service Registry.",
+        "operationId": "ServiceRegistries_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceRegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the default Service Registries has deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the default Service Registries is now deleting."
+          },
+          "204": {
+            "description": "Success. The response indicates the default Service Registries doesn't exist or has deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ServiceRegistries_Delete": {
+            "$ref": "./examples/ServiceRegistries_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/serviceRegistries": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handles requests to list all resources in a Service.",
+        "operationId": "ServiceRegistries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Service Registry resources in the Service.",
+            "schema": {
+              "$ref": "#/definitions/ServiceRegistryResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServiceRegistries_List": {
+            "$ref": "./examples/ServiceRegistries_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default": {
       "get": {
         "tags": [
@@ -3970,6 +4169,112 @@
         }
       }
     },
+    "ServiceRegistryResourceCollection": {
+      "description": "Object that includes an array of Service Registry resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Service Registry resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRegistryResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ServiceRegistryResource": {
+      "description": "Service Registry resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceRegistryProperties"
+        }
+      }
+    },
+    "ServiceRegistryProperties": {
+      "description": "Service Registry properties payload",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the Service Registry.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ServiceRegistryProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/ServiceRegistryResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        },
+        "instances": {
+          "description": "Collection of instances belong to Service Registry.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRegistryInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceRegistryResourceRequests": {
+      "description": "Resource request payload of Service Registry",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "cpu": {
+          "description": "Cpu allocated to each Service Registry instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "memory": {
+          "description": "Memory allocated to each Service Registry instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceCount": {
+          "format": "int32",
+          "description": "Instance count of the Service Registry",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceRegistryInstance": {
+      "description": "Collection of instances belong to the Service Registry",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Service Registry instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the Service Registry instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Sku": {
       "description": "Sku of Azure Spring Cloud",
       "type": "object",
@@ -6111,6 +6416,14 @@
       "name": "configurationServiceName",
       "in": "path",
       "description": "The name of Application Configuration Service.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceRegistryNameParameter": {
+      "name": "serviceRegistryName",
+      "in": "path",
+      "description": "The name of Service Registry.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
