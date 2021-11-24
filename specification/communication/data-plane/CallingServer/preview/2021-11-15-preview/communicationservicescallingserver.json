@@ -525,14 +525,14 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/:transfer": {
+    "/calling/callConnections/{callConnectionId}/:transferToParticipant": {
       "post": {
         "tags": [
           "CallConnection"
         ],
-        "summary": "Transfer the call to a participant or to another call.",
-        "description": "Transfer the call to a participant or to another call.",
-        "operationId": "CallConnections_Transfer",
+        "summary": "Transfer the call to a participant.",
+        "description": "Transfer the call to a participant.",
+        "operationId": "CallConnections_TransferToParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -542,12 +542,12 @@
             "type": "string"
           },
           {
-            "name": "transferCallRequest",
+            "name": "transferToParticipantRequest",
             "in": "body",
-            "description": "The transfer call request.",
+            "description": "The transfer to participant request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferCallRequest"
+              "$ref": "#/definitions/TransferToParticipantRequest"
             }
           },
           {
@@ -578,8 +578,67 @@
           }
         },
         "x-ms-examples": {
-          "Transfer the call to a participant or to another call.": {
-            "$ref": "./examples/CallConnections_Transfer.json"
+          "Transfer the call to a participant.": {
+            "$ref": "./examples/CallConnections_TransferToParticipant.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}/:transferToCall": {
+      "post": {
+        "tags": [
+          "CallConnection"
+        ],
+        "summary": "Transfer the current call to another call.",
+        "description": "Transfer the current call to another call.",
+        "operationId": "CallConnections_TransferToCall",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferToCallRequest",
+            "in": "body",
+            "description": "The transfer to call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferToCallRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the transfer call response.",
+            "schema": {
+              "$ref": "#/definitions/TransferCallResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "x-ms-examples": {
+          "Transfer the current call to another call.": {
+            "$ref": "./examples/CallConnections_TransferToCall.json"
           }
         }
       }
@@ -2376,17 +2435,16 @@
         }
       }
     },
-    "TransferCallRequest": {
-      "description": "The transfer call request.",
+    "TransferToParticipantRequest": {
+      "description": "The transfer call to participant request.",
+      "required": [
+        "targetParticipant"
+      ],
       "type": "object",
       "properties": {
         "targetParticipant": {
           "$ref": "#/definitions/CommunicationIdentifier",
           "description": "The identity of the target where call should be transfer to."
-        },
-        "targetCallConnectionId": {
-          "description": "The call connection id to replace the current call with. This parameter should be used for consultative transfer.",
-          "type": "string"
         },
         "alternateCallerId": {
           "$ref": "#/definitions/PhoneNumberIdentifier",
@@ -2423,6 +2481,27 @@
         "resultDetails": {
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result info for the operation."
+        }
+      }
+    },
+    "TransferToCallRequest": {
+      "description": "The transfer to call request.",
+      "required": [
+        "targetCallConnectionId"
+      ],
+      "type": "object",
+      "properties": {
+        "targetCallConnectionId": {
+          "description": "The call connection id to replace the current call with. This parameter should be used for consultative transfer.",
+          "type": "string"
+        },
+        "userToUserInformation": {
+          "description": "The user to user information.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The operation context.",
+          "type": "string"
         }
       }
     },
