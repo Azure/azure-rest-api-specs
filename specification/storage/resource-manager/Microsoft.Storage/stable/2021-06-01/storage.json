@@ -731,6 +731,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "name": "failoverType",
+              "description": "Used to indicate whether a Planned or an UnPlanned Failover is required. The Default value is null, which indicates n UnPlanned Failover. The Value Soft indicates a Planned Failover.",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "enum": [
+              "Soft"
+              ],
+              "x-ms-enum": {
+                "name": "failoverType",
+                "modelAsString": false
+            }
           }
         ],
         "responses": {
