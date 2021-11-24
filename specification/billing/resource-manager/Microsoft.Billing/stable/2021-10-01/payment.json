@@ -3,7 +3,7 @@
   "info": {
     "version": "2021-10-01",
     "title": "PaymentManagementClient",
-    "description": "Payment management client provides access to payment resources for Azure."
+    "description": "The billing client allows you to view and manage your billing details programmatically."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -21,7 +21,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodOwnedByUser_List.",
+        "operationId": "PaymentMethods_ListByUser",
         "description": "Lists the payment methods owned by the caller.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -46,7 +46,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -60,7 +60,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodOwnedByUser_Get",
+        "operationId": "PaymentMethods_GetByUser",
         "description": "Gets a payment method owned by the caller.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -88,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -97,7 +97,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodOwnedByUser_Delete",
+        "operationId": "PaymentMethods_DeleteByUser",
         "description": "Deletes a payment method owned by the caller.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -125,7 +125,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -164,7 +164,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -178,7 +178,7 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodAtBillingAccount_Get",
+        "operationId": "PaymentMethods_GetByBillingAccount",
         "description": "Gets a payment method available for a billing account. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -209,7 +209,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -251,7 +251,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -271,7 +271,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "PaymentMethodsListByBillingProfile": {
+          "PaymentMethodsGetByBillingProfile": {
             "$ref": "./examples/PaymentMethodAtBillingProfile_Get.json"
           }
         },
@@ -299,7 +299,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -308,15 +308,15 @@
         "tags": [
           "PaymentMethods"
         ],
-        "operationId": "PaymentMethodAtBillingProfile_Remove",
+        "operationId": "PaymentMethods_DeleteAtBillingProfile",
         "x-ms-long-running-operation": true,
         "description": "Deletes a payment method link and removes the payment method from a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "PaymentMethodAtBillingProfileRemove": {
-            "$ref": "./examples/PaymentMethodAtBillingProfile_Remove.json"
+          "PaymentMethodAtBillingProfileDelete": {
+            "$ref": "./examples/PaymentMethodAtBillingProfile_Delete.json"
           }
         },
         "parameters": [
@@ -364,7 +364,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -395,7 +395,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -430,7 +430,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -447,8 +447,7 @@
       "properties": {
         "paymentMethod": {
           "description": "Projection of a payment method",
-          "$ref": "#/definitions/PaymentMethodProjectionProperties",
-          "readOnly": true
+          "$ref": "#/definitions/PaymentMethodProjectionProperties"
         }
       }
     },
@@ -476,7 +475,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -705,87 +704,9 @@
         }
       }
     },
-    "Resource": {
-      "description": "The resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ErrorDetails": {
-      "description": "The details of the error.",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "The sub details of the error.",
-          "readOnly": true,
-          "$ref": "#/definitions/ErrorSubDetails"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
-    "ErrorSubDetails": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Error code.",
-            "type": "string",
-            "readOnly": true
-          },
-          "message": {
-            "description": "Error message indicating why the operation failed.",
-            "type": "string",
-            "readOnly": true
-          },
-          "target": {
-            "description": "The target of the particular error.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      }
-    },
     "OperationListResult": {
       "description": "The list of billing operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
@@ -818,6 +739,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.Billing.",
