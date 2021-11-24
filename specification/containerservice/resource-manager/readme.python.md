@@ -343,3 +343,10 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.containerservice.v2019_09_30_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_09_30_preview
 ```
+
+``` yaml $(track2)
+directive:
+  - from: swagger-document
+    where: $.definitions.ManagedClusterLoadBalancerProfile.properties.managedOutboundIPs.properties["countIPv6"]
+    transform: $["x-ms-client-name"] = "count_ipv6"
+```
