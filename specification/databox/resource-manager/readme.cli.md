@@ -31,4 +31,6 @@ cli:
     - name: AvailableSkusPost
     - name: JobsDelete
     - name: JobMitigate
+    - name: JobsGetWaitingForAction
+    - name: MarkDevicesShipped
 ```

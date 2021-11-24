@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2021-03
+tag: package-2021-08
 ```
 
 ### Validations
@@ -42,28 +42,78 @@ semantic-validator: true
 message-format: json
 ```
 
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-08-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-08-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-08-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-08-01/vaultusages.json
+```
+### Tag: package-2021-07
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-07-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-07-01/vaultusages.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-06-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-06-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-06-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-06-01/vaultusages.json
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-04-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-04-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-04-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-04-01/vaultusages.json
+```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-03-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-03-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-03-01/vaults.json
   - Microsoft.RecoveryServices/stable/2021-03-01/vaultusages.json
 ```
+
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02'
+``` yaml $(tag) == 'package-2021-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
   - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
 ```
+
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
@@ -124,17 +174,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js recoveryservices/resource-manager
 ```
 
 ## C#
@@ -155,6 +204,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -189,7 +242,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

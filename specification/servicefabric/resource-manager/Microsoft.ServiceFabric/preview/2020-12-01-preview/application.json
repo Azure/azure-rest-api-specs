@@ -974,6 +974,7 @@
       }
     },
     "ApplicationResource": {
+      "type": "object",
       "description": "The application resource.",
       "properties": {
         "identity": {
@@ -993,6 +994,7 @@
       ]
     },
     "ApplicationResourceList": {
+      "type": "object",
       "description": "The list of application resources.",
       "properties": {
         "value": {
@@ -1009,6 +1011,7 @@
       }
     },
     "ApplicationResourceProperties": {
+      "type": "object",
       "description": "The application resource properties.",
       "allOf": [
         {
@@ -1028,6 +1031,7 @@
       }
     },
     "ApplicationResourceUpdate": {
+      "type": "object",
       "description": "The application resource for patch operations.",
       "properties": {
         "properties": {
@@ -1043,6 +1047,7 @@
       ]
     },
     "ApplicationResourceUpdateProperties": {
+      "type": "object",
       "description": "The application resource properties for patch operations.",
       "properties": {
         "typeVersion": {
@@ -1099,6 +1104,7 @@
       }
     },
     "ApplicationTypeResource": {
+      "type": "object",
       "description": "The application type name resource",
       "properties": {
         "properties": {
@@ -1114,6 +1120,7 @@
       ]
     },
     "ApplicationTypeResourceList": {
+      "type": "object",
       "description": "The list of application type names.",
       "properties": {
         "value": {
@@ -1130,6 +1137,7 @@
       }
     },
     "ApplicationTypeResourceProperties": {
+      "type": "object",
       "description": "The application type name properties",
       "properties": {
         "provisioningState": {
@@ -1144,6 +1152,7 @@
       "description": "The version of the application type as defined in the application manifest."
     },
     "ApplicationTypeVersionResource": {
+      "type": "object",
       "description": "An application type version resource for the specified application type name resource.",
       "properties": {
         "properties": {
@@ -1159,6 +1168,7 @@
       ]
     },
     "ApplicationTypeVersionResourceList": {
+      "type": "object",
       "description": "The list of application type version resources for the specified application type name resource.",
       "properties": {
         "value": {
@@ -1175,6 +1185,7 @@
       }
     },
     "ApplicationTypeVersionResourceProperties": {
+      "type": "object",
       "description": "The properties of the application type version resource.",
       "required": [
         "appPackageUrl"
@@ -1197,6 +1208,7 @@
       }
     },
     "ApplicationUpgradePolicy": {
+      "type": "object",
       "description": "Describes the policy for a monitored application upgrade.",
       "properties": {
         "upgradeReplicaSetCheckTimeout": {
@@ -1218,10 +1230,15 @@
         "upgradeMode": {
           "$ref": "#/definitions/RollingUpgradeMode",
           "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, and Monitored."
+        },
+        "recreateApplication": {
+          "type": "boolean",
+          "description": "Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed and it will result in availability loss."
         }
       }
     },
     "ApplicationUserAssignedIdentity": {
+      "type": "object",
       "required": [
         "name",
         "principalId"
@@ -1248,6 +1265,7 @@
         },
         "maxPercentUnhealthyDeployedApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
           "default": 0
         },
@@ -1262,6 +1280,7 @@
       }
     },
     "ArmRollingUpgradeMonitoringPolicy": {
+      "type": "object",
       "description": "The policy used for monitoring the application upgrade",
       "properties": {
         "failureAction": {
@@ -1314,6 +1333,7 @@
       "properties": {
         "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1321,6 +1341,7 @@
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1328,6 +1349,7 @@
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.\n",
           "default": 0,
           "minimum": 0,
@@ -1343,6 +1365,7 @@
       }
     },
     "AvailableOperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -1391,6 +1414,7 @@
       "default": "0"
     },
     "ManagedIdentity": {
+      "type": "object",
       "description": "Describes the managed identities for an Azure resource.",
       "properties": {
         "principalId": {
@@ -1478,6 +1502,7 @@
       }
     },
     "NamedPartitionSchemeDescription": {
+      "type": "object",
       "description": "Describes the named partition scheme of the service.",
       "allOf": [
         {
@@ -1496,6 +1521,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "names": {
@@ -1554,6 +1580,7 @@
       }
     },
     "ProxyResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1728,14 +1755,17 @@
         },
         "primaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
         },
         "secondaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
         },
         "defaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
         }
       }
@@ -1847,6 +1877,7 @@
       }
     },
     "ServiceResource": {
+      "type": "object",
       "description": "The service resource.",
       "properties": {
         "properties": {
@@ -1862,6 +1893,7 @@
       ]
     },
     "ServiceResourceList": {
+      "type": "object",
       "description": "The list of service resources.",
       "properties": {
         "value": {
@@ -1878,6 +1910,7 @@
       }
     },
     "ServiceResourceProperties": {
+      "type": "object",
       "description": "The service resource properties.",
       "allOf": [
         {
@@ -1935,6 +1968,7 @@
       }
     },
     "ServiceResourcePropertiesBase": {
+      "type": "object",
       "description": "The common service resource properties.",
       "properties": {
         "placementConstraints": {
@@ -1960,6 +1994,7 @@
       }
     },
     "ServiceResourceUpdate": {
+      "type": "object",
       "description": "The service resource for patch operations.",
       "properties": {
         "properties": {
@@ -1975,6 +2010,7 @@
       ]
     },
     "ServiceResourceUpdateProperties": {
+      "type": "object",
       "description": "The service resource properties for patch operations.",
       "allOf": [
         {
@@ -1993,6 +2029,7 @@
       }
     },
     "SingletonPartitionSchemeDescription": {
+      "type": "object",
       "description": "Describes the partition scheme of a singleton-partitioned, or non-partitioned service.",
       "allOf": [
         {
@@ -2006,6 +2043,7 @@
       "x-ms-discriminator-value": "Singleton"
     },
     "StatefulServiceProperties": {
+      "type": "object",
       "description": "The properties of a stateful service resource.",
       "allOf": [
         {
@@ -2020,11 +2058,13 @@
         },
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2046,6 +2086,7 @@
       }
     },
     "StatefulServiceUpdateProperties": {
+      "type": "object",
       "description": "The properties of a stateful service resource for patch operations.",
       "allOf": [
         {
@@ -2056,11 +2097,13 @@
       "properties": {
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2082,6 +2125,7 @@
       }
     },
     "StatelessServiceProperties": {
+      "type": "object",
       "description": "The properties of a stateless service resource.",
       "allOf": [
         {
@@ -2092,6 +2136,7 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
@@ -2102,6 +2147,7 @@
       }
     },
     "StatelessServiceUpdateProperties": {
+      "type": "object",
       "description": "The properties of a stateless service resource for patch operations.",
       "allOf": [
         {
@@ -2112,6 +2158,7 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
@@ -2122,6 +2169,7 @@
       }
     },
     "UserAssignedIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -2143,6 +2191,7 @@
       }
     },
     "UniformInt64RangePartitionSchemeDescription": {
+      "type": "object",
       "description": "Describes a partitioning scheme where an integer range is allocated evenly across a number of partitions.",
       "allOf": [
         {
@@ -2162,6 +2211,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "lowKey": {
@@ -2185,6 +2235,7 @@
       "default": "P10675199DT02H48M05.4775807S"
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -2194,6 +2245,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",

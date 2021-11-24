@@ -9,117 +9,6 @@
       "body": {
         "amlCompute": [
           {
-            "name": "Standard_D1_v2",
-            "family": "standardDv2Family",
-            "vCPUs": 1,
-            "gpus": 0,
-            "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 51200,
-            "memoryGB": 3.5,
-            "lowPriorityCapable": true,
-            "premiumIO": false,
-            "estimatedVMPrices": {
-              "billingCurrency": "USD",
-              "unitOfMeasure": "OneHour",
-              "values": [
-                {
-                  "retailPrice": 0.05,
-                  "osType": "Windows",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.12,
-                  "osType": "Windows",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 0.01,
-                  "osType": "Linux",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.06,
-                  "osType": "Linux",
-                  "vmTier": "Standard"
-                }
-              ]
-            }
-          },
-          {
-            "name": "Standard_D2_v2",
-            "family": "standardDv2Family",
-            "vCPUs": 2,
-            "gpus": 0,
-            "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 102400,
-            "memoryGB": 7,
-            "lowPriorityCapable": true,
-            "premiumIO": false,
-            "estimatedVMPrices": {
-              "billingCurrency": "USD",
-              "unitOfMeasure": "OneHour",
-              "values": [
-                {
-                  "retailPrice": 0.09,
-                  "osType": "Windows",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.23,
-                  "osType": "Windows",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 0.11,
-                  "osType": "Linux",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 0.02,
-                  "osType": "Linux",
-                  "vmTier": "LowPriority"
-                }
-              ]
-            }
-          },
-          {
-            "name": "Standard_D11_v2",
-            "family": "standardDv2Family",
-            "vCPUs": 2,
-            "gpus": 0,
-            "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 102400,
-            "memoryGB": 14,
-            "lowPriorityCapable": true,
-            "premiumIO": false,
-            "estimatedVMPrices": {
-              "billingCurrency": "USD",
-              "unitOfMeasure": "OneHour",
-              "values": [
-                {
-                  "retailPrice": 0.15,
-                  "osType": "Linux",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 0.1,
-                  "osType": "Windows",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.03,
-                  "osType": "Linux",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.24,
-                  "osType": "Windows",
-                  "vmTier": "Standard"
-                }
-              ]
-            }
-          },
-          {
             "name": "Standard_DS1_v2",
             "family": "standardDSv2Family",
             "vCPUs": 1,
@@ -134,12 +23,7 @@
               "unitOfMeasure": "OneHour",
               "values": [
                 {
-                  "retailPrice": 0.05,
-                  "osType": "Windows",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.12,
+                  "retailPrice": 0.13,
                   "osType": "Windows",
                   "vmTier": "Standard"
                 },
@@ -149,21 +33,30 @@
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 0.06,
+                  "retailPrice": 0.07,
                   "osType": "Linux",
                   "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.05,
+                  "osType": "Windows",
+                  "vmTier": "LowPriority"
                 }
               ]
-            }
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance"
+            ]
           },
           {
-            "name": "Standard_F2s_v2",
-            "family": "standardFSv2Family",
+            "name": "Standard_DS2_v2",
+            "family": "standardDSv2Family",
             "vCPUs": 2,
             "gpus": 0,
             "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 16384,
-            "memoryGB": 4,
+            "maxResourceVolumeMB": 14336,
+            "memoryGB": 7.0,
             "lowPriorityCapable": true,
             "premiumIO": true,
             "estimatedVMPrices": {
@@ -171,36 +64,83 @@
               "unitOfMeasure": "OneHour",
               "values": [
                 {
-                  "retailPrice": 0.02,
+                  "retailPrice": 0.03,
                   "osType": "Linux",
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 0.08,
+                  "retailPrice": 0.15,
                   "osType": "Linux",
                   "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.1,
+                  "osType": "Windows",
+                  "vmTier": "LowPriority"
+                },
+                {
+                  "retailPrice": 0.25,
+                  "osType": "Windows",
+                  "vmTier": "Standard"
+                }
+              ]
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance",
+              "MIR"
+            ]
+          },
+          {
+            "name": "Standard_DS3_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 4,
+            "gpus": 0,
+            "osVhdSizeMB": 1047552,
+            "maxResourceVolumeMB": 28672,
+            "memoryGB": 14.0,
+            "lowPriorityCapable": true,
+            "premiumIO": true,
+            "estimatedVMPrices": {
+              "billingCurrency": "USD",
+              "unitOfMeasure": "OneHour",
+              "values": [
+                {
+                  "retailPrice": 0.2,
+                  "osType": "Windows",
+                  "vmTier": "LowPriority"
                 },
                 {
                   "retailPrice": 0.06,
-                  "osType": "Windows",
+                  "osType": "Linux",
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 0.16,
+                  "retailPrice": 0.5,
                   "osType": "Windows",
+                  "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.29,
+                  "osType": "Linux",
                   "vmTier": "Standard"
                 }
               ]
-            }
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance",
+              "MIR"
+            ]
           },
           {
-            "name": "Standard_M32-8ms",
-            "family": "standardMSFamily",
-            "vCPUs": 32,
+            "name": "Standard_DS4_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 8,
             "gpus": 0,
             "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 1024000,
-            "memoryGB": 875,
+            "maxResourceVolumeMB": 57344,
+            "memoryGB": 28.0,
             "lowPriorityCapable": true,
             "premiumIO": true,
             "estimatedVMPrices": {
@@ -208,110 +148,124 @@
               "unitOfMeasure": "OneHour",
               "values": [
                 {
-                  "retailPrice": 8.43,
-                  "osType": "Windows",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 1.23,
+                  "retailPrice": 0.12,
                   "osType": "Linux",
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 3.37,
+                  "retailPrice": 0.4,
                   "osType": "Windows",
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 6.15,
+                  "retailPrice": 1.01,
+                  "osType": "Windows",
+                  "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.58,
                   "osType": "Linux",
                   "vmTier": "Standard"
                 }
               ]
-            }
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance",
+              "MIR"
+            ]
           },
           {
-            "name": "Standard_NC6",
-            "family": "standardNCFamily",
-            "vCPUs": 6,
-            "gpus": 1,
+            "name": "Standard_DS5_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 16,
+            "gpus": 0,
             "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 389120,
-            "memoryGB": 56,
+            "maxResourceVolumeMB": 114688,
+            "memoryGB": 56.0,
             "lowPriorityCapable": true,
-            "premiumIO": false,
+            "premiumIO": true,
             "estimatedVMPrices": {
               "billingCurrency": "USD",
               "unitOfMeasure": "OneHour",
               "values": [
+                {
+                  "retailPrice": 1.17,
+                  "osType": "Linux",
+                  "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.81,
+                  "osType": "Windows",
+                  "vmTier": "LowPriority"
+                },
+                {
+                  "retailPrice": 2.02,
+                  "osType": "Windows",
+                  "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.23,
+                  "osType": "Linux",
+                  "vmTier": "LowPriority"
+                }
+              ]
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance",
+              "MIR"
+            ]
+          },
+          {
+            "name": "Standard_DS11_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 2,
+            "gpus": 0,
+            "osVhdSizeMB": 1047552,
+            "maxResourceVolumeMB": 28672,
+            "memoryGB": 14.0,
+            "lowPriorityCapable": true,
+            "premiumIO": true,
+            "estimatedVMPrices": {
+              "billingCurrency": "USD",
+              "unitOfMeasure": "OneHour",
+              "values": [
+                {
+                  "retailPrice": 0.26,
+                  "osType": "Windows",
+                  "vmTier": "Standard"
+                },
                 {
                   "retailPrice": 0.18,
                   "osType": "Linux",
-                  "vmTier": "LowPriority"
+                  "vmTier": "Standard"
                 },
                 {
-                  "retailPrice": 0.43,
+                  "retailPrice": 0.11,
                   "osType": "Windows",
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 0.9,
+                  "retailPrice": 0.04,
                   "osType": "Linux",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 1.08,
-                  "osType": "Windows",
-                  "vmTier": "Standard"
+                  "vmTier": "LowPriority"
                 }
               ]
-            }
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance"
+            ]
           },
           {
-            "name": "Standard_NV6",
-            "family": "standardNVFamily",
-            "vCPUs": 6,
-            "gpus": 1,
+            "name": "Standard_DS12_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 4,
+            "gpus": 0,
             "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 389120,
-            "memoryGB": 56,
-            "lowPriorityCapable": true,
-            "premiumIO": false,
-            "estimatedVMPrices": {
-              "billingCurrency": "USD",
-              "unitOfMeasure": "OneHour",
-              "values": [
-                {
-                  "retailPrice": 1.28,
-                  "osType": "Windows",
-                  "vmTier": "Standard"
-                },
-                {
-                  "retailPrice": 0.51,
-                  "osType": "Windows",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 0.22,
-                  "osType": "Linux",
-                  "vmTier": "LowPriority"
-                },
-                {
-                  "retailPrice": 1.09,
-                  "osType": "Linux",
-                  "vmTier": "Standard"
-                }
-              ]
-            }
-          },
-          {
-            "name": "Standard_ND6s",
-            "family": "standardNDSFamily",
-            "vCPUs": 6,
-            "gpus": 1,
-            "osVhdSizeMB": 1047552,
-            "maxResourceVolumeMB": 344064,
-            "memoryGB": 112,
+            "maxResourceVolumeMB": 57344,
+            "memoryGB": 28.0,
             "lowPriorityCapable": true,
             "premiumIO": true,
             "estimatedVMPrices": {
@@ -319,27 +273,113 @@
               "unitOfMeasure": "OneHour",
               "values": [
                 {
-                  "retailPrice": 2.07,
+                  "retailPrice": 0.37,
                   "osType": "Linux",
                   "vmTier": "Standard"
                 },
                 {
-                  "retailPrice": 0.36,
-                  "osType": "Linux",
-                  "vmTier": "LowPriority"
+                  "retailPrice": 0.53,
+                  "osType": "Windows",
+                  "vmTier": "Standard"
                 },
                 {
-                  "retailPrice": 0.87,
+                  "retailPrice": 0.21,
                   "osType": "Windows",
                   "vmTier": "LowPriority"
                 },
                 {
-                  "retailPrice": 2.49,
+                  "retailPrice": 0.07,
+                  "osType": "Linux",
+                  "vmTier": "LowPriority"
+                }
+              ]
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance"
+            ]
+          },
+          {
+            "name": "Standard_DS13_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 8,
+            "gpus": 0,
+            "osVhdSizeMB": 1047552,
+            "maxResourceVolumeMB": 114688,
+            "memoryGB": 56.0,
+            "lowPriorityCapable": true,
+            "premiumIO": true,
+            "estimatedVMPrices": {
+              "billingCurrency": "USD",
+              "unitOfMeasure": "OneHour",
+              "values": [
+                {
+                  "retailPrice": 0.15,
+                  "osType": "Linux",
+                  "vmTier": "LowPriority"
+                },
+                {
+                  "retailPrice": 0.42,
+                  "osType": "Windows",
+                  "vmTier": "LowPriority"
+                },
+                {
+                  "retailPrice": 0.74,
+                  "osType": "Linux",
+                  "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 1.06,
                   "osType": "Windows",
                   "vmTier": "Standard"
                 }
               ]
-            }
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance"
+            ]
+          },
+          {
+            "name": "Standard_DS14_v2",
+            "family": "standardDSv2Family",
+            "vCPUs": 16,
+            "gpus": 0,
+            "osVhdSizeMB": 1047552,
+            "maxResourceVolumeMB": 229376,
+            "memoryGB": 112.0,
+            "lowPriorityCapable": true,
+            "premiumIO": true,
+            "estimatedVMPrices": {
+              "billingCurrency": "USD",
+              "unitOfMeasure": "OneHour",
+              "values": [
+                {
+                  "retailPrice": 0.3,
+                  "osType": "Linux",
+                  "vmTier": "LowPriority"
+                },
+                {
+                  "retailPrice": 1.48,
+                  "osType": "Linux",
+                  "vmTier": "Standard"
+                },
+                {
+                  "retailPrice": 0.84,
+                  "osType": "Windows",
+                  "vmTier": "LowPriority"
+                },
+                {
+                  "retailPrice": 2.11,
+                  "osType": "Windows",
+                  "vmTier": "Standard"
+                }
+              ]
+            },
+            "supportedComputeTypes": [
+              "AmlCompute",
+              "ComputeInstance"
+            ]
           }
         ]
       }

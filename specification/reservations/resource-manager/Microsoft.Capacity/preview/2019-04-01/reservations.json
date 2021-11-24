@@ -1147,6 +1147,18 @@
             }
           }
         },
+        "netTotal": {
+          "description": "Net total",
+          "type": "number"
+        },
+        "taxTotal": {
+          "description": "Tax total",
+          "type": "number"
+        },
+        "grandTotal": {
+          "description": "Grand Total",
+          "type": "number"
+        },
         "isBillingPartnerManaged": {
           "description": "True if billing is managed by Microsoft Partner. Used only for CSP accounts.",
           "type": "boolean"
@@ -1260,6 +1272,14 @@
         },
         "term": {
           "$ref": "#/definitions/ReservationTerm"
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Property to determine if a reservation is archived or not"
+        },
+        "capabilities": {
+          "type": "string",
+          "description": "List the Capabilities of a reservation"
         }
       }
     },
@@ -1300,6 +1320,9 @@
       "properties": {
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType"
+        },
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility"
         },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
@@ -1668,6 +1691,9 @@
         },
         "valid": {
           "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
         }
       }
     },
