@@ -17,7 +17,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && $(track2)
 batch:
-  - tag: package-2021-10
+  - tag: package-2021-10-01-only
   - tag: package-2021-09-01-only
   - tag: package-2021-08-01-only
   - tag: package-2021-07-01-only
@@ -54,12 +54,12 @@ output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservic
 clear-output-folder: false
 perform-load: false
 ```
-### Tag: package-2021-10 and python
+### Tag: package-2021-10-01-only and python
 
-These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
+These settings apply only when `--tag=package-2021-10-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-10' && $(python)
+``` yaml $(tag) == 'package-2021-10-01-only' && $(python)
 namespace: azure.mgmt.containerservice.v2021_10_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2021_10_01
 ```
