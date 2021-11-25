@@ -506,13 +506,22 @@
       "description": "Properties of network group"
     },
     "StaticMember": {
-      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
           "description": "Resource Id."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ],
       "description": "StaticMember Item."
     },
     "StaticMemberListResult": {
@@ -613,7 +622,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of thestatic member.",
+      "description": "The name of the static member.",
       "x-ms-parameter-location": "method"
     },
     "ListTopParameter": {
