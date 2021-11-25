@@ -22,7 +22,7 @@
           "DatabaseMigrations"
         ],
         "description": "Retrieve the Database Migration resource.",
-        "operationId": "DatabaseMigrations_Get",
+        "operationId": "DatabaseMigrationsSqlMi_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -80,7 +80,7 @@
           "DatabaseMigrations"
         ],
         "description": "Create or Update Database Migration resource.",
-        "operationId": "DatabaseMigrations_CreateOrUpdate",
+        "operationId": "DatabaseMigrationsSqlMi_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -142,7 +142,7 @@
           "DatabaseMigrations"
         ],
         "description": "Delete Database Migration resource.",
-        "operationId": "DatabaseMigrations_Delete",
+        "operationId": "DatabaseMigrationsSqlMi_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -191,7 +191,7 @@
           "DatabaseMigrations"
         ],
         "description": "Retrieve Database Migration in the scope.",
-        "operationId": "DatabaseMigrations_ListByScope",
+        "operationId": "DatabaseMigrationsSqlMi_ListByScope",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -236,7 +236,7 @@
           "DatabaseMigrations"
         ],
         "description": "Stop migrations in progress for the database",
-        "operationId": "DatabaseMigrations_cancel",
+        "operationId": "DatabaseMigrationsSqlMi_cancel",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -291,7 +291,7 @@
           "DatabaseMigrations"
         ],
         "description": "Initiate cutover for online migration in progress for the database.",
-        "operationId": "DatabaseMigrations_cutover",
+        "operationId": "DatabaseMigrationsSqlMi_cutover",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -336,6 +336,327 @@
         "x-ms-examples": {
           "Cutover online migration operation for the database.": {
             "$ref": "./examples/SqlMiCutoverDatabaseMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}": {
+      "get": {
+        "tags": [
+          "DatabaseMigrations"
+        ],
+        "description": "Retrieve the Database Migration resource.",
+        "operationId": "DatabaseMigrationsSqlVm_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TargetDbNameParameter"
+          },
+          {
+            "name": "migrationOperationId",
+            "in": "query",
+            "description": "Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Database Migration resource.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 CutoverNotAllowedMigrationCompleteError - Cutover is not allowed as migration for database '{0}' is already complete\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 400 InvalidStorageAccount - Invalid storage account: '{0}'. Only BlockBlobStorage kind is supported for premium tier.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 MigrationNotReadyForCancelError - Database '{0}' is not ready for Cancel operation\n\n * 400 RestoreJobCompletedDuringCancel - Migration cannot be canceled as Restore Job was completed during the cancel process. Target server:'{0}', Target database: '{1}'.\n\n * 400 SqlVmGenericUserError - {0}\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 InvalidContainerName - Invalid storage account container name: '{0}'. Container name 'backup' is not supported in SQL Managed Instance.\n\n * 400 IntegrationRuntimeIsNotSelfHosted - Integration Runtime is not self-hosted for subscription '{0}' resource group '{1}' and name '{2}'\n\n * 400 MigrationNotReadyForCutoverError - Database '{0}' is not ready for Cutover operation\n\n * 400 CutoverFailedOrCancelled - Cutover failed or cancelled for database '{0}'. Error details: '{1}'\n\n * 400 MigrationCancelFailed - Cancel could not be performed on operation '{0}' for database '{1}'. This can happen if the migration with MigrationId '{0}' is already completed or canceled. Please check the migration for details.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 CancelVmRestoreJobFailed - Failed to cancel VM restore job. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 CancelMigrationFailed - Failed to cancel migration. Target server:'{0}', Target database: '{1}', Migration Id: '{2}', Error details: '{3}'."
+          }
+        },
+        "x-ms-examples": {
+          "Get Database Migration resource.": {
+            "$ref": "./examples/SqlVmGetDatabaseMigration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseMigrations"
+        ],
+        "description": "Create or Update Database Migration resource.",
+        "operationId": "DatabaseMigrationsSqlVm_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TargetDbNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Details of SqlMigrationService resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigration"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Database Migration resource.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 CutoverNotAllowedMigrationCompleteError - Cutover is not allowed as migration for database '{0}' is already complete\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 400 InvalidStorageAccount - Invalid storage account: '{0}'. Only BlockBlobStorage kind is supported for premium tier.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 MigrationNotReadyForCancelError - Database '{0}' is not ready for Cancel operation\n\n * 400 RestoreJobCompletedDuringCancel - Migration cannot be canceled as Restore Job was completed during the cancel process. Target server:'{0}', Target database: '{1}'.\n\n * 400 SqlVmGenericUserError - {0}\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 InvalidContainerName - Invalid storage account container name: '{0}'. Container name 'backup' is not supported in SQL Managed Instance.\n\n * 400 IntegrationRuntimeIsNotSelfHosted - Integration Runtime is not self-hosted for subscription '{0}' resource group '{1}' and name '{2}'\n\n * 400 MigrationNotReadyForCutoverError - Database '{0}' is not ready for Cutover operation\n\n * 400 CutoverFailedOrCancelled - Cutover failed or cancelled for database '{0}'. Error details: '{1}'\n\n * 400 MigrationCancelFailed - Cancel could not be performed on operation '{0}' for database '{1}'. This can happen if the migration with MigrationId '{0}' is already completed or canceled. Please check the migration for details.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 CancelVmRestoreJobFailed - Failed to cancel VM restore job. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 CancelMigrationFailed - Failed to cancel migration. Target server:'{0}', Target database: '{1}', Migration Id: '{2}', Error details: '{3}'."
+          },
+          "201": {
+            "description": "Successfully created the Database Migration resource.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigration"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update Database Migration resource with Minimum parameters.": {
+            "$ref": "./examples/SqlVmCreateOrUpdateDatabaseMigrationMIN.json"
+          },
+          "Create or Update Database Migration resource with Maximum parameters.": {
+            "$ref": "./examples/SqlVmCreateOrUpdateDatabaseMigrationMAX.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatabaseMigrations"
+        ],
+        "description": "Delete Database Migration resource.",
+        "operationId": "DatabaseMigrationsSqlVm_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TargetDbNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Database Migration resource."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 CutoverNotAllowedMigrationCompleteError - Cutover is not allowed as migration for database '{0}' is already complete\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 400 InvalidStorageAccount - Invalid storage account: '{0}'. Only BlockBlobStorage kind is supported for premium tier.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 MigrationNotReadyForCancelError - Database '{0}' is not ready for Cancel operation\n\n * 400 RestoreJobCompletedDuringCancel - Migration cannot be canceled as Restore Job was completed during the cancel process. Target server:'{0}', Target database: '{1}'.\n\n * 400 SqlVmGenericUserError - {0}\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 InvalidContainerName - Invalid storage account container name: '{0}'. Container name 'backup' is not supported in SQL Managed Instance.\n\n * 400 IntegrationRuntimeIsNotSelfHosted - Integration Runtime is not self-hosted for subscription '{0}' resource group '{1}' and name '{2}'\n\n * 400 MigrationNotReadyForCutoverError - Database '{0}' is not ready for Cutover operation\n\n * 400 CutoverFailedOrCancelled - Cutover failed or cancelled for database '{0}'. Error details: '{1}'\n\n * 400 MigrationCancelFailed - Cancel could not be performed on operation '{0}' for database '{1}'. This can happen if the migration with MigrationId '{0}' is already completed or canceled. Please check the migration for details.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 CancelVmRestoreJobFailed - Failed to cancel VM restore job. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 CancelMigrationFailed - Failed to cancel migration. Target server:'{0}', Target database: '{1}', Migration Id: '{2}', Error details: '{3}'."
+          },
+          "202": {
+            "description": "Deleting the Database Migration resource."
+          },
+          "204": {
+            "description": "The specified Database Migration resource does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Database Migration resource.": {
+            "$ref": "./examples/SqlVmDeleteDatabaseMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/providers/Microsoft.DataMigration/databaseMigrations": {
+      "get": {
+        "tags": [
+          "DatabaseMigrations"
+        ],
+        "description": "Retrieve Database Migration in the scope.",
+        "operationId": "DatabaseMigrationsSqlVm_ListByScope",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all Database Migration resources in the scope.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 CutoverNotAllowedMigrationCompleteError - Cutover is not allowed as migration for database '{0}' is already complete\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 400 InvalidStorageAccount - Invalid storage account: '{0}'. Only BlockBlobStorage kind is supported for premium tier.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 MigrationNotReadyForCancelError - Database '{0}' is not ready for Cancel operation\n\n * 400 RestoreJobCompletedDuringCancel - Migration cannot be canceled as Restore Job was completed during the cancel process. Target server:'{0}', Target database: '{1}'.\n\n * 400 SqlVmGenericUserError - {0}\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 InvalidContainerName - Invalid storage account container name: '{0}'. Container name 'backup' is not supported in SQL Managed Instance.\n\n * 400 IntegrationRuntimeIsNotSelfHosted - Integration Runtime is not self-hosted for subscription '{0}' resource group '{1}' and name '{2}'\n\n * 400 MigrationNotReadyForCutoverError - Database '{0}' is not ready for Cutover operation\n\n * 400 CutoverFailedOrCancelled - Cutover failed or cancelled for database '{0}'. Error details: '{1}'\n\n * 400 MigrationCancelFailed - Cancel could not be performed on operation '{0}' for database '{1}'. This can happen if the migration with MigrationId '{0}' is already completed or canceled. Please check the migration for details.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 CancelVmRestoreJobFailed - Failed to cancel VM restore job. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 CancelMigrationFailed - Failed to cancel migration. Target server:'{0}', Target database: '{1}', Migration Id: '{2}', Error details: '{3}'."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Database Migration in the scope.": {
+            "$ref": "./examples/SqlVmListByScopeDatabaseMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cancel": {
+      "post": {
+        "tags": [
+          "DatabaseMigrations"
+        ],
+        "description": "Stop ongoing migration for the database.",
+        "operationId": "DatabaseMigrationsSqlVm_cancel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TargetDbNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationOperationInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully canceled ongoing migration."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 CutoverNotAllowedMigrationCompleteError - Cutover is not allowed as migration for database '{0}' is already complete\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 400 InvalidStorageAccount - Invalid storage account: '{0}'. Only BlockBlobStorage kind is supported for premium tier.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 MigrationNotReadyForCancelError - Database '{0}' is not ready for Cancel operation\n\n * 400 RestoreJobCompletedDuringCancel - Migration cannot be canceled as Restore Job was completed during the cancel process. Target server:'{0}', Target database: '{1}'.\n\n * 400 SqlVmGenericUserError - {0}\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 InvalidContainerName - Invalid storage account container name: '{0}'. Container name 'backup' is not supported in SQL Managed Instance.\n\n * 400 IntegrationRuntimeIsNotSelfHosted - Integration Runtime is not self-hosted for subscription '{0}' resource group '{1}' and name '{2}'\n\n * 400 MigrationNotReadyForCutoverError - Database '{0}' is not ready for Cutover operation\n\n * 400 CutoverFailedOrCancelled - Cutover failed or cancelled for database '{0}'. Error details: '{1}'\n\n * 400 MigrationCancelFailed - Cancel could not be performed on operation '{0}' for database '{1}'. This can happen if the migration with MigrationId '{0}' is already completed or canceled. Please check the migration for details.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 CancelVmRestoreJobFailed - Failed to cancel VM restore job. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 CancelMigrationFailed - Failed to cancel migration. Target server:'{0}', Target database: '{1}', Migration Id: '{2}', Error details: '{3}'."
+          },
+          "202": {
+            "description": "Accepted cancellation of ongoing migration."
+          }
+        },
+        "x-ms-examples": {
+          "Stop ongoing migration for the database.": {
+            "$ref": "./examples/SqlVmCancelDatabaseMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cutover": {
+      "post": {
+        "tags": [
+          "DatabaseMigrations"
+        ],
+        "description": "Cutover online migration operation for the database.",
+        "operationId": "DatabaseMigrationsSqlVm_cutover",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/TargetDbNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationOperationInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful cutover for ongoing migration."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 CutoverNotAllowedMigrationCompleteError - Cutover is not allowed as migration for database '{0}' is already complete\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 400 InvalidStorageAccount - Invalid storage account: '{0}'. Only BlockBlobStorage kind is supported for premium tier.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 MigrationNotReadyForCancelError - Database '{0}' is not ready for Cancel operation\n\n * 400 RestoreJobCompletedDuringCancel - Migration cannot be canceled as Restore Job was completed during the cancel process. Target server:'{0}', Target database: '{1}'.\n\n * 400 SqlVmGenericUserError - {0}\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 InvalidContainerName - Invalid storage account container name: '{0}'. Container name 'backup' is not supported in SQL Managed Instance.\n\n * 400 IntegrationRuntimeIsNotSelfHosted - Integration Runtime is not self-hosted for subscription '{0}' resource group '{1}' and name '{2}'\n\n * 400 MigrationNotReadyForCutoverError - Database '{0}' is not ready for Cutover operation\n\n * 400 CutoverFailedOrCancelled - Cutover failed or cancelled for database '{0}'. Error details: '{1}'\n\n * 400 MigrationCancelFailed - Cancel could not be performed on operation '{0}' for database '{1}'. This can happen if the migration with MigrationId '{0}' is already completed or canceled. Please check the migration for details.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 CancelVmRestoreJobFailed - Failed to cancel VM restore job. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'.\n\n * 500 CancelMigrationFailed - Failed to cancel migration. Target server:'{0}', Target database: '{1}', Migration Id: '{2}', Error details: '{3}'."
+          },
+          "202": {
+            "description": "Accepted cutover request for ongoing migration."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Cutover online migration operation for the database.": {
+            "$ref": "./examples/SqlVmCutoverDatabaseMigration.json"
           }
         }
       }
