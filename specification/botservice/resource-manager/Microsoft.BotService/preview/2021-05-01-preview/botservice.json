@@ -1690,6 +1690,10 @@
           "type": "string",
           "description": "The channel schema transformation version for the bot"
         },
+        "storageResourceId": {
+          "type": "string",
+          "description": "The storage resourceId for the bot"
+        },
         "privateEndpointConnections": {
           "type": "array",
           "readOnly": true,
@@ -1767,6 +1771,15 @@
         "etag": {
           "type": "string",
           "description": "Entity Tag of the resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the resource"
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
         }
       },
       "required": [
@@ -1786,15 +1799,6 @@
         "properties": {
           "$ref": "#/definitions/AlexaChannelProperties",
           "description": "The set of properties specific to Alexa channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -1838,14 +1842,6 @@
         "properties": {
           "$ref": "#/definitions/FacebookChannelProperties",
           "description": "The set of properties specific to bot facebook channel"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
         }
       }
     },
@@ -1919,14 +1915,6 @@
         "properties": {
           "$ref": "#/definitions/EmailChannelProperties",
           "description": "The set of properties specific to email channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -1964,18 +1952,6 @@
         "properties": {
           "$ref": "#/definitions/MsTeamsChannelProperties",
           "description": "The set of properties specific to Microsoft Teams channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
         }
       }
     },
@@ -2024,10 +2000,6 @@
         "properties": {
           "$ref": "#/definitions/SkypeChannelProperties",
           "description": "The set of properties specific to Skype channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2133,18 +2105,6 @@
         "properties": {
           "$ref": "#/definitions/WebChatChannelProperties",
           "description": "The set of properties specific to Web Chat channel resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2181,18 +2141,6 @@
         "properties": {
           "$ref": "#/definitions/DirectLineChannelProperties",
           "description": "The set of properties specific to Direct Line channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
         }
       }
     },
@@ -2225,14 +2173,6 @@
         "properties": {
           "$ref": "#/definitions/TelegramChannelProperties",
           "description": "The set of properties specific to Telegram channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
         }
       }
     },
@@ -2270,10 +2210,6 @@
         "properties": {
           "$ref": "#/definitions/SmsChannelProperties",
           "description": "The set of properties specific to Sms channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2321,14 +2257,6 @@
         "properties": {
           "$ref": "#/definitions/SlackChannelProperties",
           "description": "The set of properties specific to Slack channel resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource"
         }
       }
     },
@@ -2468,14 +2396,6 @@
         "properties": {
           "$ref": "#/definitions/DirectLineSpeechChannelProperties",
           "description": "The set of properties specific to DirectLine Speech channel resource"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag of the resource"
         }
       }
     },
@@ -2693,6 +2613,10 @@
     },
     "ConnectionSettingProperties": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id associated with the Connection Setting."
+        },
         "clientId": {
           "type": "string",
           "description": "Client Id associated with the Connection Setting."
