@@ -1,80 +1,78 @@
 {
     "parameters": {
-        "api-version": "2022-04-01-preview",
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+      "api-version": "2022-04-01-preview",
+      "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
     },
     "responses": {
-        "200": {
-            "body": {
-                "value":[
+      "200": {
+        "body": {
+          "value": [
+            {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westeurope/attackPaths/21300918-b2e3-0346-785f-c77ff57d243b",
+              "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+              "type": "Microsoft.Security/attackPaths",
+              "properties": {
+                "displayName": "Risky user account has high-privileged permissions to a subscription",
+                "attackPathType": "66a1d478-4d24-42d4-a119-70bfb1a76929",
+                "description": "User account <user account> is <has no MFA enabled / external user account to the organization> and has <permissions type> permissions to a subscription",
+                "potentialImpact": "Attacker can potentially breach the user account and user his permissions on the subscription to manage the resources within it (create resources, delete resources)",
+                "graph": {
+                  "Nodes": [
                     {
-                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westeurope/attackPaths/21300918-b2e3-0346-785f-c77ff57d243b",
-                        "name": "21300918-b2e3-0346-785f-c77ff57d243b",
-                        "type": "Microsoft.Security/attackPaths",
-                        "properties": {
-                            "displayName": "Risky user account has high-privileged permissions to a subscription",
-                            "attackPathType": "66a1d478-4d24-42d4-a119-70bfb1a76929",
-                            "description": "User account <user account> is <has no MFA enabled / external user account to the organization> and has <permissions type> permissions to a subscription",
-                            "potentialImpact": "Attacker can potentially breach the user account and user his permissions on the subscription to manage the resources within it (create resources, delete resources)",
-                            "graph": {
-                                "Nodes": [
-                                    {
-                                        "name": "7d6fbc99-0db4-485b-8882-7a39d20bac65",
-                                        "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapVertexes/b0efc5e9-13ce-ca76-222d-460fa86c8912",
-                                        "label": "Account",
-                                        "tags": {
-                                            "Environment": "Azure"
-                                        },
-                                        "entityIdentifiers": {
-                                            "Type": "Account",
-                                            "PrincipalOid": "7d6fbc990db4485b88827a39d20bac65"
-                                        },
-                                        "additionalData": {
-                                        }
-                                    },
-                                    {
-                                        "name": "ebe59759-e1a0-4110-a32f-889ceeca0936",
-                                        "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapVertexes/0e442e97-c9a0-d8d3-69da-3886443f16c7",
-                                        "label": "subscriptions",
-                                        "tags": {
-                                            "Environment": "Azure"
-                                        },
-                                        "entityIdentifiers": {
-                                            "Type": "AzureResource",
-                                            "AzureResourceId": "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936"
-                                        },
-                                        "additionalData": {
-                                        }
-                                    }
-                                ],
-                                "Edges": [
-                                    {
-                                        "sourceNodeId": "b0efc5e9-13ce-ca76-222d-460fa86c8912",
-                                        "targetNodeId": "0e442e97-c9a0-d8d3-69da-3886443f16c7",
-                                        "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapEdges/58fd30a7-bd37-5da4-bfbb-34fa93e0b12a",
-                                        "label": "AssignedWithPermissions",
-                                        "tags": {
-                                            "Category": "Permissions"
-                                        },
-                                        "additionalData": {
-                                        }                                      
-                                    }
-                                ]
-
-                            },
-                            "assessments": [
-                                    "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/c0cb17b2-0607-48a7-b0e0-903ed22de39b",
-                                    "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/2c79b4af-f830-b61e-92b9-63dfa30f16e4",                            ,
-                                    "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/c3b6ae71-f1f0-31b4-e6c1-d5951285d03d",                                ,
-                                    "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/04e7147b-0deb-9796-2e5c-0336343ceb3d"
-                            ],
-                            "bestPractices": "",
-                            "riskCategories": ["Subscription takeover"],
-                            "refreshInterval": "6 Hours"
-                        }
+                      "name": "7d6fbc99-0db4-485b-8882-7a39d20bac65",
+                      "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapVertexes/b0efc5e9-13ce-ca76-222d-460fa86c8912",
+                      "label": "Account",
+                      "tags": {
+                        "Environment": "Azure"
+                      },
+                      "entityIdentifiers": {
+                        "Type": "Account",
+                        "PrincipalOid": "7d6fbc990db4485b88827a39d20bac65"
+                      },
+                      "additionalData": {}
+                    },
+                    {
+                      "name": "ebe59759-e1a0-4110-a32f-889ceeca0936",
+                      "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapVertexes/0e442e97-c9a0-d8d3-69da-3886443f16c7",
+                      "label": "subscriptions",
+                      "tags": {
+                        "Environment": "Azure"
+                      },
+                      "entityIdentifiers": {
+                        "Type": "AzureResource",
+                        "AzureResourceId": "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936"
+                      },
+                      "additionalData": {}
                     }
-                ]
+                  ],
+                  "Edges": [
+                    {
+                      "sourceNodeId": "b0efc5e9-13ce-ca76-222d-460fa86c8912",
+                      "targetNodeId": "0e442e97-c9a0-d8d3-69da-3886443f16c7",
+                      "mapIdentifier": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/Microsoft.Security/CloudMapEdges/58fd30a7-bd37-5da4-bfbb-34fa93e0b12a",
+                      "label": "AssignedWithPermissions",
+                      "tags": {
+                        "Category": "Permissions"
+                      },
+                      "additionalData": {}
+                    }
+                  ]
+                },
+                "assessments": [
+                  "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/c0cb17b2-0607-48a7-b0e0-903ed22de39b",
+                  "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/2c79b4af-f830-b61e-92b9-63dfa30f16e4",
+                  "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/c3b6ae71-f1f0-31b4-e6c1-d5951285d03d",
+                  "/subscriptions/ebe59759-e1a0-4110-a32f-889ceeca0936/providers/Microsoft.Security/assessments/04e7147b-0deb-9796-2e5c-0336343ceb3d"
+                ],
+                "bestPractices": "",
+                "riskCategories": [
+                  "Subscription takeover"
+                ],
+                "refreshInterval": "6 Hours"
+              }
             }
+          ]
         }
+      }
     }
-}
+  }

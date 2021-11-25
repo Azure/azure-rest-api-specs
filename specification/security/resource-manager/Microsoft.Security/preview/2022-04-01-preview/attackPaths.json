@@ -1,310 +1,309 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Security Center",
-      "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-      "version": "2022-04-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "paths": {
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/attackPaths": {
-        "get": {
-          "x-ms-examples": {
-            "List security assessments": {
-              "$ref": "./examples/AttackPaths/ListAttackPaths_example.json"
-            }
-          },
-          "tags": [
-            "AttackPaths"
-          ],
-          "description": "List all the attack vectors that are associated with the subscription",
-          "operationId": "AttackPaths_List",
-          "parameters": [
-            {
-              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-            },
-            {
-              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/AttackPathList"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      }
-    },
-    "definitions": {
-      "AttackPathList": {
-        "type": "object",
-        "description": "Page of attack vectors list",
-        "properties": {
-          "value": {
-            "description": "Collection of attack vectors in this page",
-            "readOnly": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AttackPath"
-            }
-          },
-          "nextLink": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The URI to fetch the next page."
-          }
-        }
-      },
-      "AttackPath": {
-        "type": "object",
-        "description": "Attack path",
-        "properties": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/AttackPathProperties"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "../../../common/v1/types.json#/definitions/Resource"
-          }
-        ]
-      },
-      "AttackPathProperties": {
-        "type": "object",
-        "description": "Describes properties of an attack path.",
-        "properties": {
-          "displayName": {
-            "readOnly": true,
-            "type": "string",
-            "description": "User friendly display name of the attack path"
-          },
-          "attackPathType": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Id representing the attack type. attack paths of the same type on different resources will have the same value."
-          },
-          "description": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Detailed description of the attack path and what it means"
-          },
-          "potentialImpact": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Potential steps attackers can take to leverage the attack path"
-          },
-          "graph": {
-            "$ref": "#/definitions/AttackPathGraph"
-          },
-          "assessments": {
-            "type": "array",
-            "description": "assessments that can help mitigate the attack path",
-            "items": {
-              "type": "string"
-            }
-          },
-          "bestPractices": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Best practices to prevent this attack path"
-          },
-          "riskCategories": {
-            "type": "array",
-            "description": "categories of risk this attack path exposing the organization to",
-            "items": {
-              "type": "string"
-            }
-          },
-          "refreshInterval": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The amount of time takes to refresh this attack path"
-          }
-        }
-      },
-      "AttackPathGraph": {
-        "type": "object",
-        "description": "Describes properties of an attack path.",
-        "properties": {
-          "Nodes": {
-            "type": "array",
-            "description": "nodes composing the attack path",
-            "items": {
-              "$ref": "#/definitions/AttackPathNode"
-            }
-          },
-          "Edges": {
-            "type": "array",
-            "description": "connections between the nodes composing the attack path",
-            "items": {
-              "$ref": "#/definitions/AttackPathEdge"
-            }
-          },
-          "AttackPathInsights": {
-            "type": "array",
-            "description": "relevant security-related insights on resources in this attack path",
-            "items": {
-              "$ref": "#/definitions/AttackPathInsight"
-            }
-          }
-        }
-      },
-      "AttackPathNode": {
-        "type": "object",
-        "description": "an entity which is part of the attack path",
-        "properties": {
-          "name": {
-            "readOnly": true,
-            "type": "string",
-            "description": "display name of the entity"
-          },
-          "mapIdentifier": {
-            "readOnly": true,
-            "type": "string",
-            "description": "an identifier for the node"
-          },
-          "label": {
-            "readOnly": true,
-            "type": "string",
-            "description": "the type of the entity"    
-          },
-          "tags": {
-            "readOnly": true,
-            "type": "object",
-            "description": "node categories",
-            "additionalProperties": {
-              "type": "string"
-            }   
-          },
-          "entityIdentifiers": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "identifiers that can be used to refer the actual entity"
-          },
-          "additionalData": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "more details on the node entity that are relevant to understand the attack path"            
-          }
-        }
-      },
-      "AttackPathEdge": {
-        "type": "object",
-        "description": "a connection relation between two attack path entities",
-        "properties": {
-          "sourceNodeId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "source node"
-          },
-          "targetNodeId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "target node"    
-          },
-          "mapIdentifier": {
-            "readOnly": true,
-            "type": "string",
-            "description": "an identifier for the edge"
-          },
-          "label": {
-            "readOnly": true,
-            "type": "string",
-            "description": "the type of the entity"    
-          },
-          "tags": {
-            "readOnly": true,
-            "type": "object",
-            "description": "edge categories",
-            "additionalProperties": {
-              "type": "string"
-            }    
-          },
-          "additionalData": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "more details on the edge that are relevant to understand the attack path"            
-          }
-        }
-      },
-      "AttackPathInsight": {
-        "type": "object",
-        "description": "",
-        "properties": {
-          "mapIdentifier": {
-            "readOnly": true,
-            "type": "string",
-            "description": "an identifier for the insight"
-          },
-          "label": {
-            "readOnly": true,
-            "type": "string",
-            "description": "the type of the entity"    
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "insight categories"
-          },
-          "additionalData": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "more details on the edge that are relevant to understand the attack path"            
-          }
-        }
-      }
-    },
-    "parameters": {
-      "AttackPathName": {
-        "name": "attackPathName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Name of the attack path object",
-        "x-ms-parameter-location": "method"
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2022-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/attackPaths": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessments": {
+            "$ref": "./examples/AttackPaths/ListAttackPaths_example.json"
+          }
+        },
+        "tags": [
+          "AttackPaths"
+        ],
+        "description": "List all the attack vectors that are associated with the subscription",
+        "operationId": "AttackPaths_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AttackPathList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttackPathList": {
+      "type": "object",
+      "description": "Page of attack vectors list",
+      "properties": {
+        "value": {
+          "description": "Collection of attack vectors in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttackPath"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AttackPath": {
+      "type": "object",
+      "description": "Attack path",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AttackPathProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AttackPathProperties": {
+      "type": "object",
+      "description": "Describes properties of an attack path.",
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "User friendly display name of the attack path"
+        },
+        "attackPathType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id representing the attack type. attack paths of the same type on different resources will have the same value."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Detailed description of the attack path and what it means"
+        },
+        "potentialImpact": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Potential steps attackers can take to leverage the attack path"
+        },
+        "graph": {
+          "$ref": "#/definitions/AttackPathGraph"
+        },
+        "assessments": {
+          "type": "array",
+          "description": "assessments that can help mitigate the attack path",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bestPractices": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Best practices to prevent this attack path"
+        },
+        "riskCategories": {
+          "type": "array",
+          "description": "categories of risk this attack path exposing the organization to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "refreshInterval": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The amount of time takes to refresh this attack path"
+        }
+      }
+    },
+    "AttackPathGraph": {
+      "type": "object",
+      "description": "Describes properties of an attack path.",
+      "properties": {
+        "Nodes": {
+          "type": "array",
+          "description": "nodes composing the attack path",
+          "items": {
+            "$ref": "#/definitions/AttackPathNode"
+          }
+        },
+        "Edges": {
+          "type": "array",
+          "description": "connections between the nodes composing the attack path",
+          "items": {
+            "$ref": "#/definitions/AttackPathEdge"
+          }
+        },
+        "AttackPathInsights": {
+          "type": "array",
+          "description": "relevant security-related insights on resources in this attack path",
+          "items": {
+            "$ref": "#/definitions/AttackPathInsight"
+          }
+        }
+      }
+    },
+    "AttackPathNode": {
+      "type": "object",
+      "description": "an entity which is part of the attack path",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "display name of the entity"
+        },
+        "mapIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "an identifier for the node"
+        },
+        "label": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the type of the entity"
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "description": "node categories",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "entityIdentifiers": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "identifiers that can be used to refer the actual entity"
+        },
+        "additionalData": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "more details on the node entity that are relevant to understand the attack path"
+        }
+      }
+    },
+    "AttackPathEdge": {
+      "type": "object",
+      "description": "a connection relation between two attack path entities",
+      "properties": {
+        "sourceNodeId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "source node"
+        },
+        "targetNodeId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "target node"
+        },
+        "mapIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "an identifier for the edge"
+        },
+        "label": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the type of the entity"
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "description": "edge categories",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "additionalData": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "more details on the edge that are relevant to understand the attack path"
+        }
+      }
+    },
+    "AttackPathInsight": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "mapIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "an identifier for the insight"
+        },
+        "label": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the type of the entity"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "insight categories"
+        },
+        "additionalData": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "more details on the edge that are relevant to understand the attack path"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AttackPathName": {
+      "name": "attackPathName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the attack path object",
+      "x-ms-parameter-location": "method"
+    }
   }
-  
+}
