@@ -10090,7 +10090,17 @@
       "properties": {
         "protectionIntentItemType": {
           "description": "backup protectionIntent type.",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "AzureResourceItem",
+            "RecoveryServiceVaultItem",
+            "AzureWorkloadContainerAutoProtectionIntent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionIntentItemType",
+            "modelAsString": true
+          }
         },
         "backupManagementType": {
           "description": "Type of backup management for the backed up item.",
