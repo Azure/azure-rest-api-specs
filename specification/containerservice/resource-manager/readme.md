@@ -364,6 +364,19 @@ input-file:
 
 ```
 
+### Tag: package-2021-10-01-only
+
+These settings apply only when `--tag=package-2021-10-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2021-10-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
 ### Tag: package-2021-09-01-only
 
 These settings apply only when `--tag=package-2021-09-01-only` is specified on the command line.
