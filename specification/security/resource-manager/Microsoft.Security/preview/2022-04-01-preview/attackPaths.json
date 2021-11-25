@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/attackPaths": {
       "get": {
         "x-ms-examples": {
-          "List security assessments": {
+          "List security attack paths": {
             "$ref": "./examples/AttackPaths/ListAttackPaths_example.json"
           }
         },
@@ -166,21 +166,21 @@
       "type": "object",
       "description": "Describes properties of an attack path.",
       "properties": {
-        "Nodes": {
+        "nodes": {
           "type": "array",
           "description": "nodes composing the attack path",
           "items": {
             "$ref": "#/definitions/AttackPathNode"
           }
         },
-        "Edges": {
+        "edges": {
           "type": "array",
           "description": "connections between the nodes composing the attack path",
           "items": {
             "$ref": "#/definitions/AttackPathEdge"
           }
         },
-        "AttackPathInsights": {
+        "attackPathInsights": {
           "type": "array",
           "description": "relevant security-related insights on resources in this attack path",
           "items": {
@@ -278,7 +278,7 @@
     },
     "AttackPathInsight": {
       "type": "object",
-      "description": "",
+      "description": "contextual data on entity that helps investigate the attack path",
       "properties": {
         "mapIdentifier": {
           "readOnly": true,
