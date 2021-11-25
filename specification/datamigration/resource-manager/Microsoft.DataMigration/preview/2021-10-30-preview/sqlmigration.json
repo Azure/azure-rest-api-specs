@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}": {
       "get": {
         "tags": [
           "DatabaseMigrations"
@@ -24,6 +24,15 @@
         "description": "Retrieve the Database Migration resource.",
         "operationId": "DatabaseMigrations_Get",
         "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/TargetDbNameParameter"
           },
@@ -43,7 +52,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -74,6 +83,15 @@
         "operationId": "DatabaseMigrations_CreateOrUpdate",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/TargetDbNameParameter"
           },
           {
@@ -86,7 +104,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -127,10 +145,19 @@
         "operationId": "DatabaseMigrations_Delete",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/TargetDbNameParameter"
           },
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -158,7 +185,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/providers/Microsoft.DataMigration/databaseMigrations": {
       "get": {
         "tags": [
           "DatabaseMigrations"
@@ -167,7 +194,16 @@
         "operationId": "DatabaseMigrations_ListByScope",
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -194,7 +230,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cancel": {
       "post": {
         "tags": [
           "DatabaseMigrations"
@@ -202,6 +238,15 @@
         "description": "Stop migrations in progress for the database",
         "operationId": "DatabaseMigrations_cancel",
         "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/TargetDbNameParameter"
           },
@@ -215,7 +260,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -240,7 +285,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cutover": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cutover": {
       "post": {
         "tags": [
           "DatabaseMigrations"
@@ -248,6 +293,15 @@
         "description": "Initiate cutover for online migration in progress for the database.",
         "operationId": "DatabaseMigrations_cutover",
         "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/TargetDbNameParameter"
           },
@@ -261,7 +315,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1678,14 +1732,6 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "Subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ScopeParameter": {
-      "name": "scope",
-      "in": "path",
-      "description": "Scope of the resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
