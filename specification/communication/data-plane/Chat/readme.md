@@ -112,7 +112,7 @@ These settings apply only when `--tag=2021-10-01-preview7` is specified on the c
 
 ```yaml $(tag) == 'package-chat-2021-10-01-preview7'
 input-file:
-  - stable/2021-10-01-preview7/communicationserviceschat.json
+  - preview/2021-10-01-preview7/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
