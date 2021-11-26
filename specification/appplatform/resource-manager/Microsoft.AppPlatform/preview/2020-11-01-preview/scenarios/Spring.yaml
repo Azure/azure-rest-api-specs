@@ -20,18 +20,25 @@ variables:
 
 prepareSteps:
   - step: Generate_Unique_ServiceName
-    armTemplateDeployment: templates/generate_service_name.json
+    armTemplate: templates/generate_service_name.json
 
   - step: Create_Application_Insight_Instance
-    armTemplateDeployment: templates/create_application_insights_instance.json
+    armTemplate: templates/create_application_insights_instance.json
 
   - step: Add_Dns_Cname_Record
-    armTemplateDeployment: templates/create_dns_cname_record.json
+    armDeploymentScript: ./templates/create_cname_record.ps1
+    environmentVariables:
+      - name: resourceGroupName
+        value: $(dnsResourceGroup)
+      - name: dnsZoneName
+        value: $(customDomainName)
+      - name: dnsCname
+        value: $(dnsCname)
+      - name: dnsCnameAlias
+        value: $(serviceName)$(ascDomainName)
     variables:
       subscriptionId: $(dnsSubscriptionId)
       resourceGroupName: $(dnsResourceGroup)
-      dnsZoneName: $(customDomainName)
-      scriptsContent: !include ./templates/create_cname_record.ps1
 
 scenarios:
   - scenario: Spring
@@ -268,9 +275,12 @@ scenarios:
             fromResponse: /relativePath
 
       - step: Upload_File
-        armTemplateDeployment: ./templates/upload_file.json
-        variables:
-          scriptsContent: !include ./templates/uploadJar.ps1
+        armDeploymentScript: ./templates/uploadJar.ps1
+        environmentVariables:
+        - name: uploadUrl
+          value: $(uploadUrl)
+        - name: blobUrl
+          value: $(blobUrl)
 
       - step: Deployments_CreateOrUpdate
         exampleFile: ../examples/Deployments_CreateOrUpdate.json
@@ -358,10 +368,14 @@ scenarios:
 
 cleanUpSteps:
   - step: delete_cname_record
-    armTemplateDeployment: ./templates/delete_dns_record.json
+    armDeploymentScript: ./templates/delete_cname_record.ps1
+    environmentVariables:
+    - name: resourceGroupName
+      value: $(dnsResourceGroup)
+    - name: dnsCname
+      value: $(dnsCname)
+    - name: dnsZoneName
+      value: $(customDomainName)
     variables:
-      dnsCname: $(dnsCname)
-      dnsZoneName: $(customDomainName)
       subscriptionId: $(dnsSubscriptionId)
       resourceGroupName: $(dnsResourceGroup)
-      scriptsContent: !include ./templates/delete_cname_record.ps1
