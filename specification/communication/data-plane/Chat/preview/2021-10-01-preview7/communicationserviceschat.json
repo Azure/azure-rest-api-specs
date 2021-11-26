@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Chat Service",
     "description": "Azure Communication Chat Service",
-    "version": "2021-09-07"
+    "version": "2021-10-01-preview7"
   },
   "paths": {
     "/chat/threads/{chatThreadId}/readReceipts": {
@@ -772,6 +772,81 @@
         }
       }
     },
+    "/chat/threads/{chatThreadId}/participants/:update": {
+      "post": {
+        "tags": [
+          "Participants"
+        ],
+        "summary": "Update a participant from a thread.",
+        "operationId": "ChatThread_UpdateChatParticipant",
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chatThreadId",
+            "description": "Id of the parent chat thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "chatParticipant",
+            "description": "ChatParticipant to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatParticipant"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful."
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update participant": {
+            "$ref": "./examples/Participants_UpdateChatParticipant.json"
+          }
+        }
+      }
+    },
     "/chat/threads": {
       "post": {
         "tags": [
@@ -1354,6 +1429,13 @@
           "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "roleIds": {
+          "description": "Identifiers of roles for this chat participant",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1719,7 +1801,7 @@
   },
   "security": [
     {
-      "Authorization": []
+      "Authorization": [ ]
     }
   ],
   "x-ms-parameterized-host": {
