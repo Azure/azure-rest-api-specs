@@ -14,39 +14,39 @@
       "roleIds": [
         "8540c0de-899f-5cce-acb5-3ec493af3800_ce2142fd-aa87-435d-bacf-16efe5ae70aa"
       ]
+    }
+  },
+  "responses": {
+    "204": {},
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
     },
-    "responses": {
-      "204": {},
-      "401": {
-        "body": {
-          "error": {
-            "code": "Unauthorized",
-            "message": "Request is not authorized."
-          }
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "User is not allowed to perform specified action."
         }
-      },
-      "403": {
-        "body": {
-          "error": {
-            "code": "Forbidden",
-            "message": "User is not allowed to perform specified action."
-          }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Rate limit exceeded."
         }
-      },
-      "429": {
-        "body": {
-          "error": {
-            "code": "TooManyRequests",
-            "message": "Rate limit exceeded."
-          }
-        }
-      },
-      "503": {
-        "body": {
-          "error": {
-            "code": "ServiceUnavailable",
-            "message": "The server is currently unable to handle the request."
-          }
+      }
+    },
+    "503": {
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The server is currently unable to handle the request."
         }
       }
     }
