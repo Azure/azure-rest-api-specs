@@ -27,9 +27,18 @@ These are the global settings for the Instance Metadata Service API.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2021-02-01
+tag: package-2018-04
 ```
 
+
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-04'
+input-file:
+  - Microsoft.InstanceMetadataService/stable/2018-04-02/imds.json
+```
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
