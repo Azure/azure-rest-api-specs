@@ -1741,7 +1741,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds/{buildName}/results/{buildResultName}/getLog": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds/{buildName}/results/{buildResultName}/getLogFileUrl": {
       "post": {
         "tags": [
           "AppPlatform"
@@ -6403,7 +6403,7 @@
             "modelAsString": true
           }
         },
-        "runtimeState": {
+        "resourceRequests": {
           "description": "The runtime resource configuration of this build service.",
           "type": "object",
           "properties": {
@@ -6464,7 +6464,7 @@
           "type": "string"
         },
         "builder": {
-          "description": "The name of builder to build the source code",
+          "description": "The resource id of builder to build the source code",
           "type": "string"
         },
         "provisioningState": {
@@ -6499,6 +6499,7 @@
     "TriggeredBuildResult": {
       "description": "The build result triggered by a build",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "id": {
           "description": "The unique build id of this build result",
