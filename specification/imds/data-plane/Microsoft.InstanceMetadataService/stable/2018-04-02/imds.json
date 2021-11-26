@@ -110,88 +110,6 @@
         }
       }
     },
-    "/attested/document": {
-      "get": {
-        "operationId": "Attested_GetDocument",
-        "description": "Get Attested Data for the Virtual Machine.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "nonce",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "This is a string of up to 32 random alphanumeric characters."
-          },
-          {
-            "$ref": "#/parameters/MetadataParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AttestedData"
-            }
-          },
-          "400": {
-            "description": "Invalid request",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "405": {
-            "description": "Method not allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "503": {
-            "description": "Service unavailable",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Attested Data for the VM": {
-            "$ref": "./examples/getAttestedData.json"
-          }
-        }
-      }
-    },
     "/identity/oauth2/token": {
       "get": {
         "tags": [
@@ -384,10 +302,6 @@
     "Compute": {
       "type": "object",
       "properties": {
-        "azEnvironment": {
-          "type": "string",
-          "description": "This is the name of the environment in which the VM is running."
-        },
         "location": {
           "type": "string",
           "description": "This is the Azure Region in which the VM is running."
@@ -427,10 +341,6 @@
         "platformUpdateDomain": {
           "type": "string",
           "description": "This is the update domain in which the VM."
-        },
-        "provider": {
-          "type": "string",
-          "description": "This is the provider of the VM."
         },
         "publisher": {
           "type": "string",
@@ -619,20 +529,6 @@
         "network": {
           "$ref": "#/definitions/Network",
           "description": "Network Metadata"
-        }
-      }
-    },
-    "AttestedData": {
-      "type": "object",
-      "description": "This is the response from the Attested_GetDocument operation.",
-      "properties": {
-        "signature": {
-          "type": "string",
-          "description": "This is the encoded string containing the VM ID, plan information, public key, timestamp, and nonce value."
-        },
-        "encoding": {
-          "type": "string",
-          "description": "This is the encoding scheme of the signature."
         }
       }
     },
