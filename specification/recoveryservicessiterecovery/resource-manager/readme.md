@@ -54,13 +54,22 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-08
+tag: package-2021-11
 directive:
   - where:
       - $.paths
     suppress:
       - UniqueResourcePaths
 ```
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-11-01/service.json
+```
+
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
