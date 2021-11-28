@@ -1,18 +1,19 @@
 {
-  "title": "Get Azure Virtual Network Manager Network Group",
+  "title": "Get Azure Virtual Network Manager Static Member",
   "parameters": {
     "api-version": "2021-05-01-preview",
     "subscriptionId": "subscriptionC",
     "resourceGroupName": "rg1",
     "networkManagerName": "testNetworkManager",
-    "networkGroupName": "testNetworkGroup"
+    "networkGroupName": "testNetworkGroup",
+    "staticMemberName": "testStaticMember"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "testNetworkGroup",
-        "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testNetworkGroup",
-        "type": "Microsoft.Network/networkManagers/networkGroups",
+        "name": "testStaticMember",
+        "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testNetworkGroup/staticMembers/testStaticMember",
+        "type": "Microsoft.Network/networkManagers/networkGroups/staticMembers",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -22,10 +23,7 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "displayName": "My Network Group",
-          "description": "A sample group",
-          "memberType": "VirtualNetwork",
-          "provisioningState": "Succeeded"
+          "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
         }
       }
     }
