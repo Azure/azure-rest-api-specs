@@ -391,6 +391,7 @@
   "definitions": {
     "errorResponse": {
       "description": "An error response from the service.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/errorResponseBody"
@@ -399,6 +400,7 @@
     },
     "errorResponseBody": {
       "description": "Details of error response.",
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -424,6 +426,7 @@
     "Resource": {
       "x-ms-azure-resource": true,
       "description": "An azure resource object",
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -444,6 +447,7 @@
     },
     "ManagedResource": {
       "description": "An azure managed resource object.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -796,6 +800,7 @@
     },
     "PatchProperties": {
       "description": "Alert processing rule properties supported by patch.",
+      "type": "object",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -805,6 +810,7 @@
     },
     "PatchObject": {
       "description": "Data contract for patch.",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
