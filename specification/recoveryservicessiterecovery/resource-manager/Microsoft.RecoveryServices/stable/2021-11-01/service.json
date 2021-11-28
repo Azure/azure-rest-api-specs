@@ -13683,7 +13683,7 @@
           "description": "The Progress Status.",
           "type": "string"
         },
-		"secondsToTakeSwitchProvider": {
+        "secondsToTakeSwitchProvider": {
           "format": "int64",
           "description": "The seconds to take for switch provider.",
           "type": "integer"
@@ -14021,7 +14021,9 @@
         "switchProviderBlockingErrorDetails": {
           "description": "The switch provider blocking error information.",
           "type": "array",
-          "items": { "$ref": "#/definitions/InMageAzureV2SwitchProviderBlockingErrorDetails" }
+          "items": {
+            "$ref": "#/definitions/InMageAzureV2SwitchProviderBlockingErrorDetails"
+          }
         },
         "switchProviderDetails": {
           "$ref": "#/definitions/InMageAzureV2SwitchProviderDetails",
@@ -14100,13 +14102,17 @@
         "errorMessageParameters": {
           "description": "The error message parameters.",
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "errorTags": {
           "description": "The error tags.",
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }
@@ -14139,9 +14145,17 @@
     },
     "InMageAzureV2SwitchProviderProviderInput": {
       "description": "Provider specific input for InMageAzureV2 switch provider.",
-      "required": [ "targetVaultID", "targetFabricID", "targetApplianceID" ],
+      "required": [
+        "targetVaultID",
+        "targetFabricID",
+        "targetApplianceID"
+      ],
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/SwitchProviderProviderSpecificInput" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SwitchProviderProviderSpecificInput"
+        }
+      ],
       "properties": {
         "targetVaultID": {
           "description": "The target vault Id.",
@@ -14466,13 +14480,17 @@
         "errorMessageParameters": {
           "description": "The error message parameters.",
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "errorTags": {
           "description": "The error tags.",
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }
@@ -24110,7 +24128,9 @@
         "switchProviderBlockingErrorDetails": {
           "description": "The switch provider blocking error information.",
           "type": "array",
-          "items": { "$ref": "#/definitions/InMageFabricSwitchProviderBlockingErrorDetails" }
+          "items": {
+            "$ref": "#/definitions/InMageFabricSwitchProviderBlockingErrorDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "VMware"
