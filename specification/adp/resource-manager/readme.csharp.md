@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AutonomousDevelopmentPlatform
-  output-folder: $(csharp-sdks-folder)/adp/management/Microsoft.AutonomousDevelopmentPlatform/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.AutonomousDevelopmentPlatform
+  output-folder: $(csharp-sdks-folder)/adp/Microsoft.Azure.Management.AutonomousDevelopmentPlatform/Generated
 ```
