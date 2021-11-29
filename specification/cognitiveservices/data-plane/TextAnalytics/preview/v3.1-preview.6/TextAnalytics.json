@@ -2667,19 +2667,13 @@
     },
     "EntityResolutions": {
       "properties": {
-        "dateTime.TimeRange": {
+        "dateTime": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TimeRangeResolution"
+            "$ref": "#/definitions/DateTimeResolution"
           }
         },
-        "dateTime.Time": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeResolution"
-          }
-        },
-        "quantity.Dimension": {
+        "dimension": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionResolution"
@@ -2687,45 +2681,61 @@
         }
       }
     },
-    "TimeRangeResolution": {
+    "DateTimeResolution": {
       "type": "object",
       "properties": {
         "timex": {
           "type": "string",
           "description": "timex expression representation"
         },
-        "start": {
-          "type": "string",
-          "description": "beginning date/time of the interval"
-        },
-        "end": {
-          "type": "string",
-          "description": "ending date/time of the interval"
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "The probability of the resolution instance being correct for the extracted text."
-        }
-      }
-    },
-    "TimeResolution": {
-      "type": "object",
-      "properties": {
-        "timex": {
-          "type": "string",
-          "description": "timex expression representation"
-        },
-        "type": {
+        "resolutionKind": {
           "type": "string",
           "enum": [
-            "time"
+            "time",
+            "date",
+            "datetime",
+            "daterange",
+            "datetimerange",
+            "duration",
+            "timerange"
           ],
-          "description": "The resolution type"
+          "description": "The date time resolution kind"
         },
         "value": {
           "type": "string",
           "description": "The actual time that the extracted text denote."
+        },
+        "start": {
+          "type": "string",
+          "description": "(optional) beginning of an interval"
+        },
+        "end": {
+          "type": "string",
+          "description": "(optional) ending of an interval"
+        },
+        "modifier":{
+          "type": "string",
+          "description": "An optional modifier of a date/time instance.",
+          "enum": [
+            "after-approx",
+            "before",
+            "before-start",
+            "approx",
+            "ref_undef",
+            "since-end",
+            "after-mid",
+            "start",
+            "after",
+            "before-end",
+            "until",
+            "end",
+            "less",
+            "since",
+            "after-start",
+            "before-approx",
+            "mid",
+            "more"
+          ]
         },
         "confidenceScore": {
           "type": "number",
@@ -2737,9 +2747,21 @@
     "DimensionResolution": {
       "type": "object",
       "properties": {
-        "subtype": {
+        "dimensionKind": {
           "type": "string",
-          "description": "Dimension subtype (e.g., speed, volume)"
+          "x-ms-enum": {
+            "name": "DimensionKind",
+            "modelAsString": false
+          },
+          "enum": [
+            "Speed",
+            "Weight",
+            "Volume",
+            "Length",
+            "Area",
+            "Information"
+          ],
+          "description": "Dimension Kind (e.g., Speed, Volume, Weight)"
         },
         "unit": {
           "type": "string",
@@ -2747,7 +2769,7 @@
         },
         "value": {
           "type": "string",
-          "description": "The actual value that the extracted text denote."
+          "description": "The actual value that the extracted text denotes."
         },
         "confidenceScore": {
           "type": "number",
