@@ -1,20 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
     "title": "SignalRManagementClient",
-    "description": "REST API for Azure SignalR Service"
+    "description": "REST API for Azure SignalR Service",
+    "version": "2021-10-01"
   },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
       "get": {
@@ -23,6 +13,9 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.SignalRService provider.",
         "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -59,28 +52,34 @@
         ],
         "description": "Checks that the resource name is valid and is not already in use.",
         "operationId": "SignalR_CheckNameAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "location",
             "in": "path",
+            "name": "location",
             "description": "the region",
             "required": true,
             "type": "string"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters supplied to the operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityParameters"
-            }
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            }
           }
         ],
         "responses": {
@@ -111,19 +110,22 @@
         ],
         "description": "List resource usage quotas by location.",
         "operationId": "Usages_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "location",
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "in": "path",
+            "name": "location",
             "description": "the location like \"eastus\"",
             "required": true,
             "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -157,12 +159,15 @@
         ],
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "SignalR_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -196,15 +201,18 @@
         ],
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "SignalR_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -238,10 +246,10 @@
         ],
         "description": "Get the resource and its properties.",
         "operationId": "SignalR_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -250,6 +258,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -278,19 +289,13 @@
         ],
         "description": "Create or update a resource.",
         "operationId": "SignalR_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SignalRResource"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -299,6 +304,18 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
           }
         ],
         "responses": {
@@ -339,9 +356,6 @@
         "operationId": "SignalR_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -349,6 +363,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -381,19 +398,13 @@
         ],
         "description": "Operation to update an exiting resource.",
         "operationId": "SignalR_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SignalRResource"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -402,6 +413,18 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
           }
         ],
         "responses": {
@@ -436,10 +459,10 @@
         ],
         "description": "Get the access keys of the resource.",
         "operationId": "SignalR_ListKeys",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -448,6 +471,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -478,10 +504,10 @@
         ],
         "description": "List private endpoint connections",
         "operationId": "SignalRPrivateEndpointConnections_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -490,6 +516,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -523,17 +552,10 @@
         ],
         "description": "Get the specified private endpoint connection",
         "operationId": "SignalRPrivateEndpointConnections_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -542,6 +564,16 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -570,26 +602,13 @@
         ],
         "description": "Update the state of specified private endpoint connection",
         "operationId": "SignalRPrivateEndpointConnections_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The resource of private endpoint and its properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -598,6 +617,25 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The resource of private endpoint and its properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           }
         ],
         "responses": {
@@ -628,16 +666,6 @@
         "operationId": "SignalRPrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -645,6 +673,16 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -679,10 +717,10 @@
         ],
         "description": "Get the private link resources that need to be created for a resource.",
         "operationId": "SignalRPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -691,6 +729,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -724,19 +765,13 @@
         ],
         "description": "Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "SignalR_RegenerateKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameter that describes the Regenerate Key Operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegenerateKeyParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -745,6 +780,18 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameter that describes the Regenerate Key Operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            }
           }
         ],
         "responses": {
@@ -781,9 +828,6 @@
         "operationId": "SignalR_Restart",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -791,6 +835,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -825,10 +872,10 @@
         ],
         "description": "List shared private link resources",
         "operationId": "SignalRSharedPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -837,6 +884,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -870,17 +920,10 @@
         ],
         "description": "Get the specified shared private link resource",
         "operationId": "SignalRSharedPrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "sharedPrivateLinkResourceName",
-            "in": "path",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -889,6 +932,16 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "sharedPrivateLinkResourceName",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -917,26 +970,13 @@
         ],
         "description": "Create or update a shared private link resource",
         "operationId": "SignalRSharedPrivateLinkResources_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "name": "sharedPrivateLinkResourceName",
-            "in": "path",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The shared private link resource",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedPrivateLinkResource"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -945,6 +985,25 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "sharedPrivateLinkResourceName",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The shared private link resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
           }
         ],
         "responses": {
@@ -982,16 +1041,6 @@
         "operationId": "SignalRSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "name": "sharedPrivateLinkResourceName",
-            "in": "path",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -999,6 +1048,16 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "sharedPrivateLinkResourceName",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1033,10 +1092,10 @@
         ],
         "description": "List all available skus of the resource.",
         "operationId": "SignalR_ListSkus",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -1045,6 +1104,9 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1071,7 +1133,7 @@
   },
   "definitions": {
     "ACLAction": {
-      "description": "Default action when no other rule matches",
+      "description": "Azure Networking ACL Action.",
       "enum": [
         "Allow",
         "Deny"
@@ -1119,7 +1181,7 @@
       }
     },
     "KeyType": {
-      "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).",
+      "description": "The type of access key.",
       "enum": [
         "Primary",
         "Secondary",
@@ -1150,8 +1212,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
-          "description": "Represent the identity type: systemAssigned, userAssigned, None"
+          "$ref": "#/definitions/ManagedIdentityType"
         },
         "userAssignedIdentities": {
           "description": "Get or set the user assigned identities",
@@ -1183,7 +1244,7 @@
       }
     },
     "ManagedIdentityType": {
-      "description": "Represent the identity type: systemAssigned, userAssigned, None",
+      "description": "Represents the identity type: systemAssigned, userAssigned, None",
       "enum": [
         "None",
         "SystemAssigned",
@@ -1257,8 +1318,8 @@
     "NameAvailabilityParameters": {
       "description": "Data POST-ed to the nameAvailability action",
       "required": [
-        "type",
-        "name"
+        "name",
+        "type"
       ],
       "type": "object",
       "properties": {
@@ -1305,17 +1366,15 @@
           "type": "boolean"
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "The object that describes the operation."
+          "$ref": "#/definitions/OperationDisplay"
         },
         "origin": {
           "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Extra properties for the operation.",
-          "x-ms-client-flatten": false
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/OperationProperties"
         }
       }
     },
@@ -1363,8 +1422,7 @@
       "type": "object",
       "properties": {
         "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification",
-          "description": "The service specifications."
+          "$ref": "#/definitions/ServiceSpecification"
         }
       }
     },
@@ -1406,14 +1464,12 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Properties of the private endpoint connection",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         }
       }
     },
@@ -1439,13 +1495,11 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the private endpoint connection",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         },
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "Private endpoint associated with the private endpoint connection"
+          "$ref": "#/definitions/PrivateEndpoint"
         },
         "groupIds": {
           "description": "Group IDs",
@@ -1456,8 +1510,7 @@
           "readOnly": true
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Connection state"
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         }
       }
     },
@@ -1471,9 +1524,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of a private link resource",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
         }
       }
     },
@@ -1530,8 +1582,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus"
         },
         "description": {
           "description": "The reason for approval/rejection of the connection.",
@@ -1583,16 +1634,14 @@
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "properties": {}
+      ]
     },
     "RegenerateKeyParameters": {
       "description": "Parameters describes the request to regenerate access keys",
       "type": "object",
       "properties": {
         "keyType": {
-          "$ref": "#/definitions/KeyType",
-          "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive)."
+          "$ref": "#/definitions/KeyType"
         }
       }
     },
@@ -1657,8 +1706,7 @@
           "type": "string"
         },
         "tier": {
-          "$ref": "#/definitions/SignalRSkuTier",
-          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead."
+          "$ref": "#/definitions/SignalRSkuTier"
         },
         "size": {
           "description": "Not used. Retained for future use.",
@@ -1704,7 +1752,7 @@
       }
     },
     "ServiceKind": {
-      "description": "The kind of the service - e.g. \"SignalR\" for \"Microsoft.SignalRService/SignalR\"",
+      "description": "The kind of the service, it can be SignalR or RawWebSockets",
       "enum": [
         "SignalR",
         "RawWebSockets"
@@ -1762,8 +1810,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
-          "description": "Describes the properties of a resource type that has been onboarded to private link service"
+          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties"
         }
       }
     },
@@ -1777,14 +1824,12 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
-          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
-          "description": "Describes the properties of a Shared Private Link Resource",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
         }
       }
     },
@@ -1822,18 +1867,16 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the shared private link resource",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         },
         "requestMessage": {
           "description": "The request message for requesting approval of the shared private link resource",
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
-          "description": "Status of the shared private link resource",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/SharedPrivateLinkResourceStatus"
         }
       }
     },
@@ -1874,8 +1917,7 @@
       "type": "object",
       "properties": {
         "flag": {
-          "$ref": "#/definitions/FeatureFlags",
-          "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature."
+          "$ref": "#/definitions/FeatureFlags"
         },
         "value": {
           "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
@@ -1939,13 +1981,10 @@
       "type": "object",
       "properties": {
         "defaultAction": {
-          "$ref": "#/definitions/ACLAction",
-          "description": "Default action when no other rule matches",
-          "default": "Deny"
+          "$ref": "#/definitions/ACLAction"
         },
         "publicNetwork": {
-          "$ref": "#/definitions/NetworkACL",
-          "description": "ACL for requests from public network"
+          "$ref": "#/definitions/NetworkACL"
         },
         "privateEndpoints": {
           "description": "ACLs for requests from private endpoints",
@@ -1961,9 +2000,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         },
         "externalIP": {
           "description": "The publicly accessible IP of the resource.",
@@ -2009,8 +2047,7 @@
           "readOnly": true
         },
         "tls": {
-          "$ref": "#/definitions/SignalRTlsSettings",
-          "description": "TLS settings."
+          "$ref": "#/definitions/SignalRTlsSettings"
         },
         "hostNamePrefix": {
           "description": "Deprecated.",
@@ -2025,20 +2062,16 @@
           }
         },
         "resourceLogConfiguration": {
-          "$ref": "#/definitions/ResourceLogConfiguration",
-          "description": "Resource log configuration of a Microsoft.SignalRService resource.\r\nIf resourceLogConfiguration isn't null or empty, it will override options \"EnableConnectivityLog\" and \"EnableMessagingLogs\" in features.\r\nOtherwise, use options \"EnableConnectivityLog\" and \"EnableMessagingLogs\" in features."
+          "$ref": "#/definitions/ResourceLogConfiguration"
         },
         "cors": {
-          "$ref": "#/definitions/SignalRCorsSettings",
-          "description": "Cross-Origin Resource Sharing (CORS) settings."
+          "$ref": "#/definitions/SignalRCorsSettings"
         },
         "upstream": {
-          "$ref": "#/definitions/ServerlessUpstreamSettings",
-          "description": "Upstream settings when the service is in server-less mode."
+          "$ref": "#/definitions/ServerlessUpstreamSettings"
         },
         "networkACLs": {
-          "$ref": "#/definitions/SignalRNetworkACLs",
-          "description": "Network ACLs"
+          "$ref": "#/definitions/SignalRNetworkACLs"
         },
         "publicNetworkAccess": {
           "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
@@ -2047,18 +2080,16 @@
         },
         "disableLocalAuth": {
           "description": "DisableLocalAuth\r\nEnable or disable local auth with AccessKey\r\nWhen set as true, connection with AccessKey=xxx won't work.",
-          "default": false,
           "type": "boolean"
         },
         "disableAadAuth": {
           "description": "DisableLocalAuth\r\nEnable or disable aad auth\r\nWhen set as true, connection with AuthType=aad won't work.",
-          "default": false,
           "type": "boolean"
         }
       }
     },
     "SignalRRequestType": {
-      "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+      "description": "The incoming request type to the service",
       "enum": [
         "ClientConnection",
         "ServerConnection",
@@ -2081,30 +2112,25 @@
       ],
       "properties": {
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The billing information of the resource.(e.g. Free, Standard)"
+          "$ref": "#/definitions/ResourceSku"
         },
         "properties": {
-          "$ref": "#/definitions/SignalRProperties",
-          "description": "Settings used to provision or configure the resource",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SignalRProperties"
         },
         "kind": {
-          "$ref": "#/definitions/ServiceKind",
-          "description": "The kind of the service - e.g. \"SignalR\" for \"Microsoft.SignalRService/SignalR\"",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "$ref": "#/definitions/ServiceKind"
         },
         "identity": {
-          "$ref": "#/definitions/ManagedIdentity",
-          "description": "The managed identity response"
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -2145,7 +2171,6 @@
       "properties": {
         "clientCertEnabled": {
           "description": "Request client certificate during TLS handshake if enabled",
-          "default": true,
           "type": "boolean"
         }
       }
@@ -2169,8 +2194,7 @@
           "type": "integer"
         },
         "name": {
-          "$ref": "#/definitions/SignalRUsageName",
-          "description": "Localizable String object containing the name and a localized value."
+          "$ref": "#/definitions/SignalRUsageName"
         },
         "unit": {
           "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond.",
@@ -2219,14 +2243,12 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The exact set of keys that define this sku.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceSku"
         },
         "capacity": {
-          "$ref": "#/definitions/SkuCapacity",
-          "description": "Specifies the unit of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/SkuCapacity"
         }
       }
     },
@@ -2262,9 +2284,8 @@
           "readOnly": true
         },
         "scaleType": {
-          "$ref": "#/definitions/ScaleType",
-          "description": "The scale type applicable to the sku.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ScaleType"
         }
       }
     },
@@ -2314,21 +2335,19 @@
       }
     },
     "UpstreamAuthSettings": {
-      "description": "Upstream auth settings.",
+      "description": "Upstream auth settings. If not set, no auth is used for upstream messages.",
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/UpstreamAuthType",
-          "description": "Gets or sets the type of auth. None or ManagedIdentity is supported now."
+          "$ref": "#/definitions/UpstreamAuthType"
         },
         "managedIdentity": {
-          "$ref": "#/definitions/ManagedIdentitySettings",
-          "description": "Gets or sets the managed identity settings. It's required if the auth type is set to ManagedIdentity."
+          "$ref": "#/definitions/ManagedIdentitySettings"
         }
       }
     },
     "UpstreamAuthType": {
-      "description": "Gets or sets the type of auth. None or ManagedIdentity is supported now.",
+      "description": "Upstream auth type enum.",
       "enum": [
         "None",
         "ManagedIdentity"
@@ -2363,8 +2382,7 @@
           "type": "string"
         },
         "auth": {
-          "$ref": "#/definitions/UpstreamAuthSettings",
-          "description": "Gets or sets the auth settings for an upstream. If not set, no auth is used for upstream messages."
+          "$ref": "#/definitions/UpstreamAuthSettings"
         }
       }
     },
@@ -2387,30 +2405,30 @@
   },
   "parameters": {
     "ApiVersionParameter": {
-      "name": "api-version",
       "in": "query",
+      "name": "api-version",
       "description": "Client Api Version.",
       "required": true,
       "type": "string"
     },
     "SubscriptionIdParameter": {
-      "name": "subscriptionId",
       "in": "path",
+      "name": "subscriptionId",
       "description": "Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
       "required": true,
       "type": "string"
     },
     "ResourceGroupParameter": {
-      "name": "resourceGroupName",
       "in": "path",
+      "name": "resourceGroupName",
       "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ResourceName": {
-      "name": "resourceName",
       "in": "path",
+      "name": "resourceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
@@ -2419,12 +2437,12 @@
   },
   "securityDefinitions": {
     "azure_auth": {
+      "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       },
-      "type": "oauth2",
       "description": "Azure Active Directory OAuth2 Flow"
     }
   },
@@ -2434,5 +2452,15 @@
         "user_impersonation"
       ]
     }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
   ]
 }
