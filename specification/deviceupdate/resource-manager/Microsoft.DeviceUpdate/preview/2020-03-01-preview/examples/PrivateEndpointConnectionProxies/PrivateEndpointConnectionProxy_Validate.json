@@ -6,25 +6,23 @@
     "privateEndpointConnectionProxyId": "peexample01",
     "api-version": "2020-03-01-preview",
     "privateEndpointConnectionProxy": {
-      "properties": {
-        "remotePrivateEndpoint": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}",
-          "manualPrivateLinkServiceConnections": [
-            {
-              "name": "{privateEndpointConnectionProxyId}",
-              "groupIds": [
-                "DeviceUpdate"
-              ],
-              "requestMessage": "Please approve my connection, thanks."
-            }
-          ],
-          "privateLinkServiceProxies": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}/privateLinkServiceProxies/{privateEndpointConnectionProxyId}",
-              "groupConnectivityInformation": []
-            }
-          ]
-        }
+      "remotePrivateEndpoint": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "{privateEndpointConnectionProxyId}",
+            "groupIds": [
+              "DeviceUpdate"
+            ],
+            "requestMessage": "Please approve my connection, thanks."
+          }
+        ],
+        "privateLinkServiceProxies": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}/privateLinkServiceProxies/{privateEndpointConnectionProxyId}",
+            "groupConnectivityInformation": []
+          }
+        ]
       }
     }
   },
