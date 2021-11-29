@@ -15253,6 +15253,48 @@
       },
       "x-ms-discriminator-value": "InMageRcm"
     },
+    "InMageRcmFabricSwitchProviderBlockingErrorDetails": {
+      "description": "InMageRcmFabric switch provider blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessageParameters": {
+          "description": "The error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "errorTags": {
+          "description": "The error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "InMageRcmFailbackDiscoveredProtectedVmDetails": {
       "description": "InMageRcmFailback discovered VM details.",
       "type": "object",
