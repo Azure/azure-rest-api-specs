@@ -379,7 +379,7 @@ These settings apply only when `--tag=package-2021-11-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2021-11-01-preview-only'
 input-file:
-- Microsoft.ContainerService/stable/2021-11-01/managedClusters.json
+- Microsoft.ContainerService/stable/2021-11-01-preview/managedClusters.json
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
