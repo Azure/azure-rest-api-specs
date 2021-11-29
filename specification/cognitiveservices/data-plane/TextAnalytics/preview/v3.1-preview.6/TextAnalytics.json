@@ -1665,7 +1665,10 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         },
         "resolutions": {
-          "$ref": "#/definitions/EntityResolutions"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseResolution"
+          }
         }
       }
     },
@@ -2665,60 +2668,103 @@
       "type": "array",
       "uniqueItems": true
     },
-    "EntityResolutions": {
+    "BaseResolution": {
+      "type":"object",
+      "discriminator": "resolutionKind",
       "properties": {
-        "dateTime": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DateTimeResolution"
-          }
+        "resolutionKind":{
+          "type": "string"
         },
-        "dimension": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DimensionResolution"
-          }
-        },
-        "age":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgeResolution"
-          }
-        },
-        "currency":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CurrencyResolution"
-          }
-        },
-        "temperature":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TemperatureResolution"
-          }
-        },
-        "number":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NumberResolution"
-          }
-        },
-        "ordinal":{
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OrdinalResolution"
-          }
+        "confidenceScore":{
+          "type":"number",
+          "format": "double",
+          "description": "The probability of the resolution instance being correct for the extracted entity."
         }
-      }
+      },
+      "required": [
+        "resolutionKind",
+        "confidenceScore"
+      ]
     },
-    "DateTimeResolution": {
+    "dimensionResolution":{
+      "description": "represents the dimension resolution kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/DimensionFields"
+        }
+      ]
+    },
+    "dateTimeResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/DateTimeFields"
+        }
+      ]
+    },
+    "temperatureResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/TemperatureFields"
+        }
+      ]
+    },
+    "currencyResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/CurrencyFields"
+        }
+      ]
+    },
+    "ageResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/AgeFields"
+        }
+      ]
+    },
+    "numberResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/NumberFields"
+        }
+      ]
+    },
+    "ordinalResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/OrdinalFields"
+        }
+      ]
+    },
+    "DateTimeFields": {
       "type": "object",
       "properties": {
         "timex": {
           "type": "string",
           "description": "timex expression representation"
         },
-        "resolutionKind": {
+        "subType": {
           "type": "string",
           "enum": [
             "time",
@@ -2729,7 +2775,7 @@
             "duration",
             "timerange"
           ],
-          "description": "The date time resolution kind"
+          "description": "The date time subType"
         },
         "value": {
           "type": "string",
@@ -2766,21 +2812,16 @@
             "mid",
             "more"
           ]
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
         }
       }
     },
-    "DimensionResolution": {
+    "DimensionFields": {
       "type": "object",
       "properties": {
-        "dimensionKind": {
+        "subType": {
           "type": "string",
           "x-ms-enum": {
-            "name": "DimensionKind",
+            "name": "SubType",
             "modelAsString": false
           },
           "enum": [
@@ -2791,7 +2832,7 @@
             "Area",
             "Information"
           ],
-          "description": "Dimension Kind (e.g., Speed, Volume, Weight)"
+          "description": "represents the Dimension subType (e.g., Speed, Volume, Weight)"
         },
         "unit": {
           "type": "string",
@@ -2800,38 +2841,28 @@
         "value": {
           "type": "string",
           "description": "The actual value that the extracted text denotes."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
         }
       }
     },
-    "AgeResolution":{
+    "TemperatureFields":{
       "type": "object",
       "properties": {
         "unit": {
-          "type": "string",
-          "description": "The age unit"
-        },
-        "value": {
           "type": "string",
           "enum": [
             "F",
             "C",
             "Degree"
           ],
-          "description": "The actual age value that the extracted text denotes."
+          "description": "The temperature unit"
         },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
+        "value": {
+          "type": "string",
+          "description": "The actual temperature value that the extracted text represents."
         }
       }
     },
-    "CurrencyResolution":{
+    "CurrencyFields":{
       "type": "object",
       "properties": {
         "unit": {
@@ -2841,15 +2872,10 @@
         "value": {
           "type": "string",
           "description": "The actual currency value that the extracted text denotes."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
         }
       }
     },
-    "TemperatureResolution":{
+    "AgeFields":{
       "type": "object",
       "properties": {
         "unit": {
@@ -2861,20 +2887,15 @@
             "Day",
             "Age"
           ],
-          "description": "The temperature unit"
+          "description": "The age unit"
         },
         "value": {
           "type": "string",
-          "description": "The actual temperature value that the extracted text denotes."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
+          "description": "The actual age value that the extracted text denotes."
         }
       }
     },
-    "NumberResolution":{
+    "NumberFields":{
       "type": "object",
       "properties": {
         "numType": {
@@ -2892,15 +2913,10 @@
         "value": {
           "type": "string",
           "description": "The actual value that the extracted text denotes."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
         }
       }
     },
-    "OrdinalResolution": {
+    "OrdinalFields": {
       "type": "object",
       "properties": {
         "offset":{
@@ -2918,16 +2934,9 @@
         "value":{
           "type": "string",
           "description": "The actual value that the extracted text denotes."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "probability of the resolution instance being correct for the extracted text."
         }
       }
-
     }
-
   },
   "parameters": {
     "Endpoint": {
