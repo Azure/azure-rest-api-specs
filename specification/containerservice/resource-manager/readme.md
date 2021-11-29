@@ -392,7 +392,7 @@ These settings apply only when `--tag=package-2021-10-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2021-10-01-only'
 input-file:
-- Microsoft.ContainerService/stable/2021-10-01/managedClusters.json
+- Microsoft.ContainerService/preview/2021-10-01/managedClusters.json
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
