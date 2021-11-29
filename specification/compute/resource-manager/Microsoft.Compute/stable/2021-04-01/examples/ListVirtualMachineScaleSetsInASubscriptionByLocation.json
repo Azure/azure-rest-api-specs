@@ -1,0 +1,169 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "location": "eastus",
+    "api-version": "2021-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{virtualMachineScaleSetName}",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "location": "eastus",
+            "tags": {
+              "myTag1": "tagValue1"
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "tier": "Standard",
+              "capacity": 4
+            },
+            "properties": {
+              "singlePlacementGroup": false,
+              "upgradePolicy": {
+                "mode": "Automatic",
+                "automaticOSUpgradePolicy": {
+                  "enableAutomaticOSUpgrade": false
+                }
+              },
+              "virtualMachineProfile": {
+                "storageProfile": {
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "caching": "ReadWrite",
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    },
+                    "diskSizeGB": 30
+                  },
+                  "imageReference": {
+                    "publisher": "azuredatabricks",
+                    "offer": "databricks",
+                    "sku": "databricksworker",
+                    "version": "3.15.2"
+                  },
+                  "dataDisks": []
+                },
+                "osProfile": {
+                  "computerNamePrefix": "{virtualMachineScaleSetName}",
+                  "adminUsername": "admin",
+                  "linuxConfiguration": {
+                    "disablePasswordAuthentication": false
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaceConfigurations": [
+                    {
+                      "name": "myNic",
+                      "properties": {
+                        "primary": true,
+                        "ipConfigurations": [
+                          {
+                            "name": "myIPConfig",
+                            "properties": {
+                              "primary": true,
+                              "subnet": {
+                                "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                              }
+                            }
+                          }
+                        ],
+                        "networkSecurityGroup": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "provisioningState": "succeeded",
+              "overprovision": false,
+              "doNotRunExtensionsOnOverprovisionedVMs": false,
+              "platformFaultDomainCount": 1
+            }
+          },
+          {
+            "name": "{virtualMachineScaleSetName}",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}1",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "location": "eastus",
+            "tags": {
+              "myTag1": "tagValue2"
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "tier": "Standard",
+              "capacity": 4
+            },
+            "properties": {
+              "singlePlacementGroup": false,
+              "upgradePolicy": {
+                "mode": "Automatic",
+                "automaticOSUpgradePolicy": {
+                  "enableAutomaticOSUpgrade": false
+                }
+              },
+              "virtualMachineProfile": {
+                "storageProfile": {
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "caching": "ReadWrite",
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    },
+                    "diskSizeGB": 30
+                  },
+                  "imageReference": {
+                    "publisher": "azuredatabricks",
+                    "offer": "databricks",
+                    "sku": "databricksworker",
+                    "version": "3.15.2"
+                  },
+                  "dataDisks": []
+                },
+                "osProfile": {
+                  "computerNamePrefix": "{virtualMachineScaleSetName}",
+                  "adminUsername": "admin",
+                  "linuxConfiguration": {
+                    "disablePasswordAuthentication": false
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaceConfigurations": [
+                    {
+                      "name": "myNic1",
+                      "properties": {
+                        "primary": true,
+                        "ipConfigurations": [
+                          {
+                            "name": "myIPConfig",
+                            "properties": {
+                              "primary": true,
+                              "subnet": {
+                                "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                              }
+                            }
+                          }
+                        ],
+                        "networkSecurityGroup": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "provisioningState": "succeeded",
+              "overprovision": false,
+              "doNotRunExtensionsOnOverprovisionedVMs": false,
+              "platformFaultDomainCount": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

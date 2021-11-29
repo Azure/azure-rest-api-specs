@@ -1538,6 +1538,16 @@
       },
       "description": "Delegated subnet arguments of a server"
     },
+    "privateDnsZoneArguments": {
+      "type": "object",
+      "description": "Private DNS zone arguments of a server",
+      "properties": {
+        "privateDnsZoneArmResourceId": {
+          "type": "string",
+          "description": "private dns zone arm resource id."
+        }
+      }
+    },
     "MaintenanceWindow": {
       "type": "object",
       "description": "Maintenance window of a server.",
@@ -1768,6 +1778,10 @@
         "delegatedSubnetArguments": {
           "$ref": "#/definitions/DelegatedSubnetArguments",
           "description": "Delegated subnet arguments."
+        },
+        "privateDnsZoneArguments": {
+          "$ref": "#/definitions/privateDnsZoneArguments",
+          "description": "private dns zone arguments."
         },
         "createMode": {
           "type": "string",

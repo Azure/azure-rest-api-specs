@@ -30,16 +30,16 @@
         ],
         "parameters": [
           {
-            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Features.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Features.json#/parameters/FeatureParameter"
           },
           {
-            "$ref": "Features.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -50,9 +50,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -79,13 +79,13 @@
         ],
         "parameters": [
           {
-            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Features.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "Features.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -96,9 +96,9 @@
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         },
@@ -128,16 +128,16 @@
         ],
         "parameters": [
           {
-            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Features.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Features.json#/parameters/FeatureParameter"
           },
           {
-            "$ref": "Features.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "Features.json#/parameters/GlobalFeatureSettingsParameter"
@@ -148,9 +148,9 @@
             "description": "OK"
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -177,16 +177,16 @@
         ],
         "parameters": [
           {
-            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Features.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Features.json#/parameters/FeatureParameter"
           },
           {
-            "$ref": "Features.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "Features.json#/parameters/TenantSubscriptionFeatureSettingsParameter"
@@ -197,9 +197,9 @@
             "description": "OK"
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -226,16 +226,16 @@
         ],
         "parameters": [
           {
-            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Features.json#/parameters/LocationParameter"
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Features.json#/parameters/FeatureParameter"
           },
           {
-            "$ref": "Features.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "Features.json#/parameters/TenantSubscriptionFeatureSettingsParameter"
@@ -246,9 +246,9 @@
             "description": "OK"
           },
           "default": {
-            "description": "Default error response.",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpErrorResponse"
             }
           }
         }
@@ -268,7 +268,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/CrpResource"
         }
       ]
     },
@@ -341,88 +341,9 @@
           "type": "string"
         }
       }
-    },
-    "ErrorDetails": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Object containing error details.",
-          "$ref": "#/definitions/ErrorDetailsInternal"
-        }
-      }
-    },
-    "ErrorDetailsInternal": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Resource": {
-      "description": "Base resource object.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "description": "ID of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "readOnly": true,
-          "description": "Name of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "readOnly": true,
-          "description": "Type of Resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string"
-    },
-    "LocationParameter": {
-      "description": "Location of the resource.",
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "FeatureParameter": {
       "description": "Name of the feature.",
       "name": "featureName",

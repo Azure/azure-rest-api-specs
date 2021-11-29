@@ -742,6 +742,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "$skipToken",
             "in": "query",
             "description": "Skip to a web app in the list of webapps associated with app service plan. If specified, the resulting list will contain web apps starting from (including) the skipToken. Otherwise, the resulting list contains web apps from the start of the list",
@@ -759,12 +765,6 @@
             "in": "query",
             "description": "List page size. If specified, results are paged.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -848,17 +848,17 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2').",
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {

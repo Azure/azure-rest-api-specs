@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "applicationName": "hue",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "edgenode",
+              "targetInstanceCount": 1,
+              "hardwareProfile": {
+                "vmSize": "Standard_D12_v2"
+              }
+            }
+          ]
+        },
+        "installScriptActions": [
+          {
+            "name": "app-install-app1",
+            "uri": "https://.../install.sh",
+            "parameters": "-version latest -port 20000",
+            "roles": [
+              "edgenode"
+            ]
+          }
+        ],
+        "uninstallScriptActions": [],
+        "httpsEndpoints": [
+          {
+            "subDomainSuffix": "dss",
+            "destinationPort": 20000,
+            "accessModes": [
+              "WebPage"
+            ]
+          }
+        ],
+        "applicationType": "CustomApplication",
+        "errors": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/hue",
+        "name": "hue",
+        "type": "Microsoft.HDInsight/clusters/applications",
+        "etag": "etag",
+        "tags": {},
+        "properties": {
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "edgenode",
+                "targetInstanceCount": 1,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D12_v2"
+                }
+              }
+            ]
+          },
+          "installScriptActions": [
+            {
+              "name": "app-install-app1",
+              "uri": "https://.../install.sh",
+              "roles": [
+                "edgenode"
+              ]
+            }
+          ],
+          "uninstallScriptActions": [],
+          "httpsEndpoints": [
+            {
+              "destinationPort": 20000,
+              "accessModes": [
+                "WebPage"
+              ]
+            }
+          ],
+          "sshEndpoints": [],
+          "provisioningState": "InProgress",
+          "applicationState": "ApplicationConfiguration",
+          "applicationType": "CustomApplication",
+          "errors": [],
+          "createdDate": "2017-02-28"
+        }
+      }
+    }
+  }
+}
