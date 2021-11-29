@@ -120,7 +120,10 @@
           "$ref": "#/definitions/StepRestOperation"
         },
         {
-          "$ref": "#/definitions/StepArmTemplateDeployment"
+          "$ref": "#/definitions/StepArmTemplate"
+        },
+        {
+          "$ref": "#/definitions/StepArmDeploymentScript"
         },
         {
           "$ref": "#/definitions/StepRawCall"
@@ -244,7 +247,7 @@
         "resourceName"
       ]
     },
-    "StepArmTemplateDeployment": {
+    "StepArmTemplate": {
       "type": "object",
       "allOf": [
         {
@@ -252,13 +255,45 @@
         }
       ],
       "properties": {
-        "armTemplateDeployment": {
+        "armTemplate": {
           "type": "string"
         }
       },
       "required": [
-        "armTemplateDeployment"
+        "armTemplate"
       ]
+    },
+    "StepArmDeploymentScript": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "armDeploymentScript": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "string"
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "value"]
+          }
+        }
+      },
+      "required": ["armDeploymentScript"]
     },
     "StepRawCall": {
       "type": "object",
