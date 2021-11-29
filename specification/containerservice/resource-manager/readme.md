@@ -373,7 +373,7 @@ input-file:
 
 ```
 
-### Tag: package-2021-11-01-preview
+### Tag: package-2021-11-01-preview-only
 
 These settings apply only when `--tag=package-2021-11-01-preview-only` is specified on the command line.
 
