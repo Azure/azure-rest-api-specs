@@ -205,7 +205,6 @@ input-file:
 
 ``` yaml
 directive:
-
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: The following properties follow the Oath2 spec, which does not use camelCase.
     from: Microsoft.InstanceMetadataService/stable/2018-04-02/imds.json
@@ -581,7 +580,6 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-02-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-03-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-05-01/imds.json
-
 ```
 
 If there are files that should not be in the `all-api-versions` set,
