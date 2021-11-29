@@ -8114,13 +8114,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/reboot": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/restart": {
       "post": {
         "tags": [
           "DedicatedHost"
         ],
-        "operationId": "DedicatedHosts_Reboot",
-        "description": "Reboot the dedicated host. The operation will complete successfully once the dedicated host has booted and is running. For VM health after the reboot, please check the Resource Health Center in the Azure Portal.",
+        "operationId": "DedicatedHosts_Restart",
+        "description": "Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. For VM health after the restart, please check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/en-us/azure/service-health/resource-health-overview for more information.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -8162,8 +8162,8 @@
           }
         },
         "x-ms-examples": {
-          "Reboot Dedicated Host.": {
-            "$ref": "./examples/compute/DedicatedHostReboot.json"
+          "Restart Dedicated Host.": {
+            "$ref": "./examples/compute/DedicatedHostRestart.json"
           }
         }
       }
