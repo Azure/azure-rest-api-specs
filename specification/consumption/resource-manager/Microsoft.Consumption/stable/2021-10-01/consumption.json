@@ -3391,6 +3391,8 @@
     },
     "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
@@ -3465,8 +3467,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3476,7 +3477,38 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "LegacySingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription id associated with single scoped recommendation.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
+    },
+    "LegacySharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
     },
     "SkuProperty": {
       "description": "The Sku property",
