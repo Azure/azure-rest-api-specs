@@ -119,8 +119,8 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 **Example:**
 
 ```yaml
-step: prepare_resources
-armTemplate: ./dep-storage-account.json
+- step: prepare_resources
+  armTemplate: ./dep-storage-account.json
 ```
 
 **Fields:**
@@ -140,16 +140,16 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 
 ```yaml
 - step: Add_Dns_Cname_Record
-    armDeploymentScript: ./templates/create_cname_record.ps1
-    environmentVariables:
-      - name: resourceGroupName
-        value: $(dnsResourceGroup)
-      - name: dnsZoneName
-        value: $(customDomainName)
-      - name: dnsCname
-        value: $(dnsCname)
-      - name: dnsCnameAlias
-        value: $(serviceName)$(ascDomainName)
+  armDeploymentScript: ./templates/create_cname_record.ps1
+  environmentVariables:
+    - name: resourceGroupName
+      value: $(dnsResourceGroup)
+    - name: dnsZoneName
+      value: $(customDomainName)
+    - name: dnsCname
+      value: $(dnsCname)
+    - name: dnsCnameAlias
+      value: $(serviceName).somedomain.com
 ```
 
 **Fields:**
@@ -169,10 +169,10 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 **Example:**
 
 ```yaml
-      - name: dnsCname
-        value: asc
-      - name: dnsCnameAlias
-        value: $(serviceName)$(ascDomainName)
+- name: dnsCname
+  value: asc
+- name: dnsCnameAlias
+  value: $(serviceName).somedomain.com
 ```
 
 **Fields:**
@@ -206,11 +206,11 @@ Rest call will have computed **requestParameter** and **responseExpected** after
 **Example:**
 
 ```yaml
-step: Create_publicIPAddresses_pubipdns
-resourceName: publicIPAddresses_pubipdns
-exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-operationId: PublicIPAddresses_CreateOrUpdate
-statusCode: 200
+- step: Create_publicIPAddresses_pubipdns
+  resourceName: publicIPAddresses_pubipdns
+  exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
+  operationId: PublicIPAddresses_CreateOrUpdate
+  statusCode: 200
 ```
 
 **Fields:**
