@@ -579,6 +579,8 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2020-12-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-01-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-02-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-03-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-05-01/imds.json
 
 ```
 
