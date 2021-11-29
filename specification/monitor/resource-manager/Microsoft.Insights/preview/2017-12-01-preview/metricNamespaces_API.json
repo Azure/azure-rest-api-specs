@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
     "version": "2017-12-01-preview"
   },
   "host": "management.azure.com",
@@ -48,7 +45,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/StartTimeParameter"
@@ -89,12 +86,25 @@
       },
       "description": "The fully qualified metric namespace name."
     },
+    "NamespaceClassification": {
+      "type": "string",
+      "description": "Kind of namespace",
+      "enum": [
+        "Platform",
+        "Custom",
+        "Qos"
+      ],
+      "x-ms-enum": {
+        "name": "NamespaceClassification",
+        "modelAsString": true
+      }
+    },
     "MetricNamespace": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the metricNamespace."
+          "description": "The ID of the metric namespace."
         },
         "type": {
           "type": "string",
@@ -102,7 +112,11 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the namespace."
+          "description": "The escaped name of the namespace."
+        },
+        "classification": {
+          "$ref": "#/definitions/NamespaceClassification",
+          "description": "Kind of namespace"
         },
         "properties": {
           "$ref": "#/definitions/MetricNamespaceName",
@@ -142,13 +156,6 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "ResourceUriParameter": {
       "name": "resourceUri",
       "in": "path",

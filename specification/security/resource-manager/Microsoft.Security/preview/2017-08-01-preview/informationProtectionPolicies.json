@@ -95,6 +95,9 @@
           },
           {
             "$ref": "#/parameters/InformationProtectionPolicyName"
+          },
+          {
+            "$ref": "#/parameters/InformationProtectionPolicy"
           }
         ],
         "responses": {
@@ -205,6 +208,11 @@
           "readOnly": true,
           "description": "Describes the last UTC time the policy was modified."
         },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the version of the policy."
+        },
         "labels": {
           "type": "object",
           "description": "Dictionary of sensitivity labels.",
@@ -231,9 +239,29 @@
           "type": "string",
           "description": "The name of the sensitivity label."
         },
+        "description": {
+          "type": "string",
+          "description": "The description of the sensitivity label."
+        },
+        "rank": {
+          "type": "string",
+          "description": "The rank of the sensitivity label.",
+          "enum": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "rank",
+            "modelAsString": false
+          }
+        },
         "order": {
-          "type": "number",
-          "description": "The order of the sensitivity label."
+          "format": "int32",
+          "description": "The order of the sensitivity label.",
+          "type": "integer"
         },
         "enabled": {
           "type": "boolean",
@@ -249,9 +277,14 @@
           "type": "string",
           "description": "The name of the information type."
         },
+        "description": {
+          "type": "string",
+          "description": "The description of the information type."
+        },
         "order": {
-          "type": "number",
-          "description": "The order of the information type."
+          "format": "int32",
+          "description": "The order of the information type.",
+          "type": "integer"
         },
         "recommendedLabelId": {
           "type": "string",
@@ -309,6 +342,16 @@
         "custom"
       ],
       "description": "Name of the information protection policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "InformationProtectionPolicy": {
+      "name": "informationProtectionPolicy",
+      "in": "body",
+      "required": true,
+      "description": "Information protection policy.",
+      "schema": {
+        "$ref": "#/definitions/InformationProtectionPolicy"
+      },
       "x-ms-parameter-location": "method"
     }
   }

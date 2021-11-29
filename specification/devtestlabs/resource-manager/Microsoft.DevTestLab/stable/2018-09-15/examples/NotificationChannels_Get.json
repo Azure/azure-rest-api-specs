@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "name": "{notificationChannelName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "webHookUrl": "{webhookUrl}",
+          "emailRecipient": "{email}",
+          "notificationLocale": "en",
+          "description": "Integration configured for auto-shutdown",
+          "events": [
+            {
+              "eventName": "AutoShutdown"
+            }
+          ],
+          "createdDate": "2021-01-05T02:14:05.2392034+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/notificationChannels/{notificationChannelName}",
+        "name": "{notificationChannelName}",
+        "type": "Microsoft.DevTestLab/labs/notificationChannels",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}

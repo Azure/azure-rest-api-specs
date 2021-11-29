@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-11-06",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "collectionName": "collectionName",
+    "createUpdateMongoDBCollectionParameters": {
+      "properties": {
+        "resource": {
+          "id": "testcoll",
+          "indexes": [
+            {
+              "key": {
+                "keys": [
+                  "testKey"
+                ]
+              },
+              "options": {
+                "expireAfterSeconds": 100,
+                "unique": true
+              }
+            }
+          ],
+          "shardKey": {
+            "testKey": "Hash"
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "collectionName",
+        "name": "collectionName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/apis/collection",
+        "properties": {
+          "id": "testcoll",
+          "indexes": [
+            {
+              "key": {
+                "keys": [
+                  "testKey"
+                ]
+              },
+              "options": {
+                "expireAfterSeconds": 100,
+                "unique": true
+              }
+            }
+          ],
+          "shardKey": {
+            "testKey": "Hash"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

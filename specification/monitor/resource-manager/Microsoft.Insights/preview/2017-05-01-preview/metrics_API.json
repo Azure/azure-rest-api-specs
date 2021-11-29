@@ -76,7 +76,7 @@
             "$ref": "#/parameters/ResultTypeParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -104,6 +104,7 @@
                       "value": "CpuTime",
                       "localizedValue": "CPU Time"
                     },
+                    "displayDescription": "CPU Time",
                     "unit": "Seconds",
                     "timeseries": [
                       {
@@ -177,7 +178,7 @@
     },
     "Unit": {
       "type": "string",
-      "description": "the unit of the metric.",
+      "description": "The unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -187,7 +188,11 @@
         "Percent",
         "MilliSeconds",
         "ByteSeconds",
-        "Unspecified"
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -266,7 +271,7 @@
           "type": "number",
           "format": "int32",
           "minimum": 0,
-          "description": "The integer value representing the cost of the query, for data case."
+          "description": "The integer value representing the relative cost of the query."
         },
         "timespan": {
           "type": "string",
@@ -305,6 +310,18 @@
         "name": {
           "$ref": "#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message encountered querying this specific metric."
         },
         "unit": {
           "$ref": "#/definitions/Unit",
@@ -423,13 +440,6 @@
       "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
       "x-ms-parameter-location": "method",
       "required": false
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

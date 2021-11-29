@@ -1,34 +1,92 @@
 {
   "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
+  "pipelineName": "automation - sdk",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
-      "mainBranch": "latest",
-      "integrationBranchPrefix": "sdkAutomationProdTest",
-      "generationRepository": "AzureSDKAutomation/azure-sdk-for-go",
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
-      "mainRepository": "test-repo-billy/azure-sdk-for-go"
+      "mainRepository": "Azure/azure-sdk-for-go"
+    },
+    "azure-sdk-for-go-track2": {
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
+      "mainRepository": "Azure/azure-sdk-for-go",
+      "configFilePath": "eng/swagger_to_sdk_config.json"
     },
     "azure-sdk-for-java": {
-      "generationRepository": "AzureSDKAutomation/azure-sdk-for-java",
-      "mainRepository": "test-repo-billy/azure-sdk-for-java"
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-java",
+      "mainRepository": "Azure/azure-sdk-for-java",
+      "configFilePath": "eng/mgmt/automation/swagger_to_sdk_config.json"
     },
     "azure-sdk-for-js": {
-      "generationRepository": "AzureSDKAutomation/azure-sdk-for-js",
-      "mainRepository": "test-repo-billy/azure-sdk-for-js"
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-js",
+      "mainRepository": "Azure/azure-sdk-for-js",
+      "mainBranch": "feature/v4"
+    },
+    "azure-sdk-for-js-track2": {
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-js",
+      "mainRepository": "Azure/azure-sdk-for-js"
     },
     "azure-sdk-for-net": {
-      "generationRepository": "AzureSDKAutomation/azure-sdk-for-net",
-      "mainRepository": "test-repo-billy/azure-sdk-for-net"
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-net",
+      "mainRepository": "Azure/azure-sdk-for-net"
+    },
+    "azure-sdk-for-net-track2": {
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-net",
+      "mainRepository": "Azure/azure-sdk-for-net",
+      "configFilePath": "eng/swagger_to_sdk_config.json"
     },
     "azure-sdk-for-python": {
-      "generationRepository": "AzureSDKAutomation/azure-sdk-for-python",
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
-      "mainRepository": "test-repo-billy/azure-sdk-for-python"
+      "mainRepository": "Azure/azure-sdk-for-python",
+      "mainBranch": "release/v3"
     },
-    "azure-sdk-for-ruby": {
-      "mainBranch": "latest",
-      "generationRepository": "AzureSDKAutomation/azure-sdk-for-ruby",
-      "mainRepository": "test-repo-billy/azure-sdk-for-ruby"
+    "azure-sdk-for-python-track2": {
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
+      "mainRepository": "Azure/azure-sdk-for-python"
+    },
+    "azure-resource-manager-schemas": {
+      "integrationRepository": "AzureSDKAutomation/azure-resource-manager-schemas",
+      "mainRepository": "Azure/azure-resource-manager-schemas"
+    },
+    "azure-powershell": {
+      "integrationRepository": "AzureSDKAutomation/azure-powershell",
+      "mainRepository": "Azure/azure-powershell"
+    }
+  },
+  "overrides": {
+    "Azure/azure-rest-api-specs-pr": {
+      "sdkRepositoryMappings": {
+        "azure-sdk-for-go": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-go-pr",
+          "mainRepository": "Azure/azure-sdk-for-go-pr"
+        },
+        "azure-sdk-for-go-track2": {
+          "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
+          "mainRepository": "Azure/azure-sdk-for-go-pr",
+          "configFilePath": "eng/swagger_to_sdk_config.json"
+        },
+        "azure-sdk-for-java": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-java-pr",
+          "mainRepository": "Azure/azure-sdk-for-java-pr",
+          "configFilePath": "eng/mgmt/automation/swagger_to_sdk_config.json"
+        },
+        "azure-sdk-for-js": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-js-pr",
+          "mainRepository": "Azure/azure-sdk-for-js-pr"
+        },
+        "azure-sdk-for-net": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-net-pr",
+          "mainRepository": "Azure/azure-sdk-for-net-pr"
+        },
+        "azure-sdk-for-python": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
+          "mainRepository": "Azure/azure-sdk-for-python-pr",
+          "mainBranch": "release/v3"
+        },
+        "azure-sdk-for-python-track2": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
+          "mainRepository": "Azure/azure-sdk-for-python-pr"
+        }
+      }
     }
   }
 }

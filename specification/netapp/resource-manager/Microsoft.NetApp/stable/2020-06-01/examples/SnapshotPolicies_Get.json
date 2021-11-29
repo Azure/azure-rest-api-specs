@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "D633CC2E-722B-4AE1-B636-BBD9E4C60ED9",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "snapshotPolicyName": "snapshotPolicyName",
+    "api-version": "2020-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/snapshotPolicies/snapshotPolicy1",
+        "name": "account1/snapshotPolicy1",
+        "type": "Microsoft.NetApp/netAppAccounts/snapshotPolicies",
+        "location": "eastus",
+        "properties": {
+          "name": "sdk-net-tests-snapshotPolicy-1",
+          "enabled": true,
+          "hourlySchedule": {
+            "snapshotsToKeep": 2,
+            "minute": 50
+          },
+          "dailySchedule": {
+            "snapshotsToKeep": 4,
+            "hour": 14,
+            "minute": 30
+          },
+          "weeklySchedule": {
+            "snapshotsToKeep": 3,
+            "day": "Wednesday",
+            "hour": 14,
+            "minute": 45
+          },
+          "monthlySchedule": {
+            "snapshotsToKeep": 5,
+            "daysOfMonth": "10,11,12",
+            "hour": 14,
+            "minute": 15
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

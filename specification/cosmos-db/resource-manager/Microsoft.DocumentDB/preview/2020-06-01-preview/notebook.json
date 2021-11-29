@@ -1,0 +1,461 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2020-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces": {
+      "get": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "description": "Gets the notebook workspace resources of an existing Cosmos DB account.",
+        "operationId": "NotebookWorkspaces_ListByDatabaseAccount",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved notebook workspace resources.",
+            "schema": {
+              "$ref": "#/definitions/NotebookWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceList": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}": {
+      "get": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "description": "Gets the notebook workspace for a Cosmos DB account.",
+        "operationId": "NotebookWorkspaces_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotebookWorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified notebook workspace resource.",
+            "schema": {
+              "$ref": "#/definitions/NotebookWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceGet": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "description": "Creates the notebook workspace for a Cosmos DB account.",
+        "operationId": "NotebookWorkspaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotebookWorkspaceNameParameter"
+          },
+          {
+            "name": "notebookCreateUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotebookWorkspaceCreateUpdateParameters"
+            },
+            "description": "The notebook workspace to create for the current database account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation of notebook workspace will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/NotebookWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceCreate": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "description": "Deletes the notebook workspace for a Cosmos DB account.",
+        "operationId": "NotebookWorkspaces_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotebookWorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The notebook workspace delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The specified notebook workspace does not exist in the database account."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceDelete": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/listConnectionInfo": {
+      "post": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "operationId": "NotebookWorkspaces_ListConnectionInfo",
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceListConnectionInfo": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceListConnectionInfo.json"
+          }
+        },
+        "description": "Retrieves the connection info for the notebook workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotebookWorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NotebookWorkspaceConnectionInfoResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/regenerateAuthToken": {
+      "post": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "operationId": "NotebookWorkspaces_RegenerateAuthToken",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceRegenerateAuthToken": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceRegenerateAuthToken.json"
+          }
+        },
+        "description": "Regenerates the auth token for the notebook workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotebookWorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The regenerate auth token operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/start": {
+      "post": {
+        "tags": [
+          "NotebookWorkspacesResource"
+        ],
+        "operationId": "NotebookWorkspaces_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "CosmosDBNotebookWorkspaceStart": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceStart.json"
+          }
+        },
+        "description": "Starts the notebook workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotebookWorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The start operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NotebookWorkspaceCreateUpdateParameters": {
+      "description": "Parameters to create a notebook workspace resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "NotebookWorkspaceListResult": {
+      "description": "A list of notebook workspace resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of notebook workspace resources",
+          "items": {
+            "$ref": "#/definitions/NotebookWorkspace"
+          }
+        }
+      }
+    },
+    "NotebookWorkspace": {
+      "description": "A notebook workspace resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NotebookWorkspaceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ]
+    },
+    "NotebookWorkspaceProperties": {
+      "description": "Properties of a notebook workspace resource.",
+      "type": "object",
+      "properties": {
+        "notebookServerEndpoint": {
+          "description": "Specifies the endpoint of Notebook server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the notebook workspace. Possible values are: Creating, Online, Deleting, Failed, Updating.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NotebookWorkspaceConnectionInfoResult": {
+      "description": "The connection info for the given notebook workspace",
+      "properties": {
+        "authToken": {
+          "type": "string",
+          "description": "Specifies auth token used for connecting to Notebook server (uses token-based auth).",
+          "readOnly": true
+        },
+        "notebookServerEndpoint": {
+          "type": "string",
+          "description": "Specifies the endpoint of Notebook server.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database account name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "NotebookWorkspaceNameParameter": {
+      "name": "notebookWorkspaceName",
+      "in": "path",
+      "description": "The name of the notebook workspace resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookWorkspaceName",
+        "modelAsString": true
+      }
+    }
+  }
+}

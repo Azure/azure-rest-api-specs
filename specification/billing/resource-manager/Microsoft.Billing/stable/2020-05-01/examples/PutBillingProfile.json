@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "parameters": {
+      "properties": {
+        "displayName": "Finance",
+        "billTo": {
+          "firstName": "Test",
+          "lastName": "User",
+          "addressLine1": "Test Address 1",
+          "city": "Redmond",
+          "postalCode": "12345",
+          "region": "WA",
+          "country": "US"
+        },
+        "enabledAzurePlans": [
+          {
+            "skuId": "0001"
+          },
+          {
+            "skuId": "0002"
+          }
+        ],
+        "invoiceEmailOptIn": true,
+        "poNumber": "ABC12345"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationResults/putBillingProfile_00000000-0000-0000-0000-000000000000?api-version=2020-05-01",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/billingProfileId1",
+        "name": "billingProfileId1",
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles",
+        "properties": {
+          "displayName": "Finance",
+          "billTo": {
+            "firstName": "Test",
+            "lastName": "User",
+            "addressLine1": "Test Address 1",
+            "city": "Redmond",
+            "postalCode": "12345",
+            "region": "WA",
+            "country": "US"
+          },
+          "currency": "USD",
+          "enabledAzurePlans": [
+            {
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Plan"
+            },
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Plan for DevTest"
+            }
+          ],
+          "invoiceDay": 5,
+          "invoiceEmailOptIn": true,
+          "poNumber": "ABC12345",
+          "hasReadAccess": true,
+          "systemId": "1XXX-11XX-XX1-XXXX-XXX",
+          "status": "Active",
+          "spendingLimit": "Off"
+        }
+      }
+    }
+  }
+}

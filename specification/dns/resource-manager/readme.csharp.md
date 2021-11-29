@@ -66,3 +66,18 @@ batch:
 skip-simplifier-on-namespace: 
   - System.Net
 ```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Dns
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Dns/Management.Dns/Generated
+
+batch:
+  - tag: profile-hybrid-2020-09-01
+
+skip-simplifier-on-namespace: 
+  - System.Net
+```

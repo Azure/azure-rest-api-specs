@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "groupId": "my-management-group-id",
+    "deploymentName": "my-deployment",
+    "api-version": "2020-06-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "templateLink": {
+          "uri": "https://example.com/exampleTemplate.json"
+        },
+        "parameters": {},
+        "mode": "Incremental"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "location": "eastus",
+        "properties": {
+          "parameters": {},
+          "mode": "Incremental",
+          "provisioningState": "Accepted",
+          "timestamp": "2019-04-24T22:52:38.7895563Z",
+          "duration": "PT1.2970875S",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "providers": [
+            {
+              "namespace": "Microsoft.Authorization",
+              "resourceTypes": [
+                {
+                  "resourceType": "policyDefinitions",
+                  "locations": [
+                    null
+                  ]
+                },
+                {
+                  "resourceType": "policyAssignments",
+                  "locations": [
+                    null
+                  ]
+                }
+              ]
+            },
+            {
+              "namespace": "Microsoft.Resources",
+              "resourceTypes": [
+                {
+                  "resourceType": "deployments",
+                  "locations": [
+                    "eastus"
+                  ]
+                }
+              ]
+            }
+          ],
+          "dependencies": [
+            {
+              "dependsOn": [
+                {
+                  "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
+                  "resourceType": "Microsoft.Authorization/policyDefinitions",
+                  "resourceName": "policy-definition-name"
+                }
+              ],
+              "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyAssignments/location-lock",
+              "resourceType": "Microsoft.Authorization/policyAssignments",
+              "resourceName": "location-lock"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "location": "eastus",
+        "properties": {
+          "parameters": {},
+          "mode": "Incremental",
+          "provisioningState": "Accepted",
+          "timestamp": "2019-04-24T22:52:38.7895563Z",
+          "duration": "PT1.2970875S",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "providers": [
+            {
+              "namespace": "Microsoft.Authorization",
+              "resourceTypes": [
+                {
+                  "resourceType": "policyDefinitions",
+                  "locations": [
+                    null
+                  ]
+                },
+                {
+                  "resourceType": "policyAssignments",
+                  "locations": [
+                    null
+                  ]
+                }
+              ]
+            },
+            {
+              "namespace": "Microsoft.Resources",
+              "resourceTypes": [
+                {
+                  "resourceType": "deployments",
+                  "locations": [
+                    "eastus"
+                  ]
+                }
+              ]
+            }
+          ],
+          "dependencies": [
+            {
+              "dependsOn": [
+                {
+                  "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
+                  "resourceType": "Microsoft.Authorization/policyDefinitions",
+                  "resourceName": "policy-definition-name"
+                }
+              ],
+              "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyAssignments/location-lock",
+              "resourceType": "Microsoft.Authorization/policyAssignments",
+              "resourceName": "location-lock"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "workspaceName": "kustorptest",
+    "kustoPoolName": "kustoclusterrptest4",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Synapse/Workspaces/kustorptest/KustoPools/kustoclusterrptest4/AttachedDatabaseConfigurations/KustoDatabase8",
+            "name": "KustoClusterRPTest4/KustoDatabase8",
+            "type": "Microsoft.Synapse/Workspaces/KustoPools/AttachedDatabaseConfigurations",
+            "location": "westus",
+            "properties": {
+              "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Synapse/Workspaces/kustorptest/KustoPools/KustoClusterLeader",
+              "databaseName": "db1",
+              "defaultPrincipalsModificationKind": "Union",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Synapse/Workspaces/kustorptest/KustoPools/kustoclusterrptest4/AttachedDatabaseConfigurations/KustoDatabase9",
+            "name": "KustoClusterRPTest4/KustoDatabase9",
+            "type": "Microsoft.Synapse/Workspaces/KustoPools/AttachedDatabaseConfigurations",
+            "location": "westus",
+            "properties": {
+              "clusterResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Synapse/Workspaces/kustorptest/KustoPools/KustoClusterLeader",
+              "databaseName": "db1",
+              "defaultPrincipalsModificationKind": "Union",
+              "tableLevelSharingProperties": {
+                "tablesToInclude": [
+                  "Table1"
+                ],
+                "tablesToExclude": [
+                  "Table2"
+                ],
+                "externalTablesToInclude": [
+                  "ExternalTable1"
+                ],
+                "externalTablesToExclude": [
+                  "ExternalTable2"
+                ],
+                "materializedViewsToInclude": [
+                  "MaterializedViewTable1"
+                ],
+                "materializedViewsToExclude": [
+                  "MaterializedViewTable2"
+                ]
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-preview-2019-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.alertsmanagement.v2019_05_05_preview
-  output-folder: $(azure-libraries-for-java-folder)/alertsmanagement/resource-manager/v2019_05_05_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/alertsmanagement/mgmt-v2019_05_05_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -43,7 +43,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2019-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.alertsmanagement.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/alertsmanagement/resource-manager/v2019_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/alertsmanagement/mgmt-v2019_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -57,7 +57,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.alertsmanagement.v2018_05_05
-  output-folder: $(azure-libraries-for-java-folder)/alertsmanagement/resource-manager/v2018_05_05
+  output-folder: $(azure-libraries-for-java-folder)/sdk/alertsmanagement/mgmt-v2018_05_05
 regenerate-manager: true
 generate-interface: true
 ```
@@ -70,7 +70,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.alertsmanagement.v2018_05_05_preview
-  output-folder: $(azure-libraries-for-java-folder)/alertsmanagement/resource-manager/v2018_05_05_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/alertsmanagement/mgmt-v2018_05_05_preview
 regenerate-manager: true
 generate-interface: true
 ```

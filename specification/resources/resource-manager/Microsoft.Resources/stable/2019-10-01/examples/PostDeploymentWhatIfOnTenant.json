@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "deploymentName": "exampleDeploymentName",
+    "api-version": "2019-10-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "templateLink": "https://example.com/exampleTemplate.json",
+        "parameters": {},
+        "mode": "Incremental"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "properties": {
+          "changes": [
+            {
+              "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup",
+              "changeType": "Create",
+              "after": {
+                "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup",
+                "apiVersion": "2019-11-01",
+                "type": "Microsoft.Management/managementGroups",
+                "name": "myManagementGroup"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/4d0ca63b-7939-4c9c-afbe-5fafae501724/operationresults/ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+      }
+    }
+  }
+}

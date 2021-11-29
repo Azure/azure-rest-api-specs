@@ -1,0 +1,162 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-08-08-preview",
+    "title": "StorageManagementClient",
+    "description": "The Admin Storage Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/acquisitions": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of page BLOB acquisitions.": {
+            "$ref": "./examples/Acquisitions/List.json"
+          }
+        },
+        "tags": [
+          "Acquisitions"
+        ],
+        "operationId": "Acquisitions_List",
+        "description": "Returns a list of BLOB acquisitions.",
+        "parameters": [
+          {
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of acquisitions has been returned.",
+            "schema": {
+              "$ref": "#/definitions/AcquisitionList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcquisitionStatus": {
+      "description": "The status of page BLOB acquisition.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "NotAcquired",
+        "Pending",
+        "Success",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AcquisitionStatus",
+        "modelAsString": true
+      }
+    },
+    "Acquisition": {
+      "description": "The acquisition of the page BLOB.",
+      "type": "object",
+      "properties": {
+        "susbcriptionid": {
+          "description": "ID of the subscription associated with the page BLOB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageaccount": {
+          "description": "The storage account that holds the page BLOB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "container": {
+          "description": "The container associated with the page BLOB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blob": {
+          "description": "The name of the page BLOB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "acquisitionid": {
+          "description": "The ID of page BLOB acquisition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePath": {
+          "description": "The file path of the page BLOB file on storage cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePathUnc": {
+          "description": "The file path unc of the page BLOB file on storage cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maximumblobsize": {
+          "description": "The maximum size of the page BLOB.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the page BLOB acquisition.",
+          "$ref": "#/definitions/AcquisitionStatus",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AcquisitionList": {
+      "description": "The list of page BLOB acquisitions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of acquisitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Acquisition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

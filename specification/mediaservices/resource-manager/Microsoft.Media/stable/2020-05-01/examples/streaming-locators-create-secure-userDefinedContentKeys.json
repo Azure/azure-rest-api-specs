@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "streamingLocatorName": "UserCreatedSecureStreamingLocatorWithUserDefinedContentKeys",
+    "api-version": "2020-05-01",
+    "parameters": {
+      "properties": {
+        "assetName": "ClimbingMountRainier",
+        "streamingPolicyName": "secureStreamingPolicy",
+        "streamingLocatorId": "90000000-0000-0000-0000-00000000000A",
+        "contentKeys": [
+          {
+            "labelReferenceInStreamingPolicy": "aesDefaultKey",
+            "id": "60000000-0000-0000-0000-000000000001",
+            "value": "1UqLohAfWsEGkULYxHjYZg=="
+          },
+          {
+            "labelReferenceInStreamingPolicy": "cencDefaultKey",
+            "id": "60000000-0000-0000-0000-000000000004",
+            "value": "4UqLohAfWsEGkULYxHjYZg=="
+          },
+          {
+            "labelReferenceInStreamingPolicy": "cbcsDefaultKey",
+            "id": "60000000-0000-0000-0000-000000000007",
+            "value": "7UqLohAfWsEGkULYxHjYZg=="
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedSecureStreamingLocatorWithUserDefinedContentKeys",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/streamingLocators/UserCreatedSecureStreamingLocatorWithUserDefinedContentKeys",
+        "type": "Microsoft.Media/mediaservices/streamingLocators",
+        "properties": {
+          "assetName": "ClimbingMountRainier",
+          "created": "2018-08-08T18:29:32.7859424Z",
+          "endTime": "9999-12-31T23:59:59.9999999Z",
+          "streamingLocatorId": "90000000-0000-0000-0000-00000000000a",
+          "streamingPolicyName": "secureStreamingPolicy",
+          "contentKeys": [
+            {
+              "id": "60000000-0000-0000-0000-000000000007",
+              "type": "CommonEncryptionCbcs",
+              "labelReferenceInStreamingPolicy": "cbcsDefaultKey",
+              "tracks": []
+            },
+            {
+              "id": "60000000-0000-0000-0000-000000000004",
+              "type": "CommonEncryptionCenc",
+              "labelReferenceInStreamingPolicy": "cencDefaultKey",
+              "tracks": []
+            },
+            {
+              "id": "60000000-0000-0000-0000-000000000001",
+              "type": "EnvelopeEncryption",
+              "labelReferenceInStreamingPolicy": "aesDefaultKey",
+              "tracks": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

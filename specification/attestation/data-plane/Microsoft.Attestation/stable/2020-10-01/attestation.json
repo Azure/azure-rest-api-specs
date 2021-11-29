@@ -1,0 +1,1003 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AttestationClient",
+    "description": "Describes the interface for the per-tenant enclave service.",
+    "version": "2020-10-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{instanceUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "instanceUrl",
+        "x-ms-parameter-location": "client",
+        "description": "The attestation instance base URI, for example https://mytenant.attest.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/policies/{attestationType}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Retrieves the current policy for an attestation type.",
+        "operationId": "Policy_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AttestationType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Policy": {
+            "$ref": "./examples/Get_Policy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Sets the policy for a given attestation type.",
+        "operationId": "Policy_Set",
+        "consumes": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AttestationType"
+          },
+          {
+            "name": "newAttestationPolicy",
+            "in": "body",
+            "description": "JWT Expressing the new policy whose body is a StoredAttestationPolicy object.",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/JsonWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set Policy": {
+            "$ref": "./examples/Set_Policy.json"
+          }
+        }
+      }
+    },
+    "/policies/{attestationType}:reset": {
+      "post": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Resets the attestation policy for the specified tenant and reverts to the default policy.",
+        "operationId": "Policy_Reset",
+        "consumes": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AttestationType"
+          },
+          {
+            "name": "PolicyJws",
+            "in": "body",
+            "description": "JSON Web Signature with an empty policy document",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/JsonWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reset Policy": {
+            "$ref": "./examples/Reset_Policy.json"
+          }
+        }
+      }
+    },
+    "/certificates": {
+      "get": {
+        "tags": [
+          "Policy Management Certificates"
+        ],
+        "summary": "Retrieves the set of certificates used to express policy for the current tenant.",
+        "operationId": "PolicyCertificates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
+            "schema": {
+              "$ref": "#/definitions/PolicyCertificatesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get PolicyCertificates": {
+            "$ref": "./examples/Get_PolicyCertificates.json"
+          }
+        }
+      }
+    },
+    "/certificates:add": {
+      "post": {
+        "tags": [
+          "Policy Management Certificates"
+        ],
+        "summary": "Adds a new attestation policy certificate to the set of policy management certificates.",
+        "operationId": "PolicyCertificates_Add",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyCertificateToAdd",
+            "in": "body",
+            "description": "An RFC7519 JSON Web Token whose body is an RFC7517 JSON Web Key object. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
+            "schema": {
+              "$ref": "#/definitions/PolicyCertificatesModifyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add PolicyCertificate": {
+            "$ref": "./examples/Add_PolicyCertificate.json"
+          }
+        }
+      }
+    },
+    "/certificates:remove": {
+      "post": {
+        "tags": [
+          "Policy Management Certificates"
+        ],
+        "summary": "Removes the specified policy management certificate. Note that the final policy management certificate cannot be removed.",
+        "operationId": "PolicyCertificates_Remove",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyCertificateToRemove",
+            "in": "body",
+            "description": "An RFC7519 JSON Web Token whose body is an AttestationCertificateManagementBody object. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
+            "schema": {
+              "$ref": "#/definitions/PolicyCertificatesModifyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove PolicyCertificate": {
+            "$ref": "./examples/Remove_PolicyCertificate.json"
+          }
+        }
+      }
+    },
+    "/attest/OpenEnclave": {
+      "post": {
+        "tags": [
+          "Attestation"
+        ],
+        "summary": "Attest to an SGX enclave.",
+        "description": "Processes an OpenEnclave report , producing an artifact. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "Attestation_AttestOpenEnclave",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestOpenEnclaveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttestationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest OpenEnclave": {
+            "$ref": "./examples/AttestOpenEnclave.json"
+          }
+        }
+      }
+    },
+    "/attest/SgxEnclave": {
+      "post": {
+        "tags": [
+          "Attestation"
+        ],
+        "summary": "Attest to an SGX enclave.",
+        "description": "Processes an SGX enclave quote, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "Attestation_AttestSgxEnclave",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestSgxEnclaveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttestationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest SgxEnclave": {
+            "$ref": "./examples/AttestSgxEnclave.json"
+          }
+        }
+      }
+    },
+    "/attest/Tpm": {
+      "post": {
+        "tags": [
+          "Attestation"
+        ],
+        "summary": "Attest a Virtualization-based Security (VBS) enclave.",
+        "description": "Processes attestation evidence from a VBS enclave, producing an attestation result. The attestation result produced is dependent upon the attestation policy.",
+        "operationId": "Attestation_AttestTpm",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TpmAttestationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TpmAttestationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest EdgeTpm": {
+            "$ref": "./examples/AttestVbsEnclave.json"
+          }
+        }
+      }
+    },
+    "/certs": {
+      "get": {
+        "tags": [
+          "OpenID Metadata Discovery"
+        ],
+        "produces": [
+          "application/jwk+json",
+          "application/json"
+        ],
+        "summary": "Retrieves the attestation signing keys in use by the attestation service",
+        "description": "Retrieves metadata signing certificates in use by the attestation service",
+        "operationId": "SigningCertificates_Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Token Signing Certificates": {
+            "$ref": "./examples/Get_Certs.json"
+          }
+        }
+      }
+    },
+    "/.well-known/openid-configuration": {
+      "get": {
+        "tags": [
+          "OpenID Metadata Discovery"
+        ],
+        "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
+        "description": "Retrieves metadata about the attestation signing keys in use by the attestation service",
+        "operationId": "MetadataConfiguration_Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OpenID Metadata": {
+            "$ref": "./examples/Get_MetadataConfiguration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from Attestation."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
+        }
+      },
+      "description": "An error response from Attestation."
+    },
+    "JsonWebToken": {
+      "description": "An RFC 7519 Json Web Token",
+      "type": "string",
+      "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*",
+      "externalDocs": {
+        "description": "JSON Web Token RFC",
+        "url": "https://tools.ietf.org/html/rfc7519"
+      }
+    },
+    "AttestationCertificateManagementBody": {
+      "type": "object",
+      "description": "The body of the JWT used for the PolicyCertificates APIs",
+      "properties": {
+        "policyCertificate": {
+          "description": "RFC 7517 Json Web Key describing the certificate.",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "PolicyCertificatesResponse": {
+      "type": "object",
+      "description": "The response to an attestation policy management API",
+      "properties": {
+        "token": {
+          "description": "An RFC7519 JSON Web Token structure containing a PolicyCertificatesResults object which contains the certificates used to validate policy changes",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "PolicyCertificatesResult": {
+      "type": "object",
+      "description": "The result of a call to retrieve policy certificates.",
+      "properties": {
+        "x-ms-policy-certificates": {
+          "description": "SHA256 Hash of the binary representation certificate which was added or removed",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet",
+          "x-ms-client-name": "PolicyCertificates"
+        }
+      }
+    },
+    "PolicyCertificatesModifyResponse": {
+      "type": "object",
+      "description": "The response to an attestation policy management API",
+      "properties": {
+        "token": {
+          "description": "An RFC7519 JSON Web Token structure whose body is a PolicyCertificatesModificationResult object.",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "PolicyCertificatesModificationResult": {
+      "type": "object",
+      "description": "The result of a policy certificate modification",
+      "properties": {
+        "x-ms-certificate-thumbprint": {
+          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added or removed",
+          "type": "string",
+          "x-ms-client-name": "CertificateThumbprint"
+        },
+        "x-ms-policycertificates-result": {
+          "description": "The result of the operation",
+          "type": "string",
+          "x-ms-client-name": "CertificateResolution",
+          "enum": [
+            "IsPresent",
+            "IsAbsent"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateModification",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IsPresent",
+                "description": "After the operation was performed, the certificate is in the set of certificates."
+              },
+              {
+                "value": "IsAbsent",
+                "description": "After the operation was performed, the certificate is no longer present in the set of certificates."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "StoredAttestationPolicy": {
+      "type": "object",
+      "properties": {
+        "AttestationPolicy": {
+          "description": "Policy text to set as a sequence of UTF-8 encoded octets.",
+          "type": "string",
+          "format": "base64url"
+        }
+      }
+    },
+    "PolicyResponse": {
+      "type": "object",
+      "description": "The response to an attestation policy operation",
+      "properties": {
+        "token": {
+          "description": "An RFC7519 JSON Web Token structure whose body is an PolicyResult object.",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "PolicyResult": {
+      "type": "object",
+      "description": "The result of a policy certificate modification",
+      "properties": {
+        "x-ms-policy-result": {
+          "description": "The result of the operation",
+          "type": "string",
+          "x-ms-client-name": "PolicyResolution",
+          "enum": [
+            "Updated",
+            "Removed"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyModification",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updated",
+                "description": "The specified policy object was updated."
+              },
+              {
+                "value": "Removed",
+                "description": "The specified policy object was removed."
+              }
+            ]
+          }
+        },
+        "x-ms-policy-token-hash": {
+          "description": "The SHA256 hash of the policy object modified",
+          "x-ms-client-name": "PolicyTokenHash",
+          "type": "string",
+          "format": "base64url"
+        },
+        "x-ms-policy-signer": {
+          "description": "The certificate used to sign the policy object, if specified",
+          "x-ms-client-name": "PolicySigner",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        },
+        "x-ms-policy": {
+          "description": "A JSON Web Token containing a StoredAttestationPolicy object with the attestation policy",
+          "x-ms-client-name": "Policy",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "AttestationResult": {
+      "type": "object",
+      "description": "A Microsoft Azure Attestation response token body - the body of a response token issued by MAA",
+      "properties": {
+        "jti": {
+          "description": "Unique Identifier for the token",
+          "type": "string"
+        },
+        "iss": {
+          "description": "The Principal who issued the token",
+          "type": "string"
+        },
+        "iat": {
+          "description": "The time at which the token was issued, in the number of seconds since 1970-01-0T00:00:00Z UTC",
+          "type": "number"
+        },
+        "exp": {
+          "description": "The expiration time after which the token is no longer valid, in the number of seconds since 1970-01-0T00:00:00Z UTC",
+          "type": "number"
+        },
+        "nbf": {
+          "description": "The not before time before which the token cannot be considered valid, in the number of seconds since 1970-01-0T00:00:00Z UTC",
+          "type": "number"
+        },
+        "cnf": {
+          "description": "An RFC 7800 Proof of Possession Key",
+          "type": "object"
+        },
+        "nonce": {
+          "description": "The Nonce input to the attestation request, if provided.",
+          "type": "string"
+        },
+        "x-ms-ver": {
+          "description": "The Schema version of this structure. Current Value: 1.0",
+          "x-ms-client-name": "Version",
+          "type": "string"
+        },
+        "x-ms-runtime": {
+          "description": "Runtime Claims",
+          "x-ms-client-name": "RuntimeClaims",
+          "type": "object"
+        },
+        "x-ms-inittime": {
+          "description": "Inittime Claims",
+          "x-ms-client-name": "InittimeClaims",
+          "type": "object"
+        },
+        "x-ms-policy": {
+          "description": "Policy Generated Claims",
+          "x-ms-client-name": "PolicyClaims",
+          "type": "object"
+        },
+        "x-ms-attestation-type": {
+          "description": "The Attestation type being attested.",
+          "x-ms-client-name": "VerifierType",
+          "type": "string"
+        },
+        "x-ms-policy-signer": {
+          "description": "The certificate used to sign the policy object, if specified.",
+          "x-ms-client-name": "PolicySigner",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        },
+        "x-ms-policy-hash": {
+          "description": "The SHA256 hash of the BASE64URL encoded policy text used for attestation",
+          "x-ms-client-name": "PolicyHash",
+          "type": "string",
+          "format": "base64url"
+        },
+        "x-ms-sgx-is-debuggable": {
+          "description": "True if the enclave is debuggable, false otherwise",
+          "x-ms-client-name": "IsDebuggable",
+          "type": "boolean"
+        },
+        "x-ms-sgx-product-id": {
+          "description": "The SGX Product ID for the enclave.",
+          "x-ms-client-name": "ProductId",
+          "type": "number"
+        },
+        "x-ms-sgx-mrenclave": {
+          "description": "The HEX encoded SGX MRENCLAVE value for the enclave.",
+          "x-ms-client-name": "MrEnclave",
+          "type": "string"
+        },
+        "x-ms-sgx-mrsigner": {
+          "description": "The HEX encoded SGX MRSIGNER value for the enclave.",
+          "x-ms-client-name": "MrSigner",
+          "type": "string"
+        },
+        "x-ms-sgx-svn": {
+          "description": "The SGX SVN value for the enclave.",
+          "x-ms-client-name": "Svn",
+          "type": "number"
+        },
+        "x-ms-sgx-ehd": {
+          "description": "A copy of the RuntimeData specified as an input to the attest call.",
+          "x-ms-client-name": "EnclaveHeldData",
+          "type": "string",
+          "format": "base64url"
+        },
+        "x-ms-sgx-collateral": {
+          "description": "The SGX SVN value for the enclave.",
+          "x-ms-client-name": "SgxCollateral",
+          "type": "object"
+        },
+        "ver": {
+          "description": "DEPRECATED: Private Preview version of x-ms-ver claim.",
+          "x-ms-client-name": "DeprecatedVersion",
+          "type": "string"
+        },
+        "is-debuggable": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-is-debuggable claim.",
+          "x-ms-client-name": "DeprecatedIsDebuggable",
+          "type": "boolean"
+        },
+        "maa-attestationcollateral": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-collateral claim.",
+          "x-ms-client-name": "DeprecatedSgxCollateral",
+          "type": "object"
+        },
+        "aas-ehd": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.",
+          "x-ms-client-name": "DeprecatedEnclaveHeldData",
+          "type": "string",
+          "format": "base64url"
+        },
+        "maa-ehd": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.",
+          "x-ms-client-name": "DeprecatedEnclaveHeldData2",
+          "type": "string",
+          "format": "base64url"
+        },
+        "product-id": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-product-id",
+          "x-ms-client-name": "DeprecatedProductId",
+          "type": "number"
+        },
+        "sgx-mrenclave": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-mrenclave.",
+          "x-ms-client-name": "DeprecatedMrEnclave",
+          "type": "string"
+        },
+        "sgx-mrsigner": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-mrsigner.",
+          "x-ms-client-name": "DeprecatedMrSigner",
+          "type": "string"
+        },
+        "svn": {
+          "description": "DEPRECATED: Private Preview version of x-ms-sgx-svn.",
+          "x-ms-client-name": "DeprecatedSvn",
+          "type": "number"
+        },
+        "tee": {
+          "description": "DEPRECATED: Private Preview version of x-ms-tee.",
+          "x-ms-client-name": "DeprecatedTee",
+          "type": "string"
+        },
+        "policy_signer": {
+          "description": "DEPRECATED: Private Preview version of x-ms-policy-signer",
+          "x-ms-client-name": "DeprecatedPolicySigner",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        },
+        "policy_hash": {
+          "description": "DEPRECATED: Private Preview version of x-ms-policy-hash",
+          "x-ms-client-name": "DeprecatedPolicyHash",
+          "type": "string",
+          "format": "base64url"
+        },
+        "rp_data": {
+          "description": "DEPRECATED: Private Preview version of nonce",
+          "x-ms-client-name": "DeprecatedRpData",
+          "type": "string"
+        }
+      }
+    },
+    "AttestationResponse": {
+      "type": "object",
+      "description": "The result of an attestation operation",
+      "properties": {
+        "token": {
+          "description": "An RFC 7519 JSON Web Token, the body of which is an AttestationResult object.",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "DataType": {
+      "description": "Specifies the type of the data encoded contained within the \"data\" field of a \"RuntimeData\" or \"InitTimeData\" object",
+      "type": "string",
+      "enum": [
+        "Binary",
+        "JSON"
+      ],
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Binary",
+            "description": "The contents of the field should be treated as binary and not interpreted by MAA."
+          },
+          {
+            "value": "JSON",
+            "description": "The contents of the field should be treated as a JSON object and may be further interpreted by MAA."
+          }
+        ]
+      }
+    },
+    "RuntimeData": {
+      "type": "object",
+      "description": "Defines the \"run time data\" provided by the attestation target for use by the MAA",
+      "properties": {
+        "data": {
+          "description": "UTF-8 encoded Runtime Data generated by the trusted environment",
+          "type": "string",
+          "format": "base64url"
+        },
+        "dataType": {
+          "description": "The type of data contained within the \"data\" field",
+          "$ref": "#/definitions/DataType"
+        }
+      }
+    },
+    "InitTimeData": {
+      "type": "object",
+      "description": "Defines the \"initialization time data\" used to provision the attestation target for use by the MAA",
+      "properties": {
+        "data": {
+          "description": "UTF-8 encoded Initialization Data passed into the trusted environment when it is created.",
+          "type": "string",
+          "format": "base64url"
+        },
+        "dataType": {
+          "description": "The type of data contained within the \"data\" field",
+          "$ref": "#/definitions/DataType"
+        }
+      }
+    },
+    "AttestSgxEnclaveRequest": {
+      "type": "object",
+      "description": "Attestation request for Intel SGX enclaves",
+      "properties": {
+        "quote": {
+          "description": "Quote of the enclave to be attested",
+          "type": "string",
+          "format": "base64url"
+        },
+        "runtimeData": {
+          "description": "Runtime data provided by the enclave at the time of quote generation. The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded \"data\" field of the runtime data.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "initTimeData": {
+          "description": "Initialization data provided when the enclave is created. MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
+          "$ref": "#/definitions/InitTimeData"
+        },
+        "draftPolicyForAttestation": {
+          "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+          "type": "string"
+        }
+      }
+    },
+    "AttestOpenEnclaveRequest": {
+      "type": "object",
+      "description": "Attestation request for Intel SGX enclaves",
+      "properties": {
+        "report": {
+          "description": "OpenEnclave report from the enclave to be attested",
+          "type": "string",
+          "format": "base64url"
+        },
+        "runtimeData": {
+          "description": "Runtime data provided by the enclave at the time of report generation. The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded \"data\" field of the runtime data.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "initTimeData": {
+          "description": "Base64Url encoded \"InitTime data\". The MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
+          "$ref": "#/definitions/InitTimeData"
+        },
+        "draftPolicyForAttestation": {
+          "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+          "type": "string"
+        }
+      }
+    },
+    "TpmAttestationRequest": {
+      "type": "object",
+      "description": "Attestation request for Trusted Platform Module (TPM) attestation.",
+      "properties": {
+        "data": {
+          "description": "Protocol data containing artifacts for attestation.",
+          "type": "string",
+          "format": "base64url"
+        }
+      }
+    },
+    "TpmAttestationResponse": {
+      "type": "object",
+      "description": "Attestation response for Trusted Platform Module (TPM) attestation.",
+      "properties": {
+        "data": {
+          "description": "Protocol data containing attestation service response.",
+          "type": "string",
+          "format": "base64url"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version. Current version is 2010-10-01"
+    },
+    "AttestationType": {
+      "description": "Specifies the trusted execution environment to be used to validate the evidence",
+      "name": "attestationType",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "name": "AttestationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SgxEnclave",
+            "description": "Intel Software Guard eXtensions"
+          },
+          {
+            "value": "OpenEnclave",
+            "description": "OpenEnclave extensions to SGX"
+          },
+          {
+            "value": "Tpm",
+            "description": "Edge TPM Virtualization Based Security"
+          }
+        ]
+      },
+      "enum": [
+        "SgxEnclave",
+        "OpenEnclave",
+        "Tpm"
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "location": "japaneast",
+    "serverName": "testserver",
+    "databaseName": "testDatabase",
+    "api-version": "2020-08-01-preview",
+    "parameters": {
+      "restorePointLabel": "mylabel"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/servers/testserver/databases/testDatabase/restorePoints/131546477590000000",
+        "name": "131546477590000000",
+        "type": "Microsoft.Sql/servers/databases/restorePoints",
+        "location": "japaneast",
+        "properties": {
+          "restorePointType": "DISCRETE",
+          "restorePointCreationDate": "2017-03-10T08:00:00Z",
+          "restorePointLabel": "mylabel"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/servers/testserver/databases/testDatabase/restorePoints/131546477590000000",
+        "name": "131546477590000000",
+        "type": "Microsoft.Sql/servers/databases/restorePoints",
+        "location": "southeastasia",
+        "properties": {
+          "restorePointType": "DISCRETE",
+          "restorePointCreationDate": "2017-03-10T08:00:00Z",
+          "restorePointLabel": "mylabel"
+        }
+      }
+    },
+    "202": {}
+  }
+}

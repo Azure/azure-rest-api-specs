@@ -1,0 +1,81 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementClient",
+    "version": "2018-06-01"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ManagedPrivateEndpoint": {
+      "description": "Properties of a managed private endpoint",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "connectionState": {
+          "description": "The managed private endpoint connection state",
+          "$ref": "#/definitions/ConnectionStateProperties"
+        },
+        "fqdns": {
+          "description": "Fully qualified domain names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupId": {
+          "description": "The groupId to which the managed private endpoint is created",
+          "type": "string"
+        },
+        "isReserved": {
+          "description": "Denotes whether the managed private endpoint is reserved",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "privateLinkResourceId": {
+          "description": "The ARM resource ID of the resource to which the managed private endpoint is created",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The managed private endpoint provisioning state",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "ConnectionStateProperties": {
+      "description": "The connection state of a managed private endpoint",
+      "type": "object",
+      "properties": {
+        "actionsRequired": {
+          "description": "The actions required on the managed private endpoint",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The managed private endpoint description",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The approval status",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

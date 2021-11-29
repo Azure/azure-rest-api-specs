@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-hybriddatamanager"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-hybriddatamanager"
+  clear-output-folder: true
   generate-metadata: true
 ```

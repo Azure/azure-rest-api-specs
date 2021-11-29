@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/calculatebaseline": {
+    "/{resourceUri}/providers/Microsoft.Insights/calculatebaseline": {
       "post": {
         "tags": [
           "Baseline"
@@ -48,7 +48,7 @@
             "$ref": "#/parameters/ExtendedResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "TimeSeriesInformation",
@@ -151,9 +151,54 @@
         "baseline": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Baseline"
+            "$ref": "./baseline_API.json#/definitions/Baseline"
           },
           "description": "The baseline values for each sensitivity."
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "isEligible": {
+              "type": "boolean",
+              "description": "is series eligible for dynamic threshold analysis"
+            },
+            "status": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of extended status for calculating the baseline."
+            },
+            "seasonalityPeriod": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The seasonality period for calculating the baseline."
+            }
+          },
+          "description": "The statistics"
+        },
+        "internalOperationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "internal operation id"
+        },
+        "errorType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            100,
+            200
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": false
+          },
+          "description": "The error type for calculating the baseline."
         }
       },
       "required": [
@@ -161,48 +206,6 @@
         "baseline"
       ],
       "description": "The response to a calculate baseline call."
-    },
-    "Baseline": {
-      "type": "object",
-      "properties": {
-        "sensitivity": {
-          "type": "string",
-          "enum": [
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "Sensitivity",
-            "modelAsString": false
-          },
-          "description": "The sensitivity of the baseline."
-        },
-        "lowThresholds": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double",
-            "description": "A single low threshold value."
-          },
-          "description": "The low thresholds of the baseline."
-        },
-        "highThresholds": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double",
-            "description": "A single high threshold value."
-          },
-          "description": "The high thresholds of the baseline."
-        }
-      },
-      "required": [
-        "sensitivity",
-        "lowThresholds",
-        "highThresholds"
-      ],
-      "description": "The baseline values for a single sensitivity value."
     }
   },
   "parameters": {
@@ -214,13 +217,6 @@
       "description": "The identifier of the resource. It has the following structure: subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceName}. For example: subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
