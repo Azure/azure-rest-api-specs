@@ -2,11 +2,21 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: costmanagement
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/costmanagement/armcostmanagement
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Go multi-api

@@ -85,5 +85,6 @@ directive:
   - suppress: OperationIdNounConflictingModelNames
     reason: This is only a warning. Changing these definitions would be a massive breaking change to our clients
   - suppress: LongRunningOperationsWithLongRunningExtension
+  - suppress: OAV107
 ```
 ---
