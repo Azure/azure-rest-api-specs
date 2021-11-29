@@ -2678,6 +2678,36 @@
           "items": {
             "$ref": "#/definitions/DimensionResolution"
           }
+        },
+        "age":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgeResolution"
+          }
+        },
+        "currency":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyResolution"
+          }
+        },
+        "temperature":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemperatureResolution"
+          }
+        },
+        "number":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumberResolution"
+          }
+        },
+        "ordinal":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrdinalResolution"
+          }
         }
       }
     },
@@ -2777,7 +2807,127 @@
           "description": "probability of the resolution instance being correct for the extracted text."
         }
       }
+    },
+    "AgeResolution":{
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "The age unit"
+        },
+        "value": {
+          "type": "string",
+          "enum": [
+            "F",
+            "C",
+            "Degree"
+          ],
+          "description": "The actual age value that the extracted text denotes."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "CurrencyResolution":{
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "The Currency unit"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual currency value that the extracted text denotes."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "TemperatureResolution":{
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Year",
+            "Month",
+            "Week",
+            "Day",
+            "Age"
+          ],
+          "description": "The temperature unit"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual temperature value that the extracted text denotes."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "NumberResolution":{
+      "type": "object",
+      "properties": {
+        "numType": {
+          "type": "string",
+          "enum": [
+            "integer",
+            "decimal",
+            "power",
+            "fraction",
+            "percent",
+            "numberrange"
+          ],
+          "description": "The type of the extracted number entity."
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual value that the extracted text denotes."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+    },
+    "OrdinalResolution": {
+      "type": "object",
+      "properties": {
+        "offset":{
+          "type": "string",
+          "description": "The offset w.r.t the value."
+        },
+        "relativeTo":{
+          "type":"string",
+          "enum": [
+            "current",
+            "end",
+            "start"
+          ]
+        },
+        "value":{
+          "type": "string",
+          "description": "The actual value that the extracted text denotes."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "probability of the resolution instance being correct for the extracted text."
+        }
+      }
+
     }
+
   },
   "parameters": {
     "Endpoint": {
