@@ -205,7 +205,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances": {
       "get": {
         "tags": [
           "ReplicationAppliances"
@@ -3854,7 +3854,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/switchProvider": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/switchProvider": {
       "post": {
         "tags": [
           "ReplicationProtectedItems"
@@ -9943,9 +9943,6 @@
     },
     "ApplianceSpecificDetails": {
       "description": "Appliance specific details.",
-      "required": [
-        "instanceType"
-      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -14711,6 +14708,90 @@
           "readOnly": true
         }
       }
+    },
+    "InMageRcmApplianceDetails": {
+      "description": "InMageRcm appliance details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The appliance Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The appliance name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fabricArmId": {
+          "description": "The fabric ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "processServer": {
+          "$ref": "#/definitions/ProcessServerDetails",
+          "description": "The process server.",
+          "readOnly": true
+        },
+        "rcmProxy": {
+          "$ref": "#/definitions/RcmProxyDetails",
+          "description": "The of RCM proxy.",
+          "readOnly": true
+        },
+        "pushInstaller": {
+          "$ref": "#/definitions/PushInstallerDetails",
+          "description": "The push installer.",
+          "readOnly": true
+        },
+        "replicationAgent": {
+          "$ref": "#/definitions/ReplicationAgentDetails",
+          "description": "The replication agent.",
+          "readOnly": true
+        },
+        "reprotectAgent": {
+          "$ref": "#/definitions/ReprotectAgentDetails",
+          "description": "The reprotect agent.",
+          "readOnly": true
+        },
+        "marsAgent": {
+          "$ref": "#/definitions/MarsAgentDetails",
+          "description": "The Mars agent.",
+          "readOnly": true
+        },
+        "dra": {
+          "$ref": "#/definitions/DraDetails",
+          "description": "The DRA.",
+          "readOnly": true
+        },
+        "switchProviderBlockingErrorDetails": {
+          "description": "The switch provider blocking error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmFabricSwitchProviderBlockingErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InMageRcmApplianceSpecificDetails": {
+      "description": "InMageRcm appliance specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplianceSpecificDetails"
+        }
+      ],
+      "properties": {
+        "appliances": {
+          "description": "The list of appliances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmApplianceDetails"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
     },
     "InMageRcmApplyRecoveryPointInput": {
       "description": "ApplyRecoveryPoint input specific to InMageRcm provider.",
