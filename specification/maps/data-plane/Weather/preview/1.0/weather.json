@@ -216,6 +216,7 @@
     "OptionalWeatherGovernmentId": {
       "name": "govId",
       "description": "Government storm Id",
+      "x-ms-client-name": "governmentStormId",
       "type": "integer",
       "format": "int32",
       "in": "query",
@@ -242,6 +243,7 @@
     "Position": {
       "name": "query",
       "in": "query",
+      "x-ms-client-name": "coordinates",
       "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
       "required": true,
       "x-ms-parameter-location": "method",
@@ -825,7 +827,7 @@
           {
             "name": "current",
             "description": "When true, return the current storm location",
-            "x-ms-client-name": "getCurrentStormLocation",
+            "x-ms-client-name": "includeCurrentStorm",
             "in": "query",
             "type": "boolean",
             "default": false
@@ -1776,7 +1778,7 @@
       "type": "object",
       "properties": {
         "date": {
-          "x-ms-client-name": "dateTime",
+          "x-ms-client-name": "timestamp",
           "type": "string",
           "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00.",
           "format": "date-time"
