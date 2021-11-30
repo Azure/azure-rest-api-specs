@@ -3,7 +3,7 @@
   "info": {
     "title": "DeviceUpdate",
     "description": "Microsoft Device Update resource provider.",
-    "version": "2020-03-01-preview"
+    "version": "2021-11-02-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1260,6 +1260,27 @@
                 "name": "PublicNetworkAccess",
                 "modelAsString": true
               }
+            },
+            "sku": {
+              "description": "Device Update SKU",
+              "type": "string",
+              "enum": [
+                "Free",
+                "Paid"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "SKU",
+                "modelAsString": true
+              }
+            },
+            "locations": {
+              "description": "Device Update account primary and failover location details",
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Location"
+              }
             }
           }
         },
@@ -1268,6 +1289,28 @@
           "description": "The type of identity used for the resource."
         }
       }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "description": "Whether the location is primary or failover",
+          "default": "Enabled",
+          "enum": [
+            "Primary",
+            "Failover"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Role",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "AccountList": {
       "description": "List of Accounts.",
@@ -1555,10 +1598,6 @@
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
           "description": "The provisioning state of the private endpoint connection proxy resource."
-        },
-        "status": {
-          "description": "Operation status.",
-          "type": "string"
         }
       }
     },
@@ -1691,14 +1730,6 @@
           "description": "Internal FQDN.",
           "type": "string",
           "readOnly": true
-        },
-        "redirectMapId": {
-          "description": "Redirect map ID.",
-          "type": "string"
-        },
-        "privateLinkServiceArmRegion": {
-          "description": "PrivateLinkService ARM region.",
-          "type": "string"
         }
       }
     },
