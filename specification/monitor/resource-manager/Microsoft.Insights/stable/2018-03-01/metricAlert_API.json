@@ -767,7 +767,7 @@
         "allOf": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MetricCriteria"
+            "$ref": "#/definitions/MultiMetricCriteria"
           },
           "description": "The list of metric criteria for this 'all of' operation. "
         }
@@ -996,8 +996,7 @@
         },
         "ignoreDataBefore": {
           "type": "string",
-          "format": "date-time",
-          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in C# Datetime format)"
         }
       },
       "description": "Criterion for dynamic threshold."
