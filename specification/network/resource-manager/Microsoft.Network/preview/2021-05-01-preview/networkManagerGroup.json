@@ -328,13 +328,13 @@
         "description": "Creates or updates a static member.",
         "parameters": [
           {
-            "name": "staticMember",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StaticMember"
             },
-            "description": "The static member to create or update"
+            "description": "Parameters supplied to the specify the static member to create"
           }
         ],
         "responses": {
@@ -507,9 +507,10 @@
     },
     "StaticMember": {
       "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Resource Id."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StaticMemberProperties",
+          "description": "The Static Member properties"
         },
         "systemData": {
           "readOnly": true,
@@ -539,6 +540,16 @@
         }
       },
       "description": "Result of the request to list StaticMember. It contains a list of groups and a URL link to get the next set of results."
+    },
+    "StaticMemberProperties": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+        "type": "string",
+        "description": "Resource Id."
+        }
+      },
+      "description": "Properties of static member."
     },
     "QueryRequestOptions": {
       "properties": {
