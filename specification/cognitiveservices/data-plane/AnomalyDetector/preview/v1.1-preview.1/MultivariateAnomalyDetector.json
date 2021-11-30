@@ -494,20 +494,15 @@
         "status": {
           "$ref": "#/definitions/ModelStatus"
         },
-        "errors": {
-          "type": "array",
-          "description": "Error messages when failed to create a model.",
-          "readOnly": true,
-          "items": {
+        "error": {
             "$ref": "#/definitions/ErrorResponse"
-          }
         },
         "diagnosticsInfo": {
           "$ref": "#/definitions/DiagnosticsInfo"
         }
       },
       "type": "object",
-      "description": "Train result of a model including status, errors and diagnose info for model and variables."
+      "description": "Train result of a model including status, error and diagnose info for model and variables."
     },
     "ErrorResponse": {
       "required": [
@@ -905,12 +900,8 @@
             "modelAsString": false
           }
         },
-        "errors": {
-          "type": "array",
-          "description": "Error message when detection is failed.",
-          "items": {
+        "error": {
             "$ref": "#/definitions/ErrorResponse"
-          }
         },
         "variableStates": {
           "type": "array",
@@ -920,72 +911,63 @@
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "ad_on_timer_output",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "ad_output",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "ad_series_init",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "cpu",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "data_in_speed",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "data_out_speed",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "last_check_point_duration",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             },
             {
               "variable": "ingestion",
               "filledNARatio": 0,
               "effectiveCount": 26,
               "startTime": "2019-04-01T00:00:00Z",
-              "endTime": "2019-04-01T00:25:00Z",
-              "errors": []
+              "endTime": "2019-04-01T00:25:00Z"
             }
           ],
           "items": {
@@ -1012,12 +994,8 @@
         "value": {
           "$ref": "#/definitions/AnomalyValue"
         },
-        "errors": {
-          "type": "array",
-          "description": "Error message for the current timestamp",
-          "items": {
+        "error": {
             "$ref": "#/definitions/ErrorResponse"
-          }
         }
       },
       "type": "object"
