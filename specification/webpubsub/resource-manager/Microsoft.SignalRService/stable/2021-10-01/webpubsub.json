@@ -52,9 +52,6 @@
         ],
         "description": "Checks that the resource name is valid and is not already in use.",
         "operationId": "WebPubSub_CheckNameAvailability",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -67,12 +64,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "body",
             "name": "parameters",
             "description": "Parameters supplied to the operation.",
@@ -80,6 +71,12 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityParameters"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -115,9 +112,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "in": "path",
             "name": "location",
             "description": "the location like \"eastus\"",
@@ -126,6 +120,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -164,10 +161,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -206,13 +203,13 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -251,6 +248,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -258,9 +258,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -289,25 +286,10 @@
         ],
         "description": "Create or update a resource.",
         "operationId": "WebPubSub_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "in": "body",
             "name": "parameters",
@@ -316,6 +298,18 @@
             "schema": {
               "$ref": "#/definitions/WebPubSubResource"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -356,6 +350,9 @@
         "operationId": "WebPubSub_Delete",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -363,9 +360,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -398,25 +392,10 @@
         ],
         "description": "Operation to update an exiting resource.",
         "operationId": "WebPubSub_Update",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "in": "body",
             "name": "parameters",
@@ -425,6 +404,18 @@
             "schema": {
               "$ref": "#/definitions/WebPubSubResource"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -464,6 +455,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -471,9 +465,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -512,15 +503,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "in": "path",
             "name": "hubName",
             "description": "The hub name.",
@@ -529,6 +511,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -557,31 +548,16 @@
         ],
         "description": "Create or update a hub setting.",
         "operationId": "WebPubSubHubs_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
           {
             "in": "path",
             "name": "hubName",
             "description": "The hub name.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -591,6 +567,18 @@
             "schema": {
               "$ref": "#/definitions/WebPubSubHub"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -628,15 +616,6 @@
         "operationId": "WebPubSubHubs_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "in": "path",
             "name": "hubName",
             "description": "The hub name.",
@@ -645,6 +624,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -684,6 +672,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -691,9 +682,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -729,6 +717,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -736,9 +727,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -777,15 +765,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "in": "path",
             "name": "privateEndpointConnectionName",
             "description": "The name of the private endpoint connection",
@@ -794,6 +773,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -822,31 +810,16 @@
         ],
         "description": "Update the state of specified private endpoint connection",
         "operationId": "WebPubSubPrivateEndpointConnections_Update",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
           {
             "in": "path",
             "name": "privateEndpointConnectionName",
             "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -856,6 +829,18 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -886,15 +871,6 @@
         "operationId": "WebPubSubPrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "in": "path",
             "name": "privateEndpointConnectionName",
             "description": "The name of the private endpoint connection",
@@ -903,6 +879,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -942,6 +927,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -949,9 +937,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -985,25 +970,10 @@
         ],
         "description": "Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "WebPubSub_RegenerateKey",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "in": "body",
             "name": "parameters",
@@ -1012,6 +982,18 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeyParameters"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -1048,6 +1030,9 @@
         "operationId": "WebPubSub_Restart",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1055,9 +1040,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1097,6 +1079,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1104,9 +1089,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1145,15 +1127,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "in": "path",
             "name": "sharedPrivateLinkResourceName",
             "description": "The name of the shared private link resource",
@@ -1162,6 +1135,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -1190,31 +1172,16 @@
         ],
         "description": "Create or update a shared private link resource",
         "operationId": "WebPubSubSharedPrivateLinkResources_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
           {
             "in": "path",
             "name": "sharedPrivateLinkResourceName",
             "description": "The name of the shared private link resource",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1224,6 +1191,18 @@
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -1261,15 +1240,6 @@
         "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "in": "path",
             "name": "sharedPrivateLinkResourceName",
             "description": "The name of the shared private link resource",
@@ -1278,6 +1248,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -1317,6 +1296,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1324,9 +1306,6 @@
           },
           {
             "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
