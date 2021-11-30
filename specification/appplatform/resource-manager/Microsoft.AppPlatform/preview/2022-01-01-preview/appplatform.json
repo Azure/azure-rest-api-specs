@@ -8675,21 +8675,11 @@
       }
     },
     "AddonProfile": {
-      "description": "Deployment addon profile",
       "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether the add-on is enabled or not"
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Key-value pairs for configurations of add-on"
-        }
-      }
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Key-value pairs for configurations of add-on."
     },
     "ContainerProbeSettings": {
       "description": "Container liveness and readiness probe settings",
@@ -9911,6 +9901,13 @@
           "description": "Indicate if only https is allowed.",
           "type": "boolean"
         },
+        "sourceGateways": {
+          "description": "The array of resource Ids of gateway to integrate with API portal.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "sourceUrls": {
           "description": "Collection of OpenAPI source URL locations.",
           "type": "array",
@@ -9923,7 +9920,8 @@
         },
         "resourceRequests": {
           "$ref": "#/definitions/ApiPortalResourceRequests",
-          "description": "The requested resource quantity for required CPU and Memory."
+          "description": "The requested resource quantity for required CPU and Memory.",
+          "readOnly": true
         },
         "instances": {
           "description": "Collection of instances belong to API portal.",
