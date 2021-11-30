@@ -31,6 +31,17 @@ openapi-subtype: rpaas
 tag: package-2021-06-10
 ```
 
+### Tag: package-2021-08-24
+
+These settings apply only when `--tag=package-2021-08-24` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-24'
+input-file:
+  - Microsoft.HealthBot/stable/2021-08-24/healthbot.json
+```
+
+---
+
 ### Tag: package-2021-06-10
 
 These settings apply only when `--tag=package-2021-06-10` is specified on the command line.
