@@ -879,7 +879,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CurrentAirQualityResult"
+              "$ref": "#/definitions/AirQualityResult"
             }
           },
           "default": {
@@ -1021,7 +1021,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HourlyAirQualityForecastResult"
+              "$ref": "#/definitions/AirQualityResult"
             }
           },
           "default": {
@@ -3463,9 +3463,9 @@
         }
       }
     },
-    "CurrentAirQualityResult": {
+    "AirQualityResult": {
       "type": "object",
-      "description": "This object is returned from a successful Get Current Air Quality call.",
+      "description": "This object is returned from a successful Get Air Quality call.",
       "properties": {
         "results": {
           "type": "array",
@@ -3473,19 +3473,6 @@
             "$ref": "#/definitions/AirQuality"
           },
           "description": "A list of all air quality results for the queried location."
-        }
-      }
-    },
-    "HourlyAirQualityForecastResult": {
-      "type": "object",
-      "description": "This object is returned from a successful Get Hourly Air Quality Forecast call.",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AirQuality"
-          },
-          "description": "A list of all hourly air quality forecasts for the queried location."
         }
       }
     },
