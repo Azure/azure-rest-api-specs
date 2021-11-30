@@ -2775,19 +2775,15 @@
             "duration",
             "timerange"
           ],
+          "x-ms-enum": {
+            "name": "subType",
+            "modelAsString": true
+          },
           "description": "The date time subType"
         },
         "value": {
           "type": "string",
           "description": "The actual time that the extracted text denote."
-        },
-        "start": {
-          "type": "string",
-          "description": "(optional) beginning of an interval"
-        },
-        "end": {
-          "type": "string",
-          "description": "(optional) ending of an interval"
         },
         "modifier":{
           "type": "string",
@@ -2811,19 +2807,24 @@
             "before-approx",
             "mid",
             "more"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "modifier",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "required": [
+        "timex",
+        "subType",
+        "value"
+      ]
     },
     "DimensionFields": {
       "type": "object",
       "properties": {
         "subType": {
           "type": "string",
-          "x-ms-enum": {
-            "name": "SubType",
-            "modelAsString": false
-          },
           "enum": [
             "Speed",
             "Weight",
@@ -2832,6 +2833,10 @@
             "Area",
             "Information"
           ],
+          "x-ms-enum": {
+            "name": "subType",
+            "modelAsString": true
+          },
           "description": "represents the Dimension subType (e.g., Speed, Volume, Weight)"
         },
         "unit": {
@@ -2842,7 +2847,12 @@
           "type": "string",
           "description": "The actual value that the extracted text denotes."
         }
-      }
+      },
+      "required": [
+        "subType",
+        "unit",
+        "value"
+      ]
     },
     "TemperatureFields":{
       "type": "object",
@@ -2854,13 +2864,20 @@
             "C",
             "Degree"
           ],
+          "x-ms-enum": {
+            "name": "subType",
+            "modelAsString": true
+          },
           "description": "The temperature unit"
         },
         "value": {
           "type": "string",
           "description": "The actual temperature value that the extracted text represents."
         }
-      }
+      },
+      "required": [
+        "unit"
+      ]
     },
     "CurrencyFields":{
       "type": "object",
@@ -2873,7 +2890,11 @@
           "type": "string",
           "description": "The actual currency value that the extracted text denotes."
         }
-      }
+      },
+      "required": [
+        "value",
+        "unit"
+      ]
     },
     "AgeFields":{
       "type": "object",
@@ -2887,13 +2908,21 @@
             "Day",
             "Age"
           ],
+          "x-ms-enum": {
+            "name": "unit",
+            "modelAsString": true
+          },
           "description": "The age unit"
         },
         "value": {
           "type": "string",
           "description": "The actual age value that the extracted text denotes."
         }
-      }
+      },
+      "required": [
+        "value",
+        "unit"
+      ]
     },
     "NumberFields":{
       "type": "object",
@@ -2908,13 +2937,21 @@
             "percent",
             "numberrange"
           ],
+          "x-ms-enum": {
+            "name": "numType",
+            "modelAsString": true
+          },
           "description": "The type of the extracted number entity."
         },
         "value": {
           "type": "string",
           "description": "The actual value that the extracted text denotes."
         }
-      }
+      },
+      "required": [
+        "numType",
+        "value"
+      ]
     },
     "OrdinalFields": {
       "type": "object",
@@ -2929,13 +2966,22 @@
             "current",
             "end",
             "start"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "numType",
+            "modelAsString": true
+          }
         },
         "value":{
           "type": "string",
           "description": "The actual value that the extracted text denotes."
         }
-      }
+      },
+      "required": [
+        "offset",
+        "relativeTo",
+        "value"
+      ]
     }
   },
   "parameters": {
