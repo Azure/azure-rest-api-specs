@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-digitaltwins-2021-06-30-preview
   - tag: schema-digitaltwins-2020-12-01
   - tag: schema-digitaltwins-2020-10-31
   - tag: schema-digitaltwins-2020-03-01-preview
@@ -13,6 +14,17 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-digitaltwins-2021-06-30-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-digitaltwins-2021-06-30-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DigitalTwins/preview/2021-06-30-preview/digitaltwins.json
+
+```
 
 ### Tag: schema-digitaltwins-2020-12-01 and azureresourceschema
 
