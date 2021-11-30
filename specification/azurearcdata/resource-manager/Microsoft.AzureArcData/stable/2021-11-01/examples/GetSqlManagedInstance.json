@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlManagedInstanceName": "testsqlManagedInstance",
+    "api-version": "2021-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "admin": "Admin user",
+          "startTime": "Instance start time",
+          "endTime": "Instance end time",
+          "basicLoginInformation": {
+            "username": "username"
+          },
+          "licenseType": "LicenseIncluded",
+          "clusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s",
+          "extensionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s/providers/Microsoft.KubernetesConfiguration/extensions/extension",
+          "k8sRaw": {
+            "additionalProperty": 1234,
+            "spec": {
+              "replicas": 1,
+              "scheduling": {
+                "default": {
+                  "resources": {
+                    "requests": {
+                      "cpu": "1",
+                      "memory": "8Gi",
+                      "additionalProperty": "additionalValue"
+                    },
+                    "limits": {
+                      "cpu": "1",
+                      "memory": "8Gi",
+                      "additionalProperty": "additionalValue"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "location": "northeurope",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/arclocation"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "sku": {
+          "name": "vCore",
+          "tier": "GeneralPurpose",
+          "dev": true
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/testsqlManagedInstance",
+        "name": "testsqlManagedInstance",
+        "type": "Microsoft.AzureArcData/sqlManagedInstance"
+      }
+    }
+  }
+}
