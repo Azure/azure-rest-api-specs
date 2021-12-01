@@ -64,6 +64,9 @@ This document lists the set of automated rules that can be validated against swa
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
 | [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
+| [INVALID_XMS_DISCRIMINATOR_VALUE](#INVALID_XMS_DISCRIMINATOR_VALUE) | [OAV133](#INVALID_XMS_DISCRIMINATOR_VALUE) |
+| [DISCRIMINATOR_PROPERTY_NOT_FOUND](#DISCRIMINATOR_PROPERTY_NOT_FOUND) | [OAV134](#DISCRIMINATOR_PROPERTY_NOT_FOUND) |
+| [INVALID_DISCRIMINATOR_TYPE](#INVALID_DISCRIMINATOR_TYPE) | [OAV132](#INVALID_DISCRIMINATOR_TYPE) |
 | [DISCRIMINATOR_NOT_REQUIRED](#DISCRIMINATOR_NOT_REQUIRED) | [OAV131](#DISCRIMINATOR_NOT_REQUIRED) |
 | [RESPONSE_BODY_NOT_IN_EXAMPLE](#RESPONSE_BODY_NOT_IN_EXAMPLE) | [OAV130](#RESPONSE_BODY_NOT_IN_EXAMPLE) |
 | [DOUBLE_FORWARD_SLASHES_IN_URL](#DOUBLE_FORWARD_SLASHES_IN_URL) | [OAV129](#DOUBLE_FORWARD_SLASHES_IN_URL) |
@@ -93,6 +96,7 @@ This document lists the set of automated rules that can be validated against swa
 | [ROUNDTRIP_ADDITIONAL_PROPERTY](#ROUNDTRIP_ADDITIONAL_PROPERTY) | |
 | [LRO_RESPONSE_CODE](#LRO_RESPONSE_CODE) | |
 | [LRO_RESPONSE_HEADER](#LRO_RESPONSE_HEADER) | |
+| [MISSING_RESOURCE_ID](#MISSING_RESOURCE_ID) | |
 
 
 ### Validation Warnings
@@ -587,11 +591,11 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="ENUM_MISMATCH" />ENUM_MISMATCH
 
-**Output Message**: Enum does not match case for:{0}.
+**Output Message**: Enum does not match for:{0}.
 
-**Description**: The enum value provided in example or in traffic payload doesn't match the case of an allowed value.
+**Description**: The enum value provided in example or in traffic payload doesn't match an allowed value.
 
-**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example or in traffic payload.
+**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value in example or in traffic payload.
 
 ### <a name="READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST" />READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
 
@@ -617,6 +621,29 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
 
+### <a name="INVALID_XMS_DISCRIMINATOR_VALUE" />INVALID_XMS_DISCRIMINATOR_VALUE
+
+**Output Message**: The value of x-ms-dicriminator-value is not in the discriminator enum list: {0}.
+
+**Description**: If a discriminator has an enum list, the x-ms-dicriminator-value must in the enum list.
+
+**How to fix the violation**: Add the value into the enum list or correct the value.
+
+### <a name="DISCRIMINATOR_PROPERTY_NOT_FOUND" />DISCRIMINATOR_PROPERTY_NOT_FOUND
+
+**Output Message**: Missing discriminator in base model. This derived model has x-ms-dicriminator-value: {0}.
+
+**Description**: x-ms-dicriminator-value is defined, but base model doesn't have discriminator field.
+
+**How to fix the violation**: Check whether it needs. If needs, add discriminator field in base model.
+
+### <a name="INVALID_DISCRIMINATOR_TYPE" />INVALID_DISCRIMINATOR_TYPE
+
+**Output Message**: The property type of discriminator must be string: {0}.
+
+**Description**: If a property is declared as discriminator, the property type must be string and nothing else.
+
+**How to fix the violation**: Set the property type to string in swagger.
 
 ### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED
 
@@ -832,16 +859,24 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="LRO_RESPONSE_CODE" />LRO_RESPONSE_CODE
 
-**Output Message**: Patch/Post long running operation must return 201 or 202, Delete long running operation must return 202 or 204, Put long running operation must return 202 or 201 or 200, but {statusCode} returned.
+**Output Message**: Respond to the initial request of a long running operation, Patch/Post call must return 201 or 202, Delete call must return 202 or 204, Put call must return 202 or 201 or 200, but {statusCode} being returned.
 
-**Description**: Long running operation must return specific response code as per http method type when this operation is annotated with x-ms-long-running-operation:true.
+**Description**: Long running operation must return specific response code as per http method type when this operation is annotated with x-ms-long-running-operation:true. See [RPC - Asynchronous Operations](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for more details.
 
 **How to fix the violation**: Correct the response code per the guidance or remove annotation of x-ms-long-running-operation.
 
 ### <a name="LRO_RESPONSE_HEADER" />LRO_RESPONSE_HEADER
 
-**Output Message**: Long running operation should return {header} in header but not provided.
+**Output Message**: Long running operation should return {header} in header but not being provided.
 
 **Description**: Long running operation must return location header or azure-AsyncOperation header in response when this operation is annotated with x-ms-long-running-operation:true.
 
 **How to fix the violation**: Adding one of these headers to the response.
+
+### <a name="MISSING_RESOURCE_ID" />MISSING_RESOURCE_ID
+
+**Output Message**: id is required to return in response of GET/PUT resource calls but not being provided.
+
+**Description**: `id` is a required field of azure resource to return in response body of each GET or PUT call when this resource is annotated as x-ms-azure-resource: true. This field is important to the platform because it is used as the identifier for references on other objects. e.g. "id": "/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}".
+
+**How to fix the violation**: Adding id to the response body.

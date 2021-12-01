@@ -1,0 +1,619 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StreamAnalyticsManagementClient",
+    "version": "2020-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/clusters/{clusterName}": {
+      "put": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Creates a Stream Analytics Cluster or replaces an already existing cluster.",
+        "operationId": "Clusters_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create a new cluster": {
+            "$ref": "./examples/Cluster_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster",
+            "description": "The definition of the cluster that will be used to create a new cluster or replace the existing one.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/IfMatchHeader"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/IfNoneMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster was successfully created or replaced.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "The cluster was successfully created or replaced.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Updates an existing cluster. This can be used to partially update (ie. update one or two properties) a cluster without affecting the rest of the cluster definition.",
+        "operationId": "Clusters_Update",
+        "x-ms-examples": {
+          "Update a cluster": {
+            "$ref": "./examples/Cluster_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cluster",
+            "description": "The properties specified here will overwrite the corresponding properties in the existing cluster (ie. Those properties will be updated).",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/IfMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "The update request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Gets information about the specified cluster.",
+        "operationId": "Clusters_Get",
+        "x-ms-examples": {
+          "Get a cluster": {
+            "$ref": "./examples/Cluster_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Deletes the specified cluster.",
+        "operationId": "Clusters_Delete",
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "./examples/Cluster_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster was successfully deleted."
+          },
+          "202": {
+            "description": "The delete request was successfully initiated."
+          },
+          "204": {
+            "description": "The cluster does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Lists all of the clusters in the given subscription.",
+        "operationId": "Clusters_ListBySubscription",
+        "x-ms-examples": {
+          "List the clusters in a subscription": {
+            "$ref": "./examples/Cluster_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the clusters under the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Lists all of the clusters in the given resource group.",
+        "operationId": "Clusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "List clusters in resource group": {
+            "$ref": "./examples/Cluster_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the clusters under the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/clusters/{clusterName}/listStreamingJobs": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Lists all of the streaming jobs in the given cluster.",
+        "operationId": "Clusters_ListStreamingJobs",
+        "x-ms-examples": {
+          "List all streaming jobs in cluster": {
+            "$ref": "./examples/Cluster_ListStreamingJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the streaming jobs in the specified cluster.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJobListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Cluster": {
+      "type": "object",
+      "description": "A Stream Analytics Cluster object",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ClusterSku"
+        },
+        "etag": {
+          "description": "The current entity tag for the cluster. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties associated with a Stream Analytics cluster.",
+          "$ref": "#/definitions/ClusterProperties"
+        }
+      }
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "The properties associated with a Stream Analytics cluster.",
+      "properties": {
+        "createdDate": {
+          "description": "The date this cluster was created.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "clusterId": {
+          "description": "Unique identifier for the cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ClusterProvisioningState"
+        },
+        "capacityAllocated": {
+          "description": "Represents the number of streaming units currently being used on the cluster.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "capacityAssigned": {
+          "description": "Represents the sum of the SUs of all streaming jobs associated with the cluster. If all of the jobs were running, this would be the capacity allocated.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "description": "A list of clusters populated by a 'list' operation.",
+      "properties": {
+        "value": {
+          "description": "A list of clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URL to fetch the next set of clusters.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterJob": {
+      "type": "object",
+      "description": "A streaming job.",
+      "properties": {
+        "id": {
+          "description": "Resource ID of the streaming job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "streamingUnits": {
+          "description": "The number of streaming units that are used by the streaming job.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "jobState": {
+          "$ref": "#/definitions/JobState"
+        }
+      }
+    },
+    "ClusterJobListResult": {
+      "type": "object",
+      "description": "A list of streaming jobs. Populated by a List operation.",
+      "properties": {
+        "value": {
+          "description": "A list of streaming jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterJob"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to fetch the next set of streaming jobs.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterSku": {
+      "type": "object",
+      "description": "The SKU of the cluster. This determines the size/capacity of the cluster. Required on PUT (CreateOrUpdate) requests.",
+      "properties": {
+        "name": {
+          "description": "Specifies the SKU name of the cluster. Required on PUT (CreateOrUpdate) requests.",
+          "type": "string",
+          "enum": [
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterSkuName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "The default SKU."
+              }
+            ]
+          }
+        },
+        "capacity": {
+          "description": "Denotes the number of streaming units the cluster can support. Valid values for this property are multiples of 36 with a minimum value of 36 and maximum value of 216. Required on PUT (CreateOrUpdate) requests.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 36,
+          "maximum": 216
+        }
+      }
+    },
+    "ClusterProvisioningState": {
+      "description": "The status of the cluster provisioning. The three terminal states are: Succeeded, Failed and Canceled",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The cluster provisioning succeeded."
+          },
+          {
+            "value": "Failed",
+            "description": "The cluster provisioning failed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The cluster provisioning was canceled."
+          },
+          {
+            "value": "InProgress",
+            "description": "The cluster provisioning was inprogress."
+          }
+        ]
+      }
+    },
+    "JobState": {
+      "description": "The current execution state of the streaming job.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Created",
+        "Starting",
+        "Running",
+        "Stopping",
+        "Stopped",
+        "Deleting",
+        "Failed",
+        "Degraded",
+        "Restarting",
+        "Scaling"
+      ],
+      "x-ms-enum": {
+        "name": "JobState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Created",
+            "description": "The job is currently in the Created state."
+          },
+          {
+            "value": "Starting",
+            "description": "The job is currently in the Starting state."
+          },
+          {
+            "value": "Running",
+            "description": "The job is currently in the Running state."
+          },
+          {
+            "value": "Stopping",
+            "description": "The job is currently in the Stopping state."
+          },
+          {
+            "value": "Stopped",
+            "description": "The job is currently in the Stopped state."
+          },
+          {
+            "value": "Deleting",
+            "description": "The job is currently in the Deleting state."
+          },
+          {
+            "value": "Failed",
+            "description": "The job is currently in the Failed state."
+          },
+          {
+            "value": "Degraded",
+            "description": "The job is currently in the Degraded state."
+          },
+          {
+            "value": "Restarting",
+            "description": "The job is currently in the Restarting state."
+          },
+          {
+            "value": "Scaling",
+            "description": "The job is currently in the Scaling state."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

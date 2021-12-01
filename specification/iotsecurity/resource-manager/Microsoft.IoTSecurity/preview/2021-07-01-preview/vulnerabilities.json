@@ -1,0 +1,269 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Defender for IoT",
+    "description": "API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider",
+    "version": "2021-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/vulnerabilities": {
+      "get": {
+        "x-ms-examples": {
+          "List IoT Device Vulnerabilities": {
+            "$ref": "./examples/Vulnerabilities/GetDeviceVulnerabilityList.json"
+          }
+        },
+        "tags": [
+          "IoT Security Device Vulnerabilities"
+        ],
+        "description": "List IoT Device Vulnerabilities",
+        "operationId": "IotDeviceVulnerability_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupName"
+          },
+          {
+            "in": "query",
+            "name": "deviceId",
+            "required": false,
+            "type": "string",
+            "description": "Device ID filter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeviceVulnerabilityListModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/vulnerabilities/{vulnerabilityId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Device Vulnerability": {
+            "$ref": "./examples/Vulnerabilities/GetDeviceVulnerability.json"
+          }
+        },
+        "tags": [
+          "IoT Security Device Vulnerability"
+        ],
+        "operationId": "IotDeviceVulnerability_Get",
+        "description": "Get IoT Device Vulnerability",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VulnerabilityId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT device vulnerability",
+            "schema": {
+              "$ref": "#/definitions/DeviceVulnerabilityModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeviceVulnerabilityListModel": {
+      "description": "List of IoT Device Vulnerabilities",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceVulnerabilityModel"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When available, follow the URI to get the next page of data"
+        }
+      }
+    },
+    "DeviceVulnerabilityModel": {
+      "type": "object",
+      "description": "IoT Device Vulnerability",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Device Vulnerability properties",
+          "$ref": "#/definitions/DeviceVulnerabilityPropertiesModel"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceVulnerabilityPropertiesModel": {
+      "type": "object",
+      "description": "IoT Device Vulnerability properties",
+      "properties": {
+        "description": {
+          "description": "The vulnerability description",
+          "readOnly": true,
+          "type": "string",
+          "example": "This vulnerability affects the following vendors: Mozilla, Ubuntu. To view more details about this vulnerability please visit the vendor website."
+        },
+        "severityScore": {
+          "description": "The severity score of the vulnerability",
+          "readOnly": true,
+          "type": "string",
+          "example": "Medium",
+          "$ref": "#/definitions/SeverityScore"
+        },
+        "score": {
+          "description": "The score of the vulnerability",
+          "type": "number",
+          "readOnly": true,
+          "format": "double",
+          "example": "6.5"
+        },
+        "exploitType": {
+          "description": "The exploit type of the vulnerability",
+          "readOnly": true,
+          "type": "string",
+          "example": "ExploitKit"
+        },
+        "sources": {
+          "description": "The sources of the vulnerability",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "Nvd"
+          }
+        },
+        "affectedVersions": {
+          "description": "The vulnerability affected versions",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "cpe:2.3:a:ubuntu:firefox:*:*:*:*:*:ubuntu_linux_18.04:*:*"
+          }
+        }
+      }
+    },
+    "SeverityScore": {
+      "description": "The severity score of the vulnerability",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "x-ms-enum": {
+        "name": "severityScore",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "DeviceGroupName": {
+      "name": "deviceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Device group name",
+      "x-ms-parameter-location": "method"
+    },
+    "VulnerabilityId": {
+      "name": "vulnerabilityId",
+      "in": "path",
+      "required": true,
+      "description": "Vulnerability Id. Format: <CVE ID>|<Device ID>",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

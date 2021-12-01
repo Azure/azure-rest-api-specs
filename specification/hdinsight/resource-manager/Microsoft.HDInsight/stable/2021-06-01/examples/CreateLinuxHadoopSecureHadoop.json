@@ -1,0 +1,219 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "tags": {
+        "key1": "val1"
+      },
+      "properties": {
+        "clusterVersion": "3.5",
+        "osType": "Linux",
+        "tier": "Premium",
+        "clusterDefinition": {
+          "kind": "Hadoop",
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
+            }
+          }
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage.blob.core.windows.net",
+              "isDefault": true,
+              "container": "containername",
+              "key": "storage account key"
+            }
+          ]
+        },
+        "securityProfile": {
+          "directoryType": "ActiveDirectory",
+          "domain": "DomainName",
+          "organizationalUnitDN": "OU=Hadoop,DC=hdinsight,DC=test",
+          "ldapsUrls": [
+            "ldaps://10.10.0.4:636"
+          ],
+          "domainUsername": "DomainUsername",
+          "domainUserPassword": "**********",
+          "clusterUsersGroupDNs": [
+            "hdiusers"
+          ]
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                "vmSize": "Standard_D3_V2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              },
+              "scriptActions": []
+            },
+            {
+              "name": "workernode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 4,
+              "hardwareProfile": {
+                "vmSize": "Standard_D3_V2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              },
+              "scriptActions": []
+            },
+            {
+              "name": "zookeepernode",
+              "minInstanceCount": 1,
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                "vmSize": "Small"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
+                }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              },
+              "scriptActions": []
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusters",
+        "location": "East US",
+        "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
+        "properties": {
+          "clusterVersion": "4.0.1000.1",
+          "osType": "Linux",
+          "clusterDefinition": {
+            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json",
+            "kind": "HADOOP",
+            "componentVersion": {
+              "Hadoop": "3.1"
+            }
+          },
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "standard_d12_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              },
+              {
+                "name": "workernode",
+                "targetInstanceCount": 4,
+                "hardwareProfile": {
+                  "vmSize": "standard_d4_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              },
+              {
+                "name": "zookeepernode",
+                "targetInstanceCount": 3,
+                "hardwareProfile": {
+                  "vmSize": "standard_a2_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "clusterState": "Running",
+          "createdDate": "2019-11-18T12:25:43.48",
+          "quotaInfo": {
+            "coresUsed": 40
+          },
+          "connectivityEndpoints": [
+            {
+              "name": "SSH",
+              "protocol": "TCP",
+              "location": "cluster1-ssh.azurehdinsight.net",
+              "port": 22
+            },
+            {
+              "name": "HTTPS",
+              "protocol": "TCP",
+              "location": "cluster1.azurehdinsight.net",
+              "port": 443
+            }
+          ],
+          "tier": "Standard"
+        }
+      }
+    }
+  }
+}

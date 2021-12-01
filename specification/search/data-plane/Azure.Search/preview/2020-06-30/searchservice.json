@@ -7102,6 +7102,10 @@
           "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
+        "knowledgeStore": {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStore",
+          "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -7141,6 +7145,138 @@
         "@odata.type"
       ],
       "description": "Base type for describing any cognitive service resource attached to a skillset."
+    },
+    "SearchIndexerKnowledgeStore": {
+      "properties": {
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string to the storage account projections will be stored in."
+        },
+        "projections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjection",
+            "x-nullable": false
+          },
+          "description": "A list of additional projections to perform during indexing."
+        }
+      },
+      "required": [
+        "storageConnectionString",
+        "projections"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/knowledge-store-projection-overview"
+      },
+      "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+    },
+    "SearchIndexerKnowledgeStoreProjection": {
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreTableProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure Table storage."
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreObjectProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure Blob storage."
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerKnowledgeStoreFileProjectionSelector",
+            "x-nullable": false
+          },
+          "description": "Projections to Azure File storage."
+        }
+      },
+      "description": "Container object for various projection selectors."
+    },
+    "SearchIndexerKnowledgeStoreProjectionSelector": {
+      "properties": {
+        "referenceKeyName": {
+          "type": "string",
+          "description": "Name of reference key to different projection."
+        },
+        "generatedKeyName": {
+          "type": "string",
+          "description": "Name of generated key to store projection under."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source data to project."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "Source context for complex projections."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "Nested inputs for complex projections."
+        }
+      },
+      "description": "Abstract class to share properties between concrete selectors."
+    },
+    "SearchIndexerKnowledgeStoreBlobProjectionSelector": {
+      "properties": {
+        "storageContainer": {
+          "type": "string",
+          "description": "Blob container to store projections in."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjectionSelector"
+        }
+      ],
+      "required": [
+        "storageContainer"
+      ],
+      "description": "Abstract class to share properties between concrete selectors."
+    },
+    "SearchIndexerKnowledgeStoreTableProjectionSelector": {
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Name of the Azure table to store projected data in."
+        }
+      },
+      "required": [
+        "generatedKeyName",
+        "tableName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreProjectionSelector"
+        }
+      ],
+      "description": "Description for what data to store in Azure Tables."
+    },
+    "SearchIndexerKnowledgeStoreObjectProjectionSelector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
+        }
+      ],
+      "description": "Projection definition for what data to store in Azure Blob."
+    },
+    "SearchIndexerKnowledgeStoreFileProjectionSelector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
+        }
+      ],
+      "description": "Projection definition for what data to store in Azure Files."
     },
     "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
@@ -7573,6 +7709,162 @@
       },
       "description": "Text analytics positive-negative sentiment analysis, scored as a floating point value in a range of zero to 1."
     },
+    "SentimentSkillV3": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "includeOpinionMining": {
+          "type": "boolean",
+          "default": false,
+          "description": "If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-sentiment-v3"
+      },
+      "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level."
+    },
+    "EntityLinkingSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityLinkingSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "x-nullable": true,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-linking-v3"
+      },
+      "description": "Using the Text Analytics API, extracts linked entities from text."
+    },
+    "EntityRecognitionSkillV3": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          },
+          "description": "A list of entity categories that should be extracted."
+        },
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "x-nullable": true,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition-v3"
+      },
+      "description": "Using the Text Analytics API, extracts entities of different types from text."
+    },
+    "PIIDetectionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.PIIDetectionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
+        },
+        "maskingMode": {
+          "$ref": "#/definitions/PIIDetectionSkillMaskingMode",
+          "description": "A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'."
+        },
+        "maskingCharacter": {
+          "type": "string",
+          "x-nullable": true,
+          "maxLength": 1,
+          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        },
+        "piiCategories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          },
+          "description": "A list of PII entity categories that should be extracted and masked."
+        },
+        "domain": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "If specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'phi', 'none'. Default is 'none'."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-pii-detection"
+      },
+      "description": "Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it."
+    },
     "SplitSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill",
       "allOf": [
@@ -7937,6 +8229,30 @@
         ]
       },
       "description": "A string indicating what entity categories to return."
+    },
+    "PIIDetectionSkillMaskingMode": {
+      "type": "string",
+      "enum": [
+        "none",
+        "replace"
+      ],
+      "x-ms-enum": {
+        "name": "PIIDetectionSkillMaskingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "No masking occurs and the maskedText output will not be returned."
+          },
+          {
+            "value": "replace",
+            "name": "Replace",
+            "description": "Replaces the detected entities with the character given in the maskingCharacter parameter. The character will be repeated to the length of the detected entity so that the offsets will correctly correspond to both the input text as well as the output maskedText."
+          }
+        ]
+      },
+      "description": "A string indicating what maskingMode to use to mask the personal information detected in the input text."
     },
     "SentimentSkillLanguage": {
       "type": "string",
@@ -9032,6 +9348,11 @@
           "x-ms-client-name": "synonymMapCounter",
           "$ref": "#/definitions/ResourceCounter",
           "description": "Total number of synonym maps."
+        },
+        "skillsetCount": {
+          "x-ms-client-name": "skillsetCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of skillsets."
         }
       },
       "required": [

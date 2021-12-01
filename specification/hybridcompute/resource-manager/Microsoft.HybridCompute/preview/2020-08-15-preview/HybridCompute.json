@@ -260,6 +260,129 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/assessPatches": {
+      "post": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_AssessPatches",
+        "x-ms-examples": {
+          "Assess patch state of a machine.": {
+            "$ref": "./examples/MachineAssessPatches.json"
+          }
+        },
+        "description": "The operation to assess patches on a hybrid machine identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineAssessPatchesResult"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/installPatches": {
+      "post": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_InstallPatches",
+        "description": "The operation to install patches on a hybrid machine identity in Azure.",
+        "x-ms-examples": {
+          "Install patch state of a machine.": {
+            "$ref": "./examples/MachineInstallPatches.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "installPatchesInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineInstallPatchesParameters"
+            },
+            "description": "Input for InstallPatches as directly received by the API"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineInstallPatchesResult"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines": {
       "get": {
         "tags": [
@@ -1014,6 +1137,422 @@
           "type": "string"
         }
       }
+    },
+    "MachineAssessPatchesResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+        },
+        "availablePatchCountByClassification": {
+          "$ref": "#/definitions/AvailablePatchCountByClassification",
+          "description": "Summarization of patches available for installation on the machine by classification."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation finished."
+        },
+        "startedBy": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "User",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStartedBy",
+            "modelAsString": true
+          },
+          "description": "Indicates if operation was triggered by user or by platform."
+        },
+        "patchServiceUsed": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "WU",
+            "WU_WSUS",
+            "YUM",
+            "APT",
+            "Zypper"
+          ],
+          "x-ms-enum": {
+            "name": "PatchServiceUsed",
+            "modelAsString": true
+          },
+          "description": "Specifies the patch service used for the operation."
+        },
+        "osType": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          },
+          "description": "The operating system type of the machine."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorDetail",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of an AssessPatches result."
+    },
+    "AvailablePatchCountByClassification": {
+      "type": "object",
+      "properties": {
+        "security": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of security patches available for installation."
+        },
+        "critical": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of critical patches available for installation."
+        },
+        "definition": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of definition patches available for installation."
+        },
+        "updateRollup": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of update Rollup patches available for installation."
+        },
+        "featurePack": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of feature pack patches available for installation."
+        },
+        "servicePack": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of service pack patches available for installation."
+        },
+        "tools": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tools patches available for installation."
+        },
+        "updates": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updates category patches available for installation."
+        },
+        "other": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of other patches available for installation."
+        }
+      },
+      "description": "Summarization of patches available for installation on the machine by classification."
+    },
+    "MachineInstallPatchesParameters": {
+      "type": "object",
+      "properties": {
+        "maximumDuration": {
+          "type": "string",
+          "description": "Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)"
+        },
+        "rebootSetting": {
+          "type": "string",
+          "description": "Defines when it is acceptable to reboot a VM during a software update operation.",
+          "enum": [
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootSetting",
+            "modelAsString": true
+          }
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "Input for InstallPatches on a Windows VM, as directly received by the API"
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "Input for InstallPatches on a Linux VM, as directly received by the API"
+        }
+      },
+      "required": [
+        "maximumDuration",
+        "rebootSetting"
+      ],
+      "description": "Input for InstallPatches as directly received by the API"
+    },
+    "WindowsParameters": {
+      "type": "object",
+      "properties": {
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The update classifications to select when installing patches for Windows.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Security",
+              "UpdateRollUp",
+              "FeaturePack",
+              "ServicePack",
+              "Definition",
+              "Tools",
+              "Updates"
+            ],
+            "x-ms-enum": {
+              "name": "VMGuestPatchClassification_Windows",
+              "modelAsString": true
+            }
+          }
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "description": "Kbs to include in the patch operation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToExclude": {
+          "type": "array",
+          "description": "Kbs to exclude in the patch operation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean",
+          "description": "Filters out Kbs that don't have an InstallationRebootBehavior of 'NeverReboots' when this is set to true."
+        },
+        "maxPatchPublishDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is used to install patches that were published on or before this given max published date."
+        }
+      },
+      "description": "Input for InstallPatches on a Windows VM, as directly received by the API"
+    },
+    "LinuxParameters": {
+      "type": "object",
+      "properties": {
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The update classifications to select when installing patches for Linux.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Security",
+              "Other"
+            ],
+            "x-ms-enum": {
+              "name": "VMGuestPatchClassification_Linux",
+              "modelAsString": true
+            }
+          }
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "description": "packages to include in the patch operation. Format: packageName_packageVersion",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "description": "packages to exclude in the patch operation. Format: packageName_packageVersion",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Input for InstallPatches on a Linux VM, as directly received by the API"
+    },
+    "MachineInstallPatchesResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", \"Unknown\" or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "installationActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result."
+        },
+        "rebootStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reboot state of the VM following completion of the operation.",
+          "enum": [
+            "Unknown",
+            "NotNeeded",
+            "Required",
+            "Started",
+            "Failed",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootStatus",
+            "modelAsString": true
+          }
+        },
+        "maintenanceWindowExceeded": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether the operation ran out of time before it completed all its intended actions."
+        },
+        "excludedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that were not installed due to the user blocking their installation."
+        },
+        "notSelectedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that were detected as available for install, but did not meet the operation's criteria."
+        },
+        "pendingPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that were identified as meeting the installation criteria, but were not able to be installed. Typically this happens when maintenanceWindowExceeded == true."
+        },
+        "installedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches successfully installed."
+        },
+        "failedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that could not be installed due to some issue. See errors for details."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation finished."
+        },
+        "startedBy": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "User",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStartedBy",
+            "modelAsString": true
+          },
+          "description": "Indicates if operation was triggered by user or by platform."
+        },
+        "patchServiceUsed": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "WU",
+            "WU_WSUS",
+            "YUM",
+            "APT",
+            "Zypper"
+          ],
+          "x-ms-enum": {
+            "name": "PatchServiceUsed",
+            "modelAsString": true
+          },
+          "description": "Specifies the patch service used for the operation."
+        },
+        "osType": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          },
+          "description": "The operating system type of the machine."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorDetail",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "The result summary of an installation operation."
     },
     "MachineExtension": {
       "properties": {

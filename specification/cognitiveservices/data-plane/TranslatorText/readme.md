@@ -21,13 +21,24 @@ tag: release_1_0_preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
+``` yaml
 
+tag: release_1_0
+add-credentials: true
+openapi-type: data-plane
+```
 # Releases
 
 ### Preview 1.0
 This setting is for batch document translator and only applied when `--tag=release_1_0_preview.1` is specified on the command line.
 ``` yaml $(tag) == 'release_1_0_preview.1'
 input-file: preview/v1.0-preview.1/TranslatorBatch.json
+```
+
+### 1.0 Batch API
+This setting is for batch document translator and only applied when `--tag=release_1_0` is specified on the command line.
+``` yaml $(tag) == 'release_1_0'
+input-file: stable/v1.0/TranslatorBatch.json
 ```
 
 ### Release 3.0
@@ -45,6 +56,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-nodejs
@@ -104,6 +116,14 @@ These settings apply only when `--tag=release_1_0_preview.1 --nodejs` is specifi
 
 ``` yaml $(tag) == 'release_1_0_preview.1' && $(nodejs)
   package-version: 1.0.1
+```
+
+### Tag: release_1_0 and nodejs
+
+These settings apply only when `--tag=release_1_0 --nodejs` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_0' && $(nodejs)
+  package-version: 1.0
 ```
 
 ### Tag: release_3_0 and go
