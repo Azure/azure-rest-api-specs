@@ -6148,7 +6148,7 @@
       "additionalProperties": false
     },
     "ComponentContainer": {
-      "description": "Component container definition.",
+      "description": "Component container definition.\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command\" />",
       "type": "object",
       "allOf": [
         {
@@ -6266,8 +6266,17 @@
       ],
       "properties": {
         "componentSpec": {
-          "description": "Defines Component definition details.",
+          "description": "Defines Component definition details.\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command\" />",
           "type": "object",
+          "example": {
+            "name": "Hello_Python_World",
+            "display_name": "Hello_Python_World",
+            "version": 1,
+            "type": "command",
+            "code": "azureml:/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/mycode/versions/1",
+            "environment": "azureml:/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/AzureML-Tutorial/versions/1",
+            "command": "python hello.py"
+          },
           "x-ms-mutability": [
             "create",
             "read"
