@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/start": {
       "post": {
         "tags": [
-          "Workloads"
+          "workloads_Start"
         ],
         "summary": "Perform Start operation.",
         "operationId": "workloads_Start",
@@ -99,7 +99,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/stop": {
       "post": {
         "tags": [
-          "Workloads"
+          "workloads_Stop"
         ],
         "summary": "Perform Stop operation.",
         "operationId": "workloads_Stop",
@@ -161,7 +161,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/restart": {
       "post": {
         "tags": [
-          "Workloads"
+          "workloads_Restart"
         ],
         "summary": "Perform Restart operation.",
         "operationId": "workloads_Restart",
@@ -223,9 +223,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{workloadName}": {
       "put": {
         "tags": [
-          "Workloads_CreateOrUpdate"
+          "workloads_CreateOrUpdate"
         ],
-        "operationId": "Workloads_CreateOrUpdate",
+        "operationId": "workloads_CreateOrUpdate",
         "description": "Creates or updates the specified workload.",
         "consumes": [
           "application/json"
@@ -307,9 +307,9 @@
       },
       "patch": {
         "tags": [
-          "Workloads_Update"
+          "workloads_Update"
         ],
-        "operationId": "Workloads_Update",
+        "operationId": "workloads_Update",
         "description": "Updates the specified workload.",
         "consumes": [
           "application/merge-patch+json",
@@ -369,6 +369,12 @@
               "$ref": "#/definitions/Workload"
             }
           },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Workload resource.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
           "default": {
             "description": "Default Error Response",
             "schema": {
@@ -385,9 +391,9 @@
       },
       "get": {
         "tags": [
-          "Workloads_Get"
+          "workloads_Get"
         ],
-        "operationId": "Workloads_Get",
+        "operationId": "workloads_Get",
         "description": "Gets information about the specified workload.",
         "produces": [
           "application/json"
@@ -451,9 +457,9 @@
       },
       "delete": {
         "tags": [
-          "Workloads_Delete"
+          "workloads_Delete"
         ],
-        "operationId": "Workloads_Delete",
+        "operationId": "workloads_Delete",
         "description": "Deletes the specified workload.",
         "produces": [
           "application/json"
@@ -504,6 +510,9 @@
           "204": {
             "description": "Request is successful. Resource with the specified name does not exist."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Default Error Response",
             "schema": {
@@ -522,9 +531,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads": {
       "get": {
         "tags": [
-          "Workloads_List"
+          "workloads_List"
         ],
-        "operationId": "Workloads_List",
+        "operationId": "workloads_List",
         "description": "Lists all workloads.",
         "produces": [
           "application/json"

@@ -5,18 +5,36 @@
     "api-version": "2021-03-01-preview",
     "instanceName": "test-instance",
     "chamberName": "test-chamber",
-    "chamber": {
+    "body": {
+      "location": "Central US",
       "properties": {
-        "location": "Central US",
-        "properties": {
-          "sku": "Basic",
-          "provisioningState": "Succeeded"
+        "provisioningState": "Succeeded",
+        "licenseServices": {
+          "cadence": {
+            "enable": true,
+            "lmhostId": "000d3a6f40a1"
+          },
+          "ansys": {
+            "enable": true,
+            "lmhostId": "000d3a6f40a1"
+          },
+          "mentor": {
+            "enable": true,
+            "lmhostId": "000d3a6f40a1"
+          },
+          "synopsys": {
+            "enable": true,
+            "vmUuid": "AA31075F-AFEB-0442-B40A-9AAE5D3C2830"
+          }
         }
       }
     }
   },
   "responses": {
     "200": {
+      "body": {}
+    },
+    "201": {
       "body": {}
     }
   }

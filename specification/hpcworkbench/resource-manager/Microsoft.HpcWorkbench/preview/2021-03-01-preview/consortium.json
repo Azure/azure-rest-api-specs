@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{name}/start": {
       "post": {
         "tags": [
-          "Consortiums"
+          "consortiums_Start"
         ],
         "summary": "Perform Start operation.",
         "operationId": "consortiums_Start",
@@ -92,7 +92,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{name}/stop": {
       "post": {
         "tags": [
-          "Consortiums"
+          "consortiums_Stop"
         ],
         "summary": "Perform Stop operation.",
         "operationId": "consortiums_Stop",
@@ -147,7 +147,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{name}/restart": {
       "post": {
         "tags": [
-          "Consortiums"
+          "consortiums_Restart"
         ],
         "summary": "Perform Restart operation.",
         "operationId": "consortiums_Restart",
@@ -202,9 +202,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{consortiumName}": {
       "put": {
         "tags": [
-          "Consortiums"
+          "consortiums_CreateOrUpdate"
         ],
-        "operationId": "Consortiums_CreateOrUpdate",
+        "operationId": "consortiums_CreateOrUpdate",
         "description": "Creates or updates the specified consortium.",
         "parameters": [
           {
@@ -276,9 +276,9 @@
       },
       "patch": {
         "tags": [
-          "Consortiums"
+          "consortiums_Update"
         ],
-        "operationId": "Consortiums_Update",
+        "operationId": "consortiums_Update",
         "description": "Updates the specified consortium.",
         "parameters": [
           {
@@ -346,9 +346,9 @@
       },
       "get": {
         "tags": [
-          "Consortiums"
+          "consortiums_Get"
         ],
-        "operationId": "Consortiums_Get",
+        "operationId": "consortiums_Get",
         "description": "Gets information about the specified consortium.",
         "parameters": [
           {
@@ -402,9 +402,9 @@
       },
       "delete": {
         "tags": [
-          "Consortiums"
+          "consortiums_Delete"
         ],
-        "operationId": "Consortiums_Delete",
+        "operationId": "consortiums_Delete",
         "description": "Deletes the specified consortium.",
         "parameters": [
           {
@@ -445,6 +445,9 @@
           "204": {
             "description": "Request is successful. Resource with the specified name does not exist."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -463,9 +466,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums": {
       "get": {
         "tags": [
-          "Consortiums"
+          "consortiums_List"
         ],
-        "operationId": "Consortiums_List",
+        "operationId": "consortiums_List",
         "description": "Lists all consortiums.",
         "parameters": [
           {
@@ -517,10 +520,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/consortiums/{name}/licenseAdd": {
       "post": {
         "tags": [
-          "Consortiums"
+          "consortiums_LicenseAdd"
         ],
         "description": "Add license to an HPC Workbench consortium.",
-        "operationId": "Consortiums_LicenseAdd",
+        "operationId": "consortiums_LicenseAdd",
         "consumes": [
           "application/json"
         ],
@@ -621,6 +624,10 @@
         },
         "replyUrlOtds": {
           "description": "The reply URL of OTDS for Azure AD app.",
+          "type": "string"
+        },
+        "licenseKeyUri": {
+          "description": "The license key uri.",
           "type": "string"
         }
       },

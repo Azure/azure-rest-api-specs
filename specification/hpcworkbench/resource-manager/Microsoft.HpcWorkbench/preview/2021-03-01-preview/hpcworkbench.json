@@ -56,15 +56,20 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Lists Operations": {
+            "$ref": "./examples/InstancesOperationList.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HpcWorkbench/instances": {
       "get": {
         "tags": [
-          "Instances"
+          "instances_ListBySubscription"
         ],
-        "operationId": "Instances_ListBySubscription",
+        "operationId": "instances_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -108,9 +113,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances": {
       "get": {
         "tags": [
-          "Instances"
+          "instances_ListByResourceGroup"
         ],
-        "operationId": "Instances_ListByResourceGroup",
+        "operationId": "instances_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -160,7 +165,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{name}": {
       "get": {
         "tags": [
-          "Instances"
+          "instances_Get"
         ],
         "operationId": "instances_Get",
         "parameters": [
@@ -213,7 +218,7 @@
       },
       "put": {
         "tags": [
-          "Instances"
+          "instances_CreateOrUpdate"
         ],
         "operationId": "instances_CreateOrUpdate",
         "parameters": [
@@ -250,6 +255,12 @@
               "$ref": "#/definitions/Instance"
             }
           },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Instance resource.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
           "default": {
             "description": "",
             "schema": {
@@ -257,6 +268,10 @@
             },
             "x-ms-error-response": true
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Instances create or update": {
@@ -273,7 +288,7 @@
       },
       "patch": {
         "tags": [
-          "Instances"
+          "instances_Patch"
         ],
         "operationId": "instances_Patch",
         "parameters": [
@@ -310,6 +325,12 @@
               "$ref": "#/definitions/Instance"
             }
           },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Instance resource.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
           "default": {
             "description": "",
             "schema": {
@@ -326,7 +347,7 @@
       },
       "delete": {
         "tags": [
-          "Instances"
+          "instances_Delete"
         ],
         "operationId": "instances_Delete",
         "parameters": [
@@ -358,6 +379,9 @@
           },
           "204": {
             "description": "Success, no content"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "",

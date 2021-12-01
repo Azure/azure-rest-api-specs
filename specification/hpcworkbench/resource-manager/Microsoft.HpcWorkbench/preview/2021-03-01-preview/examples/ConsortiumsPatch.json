@@ -5,14 +5,27 @@
     "api-version": "2021-03-01-preview",
     "instanceName": "test-instance",
     "consortiumName": "test-consortium",
-    "consortium": {
+    "body": {
+      "location": "Central US",
       "properties": {
-        "location": "Central US",
-        "properties": {
-          "allowedPublicIps": [
+        "accessConfigurations": {
+          "accessType": "GUI",
+          "gatewayType": "Vpn",
+          "gatewayVnetId": "/subscriptions/d9f252e3-8046-4707-bfbd-e5b9e6011e07/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/test-virtualNetwork",
+          "ipAddress": "10.1.0.0/16"
+        },
+        "remoteDesktop": {
+          "Etx": {
+            "connectionNodeCount": 2,
+            "licenseActivated": true
+          }
+        },
+        "networkAcls": {
+          "allowedAddressSpaces": [
             "10.1.0.0/16"
           ]
-        }
+        },
+        "provisioningState": "Succeeded"
       }
     }
   },

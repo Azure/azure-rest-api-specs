@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/getUploadUri": {
       "post": {
         "tags": [
-          "Chambers"
+          "chambers_GetUploadUri"
         ],
         "summary": "Gets a URI to upload files to the specified Chamber resource.",
         "operationId": "chambers_GetUploadUri",
@@ -100,7 +100,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/start": {
       "post": {
         "tags": [
-          "Chambers"
+          "chambers_Start"
         ],
         "summary": "Perform Start operation.",
         "operationId": "chambers_Start",
@@ -155,7 +155,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/stop": {
       "post": {
         "tags": [
-          "Chambers"
+          "chambers_Stop"
         ],
         "summary": "Perform Stop operation.",
         "operationId": "chambers_Stop",
@@ -210,7 +210,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/restart": {
       "post": {
         "tags": [
-          "Chambers"
+          "chambers_Restart"
         ],
         "summary": "Perform Restart operation.",
         "operationId": "chambers_Restart",
@@ -262,13 +262,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/updateLicense": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/licenseUpdate": {
       "post": {
         "tags": [
-          "Chambers"
+          "chambers_LicenseUpdate"
         ],
-        "summary": "Perform UpdateLicenseServices operation.",
-        "operationId": "chambers_UpdateChamberLicense",
+        "summary": "Perform Update LicenseServices operation.",
+        "operationId": "chambers_LicenseUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -324,7 +324,7 @@
         },
         "x-ms-examples": {
           "Update chamber license": {
-            "$ref": "./examples/ChambersUpdateChamberLicense.json"
+            "$ref": "./examples/ChambersLicenseUpdate.json"
           }
         }
       }
@@ -332,9 +332,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}": {
       "put": {
         "tags": [
-          "Chambers_CreateorUpdate"
+          "chambers_CreateOrUpdate"
         ],
-        "operationId": "Chambers_CreateOrUpdate",
+        "operationId": "chambers_CreateOrUpdate",
         "description": "Creates or updates the specified Chamber.",
         "parameters": [
           {
@@ -406,9 +406,9 @@
       },
       "patch": {
         "tags": [
-          "Chambers_Update"
+          "chambers_Update"
         ],
-        "operationId": "Chambers_Update",
+        "operationId": "chambers_Update",
         "description": "Updates the specified Chamber.",
         "consumes": [
           "application/merge-patch+json",
@@ -458,6 +458,12 @@
               "$ref": "#/definitions/Chamber"
             }
           },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Chamber resource.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
           "default": {
             "description": "Default Error Response",
             "schema": {
@@ -474,9 +480,9 @@
       },
       "get": {
         "tags": [
-          "Chambers_Get"
+          "chambers_Get"
         ],
-        "operationId": "Chambers_Get",
+        "operationId": "chambers_Get",
         "description": "Gets information about the specified Chamber.",
         "parameters": [
           {
@@ -530,9 +536,9 @@
       },
       "delete": {
         "tags": [
-          "Chambers_Delete"
+          "chambers_Delete"
         ],
-        "operationId": "Chambers_Delete",
+        "operationId": "chambers_Delete",
         "description": "Deletes the specified Chamber.",
         "parameters": [
           {
@@ -573,6 +579,9 @@
           "204": {
             "description": "Request is successful. Resource with the specified name does not exist."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -591,9 +600,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers": {
       "get": {
         "tags": [
-          "Chambers_List"
+          "chambers_List"
         ],
-        "operationId": "Chambers_List",
+        "operationId": "chambers_List",
         "description": "Lists all Chambers.",
         "produces": [
           "application/json"

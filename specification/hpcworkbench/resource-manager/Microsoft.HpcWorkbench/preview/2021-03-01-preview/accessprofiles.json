@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles/{name}/sync": {
       "post": {
         "tags": [
-          "AccessProfiles"
+          "accessProfiles_Sync"
         ],
         "operationId": "accessProfiles_Sync",
         "produces": [
@@ -100,9 +100,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles/{accessProfileName}": {
       "put": {
         "tags": [
-          "AccessProfiles_CreateorUpdate"
+          "accessProfiles_CreateOrUpdate"
         ],
-        "operationId": "AccessProfiles_CreateOrUpdate",
+        "operationId": "accessProfiles_CreateOrUpdate",
         "description": "Creates or updates the specified AccessProfile.",
         "consumes": [
           "application/json"
@@ -186,9 +186,9 @@
       },
       "patch": {
         "tags": [
-          "AccessProfiles_Update"
+          "accessProfiles_Update"
         ],
-        "operationId": "AccessProfiles_Update",
+        "operationId": "accessProfiles_Update",
         "description": "Updates the specified accessProfile.",
         "consumes": [
           "application/merge-patch+json",
@@ -247,6 +247,12 @@
               "$ref": "#/definitions/AccessProfile"
             }
           },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Access Profile resource.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          },
           "default": {
             "description": "Default Error Response",
             "schema": {
@@ -263,9 +269,9 @@
       },
       "get": {
         "tags": [
-          "AccessProfiles_Get"
+          "accessProfiles_Get"
         ],
-        "operationId": "AccessProfiles_Get",
+        "operationId": "accessProfiles_Get",
         "description": "Gets information about the specified accessProfile.",
         "produces": [
           "application/json"
@@ -328,9 +334,9 @@
       },
       "delete": {
         "tags": [
-          "AccessProfiles_Delete"
+          "accessProfiles_Delete"
         ],
-        "operationId": "AccessProfiles_Delete",
+        "operationId": "accessProfiles_Delete",
         "description": "Deletes the specified accessProfile.",
         "produces": [
           "application/json"
@@ -380,6 +386,9 @@
           "204": {
             "description": "Request is successful. Resource with the specified name does not exist."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "",
             "schema": {
@@ -398,9 +407,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles": {
       "get": {
         "tags": [
-          "AccessProfiles_List"
+          "accessProfiles_List"
         ],
-        "operationId": "AccessProfiles_List",
+        "operationId": "accessProfiles_List",
         "description": "Lists all AccessProfiles.",
         "produces": [
           "application/json"
