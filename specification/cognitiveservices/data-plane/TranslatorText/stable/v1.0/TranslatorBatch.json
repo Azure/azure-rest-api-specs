@@ -18,9 +18,6 @@
           "text/json",
           "application/*+json"
         ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "required": true,
@@ -42,56 +39,6 @@
                 "format": ""
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.  Check input parameters",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "Unauthorized.  Please check your credentials",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Server temporary unavailable",
-            "schema": {
-              "$ref": "#/definitions/TranslationErrorResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
-            },
-            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -478,7 +425,7 @@
           "Document Translation"
         ],
         "summary": "Cancel a currently processing or queued translation",
-        "description": "Cancel a currently processing or queued translation.\r\nCancel a currently processing or queued translation.\r\nA translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
+        "description": "Cancel a currently processing or queued translation.\r\nA translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
         "operationId": "DocumentTranslation_CancelTranslation",
         "produces": [
           "application/json"
@@ -1096,6 +1043,16 @@
         }
       }
     },
+    "BatchRequestOptions": {
+      "type": "object",
+      "properties": {
+        "convertPdfToWordOutput": {
+          "description": "If set to true, any pdf source document will output both pdf and word translated documents",
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
     "StartTranslationDetails": {
       "description": "Translation job submission batch request",
       "required": [
@@ -1109,6 +1066,9 @@
           "items": {
             "$ref": "#/definitions/BatchRequest"
           }
+        },
+        "options": {
+          "$ref": "#/definitions/BatchRequestOptions"
         }
       }
     },
@@ -1335,6 +1295,11 @@
         },
         "summary": {
           "$ref": "#/definitions/StatusSummary"
+        },
+        "@failedDocumentStatusLink": {
+          "description": "Url to get the status of failed document. Null if there are no failed documents",
+          "type": "string",
+          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.1/operations/727BF148-F327-47A0-9481-ABAE6362F11E/documents?statuses=Failed"
         }
       }
     },
@@ -1355,7 +1320,7 @@
         "@nextLink": {
           "description": "Url for the next page.  Null if no more pages available",
           "type": "string",
-          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0/operations?$top=5&$skip=15"
+          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.1/operations?$top=5&$skip=15"
         }
       }
     },
@@ -1442,7 +1407,7 @@
         "@nextLink": {
           "description": "Url for the next page.  Null if no more pages available",
           "type": "string",
-          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0/operations/727BF148-F327-47A0-9481-ABAE6362F11E/documents?$top=5&$skip=15"
+          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.1/operations/727BF148-F327-47A0-9481-ABAE6362F11E/documents?$top=5&$skip=15"
         }
       }
     },
@@ -1487,7 +1452,7 @@
       }
     },
     "SupportedFileFormats": {
-      "description": "Base type for List return in our api",
+      "description": "List of supported file formats",
       "required": [
         "value"
       ],
@@ -1503,7 +1468,7 @@
       }
     },
     "SupportedStorageSources": {
-      "description": "Base type for List return in our api",
+      "description": "List of supported storage sources",
       "required": [
         "value"
       ],
@@ -1542,7 +1507,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/translator/text/batch/v1.0",
+    "hostTemplate": "{endpoint}/translator/text/batch/v1.1",
     "useSchemePrefix": false,
     "parameters": [
       {
