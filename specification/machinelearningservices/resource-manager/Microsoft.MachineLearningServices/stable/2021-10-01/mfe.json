@@ -8563,47 +8563,6 @@
       },
       "additionalProperties": false
     },
-    "PartialContainerResourceRequirements": {
-      "description": "Resource requirements for each container instance within an online deployment.",
-      "type": "object",
-      "properties": {
-        "containerResourceLimits": {
-          "description": "Container resource limit info:",
-          "$ref": "#/definitions/PartialContainerResourceSettings",
-          "x-nullable": true
-        },
-        "containerResourceRequests": {
-          "description": "Container resource request info:",
-          "$ref": "#/definitions/PartialContainerResourceSettings",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "PartialContainerResourceSettings": {
-      "type": "object",
-      "properties": {
-        "cpu": {
-          "description": "Number of vCPUs request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "string",
-          "example": "1",
-          "x-nullable": true
-        },
-        "gpu": {
-          "description": "Number of Nvidia GPU cards request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "string",
-          "example": "1",
-          "x-nullable": true
-        },
-        "memory": {
-          "description": "Memory size request/limit for container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
-          "type": "string",
-          "example": "2Gi",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "PartialDataPathAssetReference": {
       "description": "Reference to an asset via its path in a datastore.",
       "type": "object",
@@ -8625,16 +8584,6 @@
         }
       },
       "x-ms-discriminator-value": "DataPath",
-      "additionalProperties": false
-    },
-    "PartialDefaultScaleSettings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PartialOnlineScaleSettings"
-        }
-      ],
-      "x-ms-discriminator-value": "Default",
       "additionalProperties": false
     },
     "PartialIdAssetReference": {
@@ -8662,13 +8611,6 @@
           "$ref": "#/definitions/PartialOnlineDeployment"
         }
       ],
-      "properties": {
-        "containerResourceRequirements": {
-          "description": "The resource requirements for the container (cpu and memory).",
-          "$ref": "#/definitions/PartialContainerResourceRequirements",
-          "x-nullable": true
-        }
-      },
       "x-ms-discriminator-value": "Kubernetes",
       "additionalProperties": false
     },
@@ -8680,13 +8622,6 @@
           "$ref": "#/definitions/PartialOnlineDeployment"
         }
       ],
-      "properties": {
-        "modelMountPath": {
-          "description": "The path to mount the model in custom container.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
@@ -8697,33 +8632,9 @@
       ],
       "type": "object",
       "properties": {
-        "appInsightsEnabled": {
-          "description": "If true, enables Application Insights logging.",
-          "type": "boolean"
-        },
         "endpointComputeType": {
           "description": "The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
-        },
-        "livenessProbe": {
-          "description": "Liveness probe monitors the health of the container regularly.",
-          "$ref": "#/definitions/PartialProbeSettings",
-          "x-nullable": true
-        },
-        "readinessProbe": {
-          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
-          "$ref": "#/definitions/PartialProbeSettings",
-          "x-nullable": true
-        },
-        "requestSettings": {
-          "description": "Request settings for the deployment.",
-          "$ref": "#/definitions/PartialOnlineRequestSettings",
-          "x-nullable": true
-        },
-        "scaleSettings": {
-          "description": "Scale settings for the deployment.",
-          "$ref": "#/definitions/PartialOnlineScaleSettings",
-          "x-nullable": true
         }
       },
       "discriminator": "endpointComputeType"
@@ -8814,42 +8725,6 @@
       },
       "additionalProperties": false
     },
-    "PartialOnlineRequestSettings": {
-      "description": "Online deployment scoring requests configuration.",
-      "type": "object",
-      "properties": {
-        "maxConcurrentRequestsPerInstance": {
-          "format": "int32",
-          "description": "The number of maximum concurrent requests per node allowed per deployment. Defaults to 1.",
-          "type": "integer"
-        },
-        "maxQueueWait": {
-          "format": "duration",
-          "description": "The maximum amount of time a request will stay in the queue in ISO 8601 format.\r\nDefaults to 500ms.",
-          "type": "string"
-        },
-        "requestTimeout": {
-          "format": "duration",
-          "description": "The scoring timeout in ISO 8601 format.\r\nDefaults to 5000ms.",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PartialOnlineScaleSettings": {
-      "description": "Online deployment scaling configuration.",
-      "required": [
-        "scaleType"
-      ],
-      "type": "object",
-      "properties": {
-        "scaleType": {
-          "description": "Type of deployment scaling algorithm",
-          "$ref": "#/definitions/ScaleType"
-        }
-      },
-      "discriminator": "scaleType"
-    },
     "PartialOutputPathAssetReference": {
       "description": "Reference to an asset via its path in a job output.",
       "type": "object",
@@ -8871,39 +8746,6 @@
         }
       },
       "x-ms-discriminator-value": "OutputPath",
-      "additionalProperties": false
-    },
-    "PartialProbeSettings": {
-      "description": "Deployment container liveness/readiness probe configuration.",
-      "type": "object",
-      "properties": {
-        "failureThreshold": {
-          "format": "int32",
-          "description": "The number of failures to allow before returning an unhealthy status.",
-          "type": "integer"
-        },
-        "initialDelay": {
-          "format": "duration",
-          "description": "The delay before the first probe in ISO 8601 format.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "period": {
-          "format": "duration",
-          "description": "The length of time between probes in ISO 8601 format.",
-          "type": "string"
-        },
-        "successThreshold": {
-          "format": "int32",
-          "description": "The number of successful probes before returning a healthy status.",
-          "type": "integer"
-        },
-        "timeout": {
-          "format": "duration",
-          "description": "The probe timeout in ISO 8601 format.",
-          "type": "string"
-        }
-      },
       "additionalProperties": false
     },
     "PartialResourceIdentity": {
@@ -8951,38 +8793,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier"
         }
       },
-      "additionalProperties": false
-    },
-    "PartialTargetUtilizationScaleSettings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PartialOnlineScaleSettings"
-        }
-      ],
-      "properties": {
-        "maxInstances": {
-          "format": "int32",
-          "description": "The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.",
-          "type": "integer"
-        },
-        "minInstances": {
-          "format": "int32",
-          "description": "The minimum number of instances to always be present.",
-          "type": "integer"
-        },
-        "pollingInterval": {
-          "format": "duration",
-          "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.",
-          "type": "string"
-        },
-        "targetUtilizationPercentage": {
-          "format": "int32",
-          "description": "Target CPU usage for the autoscaler.",
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "TargetUtilization",
       "additionalProperties": false
     },
     "PartialUserAssignedIdentityMeta": {
