@@ -39,7 +39,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Lists all of the CDN profiles within an Azure subscription.",
+        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.",
         "operationId": "Profiles_List",
         "x-ms-examples": {
           "Profiles_List": {
@@ -78,7 +78,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Lists all of the CDN profiles within a resource group.",
+        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within a resource group.",
         "operationId": "Profiles_ListByResourceGroup",
         "x-ms-examples": {
           "Profiles_ListByResourceGroup": {
@@ -120,7 +120,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Gets a CDN profile with the specified profile name under the specified subscription and resource group.",
+        "description": "Gets an Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Get",
         "x-ms-examples": {
           "Profiles_Get": {
@@ -134,7 +134,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -164,7 +164,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Creates a new CDN profile with a profile name under the specified subscription and resource group.",
+        "description": "Creates a new Azure Front Door Standard or Azure Front Door Premium or CDN profile with a profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Create",
         "x-ms-examples": {
           "Profiles_Create": {
@@ -178,7 +178,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -230,7 +230,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.",
+        "description": "Updates an existing Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Update",
         "x-ms-examples": {
           "Profiles_Update": {
@@ -244,7 +244,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -290,7 +290,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
+        "description": "Deletes an existing  Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
         "operationId": "Profiles_Delete",
         "x-ms-examples": {
           "Profiles_Delete": {
@@ -304,7 +304,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -400,7 +400,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -432,7 +432,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "description": "Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.",
         "operationId": "Profiles_ListResourceUsage",
         "x-ms-examples": {
           "Profiles_ListResourceUsage": {
@@ -446,7 +446,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -2446,7 +2446,7 @@
   },
   "definitions": {
     "Profile": {
-      "description": "CDN profile is a logical grouping of endpoints that share the same settings, such as CDN provider and pricing tier.",
+      "description": "A profile is a logical grouping of endpoints that share the same settings.",
       "type": "object",
       "allOf": [
         {
@@ -2455,7 +2455,7 @@
       ],
       "properties": {
         "sku": {
-          "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
+          "description": "The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.",
           "$ref": "#/definitions/Sku"
         },
         "properties": {
@@ -5932,7 +5932,7 @@
       }
     },
     "Sku": {
-      "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
+      "description": "The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.",
       "properties": {
         "name": {
           "description": "Name of the pricing tier.",
@@ -5943,7 +5943,6 @@
             "Standard_Akamai",
             "Standard_ChinaCdn",
             "Standard_Microsoft",
-            "Premium_ChinaCdn",
             "Standard_AzureFrontDoor",
             "Premium_AzureFrontDoor",
             "Standard_955BandWidth_ChinaCdn",
@@ -5978,7 +5977,7 @@
     },
     "ErrorResponse": {
       "title": "Error response",
-      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates Azure Front Door Standard or Azure Front Door Premium or CDN service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "error": {
