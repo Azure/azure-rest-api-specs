@@ -143,7 +143,15 @@
                     "type": "string"
                 },
                 "analysisInput": {
-                    "$ref": "#/definitions/MultiLanguageBatchInput"
+                    "description": "TODO",
+                    "properties": {
+                        "documents": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MultiLanguageInput"
+                            }
+                        }
+                    }
                 },
                 "tasks": {
                     "description": "The set of tasks to execute on the input documents.",
@@ -2059,9 +2067,9 @@
                     "description": "The set of documents to process as part of this batch.",
                     "items": {
                         "$ref": "#/definitions/MultiLanguageInput"
-                        }
                     }
                 }
+            }
         },
         "MultiLanguageInput": {
             "type": "object",
