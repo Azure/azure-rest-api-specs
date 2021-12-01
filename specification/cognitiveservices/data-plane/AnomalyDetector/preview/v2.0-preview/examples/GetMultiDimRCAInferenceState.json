@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "instanceId": "11111111-2222-3333-4444-000000000000",
+    "modelId": "11223344-5555-6666-7777-000000000000",
+    "inferenceId": "11111111-1111-1111-1111-000000000000"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "inferenceId": "11111111-1111-1111-1111-000000000000",
+        "instanceId": "11111111-2222-3333-4444-000000000000",
+        "modelId": "11223344-5555-6666-7777-000000000000",
+        "status": "succeeded",
+        "createdDateTime": "2021-11-30T00:00:00.000Z",
+        "lastModifiedDateTime": "2021-11-30T00:00:00.000Z",
+        "parameter": {
+          "timestamp": "2021-12-01T00:00:00.000Z",
+          "dimensionScope": {}
+        },
+        "result": {
+          "rootCauses": [
+            {
+              "dimension": {
+                "region": "US"
+              },
+              "score": 0.6,
+              "measures": [
+                {
+                  "dataSetId": "01234567-8901-2345-6789-012345678901",
+                  "name": "error count",
+                  "trendType": "rise",
+                  "contributionScore": 0.3
+                },
+                {
+                  "dataSetId": "01234567-8901-2345-6789-012345678901",
+                  "name": "total call count",
+                  "trendType": "drop",
+                  "contributionScore": 0.4
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "region": "CN",
+                "OS": "iOS"
+              },
+              "score": 0.2,
+              "measures": [
+                {
+                  "dataSetId": "01234567-8901-2345-6789-012345678901",
+                  "name": "total call count",
+                  "trendType": "drop",
+                  "contributionScore": 0.6
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
