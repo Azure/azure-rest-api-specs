@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "portal"
-  output-folder: "$(typescript-sdks-folder)/packages/portal"
+  package-name: "@azure/arm-portal"
+  output-folder: "$(typescript-sdks-folder)/sdk/portal/arm-portal"
   clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
