@@ -83,6 +83,10 @@ directive:
   - suppress: R4009
   - suppress: R4013
   - suppress: R4037
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigration
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target like Sql Managed Instance or Sql Virtual Machine.
 ```
 ### Tag: package-2021-06
 
