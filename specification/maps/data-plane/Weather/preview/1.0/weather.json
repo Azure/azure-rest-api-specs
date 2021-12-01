@@ -3297,7 +3297,8 @@
           "description": "Storm status"
         },
         "window": {
-          "$ref": "#/definitions/Window",
+          "$ref": "#/definitions/WeatherWindow",
+          "x-ms-client-name": "WeatherWindow",
           "description": "Contains information about the forecast window for the storm during the specified time period (not the entire cone). If windowGeometry=true in the request, this object will include geoJSON details for window geometry."
         },
         "windRadiiSummary": {
@@ -3309,9 +3310,9 @@
         }
       }
     },
-    "Window": {
+    "WeatherWindow": {
       "type": "object",
-      "description": "Government-issued storm forecast",
+      "description": "Forecast window for the storm",
       "properties": {
         "left": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
@@ -3800,6 +3801,7 @@
     "WeatherUnitMaxMinAvg": {
       "type": "object",
       "description": "Returned temperature values.",
+      "x-ms-client-name": "WeatherValueMaxMinAvg",
       "properties": {
         "maximum": {
           "$ref": "#/definitions/WeatherUnit",
@@ -3818,6 +3820,7 @@
     "WeatherUnitYearMax": {
       "type": "object",
       "description": "Returned temperature values.",
+      "x-ms-client-name": "WeatherValueYearMax",
       "properties": {
         "maximum": {
           "$ref": "#/definitions/WeatherUnitYear",
@@ -3828,6 +3831,7 @@
     "WeatherUnitYearMaxMinAvg": {
       "type": "object",
       "description": "Returned temperature values.",
+      "x-ms-client-name": "WeatherValueYearMaxMinAvg",
       "properties": {
         "maximum": {
           "$ref": "#/definitions/WeatherUnitYear",
@@ -3845,6 +3849,7 @@
     },
     "WeatherUnitYear": {
       "type": "object",
+      "x-ms-client-name": "WeatherValueYear",
       "properties": {
         "value": {
           "type": "number",
