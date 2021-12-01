@@ -47,20 +47,22 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
-          },
-          "description": "Parameters supplied to list correct page."
         }
       ],
       "post": {
         "tags": [
           "NetworkManagerEffectiveConnectivityConfiguration"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+            },
+            "description": "Parameters supplied to list correct page."
+          }
         ],
         "operationId": "EffectiveConnectivityConfigurations_List",
         "description": "List all effective connectivity configurations applied on a virtual network.",
@@ -98,20 +100,22 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
-          },
-          "description": "Parameters supplied to list correct page."
         }
       ],
       "post": {
         "tags": [
           "NetworkManagerEffectiveSecurityAdminRules"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./networkManagerGroup.json#/definitions/QueryRequestOptions"
+            },
+            "description": "Parameters supplied to list correct page."
+          }
         ],
         "operationId": "NetworkManagerEffectiveSecurityAdminRules_List",
         "description": "List all effective security admin rules applied on a virtual network.",

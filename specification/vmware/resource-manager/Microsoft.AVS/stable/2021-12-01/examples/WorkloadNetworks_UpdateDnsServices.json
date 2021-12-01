@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "dnsServiceId": "dnsService1",
+    "workloadNetworkDnsService": {
+      "properties": {
+        "displayName": "dnsService1",
+        "dnsServiceIp": "5.5.5.5",
+        "defaultDnsZone": "defaultDnsZone1",
+        "fqdnZones": [
+          "fqdnZone1"
+        ],
+        "logLevel": "INFO",
+        "revision": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/dnsServices/dnsService1",
+        "name": "dnsService1",
+        "properties": {
+          "displayName": "dnsService1",
+          "dnsServiceIp": "5.5.5.5",
+          "defaultDnsZone": "defaultDnsZone1",
+          "fqdnZones": [
+            "fqdnZone1"
+          ],
+          "logLevel": "INFO",
+          "status": "SUCCESS",
+          "revision": 1
+        },
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/dnsServices"
+      }
+    },
+    "202": {}
+  }
+}
