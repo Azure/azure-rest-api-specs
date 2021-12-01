@@ -112,6 +112,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_healthbot']
   - repo: azure-cli-extensions
