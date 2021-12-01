@@ -50,7 +50,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/AmlOperationListResult"
             }
           },
           "default": {
@@ -1950,7 +1950,7 @@
     }
   },
   "definitions": {
-    "Operation": {
+    "AmlOperation": {
       "description": "Azure Machine Learning workspace REST API operation",
       "type": "object",
       "properties": {
@@ -1981,13 +1981,13 @@
         }
       }
     },
-    "OperationListResult": {
+    "AmlOperationListResult": {
       "description": "An array of operations supported by the resource provider.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/AmlOperation"
           },
           "description": "List of AML workspace operations supported by the AML workspace resource provider."
         }
@@ -4457,7 +4457,7 @@
           "description": "The identity that will be used to access the key vault for encryption at rest."
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/EncryptionKeyVaultProperties",
           "description": "Customer Key vault properties."
         }
       },
@@ -4467,7 +4467,7 @@
       ],
       "type": "object"
     },
-    "KeyVaultProperties": {
+    "EncryptionKeyVaultProperties": {
       "properties": {
         "keyVaultArmId": {
           "description": "The ArmId of the keyVault where the customer owned encryption key is present.",
