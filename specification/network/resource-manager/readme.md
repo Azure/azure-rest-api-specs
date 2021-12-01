@@ -46,6 +46,8 @@ input-file:
   - Microsoft.Network/preview/2021-05-01-preview/networkManagerGroup.json
   - Microsoft.Network/preview/2021-05-01-preview/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/preview/2021-05-01-preview/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerConnection.json
+  - Microsoft.Network/preview/2021-05-01-preview/networkManagerScopeConnection.json
   - Microsoft.Network/stable/2021-05-01/applicationGateway.json
   - Microsoft.Network/stable/2021-05-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2021-05-01/availableDelegations.json

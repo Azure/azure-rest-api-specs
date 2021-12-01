@@ -507,6 +507,14 @@
                 "type": "string"
               },
               "description": "List of subscriptions."
+            },
+            "crossTenantScopes": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CrossTenantScopes"
+              },
+              "description": "List of cross tenant scopes."
             }
           },
           "description": "Scope of Network Manager."
@@ -526,6 +534,33 @@
         }
       },
       "description": "Properties of Managed Network"
+    },
+    "CrossTenantScopes": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "managementGroups": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of management groups."
+        },
+        "subscriptions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "List of subscriptions."
+        }
+      },
+      "description": "Cross tenant scopes."
     },
     "NetworkManagerCommit": {
       "properties": {
