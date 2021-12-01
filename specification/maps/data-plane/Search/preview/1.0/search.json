@@ -1843,6 +1843,70 @@
         }
       }
     },
+    "GeoJsonPolygonFeatureCollection": {
+      "description": "A valid `GeoJSON FeatureCollection` object type that contains only polygons. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
+      "x-ms-discriminator-value": "FeatureCollection",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type. FeatureCollection.",
+          "type": "string",
+          "enum": [
+            "FeatureCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "FeatureCollection",
+                "description": "`GeoJSON FeatureCollection` object.",
+                "name": "GeoJsonFeatureCollection"
+              }
+            ]
+          }
+        },
+        "features": {
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonPolygonFeature"
+          }
+        }
+      }
+    },
+    "GeoJsonPolygonFeature": {
+      "description": "A valid `GeoJSON Polygon` feature type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type. Polygon.",
+          "type": "string",
+          "enum": [
+            "Polygon"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry.",
+                "name": "GeoJsonPolygon"
+              }
+            ]
+          }
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygon"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+          "type": "object"
+        }
+      }
+    },
     "SearchAddressResult": {
       "description": "This object is returned from a successful Search calls.",
       "type": "object",
@@ -2154,7 +2218,7 @@
       "type": "object",
       "properties": {
         "geometry": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonObject"
+          "$ref": "#/definitions/PolygonOrGeometryCollectionOrFeatureCollection"
         }
       }
     },
