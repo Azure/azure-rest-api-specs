@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingAccountId": "1234:5678",
+    "billingProfileId": "2468"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/lots/lot1",
+            "name": "lot1",
+            "type": "Microsoft.Consumption/lots",
+            "properties": {
+              "creditCurrency": "USD",
+              "billingCurrency": "USD",
+              "originalAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "originalAmountInBillingCurrency": {
+                "exchangeRate": 5000.00,
+                "exchangeRateMonth": 1
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 60.90
+              },
+              "closedBalanceInBillingCurrency": {
+                "exchangeRate": 5000.00,
+                "exchangeRateMonth": 1
+              },
+              "reseller": {
+                "resellerId": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/reseller/reseller1",
+                "resellerDescription": "Reseller information."
+              },
+              "source": "PurchasedCredit",
+              "startDate": "2021-10-01T00:00:00Z",
+              "expirationDate": "2021-10-01T00:00:00Z",
+              "poNumber": "3524"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/lots/lot2",
+            "name": "lot2",
+            "type": "Microsoft.Consumption/lots",
+            "properties": {
+              "creditCurrency": "USD",
+              "billingCurrency": "USD",
+              "originalAmount": {
+                "currency": "USD",
+                "value": 6000.00
+              },
+              "originalAmountInBillingCurrency": {
+                "exchangeRate": 5000.00,
+                "exchangeRateMonth": 1
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 80.90
+              },
+              "closedBalanceInBillingCurrency": {
+                "exchangeRate": 5000.00,
+                "exchangeRateMonth": 1
+              },
+              "reseller": {
+                "resellerId": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/reseller/reseller2",
+                "resellerDescription": "Reseller information."
+              },
+              "source": "PurchasedCredit",
+              "startDate": "2021-10-01T00:00:00Z",
+              "expirationDate": "2019-12-31T00:00:00Z",
+              "poNumber": "31224"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

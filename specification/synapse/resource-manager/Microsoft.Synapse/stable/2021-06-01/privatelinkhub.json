@@ -1,0 +1,488 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "PrivateLinkHubs_ListByResourceGroup",
+        "description": "Returns a list of privateLinkHubs in a resource group",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHubInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List privateLinkHubs in resource group": {
+            "$ref": "./examples/ListPrivateLinkHubsInResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "PrivateLinkHubs_Get",
+        "description": "Gets a privateLinkHub",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while trying to get details for PrivateLinkHub."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/GetPrivateLinkHub.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PrivateLinkHubs_Update",
+        "description": "Updates a privateLinkHub",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHubPatchInfo"
+            },
+            "in": "body",
+            "name": "privateLinkHubPatchInfo",
+            "required": true,
+            "description": "PrivateLinkHub patch request properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a PrivateLinkHub.\n\n * 500 InternalServerError- Some error occurred while creating PrivateLinkHub."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update a privateLinkHub": {
+            "$ref": "./examples/UpdatePrivateLinkHub.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateLinkHubs_CreateOrUpdate",
+        "description": "Creates or updates a privateLinkHub",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "PrivateLinkHub create or update request properties",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "in": "body",
+            "name": "privateLinkHubInfo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a PrivateLinkHub.\n\n * 500 InternalServerError- Some error occurred while creating PrivateLinkHub."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update a privateLinkHub": {
+            "$ref": "./examples/CreateOrUpdatePrivateLinkHub.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateLinkHubs_Delete",
+        "description": "Deletes a privateLinkHub",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "PrivateLinkHub resource not found."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while deleting PrivateLinkHub."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a privateLinkHub": {
+            "$ref": "./examples/DeletePrivateLinkHub.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/privateLinkHubs": {
+      "get": {
+        "operationId": "PrivateLinkHubs_List",
+        "description": "Returns a list of privateLinkHubs in a subscription",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHubInfoListResult"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List privateLinkHubs in subscription": {
+            "$ref": "./examples/ListPrivateLinkHubsInSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "PrivateEndpointConnectionsPrivateLinkHub_List",
+        "description": "Get all PrivateEndpointConnections in the PrivateLinkHub",
+        "tags": [
+          "PrivateLinkHubs",
+          "PrivateEndpointConnections"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse"
+            },
+            "description": "List of PrivateEndpointConnections in PrivateLinkHub"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/PrivateEndpointConnectionsPrivateLinkHub_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Name of the privateEndpointConnection",
+          "x-ms-parameter-location": "method"
+        }
+      ],
+      "get": {
+        "operationId": "PrivateEndpointConnectionsPrivateLinkHub_Get",
+        "description": "Get all PrivateEndpointConnection in the PrivateLinkHub by name",
+        "tags": [
+          "PrivateLinkHubs",
+          "PrivateEndpointConnections"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHub"
+            },
+            "description": "PrivateEndpointConnection in PrivateLinkHub"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/PrivateEndpointConnectionsPrivateLinkHub_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateLinkHubInfoListResult": {
+      "description": "List of privateLinkHubs",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of privateLinkHubs",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkHub"
+          }
+        }
+      }
+    },
+    "PrivateLinkHub": {
+      "description": "A privateLinkHub",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PrivateLinkHub resource properties",
+          "$ref": "#/definitions/PrivateLinkHubProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkHubPatchInfo": {
+      "description": "PrivateLinkHub patch details",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PrivateLinkHubProperties": {
+      "description": "PrivateLinkHub properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "PrivateLinkHub provisioning state",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasic"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubBasic": {
+      "description": "Private Endpoint Connection For Private Link Hub - Basic",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of private endpoint connection for private link hub",
+          "type": "object",
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  }
+}

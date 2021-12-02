@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-10-01",
+    "imageTemplateName": "myImageTemplate"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
+        "name": "myImageTemplate",
+        "location": "westus",
+        "type": "Microsoft.VirtualMachineImages/imageTemplate",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "source": {
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
+          },
+          "customize": [
+            {
+              "type": "Shell",
+              "name": "Shell Customizer Example",
+              "scriptUri": "https://example.com/path/to/script.sh"
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "location": "1_location",
+              "runOutputName": "image_it_pir_1",
+              "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "artifactTags": {
+                "tagName": "value"
+              }
+            }
+          ],
+          "vmProfile": {
+            "vmSize": "Standard_D2s_v3",
+            "osDiskSizeGB": 64
+          }
+        }
+      }
+    }
+  }
+}

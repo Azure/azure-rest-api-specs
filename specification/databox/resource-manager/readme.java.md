@@ -23,6 +23,7 @@ batch:
   - tag: package-2020-11
   - tag: package-2021-03
   - tag: package-2021-05
+  - tag: package-2021-08-preview
 ```
 
 ### Tag: package-2018-01 and java
@@ -99,6 +100,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.databox.v2021_05-01
   output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2021_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-08-preview and java
+
+These settings apply only when `--tag=package-2021-08-preview-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-08-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2021_08-01-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2021_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

@@ -9,7 +9,7 @@
       "regions": [
         "westus"
       ],
-      "$skipToken": "fakeSkipTokenCode"
+      "skipToken": "fakeSkipTokenCode"
     }
   },
   "responses": {
@@ -64,10 +64,10 @@
                 "properties": {
                   "displayName": "My Network Group",
                   "description": "A group for all test Virtual Networks",
-                  "memberType": "VirtualNetwork",
+                  "memberType": "Microsoft.Network/virtualNetworks",
                   "groupMembers": [
                     {
-                      "vnetId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
+                      "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetwork/vnet1"
                     }
                   ],
                   "conditionalMembership": "",
@@ -77,7 +77,7 @@
             ]
           }
         ],
-        "$skipToken": "FakeSkipTokenCode"
+        "skipToken": "FakeSkipTokenCode"
       }
     }
   }
