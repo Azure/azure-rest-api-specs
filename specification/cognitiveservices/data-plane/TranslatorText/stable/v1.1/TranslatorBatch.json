@@ -18,6 +18,9 @@
           "text/json",
           "application/*+json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "required": true,
@@ -39,6 +42,16 @@
                 "format": ""
               }
             }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/TranslationErrorResponse"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -965,6 +978,34 @@
         }
       }
     },
+    "AdditionalOutputFileFormat": {
+      "description": "List of possible additional output formats",
+      "enum": [
+        "None",
+        "OpenXmlWord"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AdditionalOutputFileFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None"
+          },
+          {
+            "value": "OpenXmlWord"
+          }
+        ]
+      }
+    },
+    "BatchRequestOptions": {
+      "type": "object",
+      "properties": {
+        "pdfOutputAdditionalFormat": {
+          "$ref": "#/definitions/AdditionalOutputFileFormat"
+        }
+      }
+    },
     "TargetInput": {
       "description": "Destination for the finished translated documents",
       "required": [
@@ -994,6 +1035,9 @@
           "items": {
             "$ref": "#/definitions/Glossary"
           }
+        },
+        "options": {
+          "$ref": "#/definitions/BatchRequestOptions"
         },
         "storageSource": {
           "$ref": "#/definitions/StorageSource"
@@ -1043,16 +1087,6 @@
         }
       }
     },
-    "BatchRequestOptions": {
-      "type": "object",
-      "properties": {
-        "convertPdfToWordOutput": {
-          "description": "If set to true, any pdf source document will output both pdf and word translated documents",
-          "type": "boolean",
-          "example": true
-        }
-      }
-    },
     "StartTranslationDetails": {
       "description": "Translation job submission batch request",
       "required": [
@@ -1066,9 +1100,6 @@
           "items": {
             "$ref": "#/definitions/BatchRequest"
           }
-        },
-        "options": {
-          "$ref": "#/definitions/BatchRequestOptions"
         }
       }
     },
@@ -1296,7 +1327,7 @@
         "summary": {
           "$ref": "#/definitions/StatusSummary"
         },
-        "@failedDocumentStatusLink": {
+        "failedDocumentStatusLink": {
           "description": "Url to get the status of failed document. Null if there are no failed documents",
           "type": "string",
           "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.1/operations/727BF148-F327-47A0-9481-ABAE6362F11E/documents?statuses=Failed"
