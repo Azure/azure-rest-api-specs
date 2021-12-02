@@ -9505,8 +9505,8 @@
           },
           "readOnly": true
         },
-        "operatorRuntimeState": {
-          "$ref": "#/definitions/GatewayOperatorRuntimeState",
+        "operatorProperties": {
+          "$ref": "#/definitions/GatewayOperatorProperties",
           "readOnly": true
         }
       }
@@ -9620,8 +9620,28 @@
         }
       }
     },
-    "GatewayOperatorRuntimeState": {
-      "description": "Runtime state of the Spring Cloud Gateway Operator.",
+    "GatewayOperatorProperties": {
+      "description": "Properties of the Spring Cloud Gateway Operator.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "resourceRequests": {
+          "$ref": "#/definitions/GatewayOperatorResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        },
+        "instances": {
+          "description": "Collection of instances belong to Spring Cloud Gateway operator.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayOperatorResourceRequests": {
+      "description": "Properties of the Spring Cloud Gateway Operator.",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -9639,15 +9659,6 @@
           "format": "int32",
           "description": "Instance count of the Spring Cloud Gateway Operator.",
           "type": "integer",
-          "readOnly": true
-        },
-        "instances": {
-          "description": "Collection of instances belong to the Spring Cloud Gateway Operator.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GatewayInstance"
-          },
           "readOnly": true
         }
       }
@@ -9901,7 +9912,7 @@
           "description": "Indicate if only https is allowed.",
           "type": "boolean"
         },
-        "sourceGateways": {
+        "gatewayIds": {
           "description": "The array of resource Ids of gateway to integrate with API portal.",
           "type": "array",
           "items": {
