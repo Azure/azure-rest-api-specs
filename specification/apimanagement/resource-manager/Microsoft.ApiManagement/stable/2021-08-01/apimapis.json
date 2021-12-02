@@ -2141,12 +2141,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas": {
       "get": {
         "tags": [
-          "ApiSchema"
+          "Schema"
         ],
-        "operationId": "ApiSchema_ListByApi",
+        "operationId": "Schema_ListByApi",
         "description": "Get the schema configuration at the API level.",
         "x-ms-examples": {
-          "ApiManagementListApiSchemas": {
+          "ApiManagementListSchemas": {
             "$ref": "./examples/ApiManagementListApiSchemas.json"
           }
         },
@@ -2184,7 +2184,7 @@
           "200": {
             "description": "Apis Schema Collection.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ApiSchemaCollection"
+              "$ref": "./definitions.json#/definitions/SchemaCollection"
             }
           },
           "default": {
@@ -2202,12 +2202,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas/{schemaId}": {
       "head": {
         "tags": [
-          "ApiSchema"
+          "Schema"
         ],
-        "operationId": "ApiSchema_GetEntityTag",
+        "operationId": "Schema_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the schema specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementHeadApiSchema": {
+          "ApiManagementHeadSchema": {
             "$ref": "./examples/ApiManagementHeadApiSchema.json"
           }
         },
@@ -2251,12 +2251,12 @@
       },
       "get": {
         "tags": [
-          "ApiSchema"
+          "Schema"
         ],
-        "operationId": "ApiSchema_Get",
+        "operationId": "Schema_Get",
         "description": "Get the schema configuration at the API level.",
         "x-ms-examples": {
-          "ApiManagementGetApiSchema": {
+          "ApiManagementGetSchema": {
             "$ref": "./examples/ApiManagementGetApiSchema.json"
           }
         },
@@ -2284,7 +2284,7 @@
           "200": {
             "description": "Api Schema information.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ApiSchemaContract"
+              "$ref": "./definitions.json#/definitions/SchemaContract"
             },
             "headers": {
               "ETag": {
@@ -2303,12 +2303,12 @@
       },
       "put": {
         "tags": [
-          "ApiSchema"
+          "Schema"
         ],
-        "operationId": "ApiSchema_CreateOrUpdate",
+        "operationId": "Schema_CreateOrUpdate",
         "description": "Creates or updates schema configuration for the API.",
         "x-ms-examples": {
-          "ApiManagementCreateApiSchema": {
+          "ApiManagementCreateSchema": {
             "$ref": "./examples/ApiManagementCreateApiSchema.json"
           }
         },
@@ -2330,7 +2330,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ApiSchemaContract"
+              "$ref": "./definitions.json#/definitions/SchemaContract"
             },
             "description": "The schema contents to apply."
           },
@@ -2351,7 +2351,7 @@
           "201": {
             "description": "Api schema configuration was successfully created.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ApiSchemaContract"
+              "$ref": "./definitions.json#/definitions/SchemaContract"
             },
             "headers": {
               "ETag": {
@@ -2363,7 +2363,7 @@
           "200": {
             "description": "Api schema configuration of the tenant was successfully updated.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ApiSchemaContract"
+              "$ref": "./definitions.json#/definitions/SchemaContract"
             },
             "headers": {
               "ETag": {
@@ -2386,12 +2386,12 @@
       },
       "delete": {
         "tags": [
-          "ApiSchema"
+          "Schema"
         ],
-        "operationId": "ApiSchema_Delete",
+        "operationId": "Schema_Delete",
         "description": "Deletes the schema configuration at the Api.",
         "x-ms-examples": {
-          "ApiManagementDeleteApiSchema": {
+          "ApiManagementDeleteSchema": {
             "$ref": "./examples/ApiManagementDeleteApiSchema.json"
           }
         },

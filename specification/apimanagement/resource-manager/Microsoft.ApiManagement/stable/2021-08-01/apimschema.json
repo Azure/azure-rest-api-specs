@@ -39,7 +39,7 @@
         "tags": [
           "Schema"
         ],
-        "operationId": "Schema_ListByService",
+        "operationId": "GlobalSchema_ListByService",
         "description": "Lists a collection of schemas registered with service instance.",
         "x-ms-examples": {
           "ApiManagementListSchemas": {
@@ -77,7 +77,7 @@
           "200": {
             "description": "Lists a collection of Schema entities.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaCollection"
+              "$ref": "./definitions.json#/definitions/GlobalSchemaCollection"
             }
           },
           "default": {
@@ -90,7 +90,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./definitions.json#/definitions/SchemaContract"
+        "x-ms-odata": "./definitions.json#/definitions/GlobalSchemaContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/schemas/{schemaId}": {
@@ -98,7 +98,7 @@
         "tags": [
           "Schema"
         ],
-        "operationId": "Schema_GetEntityTag",
+        "operationId": "GlobalSchema_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Schema specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementHeadApi": {
@@ -144,7 +144,7 @@
         "tags": [
           "Schema"
         ],
-        "operationId": "Schema_Get",
+        "operationId": "GlobalSchema_Get",
         "description": "Gets the details of the Schema specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetSchema1": {
@@ -178,7 +178,7 @@
           "200": {
             "description": "The response body contains the specified Schema entity.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
+              "$ref": "./definitions.json#/definitions/GlobalSchemaContract"
             },
             "headers": {
               "ETag": {
@@ -199,7 +199,7 @@
         "tags": [
           "Schema"
         ],
-        "operationId": "Schema_CreateOrUpdate",
+        "operationId": "GlobalSchema_CreateOrUpdate",
         "description": "Creates new or updates existing specified Schema of the API Management service instance.",
         "x-ms-examples": {
           "ApiManagementCreateSchema1": {
@@ -224,7 +224,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
+              "$ref": "./definitions.json#/definitions/GlobalSchemaContract"
             },
             "description": "Create or update parameters."
           },
@@ -248,7 +248,7 @@
               }
             },
             "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
+              "$ref": "./definitions.json#/definitions/GlobalSchemaContract"
             }
           },
           "200": {
@@ -260,7 +260,7 @@
               }
             },
             "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
+              "$ref": "./definitions.json#/definitions/GlobalSchemaContract"
             }
           },
           "202": {
@@ -279,7 +279,7 @@
         "tags": [
           "Schema"
         ],
-        "operationId": "Schema_Delete",
+        "operationId": "GlobalSchema_Delete",
         "description": "Deletes specific Schema.",
         "x-ms-examples": {
           "ApiManagementDeleteSchema": {
