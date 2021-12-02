@@ -28,7 +28,7 @@ These are the global settings for the Virtual Machine Image Builder API.
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-2021-10
+tag: package-2020-02
 azure-arm: true
 ```
 
