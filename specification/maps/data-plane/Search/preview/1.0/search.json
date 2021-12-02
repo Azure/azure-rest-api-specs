@@ -1843,41 +1843,13 @@
         }
       }
     },
-    "GeoJsonPolygonFeatureCollection": {
-      "description": "A valid `GeoJSON FeatureCollection` object type that contains only polygons. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-      "x-ms-discriminator-value": "FeatureCollection",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` type. FeatureCollection.",
-          "type": "string",
-          "enum": [
-            "FeatureCollection"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJsonObjectType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "FeatureCollection",
-                "description": "`GeoJSON FeatureCollection` object.",
-                "name": "GeoJsonFeatureCollection"
-              }
-            ]
-          }
-        },
-        "features": {
-          "description": "Contains a list of valid `GeoJSON Feature` objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeoJsonPolygonFeature"
-          }
-        }
-      }
-    },
     "GeoJsonPolygonFeature": {
       "description": "A valid `GeoJSON Polygon` feature type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "x-ms-discriminator-value": "Feature",
       "type": "object",
+      "allOf": [{
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
+      }],
       "properties": {
         "type": {
           "description": "Specifies the `GeoJSON` type. Polygon.",
@@ -1899,6 +1871,41 @@
         },
         "geometry": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygon"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+          "type": "object"
+        }
+      },
+      "required": [
+        "geometry"
+      ]
+    },
+    "GeoJsonMultiPolygonFeature": {
+      "description": "A valid `GeoJSON Polygon` feature type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` type. Polygon.",
+          "type": "string",
+          "enum": [
+            "Polygon"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON Polygon` geometry.",
+                "name": "GeoJsonMultiPolygon"
+              }
+            ]
+          }
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPolygon"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2766,40 +2773,6 @@
         }
       }
     },
-    "PolygonOrCirclePointExtension": {
-      "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
-      "type": "object",
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` type for search inside geometry. Must be one of the three valid GeoJSON object types - Polygon, GeometryCollection, and FeatureCollection.",
-          "type": "string",
-          "enum": [
-            "Polygon",
-            "Point"
-          ],
-          "x-ms-enum": {
-            "name": "PolygonOrCirclePointExtensionType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Polygon",
-                "description": "`GeoJSON Polygon` geometry.",
-                "name": "GeoJsonPolygon"
-              },
-              {
-                "value": "Point",
-                "description": "`GeoJSON FeatureCollection` object.",
-                "name": "CirclePointExtension"
-              }
-            ]
-          }
-        }
-      }
-    },
     "PolygonOrGeometryCollectionOrFeatureCollection": {
       "description": "A valid `GeoJSON` object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
       "type": "object",
@@ -2840,40 +2813,34 @@
         }
       }
     },
-    "SearchInsideGeometryFeatureCollectionPolygon": {
-      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
-      "x-ms-discriminator-value": "Polygon",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolygonOrCirclePointExtension"
-        }
-      ],
-      "properties": {
-        "coordinates": {
-          "description": "Coordinates for the `GeoJson Polygon` geometry type.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonLinearRing"
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
-    "SearchInsideGeometryFeatureCollectionCircle": {
+    "GeoJsonCircleFeature": {
       "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
-      "x-ms-discriminator-value": "Point",
+      "x-ms-discriminator-value": "Feature",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolygonOrCirclePointExtension"
-        }
-      ],
+      "allOf": [{
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
+      }],
       "properties": {
-        "coordinates": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPosition"
+        "type": {
+          "description": "Specifies the `GeoJSON` type. Point.",
+          "type": "string",
+          "enum": [
+            "Point"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJsonObjectType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry.",
+                "name": "GeoJsonPolygon"
+              }
+            ]
+          }
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
           "type": "object",
@@ -2904,10 +2871,11 @@
         }
       },
       "required": [
-        "coordinates"
+        "geometry",
+        "properties"
       ]
     },
-    "SearchInsideGeometryPolygon": {
+    "SearchInsidePolygon": {
       "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
       "x-ms-discriminator-value": "Polygon",
       "type": "object",
@@ -2929,7 +2897,7 @@
         "coordinates"
       ]
     },
-    "SearchInsideGeometryGeometryCollection": {
+    "SearchInsideGeometryCollection": {
       "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.",
       "x-ms-discriminator-value": "GeometryCollection",
       "type": "object",
@@ -2943,7 +2911,7 @@
           "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SearchInsideGeometryPolygon"
+            "$ref": "#/definitions/SearchInsidePolygon"
           }
         }
       },
@@ -2951,7 +2919,7 @@
         "geometries"
       ]
     },
-    "SearchInsideGeometryFeatureCollection": {
+    "SearchInsideFeatureCollection": {
       "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
       "x-ms-discriminator-value": "FeatureCollection",
       "type": "object",
@@ -2965,7 +2933,7 @@
           "description": "Contains a list of valid `GeoJSON Feature` objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PolygonOrCirclePointExtension"
+            "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
           }
         }
       },
