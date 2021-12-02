@@ -39,6 +39,7 @@ batch:
   - tag: package-2019-11
   - tag: package-2020-10-only
   - tag: package-2021-07
+  - tag: package-2021-09
 ```
 
 ### Tag: package-2017-09 and go
@@ -161,4 +162,13 @@ directive:
   where: $.parameters
   transform: delete $["ResourceGroupNameParameter"]
   reason: ResourceGroupNameParameter is taken from v2/types.json
+```
+
+### Tag: package-2021-09 and go
+
+These settings apply only when `--tag=package-2021-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-09' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/monitor/mgmt/2021-09-01-preview/$(namespace)
 ```
