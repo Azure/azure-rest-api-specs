@@ -482,6 +482,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. Please poll the targeted custom domain and check the 'validationProperties' field for the new validation token values."
           },
@@ -4071,7 +4074,7 @@
       }
     },
     "AzureFirstPartyManagedCertificate": {
-      "description": "Azure FirstParty Managed Certificate provided by other first party rp's to enable HTTPS.",
+      "description": "Azure FirstParty Managed Certificate provided by other first party resource providers to enable HTTPS.",
       "allOf": [
         {
           "$ref": "#/definitions/Certificate"
@@ -4717,7 +4720,7 @@
       }
     },
     "AzureFirstPartyManagedCertificateParameters": {
-      "description": "Azure FirstParty Managed Certificate provided by other first party rp's to enable HTTPS.",
+      "description": "Azure FirstParty Managed Certificate provided by other first party resource providers to enable HTTPS.",
       "x-ms-discriminator-value": "AzureFirstPartyManagedCertificate",
       "type": "object",
       "allOf": [
