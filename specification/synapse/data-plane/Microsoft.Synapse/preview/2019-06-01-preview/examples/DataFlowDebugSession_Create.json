@@ -2,21 +2,21 @@
   "parameters": {
     "endpoint": "exampleWorkspace.dev.azuresynapse.net",
     "request": {
-      "dataFlowName": "dataflow",
-      "existingClusterId": "1221221",
-      "clusterTimeout": 50,
-      "newClusterName": "newClusterName",
-      "newClusterNodeType": "newClusterNodeType",
-      "dataBricksLinkedService": {
+      "timeToLive": 60,
+      "integrationRuntime": {
+        "name": "ir1",
         "properties": {
-          "type": "AzureStorage",
+          "type": "Managed",
           "typeProperties": {
-            "connectionString": {
-              "type": "SecureString",
-              "value": "DefaultEndpointsProtocol=https;AccountName=examplestorageaccount;AccountKey=<storage key>"
+            "computeProperties": {
+              "location": "AutoResolve",
+              "dataFlowProperties": {
+                "computeType": "General",
+                "coreCount": 48,
+                "timeToLive": 10
+              }
             }
-          },
-          "description": "Example description"
+          }
         }
       }
     },

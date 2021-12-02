@@ -21,3 +21,8 @@ output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview/azure/mgmt/purvi
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview
 ```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
