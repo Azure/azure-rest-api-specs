@@ -4,5 +4,5 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AzureADB2C
-  output-folder: $(csharp-sdks-folder)/azureadb2c/management/Microsoft.AzureADB2C/GeneratedProtocol
+  namespace: Microsoft.AzureADExternalIdentities
+  output-folder: $(csharp-sdks-folder)/azureadexternalidentities/management/Microsoft.AzureADExternalIdentities/GeneratedProtocol

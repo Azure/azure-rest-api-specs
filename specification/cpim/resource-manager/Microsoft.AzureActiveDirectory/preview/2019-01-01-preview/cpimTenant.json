@@ -490,6 +490,10 @@
               "type": "string"
             }
           }
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
         }
       }
     },
@@ -562,7 +566,7 @@
           "description": "The Azure AD B2C tenant resource properties"
         },
         "error": {
-          "description": "Error response if async operation failed.",
+          "description": "Error response if async operation had an error.",
           "properties": {
             "code": {
               "type": "string",
@@ -571,6 +575,11 @@
             "message": {
               "type": "string",
               "description": "Error message."
+            },
+            "extendedDetails": {
+              "description": "Extended details of the error",
+              "type": "object",
+              "additionalProperties": true
             }
           }
         }
