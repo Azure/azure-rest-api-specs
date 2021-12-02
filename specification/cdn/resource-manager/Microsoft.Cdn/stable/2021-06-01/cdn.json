@@ -4267,6 +4267,7 @@
     },
     "DeliveryRuleRouteConfigurationOverrideAction": {
       "description": "Defines the route configuration override action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
+      "type": "object",
       "x-ms-discriminator-value": "RouteConfigurationOverride",
       "allOf": [
         {
@@ -4285,6 +4286,7 @@
     },
     "RouteConfigurationOverrideActionParameters": {
       "description": "Defines the parameters for the route configuration override action.",
+      "type": "object",
       "required": [
         "typeName"
       ],
@@ -4309,6 +4311,7 @@
     },
     "OriginGroupOverride": {
       "description": "Defines the parameters for the origin group override configuration.",
+      "type":" object",
       "properties": {
         "originGroup": {
           "description": "defines the OriginGroup that would override the DefaultOriginGroup on route.",
@@ -4570,6 +4573,7 @@
         }
       },
       "description": "Reference to another resource along with its state.",
+      "type":" object",
       "x-ms-azure-resource": true
     },
     "GeoFilter": {
@@ -5573,6 +5577,7 @@
     },
     "OperationProperties": {
       "description": "Properties of operation, include metric specifications.",
+      "type":" object",
       "properties": {
         "serviceSpecification": {
           "$ref": "#/definitions/ServiceSpecification",
@@ -5582,6 +5587,7 @@
     },
     "ServiceSpecification": {
       "description": "One property of operation, include log specifications.",
+      "type":" object",
       "properties": {
         "logSpecifications": {
           "description": "Log specifications of operation.",
@@ -5601,6 +5607,7 @@
     },
     "LogSpecification": {
       "description": "Log specification of operation.",
+      "type":" object",
       "properties": {
         "name": {
           "type": "string",
@@ -5622,6 +5629,7 @@
     },
     "MetricSpecification": {
       "description": "Metric specification of operation.",
+      "type":" object",
       "properties": {
         "name": {
           "type": "string",
@@ -5680,6 +5688,7 @@
     },
     "DimensionProperties": {
       "description": "Type of operation: get, read, delete, etc.",
+      "type":" object",
       "properties": {
         "name": {
           "type": "string",
@@ -5820,6 +5829,7 @@
     },
     "SystemData": {
       "description": "Read only system data",
+      "readOnly": true,
       "type": "object",
       "properties": {
         "createdBy": {
