@@ -28,10 +28,34 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-composite-v1
+tag: package-composite-v2
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
+```
+
+### Tag: package-composite-v2
+
+These settings apply only when `--tag=package-composite-v2` is specified on the command line.
+
+```yaml $(tag) == 'package-composite-v2'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
 ```
 
 ### Tag: package-composite-v1
@@ -102,17 +126,6 @@ input-file:
   - Microsoft.Synapse/preview/2021-06-01-preview/azureADOnlyAuthentication.json
 ```
 
-### Tag: package-kusto-pool-2021-06-preview
-
-These settings apply only when `--tag=package-kusto-pool-2021-06-preview` is specified on the command line.
-
-**ATTENTION**: Please DO NOT generate SDK based on this tag. Kusto pool API set is not ready to be widely used.
-
-``` yaml $(tag) == 'package-kusto-pool-2021-06-preview'
-input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
-```
-
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -158,8 +171,6 @@ input-file:
 ### Tag: package-kusto-pool-2021-04-preview
 
 These settings apply only when `--tag=package-kusto-pool-2021-04-preview` is specified on the command line.
-
-**ATTENTION**: Please DO NOT generate SDK based on this tag. Kusto pool API set is not ready to be widely used.
 
 ``` yaml $(tag) == 'package-kusto-pool-2021-04-preview'
 input-file:

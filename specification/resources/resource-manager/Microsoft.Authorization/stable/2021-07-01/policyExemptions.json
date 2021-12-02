@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2021-07-01",
+    "description": "To exempt your resources from policy evaluation and non-compliance state, you can create an exemption at a scope."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/policyExemptions/{policyExemptionName}": {
+      "delete": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_Delete",
+        "summary": "Deletes a policy exemption.",
+        "description": "This operation deletes a policy exemption, given its name and the scope it was created in. The scope of a policy exemption is the part of its ID preceding '/providers/Microsoft.Authorization/policyExemptions/{policyExemptionName}'.",
+        "x-ms-examples": {
+          "Delete a policy exemption": {
+            "$ref": "./examples/deletePolicyExemption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyExemptionScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - the policy exemption doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_CreateOrUpdate",
+        "summary": "Creates or updates a policy exemption.",
+        "description": " This operation creates or updates a policy exemption with the given scope and name. Policy exemptions apply to all resources contained within their scope. For example, when you create a policy exemption at resource group scope for a policy assignment at the same or above level, the exemption exempts to all applicable resources in the resource group.",
+        "x-ms-examples": {
+          "Create or update a policy exemption": {
+            "$ref": "./examples/createOrUpdatePolicyExemption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyExemptionScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            },
+            "description": "Parameters for the policy exemption."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the updated policy exemption.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new policy exemption.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_Get",
+        "summary": "Retrieves a policy exemption.",
+        "description": "This operation retrieves a single policy exemption, given its name and the scope it was created at.",
+        "x-ms-examples": {
+          "Retrieve a policy exemption": {
+            "$ref": "./examples/getPolicyExemption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyExemptionScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy exemption.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyExemptions": {
+      "get": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_List",
+        "summary": "Retrieves all policy exemptions that apply to a subscription.",
+        "description": "This operation retrieves the list of all policy exemptions associated with the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the subscription, including those that apply directly or from management groups that contain the given subscription, as well as any applied to objects contained within the subscription.",
+        "x-ms-examples": {
+          "List policy exemptions that apply to a subscription": {
+            "$ref": "./examples/listPolicyExemptionsForSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy exemptions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyExemptions": {
+      "get": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_ListForResourceGroup",
+        "summary": "Retrieves all policy exemptions that apply to a resource group.",
+        "description": "This operation retrieves the list of all policy exemptions associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group.",
+        "x-ms-examples": {
+          "List policy exemptions that apply to a resource group": {
+            "$ref": "./examples/listPolicyExemptionsForResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy exemptions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyExemptions": {
+      "get": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_ListForResource",
+        "summary": "Retrieves all policy exemptions that apply to a resource.",
+        "description": "This operation retrieves the list of all policy exemptions associated with the specified resource in the given resource group and subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the resource, including those that apply directly or from all containing scopes, as well as any applied to resources contained within the resource. Three parameters plus the resource name are used to identify a specific resource. If the resource is not part of a parent resource (the more common case), the parent resource path should not be provided (or provided as ''). For example a web app could be specified as ({resourceProviderNamespace} == 'Microsoft.Web', {parentResourcePath} == '', {resourceType} == 'sites', {resourceName} == 'MyWebApp'). If the resource is part of a parent resource, then all parameters should be provided. For example a virtual machine DNS name could be specified as ({resourceProviderNamespace} == 'Microsoft.Compute', {parentResourcePath} == 'virtualMachines/MyVirtualMachine', {resourceType} == 'domainNames', {resourceName} == 'MyComputerName'). A convenient alternative to providing the namespace and type name separately is to provide both in the {resourceType} parameter, format: ({resourceProviderNamespace} == '', {parentResourcePath} == '', {resourceType} == 'Microsoft.Web/sites', {resourceName} == 'MyWebApp').",
+        "x-ms-examples": {
+          "List all policy exemptions that apply to a resource": {
+            "$ref": "./examples/listPolicyExemptionsForResource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider. For example, the namespace of a virtual machine is Microsoft.Compute (from Microsoft.Compute/virtualMachines)"
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parent resource path. Use empty string if there is none.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites).",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource."
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy exemptions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyExemptions": {
+      "get": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_ListForManagementGroup",
+        "summary": "Retrieves all policy exemptions that apply to a management group.",
+        "description": "This operation retrieves the list of all policy exemptions applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy exemptions that are assigned to the management group or the management group's ancestors.",
+        "x-ms-examples": {
+          "List policy exemptions that apply to a management group": {
+            "$ref": "./examples/listPolicyExemptionsForManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy exemptions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from a policy operation."
+    },
+    "PolicyExemptionProperties": {
+      "type": "object",
+      "required": [
+        "policyAssignmentId",
+        "exemptionCategory"
+      ],
+      "properties": {
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The ID of the policy assignment that is being exempted."
+        },
+        "policyDefinitionReferenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition."
+        },
+        "exemptionCategory": {
+          "type": "string",
+          "description": "The policy exemption category. Possible values are Waiver and Mitigated.",
+          "enum": [
+            "Waiver",
+            "Mitigated"
+          ],
+          "x-ms-enum": {
+            "name": "exemptionCategory",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Waiver",
+                "description": "This category of exemptions usually means the scope is not applicable for the policy."
+              },
+              {
+                "value": "Mitigated",
+                "description": "This category of exemptions usually means the mitigation actions have been applied to the scope."
+              }
+            ]
+          }
+        },
+        "expiresOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date and time (in UTC ISO 8601 format yyyy-MM-ddTHH:mm:ssZ) of the policy exemption."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy exemption."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the policy exemption."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The policy exemption metadata. Metadata is an open ended object and is typically a collection of key value pairs."
+        }
+      },
+      "description": "The policy exemption properties."
+    },
+    "PolicyExemption": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyExemptionProperties",
+          "description": "Properties for the policy exemption."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the policy exemption."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the policy exemption."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/policyExemptions)."
+        }
+      },
+      "description": "The policy exemption.",
+      "x-ms-azure-resource": true
+    },
+    "PolicyExemptionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyExemption"
+          },
+          "description": "An array of policy exemptions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of policy exemptions."
+    }
+  },
+  "parameters": {
+    "PolicyExemptionNameParameter": {
+      "name": "policyExemptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the policy exemption.",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyExemptionScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the policy exemption. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group containing the resource.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the management group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "client"
+    },
+    "PolicyExemptionFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the scope, including those that apply directly or apply from containing scopes. If $filter=atScope() is provided, the returned list only includes all policy exemptions that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy exemptions that at the given scope. If $filter=excludeExpired() is provided, the returned list only includes all policy exemptions that either haven't expired or didn't set expiration date. If $filter=policyAssignmentId eq '{value}' is provided. the returned list only includes all policy exemptions that are associated with the give policyAssignmentId.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

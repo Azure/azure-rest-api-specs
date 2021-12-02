@@ -7286,8 +7286,32 @@
       "properties": {
         "sinks": {
           "type": "object",
-          "description": "List of Power Query activity sinks mapped to a queryName.",
+          "description": "(Deprecated. Please use Queries). List of Power Query activity sinks mapped to a queryName.",
           "additionalProperties": {
+            "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
+          }
+        },
+        "queries": {
+          "type": "array",
+          "description": "List of mapping for Power Query mashup query to sink dataset(s).",
+          "items": {
+            "$ref": "#/definitions/PowerQuerySinkMapping"
+          }
+        }
+      }
+    },
+    "PowerQuerySinkMapping": {
+      "description": "Map Power Query mashup query to sink dataset(s).",
+      "type": "object",
+      "properties": {
+        "queryName": {
+          "description": "Name of the query in Power Query mashup document.",
+          "type": "string"
+        },
+        "dataflowSinks": {
+          "type": "array",
+          "description": "List of sinks mapped to Power Query mashup query.",
+          "items": {
             "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
           }
         }

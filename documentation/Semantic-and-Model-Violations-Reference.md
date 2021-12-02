@@ -588,11 +588,11 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="ENUM_MISMATCH" />ENUM_MISMATCH
 
-**Output Message**: Enum does not match case for:{0}.
+**Output Message**: Enum does not match for:{0}.
 
-**Description**: The enum value provided in example or in traffic payload doesn't match the case of an allowed value.
+**Description**: The enum value provided in example or in traffic payload doesn't match an allowed value.
 
-**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example or in traffic payload.
+**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value in example or in traffic payload.
 
 ### <a name="READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST" />READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
 

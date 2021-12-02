@@ -1,0 +1,430 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2021-07-01",
+    "description": "To enable policy Advanced tier feature, you can create the policy pricing at a subscription scope or a management group scope."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/policyPricings/{policyPricingName}": {
+      "delete": {
+        "tags": [
+          "PolicyPricings"
+        ],
+        "operationId": "PolicyPricings_Delete",
+        "summary": "Deletes a policy pricing.",
+        "description": "This operation deletes a policy pricing, given its name and the scope it was created in. The scope of a policy pricing is the part of its ID preceding '/providers/Microsoft.Authorization/policyPricings/{policyPricingName}'.",
+        "x-ms-examples": {
+          "Delete a policy pricing": {
+            "$ref": "./examples/deletePolicyPricing.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyPricingScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPricingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content - the policy pricing doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "PolicyPricings"
+        ],
+        "operationId": "PolicyPricings_CreateOrUpdate",
+        "summary": "Creates or updates a policy pricing.",
+        "description": " This operation creates or updates a policy pricing with the given scope and name.",
+        "x-ms-examples": {
+          "Create or update a policy pricing": {
+            "$ref": "./examples/createOrUpdatePolicyPricing.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyPricingScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPricingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyPricing"
+            },
+            "description": "Parameters for the policy pricing."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the updated policy pricing.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPricing"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the new policy pricing.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "PolicyPricings"
+        ],
+        "operationId": "PolicyPricings_Get",
+        "summary": "Retrieves a policy pricing.",
+        "description": "This operation retrieves a single policy pricing, given its name and the scope it was created at.",
+        "x-ms-examples": {
+          "Retrieve a policy pricing": {
+            "$ref": "./examples/getPolicyPricing.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyPricingScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyPricingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy pricing.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyPricings": {
+      "get": {
+        "tags": [
+          "PolicyPricings"
+        ],
+        "operationId": "PolicyPricings_List",
+        "summary": "Retrieves all policy pricings that apply to a subscription.",
+        "description": "This operation retrieves the list of all policy pricings associated with the given subscription and the management group ancestors.",
+        "x-ms-examples": {
+          "List policy pricings that apply to a subscription": {
+            "$ref": "./examples/listPolicyPricingsForSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy pricings.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPricingListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyPricings": {
+      "get": {
+        "tags": [
+          "PolicyPricings"
+        ],
+        "operationId": "PolicyPricings_ListForManagementGroup",
+        "summary": "Retrieves all policy pricings that apply to a management group.",
+        "description": "This operation retrieves the list of all policy pricings associated with the given subscription and the management group ancestors.",
+        "x-ms-examples": {
+          "List policy pricings that apply to a management group": {
+            "$ref": "./examples/listPolicyPricingsForManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy pricings.",
+            "schema": {
+              "$ref": "#/definitions/PolicyPricingListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from a policy operation."
+    },
+    "PolicyPricingProperties": {
+      "type": "object",
+      "required": [
+        "pricingTier"
+      ],
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "The policy pricing tier. Possible values are Advanced and Defender.",
+          "enum": [
+            "Advanced",
+            "Defender"
+          ],
+          "x-ms-enum": {
+            "name": "pricingTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Advanced",
+                "description": "The pricing tier gives the user ability to use policy exemption feature."
+              },
+              {
+                "value": "Defender",
+                "description": "The pricing tier gives the user ability to use policy exemption feature. This pricing tier is managed by Azure Security Center."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the policy pricing resource.",
+          "readOnly": true,
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Accepted",
+                "description": "When creating policy pricing at the management group level, the provisioning state will be accepted initially."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The policy pricing is provisioned."
+              },
+              {
+                "value": "Deleting",
+                "description": "When deleting policy pricing at the management group level, the provisioning state will be deleting."
+              }
+            ]
+          }
+        }
+      },
+      "description": "The policy pricing properties."
+    },
+    "PolicyPricing": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyPricingProperties",
+          "description": "Properties for the policy pricing."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the policy pricing."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the policy pricing."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/policyPricings)."
+        }
+      },
+      "description": "The policy pricing.",
+      "x-ms-azure-resource": true
+    },
+    "PolicyPricingListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyPricing"
+          },
+          "description": "An array of policy pricings."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of policy pricings."
+    }
+  },
+  "parameters": {
+    "PolicyPricingNameParameter": {
+      "name": "policyPricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the policy pricing.",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyPricingScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the policy pricing. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroupId}') or subscription (format: '/subscriptions/{subscriptionId}')",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the management group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
