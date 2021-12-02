@@ -6,12 +6,12 @@
     "version": "2022-02-01"
   },
   "paths": {
-    "/networktraversal/:issueRelayConfiguration": {
+    "/networkTraversal/:issueRelayConfiguration": {
       "post": {
         "tags": [
           "Turn"
         ],
-        "summary": "Issue a configuration for an STUN/TURN server for an existing identity.",
+        "summary": "Issue a configuration for an STUN/TURN server.",
         "operationId": "CommunicationNetworkTraversal_IssueRelayConfiguration",
         "consumes": [
           "application/json"
@@ -24,6 +24,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "description": "Optional request for providing the id and/or route type for the returned relay configuration.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -59,10 +60,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "An existing ACS identity.",
+          "description": "An identity to be associated with telemetry for data relayed using the returned credentials. Must be an existing ACS user identity. If not provided, the telemetry will not contain an associated identity value.",
           "type": "string"
         },
         "routeType": {
+          "description": "Filter the routing methodology returned. If not provided, will return all route types in separate ICE servers.",
           "$ref": "#/definitions/RouteType"
         }
       }
@@ -107,7 +109,7 @@
       "properties": {
         "expiresOn": {
           "format": "date-time",
-          "description": "The date for which the username and credentials are not longer valid.",
+          "description": "The date for which the username and credentials are not longer valid. Will be 48 hours from request time.",
           "type": "string"
         },
         "iceServers": {
@@ -120,7 +122,7 @@
       }
     },
     "RouteType": {
-      "description": "The routing methodology to where the ICE server will be located from the client.",
+      "description": "The routing methodology to where the ICE server will be located from the client. \"any\" will have higher reliability while \"nearest\" will have lower latency. It is recommended to default to use the \"any\" routing method unless there are specific scenarios which minimizing latency is critical.",
       "enum": [
         "any",
         "nearest"
