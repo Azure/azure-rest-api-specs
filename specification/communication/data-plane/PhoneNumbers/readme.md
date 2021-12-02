@@ -48,7 +48,7 @@ directive:
     suppress:
     - R2005 #Long running operation status code
     reason:
-    - Approval from Azure review board that Long Running Operations can return 202s.
+      Approval from Azure review board that Long Running Operations can return 202s.
 ```
 
 ---
