@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "vcenterName": "ContosoVCenter",
+    "body": {
+      "location": "East US",
+      "extendedLocation": {
+        "type": "customLocation",
+        "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+      },
+      "properties": {
+        "fqdn": "ContosoVMware.contoso.com",
+        "port": 1234,
+        "credentials": {
+          "username": "tempuser",
+          "password": "<password>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+        "name": "ContosoVCenter",
+        "type": "Microsoft.ConnectedVMwarevSphere/VCenters",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+        },
+        "properties": {
+          "fqdn": "ContosoVMware.contoso.com",
+          "port": 1234,
+          "credentials": {
+            "username": "tempuser"
+          },
+          "version": "1.0",
+          "instanceUuid": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+        "name": "ContosoVCenter",
+        "type": "Microsoft.ConnectedVMwarevSphere/VCenters",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+        },
+        "properties": {
+          "fqdn": "ContosoVMware.contoso.com",
+          "port": 1234,
+          "credentials": {
+            "username": "tempuser"
+          },
+          "version": "1.0",
+          "instanceUuid": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

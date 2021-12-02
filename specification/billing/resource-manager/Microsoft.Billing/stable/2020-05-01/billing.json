@@ -5037,6 +5037,12 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         }
       }
     },
@@ -5092,8 +5098,8 @@
           "$ref": "#/definitions/Amount"
         },
         "azurePrepaymentApplied": {
-          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "readOnly": true,
+          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "$ref": "#/definitions/Amount"
         },
         "billedAmount": {

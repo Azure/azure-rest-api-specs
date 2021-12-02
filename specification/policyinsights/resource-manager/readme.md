@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for PolicyInsights.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for PolicyInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,23 @@ To build the SDK for PolicyInsights, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the PolicyInsights API.
 
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2021-01
+tag: package-2021-10
 ```
 
 ### Validations
+
 Run validations when `--validate` is specified on command line
 
 ``` yaml $(validate)
@@ -41,6 +42,7 @@ message-format: json
 ```
 
 ### Suppression
+
 ``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean
@@ -134,6 +136,21 @@ directive:
     transform: delete $['post']['x-ms-pageable']['operationName']
 ```
 
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
+- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
+```
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -190,7 +207,6 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 ```
 
-
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
@@ -203,7 +219,6 @@ input-file:
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
 ```
 
-
 ### Tag: package-2018-04
 
 These settings apply only when `--tag=package-2018-04` is specified on the command line.
@@ -215,8 +230,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -232,7 +247,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -274,11 +288,25 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-10
   - tag: package-2021-01
   - tag: package-2020-07
   - tag: package-2019-10
   - tag: package-2018-07
   - tag: package-2018-04
+```
+
+### Tag: package-2021-10 and java
+
+These settings apply only when `--tag=package-2021-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-10' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2021_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2021_10_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-01 and java
@@ -307,7 +335,6 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
 ### Tag: package-2019-10 and java
 
 These settings apply only when `--tag=package-2019-10 --java` is specified on the command line.
@@ -320,7 +347,6 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
 
 ### Tag: package-2018-07 and java
 
@@ -347,7 +373,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
