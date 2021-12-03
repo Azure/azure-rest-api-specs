@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2020-11-only
+tag: package-2021-11-01
 ```
 
 ### Suppression
@@ -222,6 +222,58 @@ directive:
   
 ```
 
+### Tag: package-2021-11-01
+
+These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11-01'
+input-file:
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+  - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+```
+
+### Tag: package-2021-08
+
+These settings apply only when `--tag=package-2021-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08'
+input-file:
+  - Microsoft.Insights/stable/2021-08-01/workbooks_API.json
+```
+
+### Tag: package-2021-03-08-only
+
+These settings apply only when `--tag=package-2021-03-08-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-08-only'
+input-file:
+  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
+```
+
 ### Tag: package-2021-03-only
 
 These settings apply only when `--tag=package-2021-03-only` is specified on the command line.
@@ -237,7 +289,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-03-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-03-only'
+``` yaml $(tag) == 'package-preview-2021-03-only'
 input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
@@ -255,7 +307,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10-only'
+``` yaml $(tag) == 'package-2020-10-only'
 input-file:
   - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
@@ -266,7 +318,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-10-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-10-only'
+``` yaml $(tag) == 'package-preview-2020-10-only'
 input-file:
   - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
 ```
@@ -392,6 +444,7 @@ These settings apply only when `--tag=package-2018-06-17-preview` is specified o
 ``` yaml $(tag) == 'package-2018-06-17-preview'
 input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
+- Microsoft.Insights/preview/2018-06-17-preview/workbookOperations_API.json
 ```
 
 ### Tag: package-2018-05-01-preview
@@ -521,6 +574,5 @@ These settings apply only when `--tag=schema-2018-06-17-preview` is specified on
 ``` yaml $(tag) == 'schema-2018-06-17-preview'
 input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
+- Microsoft.Insights/preview/2018-06-17-preview/workbookOperations_API.json
 ```
-
-

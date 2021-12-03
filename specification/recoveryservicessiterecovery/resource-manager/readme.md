@@ -54,27 +54,37 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-08
+tag: package-2021-10
 directive:
   - where:
       - $.paths
     suppress:
       - UniqueResourcePaths
 ```
+
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-10-01/service.json
+```
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-08-01/service.json
 ```
-  
+
 ### Tag: package-2021-07
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07'
+``` yaml $(tag) == 'package-2021-07'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-07-01/service.json
 ```
@@ -83,18 +93,20 @@ input-file:
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-06-01/service.json
 ```
+
 ### Tag: package-2021-04
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04'
+``` yaml $(tag) == 'package-2021-04'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-04-01/service.json
 ```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.

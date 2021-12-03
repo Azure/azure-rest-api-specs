@@ -25,6 +25,8 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the chaos.
 
 ```yaml
+title: ChaosManagementClient
+description: Chaos Management Client
 openapi-type: arm
 tag: package-2021-09-15-preview
 ```
