@@ -1548,8 +1548,19 @@
           "description": "The Dns name label for the IP."
         },
         "dnsNameLabelReusePolicy": {
-          "type": "object",
-          "description": "The value representing the security enum."
+          "type": "string",
+          "description": "The value representing the security enum.",
+          "enum":[
+            "Unsecure",
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "Noreuse"
+          ],
+          "x-ms-enum": {
+            "name": "DnsNameLabelReusePolicy",
+            "modelAsString": false
+          }
         },
         "fqdn": {
           "readOnly": true,
