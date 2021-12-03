@@ -194,7 +194,6 @@
     "TimeGranularity": {
       "type": "string",
       "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly, minutely, secondly, microsecond or none. If granularity is not present, it will be none by default. If granularity is none, the timestamp property in time series point can be absent.",
-      "x-nullable": true,
       "x-ms-enum": {
         "name": "TimeGranularity",
         "modelAsString": false,
@@ -245,16 +244,14 @@
     "CustomInterval": {
       "type": "integer",
       "format": "int32",
-      "x-nullable": false,
       "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
     },
     "ImputeMode": {
       "type": "string",
       "description": "Define the impute method, can be one of auto, previous, linear, fixed, zero, notFill.",
-      "x-nullable": false,
       "x-ms-enum": {
         "name": "ImputeMode",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "auto"
@@ -288,7 +285,6 @@
     "ImputeFixedValue": {
       "type": "number",
       "format": "float",
-      "x-nullable": false,
       "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
     },
     "DetectRequest": {

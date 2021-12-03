@@ -439,7 +439,6 @@
     "ModelStatus": {
       "type": "string",
       "description": "Model training status.",
-      "x-nullable": false,
       "x-ms-enum": {
         "name": "modelStatus",
         "modelAsString": false
@@ -517,12 +516,10 @@
       "properties": {
         "code": {
           "type": "string",
-          "x-nullable": false,
           "description": "The error code."
         },
         "message": {
           "type": "string",
-          "x-nullable": false,
           "description": "The message explaining the error reported by the service."
         }
       },
@@ -625,7 +622,7 @@
         },
         "fillNAMethod": {
           "type": "string",
-          "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fix, and NotFill. Cannot be set to NotFill, when the alignMode is Outer.",
+          "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to NotFill, when the alignMode is Outer.",
           "example": "Linear",
           "enum": [
             "Previous",
@@ -637,7 +634,7 @@
           ],
           "x-ms-enum": {
             "name": "fillNAMethod",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "paddingValue": {
@@ -813,13 +810,11 @@
         "currentCount": {
           "type": "integer",
           "description": "Current count of trained multivariate models.",
-          "x-nullable": false,
           "example": 10
         },
         "maxCount": {
           "type": "integer",
           "description": "Max number of models that can be trained for this subscription.",
-          "x-nullable": false,
           "example": 20
         },
         "nextLink": {
