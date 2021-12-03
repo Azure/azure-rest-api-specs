@@ -232,6 +232,10 @@ directive:
       - $.definitions.SubResourceWithColocationStatus.properties
     suppress:
       - BodyTopLevelProperties
+  - where:
+      - $.definitions.SubResourceWithColocationStatus
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 ```
 
 ### Tag: package-2021-11-01
