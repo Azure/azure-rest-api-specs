@@ -3834,6 +3834,13 @@
             "description": "The name of the resource group."
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -3869,6 +3876,13 @@
         "operationId": "VirtualMachines_ListAll",
         "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -12162,7 +12176,7 @@
           }
         }
       },
-      "description": "Describes the public IP Sku"
+      "description": "Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible."
     },
     "VirtualMachinePublicIPAddressConfiguration": {
       "properties": {
