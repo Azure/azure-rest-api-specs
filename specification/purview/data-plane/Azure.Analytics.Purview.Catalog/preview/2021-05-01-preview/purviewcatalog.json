@@ -99,7 +99,7 @@
         },
         "parameters": [
           {
-            "name": "guids",
+            "name": "guid",
             "in": "query",
             "description": "An array of GUIDs of entities to create.",
             "required": true,
@@ -2476,6 +2476,9 @@
           },
           "Discovery_Query_Taxonomy": {
             "$ref": "./examples/Discovery_Query_Taxonomy.json"
+          },
+          "Discovery_Query_Collection": {
+            "$ref": "./examples/Discovery_Query_Collection.json"
           }
         },
         "parameters": [
@@ -5947,7 +5950,7 @@
         }
       },
       "title": "Context",
-      "description": "A facet list that consists of index fields assetType ,classification, classificationCategory, contactId, fileExtension, label, and label. When the facet is specified in the request, the value of the facet is returned as an element of @search.facets."
+      "description": "A facet list that consists of index fields assetType ,classification, contactId, and label. When the facet is specified in the request, the value of the facet is returned as an element of @search.facets."
     },
     "SearchFacetItemValue": {
       "type": "object",
@@ -6195,7 +6198,7 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset. The default value is 0."
+          "description": "The offset. The default value is 0. The maximum value is 100000."
         },
         "limit": {
           "type": "integer",
@@ -6244,12 +6247,12 @@
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of browse items we hope to return."
+          "description": "The number of browse items we hope to return. The maximum value is 10000."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset. The default value is 0."
+          "description": "The offset. The default value is 0. The maximum value is 100000."
         }
       },
       "title": "BrowseRequest",

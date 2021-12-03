@@ -6,7 +6,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release is 2021-11-01-preview
+The current preview release is 2022-02-01-preview
 
 ```yaml
 tag: release_2021_11_01_preview
@@ -33,6 +33,20 @@ These settings apply only when `--tag=release_2021_11_01_preview` is specified o
 input-file:
 - preview/2021-11-01-preview/textanalytics.json
 title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2021-10-01
+
+These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2021_10_01'
+input-file: 
+  - stable/2021-10-01/questionanswering.json
+  - stable/2021-10-01/questionanswering-authoring.json
+title: 
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true
@@ -74,6 +88,5 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
 ```
