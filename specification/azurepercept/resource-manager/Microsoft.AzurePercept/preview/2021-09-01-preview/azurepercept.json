@@ -62,6 +62,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
         }
       }
     },
@@ -1968,17 +1973,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Azure Percept Solution editable properties.",
-          "$ref": "#/definitions/SolutionEditableProperties"
-        }
-      }
-    },
-    "SolutionEditableProperties": {
-      "description": "Editable properties of a Solution inside the Azure Percept account.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "The properties of a Solution linked to the Azure Percept account.",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SolutionProperties"
         }
       }
@@ -2027,9 +2021,7 @@
         "capabilities": {
           "description": "Component capabilities.",
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "configurations": {
           "description": "Component configurations.",
@@ -2375,6 +2367,10 @@
       "description": "Editable properties of a sensor inside the Azure Percept device.",
       "type": "object",
       "properties": {
+        "sensorLocation": {
+          "description": "The sensor location.",
+          "type": "string"
+        },
         "metadata": {
           "type": "object",
           "additionalProperties": {
@@ -2525,6 +2521,40 @@
       "type": "object",
       "description": "The SolutionInstance object."
     },
+    "SolutionInstanceUpdateProperties": {
+      "description": "The properties of a SolutionInstance within a Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of solutioninstance resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target resource to deploy the SolutionInstance.",
+          "type": "string"
+        },
+        "solution": {
+          "description": "The solution resource to be deployed.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The user provided description.",
+          "type": "string"
+        },
+        "configurations": {
+          "description": "Component configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionInstanceConfiguration"
+          }
+        }
+      },
+      "required": [
+        "target",
+        "solution"
+      ]
+    },
     "SolutionInstanceProperties": {
       "description": "The properties of a SolutionInstance within a Azure Percept account.",
       "type": "object",
@@ -2578,7 +2608,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Azure Percept SolutionInstance editable properties.",
-          "$ref": "#/definitions/SolutionInstanceProperties"
+          "$ref": "#/definitions/SolutionInstanceUpdateProperties"
         }
       }
     },
