@@ -1693,24 +1693,6 @@
       },
       "description": "Wind direction"
     },
-    "WindSpeed": {
-      "type": "object",
-      "description": "Speed of wind in specified unit.",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "float",
-          "description": "Rounded value of the speed."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Type of unit for the speed value."
-        },
-        "unitType": {
-          "$ref": "#/definitions/UnitType"
-        }
-      }
-    },
     "WeatherUnitRange": {
       "x-ms-client-name": "WeatherValueRange",
       "type": "object",
@@ -3476,7 +3458,7 @@
       "properties": {
         "results": {
           "type": "array",
-          "x-ms-client-name": "airQualityResult",
+          "x-ms-client-name": "airQualityResults",
           "items": {
             "$ref": "#/definitions/AirQuality"
           },
@@ -3490,7 +3472,7 @@
       "properties": {
         "results": {
           "type": "array",
-          "x-ms-client-name": "airQualityResult",
+          "x-ms-client-name": "airQualityResults",
           "items": {
             "$ref": "#/definitions/DailyAirQuality"
           },
