@@ -2268,12 +2268,12 @@
             "$ref": "#/parameters/BuildServiceAgentPoolNameParameter"
           },
           {
-            "name": "tier",
+            "name": "poolSize",
             "in": "body",
             "description": "Parameters for the update operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BuildServiceAgentPoolTierProperties"
+              "$ref": "#/definitions/BuildServiceAgentPoolSizeProperties"
             }
           }
         ],
@@ -2310,71 +2310,6 @@
         "x-ms-examples": {
           "BuildServiceAgentPool_UpdatePut": {
             "$ref": "./examples/BuildServiceAgentPool_UpdatePut.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Update build service agent pool.",
-        "operationId": "BuildServiceAgentPool_UpdatePatch",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BuildServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BuildServiceAgentPoolNameParameter"
-          },
-          {
-            "name": "tier",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildServiceAgentPoolTierProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes build service agent pool.",
-            "schema": {
-              "$ref": "#/definitions/BuildServiceAgentPoolResource"
-            }
-          },
-          "202": {
-            "description": "Accepted. The response describes the build service agent pool is updating and contains a Location header to query the\r\noperation result.",
-            "schema": {
-              "$ref": "#/definitions/BuildServiceAgentPoolResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "BuildServiceAgentPool_UpdatePatch": {
-            "$ref": "./examples/BuildServiceAgentPool_UpdatePatch.json"
           }
         }
       }
@@ -6826,28 +6761,28 @@
           "type": "string",
           "readOnly": true
         },
-        "tier": {
-          "description": "build service agent pool tier properties",
+        "poolSize": {
+          "description": "build service agent pool size properties",
           "type": "object",
-          "$ref": "#/definitions/BuildServiceAgentPoolTierProperties"
+          "$ref": "#/definitions/BuildServiceAgentPoolSizeProperties"
         }
       }
     },
-    "BuildServiceAgentPoolTierProperties": {
-      "description": "Build service agent pool tier properties",
+    "BuildServiceAgentPoolSizeProperties": {
+      "description": "Build service agent pool size properties",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of build service agent pool tier",
+          "description": "The name of build service agent pool size",
           "type": "string"
         },
         "cpu": {
-          "description": "The cpu property of build service agent pool tier",
+          "description": "The cpu property of build service agent pool size",
           "type": "string",
           "readOnly": true
         },
         "memory": {
-          "description": "The memory property of build service agent pool tier",
+          "description": "The memory property of build service agent pool size",
           "type": "string",
           "readOnly": true
         }
