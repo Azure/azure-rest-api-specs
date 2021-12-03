@@ -468,6 +468,268 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages/{resourceName}": {
+      "put": {
+        "operationId": "GuestUsages_Create",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Create": {
+            "$ref": "./examples/GuestUsagesCreate.json"
+          }
+        },
+        "summary": "Creates a Guest Usages resource",
+        "description": "Creates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "Resource",
+            "in": "body",
+            "description": "Guest Usages resource to be created",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and the resource was created successfully",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "GuestUsages_Update",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Update": {
+            "$ref": "./examples/GuestUsagesUpdate.json"
+          }
+        },
+        "summary": "Updates a Guest Usages resource",
+        "description": "Updates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "ResourcePatch",
+            "in": "body",
+            "description": "Guest Usages Resource to be updated",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest Usages Resource Successfully Updated",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GuestUsages_Delete",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Delete": {
+            "$ref": "./examples/GuestUsagesDelete.json"
+          }
+        },
+        "summary": "Deletes a Guest Usages resource",
+        "description": "Deletes a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest Usages Resource Successfully Deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GuestUsages_Get",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Get": {
+            "$ref": "./examples/GuestUsagesGet.json"
+          }
+        },
+        "summary": "Gets a Guest Usages resource",
+        "description": "Gets a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest Usages resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
+      "get": {
+        "operationId": "GuestUsages_ListBySubscription",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsagesSubscription_List": {
+            "$ref": "./examples/GuestUsagesSubscriptionGet.json"
+          }
+        },
+        "summary": "Gets Guest Usages resources under a subscription",
+        "description": "Gets Guest Usages resources under a subscription for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Guest Usages resources under the subscription successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
+      "get": {
+        "operationId": "GuestUsages_ListByResourceGroup",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsagesResourceGroup_List": {
+            "$ref": "./examples/GuestUsagesResourceGroupGet.json"
+          }
+        },
+        "summary": "Gets Guest Usages resources under resource group",
+        "description": "Gets Guest Usages resources under a resource group for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Guest Usages resources under the resourceGroup successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -831,7 +1093,7 @@
       "description": "The collection of Azure AD B2C tenant resources",
       "properties": {
         "value": {
-          "description": "List of guest usages resources",
+          "description": "List of Azure AD B2C tenant resources",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -891,6 +1153,84 @@
     "CountryCode": {
       "type": "string",
       "description": "Country code of Azure tenant (e.g. 'US'). Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see valid country codes and corresponding data residency locations. If you do not see a country code in an valid data residency location, choose one from the list."
+    },
+    "GuestUsagesResourceProperties": {
+      "description": "Guest Usages Resource Properties",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier for the tenant for which the resource is being created"
+        }
+      }
+    },
+    "GuestUsagesResource": {
+      "description": "Guest Usages Resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the Guest Usages resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the Guest Usages resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the Guest Usages resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Guest Usages resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        },
+        "properties": {
+          "$ref": "#/definitions/GuestUsagesResourceProperties",
+          "x-ms-client-flatten": true,
+          "description": "The Guest Usages Resource Properties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "GuestUsagesResourcePatch": {
+      "description": "Guest Usages Resource for Patch",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        }
+      }
+    },
+    "GuestUsagesResourceList": {
+      "description": "The collection of guest usages resources",
+      "properties": {
+        "value": {
+          "description": "List of guest usages resources",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GuestUsagesResource"
+          }
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
