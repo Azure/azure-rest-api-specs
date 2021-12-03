@@ -112,7 +112,7 @@
             "description": "Custom domain to be validated.",
             "required": true,
             "schema": {
-              "$ref": "./cdn.json#/definitions/CheckNameAvailabilityInput"
+              "$ref": "#/definitions/CheckHostNameAvailabilityInput"
             }
           },
           {
@@ -5353,6 +5353,19 @@
             "name": "MatchProcessingBehavior",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "CheckHostNameAvailabilityInput": {
+      "description": "Input of CheckHostNameAvailability API.",
+      "type": "object",
+      "required": [
+        "hostName"
+      ],
+      "properties": {
+        "hostName": {
+          "description": "The host name to validate.",
+          "type": "string"
         }
       }
     },
