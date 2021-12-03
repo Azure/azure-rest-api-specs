@@ -3,7 +3,7 @@
   "info": {
     "title": "BatchManagementClient",
     "description": "The Batch Management Client.",
-    "version": "2021-06-01"
+    "version": "2022-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1165,6 +1165,11 @@
           "Operations"
         ],
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "description": "Lists available operations for the Microsoft.Batch provider",
         "parameters": [
           {
@@ -1611,6 +1616,90 @@
                 "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/detectors": {
+      "get": {
+        "operationId": "BatchAccount_ListDetectors",
+        "description": "Gets information about the detectors available for a given Batch account.",
+        "x-ms-examples": {
+          "ListDetectors": {
+            "$ref": "./examples/DetectorList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of detectors associated with a Batch account.",
+            "schema": {
+              "$ref": "#/definitions/DetectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/detectors/{detectorId}": {
+      "get": {
+        "operationId": "BatchAccount_GetDetector",
+        "description": "Gets information about the given detector for a given Batch account.",
+        "x-ms-examples": {
+          "GetDetector": {
+            "$ref": "./examples/DetectorGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DetectorIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the given detector associated with a Batch account.",
+            "schema": {
+              "$ref": "#/definitions/DetectorResponse"
             }
           },
           "default": {
@@ -2772,7 +2861,7 @@
           "x-nullable": true,
           "type": "integer",
           "format": "int32",
-          "title": "The low-priority core quota for the Batch account.",
+          "title": "The Spot/low-priority core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamily": {
@@ -2782,6 +2871,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamilyEnforced": {
@@ -3461,6 +3553,10 @@
           "items": {
             "$ref": "#/definitions/DeleteCertificateError"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -3469,6 +3565,49 @@
         "message"
       ],
       "description": "An error response from the Batch service."
+    },
+    "DetectorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectorResponse"
+          },
+          "description": "The collection of Batch account detectors returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "DetectorResponse": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DetectorResponseProperties",
+          "description": "The properties associated with the detector."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Contains the information for a detector."
+    },
+    "DetectorResponseProperties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "A base64 encoded string that represents the content of a detector."
+        }
+      },
+      "description": "Detector response properties."
     },
     "PrivateLinkResource": {
       "type": "object",
@@ -3762,7 +3901,7 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low-priority compute nodes currently in the pool.",
+          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
           "readOnly": true
         },
         "scaleSettings": {
@@ -3818,6 +3957,9 @@
           "items": {
             "$ref": "#/definitions/UserAccount"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "The list of user accounts to be created on each node in the pool."
         },
         "metadata": {
@@ -3825,6 +3967,9 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "A list of name-value pairs associated with the pool as metadata.",
           "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         },
@@ -3867,6 +4012,7 @@
           "items": {
             "$ref": "#/definitions/MountConfiguration"
           },
+          "x-ms-identifiers": [],
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
         }
@@ -3985,7 +4131,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool.",
+          "title": "The desired number of Spot/low-priority compute nodes in the pool.",
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
@@ -4134,6 +4280,7 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
+          "x-ms-identifiers": [],
           "title": "Additional details about the error."
         }
       },
@@ -4159,6 +4306,7 @@
           "items": {
             "$ref": "#/definitions/AutoScaleRunError"
           },
+          "x-ms-identifiers": [],
           "title": "Additional details about the error."
         }
       },
@@ -4213,6 +4361,9 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
+          "x-ms-identifiers": [
+            "lun"
+          ],
           "title": "The configuration for data disks attached to the compute nodes in the pool.",
           "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them."
         },
@@ -4241,6 +4392,10 @@
           "items": {
             "$ref": "#/definitions/VMExtension"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "title": "The virtual machine extension for the pool.",
           "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
         },
@@ -4350,6 +4505,9 @@
           "items": {
             "$ref": "#/definitions/ContainerRegistry"
           },
+          "x-ms-identifiers": [
+            "registryServers"
+          ],
           "title": "Additional private registries from which containers can be pulled.",
           "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here."
         }
@@ -4470,7 +4628,7 @@
         "sku": {
           "type": "string",
           "title": "The SKU of the Azure Virtual Machines Marketplace image.",
-          "description": "For example, 18.04-LTS or 2019-Datacenter."
+          "description": "For example, 18.04-LTS or 2022-datacenter."
         },
         "version": {
           "type": "string",
@@ -4645,6 +4803,9 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
+          "x-ms-identifiers": [
+            "httpUrl"
+          ],
           "title": "A list of files that the Batch service will download to the compute node before running the command line."
         },
         "environmentSettings": {
@@ -4652,6 +4813,9 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "A list of environment variable settings for the start task."
         },
         "userIdentity": {
@@ -5011,7 +5175,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -5026,6 +5190,28 @@
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
             "description": "Setting up RBAC for Azure Batch VNets"
+          }
+        },
+        "dynamicVNetAssignmentScope": {
+          "type": "string",
+          "title": "The scope of dynamic vnet assignment.",
+          "enum": [
+            "none",
+            "job"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicVNetAssignmentScope",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "none",
+                "description": "No dynamic VNet assignment is enabled."
+              },
+              {
+                "value": "job",
+                "description": "Dynamic VNet assignment is done per-job. Don't use this option unless your batch account has been approved to use this feature."
+              }
+            ]
           }
         },
         "endpointConfiguration": {
@@ -5090,7 +5276,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool."
+          "title": "The desired number of Spot/low-priority compute nodes in the pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -5113,6 +5299,7 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
+          "x-ms-identifiers": [],
           "title": "Details of any errors encountered while performing the last resize on the pool.",
           "description": "This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady."
         }
@@ -5128,6 +5315,9 @@
           "items": {
             "$ref": "#/definitions/InboundNatPool"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
           "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
@@ -5191,7 +5381,8 @@
           "description": "The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroupRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5338,6 +5529,10 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -5378,6 +5573,9 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A collection of capabilities which this SKU supports."
         }
       },
@@ -5391,6 +5589,9 @@
           "items": {
             "$ref": "#/definitions/SupportedSku"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of SKUs available for the Batch service in the location."
         },
         "nextLink": {
@@ -5459,6 +5660,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "title": "The list of operations supported by the resource provider."
         },
         "nextLink": {
@@ -5710,6 +5914,7 @@
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
+          "x-ms-identifiers": [],
           "description": "The collection of outbound network dependency endpoints returned by the listing operation."
         },
         "nextLink": {
@@ -5733,6 +5938,9 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
+          "x-ms-identifiers": [
+            "domainName"
+          ],
           "description": "The endpoints for this service to which the Batch service makes outbound calls."
         }
       },
@@ -5757,6 +5965,7 @@
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           },
+          "x-ms-identifiers": [],
           "description": "The list of connection details for this endpoint."
         }
       },
@@ -5818,6 +6027,14 @@
       "minLength": 5,
       "maxLength": 45,
       "description": "The identifier for the certificate. This must be made up of algorithm and thumbprint separated by a dash, and must match the certificate data in the request. For example SHA1-a3d1c5.",
+      "x-ms-parameter-location": "method"
+    },
+    "DetectorIdParameter": {
+      "name": "detectorId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the detector.",
       "x-ms-parameter-location": "method"
     },
     "PoolNameParameter": {
