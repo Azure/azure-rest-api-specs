@@ -2602,11 +2602,25 @@
     },
     "AddParticipantResult": {
       "description": "The add participant result",
+      "required": [
+        "status"
+      ],
       "type": "object",
       "properties": {
-        "participantId": {
-          "description": "The id of the added participant.",
+        "operationId": {
+          "description": "The operation id.",
           "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CallingOperationStatus"
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "resultDetails": {
+          "$ref": "#/definitions/CallingOperationResultDetails",
+          "description": "The result info for the operation."
         }
       }
     },
