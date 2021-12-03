@@ -3212,13 +3212,13 @@
           "type": "array",
           "x-ms-client-name": "storms",
           "items": {
-            "$ref": "#/definitions/StormSearch"
+            "$ref": "#/definitions/StormSearchResultItem"
           },
           "description": "Search government-issued storms"
         }
       }
     },
-    "StormSearch": {
+    "StormSearchResultItem": {
       "type": "object",
       "description": "Government-issued active storm event",
       "properties": {
@@ -3318,12 +3318,12 @@
       "properties": {
         "left": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
-          "x-ms-client-name": "TopLeft",
+          "x-ms-client-name": "topLeft",
           "description": "Location of the point on the left side of the window at the time of the timeframe."
         },
         "right": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
-          "x-ms-client-name": "BottomRight",
+          "x-ms-client-name": "bottomRight",
           "description": "Location of the point on the right side of the window at the end of the timeframe."
         },
         "beginDateTime": {
@@ -3408,13 +3408,13 @@
           "type": "array",
           "x-ms-client-name": "stormLocations",
           "items": {
-            "$ref": "#/definitions/LocationResult"
+            "$ref": "#/definitions/StormLocation"
           },
           "description": "Locations for an individual government-issued storm"
         }
       }
     },
-    "LocationResult": {
+    "StormLocation": {
       "type": "object",
       "description": "Location for an individual Government-issued storm",
       "properties": {
