@@ -398,7 +398,7 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -740,60 +740,72 @@
     }
   },
   "definitions": {
-    "Operation": {
-      "description": "Microsoft.AzureActiveDirectory REST API operation.",
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.AzureActiveDirectory.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: GuestUsages, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Friendly name of the operation",
-              "type": "string"
-            }
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
           }
         },
-        "origin": {
-          "description": "The origin of the operation.",
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
           "type": "string"
         }
       }
     },
-    "OperationListResult": {
-      "description": "Result of listing operations for the resourceProvider",
+    "OperationDetail": {
+      "description": "Operation detail payload",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "List of cpim service operations supported by the Microsoft.AzureActiveDirectory resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    }
     "AsyncOperationStatus": {
       "description": "The async operation status.",
       "type": "object",
@@ -1100,6 +1112,10 @@
             "type": "string"
           },
           "description": "Resource Tags"
+        },
+        "systemData": {
+          "$ref": "v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       }
     },
@@ -1218,6 +1234,10 @@
           "$ref": "#/definitions/GuestUsagesResourceProperties",
           "x-ms-client-flatten": true,
           "description": "The Guest Usages Resource Properties"
+        },
+        "systemData": {
+          "$ref": "v2/types.json#/definitions/systemData",
+           "readOnly" : true
         }
       },
       "x-ms-azure-resource": true
