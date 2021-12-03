@@ -40,6 +40,15 @@ input-file:
 - Microsoft.AzureSphere/preview/2021-02-01-preview/azuresphere.json
 ```
 
+### Tag: package-2022-02-01-privatepreview
+
+These settings apply only when `--tag=package-2022-02-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-privatepreview'
+input-file:
+- Microsoft.AzureSphere/preview/2022-02-01-privatepreview/azuresphere.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -108,6 +117,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.AzureSphere/preview/2021-02-01-preview/azuresphere.json
+  - $(this-folder)/Microsoft.AzureSphere/preview/2022-02-01-privatepreview/azuresphere.json
   
 ```
 
