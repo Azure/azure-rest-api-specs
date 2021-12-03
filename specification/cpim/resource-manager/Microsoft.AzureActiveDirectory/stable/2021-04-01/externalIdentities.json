@@ -209,7 +209,7 @@
           "B2CTenants"
         ],
         "x-ms-examples": {
-          "Get tenant": {
+          "Update tenant": {
             "$ref": "./examples/updateTenant.json"
           }
         },
@@ -596,7 +596,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Guest Usages Resource Successfully Deleted."
+            "description": "Guest Usages resource was successfully deleted."
+          },
+          "204": {
+            "description": "Guest Usages resource successfully deleted or didn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -744,6 +747,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.AzureActiveDirectory.",
@@ -774,6 +778,7 @@
     },
     "OperationListResult": {
       "description": "Result of listing operations for the resourceProvider",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of cpim service operations supported by the Microsoft.AzureActiveDirectory resource provider.",
@@ -787,6 +792,7 @@
     },
     "AsyncOperationStatus": {
       "description": "The async operation status.",
+      "type": "object",
       "properties": {
         "subscriptionId": {
           "type": "string",
@@ -842,6 +848,7 @@
         },
         "error": {
           "description": "Error response if async operation failed.",
+          "type":"object",
           "properties": {
             "code": {
               "type": "string",
@@ -905,6 +912,7 @@
     },
     "B2CResourceSKU": {
       "description": "SKU properties of the Azure AD B2C tenant. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cBilling).",
+      "type":"object",
       "properties": {
         "name": {
           "type": "string",
@@ -954,6 +962,7 @@
     },
     "NameAvailabilityResponse": {
       "description": "Response of the CheckNameAvailability operation.",
+      "type":"object",
       "properties": {
         "message": {
           "type": "string",
@@ -1091,6 +1100,7 @@
     },
     "B2CTenantResourceList": {
       "description": "The collection of Azure AD B2C tenant resources",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of Azure AD B2C tenant resources",
@@ -1221,6 +1231,7 @@
     },
     "GuestUsagesResourceList": {
       "description": "The collection of guest usages resources",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of guest usages resources",
@@ -1234,6 +1245,7 @@
     },
     "CloudError": {
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
