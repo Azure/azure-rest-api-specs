@@ -1,0 +1,18 @@
+on: [pull_request]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+    - name: checkout action
+      uses: actions/checkout@v2
+    #custom docker action
+    - name: Hello world action step
+      id: hello
+      uses: haagha/custom-docker-action@v9
+      with:
+        who-to-greet: 'Haider2'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
