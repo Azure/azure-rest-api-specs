@@ -5,10 +5,10 @@ These settings apply only when `--track2` is specified on the command line.
 ```yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-externalidentities
+package-name: azure-mgmt-azureadexternalidentities
 package-version: 1.0.0b2
 no-namespace-folders: true
-python-base-folder: externalidentities/azure-mgmt-externalidentities/azure/mgmt/externalidentities
+python-base-folder: azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities
 ```
 
 ### Python multi-api
@@ -24,7 +24,7 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/externalidentities/azure-mgmt-externalidentities/azure/mgmt/externalidentities/
+output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/
 clear-output-folder: false
 perform-load: false
 ```
