@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2020-07-01-preview"
+    "version": "2021-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -451,6 +451,59 @@
         "x-ms-examples": {
           "DeploymentInfo_List": {
             "$ref": "./examples/DeploymentInfo_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/createOrUpdateExternalUser": {
+      "post": {
+        "tags": [
+          "DeploymentInfo"
+        ],
+        "summary": "Create User inside elastic deployment which are used by customers to perform operations on the elastic deployment",
+        "operationId": "ExternalUser_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic External User Creation Parameters",
+            "schema": {
+              "$ref": "#/definitions/ExternalUserInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalUserCreationResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInfo_List": {
+            "$ref": "./examples/ExternalUserInfo.json"
           }
         }
       }
@@ -1452,6 +1505,47 @@
         }
       }
     },
+    "ExternalUserCreationResponse": {
+      "description": "The properties of the response we got from elastic while creating external user",
+      "type": "object",
+      "properties": {
+        "created": {
+          "description": "Shows if user is created or updated",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ExternalUserInfo": {
+      "description": "The properties of the request required for creating user on elastic side",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "description": "Username of the user to be created or updated",
+          "type": "string"
+        },
+        "fullName": {
+          "description": "Full name of the user to be created or updated",
+          "type": "string"
+        },
+        "password": {
+          "x-ms-secret": true,
+          "description": "Password of the user to be created or updated",
+          "type": "string"
+        },
+        "emailId": {
+          "description": "Email id of the user to be created or updated",
+          "type": "string"
+        },
+        "roles": {
+          "description": "Roles to be assigned for  created or updated user",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "VMHostListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
@@ -1531,7 +1625,9 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2020-07-01-preview"
+        "2020-07-01-preview",
+        "2020-07-01",
+        "2021-09-01-preview"
       ]
     },
     "SubscriptionIdParameter": {
