@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-elastic"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-elastic"
+  output-folder: "$(typescript-sdks-folder)/sdk/elastic/arm-elastic"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
