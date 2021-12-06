@@ -202,6 +202,70 @@
           }
         }
       },
+      "put": {
+        "operationId": "B2CTenants_Create",
+        "description": "Initiates an async request to create both the Azure AD B2C tenant and the corresponding Azure resource linked to a subscription.",
+        "x-ms-examples": {
+          "Create tenant": {
+            "$ref": "./examples/createTenant.json"
+          }
+        },
+        "tags": [
+          "B2CTenants"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "createTenantRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateTenantRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of the URL in Location header if the async operation is successful. Resource will be created.",
+            "schema": {
+              "$ref": "#/definitions/B2CTenantResource"
+            }
+          },
+          "202": {
+            "description": "Tenant create request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Contains the number of seconds to wait before polling the location.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
       "patch": {
         "description": "Update the Azure AD B2C tenant resource.",
         "operationId": "B2CTenants_Update",
@@ -249,76 +313,6 @@
           }
         }
       },
-      "put": {
-        "operationId": "B2CTenants_Create",
-        "description": "Initiates an async request to create both the Azure AD B2C tenant and the corresponding Azure resource linked to a subscription.",
-        "x-ms-examples": {
-          "Create tenant": {
-            "$ref": "./examples/createTenant.json"
-          }
-        },
-        "tags": [
-          "B2CTenants"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "name": "createTenantRequestBody",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/CreateTenantRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The expected resource type once successfully created from the async request.",
-            "schema": {
-              "$ref": "#/definitions/B2CTenantResource"
-            }
-          },
-          "201": {
-            "description": "OK. The expected resource type once successfully created from the async request.",
-            "schema": {
-              "$ref": "#/definitions/B2CTenantResource"
-            }
-          },
-          "202": {
-            "description": "Tenant create request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation.",
-            "headers": {
-              "Location": {
-                "description": "Contains the URL/location which can return the tenant provisioning status.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Contains the number of seconds to wait before checking the tenant provisioning status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
       "delete": {
         "operationId": "B2CTenants_Delete",
         "description": "Initiates an async operation to delete the Azure AD B2C tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://aka.ms/deleteB2Ctenant). ",
@@ -345,9 +339,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deletion successful."
-          },
           "202": {
             "description": "Resource deletion request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation. ",
             "headers": {
@@ -362,7 +353,7 @@
             }
           },
           "204": {
-            "description": "Request successful. Resource does not exist. "
+            "description": "Response of the URL in Location header if the async operation is successful. Resource will no longer exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -410,66 +401,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/operations/{operationId}": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_GetAsyncStatus",
-        "description": "Gets the status of the async operation.",
-        "x-ms-examples": {
-          "Get Async Status": {
-            "$ref": "./examples/getAsyncOperationStatus.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "type": "string",
-            "in": "path",
-            "description": "The operation ID.",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The async operation status.",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperationStatus"
-            }
-          },
-          "202": {
-            "description": "Tenant create request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation.",
-            "headers": {
-              "Location": {
-                "description": "Contains the URL/location which can return the tenant provisioning status.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Contains the number of seconds to wait before checking the tenant provisioning status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
         }
       }
     },
@@ -799,84 +730,6 @@
         "description": {
           "description": "Localized friendly description for the operation",
           "type": "string"
-        }
-      }
-    },
-    "AsyncOperationStatus": {
-      "description": "The async operation status.",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription ID that the resource belongs to."
-        },
-        "id": {
-          "type": "string",
-          "description": "The GET resource path for the operation."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation ID."
-        },
-        "status": {
-          "description": "The status of the operation.",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Pending",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "StatusType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Succeeded",
-                "description": "The operation succeeded."
-              },
-              {
-                "value": "Pending",
-                "description": "The operation is pending."
-              },
-              {
-                "value": "Failed",
-                "description": "The operation failed."
-              }
-            ]
-          }
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Start time of the async operation."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "End time of the async operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/B2CTenantResourceProperties",
-          "x-ms-client-flatten": true,
-          "description": "The Azure AD B2C tenant resource properties"
-        },
-        "error": {
-          "description": "Error response if async operation failed.",
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Error code."
-            },
-            "message": {
-              "type": "string",
-              "description": "Error message."
-            },
-            "extendedDetails": {
-              "description": "Extended details of the error",
-              "type": "object",
-              "properties": {},
-              "additionalProperties": {}
-            }
-          }
         }
       }
     },
