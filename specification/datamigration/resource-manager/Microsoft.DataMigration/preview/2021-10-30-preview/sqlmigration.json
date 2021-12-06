@@ -1177,9 +1177,23 @@
   },
   "definitions": {
     "DatabaseMigrationProperties": {
+      "required": [
+        "kind"
+      ],
       "description": "Database Migration Resource properties.",
       "type": "object",
       "properties": {
+        "kind": {
+          "enum": [
+            "SqlMi",
+            "SqlVm"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": true
+          }
+        },
         "scope": {
           "description": "Scope of the database.",
           "type": "string",
@@ -1197,7 +1211,20 @@
           "description": "Migration status.",
           "type": "string",
           "readOnly": true
-        },
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DatabaseMigrationPropertiesSqlMi": {
+      "x-ms-discriminator-value": "SqlMi",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseMigrationProperties"
+        }
+      ],
+      "description": "Database Migration Resource properties for Sql Managed Instance.",
+      "type": "object",
+      "properties": {
         "migrationStatusDetails": {
           "$ref": "#/definitions/MigrationStatusDetails",
           "description": "Detailed migration status. Not included by default.",
@@ -1216,7 +1243,73 @@
           "readOnly": true
         },
         "sourceSqlConnection": {
-          "$ref": "#/definitions/SqlConnectionInformation",
+          "$ref": "#/definitions/SqlConnectionInfo",
+          "description": "Source SQL Server connection details."
+        },
+        "sourceDatabaseName": {
+          "description": "Name of the source database.",
+          "type": "string"
+        },
+        "targetDatabaseCollation": {
+          "description": "Database collation to be used for the target database.",
+          "type": "string"
+        },
+        "migrationService": {
+          "description": "Resource Id of the Migration Service.",
+          "type": "string"
+        },
+        "migrationOperationId": {
+          "description": "ID tracking current migration operation.",
+          "type": "string"
+        },
+        "provisioningError": {
+          "description": "Error message for migration provisioning failure, if any.",
+          "type": "string"
+        },
+        "backupConfiguration": {
+          "$ref": "#/definitions/BackupConfiguration",
+          "description": "Backup configuration info."
+        },
+        "offlineConfiguration": {
+          "$ref": "#/definitions/OfflineConfiguration",
+          "description": "Offline configuration."
+        },
+        "migrationFailureError": {
+          "$ref": "#/definitions/ErrorInfo",
+          "description": "Error details in case of migration failure.",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseMigrationPropertiesSqlVm": {
+      "x-ms-discriminator-value": "SqlVm",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseMigrationProperties"
+        }
+      ],
+      "description": "Database Migration Resource properties for Sql Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "migrationStatusDetails": {
+          "$ref": "#/definitions/MigrationStatusDetails",
+          "description": "Detailed migration status. Not included by default.",
+          "readOnly": true
+        },
+        "startedOn": {
+          "format": "date-time",
+          "description": "Database migration start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endedOn": {
+          "format": "date-time",
+          "description": "Database migration end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceSqlConnection": {
+          "$ref": "#/definitions/SqlConnectionInfo",
           "description": "Source SQL Server connection details."
         },
         "sourceDatabaseName": {
