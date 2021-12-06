@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2020-07-01-preview"
+    "version": "2021-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -455,6 +455,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/createOrUpdateExternalUser": {
+      "post": {
+        "tags": [
+          "DeploymentInfo"
+        ],
+        "summary": "Create User inside elastic deployment which are used by customers to perform operations on the elastic deployment",
+        "operationId": "ExternalUser_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic External User Creation Parameters",
+            "schema": {
+              "$ref": "#/definitions/ExternalUserInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalUserCreationResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInfo_List": {
+            "$ref": "./examples/ExternalUserInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules": {
       "get": {
         "tags": [
@@ -800,6 +853,105 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgradableVersions": {
+      "get": {
+        "tags": [
+          "MonitorUpgradableVersions"
+        ],
+        "summary": "Get the list of upgradable versions for a given monitor resource.",
+        "operationId": "UpgradableVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionsList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpgradableVersions_Get": {
+            "$ref": "./examples/UpgradableVersions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgrade": {
+      "put": {
+        "tags": [
+          "DeploymentUpdate"
+        ],
+        "summary": "Upgradable version for a monitor resource.",
+        "operationId": "Monitor_Upgrade",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic Monitor Upgrade Parameters",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorUpgrade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitor_Upgrade": {
+            "$ref": "./examples/Monitor_Upgrade.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1117,6 +1269,10 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "version": {
+          "description": "Version of elastic of the monitor resource",
+          "type": "string"
         },
         "liftrResourceCategory": {
           "$ref": "#/definitions/LiftrResourceCategories"
@@ -1452,6 +1608,47 @@
         }
       }
     },
+    "ExternalUserCreationResponse": {
+      "description": "The properties of the response we got from elastic while creating external user",
+      "type": "object",
+      "properties": {
+        "created": {
+          "description": "Shows if user is created or updated",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ExternalUserInfo": {
+      "description": "The properties of the request required for creating user on elastic side",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "description": "Username of the user to be created or updated",
+          "type": "string"
+        },
+        "fullName": {
+          "description": "Full name of the user to be created or updated",
+          "type": "string"
+        },
+        "password": {
+          "x-ms-secret": true,
+          "description": "Password of the user to be created or updated",
+          "type": "string"
+        },
+        "emailId": {
+          "description": "Email id of the user to be created or updated",
+          "type": "string"
+        },
+        "roles": {
+          "description": "Roles to be assigned for  created or updated user",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "VMHostListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
@@ -1521,6 +1718,33 @@
           "$ref": "#/definitions/OperationName"
         }
       }
+    },
+    "UpgradableVersionsList": {
+      "description": "Stack Versions that this version can upgrade to",
+      "type": "object",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current version of the elastic monitor"
+        },
+        "upgradableVersions": {
+          "type": "array",
+          "description": "Stack Versions that this version can upgrade to",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ElasticMonitorUpgrade": {
+      "description": "Upgrade elastic monitor version",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version to which the elastic monitor should be upgraded to"
+        }
+      }
     }
   },
   "parameters": {
@@ -1531,7 +1755,10 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2020-07-01-preview"
+        "2020-07-01-preview",
+        "2020-07-01",
+        "2021-09-01-preview",
+        "2021-10-01-preview"
       ]
     },
     "SubscriptionIdParameter": {
