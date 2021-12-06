@@ -146,7 +146,7 @@ input-file:
 - Microsoft.AlertsManagement/preview/2020-08-04-preview/ResourceHealthAlertRules.json
 ```
 
-### Tag: package-2021-07-22-preview
+### Tag: package-2021-07-22-privatepreview
 
 
 These settings apply only when `--tag=package-2021-07-22` is specified on the command line.
