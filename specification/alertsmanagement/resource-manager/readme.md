@@ -151,9 +151,9 @@ input-file:
 
 These settings apply only when `--tag=package-2021-07-22` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-22-preview'
+``` yaml $(tag) == 'package-2021-07-22-privatepreview'
 input-file:
-- Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
+- Microsoft.AlertsManagement/preview/2021-07-22-privatepreview/PrometheusRuleGroups.json
 ```
 
 # Code Generation
