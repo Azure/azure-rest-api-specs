@@ -34,10 +34,23 @@
     "200": {
       "headers": {},
       "body": {
-        "error": {
-          "code": "400 Bad Request",
-          "message": "Upload request failed. Your data has been removed as we encountered the following problems with it: Map data is not a valid GeoJSON geometry."
-        }
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.126986,
+                47.639754
+              ]
+            },
+            "properties": {
+              "geometryId": "001",
+              "radius": 500
+            }
+          }
+        ]
       }
     },
     "400": {
