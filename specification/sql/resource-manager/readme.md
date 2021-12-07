@@ -42,7 +42,6 @@ APIs must only be added to this section when the API is publicly available in at
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
-- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
@@ -81,8 +80,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobTargetGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobVersions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/LocationCapabilities.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionManagedInstanceBackups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/MaintenanceWindowOptions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/MaintenanceWindows.json
@@ -108,13 +105,11 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstanceOperations.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstancePrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstancePrivateLinkResources.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstanceTdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Operations.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/OperationsHealth.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
@@ -144,17 +139,21 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/BackupShortTermRetentionPolicies.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/ReplicationLinks.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/ManagedInstances.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
+- ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 
 
 # Needed when there is more than one input file
@@ -791,7 +790,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/Operations.json
- - ./Microsoft.Sql/preview/2021-05-01-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/OutboundFirewallRules.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/PrivateLinkResources.json
@@ -909,7 +907,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/Operations.json
- - ./Microsoft.Sql/preview/2021-02-01-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/PrivateLinkResources.json
@@ -1031,7 +1028,6 @@ input-file:
   - Microsoft.Sql/preview/2020-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2020-11-01-preview/ManagedServerSecurityAlertPolicies.json
   - Microsoft.Sql/preview/2020-11-01-preview/Operations.json
-  - Microsoft.Sql/preview/2020-11-01-preview/OperationsHealth.json
   - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
   - Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
   - Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
@@ -1151,7 +1147,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/Operations.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/PrivateLinkResources.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/RecoverableManagedDatabases.json
@@ -1270,7 +1265,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/Operations.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/PrivateLinkResources.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/RecoverableManagedDatabases.json

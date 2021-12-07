@@ -81,9 +81,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowletTypeProperties"
         }
-      },
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "MappingDataFlowTypeProperties": {
@@ -196,9 +193,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "additionalProperties": {
-          "type": "object"
         }
       }
     },
@@ -213,6 +207,14 @@
         "description": {
           "description": "Transformation description.",
           "type": "string"
+        },
+        "dataset": {
+          "description": "Dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        },
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
         },
         "flowlet": {
           "description": "Flowlet Reference",
