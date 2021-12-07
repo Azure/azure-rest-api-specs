@@ -1165,6 +1165,61 @@
         "operationId": "StorageTarget_Resume"
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/invalidate": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All cached data for the storage target was invalidated"
+          },
+          "202": {
+            "description": "Storage target invalidation has started. Poll the storage target's state field to monitor progress."
+          },
+          "204": {
+            "description": "The storage target already has been invalidated, or invalidate is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Invalidate": {
+            "$ref": "./examples/StorageTargets_Invalidate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Invalidate all cached data for a storage target. Cached files are discarded and fetched from the back end on the next request.",
+        "operationId": "StorageTarget_Invalidate"
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
       "post": {
         "produces": [
@@ -1508,6 +1563,17 @@
             "directoryServicesSettings": {
               "$ref": "#/definitions/CacheDirectorySettings",
               "description": "Specifies Directory Services settings of the cache."
+            },
+            "zones": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Availability zones for resources. This field should only contain a single element in the array.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
             }
           },
           "type": "object"
