@@ -640,38 +640,6 @@
     }
   },
   "definitions": {
-    "FeatureGeoJSON": {
-      "description": "GeoJSON Feature",
-      "type": "object",
-      "required": [
-        "type",
-        "geometry",
-        "properties"
-      ],
-      "properties": {
-        "type": {
-          "description": "feature",
-          "type": "string"
-        },
-        "geometry": {
-          "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
-          "type": "object"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Additional properties of the feature.",
-          "type": "object"
-        },
-        "id": {
-          "description": "Identifier for the feature.",
-          "type": "string"
-        },
-        "featureType": {
-          "description": "The type of the feature. The value depends on the data model the current feature is part of. Some data models may have an empty value.",
-          "type": "string"
-        }
-      }
-    },
     "ODataErrorResponse": {
       "type": "object",
       "description": "This response object is returned when an error occurs in the Azure Maps API.",
@@ -766,15 +734,6 @@
       "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "features": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeatureGeoJSON"
-          }
-        }
       }
     },
     "MapDataListResponse": {
