@@ -1082,17 +1082,17 @@
     "AdditionalErrorInfo": {
       "description": "This class represents additional info Resource Providers pass when an error occurs",
       "properties": {
-          "info": {
-              "description": "Additional information of the type of error that occured",
-              "type": "object"
-          },
-          "type": {
-              "description": "Type of error occured (e.g. PolicyViolation, SecurityViolation)",
-              "type": "string"
-          }
+        "info": {
+          "description": "Additional information of the type of error that occured",
+          "type": "object"
+        },
+        "type": {
+          "description": "Type of error occured (e.g. PolicyViolation, SecurityViolation)",
+          "type": "string"
+        }
       },
       "type": "object"
-  },
+    },
     "AddressValidationOutput": {
       "description": "Output of the address validation api.",
       "type": "object",
@@ -1368,37 +1368,37 @@
     "CloudError": {
       "description": "Provides additional information about an http error response",
       "properties": {
-          "additionalInfo": {
-              "description": "Gets or sets additional error info.",
-              "items": {
-                  "$ref": "#/definitions/AdditionalErrorInfo"
-              },
-              "readOnly": true,
-              "type": "array"
+        "additionalInfo": {
+          "description": "Gets or sets additional error info.",
+          "items": {
+            "$ref": "#/definitions/AdditionalErrorInfo"
           },
-          "code": {
-              "description": "Error code",
-              "type": "string"
+          "readOnly": true,
+          "type": "array"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "details": {
+          "description": "Gets or sets details for the error.",
+          "items": {
+            "$ref": "#/definitions/CloudError"
           },
-          "details": {
-              "description": "Gets or sets details for the error.",
-              "items": {
-                  "$ref": "#/definitions/CloudError"
-              },
-              "readOnly": true,
-              "type": "array"
-          },
-          "message": {
-              "description": "The error message parsed from the body of the http error response",
-              "type": "string"
-          },
-          "target": {
-              "description": "Gets or sets the target of the error.",
-              "type": "string"
-          }
+          "readOnly": true,
+          "type": "array"
+        },
+        "message": {
+          "description": "The error message parsed from the body of the http error response",
+          "type": "string"
+        },
+        "target": {
+          "description": "Gets or sets the target of the error.",
+          "type": "string"
+        }
       },
       "type": "object"
-  },
+    },
     "ContactDetails": {
       "description": "Contact Details.",
       "required": [
@@ -3267,11 +3267,11 @@
                 {
                   "description": "Restart whole action",
                   "value": "Restart"
-              },
-              {
+                },
+                {
                   "description": "Reach out to operation for further action",
                   "value": "ReachOutToOperation"
-              }
+                }
               ]
             }
           },
@@ -4192,11 +4192,11 @@
               {
                 "description": "Restart whole action",
                 "value": "Restart"
-            },
-            {
+              },
+              {
                 "description": "Reach out to operation for further action",
                 "value": "ReachOutToOperation"
-            }
+              }
             ]
           }
         }
@@ -4238,11 +4238,11 @@
               {
                 "description": "Restart whole action",
                 "value": "Restart"
-            },
-            {
+              },
+              {
                 "description": "Reach out to operation for further action",
                 "value": "ReachOutToOperation"
-            }
+              }
             ]
           }
         }
@@ -4464,7 +4464,7 @@
           "$ref": "#/definitions/EncryptionPreferences",
           "description": "Preferences related to the Encryption."
         },
-		"storageAccountAccessTierPreferences": {
+        "storageAccountAccessTierPreferences": {
           "description": "Preferences related to the Access Tier of storage accounts.",
           "uniqueItems": false,
           "type": "array",
