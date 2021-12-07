@@ -56,65 +56,6 @@
       "SasToken": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      }
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "200Async": {
-      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-      "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
-      },
-      "headers": {
-        "Resource-Location": {
-          "type": "string",
-          "description": "If successful, a URI where details on the newly created resource can be found."
-        }
-      }
-    },
-    "202Accepted": {
-      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
-      "headers": {
-        "Operation-Location": {
-          "type": "string",
-          "description": "New URL to check for the results of the long running process."
-        }
-      }
-    }
-  },
   "parameters": {
     "GeographicResourceLocation": {
       "name": "geography",
@@ -288,7 +229,7 @@
         ],
         "responses": {
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "$ref": "#/definitions/ODataErrorResponse"
           },
           "400": {
             "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
@@ -448,7 +389,7 @@
             }
           },
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "$ref": "#/definitions/ODataErrorResponse"
           },
           "400": {
             "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
@@ -870,3 +811,4 @@
     }
   }
 }
+
