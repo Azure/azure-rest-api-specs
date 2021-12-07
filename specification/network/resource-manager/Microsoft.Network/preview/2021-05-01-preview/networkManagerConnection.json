@@ -464,7 +464,9 @@
           "description": "Network Manager Id."
         },
         "connectionState": {
-          "$ref": "./networkManagerScopeConnection.json#/definitions/ConnectionState"
+          "x-ms-client-flatten": true,
+          "$ref": "./networkManagerScopeConnection.json#/definitions/ConnectionState",
+          "description": "Connection state."
         },
         "description": {
           "type": "string",
@@ -502,8 +504,8 @@
         },
         "connectionState": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectionState",
-          "description": "Connection State"
+          "$ref": "./networkManagerScopeConnection.json#/definitions/ConnectionState",
+          "description": "Connection state."
         },
         "description": {
           "type": "string",
