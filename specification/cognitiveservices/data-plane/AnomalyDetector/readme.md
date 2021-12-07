@@ -106,9 +106,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview/AnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview.1/AnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
 ```
 
