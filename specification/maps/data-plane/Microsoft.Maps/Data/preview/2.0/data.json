@@ -376,6 +376,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Data update failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
+          },
           "202": {
             "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status."
           },
