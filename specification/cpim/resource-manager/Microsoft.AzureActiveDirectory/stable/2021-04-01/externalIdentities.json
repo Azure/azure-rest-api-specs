@@ -236,13 +236,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Response of the URL in Location header if the async operation is successful. Resource will be created.",
+            "description": "OK - Response of the URL in Location header if the async operation is successful. Resource will be created.",
             "schema": {
               "$ref": "#/definitions/B2CTenantResource"
             }
           },
           "202": {
-            "description": "Tenant create request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation.",
+            "description": "Azure AD B2C tenant create request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -339,8 +339,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Response of the URL in Location header if the asynchronous operation is successful. Resource will no longer exist."
+          },
           "202": {
-            "description": "Resource deletion request accepted. The Location header indicates the URL/location in which to check to get the async status of the operation. ",
+            "description": "Resource deletion request accepted. The Location header indicates the URL/location in which to poll for a result of the asynchronous operation. ",
             "headers": {
               "Location": {
                 "description": "Contains the URL/location which can return the deletion status.",
@@ -353,7 +356,7 @@
             }
           },
           "204": {
-            "description": "Response of the URL in Location header if the async operation is successful. Resource will no longer exist."
+            "description": "NoContent - Azure AD B2C tenant resource successfully deleted or didn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -416,7 +419,7 @@
           }
         },
         "summary": "Creates a Guest Usages resource",
-        "description": "Creates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "description": "Creates a Guest Usages resource, which is used to linking a subscription to an instance of Azure AD External Identities. [Learn more](https://aka.ms/extidbilling).",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -772,7 +775,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "An identifier of the B2C tenant."
+          "description": "An identifier of the Azure AD B2C tenant."
         }
       }
     },
@@ -935,21 +938,21 @@
         "properties": {
           "$ref": "#/definitions/B2CTenantResourceProperties",
           "x-ms-client-flatten": true,
-          "description": "The B2C tenant resource properties"
+          "description": "The Azure AD B2C tenant resource properties"
         },
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "An identifier that represents the B2C tenant resource."
+          "description": "An identifier that represents the Azure AD B2C tenant resource."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the B2C tenant resource."
+          "description": "The name of the Azure AD B2C tenant resource."
         },
         "location": {
           "type": "string",
-          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia' (preview). Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information.",
+          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -994,7 +997,7 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia' (preview). Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information."
+          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information."
         },
         "properties": {
           "type": "object",
@@ -1023,7 +1026,7 @@
       "description": "These properties are used to create the Azure AD B2C tenant. These properties are not part of the Azure resource.",
       "properties": {
         "displayName": {
-          "description": "The display name of the B2C tenant.",
+          "description": "The display name of the Azure AD B2C tenant.",
           "type": "string"
         },
         "countryCode": {
@@ -1150,7 +1153,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The initial domain name of the B2C tenant.",
+      "description": "The initial domain name of the Azure AD B2C tenant.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
