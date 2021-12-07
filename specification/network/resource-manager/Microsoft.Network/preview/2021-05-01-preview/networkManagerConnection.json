@@ -489,13 +489,36 @@
       },
       "description": "List of network manager connections."
     },
+    "PendingNetworkManagerConnection": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "connectionState": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Connection State"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the network manager connection."
+        }
+      },
+      "description": "Pending Network Manager Connection"
+    },
     "PendingNetworkManagerConnectionListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkManagerConnection"
+            "$ref": "#/definitions/PendingNetworkManagerConnection"
           }
         },
         "skipToken": {
@@ -503,7 +526,7 @@
           "description": "When present, this value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
         }
       },
-      "description": "List of network manager connections."
+      "description": "List of pending network manager connection properties."
     }
   },
   "parameters": {
