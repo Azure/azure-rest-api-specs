@@ -2073,13 +2073,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/getSupportedBuildpacks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/supportedBuildpacks": {
       "get": {
         "tags": [
           "AppPlatform"
         ],
         "description": "Get all supported buildpacks.",
-        "operationId": "BuildService_SupportedBuildpacks",
+        "operationId": "BuildService_ListSupportedBuildpacks",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2101,7 +2101,7 @@
           "200": {
             "description": "Success. The response describes all supported buildpacks.",
             "schema": {
-              "$ref": "#/definitions/SupportedBuildpacksDefinition"
+              "$ref": "#/definitions/SupportedBuildpacksCollection"
             }
           },
           "default": {
@@ -2112,19 +2112,67 @@
           }
         },
         "x-ms-examples": {
-          "BuildService_SupportedBuildpacks": {
-            "$ref": "./examples/BuildService_SupportedBuildpacks.json"
+          "BuildService_ListSupportedBuildpacks": {
+            "$ref": "./examples/BuildService_ListSupportedBuildpacks.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/getSupportedStacks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/supportedBuildpacks/{buildpackName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the supported buildpack resource.",
+        "operationId": "BuildService_GetSupportedBuildpack",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceBuildpackNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the supported buildpack.",
+            "schema": {
+              "$ref": "#/definitions/SupportedBuildpackResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetSupportedBuildpack": {
+            "$ref": "./examples/BuildService_GetSupportedBuildpack.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/supportedStacks": {
       "get": {
         "tags": [
           "AppPlatform"
         ],
         "description": "Get all supported stacks.",
-        "operationId": "BuildService_SupportedStacks",
+        "operationId": "BuildService_ListSupportedStacks",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2146,7 +2194,7 @@
           "200": {
             "description": "Success. The response describes all supported stacks.",
             "schema": {
-              "$ref": "#/definitions/SupportedStacksDefinition"
+              "$ref": "#/definitions/SupportedStacksCollection"
             }
           },
           "default": {
@@ -2157,8 +2205,56 @@
           }
         },
         "x-ms-examples": {
-          "BuildService_SupportedStacks": {
-            "$ref": "./examples/BuildService_SupportedStacks.json"
+          "BuildService_ListSupportedStacks": {
+            "$ref": "./examples/BuildService_ListSupportedStacks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/supportedStacks/{stackName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the supported stack resource.",
+        "operationId": "BuildService_GetSupportedStack",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceStackNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the supported stack.",
+            "schema": {
+              "$ref": "#/definitions/SupportedStackResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetSupportedStack": {
+            "$ref": "./examples/BuildService_GetSupportedStack.json"
           }
         }
       }
@@ -4644,7 +4740,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/StartJFR": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/startJFR": {
       "post": {
         "tags": [
           "AppPlatform"
@@ -6646,50 +6742,93 @@
         "id": {
           "description": "Id of the buildpack",
           "type": "string"
+        }
+      }
+    },
+    "SupportedBuildpacksCollection": {
+      "description": "Object that includes an array of supported buildpacks resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of supported buildpacks resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedBuildpackResource"
+          }
         },
-        "version": {
-          "description": "Version of the buildpack",
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedBuildpackResource": {
+      "description": "Supported buildpack resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportedBuildpackResourceProperties"
+        }
+      }
+    },
+    "SupportedBuildpackResourceProperties": {
+      "description": "Supported buildpack resource properties",
+      "type": "object",
+      "properties": {
+        "buildpackId": {
+          "description": "The id of supported buildpack",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedStacksCollection": {
+      "description": "Object that includes an array of supported stacks resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of supported stacks resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedStackResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedStackResource": {
+      "description": "Supported stack resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportedStackResourceProperties"
+        }
+      }
+    },
+    "SupportedStackResourceProperties": {
+      "description": "Supported stack resource properties",
+      "type": "object",
+      "properties": {
+        "stackId": {
+          "description": "The id of supported stack",
           "type": "string"
         },
-        "optional": {
-          "description": "optional property of the buildpack",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "SupportedBuildpacksDefinition": {
-      "description": "Supported buildpacks definition payload",
-      "type": "object",
-      "properties": {
-        "buildpacks": {
-          "description": "A dictionary of all supported buildpacks",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildServiceSupportedItem"
-          }
-        }
-      }
-    },
-    "SupportedStacksDefinition": {
-      "description": "Supported stacks definition payload",
-      "type": "object",
-      "properties": {
-        "stacks": {
-          "description": "A dictionary of all supported stacks",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BuildServiceSupportedItem"
-          }
-        }
-      }
-    },
-    "BuildServiceSupportedItem": {
-      "description": "The supported item in build service",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The id of this resource",
+        "version": {
+          "description": "The version of supported stack",
           "type": "string"
         }
       }
@@ -9983,6 +10122,22 @@
       "name": "buildServiceName",
       "in": "path",
       "description": "The name of the build service resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildServiceBuildpackNameParameter": {
+      "name": "buildpackName",
+      "in": "path",
+      "description": "The name of the buildpack resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildServiceStackNameParameter": {
+      "name": "stackName",
+      "in": "path",
+      "description": "The name of the stack resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
