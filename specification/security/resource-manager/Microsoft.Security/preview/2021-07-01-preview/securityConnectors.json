@@ -412,7 +412,8 @@
           "enum": [
             "CspmMonitorAws",
             "DefenderForContainersAws",
-            "DefenderForServersAws"
+            "DefenderForServersAws",
+            "InformationProtectionAws"
           ],
           "x-ms-enum": {
             "name": "OfferingType",
@@ -545,6 +546,28 @@
                   "description": "name of secret resource in parameter store"
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "informationProtectionAwsOffering": {
+      "type": "object",
+      "description": "The information protection for AWS offering configurations",
+      "x-ms-discriminator-value": "InformationProtectionAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "nativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
             }
           }
         }
