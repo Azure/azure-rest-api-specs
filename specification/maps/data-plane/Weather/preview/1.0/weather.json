@@ -83,6 +83,149 @@
         ]
       },
       "x-ms-parameter-location": "method"
+    },
+    "WeatherYear": {
+      "name": "year",
+      "description": "Year of the cyclone(s)",
+      "type": "integer",
+      "format": "int32",
+      "required": true,
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "RequiredWeatherBasinId": {
+      "name": "basinId",
+      "type": "string",
+      "description": "Basin identifier",
+      "required": true,
+      "in": "query",
+      "enum": [
+        "AL",
+        "EP",
+        "SI",
+        "NI",
+        "CP",
+        "NP",
+        "SP"
+      ],
+      "x-ms-enum": {
+        "name": "basinId",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AL",
+            "description": "AL"
+          },
+          {
+            "value": "EP",
+            "description": "EP"
+          },
+          {
+            "value": "SI",
+            "description": "SI"
+          },
+          {
+            "value": "NI",
+            "description": "NI"
+          },
+          {
+            "value": "CP",
+            "description": "CP"
+          },
+          {
+            "value": "NP",
+            "description": "NP"
+          },
+          {
+            "value": "SP",
+            "description": "SP"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalWeatherBasinId": {
+      "name": "basinId",
+      "type": "string",
+      "description": "Basin identifier",
+      "in": "query",
+      "enum": [
+        "AL",
+        "EP",
+        "SI",
+        "NI",
+        "CP",
+        "NP",
+        "SP"
+      ],
+      "x-ms-enum": {
+        "name": "basinId",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AL",
+            "description": "Atlantic"
+          },
+          {
+            "value": "EP",
+            "description": "Eastern Pacific"
+          },
+          {
+            "value": "SI",
+            "description": "Southwest Indian Ocean"
+          },
+          {
+            "value": "NI",
+            "description": "North Indian Ocean"
+          },
+          {
+            "value": "CP",
+            "description": "Central Pacific"
+          },
+          {
+            "value": "NP",
+            "description": "Northwest Pacific"
+          },
+          {
+            "value": "SP",
+            "description": "South Pacific"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RequiredWeatherGovernmentId": {
+      "name": "govId",
+      "description": "Government storm Id",
+      "type": "integer",
+      "format": "int32",
+      "required": true,
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalWeatherGovernmentId": {
+      "name": "govId",
+      "description": "Government storm Id",
+      "type": "integer",
+      "format": "int32",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "WeatherDetails": {
+      "name": "details",
+      "description": "When true, wind radii summary data is included in the response",
+      "in": "query",
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "WeatherRadiiGeometry": {
+      "name": "radiiGeometry",
+      "description": "When true, wind radii summary data and geoJSON details are included in the response",
+      "in": "query",
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -557,6 +700,203 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DailyIndicesResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/tropical/storms/active/{format}": {
+      "get": {
+        "description": "**Get Tropical Active Storms**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
+        "operationId": "Weather_GetTropicalActiveStorms",
+        "x-ms-examples": {
+          "Get Tropical Active Storms": {
+            "$ref": "./examples/GetActiveStorms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActiveStormResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/tropical/storms/{format}": {
+      "get": {
+        "description": "**Get Tropical Storm Search**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nSearch government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
+        "operationId": "Weather_GetTropicalStormSearch",
+        "x-ms-examples": {
+          "Get Tropical Storm Search": {
+            "$ref": "./examples/GetStormSearch.json"
+          },
+          "Get Tropical Storm Search With Three Properties": {
+            "$ref": "./examples/GetFullStormSearch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherYear"
+          },
+          {
+            "$ref": "#/parameters/OptionalWeatherBasinId"
+          },
+          {
+            "$ref": "#/parameters/OptionalWeatherGovernmentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StormSearchResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/tropical/storms/forecasts/{format}": {
+      "get": {
+        "description": "**Get Tropical Storm Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
+        "operationId": "Weather_GetTropicalStormForecast",
+        "x-ms-examples": {
+          "Get Tropical Storm Forecasts": {
+            "$ref": "./examples/GetStormForecast.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherYear"
+          },
+          {
+            "$ref": "#/parameters/RequiredWeatherBasinId"
+          },
+          {
+            "$ref": "#/parameters/RequiredWeatherGovernmentId"
+          },
+          {
+            "$ref": "#/parameters/WeatherDataUnit"
+          },
+          {
+            "$ref": "#/parameters/WeatherDetails"
+          },
+          {
+            "$ref": "#/parameters/WeatherRadiiGeometry"
+          },
+          {
+            "name": "windowGeometry",
+            "description": "When true, window geometry data (geoJSON) is included in the response",
+            "in": "query",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StormForecastResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/weather/tropical/storms/locations/{format}": {
+      "get": {
+        "description": "**Get Tropical Storm Locations**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet locations of an individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
+        "operationId": "Weather_GetTropicalStormLocations",
+        "x-ms-examples": {
+          "Get Tropical Storm Locations": {
+            "$ref": "./examples/GetStormLocations.json"
+          },
+          "Get Tropical Storm Current Location": {
+            "$ref": "./examples/GetStormCurrentLocation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/WeatherYear"
+          },
+          {
+            "$ref": "#/parameters/RequiredWeatherBasinId"
+          },
+          {
+            "$ref": "#/parameters/RequiredWeatherGovernmentId"
+          },
+          {
+            "$ref": "#/parameters/WeatherDetails"
+          },
+          {
+            "$ref": "#/parameters/WeatherRadiiGeometry"
+          },
+          {
+            "$ref": "#/parameters/WeatherDataUnit"
+          },
+          {
+            "name": "current",
+            "description": "When true, return the current storm location",
+            "in": "query",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StormLocationsResponse"
             }
           },
           "default": {
@@ -1042,7 +1382,7 @@
           "description": "Wind direction"
         },
         "speed": {
-          "$ref": "#/definitions/WindSpeed",
+          "$ref": "#/definitions/WeatherUnit",
           "description": "Speed of the wind in specified unit."
         }
       }
@@ -2480,6 +2820,347 @@
         "description": {
           "type": "string",
           "description": "A textual explanation that can be used for display purposes to summarize the index value and category. For example, when the index value for Flight Delays is very good, the description will be \"Conditions are excellent for flying!\"."
+        }
+      }
+    },
+    "ActiveStormResponse": {
+      "type": "object",
+      "description": "All government-issued active storms",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveStorm"
+          },
+          "description": "All government-issued active storms"
+        }
+      }
+    },
+    "ActiveStorm": {
+      "type": "object",
+      "description": "Government-issued active storm",
+      "properties": {
+        "year": {
+          "type": "string",
+          "description": "Year of origination"
+        },
+        "basinId": {
+          "$ref": "#/definitions/basinId",
+          "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the depression."
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "True if the depression has been updated recently."
+        },
+        "isSubtropical": {
+          "type": "boolean",
+          "description": "True when the depression is classified as a subtropical cyclone."
+        },
+        "govId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Government storm ID. This will match the depression number."
+        }
+      }
+    },
+    "basinId": {
+      "type": "string",
+      "description": "Basin identifier",
+      "enum": [
+        "AL",
+        "EP",
+        "SI",
+        "NI",
+        "CP",
+        "NP",
+        "SP"
+      ],
+      "x-ms-enum": {
+        "name": "basinId",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AL",
+            "description": "Atlantic"
+          },
+          {
+            "value": "EP",
+            "description": "Eastern Pacific"
+          },
+          {
+            "value": "SI",
+            "description": "Southwest Indian Ocean"
+          },
+          {
+            "value": "NI",
+            "description": "North Indian Ocean"
+          },
+          {
+            "value": "CP",
+            "description": "Central Pacific"
+          },
+          {
+            "value": "NP",
+            "description": "Northwest Pacific"
+          },
+          {
+            "value": "SP",
+            "description": "South Pacific"
+          }
+        ]
+      }
+    },
+    "StormSearchResponse": {
+      "type": "object",
+      "description": "Search government-issued storms",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StormSearch"
+          },
+          "description": "Search government-issued storms"
+        }
+      }
+    },
+    "StormSearch": {
+      "type": "object",
+      "description": "Government-issued active storm event",
+      "properties": {
+        "year": {
+          "type": "string",
+          "description": "Year of origination"
+        },
+        "basinId": {
+          "$ref": "#/definitions/basinId",
+          "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the depression."
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "True if the depression has been updated recently."
+        },
+        "isRetired": {
+          "type": "boolean",
+          "description": "True if the storm name has been permanently retired in the source basin."
+        },
+        "isSubtropical": {
+          "type": "boolean",
+          "description": "True when the depression is classified as a subtropical cyclone."
+        },
+        "govId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Government storm ID. This will match the depression number."
+        }
+      }
+    },
+    "StormForecastResponse": {
+      "type": "object",
+      "description": "The list of Government-issued forecasts",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StormForecast"
+          },
+          "description": "The list of Government-issued forecasts"
+        }
+      }
+    },
+    "StormForecast": {
+      "type": "object",
+      "description": "Government-issued storm forecast",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "Datetime the forecast is valid, displayed in ISO8601 format."
+        },
+        "initializedDateTime": {
+          "type": "string",
+          "description": "Datetime the forecast was created, displayed in ISO8601 format."
+        },
+        "location": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
+          "description": "Coordinates of the storm"
+        },
+        "maxWindGust": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Maximum wind gust speed associated with the storm. May be NULL."
+        },
+        "sustainedWind": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Maximum sustained wind speed associated with the storm. May be NULL."
+        },
+        "status": {
+          "type": "string",
+          "description": "Storm status"
+        },
+        "window": {
+          "$ref": "#/definitions/Window",
+          "description": "Contains information about the forecast window for the storm during the specified time period (not the entire cone). If windowGeometry=true in the request, this object will include geoJSON details for window geometry."
+        },
+        "windRadiiSummary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StormWindRadiiSummary"
+          },
+          "description": "Displayed when details=true or radiiGeometry=true in the request."
+        }
+      }
+    },
+    "Window": {
+      "type": "object",
+      "description": "Government-issued storm forecast",
+      "properties": {
+        "left": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
+          "description": "Location of the point on the left side of the window at the time of the timeframe."
+        },
+        "right": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
+          "description": "Location of the point on the right side of the window at the end of the timeframe."
+        },
+        "beginDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the beginning of the window of movement, displayed in ISO8601 format."
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the end of the window of movement, displayed in ISO8601 format."
+        },
+        "beginStatus": {
+          "type": "string",
+          "description": "Storm status at the beginning of the window."
+        },
+        "endStatus": {
+          "type": "string",
+          "description": "Storm status at the end of the window."
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry",
+          "description": "Displayed when windowGeometry=true in request. GeoJSON object containing coordinates describing the window of movement during the specified timeframe."
+        }
+      }
+    },
+    "StormWindRadiiSummary": {
+      "type": "object",
+      "description": "Displayed when details=true or radiiGeometry=true in the request.",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "DateTime for which the wind radii summary data is valid, displayed in ISO8601 format."
+        },
+        "windSpeed": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Wind speed associated with the radiusSectorData."
+        },
+        "radiusSectorData": {
+          "type": "array",
+          "description": "Contains the information needed to plot wind radius quadrants. Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
+          "items": {
+            "$ref": "#/definitions/RadiusSector"
+          }
+        },
+        "radiiGeometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry",
+          "description": "GeoJSON object. Displayed when radiiGeometry=true in request. Describes the outline of the wind radius quadrants."
+        }
+      }
+    },
+    "RadiusSector": {
+      "type": "object",
+      "description": "Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
+      "properties": {
+        "beginBearing": {
+          "type": "number",
+          "format": "double",
+          "description": "Bearing, in degrees, of the beginning of the quadrant."
+        },
+        "endBearing": {
+          "type": "number",
+          "format": "double",
+          "description": "Bearing, in degrees, of the end of the quadrant."
+        },
+        "range": {
+          "type": "number",
+          "format": "double",
+          "description": "The radius of the quadrant, in nautical miles."
+        }
+      }
+    },
+    "StormLocationsResponse": {
+      "type": "object",
+      "description": "Locations for an individual government-issued storm",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationResponse"
+          },
+          "description": "Locations for an individual government-issued storm"
+        }
+      }
+    },
+    "LocationResponse": {
+      "type": "object",
+      "description": "Location for an individual Government-issued storm",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "Datetime the forecast is valid, displayed in ISO8601 format."
+        },
+        "location": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
+          "description": "Coordinates of the storm"
+        },
+        "maxWindGust": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Maximum wind gust speed associated with the storm. May be NULL."
+        },
+        "sustainedWind": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Maximum sustained wind speed associated with the storm. May be NULL."
+        },
+        "minimumPressure": {
+          "$ref": "#/definitions/WeatherUnit",
+          "description": "Minimum pressure associated with the storm. May be NULL."
+        },
+        "movement": {
+          "$ref": "#/definitions/WindDetails",
+          "description": "The storm movement information."
+        },
+        "status": {
+          "type": "string",
+          "description": "Storm status, in English."
+        },
+        "isSubtropical": {
+          "type": "boolean",
+          "description": "True when the depression is classified as a subtropical cyclone."
+        },
+        "hasTropicalPotential": {
+          "type": "boolean",
+          "description": "True when storm may develop into a Tropical System."
+        },
+        "isPostTropical": {
+          "type": "boolean",
+          "description": "True when the storm is weakening away, and will no longer become a tropical system."
+        },
+        "windRadiiSummary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StormWindRadiiSummary"
+          },
+          "description": "Displayed when details=true or radiiGeometry=true in the request."
         }
       }
     }
