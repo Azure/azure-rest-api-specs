@@ -63,8 +63,9 @@
         "parameters": [
           {
             "in": "query",
-            "name": "type",
-            "description": "Filter the result on their role type"
+            "name": "filter",
+            "description": "Defines how to filter the given results. Follows Azure guidelines: https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#filter",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -223,12 +224,14 @@
   },
   "definitions": {
     "CommunicationRoleCreatePermissions": {
+      "description": "The object containing the various types of permissions.",
       "required": [
         "dataActions"
       ],
       "type": "object",
       "properties": {
         "dataActions": {
+          "description": "The list of data oriented action permissions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationRolePermissionActions"
@@ -245,7 +248,7 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "The human readable name of the Role",
+          "description": "The human readable name of the Role.",
           "type": "string"
         },
         "permissions": {
@@ -280,7 +283,7 @@
       }
     },
     "CommunicationRolePermissionActions": {
-      "description": "The available action permisions list",
+      "description": "The available action permissions list.",
       "enum": [
         "communication.services/calling/audio/receive/action",
         "communication.services/calling/video/receive/action",
@@ -328,7 +331,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The unique identifier for the Role",
+          "description": "The unique identifier for the Role.",
           "type": "string"
         },
         "type": {
@@ -336,16 +339,16 @@
         },
         "createdOn": {
           "format": "date-time",
-          "description": "The datetime the Role was created",
+          "description": "The datetime the Role was created.",
           "type": "string"
         },
         "updatedOn": {
           "format": "date-time",
-          "description": "The datetime the role was last modified",
+          "description": "The datetime the role was last modified.",
           "type": "string"
         },
         "displayName": {
-          "description": "The human readable name of the Role",
+          "description": "The human readable name of the Role.",
           "type": "string"
         },
         "permissions": {
@@ -358,7 +361,7 @@
       }
     },
     "CommunicationRoleType": {
-      "description": "The role type enum. Defined the possible types for a role",
+      "description": "The role type enum. Defines the possible types for a role.",
       "enum": [
         "builtIn",
         "custom"
@@ -370,9 +373,11 @@
       }
     },
     "CommunicationRoleUpdatePermissions": {
+      "description": "The object containing the various types of permissions.",
       "type": "object",
       "properties": {
         "dataActions": {
+          "description": "The list of data oriented action permissions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationRolePermissionActions"
@@ -384,7 +389,7 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "The human readable name of the Role",
+          "description": "The human readable name of the Role.",
           "type": "string"
         },
         "permissions": {
