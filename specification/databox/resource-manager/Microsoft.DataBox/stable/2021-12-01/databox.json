@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-01-preview",
+    "version": "2021-12-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -1080,19 +1080,19 @@
       }
     },
     "AdditionalErrorInfo": {
-      "type": "object",
-      "description": "Additional error info.",
+      "description": "This class represents additional info Resource Providers pass when an error occurs",
       "properties": {
-        "type": {
-          "description": "Additional error type.",
-          "type": "string"
-        },
-        "info": {
-          "description": "Additional error info.",
-          "type": "object"
-        }
-      }
-    },
+          "info": {
+              "description": "Additional information of the type of error that occured",
+              "type": "object"
+          },
+          "type": {
+              "description": "Type of error occured (e.g. PolicyViolation, SecurityViolation)",
+              "type": "string"
+          }
+      },
+      "type": "object"
+  },
     "AddressValidationOutput": {
       "description": "Output of the address validation api.",
       "type": "object",
@@ -1366,40 +1366,39 @@
       }
     },
     "CloudError": {
-      "description": "Cloud error.",
-      "type": "object",
+      "description": "Provides additional information about an http error response",
       "properties": {
-        "code": {
-          "description": "Cloud error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Cloud error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Cloud error target.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Cloud error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudError"
+          "additionalInfo": {
+              "description": "Gets or sets details for the error.",
+              "items": {
+                  "$ref": "#/definitions/AdditionalErrorInfo"
+              },
+              "readOnly": true,
+              "type": "array"
           },
-          "readOnly": true
-        },
-        "additionalInfo": {
-          "description": "Cloud error additional info.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdditionalErrorInfo"
+          "code": {
+              "description": "Error code",
+              "type": "string"
           },
-          "readOnly": true
-        }
+          "details": {
+              "description": "Gets or sets details for the error.",
+              "items": {
+                  "$ref": "#/definitions/CloudError"
+              },
+              "readOnly": true,
+              "type": "array"
+          },
+          "message": {
+              "description": "The error message parsed from the body of the http error response",
+              "type": "string"
+          },
+          "target": {
+              "description": "Gets or sets the target of the error.",
+              "type": "string"
+          }
       },
-      "x-ms-external": true
-    },
+      "type": "object"
+  },
     "ContactDetails": {
       "description": "Contact Details.",
       "required": [
@@ -3244,7 +3243,9 @@
             "enum": [
               "None",
               "MoveToCleanUpDevice",
-              "Resume"
+              "Resume",
+              "Restart",
+              "ReachOutToOperation"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -3262,7 +3263,15 @@
                 {
                   "value": "Resume",
                   "description": "Resume the job to same stage"
-                }
+                },
+                {
+                  "description": "Restart whole action",
+                  "value": "Restart"
+              },
+              {
+                  "description": "Reach out to operation for further action",
+                  "value": "ReachOutToOperation"
+              }
               ]
             }
           },
@@ -3986,7 +3995,8 @@
             "SucceededWithWarnings",
             "WaitingForCustomerActionForKek",
             "WaitingForCustomerActionForCleanUp",
-            "CustomerActionPerformedForCleanUp"
+            "CustomerActionPerformedForCleanUp",
+            "CustomerActionPerformed"
           ],
           "type": "string",
           "readOnly": true,
@@ -4158,7 +4168,9 @@
           "enum": [
             "None",
             "MoveToCleanUpDevice",
-            "Resume"
+            "Resume",
+            "Restart",
+            "ReachOutToOperation"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4176,7 +4188,15 @@
               {
                 "value": "Resume",
                 "description": "Resume the job to same stage"
-              }
+              },
+              {
+                "description": "Restart whole action",
+                "value": "Restart"
+            },
+            {
+                "description": "Reach out to operation for further action",
+                "value": "ReachOutToOperation"
+            }
             ]
           }
         }
@@ -4194,7 +4214,9 @@
           "enum": [
             "None",
             "MoveToCleanUpDevice",
-            "Resume"
+            "Resume",
+            "Restart",
+            "ReachOutToOperation"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4212,7 +4234,15 @@
               {
                 "value": "Resume",
                 "description": "Resume the job to same stage"
-              }
+              },
+              {
+                "description": "Restart whole action",
+                "value": "Restart"
+            },
+            {
+                "description": "Reach out to operation for further action",
+                "value": "ReachOutToOperation"
+            }
             ]
           }
         }
@@ -4433,6 +4463,37 @@
         "encryptionPreferences": {
           "$ref": "#/definitions/EncryptionPreferences",
           "description": "Preferences related to the Encryption."
+        },
+		"storageAccountAccessTierPreferences": {
+          "description": "Preferences related to the Access Tier of storage accounts.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Archive"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "StorageAccountAccessTier",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "Archive",
+                  "description": "Archive Access Tier shares requested by customer"
+                }
+              ]
+            }
+          },
+          "x-ms-enum": {
+            "name": "StorageAccountAccessTier",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Archive",
+                "description": "Archive Access Tier shares requested by customer"
+              }
+            ]
+          }
         }
       }
     },
