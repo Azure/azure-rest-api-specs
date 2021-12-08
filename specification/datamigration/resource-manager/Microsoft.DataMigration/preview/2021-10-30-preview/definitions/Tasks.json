@@ -22,6 +22,10 @@
       "description": "Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.",
       "properties": {
         "taskType": {
+          "enum": [
+            "ConnectToTarget.SqlDb",
+            "Service.Check.OCI"
+          ],
           "description": "Task type.",
           "type": "string"
         },
