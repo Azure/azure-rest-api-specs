@@ -212,6 +212,140 @@
           }
         }
       }
+    },
+    "/{scope}/providers/Microsoft.Diagnostics/apollo/{resourceName}": {
+      "put": {
+        "tags": [
+          "Apollo"
+        ],
+        "description": "Apollo Invoke Solution API",
+        "operationId": "Apollo_Invoke",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "ApolloInvokeRequest",
+            "description": "Apollo Invoke Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApolloInvokeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Apollo Diagnostic Invocation (may contain errors)",
+            "schema": {
+              "$ref": "#/definitions/ApolloArmResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apollo_InvokeOrUpdate": {
+            "$ref": "./examples/Apollo_Invoke.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Apollo"
+        ],
+        "description": "Get Apollo Solution execution result API",
+        "operationId": "Apollo_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Apollo Diagnostic Invocation",
+            "schema": {
+              "$ref": "#/definitions/ApolloArmResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apollo_Get": {
+            "$ref": "./examples/Apollo_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Apollo"
+        ],
+        "description": "Update Apollo Solution API",
+        "operationId": "Apollo_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "ApolloInvokeRequest",
+            "description": "Apollo Invoke Request body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApolloInvokeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Apollo Diagnostic Invocation (may contain errors)"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apollo_InvokeOrUpdate": {
+            "$ref": "./examples/Apollo_Update.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -637,9 +771,318 @@
     },
     "DiagnosticExecutionResponse": {
       "description": "The response from a Diagnostic Execution."
+    },
+    "ApolloInvokeRequest": {
+      "description": "Apollo Invoke Request body",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of Apollo InvokeRequest",
+          "type": "object",
+          "$ref": "#/definitions/ApolloInvokeProperties"
+        }
+      }
+    },
+    "ApolloInvokeProperties": {
+      "description": "Apollo Invoke properties.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single Apollo Solution",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Client input parameters to run Apollo Solution",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApolloArmResource": {
+      "description": "Insight result modeled as arm resource.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "description": "Properties of the Arm resource",
+          "type": "object",
+          "$ref": "#/definitions/ApolloResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApolloResult": {
+      "description": "Apollo Result",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single Apollo Solution",
+          "type": "string"
+        },
+        "solutionType": {
+          "description": "Solution Type",
+          "type": "string"
+        },
+        "solutionInstanceId": {
+          "description": "Unique solution instance Id to identify solution execution result",
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning status of the resource"
+        },
+        "title": {
+          "description": "The title",
+          "type": "string"
+        },
+        "htmlContent": {
+          "description": "The HTML content that needs to be rendered and shown to customer",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Client input parameters to run Apollo Solution",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "bindings": {
+          "description": "List of rich components (Insights, Videos, Charts, etc.) that need to be replaced in the htmlContent",
+          "type": "object",
+          "$ref": "#/definitions/BindingExecutionResult"
+        },
+        "sections": {
+          "description": "Part of the solution and are dividers in the solution rendering.",
+          "type": "object",
+          "$ref": "#/definitions/SectionExecutionResult"
+        }
+      }
+    },
+    "SectionExecutionResult": {
+      "description": "Each section is placed in an accordion control and contains htmlContent and bindings that help replace rich components in the htmlContent",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "The title",
+          "type": "string"
+        },
+        "htmlContent": {
+          "description": "The HTML content that needs to be rendered and shown to customer",
+          "type": "string"
+        },
+        "bindings": {
+          "description": "List of rich components (Insights, Videos, Charts, etc.) that need to be replaced in the htmlContent",
+          "type": "object",
+          "$ref": "#/definitions/BindingExecutionResult"
+        }
+      }
+    },
+    "BindingExecutionResult": {
+      "description": "List of rich components (Insights, Videos, Charts, etc.) that need to be replaced in the htmlContent",
+      "type": "object",
+      "properties": {
+        "azureKb": {
+          "description": "Content ingested from many places, such as Azure public docs, Stack, MSDN, Q&A",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApolloAzureKBExecutionResult"
+          }
+        },
+        "insights": {
+          "description": "diagnosis and data collected on the customer's deployed application",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApolloInsightExecutionResult"
+          }
+        },
+        "videos": {
+          "description": "Video solutions, which have the power to engage the customer by stimulating their senses",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          }
+        },
+        "videoGroups": {
+          "description": "Group of Videos",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroup"
+          }
+        },
+        "commonSolutions": {
+          "description": "SelfHelp Articles written in markdown language, which will be shown inside HTMLContent",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommonSolution"
+          }
+        }
+      }
+    },
+    "ApolloAzureKBExecutionResult": {
+      "description": "insight execution result detail",
+      "type": "object",
+      "properties": {
+        "showSummary": {
+          "description": "Whether to show AzureKB summary to Customers",
+          "type": "boolean"
+        },
+        "showSource": {
+          "description": "Whether to show AzureKB source to Customers",
+          "type": "boolean"
+        },
+        "solutionType": {
+          "description": "Solution Type",
+          "type": "string"
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        },
+        "searchResults": {
+          "description": "Array of AzureKB Search Results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureKBSearchResultProperties"
+          }
+        }
+      }
+    },
+    "ApolloInsightExecutionResult": {
+      "description": "insight execution result detail",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single Apollo Solution",
+          "type": "string"
+        },
+        "solutionType": {
+          "description": "Solution Type",
+          "type": "string"
+        },
+        "solutionInstanceId": {
+          "description": "Unique solution instance Id to identify solution execution result",
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning status of the resource"
+        },
+        "executionText": {
+          "description": "Text to be presented to the user while the diagnostic is running",
+          "type": "string"
+        },
+        "timeoutText": {
+          "description": "Failure text when diagnostic is timeout",
+          "type": "string"
+        },
+        "noResultText": {
+          "description": "Text to be presented to the user if the diagnostic successfully completes but no insight is returned",
+          "type": "string"
+        },
+        "maxInsightCount": {
+          "description": "Defines the maximum number of insights to be presented if more than one insight is returned by the diagnostic",
+          "type": "string"
+        },
+        "additionalInputsReq": {
+          "description": "Defines if this should be showcased as a DSQ card to the user",
+          "type": "boolean"
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        },
+        "insights": {
+          "description": "The problems (if any) detected by this insight",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          }
+        }
+      }
+    },
+    "Video": {
+      "description": "Video detail",
+      "type": "object",
+      "properties": {
+        "src": {
+          "description": "Link to the video",
+          "type": "string"
+        },
+        "width": {
+          "description": "Width of video, which will be shown to customers",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the video",
+          "type": "string"
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        }
+      }
+    },
+    "VideoGroup": {
+      "description": "Video group detail",
+      "type": "object",
+      "properties": {
+        "videos": {
+          "description": "List of videos will be shown to customers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          }
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        }
+      }
+    },
+    "CommonSolution": {
+      "description": "Common Solution detail",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Common article title",
+          "type": "string"
+        },
+        "gitHubPath": {
+          "description": "Path of the article in GitHub",
+          "type": "string"
+        },
+        "htmlContent": {
+          "description": "The HTML content that needs to be rendered and shown to customer",
+          "type": "string"
+        },
+        "type": {
+          "description": "Article type",
+          "type": "string"
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource Name",
+      "x-ms-parameter-location": "client"
+    },
     "ScopeParameter": {
       "name": "scope",
       "in": "path",

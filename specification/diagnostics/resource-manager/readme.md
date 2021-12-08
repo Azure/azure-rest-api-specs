@@ -47,4 +47,14 @@ openapi-type: arm
 tag: package-2020-07-01-preview
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code for PATCH API.
+    from: diagnostics.json
+    where: $.paths["/{scope}/providers/Microsoft.Diagnostics/apollo/{resourceName}"].patch["x-ms-long-running-operation"]
+```
+
 # Code Generation
