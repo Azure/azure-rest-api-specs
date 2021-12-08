@@ -1669,6 +1669,12 @@
           "items": {
             "$ref": "#/definitions/BaseResolution"
           }
+        },
+        "extraInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseExtraInformation"
+          }
         }
       }
     },
@@ -2675,6 +2681,7 @@
         "resolutionKind":{
           "type": "string",
           "enum": [
+            "BooleanResolution",
             "DateTimeResolution",
             "NumberResolution",
             "OrdinalResolution",
@@ -2705,13 +2712,78 @@
         "confidenceScore"
       ]
     },
+    "BaseExtraInformation":{
+      "type":"object",
+      "discriminator": "extraInformationKind",
+      "properties": {
+        "extraInformationKind":{
+          "type": "string",
+          "enum": [
+            "PersonNameExtraInfo",
+            "ColorExtraInfo",
+            "OrganizationExtraInfo"
+          ]
+        }
+      },
+      "required": [
+        "extraInformationKind"
+      ]
+    },
+    "PersonNameExtraInfo":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type":"object",
+      "properties":{
+        "firstName":{
+          "type":"string"
+        },
+        "middleName":{
+          "type":"string"
+        },
+        "lastName":{
+          "type":"string"
+        }
+      },
+      "description": "Breaking down the Person Name match into its subparts."
+    },
+    "ColorExtraInfo":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type":"object",
+      "properties":{
+        "normalizedValue":{
+          "type":"string"
+        }
+      },
+      "description": "A normalized value from the set of known colors."
+    },
+    "OrganizationExtraInfo":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type":"object",
+      "properties":{
+        "normalizedValue":{
+          "type":"string"
+        }
+      },
+      "description": "The normalized organization name in English"
+    },
     "QuantityResolution":{
       "description": "represents resolutions for quantities.",
       "type": "object",
       "properties": {
         "value": {
           "type": "string",
-          "description": "The actual value that the extracted text denotes."
+          "description": "The numeric value that the extracted text denotes."
         }
       },
       "required": [
@@ -2727,17 +2799,19 @@
       "type":"object",
       "properties": {
         "begin":{
-          "$ref": "#/definitions/DateTimeResolution",
-          "description": "Beginning date/time instance of the temporal span"
+          "$ref": "#/definitions/TimeExpression"
         },
         "end":{
-          "$ref": "#/definitions/DateTimeResolution",
-          "description": "Ending date/time instance of the temporal span"
+          "$ref": "#/definitions/TimeExpression"
         },
         "duration":{
           "type":"string",
-          "description": "The ISO 8601 duration format (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
-        }
+          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+        },
+        "modifier":{
+          "$ref": "#/definitions/TemporalModifier"
+        },
+        "description": "represents the resolution of a date and/or time span."
       }
     },
     "NumericRangeResolution": {
@@ -2780,6 +2854,20 @@
         "rangeKind"
       ]
     },
+    "BooleanResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type":"object",
+      "properties":{
+        "value":{
+          "type":"boolean"
+        }
+      },
+      "description": "A resolution for boolean expressions"
+    },
     "DateTimeResolution":{
       "allOf": [
         {
@@ -2789,8 +2877,7 @@
       "type":"object",
       "properties":{
         "timex": {
-          "type": "string",
-          "description": "an extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+          "$ref": "#/definitions/TimeExpression"
         },
         "subKind": {
           "type": "string",
@@ -2811,32 +2898,7 @@
           "description": "The actual time that the extracted text denote."
         },
         "modifier":{
-          "type": "string",
-          "description": "An optional modifier of a date/time instance.",
-          "enum": [
-            "AfterApprox",
-            "Before",
-            "BeforeStart",
-            "Approx",
-            "ReferenceUndefined",
-            "SinceEnd",
-            "AfterMid",
-            "Start",
-            "After",
-            "BeforeEnd",
-            "Until",
-            "End",
-            "Less",
-            "Since",
-            "AfterStart",
-            "BeforeApprox",
-            "Mid",
-            "More"
-          ],
-          "x-ms-enum": {
-            "name": "Modifier",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/TemporalModifier"
         }
       },
       "required": [
@@ -3143,6 +3205,10 @@
             "modelAsString": true
           },
           "description": "The age measurement unit."
+        },
+        "duration":{
+          "type":"string",
+          "description": "A value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
         }
       }
     },
@@ -3231,6 +3297,38 @@
           "description": "A string representation of the currency name."
         }
       }
+    },
+    "TemporalModifier":{
+      "type": "string",
+      "description": "An optional modifier of a date/time instance.",
+      "enum": [
+        "AfterApprox",
+        "Before",
+        "BeforeStart",
+        "Approx",
+        "ReferenceUndefined",
+        "SinceEnd",
+        "AfterMid",
+        "Start",
+        "After",
+        "BeforeEnd",
+        "Until",
+        "End",
+        "Less",
+        "Since",
+        "AfterStart",
+        "BeforeApprox",
+        "Mid",
+        "More"
+      ],
+      "x-ms-enum": {
+        "name": "Modifier",
+        "modelAsString": true
+      }
+    },
+    "TimeExpression":{
+      "type": "string",
+      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     }
   },
   "parameters": {
