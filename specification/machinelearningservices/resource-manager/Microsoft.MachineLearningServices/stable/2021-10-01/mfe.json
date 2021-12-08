@@ -6017,7 +6017,8 @@
     "CommandJob": {
       "description": "Command job definition.",
       "required": [
-        "command"
+        "command",
+        "environmentId"
       ],
       "type": "object",
       "allOf": [
@@ -6056,12 +6057,12 @@
         },
         "environmentId": {
           "description": "The ARM resource ID of the Environment specification for the job.",
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "x-nullable": true
+          ]
         },
         "environmentVariables": {
           "description": "Environment variables included in the job.",
@@ -9373,7 +9374,8 @@
       "required": [
         "objective",
         "samplingAlgorithm",
-        "searchSpace"
+        "searchSpace",
+        "trial"
       ],
       "type": "object",
       "allOf": [
@@ -9447,8 +9449,7 @@
         },
         "trial": {
           "description": "Trial component definition.",
-          "$ref": "#/definitions/TrialComponent",
-          "x-nullable": true
+          "$ref": "#/definitions/TrialComponent"
         }
       },
       "x-ms-discriminator-value": "Sweep",
@@ -9557,7 +9558,8 @@
     "TrialComponent": {
       "description": "Trial component definition.",
       "required": [
-        "command"
+        "command",
+        "environmentId"
       ],
       "type": "object",
       "properties": {
@@ -9591,8 +9593,8 @@
         },
         "environmentId": {
           "description": "The ARM resource ID of the Environment specification for the job.",
-          "type": "string",
-          "x-nullable": true
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
         },
         "environmentVariables": {
           "description": "Environment variables included in the job.",
