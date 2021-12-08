@@ -4142,8 +4142,8 @@
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
           "x-nullable": false
         },
-        "sessionHostComponentUpdateConfiguration": {
-          "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
+        "agentUpdate": {
+          "$ref": "#/definitions/AgentUpdateProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
         }
       }
@@ -4287,8 +4287,8 @@
           "type": "string",
           "description": "Enabled to allow this resource to be access from the public network"
         },
-        "sessionHostComponentUpdateConfiguration": {
-          "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
+        "agentUpdate": {
+          "$ref": "#/definitions/AgentUpdateProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component."
         }
       }
@@ -5276,16 +5276,16 @@
         }
       }
     },
-    "SessionHostComponentUpdateConfigurationProperties": {
+    "AgentUpdateProperties": {
       "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
       "type": "object",
       "properties": {
-        "maintenanceType": {
+        "type": {
           "type": "string",
           "description": "The type of maintenance for session host components.",
           "enum": [
             "Default",
-            "TenantAdminControlled"
+            "Scheduled"
           ],
           "x-ms-enum": {
             "name": "SessionHostComponentUpdateType",
@@ -5296,7 +5296,7 @@
                 "description": "Agent and other agent side components are delivery schedule is controlled by WVD Infra."
               },
               {
-                "value": "TenantAdminControlled",
+                "value": "Scheduled",
                 "description": "TenantAdmin have opted in for Scheduled Component Update feature."
               }
             ]
@@ -5310,13 +5310,14 @@
           "type": "string",
           "description": "Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
         },
-        "primaryWindow": {
-          "$ref": "#/definitions/MaintenanceWindowProperties",
-          "description": "Primary Window of the maintenance. Maintenance windows are 2 hours long. We try to push component update in this window first."
-        },
-        "secondaryWindow": {
-          "$ref": "#/definitions/SecondaryWindowProperties",
-          "description": "Secondary maintenance windows. Maintenance windows are 2 hours long. We try to exercise this only when the primary window update fails."
+        "maintenanceWindows": {
+          "value": {
+            "type": "array",
+            "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
+            "items": {
+              "$ref": "#/definitions/MaintenanceWindowProperties"
+            }
+          }
         }
       }
     },
@@ -5344,33 +5345,6 @@
           "x-ms-enum": {
             "name": "DayOfWeek",
             "modelAsString": false
-          }
-        }
-      }
-    },
-    "SecondaryWindowProperties": {
-      "description": "Secondary maintenance windows is a list of days at one specific hour. Maintenance windows are 2 hours long. We try to exercise this only when the primary window update fails.",
-      "type": "object",
-      "properties": {
-        "hour": {
-          "format": "int32",
-          "type": "integer",
-          "description": "The update start hour of the day. (0 - 23)"
-        },
-        "daysOfWeek": {
-          "type": "array",
-          "description": "Set of days of the week on which this schedule is active.",
-          "items": {
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "type": "string"
           }
         }
       }
