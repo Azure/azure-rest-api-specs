@@ -1028,6 +1028,39 @@
           "description": "Migration status.",
           "type": "string",
           "readOnly": true
+        },
+        "startedOn": {
+          "format": "date-time",
+          "description": "Database migration start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endedOn": {
+          "format": "date-time",
+          "description": "Database migration end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceSqlConnection": {
+          "$ref": "#/definitions/SqlConnectionInformation",
+          "description": "Source SQL Server connection details."
+        },
+        "sourceDatabaseName": {
+          "description": "Name of the source database.",
+          "type": "string"
+        },
+        "migrationService": {
+          "description": "Resource Id of the Migration Service.",
+          "type": "string"
+        },
+        "migrationOperationId": {
+          "description": "ID tracking current migration operation.",
+          "type": "string"
+        },
+        "migrationFailureError": {
+          "$ref": "#/definitions/ErrorInfo",
+          "description": "Error details in case of migration failure.",
+          "readOnly": true
         }
       },
       "discriminator": "kind"
@@ -1039,7 +1072,7 @@
           "$ref": "#/definitions/DatabaseMigrationProperties"
         }
       ],
-      "description": "Database Migration Resource properties for Sql Managed Instance.",
+      "description": "Database Migration Resource properties for SQL Managed Instance.",
       "type": "object",
       "properties": {
         "migrationStatusDetails": {
@@ -1047,36 +1080,8 @@
           "description": "Detailed migration status. Not included by default.",
           "readOnly": true
         },
-        "startedOn": {
-          "format": "date-time",
-          "description": "Database migration start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endedOn": {
-          "format": "date-time",
-          "description": "Database migration end time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "sourceSqlConnection": {
-          "$ref": "#/definitions/SqlConnectionInformation",
-          "description": "Source SQL Server connection details."
-        },
-        "sourceDatabaseName": {
-          "description": "Name of the source database.",
-          "type": "string"
-        },
         "targetDatabaseCollation": {
           "description": "Database collation to be used for the target database.",
-          "type": "string"
-        },
-        "migrationService": {
-          "description": "Resource Id of the Migration Service.",
-          "type": "string"
-        },
-        "migrationOperationId": {
-          "description": "ID tracking current migration operation.",
           "type": "string"
         },
         "provisioningError": {
@@ -1090,11 +1095,6 @@
         "offlineConfiguration": {
           "$ref": "#/definitions/OfflineConfiguration",
           "description": "Offline configuration."
-        },
-        "migrationFailureError": {
-          "$ref": "#/definitions/ErrorInfo",
-          "description": "Error details in case of migration failure.",
-          "readOnly": true
         }
       }
     },
@@ -1105,7 +1105,7 @@
           "$ref": "#/definitions/DatabaseMigrationProperties"
         }
       ],
-      "description": "Database Migration Resource properties for Sql Virtual Machine.",
+      "description": "Database Migration Resource properties for SQL Virtual Machine.",
       "type": "object",
       "properties": {
         "migrationStatusDetails": {
@@ -1113,36 +1113,8 @@
           "description": "Detailed migration status. Not included by default.",
           "readOnly": true
         },
-        "startedOn": {
-          "format": "date-time",
-          "description": "Database migration start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endedOn": {
-          "format": "date-time",
-          "description": "Database migration end time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "sourceSqlConnection": {
-          "$ref": "#/definitions/SqlConnectionInformation",
-          "description": "Source SQL Server connection details."
-        },
-        "sourceDatabaseName": {
-          "description": "Name of the source database.",
-          "type": "string"
-        },
         "targetDatabaseCollation": {
           "description": "Database collation to be used for the target database.",
-          "type": "string"
-        },
-        "migrationService": {
-          "description": "Resource Id of the Migration Service.",
-          "type": "string"
-        },
-        "migrationOperationId": {
-          "description": "ID tracking current migration operation.",
           "type": "string"
         },
         "provisioningError": {
@@ -1156,11 +1128,6 @@
         "offlineConfiguration": {
           "$ref": "#/definitions/OfflineConfiguration",
           "description": "Offline configuration."
-        },
-        "migrationFailureError": {
-          "$ref": "#/definitions/ErrorInfo",
-          "description": "Error details in case of migration failure.",
-          "readOnly": true
         }
       }
     },
