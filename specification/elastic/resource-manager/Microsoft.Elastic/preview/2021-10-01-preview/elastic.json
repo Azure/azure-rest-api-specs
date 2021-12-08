@@ -854,13 +854,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgradableVersions": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listUpgradableVersions": {
+      "post": {
         "tags": [
           "MonitorUpgradableVersions"
         ],
-        "summary": "Get the list of upgradable versions for a given monitor resource.",
-        "operationId": "UpgradableVersions_Get",
+        "summary": "List of upgradable versions for a given monitor resource.",
+        "operationId": "UpgradableVersions_Details",
         "produces": [
           "application/json"
         ],
@@ -893,14 +893,14 @@
           }
         },
         "x-ms-examples": {
-          "UpgradableVersions_Get": {
-            "$ref": "./examples/UpgradableVersions_Get.json"
+          "UpgradableVersions_Details": {
+            "$ref": "./examples/UpgradableVersions_Details.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgrade": {
-      "put": {
+      "post": {
         "tags": [
           "DeploymentUpdate"
         ],
@@ -935,7 +935,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Success"
           },
           "default": {
