@@ -583,7 +583,7 @@
           "200": {
             "description": "If resource is retrieved successfully, the service should return 200 (OK).",
             "schema": {
-              "$ref": "#/definitions/BotChannel"
+              "$ref": "#/definitions/ListChannelWithKeysResponse"
             }
           },
           "default": {
@@ -1744,6 +1744,25 @@
       },
       "description": "The list of  bot service operation response."
     },
+    "ListChannelWithKeysResponse": {
+      "type": "object",
+      "description": "The ARM channel of list channel with keys operation response.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BotChannel"
+        }
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/Channel",
+          "description": "The set of properties specific to bot channel resource"
+        },
+        "setting": {
+          "$ref": "#/definitions/ChannelSettings",
+          "description": "Channel settings"
+        }
+      }
+    },
     "BotChannel": {
       "type": "object",
       "description": "Bot channel resource definition",
@@ -1756,6 +1775,51 @@
         "properties": {
           "$ref": "#/definitions/Channel",
           "description": "The set of properties specific to bot channel resource"
+        }
+      }
+    },
+    "ChannelSettings": {
+      "type": "object",
+      "description": "Channel settings definition",
+      "properties": {
+        "extensionKey1": {
+          "type": "string",
+          "description": "The extensionKey1"
+        },
+        "extensionKey2": {
+          "type": "string",
+          "description": "The extensionKey2"
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Site"
+          },
+          "description": "The list of sites"
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The channel id"
+        },
+        "channelDisplayName": {
+          "type": "string",
+          "description": "The channel display name"
+        },
+        "botId": {
+          "type": "string",
+          "description": "The bot id"
+        },
+        "botIconUrl": {
+          "type": "string",
+          "description": "The bot icon url"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether this channel is enabled for the bot"
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
         }
       }
     },
@@ -2561,6 +2625,27 @@
         "isEnabled",
         "siteName"
       ]
+    },
+    "Site": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebChatSite"
+        },
+        {
+          "$ref": "#/definitions/DirectLineSite"
+        }
+      ],
+      "properties": {
+        "isTokenEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is token enabled for channel"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity Tag"
+        }
+      },
+      "description": "A site for the channel"
     },
     "SiteInfo": {
       "properties": {
