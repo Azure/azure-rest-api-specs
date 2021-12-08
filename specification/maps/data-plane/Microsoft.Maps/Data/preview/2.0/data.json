@@ -56,65 +56,6 @@
       "SasToken": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      }
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "200Async": {
-      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-      "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
-      },
-      "headers": {
-        "Resource-Location": {
-          "type": "string",
-          "description": "If successful, a URI where details on the newly created resource can be found."
-        }
-      }
-    },
-    "202Accepted": {
-      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
-      "headers": {
-        "Operation-Location": {
-          "type": "string",
-          "description": "New URL to check for the results of the long running process."
-        }
-      }
-    }
-  },
   "parameters": {
     "GeographicResourceLocation": {
       "name": "geography",
@@ -249,7 +190,7 @@
     "/mapData": {
       "post": {
         "x-publish": true,
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Upload API allows the caller to upload data content to the Azure Maps service.\nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` \nformat, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Upload Request\n\nTo upload your content you will use a `POST` request. The request body will contain the data to upload. The `Content-Type` header will be set to the content type of the \ndata.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the geofence \ncontent. Set the `dataFormat` query parameter to _geojson_, and set the `Content-Type` header to either one \nof the following media types:\n\n- `application/json`\n- `application/vnd.geo+json`\n- `application/octet-stream`\n\nHere's a sample request body for uploading a simple Geofence represented as a circle geometry using a center \npoint and a radius. The sample below is in `GeoJSON`:\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\nThe Data Upload API performs a \n[long-running request](https://aka.ms/am-creator-lrt-v2).\n\n## Data Upload Limits\n\nPlease, be aware that currently every Azure Maps account has a [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits). \nOnce the storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. \nYou can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data-v2/delete-preview) to \ndelete old/unused content and create space for new uploads.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Upload API allows the caller to upload data content to the Azure Maps service.\nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` \nformat, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Upload Request\n\nTo upload your content you will use a `POST` request. The request body will contain the data to upload. The `Content-Type` header will be set to the content type of the \ndata.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the geofence \ncontent. Set the `dataFormat` query parameter to _geojson_, and set the `Content-Type` header to either one \nof the following media types:\n\n- `application/json` if `dataFormat` is `JSON`\n- `application/vnd.geo+json` if `dataFormat` is `geoJSON` \n- `application/octet-stream` if `dataFormat` is `zip`\n\nHere's a sample request body for uploading a simple Geofence represented as a circle geometry using a center \npoint and a radius. The sample below is in `GeoJSON`:\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\nThe Data Upload API performs a \n[long-running request](https://aka.ms/am-creator-lrt-v2).\n\n## Data Upload Limits\n\nPlease, be aware that currently every Azure Maps account has a [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits). \nOnce the storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. \nYou can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data-v2/delete-preview) to \ndelete old/unused content and create space for new uploads.",
         "operationId": "Data_UploadPreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -294,22 +235,43 @@
             }
           },
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           }
         }
       },
@@ -347,19 +309,34 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           }
         }
       }
@@ -412,22 +389,43 @@
             }
           },
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process."
+              }
+            }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           }
         }
       },
@@ -468,19 +466,34 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           }
         }
       },
@@ -512,19 +525,34 @@
             "description": "Data delete request completed successfully. The content for `udid` was deleted on the server."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           }
         }
       }
@@ -554,10 +582,16 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/responses/200Async"
+            "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResult"
+            }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "schema": {
+              "$ref": "#/definitions/ODataErrorResponse"
+            }
           }
         }
       }
@@ -656,7 +690,8 @@
     },
     "MapDataDownloadResponse": {
       "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "MapDataListResponse": {
       "description": "The response model for the Data List API. Returns a list of all the previously uploaded data.",
