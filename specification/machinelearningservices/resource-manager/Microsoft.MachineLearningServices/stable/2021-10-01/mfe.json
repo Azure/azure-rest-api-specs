@@ -6133,6 +6133,7 @@
         },
         "resources": {
           "description": "Compute Resource configuration for the job.",
+          "default": "{}",
           "$ref": "#/definitions/ResourceConfiguration",
           "x-ms-mutability": [
             "create",
@@ -9041,12 +9042,12 @@
         "instanceCount": {
           "format": "int32",
           "description": "Optional number of instances or nodes used by the compute target.",
+          "default": 1,
           "type": "integer",
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "x-nullable": true
+          ]
         },
         "instanceType": {
           "description": "Optional type of VM used as supported by the compute target.",
@@ -9608,6 +9609,7 @@
         },
         "resources": {
           "description": "Compute Resource configuration for the job.",
+          "default": "{}",
           "$ref": "#/definitions/ResourceConfiguration",
           "x-ms-mutability": [
             "create",
