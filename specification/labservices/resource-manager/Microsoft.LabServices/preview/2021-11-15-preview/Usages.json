@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services core usages."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/locations/{location}/usages": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/LocationRouteParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "summary": "Gets the list of usages.",
+        "description": "Returns list of usage per SKU family for the specified subscription in the specified region.",
+        "operationId": "Usages_ListByLocation",
+        "responses": {
+          "200": {
+            "description": "The request was successful; a list of usages is returned",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "listUsages": {
+            "$ref": "./examples/Usages/getUsages.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ListUsagesResult": {
+      "description": "List of Core Usages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of Usages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of Usage result.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Usage": {
+      "description": "The core usage details.",
+      "type": "object",
+      "properties": {
+        "currentValue": {
+          "description": "The current usage.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "description": "The limit integer.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "unit": {
+          "description": "The unit details.",
+          "type": "string",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name.",
+          "$ref": "#/definitions/UsageName"
+        },
+        "id": {
+          "description": "The fully qualified arm resource id.",
+          "type": "string"
+        }
+      }
+    },
+    "UsageName": {
+      "description": "The Usage Names.",
+      "type": "object",
+      "properties": {
+        "localizedValue": {
+          "description": "The localized name of the resource.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The name of the resource.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LocationRouteParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The location name.",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

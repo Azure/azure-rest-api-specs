@@ -39,7 +39,7 @@ If any further question about AME onboarding or validation tools, please view th
 > - All removals
 
 Otherwise your PR may be subject to ARM review requirements. Complete the following:
-- [ ] Check this box if any of the following apply to the PR so that label “WaitForARMFeedback” will be added automatically to begin ARM API Review. Failure to comply may result in delays to the manifest.
+- [ ] Check this box if any of the following apply to the PR so that label "WaitForARMFeedback" will be added automatically to begin ARM API Review. Failure to comply may result in delays to the manifest.
   - Adding a new service
   - Adding new API(s)
   - Adding a new API version
