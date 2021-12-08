@@ -85,6 +85,11 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ``` yaml
 directive:
   - from: agfood.json
+    suppress: R3010 # TrackedResourceListByImmediateParent
+    where: 
+      - $.definitions  
+    reason: Have an api already.
+  - from: agfood.json
     suppress: R3006 # BodyTopLevelProperties
     where: $.definitions.FarmBeats.properties    
     reason: Currently systemData is not allowed.
@@ -101,6 +106,16 @@ directive:
   - from: agfood.json
     suppress: R4000  # DescriptionAndTitleMissing
     where:
+      - $.definitions.FarmBeatsExtension.properties.systemData
+      - $.definitions.FarmBeatsExtension.properties.properties
+      - $.definitions.DetailedInformation.properties.unitsSupported
+      - $.definitions.SensorIntegration.properties.provisioningInfo
+      - $.definitions.FarmBeatsProperties.properties.publicNetworkAccess
+      - $.definitions.FarmBeatsProperties.properties.sensorIntegration
+      - $.definitions.FarmBeatsProperties.properties.publicNetworkAccess
+      - $.definitions.FarmBeatsProperties.properties.privateEndpointConnections
+      - $.definitions.FarmBeatsUpdateProperties.properties.sensorIntegration
+      - $.definitions.FarmBeatsUpdateProperties.properties.publicNetworkAccess
       - $.definitions.Error.properties.innererror
       - $.definitions.ErrorResponse.properties.error
       - $.definitions.Extension.properties.properties
