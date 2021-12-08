@@ -2,7 +2,7 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go) !$(track2)
+```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: testbase
