@@ -4,7 +4,7 @@
     "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "examples-rg",
     "farmBeatsResourceName": "examples-farmbeatsResourceName",
-    "groupName": "farmbeats"
+    "subResourceName": "farmbeats"
   },
   "responses": {
     "200": {
@@ -20,6 +20,14 @@
           "requiredZoneNames": [
             "privatelink.farmbeats.azure.net"
           ]
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Resource with subscriptionId '11111111-2222-3333-4444-555555555555', resource group 'examples-rg' and resourcename 'examples-farmbeatsResourceName' not found."
         }
       }
     }

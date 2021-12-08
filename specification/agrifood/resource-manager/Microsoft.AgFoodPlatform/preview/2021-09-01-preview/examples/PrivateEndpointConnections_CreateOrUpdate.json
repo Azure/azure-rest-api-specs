@@ -5,7 +5,7 @@
     "resourceGroupName": "examples-rg",
     "farmBeatsResourceName": "examples-farmbeatsResourceName",
     "privateEndpointConnectionName": "privateEndpointConnectionName",
-    "parameters": {
+    "body": {
       "properties": {
         "privateLinkServiceConnectionState": {
           "status": "Approved",
@@ -33,6 +33,14 @@
         }
       }
     },
-    "202": {}
+    "202": {},
+    "400": {
+      "body": {
+        "error": {
+          "code": "ModelValidationFailed",
+          "message": "Invalid value(s) for request parameter: privateLinkServiceConnectionState.status."
+        }
+      }
+    }
   }
 }
