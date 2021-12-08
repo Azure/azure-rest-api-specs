@@ -43,6 +43,21 @@
   "schemes": [
     "https"
   ],
+  "responses": {
+    "AnomalyDetectorErrorResponse": {
+      "description": "Failure",
+      "x-ms-error-response": true,
+      "headers": {
+        "x-ms-error-code": {
+          "type": "string",
+          "description": "error code"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
   "paths": {
     "/multivariate/models": {
       "post": {
@@ -59,7 +74,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -97,7 +112,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -158,7 +173,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -192,7 +207,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -224,7 +239,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -282,7 +297,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -328,7 +343,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
@@ -388,7 +403,7 @@
           "default": {
             "description": "Error response",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/responses/AnomalyDetectorErrorResponse"
             }
           }
         },
