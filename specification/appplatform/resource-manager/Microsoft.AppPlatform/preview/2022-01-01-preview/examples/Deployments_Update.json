@@ -28,23 +28,18 @@
             "version": "1.0",
             "artifactSelector": "sub-module-1"
           },
-          "appName": "myapp",
           "deploymentSettings": {
-            "cpu": 1,
-            "memoryInGB": 3,
             "resourceRequests": {
               "cpu": "1000m",
               "memory": "3Gi"
             },
-            "jvmOptions": "-Xms1G -Xmx3G",
             "environmentVariables": {
               "env": "test"
-            },
-            "runtimeVersion": "Java_8"
+            }
           },
           "provisioningState": "Succeeded",
           "status": "Running",
-          "active": false,
+          "active": true,
           "instances": [
             {
               "name": "instance1",
@@ -59,12 +54,24 @@
           "tier": "Standard",
           "capacity": 1
         },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
         "type": "Microsoft.AppPlatform/Spring/apps/deployments",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
         "name": "mydeployment"
       }
     },
     "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2022-01-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2022-01-01-preview"
+      },
       "body": {
         "properties": {
           "source": {
@@ -73,23 +80,18 @@
             "version": "1.0",
             "artifactSelector": "sub-module-1"
           },
-          "appName": "myapp",
           "deploymentSettings": {
-            "cpu": 1,
-            "memoryInGB": 3,
             "resourceRequests": {
               "cpu": "1000m",
               "memory": "3Gi"
             },
-            "jvmOptions": "-Xms1G -Xmx3G",
             "environmentVariables": {
               "env": "test"
-            },
-            "runtimeVersion": "Java_8"
+            }
           },
           "provisioningState": "Updating",
           "status": "Running",
-          "active": false,
+          "active": true,
           "instances": [
             {
               "name": "instance1",
@@ -103,6 +105,14 @@
           "name": "S0",
           "tier": "Standard",
           "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
         },
         "type": "Microsoft.AppPlatform/Spring/apps/deployments",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",

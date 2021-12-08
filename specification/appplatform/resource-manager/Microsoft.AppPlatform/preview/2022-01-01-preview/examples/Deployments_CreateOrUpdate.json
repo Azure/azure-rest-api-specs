@@ -13,19 +13,24 @@
             "cpu": "1000m",
             "memory": "3Gi"
           },
-          "jvmOptions": "-Xms1G -Xmx3G",
+          "addonConfigs": {
+            "ApplicationConfigurationService": {
+              "patterns": [
+                "mypattern"
+              ]
+            }
+          },
           "environmentVariables": {
             "env": "test"
-          },
-          "runtimeVersion": "Java_8"
+          }
         },
         "instances": null
+      },
+      "sku": {
+        "name": "S0",
+        "tier": "Standard",
+        "capacity": 1
       }
-    },
-    "sku": {
-      "name": "S0",
-      "tier": "Standard",
-      "capacity": 1
     },
     "api-version": "2022-01-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -44,19 +49,14 @@
             "version": "1.0",
             "artifactSelector": "sub-module-1"
           },
-          "appName": "myapp",
           "deploymentSettings": {
-            "cpu": 1,
-            "memoryInGB": 3,
             "resourceRequests": {
               "cpu": "1000m",
               "memory": "3Gi"
             },
-            "jvmOptions": "-Xms1G -Xmx3G",
             "environmentVariables": {
               "env": "test"
-            },
-            "runtimeVersion": "Java_8"
+            }
           },
           "provisioningState": "Creating",
           "status": "Running",
@@ -75,6 +75,14 @@
           "tier": "Standard",
           "capacity": 1
         },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
         "type": "Microsoft.AppPlatform/Spring/apps/deployments",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
         "name": "mydeployment"
@@ -89,19 +97,14 @@
             "version": "1.0",
             "artifactSelector": "sub-module-1"
           },
-          "appName": "myapp",
           "deploymentSettings": {
-            "cpu": 1,
-            "memoryInGB": 3,
             "resourceRequests": {
               "cpu": "1000m",
               "memory": "3Gi"
             },
-            "jvmOptions": "-Xms1G -Xmx3G",
             "environmentVariables": {
               "env": "test"
-            },
-            "runtimeVersion": "Java_8"
+            }
           },
           "provisioningState": "Succeeded",
           "status": "Running",
@@ -120,6 +123,14 @@
           "tier": "Standard",
           "capacity": 1
         },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
         "type": "Microsoft.AppPlatform/Spring/apps/deployments",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
         "name": "mydeployment"
@@ -134,19 +145,14 @@
             "version": "1.0",
             "artifactSelector": "sub-module-1"
           },
-          "appName": "myapp",
           "deploymentSettings": {
-            "cpu": 1,
-            "memoryInGB": 3,
             "resourceRequests": {
               "cpu": "1000m",
               "memory": "3Gi"
             },
-            "jvmOptions": "-Xms1G -Xmx3G",
             "environmentVariables": {
               "env": "test"
-            },
-            "runtimeVersion": "Java_8"
+            }
           },
           "provisioningState": "Updating",
           "status": "Running",
@@ -164,6 +170,14 @@
           "name": "S0",
           "tier": "Standard",
           "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
         },
         "type": "Microsoft.AppPlatform/Spring/apps/deployments",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
