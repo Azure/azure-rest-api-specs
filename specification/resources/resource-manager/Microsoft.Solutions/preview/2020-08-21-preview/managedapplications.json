@@ -290,6 +290,12 @@
               "$ref": "#/definitions/Application"
             }
           },
+          "202": {
+            "description": "Accepted - Returns information about the managed application, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1926,6 +1932,13 @@
     "ApplicationPackageLockingPolicyDefinition": {
       "properties": {
         "allowedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The deny assignment excluded actions."
+        },
+        "allowedDataActions": {
           "type": "array",
           "items": {
             "type": "string"
