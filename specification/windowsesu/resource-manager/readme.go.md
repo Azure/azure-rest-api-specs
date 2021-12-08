@@ -16,6 +16,12 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
+### Go multi-api
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2019-09-16-preview
+```
+
 ### Tag: package-2019-09-16-preview and go
 
 These settings apply only when `--tag=package-2019-09-16-preview --go` is specified on the command line.
