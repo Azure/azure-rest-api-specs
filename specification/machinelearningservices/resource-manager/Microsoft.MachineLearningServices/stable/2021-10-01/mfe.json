@@ -4895,7 +4895,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DeploymentSkuResourceTypeArmPaginatedResult"
+              "$ref": "#/definitions/SkuResourceArmPaginatedResult"
             }
           }
         },
@@ -6710,50 +6710,6 @@
       "x-ms-enum": {
         "name": "DeploymentProvisioningState",
         "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "DeploymentSkuResourceType": {
-      "description": "Fulfills ARM Contract requirement to list all available SKUS for a resource.",
-      "type": "object",
-      "properties": {
-        "capacity": {
-          "description": "Gets or sets the Sku Capacity.",
-          "$ref": "#/definitions/SkuCapacity",
-          "x-nullable": true
-        },
-        "resourceType": {
-          "description": "Gets or sets the resource type name.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "sku": {
-          "description": "Gets or sets the Sku.",
-          "$ref": "#/definitions/SkuSetting",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "DeploymentSkuResourceTypeArmPaginatedResult": {
-      "description": "A paginated list of DeploymentSkuResourceType entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of DeploymentSkuResourceType objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type DeploymentSkuResourceType.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentSkuResourceType"
-          }
-        }
       },
       "additionalProperties": false
     },
@@ -9331,6 +9287,50 @@
           "description": "Gets or sets the type of the scale.",
           "default": "Automatic",
           "$ref": "#/definitions/SkuScaleType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SkuResource": {
+      "description": "Fulfills ARM Contract requirement to list all available SKUS for a resource.",
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "description": "Gets or sets the Sku Capacity.",
+          "$ref": "#/definitions/SkuCapacity",
+          "x-nullable": true
+        },
+        "resourceType": {
+          "description": "The resource type name.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "sku": {
+          "description": "Gets or sets the Sku.",
+          "$ref": "#/definitions/SkuSetting",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SkuResourceArmPaginatedResult": {
+      "description": "A paginated list of SkuResource entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of SkuResource objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type SkuResource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuResource"
+          }
         }
       },
       "additionalProperties": false
