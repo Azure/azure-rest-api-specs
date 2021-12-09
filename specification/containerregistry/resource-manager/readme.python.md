@@ -20,7 +20,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2021-12-preview-only
-  - tag: package-2021-09
+  - tag: package-2021-09-only
   - tag: package-2021-08-preview-only
   - tag: package-2021-06-preview-only
   - tag: package-2020-11-preview-only
@@ -48,16 +48,6 @@ These settings apply only when `--tag=package-2021-12-preview-only --python` is 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2021-12-preview-only' && $(python)
-namespace: azure.mgmt.containerregistry.v2021_12_01_preview
-output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_12_01_preview
-```
-
-### Tag: package-2021-12-preview and python
-
-These settings apply only when `--tag=package-2021-12-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2021-12-preview' && $(python)
 namespace: azure.mgmt.containerregistry.v2021_12_01_preview
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2021_12_01_preview
 ```
