@@ -313,13 +313,40 @@
       },
       "description": "List of scope connections."
     },
+    "PendingScopeConnection": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "networkManagerId": {
+          "type": "string",
+          "description": "Network Manager Id."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "connectionState": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Connection State"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the scope connection."
+        }
+      },
+      "description": "Pending Scope Connection"
+    },
     "PendingScopeConnectionListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScopeConnection"
+            "$ref": "#/definitions/PendingScopeConnection"
           }
         },
         "skipToken": {
@@ -327,7 +354,7 @@
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
         }
       },
-      "description": "List of scope connections."
+      "description": "List of pending scope connections"
     },
     "ConnectionState": {
       "type": "string",
