@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2.0",
+    "dataFormat": "geojson",
+    "UploadContent": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -122.126986,
+              47.639754
+            ]
+          },
+          "properties": {
+            "geometryId": "001",
+            "radius": 500
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationId": "8b1288fa-1958-4a2b-b68e-13a7i5af7d7c",
+        "created": "2021-04-20T22:43:14.9401559+00:00",
+        "status": "Succeeded"
+      },
+      "headers": {
+        "Resource-Location": "https://us.atlas.microsoft.com/mapData/3e36b996-f6d1-b068-0fcb-dd6b014c3447?api-version=2.0"
+      }
+    },
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/mapData/operations/{udid}?api-version=2.0",
+        "Access-Control-Expose-Headers": "Operation-Location"
+      }
+    },
+    "409": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "409 Conflict",
+          "message": "The data storage limit is reached on the Azure Maps account. You can always use the Data Delete API to delete old/unused content and create space for new uploads."
+        }
+      }
+    }
+  }
+}
