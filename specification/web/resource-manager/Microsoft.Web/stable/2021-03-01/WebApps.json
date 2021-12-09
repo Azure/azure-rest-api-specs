@@ -1201,7 +1201,7 @@
         ],
         "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
         "description": "Description for Gets site's Authentication / Authorization settings for apps via the V2 format",
-        "operationId": "WebApps_GetAuthSettingsV2",
+        "operationId": "WebApps_GetAuthSettingsV2WithoutSecrets",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1292,7 +1292,7 @@
         ],
         "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
         "description": "Description for Gets site's Authentication / Authorization settings for apps via the V2 format",
-        "operationId": "WebApps_ListAuthSettingsV2",
+        "operationId": "WebApps_GetAuthSettingsV2",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -8105,9 +8105,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "App restart started."
-          },
           "200": {
             "description": "Successfully restarted app."
           },
@@ -8117,8 +8114,7 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restoreFromBackupBlob": {
@@ -17365,9 +17361,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "App restart started."
-          },
           "200": {
             "description": "Successfully restarted app."
           },
@@ -17377,8 +17370,7 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restoreFromBackupBlob": {
