@@ -2902,13 +2902,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/setActiveDeployment": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/setActiveDeployments": {
       "post": {
         "tags": [
           "AppPlatform"
         ],
         "description": "Set existing Deployment under the app as active",
-        "operationId": "Apps_SetActiveDeployment",
+        "operationId": "Apps_SetActiveDeployments",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2942,6 +2942,12 @@
               "$ref": "#/definitions/ActiveDeploymentCollection"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Binding is now updating and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeploymentCollection"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2949,9 +2955,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Apps_SetActiveDeployment": {
-            "$ref": "./examples/Apps_SetActiveDeployment.json"
+          "Apps_SetActiveDeployments": {
+            "$ref": "./examples/Apps_SetActiveDeployments.json"
           }
         }
       }
@@ -7927,7 +7937,7 @@
       "description": "Object that includes an array of Deployment resource name and set them as active.",
       "type": "object",
       "properties": {
-        "activeDeployments": {
+        "activeDeploymentNames": {
           "description": "Collection of Deployment name.",
           "uniqueItems": false,
           "type": "array",
