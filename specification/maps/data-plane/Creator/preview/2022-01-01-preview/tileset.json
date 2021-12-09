@@ -125,6 +125,15 @@
           },
           {
             "$ref": "#/parameters/DescriptionTileset"
+          },
+          {
+            "name": "TilesetRecipe",
+            "in": "body",
+            "description": "The custom tileset recipe to use.",
+            "required": false,
+            "schema": {
+              "type": "json"
+            }      
           }
         ],
         "responses": {
@@ -319,6 +328,75 @@
         "bbox": {
           "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/BoundingBox"
+        },
+        "tilesetRecipe": {
+          "description": "Tileset recipe which is used to build the tileset.",
+          "$ref": "#/definitions/TilesetRecipe"
+        }
+      }
+    },
+    "TilesetRecipe": {
+      "description": "A tileset recipe object. Please refer to [Tileset Recipe Specification]() for details.",
+      "type": "object",
+      "required": [
+        "version", "layers"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of Azure Maps Tiling service recipe reference that the recipe uses.",
+          "type": "integer"
+        },
+        "layers": {
+          "description": "The names of the layers and their configuration options.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LayerObject"
+          }
+        }
+      }
+    },
+    "LayerObject": {
+      "description": "Layer object for tileset recipe.",
+      "type": "object",
+      "required": [
+        "features", "minzoom", "maxzoom"
+      ],
+      "properties": {
+        "features": {
+          "description": "Specifies the output on a per feature basis.",
+          "$ref": "#/definitions/Feature"
+        },
+        "minzoom": {
+          "description": "The lowest zoom level for the layer to build.",
+          "type": "integer"
+        },
+        "maxzoom": {
+          "description": "The highest zoom level for the layer to build.",
+          "type": "integer"
+        }
+      }
+    },
+    "Feature": {
+      "description": "Feature configuration for tileset recipe.",
+      "type": "object",
+      "required": [
+        "featureClasses"
+      ],
+      "properties": {
+        "featureClasses": {
+          "description": "The list of featureClasses that will be used to build the layer.",
+          "type": "array",
+          "items":{
+            "type": "string"
+          }
+        },
+        "minzoom": {
+          "description": "The lowest zoom level for the layer to build.",
+          "type": "integer"
+        },
+        "maxzoom": {
+          "description": "The highest zoom level for the layer to build.",
+          "type": "integer"
         }
       }
     }
