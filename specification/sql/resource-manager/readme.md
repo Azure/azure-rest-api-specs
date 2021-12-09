@@ -110,7 +110,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Operations.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/OperationsHealth.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
@@ -791,7 +790,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-05-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/Operations.json
- - ./Microsoft.Sql/preview/2021-05-01-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/OutboundFirewallRules.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2021-05-01-preview/PrivateLinkResources.json
@@ -909,7 +907,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/Operations.json
- - ./Microsoft.Sql/preview/2021-02-01-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/PrivateLinkResources.json
@@ -1031,7 +1028,6 @@ input-file:
   - Microsoft.Sql/preview/2020-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2020-11-01-preview/ManagedServerSecurityAlertPolicies.json
   - Microsoft.Sql/preview/2020-11-01-preview/Operations.json
-  - Microsoft.Sql/preview/2020-11-01-preview/OperationsHealth.json
   - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
   - Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
   - Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
@@ -1151,7 +1147,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/Operations.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/PrivateLinkResources.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/RecoverableManagedDatabases.json
@@ -1270,7 +1265,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/Operations.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/OperationsHealth.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/PrivateLinkResources.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/RecoverableManagedDatabases.json

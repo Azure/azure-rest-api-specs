@@ -5784,6 +5784,82 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
+    "SemanticSettings": {
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticConfiguration"
+          },
+          "description": "The semantic configurations for the index."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines parameters for a search index that influence semantic capabilities."
+    },
+    "SemanticConfiguration": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the semantic configuration.",
+          "x-nullable": false
+        },
+        "prioritizedFields": {
+          "$ref": "#/definitions/PrioritizedFields",
+          "x-nullable": false,
+          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
+        }
+      },
+      "required": [
+        "name",
+        "prioritizedFields"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
+    },
+    "PrioritizedFields": {
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticField",
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
+        },
+        "prioritizedContentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        },
+        "prioritizedKeywordsFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
+    },
+    "SemanticField": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "",
+          "x-nullable": false
+        }
+      },
+      "description": "A field that is used as part of the semantic configuration."
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -7452,6 +7528,15 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/azure/search/index-ranking-similarity"
           }
+        },
+        "semantic": {
+          "$ref": "#/definitions/SemanticSettings",
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+          },
+          "x-ms-client-name": "SemanticSettings",
+          "x-nullable": true
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
