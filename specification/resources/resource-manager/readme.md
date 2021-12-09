@@ -45,7 +45,7 @@ tag: package-resources-2021-01
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2021-01
+tag: package-subscriptions-2022-01
 ```
 
 ``` yaml $(package-links)
@@ -99,8 +99,6 @@ input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
-
-
 ### Tag: package-subscriptions-2021-01
 
 These settings apply only when `--tag=package-subscriptions-2021-01` is specified on the command line.
@@ -108,6 +106,15 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 ``` yaml $(tag) == 'package-subscriptions-2021-01'
 input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
+```
+
+### Tag: package-subscriptions-2022-01
+
+These settings apply only when `--tag=package-subscriptions-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2022-01'
+input-file:
+- Microsoft.Resources/stable/2022-01-01/subscriptions.json
 ```
 
 ### Tag: package-deploymentscripts-2020-10
