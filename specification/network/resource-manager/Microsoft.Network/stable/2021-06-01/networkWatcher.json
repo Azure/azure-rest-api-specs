@@ -2727,6 +2727,22 @@
           "type": "string",
           "description": "The ID of the targeted resource, only VM is currently supported."
         },
+        "scope": {
+          "$ref": "#/definitions/PacketCaptureMachineScope",
+          "description": "A list of machines for packet capture"
+        },
+        "targetType": {
+          "description": "Target type of the machine provided",
+          "type": "string",
+          "enum": [
+            "AzureVM",
+            "AzureVMSS"
+          ],
+          "x-ms-enum": {
+            "name": "PcTargetType",
+            "modelAsString": true
+          }
+        },
         "bytesToCapturePerPacket": {
           "type": "integer",
           "format": "int64",
@@ -2768,6 +2784,26 @@
         "storageLocation"
       ],
       "description": "Parameters that define the create packet capture operation."
+    },
+    "PacketCaptureMachineScope": {
+      "type": "object",
+      "properties": {
+        "include": {
+          "type": "array",
+          "description": "List of target type resources to be included for packet capture",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "description": "List of target type resources to be excluded for packet capture",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "A list of machines for packet capture"
     },
     "PacketCaptureStorageLocation": {
       "properties": {
