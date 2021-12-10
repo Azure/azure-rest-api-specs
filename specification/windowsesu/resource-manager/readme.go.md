@@ -29,5 +29,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2019-09-16-preview' && $(go)
 namespace: windowsesu
-output-folder: $(go-sdk-folder)/services/preview/windowsesu/2019-09-16-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/windowsesu/mgmt/2019-09-16-preview/$(namespace)
 ```
