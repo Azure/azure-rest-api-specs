@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Style Service",
+    "title": "Azure Maps StyleSet Service",
     "version": "2022-01-01-preview",
-    "description": "This is an extension of the Azure Maps Tileset API to serve custom styles. It will allow a client to create a list of map styling information which can be combined with tilesetIds to compose a Mapbox style that can be consumed directly by front-end services (map control web & mobile SDKs, styling tools like [Maputnik](https://maputnik.github.io/editor/))."
+    "description": "This is an extension of the Azure Maps Tileset API to serve custom styles. It will allow a client to create a list of map styling information which can be combined with tilesetIds to compose a Mapbox style that can be consumed directly by front-end services (map control web & mobile SDKs, styling tools like [Maputnik](https://maputnik.github.io/editor/)). StyleSet can be viewed as the backend representation for a style picker at frontend."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
@@ -67,9 +67,9 @@
       "default": "2022-01-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "StyleId": {
-      "name": "styleId",
-      "description": "The Style Id.",
+    "StyleSetId": {
+      "name": "styleSetId",
+      "description": "The StyleSet Id.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -83,25 +83,25 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "DescriptionStyle": {
+    "DescriptionStyleSet": {
       "name": "description",
-      "description": "User provided description of the style.",
+      "description": "User provided description of the styleSet.",
       "type": "string",
       "in": "query",
       "x-ms-parameter-location": "method"
     },
-    "StyleOperationId": {
+    "StyleSetOperationId": {
       "name": "operationId",
       "type": "string",
       "in": "path",
-      "description": "The ID to query the status for the style create/import request.",
+      "description": "The ID to query the status for the styleSet create request.",
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "Format": {
-      "name": "format",
+    "DataFormat": {
+      "name": "dataFormat",
       "in": "query",
-      "description": "Defines the type of input file for a style to be created from",
+      "description": "Defines the type of input file for a style set to be created from",
       "required": false,
       "schema": {
         "type": "string",
@@ -114,17 +114,17 @@
     }
   },
   "paths": {
-    "/styles": {
+    "styles/stylesets": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Style Import API allows the caller to import a style from a their style json file.\n\n## Submit Import Request\n\nTo import your style you will make a `POST` request with an azure maps style or mapbox style. \n\nThe Import Style API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Style_Import",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe StyleSet Create API allows the caller to create a styleSet from their styleSet configuration file.\n\n## Submit Create Request\n\nTo create your styleset you will make a `POST` request with a styleSet configration file. \n\nThe Create StyleSet API is a \n[long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "StyleSet_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
           "Import Style by providing a azure maps or mapbox style json file": {
-            "$ref": "./examples/style/Style_Import.json"
+            "$ref": "./examples/styleset/StyleSet_Create.json"
           }
         },
         "parameters": [
@@ -135,10 +135,10 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Format"
+            "$ref": "#/parameters/DataFormat"
           },
           {
-            "$ref": "#/parameters/DescriptionStyle"
+            "$ref": "#/parameters/DescriptionStyleSet"
           }
         ],
         "responses": {
@@ -154,11 +154,11 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all styles imported.   \n<br>",
-        "operationId": "Style_List",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all styleSets created.   \n<br>",
+        "operationId": "StyleSet_List",
         "x-ms-examples": {
-          "Get a list of all styles": {
-            "$ref": "./examples/style/Style_List.json"
+          "Get a list of all styleSets": {
+            "$ref": "./examples/style/StyleSet_List.json"
           }
         },
         "parameters": [
@@ -170,14 +170,14 @@
           }
         ],
         "x-ms-pageable": {
-          "itemName": "styles",
+          "itemName": "styleSets",
           "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
-            "description": "List style request completed successfully. The response body contains a list of all styles.",
+            "description": "List styleSets request completed successfully. The response body contains a list of all styleSets.",
             "schema": {
-              "$ref": "#/definitions/StyleListResult"
+              "$ref": "#/definitions/StyleSetListResult"
             }
           },
           "default": {
@@ -186,13 +186,13 @@
         }
       }
     },
-    "/styles/{styleId}": {
+    "/styles/stylesets/{styleId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a style.",
-        "operationId": "Style_Export",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a styleSet.",
+        "operationId": "StyleSet_Get",
         "x-ms-examples": {
-          "Exports the details for a single style": {
-            "$ref": "./examples/style/Style_Export.json"
+          "Gets the details for a single styleSet": {
+            "$ref": "./examples/styleset/StyleSet_Get.json"
           }
         },
         "parameters": [
@@ -203,15 +203,12 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StyleId"
-          },
-          {
-            "$ref": "#/parameters/TilesetId"
+            "$ref": "#/parameters/StyleSetId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Export style request completed successfully. The response body contains a single style.",
+            "description": "Get styleSet request completed successfully. The response body contains a single styleSet.",
             "schema": {
               "$ref": "#/definitions/Style"
             }
@@ -222,11 +219,11 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a imported style.<br>    \nYou can use this API if a style is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleId` of the style to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
-        "operationId": "Style_Delete",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created styleSet.<br>    \nYou can use this API if a style is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleSetId` of the styleSet to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe StyleSet Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the styleSet with the passed-in `styleSetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - StyleSet Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "operationId": "StyleSet_Delete",
         "x-ms-examples": {
           "Delete a imported style": {
-            "$ref": "./examples/style/Style_Delete.json"
+            "$ref": "./examples/styleset/StyleSet_Delete.json"
           }
         },
         "parameters": [
@@ -237,12 +234,12 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StyleId"
+            "$ref": "#/parameters/StyleSetId"
           }
         ],
         "responses": {
           "204": {
-            "description": "Style delete request completed successfully."
+            "description": "StyleSet delete request completed successfully."
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
@@ -252,14 +249,14 @@
     },
     "/styles/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to create a style.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
-        "operationId": "Style_GetOperation",
+        "description": "This path will be obtained from a call to create a styleSet.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "operationId": "StyleSet_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/style/Style_GetOperationStillRunning.json"
+            "$ref": "./examples/styleset/StyleSet_GetOperationStillRunning.json"
           },
           "Get the status of an operation which has finished successfully": {
-            "$ref": "./examples/style/Style_GetOperation.json"
+            "$ref": "./examples/styleset/StyleSet_GetOperation.json"
           }
         },
         "parameters": [
@@ -267,7 +264,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StyleOperationId"
+            "$ref": "#/parameters/StyleSetOperationId"
           }
         ],
         "responses": {
@@ -282,16 +279,16 @@
     }
   },
   "definitions": {
-    "StyleListResult": {
-      "description": "The response model for the Style List API. Returns a list of all styles.",
+    "StyleSetListResult": {
+      "description": "The response model for the StyleSet List API. Returns a list of all styleSets.",
       "type": "object",
       "properties": {
         "styles": {
-          "description": "A list of all styles.",
+          "description": "A list of all styleSets.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Style"
+            "$ref": "#/definitions/StyleSet"
           }
         },
         "nextLink": {
@@ -301,17 +298,22 @@
         }
       }
     },
-    "Style": {
+    "StyleSet": {
       "description": "Detail information for the data.",
       "type": "object",
       "properties": {
-        "styleId": {
-          "description": "The unique style id for the style.",
+        "styleSetId": {
+          "description": "The unique styleSet id for the styleSet.",
           "type": "string",
           "readOnly": true
         },
         "description": {
-          "description": "The description the caller provided when creating the style. Maximum length 1024 characters.",
+          "description": "The description the caller provided when creating the styleSet. Maximum length 1024 characters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The creation date and time of this styleSet.",
           "type": "string",
           "readOnly": true
         }
