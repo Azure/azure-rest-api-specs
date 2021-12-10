@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SubscriptionClient",
-    "version": "2021-01-01",
+    "version": "2022-01-01",
     "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization."
   },
   "host": "management.azure.com",
@@ -431,6 +431,13 @@
           },
           "description": "An array containing the tenants managing the subscription."
         },
+        "promotions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Promotion"
+          },
+          "description": "An array containing the promotions on the subscription."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -480,6 +487,22 @@
         }
       },
       "description": "Information about a tenant managing the subscription."
+    },
+    "Promotion": {
+      "properties": {
+        "category": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The promotion category."
+        },
+        "endDateTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The promotion end date."
+        }
+      },
+      "description": "Information about a promotion given to the subscription."
     },
     "SubscriptionListResult": {
       "properties": {
