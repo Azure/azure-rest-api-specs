@@ -652,6 +652,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
@@ -770,6 +773,15 @@
       },
       "description": "Specifies the patch settings."
     },
+    "CloudMetadata": {
+      "properties" : {
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the cloud provider (Azure/AWS/GCP...)."
+        }
+      }
+    },
     "OSProfile": {
       "properties": {
         "computerName": {
@@ -812,6 +824,10 @@
       "properties": {
         "locationData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
+        "cloudMetadata": {
+          "$ref": "#/definitions/CloudMetadata",
+          "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
@@ -950,6 +966,10 @@
         "osProfile": {
           "$ref": "#/definitions/OSProfile"
         },
+        "cloudMetadata": {
+          "$ref": "#/definitions/CloudMetadata",
+          "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
+        },
         "parentClusterResourceId": {
           "type": "string",
           "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
@@ -1081,6 +1101,10 @@
         "typeHandlerVersion": {
           "type": "string",
           "description": "Specifies the version of the script handler."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
