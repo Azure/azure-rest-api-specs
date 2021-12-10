@@ -819,27 +819,27 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProviderInstanceProperties"
+          "$ref": "#/definitions/ProviderSpecificProperties"
         }
       ],
       "properties": {
-        "hanaHostname": {
+        "hostname": {
           "description": "Gets or sets the target virtual machine size.",
           "type": "string"
         },
-        "hanaDatabaseName": {
+        "dbName": {
           "description": "Gets or sets the hana database name.",
           "type": "string"
         },
-        "hanaDatabaseSqlPort": {
+        "sqlPort": {
           "description": "Gets or sets the database sql port.",
           "type": "string"
         },
-        "hanaDatabaseUsername": {
+        "dbUsername": {
           "description": "Gets or sets the database user name.",
           "type": "string"
         },
-        "hanaDatabasePassword": {
+        "dbPassword": {
           "description": "Gets or sets the database password.",
           "type": "string",
           "x-ms-secret": true
@@ -847,7 +847,8 @@
       },
       "x-ms-discriminator-value": "SapHana"
     },
-    "ProviderInstanceProperties": {
+    "ProviderSpecificProperties": {
+      "description": "Gets or sets the provider specific properties.",
       "type": "object",
       "required": [
         "providerType"
@@ -860,7 +861,13 @@
             "create",
             "read"
           ]
-        },
+        }
+      },
+      "discriminator": "providerType"
+    },
+    "ProviderInstanceProperties": {
+      "type": "object",
+      "properties": {
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -892,10 +899,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The version of the payload."
+        },
+        "providerSettings": {
+          "description": "Defines the provider instance errors.",
+          "$ref": "#/definitions/ProviderSpecificProperties"
         }
       },
-      "description": "Describes the properties of a provider instance.",
-      "discriminator": "providerType"
+      "description": "Describes the properties of a provider instance."
     }
   },
   "parameters": {
