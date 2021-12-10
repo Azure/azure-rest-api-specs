@@ -2555,12 +2555,27 @@
             "maxLength": 90
           },
           {
+            "name": "forceDeletionTypes",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The resource types you want to force delete. Currently, only the following is supported: forceDeletionTypes=Microsoft.Compute/virtualMachines,Microsoft.Compute/virtualMachineScaleSets"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
+        "x-ms-examples": {
+          "Force delete all the Virtual Machines in a resource group": {
+            "$ref": "./examples/ForceDeleteVMsInResourceGroup.json"
+          },
+          "Force delete all the Virtual Machines and Virtual Machine Scale Sets in a resource group": {
+            "$ref": "./examples/ForceDeleteVMsAndVMSSInResourceGroup.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -2906,7 +2921,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resource groups."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4961,6 +4976,12 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
@@ -6359,6 +6380,21 @@
         }
       },
       "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {

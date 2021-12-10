@@ -57,6 +57,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStack/registrations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all registrations under current subscription.": {
+            "$ref": "examples/Registration/ListBySubscription.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Returns a list of all registrations under current subscription.",
+        "operationId": "Registrations_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistrationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}": {
       "get": {
         "x-ms-examples": {

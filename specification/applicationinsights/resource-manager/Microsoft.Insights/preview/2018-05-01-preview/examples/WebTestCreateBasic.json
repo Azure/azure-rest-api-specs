@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "my-resource-group",
+    "webTestName": "my-webtest-my-component",
+    "WebTestDefinition": {
+      "location": "South Central US",
+      "properties": {
+        "Name": "my-webtest-my-component",
+        "SyntheticMonitorId": "my-webtest-my-component",
+        "Description": "Ping web test alert for mytestwebapp",
+        "Enabled": true,
+        "Frequency": 900,
+        "Timeout": 120,
+        "Kind": "basic",
+        "RetryEnabled": true,
+        "ValidationRules": {
+          "ExpectedHttpStatusCode": 200,
+          "SSLCheck": true
+        },
+        "Request": {
+          "ParseDependentRequests": true,
+          "RequestUrl": "https://www.bing.com"
+        },
+        "Locations": [
+          {
+            "Id": "us-fl-mia-edge"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component",
+        "name": "my-webtest-my-component",
+        "type": "Microsoft.Insights/webtests",
+        "location": "southcentralus",
+        "tags": {
+          "hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component": "Resource",
+          "hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp": "Resource"
+        },
+        "properties": {
+          "Name": "my-webtest-my-component",
+          "SyntheticMonitorId": "my-webtest-my-component",
+          "Description": "Ping web test alert for mytestwebapp",
+          "Enabled": true,
+          "Frequency": 900,
+          "Timeout": 120,
+          "Kind": "basic",
+          "RetryEnabled": true,
+          "Locations": [
+            {
+              "Id": "us-fl-mia-edge"
+            }
+          ],
+          "ValidationRules": {
+            "ExpectedHttpStatusCode": 200,
+            "SSLCheck": true
+          },
+          "Request": {
+            "ParseDependentRequests": true,
+            "RequestUrl": "https://www.bing.com"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

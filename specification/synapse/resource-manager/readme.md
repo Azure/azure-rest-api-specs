@@ -28,10 +28,123 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2021-04-preview
+tag: package-composite-v2
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
+```
+
+### Tag: package-composite-v2
+
+These settings apply only when `--tag=package-composite-v2` is specified on the command line.
+
+```yaml $(tag) == 'package-composite-v2'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
+```
+
+### Tag: package-composite-v1
+
+These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+
+```yaml $(tag) == 'package-composite-v1'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Synapse/stable/2021-06-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/library.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+```
+
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/checkNameAvailability.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/firewallRule.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/keys.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/operations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/privateEndpointConnections.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/privateLinkResources.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/privatelinkhub.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sqlPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sqlServer.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/azureADOnlyAuthentication.json
+```
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Synapse/stable/2021-05-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-05-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-05-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-05-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-05-01/keys.json
+  - Microsoft.Synapse/stable/2021-05-01/library.json
+  - Microsoft.Synapse/stable/2021-05-01/operations.json
+  - Microsoft.Synapse/stable/2021-05-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-05-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-05-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-05-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-05-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-05-01/workspace.json
 ```
 
 ### Tag: package-2021-04-preview
@@ -58,8 +171,6 @@ input-file:
 ### Tag: package-kusto-pool-2021-04-preview
 
 These settings apply only when `--tag=package-kusto-pool-2021-04-preview` is specified on the command line.
-
-**ATTENTION**: Please DO NOT generate SDK based on this tag. Kusto pool API set is not ready to be widely used.
 
 ``` yaml $(tag) == 'package-kusto-pool-2021-04-preview'
 input-file:
@@ -154,18 +265,18 @@ directive:
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
-    where: 
+    where:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
         - $.definitions.DataWarehouseUserActivities
         - $.definitions.SqlPoolConnectionPolicy
         - $.definitions.TransparentDataEncryption
-    suppress: 
+    suppress:
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
   - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
     where :
-        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses'
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
@@ -190,18 +301,18 @@ directive:
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
   - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
-    where: 
+    where:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
         - $.definitions.DataWarehouseUserActivities
         - $.definitions.SqlPoolConnectionPolicy
         - $.definitions.TransparentDataEncryption
-    suppress: 
+    suppress:
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
   - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
     where :
-        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses'
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
@@ -244,10 +355,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
 ```
 
 ## Python
@@ -270,12 +382,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
 batch:
- - tag: package-2021-04-preview
+ - tag: $(tag)
  - tag: package-sqlGen3-2020-04-01-preview
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-

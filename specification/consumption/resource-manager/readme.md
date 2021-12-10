@@ -26,18 +26,36 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-2021-10
 ```
 
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.Consumption/stable/2021-10-01/consumption.json
+```
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Consumption/stable/2021-05-01/consumption.json
+```
 
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11'
+``` yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.Consumption/stable/2019-11-01/consumption.json
 ```
+
 ### Tag: package-2019-10
 
 These settings apply only when `--tag=package-2019-10` is specified on the command line.
@@ -221,7 +239,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
@@ -415,7 +433,18 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## Suppression
 
+``` yaml
+directive:
+  - suppress: R4009
+    from: consumption.json
+    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.  
+```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Python
 

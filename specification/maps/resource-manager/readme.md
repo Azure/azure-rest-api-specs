@@ -28,7 +28,25 @@ These are the global settings for the Maps API.
 title: AzureMapsManagementClient
 description: Azure Maps
 openapi-type: arm
-tag: package-2021-02
+tag: package-preview-2021-12
+```
+
+
+### Tag: package-preview-2021-12
+
+These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-12'
+input-file:
+  - Microsoft.Maps/preview/2021-12-01-preview/maps-management.json
+```
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.Maps/preview/2021-07-01-preview/maps-management.json
 ```
 
 ### Tag: package-2021-02
@@ -79,9 +97,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
@@ -192,9 +210,13 @@ directive:
       - Flattening does not work well with polymorphic models.
       - PrivateAtlas.properties is an arbitrary dictionary and cannot be flattened.
       - MapsAccount.properties is an arbitrary dictionary and cannot be flattened.
+  - suppress: R2026
+    from: maps-management.json
+    reason: Managed identity is standard property being applied to all azure resources.
   - suppress: R3006
     where:
       - $.definitions.MapsAccount.properties
+      - $.definitions.Creator.properties
     reason:
       - Currently systemData is not allowed.
   - suppress: R3010
@@ -250,7 +272,7 @@ directive:
       - $.definitions.MapsAccountProperties.properties.disableLocalAuth
       - $.definitions.OperationDetail.properties.isDataAction
       - $.definitions.MetricSpecification.properties.fillGapWithZero
+      - $.definitions.Dimension.properties.toBeExportedToShoebox
     from: maps-management.json
     reason: standard property being applied to all azure resources.
 ```
-

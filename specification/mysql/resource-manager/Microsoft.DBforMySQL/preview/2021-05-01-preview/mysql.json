@@ -1,0 +1,2599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
+    "version": "2021-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}": {
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Create",
+        "x-ms-examples": {
+          "Create a new server": {
+            "$ref": "./examples/ServerCreate.json"
+          },
+          "Create a server as a point in time restore": {
+            "$ref": "./examples/ServerCreateWithPointInTimeRestore.json"
+          },
+          "Create a replica server": {
+            "$ref": "./examples/ServerCreateReplica.json"
+          }
+        },
+        "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Update",
+        "x-ms-examples": {
+          "Update a server": {
+            "$ref": "./examples/ServerUpdate.json"
+          },
+          "Update server customer maintenance window": {
+            "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
+          }
+        },
+        "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerForUpdate"
+            },
+            "description": "The required parameters for updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Delete",
+        "x-ms-examples": {
+          "Delete a server": {
+            "$ref": "./examples/ServerDelete.json"
+          }
+        },
+        "description": "Deletes a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Get",
+        "x-ms-examples": {
+          "Get a server": {
+            "$ref": "./examples/ServerGet.json"
+          },
+          "Get a server with vnet": {
+            "$ref": "./examples/ServerGetWithVnet.json"
+          }
+        },
+        "description": "Gets information about a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListByResourceGroup",
+        "x-ms-examples": {
+          "List servers in a resource group": {
+            "$ref": "./examples/ServersListByResourceGroup.json"
+          }
+        },
+        "description": "List all the servers in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/flexibleServers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_List",
+        "x-ms-examples": {
+          "List servers in a subscription": {
+            "$ref": "./examples/ServersList.json"
+          }
+        },
+        "description": "List all the servers in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/failover": {
+      "post": {
+        "tags": [
+          "ServerFailover"
+        ],
+        "operationId": "Servers_Failover",
+        "x-ms-examples": {
+          "Restart a server": {
+            "$ref": "./examples/ServerFailover.json"
+          }
+        },
+        "description": "Manual failover a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "ServerRestart"
+        ],
+        "operationId": "Servers_Restart",
+        "x-ms-examples": {
+          "Restart a server": {
+            "$ref": "./examples/ServerRestart.json"
+          }
+        },
+        "description": "Restarts a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerRestartParameter"
+            },
+            "description": "The required parameters for restarting a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/start": {
+      "post": {
+        "tags": [
+          "ServerStart"
+        ],
+        "operationId": "Servers_Start",
+        "x-ms-examples": {
+          "Start a server": {
+            "$ref": "./examples/ServerStart.json"
+          }
+        },
+        "description": "Starts a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/stop": {
+      "post": {
+        "tags": [
+          "ServerStop"
+        ],
+        "operationId": "Servers_Stop",
+        "x-ms-examples": {
+          "Stop a server": {
+            "$ref": "./examples/ServerStop.json"
+          }
+        },
+        "description": "Stops a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/replicas": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Replicas_ListByServer",
+        "x-ms-examples": {
+          "List replicas for a server": {
+            "$ref": "./examples/ReplicasListByServer.json"
+          }
+        },
+        "description": "List all the replicas for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/backups/{backupName}": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Get",
+        "x-ms-examples": {
+          "Get a backup for a server": {
+            "$ref": "./examples/BackupGet.json"
+          }
+        },
+        "description": "List all the backups for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBackup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/backups": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_ListByServer",
+        "x-ms-examples": {
+          "List backups for a server": {
+            "$ref": "./examples/BackupsListByServer.json"
+          }
+        },
+        "description": "List all the backups for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBackupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create a firewall rule": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          }
+        },
+        "description": "Creates a new firewall rule or updates an existing firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "The required parameters for creating or updating a firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "x-ms-examples": {
+          "Delete a firewall rule": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
+        },
+        "description": "Deletes a firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "x-ms-examples": {
+          "Get a firewall rule": {
+            "$ref": "./examples/FirewallRuleGet.json"
+          }
+        },
+        "description": "Gets information about a server firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/firewallRules": {
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_ListByServer",
+        "x-ms-examples": {
+          "List all firewall rules in a server": {
+            "$ref": "./examples/FirewallRulesListByServer.json"
+          }
+        },
+        "description": "List all the firewall rules in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/databases/{databaseName}": {
+      "put": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create a database": {
+            "$ref": "./examples/DatabaseCreate.json"
+          }
+        },
+        "description": "Creates a new database or updates an existing database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The required parameters for creating or updating a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Delete",
+        "x-ms-examples": {
+          "Delete a database": {
+            "$ref": "./examples/DatabaseDelete.json"
+          }
+        },
+        "description": "Deletes a database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Get",
+        "x-ms-examples": {
+          "Get a database": {
+            "$ref": "./examples/DatabaseGet.json"
+          }
+        },
+        "description": "Gets information about a database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ListByServer",
+        "x-ms-examples": {
+          "List databases in a server": {
+            "$ref": "./examples/DatabasesListByServer.json"
+          }
+        },
+        "description": "List all the databases in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations/{configurationName}": {
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Update",
+        "x-ms-examples": {
+          "Update a user configuration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Get",
+        "x-ms-examples": {
+          "Get a configuration": {
+            "$ref": "./examples/ConfigurationGet.json"
+          }
+        },
+        "description": "Gets information about a configuration of server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/updateConfigurations": {
+      "post": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_BatchUpdate",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsBatchUpdate.json"
+          }
+        },
+        "description": "Update a list of configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListForBatchUpdate"
+            },
+            "description": "The parameters for updating a list of server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByServer",
+        "x-ms-examples": {
+          "List all configurations for a server": {
+            "$ref": "./examples/ConfigurationsListByServer.json"
+          }
+        },
+        "description": "List all the configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/capabilities": {
+      "get": {
+        "tags": [
+          "LocationBasedCapabilities"
+        ],
+        "operationId": "LocationBasedCapabilities_List",
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/CapabilitiesByLocationList.json"
+          }
+        },
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+      "post": {
+        "tags": [
+          "CheckVirtualNetworkSubnetUsage"
+        ],
+        "operationId": "CheckVirtualNetworkSubnetUsage_Execute",
+        "x-ms-examples": {
+          "CheckVirtualNetworkSubnetUsage": {
+            "$ref": "./examples/CheckVirtualNetworkSubnetUsage.json"
+          }
+        },
+        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageParameter"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "operationId": "CheckNameAvailability_Execute",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "description": "Check the availability of name for server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if server name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBforMySQL/getPrivateDnsZoneSuffix": {
+      "post": {
+        "tags": [
+          "GetPrivateDnsZoneSuffix"
+        ],
+        "operationId": "GetPrivateDnsZoneSuffix_Execute",
+        "x-ms-examples": {
+          "GetPrivateDnsZoneSuffix": {
+            "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
+          }
+        },
+        "description": "Get private DNS zone suffix in the cloud.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetPrivateDnsZoneSuffixResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBforMySQL/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "description": "Lists all of the available REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerVersion": {
+      "type": "string",
+      "description": "The version of a server.",
+      "enum": [
+        "5.7",
+        "8.0.21"
+      ],
+      "x-ms-enum": {
+        "name": "ServerVersion",
+        "modelAsString": true
+      }
+    },
+    "EnableStatusEnum": {
+      "type": "string",
+      "description": "Enum to indicate whether value is 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnableStatusEnum",
+        "modelAsString": true
+      }
+    },
+    "ReplicationRole": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Source",
+        "Replica"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationRole",
+        "modelAsString": true
+      },
+      "description": "The replication role."
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "indicates whether custom window is enabled or disabled"
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start hour for maintenance window"
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start minute for maintenance window"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "day of week for maintenance window"
+        }
+      }
+    },
+    "Backup": {
+      "type": "object",
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server."
+        },
+        "geoRedundantBackup": {
+          "$ref": "#/definitions/EnableStatusEnum",
+          "description": "Whether or not geo redundant backup is enabled."
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Earliest restore point creation time (ISO8601 format)"
+        }
+      },
+      "description": "Storage Profile properties of a server"
+    },
+    "Storage": {
+      "type": "object",
+      "properties": {
+        "storageSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage size allowed for a server."
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage IOPS for a server."
+        },
+        "autoGrow": {
+          "description": "Enable Storage Auto Grow or not.",
+          "$ref": "#/definitions/EnableStatusEnum"
+        },
+        "storageSku": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The sku name of the server storage."
+        }
+      },
+      "description": "Storage Profile properties of a server"
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the sku, e.g. Standard_D32s_v3."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the particular SKU, e.g. GeneralPurpose.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ],
+      "description": "Billing information related properties of a server."
+    },
+    "Network": {
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/EnableStatusEnum",
+          "readOnly": true,
+          "description": "Whether or not public network access is allowed for this server. Value is 'Disabled' when server has VNet integration."
+        },
+        "delegatedSubnetResourceId": {
+          "type": "string",
+          "description": "Delegated subnet resource id used to setup vnet for a server."
+        },
+        "privateDnsZoneResourceId": {
+          "type": "string",
+          "description": "Private DNS zone resource id."
+        }
+      },
+      "description": "Network related properties of a server"
+    },
+    "HighAvailability": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "ZoneRedundant",
+            "SameZone"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityMode",
+            "modelAsString": true
+          },
+          "description": "High availability mode for a server."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of server high availability.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "Healthy",
+            "FailingOver",
+            "RemovingStandby"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityState",
+            "modelAsString": true
+          }
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "description": "Availability zone of the standby server."
+        }
+      },
+      "description": "Network related properties of a server"
+    },
+    "ServerProperties": {
+      "type": "object",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "description": "The password of the administrator login (required for server creation).",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "Server version."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a new MySQL server.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore",
+            "Replica",
+            "GeoRestore"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "The source MySQL server id.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "The replication role."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "readOnly": true,
+          "description": "The maximum number of replicas that a primary server can have."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of a server.",
+          "enum": [
+            "Ready",
+            "Dropping",
+            "Disabled",
+            "Starting",
+            "Stopping",
+            "Stopped",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ServerState",
+            "modelAsString": true
+          }
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "Storage related properties of a server."
+        },
+        "backup": {
+          "$ref": "#/definitions/Backup",
+          "description": "Backup related properties of a server."
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/HighAvailability",
+          "description": "High availability related properties of a server."
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "description": "Network related properties of a server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        }
+      },
+      "description": "The properties of a server."
+    },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
+          "description": "The Azure Active Directory identity of the server."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Represents a server."
+    },
+    "ServerPropertiesForUpdate": {
+      "type": "object",
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "description": "The password of the administrator login."
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "Storage related properties of a server."
+        },
+        "backup": {
+          "$ref": "#/definitions/Backup",
+          "description": "Backup related properties of a server."
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/HighAvailability",
+          "description": "High availability related properties of a server."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "The replication role of the server."
+        }
+      },
+      "description": "The properties that can be updated for a server."
+    },
+    "ServerForUpdate": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerPropertiesForUpdate",
+          "x-ms-client-flatten": true,
+          "description": "The properties that can be updated for a server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "Parameters allowed to update for a server."
+    },
+    "ServerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          },
+          "description": "The list of servers"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of servers."
+    },
+    "ServerRestartParameter": {
+      "type": "object",
+      "properties": {
+        "restartWithFailover": {
+          "$ref": "#/definitions/EnableStatusEnum",
+          "description": "Whether or not failover to standby server when restarting a server with high availability enabled."
+        },
+        "maxFailoverSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed failover time in seconds."
+        }
+      },
+      "description": "Server restart parameters."
+    },
+    "ServerBackupProperties": {
+      "type": "object",
+      "properties": {
+        "backupType": {
+          "type": "string",
+          "description": "Backup type."
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Backup completed time (ISO8601 format)."
+        },
+        "source": {
+          "type": "string",
+          "description": "Backup source"
+        }
+      },
+      "description": "The properties of a server backup."
+    },
+    "ServerBackup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerBackupProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a server backup."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Server backup properties"
+    },
+    "ServerBackupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerBackup"
+          },
+          "description": "The list of backups of a server."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of server backups."
+    },
+    "FirewallRuleProperties": {
+      "type": "object",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+          "description": "The start IP address of the server firewall rule. Must be IPv4 format."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+          "description": "The end IP address of the server firewall rule. Must be IPv4 format."
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
+      "description": "The properties of a server firewall rule."
+    },
+    "FirewallRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a firewall rule."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Represents a server firewall rule."
+    },
+    "FirewallRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of firewall rules in a server."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of firewall rules."
+    },
+    "DatabaseProperties": {
+      "type": "object",
+      "properties": {
+        "charset": {
+          "type": "string",
+          "description": "The charset of the database."
+        },
+        "collation": {
+          "type": "string",
+          "description": "The collation of the database."
+        }
+      },
+      "description": "The properties of a database."
+    },
+    "Database": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a database."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Database."
+    },
+    "DatabaseListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          },
+          "description": "The list of databases housed in a server"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A List of databases."
+    },
+    "ConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Description of the configuration."
+        },
+        "defaultValue": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Default value of the configuration."
+        },
+        "dataType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Data type of the configuration."
+        },
+        "allowedValues": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Allowed values of the configuration."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration.",
+          "enum": [
+            "system-default",
+            "user-override"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationSource",
+            "modelAsString": true
+          }
+        },
+        "isReadOnly": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration read only.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsReadOnly",
+            "modelAsString": true
+          }
+        },
+        "isConfigPendingRestart": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration pending restart or not.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsConfigPendingRestart",
+            "modelAsString": true
+          }
+        },
+        "isDynamicConfig": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration dynamic.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsDynamicConfig",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of a configuration."
+    },
+    "Configuration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a configuration."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Configuration."
+    },
+    "ConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "description": "The list of server configurations."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of server configurations."
+    },
+    "ConfigurationForBatchUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the configuration."
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Value of the configuration."
+            },
+            "source": {
+              "type": "string",
+              "description": "Source of the configuration."
+            }
+          },
+          "x-ms-client-flatten": true,
+          "description": "The properties can be updated for a configuration."
+        }
+      },
+      "description": "Represents a Configuration."
+    },
+    "ConfigurationListForBatchUpdate": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationForBatchUpdate"
+          },
+          "description": "The list of server configurations."
+        }
+      },
+      "description": "A list of server configurations to update."
+    },
+    "VirtualNetworkSubnetUsageParameter": {
+      "type": "object",
+      "properties": {
+        "virtualNetworkResourceId": {
+          "type": "string",
+          "description": "Virtual network resource id."
+        }
+      },
+      "description": "Virtual network subnet usage parameter"
+    },
+    "DelegatedSubnetUsage": {
+      "type": "object",
+      "properties": {
+        "subnetName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the subnet"
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Number of used delegated subnets"
+        }
+      },
+      "description": "Delegated subnet usage data."
+    },
+    "VirtualNetworkSubnetUsageResult": {
+      "type": "object",
+      "properties": {
+        "delegatedSubnetsUsage": {
+          "description": "A list of delegated subnet usage",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnetUsage"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Virtual network subnet usage data."
+    },
+    "SkuCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "vCore name",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported vCores",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "supportedMemoryPerVCoreMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported memory per vCore in MB",
+          "readOnly": true
+        }
+      },
+      "description": "Sku capability"
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "server version",
+          "readOnly": true
+        },
+        "supportedSkus": {
+          "description": "A list of supported Skus",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "StorageEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage edition name",
+          "readOnly": true
+        },
+        "minStorageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimal supported storage size.",
+          "readOnly": true
+        },
+        "maxStorageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum supported storage size.",
+          "readOnly": true
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimal backup retention days",
+          "readOnly": true
+        },
+        "maxBackupRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum backup retention days",
+          "readOnly": true
+        }
+      },
+      "description": "storage edition capability"
+    },
+    "ServerEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "description": "A list of supported storage editions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "description": "A list of supported server versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Server edition capabilities."
+    },
+    "CapabilityProperties": {
+      "type": "object",
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "zone name",
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
+          "readOnly": true
+        },
+        "supportedGeoBackupRegions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "supported geo backup regions",
+          "readOnly": true
+        },
+        "supportedFlexibleServerEditions": {
+          "description": "A list of supported flexible server editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEditionCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Location capabilities."
+    },
+    "CapabilitiesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of supported capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityProperties"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "location capability"
+    },
+    "GetPrivateDnsZoneSuffixResponse": {
+      "type": "object",
+      "properties": {
+        "privateDnsZoneSuffix": {
+          "type": "string",
+          "description": "Represents the private DNS zone suffix."
+        }
+      },
+      "description": "The response of get private dns zone suffix."
+    },
+    "NameAvailabilityRequest": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type used for verification."
+        }
+      },
+      "description": "Request from client to check resource name availability."
+    },
+    "NameAvailability": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error Message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for name being unavailable."
+        }
+      },
+      "description": "Represents a resource name availability."
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      },
+      "description": "Display metadata associated with the operation."
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation or action."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-ms-client-flatten": false,
+          "description": "Additional descriptions for the operation."
+        }
+      },
+      "description": "REST API operation definition."
+    },
+    "OperationListResult": {
+      "description": "A list of resource provider operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The resource management error response."
+        }
+      },
+      "description": "An error response from the Batch service."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server firewall rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the database.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
+      "x-ms-parameter-location": "method"
+    },
+    "BackupNameParameter": {
+      "name": "backupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the backup.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

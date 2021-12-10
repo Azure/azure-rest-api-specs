@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "applicationName": "app",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
+        "name": "app",
+        "type": "Microsoft.HDInsight/clusters/applications",
+        "etag": "CF938302-6B4D-44A0-A6D2-C0D67E847AEC",
+        "tags": {
+          "key1": "val1"
+        },
+        "properties": {
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "edgenode",
+                "targetInstanceCount": 1,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D12_v2"
+                }
+              }
+            ]
+          },
+          "installScriptActions": [
+            {
+              "name": "app-install",
+              "uri": "http://app.com/public/hdi-app/20170301/app-install.sh",
+              "roles": [
+                "edgenode"
+              ]
+            }
+          ],
+          "uninstallScriptActions": [],
+          "httpsEndpoints": [
+            {
+              "accessModes": [
+                "WebPage"
+              ],
+              "location": "https://cluster1.apps.azurehdinsight.net:443",
+              "destinationPort": 20000,
+              "publicPort": 443
+            }
+          ],
+          "sshEndpoints": [
+            {
+              "location": "cluster1-ssh.azurehdinsight.net:22",
+              "destinationPort": 22,
+              "publicPort": 22
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "applicationState": "Running",
+          "createdDate": "2017-03-22T21:34:39.293",
+          "applicationType": "CustomApplication",
+          "marketplaceIdentifier": "appMarketId"
+        }
+      }
+    }
+  }
+}

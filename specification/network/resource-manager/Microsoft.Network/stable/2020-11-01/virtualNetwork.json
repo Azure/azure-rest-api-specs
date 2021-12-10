@@ -1382,6 +1382,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1519,6 +1523,13 @@
             "name": "VirtualNetworkPrivateLinkServiceNetworkPolicies",
             "modelAsString": true
           }
+        },
+        "applicationGatewayIpConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayIPConfiguration"
+          },
+          "description": "Application gateway IP configurations of virtual network resource."
         }
       },
       "description": "Properties of the subnet."
@@ -1592,6 +1603,15 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource."
+        },
+        "doNotVerifyRemoteGateways": {
+          "type": "boolean",
+          "description": "If we need to verify the provisioning state of the remote gateway."
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resourceGuid property of the Virtual Network peering resource."
         }
       },
       "description": "Properties of the virtual network peering."
@@ -1611,6 +1631,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1635,6 +1659,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1867,6 +1895,10 @@
             "type": "string"
           },
           "description": "Contains other available private IP addresses if the asked for address is taken."
+        },
+        "isPlatformReserved": {
+          "type": "boolean",
+          "description": "Private IP address platform reserved."
         }
       },
       "description": "Response for CheckIPAddressAvailability API service call."
