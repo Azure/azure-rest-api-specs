@@ -242,6 +242,69 @@
         }
       }
     },
+    "/tilesets/recipes": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default tileset recipe based on the dataset provided.",
+        "operationId": "Tileset_GetRecipe",
+        "x-ms-examples": {
+          "Gets the tileset recipe for a given dataset ontology": {
+            "$ref": "./examples/tileset/Tileset_GetRecipe.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get tileset recipe request completed successfully. The response body contains a default tileset recipe generated for the given dataset ontology.",
+            "schema": {
+              "$ref": "#/definitions/TilesetRecipe"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/tilesets/recipes/validate": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a tileset recipe.",
+        "operationId": "Tileset_ValidateRecipe",
+        "x-ms-examples": {
+          "Validates the correctness of a tileset recipe": {
+            "$ref": "./examples/tileset/Tileset_ValidateRecipe.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate tileset recipe request completed successfully. The response body contains the validation results.",
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
     "/tilesets/operations/{operationId}": {
       "get": {
         "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
