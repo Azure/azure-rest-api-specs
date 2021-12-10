@@ -71,7 +71,15 @@
       "name": "styleSetId",
       "description": "The StyleSet Id.",
       "type": "string",
-      "in": "query",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StyleName": {
+      "name": "styleName",
+      "description": "The StyleSet style name.",
+      "type": "string",
+      "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -109,6 +117,19 @@
         "enum": [
           "JSON",
           "ZIP"
+        ]
+      }
+    },
+    "StyleFormat": {
+      "name": "styleFormat",
+      "in": "query",
+      "description": "Defines the type of JSON object that is exported",
+      "required": false,
+      "schema": {
+        "type": "string",
+        "default": "mapbox",
+        "enum": [
+          "mapbox"
         ]
       }
     }
@@ -158,7 +179,7 @@
         "operationId": "StyleSet_List",
         "x-ms-examples": {
           "Get a list of all styleSets": {
-            "$ref": "./examples/style/StyleSet_List.json"
+            "$ref": "./examples/styleset/StyleSet_List.json"
           }
         },
         "parameters": [
@@ -186,7 +207,7 @@
         }
       }
     },
-    "/styles/stylesets/{styleId}": {
+    "/styles/stylesets/{styleSetId}": {
       "get": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a styleSet.",
         "operationId": "StyleSet_Get",
@@ -210,7 +231,7 @@
           "200": {
             "description": "Get styleSet request completed successfully. The response body contains a single styleSet.",
             "schema": {
-              "$ref": "#/definitions/Style"
+              "$ref": "#/definitions/StyleSet"
             }
           },
           "default": {
@@ -240,6 +261,42 @@
         "responses": {
           "204": {
             "description": "StyleSet delete request completed successfully."
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/styles/stylesets/{styleSetId}/{styleName}": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a composed style defined in the styleSet.",
+        "operationId": "StyleSet_GetStyle",
+        "x-ms-examples": {
+          "Gets the details for a single styleSet": {
+            "$ref": "./examples/styleset/StyleSet_GetStyle.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StyleSetId"
+          },
+          {
+            "$ref": "#/parameters/StyleName"
+          },
+          {
+            "$ref": "#/parameters/StyleFormat"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get composed styleSet style request completed successfully. The response body contains a single style."
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
