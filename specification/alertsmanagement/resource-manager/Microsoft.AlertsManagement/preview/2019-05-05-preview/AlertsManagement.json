@@ -49,7 +49,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -83,7 +83,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -213,7 +213,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -252,7 +252,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -288,7 +288,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -357,7 +357,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/errorResponse"
             }
           }
         },
@@ -728,40 +728,6 @@
       "required": [
         "value"
       ]
-    },
-    "errorResponse": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/errorResponseBody"
-        }
-      }
-    },
-    "errorResponseBody": {
-      "type": "object",
-      "description": "Details of error response.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code, intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "Description of the error, intended for display in user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "Target of the particular error, for example name of the property."
-        },
-        "details": {
-          "type": "array",
-          "description": "A list of additional details about the error.",
-          "items": {
-            "$ref": "#/definitions/errorResponseBody"
-          }
-        }
-      }
     },
     "Resource": {
       "x-ms-azure-resource": true,

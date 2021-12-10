@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "errorResponse": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/errorResponseBody"
+        }
+      }
+    },
+    "errorResponseBody": {
+      "type": "object",
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/errorResponseBody"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "EnterprisePolicyNameParameter": {
+      "name": "enterprisePolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "EnterprisePolicy for the Microsoft Azure subscription.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
