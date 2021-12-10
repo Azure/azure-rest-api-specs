@@ -441,33 +441,12 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        }
-      }
-    },
     "smartGroupModification": {
       "type": "object",
       "description": "Alert Modification details",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -563,7 +542,7 @@
       "description": "Set of related alerts grouped together smartly by AMS.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
         }
       ],
       "properties": {
