@@ -8,7 +8,6 @@ go:
   namespace: vi
   clear-output-folder: true
 ```
-
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
