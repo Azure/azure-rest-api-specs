@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-01-01-preview",
+    "styleSetId": "[styleSetId]",
+    "styleName": "composedStyle"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "version": 8,
+        "name": "My cool map styling",
+        "sources": {
+          "microsoft.base": {
+            "url": "https://us.atlas.microsoft.com/map/tileset?api-version=2.1&tilesetId=microsoft.base",
+            "type": "vector"
+          },
+          "64d79640-1db8-42e9-8e4a-714be32543c6": {
+            "url": "https://us.atlas.microsoft.com/tileset/64d79640-1db8-42e9-8e4a-714be32543c6",
+            "type": "vector"
+          }
+        },
+        "sprite": "https://us.atlas.microsoft.com/styling/sprite/019db5fd-1792-4a84-9e39-7a82ceaea311",
+        "glyphs": "https://us.atlas.microsoft.com/styling/glyphs/{fontstack}/{range}.pbf",
+        "layers": [
+          {
+            "id": "microsoft.maps.base.base.background:grayscale_light:microsoft.base",
+            "source": "microsoft.base",
+            "type": "background",
+            "layout": {},
+            "paint": {
+              "background-color": "hsl(55, 11%, 96%)"
+            }
+          },
+          {
+            "id": "indoorLayer:9c451b0a-6527-49a7-9154-1b3d9486487f:64d79640-1db8-42e9-8e4a-714be32543c6",
+            "source": "microsoft.base",
+            "type": "background",
+            "layout": {},
+            "paint": {
+              "background-color": "hsl(55, 11%, 96%)"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
