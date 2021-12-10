@@ -156,7 +156,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkManager"
+              "$ref": "#/definitions/PatchObject"
             },
             "description": "Parameters supplied to specify which network manager is."
           }
@@ -597,6 +597,18 @@
         "targetLocations"
       ],
       "description": "Network Manager Commit."
+    },
+    "PatchObject": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object for patch operations."
     },
     "NetworkManagerDeploymentStatusParameter": {
       "properties": {
