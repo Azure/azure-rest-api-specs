@@ -18,7 +18,7 @@ go:
   clear-output-folder: true
 ```
 
-``` yaml $(go) && $(package-resources) && $(track2)
+``` yaml $(go) && $(track2) && $(package-resources)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armresources
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -26,7 +26,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-deploymentscripts) && $(track2)
+``` yaml $(go) && $(track2) && $(package-deploymentscripts)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armdeploymentscripts
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -34,7 +34,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-features) && $(track2)
+``` yaml $(go) && $(track2) && $(package-features)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armfeatures
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -42,7 +42,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-links) && $(track2)
+``` yaml $(go) && $(track2) && $(package-links)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armlinks
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -50,7 +50,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-locks) && $(track2)
+``` yaml $(go) && $(track2) && $(package-locks)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armlocks
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -58,7 +58,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-managedapplications) && $(track2)
+``` yaml $(go) && $(track2) && $(package-managedapplications)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armmanagedapplications
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -66,7 +66,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-policy) && $(track2)
+``` yaml $(go) && $(track2) && $(package-policy)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armpolicy
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -74,7 +74,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-subscriptions) && $(track2)
+``` yaml $(go) && $(track2) && $(package-subscriptions)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armsubscriptions
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
@@ -82,7 +82,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
-``` yaml $(go) && $(package-templatespecs) && $(track2)
+``` yaml $(go) && $(track2) && $(package-templatespecs)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armtemplatespecs
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
