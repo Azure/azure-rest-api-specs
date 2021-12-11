@@ -5199,9 +5199,69 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureIaaSVMJobExtendedInfo",
           "description": "Additional information for this job."
+        },
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
+        "isUserTriggered": {
+          "description": "Indicated that whether the job is adhoc(true) or scheduled(false)",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureIaaSVMJob"
+    },
+    "AzureIaaSVMJobV2": {
+      "description": "Azure IaaS VM workload-specific job object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "properties": {
+        "actionsInfo": {
+          "description": "Gets or sets the state/actions applicable on this job like cancel/retry.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "Cancellable",
+              "Retriable"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobSupportedAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "containerName": {
+          "description": "Container name of the entity on which the current job is executing.",
+          "type": "string"
+        },
+        "duration": {
+          "format": "duration",
+          "description": "Time elapsed during the execution of this job.",
+          "type": "string"
+        },
+        "errorDetails": {
+          "description": "Error details on execution of this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMErrorInfo"
+          }
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the backup item is a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMJobExtendedInfo",
+          "description": "Additional information for this job."
+        }
+      },
+      "x-ms-discriminator-value": "AzureIaaSVMJobV2"
     },
     "AzureIaaSVMJobExtendedInfo": {
       "description": "Azure IaaS VM workload-specific additional information for job.",
@@ -5567,6 +5627,10 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureStorageJobExtendedInfo",
           "description": "Additional information about the job."
+        },
+        "isUserTriggered": {
+          "description": "Indicated that whether the job is adhoc(true) or scheduled(false)",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureStorageJob"
@@ -5725,6 +5789,10 @@
           "type": "integer"
         },
         "policyState": {
+          "description": "Indicates consistency of policy object and policy applied to this backup item.",
+          "type": "string"
+        },
+        "recoveryModel": {
           "description": "Indicates consistency of policy object and policy applied to this backup item.",
           "type": "string"
         }
@@ -5945,7 +6013,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformation"
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
           }
         },
         "recoveryPointMoveReadinessInfo": {
@@ -6539,6 +6607,32 @@
         "crossRegionRestoreFlag": {
           "description": "Opt in details of Cross Region Restore feature.",
           "type": "boolean"
+        },
+        "dedupState": {
+          "description": "Vault Dedup state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dedupState",
+            "modelAsString": true
+          }
+        },
+        "xcoolState": {
+          "description": "Vault x-cool state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "xcoolState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6791,6 +6885,10 @@
         "diskExclusionProperties": {
           "$ref": "#/definitions/DiskExclusionProperties",
           "description": "Extended Properties for Disk Exclusion."
+        },
+        "linuxVmApplicationName": {
+          "description": "Linux VM name",
+          "type": "string"
         }
       }
     },
@@ -6821,20 +6919,6 @@
       },
       "x-ms-discriminator-value": "GenericProtectionPolicy"
     },
-    "IdentityBasedRestoreDetails": {
-      "description": "IaaS VM workload specific restore details for restores using managed identity",
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "Gets the class type.",
-          "type": "string"
-        },
-        "targetStorageAccountId": {
-          "description": "Fully qualified ARM ID of the target storage account.",
-          "type": "string"
-        }
-      }
-    },
     "HourlySchedule": {
       "type": "object",
       "properties": {
@@ -6852,6 +6936,20 @@
           "format": "int32",
           "description": "To specify duration of the backup window",
           "type": "integer"
+        }
+      }
+    },
+    "IdentityBasedRestoreDetails": {
+      "description": "IaaS VM workload specific restore details for restores using managed identity",
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Gets the class type.",
+          "type": "string"
+        },
+        "targetStorageAccountId": {
+          "description": "Fully qualified ARM ID of the target storage account.",
+          "type": "string"
         }
       }
     },
@@ -7013,7 +7111,7 @@
           "description": "Recovery point tier information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformation"
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
           }
         },
         "isManagedVirtualMachine": {
@@ -8123,6 +8221,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "isArchiveEnabled": {
+          "description": "Flag to identify whether datasource is protected in archive",
+          "type": "boolean"
+        },
+        "policyName": {
+          "description": "Name of the policy used for protection",
+          "type": "string"
         }
       },
       "discriminator": "protectedItemType"
@@ -8473,6 +8579,46 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "RecoveryPointTierInformationV2": {
+      "description": "RecoveryPoint Tier Information V2",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPointTierInformation"
+        }
+      ],
+      "properties": {
+        "type": {
+          "description": "Recovery point tier type.",
+          "enum": [
+            "Invalid",
+            "InstantRP",
+            "HardenedRP",
+            "ArchivedRP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Recovery point tier status.",
+          "enum": [
+            "Invalid",
+            "Valid",
+            "Disabled",
+            "Deleted",
+            "Rehydrated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierStatus",
+            "modelAsString": true
           }
         }
       }
@@ -9091,6 +9237,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "isSoftDeleteFeatureStateEditable": {
+          "description": "Is soft delete feature state editable",
+          "type": "boolean"
         }
       }
     },
@@ -9741,16 +9891,6 @@
       },
       "x-ms-discriminator-value": "AzureResourceItem"
     },
-    "AzureWorkloadContainerAutoProtectionIntent": {
-      "description": "Azure workload specific protection intent item.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionIntent"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureWorkloadContainerAutoProtectionIntent"
-    },
     "AzureVMResourceFeatureSupportRequest": {
       "description": "AzureResource(IaaS VM) Specific feature support request",
       "type": "object",
@@ -9791,6 +9931,16 @@
           }
         }
       }
+    },
+    "AzureWorkloadContainerAutoProtectionIntent": {
+      "description": "Azure workload specific protection intent item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionIntent"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadContainerAutoProtectionIntent"
     },
     "AzureWorkloadAutoProtectionIntent": {
       "description": "Azure Recovery Services Vault specific protection intent item.",
@@ -11129,6 +11279,14 @@
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group name of Recovery Services Vault.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaaSVMProtectableItem"
@@ -11673,6 +11831,10 @@
             "name": "ContainerType",
             "modelAsString": true
           }
+        },
+        "protectableObjectType": {
+          "description": "Type of the protectable object associated with this container",
+          "type": "string"
         }
       },
       "discriminator": "containerType"
