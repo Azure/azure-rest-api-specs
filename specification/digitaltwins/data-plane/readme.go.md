@@ -11,7 +11,7 @@ go:
 
 ### Go multi-api
 
-``` yaml $(go) && $(multiapi)
+```yaml $(go) && $(multiapi)
 batch:
   - tag: package-2021-06-30-preview
   - tag: package-2020-10-31
