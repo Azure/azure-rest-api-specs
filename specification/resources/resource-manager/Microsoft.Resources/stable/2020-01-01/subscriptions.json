@@ -183,6 +183,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/checkZonePeers/": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_CheckZonePeers",
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Microsoft Azure subscription ID.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckZonePeersRequest"
+            },
+            "description": "Parameters for checking zone peers."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the logical availabilty zone mapping between subscriptions.",
+            "schema": {
+              "$ref": "#/definitions/CheckZonePeersResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLogicalZoneMapping": {
+            "$ref": "./examples/PostCheckZonePeers"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Resources/checkResourceName": {
       "post": {
         "tags": [
@@ -666,6 +717,71 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "CheckZonePeersRequest": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The Microsoft location."
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The peer Microsoft Azure subscription ID."
+        }
+      },
+      "description": "Check zone peers request parameters."
+    },
+    "CheckZonePeersResult": {
+      "description": "Result of the Check zone peers operation.",
+      "properties": {
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription ID."
+        },
+        "location": {
+          "type": "string",
+          "description": "the location of the subscription."
+        },
+        "availabilityZonePeers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZonePeers"
+          }
+        }
+      }
+    },
+    "AvailabilityZonePeers": {
+      "properties": {
+        "availabilityZone": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The availabilityZone."
+        },
+        "peers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Peers"
+          }
+        }
+      }
+    },
+    "Peers": {
+      "properties": {
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription ID."
+        },
+        "availabilityZone": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The availabilityZone."
         }
       }
     }
