@@ -209,7 +209,7 @@
         },
         "x-ms-examples": {
           "GetLogicalZoneMapping": {
-            "$ref": "./examples/PostCheckZonePeers"
+            "$ref": "./examples/PostCheckZonePeers.json"
           }
         }
       }
@@ -470,6 +470,15 @@
         }
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "ErrorResponse": {
       "description": "Error response.",
