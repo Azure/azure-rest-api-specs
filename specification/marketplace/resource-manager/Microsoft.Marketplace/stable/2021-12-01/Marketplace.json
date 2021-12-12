@@ -56,20 +56,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_Get",
         "description": "Get information about the private store",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -103,12 +103,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateStore"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -134,14 +128,6 @@
         ],
         "operationId": "PrivateStore_Delete",
         "description": "Deletes the private store. All that is not saved will be lost.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Private store was deleted successfully."
@@ -164,20 +150,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryOffers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_QueryOffers",
         "description": "List of offers, regardless the collections",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "List of offers",
@@ -200,20 +186,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/billingAccounts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_BillingAccounts",
         "description": "Tenant billing accounts names",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -236,6 +222,14 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collectionsToSubscriptionsMapping": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -249,12 +243,6 @@
             "schema": {
               "$ref": "#/definitions/CollectionsToSubscriptionsMappingPayload"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -279,20 +267,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollection_List",
         "description": "Gets private store collections list",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Collections list information retrieved",
@@ -315,23 +303,23 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/CollectionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollection_Get",
         "description": "Gets private store collection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Collection information retrieved",
@@ -365,15 +353,6 @@
             "schema": {
               "$ref": "#/definitions/Collection"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -402,17 +381,6 @@
         ],
         "operationId": "PrivateStoreCollection_Delete",
         "description": "Delete a collection from the given private store.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Collection was deleted successfully"
@@ -446,15 +414,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreOperation"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -476,6 +435,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/transferOffers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/CollectionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -489,15 +459,6 @@
             "schema": {
               "$ref": "#/definitions/TransferOffersProperties"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -522,6 +483,14 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryApprovedPlans": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -535,12 +504,6 @@
             "schema": {
               "$ref": "#/definitions/QueryApprovedPlansPayload"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -565,6 +528,14 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/bulkCollectionsAction": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -578,12 +549,6 @@
             "schema": {
               "$ref": "#/definitions/BulkCollectionsPayload"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -608,23 +573,23 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/CollectionIdParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollectionOffer_List",
         "description": "Get a list of all private offers in the given private store and collection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -650,26 +615,26 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/OfferIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/CollectionIdParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollectionOffer_Get",
         "description": "Gets information about a specific offer.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Offer information retrieved",
@@ -703,18 +668,6 @@
             "schema": {
               "$ref": "#/definitions/Offer"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
           }
         ],
         "responses": {
@@ -743,20 +696,6 @@
         ],
         "operationId": "PrivateStoreCollectionOffer_Delete",
         "description": "Deletes an offer from the given collection of private store.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Offer was deleted successfully"
@@ -790,18 +729,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreOperation"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
           }
         ],
         "responses": {
@@ -823,20 +750,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_GetApprovalRequestsList",
         "description": "Get all open approval requests of current user",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -859,23 +786,23 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{requestApprovalId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/RequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_GetRequestApproval",
         "description": "Get open request approval details",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/RequestApprovalIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -909,15 +836,6 @@
             "schema": {
               "$ref": "#/definitions/RequestApprovalResource"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/RequestApprovalIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -942,6 +860,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{requestApprovalId}/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/RequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -955,15 +884,6 @@
             "schema": {
               "$ref": "#/definitions/QueryRequestApprovalProperties"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/RequestApprovalIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -988,20 +908,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/adminRequestApprovals": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_AdminRequestApprovalsList",
         "description": "Get list of admin request approvals",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1024,6 +944,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/adminRequestApprovals/{adminRequestApprovalId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/AdminRequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
@@ -1033,15 +964,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/PublisherIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AdminRequestApprovalIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1077,15 +999,6 @@
             "schema": {
               "$ref": "#/definitions/AdminRequestApprovalsResource"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AdminRequestApprovalIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1110,20 +1023,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryNotificationsState": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_QueryNotificationsState",
         "description": "Get private store notifications state",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1146,6 +1059,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/acknowledgeNotification": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/OfferIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -1159,15 +1083,6 @@
             "schema": {
               "$ref": "#/definitions/AcknowledgeOfferNotificationProperties"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1189,6 +1104,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{requestApprovalId}/withdrawPlan": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/RequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -1202,15 +1128,6 @@
             "schema": {
               "$ref": "#/definitions/WithdrawProperties"
             }
-          },
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/RequestApprovalIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1232,20 +1149,20 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/fetchAllSubscriptionsInTenant": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/SkipTokenParameter"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_FetchAllSubscriptionsInTenant",
         "description": "Fetch all subscriptions in tenant, only for marketplace admin",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SkipTokenParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -1271,17 +1188,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/listNewPlansNotifications": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_ListNewPlansNotifications",
         "description": "List new plans notifications",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -1304,6 +1221,11 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/listStopSellOffersPlansNotifications": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
@@ -1317,9 +1239,6 @@
             "schema": {
               "$ref": "#/definitions/StopSellPayload"
             }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1344,17 +1263,17 @@
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/listSubscriptionsContext": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "tags": [
           "PrivateStores"
         ],
         "operationId": "PrivateStore_ListSubscriptionsContext",
         "description": "List all the subscriptions in the private store context",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -2173,6 +2092,7 @@
     },
     "SubscriptionsContextList": {
       "description": "Get private store subscriptions context",
+      "type": "object",
       "properties": {
         "subscriptionsContext": {
           "type": "array",
@@ -2644,6 +2564,7 @@
     },
     "StopSellOffersPlansNotificationsList": {
       "description": "List of stop sell offers and plans notifications.",
+      "type": "object",
       "properties": {
         "stopSellNotifications": {
           "type": "array",
@@ -2720,6 +2641,7 @@
     },
     "SubscriptionsResponse": {
       "description": "Subscription list operation response.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
