@@ -104,6 +104,12 @@ directive:
       - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable 
     reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
   - from: agfood.json
+    suppress: RequiredReadOnlySystemData
+    reason: We do not yet support system data
+  - from: agfood.json
+    suppress: R4009 #RequiredReadOnlySystemData
+    reason: Currently systemData is not allowed
+  - from: agfood.json
     suppress: R4000  # DescriptionAndTitleMissing
     where:
       - $.definitions.FarmBeatsExtension.properties.systemData
