@@ -790,6 +790,18 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreOperation"
             }
+          },
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
           }
         ],
         "responses": {
@@ -1474,7 +1486,8 @@
       "name": "next-page-token",
       "in": "header",
       "type": "string",
-      "description": "The skip token to get the next page."
+      "description": "The skip token to get the next page.",
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
