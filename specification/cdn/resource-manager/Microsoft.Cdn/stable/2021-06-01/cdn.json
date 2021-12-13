@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-12-31",
+    "version": "2021-06-01",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -39,7 +39,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Lists all of the CDN profiles within an Azure subscription.",
+        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.",
         "operationId": "Profiles_List",
         "x-ms-examples": {
           "Profiles_List": {
@@ -78,7 +78,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Lists all of the CDN profiles within a resource group.",
+        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within a resource group.",
         "operationId": "Profiles_ListByResourceGroup",
         "x-ms-examples": {
           "Profiles_ListByResourceGroup": {
@@ -120,7 +120,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Gets a CDN profile with the specified profile name under the specified subscription and resource group.",
+        "description": "Gets an Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Get",
         "x-ms-examples": {
           "Profiles_Get": {
@@ -134,7 +134,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -164,7 +164,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Creates a new CDN profile with a profile name under the specified subscription and resource group.",
+        "description": "Creates a new Azure Front Door Standard or Azure Front Door Premium or CDN profile with a profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Create",
         "x-ms-examples": {
           "Profiles_Create": {
@@ -178,7 +178,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -230,7 +230,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.",
+        "description": "Updates an existing Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Update",
         "x-ms-examples": {
           "Profiles_Update": {
@@ -244,7 +244,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -290,7 +290,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
+        "description": "Deletes an existing  Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
         "operationId": "Profiles_Delete",
         "x-ms-examples": {
           "Profiles_Delete": {
@@ -304,7 +304,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -316,6 +316,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
           },
@@ -397,7 +400,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -429,7 +432,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "description": "Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.",
         "operationId": "Profiles_ListResourceUsage",
         "x-ms-examples": {
           "Profiles_ListResourceUsage": {
@@ -443,7 +446,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -651,7 +654,7 @@
         "tags": [
           "Endpoints"
         ],
-        "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin Group operation. To update custom domains, use the Update Custom Domain operation.",
+        "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update custom domains, use the Update Custom Domain operation.",
         "operationId": "Endpoints_Update",
         "x-ms-examples": {
           "Endpoints_Update": {
@@ -751,6 +754,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -1444,6 +1450,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -1773,6 +1782,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -2110,8 +2122,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps": {
@@ -2186,8 +2197,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
@@ -2436,7 +2446,7 @@
   },
   "definitions": {
     "Profile": {
-      "description": "CDN profile is a logical grouping of endpoints that share the same settings, such as CDN provider and pricing tier.",
+      "description": "A profile is a logical grouping of endpoints that share the same settings.",
       "type": "object",
       "allOf": [
         {
@@ -2445,7 +2455,7 @@
       ],
       "properties": {
         "sku": {
-          "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
+          "description": "The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.",
           "$ref": "#/definitions/Sku"
         },
         "properties": {
@@ -2479,6 +2489,23 @@
           "readOnly": true,
           "description": "Provisioning status of the profile.",
           "type": "string"
+        },
+        "frontDoorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Id of the frontdoor."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
+        },
+        "originResponseTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 16,
+          "exclusiveMinimum": false
         }
       }
     },
@@ -2583,6 +2610,14 @@
             "$ref": "#/definitions/DeepCreatedOriginGroup"
           }
         },
+        "customDomains": {
+          "description": "The custom domains under the endpoint.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CustomDomain"
+          }
+        },
         "resourceState": {
           "description": "Resource status of the endpoint.",
           "readOnly": true,
@@ -2657,7 +2692,7 @@
           }
         },
         "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. This property at Endpoint can only be set allowed when endpoint uses single origin. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
+          "description": "The host header value sent to the origin with each request. This property at Endpoint is only allowed when endpoint uses single origin and can be overridden by the same property specified at origin.If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
           "type": "string"
         },
         "isCompressionEnabled": {
@@ -2696,6 +2731,13 @@
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
         },
+        "urlSigningKeys": {
+          "description": "List of keys used to validate the signed URL hashes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
+        },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
           "type": "object",
@@ -2715,6 +2757,16 @@
               }
             }
           }
+        },
+        "webApplicationFirewallPolicyLink": {
+          "description": "Defines the Web Application Firewall policy for the endpoint (if applicable)",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource ID."
+            }
+          }
         }
       }
     },
@@ -2732,7 +2784,8 @@
         },
         "order": {
           "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "conditions": {
           "description": "A list of conditions that must be matched for the actions to be executed",
@@ -2774,7 +2827,12 @@
             "UrlFileName",
             "HttpVersion",
             "Cookies",
-            "IsDevice"
+            "IsDevice",
+            "SocketAddr",
+            "ClientPort",
+            "ServerPort",
+            "HostName",
+            "SslProtocol"
           ],
           "x-ms-enum": {
             "name": "MatchVariable",
@@ -3035,17 +3093,112 @@
         }
       }
     },
+    "DeliveryRuleSocketAddrCondition": {
+      "description": "Defines the SocketAddress condition for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "SocketAddr",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/SocketAddrMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleClientPortCondition": {
+      "description": "Defines the ClientPort condition for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "ClientPort",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/ClientPortMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleServerPortCondition": {
+      "description": "Defines the ServerPort condition for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "ServerPort",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/ServerPortMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleHostNameCondition": {
+      "description": "Defines the HostName condition for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "HostName",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/HostNameMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleSslProtocolCondition": {
+      "description": "Defines the SslProtocol condition for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "SslProtocol",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/SslProtocolMatchConditionParameters"
+        }
+      }
+    },
     "RemoteAddressMatchConditionParameters": {
       "description": "Defines the parameters for RemoteAddress match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters"
+            "DeliveryRuleRemoteAddressConditionParameters"
           ]
         },
         "operator": {
@@ -3085,13 +3238,13 @@
       "description": "Defines the parameters for RequestMethod match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestMethodConditionParameters"
+            "DeliveryRuleRequestMethodConditionParameters"
           ]
         },
         "operator": {
@@ -3108,6 +3261,13 @@
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
           "type": "boolean"
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3131,13 +3291,13 @@
       "description": "Defines the parameters for QueryString match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleQueryStringConditionParameters"
+            "DeliveryRuleQueryStringConditionParameters"
           ]
         },
         "operator": {
@@ -3152,7 +3312,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "QueryStringOperator",
@@ -3183,13 +3344,13 @@
       "description": "Defines the parameters for PostArgs match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRulePostArgsConditionParameters"
+            "DeliveryRulePostArgsConditionParameters"
           ]
         },
         "selector": {
@@ -3208,7 +3369,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "PostArgsOperator",
@@ -3239,13 +3401,13 @@
       "description": "Defines the parameters for RequestUri match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestUriConditionParameters"
+            "DeliveryRuleRequestUriConditionParameters"
           ]
         },
         "operator": {
@@ -3260,7 +3422,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestUriOperator",
@@ -3291,13 +3454,13 @@
       "description": "Defines the parameters for RequestHeader match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHeaderConditionParameters"
+            "DeliveryRuleRequestHeaderConditionParameters"
           ]
         },
         "selector": {
@@ -3316,7 +3479,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestHeaderOperator",
@@ -3347,13 +3511,13 @@
       "description": "Defines the parameters for RequestBody match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestBodyConditionParameters"
+            "DeliveryRuleRequestBodyConditionParameters"
           ]
         },
         "operator": {
@@ -3368,7 +3532,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestBodyOperator",
@@ -3399,13 +3564,13 @@
       "description": "Defines the parameters for RequestScheme match conditions ",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestSchemeConditionParameters"
+            "DeliveryRuleRequestSchemeConditionParameters"
           ]
         },
         "operator": {
@@ -3418,6 +3583,13 @@
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
           "type": "boolean"
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3436,13 +3608,13 @@
       "description": "Defines the parameters for UrlPath match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlPathMatchConditionParameters"
+            "DeliveryRuleUrlPathMatchConditionParameters"
           ]
         },
         "operator": {
@@ -3458,7 +3630,8 @@
             "LessThanOrEqual",
             "GreaterThan",
             "GreaterThanOrEqual",
-            "Wildcard"
+            "Wildcard",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlPathOperator",
@@ -3489,13 +3662,13 @@
       "description": "Defines the parameters for UrlFileExtension match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileExtensionMatchConditionParameters"
+            "DeliveryRuleUrlFileExtensionMatchConditionParameters"
           ]
         },
         "operator": {
@@ -3510,7 +3683,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlFileExtensionOperator",
@@ -3541,13 +3715,13 @@
       "description": "Defines the parameters for UrlFilename match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFilenameConditionParameters"
+            "DeliveryRuleUrlFilenameConditionParameters"
           ]
         },
         "operator": {
@@ -3562,7 +3736,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlFileNameOperator",
@@ -3593,13 +3768,13 @@
       "description": "Defines the parameters for HttpVersion match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHttpVersionConditionParameters"
+            "DeliveryRuleHttpVersionConditionParameters"
           ]
         },
         "operator": {
@@ -3623,6 +3798,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
         }
       }
     },
@@ -3630,13 +3812,13 @@
       "description": "Defines the parameters for Cookies match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCookiesConditionParameters"
+            "DeliveryRuleCookiesConditionParameters"
           ]
         },
         "selector": {
@@ -3655,7 +3837,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "CookiesOperator",
@@ -3686,13 +3869,13 @@
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleIsDeviceConditionParameters"
+            "DeliveryRuleIsDeviceConditionParameters"
           ]
         },
         "operator": {
@@ -3720,12 +3903,230 @@
               "Desktop"
             ]
           }
+        }
+      }
+    },
+    "SocketAddrMatchConditionParameters": {
+      "description": "Defines the parameters for SocketAddress match conditions",
+      "type": "object",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleSocketAddrConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "IPMatch"
+          ],
+          "x-ms-enum": {
+            "name": "SocketAddrOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClientPortMatchConditionParameters": {
+      "description": "Defines the parameters for ClientPort match conditions",
+      "type": "object",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleClientPortConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "ClientPortOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServerPortMatchConditionParameters": {
+      "description": "Defines the parameters for ServerPort match conditions",
+      "type": "object",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleServerPortConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPortOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HostNameMatchConditionParameters": {
+      "description": "Defines the parameters for HostName match conditions",
+      "type": "object",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleHostNameConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "HostNameOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "transforms": {
           "description": "List of transforms",
           "type": "array",
           "items": {
             "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "SslProtocolMatchConditionParameters": {
+      "description": "Defines the parameters for SslProtocol match conditions",
+      "type": "object",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleSslProtocolConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "SslProtocolOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SslProtocol"
           }
         }
       }
@@ -3747,7 +4148,9 @@
             "ModifyResponseHeader",
             "UrlRedirect",
             "UrlRewrite",
-            "OriginGroupOverride"
+            "UrlSigning",
+            "OriginGroupOverride",
+            "RouteConfigurationOverride"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3778,13 +4181,13 @@
       "description": "Defines the parameters for the url redirect action.",
       "required": [
         "redirectType",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRedirectActionParameters"
+            "DeliveryRuleUrlRedirectActionParameters"
           ]
         },
         "redirectType": {
@@ -3832,6 +4235,120 @@
         }
       }
     },
+    "UrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningActionParameters"
+        }
+      }
+    },
+    "UrlSigningActionParameters": {
+      "description": "Defines the parameters for the Url Signing action.",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleUrlSigningActionParameters"
+          ]
+        },
+        "algorithm": {
+          "description": "Algorithm to use for URL signing",
+          "type": "string",
+          "enum": [
+            "SHA256"
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
+        },
+        "parameterNameOverride": {
+          "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlSigningParamIdentifier"
+          }
+        }
+      }
+    },
+    "UrlSigningParamIdentifier": {
+      "description": "Defines how to identify a parameter for a specific purpose e.g. expires",
+      "required": [
+        "paramIndicator",
+        "paramName"
+      ],
+      "properties": {
+        "paramIndicator": {
+          "description": "Indicates the purpose of the parameter",
+          "type": "string",
+          "enum": [
+            "Expires",
+            "KeyId",
+            "Signature"
+          ],
+          "x-ms-enum": {
+            "name": "paramIndicator",
+            "modelAsString": true
+          }
+        },
+        "paramName": {
+          "description": "Parameter name",
+          "type": "string"
+        }
+      }
+    },
+    "OriginGroupOverrideAction": {
+      "description": "Defines the origin group override action for the delivery rule.",
+      "x-ms-discriminator-value": "OriginGroupOverride",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/OriginGroupOverrideActionParameters"
+        }
+      }
+    },
+    "OriginGroupOverrideActionParameters": {
+      "description": "Defines the parameters for the origin group override action.",
+      "required": [
+        "originGroup",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleOriginGroupOverrideActionParameters"
+          ]
+        },
+        "originGroup": {
+          "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
     "UrlRewriteAction": {
       "description": "Defines the url rewrite action for the delivery rule.",
       "x-ms-discriminator-value": "UrlRewrite",
@@ -3855,13 +4372,13 @@
       "required": [
         "sourcePattern",
         "destination",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRewriteActionParameters"
+            "DeliveryRuleUrlRewriteActionParameters"
           ]
         },
         "sourcePattern": {
@@ -3875,44 +4392,6 @@
         "preserveUnmatchedPath": {
           "description": "Whether to preserve unmatched path. Default value is true.",
           "type": "boolean"
-        }
-      }
-    },
-    "OriginGroupOverrideAction": {
-      "description": "Defines the Origin Group override action for the delivery rule.",
-      "x-ms-discriminator-value": "OriginGroupOverride",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeliveryRuleAction"
-        }
-      ],
-      "required": [
-        "parameters"
-      ],
-      "properties": {
-        "parameters": {
-          "description": "Defines the parameters for the action.",
-          "$ref": "#/definitions/OriginGroupOverrideActionParameters"
-        }
-      }
-    },
-    "OriginGroupOverrideActionParameters": {
-      "description": "Defines the parameters for the Origin Group override action.",
-      "required": [
-        "originGroup",
-        "@odata.type"
-      ],
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleOriginGroupOverrideActionParameters"
-          ]
-        },
-        "originGroup": {
-          "description": "A reference to the origin group from where the content will be fetched from when CDN does not have it",
-          "type": "object",
-          "$ref": "#/definitions/ResourceReference"
         }
       }
     },
@@ -3957,13 +4436,13 @@
       "required": [
         "headerAction",
         "headerName",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters"
+            "DeliveryRuleHeaderActionParameters"
           ]
         },
         "headerAction": {
@@ -4012,13 +4491,13 @@
       "required": [
         "cacheBehavior",
         "cacheType",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters"
+            "DeliveryRuleCacheExpirationActionParameters"
           ]
         },
         "cacheBehavior": {
@@ -4074,13 +4553,13 @@
       "description": "Defines the parameters for the cache-key query string action.",
       "required": [
         "queryStringBehavior",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheKeyQueryStringBehaviorActionParameters"
+            "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters"
           ]
         },
         "queryStringBehavior": {
@@ -4104,6 +4583,128 @@
         }
       }
     },
+    "DeliveryRuleRouteConfigurationOverrideAction": {
+      "description": "Defines the route configuration override action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
+      "type": "object",
+      "x-ms-discriminator-value": "RouteConfigurationOverride",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/RouteConfigurationOverrideActionParameters"
+        }
+      }
+    },
+    "RouteConfigurationOverrideActionParameters": {
+      "description": "Defines the parameters for the route configuration override action.",
+      "type": "object",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleRouteConfigurationOverrideActionParameters"
+          ]
+        },
+        "originGroupOverride": {
+          "description": "A reference to the origin group override configuration. Leave empty to use the default origin group on route.",
+          "type": "object",
+          "$ref": "#/definitions/OriginGroupOverride"
+        },
+        "cacheConfiguration": {
+          "description": "The caching configuration associated with this rule. To disable caching, do not provide a cacheConfiguration object.",
+          "type": "object",
+          "$ref": "#/definitions/CacheConfiguration"
+        }
+      }
+    },
+    "OriginGroupOverride": {
+      "description": "Defines the parameters for the origin group override configuration.",
+      "type": "object",
+      "properties": {
+        "originGroup": {
+          "description": "defines the OriginGroup that would override the DefaultOriginGroup on route.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
+      "type": "object",
+      "properties": {
+        "queryStringCachingBehavior": {
+          "description": "Defines how Frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings, cache every request with a unique URL, or cache specific query strings.",
+          "enum": [
+            "IgnoreQueryString",
+            "UseQueryString",
+            "IgnoreSpecifiedQueryStrings",
+            "IncludeSpecifiedQueryStrings"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ruleQueryStringCachingBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
+        },
+        "isCompressionEnabled": {
+          "description": "Indicates whether content compression is enabled. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ruleIsCompressionEnabled",
+            "modelAsString": true
+          }
+        },
+        "cacheBehavior": {
+          "description": "Caching behavior for the requests",
+          "type": "string",
+          "enum": [
+            "HonorOrigin",
+            "OverrideAlways",
+            "OverrideIfOriginMissing"
+          ],
+          "x-ms-enum": {
+            "name": "ruleCacheBehavior",
+            "modelAsString": true
+          }
+        },
+        "cacheDuration": {
+          "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
+          "type": "string",
+          "format": "duration"
+        }
+      }
+    },
     "transform": {
       "description": "Describes what transforms are applied before matching",
       "type": "string",
@@ -4117,6 +4718,19 @@
       ],
       "x-ms-enum": {
         "name": "transform",
+        "modelAsString": true
+      }
+    },
+    "SslProtocol": {
+      "description": "The protocol of an established TLS connection.",
+      "type": "string",
+      "enum": [
+        "TLSv1",
+        "TLSv1.1",
+        "TLSv1.2"
+      ],
+      "x-ms-enum": {
+        "name": "SslProtocol",
         "modelAsString": true
       }
     },
@@ -4152,6 +4766,7 @@
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
@@ -4160,30 +4775,55 @@
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
           "exclusiveMinimum": false
         },
         "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. If endpoint uses multiple origins for load balancing, then the host header at endpoint is ignored and this one is considered.",
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
           "type": "string"
         },
         "priority": {
           "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5.",
           "type": "integer",
+          "format": "int32",
           "maximum": 5,
           "minimum": 1
         },
         "weight": {
           "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
           "type": "integer",
+          "format": "int32",
           "maximum": 1000,
           "minimum": 1
         },
         "enabled": {
           "description": "Origin is enabled for load balancing or not. By default, origin is always enabled.",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link.",
+          "type": "string"
+        },
+        "privateEndpointStatus": {
+          "description": "The approval status for the connection to the Private Link",
+          "$ref": "#/definitions/PrivateEndpointStatus",
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -4229,6 +4869,7 @@
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
           "type": "integer",
+          "format": "int32",
           "maximum": 50,
           "minimum": 0
         },
@@ -4250,13 +4891,29 @@
       "description": "Reference to another resource.",
       "x-ms-azure-resource": true
     },
+    "ActivatedResourceReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "isActive": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Whether the resource is active or inactive"
+        }
+      },
+      "description": "Reference to another resource along with its state.",
+      "type": "object",
+      "x-ms-azure-resource": true
+    },
     "GeoFilter": {
       "description": "Rules defining user's geo access within a CDN endpoint.",
       "type": "object",
       "required": [
         "relativePath",
         "action",
-        "countryCodes"
+        "countryOrRegionCodes"
       ],
       "properties": {
         "relativePath": {
@@ -4275,8 +4932,8 @@
             "modelAsString": false
           }
         },
-        "countryCodes": {
-          "description": "Two letter country codes defining user country access in a geo filter, e.g. AU, MX, US.",
+        "countryOrRegionCodes": {
+          "description": "Two letter country or region codes defining user country or region access in a geo filter, e.g. AU, MX, US.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4297,6 +4954,62 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "UrlSigningKey": {
+      "description": "Url signing key",
+      "required": [
+        "keyId",
+        "keySourceParameters"
+      ],
+      "properties": {
+        "keyId": {
+          "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
+          "type": "string"
+        },
+        "keySourceParameters": {
+          "description": "Defines the parameters for using customer key vault for Url Signing Key.",
+          "$ref": "#/definitions/KeyVaultSigningKeyParameters"
+        }
+      }
+    },
+    "KeyVaultSigningKeyParameters": {
+      "description": "Describes the parameters for using a user's KeyVault for URL Signing Key.",
+      "required": [
+        "typeName",
+        "subscriptionId",
+        "resourceGroupName",
+        "vaultName",
+        "secretName",
+        "secretVersion"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "KeyVaultSigningKeyParameters"
+          ]
+        },
+        "subscriptionId": {
+          "description": "Subscription Id of the user's Key Vault containing the secret",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "Resource group of the user's Key Vault containing the secret",
+          "type": "string"
+        },
+        "vaultName": {
+          "description": "The name of the user's Key Vault containing the secret",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "The name of secret in Key Vault.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version(GUID) of secret in Key Vault.",
+          "type": "string"
         }
       }
     },
@@ -4360,6 +5073,12 @@
           "readOnly": true,
           "description": "Provisioning status of the origin.",
           "type": "string"
+        },
+        "privateEndpointStatus": {
+          "description": "The approval status for the connection to the Private Link",
+          "$ref": "#/definitions/PrivateEndpointStatus",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4384,6 +5103,7 @@
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
@@ -4392,30 +5112,49 @@
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
           "exclusiveMinimum": false
         },
         "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. If endpoint uses multiple origins for load balancing, then the host header at endpoint is ignored and this one is considered.",
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
           "type": "string"
         },
         "priority": {
           "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5",
           "type": "integer",
+          "format": "int32",
           "maximum": 5,
           "minimum": 1
         },
         "weight": {
           "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
           "type": "integer",
+          "format": "int32",
           "maximum": 1000,
           "minimum": 1
         },
         "enabled": {
           "description": "Origin is enabled for load balancing or not",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link.",
+          "type": "string"
         }
       }
     },
@@ -4514,6 +5253,7 @@
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
           "type": "integer",
+          "format": "int32",
           "maximum": 50,
           "minimum": 0
         },
@@ -4560,6 +5300,7 @@
         "probeIntervalInSeconds": {
           "description": "The number of seconds between health probes.Default is 240sec.",
           "type": "integer",
+          "format": "int32",
           "maximum": 255,
           "minimum": 1
         }
@@ -4584,6 +5325,7 @@
         "responseBasedFailoverThresholdPercentage": {
           "description": "The percentage of failed requests in the sample where failover should trigger.",
           "type": "integer",
+          "format": "int32",
           "maximum": 100,
           "minimum": 0
         },
@@ -4602,12 +5344,14 @@
         "begin": {
           "description": "The inclusive start of the http status code range.",
           "type": "integer",
+          "format": "int32",
           "maximum": 999,
           "minimum": 100
         },
         "end": {
           "description": "The inclusive end of the http status code range.",
           "type": "integer",
+          "format": "int32",
           "maximum": 999,
           "minimum": 100
         }
@@ -4811,14 +5555,14 @@
     "CdnCertificateSourceParameters": {
       "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
       "required": [
-        "@odata.type",
+        "typeName",
         "certificateType"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters"
+            "CdnCertificateSourceParameters"
           ]
         },
         "certificateType": {
@@ -4856,7 +5600,7 @@
     "KeyVaultCertificateSourceParameters": {
       "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
       "required": [
-        "@odata.type",
+        "typeName",
         "subscriptionId",
         "resourceGroupName",
         "vaultName",
@@ -4865,10 +5609,10 @@
         "deleteRule"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
+            "KeyVaultCertificateSourceParameters"
           ]
         },
         "subscriptionId": {
@@ -5072,11 +5816,13 @@
         },
         "currentValue": {
           "type": "integer",
+          "format": "int32",
           "readOnly": true,
           "description": "Actual value of usage on the specified resource type."
         },
         "limit": {
           "type": "integer",
+          "format": "int32",
           "readOnly": true,
           "description": "Quota of the specified resource type."
         }
@@ -5093,6 +5839,22 @@
         "modelAsString": false
       }
     },
+    "OperationsListResult": {
+      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of CDN operations supported by the CDN resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
     "Operation": {
       "description": "CDN REST API operation",
       "type": "object",
@@ -5101,6 +5863,10 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "readOnly": true,
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "description": "The object that represents the operation.",
@@ -5119,25 +5885,165 @@
               "description": "Operation type: Read, write, delete, etc.",
               "readOnly": true,
               "type": "string"
+            },
+            "description": {
+              "description": "Description of operation.",
+              "readOnly": true,
+              "type": "string"
             }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The origin of operations."
+        },
+        "properties": {
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "OperationProperties",
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include log specifications.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Log specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
           }
         }
       }
     },
-    "OperationsListResult": {
-      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+    "LogSpecification": {
+      "description": "Log specification of operation.",
+      "type": "object",
       "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of CDN operations supported by the CDN resource provider."
-        },
-        "nextLink": {
+        "name": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "Name of log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of specification."
+        },
+        "logFilterPattern": {
+          "type": "string",
+          "description": "Pattern to filter based on name"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The metric unit. Possible values include: 'Bytes', 'Count', 'Milliseconds'."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The metric aggregation type. Possible values include: 'Average', 'Count', 'Total'."
+        },
+        "availabilities": {
+          "description": "Retention policies of a resource metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of metric",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          }
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Property to specify whether to fill gap with zero."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern to filter based on name"
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Property to specify metric is internal or not."
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "Type of operation: get, read, delete, etc.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of dimension."
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
         }
       }
     },
@@ -5222,7 +6128,8 @@
         },
         "prefixLength": {
           "description": "The length of the prefix of the ip address.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -5243,9 +6150,60 @@
           "description": "Resource type.",
           "readOnly": true,
           "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "user",
+        "application",
+        "managedIdentity",
+        "key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
     },
     "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource.",
@@ -5282,7 +6240,8 @@
         {
           "$ref": "#/definitions/Resource"
         }
-      ]
+      ],
+      "properties": {}
     },
     "QueryStringCachingBehavior": {
       "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
@@ -5298,8 +6257,23 @@
         "modelAsString": false
       }
     },
+    "PrivateEndpointStatus": {
+      "description": "The approval status for the connection to the Private Link",
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointStatus",
+        "modelAsString": true
+      }
+    },
     "Sku": {
-      "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
+      "description": "Standard_Verizon = The SKU name for a Standard Verizon CDN profile.\nPremium_Verizon = The SKU name for a Premium Verizon CDN profile.\nCustom_Verizon = The SKU name for a Custom Verizon CDN profile.\nStandard_Akamai = The SKU name for an Akamai CDN profile.\nStandard_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using GB based billing model.\nStandard_Microsoft = The SKU name for a Standard Microsoft CDN profile.\nStandard_AzureFrontDoor =  The SKU name for an Azure Front Door Standard profile.\nPremium_AzureFrontDoor = The SKU name for an Azure Front Door Premium profile.\nStandard_955BandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using 95-5 peak bandwidth billing model.\nStandard_AvgBandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using monthly average peak bandwidth billing model.\nStandardPlus_ChinaCdn = The SKU name for a China CDN profile for live-streaming using GB based billing model.\nStandardPlus_955BandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using 95-5 peak bandwidth billing model.\nStandardPlus_AvgBandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using monthly average peak bandwidth billing model.\n",
       "properties": {
         "name": {
           "description": "Name of the pricing tier.",
@@ -5310,7 +6284,13 @@
             "Standard_Akamai",
             "Standard_ChinaCdn",
             "Standard_Microsoft",
-            "Premium_ChinaCdn"
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor",
+            "Standard_955BandWidth_ChinaCdn",
+            "Standard_AvgBandWidth_ChinaCdn",
+            "StandardPlus_ChinaCdn",
+            "StandardPlus_955BandWidth_ChinaCdn",
+            "StandardPlus_AvgBandWidth_ChinaCdn"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5337,20 +6317,68 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "title": "Error response",
+      "description": "Error response indicates Azure Front Door Standard or Azure Front Door Premium or CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
       "type": "object",
       "properties": {
         "code": {
-          "description": "Error code.",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "description": "The error code."
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
         }
       }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     }
   },
   "parameters": {
@@ -5366,7 +6394,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2017-04-02."
+      "description": "Version of the API to be used with the client request. Current version is 2021-06-01."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
