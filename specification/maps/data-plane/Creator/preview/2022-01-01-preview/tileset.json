@@ -276,7 +276,7 @@
       }
     },
     "/tilesets/recipes/validate": {
-      "get": {
+      "post": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a tileset recipe.",
         "operationId": "Tileset_ValidateRecipe",
         "x-ms-examples": {
@@ -297,7 +297,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Validate tileset recipe request completed successfully. The response body contains the validation results.",
+            "description": "Validate tileset recipe request completed successfully. The response body contains the validation results."
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
@@ -455,7 +455,7 @@
         },
         "filter": {
           "description": "Removes features that do not match a pattern.",
-          "type": "Expression<Boolean>"
+          "type": "object"
         }
       }
     }
