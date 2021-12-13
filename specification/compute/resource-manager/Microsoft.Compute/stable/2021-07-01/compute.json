@@ -60,57 +60,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
-      "put": {
-        "tags": [
-          "AvailabilitySets"
-        ],
-        "operationId": "AvailabilitySets_CreateOrUpdate",
-        "description": "Create or update an availability set.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "availabilitySetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the availability set."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AvailabilitySet"
-            },
-            "description": "Parameters supplied to the Create Availability Set operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AvailabilitySet"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create an availability set.": {
-            "$ref": "./examples/compute/CreateAnAvailabilitySet.json"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "AvailabilitySets"
