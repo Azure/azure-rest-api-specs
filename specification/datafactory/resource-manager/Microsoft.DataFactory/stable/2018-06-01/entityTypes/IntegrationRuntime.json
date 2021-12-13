@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "IntegrationRuntime": {
@@ -58,6 +69,10 @@
           "description": "Managed integration runtime properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+        },
+        "managedVirtualNetwork": {
+          "description": "Managed Virtual Network reference.",
+          "$ref": "../datafactory.json#/definitions/ManagedVirtualNetworkReference"
         }
       },
       "required": [
@@ -75,6 +90,10 @@
         "ssisProperties": {
           "description": "SSIS properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        },
+        "customerVirtualNetwork": {
+          "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
+          "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
         }
       }
     },
@@ -100,9 +119,48 @@
           "type": "integer",
           "minimum": 1
         },
+        "dataFlowProperties": {
+          "description": "Data flow properties for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeDataFlowProperties"
+        },
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeDataFlowProperties": {
+      "description": "Data flow properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "description": "Compute type of the cluster which will execute data flow job.",
+          "type": "string",
+          "enum": [
+            "General",
+            "MemoryOptimized",
+            "ComputeOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowComputeType",
+            "modelAsString": true
+          }
+        },
+        "coreCount": {
+          "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
+          "type": "integer"
+        },
+        "timeToLive": {
+          "description": "Time to live (in minutes) setting of the cluster which will execute data flow job.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "cleanup": {
+          "description": "Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.",
+          "type": "boolean"
         }
       },
       "additionalProperties": {
@@ -119,6 +177,18 @@
         },
         "subnet": {
           "description": "The name of the subnet this integration runtime will join.",
+          "type": "string"
+        },
+        "publicIPs": {
+          "description": "Resource IDs of the public IP addresses that this integration runtime will use.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The ID of the public IP address."
+          }
+        },
+        "subnetId": {
+          "description": "The ID of subnet, to which this Azure-SSIS integration runtime will be joined.",
           "type": "string"
         }
       },
@@ -165,10 +235,38 @@
             "name": "IntegrationRuntimeEdition",
             "modelAsString": true
           }
+        },
+        "expressCustomSetupProperties": {
+          "description": "Custom setup without script properties for a SSIS integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSetupBase"
+          }
+        },
+        "packageStores": {
+          "description": "Package stores for the SSIS Integration Runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageStore"
+          }
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "IntegrationRuntimeCustomerVirtualNetwork": {
+      "description": "The definition and properties of virtual network to which Azure-SSIS integration runtime will join.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The ID of subnet to which Azure-SSIS integration runtime will join.",
+          "type": "string"
+        }
       }
     },
     "IntegrationRuntimeSsisCatalogInfo": {
@@ -202,6 +300,10 @@
             "name": "IntegrationRuntimeSsisCatalogPricingTier",
             "modelAsString": true
           }
+        },
+        "dualStandbyPairName": {
+          "description": "The dual standby pair name of Azure-SSIS Integration Runtimes to support SSISDB failover.",
+          "type": "string"
         }
       },
       "additionalProperties": {
@@ -239,6 +341,185 @@
           "type": "string"
         }
       }
+    },
+    "PackageStore": {
+      "description": "Package store for the SSIS integration runtime.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the package store",
+          "type": "string"
+        },
+        "packageStoreLinkedService": {
+          "description": "The package store linked service reference.",
+          "$ref": "#/definitions/EntityReference"
+        }
+      },
+      "required": [
+        "name",
+        "packageStoreLinkedService"
+      ]
+    },
+    "CustomSetupBase": {
+      "description": "The base definition of the custom setup.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "The type of custom setup.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CmdkeySetup": {
+      "description": "The custom setup of running cmdkey commands.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Cmdkey command custom setup type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CmdkeySetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CmdkeySetupTypeProperties": {
+      "description": "Cmdkey command custom setup type properties.",
+      "type": "object",
+      "properties": {
+        "targetName": {
+          "description": "The server name of data source access.",
+          "type": "object"
+        },
+        "userName": {
+          "description": "The user name of data source access.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password of data source access.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "targetName",
+        "userName",
+        "password"
+      ]
+    },
+    "EnvironmentVariableSetup": {
+      "description": "The custom setup of setting environment variable.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Add environment variable type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentVariableSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "EnvironmentVariableSetupTypeProperties": {
+      "description": "Environment variable custom setup type properties.",
+      "type": "object",
+      "properties": {
+        "variableName": {
+          "description": "The name of the environment variable.",
+          "type": "string"
+        },
+        "variableValue": {
+          "description": "The value of the environment variable.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "variableName",
+        "variableValue"
+      ]
+    },
+    "ComponentSetup": {
+      "description": "The custom setup of installing 3rd party components.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Install 3rd party component type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LicensedComponentSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "LicensedComponentSetupTypeProperties": {
+      "description": "Installation of licensed component setup type properties.",
+      "type": "object",
+      "properties": {
+        "componentName": {
+          "description": "The name of the 3rd party component.",
+          "type": "string"
+        },
+        "licenseKey": {
+          "description": "The license key to activate the component.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "componentName"
+      ]
+    },
+    "AzPowerShellSetup": {
+      "description": "The express custom setup of installing Azure PowerShell.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Install Azure PowerShell type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzPowerShellSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzPowerShellSetupTypeProperties": {
+      "description": "Installation of Azure PowerShell type properties.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The required version of Azure PowerShell to install.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
+      ]
     },
     "EntityReference": {
       "description": "The entity reference.",
@@ -339,6 +620,64 @@
       "required": [
         "resourceId"
       ]
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse": {
+      "description": "Azure-SSIS integration runtime outbound network dependency endpoints.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of outbound network dependency endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint": {
+      "description": "Azure-SSIS integration runtime outbound network dependency endpoints for one category.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of outbound network dependency.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints for outbound network dependency.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpoint": {
+      "description": "The endpoint for Azure-SSIS integration runtime outbound network dependency.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of endpoint.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The details of endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
+          }
+        }
+      }
+    },
+    "IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails": {
+      "description": "The details of Azure-SSIS integration runtime outbound network dependency endpoint.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "description": "The port of endpoint.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "IntegrationRuntimeStatus": {
       "description": "Integration runtime status.",

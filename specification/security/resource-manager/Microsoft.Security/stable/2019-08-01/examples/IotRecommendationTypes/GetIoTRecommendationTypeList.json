@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2019-08-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myGroup",
+    "solutionName": "mySolution"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myGroup/providers/Microsoft.Security/iotSecuritySolutions/mySolution/iotRecommendationTypes/IoT_VulnerableTLSCipherSuite",
+            "name": "IoT_VulnerableTLSCipherSuite",
+            "type": "Microsoft.Security/iotSecuritySolutions/iotRecommendationTypes",
+            "properties": {
+              "recommendationDisplayName": "TLS cipher suite upgrade needed",
+              "severity": "Medium",
+              "description": "Insecure TLS configurations detected. Immediate TLS cipher suite upgrade recommended.",
+              "remediationSteps": [
+                "Upgrade your TLS cipher suite to a secure configuration. See the Guide to TLS Standards Compliance for more information."
+              ],
+              "vendorName": "Microsoft",
+              "control": "Communication between device and IoT Hub is not optimized",
+              "productName": "Azure Security Center for IoT",
+              "productComponentName": "IoT Hub"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

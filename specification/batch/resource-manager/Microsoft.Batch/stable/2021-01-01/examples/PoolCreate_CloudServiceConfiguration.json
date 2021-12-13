@@ -1,0 +1,227 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2021-01-01",
+    "parameters": {
+      "properties": {
+        "displayName": "my-pool-name",
+        "vmSize": "STANDARD_D4",
+        "interNodeCommunication": "Enabled",
+        "taskSlotsPerNode": 13,
+        "taskSchedulingPolicy": {
+          "nodeFillType": "Pack"
+        },
+        "deploymentConfiguration": {
+          "cloudServiceConfiguration": {
+            "osFamily": "4",
+            "osVersion": "WA-GUEST-OS-4.45_201708-01"
+          }
+        },
+        "networkConfiguration": {
+          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+          "publicIPAddressConfiguration": {
+            "provision": "UserManaged",
+            "ipAddressIds": [
+              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
+              "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
+            ]
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 6,
+            "targetLowPriorityNodes": 28,
+            "resizeTimeout": "PT8M",
+            "nodeDeallocationOption": "TaskCompletion"
+          }
+        },
+        "metadata": [
+          {
+            "name": "metadata-1",
+            "value": "value-1"
+          },
+          {
+            "name": "metadata-2",
+            "value": "value-2"
+          }
+        ],
+        "startTask": {
+          "commandLine": "cmd /c SET",
+          "resourceFiles": [
+            {
+              "httpUrl": "https://testaccount.blob.core.windows.net/example-blob-file",
+              "filePath": "c:\\temp\\gohere",
+              "fileMode": "777"
+            }
+          ],
+          "environmentSettings": [
+            {
+              "name": "MYSET",
+              "value": "1234"
+            }
+          ],
+          "userIdentity": {
+            "autoUser": {
+              "scope": "Pool",
+              "elevationLevel": "Admin"
+            }
+          },
+          "maxTaskRetryCount": 6,
+          "waitForSuccess": true
+        },
+        "userAccounts": [
+          {
+            "name": "username1",
+            "password": "<ExamplePassword>",
+            "elevationLevel": "Admin",
+            "linuxUserConfiguration": {
+              "sshPrivateKey": "sshprivatekeyvalue",
+              "uid": 1234,
+              "gid": 4567
+            }
+          }
+        ],
+        "applicationPackages": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/applications/app_1234",
+            "version": "asdf"
+          }
+        ],
+        "certificates": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/sha1-1234567",
+            "storeLocation": "LocalMachine",
+            "storeName": "MY",
+            "visibility": [
+              "RemoteUser"
+            ]
+          }
+        ],
+        "applicationLicenses": [
+          "app-license0",
+          "app-license1"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2017-08-28T10:22:55.9407275Z",
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "vmSize": "STANDARD_D4",
+          "interNodeCommunication": "Enabled",
+          "taskSlotsPerNode": 13,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Pack"
+          },
+          "deploymentConfiguration": {
+            "cloudServiceConfiguration": {
+              "osFamily": "4",
+              "osVersion": "WA-GUEST-OS-4.45_201708-01"
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 6,
+              "targetLowPriorityNodes": 28,
+              "resizeTimeout": "PT8M",
+              "nodeDeallocationOption": "TaskCompletion"
+            }
+          },
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+            "publicIPAddressConfiguration": {
+              "provision": "UserManaged",
+              "ipAddressIds": [
+                "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
+                "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
+              ]
+            }
+          },
+          "metadata": [
+            {
+              "name": "metadata-1",
+              "value": "value-1"
+            },
+            {
+              "name": "metadata-2",
+              "value": "value-2"
+            }
+          ],
+          "startTask": {
+            "commandLine": "cmd /c SET",
+            "resourceFiles": [
+              {
+                "httpUrl": "https://testaccount.blob.core.windows.net/example-blob-file",
+                "filePath": "c:\\temp\\gohere",
+                "fileMode": "777"
+              }
+            ],
+            "environmentSettings": [
+              {
+                "name": "MYSET",
+                "value": "1234"
+              }
+            ],
+            "userIdentity": {
+              "autoUser": {
+                "scope": "Pool",
+                "elevationLevel": "Admin"
+              }
+            },
+            "maxTaskRetryCount": 6,
+            "waitForSuccess": true
+          },
+          "userAccounts": [
+            {
+              "name": "username1",
+              "elevationLevel": "Admin",
+              "linuxUserConfiguration": {
+                "uid": 1234,
+                "gid": 4567
+              }
+            }
+          ],
+          "applicationPackages": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/applications/app_1234",
+              "version": "asdf"
+            }
+          ],
+          "certificates": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/sha1-1234567",
+              "storeLocation": "LocalMachine",
+              "storeName": "MY",
+              "visibility": [
+                "RemoteUser"
+              ]
+            }
+          ],
+          "applicationLicenses": [
+            "app-license0",
+            "app-license1"
+          ],
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
+        }
+      }
+    }
+  }
+}
