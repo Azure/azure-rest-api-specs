@@ -30,6 +30,10 @@
           "$ref": "../sqlmigration.json#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
         }
       },
       "allOf": [
@@ -66,6 +70,10 @@
         "targetPlatform": {
           "description": "Target platform for the project",
           "$ref": "#/definitions/ProjectTargetPlatform"
+        },
+        "azureAuthenticationInfo": {
+          "description": "Field that defines the Azure active directory application info, used to connect to the target Azure resource",
+          "type": "string"
         },
         "creationTime": {
           "type": "string",
