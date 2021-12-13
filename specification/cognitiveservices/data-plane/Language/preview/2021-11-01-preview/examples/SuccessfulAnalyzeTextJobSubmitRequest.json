@@ -11,12 +11,12 @@
           {
             "id": "1",
             "language": "en",
-            "text": "I had a wonderful trip to Seattle last week."
+            "text": "I had a wonderful trip to Seattle last week. The Pacific Northwest is beautiful."
           },
           {
             "id": "2",
             "language": "en",
-            "text": "I'm flying to NYC tomorrow. See you there."
+            "text": "I'm flying to NYC tomorrow. I hear the weather is cold on the East Coast this time of year.  Should I bring a heavy coat?"
           }
         ]
       },
@@ -26,6 +26,15 @@
             "taskName": "Recognize Entities",
             "parameters": {
               "model-version": "latest"
+            }
+          }
+        ],
+        "customEntityRecognitionTasks": [
+          {
+            "taskName": "Recognize US Regions",
+            "parameters": {
+              "projectName": "MyProject",
+              "deploymentName": "MyDeployment"
             }
           }
         ]
