@@ -169,16 +169,10 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_CheckZonePeers",
-        "summary": "",
-        "description": "",
+        "description": "Compares a subscriptions logical zone mapping",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Microsoft Azure subscription ID.",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -521,6 +515,15 @@
         }
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "Operation": {
       "description": "Microsoft.Resources operation",
