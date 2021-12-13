@@ -252,8 +252,6 @@ These settings apply only when `--tag=package-2021-10-01-only` is specified on t
 ``` yaml $(tag) == 'package-2021-10-01-only'
 input-file:
 - Microsoft.Compute/stable/2021-10-01/gallery.json
-- Microsoft.Compute/stable/2021-10-01/sharedGallery.json
-- Microsoft.Compute/stable/2021-10-01/communityGallery.json
 ```
 
 ### Tag: package-2021-07-01
