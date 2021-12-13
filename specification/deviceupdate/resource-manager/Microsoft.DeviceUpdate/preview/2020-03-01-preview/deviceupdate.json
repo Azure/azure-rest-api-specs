@@ -675,7 +675,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -716,14 +716,14 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -759,7 +759,7 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "privateEndpointConnection",
@@ -767,7 +767,7 @@
             "description": "The parameters for creating a private endpoint connection.",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -775,7 +775,7 @@
           "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -815,7 +815,7 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -1207,6 +1207,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     }
@@ -1249,7 +1254,7 @@
               "readOnly": true
             },
             "publicNetworkAccess": {
-              "description": "Whether or not public network access is allowed for the container registry.",
+              "description": "Whether or not public network access is allowed for the account.",
               "default": "Enabled",
               "enum": [
                 "Enabled",
@@ -1259,6 +1264,13 @@
               "x-ms-enum": {
                 "name": "PublicNetworkAccess",
                 "modelAsString": true
+              }
+            },
+            "privateEndpointConnections": {
+              "description": "List of private endpoint connections associated with the account.",
+              "type": "array",
+              "items": {
+                "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
               }
             }
           }
@@ -1489,7 +1501,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties"
+          "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceProperties"
         }
       ],
       "properties": {
@@ -1636,7 +1648,7 @@
         },
         "remotePrivateLinkServiceConnectionState": {
           "description": "Remote private link service connection state",
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+          "$ref": "./privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
         },
         "remotePrivateEndpointConnection": {
           "description": "Remote private endpoint connection details.",
