@@ -11,5 +11,16 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.RedisEnterprise
-  output-folder: $(csharp-sdks-folder)/redisenterprise/Microsoft.Azure.Management.RedisEnterprise/src/Generated
+  output-folder: $(csharp-sdks-folder)/redisenterprise/Microsoft.Azure.Management.RedisEnterpriseCache/src/Generated
+
+directive:
+  # Rename constants in the generated code
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /public const string Ones /g, "public const string OneSecond " ).
+        replace( /public const string Oneh /g, "public const string OneHour " ).
+        replace( /public const string Sixh /g, "public const string SixHours " ).
+        replace( /public const string OneTwoh /g, "public const string TwelveHours " )
 ```

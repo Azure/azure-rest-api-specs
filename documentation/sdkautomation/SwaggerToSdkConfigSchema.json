@@ -23,7 +23,10 @@
           // If we have multiple related readme.md, should we call generation once with
           // all the readme.md or should we call generation multiple times and one per readme.md.
           "type": "string",
-          "enum": ["one-per-config", "one-for-all-configs"],
+          "enum": [
+            "one-per-config",
+            "one-for-all-configs"
+          ],
           "default": "one-for-all-configs"
         },
         "cloneDir": {
@@ -112,7 +115,9 @@
                   "type": "string"
                 }
               },
-              "required": ["searchRegex"]
+              "required": [
+                "searchRegex"
+              ]
             },
             {
               // If this option is set to false, then package folder will be from generateOutput.json.
@@ -167,7 +172,9 @@
                   "format": "regex"
                 }
               },
-              "required": ["searchRegex"]
+              "required": [
+                "searchRegex"
+              ]
             },
             {
               // If this option is set to false, then package folder will be from generateOutput.json
@@ -200,7 +207,7 @@
         "envs": {
           // Extra environment variable to be passed to the script.
           // By default the following envs will be passed:
-          // USER, HOME, PATH, SHELL, PWD (current directory), TMPDIR (dedicated temp folder) 
+          // USER, HOME, PATH, SHELL, PWD (current directory), TMPDIR (dedicated temp folder)
           "type": "array",
           "items": {
             "type": "string"
@@ -241,7 +248,11 @@
             "result": {
               // If script has non-error exitCode how should we mark the script's result.
               "type": "string",
-              "enum": ["error", "warning", "ignore"],
+              "enum": [
+                "error",
+                "warning",
+                "ignore"
+              ],
               "default": "error"
             }
           },
@@ -251,7 +262,9 @@
           }
         }
       },
-      "required": ["path"]
+      "required": [
+        "path"
+      ]
     },
     "RunLogOptions": {
       // How should SDK Automation handle the log stream.

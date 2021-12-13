@@ -34,6 +34,48 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings": {
+      "get": {
+        "tags": [
+          "PortalSettings"
+        ],
+        "operationId": "PortalSettings_ListByService",
+        "description": "Lists a collection of portalsettings defined within a service instance..",
+        "x-ms-examples": {
+          "ApiManagementListPortalSettings": {
+            "$ref": "./examples/ApiManagementListPortalSettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Portal Settings entities.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PortalSettingsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signin": {
       "head": {
         "tags": [

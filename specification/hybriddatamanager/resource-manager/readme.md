@@ -43,12 +43,6 @@ directive:
     - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2016-06
-```
-
-
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
@@ -75,6 +69,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -83,8 +78,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybriddatamanager']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hybriddatamanager/resource-manager
 ```
 
 
@@ -153,7 +146,5 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-hybriddatamanager
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

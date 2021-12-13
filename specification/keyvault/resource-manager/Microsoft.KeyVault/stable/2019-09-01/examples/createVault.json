@@ -84,6 +84,21 @@
             "name": "standard"
           },
           "tenantId": "00000000-0000-0000-0000-000000000000",
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "defaultAction": "Deny",
+            "ipRules": [
+              {
+                "value": ""
+              }
+            ],
+            "virtualNetworkRules": [
+              {
+                "id": "",
+                "ignoreMissingVnetServiceEndpoint": false
+              }
+            ]
+          },
           "accessPolicies": [
             {
               "tenantId": "00000000-0000-0000-0000-000000000000",
@@ -136,9 +151,26 @@
               }
             }
           ],
+          "privateEndpointConnections": [
+            {
+              "id": "",
+              "etag": "",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": ""
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
           "enabledForDeployment": true,
           "enabledForDiskEncryption": true,
           "enabledForTemplateDeployment": true,
+          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
           "vaultUri": "https://sample-vault.vault.azure.net",
           "provisioningState": "Succeeded"
         }
@@ -212,6 +244,7 @@
           "enabledForDeployment": true,
           "enabledForDiskEncryption": true,
           "enabledForTemplateDeployment": true,
+          "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
           "vaultUri": "https://sample-vault.vault.azure.net",
           "provisioningState": "Succeeded"
         }
@@ -227,6 +260,15 @@
       }
     },
     "409": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "",
+          "message": ""
+        }
+      }
+    },
+    "default": {
       "headers": {},
       "body": {
         "error": {

@@ -28,16 +28,34 @@ These are the global settings for the adp.
 title: AdpManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-07-01-preview
+tag: package-2021-11-01-preview
 ```
 
 ### Tag: package-2020-07-01-preview
 
-These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-07-01-preview'
+version: 2020-07-01-preview
+version-with-underscores: 2020_07_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2020-07-01-preview/adp.json
+```
+
+### Tag: package-2021-02-01-preview
+
+```yaml $(tag) == 'package-2021-02-01-preview'
+version: 2021-02-01-preview
+version-with-underscores: 2021_02_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2021-02-01-preview/adp.json
+```
+
+### Tag: package-2021-11-01-preview
+
+```yaml $(tag) == 'package-2021-11-01-preview'
+version: 2021-11-01-preview
+version-with-underscores: 2021_11_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2021-11-01-preview/adp.json
 ```
 
 ---
@@ -55,13 +73,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_adp']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js adp/resource-manager
 ```
 
 ## Go
@@ -72,10 +85,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
@@ -83,7 +92,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

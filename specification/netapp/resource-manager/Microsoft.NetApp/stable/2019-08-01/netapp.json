@@ -1860,6 +1860,12 @@
           "default": 107374182400,
           "example": 107374182400
         },
+        "usedBytes": {
+          "type": "integer",
+          "description": "Resource size in bytes, current storage usage for the volume in bytes",
+          "readOnly": true,
+          "format": "int64"
+        },
         "exportPolicy": {
           "title": "exportPolicy",
           "description": "Set of export policy rules",
@@ -2401,7 +2407,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the mount target",
+      "description": "The name of the snapshot",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {

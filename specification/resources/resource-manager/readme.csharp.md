@@ -836,6 +836,7 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.Resou
 
 batch:
   - tag: package-features-2015-12
+  - tag: package-features-2021-07
   - tag: package-locks-2016-09
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12

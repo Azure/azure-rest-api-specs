@@ -2110,7 +2110,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps": {
@@ -2185,7 +2186,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
@@ -4912,6 +4914,10 @@
             "modelAsString": true
           }
         },
+        "customHttpsParameters": {
+          "description": "Certificate parameters for securing custom HTTPS",
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
+        },
         "validationData": {
           "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
           "type": "string"
@@ -5445,6 +5451,10 @@
           "description": "Resource type.",
           "readOnly": true,
           "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -5518,10 +5528,6 @@
             "update"
           ],
           "description": "Resource tags."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
         }
       },
       "required": [
@@ -5535,12 +5541,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        }
-      }
+      "properties": {}
     },
     "QueryStringCachingBehavior": {
       "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",

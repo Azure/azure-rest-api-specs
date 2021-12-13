@@ -1496,11 +1496,29 @@
         },
         "privateEndpointNetworkPolicies": {
           "type": "string",
-          "description": "Enable or Disable apply network policies on private end point in the subnet."
+          "default": "Enabled",
+          "description": "Enable or Disable apply network policies on private end point in the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPrivateEndpointNetworkPolicies",
+            "modelAsString": true
+          }
         },
         "privateLinkServiceNetworkPolicies": {
           "type": "string",
-          "description": "Enable or Disable apply network policies on private link service in the subnet."
+          "default": "Enabled",
+          "description": "Enable or Disable apply network policies on private link service in the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPrivateLinkServiceNetworkPolicies",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the subnet."
@@ -1574,6 +1592,11 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource."
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resourceGuid property of the Virtual Network peering resource."
         }
       },
       "description": "Properties of the virtual network peering."
@@ -1593,6 +1616,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1617,6 +1644,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1849,6 +1880,10 @@
             "type": "string"
           },
           "description": "Contains other available private IP addresses if the asked for address is taken."
+        },
+        "isPlatformReserved": {
+          "type": "boolean",
+          "description": "Private IP address platform reserved."
         }
       },
       "description": "Response for CheckIPAddressAvailability API service call."

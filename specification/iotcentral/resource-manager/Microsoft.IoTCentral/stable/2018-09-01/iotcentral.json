@@ -824,6 +824,35 @@
           "description": "The description of the template.",
           "type": "string",
           "readOnly": true
+        },
+        "industry": {
+          "description": "The industry of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "A list of locations that support the template.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AppTemplateLocations"
+          }
+        }
+      }
+    },
+    "AppTemplateLocations": {
+      "description": "IoT Central Application Template Locations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the location.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

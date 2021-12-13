@@ -1903,7 +1903,8 @@
         },
         "devicePassword": {
           "description": "Set Device password for unlocking Databox Heavy. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "DataBoxHeavy"
@@ -1988,7 +1989,8 @@
         },
         "devicePassword": {
           "description": "Set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "DataBox"
@@ -2096,7 +2098,8 @@
                 "description": "Verbose logging (includes Errors, CRC, size information and others)."
               }
             ]
-          }
+          },
+          "default": "Error"
         },
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
@@ -2260,11 +2263,11 @@
       "description": "Dc access security code",
       "type": "object",
       "properties": {
-        "reverseDcAccessCode": {
+        "reverseDCAccessCode": {
           "description": "Reverse Dc access security code.",
           "type": "string"
         },
-        "forwardDcAccessCode": {
+        "forwardDCAccessCode": {
           "description": "Forward Dc access security code.",
           "type": "string"
         }
@@ -2290,7 +2293,7 @@
       "required": [
         "storageLocation",
         "skuName",
-        "expectedDataSizeInTerabytes"
+        "expectedDataSizeInTeraBytes"
       ],
       "type": "object",
       "allOf": [
@@ -2299,7 +2302,7 @@
         }
       ],
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2511,7 +2514,7 @@
           "description": "Details about which key encryption type is being used.",
           "readOnly": true
         },
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2701,7 +2704,8 @@
                 "description": "Scheduled job."
               }
             ]
-          }
+          },
+          "default": "NonScheduled"
         },
         "deliveryInfo": {
           "$ref": "#/definitions/JobDeliveryInfo",
@@ -3034,7 +3038,8 @@
                 "description": "Key encryption key is managed by the Customer."
               }
             ]
-          }
+          },
+          "default": "MicrosoftManaged"
         },
         "kekUrl": {
           "description": "Key encryption key. It is required in case of Customer managed KekType.",
@@ -3123,7 +3128,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -3678,7 +3684,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },
@@ -4097,7 +4104,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "transferAllBlobs": {
           "description": "To indicate if all Azure blobs have to be transferred",
@@ -4187,7 +4195,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "blobFilterDetails": {
           "$ref": "#/definitions/BlobFilterDetails",

@@ -337,6 +337,18 @@
         "resourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors. **NOTE**: this property cannot be updated for an existing rule."
+        },
+        "legacyResourceId": {
+          "type": "string",
+          "description": "the legacy resource identifier of the resource the rule monitors. **NOTE**: this property cannot be updated for an existing rule."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "the location of the resource."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "the namespace of the metric."
         }
       },
       "required": [
@@ -621,6 +633,10 @@
           "type": "string",
           "description": "the description of the alert rule that will be included in the alert email."
         },
+        "provisioningState": {
+          "type": "string",
+          "description": "the provisioning state."
+        },
         "isEnabled": {
           "type": "boolean",
           "description": "the flag that indicates whether the alert rule is enabled."
@@ -628,6 +644,10 @@
         "condition": {
           "$ref": "#/definitions/RuleCondition",
           "description": "the condition that results in the alert rule being activated."
+        },
+        "action": {
+          "$ref": "#/definitions/RuleAction",
+          "description": "action that is performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "actions": {
           "type": "array",
