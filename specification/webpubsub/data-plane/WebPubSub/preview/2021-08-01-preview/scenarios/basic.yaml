@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.1/schema.json
+scope: ResourceGroup
+
+variables:
+  Endpoint: https://endpoint.net
+  api-version: '2021-08-01-preview'
+  hub: myHub
+
+scenarios:
+  - variables:
+      hub: myHub2
+    steps:
+      - operationId: WebPubSub_GenerateClientToken
+        parameters:
+          role:
+            - read
+            - write
+          minutesToExpire: 120
+        outputVariables:
+          clientToken:
+            fromResponse: /token
