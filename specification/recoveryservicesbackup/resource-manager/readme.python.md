@@ -27,9 +27,8 @@ These settings apply only when `--tag=package-passivestamp-2018-12-20 --python` 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-passivestamp-2018-12-20'
-title: Cross Region RegionRestore Client
-namespace: azure.mgmt.recoveryservicesbackup.crossregionregionrestore
-output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/crossregionregionrestore
+namespace: azure.mgmt.recoveryservicesbackup.passivestamp
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/passivestamp
 ```
 
 ### Tag: package-2021-10 and python
@@ -38,8 +37,8 @@ These settings apply only when `--tag=package-2021-10 --python` is specified on 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2021-10'
-namespace: azure.mgmt.recoveryservicesbackup
-output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
+namespace: azure.mgmt.recoveryservicesbackup.activestamp
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
 ```
 
 
