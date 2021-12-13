@@ -475,7 +475,8 @@
             }
           },
           "400": {
-            "description": "BadRequest"
+            "description": "BadRequest",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -930,6 +931,7 @@
       }
     },
     "AADPropertiesResource": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2355,6 +2357,7 @@
     },
     "CrrJobRequestResource": {
       "description": "Request object for fetching CRR jobs.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2421,6 +2424,7 @@
       }
     },
     "CrossRegionRestoreRequestResource": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2551,6 +2555,7 @@
       "discriminator": "objectType"
     },
     "CrrAccessTokenResource": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
