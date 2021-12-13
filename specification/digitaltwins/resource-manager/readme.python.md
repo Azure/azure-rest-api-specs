@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.digitaltwins
 package-name: azure-mgmt-digitaltwins
-clear-output-folder: true
+package-version: 1.0.0b1
 no-namespace-folders: true
 ```
 
