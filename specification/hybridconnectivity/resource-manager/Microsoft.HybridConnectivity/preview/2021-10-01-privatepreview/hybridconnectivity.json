@@ -453,12 +453,35 @@
       "type": "object",
       "description": "Ingress gateway profile",
       "required": [
-        "hostname"
+        "hostname",
+        "aadProfile"
       ],
       "properties": {
         "hostname": {
           "type": "string",
           "description": "The ingress hostname."
+        },
+        "aadProfile": {
+          "$ref": "#/definitions/AADProfileProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AADProfileProperties": {
+      "type": "object",
+      "description": "The AAD Profile",
+      "required": [
+        "serverId",
+        "tenantId"
+      ],
+      "properties": {
+        "serverId": {
+          "type": "string",
+          "description": "The arc ingress gateway server app id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The target resource home tenant id."
         }
       }
     },
