@@ -39,8 +39,8 @@ license-header: MICROSOFT_MIT
 tag: package-passivestamp-2021-11-15
 ```
 
-``` yaml $(package-activestamp)
-tag: package-2021-10-01
+```yaml $(package-activestamp)
+tag: package-2021-10
 ```
 
 ### Validations
