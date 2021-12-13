@@ -6491,49 +6491,6 @@
             "description": "Creation time of the deployment",
             "type": "string",
             "format": "date-time"
-          },
-          "stages": {
-            "description": "Stages of the deployment",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DeploymentStage"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeploymentStage": {
-        "description": "Stage of the deployment",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "name of the stage",
-            "type": "string",
-            "nullable": true
-          },
-          "StageId": {
-            "description": "ID of the stage",
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "status": {
-            "description": " status of the deployment stage",
-            "readOnly": true,
-            "enum": [
-              "NotStarted",
-              "InRollout",
-              "InRollback",
-              "RolledBack",
-              "Committing",
-              "Committed"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DeploymentStageState",
-              "modelAsString": true
-            }
           }
         },
         "additionalProperties": false
