@@ -122,7 +122,6 @@
                   "$ref": "./examples/SuccessfulAnalyzeTextJobSubmitRequest.json"
                 }
               },
-              "deprecated": false,
               "x-ms-long-running-operation": true
             }
           },
@@ -184,10 +183,66 @@
                 }
               },
               "deprecated": false
-            }
+            },
+            "delete": {
+                "produces": [
+                  "application/json",
+                  "text/json"
+                ],
+                "description": "Cancel analysis job.",
+                "operationId": "AnalyzeText_CancelJob",
+                "summary": "Cancel analysis job",
+                "parameters": [
+                  {
+                    "$ref": "#/parameters/JobId"
+                  }
+                ],
+                "responses": {
+                  "202": {
+                    "description": "Cancel Job request has been received.",
+                    "headers": {
+                      "Operation-Location": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "default": {
+                    "description": "Unexpected error",
+                    "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                    }
+                  }
+                },
+                "x-ms-examples": {
+                  "Successful Delete Text Analysis Job Request": {
+                    "$ref": ".//examples//SuccessfulAnalyzeTextJobDeleteRequest.json"
+                  }
+                },
+                "x-ms-long-running-operation": true
+              }
           }
     },
     "definitions": {
+        "AnalyzeTextTaskKind": {
+            "type": "string",
+            "description": "Enumeration of supported Text Analysis tasks.",
+            "enum": [
+                "SentimentAnalysis",
+                "EntityRecognition",
+                "PiiEntityRecognition",
+                "KeyPhraseExtraction",
+                "EntityLinking",
+                "LanguageDetection",
+                "Healthcare",
+                "ExtractiveSummarization",
+                "CustomEntityRecogntion",
+                "CustomSingleClassification",
+                "CustomMultiClassification"
+            ],
+            "x-ms-enum": {
+                "modelAsString": true
+            }
+        },
         "AnalyzeTextInput": {
             "allOf": [
                 {
@@ -206,24 +261,7 @@
             ],
             "properties": {
                 "task": {
-                    "type": "string",
-                    "description": "TODO",
-                    "enum": [
-                        "SentimentAnalysis",
-                        "EntityRecognition",
-                        "PiiEntityRecognition",
-                        "KeyPhraseExtraction",
-                        "EntityLinking",
-                        "LanguageDetection",
-                        "Healthcare",
-                        "ExtractiveSummarization",
-                        "CustomEntityRecogntion",
-                        "CustomSingleClassification",
-                        "CustomMultiClassification"
-                    ],
-                    "x-ms-enum": {
-                        "modelAsString": true
-                    }
+                    "$ref": "#/definitions/AnalyzeTextTaskKind"
                 }
             }
         },
@@ -256,7 +294,15 @@
                     "type": "string"
                 },
                 "analysisInput": {
-                    "$ref": "#/definitions/MultiLanguageBatchInput"
+                    "description": "Input for the analysis job.",
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MultiLanguageInput"
+                            }
+                        }
+                    }
                 },
                 "tasks": {
                     "description": "The set of tasks to execute on the input documents.",
@@ -333,16 +379,16 @@
             "type": "object",
             "description": "Parameters object for a text analysis task using custom models.",
             "properties": {
-                "project-name": {
+                "projectName": {
                     "type": "string"
                 },
-                "deployment-name": {
+                "deploymentName": {
                     "type": "string"
                 }
             },
             "required": [
-                "project-name",
-                "deployment-name"
+                "projectName",
+                "deploymentName"
             ]
         },
         "CustomResult": {
@@ -407,36 +453,33 @@
         },
         "CustomEntitiesResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/EntitiesRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/CustomResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/EntitiesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "CustomSingleClassificationTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -466,49 +509,45 @@
         },
         "CustomSingleClassificationResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SingleClassificationRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/CustomResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/SingleClassificationRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
-                }
+                }   
+            ],
+            "required": [
+                "records"
             ]
         },
         "SingleClassificationRecordResult": {
             "type": "object",
-            "required": [
-                "classification"
-            ],
+            "properties": {
+                "classification": {
+                    "$ref": "#/definitions/ClassificationResult"
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "classification": {
-                            "$ref": "#/definitions/ClassificationResult"
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "classification"
             ]
         },
         "ClassificationResult": {
@@ -531,7 +570,6 @@
         },
         "CustomMultiClassificationTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -545,6 +583,7 @@
                 }
             },
             "allOf": [
+
                 {
                     "$ref": "#/definitions/AnalyzeTextTask"
                 }
@@ -561,62 +600,54 @@
         },
         "CustomMultiClassificationResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/MultiClassificationRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/CustomResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/MultiClassificationRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "MultiClassificationRecordResult": {
             "type": "object",
-            "required": [
-                "classifications"
-            ],
+            "properties": {
+                "classifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ClassificationResult"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "classifications": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ClassificationResult"
-                            }
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "classifications"
             ]
         },
         "HealthcareTaskParameters": {
             "type": "object",
             "description": "Parameters object for a Healthcare task.",
             "properties": {
-                "structureFhir": {
-                    "type": "boolean",
-                    "default": false
-                },
                 "stringIndexType": {
                     "$ref": "#/definitions/StringIndexType"
                 }
@@ -624,7 +655,6 @@
         },
         "HealthcareTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -657,60 +687,56 @@
         },
         "HealthcareResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/HealthcareEntitiesRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/HealthcareEntitiesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "HealthcareEntitiesRecordResult": {
             "type": "object",
+            "properties": {
+                "entities": {
+                    "description": "Healthcare entities.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HealthcareEntity"
+                    }
+                },
+                "relations": {
+                    "type": "array",
+                    "description": "Healthcare entity relations.",
+                    "items": {
+                        "$ref": "#/definitions/HealthcareRelation"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "entities": {
-                            "description": "Healthcare entities.",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HealthcareEntity"
-                            }
-                        },
-                        "relations": {
-                            "type": "array",
-                            "description": "Healthcare entity relations.",
-                            "items": {
-                                "$ref": "#/definitions/HealthcareRelation"
-                            }
-                        }
-                    },
-                    "required": [
-                        "entities",
-                        "relations"
-                    ]
                 }
+            ],
+            "required": [
+                "entities",
+                "relations"
             ]
         },
         "HealthcareEntity": {
@@ -955,7 +981,6 @@
         },
         "SentimentAnalysisTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -988,73 +1013,69 @@
         },
         "SentimentResponse": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Sentiment analysis per record.",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SentimentRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Sentiment analysis per record.",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/SentimentRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "SentimentRecordResult": {
             "type": "object",
+            "properties": {
+                "sentiment": {
+                    "type": "string",
+                    "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+                    "enum": [
+                        "positive",
+                        "neutral",
+                        "negative",
+                        "mixed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "DocumentSentimentValue",
+                        "modelAsString": false
+                    }
+                },
+                "confidenceScores": {
+                    "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+                    "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
+                },
+                "sentences": {
+                    "type": "array",
+                    "description": "Sentence level sentiment analysis.",
+                    "items": {
+                        "$ref": "#/definitions/SentenceSentiment"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "sentiment": {
-                            "type": "string",
-                            "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
-                            "enum": [
-                                "positive",
-                                "neutral",
-                                "negative",
-                                "mixed"
-                            ],
-                            "x-ms-enum": {
-                                "name": "DocumentSentimentValue",
-                                "modelAsString": false
-                            }
-                        },
-                        "confidenceScores": {
-                            "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
-                            "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
-                        },
-                        "sentences": {
-                            "type": "array",
-                            "description": "Sentence level sentiment analysis.",
-                            "items": {
-                                "$ref": "#/definitions/SentenceSentiment"
-                            }
-                        }
-                    },
-                    "required": [
-                        "sentiment",
-                        "confidenceScores",
-                        "sentences"
-                    ]
                 }
+            ],
+            "required": [
+                "sentiment",
+                "confidenceScores",
+                "sentences"
             ]
         },
         "SentimentConfidenceScorePerLabel": {
@@ -1290,7 +1311,6 @@
         },
         "EntitiesTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1323,53 +1343,49 @@
         },
         "EntitiesResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/EntitiesRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/EntitiesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "EntitiesRecordResult": {
             "type": "object",
-            "required": [
-                "entities"
-            ],
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "description": "Recognized entities in the document.",
+                    "items": {
+                        "$ref": "#/definitions/Entity"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "entities": {
-                            "type": "array",
-                            "description": "Recognized entities in the document.",
-                            "items": {
-                                "$ref": "#/definitions/Entity"
-                            }
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "entities"
             ]
         },
         "Entity": {
@@ -1455,31 +1471,29 @@
         },
         "EntityLinkingResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            },
+                            {
+                                "$ref": "#/definitions/LinkedEntitiesRecordResult"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/LinkedEntitiesRecordResult"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "LinkedEntitiesRecordResult": {
@@ -1487,20 +1501,18 @@
             "required": [
                 "entities"
             ],
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "description": "Recognized well known entities in the record.",
+                    "items": {
+                        "$ref": "#/definitions/LinkedEntity"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "entities": {
-                            "type": "array",
-                            "description": "Recognized well known entities in the record.",
-                            "items": {
-                                "$ref": "#/definitions/LinkedEntity"
-                            }
-                        }
-                    }
                 }
             ]
         },
@@ -1632,58 +1644,54 @@
         },
         "PiiResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            },
+                            {
+                                "$ref": "#/definitions/PiiEntitiesRecordResult"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PiiEntitiesRecordResult"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "PiiEntitiesRecordResult": {
             "type": "object",
-            "required": [
-                "redactedText",
-                "entities"
-            ],
+            "properties": {
+                "redactedText": {
+                    "type": "string",
+                    "description": "Returns redacted text."
+                },
+                "entities": {
+                    "type": "array",
+                    "description": "Recognized entities in the record.",
+                    "items": {
+                        "$ref": "#/definitions/Entity"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "redactedText": {
-                            "type": "string",
-                            "description": "Returns redacted text."
-                        },
-                        "entities": {
-                            "type": "array",
-                            "description": "Recognized entities in the record.",
-                            "items": {
-                                "$ref": "#/definitions/Entity"
-                            }
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "redactedText",
+                "entities"
             ]
         },
         "PiiCategories": {
@@ -1896,7 +1904,6 @@
         },
         "ExtractiveSummarizationTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -1929,53 +1936,49 @@
         },
         "ExtractiveSummarizationResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ExtractedSummaryRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/ExtractedSummaryRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "ExtractedSummaryRecordResult": {
             "type": "object",
-            "required": [
-                "sentences"
-            ],
+            "properties": {
+                "sentences": {
+                    "type": "array",
+                    "description": "A ranked list of sentences representing the extracted summary.",
+                    "items": {
+                        "$ref": "#/definitions/ExtractedSummarySentence"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "sentences": {
-                            "type": "array",
-                            "description": "A ranked list of sentences representing the extracted summary.",
-                            "items": {
-                                "$ref": "#/definitions/ExtractedSummarySentence"
-                            }
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "sentences"
             ]
         },
         "ExtractedSummarySentence": {
@@ -2010,7 +2013,6 @@
         },
         "KeyPhraseTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -2040,53 +2042,49 @@
         },
         "KeyPhraseResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/KeyPhrasesRecordResult"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordDetectedLanguage"
+                            }
+                        ]
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/KeyPhrasesRecordResult"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/RecordDetectedLanguage"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "KeyPhrasesRecordResult": {
             "type": "object",
-            "required": [
-                "keyPhrases"
-            ],
+            "properties": {
+                "keyPhrases": {
+                    "type": "array",
+                    "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input record.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "keyPhrases": {
-                            "type": "array",
-                            "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input record.",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "keyPhrases"
             ]
         },
         "LanguageDetectionTaskParameters": {
@@ -2094,14 +2092,11 @@
             "description": "Parameters object for a Language Detection task.",
             "properties": {
                 "regionHint": {
-                    "type": "string",
-                    "description": "TODO"
-                }
+                    "type": "string"                }
             }
         },
         "LanguageDetectionTask": {
             "type": "object",
-            "description": "TODO",
             "properties": {
                 "parameters": {
                     "allOf": [
@@ -2126,43 +2121,39 @@
         },
         "LanguageDetectionResult": {
             "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "description": "Response by record",
+                    "items": {
+                        "$ref": "#/definitions/LanguageDetectionRecordResult"
+                    }
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/PreBuiltResult"
-                },
-                {
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "description": "Response by record",
-                            "items": {
-                                "$ref": "#/definitions/LanguageDetectionRecordResult"
-                            }
-                        }
-                    },
-                    "required": [
-                        "records"
-                    ]
                 }
+            ],
+            "required": [
+                "records"
             ]
         },
         "LanguageDetectionRecordResult": {
             "type": "object",
-            "required": [
-                "detectedLanguage"
-            ],
+            "properties": {
+                "detectedLanguage": {
+                    "description": "Detected Language.",
+                    "$ref": "#/definitions/DetectedLanguage"
+                }
+            },
             "allOf": [
                 {
                     "$ref": "#/definitions/RecordResult"
-                },
-                {
-                    "properties": {
-                        "detectedLanguage": {
-                            "description": "Detected Language.",
-                            "$ref": "#/definitions/DetectedLanguage"
-                        }
-                    }
                 }
+            ],
+            "required": [
+                "detectedLanguage"
             ]
         },
         "DetectedLanguage": {
@@ -2501,6 +2492,12 @@
                         "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
                     }
                 ]
+            }
+        },
+        "DocumentResponse": {
+            "type": "object",
+            "properties": {
+
             }
         },
         "RecordResult": {
