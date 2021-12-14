@@ -2282,6 +2282,15 @@
             "type": "string"
           },
           {
+            "name": "policyProperties",
+            "in": "body",
+            "description": "Properties required to create a new policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyParameters"
+            }
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -2332,7 +2341,7 @@
             "type": "string"
           },
           {
-            "name": "PolicyName",
+            "name": "policyName",
             "in": "path",
             "description": "Name of the policy under the profile which is unique globally.",
             "required": true,
@@ -6678,18 +6687,12 @@
       "description": "The JSON object that contains the properties of the Policy to create.",
       "type": "object",
       "required": [
-        "Name",
         "ServiceType"
       ],
       "properties": {
-        "PolicyName": {
-          "description": "The policy name of the profile",
-          "type": "string"
-        },
         "ServiceType": {
           "description": "Service type of the policy",
           "type": "string"
-
         },
         "resourceState": {
           "description": "Resource status of the policy.",
@@ -6708,6 +6711,28 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the policy.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyParameters": {
+      "description": "The policy JSON object required for policy creation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyPropertiesParameters"
+        }
+      }
+    },
+    "PolicyPropertiesParameters": {
+      "description": "The JSON object that contains the properties of policy to create.",
+      "required": [
+        "serviceType"
+      ],
+      "properties": {
+        "serviceType": {
+          "description": "The serviceType of the policy.",
           "type": "string"
         }
       }
