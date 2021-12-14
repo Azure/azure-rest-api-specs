@@ -30,7 +30,7 @@
     "/query-knowledgebases/projects": {
       "get": {
         "summary": "Gets all projects for a user.",
-        "operationId": "QuestionAnsweringProjects_ListProjects",
+        "operationId": "QuestionAnsweringAuthoring_ListProjects",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -79,7 +79,7 @@
     "/query-knowledgebases/projects/{projectName}": {
       "get": {
         "summary": "Get the requested project metadata.",
-        "operationId": "QuestionAnsweringProjects_GetProjectDetails",
+        "operationId": "QuestionAnsweringAuthoring_GetProjectDetails",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -116,7 +116,7 @@
       },
       "patch": {
         "summary": "Create or update a project.",
-        "operationId": "QuestionAnsweringProjects_CreateProject",
+        "operationId": "QuestionAnsweringAuthoring_CreateProject",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -168,7 +168,7 @@
       },
       "delete": {
         "summary": "Delete the project.",
-        "operationId": "QuestionAnsweringProjects_DeleteProject",
+        "operationId": "QuestionAnsweringAuthoring_DeleteProject",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -210,7 +210,7 @@
     "/query-knowledgebases/projects/deletion-jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Project delete job.",
-        "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
+        "operationId": "QuestionAnsweringAuthoring_GetDeleteStatus",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -249,7 +249,7 @@
     "/query-knowledgebases/projects/{projectName}/:export": {
       "post": {
         "summary": "Export project metadata and assets.",
-        "operationId": "QuestionAnsweringProjects_Export",
+        "operationId": "QuestionAnsweringAuthoring_Export",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -297,7 +297,7 @@
     "/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Export job, once job completes, returns the project metadata, and assets.",
-        "operationId": "QuestionAnsweringProjects_GetExportStatus",
+        "operationId": "QuestionAnsweringAuthoring_GetExportStatus",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -339,7 +339,7 @@
     "/query-knowledgebases/projects/{projectName}/:import": {
       "post": {
         "summary": "Import project assets.",
-        "operationId": "QuestionAnsweringProjects_Import",
+        "operationId": "QuestionAnsweringAuthoring_Import",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -395,7 +395,7 @@
     "/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Import job.",
-        "operationId": "QuestionAnsweringProjects_GetImportStatus",
+        "operationId": "QuestionAnsweringAuthoring_GetImportStatus",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -437,7 +437,7 @@
     "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
       "put": {
         "summary": "Deploy project to production.",
-        "operationId": "QuestionAnsweringProjects_DeployProject",
+        "operationId": "QuestionAnsweringAuthoring_DeployProject",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -482,7 +482,7 @@
     "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Deploy job.",
-        "operationId": "QuestionAnsweringProjects_GetDeployStatus",
+        "operationId": "QuestionAnsweringAuthoring_GetDeployStatus",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -527,7 +527,7 @@
     "/query-knowledgebases/projects/{projectName}/deployments": {
       "get": {
         "summary": "List all deployments of a project.",
-        "operationId": "QuestionAnsweringProjects_ListDeployments",
+        "operationId": "QuestionAnsweringAuthoring_ListDeployments",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -579,7 +579,7 @@
     "/query-knowledgebases/projects/{projectName}/synonyms": {
       "get": {
         "summary": "Gets all the synonyms of a project.",
-        "operationId": "QuestionAnsweringProjects_GetSynonyms",
+        "operationId": "QuestionAnsweringAuthoring_GetSynonyms",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -629,7 +629,7 @@
       },
       "put": {
         "summary": "Updates all the synonyms of a project.",
-        "operationId": "QuestionAnsweringProjects_UpdateSynonyms",
+        "operationId": "QuestionAnsweringAuthoring_UpdateSynonyms",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -674,7 +674,7 @@
     "/query-knowledgebases/projects/{projectName}/sources": {
       "get": {
         "summary": "Gets all the sources of a project.",
-        "operationId": "QuestionAnsweringProjects_GetSources",
+        "operationId": "QuestionAnsweringAuthoring_GetSources",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -724,7 +724,7 @@
       },
       "patch": {
         "summary": "Updates the sources of a project.",
-        "operationId": "QuestionAnsweringProjects_UpdateSources",
+        "operationId": "QuestionAnsweringAuthoring_UpdateSources",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -775,7 +775,7 @@
     "/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update sources job.",
-        "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
+        "operationId": "QuestionAnsweringAuthoring_GetUpdateSourcesStatus",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -817,7 +817,7 @@
     "/query-knowledgebases/projects/{projectName}/qnas": {
       "get": {
         "summary": "Gets all the QnAs of a project.",
-        "operationId": "QuestionAnsweringProjects_GetQnas",
+        "operationId": "QuestionAnsweringAuthoring_GetQnas",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -870,7 +870,7 @@
       },
       "patch": {
         "summary": "Updates the QnAs of a project.",
-        "operationId": "QuestionAnsweringProjects_UpdateQnas",
+        "operationId": "QuestionAnsweringAuthoring_UpdateQnas",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -921,7 +921,7 @@
     "/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update QnAs job.",
-        "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
+        "operationId": "QuestionAnsweringAuthoring_GetUpdateQnasStatus",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
@@ -962,8 +962,8 @@
     },
     "/query-knowledgebases/projects/{projectName}/feedback": {
       "post": {
-        "summary": "Update Active Learning feedback.",
-        "operationId": "QuestionAnsweringProjects_AddFeedback",
+        "summary": "Add Active Learning feedback.",
+        "operationId": "QuestionAnsweringAuthoring_AddActiveLearningFeedback",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"

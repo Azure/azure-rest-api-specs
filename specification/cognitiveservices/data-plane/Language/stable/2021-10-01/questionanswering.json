@@ -29,8 +29,8 @@
   "paths": {
     "/:query-knowledgebases": {
       "post": {
-        "summary": "Answers the specified question using your knowledge base.",
-        "operationId": "QuestionAnswering_GetAnswers",
+        "summary": "Answers the specified question using your knowledge base. It is the runtime API for Custom Question Answering.",
+        "operationId": "QuestionAnsweringRuntime_GetAnswers",
         "parameters": [
           {
             "$ref": "#/parameters/AnswersOptions"
@@ -74,8 +74,8 @@
     },
     "/:query-text": {
       "post": {
-        "summary": "Answers the specified question using the provided text in the body.",
-        "operationId": "QuestionAnswering_GetAnswersFromText",
+        "summary": "Answers the specified question using the provided text in the body. It is the runtime API for Prebuilt Question Answering.",
+        "operationId": "QuestionAnsweringRuntime_GetAnswersFromText",
         "parameters": [
           {
             "$ref": "#/parameters/AnswersFromTextOptions"
