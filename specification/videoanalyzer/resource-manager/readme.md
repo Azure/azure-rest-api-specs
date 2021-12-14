@@ -25,7 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the videoanalyzer.
 
 ```yaml
-title: VideoAnalyzer
+title: VideoAnalyzerManagementClient
 description: Azure Video Analyzer provides a platform for you to build intelligent video applications that span the edge and the cloud
 openapi-type: arm
 tag: package-preview-2021-11
