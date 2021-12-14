@@ -29,7 +29,7 @@
     "paths": {
         "/:analyze-text": {
             "post": {
-                "summary": "",
+                "summary": "Request text analysis over a collection of documents.",
                 "description": "",
                 "operationId": "AnalyzeText",
                 "consumes": [
@@ -71,8 +71,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Successful Text Analysis Request": {
-                        "$ref": ".//examples//SuccessfulAnalyzeTextRequest.json"
+                    "Successful Sentiment Analysis Request": {
+                        "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
                     }
                 }
             }
@@ -215,7 +215,7 @@
                 },
                 "x-ms-examples": {
                   "Successful Delete Text Analysis Job Request": {
-                    "$ref": ".//examples//SuccessfulAnalyzeTextJobDeleteRequest.json"
+                    "$ref": "./examples/SuccessfulAnalyzeTextJobDeleteRequest.json"
                   }
                 },
                 "x-ms-long-running-operation": true
@@ -232,7 +232,6 @@
                 "PiiEntityRecognition",
                 "KeyPhraseExtraction",
                 "EntityLinking",
-                "LanguageDetection",
                 "Healthcare",
                 "ExtractiveSummarization",
                 "CustomEntityRecogntion",
@@ -266,26 +265,118 @@
             }
         },
         "AnalyzeTextResponse": {
+            "type": "object",
+            "discriminator": "task",
             "properties": {
-                "sentimentAnalysis": {
+                "task": {
+                    "$ref": "#/definitions/AnalyzeTextTaskKind"
+                }
+            },
+            "required": [
+                "task"
+            ]
+        },
+        "AnalyzeTextSentimentResponse": {
+            "type": "object",
+            "properties": {
+                "result": {
                     "$ref": "#/definitions/SentimentResponse"
-                },
-                "entityRecognition": {
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextResponse"
+                }
+            ],
+            "required": [
+                "result"
+            ],
+            "x-ms-discriminator-value": "SentimentAnalysis"
+        },
+        "AnalyzeTextEntityRecognitionResponse": {
+            "type": "object",
+            "properties": {
+                "result": {
                     "$ref": "#/definitions/EntitiesResult"
-                },
-                "piiEntityRecognition": {
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextResponse"
+                }
+            ],
+            "required": [
+                "result"
+            ],
+            "x-ms-discriminator-value": "EntityRecognition"
+        },
+        "AnalyzeTextPiiEntityRecognitionResponse": {
+            "type": "object",
+            "properties": {
+                "result": {
                     "$ref": "#/definitions/PiiResult"
-                },
-                "keyPhraseExtraction": {
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextResponse"
+                }
+            ],
+            "required": [
+                "result"
+            ],
+            "x-ms-discriminator-value": "PiiEntityRecognition"
+        },
+        "AnalyzeTextKeyPhraseExtractionResponse": {
+            "type": "object",
+            "properties": {
+                "result": {
                     "$ref": "#/definitions/KeyPhraseResult"
-                },
-                "entityLinking": {
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextResponse"
+                }
+            ],
+            "required": [
+                "result"
+            ],
+            "x-ms-discriminator-value": "KeyPhraseExtraction"
+        },
+        "AnalyzeTextEntityLinkingResponse": {
+            "type": "object",
+            "properties": {
+                "result": {
                     "$ref": "#/definitions/EntityLinkingResult"
-                },
-                "languageDetection": {
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextResponse"
+                }
+            ],
+            "required": [
+                "result"
+            ],
+            "x-ms-discriminator-value": "EntityLinking"
+        },
+        "AnalyzeTextLanguageDetectionResponse": {
+            "type": "object",
+            "properties": {
+                "result": {
                     "$ref": "#/definitions/LanguageDetectionResult"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextResponse"
+                }
+            ],
+            "required": [
+                "result"
+            ],
+            "x-ms-discriminator-value": "LanguageDetection"
         },
         "AnalyzeTextJobsInput": {
             "properties": {
