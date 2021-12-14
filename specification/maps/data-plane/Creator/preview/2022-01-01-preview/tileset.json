@@ -132,7 +132,7 @@
             "description": "The custom tileset recipe to use.",
             "required": false,
             "schema": {
-              "type": "json"
+              "$ref": "#/definitions/TilesetRecipe"
             }      
           }
         ],
@@ -293,6 +293,15 @@
           },
           {
             "$ref": "#/parameters/DatasetIdQuery"
+          },
+          {
+            "name": "TilesetRecipe",
+            "in": "body",
+            "description": "The custom tileset recipe to use.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TilesetRecipe"
+            }      
           }
         ],
         "responses": {
