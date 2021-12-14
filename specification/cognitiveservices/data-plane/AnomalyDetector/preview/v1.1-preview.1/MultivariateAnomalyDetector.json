@@ -48,7 +48,7 @@
       "post": {
         "responses": {
           "201": {
-            "description": "Submit a multivariate model training task successfully.",
+            "description": "Create and train a multivariate anomaly detection model.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -58,7 +58,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -103,7 +102,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -171,7 +169,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -212,7 +209,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -251,7 +247,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -316,7 +311,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -356,20 +350,13 @@
         "responses": {
           "200": {
             "description": "Export the multivariate model as a zip package.",
-            "headers": {
-              "content-type": {
-                "description": "application/zip",
-                "type": "string"
-              }
-            },
             "schema": {
-              "type": "object",
-              "format": "file"
+              "type": "string",
+              "format": "binary"
             }
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -437,7 +424,6 @@
           },
           "default": {
             "description": "Error response",
-            "x-ms-error-response": true,
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
