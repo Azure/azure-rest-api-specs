@@ -35,10 +35,6 @@
         "sourceConnectionInfo": {
           "description": "Connection information for source PostgreSQL",
           "$ref": "./Common.json#/definitions/PostgreSqlConnectionInfo"
-        },
-        "encryptedKeyForSecureFields": {
-          "type": "string",
-          "description": "encrypted key for secure fields"
         }
       },
       "required": [
@@ -116,10 +112,6 @@
           "$ref": "./TasksCommon.json#/definitions/ReplicateMigrationState",
           "description": "Migration status",
           "readOnly": true
-        },
-        "databaseCount": {
-          "type": "number",
-          "description": "Number of databases to include"
         }
       },
       "allOf": [
@@ -320,10 +312,6 @@
           "$ref": "./Common.json#/definitions/ReportableException",
           "description": "Migration error",
           "readOnly": true
-        },
-        "events": {
-          "type": "array",
-          "description": "List of error events"
         }
       },
       "allOf": [

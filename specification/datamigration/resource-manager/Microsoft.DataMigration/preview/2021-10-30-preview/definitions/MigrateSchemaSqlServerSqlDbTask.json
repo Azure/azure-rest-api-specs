@@ -33,14 +33,6 @@
             "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput"
           },
           "readOnly": true
-        },
-        "createdOn": {
-          "type": "string",
-          "description": "DateTime in UTC when the task was created"
-        },
-        "taskId": {
-          "type": "string",
-          "description": "Task id "
         }
       },
       "allOf": [
@@ -59,14 +51,6 @@
           "items": {
             "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbDatabaseInput"
           }
-        },
-        "encryptedKeyForSecureFields": {
-          "type": "string",
-          "description": "encrypted key for secure fields"
-        },
-        "startedOn": {
-          "type": "string",
-          "description": "Migration start time"
         }
       },
       "required": [
@@ -85,10 +69,6 @@
         "name": {
           "type": "string",
           "description": "Name of source database"
-        },
-        "id": {
-          "type": "string",
-          "description": "Id of the source database"
         },
         "targetDatabaseName": {
           "type": "string",
@@ -111,10 +91,6 @@
         "fileId": {
           "type": "string",
           "description": "Resource Identifier of a file resource containing the uploaded schema file"
-        },
-        "fileName": {
-          "type": "string",
-          "description": "Name of the file resource containing the uploaded schema file"
         }
       }
     },
