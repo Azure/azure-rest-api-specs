@@ -36,9 +36,9 @@ These settings apply only when `--tag=package-2022-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
-  - Microsoft.MachineLearningServices/stable/2022-01-01-preview/machineLearningServices.json
-  - Microsoft.MachineLearningServices/stable/2022-01-01-preview/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/stable/2022-01-01-preview/workspaceSkus.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceSkus.json
 ```
 
 ### Tag: package-2021-07-01
