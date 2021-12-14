@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2021-07-01"
+    "version": "2022-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available Azure Machine Learning Workspaces REST API operations.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -2091,6 +2096,16 @@
         "hbiWorkspace": {
           "type": "boolean",
           "description": "The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service",
+          "default": false
+        },
+        "softDeleteEnabled": {
+          "type": "boolean",
+          "description": "create a workspace with soft delete capability",
+          "default": false
+        },
+        "recoverWorkspace": {
+          "type": "boolean",
+          "description": "recover a soft-deleted workspace",
           "default": false
         },
         "serviceProvisionedResourceGroup": {
@@ -4490,6 +4505,18 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Customer Key vault properties."
+        },
+        "cosmosDbArmId": {
+          "description": "The byok cosmosdb account that customer brings to store customer's data",
+          "type": "string"
+        },
+        "storageAccountArmId": {
+          "description": "The byok storage account that customer brings to store customer's data",
+          "type": "string"
+        },
+        "searchAccountArmId": {
+          "description": "The byok search account that customer brings to store customer's data",
+          "type": "string"
         }
       },
       "required": [

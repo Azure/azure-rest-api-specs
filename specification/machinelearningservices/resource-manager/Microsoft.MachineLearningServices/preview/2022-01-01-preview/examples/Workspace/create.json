@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "workspace-1234",
     "workspaceName": "testworkspace",
-    "api-version": "2021-07-01",
+    "api-version": "2022-01-01-preview",
     "parameters": {
       "location": "eastus2euap",
       "identity": {
@@ -28,9 +28,13 @@
             "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
             "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
             "identityClientId": ""
-          }
+          },
+          "cosmosDbArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDb/databaseAccounts/byo-cosmosdb",
+          "storageAccountArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.Storage/storageAccounts/byostorage",
+          "searchAccountArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.Search/searchServices/byo-search"
         },
         "hbiWorkspace": false,
+        "softDeleteEnabled": true,
         "sharedPrivateLinkResources": [
           {
             "name": "testdbresource",
