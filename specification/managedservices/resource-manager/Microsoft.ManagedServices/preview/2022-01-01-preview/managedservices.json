@@ -312,6 +312,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Filter"
           }
         ],
         "responses": {
@@ -334,6 +337,12 @@
         "x-ms-examples": {
           "Get Registration Definitions": {
             "$ref": "./examples/GetRegistrationDefinitions.json"
+          },
+          "Get Registration Definitions with ManagedByTenantId eq filter": {
+            "$ref": "./examples/GetRegistrationDefinitionsWithManagedByTenantIdEqFilter.json"
+          },
+          "Get Registration Definitions with ManagedByTenantId in filter": {
+            "$ref": "./examples/GetRegistrationDefinitionsWithManagedByTenantIdInFilter.json"
           }
         }
       }
@@ -354,6 +363,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Filter"
           }
         ],
         "responses": {
@@ -376,6 +388,12 @@
         "x-ms-examples": {
           "Get Registration Assignments": {
             "$ref": "./examples/GetRegistrationAssignments.json"
+          },
+          "Get Registration Assignments with ManagedByTenantId eq filter": {
+            "$ref": "./examples/GetRegistrationAssignmentsWithManagedByTenantIdEqFilter.json"
+          },
+          "Get Registration Assignments with ManagedByTenantId in filter": {
+            "$ref": "./examples/GetRegistrationAssignmentsWithManagedByTenantIdInFilter.json"
           }
         }
       }
@@ -595,6 +613,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The name of the registration definition."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The metadata for the registration assignment resource.",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -713,6 +736,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The name of the registration assignment."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The metadata for the registration assignment resource.",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -834,6 +862,11 @@
               "readOnly": true,
               "type": "string",
               "description": "The name of the registration definition."
+            },
+            "systemData": {
+              "readOnly": true,
+              "description": "The metadata for the registration definition resource.",
+              "$ref": "#/definitions/SystemData"
             }
           },
           "type": "object",
@@ -1168,6 +1201,39 @@
           "type": "object"
         }
       }
+    },
+    "SystemData": {
+      "readOnly": true,
+      "type": "object",
+      "description": "The metadata associated with an Azure resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "A string identifier for the identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource: user, application, managedIdentity."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "A string identifier for the identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
     }
   },
   "parameters": {
@@ -1223,7 +1289,7 @@
       "in": "query",
       "x-ms-parameter-location": "method",
       "type": "string",
-      "description": "The filter query parameter to filter marketplace registration definitions by plan identifier, publisher, version etc."
+      "description": "The filter query parameter to filter managed services resources by."
     }
   }
 }
