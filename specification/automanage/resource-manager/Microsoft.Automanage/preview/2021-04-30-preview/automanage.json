@@ -1283,6 +1283,49 @@
           "application/json"
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/listServicePrincipalId": {
+      "post": {
+        "tags": [
+          "serviceprincipalid"
+        ],
+        "operationId": "serviceprincipalid_List",
+        "description": "Returns the Automanage's ADD first party Application Service Principal Id for the subscription.",
+        "x-ms-examples": {
+          "List reports by configuration profiles assignment": {
+            "$ref": "./examples/listServicePrincipalId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Automanage's ADD first party Application Service Principal Id for the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalId"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1609,6 +1652,17 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "readOnly": true,
           "description": "Error message, if any, returned when deploying the resource."
+        }
+      }
+    },
+    "ServicePrincipalId": {
+      "description": "The Service Principal Id for the subscription.",
+      "type": "object",
+      "properties": {
+        "servicePrincipalid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Service Principal Id for the subscription."
         }
       }
     }
