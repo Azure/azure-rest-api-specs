@@ -61,6 +61,13 @@
           },
           "default": {
             "description": "Error response.",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnomalyDetectorError"
             }
@@ -104,6 +111,13 @@
           },
           "default": {
             "description": "Error response.",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnomalyDetectorError"
             }
@@ -147,6 +161,13 @@
           },
           "default": {
             "description": "Error response.",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnomalyDetectorError"
             }
@@ -289,6 +310,7 @@
     },
     "DetectRequest": {
       "type": "object",
+      "description": "The request of entire or last anomaly detection.",
       "required": [
         "series"
       ],
@@ -334,6 +356,7 @@
     },
     "TimeSeriesPoint": {
       "type": "object",
+      "description": "The definition of input timeseries points.",
       "required": [
         "value"
       ],
@@ -352,6 +375,7 @@
     },
     "EntireDetectResponse": {
       "type": "object",
+      "description": "The response of entire anomaly detection.",
       "required": [
         "expectedValues",
         "isAnomaly",
@@ -424,6 +448,7 @@
     },
     "LastDetectResponse": {
       "type": "object",
+      "description": "The response of last anomaly detection.",
       "required": [
         "expectedValue",
         "isAnomaly",
@@ -481,6 +506,7 @@
     },
     "ChangePointDetectRequest": {
       "type": "object",
+      "description": "The request of change point detection.",
       "required": [
         "granularity",
         "series"
@@ -520,6 +546,7 @@
     },
     "ChangePointDetectResponse": {
       "type": "object",
+      "description": "The response of change point detection.",
       "properties": {
         "period": {
           "type": "integer",
