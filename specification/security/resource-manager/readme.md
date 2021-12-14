@@ -80,8 +80,6 @@ These settings apply only when `--tag=package-preview-2021-12` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-12'
 input-file:
-  - Microsoft.Security/preview/2021-12-01-preview/customAssessmentAutomation.json
-  - Microsoft.Security/preview/2021-12-01-preview/customEntityStoreAssignment.json
   - Microsoft.Security/preview/2021-12-01-preview/securityConnectors.json
 ```
 ### Tag: package-preview-2021-08
