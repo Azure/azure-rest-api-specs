@@ -5001,7 +5001,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SchemaContractProperties",
-          "description": "Properties of the Schema."
+          "description": "Properties of the API Schema."
         }
       },
       "allOf": [
@@ -5009,7 +5009,7 @@
           "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Schema Contract details."
+      "description": "API Schema Contract details."
     },
     "SchemaContractProperties": {
       "properties": {
@@ -5020,7 +5020,7 @@
         "document": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SchemaDocumentProperties",
-          "description": "Create or update Properties of the Schema Document."
+          "description": "Create or update Properties of the API Schema Document."
         }
       },
       "required": [
@@ -5036,14 +5036,101 @@
         },
         "definitions": {
           "type": "object",
-          "description": "Types definitions. Used for OpenAPI v2 (Swagger) schemas only, null otherwise."
+          "description": "Types definitions. Used for Swagger/OpenAPI v1 schemas only, null otherwise."
         },
         "components": {
           "type": "object",
-          "description": "Types definitions. Used for OpenAPI v3 schemas only, null otherwise."
+          "description": "Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only, null otherwise."
         }
       },
-      "description": "Schema Document Properties."
+      "description": "Api Schema Document Properties."
+    },
+    "GlobalSchemaCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GlobalSchemaContract"
+          },
+          "description": "Global Schema Contract value.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "The response of the list schema operation."
+    },
+    "GlobalSchemaContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GlobalSchemaContractProperties",
+          "description": "Properties of the Global Schema."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Global Schema Contract details."
+    },
+    "GlobalSchemaContractProperties": {
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "description": "Schema Type. Immutable.",
+          "enum": [
+            "xml",
+            "json"
+          ],
+          "x-ms-client-name": "SchemaType",
+          "x-ms-enum": {
+            "name": "SchemaType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "xml",
+                "description": "Xml schema type.",
+                "name": "Xml"
+              },
+              {
+                "value": "json",
+                "description": "Json schema type.",
+                "name": "Json"
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form schema entity description."
+        },
+        "value": {
+          "description": "Json-encoded string for non json-based schema."
+        },
+        "document": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GlobalSchemaDocumentProperties",
+          "description": "Global Schema document object for json-based schema formats(e.g. json schema)."
+        }
+      },
+      "required": [
+        "schemaType"
+      ],
+      "description": "Schema create or update contract Properties."
+    },
+    "GlobalSchemaDocumentProperties": {
+      "type": "object",
+      "description": "Global Schema Document Properties."
     },
     "SubscriptionCollection": {
       "properties": {

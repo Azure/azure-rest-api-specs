@@ -78,6 +78,7 @@ input-file:
   - Microsoft.ApiManagement/stable/2021-08-01/apimquotas.json
   - Microsoft.ApiManagement/stable/2021-08-01/apimregions.json
   - Microsoft.ApiManagement/stable/2021-08-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2021-08-01/apimschema.json
   - Microsoft.ApiManagement/stable/2021-08-01/apimsettings.json
   - Microsoft.ApiManagement/stable/2021-08-01/apimskus.json
   - Microsoft.ApiManagement/stable/2021-08-01/apimsubscriptions.json
