@@ -37,7 +37,7 @@ These settings apply only when `--tag=release_2_0_preview` is specified on the c
 input-file:
   - preview/v2.0-preview/AnomalyDetector.json
   - preview/v2.0-preview/MultivariateAnomalyDetector.json
-  - preview/v2.0-preview/MultidimensionalRootCauseAnalysis.json
+  - preview/v2.0-preview/RootCauseAnalysis.json
 ```
 
 ## Swagger to SDK
