@@ -2438,9 +2438,7 @@
           "readOnly": true
         },
         "boundingBox": {
-          "description": "Bounding box coordinates.",
-          "type": "object",
-          "readOnly": true
+          "$ref": "#/definitions/BoundingBoxCompassNotation"
         }
       }
     },
@@ -2469,6 +2467,41 @@
         "btmRightPoint": {
           "x-ms-client-name": "bottomRight",
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPairAbbreviated"
+        }
+      }
+    },
+    "BoundingBoxCompassNotation": {
+      "description": "The bounding box of the location.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "northEast": {
+          "description": "North-east (top-left) latitude,longitude coordinate of the bounding box as comma-separated floats",
+          "type": "string",
+          "readOnly": true
+        },
+        "southWest": {
+          "description": "South-west (bottom-right) latitude,longitude coordinate of the bounding box as comma-separated floats",
+          "type": "string",
+          "readOnly": true
+        },
+        "entity": {
+          "description": "Entity type source of the bounding box. For reverse-geocoding this is always equal to position.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "position"
+          ],
+          "x-ms-enum": {
+            "name": "Entity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "position",
+                "description": "Position entity"
+              }
+            ]
+          }
         }
       }
     },
