@@ -46,7 +46,6 @@ input-file:
   - preview/2.0/dataset.json
   - preview/2.0/dwgconversion.json
   - preview/2.0/featurestate.json
-  - preview/1.0/spatial.json
   - preview/2.0/tileset.json
   - preview/2.0/wfs.json
 ```
