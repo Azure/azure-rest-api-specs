@@ -2427,6 +2427,98 @@
         }
       }
     },
+    "/glossary/terms/bulkDeletion/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Glossary"
+        ],
+        "description": "Get the status of bulk delete operation",
+        "operationId": "Glossary_GetBulkDeleteOperationStatus",
+        "x-ms-examples": {
+          "Glossary_GetBulkDeleteOperationStatus": {
+            "$ref": "./examples/Glossary_GetBulkDeleteOperationStatusByOperationguid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of bulk delete operation.",
+            "schema": {
+              "$ref": "#/definitions/BulkDeleteOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/glossary/terms": {
+      "delete": {
+        "tags": [
+          "Glossary"
+        ],
+        "description": "Delete Glossary Terms",
+        "operationId": "Glossary_DeleteGlossaryTerms",
+        "x-ms-examples": {
+          "Glossary_DeleteGlossaryTerms": {
+            "$ref": "./examples/Glossary_GetBulkDeleteOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/forceDeleteEntityAssignment"
+          },
+          {
+            "$ref": "#/parameters/forceDeleteChild"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "termGuids",
+            "description": "An array of term guids to be deleted.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "An array of term guids to be deleted.",
+              "items": {
+                "$ref": "#/definitions/TermGuid"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to delete glossary terms has been accepted.",
+            "schema": {
+              "$ref": "#/definitions/BulkDeleteOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/search/query": {
       "post": {
         "tags": [
@@ -6349,6 +6441,77 @@
       "title": "ImportCSVOperationStatus",
       "description": "Enum of the status of import csv operation."
     },
+    "BulkDeleteOperation": {
+      "type": "object",
+      "title": "Status of bulk delete operation",
+      "description": "The status of bulk delete operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "guid string"
+        },
+        "status": {
+          "$ref": "#/definitions/BulkDeleteOperationStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The created time of the record."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The last updated time of the record."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BulkDeleteOperationProperties"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BulkDeleteOperationError"
+        }
+      }
+    },
+    "BulkDeleteOperationProperties": {
+      "type": "object",
+      "properties": {
+        "deletedTerms": {
+          "type": "string",
+          "description": "Term numbers that already deleted successfully"
+        },
+        "totalTermsDetected": {
+          "type": "string",
+          "description": "Total term numbers that detected in a bulk delete job"
+        }
+      }
+    },
+    "BulkDeleteOperationError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "description": "Error code from async bulk delete job if fail"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message from async bulk delete job if fail"
+        }
+      }
+    },
+    "BulkDeleteOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Succeeded",
+        "Failed",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "BulkDeleteOperationStatus",
+        "modelAsString": true
+      },
+      "title": "BulkDeleteOperationStatus",
+      "description": "Enum of the status of bulk delete operation."
+    },
     "LastModifiedTS": {
       "type": "string",
       "title": "lastModifiedTS",
@@ -6832,6 +6995,24 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "forceDeleteEntityAssignment": {
+      "name": "forceDeleteEntityAssignment",
+      "description": "Whether delete entity assignment",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "forceDeleteChild": {
+      "name": "forceDeleteChild",
+      "description": "Whether delete child terms together with the parent term",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     }
   }
