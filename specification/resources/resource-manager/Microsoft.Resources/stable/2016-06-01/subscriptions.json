@@ -197,9 +197,8 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
-          }
         },
         "x-ms-examples": {
           "GetLogicalZoneMapping": {
@@ -464,15 +463,6 @@
         }
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "An error response for a resource management request."
     },
     "ErrorResponse": {
       "description": "Error response.",
