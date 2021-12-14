@@ -901,9 +901,8 @@ directive:
 ``` yaml ($(go) && !$(track2)) || $(csharp) || $(validation)
 directive:
 - from: activityLogAlerts_API.json
-  where: $.definitions.Resource
-  transform: >
-    $["x-ms-client-name"] = "ActivityLogAlertsResource"
+  where: $.definitions
+  transform: delete $["Resource"]
   reason: Missing kind, etag
 - from: activityLogAlerts_API.json
   where: $.definitions
