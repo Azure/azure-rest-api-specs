@@ -1287,12 +1287,12 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/listServicePrincipalId": {
       "post": {
         "tags": [
-          "serviceprincipalid"
+          "servicePrincipalId"
         ],
-        "operationId": "serviceprincipalid_List",
-        "description": "Returns the Automanage's ADD first party Application Service Principal Id for the subscription.",
+        "operationId": "servicePrincipalId_List",
+        "description": "Returns the Automanage ADD first party Application Service Principal Id for the subscription.",
         "x-ms-examples": {
-          "List reports by configuration profiles assignment": {
+          "List service principal id": {
             "$ref": "./examples/listServicePrincipalId.json"
           }
         },
@@ -1306,7 +1306,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the Automanage's ADD first party Application Service Principal Id for the subscription.",
+            "description": "Returns the Automanage ADD first party Application Service Principal Id for the subscription.",
             "schema": {
               "$ref": "#/definitions/ServicePrincipalId"
             }
@@ -1659,10 +1659,12 @@
       "description": "The Service Principal Id for the subscription.",
       "type": "object",
       "properties": {
-        "servicePrincipalid": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Service Principal Id for the subscription."
+        "properties": {
+          "servicePrincipalid": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The Service Principal Id for the subscription."
+          }
         }
       }
     }
