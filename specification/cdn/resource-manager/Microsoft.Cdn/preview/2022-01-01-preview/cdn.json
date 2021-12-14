@@ -6623,50 +6623,49 @@
       "description": "Input of ApplyPolicy API.",
       "type": "object",
       "required": [
-        "customerConfig",
-        "serviceType"
+        "customerConfig"
       ],
       "properties": {
         "customerConfig": {
           "description": "Json blob containing config",
           "type": "string"
-         }
+        }
       },
       "additionalProperties": false
     },
     "ApplyPolicyOutput": {
       "description": "Output of ApplyPolicy API",
-        "type": "object",
-        "properties": {
-          "DeploymentStatusId": {
-            "description": "Status ID of the Policy deployment",
-            "type": "integer",
-            "format": "int64"
-          },
-          "status": {
-            "description": "Status of the Policy deployment",
-            "readOnly": true,
-            "enum": [
-              "NotStarted",
-              "InRollout",
-              "InRollback",
-              "RolledBack",
-              "Committing",
-              "Committed"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "PolicyDeploymentState",
-              "modelAsString": true
-            }
-          },
-          "creationTime": {
-            "description": "Creation time of the deployment",
-            "type": "string",
-            "format": "date-time"
+      "type": "object",
+      "properties": {
+        "DeploymentStatusId": {
+          "description": "Status ID of the Policy deployment",
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "description": "Status of the Policy deployment",
+          "readOnly": true,
+          "enum": [
+            "NotStarted",
+            "InRollout",
+            "InRollback",
+            "RolledBack",
+            "Committing",
+            "Committed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyDeploymentState",
+            "modelAsString": true
           }
         },
-        "additionalProperties": false
+        "creationTime": {
+          "description": "Creation time of the deployment",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
     },
     "Policy": {
       "description": "A policy is a logical grouping of policies",
