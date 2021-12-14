@@ -1343,6 +1343,12 @@
             }
           }
         },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for server.",
+          "readOnly": true
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to create a new PostgreSQL server.",
@@ -1527,12 +1533,6 @@
             "create",
             "read"
           ]
-        },
-        "earliestRestoreDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest restore point time (ISO8601 format) for server.",
-          "readOnly": true
         }
       },
       "description": "Storage Profile properties of a server"
