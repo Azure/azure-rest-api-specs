@@ -298,16 +298,12 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "licenseName",
-            "description": "the license name.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "enable",
-            "description": "enable boolean",
-            "type": "boolean"
+            "in": "body",
+            "name": "body",
+            "description": "the update license services parameters.",
+            "schema": {
+              "$ref": "#/definitions/UpdateLicenseParameters"
+            }
           }
         ],
         "responses": {
@@ -325,6 +321,81 @@
         "x-ms-examples": {
           "Update chamber license": {
             "$ref": "./examples/ChambersLicenseUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.HpcWorkbench/instances/{instanceName}/chambers/{name}/licenseRestart": {
+      "post": {
+        "tags": [
+          "chambers_LicenseRestart"
+        ],
+        "summary": "Perform License Restart operation.",
+        "operationId": "chambers_LicenseRestart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "licenseServices",
+            "description": "the license services name.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ansys",
+                "cadence",
+                "mentor",
+                "synopsys",
+                "all"
+              ],
+              "x-ms-enum": {
+                "name": "LicenseServices",
+                "modelAsString": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./hpcworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Chamber License Restart": {
+            "$ref": "./examples/ChambersLicenseRestart.json"
           }
         }
       }
@@ -682,6 +753,34 @@
           "description": "Gets or sets the size of the file being uploaded.",
           "type": "integer",
           "example": 1073741824
+        }
+      }
+    },
+    "UpdateLicenseParameters": {
+      "description": "File Upload Parameters DTO.",
+      "type": "object",
+      "properties": {
+        "licenseServices": {
+          "description": "Gets or sets the size of the file being uploaded.",
+          "type": "string",
+          "enum": [
+            "ansys",
+            "cadence",
+            "mentor",
+            "synopsys"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseServices",
+            "modelAsString": true
+          }
+        },
+        "enable": {
+          "description": "Switch to show if License Service is activated.",
+          "type": "boolean"
+        },
+        "licenseKey": {
+          "description": "EDA License file contents",
+          "type": "string"
         }
       }
     },
