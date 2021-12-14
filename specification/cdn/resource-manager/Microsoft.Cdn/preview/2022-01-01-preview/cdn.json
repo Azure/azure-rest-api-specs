@@ -2299,13 +2299,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Policy"
             }
           },
           "201": {
-            "description": "Created. The request has been fulfilled and a new rule set has been created.",
+            "description": "Created. The request has been fulfilled and a policy has been created.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Policy"
             }
@@ -6637,7 +6643,7 @@
       "description": "Output of ApplyPolicy API",
       "type": "object",
       "properties": {
-        "DeploymentStatusId": {
+        "deploymentStatusId": {
           "description": "Status ID of the Policy deployment",
           "type": "integer",
           "format": "int64"
