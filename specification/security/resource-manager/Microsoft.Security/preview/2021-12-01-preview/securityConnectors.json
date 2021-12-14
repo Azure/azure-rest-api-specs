@@ -340,7 +340,7 @@
       "properties": {
         "hierarchyIdentifier": {
           "type": "string",
-          "description": "The multi cloud resource identifier (account id in case of AWS connector)."
+          "description": "The multi cloud resource identifier (account id in case of AWS connector, project number in case of GCP connector)."
         },
         "cloudName": {
           "type": "string",
@@ -412,7 +412,8 @@
           "enum": [
             "CspmMonitorAws",
             "DefenderForContainersAws",
-            "DefenderForServersAws"
+            "DefenderForServersAws",
+            "CspmMonitorGcp"
           ],
           "x-ms-enum": {
             "name": "OfferingType",
@@ -545,6 +546,32 @@
                   "description": "name of secret resource in parameter store"
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "cspmMonitorGcpOffering": {
+      "type": "object",
+      "description": "The CSPM monitoring for GCP offering configurations",
+      "x-ms-discriminator-value": "CspmMonitorGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "workloadIdentityProviderId": {
+          "type": "string",
+          "description": "The GCP workload identity provider id for the offering"
+        },
+        "nativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this offering"
             }
           }
         }
