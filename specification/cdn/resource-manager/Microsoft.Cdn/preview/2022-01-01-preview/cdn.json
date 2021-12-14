@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-01-01-preview",
+    "version": "2021-06-01",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -2260,7 +2260,7 @@
         "operationId": "policies_Create",
         "x-ms-examples": {
           "policies_Create": {
-            "$ref": "./examples/Policies_Create.json"
+            "$ref": "./examples/policies_Create.json"
           }
         },
         "parameters": [
@@ -6621,43 +6621,43 @@
         "customerConfig": {
           "description": "Json blob containing config",
           "type": "string"
-        }
+         }
       },
       "additionalProperties": false
     },
     "ApplyPolicyOutput": {
       "description": "Output of ApplyPolicy API",
-      "type": "object",
-      "properties": {
-        "DeploymentStatusId": {
-          "description": "Status ID of the Policy deployment",
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "description": "Status of the Policy deployment",
-          "readOnly": true,
-          "enum": [
-            "NotStarted",
-            "InRollout",
-            "InRollback",
-            "RolledBack",
-            "Committing",
-            "Committed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PolicyDeploymentState",
-            "modelAsString": true
+        "type": "object",
+        "properties": {
+          "DeploymentStatusId": {
+            "description": "Status ID of the Policy deployment",
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "description": "Status of the Policy deployment",
+            "readOnly": true,
+            "enum": [
+              "NotStarted",
+              "InRollout",
+              "InRollback",
+              "RolledBack",
+              "Committing",
+              "Committed"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PolicyDeploymentState",
+              "modelAsString": true
+            }
+          },
+          "creationTime": {
+            "description": "Creation time of the deployment",
+            "type": "string",
+            "format": "date-time"
           }
         },
-        "creationTime": {
-          "description": "Creation time of the deployment",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "additionalProperties": false
+        "additionalProperties": false
     },
     "Policy": {
       "description": "A policy is a logical grouping of policies",
@@ -6689,6 +6689,7 @@
         "ServiceType": {
           "description": "Service type of the policy",
           "type": "string"
+
         },
         "resourceState": {
           "description": "Resource status of the policy.",
@@ -6725,7 +6726,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2022-01-01-preview."
+      "description": "Version of the API to be used with the client request. Current version is 2021-06-01."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
