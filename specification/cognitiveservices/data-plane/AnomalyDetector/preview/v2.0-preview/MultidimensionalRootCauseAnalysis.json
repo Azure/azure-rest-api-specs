@@ -6,13 +6,13 @@
     "version": "2.0-preview"
   },
   "paths": {
-    "/rootCauseAnalysis/multiDimension/dataSets": {
+    "/rootCauseAnalysis/dataSets": {
       "post": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "Create a multidimensional root cause analysis data set",
-        "operationId": "CreateMultiDimRCADataSet",
+        "summary": "Create a root cause analysis data set",
+        "operationId": "CreateRootCauseAnalysisDataSet",
         "consumes": [
           "application/json"
         ],
@@ -23,9 +23,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "create a multidimensional root cause analysis data set request",
+            "description": "create a root cause analysis data set request",
             "schema": {
-              "$ref": "#/definitions/CreateMultiDimRCADatasetRequest"
+              "$ref": "#/definitions/CreateRootCauseAnalysisDatasetRequest"
             }
           }
         ],
@@ -47,17 +47,17 @@
           }
         },
         "x-ms-examples": {
-          "Create a multidimensional root cause analysis data set": {
-            "$ref": "./examples/CreateMultiDimRCADataSet.json"
+          "Create a root cause analysis data set": {
+            "$ref": "./examples/CreateRootCauseAnalysisDataSet.json"
           }
         }
       },
       "get": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "List multidimensional root cause analysis data set",
-        "operationId": "ListMultiDimRCADataSet",
+        "summary": "List root cause analysis data set",
+        "operationId": "ListRootCauseAnalysisDataSet",
         "produces": [
           "application/json"
         ],
@@ -65,7 +65,7 @@
           {
             "in": "query",
             "name": "name",
-            "description": "Multidimensional root cause analysis data set name",
+            "description": "Root cause analysis data set name",
             "type": "string"
           },
           {
@@ -87,7 +87,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCADataSetList"
+              "$ref": "#/definitions/RootCauseAnalysisDataSetList"
             }
           },
           "default": {
@@ -101,19 +101,19 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "List multidimensional root cause analysis data set": {
-            "$ref": "./examples/ListMultiDimRCADataSet.json"
+          "List root cause analysis data set": {
+            "$ref": "./examples/ListRootCauseAnalysisDataSet.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/dataSets/{dataSetId}": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}": {
       "get": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "Get a multidimensional root cause analysis data set by its id",
-        "operationId": "GetMultiDimRCADataSet",
+        "summary": "Get a root cause analysis data set by its id",
+        "operationId": "GetRootCauseAnalysisDataSet",
         "produces": [
           "application/json"
         ],
@@ -121,7 +121,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The multidimensional root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -131,7 +131,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCADataSetDetail"
+              "$ref": "#/definitions/RootCauseAnalysisDataSetDetail"
             }
           },
           "default": {
@@ -142,17 +142,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a multidimensional root cause analysis data set by its id": {
-            "$ref": "./examples/GetMultiDimRCADataSet.json"
+          "Get a root cause analysis data set by its id": {
+            "$ref": "./examples/GetRootCauseAnalysisDataSet.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "Delete a multidimensional root cause analysis data set",
-        "operationId": "DeleteMultiDimRCADataSet",
+        "summary": "Delete a root cause analysis data set",
+        "operationId": "DeleteRootCauseAnalysisADataSet",
         "produces": [
           "application/json"
         ],
@@ -160,7 +160,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The multidimensional root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -178,19 +178,19 @@
           }
         },
         "x-ms-examples": {
-          "Delete a multidimensional root cause analysis data set": {
-            "$ref": "./examples/DeleteMultiDimRCADataSet.json"
+          "Delete a root cause analysis data set": {
+            "$ref": "./examples/DeleteRootCauseAnalysisADataSet.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/dataSets/{dataSetId}/data": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}/data": {
       "put": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "Upload data to multidimensional root cause analysis data set",
-        "operationId": "UploadMultiDimRCAData",
+        "summary": "Upload data to root cause analysis data set",
+        "operationId": "UploadRootCauseAnalysisData",
         "consumes": [
           "application/json"
         ],
@@ -201,7 +201,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The multidimensional root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -209,9 +209,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Data to be uploaded to perform multidimensional root cause analysis",
+            "description": "Data to be uploaded to perform root cause analysis",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCAUploadDataRequest"
+              "$ref": "#/definitions/RootCauseAnalysisUploadDataRequest"
             }
           }
         ],
@@ -233,17 +233,17 @@
           }
         },
         "x-ms-examples": {
-          "Upload data to multidimensional root cause analysis data set": {
-            "$ref": "./examples/UploadMultiDimRCAData.json"
+          "Upload data to root cause analysis data set": {
+            "$ref": "./examples/UploadRootCauseAnalysisData.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "Delete a multidimensional root cause analysis data",
-        "operationId": "DeleteMultiDimRCAData",
+        "summary": "Delete root cause analysis data",
+        "operationId": "DeleteRootCauseAnalysisData",
         "produces": [
           "application/json"
         ],
@@ -251,7 +251,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The multidimensional root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -289,17 +289,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete a multidimensional root cause analysis data": {
-            "$ref": "./examples/DeleteMultiDimRCAData.json"
+          "Delete root cause analysis data": {
+            "$ref": "./examples/DeleteRootCauseAnalysisData.json"
           }
         }
       },
       "get": {
         "tags": [
-          "MultiDimRCADataSet"
+          "RootCauseAnalysisDataSet"
         ],
-        "summary": "List multidimensional root cause analysis data in a specified data set",
-        "operationId": "ListMultiDimRCAData",
+        "summary": "List root cause analysis data in a specified data set",
+        "operationId": "ListRootCauseAnalysisData",
         "produces": [
           "application/json"
         ],
@@ -307,7 +307,7 @@
           {
             "in": "path",
             "name": "dataSetId",
-            "description": "The multidimensional root cause analysis data set unique id",
+            "description": "The root cause analysis data set unique id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -351,7 +351,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCADataMetaListResponse"
+              "$ref": "#/definitions/RootCauseAnalysisDataMetaListResponse"
             }
           },
           "default": {
@@ -365,19 +365,19 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "List multidimensional root cause analysis data in a specified data set": {
-            "$ref": "./examples/ListMultiDimRCAData.json"
+          "List root cause analysis data in a specified data set": {
+            "$ref": "./examples/ListRootCauseAnalysisData.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/instances": {
+    "/rootCauseAnalysis/instances": {
       "post": {
         "tags": [
-          "MultiDimRCAInstance"
+          "RootCauseAnalysisInstance"
         ],
-        "summary": "Create an instance for multidimensional RCA",
-        "operationId": "CreateMultiDimRCAInstance",
+        "summary": "Create an instance for root cause analysis",
+        "operationId": "CreateRootCauseAnalysisInstance",
         "consumes": [
           "application/json"
         ],
@@ -388,9 +388,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Create a multidimensional RCA instance request",
+            "description": "Create a root cause analysis instance request",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCAInstanceRequest"
+              "$ref": "#/definitions/RootCauseAnalysisInstanceRequest"
             }
           }
         ],
@@ -412,17 +412,17 @@
           }
         },
         "x-ms-examples": {
-          "Create an instance for multidimensional RCA": {
-            "$ref": "./examples/CreateMultiDimRCAInstance.json"
+          "Create an instance for root cause analysis": {
+            "$ref": "./examples/CreateRootCauseAnalysisInstance.json"
           }
         }
       },
       "get": {
         "tags": [
-          "MultiDimRCAInstance"
+          "RootCauseAnalysisInstance"
         ],
-        "summary": "Get instance list for multidimensional RCA",
-        "operationId": "ListMultiDimRCAInstance",
+        "summary": "Get instance list for root cause analysis",
+        "operationId": "ListRCAInstance",
         "produces": [
           "application/json"
         ],
@@ -452,7 +452,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCAInstanceResponseList"
+              "$ref": "#/definitions/RootCauseAnalysisInstanceResponseList"
             }
           },
           "default": {
@@ -466,19 +466,19 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "Get instance list for multidimensional RCA": {
-            "$ref": "./examples/ListMultiDimRCAInstance.json"
+          "Get instance list for root cause analysis": {
+            "$ref": "./examples/ListRCAInstance.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/instances/{instanceId}": {
+    "/rootCauseAnalysis/instances/{instanceId}": {
       "get": {
         "tags": [
-          "MultiDimRCAInstance"
+          "RootCauseAnalysisInstance"
         ],
-        "summary": "Query an instance information for multidimensional RCA",
-        "operationId": "GetMultiDimRCAInstance",
+        "summary": "Query an instance information for root cause analysis",
+        "operationId": "GetRootCauseAnalysisInstance",
         "produces": [
           "application/json"
         ],
@@ -496,7 +496,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCAInstanceResponse"
+              "$ref": "#/definitions/RootCauseAnalysisInstanceResponse"
             }
           },
           "default": {
@@ -507,17 +507,17 @@
           }
         },
         "x-ms-examples": {
-          "Query an instance information for multidimensional RCA": {
-            "$ref": "./examples/GetMultiDimRCAInstance.json"
+          "Query an instance information for root cause analysis": {
+            "$ref": "./examples/GetRootCauseAnalysisInstance.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "MultiDimRCAInstance"
+          "RootCauseAnalysisInstance"
         ],
-        "summary": "Delete an instance for multidimensional RCA",
-        "operationId": "DeleteMultiDimRCAInstance",
+        "summary": "Delete an instance for root cause analysis",
+        "operationId": "DeleteRootCauseAnalysisInstance",
         "produces": [
           "application/json"
         ],
@@ -543,19 +543,19 @@
           }
         },
         "x-ms-examples": {
-          "Delete an instance for multidimensional RCA": {
-            "$ref": "./examples/DeleteMultiDimRCAInstance.json"
+          "Delete an instance for root cause analysis": {
+            "$ref": "./examples/DeleteRootCauseAnalysisInstance.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/instances/{instanceId}/models": {
+    "/rootCauseAnalysis/instances/{instanceId}/models": {
       "post": {
         "tags": [
-          "MultiDimRCAModel"
+          "RootCauseAnalysisModel"
         ],
-        "summary": "Trigger a model training task for multidimensional RCA",
-        "operationId": "CreateMultiDimRCATrainingTask",
+        "summary": "Trigger a model training task for root cause analysis",
+        "operationId": "CreateRootCauseAnalysisTrainingTask",
         "consumes": [
           "application/json"
         ],
@@ -574,9 +574,8 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Training request of multidimensional RCA",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCATrainingRequest"
+              "$ref": "#/definitions/RootCauseAnalysisTrainingRequest"
             }
           }
         ],
@@ -598,17 +597,17 @@
           }
         },
         "x-ms-examples": {
-          "Trigger a model training task for multidimensional RCA": {
-            "$ref": "./examples/CreateMultiDimRCATrainingTask.json"
+          "Trigger a model training task for root cause analysis": {
+            "$ref": "./examples/CreateRootCauseAnalysisTrainingTask.json"
           }
         }
       },
       "get": {
         "tags": [
-          "MultiDimRCAModel"
+          "RootCauseAnalysisModel"
         ],
-        "summary": "Query training task state list for multidimensional RCA",
-        "operationId": "ListMultiDimRCATrainingStates",
+        "summary": "Query training task state list for root cause analysis",
+        "operationId": "ListRootCauseAnalysisTrainingStates",
         "produces": [
           "application/json"
         ],
@@ -646,7 +645,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCATrainingResponseList"
+              "$ref": "#/definitions/RootCauseAnalysisTrainingResponseList"
             }
           },
           "default": {
@@ -660,19 +659,19 @@
           "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
-          "Query training task state list for multidimensional RCA": {
-            "$ref": "./examples/ListMultiDimRCATrainingStates.json"
+          "Query training task state list for root cause analysis": {
+            "$ref": "./examples/ListRootCauseAnalysisTrainingStates.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/instances/{instanceId}/models/{modelId}": {
+    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}": {
       "delete": {
         "tags": [
-          "MultiDimRCAModel"
+          "RootCauseAnalysisModel"
         ],
-        "summary": "Delete a model for multidimensional RCA",
-        "operationId": "DeleteMultiDimRCAModel",
+        "summary": "Delete a model for root cause analysis",
+        "operationId": "DeleteRootCauseAnalysisModel",
         "produces": [
           "application/json"
         ],
@@ -706,17 +705,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete a model for multidimensional RCA": {
-            "$ref": "./examples/DeleteMultiDimRCAModel.json"
+          "Delete a model for root cause analysis": {
+            "$ref": "./examples/DeleteRootCauseAnalysisModel.json"
           }
         }
       },
       "get": {
         "tags": [
-          "MultiDimRCAModel"
+          "RootCauseAnalysisModel"
         ],
-        "summary": "Query an training task state for multidimensional RCA",
-        "operationId": "GetMultiDimRCATrainingState",
+        "summary": "Query an training task state for root cause analysis",
+        "operationId": "GetRootCauseAnalysisTrainingState",
         "produces": [
           "application/json"
         ],
@@ -742,7 +741,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCATrainingResponse"
+              "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
             }
           },
           "default": {
@@ -753,19 +752,19 @@
           }
         },
         "x-ms-examples": {
-          "Query an training task state for multidimensional RCA": {
-            "$ref": "./examples/GetMultiDimRCATrainingState.json"
+          "Query an training task state for root cause analysis": {
+            "$ref": "./examples/GetRootCauseAnalysisTrainingState.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/instances/{instanceId}/models/{modelId}/inferences": {
+    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}/inferences": {
       "post": {
         "tags": [
-          "MultiDimRCAModel"
+          "RootCauseAnalysisModel"
         ],
-        "summary": "Trigger an inference task for multidimensional RCA",
-        "operationId": "CreateMultiDimRCAInferenceTask",
+        "summary": "Trigger an inference task for root cause analysis",
+        "operationId": "CreateRootCauseAnalysisInferenceTask",
         "consumes": [
           "application/json"
         ],
@@ -792,9 +791,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Inference request of multidimensional RCA",
+            "description": "Inference request of root cause analysis",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCAInferenceRequest"
+              "$ref": "#/definitions/RootCauseAnalysisInferenceRequest"
             }
           }
         ],
@@ -816,19 +815,19 @@
           }
         },
         "x-ms-examples": {
-          "Trigger an inference task for multidimensional RCA": {
-            "$ref": "./examples/CreateMultiDimRCAInferenceTask.json"
+          "Trigger an inference task for root cause analysis": {
+            "$ref": "./examples/CreateRootCauseAnalysisInferenceTask.json"
           }
         }
       }
     },
-    "/rootCauseAnalysis/multiDimension/instances/{instanceId}/models/{modelId}/inferences/{inferenceId}": {
+    "/rootCauseAnalysis/instances/{instanceId}/models/{modelId}/inferences/{inferenceId}": {
       "get": {
         "tags": [
-          "MultiDimRCAModel"
+          "RootCauseAnalysisModel"
         ],
-        "summary": "Query an inference task state for multidimensional RCA",
-        "operationId": "GetMultiDimRCAInferenceState",
+        "summary": "Query an inference task state for root cause analysis",
+        "operationId": "GetRootCauseAnalysisInferenceState",
         "produces": [
           "application/json"
         ],
@@ -862,7 +861,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MultiDimRCAInferenceResponse"
+              "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
             }
           },
           "default": {
@@ -873,86 +872,38 @@
           }
         },
         "x-ms-examples": {
-          "Query an inference task state for multidimensional RCA": {
-            "$ref": "./examples/GetMultiDimRCAInferenceState.json"
+          "Query an inference task state for root cause analysis": {
+            "$ref": "./examples/GetRootCauseAnalysisInferenceState.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "MultiDimRCAMeasure": {
+    "CreateRootCauseAnalysisDatasetRequest": {
       "required": [
+        "kind",
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
-          "description": "Multidimensional root cause analysis measure name",
-          "type": "string"
-        }
-      }
-    },
-    "CreateMultiDimRCADatasetRequest": {
-      "required": [
-        "aggregateValue",
-        "customInterval",
-        "dimensionKeys",
-        "granularity",
-        "measures",
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Multidimensional root cause analysis data set name",
+          "description": "Root cause analysis data set name",
           "type": "string"
         },
-        "granularity": {
-          "description": "Multidimensional root cause data set granularity",
+        "kind": {
+          "description": "Root cause analysis type",
           "enum": [
-            "yearly",
-            "monthly",
-            "weekly",
-            "daily",
-            "hourly",
-            "minutely",
-            "secondly",
-            "microsecond",
-            "none"
+            "multidimension"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Granularity",
+            "name": "RootCauseAnalysisType",
             "modelAsString": true
-          }
-        },
-        "customInterval": {
-          "format": "int32",
-          "description": "Multidimensional root cause data set customized granularity interval in seconds",
-          "type": "integer"
-        },
-        "dimensionKeys": {
-          "description": "Multidimensional root cause data set dimension keys",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "aggregateValue": {
-          "description": "Multidimensional root cause analysis measure aggregate value",
-          "type": "string"
-        },
-        "measures": {
-          "description": "Measure list to do multidimensional root cause analysis",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRCAMeasure"
           }
         }
       },
       "example": {
-  "name": "Sample Multidimensional Root Cause Analysis Dataset Name",
   "granularity": "daily",
   "customInterval": 0,
   "dimensionKeys": [
@@ -970,7 +921,9 @@
     {
       "name": "total call count"
     }
-  ]
+  ],
+  "name": "Sample Multidimensional Root Cause Analysis Dataset Name",
+  "kind": "multidimension"
 }
     },
     "ErrorCode": {
@@ -986,72 +939,37 @@
         }
       }
     },
-    "MultiDimRCADataSetDetail": {
+    "RootCauseAnalysisDataSetDetail": {
       "required": [
-        "aggregateValue",
-        "customInterval",
         "dataSetId",
-        "dimensionKeys",
-        "granularity",
-        "measures",
+        "kind",
         "name"
       ],
       "type": "object",
       "properties": {
         "dataSetId": {
           "format": "uuid",
-          "description": "Multidimensional root cause analysis data set unique ID",
+          "description": "Root cause analysis data set unique ID",
           "type": "string"
         },
-        "name": {
-          "description": "Multidimensional root cause analysis data set name",
-          "type": "string"
-        },
-        "granularity": {
-          "description": "Multidimensional root cause data set granularity",
+        "kind": {
+          "description": "Root cause analysis type",
           "enum": [
-            "yearly",
-            "monthly",
-            "weekly",
-            "daily",
-            "hourly",
-            "minutely",
-            "secondly",
-            "microsecond",
-            "none"
+            "multidimension"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Granularity",
+            "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
         },
-        "customInterval": {
-          "format": "int32",
-          "description": "Multidimensional root cause data set customized granularity interval in seconds",
-          "type": "integer"
-        },
-        "dimensionKeys": {
-          "description": "Multidimensional root cause data set dimension keys",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "aggregateValue": {
-          "description": "Multidimensional root cause analysis measure aggregate value",
+        "name": {
+          "description": "Root cause analysis data set name",
           "type": "string"
-        },
-        "measures": {
-          "description": "Measure list to do multidimensional root cause analysis",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRCAMeasure"
-          }
         }
       }
     },
-    "MultiDimRCADataSetList": {
+    "RootCauseAnalysisDataSetList": {
       "required": [
         "value"
       ],
@@ -1065,54 +983,13 @@
           "description": "Response values",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiDimRCADataSetDetail"
+            "$ref": "#/definitions/RootCauseAnalysisDataSetDetail"
           }
         }
       }
     },
-    "MultiDimRCADataPartition": {
-      "required": [
-        "data",
-        "partitionIdentity",
-        "timestamp"
-      ],
+    "RootCauseAnalysisUploadDataRequest": {
       "type": "object",
-      "properties": {
-        "partitionIdentity": {
-          "description": "Multidimensional root cause analysis data partition unique ID",
-          "type": "string"
-        },
-        "timestamp": {
-          "format": "date-time",
-          "description": "Multidimensional root cause analysis date time of the data",
-          "type": "string"
-        },
-        "data": {
-          "description": "Multidimensional root cause data detail, the first few columns should be the dimension value. the last few columns should be the measure values",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "MultiDimRCAUploadDataRequest": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Multidimensional root cause analysis data",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRCADataPartition"
-          }
-        }
-      },
       "example": {
   "value": [
     {
@@ -1428,43 +1305,10 @@
   ]
 }
     },
-    "MultiDimRCADataMeta": {
-      "required": [
-        "createdDateTime",
-        "dataSize",
-        "lastUploadedDateTime",
-        "partitionIdentity",
-        "timestamp"
-      ],
-      "type": "object",
-      "properties": {
-        "partitionIdentity": {
-          "description": "Multidimensional root cause analysis partition identity",
-          "type": "string"
-        },
-        "dataSize": {
-          "format": "int32",
-          "description": "Multidimensional root cause analysis data size in the partition identity",
-          "type": "integer"
-        },
-        "timestamp": {
-          "format": "date-time",
-          "description": "Multidimensional root cause date time of the data",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Multidimensional root cause data created time",
-          "type": "string"
-        },
-        "lastUploadedDateTime": {
-          "format": "date-time",
-          "description": "Multidimensional root cause data last time uploaded",
-          "type": "string"
-        }
-      }
+    "RootCauseAnalysisDataMeta": {
+      "type": "object"
     },
-    "MultiDimRCADataMetaListResponse": {
+    "RootCauseAnalysisDataMetaListResponse": {
       "required": [
         "value"
       ],
@@ -1479,55 +1323,15 @@
           "description": "Response values",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiDimRCADataMeta"
+            "$ref": "#/definitions/RootCauseAnalysisDataMeta"
           }
         }
       }
     },
-    "MultiDimRCATargetMeasure": {
+    "RootCauseAnalysisInstanceRequest": {
       "required": [
-        "dataSetId",
-        "measureName"
-      ],
-      "type": "object",
-      "properties": {
-        "dataSetId": {
-          "format": "uuid",
-          "description": "Target dataset id for multidimensional RCA instance",
-          "type": "string"
-        },
-        "measureName": {
-          "description": "Target measure name for multidimensional RCA instance",
-          "type": "string"
-        }
-      }
-    },
-    "MultiDimRCADataScope": {
-      "required": [
-        "dataSetId",
-        "measureNames"
-      ],
-      "type": "object",
-      "properties": {
-        "dataSetId": {
-          "format": "uuid",
-          "description": "Data set id for multidimensional RCA instance",
-          "type": "string"
-        },
-        "measureNames": {
-          "description": "Measure name list for multidimensional RCA instance",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MultiDimRCAInstanceRequest": {
-      "required": [
-        "dataSets",
-        "name",
-        "targetMeasure"
+        "kind",
+        "name"
       ],
       "type": "object",
       "properties": {
@@ -1535,19 +1339,19 @@
           "description": "Instance name",
           "type": "string"
         },
-        "targetMeasure": {
-          "$ref": "#/definitions/MultiDimRCATargetMeasure"
-        },
-        "dataSets": {
-          "description": "Data sets for instance",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRCADataScope"
+        "kind": {
+          "description": "Root cause analysis kind",
+          "enum": [
+            "multidimension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
           }
         }
       },
       "example": {
-  "name": "Sample Multidimensional Root Cause Analysis Instance Name",
   "targetMeasure": {
     "dataSetId": "01234567-8901-2345-6789-012345678901",
     "measureName": "error rate"
@@ -1560,40 +1364,42 @@
         "total call count"
       ]
     }
-  ]
+  ],
+  "name": "Sample Root Cause Analysis Instance Name",
+  "kind": "multidimension"
 }
     },
-    "MultiDimRCAInstanceResponse": {
+    "RootCauseAnalysisInstanceResponse": {
       "required": [
-        "dataSets",
         "instanceId",
-        "name",
-        "targetMeasure"
+        "kind",
+        "name"
       ],
       "type": "object",
       "properties": {
         "instanceId": {
           "format": "uuid",
-          "description": "Instance unique ID for multidimensional RCA",
+          "description": "Instance unique ID for root cause analysis",
           "type": "string"
         },
         "name": {
-          "description": "Instance name for multidimensional RCA",
+          "description": "Instance name for root cause analysis",
           "type": "string"
         },
-        "targetMeasure": {
-          "$ref": "#/definitions/MultiDimRCATargetMeasure"
-        },
-        "dataSets": {
-          "description": "Data sets for multidimensional RCA",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRCADataScope"
+        "kind": {
+          "description": "Root cause analysis type",
+          "enum": [
+            "multidimension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
           }
         }
       }
     },
-    "MultiDimRCAInstanceResponseList": {
+    "RootCauseAnalysisInstanceResponseList": {
       "required": [
         "value"
       ],
@@ -1608,131 +1414,38 @@
           "description": "Response values",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiDimRCAInstanceResponse"
+            "$ref": "#/definitions/RootCauseAnalysisInstanceResponse"
           }
         }
       }
     },
-    "MultiDimRCATrainingParameter": {
+    "RootCauseAnalysisTrainingRequest": {
       "required": [
-        "endDateTime",
-        "startDateTime"
-      ],
-      "type": "object",
-      "properties": {
-        "startDateTime": {
-          "format": "date-time",
-          "description": "Start time of data used to train model",
-          "type": "string"
-        },
-        "endDateTime": {
-          "format": "date-time",
-          "description": "End time of data used to train model",
-          "type": "string"
-        }
-      }
-    },
-    "MultiDimRCATrainingRequest": {
-      "required": [
-        "name",
-        "parameter"
+        "name"
       ],
       "type": "object",
       "properties": {
         "name": {
           "description": "Model name",
           "type": "string"
-        },
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCATrainingParameter"
         }
       },
       "example": {
-  "name": "Sample Multidimensional Root Cause Analysis Model Name",
   "parameter": {
     "startDateTime": "2021-10-01T00:00:00Z",
     "endDateTime": "2021-11-30T00:00:00Z"
-  }
+  },
+  "name": "Sample Root Cause Analysis Model Name"
 }
     },
-    "MultiDimRCATrainingTaskInfo": {
-      "required": [
-        "bestEpoch",
-        "bestValidationLoss",
-        "dataSize",
-        "edgeSize",
-        "epochs",
-        "latencyInSecond",
-        "trainLoss",
-        "validationLoss"
-      ],
-      "type": "object",
-      "properties": {
-        "epochs": {
-          "description": "Train epochs",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "trainLoss": {
-          "description": "Train loss for each epoch",
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        },
-        "validationLoss": {
-          "description": "Validation loss for each epoch",
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        },
-        "latencyInSecond": {
-          "description": "Latency in second for each epoch",
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        },
-        "bestEpoch": {
-          "format": "int32",
-          "description": "Best epoch",
-          "type": "integer"
-        },
-        "bestValidationLoss": {
-          "format": "double",
-          "description": "Best validation loss",
-          "type": "number"
-        },
-        "dataSize": {
-          "description": "Data size for each epoch",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "edgeSize": {
-          "format": "int32",
-          "description": "Edge size",
-          "type": "integer"
-        }
-      }
-    },
-    "MultiDimRCATrainingResponse": {
+    "RootCauseAnalysisTrainingResponse": {
       "required": [
         "createdDateTime",
         "instanceId",
+        "kind",
         "lastModifiedDateTime",
         "modelId",
         "name",
-        "parameter",
         "status",
         "taskId"
       ],
@@ -1740,25 +1453,36 @@
       "properties": {
         "taskId": {
           "format": "uuid",
-          "description": "Training task unique id for multidimensional RCA",
+          "description": "Training task unique id for root cause analysis",
           "type": "string"
         },
         "instanceId": {
           "format": "uuid",
-          "description": "Instance unique id for multidimensional RCA",
+          "description": "Instance unique id for root cause analysis",
           "type": "string"
         },
         "modelId": {
           "format": "uuid",
-          "description": "Model unique id for multidimensional RCA",
+          "description": "Model unique id for root cause analysis",
           "type": "string"
         },
         "name": {
-          "description": "Model name for multidimensional RCA",
+          "description": "Model name for root cause analysis",
           "type": "string"
         },
+        "kind": {
+          "description": "kind of root cause analysis",
+          "enum": [
+            "multidimension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
+        },
         "status": {
-          "description": "Training task status for multidimensional RCA",
+          "description": "Training task status for root cause analysis",
           "enum": [
             "scheduled",
             "running",
@@ -1768,7 +1492,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "MultiDimRCATrainingStatus",
+            "name": "RootCauseAnalysisTrainingStatus",
             "modelAsString": true
           }
         },
@@ -1782,18 +1506,12 @@
           "description": "Training task state modified date time",
           "type": "string"
         },
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCATrainingParameter"
-        },
         "error": {
           "$ref": "#/definitions/ErrorCode"
-        },
-        "taskInfo": {
-          "$ref": "#/definitions/MultiDimRCATrainingTaskInfo"
         }
       }
     },
-    "MultiDimRCATrainingResponseList": {
+    "RootCauseAnalysisTrainingResponseList": {
       "required": [
         "value"
       ],
@@ -1808,42 +1526,13 @@
           "description": "Response values",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiDimRCATrainingResponse"
+            "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
           }
         }
       }
     },
-    "MultiDimRCAInferenceParameter": {
-      "required": [
-        "dimensionScope",
-        "timestamp"
-      ],
+    "RootCauseAnalysisInferenceRequest": {
       "type": "object",
-      "properties": {
-        "timestamp": {
-          "format": "date-time",
-          "description": "Timestamp of issue to be analyzed",
-          "type": "string"
-        },
-        "dimensionScope": {
-          "description": "Dimension scope used to narrow down the search",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MultiDimRCAInferenceRequest": {
-      "required": [
-        "parameter"
-      ],
-      "type": "object",
-      "properties": {
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCAInferenceParameter"
-        }
-      },
       "example": {
   "parameter": {
     "timestamp": "2021-12-01T00:00:00Z",
@@ -1851,116 +1540,46 @@
   }
 }
     },
-    "MultiDimRootCauseMeasure": {
-      "required": [
-        "contributionScore",
-        "dataSetId",
-        "name",
-        "trendType"
-      ],
-      "type": "object",
-      "properties": {
-        "dataSetId": {
-          "format": "uuid",
-          "description": "data set unique id of the root cause measure",
-          "type": "string"
-        },
-        "name": {
-          "description": "name of the root cause measure",
-          "type": "string"
-        },
-        "trendType": {
-          "description": "trend type of the measure",
-          "enum": [
-            "rise",
-            "drop"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MultiDimRootCauseMeasureTrendType",
-            "modelAsString": true
-          }
-        },
-        "contributionScore": {
-          "format": "double",
-          "description": "contribution score of the measure",
-          "type": "number"
-        }
-      }
-    },
-    "MultiDimRootCause": {
-      "required": [
-        "dimension",
-        "measures",
-        "score"
-      ],
-      "type": "object",
-      "properties": {
-        "dimension": {
-          "description": "dimension combination of the root cause",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "score": {
-          "format": "double",
-          "description": "score of the root cause",
-          "type": "number"
-        },
-        "measures": {
-          "description": "root cause measures",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRootCauseMeasure"
-          }
-        }
-      }
-    },
-    "MultiDimRCAInferenceResult": {
-      "required": [
-        "rootCauses"
-      ],
-      "type": "object",
-      "properties": {
-        "rootCauses": {
-          "description": "root causes",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiDimRootCause"
-          }
-        }
-      }
-    },
-    "MultiDimRCAInferenceResponse": {
+    "RootCauseAnalysisInferenceResponse": {
       "required": [
         "createdDateTime",
         "inferenceId",
         "instanceId",
+        "kind",
         "lastModifiedDateTime",
         "modelId",
-        "parameter",
         "status"
       ],
       "type": "object",
       "properties": {
         "inferenceId": {
           "format": "uuid",
-          "description": "Inference unique id for multidimensional RCA",
+          "description": "Inference unique id for root cause analysis",
           "type": "string"
         },
         "instanceId": {
           "format": "uuid",
-          "description": "Instance unique id for multidimensional RCA",
+          "description": "Instance unique id for root cause analysis",
           "type": "string"
         },
         "modelId": {
           "format": "uuid",
-          "description": "Model unique id for multidimensional RCA",
+          "description": "Model unique id for root cause analysis",
           "type": "string"
         },
+        "kind": {
+          "description": "kind of root cause analysis",
+          "enum": [
+            "multidimension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RootCauseAnalysisType",
+            "modelAsString": true
+          }
+        },
         "status": {
-          "description": "Inference task status for multidimensional RCA",
+          "description": "Inference task status for root cause analysis",
           "enum": [
             "scheduled",
             "running",
@@ -1970,7 +1589,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "MultiDimRCAInferenceStatus",
+            "name": "RootCauseAnalysisInferenceStatus",
             "modelAsString": true
           }
         },
@@ -1983,12 +1602,6 @@
           "format": "date-time",
           "description": "Inference task state modified date time",
           "type": "string"
-        },
-        "parameter": {
-          "$ref": "#/definitions/MultiDimRCAInferenceParameter"
-        },
-        "result": {
-          "$ref": "#/definitions/MultiDimRCAInferenceResult"
         },
         "error": {
           "$ref": "#/definitions/ErrorCode"
