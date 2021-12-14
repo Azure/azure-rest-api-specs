@@ -56,8 +56,6 @@ version_with_hyphens: 2021-11-10-preview
 version-with-underscores: 2021_11_10_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-11-10-preview/vi.json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 ### Tag: package-2021-10-27-preview
 
