@@ -41,27 +41,6 @@ batch:
   - tag: package-2021-07
 ```
 
-
-``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07')
-directive:
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["Resource"]
-  reason: Missing kind, etag
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["ErrorResponse"]
-  reason: Incompatible values (2020-10-01)
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["AzureResource"]
-  reason: Incompatible values (2020-10-01)
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["ActionGroup"]
-  reason: Incompatible values (2020-10-01)
-```
-
 ### Tag: package-2017-09 and go
 
 These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
