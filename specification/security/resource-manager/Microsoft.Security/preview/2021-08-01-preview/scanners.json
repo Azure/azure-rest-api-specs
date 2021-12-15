@@ -34,6 +34,45 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/scanners": {
+      "get": {
+        "x-ms-examples": {
+          "List security scanners by subscription level scope": {
+            "$ref": "./examples/Scanners/ListBySubscriptionScanners_example.json"
+          }
+        },
+        "tags": [
+          "Scanners"
+        ],
+        "description": "Get a list of all relevant security Scanners over a subscription level scope.",
+        "operationId": "Scanners_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScannersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/scanners": {
       "get": {
         "x-ms-examples": {
