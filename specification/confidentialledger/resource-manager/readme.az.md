@@ -1,7 +1,5 @@
 ## AZ
 
-[//]: # "See https://github.com/Azure/autorest.az/blob/b000db70f608c64918d04a0e0f5b50bb5468baa0/doc/how-to-author-readme-file.md"
-
 These settings apply only when `--az` is specified on the command line.
 
 ``` yaml $(az) && $(target-mode) != 'core'
