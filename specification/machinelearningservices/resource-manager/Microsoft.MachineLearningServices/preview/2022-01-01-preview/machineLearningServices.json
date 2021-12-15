@@ -2094,14 +2094,28 @@
           "default": false
         },
         "softDeleteEnabled": {
-          "type": "boolean",
+          "type": "string",
           "description": "create a workspace with soft delete capability",
-          "default": false
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SoftDeleteEnabled"
+          }
         },
-        "recoverWorkspace": {
-          "type": "boolean",
-          "description": "recover a soft-deleted workspace",
-          "default": false
+        "allowRecoverSoftDeletedWorkspace": {
+          "type": "string",
+          "description": "Allow an exising soft-deleted workspace to be recovered",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AllowRecoverSoftDeletedWorkspace"
+          }
         },
         "serviceProvisionedResourceGroup": {
           "type": "string",
@@ -4501,16 +4515,16 @@
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Customer Key vault properties."
         },
-        "cosmosDbArmId": {
-          "description": "The byok cosmosdb account that customer brings to store customer's data",
+        "cosmosDbResourceId": {
+          "description": "The Bring-Your-Own cosmosdb account that customer brings to store data",
           "type": "string"
         },
-        "storageAccountArmId": {
-          "description": "The byok storage account that customer brings to store customer's data",
+        "storageAccountResourceId": {
+          "description": "The Bring-Your-Own storage account that customer brings to store data",
           "type": "string"
         },
-        "searchAccountArmId": {
-          "description": "The byok search account that customer brings to store customer's data",
+        "searchAccountResourceId": {
+          "description": "The Bring-Your-Own search account that customer brings to store index",
           "type": "string"
         }
       },
