@@ -24,8 +24,9 @@
             "in": "body",
             "name": "body",
             "description": "create a root cause analysis data set request",
+            "required": true,
             "schema": {
-              "description": "create a root cause analysis data set request"
+              "$ref": "#/definitions/RootCauseAnalysisDataSetDetail"
             }
           }
         ],
@@ -130,7 +131,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { }
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisDataSetDetail"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -208,8 +211,9 @@
             "in": "body",
             "name": "body",
             "description": "Data to be uploaded to perform root cause analysis",
+            "required": true,
             "schema": {
-              "description": "Data to be uploaded to perform root cause analysis"
+              "$ref": "#/definitions/RootCauseAnalysisUploadDataRequest"
             }
           }
         ],
@@ -387,8 +391,9 @@
             "in": "body",
             "name": "body",
             "description": "Create a root cause analysis instance request",
+            "required": true,
             "schema": {
-              "description": "Create a root cause analysis instance request"
+              "$ref": "#/definitions/RootCauseAnalysisInstanceRequest"
             }
           }
         ],
@@ -493,7 +498,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { }
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisInstanceResponse"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -570,7 +577,10 @@
           {
             "in": "body",
             "name": "body",
-            "schema": { }
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisTrainingRequest"
+            }
           }
         ],
         "responses": {
@@ -734,7 +744,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { }
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -784,8 +796,9 @@
             "in": "body",
             "name": "body",
             "description": "Inference request of root cause analysis",
+            "required": true,
             "schema": {
-              "description": "Inference request of root cause analysis"
+              "$ref": "#/definitions/RootCauseAnalysisInferenceRequest"
             }
           }
         ],
@@ -852,7 +865,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { }
+            "schema": {
+              "$ref": "#/definitions/RootCauseAnalysisInferenceResponse"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -1017,8 +1032,12 @@
           "description": "Root cause analysis data set unique ID",
           "type": "string"
         },
+        "name": {
+          "description": "Root cause analysis data set name",
+          "type": "string"
+        },
         "kind": {
-          "description": "Root cause analysis type",
+          "description": "Root cause analysis kind",
           "enum": [
             "multidimensional"
           ],
@@ -1027,10 +1046,6 @@
             "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
-        },
-        "name": {
-          "description": "Root cause analysis data set name",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "multidimensional"
@@ -1121,7 +1136,9 @@
         "value": {
           "description": "Response values",
           "type": "array",
-          "items": { }
+          "items": {
+            "$ref": "#/definitions/RootCauseAnalysisDataSetDetail"
+          }
         }
       }
     },
@@ -1563,7 +1580,9 @@
         "value": {
           "description": "Response values",
           "type": "array",
-          "items": { }
+          "items": {
+            "$ref": "#/definitions/RootCauseAnalysisDataMeta"
+          }
         }
       }
     },
@@ -1761,7 +1780,9 @@
         "value": {
           "description": "Response values",
           "type": "array",
-          "items": { }
+          "items": {
+            "$ref": "#/definitions/RootCauseAnalysisInstanceResponse"
+          }
         }
       }
     },
@@ -2003,7 +2024,9 @@
         "value": {
           "description": "Response values",
           "type": "array",
-          "items": { }
+          "items": {
+            "$ref": "#/definitions/RootCauseAnalysisTrainingResponse"
+          }
         }
       }
     },
