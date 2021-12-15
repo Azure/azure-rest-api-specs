@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview`.
+The current release is `release_1_1_preview.1`.
 
 ``` yaml
-tag: release_1_1_preview
+tag: release_1_1_preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -28,6 +28,15 @@ These settings apply only when `--tag=release_1_1_preview` is specified on the c
 input-file: 
   - preview/v1.1-preview/AnomalyDetector.json
   - preview/v1.1-preview/MultivariateAnomalyDetector.json
+```
+
+### Release 1.1-preview.1
+These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1_preview.1'
+input-file: 
+  - preview/v1.1-preview.1/AnomalyDetector.json
+  - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
 ```
 
 ## Swagger to SDK
@@ -98,6 +107,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
   - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
+  - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
