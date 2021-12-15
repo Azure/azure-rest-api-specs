@@ -1148,10 +1148,13 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/fetchAllSubscriptionsInTenant": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/fetchAllSubscriptionsInTenant": {
       "parameters": [
         {
           "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
         },
         {
           "$ref": "#/parameters/SkipTokenParameter"
@@ -1187,8 +1190,11 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/listNewPlansNotifications": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/listNewPlansNotifications": {
       "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
         {
           "$ref": "#/parameters/ApiVersionParameter"
         }
@@ -1220,8 +1226,11 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/listStopSellOffersPlansNotifications": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/listStopSellOffersPlansNotifications": {
       "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
         {
           "$ref": "#/parameters/ApiVersionParameter"
         }
@@ -1235,9 +1244,9 @@
         "parameters": [
           {
             "in": "body",
-            "name": "payload",
+            "name": "stopSellSubscriptions",
             "schema": {
-              "$ref": "#/definitions/StopSellPayload"
+              "$ref": "#/definitions/StopSellSubscriptions"
             }
           }
         ],
@@ -1262,8 +1271,11 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/listSubscriptionsContext": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/listSubscriptionsContext": {
       "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
         {
           "$ref": "#/parameters/ApiVersionParameter"
         }
@@ -2091,10 +2103,10 @@
       }
     },
     "SubscriptionsContextList": {
-      "description": "Get private store subscriptions context",
+      "description": "List of subscription Ids in the private store",
       "type": "object",
       "properties": {
-        "subscriptionsContext": {
+        "subscriptionsIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -2627,7 +2639,7 @@
         }
       }
     },
-    "StopSellPayload": {
+    "StopSellSubscriptions": {
       "description": "Private plans subscriptions",
       "type": "object",
       "properties": {
