@@ -2321,7 +2321,7 @@
         "targetExtendedLocations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TargetExtendedLocation"
+            "$ref": "#/definitions/GalleryTargetExtendedLocation"
           },
           "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable."
         },
@@ -2406,14 +2406,14 @@
       ],
       "description": "Describes the target region information."
     },
-    "TargetExtendedLocation": {
+    "GalleryTargetExtendedLocation": {
       "properties": {
         "name": {
           "type": "string",
           "description": "The name of the region."
         },
         "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation"
+          "$ref": "#/definitions/GalleryExtendedLocation"
         },
         "extendedLocationReplicaCount": {
           "type": "integer",
@@ -2438,28 +2438,28 @@
         }
       }
     },
-    "ExtendedLocation": {
+    "GalleryExtendedLocation": {
       "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the extended location."
+          "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/ExtendedLocationType"
+          "$ref": "#/definitions/GalleryExtendedLocationType"
         }
-      }
+      },
+      "description": "The name of the extended location."
     },
-    "ExtendedLocationType": {
+    "GalleryExtendedLocationType": {
       "type": "string",
-      "description": "The type of the extendedLocation.",
       "enum": [
         "EdgeZone",
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "ExtendedLocationType",
+        "name": "GalleryExtendedLocationType",
         "modelAsString": true
-      }
+      },
+      "description": "It is type of the extended location."
     },
     "EncryptionImages": {
       "properties": {
