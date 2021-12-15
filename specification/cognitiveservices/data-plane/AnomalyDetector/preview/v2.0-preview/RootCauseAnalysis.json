@@ -185,8 +185,8 @@
         }
       }
     },
-    "/rootCauseAnalysis/dataSets/{dataSetId}/data": {
-      "put": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}/upload": {
+      "post": {
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
@@ -218,14 +218,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Success",
-            "headers": {
-              "Location": {
-                "description": "Location of the newly created resource.",
-                "type": "string"
-              }
-            }
+          "204": {
+            "description": "Success"
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -239,7 +233,9 @@
             "$ref": "./examples/UploadRootCauseAnalysisData.json"
           }
         }
-      },
+      }
+    },
+    "/rootCauseAnalysis/dataSets/{dataSetId}/data": {
       "delete": {
         "tags": [
           "RootCauseAnalysisDataSet"
@@ -931,8 +927,8 @@
   "granularity": "daily",
   "customInterval": 0,
   "dimensionKeys": [
-    "region",
-    "OS"
+    "Country",
+    "Version"
   ],
   "aggregateValue": "__SUM__",
   "measures": [
@@ -1582,7 +1578,8 @@
       "dataSetId": "01234567-8901-2345-6789-012345678901",
       "measureNames": [
         "error count",
-        "total call count"
+        "total call count",
+        "error rate"
       ]
     }
   ],
