@@ -16,6 +16,13 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
 
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2018-03-01-beta
+```
+
 ### Tag: package-2018-03-01-beta and go
 
 These settings apply only when `--tag=package-2018-03-01-beta --go` is specified on the command line.
