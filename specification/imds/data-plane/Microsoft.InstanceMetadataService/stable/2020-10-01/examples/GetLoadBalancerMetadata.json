@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "Metadata": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "loadbalancer": {
+          "publicIpAddresses": [
+            {
+              "frontendIpAddress": "51.0.0.1",
+              "privateIpAddress": "10.1.0.5"
+            }
+          ],
+          "inboundRules": [
+            {
+              "frontendIpAddress": "50.0.0.1",
+              "protocol": "tcp",
+              "frontendPort": 80,
+              "backendPort": 443,
+              "privateIpAddress": "10.1.0.4"
+            },
+            {
+              "frontendIpAddress": "2603:10e1:100:2::1:1",
+              "protocol": "tcp",
+              "frontendPort": 80,
+              "backendPort": 443,
+              "privateIpAddress": "ace:cab:deca:deed::1"
+            }
+          ],
+          "outboundRules": [
+            {
+              "frontendIpAddress": "50.0.0.1",
+              "privateIpAddress": "10.1.0.4"
+            },
+            {
+              "frotendIpAddress": "2603:10e1:100:2::1:1",
+              "privateIpAddress": "ace:cab:deca:deed::1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

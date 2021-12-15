@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "Metadata": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "loadbalancer": {
+          "publicIpAddresses": [
+          ],
+          "inboundRules": [
+            {
+              "frontendIpAddress": "10.1.0.7",
+              "protocol": "All",
+              "frontendPort": 0,
+              "backendPort": 0,
+              "privateIpAddress": "10.1.0.8"
+            },
+            {
+              "frontendIpAddress": "10.1.0.7",
+              "protocol": "All",
+              "frontendPort": 0,
+              "backendPort": 0,
+              "privateIpAddress": "10.1.0.9"
+            }
+          ],
+          "outboundRules": [            
+          ],
+          "tunnelInterfaces": [
+            {
+              "gatewayIpAddress": "10.1.0.7",
+              "gatewayPort": 2666,
+              "identifier": 800,
+              "type": "Internal",
+              "protocol": "VXLAN",
+              "localIpAddress": "10.1.0.8",
+              "localPort": 2666
+            },
+            {
+              "gatewayIpAddress": "10.1.0.7",
+              "gatewayPort": 2667,
+              "identifier": 801,
+              "type": "External",
+              "protocol": "VXLAN",
+              "localIpAddress": "10.1.0.9",
+              "localPort": 2667
+            }
+          ]
+        }
+      }
+    }
+  }
+}
