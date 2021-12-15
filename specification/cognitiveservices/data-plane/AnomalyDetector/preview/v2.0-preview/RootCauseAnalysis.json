@@ -897,7 +897,7 @@
         }
       }
     },
-    "CreateRootCauseAnalysisDatasetRequest": {
+    "RootCauseAnalysisDataSetDetail": {
       "required": [
         "kind",
         "name"
@@ -914,6 +914,12 @@
             "name": "RootCauseAnalysisType",
             "modelAsString": true
           }
+        },
+        "dataSetId": {
+          "format": "uuid",
+          "description": "Root cause analysis data set unique ID",
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "Root cause analysis data set name",
@@ -940,43 +946,18 @@
       "name": "total call count"
     }
   ],
+  "dataSetId": "01234567-8901-2345-6789-012345678901",
   "name": "Sample Multidimensional Root Cause Analysis Dataset Name",
   "kind": "multidimensional"
 }
-    },
-    "RootCauseAnalysisDataSetDetail": {
-      "required": [
-        "$type",
-        "dataSetId"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CreateRootCauseAnalysisDatasetRequest"
-        }
-      ],
-      "properties": {
-        "$type": {
-          "type": "string"
-        },
-        "dataSetId": {
-          "format": "uuid",
-          "description": "Root cause analysis data set unique ID",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "multidimensional"
     },
     "MultiDimRCADataSetDetail": {
       "required": [
         "aggregateValue",
         "customInterval",
-        "dataSetId",
         "dimensionKeys",
         "granularity",
-        "kind",
-        "measures",
-        "name"
+        "measures"
       ],
       "type": "object",
       "allOf": [
@@ -1022,86 +1003,6 @@
         },
         "measures": {
           "description": "Measure list to do multidimensional root cause analysis",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RootCauseAnalysisMeasure"
-          }
-        },
-        "dataSetId": {
-          "format": "uuid",
-          "description": "Root cause analysis data set unique ID",
-          "type": "string"
-        },
-        "name": {
-          "description": "Root cause analysis data set name",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Root cause analysis kind",
-          "enum": [
-            "multidimensional"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RootCauseAnalysisType",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-ms-discriminator-value": "multidimensional"
-    },
-    "CreateMultiDimRCADatasetRequest": {
-      "required": [
-        "aggregateValue",
-        "customInterval",
-        "dimensionKeys",
-        "granularity",
-        "measures"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CreateRootCauseAnalysisDatasetRequest"
-        }
-      ],
-      "properties": {
-        "granularity": {
-          "description": "Root cause analysis data set granularity",
-          "enum": [
-            "yearly",
-            "monthly",
-            "weekly",
-            "daily",
-            "hourly",
-            "minutely",
-            "secondly",
-            "microsecond",
-            "none"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Granularity",
-            "modelAsString": true
-          }
-        },
-        "customInterval": {
-          "format": "int32",
-          "description": "Root cause analysis data set customized granularity interval in seconds",
-          "type": "integer"
-        },
-        "dimensionKeys": {
-          "description": "Root cause analysis data set dimension keys",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "aggregateValue": {
-          "description": "Root cause analysis measure aggregate value",
-          "type": "string"
-        },
-        "measures": {
-          "description": "Measure list to do root cause analysis",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RootCauseAnalysisMeasure"
