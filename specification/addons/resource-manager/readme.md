@@ -58,6 +58,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-resource-manager-schemas
+  - repo: azure-sdk-for-go-track2
 ```
 
 ---
@@ -107,7 +108,7 @@ python:
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
