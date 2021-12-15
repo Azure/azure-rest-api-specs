@@ -7584,6 +7584,11 @@
             "x-nullable": false
           },
           "description": "A list of additional projections to perform during indexing."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for auth for the storage account projections will be stored in if the connection string indicates managed identity should be used. If the connection string indicates managed identity should be used and this is not specified, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
         }
       },
       "required": [
@@ -8474,6 +8479,11 @@
           "type": "string",
           "x-nullable": true,
           "description": "If set, indicates that this skill should use managed identity auth. This will be used as the resource id for indicating the scope of the auth token."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for auth. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
         }
       },
       "required": [
@@ -9814,6 +9824,11 @@
           "type": "boolean",
           "x-nullable": true,
           "description": "Specifies whether incremental reprocessing is enabled."
+        },
+        "authIdentity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for auth for the cache if the connection string indicates managed identity should be used. If the connection string indicates managed identity should be used and this is not specified, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
         }
       }
     },
