@@ -1,0 +1,2471 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-20-preview",
+    "title": "ElasticSanManagement"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticSans",
+      "description": "APIs for ElasticSan operations."
+    },
+    {
+      "name": "ElasticSanOperations",
+      "description": "APIs for ElasticSan operations,"
+    },
+    {
+      "name": "VolumeGroups",
+      "description": "APIs for Volume Group operations."
+    },
+    {
+      "name": "Volumes",
+      "description": "APIs for Volume operations."
+    },
+    {
+      "name": "Snapshots",
+      "description": "APIs for Snapshot operations."
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ElasticSan/operations": {
+      "get": {
+        "tags": [
+          "ElasticSanOperations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of ElasticSan operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved RP operations",
+            "schema": {
+              "$ref": "#/definitions/ElasticSanOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ElasticSan/elasticSans": {
+      "get": {
+        "tags": [
+          "ElasticSans"
+        ],
+        "operationId": "ElasticSans_ListBySubscription",
+        "description": "Gets a list of ElasticSans in a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved Elastic San by subscription",
+            "schema": {
+              "$ref": "#/definitions/ElasticSanListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ElasticSans_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/ElasticSans_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "ElasticSans_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/ElasticSans_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans": {
+      "get": {
+        "tags": [
+          "ElasticSan"
+        ],
+        "operationId": "ElasticSans_ListByResourceGroup",
+        "description": "Gets a list of ElasticSan in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved elasticSans by resource group",
+            "schema": {
+              "$ref": "#/definitions/ElasticSanListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ElasticSans_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/ElasticSans_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "ElasticSans_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/ElasticSans_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}": {
+      "put": {
+        "tags": [
+          "ElasticSans"
+        ],
+        "operationId": "ElasticSans_CreateOrUpdate",
+        "description": "Create or Update ElasticSan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/ElasticSan"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ElasticSan"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ElasticSans_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ElasticSans_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "ElasticSans_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/ElasticSans_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ElasticSans"
+        ],
+        "operationId": "ElasticSans_Update",
+        "description": "Update a Elastic San.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanUpdate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/ElasticSan"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ElasticSans_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ElasticSans_Update_MaximumSet_Gen.json"
+          },
+          "ElasticSans_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ElasticSans_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ElasticSans"
+        ],
+        "operationId": "ElasticSans_Delete",
+        "description": "Delete a Elastic San.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed successfully."
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ElasticSans_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ElasticSans_Delete_MaximumSet_Gen.json"
+          },
+          "ElasticSans_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ElasticSans_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ElasticSans"
+        ],
+        "operationId": "ElasticSans_Get",
+        "description": "Get a ElasticSan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved ElasticSan.",
+            "schema": {
+              "$ref": "#/definitions/ElasticSan"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticSans_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ElasticSans_Get_MaximumSet_Gen.json"
+          },
+          "ElasticSans_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ElasticSans_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumeGroups": {
+      "get": {
+        "tags": [
+          "VolumeGroups"
+        ],
+        "description": "List VolumeGroups.",
+        "operationId": "VolumeGroups_ListByElasticSan",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved Volume Group List.",
+            "schema": {
+              "$ref": "#/definitions/VolumeGroupList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VolumeGroups_ListByElasticSan_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_ListByElasticSan_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_ListByElasticSan_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_ListByElasticSan_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}": {
+      "put": {
+        "tags": [
+          "VolumeGroups"
+        ],
+        "description": "Create or Update a Volume Group.",
+        "operationId": "VolumeGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/VolumeGroup"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/VolumeGroup"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "VolumeGroups_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VolumeGroups"
+        ],
+        "description": "Update an VolumeGroup.",
+        "operationId": "VolumeGroups_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupUpdate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/VolumeGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Update_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Update_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_Update_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VolumeGroups"
+        ],
+        "description": "Delete an VolumeGroup.",
+        "operationId": "VolumeGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed successfully."
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Delete_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VolumeGroups"
+        ],
+        "description": "Get an VolumeGroups.",
+        "operationId": "VolumeGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved iSCSI Target.",
+            "schema": {
+              "$ref": "#/definitions/VolumeGroup"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Get_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Get_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_Get_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}": {
+      "put": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Create or Update a Volume.",
+        "operationId": "Volumes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/VolumeCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Volumes_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Volumes_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Update an Volume.",
+        "operationId": "Volumes_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/VolumeUpdate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Volumes_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
+          },
+          "Volumes_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Delete an Volume.",
+        "operationId": "Volumes_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed successfully."
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Volumes_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
+          },
+          "Volumes_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Get an Volume.",
+        "operationId": "Volumes_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved Volume.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_Get_MaximumSet_Gen.json"
+          },
+          "Volumes_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes": {
+      "get": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "List Volumes in a VolumeGroup.",
+        "operationId": "Volumes_ListByVolumeGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved volumes in a volume group.",
+            "schema": {
+              "$ref": "#/definitions/VolumeList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Volumes_ListByVolumeGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_ListByVolumeGroup_MaximumSet_Gen.json"
+          },
+          "Volumes_ListByVolumeGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_ListByVolumeGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}": {
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Create a Volume Snapshot.",
+        "operationId": "Snapshots_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Snapshots_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Snapshots_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Update a Volume Snapshot.",
+        "operationId": "Snapshots_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotCreate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Snapshots_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_Update_MaximumSet_Gen.json"
+          },
+          "Snapshots_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Delete an Volume Snapshot.",
+        "operationId": "Snapshots_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed successfully."
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Snapshots_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_Delete_MaximumSet_Gen.json"
+          },
+          "Snapshots_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Get an Volume Snapshot.",
+        "operationId": "Snapshots_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved Volume.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_Get_MaximumSet_Gen.json"
+          },
+          "Snapshots_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "List Snapshots in a VolumeGroup.",
+        "operationId": "Snapshots_ListByVolumeGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved volumes in a volume group.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Snapshots_ListByVolumeGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_ListByVolumeGroup_MaximumSet_Gen.json"
+          },
+          "Snapshots_ListByVolumeGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_ListByVolumeGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}/create": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Create a VolumeGroup Snapshot.",
+        "operationId": "Snapshots_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Snapshots_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_Create_MaximumSet_Gen.json"
+          },
+          "Snapshots_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_Create_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._]*[0-9A-Za-z]$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ElasticSanName": {
+      "name": "elasticSanName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the ElasticSan.",
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeGroupName": {
+      "name": "volumeGroupName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The name of the VolumeGroup.",
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeName": {
+      "name": "volumeName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The name of the Volume.",
+      "x-ms-parameter-location": "method"
+    },
+    "IscsiTargetName": {
+      "name": "iscsiTargetName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The name of the iSCSI Target.",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotName": {
+      "name": "snapshotName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The name of the Volume Snapshot.",
+      "x-ms-parameter-location": "method"
+    },
+    "ElasticSanCreate": {
+      "name": "ElasticSanCreatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for ElasticSan create operation",
+      "schema": {
+        "$ref": "#/definitions/ElasticSanCreate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ElasticSanUpdate": {
+      "name": "ElasticSanUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for ElasticSan update operation",
+      "schema": {
+        "$ref": "#/definitions/ElasticSanUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeGroupCreate": {
+      "name": "VolumeGroupCreate",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for VolumeGroup create operation.",
+      "schema": {
+        "$ref": "#/definitions/VolumeGroupCreate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeGroupUpdate": {
+      "name": "VolumeGroupUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for VolumeGroup update operation.",
+      "schema": {
+        "$ref": "#/definitions/VolumeGroupUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeCreate": {
+      "name": "VolumeCreate",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for Volume create operation.",
+      "schema": {
+        "$ref": "#/definitions/VolumeCreate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeUpdate": {
+      "name": "VolumeUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for Volume update operation.",
+      "schema": {
+        "$ref": "#/definitions/VolumeUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotCreate": {
+      "name": "SnapshotCreatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for Volume Snapshot create operation.",
+      "schema": {
+        "$ref": "#/definitions/SnapshotCreate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The unique uuid of an operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "Location": {
+      "name": "location",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "The location of the resource.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "ElasticSanOperationDisplay": {
+      "type": "object",
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ],
+      "description": "Metadata about an operation.",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Localized friendly form of the resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Localized friendly form of the resource type related to this action/operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation, as it should be shown to the user."
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized friendly description for the operation, as it should be shown to the user."
+        }
+      }
+    },
+    "ElasticSanRPOperation": {
+      "type": "object",
+      "required": [
+        "name",
+        "isDataAction",
+        "display"
+      ],
+      "description": "Description of a ElasticSan RP Operation",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Indicates the action type."
+        },
+        "display": {
+          "type": "string",
+          "description": "Additional metadata about RP operation.",
+          "$ref": "#/definitions/ElasticSanOperationDisplay"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX."
+        }
+      }
+    },
+    "ElasticSanOperationListResult": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of operations supported by the RP.",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of operations supported by the ElasticSan RP.",
+          "items": {
+            "$ref": "#/definitions/ElasticSanRPOperation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string"
+        }
+      }
+    },
+    "ElasticSanListResult": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of Elastic San",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "An array of Elastic San objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticSan"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticSan": {
+      "type": "object",
+      "description": "Response for ElasticSan request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of ElasticSan.",
+          "$ref": "#/definitions/ElasticSanProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticSanProperties": {
+      "type": "object",
+      "description": "Elastic San response properties.",
+      "required": [
+        "subscriptionId",
+        "availabilityZones",
+        "provisioningState",
+        "sizeInTB"
+      ],
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription Id of Elastic San",
+          "type": "string",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives."
+        },
+        "availabilityZones": {
+          "type": "array",
+          "description": "Logical zone for Elastic San resource; example: [\"1\"].",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "sizeInTB": {
+          "description": "Size of the ElasticSan in TB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.ElasticSan/elasticSans."
+        }
+      }
+    },
+    "ElasticSanCreate": {
+      "type": "object",
+      "description": "Request payload for create or update Elastic San request.",
+      "required": [
+        "location",
+        "name"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for ElasticSan create request.",
+          "$ref": "#/definitions/ElasticSanCreateProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Elastic San to create"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.ElasticSan/elasticSans."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ElasticSanUpdate": {
+      "type": "object",
+      "description": "Request payload for Update ElasticSan request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for ElasticSan update request.",
+          "$ref": "#/definitions/ElasticSanUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ElasticSanCreateProperties": {
+      "type": "object",
+      "description": "Properties for Elastic San create or update request.",
+      "required": [
+        "sizeInTB"
+      ],
+      "properties": {
+        "availabilityZones": {
+          "type": "array",
+          "description": "Logical zone for Elastic San resource; example: [\"1\"].",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "sizeInTB": {
+          "description": "size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sku": {
+          "description": "resource sku",
+          "type": "string",
+          "$ref": "#/definitions/SkuName"
+        }
+      }
+    },
+    "ElasticSanUpdateProperties": {
+      "type": "object",
+      "description": "Properties for ElasticSan update request.",
+      "required": [
+        "sizeInTB"
+      ],
+      "properties": {
+        "sizeInTB": {
+          "description": "size of Elastic San in TB.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AvailabilityZone": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Availability zones."
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "The SKU name. Required for account creation; optional for update.",
+      "enum": [
+        "Premium_LRS",
+        "Premium_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      }
+    },
+    "StorageTarget": {
+      "type": "object",
+      "description": "Response for Storage Target requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for Storage Target operations.",
+          "$ref": "#/definitions/StorageTargetProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StorageTargetProperties": {
+      "type": "object",
+      "description": "Response properties for Storage Target operations.",
+      "properties": {
+        "protocolType": {
+          "description": "Type of storage target",
+          "type": "string",
+          "$ref": "#/definitions/StorageTargetType"
+        },
+        "encryption": {
+          "description": "Type of encryption",
+          "type": "string",
+          "$ref": "#/definitions/EncryptionType"
+        }
+      }
+    },
+    "IscsiTargetInfo": {
+      "type": "object",
+      "description": "Iscsi target information",
+      "properties": {
+        "targetIqn": {
+          "type": "string",
+          "description": "iSCSI Target IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:server\".",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "type": "string",
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status of the iSCSI Target."
+        },
+        "endpoints": {
+          "description": "List of private IPv4 addresses to connect to the storage Target.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VolumeGroup": {
+      "type": "object",
+      "description": "Response for Volume Group request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of VolumeGroup.",
+          "$ref": "#/definitions/VolumeGroupProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VolumeGroupList": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of Volume Groups",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "An array of Volume Groups objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeGroup"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VolumeGroupCreate": {
+      "type": "object",
+      "description": "Payload for VolumeGroup create or update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for VolumeGroup create request.",
+          "$ref": "#/definitions/VolumeGroupCreateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VolumeGroupUpdate": {
+      "type": "object",
+      "description": "Payload for VolumeGroup update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for VolumeGroup update request.",
+          "$ref": "#/definitions/VolumeGroupUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VolumeGroupProperties": {
+      "type": "object",
+      "description": "VolumeGroup response properties.",
+      "required": [
+        "name",
+        "provisioningState",
+        "subnet",
+        "storageTarget",
+        "sizeInGB",
+        "volumes"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the volume group"
+        },
+        "sizeInGB": {
+          "description": "Volume Group size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "storageTarget": {
+          "description": "Storage Target Information",
+          "$ref": "#/definitions/StorageTarget"
+        },
+        "volumes": {
+          "type": "array",
+          "description": "List of Volumes attached to this Volume Group.",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Azure Resource ID of a Subnet for the Volume Group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "VolumeGroupCreateProperties": {
+      "type": "object",
+      "description": "Properties for VolumeGroup create or update request.",
+      "required": [
+        "volumeGroupName",
+        "subnet"
+      ],
+      "properties": {
+        "volumeGroupName": {
+          "type": "string",
+          "description": "Name of the Volumge Group"
+        },
+        "subnet": {
+          "description": "Volume Group subnet id.",
+          "type": "string"
+        },
+        "storageTarget": {
+          "description": "Storage Target Information",
+          "readOnly": true,
+          "$ref": "#/definitions/StorageTarget"
+        }
+      }
+    },
+    "VolumeGroupUpdateProperties": {
+      "type": "object",
+      "description": "Properties for VolumeGroup update request.",
+      "properties": {
+        "name": {
+          "description": "Volume Group name.",
+          "type": "string"
+        },
+        "storageTarget": {
+          "description": "Iscsi Target Information",
+          "$ref": "#/definitions/StorageTarget"
+        }
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "description": "Response for Volume request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Volume.",
+          "$ref": "#/definitions/VolumeProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VolumeList": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of Volumes",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "An array of Volume objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VolumeCreate": {
+      "type": "object",
+      "description": "Payload for Volume create or update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for Volume create request.",
+          "$ref": "#/definitions/VolumeCreateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VolumeUpdate": {
+      "type": "object",
+      "description": "Payload for Volume update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for Volume update request.",
+          "$ref": "#/definitions/VolumeUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VolumeProperties": {
+      "type": "object",
+      "description": "Volume response properties.",
+      "required": [
+        "sizeInGB"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "sizeInGB": {
+          "description": "Volume size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "volumeGroupName": {
+          "type": "string",
+          "description": "Parent volume group name"
+        },
+        "storageTarget": {
+          "description": "Storage target information",
+          "type": "object",
+          "$ref": "#/definitions/IscsiTargetInfo"
+        }
+      }
+    },
+    "VolumeCreateProperties": {
+      "type": "object",
+      "description": "Properties for Volume create or update request.",
+      "required": [
+        "sizeInGB"
+      ],
+      "properties": {
+        "sizeInGB": {
+          "description": "Volume size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "VolumeUpdateProperties": {
+      "type": "object",
+      "description": "Properties for Volume update request.",
+      "properties": {
+        "volumename": {
+          "description": "Volume name.",
+          "type": "string"
+        },
+        "sizeInGB": {
+          "description": "Volume size in GB.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Snapshot": {
+      "type": "object",
+      "description": "Response for Snapshot request.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Snapshot.",
+          "$ref": "#/definitions/SnapshotProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SnapshotProperties": {
+      "type": "object",
+      "description": "Snapshot response properties.",
+      "required": [
+        "name",
+        "volumes",
+        "provisioningState"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the volume"
+        },
+        "volumes": {
+          "description": "An array of Volume objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        }
+      }
+    },
+    "SnapshotList": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of Snapshots",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "An array of Snapshot objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SnapshotCreate": {
+      "type": "object",
+      "description": "Payload for Volume Snapshot create or update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for Volume Snapshot create request.",
+          "$ref": "#/definitions/SnapshotCreateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SnapshotCreateProperties": {
+      "type": "object",
+      "description": "Properties for Volume create or update request.",
+      "required": [
+        "volumes"
+      ],
+      "properties": {
+        "volumes": {
+          "type": "array",
+          "description": "List of Volumes to attach to a Snapshot Set.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the snapshot was created."
+        },
+        "uniqueId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Guid identifying the resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disk provisioning state."
+        },
+        "incremental": {
+          "type": "boolean",
+          "description": "Whether a snapshot is incremental. Incremental snapshots on the same disk occupy less space than full snapshots and can be diffed."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "The resource management error response.",
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "RP error response.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStates",
+        "modelAsString": true
+      },
+      "description": "Provisioning state of the iSCSI Target.",
+      "readOnly": true
+    },
+    "OperationalStatus": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Unknown",
+        "Healthy",
+        "Unhealthy",
+        "Updating",
+        "Running",
+        "Stopped",
+        "Stopped (deallocated)"
+      ],
+      "x-ms-enum": {
+        "name": "OperationalStatus",
+        "modelAsString": true
+      },
+      "description": "Operational status of the resource."
+    },
+    "StorageTargetType": {
+      "type": "string",
+      "enum": [
+        "Iscsi"
+      ],
+      "x-ms-enum": {
+        "name": "StorageTargetType",
+        "modelAsString": true
+      },
+      "description": "Storage Target type."
+    },
+    "EncryptionType": {
+      "type": "string",
+      "enum": [
+        "SSE Platform Managed Key",
+        "SSE Customer Managed Key"
+      ],
+      "x-ms-enum": {
+        "name": "Encryption Type",
+        "modelAsString": true
+      },
+      "description": "Encryption type."
+    },
+    "SystemMetadata": {
+      "type": "object",
+      "description": "Resource metadata required by ARM RPC.",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A string identifier for the identity that created the resource."
+        },
+        "createdByType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of identity that created the resource: user, application, managedIdentity."
+        },
+        "createdAt": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A string identifier for the identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity."
+        },
+        "lastModifiedAt": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "ARM resource model definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorAdditionalInfo": {
+      "description": "The resource management error additional info.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      },
+      "description": "The resource management error response."
+    }
+  }
+}

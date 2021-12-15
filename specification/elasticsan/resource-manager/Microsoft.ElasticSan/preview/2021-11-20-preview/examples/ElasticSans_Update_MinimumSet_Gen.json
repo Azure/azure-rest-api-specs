@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "aaaaaaaaa",
+    "resourceGroupName": "rgelasticsan",
+    "elasticSanName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "ElasticSanUpdatePayload": {
+      "properties": {
+        "sizeInTB": 7
+      }
+    },
+    "api-version": "2021-11-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "subscriptionId": "aaaaaaaaaaaaaaaaaaaaa",
+          "availabilityZones": [
+            [
+              "aaaaaaaaaaaa"
+            ]
+          ],
+          "provisioningState": "Invalid",
+          "sizeInTB": 10
+        },
+        "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

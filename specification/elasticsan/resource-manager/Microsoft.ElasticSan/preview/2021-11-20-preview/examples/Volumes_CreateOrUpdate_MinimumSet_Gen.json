@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "aaaaaaaaa",
+    "resourceGroupName": "rgelasticsan",
+    "elasticSanName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "volumeGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "volumeName": "aaaaaaaaaaaaa",
+    "VolumeCreate": {
+      "properties": {
+        "sizeInGB": 30
+      }
+    },
+    "api-version": "2021-11-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sizeInGB": 20
+        },
+        "location": "aaaaaaaaaaaaaa"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "sizeInGB": 20
+        },
+        "location": "aaaaaaaaaaaaaa"
+      }
+    }
+  }
+}
