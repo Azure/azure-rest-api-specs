@@ -1,0 +1,651 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Experimentation",
+    "description": "Rest API for Experimentation Service.",
+    "version": "2021-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Experimentation/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all of the available Experimentation resource provider API operations.",
+        "description": "Get the list of available Experimentation resource provider API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The version of the Experimentation resource provider API",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ExperimentWorkspaces_OperationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Experimentation/experimentWorkspaces/{experimentWorkspaceName}": {
+      "put": {
+        "tags": [
+          "ExperimentWorkspace"
+        ],
+        "operationId": "experimentWorkspaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "GetWorkspaces": {
+            "$ref": "./examples/ExperimentWorkspaces_CreateOrUpdate.json"
+          }
+        },
+        "description": "Create an experiment workspace, or update an existing workspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspaceCreate"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate experiment workspace operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request to create the experiment workspace is accepted and is running asynchronously",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "200": {
+            "description": "The request to update the experiment workspace is accepted and is running asynchronously",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ExperimentWorkspace"
+        ],
+        "operationId": "experimentWorkspaces_Patch",
+        "x-ms-examples": {
+          "GetWorkspaces": {
+            "$ref": "./examples/ExperimentWorkspaces_Patch.json"
+          }
+        },
+        "description": "Patch an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspacePatch"
+            },
+            "description": "Parameters supplied to the Patch experiment workspace operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experiment workspace is patched",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExperimentWorkspace"
+        ],
+        "operationId": "experimentWorkspaces_Delete",
+        "x-ms-examples": {
+          "GetWorkspaces": {
+            "$ref": "./examples/ExperimentWorkspaces_Delete.json"
+          }
+        },
+        "description": "Deletes an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request to delete the experiment workspace is accepted and is running asynchronously"
+          },
+          "202": {
+            "description": "The request to delete the experiment workspace is accepted and is running asynchronously"
+          },
+          "204": {
+            "description": "The experiment Workspace doesn't exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ExperimentWorkspace"
+        ],
+        "operationId": "experimentWorkspaces_Get",
+        "x-ms-examples": {
+          "GetWorkspaces": {
+            "$ref": "./examples/ExperimentWorkspaceGet.json"
+          }
+        },
+        "description": "Gets an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the experiment workspace for the specified name",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Experimentation/experimentWorkspaces": {
+      "get": {
+        "tags": [
+          "ExperimentWorkspace"
+        ],
+        "operationId": "experimentWorkspaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "GetWorkspaces": {
+            "$ref": "./examples/ExperimentWorkspaces_ListByResourceGroup.json"
+          }
+        },
+        "description": "Gets all experiment workspaces in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all the experiment workspaces in the specified resource group",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Experimentation/experimentWorkspaces": {
+      "get": {
+        "tags": [
+          "ExperimentWorkspace"
+        ],
+        "operationId": "experimentWorkspaces_List",
+        "x-ms-examples": {
+          "GetWorkspaces": {
+            "$ref": "./examples/ExperimentWorkspaces_List.json"
+          }
+        },
+        "description": "Gets all experiment workspaces in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all the experiment workspaces in the specified subscription",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExperimentWorkspacePatch": {
+      "type": "object",
+      "description": "An experiment workspace properties.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ExperimentWorkspace": {
+      "type": "object",
+      "description": "An experiment workspace.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentWorkspaceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "ExperimentWorkspaceProperties": {
+      "type": "object",
+      "description": "An experiment workspace properties.",
+      "properties": {
+        "expWorkspaceId": {
+          "description": "The id for experiment workspace",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state for the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "afdTasUrl": {
+          "description": "Afd Tas Url",
+          "type": "string",
+          "readOnly": true
+        },
+        "managementGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementGroup"
+          },
+          "description": "Management Groups"
+        }
+      }
+    },
+    "ExperimentWorkspaceCreate": {
+      "type": "object",
+      "description": "An experiment workspace.",
+      "properties": {
+        "location": {
+          "description": "Location of the experiment workspace",
+          "type": "string"
+        }
+      }
+    },
+    "ExperimentWorkspaceCreateProperties": {
+      "type": "object",
+      "description": "An experiment workspace properties.",
+      "properties": {
+        "tasEndpoint": {
+          "description": "A treatment assignment service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tasCustomSubscriptionId": {
+          "description": "Treatment Assignment Service custom subscription Id.",
+          "type": "string"
+        },
+        "tasClusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TASCluster"
+          },
+          "description": "Treatment Assignment Clusters"
+        }
+      }
+    },
+    "ManagementGroup": {
+      "type": "object",
+      "description": "A management group.",
+      "properties": {
+        "name": {
+          "description": "Management Group name.",
+          "type": "string"
+        },
+        "tasEndpoint": {
+          "description": "A treatment assignment service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tasCustomSubscriptionId": {
+          "description": "Treatment Assignment Service custom subscription Id.",
+          "type": "string"
+        },
+        "tasClusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TASCluster"
+          },
+          "description": "Treatment Assignment Clusters"
+        }
+      }
+    },
+    "TASCluster": {
+      "type": "object",
+      "description": "An experiment workspace.",
+      "properties": {
+        "region": {
+          "description": "Geographical region.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Cluster size.",
+          "type": "string"
+        }
+      }
+    },
+    "ExperimentWorkspaceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Results of the list operation.",
+          "items": {
+            "$ref": "#/definitions/ExperimentWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of locations."
+        }
+      },
+      "description": "The response of list experiment workspace operation."
+    },
+    "ExperimentWorkspacePatchParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags that will be assigned to the experiment workspace. "
+        },
+        "properties": {
+          "$ref": "#/definitions/ExperimentWorkspacePatchParameters",
+          "description": "Properties of the workspace"
+        }
+      },
+      "description": "Parameters for patching the experiment workspace"
+    },
+    "OperationListResult": {
+      "description": "Describes the result of the request to list Service Fabric operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Experimentation operations supported by the Microsoft.Experimentation resource provider.",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "Available operation list result",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "AvailableOperationDisplay": {
+      "description": "Operation supported by Experimentation resource provider",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "client"
+    },
+    "experimentWorkspaceParameter": {
+      "name": "experimentWorkspaceName",
+      "in": "path",
+      "description": "The name of the experimentation workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
