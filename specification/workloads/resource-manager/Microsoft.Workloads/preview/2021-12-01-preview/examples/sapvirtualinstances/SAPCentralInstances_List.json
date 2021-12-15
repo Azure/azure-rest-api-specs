@@ -24,19 +24,33 @@
               "lastModifiedAt": "2021-08-19T15:10:46.196Z"
             },
             "properties": {
-              "ipAddress": "10.0.0.5",
-              "msPort": 1234,
-              "httpPort": 3345,
-              "httpsPort": 3346,
-              "vmDetails": {
-                "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm": {
-                  "type": "Primary"
-                },
-                "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm2": {
-                  "type": "Secondary"
-                }
+              "instanceNo": 0,
+              "subnet": null,
+              "messageServerProperties": {
+                "msPort": 3600,
+                "internalMsPort": 3900,
+                "httpPort": 8100,
+                "httpsPort": 44400,
+                "hostname": "vh-ascs1",
+                "ipAddress": "10.0.0.5"
               },
-              "status": "Starting",
+              "enqueueServerProperties": {
+                "port": 3600,
+                "hostname": "vh-ascs1",
+                "ipAddress": "10.0.0.5"
+              },
+              "gatewayServerProperties": {
+                "port": 3300
+              },
+              "kernelVersion": "777",
+              "kernelPatch": "patch 300",
+              "vmDetails": [
+                {
+                  "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm",
+                  "type": "Primary"
+                }
+              ],
+              "status": "Running",
               "health": "Unknown",
               "errors": null,
               "provisioningState": "Succeeded"

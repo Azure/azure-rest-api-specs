@@ -1386,6 +1386,22 @@
         "read"
       ]
     },
+    "HighAvailabilityType": {
+      "description": "The high availability Type. AvailabilitySet guarantees 99.95% availability. Availability Zone guarantees 99.99% availability.",
+      "enum": [
+        "AvailabilitySet",
+        "AvailabilityZone"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SAPHighAvailabilityType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
     "DatabaseScaleMethod": {
       "description": "The database scale method.",
       "enum": [
@@ -1465,38 +1481,6 @@
       },
       "x-ms-mutability": [
         "create",
-        "read"
-      ]
-    },
-    "ApplicationServerType": {
-      "description": "Defines the SAP Application Server type.",
-      "enum": [
-        "Primary",
-        "Additional"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "ApplicationServerType",
-        "modelAsString": true
-      },
-      "x-ms-mutability": [
-        "read"
-      ]
-    },
-    "DatabaseVirtualMachineType": {
-      "description": "Defines the type of database VM.",
-      "enum": [
-        "Primary",
-        "Secondary"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "DatabaseVirtualMachineType",
-        "modelAsString": true
-      },
-      "x-ms-mutability": [
         "read"
       ]
     },
@@ -1886,6 +1870,9 @@
           "type": "string",
           "description": "The geo-location where the resource is to be created."
         },
+        "environment": {
+          "$ref": "#/definitions/EnvironmentType"
+        },
         "sapProduct": {
           "$ref": "#/definitions/SAPProductType"
         },
@@ -1896,6 +1883,7 @@
       },
       "required": [
         "appLocation",
+        "environment",
         "sapProduct",
         "databaseType"
       ]
@@ -2053,6 +2041,20 @@
       ],
       "x-ms-azure-resource": true
     },
+    "HighAvailabilityConfiguration": {
+      "description": "Gets or sets the high availability configuration.",
+      "type": "object",
+      "properties": {
+        "highAvailabilityType": {
+          "description": "The high availability type.",
+          "$ref": "#/definitions/HighAvailabilityType"
+        }
+      },
+      "required": [
+        "highAvailabilityType"
+      ],
+      "x-ms-azure-resource": true
+    },
     "ThreeTierConfiguration": {
       "x-ms-discriminator-value": "ThreeTier",
       "x-ms-client-flatten": true,
@@ -2075,6 +2077,10 @@
         "databaseServer": {
           "description": "The database configuration.",
           "$ref": "#/definitions/DatabaseConfiguration"
+        },
+        "highAvailabilityConfig": {
+          "description": "The high availability configuration.",
+          "$ref": "#/definitions/HighAvailabilityConfiguration"
         }
       },
       "required": [
@@ -2159,6 +2165,11 @@
         "centralServerVmId": {
           "type": "string",
           "description": "The virtual machine ID of the Central Server."
+        },
+        "appLocation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the SAP system exists."
         }
       }
     },
@@ -2172,6 +2183,10 @@
         }
       ],
       "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP system is to be created."
+        },
         "infrastructureConfiguration": {
           "$ref": "#/definitions/InfrastructureConfiguration",
           "description": "The infrastructure configuration."
@@ -2186,16 +2201,11 @@
       "description": "The SAP Configuration.",
       "type": "object",
       "required": [
-        "configurationType",
-        "appLocation"
+        "configurationType"
       ],
       "properties": {
         "configurationType": {
           "$ref": "#/definitions/ConfigurationType"
-        },
-        "appLocation": {
-          "type": "string",
-          "description": "The geo-location where the resource is to be created."
         }
       },
       "discriminator": "configurationType"
@@ -2204,13 +2214,12 @@
       "description": "The Central Server VM Details.",
       "type": "object",
       "properties": {
-        "virtualMachineId": {
-          "type": "string",
-          "description": "The central server virtual machine id.",
-          "readOnly": true
-        },
         "type": {
           "$ref": "#/definitions/CentralServerVirtualMachineType",
+          "readOnly": true
+        },
+        "virtualMachineId": {
+          "type": "string",
           "readOnly": true
         }
       }
@@ -2221,11 +2230,6 @@
       "properties": {
         "virtualMachineId": {
           "type": "string",
-          "description": "The database virtual machine id.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/DatabaseVirtualMachineType",
           "readOnly": true
         }
       }
@@ -2400,38 +2404,44 @@
         },
         "hostname": {
           "type": "string",
-          "description": "The application server hostname.",
+          "description": "The application server SAP host name.",
+          "readOnly": true
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "The application server SAP kernel version.",
+          "readOnly": true
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "The application server SAP kernel patch.",
           "readOnly": true
         },
         "ipAddress": {
           "type": "string",
-          "description": "The application server IP Address.",
+          "description": "The application server SAP IP Address.",
           "readOnly": true
         },
-        "diaPort": {
+        "gatewayPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The application server DIA Port.",
+          "description": "The application server gateway Port.",
           "readOnly": true,
           "x-nullable": true
         },
-        "httpPort": {
+        "icmHttpPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The application server HTTP Port.",
+          "description": "The application server ICM HTTP Port.",
           "readOnly": true,
           "x-nullable": true
         },
-        "httpsPort": {
+        "icmHttpsPort": {
           "type": "integer",
           "format": "int64",
-          "description": "The application server HTTPS Port.",
+          "description": "The application server ICM HTTPS Port.",
           "readOnly": true,
           "x-nullable": true
-        },
-        "applicationServerType": {
-          "$ref": "#/definitions/ApplicationServerType",
-          "readOnly": true
         },
         "virtualMachineId": {
           "type": "string",
@@ -2482,6 +2492,86 @@
       },
       "x-ms-azure-resource": true
     },
+    "MessageServerProperties": {
+      "description": "Defines the SAP message server properties.",
+      "type": "object",
+      "properties": {
+        "msPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The message server port.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "internalMsPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The message server internal MS port.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "httpPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The message server http port.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "httpsPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The message server https port.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The message server SAP host name.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The message server IP Address.",
+          "readOnly": true
+        }
+      }
+    },
+    "EnqueueServerProperties": {
+      "description": "Defines the SAP enqueue server properties.",
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "The enqueue server SAP host name.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The enqueue server SAP IP Address.",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The enqueue server Port.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "GatewayServerProperties": {
+      "description": "Defines the SAP Gateway Server properties.",
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The gateway Port.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
     "SAPCentralServerProperties": {
       "description": "Defines the SAP Central Server properties.",
       "type": "object",
@@ -2498,39 +2588,34 @@
           "description": "The central server subnet.",
           "readOnly": true
         },
-        "ipAddress": {
+        "messageServerProperties": {
+          "$ref": "#/definitions/MessageServerProperties"
+        },
+        "enqueueServerProperties": {
+          "$ref": "#/definitions/EnqueueServerProperties"
+        },
+        "gatewayServerProperties": {
+          "$ref": "#/definitions/GatewayServerProperties"
+        },
+        "kernelVersion": {
           "type": "string",
-          "description": "The central server IP Address.",
-          "readOnly": true
-        },
-        "msPort": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The central server MS Port.",
+          "description": "The central server kernel version.",
           "readOnly": true,
           "x-nullable": true
         },
-        "httpPort": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The central server HTTP Port.",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "httpsPort": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The central server HTTPS Port.",
+        "kernelPatch": {
+          "type": "string",
+          "description": "The central server kernel patch.",
           "readOnly": true,
           "x-nullable": true
         },
         "vmDetails": {
-          "type": "object",
           "description": "The list of virtual machines.",
-          "readOnly": true,
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/CentralServerVmDetails"
-          }
+          },
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
@@ -2590,25 +2675,23 @@
           "description": "The database SID.",
           "readOnly": true
         },
+        "databaseType": {
+          "type": "string",
+          "description": "The SAP database type.",
+          "readOnly": true
+        },
         "ipAddress": {
           "type": "string",
           "description": "The database IP Address.",
           "readOnly": true
         },
-        "port": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The database port.",
-          "readOnly": true,
-          "x-nullable": true
-        },
         "vmDetails": {
-          "type": "object",
           "description": "The list of virtual machines.",
-          "readOnly": true,
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/DatabaseVmDetails"
-          }
+          },
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
