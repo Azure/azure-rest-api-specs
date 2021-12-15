@@ -1,132 +1,517 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-06-01-preview",
-    "title": "oep",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "oepClient"
-    }
-  },
-  "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [
-    {
-      "azure_auth": ["user_impersonation"]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
+    "title": "Open Energy Platform Management Service APIs",
+    "description": "Open Energy Platform Management Service APIs",
+    "version": "2021-06-01-preview"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/operations": {
-      "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "operationId": "Locations_CheckNameAvailability",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "in": "body",
+            "name": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "description": "NameAvailabilityRequest object.",
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Locations_CheckNameAvailability": {
+            "$ref": "./examples/Locations_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Returns list of oep resources..",
+        "operationId": "OepResources_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OepResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OepResource_ListByResourceGroup": {
+            "$ref": "./examples/OepResource_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Lists a collection of oep resources under the given Azure Subscription ID.",
+        "operationId": "OepResources_ListBySubscriptionId",
+        "x-ms-examples": {
+          "OepResource_ListBySubscriptionId": {
+            "$ref": "./examples/OepResource_ListBySubscriptionId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/OepResourceList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Returns oep resource for a given name.",
+        "operationId": "OepResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OepResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Get": {
+            "$ref": "./examples/OepResource_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Method that gets called if subscribed for ResourceCreationBegin trigger.",
+        "operationId": "OepResources_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body.",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/OepResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The OEP resource created.",
+            "schema": {
+              "$ref": "#/definitions/OepResource"
+            }
+          },
+          "201": {
+            "description": "The OEP resource will be created asynchronously",
+            "schema": {
+              "$ref": "#/definitions/OepResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Create": {
+            "$ref": "./examples/OepResource_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "OepResources_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OepPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the oep resource.",
+            "schema": {
+              "$ref": "#/definitions/OepResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Update": {
+            "$ref": "./examples/OepResource_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes oep resource",
+        "operationId": "OepResources_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "The OEP resource will be deleted asynchronously"
+          },
+          "204": {
+            "description": "Returned when the operation returns no content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Delete": {
+            "$ref": "./examples/OepResource_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.OpenEnergyPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available operations of Microsoft.OpenEnergyPlatform resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "CheckNameAvailabilityRequest": {
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
       "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "nameAvailable": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
           "type": "string",
           "readOnly": true
         },
         "message": {
-          "description": "Description of the error.",
           "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
           "readOnly": true
         }
       }
+    },
+    "OepResourceList": {
+      "description": "The list of oep resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of oep resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of oep resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OepResource"
+          }
+        }
+      }
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "OepProperties": {
+      "type": "object",
+      "properties": {
+        "dnsName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "authAppId": {
+          "type": "string",
+          "readOnly": false
+        },
+        "dataPartitionNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        }
+      }
+    },
+    "OepResource": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OepProperties"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Geo-location where the resource lives.",
+          "type": "string"
+        }
+      }
+    },
+    "TrackedResourceUpdate": {
+      "description": "The resource model definition used for updating a tracked ARM resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OepPatchResource": {
+      "type": "object",
+      "description": "OepResource patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResourceUpdate"
+        }
+      ]
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
     }
-  }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ]
 }

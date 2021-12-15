@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.OpenEnergyPlatform
-  output-folder: $(csharp-sdks-folder)/oep/management/Microsoft.OpenEnergyPlatform/GeneratedProtocol
+  namespace: Microsoft.OEP
+  output-folder: $(csharp-sdks-folder)/oep/management/Microsoft.OEP/GeneratedProtocol
 ```

@@ -26,6 +26,7 @@ These are the global settings for the oep.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2021-06-01-preview
 ```
 
@@ -51,7 +52,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
