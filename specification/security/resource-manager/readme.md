@@ -81,6 +81,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 input-file:
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
   - Microsoft.Security/preview/2021-08-01-preview/assignments.json
+  - Microsoft.Security/preview/2021-08-01-preview/scanners.json
 
 override-info:
   title: SecurityCenter
