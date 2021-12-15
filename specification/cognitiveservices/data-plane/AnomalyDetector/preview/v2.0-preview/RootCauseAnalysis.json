@@ -1173,15 +1173,15 @@
     },
     "RootCauseAnalysisUploadDataRequest": {
       "required": [
-        "$type"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "$type": {
+        "kind": {
           "type": "string"
         }
       },
-      "discriminator": "$type",
+      "discriminator": "kind",
       "example": {
   "value": [
     {
@@ -1520,15 +1520,15 @@
     },
     "RootCauseAnalysisDataMeta": {
       "required": [
-        "$type"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "$type": {
+        "kind": {
           "type": "string"
         }
       },
-      "discriminator": "$type"
+      "discriminator": "kind"
     },
     "MultiDimRCADataMeta": {
       "required": [
@@ -1807,12 +1807,12 @@
     },
     "RootCauseAnalysisTrainingRequest": {
       "required": [
-        "$type",
+        "kind",
         "name"
       ],
       "type": "object",
       "properties": {
-        "$type": {
+        "kind": {
           "type": "string"
         },
         "name": {
@@ -1820,7 +1820,7 @@
           "type": "string"
         }
       },
-      "discriminator": "$type",
+      "discriminator": "kind",
       "example": {
   "parameter": {
     "startDateTime": "2021-10-01T00:00:00Z",
@@ -2053,15 +2053,15 @@
     },
     "RootCauseAnalysisInferenceRequest": {
       "required": [
-        "$type"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "$type": {
+        "kind": {
           "type": "string"
         }
       },
-      "discriminator": "$type",
+      "discriminator": "kind",
       "example": {
   "parameter": {
     "timestamp": "2021-12-01T00:00:00Z",
