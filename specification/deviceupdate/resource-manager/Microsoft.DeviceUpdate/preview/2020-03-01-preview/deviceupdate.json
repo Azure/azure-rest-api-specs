@@ -1532,22 +1532,16 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Private endpoint connection proxy object properties.",
-          "x-ms-client-flatten": true,
+        },
+        {
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
         }
-      },
-      "required": [
-        "properties"
       ]
     },
     "PrivateEndpointConnectionProxyProperties": {
       "description": "Private endpoint connection proxy object properties.",
       "type": "object",
+      "x-ms-client-flatten": true,
       "properties": {
         "eTag": {
           "description": "ETag from NRP.",
@@ -1561,6 +1555,10 @@
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
           "description": "The provisioning state of the private endpoint connection proxy resource."
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
         }
       }
     },
@@ -1693,6 +1691,14 @@
           "description": "Internal FQDN.",
           "type": "string",
           "readOnly": true
+        },
+        "redirectMapId": {
+          "description": "Redirect map ID.",
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "description": "PrivateLinkService ARM region.",
+          "type": "string"
         }
       }
     },
