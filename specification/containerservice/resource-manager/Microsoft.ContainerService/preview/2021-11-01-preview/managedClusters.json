@@ -578,6 +578,9 @@
           },
           "Create/Update Managed Cluster with dual-stack networking": {
             "$ref": "./examples/ManagedClustersCreate_DualStackNetworking.json"
+          },
+          "Associate Managed Cluster with Capacity Reservation Group": {
+            "$ref": "./examples/ManagedClustersAssociate_CRG.json"
           }
         }
       },
@@ -1070,6 +1073,9 @@
           },
           "Start Agent Pool": {
             "$ref": "./examples/AgentPools_Start.json"
+          },
+          "Associate Agent Pool with Capacity Reservation Group": {
+            "$ref": "./examples/AgentPoolsAssociate_CRG.json"
           }
         }
       },
@@ -2813,6 +2819,10 @@
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot."
+        },
+        "capacityReservationGroupID": {
+          "$ref": "#/definitions/CapacityReservationGroupID",
+          "description": "AKS will associate the specified agent pool with the Capacity Reservation Group."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -5606,6 +5616,10 @@
         ]
       },
       "description": "The type of a snapshot. The default is NodePool."
+    },
+    "CapacityReservationGroupID": {
+      "description": "Capacity Reservation Group ID for AgentPool to associate",
+      "type": "string"
     }
   },
   "parameters": {
