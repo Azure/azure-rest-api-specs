@@ -7,15 +7,18 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: microsoft.confidentialledger
+  namespace: azure.mgmt.confidentialledger
   package-name: azure-mgmt-confidentialledger
-  package-version: 0.0.1
   clear-output-folder: true
 ```
 
-```yaml $(python)
+``` yaml $(python) && $(python-mode) == 'update'
 python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/confidentialledger/azure-mgmt-confidentialledger/azure/mgmt/confidentialledger
+    no-namespace-folders: true
+    output-folder: $(python-sdks-folder)/confidentialledger/azure-mgmt-confidentialledger/azure/mgmt/confidentialledger
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+    basic-setup-py: true
+    output-folder: $(python-sdks-folder)/confidentialledger/azure-mgmt-confidentialledger
 ```
