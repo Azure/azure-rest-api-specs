@@ -2285,23 +2285,7 @@
       "properties": {
         "provisioningState": {
           "description": "The provisioning state.",
-          "enum": [
-            "Deleting",
-            "Succeeded",
-            "Creating",
-            "Accepted",
-            "Verifying",
-            "Updating",
-            "Failed",
-            "Canceled",
-            "Deprovisioned"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState"
         },
         "accessPolicies": {
           "$ref": "#/definitions/ServiceAccessPoliciesInfo",
@@ -3081,7 +3065,7 @@
       "type": "string",
       "readOnly": true,
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "provisioningState",
         "modelAsString": true
       }
     },
