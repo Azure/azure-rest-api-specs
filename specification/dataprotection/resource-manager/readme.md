@@ -90,6 +90,16 @@ These settings apply only when `--tag=package-2021-06-preview` is specified on t
 input-file:
 - Microsoft.DataProtection/preview/2021-06-01-preview/dataprotection.json
 ```
+
+### Tag: package-2021-12-preview
+
+These settings apply only when `--tag=package-2021-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-preview'
+input-file:
+- Microsoft.DataProtection/preview/2021-12-01-preview/dataprotection.json
+```
+
 ---
 # Code Generation
 
@@ -102,9 +112,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -127,6 +138,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/dataprotection/Microsoft.Azure.Management.DataProtection/src/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
