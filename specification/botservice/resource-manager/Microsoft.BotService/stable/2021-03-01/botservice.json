@@ -1160,7 +1160,8 @@
         },
         "location": {
           "description": "Specifies the location of the resource.",
-          "type": "string"
+          "type": "string",
+          "default": "global"
         },
         "type": {
           "description": "Specifies the type of the resource.",
@@ -1185,7 +1186,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "Entity Tag"
+          "description": "Entity Tag",
+          "default": "*"
         },
         "zones": {
           "type": "array",
@@ -1379,7 +1381,8 @@
         },
         "cmekEncryptionStatus": {
           "type": "string",
-          "description": "The CMK encryption status"
+          "description": "The CMK encryption status",
+          "readOnly": true
         },
         "publicNetworkAccess": {
           "description": "Whether the bot is in an isolated network",
@@ -1396,11 +1399,13 @@
         },
         "isStreamingSupported": {
           "type": "boolean",
-          "description": "Whether the bot is streaming supported"
+          "description": "Whether the bot is streaming supported",
+          "default": false
         },
         "isDeveloperAppInsightsApiKeySet": {
           "type": "boolean",
-          "description": "Whether the bot is developerAppInsightsApiKey set"
+          "description": "Whether the bot is developerAppInsightsApiKey set",
+          "default": false
         },
         "migrationToken": {
           "type": "string",
@@ -1409,11 +1414,13 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+          "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
+          "default": false
         },
         "schemaTransformationVersion": {
           "type": "string",
-          "description": "The channel schema transformation version for the bot"
+          "description": "The channel schema transformation version for the bot",
+          "default": null
         },
         "storageResourceId": {
           "type": "string",
@@ -1528,7 +1535,8 @@
         },
         "botIconUrl": {
           "type": "string",
-          "description": "The bot icon url"
+          "description": "The bot icon url",
+          "default": null
         },
         "isEnabled": {
           "type": "boolean",
@@ -1551,7 +1559,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "Entity Tag of the resource"
+          "description": "Entity Tag of the resource",
+          "default": "*"
         },
         "provisioningState": {
           "type": "string",
@@ -1560,7 +1569,8 @@
         },
         "location": {
           "description": "Specifies the location of the resource.",
-          "type": "string"
+          "type": "string",
+          "default": "global"
         }
       },
       "required": [
@@ -1756,11 +1766,13 @@
         },
         "deploymentEnvironment": {
           "type": "string",
-          "description": "Deployment environment for Microsoft Teams channel calls"
+          "description": "Deployment environment for Microsoft Teams channel calls",
+          "default": null
         },
         "acceptedTerms": {
           "type": "boolean",
-          "description": "Whether this channel accepted terms"
+          "description": "Whether this channel accepted terms",
+          "default": true
         }
       },
       "description": "The parameters to provide for the Microsoft Teams channel.",
@@ -2322,7 +2334,8 @@
         },
         "isBlockUserUploadEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for block user upload."
+          "description": "Whether this site is enabled for block user upload.",
+          "default": false
         },
         "trustedOrigins": {
           "type": "array",
