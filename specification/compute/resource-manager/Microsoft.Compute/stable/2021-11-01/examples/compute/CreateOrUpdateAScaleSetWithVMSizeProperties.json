@@ -13,6 +13,9 @@
       "location": "westus",
       "properties": {
         "overprovision": true,
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
         "virtualMachineProfile": {
           "storageProfile": {
             "imageReference": {
@@ -27,6 +30,13 @@
                 "storageAccountType": "Standard_LRS"
               },
               "createOption": "FromImage"
+            }
+          },
+          "userData": "RXhhbXBsZSBVc2VyRGF0YQ==",
+          "hardwareProfile": {
+            "vmSizeProperties": {
+              "vCPUsAvailable": 1,
+              "vCPUsPerCore": 1
             }
           },
           "osProfile": {
@@ -55,13 +65,6 @@
               }
             ]
           }
-        },
-        "upgradePolicy": {
-          "mode": "Manual"
-        },
-        "automaticRepairsPolicy": {
-          "enabled": true,
-          "gracePeriod": "PT10M"
         }
       }
     }
@@ -93,6 +96,18 @@
                   "storageAccountType": "Standard_LRS"
                 },
                 "createOption": "FromImage"
+              }
+            },
+            "hardwareProfile": {
+              "vmSizeProperties": {
+                "vCPUsAvailable": 1,
+                "vCPUsPerCore": 1
+              }
+            },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+                "enabled": true
               }
             },
             "osProfile": {
@@ -133,10 +148,6 @@
           },
           "upgradePolicy": {
             "mode": "Manual"
-          },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT10M"
           },
           "provisioningState": "Creating"
         },
@@ -173,6 +184,18 @@
                 "createOption": "FromImage"
               }
             },
+            "hardwareProfile": {
+              "vmSizeProperties": {
+                "vCPUsAvailable": 1,
+                "vCPUsPerCore": 1
+              }
+            },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+                "enabled": true
+              }
+            },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
               "adminUsername": "{your-username}",
@@ -211,10 +234,6 @@
           },
           "upgradePolicy": {
             "mode": "Manual"
-          },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT10M"
           },
           "provisioningState": "Creating"
         },

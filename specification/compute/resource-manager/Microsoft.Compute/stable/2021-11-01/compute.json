@@ -3458,6 +3458,12 @@
           },
           "Create a VM from a community gallery image": {
             "$ref": "./examples/compute/CreateAVmFromACommunityGalleryImage.json"
+          },
+          "Create a VM with securityType ConfidentialVM with Platform Managed Keys": {
+            "$ref": "./examples/compute/CreateAVmWithSecurityTypeConfidentialVM.json"
+          },
+          "Create a VM with securityType ConfidentialVM with Customer Managed Keys": {
+            "$ref": "./examples/compute/CreateAVmWithSecurityTypeConfidentialVMWithCustomerManagedKeys.json"
           }
         }
       },
@@ -3626,6 +3632,9 @@
           },
           "Get a virtual machine placed on a dedicated host group through automatic placement": {
             "$ref": "./examples/compute/GetVirtualMachineAutoPlacedOnDedicatedHostGroup.json"
+          },
+          "Get a virtual machine with VM Size Properties": {
+            "$ref": "./examples/compute/GetVirtualMachineWithVMSizeProperties.json"
           }
         }
       }
@@ -5860,6 +5869,12 @@
           },
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/compute/CreateAScaleSetWithSpotRestorePolicy.json"
+          },
+          "Create a scale set with vm size properties": {
+            "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithVMSizeProperties.json"
+          },
+          "Create a scale set with SecurityType as ConfidentialVM": {
+            "$ref": "./examples/compute/CreateAScaleSetWithSecurityTypeConfidentialVM.json"
           }
         }
       },
@@ -6027,6 +6042,9 @@
           },
           "Get a virtual machine scale set with UserData": {
             "$ref": "./examples/compute/GetVirtualMachineScaleSetWithUserData.json"
+          },
+          "Get a virtual machine scale set": {
+            "$ref": "./examples/compute/GetVirtualMachineScaleSet.json"
           }
         }
       }
@@ -7367,6 +7385,20 @@
             "required": true,
             "type": "integer",
             "description": "The platform update domain for which a manual recovery walk is requested"
+          },
+          {
+            "name": "zone",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The zone in which the manual recovery walk is requested for cross zone virtual machine scale set"
+          },
+          {
+            "name": "placementGroupId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The placement group id for which the manual recovery walk is requested."
           }
         ],
         "responses": {
@@ -8212,6 +8244,9 @@
         "x-ms-examples": {
           "Get VM scale set VM with UserData": {
             "$ref": "./examples/compute/GetVirtualMachineScaleSetVMWithUserData.json"
+          },
+          "Get VM scale set VM with VMSizeProperties": {
+            "$ref": "./examples/compute/GetVirtualMachineScaleSetVMWithVMSizeProperties.json"
           }
         }
       }
@@ -8842,6 +8877,60 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/restart": {
+      "post": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHosts_Restart",
+        "description": "Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/en-us/azure/service-health/resource-health-overview for more details.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart Dedicated Host.": {
+            "$ref": "./examples/compute/DedicatedHostRestart.json"
+          }
         }
       }
     }
@@ -9672,6 +9761,12 @@
           "$ref": "#/definitions/DedicatedHostInstanceView",
           "readOnly": true,
           "description": "The dedicated host instance view."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Dedicated Host resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Properties of the dedicated host."
@@ -9905,6 +10000,12 @@
           "$ref": "#/definitions/CapacityReservationInstanceView",
           "readOnly": true,
           "description": "The Capacity reservation instance view."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Capacity Reservation resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Properties of the Capacity reservation."
@@ -11364,6 +11465,28 @@
       ],
       "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details."
     },
+    "VMDiskSecurityProfile": {
+      "type": "object",
+      "properties": {
+        "securityEncryptionType": {
+          "type": "string",
+          "description": "Specifies the EncryptionType of the managed disk. <br> It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. <br><br> NOTE: It can be set for only Confidential VMs.",
+          "enum": [
+            "VMGuestStateOnly",
+            "DiskWithVMGuestState"
+          ],
+          "x-ms-enum": {
+            "name": "securityEncryptionTypes",
+            "modelAsString": true
+          }
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed disk that is used for Customer Managed Key encrypted ConfidentialVM OS Disk and VMGuest blob."
+        }
+      },
+      "description": "Specifies the security profile settings for the managed disk. <br><br> NOTE: It can only be set for Confidential VMs"
+    },
     "KeyVaultKeyReference": {
       "properties": {
         "keyUrl": {
@@ -11517,6 +11640,10 @@
         "diskEncryptionSet": {
           "$ref": "#/definitions/DiskEncryptionSetParameters",
           "description": "Specifies the customer managed disk encryption set resource id for the managed disk."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "description": "Specifies the security profile for the managed disk."
         }
       },
       "allOf": [
@@ -11717,9 +11844,10 @@
         },
         "securityType": {
           "type": "string",
-          "description": "Specifies the SecurityType of the virtual machine. It is set as TrustedLaunch to enable UefiSettings. <br><br> Default: UefiSettings will not be enabled unless this property is set as TrustedLaunch.",
+          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. <br><br> Default: UefiSettings will not be enabled unless this property is set.",
           "enum": [
-            "TrustedLaunch"
+            "TrustedLaunch",
+            "ConfidentialVM"
           ],
           "x-ms-enum": {
             "name": "SecurityTypes",
@@ -11767,6 +11895,16 @@
         }
       },
       "description": "Contains the list of gallery applications that should be made available to the VM/VMSS"
+    },
+    "VirtualMachineScaleSetHardwareProfile": {
+      "type": "object",
+      "properties": {
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VMSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. <br><br> Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        }
+      },
+      "description": "Specifies the hardware settings for the virtual machine scale set."
     },
     "AdditionalCapabilities": {
       "properties": {
@@ -12016,7 +12154,11 @@
         },
         "gracePeriod": {
           "type": "string",
-          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value. The maximum allowed grace period is 90 minutes (PT90M)."
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 10 minutes (PT10M), which is also the default value. The maximum allowed grace period is 90 minutes (PT90M)."
+        },
+        "repairAction": {
+          "type": "string",
+          "description": "Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace."
         }
       },
       "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
@@ -12799,6 +12941,12 @@
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Virtual Machine resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -13358,6 +13506,10 @@
         "diskEncryptionSet": {
           "$ref": "#/definitions/DiskEncryptionSetParameters",
           "description": "Specifies the customer managed disk encryption set resource id for the managed disk."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "description": "Specifies the security profile for the managed disk."
         }
       },
       "description": "Describes the parameters of a ScaleSet managed disk."
@@ -14234,6 +14386,10 @@
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
+          "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -14351,6 +14507,12 @@
         "spotRestorePolicy": {
           "$ref": "#/definitions/SpotRestorePolicy",
           "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Virtual Machine Scale Set resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -15367,9 +15529,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "UpdateResource": {

@@ -8,26 +8,35 @@
       "sku": {
         "tier": "Standard",
         "capacity": 3,
-        "name": "Standard_D1_v2"
+        "name": "Standard_DC2as_v5"
       },
-      "location": "westus",
       "properties": {
         "overprovision": true,
         "virtualMachineProfile": {
           "storageProfile": {
             "imageReference": {
-              "sku": "2016-Datacenter",
+              "sku": "windows-cvm",
               "publisher": "MicrosoftWindowsServer",
-              "version": "latest",
-              "offer": "WindowsServer"
+              "version": "17763.2183.2109130127",
+              "offer": "2019-datacenter-cvm"
             },
             "osDisk": {
-              "caching": "ReadWrite",
+              "caching": "ReadOnly",
               "managedDisk": {
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "StandardSSD_LRS",
+                "securityProfile": {
+                  "securityEncryptionType": "VMGuestStateOnly"
+                }
               },
               "createOption": "FromImage"
             }
+          },
+          "securityProfile": {
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            },
+            "securityType": "ConfidentialVM"
           },
           "osProfile": {
             "computerNamePrefix": "{vmss-name}",
@@ -58,12 +67,9 @@
         },
         "upgradePolicy": {
           "mode": "Manual"
-        },
-        "automaticRepairsPolicy": {
-          "enabled": true,
-          "gracePeriod": "PT10M"
         }
-      }
+      },
+      "location": "westus"
     }
   },
   "responses": {
@@ -72,28 +78,40 @@
         "sku": {
           "tier": "Standard",
           "capacity": 3,
-          "name": "Standard_D1_v2"
+          "name": "Standard_DC2as_v5"
         },
         "name": "{vmss-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
         "properties": {
           "singlePlacementGroup": true,
           "overprovision": true,
-          "uniqueId": "d053ec5a-8da6-495f-ab13-38216503c6d7",
+          "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
-                "sku": "2016-Datacenter",
+                "sku": "windows-cvm",
                 "publisher": "MicrosoftWindowsServer",
-                "version": "latest",
-                "offer": "WindowsServer"
+                "version": "17763.2183.2109130127",
+                "offer": "2019-datacenter-cvm"
               },
               "osDisk": {
-                "caching": "ReadWrite",
+                "caching": "ReadOnly",
                 "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
+                  "storageAccountType": "StandardSSD_LRS",
+                  "securityProfile": {
+                    "securityEncryptionType": "VMGuestStateOnly"
+                  }
                 },
                 "createOption": "FromImage"
               }
+            },
+            "securityProfile": {
+              "uefiSettings": {
+                "secureBootEnabled": true,
+                "vTpmEnabled": true
+              },
+              "securityType": "ConfidentialVM"
             },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
@@ -134,15 +152,9 @@
           "upgradePolicy": {
             "mode": "Manual"
           },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT10M"
-          },
           "provisioningState": "Creating"
         },
-        "location": "westus",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "location": "westus"
       }
     },
     "201": {
@@ -150,28 +162,40 @@
         "sku": {
           "tier": "Standard",
           "capacity": 3,
-          "name": "Standard_D1_v2"
+          "name": "Standard_DC2as_v5"
         },
         "name": "{vmss-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
         "properties": {
           "singlePlacementGroup": true,
           "overprovision": true,
-          "uniqueId": "d053ec5a-8da6-495f-ab13-38216503c6d7",
+          "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
-                "sku": "2016-Datacenter",
+                "sku": "windows-cvm",
                 "publisher": "MicrosoftWindowsServer",
-                "version": "latest",
-                "offer": "WindowsServer"
+                "version": "17763.2183.2109130127",
+                "offer": "2019-datacenter-cvm"
               },
               "osDisk": {
-                "caching": "ReadWrite",
+                "caching": "ReadOnly",
                 "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
+                  "storageAccountType": "StandardSSD_LRS",
+                  "securityProfile": {
+                    "securityEncryptionType": "VMGuestStateOnly"
+                  }
                 },
                 "createOption": "FromImage"
               }
+            },
+            "securityProfile": {
+              "uefiSettings": {
+                "secureBootEnabled": true,
+                "vTpmEnabled": true
+              },
+              "securityType": "ConfidentialVM"
             },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
@@ -212,15 +236,9 @@
           "upgradePolicy": {
             "mode": "Manual"
           },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT10M"
-          },
           "provisioningState": "Creating"
         },
-        "location": "westus",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "location": "westus"
       }
     }
   }

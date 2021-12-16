@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "vmScaleSetName": "{vmss-name}",
-    "api-version": "2021-11-01",
+    "api-version": "2021-07-01",
     "parameters": {
       "sku": {
         "tier": "Standard",
@@ -29,10 +29,36 @@
               "createOption": "FromImage"
             }
           },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net",
+              "enabled": true
+            }
+          },
           "osProfile": {
             "computerNamePrefix": "{vmss-name}",
             "adminUsername": "{your-username}",
             "adminPassword": "{your-password}"
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "{extension-name}",
+                "properties": {
+                  "autoUpgradeMinorVersion": false,
+                  "publisher": "{extension-Publisher}",
+                  "type": "{extension-Type}",
+                  "typeHandlerVersion": "{handler-version}",
+                  "settings": {},
+                  "protectedSettingsFromKeyVault": {
+                    "sourceVault": {
+                      "id": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/kvName"
+                    },
+                    "secretUrl": "https://kvName.vault.azure.net/secrets/secretName/79b88b3a6f5440ffb2e73e44a0db712e"
+                  }
+                }
+              }
+            ]
           },
           "networkProfile": {
             "networkInterfaceConfigurations": [
@@ -58,10 +84,6 @@
         },
         "upgradePolicy": {
           "mode": "Manual"
-        },
-        "automaticRepairsPolicy": {
-          "enabled": true,
-          "gracePeriod": "PT10M"
         }
       }
     }
@@ -95,6 +117,12 @@
                 "createOption": "FromImage"
               }
             },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+                "enabled": true
+              }
+            },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
               "adminUsername": "{your-username}",
@@ -103,6 +131,26 @@
                 "provisionVMAgent": true,
                 "enableAutomaticUpdates": true
               }
+            },
+            "extensionProfile": {
+              "extensions": [
+                {
+                  "name": "{extension-name}",
+                  "properties": {
+                    "autoUpgradeMinorVersion": false,
+                    "publisher": "{extension-Publisher}",
+                    "type": "{extension-Type}",
+                    "typeHandlerVersion": "{handler-version}",
+                    "settings": {},
+                    "protectedSettingsFromKeyVault": {
+                      "sourceVault": {
+                        "id": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/kvName"
+                      },
+                      "secretUrl": "https://kvName.vault.azure.net/secrets/secretName/79b88b3a6f5440ffb2e73e44a0db712e"
+                    }
+                  }
+                }
+              ]
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [
@@ -133,10 +181,6 @@
           },
           "upgradePolicy": {
             "mode": "Manual"
-          },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT10M"
           },
           "provisioningState": "Creating"
         },
@@ -173,6 +217,12 @@
                 "createOption": "FromImage"
               }
             },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+                "enabled": true
+              }
+            },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
               "adminUsername": "{your-username}",
@@ -181,6 +231,26 @@
                 "provisionVMAgent": true,
                 "enableAutomaticUpdates": true
               }
+            },
+            "extensionProfile": {
+              "extensions": [
+                {
+                  "name": "{extension-name}",
+                  "properties": {
+                    "autoUpgradeMinorVersion": false,
+                    "publisher": "{extension-Publisher}",
+                    "type": "{extension-Type}",
+                    "typeHandlerVersion": "{handler-version}",
+                    "settings": {},
+                    "protectedSettingsFromKeyVault": {
+                      "sourceVault": {
+                        "id": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/kvName"
+                      },
+                      "secretUrl": "https://kvName.vault.azure.net/secrets/secretName/79b88b3a6f5440ffb2e73e44a0db712e"
+                    }
+                  }
+                }
+              ]
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [
@@ -211,10 +281,6 @@
           },
           "upgradePolicy": {
             "mode": "Manual"
-          },
-          "automaticRepairsPolicy": {
-            "enabled": true,
-            "gracePeriod": "PT10M"
           },
           "provisioningState": "Creating"
         },
