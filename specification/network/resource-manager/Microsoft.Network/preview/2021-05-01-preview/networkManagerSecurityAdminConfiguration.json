@@ -598,6 +598,13 @@
             "modelAsString": true
           }
         },
+        "applyOnNetworkIntentPolicyBasedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkIntentPolicyBasedServices"
+          },
+          "description": "Enum list of network intent policy based services."
+        },
         "deleteExistingNSGs": {
           "type": "string",
           "enum": [
@@ -1016,6 +1023,18 @@
         }
       },
       "description": "Address prefix item."
+    },
+    "NetworkIntentPolicyBasedServices": {
+      "type": "string",
+      "description": "Network intent policy based services.",
+      "enum": [
+        "None",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkIntentPolicyBasedServices",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
