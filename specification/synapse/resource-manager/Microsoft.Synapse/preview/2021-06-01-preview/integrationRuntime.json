@@ -1386,6 +1386,11 @@
           "description": "Managed integration runtime properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+        },
+        "managedVirtualNetwork": {
+          "description": "Managed integration runtime properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedIntegrationRuntimeManagedVirtualNetworkReference"
         }
       },
       "required": [
@@ -1403,6 +1408,24 @@
         "ssisProperties": {
           "description": "SSIS properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeManagedVirtualNetworkReference": {
+      "description": "Managed integration runtime managed virtual network reference.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "The refernce name of the managed virtual network.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the managed virtual network.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the managed virtual network.",
+          "type": "string"
         }
       }
     },
