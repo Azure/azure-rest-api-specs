@@ -2688,33 +2688,33 @@
       "type": "object",
       "properties": {
         "offerId": {
-          "description": "Gets offer id",
+          "description": "The offer id",
           "type": "string",
           "readOnly": true
         },
         "displayName": {
-          "description": "Gets offer display name",
+          "description": "The offer display name",
           "type": "string",
           "readOnly": true
         },
         "isEntire": {
-          "description": "Gets a value indicating whether entire offer is in stop sell or only few of its plans",
+          "description": "A value indicating whether entire offer is in stop sell or only few of its plans",
           "type": "boolean",
           "readOnly": true
         },
         "messageCode": {
-          "description": "Gets the notification message id",
+          "description": "The notification message code",
           "type": "integer",
           "format": "int64",
           "readOnly": true
         },
         "icon": {
-          "description": "Gets the icon url",
+          "description": "The icon url",
           "type": "string",
           "readOnly": true
         },
         "plans": {
-          "description": "Gets removed plans notifications",
+          "description": "The list of removed plans notifications",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlanNotificationDetails"
@@ -2722,12 +2722,12 @@
           "readOnly": true
         },
         "publicContext": {
-          "description": "Gets if the offer has public plans",
+          "description": "True if the offer has public plans",
           "type": "boolean",
           "readOnly": true
         },
-        "subscriptionsContext": {
-          "description": "Gets the subscriptions context for private plans",
+        "subscriptionsIds": {
+          "description": "The subscriptions related to private plans",
           "type": "array",
           "items": {
             "type": "string"
@@ -2760,13 +2760,13 @@
           "description": "An array of subscriptions.",
           "readOnly": true
         },
-        "nextLink": {
+        "skipToken": {
           "type": "string",
-          "description": "Link to the next page.",
+          "description": "The skip token to retrieve the next page.",
           "readOnly": true
         },
         "count": {
-          "description": "Gets the number of subscriptions on a page",
+          "description": "Number of subscriptions on the page",
           "type": "integer",
           "format": "int64",
           "readOnly": true
