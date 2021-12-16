@@ -89,6 +89,22 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "SortOrder": {
+      "description": "Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others.",
+      "name": "SortOrder",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "SortOrder",
+        "modelAsString": true
+      }
     }
   }
 }
