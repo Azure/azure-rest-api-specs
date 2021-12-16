@@ -24,7 +24,10 @@
         "operationId": "ContainerAppsRevisions_ListRevisions",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -34,10 +37,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -73,7 +73,10 @@
         "operationId": "ContainerAppsRevisions_GetRevision",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -90,10 +93,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -126,7 +126,10 @@
         "operationId": "ContainerAppsRevisions_ActivateRevision",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -138,15 +141,12 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the Container App Revision to activate",
+            "description": "Name of the Container App Revision.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -176,7 +176,10 @@
         "operationId": "ContainerAppsRevisions_DeactivateRevision",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -188,15 +191,12 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the Container App Revision to deactivate",
+            "description": "Name of the Container App Revision.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -226,7 +226,10 @@
         "operationId": "ContainerAppsRevisions_RestartRevision",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -238,15 +241,12 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the Container App Revision to restart",
+            "description": "Name of the Container App Revision.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -375,33 +375,6 @@
           "readOnly": true
         }
       }
-    }
-  },
-  "parameters": {
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-      "required": true,
-      "type": "string"
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "Name of the resource group to which the resource belongs.",
-      "required": true,
-      "type": "string",
-      "maxLength": 90,
-      "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
-      "x-ms-parameter-location": "method"
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "API Version",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {
