@@ -1403,7 +1403,7 @@
         "isDeveloperAppInsightsApiKeySet": {
           "type": "boolean",
           "description": "Whether the bot is developerAppInsightsApiKey set",
-          "default": false
+          "readOnly": true
         },
         "migrationToken": {
           "type": "string",
@@ -1413,12 +1413,12 @@
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.",
-          "default": false
+          "x-nullable": true
         },
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot",
-          "default": ""
+          "x-nullable": true
         },
         "storageResourceId": {
           "type": "string",
@@ -1534,7 +1534,7 @@
         "botIconUrl": {
           "type": "string",
           "description": "The bot icon url",
-          "default": ""
+          "x-nullable": true
         },
         "isEnabled": {
           "type": "boolean",
@@ -1765,7 +1765,7 @@
         "deploymentEnvironment": {
           "type": "string",
           "description": "Deployment environment for Microsoft Teams channel calls",
-          "default": ""
+          "x-nullable": true
         },
         "acceptedTerms": {
           "type": "boolean",
@@ -2333,7 +2333,7 @@
         "isBlockUserUploadEnabled": {
           "type": "boolean",
           "description": "Whether this site is enabled for block user upload.",
-          "default": false
+          "x-nullable": true
         },
         "trustedOrigins": {
           "type": "array",
