@@ -267,7 +267,7 @@
             "$ref": "./examples/GetLoadBalancerMetadata.json"
           },
           "Get Azure Load Balancer metadata for the VM when VM is in the backend pool of a Gateway Load Balancer": {
-            "$ref": "./examples/GetLoadBalancerMetadata_gatewayLB.json"
+            "$ref": "./examples/GetLoadBalancerMetadata_GatewayLB.json"
           }
         }
       }
@@ -936,34 +936,34 @@
           "description": "List of the instance level public or private IP of VM.",
           "items": {
             "type": "object",
-            "description": "This contains the publicIpAddress properties.",
+            "description": "",
             "$ref": "#/definitions/PublicIpAddress"
           }
         },
         "inboundRules": {
           "type": "array",
-          "description": "List of load balancing rules or inbound NAT rules using which the Load Balancer directs traffic to the VM. Frontend IP addresses and the Private IP addresses listed here belong to the Load Balancer.",
+          "description": "List of load balancing rules or inbound NAT rules, using which the Load Balancer directs traffic to the VM. Frontend IP addresses and the Private IP addresses listed here belong to the Load Balancer.",
           "items": {
             "type": "object",
-            "description": "This contains the inboundRule properties.",
+            "description": "",
             "$ref": "#/definitions/LoadBalancerInboundRule"
           }
         },
         "outboundRules": {
           "type": "array",
-          "description": "List of outbound rules by which the VM behind Load Balancer sends outbound traffic. Frontend IP addresses and the Private IP addresses listed here belong to the Load Balancer.",
+          "description": "List of outbound rules, by which the VM behind Load Balancer sends outbound traffic. Frontend IP addresses and the Private IP addresses listed here belong to the Load Balancer.",
           "items": {
             "type": "object",
-            "description": "This contains the outboundRule properties.",
+            "description": "",
             "$ref": "#/definitions/LoadBalancerOutboundRule"
           }
         },
         "tunnelInterfaces": {
           "type": "array",
-          "description": "List of tunnelInterface by which the VM behind Gateway Load Balancer sends or receives traffic to/from consumer Loadbalancer or Internet. This list is only available when VM is in the backend pool of a Gateway Load balancer. Learn more at aka.ms/gatewaylb",
+          "description": "List of tunnel interfaces, by which the VM behind Gateway Load Balancer sends/receives traffic to/from consumer Loadbalancer or Internet. This field is only available when VM is in the backend pool of a Gateway Load balancer. Learn more at aka.ms/gatewaylb.",
           "items": {
             "type": "object",
-            "description": "This contains the tunnelInterface properties.",
+            "description": "",
             "$ref": "#/definitions/LoadBalancerTunnelInterface"
           }
         }
@@ -971,15 +971,15 @@
     },
     "PublicIpAddress": {
       "type": "object",
-      "description": "Loadbalancer public ipAddress Metadata.",
+      "description": "Loadbalancer public IP address Metadata.",
       "properties": {
         "frontendIpAddress": {
           "type": "string",
-          "description": "This is instance level public ipAddress associated to the NIC on the VM"
+          "description": "This is instance level public IP address associated with each private IP address."
         },
         "privateIpAddress": {
           "type": "string",
-          "description": "This is private ipAddress assigned to the NIC on the VM"
+          "description": "This is private IP address assigned to the VM"
         }
       }
     },
@@ -989,29 +989,29 @@
       "properties": {
         "frontendIpAddress": {
           "type": "string",
-          "description": "This is frontend ipAddress used in load balancing rules and inbound NAT rules using which the Load Balancer directs traffic to the VM."
+          "description": "This is frontend IP address used in load balancing rules and inbound NAT rules, using which the Load Balancer directs traffic to the VM."
         },
         "protocol": {
           "type": "string",
-          "description": "This is protocol in load balancing rules and inbound NAT rules using which the Load Balancer directs traffic to the VM."
+          "description": "This is protocol in load balancing rules and inbound NAT rules, using which the Load Balancer directs traffic to the VM."
         },
         "frontendPort": {
           "type": "integer",
-          "description": "This is frontend port in load balancing rules and inbound NAT rules using which the Load Balancer directs traffic to the VM."
+          "description": "This is frontend port in load balancing rules and inbound NAT rules, using which the Load Balancer directs traffic to the VM."
         },
         "backendPort": {
           "type": "integer",
-          "description": "This is backend port using which VM communicates with Load balancer"
+          "description": "This is backend port, using which VM communicates with Load balancer"
         },
         "privateIpAddress": {
           "type": "string",
-          "description": "This is private ipAddress to the NIC using which VM communicates with Load balancer"
+          "description": "This is private IP address to the NIC, using which VM communicates with Load balancer"
         }
       }
     },
     "LoadBalancerOutboundRule": {
       "type": "object",
-      "description": "This contains the Load Balancer outbound Rule properties.",
+      "description": "This contains the Load Balancer outbound rule properties.",
       "properties": {
         "frontendIpAddress": {
           "type": "string",
@@ -1019,25 +1019,25 @@
         },
         "privateIpAddress": {
           "type": "string",
-          "description": "This is private ipAddress to the NIC using which VM communicates with Load balancer"
+          "description": "This is private IP address to the network interface, using which VM communicates with Load balancer"
         }
       }
     },
     "LoadBalancerTunnelInterface": {
       "type": "object",
-      "description": "This contains the properties of tunnel interface which are configured on the VM. This is only available when VM is in the backend pool of a Gateway Load balancer. Learn more at aka.ms/gatewaylb",
+      "description": "This contains the tunnel interface properties which are configured on the VM. This field is only available when VM is in the backend pool of a Gateway Load balancer. Learn more at aka.ms/gatewaylb.",
       "properties": {
         "gatewayIpAddress": {
           "type": "string",
-          "description": "This is private ipAddress of gateway Load Balancer of which VM is in the backend pool."
+          "description": "This is frontend IP address of Gateway Load Balancer that have VM in the backend pool."
         },
         "gatewayPort": {
           "type": "integer",
-          "description": "This is port for Gateway Loadbalancer to direct the traffic to VM."
+          "description": "This is port opened on the frontend IP of the Gateway Load Balancer."
         },
         "identifier": {
           "type": "integer",
-          "description": "This is identifier indicates internal or external interface."
+          "description": "This is identifier used by internal or external interface."
         },
         "type": {
           "type": "string",
@@ -1049,7 +1049,7 @@
         },
         "localIpAddress": {
           "type": "string",
-          "description": "This is private ipAddress associated to the Nic of Gateway LB's backend VM."
+          "description": "This is private IP address associated to the Nic of Gateway LB's backend VM."
         },
         "localPort": {
           "type": "integer",
