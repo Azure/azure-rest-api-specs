@@ -120,7 +120,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4039](#r4039) | [ParametersOrder](#r4039) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4040](#r4040) | [EnumMustRespectType](#r4040) | ARM and Data plan OpenAPI(swagger) specs |
-| [R4041](#r4041) | [XmsIdentifierValidation](#r4041) | ARM and Data plan OpenAPI(swagger) specs |
+| [R4041](#r4041) | [XmsIdentifierValidation](#r4041) | ARM OpenAPI(swagger) specs |
 #### SDK Warnings
 
 | Id | Rule Name | Applies to |
@@ -3585,11 +3585,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Category** : SDK Error
 
-**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message** : Missing identifier {0} in array item property
 
-**Description**: This rule is to check the identifying properties of objects in the array. The default identifier is `id`. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers)
+**Description**: This rule is to check the `id` property or identification of objects in the array. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers)
 
 **CreatedAt**: Decenmber 15, 2021
 
