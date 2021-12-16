@@ -80,6 +80,8 @@ input-file:
 - Microsoft.StreamAnalytics/stable/2020-03-01/transformations.json
 - Microsoft.StreamAnalytics/stable/2020-03-01/functions.json
 - Microsoft.StreamAnalytics/stable/2020-03-01/subscriptions.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/clusters.json
+- Microsoft.StreamAnalytics/stable/2020-03-01/privateEndpoints.json
 ```
 
 ### Tag: package-pure-2020-03-preview

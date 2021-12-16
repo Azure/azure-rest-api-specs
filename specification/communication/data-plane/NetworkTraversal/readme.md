@@ -58,6 +58,15 @@ input-file:
   - preview/2021-10-08-preview/CommunicationNetworkTraversal.json
 ```
 
+### Tag: package-2022-02-01
+
+These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-01'
+input-file:
+  - stable/2022-02-01/CommunicationNetworkTraversal.json
+```
+
 ---
 
 # Code Generation
