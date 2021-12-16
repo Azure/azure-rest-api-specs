@@ -6039,6 +6039,9 @@
           },
           "Get a virtual machine scale set with UserData": {
             "$ref": "./examples/compute/GetVirtualMachineScaleSetWithUserData.json"
+          },
+          "Get a virtual machine scale set": {
+            "$ref": "./examples/compute/GetVirtualMachineScaleSet.json"
           }
         }
       }
@@ -9687,6 +9690,12 @@
           "$ref": "#/definitions/DedicatedHostInstanceView",
           "readOnly": true,
           "description": "The dedicated host instance view."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Dedicated Host resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Properties of the dedicated host."
@@ -9920,6 +9929,12 @@
           "$ref": "#/definitions/CapacityReservationInstanceView",
           "readOnly": true,
           "description": "The Capacity reservation instance view."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Capacity Reservation resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Properties of the Capacity reservation."
@@ -12851,6 +12866,12 @@
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Virtual Machine resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -14411,6 +14432,12 @@
         "spotRestorePolicy": {
           "$ref": "#/definitions/SpotRestorePolicy",
           "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Virtual Machine Scale Set resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -15427,9 +15454,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "UpdateResource": {
