@@ -342,7 +342,7 @@
           "type": "string",
           "description": "The multi cloud resource identifier (account id in case of AWS connector, project number in case of GCP connector)."
         },
-        "cloudName": {
+        "environmentName": {
           "type": "string",
           "description": "The multi cloud resource's cloud name.",
           "enum": [
@@ -361,6 +361,48 @@
           "items": {
             "$ref": "#/definitions/cloudOffering"
           }
+        },
+        "environmentData": {
+          "type": "object",
+          "description": "The security connector environment data.",
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      }
+    },
+    "EnvironmentData": {
+      "type": "object",
+      "description": "The security connector environment data.",
+      "discriminator": "environmentType",
+      "required": [
+        "environmentType"
+      ],
+      "properties": {
+        "environmentType": {
+          "type": "string",
+          "description": "The type of the environment data.",
+          "enum": [
+            "AwsEnvironmentData",
+            "GcpProjectEnvironmentData"
+          ],
+          "x-ms-enum": {
+            "name": "environmentType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AWS": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "environmentType": {
+          "type": "string",
+          "description": "The environment type",
+          "x-ms-discriminator-value": "AwsEnvironmentData"
         },
         "organizationalData": {
           "type": "object",
@@ -395,6 +437,29 @@
               }
             }
           }
+        }
+      }
+    },
+    "GcpProject": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "environmentType": {
+          "type": "string",
+          "description": "The environment type",
+          "x-ms-discriminator-value": "GcpProjectEnvironmentData"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The GCP Project name"
+        },
+        "workloadIdentityFederationPoolId": {
+          "type": "string",
+          "description": "The GCP workload identity federation pool id"
         }
       }
     },
@@ -504,7 +569,7 @@
     "defenderForServersAwsOffering": {
       "type": "object",
       "description": "The Defender for Servers AWS offering configurations",
-      "x-ms-discriminator-value": "DefenderForServersAWS",
+      "x-ms-discriminator-value": "DefenderForServersAws",
       "allOf": [
         {
           "$ref": "#/definitions/cloudOffering"
