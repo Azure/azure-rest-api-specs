@@ -1891,7 +1891,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update VM extension.": {
-            "$ref": "./examples/compute/UpdateVMExtensionWithSuppressFailureEnabled.json"
+            "$ref": "./examples/compute/UpdateVMExtension.json"
           }
         }
       },
@@ -5883,6 +5883,9 @@
           },
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/compute/CreateAScaleSetWithSpotRestorePolicy.json"
+          },
+          "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
+            "$ref": "./examples/compute/CreateAScaleSetWithProtectedSettingsFromKeyVault.json"
           },
           "Create a scale set with vm size properties": {
             "$ref": "./examples/compute/CreateOrUpdateAScaleSetWithVMSizeProperties.json"
@@ -10376,6 +10379,10 @@
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -10417,6 +10424,10 @@
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -13483,6 +13494,10 @@
             "$ref": "#/definitions/VaultSecretGroup"
           },
           "description": "Specifies set of certificates that should be installed onto the virtual machines in the scale set. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
+        },
+        "allowExtensionOperations": {
+          "type": "boolean",
+          "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. <br><br>This may only be set to False when no extensions are present on the virtual machine scale set."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."
@@ -14261,6 +14276,10 @@
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
