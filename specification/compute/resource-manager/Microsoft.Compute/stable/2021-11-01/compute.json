@@ -8862,6 +8862,60 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/restart": {
+      "post": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHosts_Restart",
+        "description": "Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/en-us/azure/service-health/resource-health-overview for more details.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart Dedicated Host.": {
+            "$ref": "./examples/compute/DedicatedHostRestart.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
