@@ -246,6 +246,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/claimDevices": {
+      "post": {
+        "operationId": "Catalogs_ClaimDevices",
+        "summary": "Bulk claim of devices in a catalog.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Devices to be claimed",
+            "schema": {
+              "$ref": "#/definitions/ClaimDevicesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Response to the action call to bulk claim devices.",
+            "schema": {
+              "$ref": "#/definitions/ClaimDevicesResponse"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "Catalogs"
+        ],
+        "x-ms-examples": {
+          "Claims devices in bulk": {
+            "$ref": "./examples/PostClaimDevices.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}": {
       "get": {
         "operationId": "Catalogs_Get",
@@ -3011,6 +3073,33 @@
         }
       },
       "description": "Response to the action call to upload an image."
+    },
+    "ClaimDevicesRequest": {
+      "type": "object",
+      "properties": {
+        "deviceIdentifiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-adl-name": "string[]",
+          "description": "Device identifiers of the devices to be claimed."
+        }
+      },
+      "description": "Request to the action call to bulk claim devices.",
+      "required": [
+        "deviceIdentifiers"
+      ]
+    },
+    "ClaimDevicesResponse": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "Response to the action call to bulk claim devices."
     },
     "Catalog": {
       "type": "object",
