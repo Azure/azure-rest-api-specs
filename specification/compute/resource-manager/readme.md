@@ -228,6 +228,14 @@ directive:
       - NestedResourcesMustHaveListOperation
     reason:
       - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
+  - where:
+      - $.definitions.SubResourceWithColocationStatus.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.SubResourceWithColocationStatus
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 ```
 
 ### Tag: package-2021-11-01
