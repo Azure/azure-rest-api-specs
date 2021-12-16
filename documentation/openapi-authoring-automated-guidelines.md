@@ -3589,7 +3589,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Missing identifier {0} in array item property
 
-**Description**: This rule is to check the `id` property or identification of objects in the array. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers)
+**Description**: This rule is to check the `id` property or identifier of objects in the array. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers)
 
 **CreatedAt**: Decenmber 15, 2021
 
