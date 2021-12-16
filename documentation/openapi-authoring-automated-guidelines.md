@@ -3587,9 +3587,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : Missing identifier {0} in array item property
+**Output Message** : Missing identifier {0} in array item property.
 
-**Description**: This rule is to check the `id` property or identifier of objects in the array. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers)
+**Description**: This rule is to check the `id` property or identifier of objects in the array. See more here: [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers).
 
 **CreatedAt**: Decenmber 15, 2021
 
@@ -3598,6 +3598,6 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Why this rule is important**: Using [x-ms-identifiers](https://github.com/Azure/autorest/tree/main/docs/extensions#x-ms-identifiers) will provide more flexibility for array types in SDK generated code.
 
 **How to fix the violation**:
-If you don't need identifier in array, leave `x-ms-identifiers` as an empty array. Otherwise, add the identifying property in the object or correct the `x-ms-identifiers`
+If you don't need identifier in array, leave `x-ms-identifiers` as an empty array. Otherwise, add the identifying property in the object or correct the `x-ms-identifiers`.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
