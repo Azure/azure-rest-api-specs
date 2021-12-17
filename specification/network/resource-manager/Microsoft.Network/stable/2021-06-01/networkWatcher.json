@@ -2725,7 +2725,23 @@
       "properties": {
         "target": {
           "type": "string",
-          "description": "The ID of the targeted resource, only VM is currently supported."
+          "description": "The ID of the targeted resource, only AzureVM and AzureVMSS as target type are currently supported."
+        },
+        "scope": {
+          "$ref": "#/definitions/PacketCaptureMachineScope",
+          "description": "A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS."
+        },
+        "targetType": {
+          "description": "Target type of the resource provided.",
+          "type": "string",
+          "enum": [
+            "AzureVM",
+            "AzureVMSS"
+          ],
+          "x-ms-enum": {
+            "name": "PcTargetType",
+            "modelAsString": true
+          }
         },
         "bytesToCapturePerPacket": {
           "type": "integer",
@@ -2768,6 +2784,26 @@
         "storageLocation"
       ],
       "description": "Parameters that define the create packet capture operation."
+    },
+    "PacketCaptureMachineScope": {
+      "type": "object",
+      "properties": {
+        "include": {
+          "type": "array",
+          "description": "List of AzureVMSS instances to run packet capture on.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "description": "List of AzureVMSS instances which has to be excluded from the AzureVMSS from running packet capture.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS."
     },
     "PacketCaptureStorageLocation": {
       "properties": {
