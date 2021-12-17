@@ -113,7 +113,7 @@
           "200": {
             "description": "Operation completed successfully; retrieved Elastic San by subscription",
             "schema": {
-              "$ref": "#/definitions/ElasticSanListResult"
+              "$ref": "#/definitions/ElasticSanList"
             }
           },
           "default": {
@@ -158,7 +158,7 @@
           "200": {
             "description": "Operation completed successfully; retrieved elasticSans by resource group",
             "schema": {
-              "$ref": "#/definitions/ElasticSanListResult"
+              "$ref": "#/definitions/ElasticSanList"
             }
           },
           "default": {
@@ -896,6 +896,9 @@
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1335,7 +1338,7 @@
       "x-ms-parameter-location": "method"
     },
     "ElasticSanCreate": {
-      "name": "ElasticSanCreatePayload",
+      "elasticSanname": "ElasticSanCreatePayload",
       "required": true,
       "in": "body",
       "description": "Request payload for ElasticSan create operation",
@@ -1505,12 +1508,12 @@
         }
       }
     },
-    "ElasticSanListResult": {
+    "ElasticSanList": {
       "type": "object",
       "required": [
         "value"
       ],
-      "description": "List of Elastic San",
+      "description": "List of Elastic Sans",
       "additionalProperties": false,
       "properties": {
         "value": {
@@ -1558,7 +1561,8 @@
         "subscriptionId",
         "availabilityZones",
         "provisioningState",
-        "sizeInTB"
+        "baseSizeInGB",
+        "extendedSizeInTB"
       ],
       "properties": {
         "subscriptionId": {
@@ -1586,10 +1590,47 @@
           "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
-        "sizeInTB": {
-          "description": "Size of the ElasticSan in TB.",
+        "baseSizeInGB": {
+          "description": "Base size of the Elastic San appliance in GB.",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedSizeInTB": {
+          "description": "Extended size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "totalSizeInTB": {
+          "description": "Total size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "provisionedIops": {
+          "description": "Provisioned IOPS of the Elastic San appliance.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "provisionedMBps": {
+          "description": "Provisioned MBps Elastic San appliance.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "type": {
           "readOnly": true,
@@ -1611,7 +1652,7 @@
           "description": "Properties for ElasticSan create request.",
           "$ref": "#/definitions/ElasticSanCreateProperties"
         },
-        "name": {
+        "elasticSanName": {
           "type": "string",
           "description": "Name of the Elastic San to create"
         },
@@ -1673,7 +1714,8 @@
       "type": "object",
       "description": "Properties for Elastic San create or update request.",
       "required": [
-        "sizeInTB"
+        "baseSizeInGB",
+        "extendedSizeInTB"
       ],
       "properties": {
         "availabilityZones": {
@@ -1683,10 +1725,23 @@
             "$ref": "#/definitions/AvailabilityZone"
           }
         },
-        "sizeInTB": {
-          "description": "size of the Elastic San appliance in TB.",
+        "baseSizeInGB": {
+          "description": "Base size of the Elastic San appliance in GB.",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedSizeInTB": {
+          "description": "Extended size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sku": {
           "description": "resource sku",
@@ -1699,22 +1754,33 @@
       "type": "object",
       "description": "Properties for ElasticSan update request.",
       "required": [
-        "sizeInTB"
+        "baseSizeInGB",
+        "extendedSizeInTB"
       ],
       "properties": {
-        "sizeInTB": {
-          "description": "size of Elastic San in TB.",
+        "baseSizeInGB": {
+          "description": "Base size of the Elastic San appliance in GB.",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedSizeInTB": {
+          "description": "Extended size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
     "AvailabilityZone": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Availability zones."
+      "type": "string",
+      "description": "Availability zone."
     },
     "SkuName": {
       "type": "string",
@@ -2103,7 +2169,7 @@
       "type": "object",
       "description": "Properties for Volume update request.",
       "properties": {
-        "volumename": {
+        "volumeName": {
           "description": "Volume name.",
           "type": "string"
         },
