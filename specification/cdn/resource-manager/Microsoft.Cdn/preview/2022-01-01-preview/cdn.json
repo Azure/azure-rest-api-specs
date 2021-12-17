@@ -2287,7 +2287,7 @@
             "description": "Properties required to create a new policy.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicyParameters"
+              "$ref": "#/definitions/Policy"
             }
           },
           {
@@ -2306,12 +2306,6 @@
           },
           "201": {
             "description": "Created. The request has been fulfilled and a policy has been created.",
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Policy"
             }
@@ -2436,12 +2430,22 @@
               "$ref": "#/definitions/ApplyPolicyOutput"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ApplyPolicyOutput"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -6691,53 +6695,17 @@
     "PolicyProperties": {
       "description": "The JSON object that contains the properties of the Policy to create.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./afdx.json#/definitions/AFDStateProperties"
+        }
+      ],
       "required": [
         "ServiceType"
       ],
       "properties": {
         "ServiceType": {
           "description": "Service type of the policy",
-          "type": "string"
-        },
-        "resourceState": {
-          "description": "Resource status of the policy.",
-          "readOnly": true,
-          "enum": [
-            "Creating",
-            "Active",
-            "Deleting"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PolicyResourceState",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status of the policy.",
-          "type": "string"
-        }
-      }
-    },
-    "PolicyParameters": {
-      "description": "The policy JSON object required for policy creation.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PolicyPropertiesParameters"
-        }
-      }
-    },
-    "PolicyPropertiesParameters": {
-      "description": "The JSON object that contains the properties of policy to create.",
-      "required": [
-        "serviceType"
-      ],
-      "properties": {
-        "serviceType": {
-          "description": "The serviceType of the policy.",
           "type": "string"
         }
       }
