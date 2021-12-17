@@ -4891,29 +4891,13 @@
       "description": "Reference to another resource.",
       "x-ms-azure-resource": true
     },
-    "ActivatedResourceReference": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "isActive": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Whether the resource is active or inactive"
-        }
-      },
-      "description": "Reference to another resource along with its state.",
-      "type": "object",
-      "x-ms-azure-resource": true
-    },
     "GeoFilter": {
       "description": "Rules defining user's geo access within a CDN endpoint.",
       "type": "object",
       "required": [
         "relativePath",
         "action",
-        "countryOrRegionCodes"
+        "countryCodes"
       ],
       "properties": {
         "relativePath": {
@@ -4932,7 +4916,7 @@
             "modelAsString": false
           }
         },
-        "countryOrRegionCodes": {
+        "countryCodes": {
           "description": "Two letter country or region codes defining user country or region access in a geo filter, e.g. AU, MX, US.",
           "type": "array",
           "items": {

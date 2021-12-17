@@ -4298,7 +4298,7 @@
           "description": "List of domains.",
           "type": "array",
           "items": {
-            "$ref": "./cdn.json#/definitions/ActivatedResourceReference"
+            "$ref": "#/definitions/ActivatedResourceReference"
           }
         },
         "patternsToMatch": {
@@ -5056,7 +5056,7 @@
           "description": "Domains referenced by this endpoint.",
           "type": "array",
           "items": {
-            "$ref": "./cdn.json#/definitions/ActivatedResourceReference"
+            "$ref": "#/definitions/ActivatedResourceReference"
           }
         },
         "originGroup": {
@@ -5748,6 +5748,22 @@
         }
       },
       "description": "The list usages operation response."
+    },
+    "ActivatedResourceReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "isActive": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Whether the resource is active or inactive"
+        }
+      },
+      "description": "Reference to another resource along with its state.",
+      "type": "object",
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
