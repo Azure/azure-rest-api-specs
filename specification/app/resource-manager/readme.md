@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for app.
+This is the AutoRest configuration file for Microsoft.App service.
 
 ## Getting Started
 
@@ -35,7 +35,39 @@ These settings apply only when `--tag=package-2022-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
-  - Microsoft.App/preview/2022-01-01-preview/app.json
+  - Microsoft.App/preview/2022-01-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-01-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-01-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-01-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-01-01-preview/Global.json
+directive:
+- suppress: R4009
+  from: ContainerAppsRevisions.json
+  reason: False positive. This is not a tracked resource.
+- suppress: R3010
+  from: Global.json
+  reason: False positive. The Revisions_list api already defined
+- suppress: R3010
+  from: ManagedEnvironments.json
+  reason: False positive. The Revisions_list api already defined
+- suppress: R3010
+  from: ContainerAppsRevisions.json
+  reason: False positive. The Revisions_list api already defined
+- suppress: R3010
+  from: CommonDefinitions.json
+  reason: False positive. The Revisions_list api already defined
+- suppress: R3010
+  from: ContainerApps.json
+  reason: False positive. The Revisions_list api already defined
+- suppress: R3018
+  from: Global.json
+  reason: Use of boolean type is required
+- suppress: R3018
+  from: CommonDefinitions.json
+  reason: Use of boolean type is required
+- suppress: R3018
+  from: ContainerApps.json
+  reason: Use of boolean type is required
 ```
 
 ---
