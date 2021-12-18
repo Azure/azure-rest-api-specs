@@ -1,13 +1,13 @@
 # Cdn
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Cdn.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Cdn, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,33 @@ To build the SDK for Cdn, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the Cdn API.
 
 ``` yaml
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2020-09
+tag: package-2021-06
 ```
 
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Cdn/stable/2021-06-01/afdx.json
+  - Microsoft.Cdn/stable/2021-06-01/cdn.json
+  - Microsoft.Cdn/stable/2021-06-01/cdnwebapplicationfirewall.json
+```
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
@@ -112,7 +123,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 input-file:
 - Microsoft.Cdn/stable/2017-04-02/cdn.json
 ```
- 
+
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
@@ -121,7 +132,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 input-file:
 - Microsoft.Cdn/stable/2016-10-02/cdn.json
 ```
- 
+
 ### Tag: package-2016-04
 
 These settings apply only when `--tag=package-2016-04` is specified on the command line.
@@ -130,7 +141,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 input-file:
 - Microsoft.Cdn/stable/2016-04-02/cdn.json
 ```
- 
+
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
@@ -140,10 +151,9 @@ input-file:
 - Microsoft.Cdn/stable/2015-06-01/cdn.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -163,8 +173,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
-
-## C# 
+## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
@@ -187,6 +196,3 @@ See configuration in [readme.node.md](./readme.node.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
-
-
