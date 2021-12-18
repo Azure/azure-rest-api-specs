@@ -2,11 +2,19 @@
   "parameters": {
     "resourceGroupName": "oiautorest6685",
     "workspaceName": "oiautorest6685",
-    "api-version": "2021-03-01-privatepreview",
+    "api-version": "2021-12-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-00000000000",
     "tableName": "AzureNetworkFlow",
     "parameters": {
       "properties": {
+        "schema": {
+          "columns": [
+            {
+              "name": "MyNewColumn",
+              "type": "guid"
+            }
+          ]
+        },
         "retentionInDays": 45
       }
     }
@@ -17,6 +25,14 @@
         "properties": {
           "schema": {
             "name": "AzureNetworkFlow",
+            "columns": [
+              {
+                "isHidden": false,
+                "name": "MyNewColumn",
+                "type": "guid",
+                "isDefaultDisplay": false
+              }
+            ],
             "standardColumns": [
               {
                 "isHidden": true,
@@ -111,16 +127,16 @@
             ],
             "solutions": [
               "LogManagement"
-            ],
-            "isTroubleshootingAllowed": false
+            ]
           },
           "provisioningState": "Succeeded",
-          "retentionInDays": 45,
+          "retentionInDays": 30,
           "isTroubleshootingAllowed": false
         },
         "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/AzureNetworkFlow",
         "name": "AzureNetworkFlow"
       }
-    }
+    },
+    "202": {}
   }
 }

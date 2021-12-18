@@ -107,13 +107,32 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
 
-### Tag: package-2021-03-01-privatepreview
+### Tag: package-2021-12-01-preview
 
-These settings apply only when `--tag=package-2021-03-01-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2021-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-01-privatepreview'
+``` yaml $(tag) == 'package-2021-12-01-preview'
 input-file:
-- Microsoft.OperationalInsights/preview/2021-03-01-privatepreview/Tables.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/DataExports.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/DataSources.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/IntelligencePacks.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/ManagementGroups.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Operations.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/OperationStatuses.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Usages.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Gateways.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Schema.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/WorkspacePurge.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Tables.json
 ```
 
 ### Tag: package-2020-08

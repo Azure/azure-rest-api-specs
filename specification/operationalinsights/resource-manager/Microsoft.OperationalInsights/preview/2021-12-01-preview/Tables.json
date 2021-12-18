@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Log Analytics",
     "description": "Azure Log Analytics API reference",
-    "version": "2021-03-01-privatepreview"
+    "version": "2021-12-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,7 +41,7 @@
         ],
         "x-ms-examples": {
           "TablesListByWorkspace": {
-            "$ref": "./examples/TableList.json"
+            "$ref": "./examples/TablesList.json"
           }
         },
         "operationId": "Tables_ListByWorkspace",
@@ -85,14 +85,8 @@
           "Tables"
         ],
         "x-ms-examples": {
-          "TableCreate_MetadataChange": {
-            "$ref": "./examples/TableCreateUpdate_MetaData.json"
-          },
-          "TableCreate_SchemaChange": {
-            "$ref": "./examples/TableCreateUpdate_Schema.json"
-          },
-          "TableCreate_SchemaMetadataChange": {
-            "$ref": "./examples/TableCreateUpdate_SchemaMetaData.json"
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsert.json"
           }
         },
         "operationId": "Tables_Upsert",
@@ -139,6 +133,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -146,14 +144,8 @@
           "Tables"
         ],
         "x-ms-examples": {
-          "TableUpdate_MetadataChange": {
-            "$ref": "./examples/TableCreateUpdate_MetaData.json"
-          },
-          "TableUpdate_SchemaChange": {
-            "$ref": "./examples/TableCreateUpdate_Schema.json"
-          },
-          "TableUpdate_SchemaMetadataChange": {
-            "$ref": "./examples/TableCreateUpdate_SchemaMetaData.json"
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsert.json"
           }
         },
         "operationId": "Tables_Update",
@@ -200,6 +192,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -208,7 +204,7 @@
         ],
         "x-ms-examples": {
           "TablesGet": {
-            "$ref": "./examples/TableGet.json"
+            "$ref": "./examples/TablesGet.json"
           }
         },
         "operationId": "Tables_Get",
@@ -251,7 +247,7 @@
         ],
         "x-ms-examples": {
           "TablesGet": {
-            "$ref": "./examples/TableDelete.json"
+            "$ref": "./examples/TablesDelete.json"
           }
         },
         "operationId": "Tables_Delete",
@@ -277,6 +273,9 @@
           "200": {
             "description": "OK response definition."
           },
+          "204": {
+            "description": "OK response definition."
+          },
           "202": {
             "description": "Accepted response definition (Long running operation)."
           },
@@ -286,12 +285,17 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     }
   },
   "definitions": {
     "Column": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -321,12 +325,26 @@
           "enum": [
             "uri",
             "guid",
-            "armpath",
+            "armPath",
             "ip"
           ],
           "x-ms-enum": {
             "name": "ColumnDataTypeHintEnum",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "uri",
+                "description": "A string that matches the pattern of a URI, for example, scheme://username:password@host:1234/this/is/a/path?k1=v1&k2=v2#fragment"
+              },
+              {
+                "value": "guid",
+                "description": "A standard 128-bit GUID following the standard shape, xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+              },
+              {
+                "value": "armPath",
+                "description": "An Azure Resource Model (ARM) path: /subscriptions/{...}/resourceGroups/{...}/providers/Microsoft.{...}/{...}/{...}/{...}..."
+              }
+            ]
           }
         },
         "displayName": {
@@ -351,19 +369,20 @@
       "description": "Table column."
     },
     "Schema": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Table's name."
+          "description": "Table name."
         },
         "displayName": {
           "type": "string",
-          "description": "Table's display name."
+          "description": "Table display name."
         },
         "description": {
           "type": "string",
-          "description": "Table's description."
+          "description": "Table description."
         },
         "columns": {
           "type": "array",
@@ -386,7 +405,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Table's Categories."
+          "description": "Table category."
         },
         "labels": {
           "readOnly": true,
@@ -394,7 +413,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Table's Labels."
+          "description": "Table labels."
         },
         "source": {
           "readOnly": true,
@@ -406,7 +425,17 @@
           ],
           "x-ms-enum": {
             "name": "SourceEnum",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "microsoft",
+                "description": "Tables provisioned by the system, as collected via Diagnostic Settings, the Agents, or any other standard data collection means."
+              },
+              {
+                "value": "customer",
+                "description": "Tables created by the owner of the Workspace, and only found in this Workspace."
+              }
+            ]
           }
         },
         "solutions": {
@@ -415,17 +444,13 @@
           "items": {
             "type": "string"
           },
-          "description": "Table is affiliated with which solutions."
-        },
-        "isTroubleshootingAllowed": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Specifies if IsTroubleshootingEnabled property can be set for this table."
+          "description": "List of solutions the table is affiliated with"
         }
       },
       "description": "Table's schema."
     },
     "TableProperties": {
+      "type": "object",
       "properties": {
         "retentionInDays": {
           "type": "integer",
@@ -441,39 +466,54 @@
         },
         "isTroubleshootEnabled": {
           "type": "boolean",
-          "description": "Enable or disable troubleshoot for this table."
+          "description": "Enable or disable the Troubleshooting Log flavour for this table."
         },
         "lastTroubleshootDate": {
           "readOnly": true,
           "type": "string",
-          "description": "Last time when troubleshooting was set for this table."
+          "description": "Last time when the Troubleshooting Log plan was enabled for this table."
         },
         "schema": {
           "$ref": "#/definitions/Schema",
-          "description": "Table's schema."
+          "description": "Table schema."
         },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Table's current provisioning state, if updating the table is set to resource lock, forbidding any update to the table until the on going operation is concluded.",
+          "description": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.",
           "enum": [
             "Updating",
             "Succeeded"
           ],
           "x-ms-enum": {
             "name": "ProvisioningStateEnum",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updating",
+                "description": "Table schema is still being built and updated, table is currently locked for any changes till the procedure is done."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Table state is stable and without changes, table is unlocked and open for new updates."
+              }
+            ]
           }
         }
       },
-      "description": "Table's properties."
+      "description": "Table properties."
     },
     "Table": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/TableProperties",
           "description": "Table's properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -484,6 +524,7 @@
       "description": "Workspace data table definition."
     },
     "TablesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

@@ -27,7 +27,7 @@ batch:
   - tag: package-2015-03
   - tag: package-2015-11-preview
   - tag: package-2020-03-preview
-  - tag: package-2021-03-01-privatepreview
+  - tag: package-2021-12-01-preview
   - tag: package-2020-10
   - tag: package-2020-08
 ```
@@ -71,12 +71,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2021-03-01-privatepreview and java
+### Tag: package-2021-12-01-preview and java
 
-These settings apply only when `--tag=package-2021-03-01-privatepreview --java` is specified on the command line.
+These settings apply only when `--tag=package-2021-12-01-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2021-03-01-privatepreview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2021-12-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.loganalytics.v2020_03_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2021_03_01_privatepreview
