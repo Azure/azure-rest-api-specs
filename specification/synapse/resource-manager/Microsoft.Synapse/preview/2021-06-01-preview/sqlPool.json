@@ -5342,12 +5342,14 @@
         },
         "status": {
           "type": "string",
-          "description": "Resource status"
+          "description": "Resource status",
+          "readOnly": true
         },
         "restorePointInTime": {
           "type": "string",
           "description": "Snapshot time to restore",
-          "format": "date-time"
+          "format": "date-time",
+          "default": null
         },
         "createMode": {
           "type": "string",
@@ -5361,12 +5363,17 @@
           "x-ms-enum": {
             "name": "createMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "creationDate": {
           "type": "string",
           "description": "Date the SQL pool was created",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "storageAccountType": {
           "description": "The storage account type used to store backups for this sql pool.",
@@ -5409,7 +5416,8 @@
             "syncIntervalInMinutes": {
               "type": "integer",
               "format": "int32",
-              "description": "The Sync Interval in minutes."
+              "description": "The Sync Interval in minutes.",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -6868,6 +6876,7 @@
         "disabledAlerts": {
           "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action",
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           }

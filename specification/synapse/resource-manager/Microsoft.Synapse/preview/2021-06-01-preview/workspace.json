@@ -926,7 +926,11 @@
       "properties": {
         "accountUrl": {
           "description": "Account URL",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "filesystem": {
           "description": "Filesystem name",
@@ -1084,7 +1088,11 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1170,7 +1178,11 @@
       "properties": {
         "initialWorkspaceAdminObjectId": {
           "description": "AAD object ID of initial workspace admin",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1282,6 +1294,7 @@
             "Disabled"
           ],
           "description": "Enable or Disable public network access to workspace",
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "WorkspacePublicNetworkAccess",
@@ -1306,7 +1319,8 @@
         },
         "trustedServiceBypassEnabled": {
           "description": "Is trustedServiceBypassEnabled for the workspace",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
