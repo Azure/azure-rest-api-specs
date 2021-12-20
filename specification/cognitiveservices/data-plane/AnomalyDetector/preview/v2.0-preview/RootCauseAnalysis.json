@@ -7,7 +7,7 @@
   },
   "paths": {
     "/rootCauseAnalysis/dataSets": {
-      "post": {
+      "put": {
         "tags": [
           "RootCauseAnalysisDataSet"
         ],
@@ -65,23 +65,23 @@
         "parameters": [
           {
             "in": "query",
-            "name": "name",
-            "description": "Root cause analysis data set name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
+            "name": "skip",
             "description": "For paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
-            "name": "$maxpagesize",
+            "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "`filter`",
+            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "type": "string"
           }
         ],
         "responses": {
@@ -99,7 +99,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List root cause analysis data set": {
@@ -185,7 +185,7 @@
         }
       }
     },
-    "/rootCauseAnalysis/dataSets/{dataSetId}/upload": {
+    "/rootCauseAnalysis/dataSets/{dataSetId}:upload": {
       "post": {
         "tags": [
           "RootCauseAnalysisDataSet"
@@ -332,17 +332,23 @@
           },
           {
             "in": "query",
-            "name": "$skip",
+            "name": "skip",
             "description": "For paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
-            "name": "$maxpagesize",
+            "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "`filter`",
+            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "type": "string"
           }
         ],
         "responses": {
@@ -360,7 +366,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List root cause analysis data in a specified data set": {
@@ -370,7 +376,7 @@
       }
     },
     "/rootCauseAnalysis/instances": {
-      "post": {
+      "put": {
         "tags": [
           "RootCauseAnalysisInstance"
         ],
@@ -428,23 +434,23 @@
         "parameters": [
           {
             "in": "query",
-            "name": "name",
-            "description": "Filter instance by name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
+            "name": "skip",
             "description": "For paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
-            "name": "$maxpagesize",
+            "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "`filter`",
+            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "type": "string"
           }
         ],
         "responses": {
@@ -462,7 +468,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get instance list for root cause analysis": {
@@ -549,7 +555,7 @@
       }
     },
     "/rootCauseAnalysis/instances/{instanceId}/models": {
-      "post": {
+      "put": {
         "tags": [
           "RootCauseAnalysisModel"
         ],
@@ -622,23 +628,23 @@
           },
           {
             "in": "query",
-            "name": "name",
-            "description": "Filter model by name",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
+            "name": "skip",
             "description": "For paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
-            "name": "$maxpagesize",
+            "name": "maxpagesize",
             "description": "The maximum number of items in one page",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "`filter`",
+            "description": "The filter expression that selects the resources to be retunres, currently contains(displayName, 'our filter name’) is supported",
+            "type": "string"
           }
         ],
         "responses": {
@@ -656,7 +662,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Query training task state list for root cause analysis": {
@@ -883,11 +889,11 @@
   "definitions": {
     "RootCauseAnalysisMeasure": {
       "required": [
-        "name"
+        "displayName"
       ],
       "type": "object",
       "properties": {
-        "name": {
+        "displayName": {
           "description": "Root cause analysis measure name",
           "type": "string"
         }
@@ -895,8 +901,8 @@
     },
     "RootCauseAnalysisDataSet": {
       "required": [
-        "kind",
-        "name"
+        "displayName",
+        "kind"
       ],
       "type": "object",
       "properties": {
@@ -917,38 +923,38 @@
           "type": "string",
           "readOnly": true
         },
-        "name": {
+        "displayName": {
           "description": "Root cause analysis data set name",
           "type": "string"
         }
       },
       "discriminator": "kind",
       "example": {
-        "granularity": "daily",
-        "customInterval": 0,
-        "dimensionKeys": [
-          "Country",
-          "Version"
-        ],
-        "aggregateValue": "__SUM__",
-        "measures": [
-          {
-            "name": "error rate"
-          },
-          {
-            "name": "error count"
-          },
-          {
-            "name": "total call count"
-          }
-        ],
-        "name": "Sample Multidimensional Root Cause Analysis Dataset Name",
-        "kind": "multidimensional"
-      }
+  "granularity": "daily",
+  "customInterval": 0,
+  "dimensionKeys": [
+    "Region",
+    "Version"
+  ],
+  "aggregateIdentifier": "__SUM__",
+  "measures": [
+    {
+      "displayName": "error rate"
+    },
+    {
+      "displayName": "error count"
+    },
+    {
+      "displayName": "total call count"
+    }
+  ],
+  "displayName": "Sample Multidimensional Root Cause Analysis Dataset Name",
+  "kind": "multidimensional"
+}
     },
     "MultiDimRCADataSet": {
       "required": [
-        "aggregateValue",
+        "aggregateIdentifier",
         "customInterval",
         "dimensionKeys",
         "granularity",
@@ -992,7 +998,7 @@
             "type": "string"
           }
         },
-        "aggregateValue": {
+        "aggregateIdentifier": {
           "description": "Multidimensional root cause analysis measure aggregate value",
           "type": "string"
         },
@@ -1025,7 +1031,7 @@
       ],
       "type": "object",
       "properties": {
-        "@nextLink": {
+        "nextLink": {
           "description": "Link of next page, only provided when there are next pages",
           "type": "string"
         },
@@ -1087,320 +1093,320 @@
       },
       "discriminator": "kind",
       "example": {
-        "value": [
-          {
-            "partitionIdentity": "PartitionIdentity1",
-            "timestamp": "2021-12-01T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                "0.38",
-                "3800",
-                "10000"
-              ],
-              [
-                "CN",
-                "ios",
-                "0.30",
-                "3000",
-                "10000"
-              ],
-              [
-                "CN",
-                "Android",
-                "0.006",
-                "60",
-                "10000"
-              ],
-              [
-                "US",
-                "__SUM__",
-                "0.6",
-                "6000",
-                "10000"
-              ],
-              [
-                "JP",
-                "__SUM__",
-                "0.001",
-                "10",
-                "10000"
-              ],
-              [
-                "DE",
-                "__SUM__",
-                "0.0002",
-                "20",
-                "10000"
-              ],
-              [
-                "CA",
-                "__SUM__",
-                "0.006",
-                "60",
-                "10000"
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                "1",
-                "10000",
-                "10000"
-              ]
-            ]
-          },
-          {
-            "partitionIdentity": "PartitionIdentity2",
-            "timestamp": "2021-11-30T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                "0.03",
-                "30",
-                "1000"
-              ],
-              [
-                "CN",
-                "ios",
-                "0.02",
-                "20",
-                "1000"
-              ],
-              [
-                "CN",
-                "Android",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "US",
-                "__SUM__",
-                "0.3",
-                "300",
-                "1000"
-              ],
-              [
-                "JP",
-                "__SUM__",
-                "0.1",
-                "10",
-                "1000"
-              ],
-              [
-                "DE",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "CA",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                "1",
-                "1000",
-                "1000"
-              ]
-            ]
-          },
-          {
-            "partitionIdentity": "PartitionIdentity3",
-            "timestamp": "2021-11-29T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                "0.3",
-                "300",
-                "1000"
-              ],
-              [
-                "CN",
-                "ios",
-                "0.30",
-                "300",
-                "1000"
-              ],
-              [
-                "CN",
-                "Android",
-                "0",
-                "0",
-                "1000"
-              ],
-              [
-                "US",
-                "__SUM__",
-                "0.4",
-                "400",
-                "1000"
-              ],
-              [
-                "JP",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "DE",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "CA",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                "1",
-                "1000",
-                "1000"
-              ]
-            ]
-          },
-          {
-            "partitionIdentity": "PartitionIdentity4",
-            "timestamp": "2021-11-28T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                "0.3",
-                "302",
-                "1000"
-              ],
-              [
-                "CN",
-                "ios",
-                "0.30",
-                "302",
-                "1000"
-              ],
-              [
-                "CN",
-                "Android",
-                "0",
-                "0",
-                "1000"
-              ],
-              [
-                "US",
-                "__SUM__",
-                "0.4",
-                "401",
-                "1000"
-              ],
-              [
-                "JP",
-                "__SUM__",
-                "0.009",
-                "9",
-                "1000"
-              ],
-              [
-                "DE",
-                "__SUM__",
-                "0.011",
-                "11",
-                "1000"
-              ],
-              [
-                "CA",
-                "__SUM__",
-                "0.01",
-                "1",
-                "1000"
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                "1",
-                "1000",
-                "1000"
-              ]
-            ]
-          },
-          {
-            "partitionIdentity": "PartitionIdentity5",
-            "timestamp": "2021-11-27T00:00:00Z",
-            "data": [
-              [
-                "CN",
-                "__SUM__",
-                "0.299",
-                "299",
-                "1000"
-              ],
-              [
-                "CN",
-                "ios",
-                "0.31",
-                "310",
-                "1000"
-              ],
-              [
-                "CN",
-                "Android",
-                "0。001",
-                "1",
-                "1000"
-              ],
-              [
-                "US",
-                "__SUM__",
-                "0.401",
-                "401",
-                "1000"
-              ],
-              [
-                "JP",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "DE",
-                "__SUM__",
-                "0.01",
-                "10",
-                "1000"
-              ],
-              [
-                "CA",
-                "__SUM__",
-                "0.01",
-                "1",
-                "100"
-              ],
-              [
-                "__SUM__",
-                "__SUM__",
-                "1",
-                "1000",
-                "1000"
-              ]
-            ]
-          }
+  "value": [
+    {
+      "partitionIdentity": "PartitionIdentity1",
+      "timestamp": "2021-12-01T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.38,
+          3800,
+          10000
         ],
-        "kind": "multidimensional"
-      }
+        [
+          "CN",
+          "ios",
+          0.3,
+          3000,
+          10000
+        ],
+        [
+          "CN",
+          "Android",
+          0.006,
+          60,
+          10000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.6,
+          6000,
+          10000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.001,
+          10,
+          10000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.0002,
+          20,
+          10000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.006,
+          60,
+          10000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          10000,
+          10000
+        ]
+      ]
+    },
+    {
+      "partitionIdentity": "PartitionIdentity2",
+      "timestamp": "2021-11-30T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.03,
+          30,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.02,
+          20,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.3,
+          300,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.1,
+          10,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    },
+    {
+      "partitionIdentity": "PartitionIdentity3",
+      "timestamp": "2021-11-29T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.3,
+          300,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.3,
+          300,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0,
+          0,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.4,
+          400,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    },
+    {
+      "partitionIdentity": "PartitionIdentity4",
+      "timestamp": "2021-11-28T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.3,
+          302,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.3,
+          302,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0,
+          0,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.4,
+          401,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.009,
+          9,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.011,
+          11,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          1,
+          1000
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    },
+    {
+      "partitionIdentity": "PartitionIdentity5",
+      "timestamp": "2021-11-27T00:00:00Z",
+      "data": [
+        [
+          "CN",
+          "__SUM__",
+          0.299,
+          299,
+          1000
+        ],
+        [
+          "CN",
+          "ios",
+          0.31,
+          310,
+          1000
+        ],
+        [
+          "CN",
+          "Android",
+          0.001,
+          1,
+          1000
+        ],
+        [
+          "US",
+          "__SUM__",
+          0.401,
+          401,
+          1000
+        ],
+        [
+          "JP",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "DE",
+          "__SUM__",
+          0.01,
+          10,
+          1000
+        ],
+        [
+          "CA",
+          "__SUM__",
+          0.01,
+          1,
+          100
+        ],
+        [
+          "__SUM__",
+          "__SUM__",
+          1,
+          1000,
+          1000
+        ]
+      ]
+    }
+  ],
+  "kind": "multidimensional"
+}
     },
     "MultiDimRCAUploadDataRequest": {
       "required": [
@@ -1540,8 +1546,8 @@
     },
     "RootCauseAnalysisInstance": {
       "required": [
-        "kind",
-        "name"
+        "displayName",
+        "kind"
       ],
       "type": "object",
       "properties": {
@@ -1562,30 +1568,30 @@
           "type": "string",
           "readOnly": true
         },
-        "name": {
+        "displayName": {
           "description": "Instance name for root cause analysis",
           "type": "string"
         }
       },
       "discriminator": "kind",
       "example": {
-        "targetMeasure": {
-          "dataSetId": "01234567-8901-2345-6789-012345678901",
-          "measureName": "error rate"
-        },
-        "dataSets": [
-          {
-            "dataSetId": "01234567-8901-2345-6789-012345678901",
-            "measureNames": [
-              "error count",
-              "total call count",
-              "error rate"
-            ]
-          }
-        ],
-        "name": "Sample Root Cause Analysis Instance Name",
-        "kind": "multidimensional"
-      }
+  "targetMeasure": {
+    "dataSetId": "01234567-8901-2345-6789-012345678901",
+    "measureName": "error rate"
+  },
+  "dataSets": [
+    {
+      "dataSetId": "01234567-8901-2345-6789-012345678901",
+      "measureNames": [
+        "error count",
+        "total call count",
+        "error rate"
+      ]
+    }
+  ],
+  "displayName": "Sample Root Cause Analysis Instance Name",
+  "kind": "multidimensional"
+}
     },
     "MultiRCADimInstance": {
       "required": [
@@ -1618,7 +1624,7 @@
       ],
       "type": "object",
       "properties": {
-        "@nextLink": {
+        "nextLink": {
           "description": "Link of next page, only provided when there are next pages",
           "type": "string",
           "readOnly": true
@@ -1653,8 +1659,8 @@
     },
     "RootCauseAnalysisTrainingRequest": {
       "required": [
-        "kind",
-        "name"
+        "displayName",
+        "kind"
       ],
       "type": "object",
       "properties": {
@@ -1669,20 +1675,20 @@
             "modelAsString": true
           }
         },
-        "name": {
+        "displayName": {
           "description": "Model name",
           "type": "string"
         }
       },
       "discriminator": "kind",
       "example": {
-        "parameter": {
-          "startDateTime": "2021-10-01T00:00:00Z",
-          "endDateTime": "2021-11-30T00:00:00Z"
-        },
-        "name": "Sample Root Cause Analysis Model Name",
-        "kind": "multidimensional"
-      }
+  "parameter": {
+    "startDateTime": "2021-10-01T00:00:00Z",
+    "endDateTime": "2021-11-30T00:00:00Z"
+  },
+  "displayName": "Sample Root Cause Analysis Model Name",
+  "kind": "multidimensional"
+}
     },
     "MultiDimRCATrainingRequest": {
       "required": [
@@ -1774,11 +1780,11 @@
     "RootCauseAnalysisTrainingResponse": {
       "required": [
         "createdDateTime",
+        "displayName",
         "instanceId",
         "kind",
         "lastModifiedDateTime",
         "modelId",
-        "name",
         "status",
         "taskId"
       ],
@@ -1810,7 +1816,7 @@
           "description": "Model unique id for root cause analysis",
           "type": "string"
         },
-        "name": {
+        "displayName": {
           "description": "Model name for root cause analysis",
           "type": "string"
         },
@@ -1871,7 +1877,7 @@
       ],
       "type": "object",
       "properties": {
-        "@nextLink": {
+        "nextLink": {
           "description": "Link of next page, only provided when there are next pages",
           "type": "string",
           "readOnly": true
@@ -1926,12 +1932,12 @@
       },
       "discriminator": "kind",
       "example": {
-        "parameter": {
-          "timestamp": "2021-12-01T00:00:00Z",
-          "dimensionScope": {}
-        },
-        "kind": "multidimensional"
-      }
+  "parameter": {
+    "timestamp": "2021-12-01T00:00:00Z",
+    "dimensionScope": {}
+  },
+  "kind": "multidimensional"
+}
     },
     "MultiDimRCAInferenceRequest": {
       "required": [
@@ -1954,7 +1960,7 @@
       "required": [
         "contributionScore",
         "dataSetId",
-        "name",
+        "displayName",
         "trendType"
       ],
       "type": "object",
@@ -1964,7 +1970,7 @@
           "description": "data set unique id of the root cause measure",
           "type": "string"
         },
-        "name": {
+        "displayName": {
           "description": "name of the root cause measure",
           "type": "string"
         },
@@ -2130,7 +2136,7 @@
   },
   "security": [
     {
-      "apiKeyHeader": []
+      "apiKeyHeader": [ ]
     }
   ],
   "parameters": {

@@ -1,36 +1,35 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "Ocp-Apim-Subscription-Key": "{API key}",
-    "name": "name_prefix"
+    "Ocp-Apim-Subscription-Key": "{API key}"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "@nextLink": "https://localhost/rootCauseAnalysis/dataSets?$skip=1&$maxpagesize=10",
+        "nextLink": "https://localhost/rootCauseAnalysis/dataSets?$skip=1&$maxpagesize=10",
         "value": [
           {
             "granularity": "daily",
             "customInterval": 0,
             "dimensionKeys": [
-              "Country",
+              "Region",
               "Version"
             ],
-            "aggregateValue": "__SUM__",
+            "aggregateIdentifier": "__SUM__",
             "measures": [
               {
-                "name": "error rate"
+                "displayName": "error rate"
               },
               {
-                "name": "error count"
+                "displayName": "error count"
               },
               {
-                "name": "total call count"
+                "displayName": "total call count"
               }
             ],
             "dataSetId": "01234567-8901-2345-6789-012345678901",
-            "name": "Sample Multidimensional Root Cause Analysis Dataset Name",
+            "displayName": "Sample Multidimensional Root Cause Analysis Dataset Name",
             "kind": "multidimensional"
           }
         ]
