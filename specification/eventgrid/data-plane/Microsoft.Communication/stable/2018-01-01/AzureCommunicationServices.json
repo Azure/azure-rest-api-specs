@@ -460,16 +460,41 @@
           "type": "integer"
         },
         "recordingContentType": {
-          "description": "The recording content type- audioVideo, or audio",
-          "type": "string"
+          "type": "string",
+          "description": "The recording content type- AudioVideo, or Audio",
+          "enum": [
+            "AudioVideo",
+            "Audio"
+          ],
+          "x-ms-enum": {
+            "name": "recordingContentType",
+            "modelAsString": true
+          }
         },
         "recordingChannelType": {
-          "description": "The recording  channel type - mixed, unmixed",
-          "type": "string"
+          "type": "string",
+          "description": "The recording  channel type - Mixed, Unmixed",
+          "enum": [
+            "Mixed",
+            "Unmixed"
+          ],
+          "x-ms-enum": {
+            "name": "recordingChannelType",
+            "modelAsString": true
+          }
         },
         "recordingFormatType": {
-          "description": "The recording format type - mp4, mp3, wav",
-          "type": "string"
+          "type": "string",
+          "description": "The recording format type - Mp4, Mp3, Wav",
+          "enum": [
+            "Wav",
+            "Mp3",
+            "Mp4"
+          ],
+          "x-ms-enum": {
+            "name": "recordingFormatType",
+            "modelAsString": true
+          }
         },
         "sessionEndReason": {
           "description": "The reason for ending recording session",
