@@ -199,6 +199,10 @@
         "summary": "Create or update the metadata of an Azure Percept account.",
         "description": "Create or update the metadata of an Azure Percept account. Performs a full replacement of the editable properties.",
         "operationId": "Accounts_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Accounts_CreateOrUpdate": {
             "$ref": "./examples/Accounts_CreateOrUpdate.json"
@@ -228,6 +232,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "The resource was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "200": {
             "description": "The resource was created or updated successfully.",
             "schema": {
@@ -249,6 +259,10 @@
         "summary": "Partially update an existing Azure Percept account",
         "description": "Partially update an existing Azure Percept account.",
         "operationId": "Accounts_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Accounts_Update": {
             "$ref": "./examples/Accounts_Update.json"
@@ -278,6 +292,12 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Azure Percept account was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "200": {
             "description": "Azure Percept account was successfully updated",
             "schema": {
@@ -1532,6 +1552,10 @@
         ],
         "summary": "Create a new solutionInstance in the Azure Percept account under a specific name or update an existing one.",
         "operationId": "SolutionInstances_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SolutionInstances_CreateOrUpdate": {
             "$ref": "./examples/SolutionInstances_CreateOrUpdate.json"
@@ -1564,6 +1588,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "The SolutionInstance was successfully created or updated in the account.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
           "200": {
             "description": "The SolutionInstance was successfully created or updated in the account.",
             "schema": {
@@ -1584,6 +1614,10 @@
         ],
         "summary": "Partially update an existing solutionInstance inside an Azure Percept account.",
         "operationId": "SolutionInstances_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SolutionInstances_Update": {
             "$ref": "./examples/SolutionInstances_Update.json"
@@ -1616,6 +1650,12 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The SolutionInstance inside the Azure Percept account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
           "200": {
             "description": "The SolutionInstance inside the Azure Percept account was successfully updated.",
             "schema": {
@@ -1636,6 +1676,10 @@
         ],
         "summary": "Delete a solutionInstance from an Azure Percept account.",
         "operationId": "SolutionInstances_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SolutionInstances_Delete": {
             "$ref": "./examples/SolutionInstances_Delete.json"
@@ -1659,56 +1703,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The SolutionInstance was successfully deleted."
+          },
           "200": {
             "description": "The SolutionInstance was successfully deleted."
           },
           "204": {
             "description": "The request is valid, but the SolutionInstance does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/solutioninstances/{solutionInstanceName}/deploy": {
-      "post": {
-        "tags": [
-          "POST"
-        ],
-        "summary": "Deploy SolutionInstance.",
-        "operationId": "SolutionInstancesAction_Deploy",
-        "x-ms-examples": {
-          "SolutionInstancesAction_Deploy": {
-            "$ref": "./examples/SolutionInstancesAction_Deploy.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "$ref": "#/parameters/solutionInstanceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The action was successfully executed.",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstanceStatus"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1795,8 +1797,9 @@
           "description": "Operation name: {provider}/{resource}/{read | write | action | delete}."
         },
         "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
+          "description": "Indicates whether the operation is a data action. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
         },
         "display": {
           "description": "The operation supported by Azure Percept.",
@@ -2542,6 +2545,10 @@
           "description": "The user provided description.",
           "type": "string"
         },
+        "desiredStatus": {
+          "$ref": "#/definitions/SolutionInstanceStatusDesired",
+          "description": "The desired status of the SolutionInstance resource."
+        },
         "configurations": {
           "description": "Component configurations.",
           "type": "array",
@@ -2576,9 +2583,13 @@
           "description": "The user provided description.",
           "type": "string"
         },
-        "status": {
+        "reportedStatus": {
           "$ref": "#/definitions/SolutionInstanceStatus",
-          "description": "The status of the SolutionInstance resource."
+          "description": "The current status of the SolutionInstance resource."
+        },
+        "desiredStatus": {
+          "$ref": "#/definitions/SolutionInstanceStatusDesired",
+          "description": "The desired status of the SolutionInstance resource."
         },
         "accounts": {
           "type": "array",
@@ -2681,6 +2692,35 @@
         }
       }
     },
+    "SolutionInstanceStatusDesired": {
+      "description": "Metadata pertaining to desired deployment status of the SolutionInstance.",
+      "type": "object",
+      "readOnly": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The desired status code.",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "Solution instance desired deployment status - Active."
+              },
+              {
+                "value": "Inactive",
+                "description": "Solution instance desired deployment status - Inactive."
+              }
+            ]
+          }
+        }
+      }
+    },
     "SolutionInstanceStatus": {
       "description": "Metadata pertaining to deployment status of the SolutionInstance.",
       "type": "object",
@@ -2690,30 +2730,25 @@
           "type": "string",
           "description": "The status code.",
           "enum": [
-            "Created",
-            "Success",
-            "Failed",
-            "InProgress"
+            "Active",
+            "Inactive",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "code",
             "modelAsString": true,
             "values": [
               {
-                "value": "Created",
-                "description": "Solution instance deployment status - Created."
+                "value": "Active",
+                "description": "Solution instance deployment status - Active."
               },
               {
-                "value": "Success",
-                "description": "Solution instance deployment status - Success."
+                "value": "Inactive",
+                "description": "Solution instance deployment status - Inactive."
               },
               {
                 "value": "Failed",
                 "description": "Solution instance deployment status - Failed."
-              },
-              {
-                "value": "InProgress",
-                "description": "Solution instance deployment status - InProgress."
               }
             ]
           }
