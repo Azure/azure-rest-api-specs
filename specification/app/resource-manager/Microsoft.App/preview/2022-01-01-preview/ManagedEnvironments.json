@@ -329,17 +329,17 @@
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
       "properties": {
-        "controlPlaneSubnetResourceId": {
+        "infrastructureSubnetId": {
           "type": "string",
-          "description": "Resource ID of a subnet for control plane infrastructure components. This subnet must be in the same VNET as the subnet defined in appSubnetResourceId. Must not overlap with the IP range defined in platformReservedCidr, if defined.",
+          "description": "Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "appSubnetResourceId": {
+        "runtimeSubnetId": {
           "type": "string",
-          "description": "Resource ID of a subnet that Container App containers are injected into. This subnet must be in the same VNET as the subnet defined in controlPlaneSubnetResourceId. Must not overlap with the IP range defined in platformReservedCidr, if defined.",
+          "description": "Resource ID of a subnet that Container App containers are injected into. This subnet must be in the same VNET as the subnet defined in infrastructureSubnetId. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -347,7 +347,7 @@
         },
         "dockerBridgeCidr": {
           "type": "string",
-          "description": "CIDR notation IP range assigned to the Docker bridge, network. It must not overlap with any Subnet IP ranges or the IP range defined in platformReservedCidr, if defined.",
+          "description": "CIDR notation IP range assigned to the Docker bridge, network. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -355,7 +355,7 @@
         },
         "platformReservedCidr": {
           "type": "string",
-          "description": "IP range in CIDR notation that can be reserved for environment infrastructure IP addresses. It must not overlap with any other Subnet IP ranges.",
+          "description": "IP range in CIDR notation that can be reserved for environment infrastructure IP addresses. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
