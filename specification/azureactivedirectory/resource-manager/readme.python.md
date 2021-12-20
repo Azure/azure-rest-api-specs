@@ -7,6 +7,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureactivedirectory
+no-namespace-folders: true
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
@@ -19,4 +20,9 @@ output-folder: $(python-sdks-folder)/azureactivedirectory/azure-mgmt-azureactive
 ``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/azureactivedirectory/azure-mgmt-azureactivedirectory
+```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```
