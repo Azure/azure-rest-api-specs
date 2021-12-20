@@ -5353,7 +5353,8 @@
         "restorePointInTime": {
           "type": "string",
           "description": "Snapshot time to restore",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "createMode": {
           "type": "string",
@@ -5383,13 +5384,15 @@
           "description": "The storage account type used to store backups for this sql pool.",
           "enum": [
             "GRS",
-            "LRS"
+            "LRS",
+            "ZRS"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "StorageAccountType",
             "modelAsString": true
-          }
+          },
+          "default": "LRS"
         },
         "sourceDatabaseDeletionDate": {
           "type": "string",
@@ -6113,13 +6116,14 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "storageAccountSubscriptionId": {
           "format": "uuid",
           "description": "Specifies the blob storage subscription Id.",
           "type": "string",
-          "default":  ""
+          "readOnly": true
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
@@ -6127,7 +6131,8 @@
         },
         "isAzureMonitorTargetEnabled": {
           "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'state' as 'Enabled' and 'isAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as {databaseName}.\r\n\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
