@@ -196,9 +196,6 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
-          },
-          {
             "$ref": "#/parameters/ElasticSanCreate"
           },
           {
@@ -426,9 +423,6 @@
         "x-ms-examples": {
           "VolumeGroups_ListByElasticSan_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_ListByElasticSan_MaximumSet_Gen.json"
-          },
-          "VolumeGroups_ListByElasticSan_MinimumSet_Gen": {
-            "$ref": "./examples/VolumeGroups_ListByElasticSan_MinimumSet_Gen.json"
           }
         }
       }
@@ -487,9 +481,6 @@
         "x-ms-examples": {
           "VolumeGroups_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "VolumeGroups_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/VolumeGroups_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
       },
@@ -543,9 +534,6 @@
         "x-ms-examples": {
           "VolumeGroups_Update_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_Update_MaximumSet_Gen.json"
-          },
-          "VolumeGroups_Update_MinimumSet_Gen": {
-            "$ref": "./examples/VolumeGroups_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -642,9 +630,6 @@
         "x-ms-examples": {
           "VolumeGroups_Get_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_Get_MaximumSet_Gen.json"
-          },
-          "VolumeGroups_Get_MinimumSet_Gen": {
-            "$ref": "./examples/VolumeGroups_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1338,7 +1323,7 @@
       "x-ms-parameter-location": "method"
     },
     "ElasticSanCreate": {
-      "elasticSanname": "ElasticSanCreatePayload",
+      "name": "ElasticSanCreatePayload",
       "required": true,
       "in": "body",
       "description": "Request payload for ElasticSan create operation",
@@ -1570,14 +1555,6 @@
           "type": "string",
           "x-ms-client-flatten": true
         },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives."
-        },
         "availabilityZones": {
           "type": "array",
           "description": "Logical zone for Elastic San resource; example: [\"1\"].",
@@ -1611,31 +1588,17 @@
         "totalSizeInTB": {
           "description": "Total size of the Elastic San appliance in TB.",
           "type": "integer",
-          "format": "int64",
-          "x-ms-mutability": [
-            "read"
-          ]
+          "format": "int64"
         },
         "provisionedIops": {
           "description": "Provisioned IOPS of the Elastic San appliance.",
           "type": "integer",
-          "format": "int64",
-          "x-ms-mutability": [
-            "read"
-          ]
+          "format": "int64"
         },
         "provisionedMBps": {
           "description": "Provisioned MBps Elastic San appliance.",
           "type": "integer",
-          "format": "int64",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.ElasticSan/elasticSans."
+          "format": "int64"
         }
       }
     },
@@ -1644,7 +1607,7 @@
       "description": "Request payload for create or update Elastic San request.",
       "required": [
         "location",
-        "name"
+        "elasticSanName"
       ],
       "properties": {
         "properties": {
@@ -1952,7 +1915,6 @@
       "required": [
         "name",
         "provisioningState",
-        "subnet",
         "storageTarget",
         "sizeInGB",
         "volumes"
@@ -1963,7 +1925,7 @@
           "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
-        "name": {
+        "volumeGroupName": {
           "type": "string",
           "description": "Name of the volume group"
         },
@@ -1972,9 +1934,13 @@
           "type": "integer",
           "format": "int64"
         },
-        "storageTarget": {
-          "description": "Storage Target Information",
-          "$ref": "#/definitions/StorageTarget"
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "volumes": {
           "type": "array",
@@ -1982,14 +1948,6 @@
           "items": {
             "$ref": "#/definitions/Volume"
           }
-        },
-        "subnet": {
-          "type": "string",
-          "description": "Azure Resource ID of a Subnet for the Volume Group.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
@@ -2009,6 +1967,10 @@
           "description": "Volume Group subnet id.",
           "type": "string"
         },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
         "storageTarget": {
           "description": "Storage Target Information",
           "readOnly": true,
@@ -2024,6 +1986,14 @@
           "description": "Volume Group name.",
           "type": "string"
         },
+        "subnet": {
+          "description": "Volume Group subnet id.",
+          "type": "string"
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
         "storageTarget": {
           "description": "Iscsi Target Information",
           "$ref": "#/definitions/StorageTarget"
@@ -2037,10 +2007,6 @@
         "properties"
       ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the volume"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of Volume.",
@@ -2532,6 +2498,76 @@
         }
       },
       "description": "The resource management error response."
+    },
+    "NetworkRuleSet": {
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility."
+    },
+    "IpRule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accessibility from a specific ip address or ip range."
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Ignore missing vnet service endpoint or not."
+        },
+        "subnet": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "description": "The list of subnets."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accessibility from a specific virtual network."
+    },
+    "Subnet": {
+      "type": "string",
+      "description": "Azure Resource Id of a Subnet for the Volume Group."
     }
   }
 }
