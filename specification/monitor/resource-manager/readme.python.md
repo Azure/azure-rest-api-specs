@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2021-09-01-only
+  - tag: package-2021-08-01
   - tag: package-2021-05-01-preview-only
   - tag: package-2021-04-only
   - tag: package-2020-10-only
@@ -61,6 +62,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: $(python-base-namespace).v2021_09_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_09_01
 ```
+
+### Tag: package-2021-08-01 and python
+
+These settings apply only when `--tag=package-2021-08-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-08-01'
+namespace: $(python-base-namespace).v2021_08_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_08_01
+```
+
 
 ### Tag: package-2021-07-01-preview-only and python
 
