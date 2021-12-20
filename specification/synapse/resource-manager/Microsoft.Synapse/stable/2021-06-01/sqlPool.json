@@ -5327,7 +5327,7 @@
         "collation": {
           "type": "string",
           "description": "Collation mode",
-          "default":  null
+          "default": ""
         },
         "sourceDatabaseId": {
           "type": "string",
@@ -5383,15 +5383,13 @@
           "description": "The storage account type used to store backups for this sql pool.",
           "enum": [
             "GRS",
-            "LRS",
-            "ZRS"
+            "LRS"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "StorageAccountType",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         },
         "sourceDatabaseDeletionDate": {
           "type": "string",
