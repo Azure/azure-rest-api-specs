@@ -329,33 +329,17 @@
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
       "properties": {
-        "platformServiceCidr": {
+        "controlPlaneSubnetResourceId": {
           "type": "string",
-          "description": "CIDR notation IP range from which to assign infrastructure service environment IPs. It must not overlap with any Subnet IP ranges.",
+          "description": "Resource ID of a subnet for control plane infrastructure components. This subnet must be in the same VNET as the subnet defined in appSubnetResourceId. Must not overlap with the IP range defined in platformReservedCidr, if defined.",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "platformServiceDnsIp": {
+        "appSubnetResourceId": {
           "type": "string",
-          "description": "IpAddress in platformService Cidr for internal service DNS server",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "infrastructureSubnetResourceId": {
-          "type": "string",
-          "description": "Subnet Resource Id for Infrastructure components should be in the same VNET as 'InfrastructureSubnetResourceId'. Must not overlap with ServiceCidr",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "runtimeSubnetResourceName": {
-          "type": "string",
-          "description": " Subnet Resource Name to which the ContainerApp Containers are injected into, should be in the same VNET as 'InfrastructureSubnetResourceId'. Must not overlap with ServiceCidr",
+          "description": "Resource ID of a subnet that Container App containers are injected into. This subnet must be in the same VNET as the subnet defined in controlPlaneSubnetResourceId. Must not overlap with the IP range defined in platformReservedCidr, if defined.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -363,7 +347,23 @@
         },
         "dockerBridgeCidr": {
           "type": "string",
-          "description": "CIDR notation IP range assigned to the Docker bridge, network. It must not overlap with any Subnet IP ranges or the infrastructure service address range.",
+          "description": "CIDR notation IP range assigned to the Docker bridge, network. It must not overlap with any Subnet IP ranges or the IP range defined in platformReservedCidr, if defined.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "platformReservedCidr": {
+          "type": "string",
+          "description": "IP range in CIDR notation that can be reserved for environment infrastructure IP addresses. It must not overlap with any other Subnet IP ranges.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "platformReservedDnsIP": {
+          "type": "string",
+          "description": " An IP address from the IP range defined by platformReservedCidr that will be reserved for the internal DNS server.",
           "x-ms-mutability": [
             "create",
             "read"
