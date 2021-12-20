@@ -345,7 +345,7 @@
         },
         "description": "Resets specific documents in the datasource to be selectively re-ingested by the indexer.",
         "externalDocs": {
-          "url": "N/A"
+          "url": "https://aka.ms/reset-documents"
         },
         "parameters": [
           {
@@ -361,6 +361,7 @@
             "required": false,
             "schema": {
               "type": "object",
+              "x-ms-client-name": "DocumentKeysOrIds",
               "properties": {
                 "documentKeys": {
                   "type": "array",
@@ -500,10 +501,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           },
           {
-            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -814,10 +815,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
+            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
           },
           {
-            "$ref": "#/parameters/IgnoreResetRequirementsParameter"
+            "$ref": "#/parameters/DisableCacheReprocessingChangeDetectionParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -1023,6 +1024,69 @@
             "schema": {
               "$ref": "#/definitions/SearchIndexerSkillset"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/skillsets('{skillsetName}')/search.resetskills": {
+      "post": {
+        "tags": [
+          "Skillsets"
+        ],
+        "operationId": "Skillsets_ResetSkills",
+        "x-ms-examples": {
+          "SearchServiceResetSkills": {
+            "$ref": "./examples/SearchServiceResetSkills.json"
+          }
+        },
+        "description": "Reset an existing skillset in a search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/reset-skills"
+        },
+        "parameters": [
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the skillset to reset."
+          },
+          {
+            "name": "skillNames",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "x-ms-client-name": "SkillNames",
+              "properties": {
+                "skillNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "the names of skills to be reset."
+                }
+              }
+            },
+            "description": "The names of skills to reset."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": "The skills in the skillset are successfully reset."
           },
           "default": {
             "description": "Error response.",
@@ -5720,6 +5784,82 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
+    "SemanticSettings": {
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticConfiguration"
+          },
+          "description": "The semantic configurations for the index."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines parameters for a search index that influence semantic capabilities."
+    },
+    "SemanticConfiguration": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the semantic configuration.",
+          "x-nullable": false
+        },
+        "prioritizedFields": {
+          "$ref": "#/definitions/PrioritizedFields",
+          "x-nullable": false,
+          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
+        }
+      },
+      "required": [
+        "name",
+        "prioritizedFields"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
+    },
+    "PrioritizedFields": {
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticField",
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
+        },
+        "prioritizedContentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        },
+        "prioritizedKeywordsFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
+    },
+    "SemanticField": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "",
+          "x-nullable": false
+        }
+      },
+      "description": "A field that is used as part of the semantic configuration."
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -6284,6 +6424,7 @@
         },
         "parameters": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "object"
           },
@@ -7387,6 +7528,15 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/azure/search/index-ranking-similarity"
           }
+        },
+        "semantic": {
+          "$ref": "#/definitions/SemanticSettings",
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
+          },
+          "x-ms-client-name": "SemanticSettings",
+          "x-nullable": true
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -8825,7 +8975,8 @@
         "ro",
         "sr-Cyrl",
         "sr-Latn",
-        "sk"
+        "sk",
+        "unk"
       ],
       "x-ms-enum": {
         "name": "OcrSkillLanguage",
@@ -8934,6 +9085,10 @@
           {
             "value": "sk",
             "description": "Slovak"
+          },
+          {
+            "value": "unk",
+            "description": "Unknown.  If the language is explicitly set to \"unk\", the language will be auto-detected."
           }
         ]
       },
@@ -9971,6 +10126,7 @@
     },
     "IgnoreResetRequirementsParameter": {
       "name": "ignoreResetRequirements",
+      "x-ms-client-name": "skipIndexerResetRequirementForCache",
       "in": "query",
       "required": false,
       "type": "boolean",

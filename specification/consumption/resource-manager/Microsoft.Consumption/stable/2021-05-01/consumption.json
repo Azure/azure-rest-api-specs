@@ -1710,7 +1710,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "EventsListByBillingProfile": {
+          "LotsListByBillingProfile": {
             "$ref": "./examples/LotsListByBillingProfile.json"
           }
         },
@@ -1828,6 +1828,9 @@
             "schema": {
               "$ref": "#/definitions/CreditSummary"
             }
+          },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4908,7 +4911,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5070,7 +5073,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5125,7 +5128,7 @@
           "type": "string",
           "readOnly": true
         },
-        "purchaseDate": {
+        "purchasedDate": {
           "description": "The date when the lot was added.",
           "type": "string",
           "format": "date-time",
@@ -5180,7 +5183,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5373,6 +5376,11 @@
     },
     "AmountWithExchangeRate": {
       "description": "The amount with exchange rate.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/amount"
+        }
+      ],
       "properties": {
         "exchangeRate": {
           "description": "The exchange rate.",
