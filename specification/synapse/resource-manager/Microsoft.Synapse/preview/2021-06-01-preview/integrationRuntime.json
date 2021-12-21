@@ -1388,7 +1388,7 @@
           "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
         },
         "managedVirtualNetwork": {
-          "description": "Managed integration runtime properties.",
+          "description": "Managed integration runtime managed virtual network.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedIntegrationRuntimeManagedVirtualNetworkReference"
         }
@@ -2259,9 +2259,20 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "serviceRegion": {
+          "description": "The service region for this integration runtime.",
+          "type": "string"
+        },
+        "newerVersions": {
+          "description": "The newer versions on download center",
+          "type": "array",
+          "items": {
+            "description": "The newer versions",
+            "type": "string"
+          }
         }
-      }
-    },
+      },
     "IntegrationRuntimeAutoUpdate": {
       "description": "The state of integration runtime auto update.",
       "type": "string",
