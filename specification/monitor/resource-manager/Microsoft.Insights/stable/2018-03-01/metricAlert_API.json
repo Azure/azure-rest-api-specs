@@ -767,7 +767,7 @@
         "allOf": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MultiMetricCriteria"
+            "$ref": "#/definitions/MetricCriteria"
           },
           "description": "The list of metric criteria for this 'all of' operation. "
         }
@@ -804,6 +804,72 @@
       "description": "Specifies the metric alert rule criteria for a web test resource."
     },
     "MetricCriteria": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "discriminator": "criterionType",
+      "properties": {
+        "criterionType": {
+          "type": "string",
+          "enum": [
+            "StaticThresholdCriterion",
+            "DynamicThresholdCriterion"
+          ],
+          "x-ms-enum": {
+            "name": "criterionType",
+            "modelAsString": true
+          },
+          "description": "Specifies the type of threshold criteria"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the criteria."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Namespace of the metric."
+        },
+        "timeAggregation": {
+          "type": "string",
+          "enum": [
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationTypeEnum",
+            "modelAsString": true
+          },
+          "description": "the criteria time aggregation types."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "List of dimension conditions."
+        },
+        "skipMetricValidation": {
+          "type": "boolean",
+          "description": "Allows creating an alert rule on a custom metric that isn't yet emitted, by causing the metric validation to be skipped."
+        }
+      },
+      "required": [
+        "criterionType",
+        "name",
+        "metricName",
+        "timeAggregation"
+      ],
+      "description": "The types of conditions for a multi resource alert."
+    },
+    "StaticMetricCriteria": {
       "x-ms-discriminator-value": "StaticThresholdCriterion",
       "type": "object",
       "allOf": [
@@ -996,7 +1062,8 @@
         },
         "ignoreDataBefore": {
           "type": "string",
-          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in C# Datetime format)"
+          "format": "date-time",
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
         }
       },
       "description": "Criterion for dynamic threshold."
