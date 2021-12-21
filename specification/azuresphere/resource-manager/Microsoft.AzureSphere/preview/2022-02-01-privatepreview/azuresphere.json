@@ -184,68 +184,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/uploadImage": {
-      "post": {
-        "operationId": "Catalogs_UploadImage",
-        "summary": "Uploads an image in a catalog.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "description": "Catalog name",
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "description": "Image to be uploaded",
-            "schema": {
-              "$ref": "#/definitions/UploadImageRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Response to the action call to upload an image.",
-            "schema": {
-              "$ref": "#/definitions/UploadImageResponse"
-            }
-          },
-          "default": {
-            "description": "An Azure Sphere Error",
-            "schema": {
-              "$ref": "#/definitions/AzureSphereErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "tags": [
-          "Catalogs"
-        ],
-        "x-ms-examples": {
-          "Uploads an image using in base64 encoding": {
-            "$ref": "./examples/PostUploadImage.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/claimDevices": {
       "post": {
         "operationId": "Catalogs_ClaimDevices",
@@ -1825,6 +1763,75 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageId}/upload": {
+      "post": {
+        "operationId": "Images_UploadImage",
+        "summary": "Uploads an image in a catalog.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Catalog name",
+            "type": "string"
+          },
+          {
+            "name": "imageId",
+            "in": "path",
+            "required": true,
+            "description": "Image identifier. Use 'default' as value.",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "Image to be uploaded",
+            "schema": {
+              "$ref": "#/definitions/UploadImageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Response to the action call to upload an image.",
+            "schema": {
+              "$ref": "#/definitions/UploadImageResponse"
+            }
+          },
+          "default": {
+            "description": "An Azure Sphere Error",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "Images"
+        ],
+        "x-ms-examples": {
+          "Uploads an image using in base64 encoding": {
+            "$ref": "./examples/PostUploadImage.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageId}": {
       "get": {
         "operationId": "Images_Get",
@@ -3051,29 +3058,6 @@
         "imageIdentifiers"
       ]
     },
-    "UploadImageRequest": {
-      "type": "object",
-      "properties": {
-        "image": {
-          "type": "string",
-          "description": "Base64 representation of the image"
-        }
-      },
-      "description": "Request to the action call to upload an image.",
-      "required": [
-        "image"
-      ]
-    },
-    "UploadImageResponse": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      },
-      "description": "Response to the action call to upload an image."
-    },
     "ClaimDevicesRequest": {
       "type": "object",
       "properties": {
@@ -3289,6 +3273,29 @@
         }
       },
       "description": "Azure Sphere Image metadata."
+    },
+    "UploadImageRequest": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "Base64 representation of the image"
+        }
+      },
+      "description": "Request to the action call to upload an image.",
+      "required": [
+        "image"
+      ]
+    },
+    "UploadImageResponse": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "Response to the action call to upload an image."
     },
     "Image": {
       "type": "object",
