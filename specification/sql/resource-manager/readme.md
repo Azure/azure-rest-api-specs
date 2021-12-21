@@ -60,6 +60,7 @@ input-file:
   - Microsoft.Sql/preview/2021-11-01-preview/ElasticPoolOperations.json
   - Microsoft.Sql/preview/2021-11-01-preview/ElasticPools.json
   - Microsoft.Sql/preview/2021-11-01-preview/EncryptionProtectors.json
+  - Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
   - Microsoft.Sql/preview/2021-11-01-preview/FailoverGroups.json
   - Microsoft.Sql/preview/2021-11-01-preview/FirewallRules.json
   - Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
@@ -181,7 +182,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ElasticPoolOperations.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/EncryptionProtectors.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/EndpointCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/InstanceFailoverGroups.json
