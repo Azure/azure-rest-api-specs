@@ -15,13 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/calling/callConnections/{callConnectionId}/audioRoutingGroups/{audioRoutingGroupId}": {
+    "/calling/callConnections/{callConnectionId}/audioGroups/{audioGroupId}": {
       "get": {
         "tags": [
-          "AudioRoutingGroup"
+          "AudioGroup"
         ],
-        "summary": "Get audio routing groups from a call.",
-        "operationId": "CallConnections_GetAudioRoutingGroups",
+        "summary": "Get audio groups from a call.",
+        "operationId": "CallConnections_GetAudioGroups",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -31,9 +31,9 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingGroupId",
+            "name": "audioGroupId",
             "in": "path",
-            "description": "The audio routing group id.",
+            "description": "The audio group id.",
             "required": true,
             "type": "string"
           },
@@ -43,9 +43,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the get audio routing group response.",
+            "description": "Returns the get audio group response.",
             "schema": {
-              "$ref": "#/definitions/AudioRoutingGroupResult"
+              "$ref": "#/definitions/AudioGroupResult"
             }
           },
           "400": {
@@ -65,17 +65,17 @@
           }
         },
         "x-ms-examples": {
-          "Get audio routing groups from a call.": {
-            "$ref": "./examples/CallConnections_GetAudioRoutingGroups.json"
+          "Get audio groups from a call.": {
+            "$ref": "./examples/CallConnections_GetAudioGroups.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "AudioRoutingGroup"
+          "AudioGroup"
         ],
-        "summary": "Delete audio routing group from a call.",
-        "operationId": "CallConnections_DeleteAudioRoutingGroup",
+        "summary": "Delete audio group from a call.",
+        "operationId": "CallConnections_DeleteAudioGroup",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -85,9 +85,9 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingGroupId",
+            "name": "audioGroupId",
             "in": "path",
-            "description": "The audio routing group id.",
+            "description": "The audio group id.",
             "required": true,
             "type": "string"
           },
@@ -97,7 +97,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the delete audio routing group response."
+            "description": "Returns the delete audio group response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -116,17 +116,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete audio routing group from a call.": {
-            "$ref": "./examples/CallConnections_DeleteAudioRoutingGroup.json"
+          "Delete audio group from a call.": {
+            "$ref": "./examples/CallConnections_DeleteAudioGroup.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "AudioRoutingGroup"
+          "AudioGroup"
         ],
-        "summary": "Update audio routing group.",
-        "operationId": "CallConnections_UpdateAudioRoutingGroup",
+        "summary": "Update audio group.",
+        "operationId": "CallConnections_UpdateAudioGroup",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -136,19 +136,19 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingGroupId",
+            "name": "audioGroupId",
             "in": "path",
-            "description": "The audio routing group id.",
+            "description": "The audio group id.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "updateAudioRoutingGroupRequest",
+            "name": "updateAudioGroupRequest",
             "in": "body",
-            "description": "The update audio routing group request.",
+            "description": "The update audio group request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAudioRoutingGroupRequest"
+              "$ref": "#/definitions/UpdateAudioGroupRequest"
             }
           },
           {
@@ -157,7 +157,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the update audio routing group response."
+            "description": "Returns the update audio group response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -176,8 +176,8 @@
           }
         },
         "x-ms-examples": {
-          "Update audio routing group.": {
-            "$ref": "./examples/CallConnections_UpdateAudioRoutingGroup.json"
+          "Update audio group.": {
+            "$ref": "./examples/CallConnections_UpdateAudioGroup.json"
           }
         }
       }
@@ -643,13 +643,13 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/:createAudioRoutingGroup": {
+    "/calling/callConnections/{callConnectionId}/:createAudioGroup": {
       "post": {
         "tags": [
           "CallConnection"
         ],
-        "summary": "Create audio routing group in a call.",
-        "operationId": "CallConnections_CreateAudioRoutingGroup",
+        "summary": "Create audio group in a call.",
+        "operationId": "CallConnections_CreateAudioGroup",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -659,12 +659,12 @@
             "type": "string"
           },
           {
-            "name": "audioRoutingGroupRequest",
+            "name": "audioGroupRequest",
             "in": "body",
-            "description": "The audio routing group request.",
+            "description": "The audio group request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AudioRoutingGroupRequest"
+              "$ref": "#/definitions/AudioGroupRequest"
             }
           },
           {
@@ -673,9 +673,9 @@
         ],
         "responses": {
           "201": {
-            "description": "Returns the create audio routing group response.",
+            "description": "Returns the create audio group response.",
             "schema": {
-              "$ref": "#/definitions/CreateAudioRoutingGroupResult"
+              "$ref": "#/definitions/CreateAudioGroupResult"
             }
           },
           "400": {
@@ -695,8 +695,8 @@
           }
         },
         "x-ms-examples": {
-          "Create audio routing group in a call.": {
-            "$ref": "./examples/CallConnections_CreateAudioRoutingGroup.json"
+          "Create audio group in a call.": {
+            "$ref": "./examples/CallConnections_CreateAudioGroup.json"
           }
         }
       }
@@ -2122,15 +2122,15 @@
         "modelAsString": true
       }
     },
-    "AudioRoutingGroupResult": {
-      "description": "The audio routing group result.",
+    "AudioGroupResult": {
+      "description": "The audio group result.",
       "type": "object",
       "properties": {
         "audioRoutingMode": {
           "$ref": "#/definitions/AudioRoutingMode"
         },
         "targets": {
-          "description": "The target identities that would be receivers in the audio routing group.",
+          "description": "The target identities that would be receivers in the audio group.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifier"
@@ -2153,15 +2153,15 @@
     "MicrosoftTeamsUserIdentifier": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
-    "UpdateAudioRoutingGroupRequest": {
-      "description": "The update audio routing group request.",
+    "UpdateAudioGroupRequest": {
+      "description": "The update audio group request.",
       "required": [
         "targets"
       ],
       "type": "object",
       "properties": {
         "targets": {
-          "description": "The target identities that would be receivers in the audio routing group.",
+          "description": "The target identities that would be receivers in the audio group.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifier"
@@ -2252,6 +2252,7 @@
     "CallConnectionState": {
       "description": "The state of the call connection.",
       "enum": [
+        "unknown",
         "connecting",
         "connected",
         "transferring",
@@ -2505,8 +2506,8 @@
         }
       }
     },
-    "AudioRoutingGroupRequest": {
-      "description": "The audio routing group request.",
+    "AudioGroupRequest": {
+      "description": "The audio group request.",
       "required": [
         "audioRoutingMode",
         "targets"
@@ -2517,7 +2518,7 @@
           "$ref": "#/definitions/AudioRoutingMode"
         },
         "targets": {
-          "description": "The target identities that would be receivers in the audio routing group.",
+          "description": "The target identities that would be receivers in the audio group.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifier"
@@ -2525,12 +2526,12 @@
         }
       }
     },
-    "CreateAudioRoutingGroupResult": {
-      "description": "The response payload of the create audio routing group operation.",
+    "CreateAudioGroupResult": {
+      "description": "The response payload of the create audio group operation.",
       "type": "object",
       "properties": {
-        "audioRoutingGroupId": {
-          "description": "The audio routing group id.",
+        "audioGroupId": {
+          "description": "The audio group id.",
           "type": "string"
         }
       }
@@ -3225,12 +3226,20 @@
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
         "operationContext": {
           "description": "The operation context.",
           "type": "string"
         },
         "status": {
           "$ref": "#/definitions/CallingOperationStatus"
+        },
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The server call locator."
         }
       }
     },
@@ -3241,6 +3250,10 @@
         "callConnectionId": {
           "description": "The call connection id.",
           "type": "string"
+        },
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The server call locator."
         },
         "participants": {
           "description": "The list of participants.",
@@ -3262,12 +3275,20 @@
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
         "operationContext": {
           "description": "The operation context.",
           "type": "string"
         },
         "status": {
           "$ref": "#/definitions/CallingOperationStatus"
+        },
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The server call locator."
         }
       }
     },
@@ -3285,6 +3306,10 @@
         "callConnectionId": {
           "description": "The call connection id.",
           "type": "string"
+        },
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The server call locator."
         }
       }
     },
@@ -3344,12 +3369,20 @@
           "$ref": "#/definitions/CallingOperationResultDetails",
           "description": "The result details."
         },
+        "operationId": {
+          "description": "The operation id.",
+          "type": "string"
+        },
         "operationContext": {
           "description": "The operation context.",
           "type": "string"
         },
         "status": {
           "$ref": "#/definitions/CallingOperationStatus"
+        },
+        "callLocator": {
+          "$ref": "#/definitions/CallLocator",
+          "description": "The server call locator."
         }
       }
     },
