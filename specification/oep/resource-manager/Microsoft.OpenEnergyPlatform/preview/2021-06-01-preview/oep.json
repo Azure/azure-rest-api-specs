@@ -250,7 +250,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/OepPatchResource"
+              "$ref": "#/definitions/EnergyResourceUpdate"
             }
           }
         ],
@@ -368,7 +368,7 @@
         }
       }
     },
-    "OepProperties": {
+    "EnergyServiceProperties": {
       "type": "object",
       "properties": {
         "dnsName": {
@@ -417,7 +417,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OepProperties"
+          "$ref": "#/definitions/EnergyServiceProperties"
         },
         "tags": {
           "description": "Resource tags.",
@@ -432,7 +432,7 @@
         }
       }
     },
-    "TrackedResourceUpdate": {
+    "EnergyResourceUpdate": {
       "description": "The resource model definition used for updating a tracked ARM resource.",
       "type": "object",
       "properties": {
@@ -444,15 +444,6 @@
           }
         }
       }
-    },
-    "OepPatchResource": {
-      "type": "object",
-      "description": "OepResource patch properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
     }
   },
   "securityDefinitions": {
