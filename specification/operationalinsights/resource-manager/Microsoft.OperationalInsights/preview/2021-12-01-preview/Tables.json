@@ -438,6 +438,67 @@
             ]
           }
         },
+        "tableType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Table's creator.",
+          "enum": [
+            "Microsoft",
+            "CustomLog",
+            "RestoredLogs",
+            "SearchResults"
+          ],
+          "x-ms-enum": {
+            "name": "TableTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Microsoft",
+                "description": "Adi - please provide description."
+              },
+              {
+                "value": "CustomLog",
+                "description": "Adi - please provide description."
+              },
+              {
+                "value": "RestoredLogs",
+                "description": "Adi - please provide description."
+              },
+              {
+                "value": "SearchResults",
+                "description": "Adi - please provide description."
+              }
+            ]
+          }
+        },
+        "tableSubType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Evgeny - please provide description.",
+          "enum": [
+            "Any",
+            "Classic",
+            "DataCollectionRuleBased"
+          ],
+          "x-ms-enum": {
+            "name": "TableTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Any",
+                "description": "Evgeny - please provide description."
+              },
+              {
+                "value": "Classic",
+                "description": "Evgeny - please provide description."
+              },
+              {
+                "value": "DataCollectionRuleBased",
+                "description": "Evgeny - please provide description."
+              }
+            ]
+          }
+        },
         "solutions": {
           "readOnly": true,
           "type": "array",
@@ -445,9 +506,86 @@
             "type": "string"
           },
           "description": "List of solutions the table is affiliated with"
+        },
+        "searchResults": {
+          "readOnly": true,
+          "$ref": "#/definitions/SearchResults",
+          "description": "Adi - please provide description."
+        },
+        "restoredLogs": {
+          "readOnly": true,
+          "$ref": "#/definitions/RestoredLogs",
+          "description": "Adi - please provide description."
         }
       },
       "description": "Table's schema."
+    },
+    "SearchResults": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Adi - please provide description."
+        },
+        "description": {
+          "type": "string",
+          "description": "Adi - please provide description."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Adi - please provide description"
+        },
+        "startSearchTime": {
+          "type": "string",
+          "description": "Adi - please provide description"
+        },
+        "endSearchTime": {
+          "type": "string",
+          "description": "Adi - please provide description"
+        },
+        "sourceTable": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Adi - please provide description"
+        }
+      },
+      "description": "Adi - please provide description."
+    },
+    "RestoredLogs": {
+      "type": "object",
+      "properties": {
+        "startRestoreTime": {
+          "type": "string",
+          "description": "Adi - please provide description"
+        },
+        "endRestoreTime": {
+          "type": "string",
+          "description": "Adi - please provide description"
+        },
+        "sourceTable": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Adi - please provide description"
+        }
+      },
+      "description": "Adi - please provide description."
+    },
+    "ResultStatistics": {
+      "type": "object",
+      "properties": {
+        "progress": {
+          "readOnly": true,
+          "type": "number",
+          "multipleOf": 0.01,
+          "description": "Adi - please provide description"
+        },
+        "ingestedRecords": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Adi - please provide description"
+        }
+      },
+      "description": "Adi - please provide description."
     },
     "TableProperties": {
       "type": "object",
@@ -455,23 +593,70 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "minimum": 7,
+          "minimum": 4,
           "maximum": 730,
-          "description": "The data table data retention in days, between 7 and 730. Setting this property to null will default to the workspace retention."
+          "description": "The data table data retention in days, between 4 and 730. Setting this property to null will default to the workspace retention."
         },
-        "isTroubleshootingAllowed": {
+        "totalRetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 4,
+          "maximum": 25555,
+          "description": "Adi - please provide description"
+        },
+        "archiveRetentionInDays": {
           "readOnly": true,
-          "type": "boolean",
-          "description": "Specifies if IsTroubleshootingEnabled property can be set for this table."
+          "type": "integer",
+          "description": "Adi - please provide description"
         },
-        "isTroubleshootEnabled": {
-          "type": "boolean",
-          "description": "Enable or disable the Troubleshooting Log flavour for this table."
+        "searchResults": {
+          "$ref": "#/definitions/SearchResults",
+          "description": "Adi - please provide description"
         },
-        "lastTroubleshootDate": {
+        "restoredLogs": {
+          "$ref": "#/definitions/RestoredLogs",
+          "description": "Adi - please provide description"
+        },
+        "resultStatistics": {
+          "$ref": "#/definitions/ResultStatistics",
+          "description": "Adi - please provide description"
+        },
+        "plan": {
+          "type": "string",
+          "description": "Adi - please provide description.",
+          "enum": [
+            "Basic",
+            "Analytics"
+          ],
+          "x-ms-enum": {
+            "name": "TablePlanEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Basic",
+                "description": "Adi - please provide description."
+              },
+              {
+                "value": "Analytics",
+                "description": "Adi - please provide description."
+              }
+            ]
+          }
+        },
+        "lastPlanModifiedDate": {
           "readOnly": true,
           "type": "string",
-          "description": "Last time when the Troubleshooting Log plan was enabled for this table."
+          "description": "Adi - please provide description."
+        },
+        "createDate": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Adi - please provide description."
+        },
+        "createdBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Adi - please provide description."
         },
         "schema": {
           "$ref": "#/definitions/Schema",
@@ -492,6 +677,10 @@
               {
                 "value": "Updating",
                 "description": "Table schema is still being built and updated, table is currently locked for any changes till the procedure is done."
+              },
+              {
+                "value": "InProgress",
+                "description": "Adi - please provide description."
               },
               {
                 "value": "Succeeded",

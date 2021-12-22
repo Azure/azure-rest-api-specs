@@ -15,7 +15,8 @@
             }
           ]
         },
-        "retentionInDays": 45
+        "retentionInDays": 45,
+        "totalRetentionInDays": 70
       }
     }
   },
@@ -25,6 +26,8 @@
         "properties": {
           "schema": {
             "name": "AzureNetworkFlow",
+            "tableSubType": "DataCollectionRuleBased",
+            "tableType": "Microsoft",
             "columns": [
               {
                 "isHidden": false,
@@ -130,8 +133,10 @@
             ]
           },
           "provisioningState": "Succeeded",
-          "retentionInDays": 30,
-          "isTroubleshootingAllowed": false
+          "retentionInDays": 45,
+          "totalRetentionInDays": 70,
+          "archiveRetentionInDays": 25,
+          "plan": "Analytics"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/AzureNetworkFlow",
         "name": "AzureNetworkFlow"
