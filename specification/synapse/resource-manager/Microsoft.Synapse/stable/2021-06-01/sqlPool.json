@@ -5384,15 +5384,14 @@
           "description": "The storage account type used to store backups for this sql pool.",
           "enum": [
             "GRS",
-            "LRS",
-            "ZRS"
+            "LRS"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "StorageAccountType",
             "modelAsString": true
           },
-          "default": "LRS"
+          "default": "GRS"
         },
         "sourceDatabaseDeletionDate": {
           "type": "string",
@@ -6116,7 +6115,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "default": [""]
         },
         "storageAccountSubscriptionId": {
           "format": "uuid",
