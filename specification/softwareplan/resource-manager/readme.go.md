@@ -9,6 +9,8 @@ go:
   namespace: softwareplan
 ```
 
+The softwareplan has been retired and will not be supported by track2 go SDK.
+
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
