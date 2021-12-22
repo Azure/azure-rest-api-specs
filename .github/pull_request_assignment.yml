@@ -54,10 +54,22 @@
       - "specification/network/**"
     reviewers:
       - lirenhe
+      - raych1
 
 
 - rule:
-    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
+    paths: "specification/common-types/**"
+    reviewers:
+      - raych1
+      - akning-ms
+      - leni-msft
+      - ruowan
+      - jianyexi
+      - zhenglaizhang
+      
+      
+- rule:
+    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate|servicelinker)/**"
     reviewers:
       - raych1
       
@@ -84,7 +96,6 @@
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
-      - yungezz
 
 - rule:
     paths:
@@ -106,12 +117,6 @@
 
 - rule:
     paths:
-      - "specification/monitor/**"
-    reviewers:
-      - weidongxu-microsoft
-
-- rule:
-    paths:
       - "specification/storage/**"
     reviewers:
       - jianyexi
@@ -130,22 +135,10 @@
 
 - rule:
     paths:
-      - "specification/@(containerservice|containerinstance)/**"
-    reviewers:
-      - PhoenixHe-msft
-
-- rule:
-    paths:
       - "specification/mixedreality/**"
       - "specification/hdinsight/**"
     reviewers:
       - leni-msft
-
-- rule:
-    paths:
-      - "specification/portal/**"
-    reviewers:
-      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -155,22 +148,18 @@
       
 - rule:
     paths:
-      - "specification/testbase/**"
-    reviewers:
-      - PhoenixHe-msft
-      
-- rule:
-    paths:
-      - "specification/servicelinker/**"
-    reviewers:
-      - raych1
-      
-- rule:
-    paths:
       - "specification/keyvault/**"
     reviewers:
       - zhenglaizhang
 
+- rule:
+    paths:
+      - "specification/videoanalyzer/resource-manager/**"
+      - "specification/cognitiveservices/resource-manager/**"
+      - "specification/dataprotection/**"
+    reviewers:
+      - xiaoxuqi-ms
+      
 - rule:
     paths:
       - "documentation/**"
@@ -188,7 +177,6 @@
       - ".azure-pipelines-preproduction/**"	
     reviewers:
       - akning-ms
-      - PhoenixHe-msft
       - raych1
       - zhenglaizhang
 
@@ -197,7 +185,6 @@
     paths:
       - "**"
     reviewers:
-      - PhoenixHe-msft
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
@@ -210,3 +197,5 @@
       - chunyu3
       - changlong-liu
       - msyyc
+      - qiaozha
+      - weidong

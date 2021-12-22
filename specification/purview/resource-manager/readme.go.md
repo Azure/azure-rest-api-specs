@@ -2,22 +2,19 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: purview
   clear-output-folder: true
 ```
-## Suppression
 
-``` yaml
-directive:
-  - suppress: R3018  # EnumInsteadOfBoolean
-    where:
-      - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
-      - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
-    reason:
-      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/purview/armpurview
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
 
 ### Go multi-api

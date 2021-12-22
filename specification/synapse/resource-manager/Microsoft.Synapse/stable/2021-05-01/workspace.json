@@ -1014,15 +1014,47 @@
           "description": "The type of managed identity for the workspace",
           "enum": [
             "None",
-            "SystemAssigned"
+            "SystemAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "description": "The user assigned managed identities.",
+          "$ref": "#/definitions/UserAssignedManagedIdentities"
         }
       }
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The User Assigned Managed Identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "UserAssignedManagedIdentity": {
+      "description": "User Assigned Managed Identity",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The client ID.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The principal ID.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "type": "object"
     },
     "VirtualNetworkProfile": {
       "description": "Virtual Network Profile",

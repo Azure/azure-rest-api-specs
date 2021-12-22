@@ -38,6 +38,15 @@ input-file:
   - Microsoft.RedHatOpenShift/stable/2020-04-30/redhatopenshift.json
 ```
 
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Microsoft.RedHatOpenShift/preview/2021-09-01-preview/redhatopenshift.json
+```
+
 ---
 
 # Code Generation
@@ -54,6 +63,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-redhatopenshift
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-resource-manager-schemas
 ```
 
@@ -64,6 +74,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-
-

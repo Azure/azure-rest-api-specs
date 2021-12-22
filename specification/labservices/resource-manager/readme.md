@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for LabServices.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for LabServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,53 @@ To build the SDK for LabServices, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the LabServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-preview-2021-11
 ```
 
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.LabServices/preview/2021-11-15-preview/Images.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/LabPlans.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/LabServices.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Labs.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/OperationResults.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Schedules.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Users.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/VirtualMachines.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Usages.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Skus.json
+```
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-10'
+input-file:
+  - Microsoft.LabServices/preview/2021-10-01-preview/LabServices.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/OperationResults.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/LabPlans.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Images.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Labs.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Users.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/VirtualMachines.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Schedules.json
+```
 
 ### Tag: package-2018-10
 
@@ -40,8 +73,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -54,6 +87,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -61,7 +95,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_labservices']
   - repo: azure-resource-manager-schemas
 ```
-
 
 ## C#
 
@@ -118,9 +151,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
-

@@ -31,6 +31,13 @@ openapi-type: arm
 tag: package-2020-01-01
 ```
 
+``` yaml $(package-flexibleservers)
+tag: package-flexibleserver-2021-05-01
+```
+
+``` yaml $(package-singleservers)
+tag: package-2020-01-01
+```
 
 ### Tag: package-2017-12-01-preview
 
@@ -132,6 +139,15 @@ input-file:
 - Microsoft.DBforMySQL/preview/2021-05-01-preview/mysql.json
 ```
 
+### Tag: package-flexibleserver-2021-05-01
+
+These settings apply only when `--tag=package-flexibleserver-2021-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-05-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2021-05-01/mysql.json
+```
+
 ## Suppression
 ``` yaml
 directive:
@@ -157,6 +173,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

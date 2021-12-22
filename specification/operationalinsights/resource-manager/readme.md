@@ -34,7 +34,7 @@ title: LogAnalyticsManagementClient
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2020-10
+tag: package-2021-06
 ```
 
 
@@ -225,6 +225,7 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2021-06-01/Tables.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Workspaces.json
 ```
@@ -241,6 +242,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

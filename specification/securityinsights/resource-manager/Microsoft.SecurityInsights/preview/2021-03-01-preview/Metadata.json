@@ -66,16 +66,16 @@
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ODataFilter"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataFilter"
           },
           {
-            "$ref": "#/parameters/ODataOrderBy"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "#/parameters/ODataTop"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataTop"
           },
           {
-            "$ref": "#/parameters/ODataSkip"
+            "$ref": "../../../common/1.0/types.json#/parameters/ODataSkip"
           }
         ],
         "responses": {
@@ -591,6 +591,58 @@
         }
       }
     },
+    "metadataCategories": {
+      "type": "object",
+      "description": "ies for the solution content item",
+      "properties": {
+        "domains": {
+          "description": "domain for the solution content item",
+          "type": "array",
+          "example": [
+            "str1",
+            "str2",
+            "str3"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "verticals": {
+          "description": "Industry verticals for the solution content item",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "str1",
+            "str2",
+            "str3"
+          ]
+        }
+      }
+    },
+    "metadataProviders": {
+      "description": "Providers for the solution content item",
+      "type": "array",
+      "example": [
+        "str1",
+        "str2",
+        "str3"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "firstPublishDate": {
+      "description": "first publish date of solution content item",
+      "type": "string",
+      "format": "date"
+    },
+    "lastPublishDate": {
+      "description": "last publish date of solution content item",
+      "type": "string",
+      "format": "date"
+    },
     "metadataProperties": {
       "description": "Metadata property bag.",
       "required": [
@@ -630,6 +682,22 @@
         "dependencies": {
           "$ref": "#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
+        },
+        "providers": {
+          "$ref": "#/definitions/metadataProviders",
+          "description": "Providers for the solution content item"
+        },
+        "firstPublishDate": {
+          "$ref": "#/definitions/firstPublishDate",
+          "description": "first publish date solution content item"
+        },
+        "lastPublishDate": {
+          "$ref": "#/definitions/lastPublishDate",
+          "description": "last publish date for the solution content item"
         }
       }
     },
@@ -668,6 +736,22 @@
         "dependencies": {
           "$ref": "#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
+        },
+        "providers": {
+          "$ref": "#/definitions/metadataProviders",
+          "description": "Providers for the solution content item"
+        },
+        "firstPublishDate": {
+          "$ref": "#/definitions/firstPublishDate",
+          "description": "first publish date solution content item"
+        },
+        "lastPublishDate": {
+          "$ref": "#/definitions/lastPublishDate",
+          "description": "last publish date for the solution content item"
         }
       }
     }
@@ -736,40 +820,6 @@
       "name": "operationalInsightsResourceProvider",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataFilter": {
-      "description": "Filters the results, based on a Boolean condition. Optional.",
-      "in": "query",
-      "name": "$filter",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataOrderBy": {
-      "description": "Sorts the results. Optional.",
-      "in": "query",
-      "name": "$orderby",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataSkip": {
-      "description": "Used to skip n elements in the OData query (offset). Returns a nextLink to the next page of results if there are any left.",
-      "in": "query",
-      "name": "$skip",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataTop": {
-      "description": "Returns only the first n results. Optional.",
-      "in": "query",
-      "name": "$top",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   }

@@ -26,18 +26,27 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-preview-2021-09
 ```
 
 
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.Maintenance/preview/2021-09-01-preview/Maintenance.json
+```
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
   - Microsoft.Maintenance/stable/2021-05-01/Maintenance.json
 ```
+
 ### Tag: package-preview-2021-04
 
 These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
@@ -88,6 +97,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
 ```
@@ -118,5 +128,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
