@@ -3,21 +3,19 @@
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2021-11-15-preview",
     "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
-    "audioRoutingGroupRequest": {
-      "audioRoutingMode": "oneToOne",
-      "targets": [
-        {
-          "communicationUser": {
-            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_182e2695-7034-4bad-b9e0-742bee482c33"
-          }
-        }
-      ]
-    }
+    "audioGroupId": "oneToOne"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "audioRoutingGroupId": "0fe55977-6022-4de3-ac5f-07a3d455119e"
+        "audioRoutingMode": "oneToOne",
+        "targets": [
+          {
+            "communicationUser": {
+              "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_182e2695-7034-4bad-b9e0-742bee482c33"
+            }
+          }
+        ]
       }
     },
     "400": {
