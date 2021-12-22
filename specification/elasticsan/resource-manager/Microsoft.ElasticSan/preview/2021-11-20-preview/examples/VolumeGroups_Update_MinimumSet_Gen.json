@@ -3,8 +3,9 @@
     "subscriptionId": "aaaaaaaaaaaaaaaaaaaaa",
     "resourceGroupName": "rgelasticsan",
     "elasticSanName": "aaaa",
-    "volumeGroupName": "aaaaaaaaaaaaaaaaa",
-    "snapshotName": "aaaaaaaaaaaaa",
+    "VolumeGroupUpdatePayload": {
+      "properties": {}
+    },
     "api-version": "2021-11-20-preview"
   },
   "responses": {
@@ -12,7 +13,8 @@
       "body": {
         "properties": {
           "provisioningState": "Invalid",
-          "name": "aaaaaaaaaaaaaaaa",
+          "volumeGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sizeInGB": 29,
           "volumes": [
             {
               "properties": {
@@ -22,27 +24,12 @@
             }
           ]
         },
-        "location": "aaaaaaaaaaaaaaaaaaaa"
+        "location": "aaaaaaaaaaaaaaaaaa"
       }
     },
-    "201": {
+    "202": {
       "headers": {
         "Azure-AsyncOperation": "https://foo.com/operationstatus"
-      },
-      "body": {
-        "properties": {
-          "provisioningState": "Invalid",
-          "name": "aaaaaaaaaaaaaaaa",
-          "volumes": [
-            {
-              "properties": {
-                "sizeInGB": 14
-              },
-              "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            }
-          ]
-        },
-        "location": "aaaaaaaaaaaaaaaaaaaa"
       }
     }
   }

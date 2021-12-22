@@ -423,6 +423,9 @@
         "x-ms-examples": {
           "VolumeGroups_ListByElasticSan_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_ListByElasticSan_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_ListByElasticSan_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_ListByElasticSan_MinimumSet_Gen.json"
           }
         }
       }
@@ -443,9 +446,6 @@
           },
           {
             "$ref": "#/parameters/ElasticSanName"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupName"
           },
           {
             "$ref": "#/parameters/VolumeGroupCreate"
@@ -481,6 +481,9 @@
         "x-ms-examples": {
           "VolumeGroups_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
       },
@@ -499,9 +502,6 @@
           },
           {
             "$ref": "#/parameters/ElasticSanName"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupName"
           },
           {
             "$ref": "#/parameters/VolumeGroupUpdate"
@@ -534,6 +534,9 @@
         "x-ms-examples": {
           "VolumeGroups_Update_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_Update_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_Update_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -630,6 +633,9 @@
         "x-ms-examples": {
           "VolumeGroups_Get_MaximumSet_Gen": {
             "$ref": "./examples/VolumeGroups_Get_MaximumSet_Gen.json"
+          },
+          "VolumeGroups_Get_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1913,9 +1919,8 @@
       "type": "object",
       "description": "VolumeGroup response properties.",
       "required": [
-        "name",
+        "volumeGroupName",
         "provisioningState",
-        "storageTarget",
         "sizeInGB",
         "volumes"
       ],
@@ -2325,7 +2330,8 @@
     "StorageTargetType": {
       "type": "string",
       "enum": [
-        "Iscsi"
+        "Iscsi",
+        "None"
       ],
       "x-ms-enum": {
         "name": "StorageTargetType",
