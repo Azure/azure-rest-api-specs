@@ -2,7 +2,7 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
+```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
