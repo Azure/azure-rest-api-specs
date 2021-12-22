@@ -1460,14 +1460,14 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants:holdMeetingAudio": {
+    "/calling/callConnections/{callConnectionId}/participants:removeFromDefaultAudioGroup": {
       "post": {
         "tags": [
           "CallConnection"
         ],
-        "summary": "Hold meeting audio of a participant in the call.",
-        "description": "Hold meeting audio of a participant in the call.",
-        "operationId": "CallConnections_HoldParticipantMeetingAudio",
+        "summary": "Remove a participant from default audio group.",
+        "description": "Remove a participant from default audio group.",
+        "operationId": "CallConnections_RemoveParticipantFromDefaultAudioGroup",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -1477,12 +1477,12 @@
             "type": "string"
           },
           {
-            "name": "holdMeetingAudioRequest",
+            "name": "removeFromDefaultAudioGroupRequest",
             "in": "body",
-            "description": "The request payload for holding meeting audio for a participant.",
+            "description": "The request payload for removing a participant from default audio group.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HoldMeetingAudioRequest"
+              "$ref": "#/definitions/RemoveFromDefaultAudioGroupRequest"
             }
           },
           {
@@ -1491,7 +1491,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the hold meeting audio of participant response."
+            "description": "Returns remove participant from default audio group response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -1510,20 +1510,20 @@
           }
         },
         "x-ms-examples": {
-          "Hold meeting audio of a participant in the call.": {
-            "$ref": "./examples/CallConnections_HoldParticipantMeetingAudio.json"
+          "Remove a participant from default audio group.": {
+            "$ref": "./examples/CallConnections_RemoveParticipantFromDefaultAudioGroup.json"
           }
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants:resumeMeetingAudio": {
+    "/calling/callConnections/{callConnectionId}/participants:addToDefaultAudioGroup": {
       "post": {
         "tags": [
           "CallConnection"
         ],
-        "summary": "Resume meeting audio of a participant in the call.",
-        "description": "Resume meeting audio of a participant in the call.",
-        "operationId": "CallConnections_ResumeParticipantMeetingAudio",
+        "summary": "Add a participant to default audio group.",
+        "description": "Add a participant to default audio group.",
+        "operationId": "CallConnections_AddParticipantToDefaultAudioGroup",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -1533,12 +1533,12 @@
             "type": "string"
           },
           {
-            "name": "resumeMeetingAudioRequest",
+            "name": "addToDefaultAudioGroupRequest",
             "in": "body",
-            "description": "The request payload for resuming meeting audio for a participant.",
+            "description": "The request payload for adding a participant to default audio group.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResumeMeetingAudioRequest"
+              "$ref": "#/definitions/AddToDefaultAudioGroupRequest"
             }
           },
           {
@@ -1547,7 +1547,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the resume meeting audio of participant response."
+            "description": "Returns add participant to default audio group response."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -1566,8 +1566,8 @@
           }
         },
         "x-ms-examples": {
-          "Resume meeting audio of a participant in the call.": {
-            "$ref": "./examples/CallConnections_ResumeParticipantMeetingAudio.json"
+          "Add a participant to default audio group.": {
+            "$ref": "./examples/CallConnections_AddParticipantToDefaultAudioGroup.json"
           }
         }
       }
@@ -2854,8 +2854,8 @@
         }
       }
     },
-    "HoldMeetingAudioRequest": {
-      "description": "The request payload for holding meeting audio for a participant.",
+    "RemoveFromDefaultAudioGroupRequest": {
+      "description": "The request payload for removing a participant from default audio group.",
       "required": [
         "identifier"
       ],
@@ -2867,8 +2867,8 @@
         }
       }
     },
-    "ResumeMeetingAudioRequest": {
-      "description": "The request payload for resuming meeting audio for a participant.",
+    "AddToDefaultAudioGroupRequest": {
+      "description": "The request payload for adding a participant to default audio group.",
       "required": [
         "identifier"
       ],
