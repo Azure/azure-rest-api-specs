@@ -105,6 +105,9 @@
           },
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          },
+          "Get a IoT data connector": {
+            "$ref": "./examples/dataConnectors/GetIoTById.json"
           }
         },
         "tags": [
@@ -396,6 +399,38 @@
       },
       "type": "object"
     },
+    "IoTDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents IoT data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTDataConnectorProperties",
+          "description": "IoT data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IOT"
+    },
+    "IoTDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ],
+      "description": "IoT data connector properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "DataConnector": {
       "allOf": [
         {
@@ -425,7 +460,8 @@
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
-        "MicrosoftDefenderAdvancedThreatProtection"
+        "MicrosoftDefenderAdvancedThreatProtection",
+        "IOT"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -455,6 +491,9 @@
           },
           {
             "value": "MicrosoftDefenderAdvancedThreatProtection"
+          },
+          {
+            "value": "IOT"
           }
         ]
       }
