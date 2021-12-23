@@ -451,6 +451,9 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/VolumeGroupCreate"
           },
           {
@@ -507,6 +510,9 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/VolumeGroupUpdate"
           },
           {
@@ -560,7 +566,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -613,7 +619,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -661,10 +667,10 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeName"
+            "$ref": "#/parameters/VolumeNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeCreate"
@@ -723,10 +729,10 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeName"
+            "$ref": "#/parameters/VolumeNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeUpdate"
@@ -782,10 +788,10 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeName"
+            "$ref": "#/parameters/VolumeNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -838,10 +844,10 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeName"
+            "$ref": "#/parameters/VolumeNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -889,7 +895,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -940,7 +946,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotName"
@@ -1002,7 +1008,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotName"
@@ -1064,7 +1070,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotName"
@@ -1120,7 +1126,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotName"
@@ -1171,7 +1177,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           }
         ],
         "responses": {
@@ -1219,7 +1225,7 @@
             "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
-            "$ref": "#/parameters/VolumeGroupName"
+            "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotName"
@@ -1299,7 +1305,7 @@
       "description": "The name of the ElasticSan.",
       "x-ms-parameter-location": "method"
     },
-    "VolumeGroupName": {
+    "VolumeGroupNameParameter": {
       "name": "volumeGroupName",
       "type": "string",
       "required": true,
@@ -1307,7 +1313,7 @@
       "description": "The name of the VolumeGroup.",
       "x-ms-parameter-location": "method"
     },
-    "VolumeName": {
+    "VolumeNameParameter": {
       "name": "volumeName",
       "type": "string",
       "required": true,
@@ -1942,14 +1948,9 @@
       "type": "object",
       "description": "Properties for VolumeGroup create or update request.",
       "required": [
-        "volumeGroupName",
         "subnet"
       ],
       "properties": {
-        "volumeGroupName": {
-          "type": "string",
-          "description": "Name of the Volume Group"
-        },
         "subnet": {
           "description": "Volume Group subnet id.",
           "type": "string"
@@ -1969,10 +1970,6 @@
       "type": "object",
       "description": "Properties for VolumeGroup update request.",
       "properties": {
-        "name": {
-          "description": "Volume Group name.",
-          "type": "string"
-        },
         "subnet": {
           "description": "Volume Group subnet id.",
           "type": "string"
@@ -2119,10 +2116,6 @@
       "type": "object",
       "description": "Properties for Volume update request.",
       "properties": {
-        "volumeName": {
-          "description": "Volume name.",
-          "type": "string"
-        },
         "sizeInGB": {
           "description": "Volume size in GB.",
           "type": "integer",
