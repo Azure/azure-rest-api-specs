@@ -1,0 +1,46 @@
+Deleting a main account with subaccount.  
+Can not delete resource before nested resources are deleted. (tested)
+
+When creating a resourece(main or sub account), resource name length >32.
+from backend we can create with >32 (tested)
+
+Can create main account with billing term Annually from backend. In frontend only monthly is shown.
+(tested)
+
+Create main account with non default user details from api??
+
+Creating sub account with non-default user.
+from backend we can create sub account.(tested)
+
+delete sub account from non-default
+from backend we can delete sub account.(tested)
+
+delete a main account from non default
+from backend we can delete main account.(tested)
+
+No operation work like add subaccount or update logz tag rules when resource in any state other than subscribed.
+adding subaccount wokring currently (tested)
+deleting subaccount working currently (tested)
+For vms, sso and logz metrics, monitored resources we need to check account status??
+
+
+validations: ko.observableArray([
+                new MsPortalFx.ViewModels.RequiredValidation(ClientResources.selectResourceGroup),
+            ]),
+
+
+
+
+
+Are we in scope of data plane PLR?
+Do we need to move swagger to stable folder before CLI survey?
+Do we need to do PS, CLI, terraform individualy?
+
+
+Cant see swagger in validation?
+Swagger PR?
+SDK generation?
+How much time to generate them?
+After generating if any testing is needed?
+Some features which are missing in banckend APIs?
+Any other thing need to be completed before SDK by us?
