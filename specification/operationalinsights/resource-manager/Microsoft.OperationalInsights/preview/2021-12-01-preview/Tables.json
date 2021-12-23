@@ -481,7 +481,7 @@
             "DataCollectionRuleBased"
           ],
           "x-ms-enum": {
-            "name": "TableTypeEnum",
+            "name": "TableSubTypeEnum",
             "modelAsString": true,
             "values": [
               {
@@ -529,10 +529,11 @@
         },
         "description": {
           "type": "string",
-          "description": "Description."
+          "description": "Search results table's Description."
         },
         "limit": {
           "type": "integer",
+          "format": "int32",
           "description": "Limit the search job to return up to specified number of rows."
         },
         "startSearchTime": {
@@ -582,6 +583,7 @@
         "ingestedRecords": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "The number of rows that were returned by the search job."
         }
       },
@@ -607,6 +609,7 @@
         "archiveRetentionInDays": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "The table data archive retention in days. Calculated as (totalRetentionInDays-retentionInDays)"
         },
         "searchResults": {
