@@ -1,20 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
     "title": "WebPubSubManagementClient",
-    "description": "REST API for Azure WebPubSub Service"
+    "description": "REST API for Azure WebPubSub Service",
+    "version": "2021-10-01"
   },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
       "get": {
@@ -23,6 +13,9 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.SignalRService provider.",
         "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -59,17 +52,20 @@
         ],
         "description": "Checks that the resource name is valid and is not already in use.",
         "operationId": "WebPubSub_CheckNameAvailability",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "location",
             "in": "path",
+            "name": "location",
             "description": "the region",
             "required": true,
             "type": "string"
           },
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "Parameters supplied to the operation.",
             "required": true,
             "schema": {
@@ -111,10 +107,13 @@
         ],
         "description": "List resource usage quotas by location.",
         "operationId": "Usages_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "location",
             "in": "path",
+            "name": "location",
             "description": "the location like \"eastus\"",
             "required": true,
             "type": "string"
@@ -157,6 +156,9 @@
         ],
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "WebPubSub_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -196,6 +198,9 @@
         ],
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "WebPubSub_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -238,6 +243,9 @@
         ],
         "description": "Get the resource and its properties.",
         "operationId": "WebPubSub_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -278,10 +286,13 @@
         ],
         "description": "Create or update a resource.",
         "operationId": "WebPubSub_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
@@ -381,10 +392,13 @@
         ],
         "description": "Operation to update an exiting resource.",
         "operationId": "WebPubSub_Update",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "Parameters for the update operation",
             "required": true,
             "schema": {
@@ -436,6 +450,9 @@
         ],
         "description": "List hub settings.",
         "operationId": "WebPubSubHubs_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -481,10 +498,13 @@
         ],
         "description": "Get a hub setting.",
         "operationId": "WebPubSubHubs_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "hubName",
             "in": "path",
+            "name": "hubName",
             "description": "The hub name.",
             "required": true,
             "type": "string"
@@ -528,17 +548,20 @@
         ],
         "description": "Create or update a hub setting.",
         "operationId": "WebPubSubHubs_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "hubName",
             "in": "path",
+            "name": "hubName",
             "description": "The hub name.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "The resource of WebPubSubHub and its properties",
             "required": true,
             "schema": {
@@ -593,8 +616,8 @@
         "operationId": "WebPubSubHubs_Delete",
         "parameters": [
           {
-            "name": "hubName",
             "in": "path",
+            "name": "hubName",
             "description": "The hub name.",
             "required": true,
             "type": "string"
@@ -644,6 +667,9 @@
         ],
         "description": "Get the access keys of the resource.",
         "operationId": "WebPubSub_ListKeys",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -686,6 +712,9 @@
         ],
         "description": "List private endpoint connections",
         "operationId": "WebPubSubPrivateEndpointConnections_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -731,10 +760,13 @@
         ],
         "description": "Get the specified private endpoint connection",
         "operationId": "WebPubSubPrivateEndpointConnections_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "privateEndpointConnectionName",
             "in": "path",
+            "name": "privateEndpointConnectionName",
             "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
@@ -778,17 +810,20 @@
         ],
         "description": "Update the state of specified private endpoint connection",
         "operationId": "WebPubSubPrivateEndpointConnections_Update",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "privateEndpointConnectionName",
             "in": "path",
+            "name": "privateEndpointConnectionName",
             "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
           },
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "The resource of private endpoint and its properties",
             "required": true,
             "schema": {
@@ -836,8 +871,8 @@
         "operationId": "WebPubSubPrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "name": "privateEndpointConnectionName",
             "in": "path",
+            "name": "privateEndpointConnectionName",
             "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
@@ -887,6 +922,9 @@
         ],
         "description": "Get the private link resources that need to be created for a resource.",
         "operationId": "WebPubSubPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -932,10 +970,13 @@
         ],
         "description": "Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "WebPubSub_RegenerateKey",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "Parameter that describes the Regenerate Key Operation.",
             "required": true,
             "schema": {
@@ -1033,6 +1074,9 @@
         ],
         "description": "List shared private link resources",
         "operationId": "WebPubSubSharedPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1078,10 +1122,13 @@
         ],
         "description": "Get the specified shared private link resource",
         "operationId": "WebPubSubSharedPrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "sharedPrivateLinkResourceName",
             "in": "path",
+            "name": "sharedPrivateLinkResourceName",
             "description": "The name of the shared private link resource",
             "required": true,
             "type": "string"
@@ -1125,17 +1172,20 @@
         ],
         "description": "Create or update a shared private link resource",
         "operationId": "WebPubSubSharedPrivateLinkResources_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "sharedPrivateLinkResourceName",
             "in": "path",
+            "name": "sharedPrivateLinkResourceName",
             "description": "The name of the shared private link resource",
             "required": true,
             "type": "string"
           },
           {
-            "name": "parameters",
             "in": "body",
+            "name": "parameters",
             "description": "The shared private link resource",
             "required": true,
             "schema": {
@@ -1190,8 +1240,8 @@
         "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "name": "sharedPrivateLinkResourceName",
             "in": "path",
+            "name": "sharedPrivateLinkResourceName",
             "description": "The name of the shared private link resource",
             "required": true,
             "type": "string"
@@ -1241,6 +1291,9 @@
         ],
         "description": "List all available skus of the resource.",
         "operationId": "WebPubSub_ListSkus",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1279,7 +1332,7 @@
   },
   "definitions": {
     "ACLAction": {
-      "description": "Default action when no other rule matches",
+      "description": "Azure Networking ACL Action.",
       "enum": [
         "Allow",
         "Deny"
@@ -1335,13 +1388,12 @@
           }
         },
         "auth": {
-          "$ref": "#/definitions/UpstreamAuthSettings",
-          "description": "Gets or sets the auth settings for an event handler. If not set, no auth is used."
+          "$ref": "#/definitions/UpstreamAuthSettings"
         }
       }
     },
     "KeyType": {
-      "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).",
+      "description": "The type of access key.",
       "enum": [
         "Primary",
         "Secondary",
@@ -1404,8 +1456,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
-          "description": "Represent the identity type: systemAssigned, userAssigned, None"
+          "$ref": "#/definitions/ManagedIdentityType"
         },
         "userAssignedIdentities": {
           "description": "Get or set the user assigned identities",
@@ -1437,7 +1488,7 @@
       }
     },
     "ManagedIdentityType": {
-      "description": "Represent the identity type: systemAssigned, userAssigned, None",
+      "description": "Represents the identity type: systemAssigned, userAssigned, None",
       "enum": [
         "None",
         "SystemAssigned",
@@ -1511,8 +1562,8 @@
     "NameAvailabilityParameters": {
       "description": "Data POST-ed to the nameAvailability action",
       "required": [
-        "type",
-        "name"
+        "name",
+        "type"
       ],
       "type": "object",
       "properties": {
@@ -1559,17 +1610,15 @@
           "type": "boolean"
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "The object that describes the operation."
+          "$ref": "#/definitions/OperationDisplay"
         },
         "origin": {
           "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Extra properties for the operation.",
-          "x-ms-client-flatten": false
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/OperationProperties"
         }
       }
     },
@@ -1617,8 +1666,7 @@
       "type": "object",
       "properties": {
         "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification",
-          "description": "The service specifications."
+          "$ref": "#/definitions/ServiceSpecification"
         }
       }
     },
@@ -1660,14 +1708,12 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Properties of the private endpoint connection",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         }
       }
     },
@@ -1693,13 +1739,11 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the private endpoint connection",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         },
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "Private endpoint associated with the private endpoint connection"
+          "$ref": "#/definitions/PrivateEndpoint"
         },
         "groupIds": {
           "description": "Group IDs",
@@ -1710,8 +1754,7 @@
           "readOnly": true
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Connection state"
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         }
       }
     },
@@ -1725,9 +1768,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of a private link resource",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
         }
       }
     },
@@ -1784,8 +1826,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus"
         },
         "description": {
           "description": "The reason for approval/rejection of the connection.",
@@ -1837,16 +1878,14 @@
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "properties": {}
+      ]
     },
     "RegenerateKeyParameters": {
       "description": "Parameters describes the request to regenerate access keys",
       "type": "object",
       "properties": {
         "keyType": {
-          "$ref": "#/definitions/KeyType",
-          "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive)."
+          "$ref": "#/definitions/KeyType"
         }
       }
     },
@@ -1911,8 +1950,7 @@
           "type": "string"
         },
         "tier": {
-          "$ref": "#/definitions/WebPubSubSkuTier",
-          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead."
+          "$ref": "#/definitions/WebPubSubSkuTier"
         },
         "size": {
           "description": "Not used. Retained for future use.",
@@ -1991,8 +2029,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
-          "description": "Describes the properties of a resource type that has been onboarded to private link service"
+          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties"
         }
       }
     },
@@ -2006,14 +2043,12 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
-          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
-          "description": "Describes the properties of a Shared Private Link Resource",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
         }
       }
     },
@@ -2051,18 +2086,16 @@
           "type": "string"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the shared private link resource",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         },
         "requestMessage": {
           "description": "The request message for requesting approval of the shared private link resource",
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
-          "description": "Status of the shared private link resource",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/SharedPrivateLinkResourceStatus"
         }
       }
     },
@@ -2100,8 +2133,7 @@
           "type": "integer"
         },
         "name": {
-          "$ref": "#/definitions/SignalRServiceUsageName",
-          "description": "Localizable String object containing the name and a localized value."
+          "$ref": "#/definitions/SignalRServiceUsageName"
         },
         "unit": {
           "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond.",
@@ -2150,14 +2182,12 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The exact set of keys that define this sku.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceSku"
         },
         "capacity": {
-          "$ref": "#/definitions/SkuCapacity",
-          "description": "Specifies the unit of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/SkuCapacity"
         }
       }
     },
@@ -2193,9 +2223,8 @@
           "readOnly": true
         },
         "scaleType": {
-          "$ref": "#/definitions/ScaleType",
-          "description": "The scale type applicable to the sku.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ScaleType"
         }
       }
     },
@@ -2245,21 +2274,19 @@
       }
     },
     "UpstreamAuthSettings": {
-      "description": "Upstream auth settings.",
+      "description": "Upstream auth settings. If not set, no auth is used for upstream messages.",
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/UpstreamAuthType",
-          "description": "Gets or sets the type of auth. None or ManagedIdentity is supported now."
+          "$ref": "#/definitions/UpstreamAuthType"
         },
         "managedIdentity": {
-          "$ref": "#/definitions/ManagedIdentitySettings",
-          "description": "Gets or sets the managed identity settings. It's required if the auth type is set to ManagedIdentity."
+          "$ref": "#/definitions/ManagedIdentitySettings"
         }
       }
     },
     "UpstreamAuthType": {
-      "description": "Gets or sets the type of auth. None or ManagedIdentity is supported now.",
+      "description": "Upstream auth type enum.",
       "enum": [
         "None",
         "ManagedIdentity"
@@ -2299,13 +2326,11 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
-          "$ref": "#/definitions/WebPubSubHubProperties",
-          "description": "Properties of the hub setting."
+          "$ref": "#/definitions/WebPubSubHubProperties"
         }
       }
     },
@@ -2392,13 +2417,10 @@
       "type": "object",
       "properties": {
         "defaultAction": {
-          "$ref": "#/definitions/ACLAction",
-          "description": "Default action when no other rule matches",
-          "default": "Deny"
+          "$ref": "#/definitions/ACLAction"
         },
         "publicNetwork": {
-          "$ref": "#/definitions/NetworkACL",
-          "description": "ACL for requests from public network"
+          "$ref": "#/definitions/NetworkACL"
         },
         "privateEndpoints": {
           "description": "ACLs for requests from private endpoints",
@@ -2414,9 +2436,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         },
         "externalIP": {
           "description": "The publicly accessible IP of the resource.",
@@ -2462,8 +2483,7 @@
           "readOnly": true
         },
         "tls": {
-          "$ref": "#/definitions/WebPubSubTlsSettings",
-          "description": "TLS settings."
+          "$ref": "#/definitions/WebPubSubTlsSettings"
         },
         "hostNamePrefix": {
           "description": "Deprecated.",
@@ -2471,16 +2491,13 @@
           "readOnly": true
         },
         "liveTraceConfiguration": {
-          "$ref": "#/definitions/LiveTraceConfiguration",
-          "description": "Live trace configuration of a Microsoft.SignalRService resource."
+          "$ref": "#/definitions/LiveTraceConfiguration"
         },
         "resourceLogConfiguration": {
-          "$ref": "#/definitions/ResourceLogConfiguration",
-          "description": "Resource log configuration of a Microsoft.SignalRService resource.\r\nIf resourceLogConfiguration isn't null or empty, it will override options \"EnableConnectivityLog\" and \"EnableMessagingLogs\" in features.\r\nOtherwise, use options \"EnableConnectivityLog\" and \"EnableMessagingLogs\" in features."
+          "$ref": "#/definitions/ResourceLogConfiguration"
         },
         "networkACLs": {
-          "$ref": "#/definitions/WebPubSubNetworkACLs",
-          "description": "Network ACLs"
+          "$ref": "#/definitions/WebPubSubNetworkACLs"
         },
         "publicNetworkAccess": {
           "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
@@ -2500,7 +2517,7 @@
       }
     },
     "WebPubSubRequestType": {
-      "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+      "description": "The incoming request type to the service",
       "enum": [
         "ClientConnection",
         "ServerConnection",
@@ -2523,22 +2540,18 @@
       ],
       "properties": {
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The billing information of the resource.(e.g. Free, Standard)"
+          "$ref": "#/definitions/ResourceSku"
         },
         "properties": {
-          "$ref": "#/definitions/WebPubSubProperties",
-          "description": "Settings used to provision or configure the resource",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebPubSubProperties"
         },
         "identity": {
-          "$ref": "#/definitions/ManagedIdentity",
-          "description": "The managed identity response"
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -2587,30 +2600,30 @@
   },
   "parameters": {
     "ApiVersionParameter": {
-      "name": "api-version",
       "in": "query",
+      "name": "api-version",
       "description": "Client Api Version.",
       "required": true,
       "type": "string"
     },
     "SubscriptionIdParameter": {
-      "name": "subscriptionId",
       "in": "path",
+      "name": "subscriptionId",
       "description": "Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
       "required": true,
       "type": "string"
     },
     "ResourceGroupParameter": {
-      "name": "resourceGroupName",
       "in": "path",
+      "name": "resourceGroupName",
       "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ResourceName": {
-      "name": "resourceName",
       "in": "path",
+      "name": "resourceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
@@ -2619,12 +2632,12 @@
   },
   "securityDefinitions": {
     "azure_auth": {
+      "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       },
-      "type": "oauth2",
       "description": "Azure Active Directory OAuth2 Flow"
     }
   },
@@ -2634,5 +2647,15 @@
         "user_impersonation"
       ]
     }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
   ]
 }

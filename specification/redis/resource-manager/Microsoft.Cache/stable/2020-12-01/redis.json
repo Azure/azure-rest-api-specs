@@ -1880,6 +1880,7 @@
         },
         "enableNonSslPort": {
           "type": "boolean",
+          "default": false,
           "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
         "replicasPerMaster": {
@@ -1923,6 +1924,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -1947,7 +1949,11 @@
         "staticIP": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
-          "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
+          "description": "Static IP address. Optionally, may be specified when deploying a Redis cache inside an existing Azure Virtual Network; auto assigned by default.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
