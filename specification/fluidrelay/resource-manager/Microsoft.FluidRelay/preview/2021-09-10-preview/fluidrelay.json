@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Fluid Relay",
-    "version": "2021-08-30-preview"
+    "version": "2021-09-10-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -119,6 +119,9 @@
         "x-ms-examples": {
           "Create a Fluid Relay server": {
             "$ref": "./examples/FluidRelayServers_CreateOrUpdate.json"
+          },
+          "Create a Fluid Relay server with AMI": {
+            "$ref": "./examples/FluidRelayServers_CreateWithAmi.json"
           }
         },
         "parameters": [
@@ -190,7 +193,7 @@
             "schema": {
               "$ref": "#/definitions/FluidRelayServerUpdate"
             },
-            "description": "The updatable details of the Fluid Relay server resource."
+            "description": "The details of the Fluid Relay server resource included in update calls."
           }
         ],
         "responses": {
@@ -634,6 +637,10 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The type of identity used for the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
         }
       },
       "description": "The updatable properties of a Fluid Relay server"
@@ -788,14 +795,36 @@
         "type": {
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
-            "modelAsString": true
+            "modelAsString": false
           },
           "type": "string",
           "description": "The identity type."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the resource."
         }
       }
     },
