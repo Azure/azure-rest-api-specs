@@ -41,7 +41,7 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-preview-2021-08
+tag: package-2021-08
 ```
 
 
@@ -53,7 +53,10 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 ```yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.AlertsManagement/stable/2021-08-08/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
 ```
+
 ### Tag: package-preview-2021-08
 
 These settings apply only when `--tag=package-preview-2021-08` is specified on the command line.
