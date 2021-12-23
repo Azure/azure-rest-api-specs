@@ -351,6 +351,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: hybridRunbookWorkerGroup.json
     reason: This body format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: deletedAutomationAccount.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
 ```
 
 ---
