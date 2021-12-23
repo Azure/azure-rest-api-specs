@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Fluid Relay",
-    "version": "2021-06-15-preview"
+    "version": "2021-08-30-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -69,7 +69,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}": {
       "get": {
         "operationId": "FluidRelayServers_Get",
         "tags": [
@@ -89,7 +89,7 @@
             "$ref": "#/parameters/ResourceGroup"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/FluidRelayServerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -129,7 +129,7 @@
             "$ref": "#/parameters/ResourceGroup"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/FluidRelayServerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -149,15 +149,7 @@
             "schema": {
               "$ref": "#/definitions/FluidRelayServer"
             },
-            "description": "Request completed synchronously.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string"
-              },
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
+            "description": "Request completed synchronously."
           },
           "default": {
             "schema": {
@@ -174,7 +166,7 @@
         ],
         "summary": "Update a Fluid Relay server.",
         "x-ms-examples": {
-          "Create a Fluid Relay server": {
+          "Update a Fluid Relay server": {
             "$ref": "./examples/FluidRelayServers_Update.json"
           }
         },
@@ -186,7 +178,7 @@
             "$ref": "#/parameters/ResourceGroup"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/FluidRelayServerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -206,15 +198,7 @@
             "schema": {
               "$ref": "#/definitions/FluidRelayServer"
             },
-            "description": "Request Completed Synchronously.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string"
-              },
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
+            "description": "Request Completed Synchronously."
           },
           "default": {
             "schema": {
@@ -243,7 +227,7 @@
             "$ref": "#/parameters/ResourceGroup"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/FluidRelayServerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -251,26 +235,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Request completed Synchronously.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string"
-              },
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
+            "description": "Request completed Synchronously."
           },
           "204": {
-            "description": "Request completed Synchronously.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string"
-              },
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
+            "description": "Request completed Synchronously."
           },
           "default": {
             "schema": {
@@ -281,7 +249,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{name}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/regenerateKey": {
       "post": {
         "operationId": "FluidRelayServers_RegenerateKey",
         "summary": "Regenerate the primary or secondary key for this server.",
@@ -301,7 +269,7 @@
             "$ref": "#/parameters/ResourceGroup"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/FluidRelayServerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -321,15 +289,7 @@
             "schema": {
               "$ref": "#/definitions/FluidRelayServerKeys"
             },
-            "description": "Request Completed Synchronously.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string"
-              },
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
+            "description": "Request Completed Synchronously."
           },
           "default": {
             "schema": {
@@ -340,7 +300,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{name}/getKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/getKeys": {
       "post": {
         "operationId": "FluidRelayServers_GetKeys",
         "summary": "Regenerate the primary or secondary key for this server.",
@@ -360,7 +320,7 @@
             "$ref": "#/parameters/ResourceGroup"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/FluidRelayServerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -371,15 +331,7 @@
             "schema": {
               "$ref": "#/definitions/FluidRelayServerKeys"
             },
-            "description": "Request Completed Synchronously.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string"
-              },
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            }
+            "description": "Request Completed Synchronously."
           },
           "default": {
             "schema": {
@@ -456,6 +408,139 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/FluidRelayServerList"
+            },
+            "description": "Paged response"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error in operation."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/fluidRelayContainers/{fluidRelayContainerName}": {
+      "get": {
+        "operationId": "FluidRelayContainers_Get",
+        "tags": [
+          "FluidRelayContainers"
+        ],
+        "summary": "Get a Fluid Relay container.",
+        "x-ms-examples": {
+          "Get Fluid Relay container details": {
+            "$ref": "./examples/FluidRelayContainers_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/FluidRelayServerName"
+          },
+          {
+            "$ref": "#/parameters/FluidRelayContainerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/FluidRelayContainer"
+            },
+            "description": "Request completed synchronously."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error in operation."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FluidRelayContainers_Delete",
+        "tags": [
+          "FluidRelayContainers"
+        ],
+        "summary": "Delete a Fluid Relay container.",
+        "x-ms-examples": {
+          "Delete a Fluid Relay container": {
+            "$ref": "./examples/FluidRelayContainers_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/FluidRelayServerName"
+          },
+          {
+            "$ref": "#/parameters/FluidRelayContainerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed Synchronously."
+          },
+          "204": {
+            "description": "Request completed Synchronously."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error in operation."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/fluidRelayContainers": {
+      "get": {
+        "operationId": "FluidRelayContainers_ListByFluidRelayServers",
+        "tags": [
+          "FluidRelayContainers"
+        ],
+        "summary": "List all Fluid Relay containers which are children of a given Fluid Relay server.",
+        "x-ms-examples": {
+          "List all Fluid Relay containers in a Fluid Relay server": {
+            "$ref": "./examples/FluidRelayContainers_ListByFluidRelayServer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/FluidRelayServerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/FluidRelayContainerList"
             },
             "description": "Paged response"
           },
@@ -575,6 +660,25 @@
       ],
       "x-adl-name": "Page<FluidRelayServer>"
     },
+    "FluidRelayContainerList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FluidRelayContainer"
+          },
+          "description": "A sequence of FluidRelay containers.",
+          "x-adl-name": "FluidRelayContainer[]"
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A link to the next page of results, if any."
+        }
+      },
+      "description": "Paged response"
+    },
     "FluidRelayServer": {
       "type": "object",
       "properties": {
@@ -602,6 +706,28 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FluidRelayContainer": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FluidRelayContainerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System meta data for this resource, including creation and modification information.",
+          "readOnly": true
+        }
+      },
+      "description": "A FluidRelay Container.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -703,6 +829,37 @@
       },
       "description": "The properties of a Fluid Relay Service resource."
     },
+    "FluidRelayContainerProperties": {
+      "type": "object",
+      "properties": {
+        "frsTenantId": {
+          "type": "string",
+          "description": "The Fluid tenantId for this container",
+          "readOnly": true
+        },
+        "frsContainerId": {
+          "type": "string",
+          "description": "The frsContainerId for this container",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "description": "Provision states for FluidRelay RP",
+          "title": "ProvisioningState",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of a Fluid Relay Container resource."
+    },
     "FluidRelayEndpoints": {
       "type": "object",
       "properties": {
@@ -742,12 +899,20 @@
       "description": "The resource group containing the resource.",
       "x-ms-parameter-location": "method"
     },
-    "ResourceName": {
-      "name": "name",
+    "FluidRelayServerName": {
+      "name": "fluidRelayServerName",
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "The resource name.",
+      "description": "The Fluid Relay server resource name.",
+      "x-ms-parameter-location": "method"
+    },
+    "FluidRelayContainerName": {
+      "name": "fluidRelayContainerName",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "The Fluid Relay container resource name.",
       "x-ms-parameter-location": "method"
     }
   }
