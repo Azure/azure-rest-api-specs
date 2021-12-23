@@ -269,6 +269,7 @@ input-file:
 - Microsoft.Automation/stable/2018-06-30/runbook.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 - Microsoft.Automation/stable/2021-06-22/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 ```
 
 ---

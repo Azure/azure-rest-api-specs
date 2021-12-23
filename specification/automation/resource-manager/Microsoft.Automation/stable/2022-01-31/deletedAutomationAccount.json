@@ -1,149 +1,144 @@
 {
-   "swagger":"2.0",
-   "info":{
-      "title":"AutomationManagement",
-      "version":"2022-01-31",
-      "x-ms-code-generation-settings":{
-         "useDateTimeOffset":true
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2022-01-31",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
-   },
-   "host":"management.azure.com",
-   "schemes":[
-      "https"
-   ],
-   "consumes":[
-      "application/json"
-   ],
-   "produces":[
-      "application/json"
-   ],
-   "security":[
-      {
-         "azure_auth":[
-            "user_impersonation"
-         ]
-      }
-   ],
-   "securityDefinitions":{
-      "azure_auth":{
-         "type":"oauth2",
-         "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-         "flow":"implicit",
-         "description":"Azure Active Directory OAuth2 Flow",
-         "scopes":{
-            "user_impersonation":"impersonate your user account"
-         }
-      }
-   },
-   "paths":{
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/deletedAutomationAccounts/{automationAccountName}":{
-         "get":{
-            "tags":[
-               "DeletedAutomationAccounts"
-            ],
-            "operationId":"deletedAutomationAccounts_Get",
-            "description":"Retrieve deleted automation account.",
-            "externalDocs":{
-               "url":"http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
-            },
-            "x-ms-examples":{
-               "Get deleted automation account":{
-                  "$ref":"./examples/getdeletedAutomationAccount.json"
-               }
-            },
-            "parameters":[
-               {
-                  "$ref":"../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
-               },
-               {
-                  "$ref":"../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-               },
-               {
-                  "$ref":"../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "$ref":"#/definitions/DeletedAutomationAccountListResult"
-                  }
-               },
-               "default":{
-                  "description":"Automation error response describing why the operation failed.",
-                  "schema":{
-                     "$ref":"../../common/v1/definitions.json#/definitions/ErrorResponse"
-                  }
-               }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/deletedAutomationAccounts/{automationAccountName}": {
+      "get": {
+        "tags": [
+          "DeletedAutomationAccounts"
+        ],
+        "operationId": "deletedAutomationAccounts_Get",
+        "description": "Retrieve deleted automation account.",
+        "x-ms-examples": {
+          "Get deleted automation account": {
+            "$ref": "./examples/getDeletedAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedAutomationAccountListResult"
             }
-         }
-      }
-   },
-   "definitions":{
-      "DeletedAutomationAccountListResult":{
-         "properties":{
-            "value":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/DeletedAutomationAccount"
-               },
-               "description":"Gets or sets the list of deleted automation accounts."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
-         },
-         "description":"The response model for the list deleted automation account."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeletedAutomationAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedAutomationAccount"
+          },
+          "description": "Gets or sets the list of deleted automation accounts."
+        }
       },
-      "DeletedAutomationAccount":{
-         "properties":{
-            "properties":{
-               "$ref":"#/definitions/DeletedAutomationAccountProperties",
-               "x-ms-client-flatten":true,
-               "description":"Gets or sets the automation account properties."
-            },
-            "id":{
-               "description":"The resource id.",
-               "type":"string"
-            },
-            "name":{
-               "type":"string",
-               "description":"Gets or sets name of the resource."
-            },
-            "type":{
-               "type":"string",
-               "description":"The resource type."
-            },
-            "location":{
-               "type":"string",
-               "description":"Gets or sets the location of the resource."
-            }
-         },
-         "description":"Definition of the deleted automation account type."
+      "description": "The response model for the list deleted automation account."
+    },
+    "DeletedAutomationAccount": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeletedAutomationAccountProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the automation account properties."
+        },
+        "id": {
+          "description": "The resource id.",
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        }
       },
-      "DeletedAutomationAccountProperties":{
-         "properties":{
-            "automationAccountResourceId":{
-               "type":"string",
-               "description":"Gets or sets the Automation Account Resource Id."
-            },
-            "automationAccountId":{
-               "type":"string",
-               "description":"Gets or sets the Automation Account Id."
-            },
-            "location":{
-               "type":"string",
-               "description":"Gets or sets the location of the resource."
-            },
-            "deletedTime":{
-               "type":"string",
-               "format":"date-time",
-               "readOnly":true,
-               "description":"Gets the creation time.",
-               "x-nullable":false
-            }
-         },
-         "description":"Definition of the deleted automation account properties."
-      }
-   },
-   "parameters":{
-      
-   }
+      "description": "Definition of the deleted automation account type."
+    },
+    "DeletedAutomationAccountProperties": {
+      "properties": {
+        "automationAccountResourceId": {
+          "type": "string",
+          "description": "Gets or sets the Automation Account Resource Id."
+        },
+        "automationAccountId": {
+          "type": "string",
+          "description": "Gets or sets the Automation Account Id."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the creation time.",
+          "x-nullable": false
+        }
+      },
+      "description": "Definition of the deleted automation account properties."
+    }
+  },
+  "parameters": {}
 }
