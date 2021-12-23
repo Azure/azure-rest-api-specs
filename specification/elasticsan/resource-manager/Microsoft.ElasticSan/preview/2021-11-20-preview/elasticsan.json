@@ -196,6 +196,9 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
             "$ref": "#/parameters/ElasticSanCreate"
           },
           {
@@ -249,7 +252,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanUpdate"
@@ -302,7 +305,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -352,7 +355,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -397,7 +400,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -443,6 +446,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupCreate"
@@ -498,6 +504,9 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
             "$ref": "#/parameters/VolumeGroupUpdate"
           },
           {
@@ -546,6 +555,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -598,6 +610,9 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
             "$ref": "#/parameters/VolumeGroupName"
           },
           {
@@ -643,7 +658,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -705,7 +720,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -764,7 +779,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -820,7 +835,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -871,7 +886,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -922,7 +937,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -984,7 +999,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -1046,7 +1061,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -1102,7 +1117,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -1153,7 +1168,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -1201,7 +1216,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ElasticSanName"
+            "$ref": "#/parameters/ElasticSanNameParameter"
           },
           {
             "$ref": "#/parameters/VolumeGroupName"
@@ -1276,7 +1291,7 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
-    "ElasticSanName": {
+    "ElasticSanNameParameter": {
       "name": "elasticSanName",
       "in": "path",
       "required": true,
@@ -1298,14 +1313,6 @@
       "required": true,
       "in": "path",
       "description": "The name of the Volume.",
-      "x-ms-parameter-location": "method"
-    },
-    "IscsiTargetName": {
-      "name": "iscsiTargetName",
-      "type": "string",
-      "required": true,
-      "in": "path",
-      "description": "The name of the iSCSI Target.",
       "x-ms-parameter-location": "method"
     },
     "SnapshotName": {
@@ -1456,7 +1463,6 @@
           "description": "Indicates the action type."
         },
         "display": {
-          "type": "string",
           "description": "Additional metadata about RP operation.",
           "$ref": "#/definitions/ElasticSanOperationDisplay"
         },
@@ -1558,7 +1564,6 @@
         },
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
         "baseSizeInGB": {
@@ -1600,18 +1605,13 @@
       "type": "object",
       "description": "Request payload for create or update Elastic San request.",
       "required": [
-        "location",
-        "elasticSanName"
+        "location"
       ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties for ElasticSan create request.",
           "$ref": "#/definitions/ElasticSanCreateProperties"
-        },
-        "elasticSanName": {
-          "type": "string",
-          "description": "Name of the Elastic San to create"
         },
         "tags": {
           "type": "object",
@@ -1702,7 +1702,6 @@
         },
         "sku": {
           "description": "resource sku",
-          "type": "string",
           "$ref": "#/definitions/SkuName"
         }
       }
@@ -1781,12 +1780,10 @@
       "properties": {
         "protocolType": {
           "description": "Type of storage target",
-          "type": "string",
           "$ref": "#/definitions/StorageTargetType"
         },
         "encryption": {
           "description": "Type of encryption",
-          "type": "string",
           "$ref": "#/definitions/EncryptionType"
         }
       }
@@ -1802,11 +1799,9 @@
         },
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
         "status": {
-          "type": "string",
           "$ref": "#/definitions/OperationalStatus",
           "description": "Operational status of the iSCSI Target."
         },
@@ -1915,7 +1910,6 @@
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
         "volumeGroupName": {
@@ -2086,7 +2080,6 @@
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
         "sizeInGB": {
@@ -2100,7 +2093,6 @@
         },
         "storageTarget": {
           "description": "Storage target information",
-          "type": "object",
           "$ref": "#/definitions/IscsiTargetInfo"
         }
       }
@@ -2119,7 +2111,6 @@
         },
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         }
       }
@@ -2174,7 +2165,6 @@
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "type": "string",
           "$ref": "#/definitions/ProvisioningState"
         },
         "name": {
@@ -2272,7 +2262,6 @@
       "description": "The resource management error response.",
       "properties": {
         "error": {
-          "type": "object",
           "description": "RP error response.",
           "$ref": "#/definitions/ErrorResponse"
         }
