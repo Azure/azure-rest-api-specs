@@ -1017,10 +1017,21 @@
           "type": "string",
           "example": "westus"
         },
-        "mediaServices": {
+        "properties": {
           "description": "List of classic account properties",
           "type": "object",
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClassicAccountProperties"
+        }
+      }
+    },
+    "ClassicAccountProperties": {
+      "description": "Azure Video Analyzer for Media classic account properties",
+      "type": "object",
+      "properties": {
+        "mediaServices": {
+          "description": "The media services details",
+          "type": "object",
           "$ref": "#/definitions/ClassicAccountMediaServices"
         }
       }
