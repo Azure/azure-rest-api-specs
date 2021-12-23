@@ -454,19 +454,19 @@
             "values": [
               {
                 "value": "Microsoft",
-                "description": "Adi - please provide description."
+                "description": "Standard data collected by Azure Monitor."
               },
               {
                 "value": "CustomLog",
-                "description": "Adi - please provide description."
+                "description": "Custom log table."
               },
               {
                 "value": "RestoredLogs",
-                "description": "Adi - please provide description."
+                "description": "Restored data."
               },
               {
                 "value": "SearchResults",
-                "description": "Adi - please provide description."
+                "description": "Data collected by a search job."
               }
             ]
           }
@@ -474,7 +474,7 @@
         "tableSubType": {
           "readOnly": true,
           "type": "string",
-          "description": "Evgeny - please provide description.",
+          "description": "The subtype describes what APIs can be used to interact with the table, and what features are available against it.",
           "enum": [
             "Any",
             "Classic",
@@ -486,15 +486,15 @@
             "values": [
               {
                 "value": "Any",
-                "description": "Evgeny - please provide description."
+                "description": "The default subtype with which built-in tables are created."
               },
               {
                 "value": "Classic",
-                "description": "Evgeny - please provide description."
+                "description": "Indicates a table created through the Data Collector API or with the custom logs feature of the MMA agent, or any table against which Custom Fields were created."
               },
               {
                 "value": "DataCollectionRuleBased",
-                "description": "Evgeny - please provide description."
+                "description": "A table eligible to have data sent into it via any of the means supported by Data Collection Rules: the Data Collection Endpoint API, ingestion-time transformations, or any other mechanism provided by Data Collection Rules"
               }
             ]
           }
@@ -510,12 +510,12 @@
         "searchResults": {
           "readOnly": true,
           "$ref": "#/definitions/SearchResults",
-          "description": "Adi - please provide description."
+          "description": "Parameters of the search job that initiated this table."
         },
         "restoredLogs": {
           "readOnly": true,
           "$ref": "#/definitions/RestoredLogs",
-          "description": "Adi - please provide description."
+          "description": "Parameters of the restore operation that initiated this table."
         }
       },
       "description": "Table's schema."
@@ -525,50 +525,50 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "Adi - please provide description."
+          "description": "Search job query."
         },
         "description": {
           "type": "string",
-          "description": "Adi - please provide description."
+          "description": "Description."
         },
         "limit": {
           "type": "integer",
-          "description": "Adi - please provide description"
+          "description": "Limit the search job to return up to specified number of rows."
         },
         "startSearchTime": {
           "type": "string",
-          "description": "Adi - please provide description"
+          "description": "The timestamp to start the search from (UTC)"
         },
         "endSearchTime": {
           "type": "string",
-          "description": "Adi - please provide description"
+          "description": "The timestamp to end the search by (UTC)"
         },
         "sourceTable": {
           "readOnly": true,
           "type": "string",
-          "description": "Adi - please provide description"
+          "description": "The table to search data from."
         }
       },
-      "description": "Adi - please provide description."
+      "description": "Search job parameters."
     },
     "RestoredLogs": {
       "type": "object",
       "properties": {
         "startRestoreTime": {
           "type": "string",
-          "description": "Adi - please provide description"
+          "description": "The timestamp to start the restore from (UTC)."
         },
         "endRestoreTime": {
           "type": "string",
-          "description": "Adi - please provide description"
+          "description": "The timestamp to end the restore by (UTC)."
         },
         "sourceTable": {
           "readOnly": true,
           "type": "string",
-          "description": "Adi - please provide description"
+          "description": "The table to restore data from."
         }
       },
-      "description": "Adi - please provide description."
+      "description": "Restore parameters."
     },
     "ResultStatistics": {
       "type": "object",
@@ -577,15 +577,15 @@
           "readOnly": true,
           "type": "number",
           "multipleOf": 0.01,
-          "description": "Adi - please provide description"
+          "description": "Search job completion percentage."
         },
         "ingestedRecords": {
           "readOnly": true,
           "type": "integer",
-          "description": "Adi - please provide description"
+          "description": "The number of rows that were returned by the search job."
         }
       },
-      "description": "Adi - please provide description."
+      "description": "Search job execution statistics."
     },
     "TableProperties": {
       "type": "object",
@@ -601,29 +601,29 @@
           "type": "integer",
           "format": "int32",
           "minimum": 4,
-          "maximum": 25555,
-          "description": "Adi - please provide description"
+          "maximum": 2555,
+          "description": "The table data total retention in days, between 4 and 2555. Setting this property to null will default to table retention."
         },
         "archiveRetentionInDays": {
           "readOnly": true,
           "type": "integer",
-          "description": "Adi - please provide description"
+          "description": "The table data archive retention in days. Calculated as (totalRetentionInDays-retentionInDays)"
         },
         "searchResults": {
           "$ref": "#/definitions/SearchResults",
-          "description": "Adi - please provide description"
+          "description": "Parameters of the search job that initiated this table."
         },
         "restoredLogs": {
           "$ref": "#/definitions/RestoredLogs",
-          "description": "Adi - please provide description"
+          "description": "Parameters of the restore operation that initiated this table."
         },
         "resultStatistics": {
           "$ref": "#/definitions/ResultStatistics",
-          "description": "Adi - please provide description"
+          "description": "Search job execution statistics."
         },
         "plan": {
           "type": "string",
-          "description": "Adi - please provide description.",
+          "description": "The table plan.",
           "enum": [
             "Basic",
             "Analytics"
@@ -634,11 +634,11 @@
             "values": [
               {
                 "value": "Basic",
-                "description": "Adi - please provide description."
+                "description": "Basic - logs that are adjusted to support high volume / low value verbose logs."
               },
               {
                 "value": "Analytics",
-                "description": "Adi - please provide description."
+                "description": "Analytics - logs that allow monitoring and analytics."
               }
             ]
           }
@@ -646,17 +646,17 @@
         "lastPlanModifiedDate": {
           "readOnly": true,
           "type": "string",
-          "description": "Adi - please provide description."
+          "description": "The timestamp that table plan was last modified (UTC)."
         },
         "createDate": {
           "readOnly": true,
           "type": "string",
-          "description": "Adi - please provide description."
+          "description": "The timestamp of resource creation (UTC)."
         },
         "createdBy": {
           "readOnly": true,
           "type": "string",
-          "description": "Adi - please provide description."
+          "description": "The identity that created the table."
         },
         "schema": {
           "$ref": "#/definitions/Schema",
@@ -680,7 +680,7 @@
               },
               {
                 "value": "InProgress",
-                "description": "Adi - please provide description."
+                "description": "Table schema is stable and without changes, table data is being updated."
               },
               {
                 "value": "Succeeded",
