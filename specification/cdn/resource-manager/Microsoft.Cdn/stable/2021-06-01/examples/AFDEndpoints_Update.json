@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "endpointUpdateProperties": {
+      "tags": {},
+      "properties": {
+        "originResponseTimeoutSeconds": 30,
+        "enabledState": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "endpoint1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/afdendpoints",
+        "tags": {},
+        "location": "WestCentralUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originResponseTimeoutSeconds": 30,
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "InProgress"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2021-06-01"
+      },
+      "body": {
+        "name": "endpoint1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/afdendpoints",
+        "tags": {},
+        "location": "WestCentralUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originResponseTimeoutSeconds": 30,
+          "enabledState": "Enabled",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
