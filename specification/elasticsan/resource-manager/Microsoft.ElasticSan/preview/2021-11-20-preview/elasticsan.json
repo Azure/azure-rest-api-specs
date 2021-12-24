@@ -928,6 +928,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "List Snapshots in a VolumeGroup.",
+        "operationId": "Snapshots_ListByVolumeGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully; retrieved volumes in a volume group.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Snapshots_ListByVolumeGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_ListByVolumeGroup_MaximumSet_Gen.json"
+          },
+          "Snapshots_ListByVolumeGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_ListByVolumeGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}": {
       "put": {
         "tags": [
@@ -949,7 +1000,7 @@
             "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SnapshotName"
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotCreate"
@@ -978,7 +1029,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": false,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1011,7 +1062,7 @@
             "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SnapshotName"
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/SnapshotCreate"
@@ -1040,7 +1091,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": false,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1057,7 +1108,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Delete an Volume Snapshot.",
+        "description": "Delete an Volume.",
         "operationId": "Snapshots_Delete",
         "parameters": [
           {
@@ -1073,7 +1124,7 @@
             "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SnapshotName"
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1113,7 +1164,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Get an Volume Snapshot.",
+        "description": "Create a Volume Snapshot.",
         "operationId": "Snapshots_Get",
         "parameters": [
           {
@@ -1129,106 +1180,7 @@
             "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SnapshotName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully; retrieved Volume.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error from the RP.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Snapshots_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Get_MaximumSet_Gen.json"
-          },
-          "Snapshots_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Get_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "List Snapshots in a VolumeGroup.",
-        "operationId": "Snapshots_ListByVolumeGroup",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully; retrieved volumes in a volume group.",
-            "schema": {
-              "$ref": "#/definitions/SnapshotList"
-            }
-          },
-          "default": {
-            "description": "Error from the RP",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Snapshots_ListByVolumeGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_ListByVolumeGroup_MaximumSet_Gen.json"
-          },
-          "Snapshots_ListByVolumeGroup_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_ListByVolumeGroup_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}/create": {
-      "post": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Create a VolumeGroup Snapshot.",
-        "operationId": "Snapshots_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotName"
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1254,16 +1206,16 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": false,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Snapshots_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Create_MaximumSet_Gen.json"
+          "Snapshots_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_Get_MaximumSet_Gen.json"
           },
-          "Snapshots_Create_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Create_MinimumSet_Gen.json"
+          "Snapshots_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1321,12 +1273,12 @@
       "description": "The name of the Volume.",
       "x-ms-parameter-location": "method"
     },
-    "SnapshotName": {
+    "SnapshotNameParameter": {
       "name": "snapshotName",
-      "type": "string",
-      "required": true,
       "in": "path",
-      "description": "The name of the Volume Snapshot.",
+      "required": true,
+      "type": "string",
+      "description": "The name of the snapshot within the given subscription, resource and volume group.",
       "x-ms-parameter-location": "method"
     },
     "ElasticSanCreate": {
@@ -1390,7 +1342,7 @@
       "x-ms-parameter-location": "method"
     },
     "SnapshotCreate": {
-      "name": "SnapshotCreatePayload",
+      "name": "SnapshotCreate",
       "required": true,
       "in": "body",
       "description": "Request payload for Volume Snapshot create operation.",
@@ -1933,13 +1885,9 @@
       "type": "object",
       "description": "Properties for VolumeGroup create or update request.",
       "required": [
-        "subnet"
+        "networkAcls"
       ],
       "properties": {
-        "subnet": {
-          "description": "Volume Group subnet id.",
-          "type": "string"
-        },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "A collection of rules governing the accessibility from specific network locations."
@@ -1955,10 +1903,6 @@
       "type": "object",
       "description": "Properties for VolumeGroup update request.",
       "properties": {
-        "subnet": {
-          "description": "Volume Group subnet id.",
-          "type": "string"
-        },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "A collection of rules governing the accessibility from specific network locations."
@@ -2110,51 +2054,22 @@
     },
     "Snapshot": {
       "type": "object",
-      "description": "Response for Snapshot request.",
-      "required": [
-        "properties"
+      "description": "Response for Volume Snapshot request.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
       ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties of Snapshot.",
+          "description": "Properties of Volume Snapshot.",
           "$ref": "#/definitions/SnapshotProperties"
         },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
           "readOnly": true,
           "$ref": "#/definitions/SystemMetadata"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "SnapshotProperties": {
-      "type": "object",
-      "description": "Snapshot response properties.",
-      "required": [
-        "name",
-        "volumes",
-        "provisioningState"
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the volume"
-        },
-        "volumes": {
-          "description": "An array of Volume objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Volume"
-          }
         }
       }
     },
@@ -2180,16 +2095,29 @@
         }
       }
     },
-    "SnapshotCreate": {
+    "SnapshotProperties": {
       "type": "object",
-      "description": "Payload for Volume Snapshot create or update requests.",
-      "required": [
-        "properties"
-      ],
+      "description": "Properties for Snapshot.",
+      "properties": {
+        "creationData": {
+          "description": "State of the operation on the resource.",
+          "$ref": "#/definitions/CreationData"
+        },
+        "volumeGroupName": {
+          "type": "string",
+          "description": "Parent volume group name"
+        },
+        "provisioningState": {
+          "description": "Snapshot provisioning state",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "SnapshotCreate": {
+      "description": "Properties for Snapshot create request.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties for Volume Snapshot create request.",
           "$ref": "#/definitions/SnapshotCreateProperties"
         }
       },
@@ -2200,38 +2128,37 @@
       ]
     },
     "SnapshotCreateProperties": {
-      "type": "object",
-      "description": "Properties for Volume create or update request.",
+      "properties": {
+        "creationData": {
+          "description": "State of the operation on the resource.",
+          "$ref": "#/definitions/CreationData"
+        }
+      },
+      "description": "Snap shot creation data."
+    },
+    "CreationData": {
+      "description": "Data used when creating a disk.",
       "required": [
-        "volumes"
+        "createSource"
       ],
       "properties": {
-        "volumes": {
-          "type": "array",
-          "description": "List of Volumes to attach to a Snapshot Set.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "timeCreated": {
-          "readOnly": true,
+        "createSource": {
           "type": "string",
-          "format": "date-time",
-          "description": "The time when the snapshot was created."
+          "enum": [
+            "None",
+            "FromVolume",
+            "FromSnapshot",
+            "Export"
+          ],
+          "x-ms-enum": {
+            "name": "VolumeOrSnapshotCreateOption",
+            "modelAsString": false
+          },
+          "description": "This enumerates the possible sources of a volume or snapshot's creation."
         },
-        "uniqueId": {
+        "sourceUri": {
           "type": "string",
-          "readOnly": true,
-          "description": "Unique Guid identifying the resource."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The disk provisioning state."
-        },
-        "incremental": {
-          "type": "boolean",
-          "description": "Whether a snapshot is incremental. Incremental snapshots on the same disk occupy less space than full snapshots and can be diffed."
+          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If createOption is Restore, this is the ARM-like id of the source disk restore point."
         }
       }
     },
