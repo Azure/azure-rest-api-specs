@@ -2,11 +2,23 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: insights
   clear-output-folder: true
+```
+
+```yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/applicationinsights/armapplicationinsights
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+directive:
+  from: aiOperations_API.json
+  where: $.paths
+  transform: delete $["/providers/Microsoft.Insights/operations"]
 ```
 
 ### Go multi-api
