@@ -972,6 +972,9 @@
               }
             }
           },
+          "204": {
+            "description": "No content; The target compute does not exist."
+          },
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
@@ -1960,6 +1963,7 @@
         },
         "display": {
           "description": "Display name of operation",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "The resource provider name: Microsoft.MachineLearningExperimentation",
@@ -1982,6 +1986,7 @@
       }
     },
     "AmlOperationListResult": {
+      "type": "object",
       "description": "An array of operations supported by the resource provider.",
       "properties": {
         "value": {
@@ -2171,6 +2176,7 @@
       }
     },
     "WorkspaceUpdateParameters": {
+      "type": "object",
       "description": "The parameters for updating a machine learning workspace.",
       "properties": {
         "tags": {
@@ -2196,6 +2202,7 @@
       }
     },
     "WorkspacePropertiesUpdateParameters": {
+      "type": "object",
       "description": "The parameters for updating the properties of a machine learning workspace.",
       "properties": {
         "description": {
@@ -2241,6 +2248,7 @@
       }
     },
     "UsageName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2306,6 +2314,7 @@
       "description": "Describes AML Resource Usage."
     },
     "ListUsagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2324,6 +2333,7 @@
       "description": "The List Usages operation response."
     },
     "VirtualMachineSize": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2401,6 +2411,7 @@
       "description": "Describes the properties of a VM size."
     },
     "EstimatedVMPrices": {
+      "type": "object",
       "properties": {
         "billingCurrency": {
           "type": "string",
@@ -2487,6 +2498,7 @@
       "description": "The estimated price info for using a VM of a particular OS type, tier, etc."
     },
     "VirtualMachineSizeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2499,6 +2511,7 @@
       "description": "The List Virtual Machine size operation response."
     },
     "WorkspaceListResult": {
+      "type": "object",
       "description": "The result of a request to list machine learning workspaces.",
       "properties": {
         "value": {
@@ -2515,6 +2528,7 @@
       }
     },
     "QuotaBaseProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -2545,6 +2559,7 @@
       "description": "The properties for Quota update or retrieval."
     },
     "QuotaUpdateParameters": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list for update quota.",
@@ -2733,6 +2748,7 @@
       }
     },
     "UpdateWorkspaceQuotasResult": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of workspace quota update result.",
@@ -2751,6 +2767,7 @@
       "description": "The result of update workspace quota."
     },
     "UpdateWorkspaceQuotas": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2804,6 +2821,7 @@
       "description": "The properties for update Quota response."
     },
     "ResourceName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2819,6 +2837,7 @@
       "description": "The Resource Name."
     },
     "ResourceQuota": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2863,6 +2882,7 @@
       "description": "The quota assigned to a resource."
     },
     "ListWorkspaceQuotas": {
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of Workspace Quotas by VM Family",
@@ -2881,6 +2901,7 @@
       "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
     "ResourceId": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -3810,6 +3831,7 @@
       }
     },
     "UserAccountCredentials": {
+      "type": "object",
       "properties": {
         "adminUserName": {
           "type": "string",
@@ -3871,6 +3893,7 @@
       ]
     },
     "NodeStateCounts": {
+      "type": "object",
       "properties": {
         "idleNodeCount": {
           "readOnly": true,
@@ -3928,6 +3951,7 @@
       "description": "Desired scale settings for the amlCompute."
     },
     "ClusterUpdateProperties": {
+      "type": "object",
       "properties": {
         "properties": {
           "description": "Properties of ClusterUpdate",
@@ -3937,6 +3961,7 @@
       "description": "The properties of a amlCompute that need to be updated."
     },
     "ClusterUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3966,6 +3991,7 @@
       }
     },
     "AmlComputeNodeInformation": {
+      "type": "object",
       "description": "Compute node information related to a AmlCompute.",
       "properties": {
         "nodeId": {
@@ -4158,6 +4184,7 @@
       "description": "List of private endpoint connection associated with the specified workspace"
     },
     "PrivateEndpointConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
@@ -4192,6 +4219,7 @@
       "description": "The Private Endpoint Connection resource."
     },
     "PrivateEndpointConnectionProperties": {
+      "type": "object",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
@@ -4212,6 +4240,7 @@
       "description": "Properties of the PrivateEndpointConnectProperties."
     },
     "PrivateEndpoint": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -4227,6 +4256,7 @@
       "description": "The Private Endpoint resource."
     },
     "PrivateLinkServiceConnectionState": {
+      "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
@@ -4274,6 +4304,7 @@
       }
     },
     "PrivateLinkResourceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4286,6 +4317,7 @@
       "description": "A list of private link resources"
     },
     "PrivateLinkResource": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -4320,6 +4352,7 @@
       "description": "A private link resource"
     },
     "PrivateLinkResourceProperties": {
+      "type": "object",
       "properties": {
         "groupId": {
           "description": "The private link resource group id.",
@@ -4345,6 +4378,7 @@
       "description": "Properties of a private link resource."
     },
     "SharedPrivateLinkResource": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "Unique name of the private link.",
@@ -4358,6 +4392,7 @@
       }
     },
     "SharedPrivateLinkResourceProperty": {
+      "type": "object",
       "properties": {
         "privateLinkResourceId": {
           "description": "The resource id that private link links to.",
