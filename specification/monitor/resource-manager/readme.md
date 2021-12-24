@@ -898,7 +898,9 @@ directive:
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
-``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07') || $(csharp) || $(validation)
+This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1. 
+
+``` yaml ($(go) && !$(track2) && $(tag) == 'package-2021-07' || $(tag) == 'package-2021-09') || $(csharp) || $(validation)
 directive:
 - from: activityLogAlerts_API.json
   where: $.definitions
