@@ -1487,14 +1487,18 @@
     },
     "ServerVulnerabilityAssessmentProperties": {
       "description": "Properties of a server Vulnerability Assessment.",
+      "type": "object",
       "required": [
         "storageContainerPath"
       ],
-      "type": "object",
       "properties": {
         "storageContainerPath": {
           "description": "A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "storageContainerSasKey": {
           "description": "A shared access signature (SAS Key) that has read and write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required.",

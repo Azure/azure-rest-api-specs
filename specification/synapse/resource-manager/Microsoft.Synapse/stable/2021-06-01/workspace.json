@@ -926,7 +926,11 @@
       "properties": {
         "accountUrl": {
           "description": "Account URL",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "filesystem": {
           "description": "Filesystem name",
@@ -938,7 +942,11 @@
         },
         "createManagedPrivateEndpoint": {
           "description": "Create managed private endpoint to this storage account or not",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -1208,7 +1216,11 @@
         },
         "managedResourceGroupName": {
           "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -1282,11 +1294,16 @@
             "Disabled"
           ],
           "description": "Enable or Disable public network access to workspace",
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "WorkspacePublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "cspWorkspaceAdminProperties": {
           "description": "Initial workspace AAD admin properties for a CSP subscription",
@@ -1303,6 +1320,11 @@
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
           "type": "boolean"
+        },
+        "trustedServiceBypassEnabled": {
+          "description": "Is trustedServiceBypassEnabled for the workspace",
+          "type": "boolean",
+          "default": false
         }
       }
     },
