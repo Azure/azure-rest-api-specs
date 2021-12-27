@@ -1386,6 +1386,11 @@
           "description": "Managed integration runtime properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+        },
+        "managedVirtualNetwork": {
+          "description": "Managed integration runtime managed virtual network.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedIntegrationRuntimeManagedVirtualNetworkReference"
         }
       },
       "required": [
@@ -1403,6 +1408,24 @@
         "ssisProperties": {
           "description": "SSIS properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeManagedVirtualNetworkReference": {
+      "description": "Managed integration runtime managed virtual network reference.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "The reference name of the managed virtual network.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the managed virtual network.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the managed virtual network.",
+          "type": "string"
         }
       }
     },
@@ -2236,6 +2259,18 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "serviceRegion": {
+          "description": "The service region of the integration runtime",
+          "type": "string"
+        },
+        "newerVersions": {
+          "description": "The newer versions on download center.",
+          "type": "array",
+          "items": {
+            "description": "The newer versions",
+            "type": "string"
+          }
         }
       }
     },
