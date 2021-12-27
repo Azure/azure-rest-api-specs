@@ -5807,6 +5807,10 @@
       "description": "Google AdWords service linked service properties.",
       "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to GoogleAds. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "clientCustomerID": {
           "description": "The Client customer ID of the AdWords account that you want to fetch report data for.",
           "type": "object"
@@ -5859,12 +5863,7 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      },
-      "required": [
-        "clientCustomerID",
-        "developerToken",
-        "authenticationType"
-      ]
+      }
     },
     "SapTableLinkedService": {
       "x-ms-discriminator-value": "SapTable",

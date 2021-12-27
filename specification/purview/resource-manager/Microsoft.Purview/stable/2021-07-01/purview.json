@@ -1168,12 +1168,21 @@
         "type": {
           "description": "Identity Type",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "type",
             "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -1237,6 +1246,7 @@
       }
     },
     "CloudConnectors": {
+      "description": "External Cloud Service connectors",
       "type": "object",
       "properties": {
         "awsExternalId": {
@@ -1299,6 +1309,22 @@
         },
         "storageAccount": {
           "description": "Gets the managed storage account resource identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Uses client ID and Principal ID",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Gets or Sets Client ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Gets or Sets Principal ID",
           "type": "string",
           "readOnly": true
         }
@@ -1411,6 +1437,10 @@
       "description": "The account update properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity related info to add/remove userAssignedIdentities."
+        },
         "properties": {
           "$ref": "#/definitions/AccountProperties",
           "description": "The account properties."
