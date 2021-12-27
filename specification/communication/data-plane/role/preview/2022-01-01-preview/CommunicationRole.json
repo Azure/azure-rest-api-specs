@@ -42,6 +42,12 @@
             "description": "Created - Returns the created role.",
             "schema": {
               "$ref": "#/definitions/CommunicationRoleResponse"
+            },
+            "headers": {
+              "ETag": {
+                "description": "ETag header",
+                "type": "string"
+              }
             }
           }
         },
@@ -66,6 +72,13 @@
             "name": "filter",
             "description": "Defines how to filter the given results. Follows Azure guidelines: https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#filter",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Defines the maximum number of items to return per pages",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -116,6 +129,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Conditional request If-Match",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "schema": {
@@ -134,6 +153,18 @@
             "description": "OK - Returns the updated role.",
             "schema": {
               "$ref": "#/definitions/CommunicationRoleResponse"
+            },
+            "headers": {
+              "ETag": {
+                "description": "ETag header",
+                "type": "string"
+              }
+            }
+          },
+          "412": {
+            "description": "PreconditionFailed - when the ETag does not match",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -161,6 +192,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Conditional request If-Match",
+            "type": "string"
           }
         ],
         "responses": {
@@ -170,8 +207,20 @@
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           },
+          "400": {
+            "description": "BadRequest - Role must be disabled before being deletable",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
           "204": {
             "description": "NoContent - The communication role is deleted."
+          },
+          "412": {
+            "description": "PreconditionFailed - when the ETag does not match",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -198,6 +247,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "If-None-Match",
+            "description": "Conditional request If-None-Match",
+            "type": "string"
           }
         ],
         "responses": {
@@ -211,7 +266,16 @@
             "description": "OK - Returns the communication role.",
             "schema": {
               "$ref": "#/definitions/CommunicationRoleResponse"
+            },
+            "headers": {
+              "ETag": {
+                "description": "ETag header",
+                "type": "string"
+              }
             }
+          },
+          "304": {
+            "description": "NotModified - when the ETag does not match"
           }
         },
         "x-ms-examples": {
@@ -273,17 +337,15 @@
             "$ref": "#/definitions/CommunicationRoleResponse"
           }
         },
-        "maxItems": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "@nextLink": {
+        "nextLink": {
+          "format": "uri",
+          "description": "The Url to GET to retreive the next page of results",
           "type": "string"
         }
       }
     },
     "CommunicationRolePermissionActions": {
-      "description": "The available action permissions list.",
+      "description": "The available action permisions list.",
       "enum": [
         "communication.services/calling/audio/receive/action",
         "communication.services/calling/video/receive/action",
@@ -322,6 +384,7 @@
       "required": [
         "createdOn",
         "displayName",
+        "eTag",
         "id",
         "isEnabled",
         "permissions",
@@ -345,6 +408,10 @@
         "updatedOn": {
           "format": "date-time",
           "description": "The datetime the role was last modified.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag acosiated with the Role.",
           "type": "string"
         },
         "displayName": {
