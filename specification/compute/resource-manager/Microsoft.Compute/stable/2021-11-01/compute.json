@@ -3940,6 +3940,9 @@
         "x-ms-examples": {
           "Create or update a restore point collection.": {
             "$ref": "./examples/compute/CreateOrUpdateARestorePointCollection.json"
+          },
+          "Create or update a restore point collection for cross region copy.": {
+            "$ref": "./examples/compute/CreateOrUpdateARestorePointCollectionForCrossRegionCopy.json"
           }
         },
         "parameters": [
@@ -4267,6 +4270,9 @@
         "x-ms-examples": {
           "Create a restore point": {
             "$ref": "./examples/compute/CreateARestorePoint.json"
+          },
+          "Copy a restore point to a different region": {
+            "$ref": "./examples/compute/CopyRestorePointBetweenRegions.json"
           }
         },
         "parameters": [
@@ -4411,12 +4417,29 @@
             "description": "The name of the restore point."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "RestorePointExpandOptions",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "x-ms-examples": {
           "Get a restore point": {
             "$ref": "./examples/compute/GetRestorePoint.json"
+          },
+          "Get restore point with instance view": {
+            "$ref": "./examples/compute/GetRestorePointWithInstanceView.json"
           }
         },
         "responses": {
@@ -9177,6 +9200,56 @@
       ],
       "description": "Restore Point details."
     },
+    "RestorePointInstanceView": {
+      "type": "object",
+      "properties": {
+        "diskRestorePoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskRestorePointInstanceView"
+          },
+          "description": "The disk restore points information."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a restore point."
+    },
+    "DiskRestorePointInstanceView": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Disk restore point Id."
+        },
+        "replicationStatus": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/DiskRestorePointReplicationStatus"
+          },
+          "description": "The disk restore point replication status information."
+        }
+      },
+      "description": "The instance view of a disk restore point."
+    },
+    "DiskRestorePointReplicationStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a disk restore point."
+    },
     "RestorePointProperties": {
       "type": "object",
       "properties": {
@@ -9215,6 +9288,15 @@
           "type": "string",
           "format": "date-time",
           "description": "Gets the creation time of the restore point."
+        },
+        "sourceRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Resource Id of the source restore point from which a copy needs to be created."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/RestorePointInstanceView",
+          "readOnly": true,
+          "description": "The restore point instance view."
         }
       },
       "description": "The restore point properties."
