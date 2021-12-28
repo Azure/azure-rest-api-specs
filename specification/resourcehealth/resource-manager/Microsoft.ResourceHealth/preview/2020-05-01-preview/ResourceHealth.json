@@ -295,6 +295,52 @@
         }
       }
     },
+    "operationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
+          },
+          "description": "List of operations available in the resourcehealth resource provider."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Lists the operations response."
+    },
+    "operation": {
+      "description": "Operation available in the resourcehealth resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        }
+      }
+    },
     "faq": {
       "type": "object",
       "description": "Frequently asked question for the service health event",
@@ -310,6 +356,23 @@
         "localeCode": {
           "type": "string",
           "description": "FAQ locale for the service health event."
+        }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "description": "Azure service impacted by the service health event.",
+      "properties": {
+        "impactedService": {
+          "type": "string",
+          "description": "Impacted service name."
+        },
+        "impactedRegions": {
+          "type": "array",
+          "description": "List regions impacted by the service health event.",
+          "items": {
+            "$ref": "#/definitions/impactedServiceRegion"
+          }
         }
       }
     },
@@ -345,6 +408,13 @@
           "type": "string",
           "description": "It provides the Timestamp for when the last update for the service health event.",
           "format": "date-time"
+        },
+        "updates": {
+          "type": "array",
+          "description": "List of updates for given service health event.",
+          "items": {
+            "$ref": "#/definitions/update"
+          }
         }
       }
     },
