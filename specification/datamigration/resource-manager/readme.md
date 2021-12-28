@@ -141,6 +141,8 @@ input-file:
 - Microsoft.DataMigration/stable/2021-06-30/definitions/ValidateMigrationInputSqlServerSqlMITask.json
 - Microsoft.DataMigration/stable/2021-06-30/definitions/ValidateSyncMigrationInputSqlServerTask.json
 - Microsoft.DataMigration/stable/2021-06-30/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
+directive:
+- suppress: R4013
 ```
 
 ### Tag: package-2018-04-19
