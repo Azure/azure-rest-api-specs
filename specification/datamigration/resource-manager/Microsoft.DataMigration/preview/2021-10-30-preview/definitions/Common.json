@@ -374,17 +374,18 @@
         "authentication": {
           "$ref": "#/definitions/AuthenticationType",
           "description": "Authentication type to use for connection"
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/ConnectionInfo"
-          }
-        ],
-        "required": [
-          "serverName",
-          "port"
-        ]
+        }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    },
     "OracleConnectionInfo": {
       "x-ms-discriminator-value": "OracleConnectionInfo",
       "type": "object",
@@ -442,17 +443,18 @@
         "authentication": {
           "$ref": "#/definitions/AuthenticationType",
           "description": "Authentication type to use for connection"
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/ConnectionInfo"
-          }
-        ],
-        "required": [
-          "serverName",
-          "port"
-        ]
+        }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    },
     "MySqlTargetPlatform": {
       "type": "string",
       "description": "An enumeration of possible target types when migrating from MySQL",
