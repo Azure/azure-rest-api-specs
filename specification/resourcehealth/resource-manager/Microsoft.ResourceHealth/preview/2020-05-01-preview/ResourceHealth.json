@@ -313,23 +313,6 @@
         }
       }
     },
-    "impact": {
-      "type": "object",
-      "description": "Azure service impacted by the service health event.",
-      "properties": {
-        "impactedService": {
-          "type": "string",
-          "description": "Impacted service name."
-        },
-        "impactedRegions": {
-          "type": "array",
-          "description": "List regions impacted by the service health event.",
-          "items": {
-            "$ref": "#/definitions/impactedServiceRegion"
-          }
-        }
-      }
-    },
     "impactedServiceRegion": {
       "type": "object",
       "description": "Azure region impacted by the service health event.",
@@ -362,13 +345,6 @@
           "type": "string",
           "description": "It provides the Timestamp for when the last update for the service health event.",
           "format": "date-time"
-        },
-        "updates": {
-          "type": "array",
-          "description": "List of updates for given service health event.",
-          "items": {
-            "$ref": "#/definitions/update"
-          }
         }
       }
     },
