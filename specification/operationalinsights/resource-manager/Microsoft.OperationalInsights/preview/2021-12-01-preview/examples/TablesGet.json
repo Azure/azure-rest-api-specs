@@ -4,16 +4,24 @@
     "workspaceName": "oiautorest6685",
     "api-version": "2021-12-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-00000000000",
-    "tableName": "table1_CL"
+    "tableName": "table1_SRCH"
   },
   "responses": {
     "200": {
       "body": {
+        "systemData": {
+          "createdBy": "00000000-0000-0000-0000-00000000000",
+          "createdAt": "Sat, 28 Aug 2021 05:29:18 GMT"
+        },
         "properties": {
+          "resultStatistics": {
+            "progress": "75",
+            "ingestedRecords" : 5
+          },        
           "schema": {
-            "name": "table1_CL",
+            "name": "table1_SRCH",
             "tableSubType": "DataCollectionRuleBased",
-            "tableType": "CustomLog",
+            "tableType": "SearchResults",
             "displayName": null,
             "description": null,
             "columns": [],
@@ -87,16 +95,24 @@
             "source": null,
             "solutions": [
               "LogManagement"
-            ]
+            ],
+            "searchResults": {
+              "query": "Heartbeat | where SourceSystem != '' | project SourceSystem",
+              "description": "This table was created using a Search Job with the following query: 'Heartbeat | where SourceSystem != '' | project SourceSystem'.",
+              "limit": 1000,
+              "startSearchTime": "Sat, 28 Aug 2021 05:29:18 GMT",
+              "endSearchTime": "Sat, 28 Aug 2021 08:29:18 GMT",
+              "sourceTable": "Heartbeat"
+            }
           },
-          "provisioningState": "Succeeded",
+          "provisioningState": "InProgress",
           "retentionInDays": 50,
           "totalRetentionInDays": 50,
           "archiveRetentionInDays": 0,
           "plan": "Analytics"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/table1_CL",
-        "name": "table1_CL"
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/table1_SRCH",
+        "name": "table1_SRCH"
       }
     }
   }
