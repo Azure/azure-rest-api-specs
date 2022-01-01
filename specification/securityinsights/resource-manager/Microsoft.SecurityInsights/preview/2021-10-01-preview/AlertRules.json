@@ -728,7 +728,32 @@
       },
       "type": "object"
     },
+    "AlertRuleMitreCommonProperties": {
+      "description": "Alert rule mitre property bag.",
+      "properties": {
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "QueryBasedAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleMitreCommonProperties"
+        }
+      ],
       "description": "Query based alert rule template base property bag.",
       "properties": {
         "query": {
@@ -738,13 +763,6 @@
         "severity": {
           "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-          },
-          "type": "array"
         },
         "version": {
           "description": "The version of this template - in format <a.b.c>, where all are numbers. For example <1.0.2>.",
@@ -881,6 +899,13 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "string"
         }
       },
       "required": [
@@ -901,6 +926,9 @@
           "allOf": [
             {
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            },
+            {
+              "$ref": "#/definitions/AlertRuleMitreCommonProperties"
             }
           ],
           "description": "MLBehaviorAnalytics alert rule template properties.",
@@ -908,13 +936,6 @@
             "severity": {
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template.",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
             }
           },
           "type": "object",
@@ -987,6 +1008,13 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "string"
         }
       },
       "required": [
@@ -1007,6 +1035,9 @@
           "allOf": [
             {
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            },
+            {
+              "$ref": "#/definitions/AlertRuleMitreCommonProperties"
             }
           ],
           "description": "Fusion alert rule template properties",
@@ -1014,13 +1045,6 @@
             "severity": {
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
             }
           },
           "required": [
@@ -1093,6 +1117,13 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "string"
         }
       },
       "required": [
@@ -1113,6 +1144,9 @@
           "allOf": [
             {
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            },
+            {
+              "$ref": "#/definitions/AlertRuleMitreCommonProperties"
             }
           ],
           "description": "Threat Intelligence alert rule template properties",
@@ -1120,13 +1154,6 @@
             "severity": {
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
             }
           },
           "required": [
@@ -1278,6 +1305,11 @@
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
     "QueryBasedAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleMitreCommonProperties"
+        }
+      ],
       "description": "Query based alert rule base property bag.",
       "properties": {
         "alertRuleTemplateName": {
@@ -1322,13 +1354,6 @@
         "severity": {
           "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
           "description": "The severity for alerts created by this alert rule."
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-          },
-          "type": "array"
         },
         "incidentConfiguration": {
           "$ref": "#/definitions/IncidentConfiguration",
@@ -1413,15 +1438,6 @@
             }
           ],
           "description": "Scheduled alert rule template properties",
-          "properties": {
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
-              },
-              "type": "array"
-            }
-          },
           "required": [
             "displayName",
             "description",
