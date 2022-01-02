@@ -974,15 +974,14 @@
           "items": {
             "$ref": "#/definitions/FusionSourceSettings"
           },
+          "x-ms-identifiers": ["sourceName"],
           "type": "array"
         },
         "scenarioExclusionPatterns": {
           "description": "Configuration to exclude scenarios in fusion detection.",
-          "items": {
-            "$ref": "#/definitions/FusionScenarioExclusionPattern"
-          },
-          "type": "array"
-        },				   
+          "$ref": "#/definitions/FusionScenarioExclusionPattern",
+          "type": "object"
+        },
         "lastModifiedUtc": {
           "description": "The last time that this alert has been modified.",
           "format": "date-time",
@@ -1005,8 +1004,7 @@
       },
       "required": [
         "alertRuleTemplateName",
-        "enabled",
-        "sourceSettings"
+        "enabled"
       ],
       "type": "object"
     },
@@ -1026,6 +1024,7 @@
           "items": {
             "$ref": "#/definitions/FusionSourceSubTypeSetting"
           },
+          "x-ms-identifiers": ["sourceSubTypeName"],
           "type": "array"
         }
       },
@@ -1073,6 +1072,7 @@
           "items": {
             "$ref": "#/definitions/FusionSubTypeSeverityFiltersItem"
           },
+          "x-ms-identifiers": ["severity"],
           "type": "array"
         }
       },
@@ -1096,6 +1096,41 @@
       "required": [
         "severity",
         "enabled"
+      ],
+      "type": "object"
+    },
+    "FusionScenarioExclusionPattern": {
+      "description": "Represents Fusion scenario exclusion patterns in Fusion detection.",
+      "properties": {
+        "scenarioExclusionPatterns": {
+          "description": "Individual scenario exclusion pattern.",
+          "items": {
+            "$ref": "#/definitions/FusionScenarioExclusionPatternItem"
+          },
+          "x-ms-identifiers": ["exclusionPattern"],
+          "type": "array"
+        }
+      },
+      "required": [
+        "scenarioExclusionPatterns"
+      ],
+      "type": "object"
+    },
+    "FusionScenarioExclusionPatternItem": {
+      "description": "Represents individual Fusion scenario exclusion pattern in Fusion detection.",
+      "properties": {
+        "exclusionPattern": {
+          "description": "Scenario exclusion pattern.",
+          "type": "string"
+        },
+        "dateAddedInUTC": {
+          "description": "DateTime in UTC.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exclusionPattern",
+        "dateAddedInUTC"
       ],
       "type": "object"
     },
@@ -1125,6 +1160,7 @@
               "items": {
                 "$ref": "#/definitions/FusionTemplateSourceSetting"
               },
+              "x-ms-identifiers": ["sourceName"],
               "type": "array"
             },
             "tactics": {
@@ -1140,7 +1176,6 @@
             "description",
             "status",
             "severity",
-            "sourceSettings",
             "alertRulesCreatedByTemplateCount"
           ],
           "type": "object",
@@ -1148,7 +1183,7 @@
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "Fusion"	  
+      "x-ms-discriminator-value": "Fusion"
     },
 	  "FusionTemplateSourceSetting": {
       "description": "Represents a source signal consumed in Fusion detection.",
@@ -1162,6 +1197,7 @@
           "items": {
             "$ref": "#/definitions/FusionTemplateSourceSubType"
           },
+          "x-ms-identifiers": ["sourceSubTypeName"],
           "type": "array"
         }
       },
@@ -1200,8 +1236,9 @@
         "severityFilters": {
           "description": "List of all supported severities for this source subtype consumed in Fusion detection.",
           "items": {
-            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
           },
+          "x-ms-identifiers": [],
           "type": "array"
         }
       },
