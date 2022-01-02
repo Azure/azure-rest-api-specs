@@ -731,8 +731,13 @@
       },
       "type": "object"
     },
-    "AlertRuleMitreCommonProperties": {
-      "description": "Alert rule mitre property bag.",
+    "AlertRuleTemplateWithMitreProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "Alert rule template with MITRE property bag.",
       "properties": {
         "tactics": {
           "description": "The tactics of the alert rule",
@@ -752,11 +757,6 @@
       "type": "object"
     },
     "QueryBasedAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleMitreCommonProperties"
-        }
-      ],
       "description": "Query based alert rule template base property bag.",
       "properties": {
         "query": {
@@ -908,6 +908,7 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "type": "array"
         }
       },
@@ -928,10 +929,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/AlertRuleMitreCommonProperties"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             }
           ],
           "description": "MLBehaviorAnalytics alert rule template properties.",
@@ -1017,6 +1015,7 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "type": "array"
         }
       },
@@ -1037,10 +1036,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/AlertRuleMitreCommonProperties"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             }
           ],
           "description": "Fusion alert rule template properties",
@@ -1126,6 +1122,7 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "type": "array"
         }
       },
@@ -1146,10 +1143,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/AlertRuleMitreCommonProperties"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             }
           ],
           "description": "Threat Intelligence alert rule template properties",
@@ -1287,9 +1281,6 @@
           "allOf": [
             {
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
             }
           ],
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
@@ -1308,11 +1299,6 @@
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
     "QueryBasedAlertRuleProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleMitreCommonProperties"
-        }
-      ],
       "description": "Query based alert rule base property bag.",
       "properties": {
         "alertRuleTemplateName": {
@@ -1330,6 +1316,20 @@
         "query": {
           "description": "The query that creates alerts for this rule.",
           "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "displayName": {
           "description": "The display name for alerts created by this alert rule.",
@@ -1431,7 +1431,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             },
             {
               "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
@@ -1472,7 +1472,7 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
             },
             {
               "$ref": "#/definitions/QueryBasedAlertRuleTemplateProperties"
