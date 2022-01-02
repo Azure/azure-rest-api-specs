@@ -132,9 +132,6 @@
           },
           "Get a APIPolling data connector": {
             "$ref": "./examples/dataConnectors/GetAPIPolling.json"
-          },
-          "Get a IoT data connector": {
-            "$ref": "./examples/dataConnectors/GetIoTById.json"
           }
         },
         "tags": [
@@ -419,9 +416,6 @@
           },
           "Check requirements for MicrosoftThreatIntelligence.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatIntelligence.json"
-          },
-          "Check requirements for IoT.": {
-            "$ref": "./examples/dataConnectors/CheckRequirementsIoT.json"
           }
         },
         "tags": [
@@ -871,33 +865,6 @@
       "description": "Threat Intelligence TAXII data connector required properties.",
       "type": "object"
     },
-    "IoTCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        }
-      ],
-      "description": "Represents IoT requirements check request.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/IoTCheckRequirementsProperties",
-          "description": "IoT requirements check properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "IOT"
-    },
-    "IoTCheckRequirementsProperties": {
-      "description": "IoT requirements check properties.",
-      "properties": {
-        "subscriptionId": {
-          "description": "The subscription id to connect to, and get the data from.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "AADDataConnector": {
       "allOf": [
         {
@@ -1255,38 +1222,6 @@
         "dataTypes"
       ]
     },
-    "IoTDataConnector": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ],
-      "description": "Represents IoT data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/IoTDataConnectorProperties",
-          "description": "IoT data connector properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "IOT"
-    },
-    "IoTDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
-      "description": "IoT data connector properties.",
-      "properties": {
-        "subscriptionId": {
-          "description": "The subscription id to connect to, and get the data from.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "DataConnector": {
       "description": "Data connector",
       "allOf": [
@@ -1357,8 +1292,7 @@
         "MicrosoftThreatProtection",
         "MicrosoftThreatIntelligence",
         "GenericUI",
-        "APIPolling",
-        "IOT"
+        "APIPolling"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1415,9 +1349,6 @@
           },
           {
             "value": "APIPolling"
-          },
-          {
-            "value": "IOT"
           }
         ]
       }
