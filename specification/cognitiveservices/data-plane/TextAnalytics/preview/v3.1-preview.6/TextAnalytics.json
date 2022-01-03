@@ -32,295 +32,6 @@
     ]
   },
   "paths": {
-    "/analyze": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
-        "operationId": "Analyze",
-        "summary": "Submit analysis job",
-        "parameters": [
-          {
-            "description": "Collection of documents to analyze and tasks to execute.",
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeBatchInput"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Submit analysis job request": {
-            "$ref": ".//examples//SuccessfulAnalyzeRequest.json"
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/analyze/jobs/{jobId}": {
-      "get": {
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
-        "operationId": "AnalyzeStatus",
-        "summary": "Get analysis status and results",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AnalyzeJobId"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          },
-          {
-            "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
-            "in": "query",
-            "maximum": 50,
-            "minimum": 1,
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
-            "in": "query",
-            "minimum": 0,
-            "name": "$skip",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Analysis job status and metadata.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeJobState"
-            }
-          },
-          "404": {
-            "description": "Job ID not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Analysis job status request": {
-            "$ref": ".//examples//SuccessfulAnalyzeStatusRequest.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/entities/health/jobs/{jobId}": {
-      "get": {
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "description": "Get details of the healthcare prediction job specified by the jobId.",
-        "operationId": "HealthStatus",
-        "summary": "Get healthcare analysis job status and results",
-        "parameters": [
-          {
-            "$ref": "#/parameters/JobId"
-          },
-          {
-            "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
-            "in": "query",
-            "maximum": 50,
-            "minimum": 1,
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
-            "in": "query",
-            "minimum": 0,
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HealthcareJobState"
-            }
-          },
-          "404": {
-            "description": "Job ID not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Health request": {
-            "$ref": ".//examples//SuccessfulHealthStatusRequest.json"
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "description": "Cancel healthcare prediction job.",
-        "operationId": "CancelHealthJob",
-        "summary": "Cancel healthcare prediction job",
-        "parameters": [
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Cancel Job request has been received.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Job ID not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Health request": {
-            "$ref": ".//examples//SuccessfulHealthDeleteRequest.json"
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/entities/health/jobs": {
-      "post": {
-        "summary": "Submit healthcare analysis job",
-        "description": "Start a healthcare analysis job to recognize healthcare related entities (drugs, conditions, symptoms, etc) and their relations.",
-        "operationId": "Health",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ModelVersion"
-          },
-          {
-            "$ref": "#/parameters/StringIndexType"
-          },
-          {
-            "$ref": "#/parameters/MultiLanguageInput"
-          },
-          {
-            "$ref": "#/parameters/LoggingOptOut"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted - call results in a link where the status of the submitted job can be checked via the GET operation.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Health request": {
-            "$ref": ".//examples//SuccessfulHealthRequest.json"
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
     "/entities/recognition/general": {
       "post": {
         "summary": "Named Entity Recognition",
@@ -376,315 +87,6 @@
         "x-ms-examples": {
           "Successful Entities request": {
             "$ref": ".//examples//SuccessfulEntitiesRequest.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/entities/recognition/pii": {
-      "post": {
-        "summary": "Entities containing personal information",
-        "description": "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. For the list of supported entity types, check <a href=\"https://aka.ms/tanerpii\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
-        "operationId": "EntitiesRecognitionPii",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ModelVersion"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          },
-          {
-            "$ref": "#/parameters/LoggingOptOut"
-          },
-          {
-            "name": "domain",
-            "in": "query",
-            "description": "(Optional) if specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'PHI', 'none'.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/StringIndexType"
-          },
-          {
-            "$ref": "#/parameters/PiiCategories"
-          },
-          {
-            "$ref": "#/parameters/MultiLanguageInput"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call results in a list of entities containing personal information returned for each valid document",
-            "schema": {
-              "$ref": "#/definitions/PiiResult"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Entity PII request": {
-            "$ref": ".//examples//SuccessfulEntityPIIRequest.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/entities/linking": {
-      "post": {
-        "summary": "Linked entities from a well known knowledge base",
-        "description": "The API returns a list of recognized entities with links to a well known knowledge base. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId": "EntitiesLinking",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ModelVersion"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          },
-          {
-            "$ref": "#/parameters/LoggingOptOut"
-          },
-          {
-            "$ref": "#/parameters/StringIndexType"
-          },
-          {
-            "$ref": "#/parameters/MultiLanguageInput"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call results in a list of recognized entities with links to a well known knowledge base returned for each valid document",
-            "schema": {
-              "$ref": "#/definitions/EntityLinkingResult"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Entity Linking request": {
-            "$ref": ".//examples//SuccessfulEntityLinkingRequest.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/keyPhrases": {
-      "post": {
-        "summary": "Key Phrases",
-        "description": "The API returns a list of strings denoting the key phrases in the input text. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId": "KeyPhrases",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ModelVersion"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          },
-          {
-            "$ref": "#/parameters/LoggingOptOut"
-          },
-          {
-            "$ref": "#/parameters/MultiLanguageInput"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response results in 0 or more key phrases identified in each valid document",
-            "schema": {
-              "$ref": "#/definitions/KeyPhraseResult"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Key Phrase request": {
-            "$ref": ".//examples//SuccessfulKeyPhrasesRequest.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/languages": {
-      "post": {
-        "summary": "Detect Language",
-        "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId": "Languages",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ModelVersion"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          },
-          {
-            "$ref": "#/parameters/LoggingOptOut"
-          },
-          {
-            "$ref": "#/parameters/LanguageInput"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call results in the detected language with the highest probability for each valid document",
-            "schema": {
-              "$ref": "#/definitions/LanguageResult"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Detect Language request": {
-            "$ref": ".//examples//SuccessfulLanguagesRequest.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/sentiment": {
-      "post": {
-        "summary": "Sentiment",
-        "description": "The API returns a detailed sentiment analysis for the input text. The analysis is done in multiple levels of granularity, start from the a document level, down to sentence and key terms (targets and assessments).",
-        "operationId": "Sentiment",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ModelVersion"
-          },
-          {
-            "$ref": "#/parameters/ShowStats"
-          },
-          {
-            "$ref": "#/parameters/LoggingOptOut"
-          },
-          {
-            "name": "opinionMining",
-            "in": "query",
-            "description": "(Optional) if set to true, response will contain not only sentiment prediction but also opinion mining (aspect-based sentiment analysis) results.",
-            "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/StringIndexType"
-          },
-          {
-            "$ref": "#/parameters/MultiLanguageInput"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call results in a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral)",
-            "schema": {
-              "$ref": "#/definitions/SentimentResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Successful Sentiment request": {
-            "$ref": ".//examples//SuccessfulSentimentRequest.json"
           }
         },
         "deprecated": false
@@ -2696,20 +2098,15 @@
             "CurrencyResolution",
             "NumericRangeResolution",
             "TemporalSpanResolution"
-          ]
-        },
-        "confidenceScore":{
-          "type":"number",
-          "format": "double",
-          "minimum": 0,
-          "maximum": 1,
-          "multipleOf": 0.01,
-          "description": "The probability of the resolution instance being correct for the extracted entity."
+          ],
+          "x-ms-enum": {
+            "name": "ResolutionKind",
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "resolutionKind",
-        "confidenceScore"
+        "resolutionKind"
       ]
     },
     "BaseExtraInformation":{
@@ -2784,11 +2181,410 @@
         "value": {
           "type": "string",
           "description": "The numeric value that the extracted text denotes."
+        },
+        "quantityUnitKind": {
+          "$ref": "#/definitions/BaseUnitKind"
         }
       },
       "required": [
-        "value"
+        "value",
+        "quantityUnitKind"
       ]
+    },
+    "AgeResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type":"object",
+      "properties": {
+        "duration":{
+          "type":"string",
+          "description": "A value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations), or constant string Unknown if the age unit is not known."
+        }
+      }
+    },
+    "VolumeResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "SpeedResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "AreaResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "LengthResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "InformationResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "TemperatureResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "WeightResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ]
+    },
+    "CurrencyResolution":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "ISO4217":{
+          "type": "string",
+          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
+        }
+      }
+    },
+    "BaseUnitKind": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+          "kind": {
+              "type": "string",
+              "enum": [
+                  "SpeedUnit",
+                  "TemperatureUnit",
+                  "WeightUnit",
+                  "InformationUnit",
+                  "VolumeUnit",
+                  "AreaUnit",
+                  "LengthUnit",
+                  "AgeUnit",
+                  "CurrencyUnit"
+              ]
+          }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "WeightUnit": {
+      "allOf": [
+          {
+            "$ref": "#/definitions/BaseUnitKind"
+          }
+      ],
+      "properties": {
+          "value": {
+              "type": "string",
+              "enum": [
+                "Kilogram",
+                "Gram",
+                "Milligram",
+                "Gallon",
+                "MetricTon",
+                "Ton",
+                "Pound",
+                "Ounce",
+                "Grain",
+                "PennyWeight",
+                "LongTonBritish",
+                "ShortTonUS",
+                "ShortHundredWeightUS",
+                "Stone",
+                "Dram",
+                "Unspecified"
+              ]
+          }
+      },
+      "required": [
+          "value"
+      ],
+      "x-ms-discriminator-value": "WeightUnit"
+    },
+
+    "VolumeUnit": {
+      "allOf": [
+          {
+            "$ref": "#/definitions/BaseUnitKind"
+          }
+      ],
+      "properties": {
+          "value": {
+              "type": "string",
+              "enum": [
+                "CubicMeter",
+                "CubicCentimeter",
+                "CubicMillimeter",
+                "Hectoliter",
+                "Decaliter",
+                "Liter",
+                "Centiliter",
+                "Milliliter",
+                "CubicYard",
+                "CubicInch",
+                "CubicFoot",
+                "CubicMile",
+                "FluidOunce",
+                "Teaspoon",
+                "Tablespoon",
+                "Pint",
+                "Quart",
+                "Cup",
+                "Gill",
+                "Pinch",
+                "FluidDram",
+                "Barrel",
+                "Minim",
+                "Cord",
+                "Peck",
+                "Bushel",
+                "Hogshead",
+                "Unspecified"
+              ]
+          }
+      },
+      "required": [
+          "value"
+      ],
+      "x-ms-discriminator-value": "VolumeUnit"
+    },
+    "SpeedUnit": {
+      "allOf": [
+          {"$ref": "#/definitions/BaseUnitKind"}
+      ],
+      "properties": {
+          "value": {
+              "type": "string",
+              "enum": [
+                  "MeterPerSecond",
+                  "KilometerPerHour",
+                  "KilometerPerMinute",
+                  "KilometerPerSecond",
+                  "MilePerHour",
+                  "Knot",
+                  "FootPerSecond",
+                  "FootPerMinute",
+                  "YardPerMinute",
+                  "YardPerSecond",
+                  "MeterPerMillisecond",
+                  "CentimeterPerMillisecond",
+                  "KilometerPerMillisecond",
+                  "Unspecified"
+              ]
+          }
+      },
+      "required": [
+          "value"
+      ],
+      "x-ms-discriminator-value": "SpeedUnit"
+    },
+    "AreaUnit": {
+      "allOf": [
+          {
+            "$ref": "#/definitions/BaseUnitKind"
+          }
+      ],
+      "properties": {
+          "value": {
+              "type": "string",
+              "enum": [
+                "SquareKilometer",
+                "SquareHectometer",
+                "SquareDecameter",
+                "SquareDecimeter",
+                "SquareMeter",
+                "SquareCentimeter",
+                "SquareMillimeter",
+                "SquareInch",
+                "SquareFoot",
+                "SquareMile",
+                "SquareYard",
+                "Acre",
+                "Unspecified"
+              ]
+          }
+      },
+      "required": [
+        "value"
+      ],
+      "x-ms-discriminator-value": "LengthUnit"
+    },
+
+    "LengthUnit": {
+      "allOf": [
+          {
+            "$ref": "#/definitions/BaseUnitKind"
+          }
+      ],
+      "properties": {
+          "value": {
+              "type": "string",
+              "enum": [
+                  "Kilometer",
+                  "Hectometer",
+                  "Decameter",
+                  "Meter",
+                  "Decimeter",
+                  "Centimeter",
+                  "Millimeter",
+                  "Micrometer",
+                  "Nanometer",
+                  "Picometer",
+                  "Mile",
+                  "Yard",
+                  "Inch",
+                  "Foot",
+                  "LightYear",
+                  "Pt",
+                  "Unspecified"
+              ]
+          }
+      },
+      "required": [
+        "value"
+      ],
+      "x-ms-discriminator-value": "LengthUnit"
+    },
+    "AgeUnit":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUnitKind"
+        }
+       ],
+       "properties": {
+         "value": {
+            "type": "string",
+            "enum": [
+              "Year",
+              "Month",
+              "Week",
+              "Day",
+              "Unspecified"
+            ]
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "x-ms-discriminator-value": "AgeUnit"
+    },
+    "TemperatureUnit":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUnitKind"
+        }
+      ],
+      "properties": {
+        "value": {
+            "type": "string",
+            "enum": [
+              "F",
+              "K",
+              "R",
+              "D",
+              "C",
+              "Unspecified"
+            ]
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "x-ms-discriminator-value": "TemperatureUnit"
+    },
+    "InformationUnit":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUnitKind"
+        }
+      ],
+      "properties": {
+        "value": {
+            "type": "string",
+            "enum": [
+              "Bit",
+              "Kilobit",
+              "Megabit",
+              "Gigabit",
+              "Terabit",
+              "Petabit",
+              "Byte",
+              "Kilobyte",
+              "Megabyte",
+              "Gigabyte",
+              "Terabyte",
+              "Petabyte",
+              "Unspecified"
+            ]
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "x-ms-discriminator-value": "InformationUnit"
+    },
+    "CurrencyUnit":{
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUnitKind"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
     },
     "TemporalSpanResolution": {
       "allOf":[
@@ -2810,9 +2606,9 @@
         },
         "modifier":{
           "$ref": "#/definitions/TemporalModifier"
-        },
-        "description": "represents the resolution of a date and/or time span."
-      }
+        }
+      },
+      "description": "represents the resolution of a date and/or time span."
     },
     "NumericRangeResolution": {
       "allOf":[
@@ -2842,11 +2638,11 @@
           }
         },
         "begin":{
-          "$ref": "#/definitions/BaseResolution",
+          "$ref": "#/definitions/QuantityResolution",
           "description": "The beginning value of  the interval."
         },
         "end":{
-          "$ref": "#/definitions/BaseResolution",
+          "$ref": "#/definitions/QuantityResolution",
           "description": "The ending value of the interval."
         }
       },
@@ -2879,16 +2675,17 @@
         "timex": {
           "$ref": "#/definitions/TimeExpression"
         },
-        "subKind": {
+        "dateTimeSubKind": {
           "type": "string",
           "enum": [
             "Time",
             "Date",
             "DateTime",
-            "Duration"
+            "Duration",
+            "Set"
           ],
           "x-ms-enum": {
-            "name": "SubKind",
+            "name": "DateTimeSubKind",
             "modelAsString": false
           },
           "description": "The date time SubKind"
@@ -2903,7 +2700,7 @@
       },
       "required": [
         "timex",
-        "subKind",
+        "dateTimeSubKind",
         "value"
       ]
     },
@@ -2922,10 +2719,11 @@
             "Decimal",
             "Power",
             "Fraction",
-            "Percent"
+            "Percent",
+            "Unspecified"
           ],
           "x-ms-enum": {
-            "name": "numberKind",
+            "name": "NumberKind",
             "modelAsString": false
           },
           "description": "The type of the extracted number entity."
@@ -2975,328 +2773,6 @@
         "relativeTo",
         "value"
       ]
-    },
-    "SpeedResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type":"object",
-      "properties": {
-        "speedUnit": {
-          "type":"string",
-          "enum": [
-            "MeterPerSecond",
-            "KilometerPerHour",
-            "KilometerPerMinute",
-            "KilometerPerSecond",
-            "MilePerHour",
-            "Knot",
-            "FootPerSecond",
-            "FootPerMinute",
-            "YardPerMinute",
-            "YardPerSecond",
-            "MeterPerMillisecond",
-            "CentimeterPerMillisecond",
-            "KilometerPerMillisecond",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "SpeedUnit",
-            "modelAsString": true
-          },
-          "description": "The Speed measurement unit."
-        }
-      }
-    },
-    "WeightResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type":"object",
-      "properties": {
-        "weightUnit": {
-          "type":"string",
-          "enum": [
-            "Kilogram",
-            "Gram",
-            "Milligram",
-            "Gallon",
-            "MetricTon",
-            "Ton",
-            "Pound",
-            "Ounce",
-            "Grain",
-            "PennyWeight",
-            "LongTonBritish",
-            "ShortTonUS",
-            "ShortHundredWeightUS",
-            "Stone",
-            "Dram",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "WeightUnit",
-            "modelAsString": true
-          },
-          "description": "The weight measurement unit."
-
-        }
-      }
-    },
-    "LengthResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type":"object",
-      "properties": {
-        "lengthUnit": {
-          "type":"string",
-          "enum": [
-            "Kilometer",
-            "Hectometer",
-            "Decameter",
-            "Meter",
-            "Decimeter",
-            "Centimeter",
-            "Millimeter",
-            "Micrometer",
-            "Nanometer",
-            "Picometer",
-            "Mile",
-            "Yard",
-            "Inch",
-            "Foot",
-            "LightYear",
-            "Pt",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "LengthUnit",
-            "modelAsString": true
-          },
-          "description": "The length measurement unit."
-        }
-      }
-    },
-    "VolumeResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type":"object",
-      "properties": {
-        "volumeUnit": {
-          "type":"string",
-          "enum": [
-            "CubicMeter",
-            "CubicCentimeter",
-            "CubicMillimeter",
-            "Hectoliter",
-            "Decaliter",
-            "Liter",
-            "Centiliter",
-            "Milliliter",
-            "CubicYard",
-            "CubicInch",
-            "CubicFoot",
-            "CubicMile",
-            "FluidOunce",
-            "Teaspoon",
-            "Tablespoon",
-            "Pint",
-            "Quart",
-            "Cup",
-            "Gill",
-            "Pinch",
-            "FluidDram",
-            "Barrel",
-            "Minim",
-            "Cord",
-            "Peck",
-            "Bushel",
-            "Hogshead",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "VolumeUnit",
-            "modelAsString": true
-          },
-          "description": "The volume measurement unit."
-        }
-      }
-    },
-    "AreaResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type":"object",
-      "properties": {
-        "unit":{
-          "type":"string",
-          "enum": [
-            "SquareKilometer",
-            "SquareHectometer",
-            "SquareDecameter",
-            "SquareDecimeter",
-            "SquareMeter",
-            "SquareCentimeter",
-            "SquareMillimeter",
-            "SquareInch",
-            "SquareFoot",
-            "SquareMile",
-            "SquareYard",
-            "Acre",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "VolumeUnit",
-            "modelAsString": true
-          },
-          "description": "The area measurement unit."
-        }
-      }
-    },
-    "AgeResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type":"object",
-      "properties": {
-        "ageUnit":{
-          "type":"string",
-          "enum": [
-            "Year",
-            "Month",
-            "Week",
-            "Day",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "AgeUnit",
-            "modelAsString": true
-          },
-          "description": "The age measurement unit."
-        },
-        "duration":{
-          "type":"string",
-          "description": "A value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
-        }
-      }
-    },
-    "InformationResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "informationUnit":{
-          "type":"string",
-          "enum": [
-            "Bit",
-            "Kilobit",
-            "Megabit",
-            "Gigabit",
-            "Terabit",
-            "Petabit",
-            "Byte",
-            "Kilobyte",
-            "Megabyte",
-            "Gigabyte",
-            "Terabyte",
-            "Petabyte",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "InformationUnit",
-            "modelAsString": true
-          },
-          "description": "The information measurement unit."
-        }
-      }
-    },
-    "TemperatureResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "temperatureUnit":{
-          "type":"string",
-          "enum": [
-            "F",
-            "K",
-            "R",
-            "D",
-            "C",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "TemperatureUnit",
-            "modelAsString": true
-          },
-          "description": "The temperature measurement unit."
-        }
-      }
-    },
-    "CurrencyResolution":{
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "ISO4217":{
-          "type": "string",
-          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
-        },
-        "unit":{
-          "type":"string",
-          "description": "A string representation of the currency name."
-        }
-      }
     },
     "TemporalModifier":{
       "type": "string",
