@@ -8,7 +8,7 @@
     "securityDefinitions": {
         "apim_key": {
             "type": "apiKey",
-            "name": "Ocp-Apim-Sumscription-Key",
+            "name": "Ocp-Apim-Subscription-Key",
             "in": "header"
         }
     },
@@ -60,7 +60,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/AnalyzeTextResponse"
+                            "$ref": "#/definitions/AnalyzeTextTaskResult"
                         }
                     },
                     "default": {
@@ -243,140 +243,56 @@
             }
         },
         "AnalyzeTextInput": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/MultiLanguageBatchInput"
+            "properties": {
+                "analysisInput": {
+                    "$ref": "#/definitions/AnalysisInput"
                 },
+                "parameters": {
+                    "$ref": 
+                }
+            },
+            "allOf": [
                 {
                     "$ref": "#/definitions/AnalyzeTextTask"
                 }
+            ],
+            "required": [
+                "analysisInput"
             ]
         },
         "AnalyzeTextTask": {
-            "description": "TODO",
-            "discriminator": "task",
+            "discriminator": "kind",
             "required": [
-                "task"
+                "kind"
             ],
             "properties": {
-                "task": {
+                "kind": {
                     "$ref": "#/definitions/AnalyzeTextTaskKind"
                 }
             }
         },
-        "AnalyzeTextResponse": {
-            "type": "object",
-            "discriminator": "task",
+        "AnalyzeTextTaskResult": {
+            "discriminator": "kind",
+            "required": [
+                "kind"
+            ],
             "properties": {
-                "task": {
+                "kind": {
                     "$ref": "#/definitions/AnalyzeTextTaskKind"
                 }
-            },
-            "required": [
-                "task"
-            ]
+            }
         },
-        "AnalyzeTextSentimentResponse": {
+        "AnalysisInput": {
             "type": "object",
+            "description": "Input for the analysis to be performed.",
             "properties": {
-                "result": {
-                    "$ref": "#/definitions/SentimentResponse"
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MultiLanguageInput"
+                    }
                 }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextResponse"
-                }
-            ],
-            "required": [
-                "result"
-            ],
-            "x-ms-discriminator-value": "SentimentAnalysis"
-        },
-        "AnalyzeTextEntityRecognitionResponse": {
-            "type": "object",
-            "properties": {
-                "result": {
-                    "$ref": "#/definitions/EntitiesResult"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextResponse"
-                }
-            ],
-            "required": [
-                "result"
-            ],
-            "x-ms-discriminator-value": "EntityRecognition"
-        },
-        "AnalyzeTextPiiEntityRecognitionResponse": {
-            "type": "object",
-            "properties": {
-                "result": {
-                    "$ref": "#/definitions/PiiResult"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextResponse"
-                }
-            ],
-            "required": [
-                "result"
-            ],
-            "x-ms-discriminator-value": "PiiEntityRecognition"
-        },
-        "AnalyzeTextKeyPhraseExtractionResponse": {
-            "type": "object",
-            "properties": {
-                "result": {
-                    "$ref": "#/definitions/KeyPhraseResult"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextResponse"
-                }
-            ],
-            "required": [
-                "result"
-            ],
-            "x-ms-discriminator-value": "KeyPhraseExtraction"
-        },
-        "AnalyzeTextEntityLinkingResponse": {
-            "type": "object",
-            "properties": {
-                "result": {
-                    "$ref": "#/definitions/EntityLinkingResult"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextResponse"
-                }
-            ],
-            "required": [
-                "result"
-            ],
-            "x-ms-discriminator-value": "EntityLinking"
-        },
-        "AnalyzeTextLanguageDetectionResponse": {
-            "type": "object",
-            "properties": {
-                "result": {
-                    "$ref": "#/definitions/LanguageDetectionResult"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AnalyzeTextResponse"
-                }
-            ],
-            "required": [
-                "result"
-            ],
-            "x-ms-discriminator-value": "LanguageDetection"
+            }
         },
         "AnalyzeTextJobsInput": {
             "properties": {
@@ -385,15 +301,7 @@
                     "type": "string"
                 },
                 "analysisInput": {
-                    "description": "Input for the analysis job.",
-                    "properties": {
-                        "records": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/MultiLanguageInput"
-                            }
-                        }
-                    }
+                    "$ref": "#/definitions/AnalysisInput"
                 },
                 "tasks": {
                     "description": "The set of tasks to execute on the input documents.",
@@ -419,10 +327,13 @@
             "type": "object",
             "description": "Base task object.",
             "properties": {
-                "taskName": {
+                "taskId": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "taskId"
+            ]
         },
         "TaskParameters": {
             "type": "object",
@@ -448,9 +359,9 @@
             "properties": {
                 "errors": {
                     "type": "array",
-                    "description": "Errors by record id.",
+                    "description": "Errors by document id.",
                     "items": {
-                        "$ref": "#/definitions/RecordError"
+                        "$ref": "#/definitions/DocumentError"
                     }
                 },
                 "statistics": {
@@ -488,7 +399,7 @@
                     "type": "array",
                     "description": "Errors by document id.",
                     "items": {
-                        "$ref": "#/definitions/RecordError"
+                        "$ref": "#/definitions/DocumentError"
                     }
                 },
                 "statistics": {
@@ -540,21 +451,27 @@
                 "results": {
                     "$ref": "#/definitions/CustomEntitiesResult"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTask"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomEntityRecognition"
         },
         "CustomEntitiesResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/EntitiesRecordResult"
+                                "$ref": "#/definitions/EntitiesDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -566,7 +483,7 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
         "CustomSingleClassificationTask": {
@@ -596,21 +513,27 @@
                 "results": {
                     "$ref": "#/definitions/CustomSingleClassificationResult"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTask"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomSingleClassification"
         },
         "CustomSingleClassificationResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SingleClassificationRecordResult"
+                                "$ref": "#/definitions/SingleClassificationDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -622,10 +545,10 @@
                 }   
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "SingleClassificationRecordResult": {
+        "SingleClassificationDocumentResult": {
             "type": "object",
             "properties": {
                 "classification": {
@@ -634,7 +557,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -687,21 +610,28 @@
                 "results": {
                     "$ref": "#/definitions/CustomMultiClassificationResult"
                 }
-            }
+            },
+            "allOf": [
+
+                {
+                    "$ref": "#/definitions/AnalyzeTextTask"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomMultiClassification"
         },
         "CustomMultiClassificationResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/MultiClassificationRecordResult"
+                                "$ref": "#/definitions/MultiClassificationDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -713,10 +643,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "MultiClassificationRecordResult": {
+        "MultiClassificationDocumentResult": {
             "type": "object",
             "properties": {
                 "classifications": {
@@ -728,7 +658,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -774,20 +704,26 @@
                 "results": {
                     "$ref": "#/definitions/HealthcareResult"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTask"
+                }
+            ],
+            "x-ms-discriminator-value": "Healthcare"
         },
         "HealthcareResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/HealthcareEntitiesRecordResult"
+                                "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -799,10 +735,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "HealthcareEntitiesRecordResult": {
+        "HealthcareEntitiesDocumentResult": {
             "type": "object",
             "properties": {
                 "entities": {
@@ -822,7 +758,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -1100,21 +1036,30 @@
                 "results": {
                     "$ref": "#/definitions/SentimentResponse"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "required": [
+                "results"
+            ],
+            "x-ms-discriminator-value": "SentimentAnalysis"
         },
         "SentimentResponse": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Sentiment analysis per record.",
+                    "description": "Sentiment analysis per document.",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SentimentRecordResult"
+                                "$ref": "#/definitions/SentimentDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -1126,10 +1071,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "SentimentRecordResult": {
+        "SentimentDocumentResult": {
             "type": "object",
             "properties": {
                 "sentiment": {
@@ -1160,7 +1105,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -1430,21 +1375,27 @@
                 "results": {
                     "$ref": "#/definitions/EntitiesResult"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "x-ms-discriminator-value": "EntityRecognition"
         },
         "EntitiesResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/EntitiesRecordResult"
+                                "$ref": "#/definitions/EntitiesDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -1456,10 +1407,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "EntitiesRecordResult": {
+        "EntitiesDocumentResult": {
             "type": "object",
             "properties": {
                 "entities": {
@@ -1472,7 +1423,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -1558,21 +1509,27 @@
                 "results": {
                     "$ref": "#/definitions/EntityLinkingResult"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "x-ms-discriminator-value": "EntityLinking"
         },
         "EntityLinkingResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             },
                             {
-                                "$ref": "#/definitions/LinkedEntitiesRecordResult"
+                                "$ref": "#/definitions/LinkedEntitiesDocumentResult"
                             }
                         ]
                     }
@@ -1584,10 +1541,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "LinkedEntitiesRecordResult": {
+        "LinkedEntitiesDocumentResult": {
             "type": "object",
             "required": [
                 "entities"
@@ -1595,7 +1552,7 @@
             "properties": {
                 "entities": {
                     "type": "array",
-                    "description": "Recognized well known entities in the record.",
+                    "description": "Recognized well known entities in the document.",
                     "items": {
                         "$ref": "#/definitions/LinkedEntity"
                     }
@@ -1603,7 +1560,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ]
         },
@@ -1731,21 +1688,27 @@
                 "results": {
                     "$ref": "#/definitions/PiiResult"
                 }
-            }
+            },
+            "allOf":[
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "x-ms-discriminator-value": "PiiEntityRecognition"
         },
         "PiiResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             },
                             {
-                                "$ref": "#/definitions/PiiEntitiesRecordResult"
+                                "$ref": "#/definitions/PiiEntitiesDocumentResult"
                             }
                         ]
                     }
@@ -1757,10 +1720,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "PiiEntitiesRecordResult": {
+        "PiiEntitiesDocumentResult": {
             "type": "object",
             "properties": {
                 "redactedText": {
@@ -1769,7 +1732,7 @@
                 },
                 "entities": {
                     "type": "array",
-                    "description": "Recognized entities in the record.",
+                    "description": "Recognized entities in the document.",
                     "items": {
                         "$ref": "#/definitions/Entity"
                     }
@@ -1777,7 +1740,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -2023,21 +1986,27 @@
                 "results": {
                     "$ref": "#/definitions/ExtractiveSummarizationResult"
                 }
-            }
+            },
+            "allOf":[
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "x-ms-discriminator-value": "ExtractiveSummarization"
         },
         "ExtractiveSummarizationResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/ExtractedSummaryRecordResult"
+                                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -2049,10 +2018,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "ExtractedSummaryRecordResult": {
+        "ExtractedSummaryDocumentResult": {
             "type": "object",
             "properties": {
                 "sentences": {
@@ -2065,7 +2034,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -2129,21 +2098,27 @@
                 "results": {
                     "$ref": "#/definitions/KeyPhraseResult"
                 }
-            }
+            },
+            "allOf":[
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "x-ms-discriminator-value": "KeyPhraseExtraction"
         },
         "KeyPhraseResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/KeyPhrasesRecordResult"
+                                "$ref": "#/definitions/KeyPhrasesDocumentResult"
                             },
                             {
-                                "$ref": "#/definitions/RecordDetectedLanguage"
+                                "$ref": "#/definitions/DocumentDetectedLanguage"
                             }
                         ]
                     }
@@ -2155,15 +2130,15 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "KeyPhrasesRecordResult": {
+        "KeyPhrasesDocumentResult": {
             "type": "object",
             "properties": {
                 "keyPhrases": {
                     "type": "array",
-                    "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input record.",
+                    "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
                     "items": {
                         "type": "string"
                     }
@@ -2171,7 +2146,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -2210,14 +2185,28 @@
             ],
             "x-ms-discriminator-value": "LanguageDetection"
         },
+        "LanguageDetectionTaskResult": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "$ref": "#/definitions/LanguageDetectionResult"
+                }
+            },
+            "allOf":[
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ],
+            "x-ms-discriminator-value": "LanguageDetection"
+        },
         "LanguageDetectionResult": {
             "type": "object",
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
-                    "description": "Response by record",
+                    "description": "Response by document",
                     "items": {
-                        "$ref": "#/definitions/LanguageDetectionRecordResult"
+                        "$ref": "#/definitions/LanguageDetectionDocumentResult"
                     }
                 }
             },
@@ -2227,10 +2216,10 @@
                 }
             ],
             "required": [
-                "records"
+                "documents"
             ]
         },
-        "LanguageDetectionRecordResult": {
+        "LanguageDetectionDocumentResult": {
             "type": "object",
             "properties": {
                 "detectedLanguage": {
@@ -2240,7 +2229,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/RecordResult"
+                    "$ref": "#/definitions/DocumentResult"
                 }
             ],
             "required": [
@@ -2384,130 +2373,10 @@
                         "total": {
                             "type": "integer"
                         },
-                        "customEntityRecognitionTasks": {
+                        "items": {
                             "type": "array",
                             "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/CustomEntitiesTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "customSingleClassificationTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/CustomSingleClassificationTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "customMultiClassificationTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/CustomMultiClassificationTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "entityRecognitionTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/EntitiesTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "entityRecognitionPiiTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                    "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                    "$ref": "#/definitions/PiiTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "keyPhraseExtractionTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                    "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                    "$ref": "#/definitions/KeyPhraseTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "entityLinkingTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                    "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                    "$ref": "#/definitions/EntityLinkingTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "sentimentAnalysisTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                    "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                    "$ref": "#/definitions/SentimentTaskResult"
-                                    }
-                                ]
-                            }
-                        },
-                        "extractiveSummarizationTasks": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "allOf": [
-                                    {
-                                    "$ref": "#/definitions/TaskState"
-                                    },
-                                    {
-                                    "$ref": "#/definitions/ExtractiveSummarizationTaskResult"
-                                    }
-                                ]
+                                "$ref": "#/definitions/AnalyzeTextLROResult"
                             }
                         }
                     },
@@ -2531,9 +2400,6 @@
                     "format": "date-time",
                     "type": "string"
                 },
-                "taskName": {
-                    "type": "string"
-                },
                 "status": {
                     "enum": [
                         "notStarted",
@@ -2550,12 +2416,27 @@
                     }
                 }
             },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TaskIdentifier"
+                }
+            ],
             "required": [
                 "status",
                 "lastUpdateDateTime",
                 "taskName"
             ],
             "type": "object"
+        },
+        "AnalyzeTextLROResult": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TaskState"
+                },
+                {
+                    "$ref": "#/definitions/AnalyzeTextTaskResult"
+                }
+            ]
         },
         "StringIndexType": {
             "type": "string",
@@ -2591,7 +2472,7 @@
 
             }
         },
-        "RecordResult": {
+        "DocumentResult": {
             "type": "object",
             "required": [
                 "id",
@@ -2600,31 +2481,35 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "Unique, non-empty record identifier."
+                    "description": "Unique, non-empty document identifier."
                 },
                 "warnings": {
                     "type": "array",
-                    "description": "Warnings encountered while processing record.",
+                    "description": "Warnings encountered while processing document.",
                     "items": {
-                        "$ref": "#/definitions/RecordWarning"
+                        "$ref": "#/definitions/DocumentWarning"
                     }
                 },
                 "statistics": {
-                    "description": "if showStats=true was specified in the request this field will contain information about the record payload.",
-                    "$ref": "#/definitions/RecordStatistics"
+                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                    "$ref": "#/definitions/DocumentStatistics"
+                },
+                "detectedLanguage": {
+                    "type": "string",
+                    "description": "(Optional) This is the 2 letter ISO 639-1 representation of the language used for processing this document. This property will only be used if automatic language detection was enabled for the input document."
                 }
             }
         },
-        "RecordDetectedLanguage": {
+        "DocumentDetectedLanguage": {
             "type": "object",
             "properties": {
                 "detectedLanguage": {
                     "type": "string",
-                    "description": "If 'language' is set to 'auto' for the record in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+                    "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
                 }
             }
         },
-        "RecordError": {
+        "DocumentError": {
             "type": "object",
             "required": [
               "id",
@@ -2633,16 +2518,16 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Record Id."
+                "description": "Document Id."
               },
               "error": {
                 "type": "object",
-                "description": "Record Error.",
+                "description": "Document Error.",
                 "$ref": "#/definitions/Error"
               }
             }
         },
-        "RecordWarning": {
+        "DocumentWarning": {
             "type": "object",
             "required": [
                 "code",
@@ -2671,7 +2556,7 @@
                 }
             }
         },
-        "RecordStatistics": {
+        "DocumentStatistics": {
             "type": "object",
             "required": [
                 "charactersCount",
@@ -2681,15 +2566,15 @@
                 "charactersCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of text elements recognized in the record."
+                    "description": "Number of text elements recognized in the document."
                 },
                 "transactionsCount": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Number of transactions for the record."
+                    "description": "Number of transactions for the document."
                 }
             },
-            "description": "if showStats=true was specified in the request this field will contain information about the record payload."
+            "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
         "RequestStatistics": {
             "type": "object",
@@ -2725,12 +2610,12 @@
         },
         "MultiLanguageBatchInput": {
             "type": "object",
-            "description": "Contains a set of input records to be analyzed by the service.",
+            "description": "Contains a set of input documents to be analyzed by the service.",
             "required": [
-                "records"
+                "documents"
             ],
             "properties": {
-                "records": {
+                "documents": {
                     "type": "array",
                     "description": "The set of documents to process as part of this batch.",
                     "items": {
@@ -2741,7 +2626,7 @@
         },
         "MultiLanguageInput": {
             "type": "object",
-            "description": "Contains an input record to be analyzed by the service.",
+            "description": "Contains an input document to be analyzed by the service.",
             "required": [
                 "id",
                 "text"
@@ -2749,7 +2634,7 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "A unique, non-empty record identifier."
+                    "description": "A unique, non-empty document identifier."
                 },
                 "text": {
                     "type": "string",
@@ -2757,7 +2642,11 @@
                 },
                 "language": {
                     "type": "string",
-                    "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+                    "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default. Use \"auto\" for automatic language detection."
+                },
+                "defaultLanguage": {
+                    "type": "string",
+                    "description": "(Optional) A 2 leter ISO 639-1 representation of a language to be used as a default value when the \"language\" property is set to \"auto\". The default value will be used as a fallback if a language cannot be automatically detected."
                 }
             }
         },
@@ -2903,7 +2792,7 @@
           "ShowStats": {
             "name": "showStats",
             "in": "query",
-            "description": "(Optional) if set to true, response will contain request and record level statistics.",
+            "description": "(Optional) if set to true, response will contain request and document level statistics.",
             "type": "boolean",
             "required": false,
             "x-ms-parameter-location": "method"
