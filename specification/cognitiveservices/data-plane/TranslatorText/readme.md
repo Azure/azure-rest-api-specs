@@ -6,7 +6,7 @@ Configuration for generating Translator Text SDK.
 
 The current release is `release_3_0`.
 
-The current document batch preview release is `release_1_1'`.
+The current document batch release is `release_1_1'`.
 
 ``` yaml
 
@@ -17,13 +17,7 @@ openapi-type: data-plane
 
 ``` yaml
 
-tag: release_1_0_preview.1
-add-credentials: true
-openapi-type: data-plane
-```
-``` yaml
-
-tag: release_1_0
+tag: release_1_1
 add-credentials: true
 openapi-type: data-plane
 ```
