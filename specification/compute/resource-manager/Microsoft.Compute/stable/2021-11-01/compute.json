@@ -12266,7 +12266,16 @@
         },
         "repairAction": {
           "type": "string",
-          "description": "Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace."
+          "description": "Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.",
+          "enum": [
+            "Replace",
+            "Restart",
+            "Reimage"
+          ],
+          "x-ms-enum": {
+            "name": "RepairActionTypes",
+            "modelAsString": true
+          }
         }
       },
       "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
