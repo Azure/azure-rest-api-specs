@@ -235,22 +235,6 @@ directive:
       - RequiredPropertiesMissingInResourceModel
 ```
 
-### Tag: package-2021-08-01
-
-These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-08-01'
-input-file:
-- Microsoft.Compute/stable/2021-07-01/compute.json
-- Microsoft.Compute/stable/2021-07-01/runCommands.json
-- Microsoft.Compute/stable/2021-07-01/skus.json
-- Microsoft.Compute/stable/2021-08-01/disk.json
-- Microsoft.Compute/stable/2021-07-01/gallery.json
-- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
-- Microsoft.Compute/stable/2021-07-01/communityGallery.json
-- Microsoft.Compute/stable/2021-03-01/cloudService.json
-```
-
 ### Tag: package-2021-11-01
 
 These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
@@ -275,6 +259,22 @@ These settings apply only when `--tag=package-2021-11-01-only` is specified on t
 input-file:
 - Microsoft.Compute/stable/2021-11-01/compute.json
 - Microsoft.Compute/stable/2021-11-01/runCommands.json
+```
+
+### Tag: package-2021-08-01
+
+These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01'
+input-file:
+- Microsoft.Compute/stable/2021-07-01/compute.json
+- Microsoft.Compute/stable/2021-07-01/runCommands.json
+- Microsoft.Compute/stable/2021-07-01/skus.json
+- Microsoft.Compute/stable/2021-08-01/disk.json
+- Microsoft.Compute/stable/2021-07-01/gallery.json
+- Microsoft.Compute/stable/2021-07-01/sharedGallery.json
+- Microsoft.Compute/stable/2021-07-01/communityGallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-07-01
