@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-05-01",
+    "version": "2021-10-14",
     "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights client for web test based alerting."
   },
@@ -33,6 +33,7 @@
         "tags": [
           "Operations"
         ],
+        "summary": "List available operations.",
         "description": "Lists all of the available insights REST API operations.",
         "operationId": "Operations_List",
         "parameters": [
@@ -56,6 +57,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
         },
         "produces": [
           "application/json"
