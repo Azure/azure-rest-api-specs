@@ -311,7 +311,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ElasticSan"
+              "$ref": "#/definitions/ElasticSanUpdate"
             },
             "description": "Elastic San object."
           },
@@ -584,7 +584,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VolumeGroup"
+              "$ref": "#/definitions/VolumeGroupUpdate"
             },
             "description": "Volume Group object."
           },
@@ -821,7 +821,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Volume"
+              "$ref": "#/definitions/VolumeUpdate"
             },
             "description": "Volume object."
           },
@@ -1040,7 +1040,7 @@
             "$ref": "#/parameters/VolumeGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FilterByVolumeParameter"
+            "$ref": "#/parameters/FilterByParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1169,7 +1169,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Snapshot"
+              "$ref": "#/definitions/SnapshotUpdate"
             },
             "description": "Snapshot object."
           },
@@ -1325,6 +1325,76 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}/export": {
+      "post": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Export a volume to a different Volume Group in same San account or different San account",
+        "operationId": "Snapshots_Export",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportSnapshot"
+            },
+            "description": "Snapshot object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the create or update operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error from the RP.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Snapshots_Export_MaximumSet_Gen": {
+            "$ref": "./examples/Snapshots_Export_MaximumSet_Gen.json"
+          },
+          "Snapshots_Export_MinimumSet_Gen": {
+            "$ref": "./examples/Snapshots_Export_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1379,8 +1449,8 @@
       "description": "The name of the Volume.",
       "x-ms-parameter-location": "method"
     },
-    "FilterByVolumeParameter": {
-      "name": "filterByVolume",
+    "FilterByParameter": {
+      "name": "filterBy",
       "required": false,
       "in": "body",
       "description": "Filter data by Volume name",
@@ -1557,8 +1627,8 @@
       "description": "Elastic San response properties.",
       "required": [
         "availabilityZones",
-        "baseSizeInGB",
-        "extendedSizeInTB"
+        "baseSizeTB",
+        "extendedSizeTB"
       ],
       "properties": {
         "sku": {
@@ -1577,8 +1647,8 @@
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true
         },
-        "baseSizeInGB": {
-          "description": "Base size of the Elastic San appliance in GB.",
+        "baseSizeTB": {
+          "description": "Base size of the Elastic San appliance in TB.",
           "type": "integer",
           "format": "int64",
           "x-ms-mutability": [
@@ -1586,7 +1656,7 @@
             "create"
           ]
         },
-        "extendedSizeInTB": {
+        "extendedSizeTB": {
           "description": "Extended size of the Elastic San appliance in TB.",
           "type": "integer",
           "format": "int64",
@@ -1595,7 +1665,7 @@
             "create"
           ]
         },
-        "totalSizeInTB": {
+        "totalSizeTB": {
           "description": "Total size of the Elastic San appliance in TB.",
           "type": "integer",
           "format": "int64",
@@ -1612,6 +1682,52 @@
           "type": "integer",
           "format": "int64",
           "readOnly": true
+        }
+      }
+    },
+    "ElasticSanUpdate": {
+      "type": "object",
+      "description": "Response for ElasticSan update request.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of ElasticSan.",
+          "$ref": "#/definitions/ElasticSanUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Update tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ElasticSanUpdateProperties": {
+      "type": "object",
+      "description": "Elastic San update properties.",
+      "required": [
+        "baseSizeTB",
+        "extendedSizeTB"
+      ],
+      "properties": {
+        "baseSizeTB": {
+          "description": "Base size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedSizeTB": {
+          "description": "Extended size of the Elastic San appliance in TB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -1679,15 +1795,6 @@
           "description": "Volume targets for the San account for a given tier",
           "type": "object",
           "$ref": "#/definitions/VolumeTierInfo"
-        },
-        "costs": {
-          "description": "The pricing info of the Sku.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuCost"
-          },
-          "x-ms-identifiers": [],
-          "readOnly": true
         }
       }
     },
@@ -1695,31 +1802,31 @@
       "description": "San scalability target",
       "type": "object",
       "properties": {
-        "maxSizePB": {
+        "maxSizeTB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum San account capacity in PiB",
+          "description": "Maximum San account capacity in TB",
           "readOnly": true
         },
         "minSizeTB": {
           "type": "integer",
           "format": "int64",
-          "description": "Minimum San account capacity in PiB",
+          "description": "Minimum San account capacity in TB",
           "readOnly": true
         },
         "minIncrementSizeTB": {
           "type": "integer",
           "format": "int64",
-          "description": "Increment the San capacity in TiB",
+          "description": "Increment the San capacity in TB",
           "readOnly": true
         },
-        "maxIopsTB": {
+        "maxIopsPerTB": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum IOPS",
           "readOnly": true
         },
-        "maxMBpsTB": {
+        "maxMBpsPerTB": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum MBps",
@@ -1737,7 +1844,7 @@
           "description": "Maximum MBps",
           "readOnly": true
         },
-        "maxVolumeGroups": {
+        "maxVolumeGroupCount": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum number of volume groups per San account",
@@ -1749,13 +1856,13 @@
       "description": "Volume Group scalability target",
       "type": "object",
       "properties": {
-        "maxVolumes": {
+        "maxVolumeCount": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum number of Volumes per Volume Groups per San account",
           "readOnly": true
         },
-        "maxSnapshots": {
+        "maxSnapshotCount": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum number of Snapshots per Volume Groups per San account",
@@ -1767,22 +1874,22 @@
       "description": "Volume scalability target",
       "type": "object",
       "properties": {
-        "maxSizeTB": {
+        "maxSizeGB": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum San account capacity in TiB",
+          "description": "Maximum San account capacity in GB",
           "readOnly": true
         },
         "minSizeGB": {
           "type": "integer",
           "format": "int64",
-          "description": "Minimum San account capacity in GiB",
+          "description": "Minimum San account capacity in GB",
           "readOnly": true
         },
         "minIncrementSizeGB": {
           "type": "integer",
           "format": "int64",
-          "description": "Increment the San capacity in TiB",
+          "description": "Increment the San capacity in TB",
           "readOnly": true
         },
         "maxIopsPerGB": {
@@ -1809,7 +1916,7 @@
           "description": "Maximum MBps",
           "readOnly": true
         },
-        "maxSnapshots": {
+        "maxSnapshotCount": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum number of Snapshots per Volume",
@@ -1832,36 +1939,6 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
-        },
-        "sites": {
-          "description": "The sites.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "SkuCost": {
-      "description": "The metadata for retrieving price info.",
-      "type": "object",
-      "properties": {
-        "meterId": {
-          "description": "Used for querying price from commerce.",
-          "type": "string",
-          "readOnly": true
-        },
-        "quantity": {
-          "format": "int64",
-          "description": "The cost quantity.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "extendedUnit": {
-          "description": "The extended unit.",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -1962,18 +2039,6 @@
           "description": "Properties of VolumeGroup.",
           "$ref": "#/definitions/VolumeGroupProperties"
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
           "readOnly": true,
@@ -2038,6 +2103,50 @@
         }
       }
     },
+    "VolumeGroupUpdate": {
+      "type": "object",
+      "description": "Volume Group request.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of VolumeGroup.",
+          "$ref": "#/definitions/VolumeGroupUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "VolumeGroupUpdateProperties": {
+      "type": "object",
+      "description": "VolumeGroup response properties.",
+      "required": [
+        "protocolType",
+        "encryption"
+      ],
+      "properties": {
+        "protocolType": {
+          "description": "Type of storage target",
+          "$ref": "#/definitions/StorageTargetType"
+        },
+        "encryption": {
+          "description": "Type of encryption",
+          "$ref": "#/definitions/EncryptionType"
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
     "Volume": {
       "type": "object",
       "description": "Response for Volume request.",
@@ -2046,18 +2155,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of Volume.",
           "$ref": "#/definitions/VolumeProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
         },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
@@ -2113,13 +2210,9 @@
         },
         "creationData": {
           "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/CreationData"
+          "$ref": "#/definitions/SourceCreationData"
         },
-        "provisioningState": {
-          "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "sizeInGB": {
+        "sizeGB": {
           "description": "Volume size.",
           "type": "integer",
           "format": "int64"
@@ -2130,29 +2223,43 @@
         }
       }
     },
-    "Snapshot": {
+    "VolumeUpdate": {
       "type": "object",
-      "description": "Response for Volume Snapshot request.",
+      "description": "Response for Volume request.",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/SnapshotSku"
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties of Volume Snapshot.",
-          "$ref": "#/definitions/SnapshotProperties"
+          "description": "Properties of Volume.",
+          "$ref": "#/definitions/VolumeUpdateProperties"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
           "description": "Resource tags."
+        }
+      }
+    },
+    "VolumeUpdateProperties": {
+      "type": "object",
+      "description": "Volume response properties.",
+      "properties": {
+        "sizeGB": {
+          "description": "Volume size.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Snapshot": {
+      "type": "object",
+      "description": "Response for Volume Snapshot request.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Volume Snapshot.",
+          "$ref": "#/definitions/SnapshotProperties"
         },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
@@ -2163,6 +2270,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExportSnapshot": {
+      "type": "object",
+      "description": "Response for Volume Snapshot request to export.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Export Volume Snapshot.",
+          "$ref": "#/definitions/ExportSnapshotProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -2227,19 +2350,44 @@
       "properties": {
         "creationData": {
           "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/CreationData"
-        },
-        "provisioningState": {
-          "description": "Snapshot provisioning state",
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionType",
-          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+          "$ref": "#/definitions/SnapshotCreationData"
         }
       }
     },
-    "CreationData": {
+    "SnapshotUpdate": {
+      "type": "object",
+      "description": "Snapshot request.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ExportSnapshotProperties": {
+      "type": "object",
+      "description": "Properties for Snapshot.",
+      "properties": {
+        "creationData": {
+          "description": "State of the operation on the resource.",
+          "$ref": "#/definitions/TargetCreationData"
+        }
+      }
+    },
+    "SnapshotCreationData": {
+      "type": "object",
+      "description": "Data used when creating a disk.",
+      "properties": {
+        "sourceUri": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If createOption is Restore, this is the ARM-like id of the source disk restore point."
+        }
+      }
+    },
+    "SourceCreationData": {
       "type": "object",
       "description": "Data used when creating a disk.",
       "required": [
@@ -2264,6 +2412,19 @@
         "sourceUri": {
           "type": "string",
           "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If createOption is Restore, this is the ARM-like id of the source disk restore point."
+        }
+      }
+    },
+    "TargetCreationData": {
+      "type": "object",
+      "description": "Data used when creating a disk.",
+      "required": [
+        "targetUri"
+      ],
+      "properties": {
+        "targetUri": {
+          "type": "string",
+          "description": "Target location for the source to be copied or exported"
         }
       }
     },
@@ -2394,18 +2555,6 @@
       "description": "The resource model definition for a ARM tracked top level resource.",
       "type": "object",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "x-ms-mutability": [
@@ -2422,34 +2571,33 @@
       ]
     },
     "Resource": {
-      "description": "ARM resource model definition.",
       "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Azure resource identifier.",
+          "readOnly": true
         },
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "The name of the resource"
+          "description": "Azure resource name.",
+          "readOnly": true
         },
         "type": {
-          "readOnly": true,
           "type": "string",
-          "description": "The type of the resource."
+          "description": "Azure resource type.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
+      "description": "The resource model definition.",
       "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "ErrorAdditionalInfo": {
       "description": "The resource management error additional info.",
