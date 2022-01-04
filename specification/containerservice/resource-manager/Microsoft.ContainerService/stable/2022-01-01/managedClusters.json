@@ -353,6 +353,9 @@
           },
           {
             "$ref": "#/parameters/ServerFqdnParameter"
+          },
+          {
+            "$ref": "#/parameters/FormatParameter"
           }
         ],
         "responses": {
@@ -5627,6 +5630,18 @@
       "required": false,
       "type": "string",
       "description": "server fqdn type for credentials to be returned",
+      "x-ms-parameter-location": "method"
+    },
+    "FormatParameter": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "exec",
+        "azure"
+      ],
+      "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
       "x-ms-parameter-location": "method"
     }
   }
