@@ -2740,6 +2740,23 @@
         }
       }
     },
+    "MetricRules": {
+      "description": "Set of rules for sending metrics for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription Id for which filtering tags are applicable",
+          "type": "boolean"
+        },
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          }
+        }
+      }
+    },
     "MonitoringTagRulesProperties": {
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
@@ -2749,6 +2766,28 @@
         },
         "logRules": {
           "$ref": "#/definitions/LogRules"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "MetricsTagRulesProperties": {
+      "description": "Definition of the properties for a TagRules resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "sendMetrics": {
+          "description": "Flag specifying if metrics from Azure resources should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "metricRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricRules"
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -2785,6 +2824,36 @@
         }
       }
     },
+    "MetricsTagRules": {
+      "description": "Capture metrics of Azure resources based on ARM tags.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "description": "Name of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/MetricsTagRulesProperties"
+        }
+      }
+    },
     "MonitoringTagRulesListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
@@ -2794,6 +2863,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoringTagRules"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricsTagRulesListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricsTagRules"
           }
         },
         "nextLink": {
