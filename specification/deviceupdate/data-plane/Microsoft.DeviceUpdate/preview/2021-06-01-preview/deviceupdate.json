@@ -1712,7 +1712,7 @@
         }
       }
     },
-    "/deviceupdate/{instanceId}/management/deviceDiagnostics/logCollection": {
+    "/deviceupdate/{instanceId}/management/deviceDiagnostics/logCollections": {
       "get": {
         "tags": [
           "Device and deployment management"
@@ -2722,7 +2722,7 @@
       "properties": {
         "groupId": {
           "type": "string",
-          "description": "Device group identifier."
+          "description": "Device group identity."
         }
       },
       "description": "Operation status filter."
@@ -2960,6 +2960,10 @@
           "$ref": "#/definitions/UpdateId",
           "description": "Update identity."
         },
+        "groupId": {
+          "type": "string",
+          "description": "The group identity"
+        },
         "isCanceled": {
           "type": "boolean",
           "description": "Boolean flag indicating whether the deployment was canceled."
@@ -2972,7 +2976,8 @@
       "required": [
         "deploymentId",
         "startDateTime",
-        "updateId"
+        "updateId",
+        "groupId"
       ],
       "description": "Deployment metadata."
     },
@@ -3347,6 +3352,23 @@
       ],
       "description": "The install result of an update and any step results under it."
     },
+    "DeviceUpdateAgentId": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device Id"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Module Id"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "description": "Device Update agent id"
+    },
     "LogCollectionOperation": {
       "type": "object",
       "properties": {
@@ -3356,11 +3378,9 @@
         },
         "deviceList": {
           "type": "array",
-          "description": "Array of device identities",
+          "description": "Array of Device Update agent ids",
           "items": {
-            "type": "string",
-            "description": "Device identity",
-            "maxLength": 257
+            "$ref": "#/definitions/DeviceUpdateAgentId"
           }
         },
         "description": {
@@ -3467,11 +3487,11 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "description": "Device identity"
+          "description": "Device id"
         },
         "moduleId": {
           "type": "string",
-          "description": "Device module identity."
+          "description": "Module id."
         },
         "status": {
           "$ref": "#/definitions/OperationStatusWithoutUndefinedOption",
@@ -3639,7 +3659,7 @@
     "GroupIdParameter": {
       "name": "groupId",
       "in": "path",
-      "description": "Group identifier.",
+      "description": "Group identity.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -2,12 +2,17 @@
   "parameters": {
     "endpoint": "contoso.api.adu.microsoft.com",
     "instanceId": "blue",
-    "operationId": "e4491c54-916f-443d-9094-bcca546ace2f",
+    "operationId": "SampleOperationId",
     "api-version": "2021-06-01-preview",
     "logCollectionRequest": {
       "deviceList": [
-        "DeviceA",
-        "DeviceB"
+        {
+          "deviceId": "DeviceA"
+        },
+        {
+          "deviceId": "DeviceB",
+          "moduleId": "ModuleB"
+        }
       ],
       "description": "Example diagnostics operation"
     }
@@ -15,10 +20,15 @@
   "responses": {
     "201": {
       "body": {
-        "operationId": "e4491c54-916f-443d-9094-bcca546ace2f",
+        "operationId": "SampleOperationId",
         "deviceList": [
-          "DeviceA",
-          "DeviceB"
+          {
+            "deviceId": "DeviceA"
+          },
+          {
+            "deviceId": "DeviceB",
+            "moduleId": "ModuleB"
+          }
         ],
         "description": "Example diagnostics operation",
         "createdDateTime": "2021-09-30T02:23:41.59Z",
