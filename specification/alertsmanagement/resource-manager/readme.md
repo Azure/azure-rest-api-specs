@@ -150,7 +150,7 @@ input-file:
 ### Tag: package-2021-07-22-preview
 
 
-These settings apply only when `--tag=package-2021-07-22` is specified on the command line.
+These settings apply only when `--tag=package-2021-07-22-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-07-22-preview'
 input-file:
