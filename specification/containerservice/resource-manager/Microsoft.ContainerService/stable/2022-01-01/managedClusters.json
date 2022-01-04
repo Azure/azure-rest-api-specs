@@ -5641,6 +5641,20 @@
         "exec",
         "azure"
       ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "exec",
+            "description": "Return azure auth-provider kubeconfig. This format is deprecated in 1.22 and will be fully removed in 1.25."
+          },
+          {
+            "value": "azure",
+            "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
+          }
+        ]
+      },
       "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
       "x-ms-parameter-location": "method"
     }
