@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AzureStackHCI
-  output-folder: $(csharp-sdks-folder)/azurestackhci/management/Microsoft.AzureStackHCI/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.AzureStackHCI
+  output-folder: $(csharp-sdks-folder)/azurestackhci/Microsoft.Azure.Management.AzureStackHCI/src/Generated
 ```

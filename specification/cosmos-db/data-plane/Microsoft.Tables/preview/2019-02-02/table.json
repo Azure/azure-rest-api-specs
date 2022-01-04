@@ -402,13 +402,13 @@
         "tags": [
           "table"
         ],
-        "operationId": "Table_QueryEntitiesWithPartitionAndRowKey",
+        "operationId": "Table_QueryEntityWithPartitionAndRowKey",
         "x-ms-examples": {
           "TableQueryEntitiesWithPartitionAndRowKey": {
-            "$ref": "./examples/TableQueryEntitiesWithPartitionAndRowKey.json"
+            "$ref": "./examples/TableQueryEntityWithPartitionAndRowKey.json"
           }
         },
-        "description": "Queries entities in a table.",
+        "description": "Queries a single entity in a table.",
         "parameters": [
           {
             "$ref": "#/parameters/Timeout"
@@ -479,7 +479,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/TableEntityQueryResponse"
+              "$ref": "#/definitions/TableEntityProperties"
             }
           },
           "default": {
@@ -1713,7 +1713,7 @@
     "Url": {
       "name": "url",
       "x-ms-parameter-location": "client",
-      "description": "The URL of the service account or table that is the targe of the desired operation.",
+      "description": "The URL of the service account or table that is the target of the desired operation.",
       "required": true,
       "type": "string",
       "in": "path",

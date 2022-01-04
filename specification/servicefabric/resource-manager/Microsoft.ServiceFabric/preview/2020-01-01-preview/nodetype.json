@@ -51,11 +51,6 @@
             "type": "string"
           }
         ],
-        "x-ms-examples": {
-          "List node type of the specified managed cluster": {
-            "$ref": "./examples/Operations_example.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -523,6 +518,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -534,13 +532,44 @@
     }
   },
   "definitions": {
+    "ManagedProxyResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Azure resource tags.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "description": "The resource model definition for proxy-only resource.",
+      "x-ms-azure-resource": true
+    },
     "NodeType": {
+      "type": "object",
       "allOf": [
         {
-          "description": "The node type definition"
-        },
-        {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ManagedProxyResource"
         }
       ],
       "properties": {
@@ -553,6 +582,7 @@
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
     },
     "NodeTypeActionParameters": {
+      "type": "object",
       "required": [
         "nodes"
       ],
@@ -572,10 +602,11 @@
       "description": "Parameters for Node type action."
     },
     "NodeTypeProperties": {
+      "type": "object",
       "required": [
         "isPrimary",
         "vmInstanceCount",
-        "diskSizeInGB"
+        "dataDiskSizeGB"
       ],
       "properties": {
         "isPrimary": {
@@ -584,12 +615,14 @@
         },
         "vmInstanceCount": {
           "type": "integer",
-          "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
+          "format": "int32",
+          "description": "The number of nodes in the node type.",
           "minimum": 1,
           "maximum": 2147483647
         },
-        "diskSizeInGB": {
+        "dataDiskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "Disk size for each vm in the node type in GBs."
         },
         "placementProperties": {
@@ -651,11 +684,17 @@
           "items": {
             "$ref": "#/definitions/VMSSExtension"
           }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the managed cluster resource."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
     },
     "NodeTypeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -673,10 +712,12 @@
       "description": "Node type list results"
     },
     "NodeTypePropertiesUpdateParameters": {
+      "type": "object",
       "properties": {
         "vmInstanceCount": {
           "type": "integer",
-          "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
+          "format": "int32",
+          "description": "The number of nodes in the node type.",
           "minimum": 1,
           "maximum": 2147483647
         },
@@ -724,6 +765,7 @@
       "description": "Node type update properties."
     },
     "NodeTypeUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -740,39 +782,8 @@
       },
       "description": "Node type update request"
     },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Azure resource type.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Azure resource tags.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "description": "The resource model definition for proxy-only resource.",
-      "x-ms-azure-resource": true
-    },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -783,6 +794,7 @@
       "x-ms-azure-resource": true
     },
     "VaultCertificate": {
+      "type": "object",
       "required": [
         "certificateUrl",
         "certificateStore"
@@ -800,6 +812,7 @@
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
     },
     "VaultSecretGroup": {
+      "type": "object",
       "required": [
         "sourceVault",
         "vaultCertificates"
@@ -820,6 +833,7 @@
       "description": "Specifies set of certificates that should be installed onto the virtual machines."
     },
     "VMSSExtension": {
+      "type": "object",
       "required": [
         "name",
         "properties"
@@ -838,6 +852,7 @@
       "description": "Specifies set of extensions that should be installed onto the virtual machines."
     },
     "VMSSExtensionProperties": {
+      "type": "object",
       "required": [
         "publisher",
         "type",
@@ -860,10 +875,6 @@
           "type": "boolean",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
         },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates if the extension will upgrade automatically."
-        },
         "settings": {
           "type": "object",
           "description": "Json formatted public settings for the extension."
@@ -871,6 +882,17 @@
         "protectedSettings": {
           "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
         },
         "provisioningState": {
           "readOnly": true,
@@ -881,6 +903,7 @@
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
     },
     "AvailableOperationDisplay": {
+      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -902,6 +925,7 @@
       "description": "Operation supported by the Service Fabric resource provider"
     },
     "EndpointRangeDescription": {
+      "type": "object",
       "required": [
         "endPort",
         "startPort"
@@ -909,16 +933,19 @@
       "properties": {
         "startPort": {
           "type": "integer",
+          "format": "int32",
           "description": "Starting port of a range of ports"
         },
         "endPort": {
           "type": "integer",
+          "format": "int32",
           "description": "End port of a range of ports"
         }
       },
       "description": "Port range details"
     },
     "ErrorModel": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -928,6 +955,7 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -940,7 +968,24 @@
       },
       "description": "The error details."
     },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
+    },
     "OperationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -958,6 +1003,7 @@
       "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "iotHubName": "testHub",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-08-31",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "input": {
+      "routingSource": "DeviceMessages",
+      "message": {
+        "body": "Body of message",
+        "appProperties": {
+          "key1": "value1"
+        },
+        "systemProperties": {
+          "key1": "value1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "routes": [
+          {
+            "properties": {
+              "name": "Routeid",
+              "source": "DeviceMessages",
+              "endpointNames": [
+                "id1"
+              ],
+              "isEnabled": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

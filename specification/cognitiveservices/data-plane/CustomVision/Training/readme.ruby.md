@@ -17,6 +17,7 @@ batch:
   - tag: release_3_1
   - tag: release_3_2
   - tag: release_3_3
+  - tag: release_3_4_preview
 ```
 
 ### Tag: release_1_0 and ruby
@@ -70,6 +71,17 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_3_3' && $(ruby)
 namespace: "Azure::CognitiveServices::CustomVision::Training::V3_3"
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_customvisiontraining/lib
+title: "TrainingClient"
+```
+
+### Tag: release_3_4_preview and ruby
+
+These settings apply only when `--tag=release_3_4_preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'release_3_4_preview' && $(ruby)
+namespace: "Azure::CognitiveServices::CustomVision::Training::V3_4_preview"
 output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_customvisiontraining/lib
 title: "TrainingClient"
 ```

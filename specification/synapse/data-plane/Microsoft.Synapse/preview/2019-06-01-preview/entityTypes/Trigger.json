@@ -55,6 +55,7 @@
     "MultiplePipelineTrigger": {
       "x-ms-discriminator-value": "MultiplePipelineTrigger",
       "description": "Base class for all triggers that support one to many model for trigger to pipeline.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"
@@ -72,7 +73,6 @@
     },
     "ScheduleTrigger": {
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -183,7 +183,7 @@
               "Saturday"
             ],
             "x-ms-enum": {
-              "name": "DaysOfWeek",
+              "name": "DayOfWeek",
               "modelAsString": false
             }
           },
@@ -284,7 +284,6 @@
     },
     "BlobEventsTrigger": {
       "description": "Trigger that runs every time a Blob event occurs.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -335,15 +334,56 @@
           "Microsoft.Storage.BlobDeleted"
         ],
         "x-ms-enum": {
-          "name": "BlobEventTypes",
+          "name": "BlobEventType",
           "modelAsString": true
         }
       },
       "description": "Blob event types."
     },
+    "CustomEventsTrigger": {
+      "description": "Trigger that runs every time a custom event is received.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiplePipelineTrigger"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Custom Events Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "subjectBeginsWith": {
+              "description": "The event subject must begin with the pattern provided for trigger to fire. At least one of these must be provided: subjectBeginsWith, subjectEndsWith.",
+              "type": "string"
+            },
+            "subjectEndsWith": {
+              "description": "The event subject must end with the pattern provided for trigger to fire. At least one of these must be provided: subjectBeginsWith, subjectEndsWith.",
+              "type": "string"
+            },
+            "events": {
+              "description": "The list of event types that cause this trigger to fire.",
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "scope": {
+              "description": "The ARM resource ID of the Azure Event Grid Topic.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "events",
+            "scope"
+          ]
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"
@@ -417,7 +457,8 @@
       "type": "string",
       "enum": [
         "Minute",
-        "Hour"
+        "Hour",
+        "Month"
       ],
       "x-ms-enum": {
         "name": "TumblingWindowFrequency",
@@ -426,6 +467,7 @@
     },
     "RetryPolicy": {
       "description": "Execution policy for an activity.",
+      "type": "object",
       "properties": {
         "count": {
           "type": "object",
@@ -508,7 +550,7 @@
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
-          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "pattern": "-?((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
@@ -533,7 +575,7 @@
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
-          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "pattern": "-((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
@@ -576,7 +618,7 @@
               "format": "date-time",
               "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported."
             },
-            "maxConcurrency": {
+            "rerunConcurrency": {
               "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
               "type": "integer",
               "minimum": 1,
@@ -584,9 +626,10 @@
             }
           },
           "required": [
+            "parentTrigger",
             "requestedStartTime",
             "requestedEndTime",
-            "maxConcurrency"
+            "rerunConcurrency"
           ]
         }
       },

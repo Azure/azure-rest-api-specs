@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/IoTApps/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps/{resourceName}": {
       "get": {
         "tags": [
           "Apps"
@@ -235,7 +235,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/IoTApps": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/iotApps": {
       "get": {
         "tags": [
           "Apps"
@@ -275,7 +275,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/IoTApps": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTCentral/iotApps": {
       "get": {
         "tags": [
           "Apps"
@@ -712,6 +712,17 @@
         "display": {
           "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "readOnly": true,
+          "x-ms-client-flatten": false
         }
       }
     },
@@ -794,7 +805,7 @@
           "type": "string",
           "readOnly": true
         },
-        "appTemplateName": {
+        "name": {
           "description": "The name of the template.",
           "type": "string",
           "readOnly": true
@@ -811,6 +822,35 @@
         },
         "description": {
           "description": "The description of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "industry": {
+          "description": "The industry of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "A list of locations that support the template.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AppTemplateLocations"
+          }
+        }
+      }
+    },
+    "AppTemplateLocations": {
+      "description": "IoT Central Application Template Locations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the location.",
           "type": "string",
           "readOnly": true
         }

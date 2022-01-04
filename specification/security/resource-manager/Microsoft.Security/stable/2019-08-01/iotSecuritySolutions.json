@@ -347,6 +347,12 @@
           "x-ms-client-flatten": true,
           "description": "Security Solution data",
           "$ref": "#/definitions/IoTSecuritySolutionProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -477,6 +483,13 @@
                 "description": "Unmasked IP logging is enabled"
               }
             ]
+          }
+        },
+        "additionalWorkspaces": {
+          "type": "array",
+          "description": "List of additional workspaces",
+          "items": {
+            "$ref": "#/definitions/AdditionalWorkspacesProperties"
           }
         }
       },
@@ -649,6 +662,44 @@
           "$ref": "#/definitions/TagsResource"
         }
       ]
+    },
+    "AdditionalWorkspacesProperties": {
+      "type": "object",
+      "description": "Properties of the additional workspaces.",
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Workspace resource id"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Sentinel"
+          ],
+          "default": "Sentinel",
+          "description": "Workspace type.",
+          "x-ms-enum": {
+            "name": "AdditionalWorkspaceType",
+            "modelAsString": true
+          }
+        },
+        "dataTypes": {
+          "type": "array",
+          "description": "List of data types sent to workspace",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Alerts",
+              "RawEvents"
+            ],
+            "description": "Data types sent to workspace.",
+            "x-ms-enum": {
+              "name": "AdditionalWorkspaceDataType",
+              "modelAsString": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
