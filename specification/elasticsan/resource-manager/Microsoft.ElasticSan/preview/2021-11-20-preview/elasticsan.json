@@ -1543,17 +1543,9 @@
           "type": "boolean",
           "description": "Indicates whether the operation applies to data-plane."
         },
-        "actionType": {
-          "type": "string",
-          "description": "Indicates the action type."
-        },
         "display": {
           "description": "Additional metadata about RP operation.",
           "$ref": "#/definitions/ElasticSanOperationDisplay"
-        },
-        "origin": {
-          "type": "string",
-          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX."
         }
       }
     },
@@ -1921,6 +1913,12 @@
           "format": "int64",
           "description": "Maximum number of Snapshots per Volume",
           "readOnly": true
+        },
+        "maxConnectedClientCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of connected clients count per Volume",
+          "readOnly": true
         }
       }
     },
@@ -1976,9 +1974,7 @@
         "tier": {
           "type": "string",
           "enum": [
-            "Hero",
-            "Satellite",
-            "Hub"
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "tier",
@@ -2296,7 +2292,6 @@
           "type": "string",
           "enum": [
             "Standard_LRS",
-            "Premium_LRS",
             "Standard_ZRS"
           ],
           "x-ms-enum": {
@@ -2306,10 +2301,6 @@
               {
                 "value": "Standard_LRS",
                 "description": "Standard HDD locally redundant storage"
-              },
-              {
-                "value": "Premium_LRS",
-                "description": "Premium SSD locally redundant storage"
               },
               {
                 "value": "Standard_ZRS",
