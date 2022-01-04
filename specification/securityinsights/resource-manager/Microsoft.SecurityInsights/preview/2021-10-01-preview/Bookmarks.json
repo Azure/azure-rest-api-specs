@@ -580,7 +580,7 @@
       "description": "List all the bookmarks.",
       "properties": {
         "nextLink": {
-          "description": "URL to fetch the next set of cases.",
+          "description": "URL to fetch the next set of bookmarks.",
           "readOnly": true,
           "type": "string"
         },
@@ -662,7 +662,27 @@
           "$ref": "./common/IncidentTypes.json#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
           "type": "object"
+        },
+        "entityMappings": {
+          "$ref": "#/definitions/EntityMappingsList",
+          "description": "Describes the entity mappings of the bookmark",
+          "type": "object"
+        },
+        "tactics": {
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "description": "A list of relevant mitre attacks",
+          "type": "array"
+        },
+        "techniques": {
+          "items": {
+            "$ref": "#/definitions/AttackTechnique"
+          },
+          "description": "A list of relevant mitre techniques",
+          "type": "array"
         }
+
       },
       "required": [
         "displayName",
