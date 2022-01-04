@@ -1030,10 +1030,24 @@
           "readOnly": true,
           "type": "array"
         },
+        "providerIncidentUrl": {
+          "description": "The provider incident url to the incident in Microsoft 365 Defender portal",
+          "readOnly": true,
+          "type": "string"
+        },
         "tactics": {
           "description": "The tactics associated with incident",
           "items": {
             "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques associated with incident's tactics'",
+          "items": {
+            "description": "Attack Technique",
+            "type": "string"
           },
           "readOnly": true,
           "type": "array"
