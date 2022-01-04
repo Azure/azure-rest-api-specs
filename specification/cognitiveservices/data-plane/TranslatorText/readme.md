@@ -6,6 +6,8 @@ Configuration for generating Translator Text SDK.
 
 The current release is `release_3_0`.
 
+The current document batch preview release is `release_1_0_preview.1'`.
+
 ``` yaml
 
 tag: release_3_0
@@ -13,7 +15,31 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
+``` yaml
+
+tag: release_1_0_preview.1
+add-credentials: true
+openapi-type: data-plane
+```
+``` yaml
+
+tag: release_1_0
+add-credentials: true
+openapi-type: data-plane
+```
 # Releases
+
+### Preview 1.0
+This setting is for batch document translator and only applied when `--tag=release_1_0_preview.1` is specified on the command line.
+``` yaml $(tag) == 'release_1_0_preview.1'
+input-file: preview/v1.0-preview.1/TranslatorBatch.json
+```
+
+### 1.0 Batch API
+This setting is for batch document translator and only applied when `--tag=release_1_0` is specified on the command line.
+``` yaml $(tag) == 'release_1_0'
+input-file: stable/v1.0/TranslatorBatch.json
+```
 
 ### Release 3.0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
@@ -30,6 +56,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-nodejs
@@ -49,57 +76,12 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  add-credentials: true
-  payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.translatortext
-  package-name: azure-cognitiveservices-translatortext
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-translatortext/azure/cognitiveservices/translatortext
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-translatortext
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: translatortext
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_3_0
-```
-
-### Tag: release_3_0 and go
-
-These settings apply only when `--tag=release_3_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_3_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.0/$(namespace)
-```
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -120,13 +102,36 @@ java:
 
 ``` yaml $(nodejs)
 nodejs:
-  package-name: azure-cognitiveservices-newssearch
-  package-version: 3.0.0
+  package-name: azure-cognitiveservices-translatortext
   output-folder: $(node-sdks-folder)/lib/services/translatorText
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: false
+```
+
+### Tag: release_1_0_preview.1 and nodejs
+
+These settings apply only when `--tag=release_1_0_preview.1 --nodejs` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_0_preview.1' && $(nodejs)
+  package-version: 1.0.1
+```
+
+### Tag: release_1_0 and nodejs
+
+These settings apply only when `--tag=release_1_0 --nodejs` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_0' && $(nodejs)
+  package-version: 1.0
+```
+
+### Tag: release_3_0 and go
+
+These settings apply only when `--tag=release_3_0 --nodejs` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0' && $(nodejs)
+  package-version: 3.0.0
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
@@ -141,6 +146,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/v1.0-preview.1/TranslatorBatch.json
   - $(this-folder)/stable/v3.0/TranslatorText.json
 
 ```

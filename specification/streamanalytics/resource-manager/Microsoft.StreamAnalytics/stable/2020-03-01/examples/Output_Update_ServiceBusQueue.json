@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg3410",
+    "jobName": "sj5095",
+    "outputName": "output3456",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.ServiceBus/Queue",
+          "properties": {
+            "queueName": "differentQueueName"
+          }
+        },
+        "serialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8",
+            "format": "LineSeparated"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "429adaec-a777-4750-8a39-8d0c931d801c"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3410/providers/Microsoft.StreamAnalytics/streamingjobs/sj5095/outputs/output3456",
+        "name": "output3456",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/Queue",
+            "properties": {
+              "queueName": "differentQueueName",
+              "propertyColumns": [
+                "column1",
+                "column2"
+              ],
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "encoding": "UTF8",
+              "format": "LineSeparated"
+            }
+          }
+        }
+      }
+    }
+  }
+}

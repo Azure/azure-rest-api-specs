@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-sql"
   output-folder: "$(typescript-sdks-folder)/sdk/sql/arm-sql"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2020-03-31",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "customDomainName": "www-someDomain-net",
+    "customHttpsParameters": {
+      "MinimumTLSVersion": "TLS12",
+      "certificateSource": "AzureKeyVault",
+      "protocolType": "ServerNameIndication",
+      "certificateSourceParameters": {
+        "OData.type": "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters",
+        "subscriptionId": "subid",
+        "resourceGroupName": "RG",
+        "vaultName": "kv",
+        "secretName": "secret1",
+        "secretVersion": "00000000-0000-0000-0000-000000000000",
+        "updateRule": "NoAction",
+        "deleteRule": "NoAction"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "body": {
+        "name": "www-someDomain-net",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "hostName": "www.someDomain.net",
+          "customHttpsProvisioningState": "Enabling",
+          "customHttpsProvisioningSubstate": "PendingDomainControlValidationREquestApproval",
+          "validationData": "validationdata"
+        }
+      }
+    }
+  }
+}

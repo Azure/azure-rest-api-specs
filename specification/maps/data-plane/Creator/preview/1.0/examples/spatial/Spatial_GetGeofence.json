@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "geography": "us",
+    "format": "json",
+    "api-version": "1.0",
+    "deviceId": "unique_device_name_under_account",
+    "udid": "[udId]",
+    "lat": 48.36,
+    "lon": -124.63,
+    "searchBuffer": 50,
+    "userTime": "2017-07-21T17:32:28Z",
+    "isAsync": true,
+    "mode": "EnterAndExit"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "geometries": [
+          {
+            "deviceId": "unique_device_name_under_account",
+            "udId": "[udId]",
+            "geometryId": "2",
+            "distance": 999,
+            "nearestLat": 47.621954,
+            "nearestLon": -122.131841
+          },
+          {
+            "deviceId": "unique_device_name_under_account",
+            "udId": "[udId]",
+            "geometryId": "1",
+            "distance": -999,
+            "nearestLat": 47.609833,
+            "nearestLon": -122.148274
+          }
+        ],
+        "expiredGeofenceGeometryId": [
+          "5"
+        ],
+        "invalidPeriodGeofenceGeometryId": [
+          "3",
+          "4"
+        ],
+        "isEventPublished": true
+      }
+    }
+  }
+}

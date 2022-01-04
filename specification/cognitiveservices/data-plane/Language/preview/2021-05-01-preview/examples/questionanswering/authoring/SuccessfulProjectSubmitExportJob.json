@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2021-05-01-preview",
+    "projectName": "proj1",
+    "body": {
+      "exportAssetTypes": [
+        "qnas",
+        "synonyms"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+      "headers": {
+        "Operation-Location": "job1"
+      }
+    }
+  }
+}

@@ -1,0 +1,469 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2021-06-22",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers/{hybridRunbookWorkerId}": {
+      "delete": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorkers_Delete",
+        "description": "Delete a hybrid runbook worker.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "Delete a V2 hybrid runbook worker": {
+            "$ref": "./examples/deleteHybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "hybridRunbookWorkerId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker id"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorkers_Get",
+        "description": "Retrieve a hybrid runbook worker.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "Get a V2 hybrid runbook worker": {
+            "$ref": "./examples/getHybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "hybridRunbookWorkerId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker id"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorker"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorkers_Create",
+        "description": "Create a hybrid runbook worker.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "Create a V2 hybrid runbook worker": {
+            "$ref": "./examples/putHybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "hybridRunbookWorkerId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker id"
+          },
+          {
+            "name": "HybridRunbookWorkerCreationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkerCreateParameters"
+            },
+            "description": "The create or update parameters for hybrid runbook worker."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorker"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers/{hybridRunbookWorkerId}/move": {
+      "post": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorkers_Move",
+        "description": "Move a hybrid worker to a different group.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "Move a V2 hybrid worker to a different group": {
+            "$ref": "./examples/moveHybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "hybridRunbookWorkerId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker id"
+          },
+          {
+            "name": "HybridRunbookWorkerMoveParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkerMoveParameters"
+            },
+            "description": "The hybrid runbook worker move parameters"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}/hybridRunbookWorkers": {
+      "get": {
+        "tags": [
+          "HybridRunbookWorker"
+        ],
+        "operationId": "HybridRunbookWorkers_ListByHybridRunbookWorkerGroup",
+        "description": "Retrieve a list of hybrid runbook workers.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations"
+        },
+        "x-ms-examples": {
+          "List hybrid workers by hybrid runbook worker group": {
+            "$ref": "./examples/listHybridRunbookWorker.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkersListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/HybridRunbookWorker"
+      }
+    }
+  },
+  "definitions": {
+    "HybridRunbookWorker": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HybridRunbookWorkerProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the hybrid worker group properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "Definition of hybrid runbook worker."
+    },
+    "HybridRunbookWorkerProperties": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "Gets or sets the assigned machine IP address."
+        },
+        "registeredDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the registration time of the worker machine.",
+          "x-nullable": false
+        },
+        "lastSeenDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Heartbeat from the Worker",
+          "x-nullable": false
+        },
+        "vmResourceId": {
+          "type": "string",
+          "description": "Azure Resource Manager Id for a virtual machine."
+        },
+        "workerType": {
+          "type": "string",
+          "description": "Type of the HybridWorker.",
+          "enum": [
+            "HybridV1",
+            "HybridV2"
+          ],
+          "x-ms-enum": {
+            "name": "WorkerType",
+            "modelAsString": true
+          }
+        },
+        "workerName": {
+          "type": "string",
+          "description": "Name of the HybridWorker."
+        }
+      },
+      "description": "Definition of hybrid runbook worker property."
+    },
+    "HybridRunbookWorkersListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridRunbookWorker"
+          },
+          "description": "Gets or sets a list of hybrid runbook workers."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list hybrid runbook workers."
+    },
+    "HybridRunbookWorkerMoveParameters": {
+      "type": "object",
+      "properties": {
+        "hybridRunbookWorkerGroupName": {
+          "type": "string",
+          "description": "Gets or sets the target hybrid runbook worker group."
+        }
+      },
+      "description": "Parameters supplied to move hybrid worker operation."
+    },
+    "HybridRunbookWorkerCreateOrUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "vmResourceId": {
+          "type": "string",
+          "description": "Azure Resource Manager Id for a virtual machine."
+        }
+      },
+      "description": "The parameters supplied to the create or update hybrid runbook worker operation."
+    },
+    "HybridRunbookWorkerCreateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HybridRunbookWorkerCreateOrUpdateParameters",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets hybrid runbook worker group create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create hybrid runbook worker operation."
+    }
+  },
+  "parameters": {}
+}

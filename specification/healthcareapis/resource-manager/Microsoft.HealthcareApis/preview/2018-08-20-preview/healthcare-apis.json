@@ -354,7 +354,7 @@
         "description": "Check if a service instance name is available.",
         "operationId": "Services_CheckNameAvailability",
         "x-ms-examples": {
-          "ServiceList": {
+          "CheckNameAvailabilityPost": {
             "$ref": "./examples/CheckNameAvailabilityPost.json"
           }
         },
@@ -483,15 +483,11 @@
           "$ref": "#/definitions/ServiceCorsConfigurationInfo",
           "description": "The settings for the CORS configuration of the service instance."
         }
-      },
-      "required": [
-        "accessPolicies"
-      ]
+      }
     },
     "ServiceAccessPoliciesInfo": {
       "description": "The access policies of the service instance.",
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/definitions/ServiceAccessPolicyEntry"
       }
@@ -678,6 +674,34 @@
         "etag": {
           "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
           "type": "string"
+        },
+        "identity": {
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of the resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of the resource."
+            },
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
+            }
+          }
         }
       },
       "x-ms-azure-resource": true,
@@ -761,6 +785,10 @@
           "type": "string",
           "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
         },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether the operation is a data action or not",
+          "type": "boolean"
+        },
         "origin": {
           "readOnly": true,
           "type": "string",
@@ -769,6 +797,10 @@
         "display": {
           "description": "The information displayed about the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -797,6 +829,11 @@
           "description": "Friendly description for the operation,"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
     },
     "CheckNameAvailabilityParameters": {
       "description": "Input values.",

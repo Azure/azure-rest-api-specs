@@ -11,7 +11,7 @@
       "body": {
         "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_Bruteforce_Fail/2019-02-02",
         "name": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_Bruteforce_Fail/2019-02-02",
-        "type": "Microsoft.Security/IoTSecurityAggregatedAlert",
+        "type": "Microsoft.Security/iotSecuritySolutions/analyticsModels/aggregatedAlerts",
         "properties": {
           "alertType": "IoT_Bruteforce_Fail",
           "alertDisplayName": "Failed Bruteforce",
@@ -24,7 +24,19 @@
           "effectedResourceType": "IoT Device",
           "systemSource": "Devices",
           "actionTaken": "Detected",
-          "logAnalyticsQuery": "SecurityAlert | where tolower(ResourceId) == tolower('/subscriptions/b77ec8a9-04ed-48d2-a87a-e5887b978ba6/resourceGroups/IoT-Solution-DemoEnv/providers/Microsoft.Devices/IotHubs/rtogm-hub') and tolower(AlertName) == tolower('Custom Alert - number of device to cloud messages in MQTT protocol is not in the allowed range') | extend DeviceId=parse_json(ExtendedProperties)['DeviceId'] | project DeviceId, TimeGenerated, DisplayName, AlertSeverity, Description, RemediationSteps, ExtendedProperties"
+          "logAnalyticsQuery": "SecurityAlert | where tolower(ResourceId) == tolower('/subscriptions/b77ec8a9-04ed-48d2-a87a-e5887b978ba6/resourceGroups/IoT-Solution-DemoEnv/providers/Microsoft.Devices/IotHubs/rtogm-hub') and tolower(AlertName) == tolower('Custom Alert - number of device to cloud messages in MQTT protocol is not in the allowed range') | extend DeviceId=parse_json(ExtendedProperties)['DeviceId'] | project DeviceId, TimeGenerated, DisplayName, AlertSeverity, Description, RemediationSteps, ExtendedProperties",
+          "topDevicesList": [
+            {
+              "deviceId": "testDevice1",
+              "alertsCount": 100,
+              "lastOccurrence": "10:42"
+            },
+            {
+              "deviceId": "testDevice2",
+              "alertsCount": 80,
+              "lastOccurrence": "15:42"
+            }
+          ]
         }
       }
     }

@@ -1,0 +1,33 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure Kubernetes Service events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Kubernetes Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent"
+  },
+  "paths": {},
+  "definitions": {
+    "ContainerServiceNewKubernetesVersionAvailableEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event",
+      "type": "object",
+      "properties": {
+        "latestSupportedKubernetesVersion": {
+          "description": "The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource",
+          "type": "string"
+        },
+        "latestStableKubernetesVersion": {
+          "description": "The highest PATCH Kubernetes version for the MINOR version considered stable for the ManagedCluster resource",
+          "type": "string"
+        },
+        "lowestMinorKubernetesVersion": {
+          "description": "The highest PATCH Kubernetes version for the lowest applicable MINOR version available for the ManagedCluster resource",
+          "type": "string"
+        },
+        "latestPreviewKubernetesVersion": {
+          "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
