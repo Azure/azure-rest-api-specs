@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deviceId": "device1",
+            "deviceClassId": "deviceClass1",
+            "manufacturer": "manufacturer1",
+            "model": "model1",
+            "lastAttemptedUpdateId": {
+              "provider": "provider1",
+              "name": "name1",
+              "version": "2.0.0.0"
+            },
+            "deploymentStatus": "Failed",
+            "installedUpdateId": {
+              "provider": "provider1",
+              "name": "name1",
+              "version": "1.0.0.0"
+            },
+            "onLatestUpdate": false,
+            "lastDeploymentId": "myDeployment123"
+          },
+          {
+            "deviceId": "device2",
+            "deviceClassId": "deviceClass2",
+            "manufacturer": "manufacturer2",
+            "model": "model2",
+            "lastAttemptedUpdateId": {
+              "provider": "provider2",
+              "name": "name2",
+              "version": "1.0.0.0"
+            },
+            "deploymentStatus": "Succeeded",
+            "installedUpdateId": {
+              "provider": "provider2",
+              "name": "name2",
+              "version": "1.0.0.0"
+            },
+            "onLatestUpdate": true,
+            "lastDeploymentId": "myDeployment234"
+          }
+        ]
+      }
+    }
+  }
+}
