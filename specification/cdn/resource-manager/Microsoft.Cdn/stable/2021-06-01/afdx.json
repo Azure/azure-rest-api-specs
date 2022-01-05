@@ -4242,7 +4242,7 @@
         },
         "parameters": {
           "description": "object which contains security policy parameters",
-          "$ref": "#/definitions/SecurityPolicyUpdatePropertiesParameters"
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
         }
       }
     },
@@ -4250,18 +4250,13 @@
       "description": "The JSON object containing security policy update parameters.",
       "type": "object",
       "properties": {
-        "profileName": {
-          "description": "The name of the profile which holds the security policy.",
-          "type": "string",
-          "readOnly": true
-        },
         "parameters": {
           "description": "object which contains security policy parameters",
-          "$ref": "#/definitions/SecurityPolicyUpdatePropertiesParameters"
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
         }
       }
     },
-    "SecurityPolicyUpdatePropertiesParameters": {
+    "SecurityPolicyPropertiesParameters": {
       "description": "The json object containing security policy parameters",
       "discriminator": "type",
       "required": [
@@ -4282,13 +4277,13 @@
         }
       }
     },
-    "SecurityPolicyWebApplicationFirewall": {
+    "SecurityPolicyWebApplicationFirewallParameters": {
       "description": "The json object containing security policy waf parameters",
       "x-ms-discriminator-value": "WebApplicationFirewall",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityPolicy"
+          "$ref": "#/definitions/SecurityPolicyPropertiesParameters"
         }
       ],
       "properties": {
