@@ -27,6 +27,24 @@ directive:
   - rename-model:
       from: ReverseSearchCrossStreetAddressResultItem
       to: ReverseSearchCrossStreetAddressResultItemPrivate   
+  - rename-model:
+      from: EntryPoint
+      to: EntryPointPrivate
+  - rename-model:
+      from: SearchSummary
+      to: SearchSummaryPrivate
+  - rename-model:
+      from: SearchAddressBatchResult
+      to: SearchAddressBatchResultPrivate
+  - rename-model:
+      from: SearchAddressBatchItem
+      to: SearchAddressBatchItemPrivate
+  - rename-model:
+      from: ReverseSearchAddressBatchProcessResult
+      to: ReverseSearchAddressBatchResultPrivate
+  - rename-model:
+      from: ReverseSearchAddressBatchItem
+      to: ReverseSearchAddressBatchItemPrivate
 
 java:
     namespace: com.azure.maps.search
@@ -42,5 +60,5 @@ java:
     polling: {}
     models-subpackage: implementation.models
     custom-types-subpackage: models
-    custom-types: BatchRequest,BatchResultSummary,DataSource,ErrorResponseException,ElectricVehicleConnector,EntryPointType,GeographicEntityType,GeoJsonObject,GeoJsonLineString,JsonFormat,LocalizedMapView,OperatingHoursRange,MatchType,PointOfInterestCategoryTreeResult,PointOfInterestExtendedPostalCodes,Polygon,ResponseFormat,ReverseSearchAddressBatchProcessResult,RoadUseType,SearchAddressBatchResult,SearchIndexes,SearchSummary,SearchesFuzzySearchBatchResponse,SearchesGetFuzzySearchBatchResponse,SearchesGetReverseSearchAddressBatchResponse,SearchesGetSearchAddressBatchResponse,SearchesReverseSearchAddressBatchResponse,SearchesSearchAddressBatchResponse,ErrorResponse                 
+    custom-types: BatchRequest,BatchResultSummary,DataSource,ErrorDetail,ErrorResponseException,ElectricVehicleConnector,EntryPointType,GeographicEntityType,GeoJsonObject,GeoJsonLineString,JsonFormat,LocalizedMapView,OperatingHoursRange,MatchType,PointOfInterestCategoryTreeResult,PointOfInterestExtendedPostalCodes,Polygon,ReverseSearchAddressBatchProcessResult,RoadUseType,SearchIndexes,ErrorResponse                 
 ```
