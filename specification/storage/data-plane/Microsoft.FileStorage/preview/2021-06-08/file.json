@@ -1967,6 +1967,9 @@
           },
           {
             "$ref": "#/parameters/FileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/FileChangeTime"
           }
         ],
         "responses": {
@@ -2262,6 +2265,9 @@
           },
           {
             "$ref": "#/parameters/FileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/FileChangeTime"
           }
         ],
         "responses": {
@@ -2979,6 +2985,9 @@
           },
           {
             "$ref": "#/parameters/FileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/FileChangeTime"
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
@@ -3882,6 +3891,9 @@
             "$ref": "#/parameters/FileLastWriteTime"
           },
           {
+            "$ref": "#/parameters/FileChangeTime"
+          },
+          {
             "$ref": "#/parameters/LeaseIdOptional"
           }
         ],
@@ -4626,6 +4638,12 @@
                 "x-ms-client-name": "IsServerEncrypted",
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
               }
             }
           },
@@ -4747,6 +4765,12 @@
                 "x-ms-client-name": "IsServerEncrypted",
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
               }
             }
           },
@@ -4933,6 +4957,9 @@
           },
           {
             "$ref": "#/parameters/FileCopyFileLastWriteTime"
+          },
+          {
+            "$ref": "#/parameters/FileCopyFileChangeTime"
           },
           {
             "$ref": "#/parameters/FileCopySetArchiveAttribute"
@@ -6438,6 +6465,18 @@
       },
       "description": "Specifies either the option to copy file last write time from a source file(source) to a target file or a time value in ISO 8601 format to set as last write time on a target file."
     },
+    "FileCopyFileChangeTime": {
+      "name": "x-ms-file-change-time",
+      "x-ms-client-name": "fileChangeTime",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "copy-file-smb-info"
+      },
+      "description": "Specifies either the option to copy file last write time from a source file(source) to a target file or a time value in ISO 8601 format to set as last write time on a target file."
+    },
     "FileCopySetArchiveAttribute": {
       "name": "x-ms-file-copy-set-archive",
       "x-ms-client-name": "setArchiveAttribute",
@@ -6621,6 +6660,16 @@
       "in": "header",
       "description": "Last write time for the file/directory. Default value: Now.",
       "required": true,
+      "type": "string",
+      "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method"
+    },
+    "FileChangeTime": {
+      "name": "x-ms-file-change-time",
+      "x-ms-client-name": "FileChangeTime",
+      "in": "header",
+      "description": "Change time for the file/directory. Default value: Now.",
+      "required": false,
       "type": "string",
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
