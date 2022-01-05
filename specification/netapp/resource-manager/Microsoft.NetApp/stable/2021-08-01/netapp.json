@@ -63,6 +63,11 @@
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "examples/OperationList.json"
+          }
         }
       }
     },
@@ -2863,7 +2868,7 @@
           }
         ],
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_ListByNetAppAccount",
         "x-ms-pageable": {
@@ -2892,7 +2897,7 @@
         "summary": "Describe a Volume Group",
         "description": "Get details of the specified volume group",
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_Get",
         "parameters": [
@@ -2931,7 +2936,7 @@
       },
       "put": {
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_Create",
         "summary": "Create the specified volume group and volumes. Creating volume group will create all the volumes specified in request body implicitly. Once volumes are created using volume group, those will be treated as regular volumes thereafter.",
@@ -2982,7 +2987,7 @@
       },
       "delete": {
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_Delete",
         "summary": "Delete a volume group",
@@ -5315,7 +5320,7 @@
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
         "creationDate": {
-          "title": "name",
+          "title": "creationDate",
           "type": "string",
           "format": "date-time",
           "readOnly": true,
