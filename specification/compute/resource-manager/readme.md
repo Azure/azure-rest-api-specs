@@ -236,6 +236,15 @@ directive:
       - RequiredPropertiesMissingInResourceModel
 ```
 
+### Tag: package-2021-08-01-only
+
+These settings apply only when `--tag=package-2021-08-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-08-01/disk.json
+```
+
 ### Tag: package-2021-08-01
 
 These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
