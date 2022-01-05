@@ -2856,7 +2856,7 @@
             "type": "string"
           },
           {
-            "name": "securityPolicyProperties",
+            "name": "securityPolicUpdateProperties",
             "in": "body",
             "description": "Security policy update properties",
             "required": true,
@@ -4230,7 +4230,7 @@
       "description": "The json object that contains properties required to create a security policy",
       "allOf": [
         {
-          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+          "$ref": "#/definitions/SecurityPolicyUpdateParameters"
         },
         {
           "$ref": "#/definitions/AFDStateProperties"
@@ -4279,13 +4279,13 @@
         }
       }
     },
-    "SecurityPolicyWebApplicationFirewallParameters": {
+    "SecurityPolicyWebApplicationFirewall": {
       "description": "The json object containing security policy waf parameters",
       "x-ms-discriminator-value": "WebApplicationFirewall",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityPolicyUpdatePropertiesParameters"
+          "$ref": "#/definitions/SecurityPolicy"
         }
       ],
       "properties": {
