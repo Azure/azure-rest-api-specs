@@ -1004,8 +1004,10 @@
         },
         "scenarioExclusionPatterns": {
           "description": "Configuration to exclude scenarios in fusion detection.",
-          "$ref": "#/definitions/FusionScenarioExclusionPattern",
-          "type": "object"
+          "items": {
+            "$ref": "#/definitions/FusionScenarioExclusionPattern"
+          },
+          "type": "array"
         },
         "lastModifiedUtc": {
           "description": "The last time that this alert has been modified.",
@@ -1130,31 +1132,14 @@
       "type": "object"
     },
     "FusionScenarioExclusionPattern": {
-      "description": "Represents Fusion scenario exclusion patterns in Fusion detection.",
-      "properties": {
-        "scenarioExclusionPatterns": {
-          "description": "Individual scenario exclusion pattern.",
-          "items": {
-            "$ref": "#/definitions/FusionScenarioExclusionPatternItem"
-          },
-          "x-ms-identifiers": [],
-          "type": "array"
-        }
-      },
-      "required": [
-        "scenarioExclusionPatterns"
-      ],
-      "type": "object"
-    },
-    "FusionScenarioExclusionPatternItem": {
-      "description": "Represents individual Fusion scenario exclusion pattern in Fusion detection.",
+      "description": "Represents a Fusion scenario exclusion patterns in Fusion detection.",
       "properties": {
         "exclusionPattern": {
           "description": "Scenario exclusion pattern.",
           "type": "string"
         },
         "dateAddedInUTC": {
-          "description": "DateTime in UTC.",
+          "description": "DateTime when scenario exclusion pattern is added in UTC.",
           "type": "string"
         }
       },
