@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 2
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.CloudSan
-  output-folder: $(csharp-sdks-folder)/cloudsan/Microsoft.Azure.Management.ElasticSan/src/Generated
+  namespace: Microsoft.Azure.Management.ElasticSan
+  output-folder: $(csharp-sdks-folder)/ElasticSans/Microsoft.Azure.Management.ElasticSan/src/Generated
 ```

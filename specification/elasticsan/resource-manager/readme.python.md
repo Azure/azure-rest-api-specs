@@ -14,10 +14,10 @@ clear-output-folder: true
 
 ``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/elasticsan/azure-mgmt-elasticsan/azure/mgmt/elasticsan
+output-folder: $(python-sdks-folder)/elasticsans/azure-mgmt-elasticsan/azure/mgmt/elasticsan
 ```
 
 ``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/elasticsan/azure-mgmt-elasticsan
+output-folder: $(python-sdks-folder)/elasticsans/azure-mgmt-elasticsan
 ```

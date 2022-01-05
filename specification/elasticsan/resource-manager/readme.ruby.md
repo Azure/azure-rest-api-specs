@@ -10,5 +10,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ```yaml $(tag) == 'package-2021-11-20-preview' && $(ruby)
 namespace: Microsoft.ElasticSan
-output-folder: $(ruby-sdks-folder)/elasticsan
+output-folder: $(ruby-sdks-folder)/elasticsans
 ```
