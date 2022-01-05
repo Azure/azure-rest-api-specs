@@ -107,6 +107,17 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
 
+### Tag: package-2021-12-01-preview
+
+These settings apply only when `--tag=package-2021-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Operations.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/preview/2021-12-01-preview/Tables.json
+```
+
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
