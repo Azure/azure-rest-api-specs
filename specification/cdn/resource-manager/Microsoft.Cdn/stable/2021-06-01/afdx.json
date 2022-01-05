@@ -2861,7 +2861,7 @@
             "description": "Security policy update properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityPolicyProperties"
+              "$ref": "#/definitions/SecurityPolicyUpdateParameters"
             }
           },
           {
@@ -4230,6 +4230,9 @@
       "description": "The json object that contains properties required to create a security policy",
       "allOf": [
         {
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        },
+        {
           "$ref": "#/definitions/AFDStateProperties"
         }
       ],
@@ -4241,11 +4244,21 @@
         },
         "parameters": {
           "description": "object which contains security policy parameters",
-          "$ref": "#/definitions/SecurityPolicyParameters"
+          "$ref": "#/definitions/SecurityPolicyUpdatePropertiesParameters"
         }
       }
     },
-    "SecurityPolicyParameters": {
+    "SecurityPolicyUpdateParameters": {
+      "description": "The JSON object containing security policy update parameters.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityPolicyUpdatePropertiesParameters"
+        }
+      }
+    },
+    "SecurityPolicyUpdatePropertiesParameters": {
       "description": "The json object containing security policy parameters",
       "discriminator": "type",
       "required": [
@@ -4272,7 +4285,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityPolicyParameters"
+          "$ref": "#/definitions/SecurityPolicyUpdatePropertiesParameters"
         }
       ],
       "properties": {
