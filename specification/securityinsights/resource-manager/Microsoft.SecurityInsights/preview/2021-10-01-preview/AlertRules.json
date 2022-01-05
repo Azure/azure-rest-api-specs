@@ -994,7 +994,7 @@
           "description": "Determines whether this alert rule is enabled or disabled.",
           "type": "boolean"
         },
-		    "sourceSettings": {
+        "sourceSettings": {
           "description": "Configuration for all supported source signals in fusion detection.",
           "items": {
             "$ref": "#/definitions/FusionSourceSettings"
@@ -1169,8 +1169,7 @@
               "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
               "description": "The severity for alerts created by this alert rule."
             },
-            "sourceSettings": 
-            {
+            "sourceSettings": {
               "description": "All supported source signal configurations consumed in fusion detection.",
               "items": {
                 "$ref": "#/definitions/FusionTemplateSourceSetting"
@@ -1194,7 +1193,7 @@
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
     },
-	  "FusionTemplateSourceSetting": {
+    "FusionTemplateSourceSetting": {
       "description": "Represents a source signal consumed in Fusion detection.",
       "properties": {
         "sourceName": {
