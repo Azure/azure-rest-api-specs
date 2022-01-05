@@ -181,15 +181,15 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: Missing required property definition: {0}.
 
-**Description**: Property indicated as required for the operation is missing its definition.
+**Description**: Property indicated as required in "required" array for the model is missing its definition.
 
-**How to fix the violation**: Verify that the properties included in the 'required" array have all been defined in swagger.
+**How to fix the violation**: Verify that the properties included in the "required" array have all been defined in swagger.
 
 ### <a name="OBJECT_MISSING_REQUIRED_PROPERTY_SCHEMA" />OBJECT_MISSING_REQUIRED_PROPERTY_SCHEMA
 
 **Output Message**: Missing required property: {0}.
 
-**Description**: Property indicated as required for this schema.
+**Description**: Property indicated as required according to [OpenAPI 2.0 specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) for this schema.
 
 **How to fix the violation**: Adding this property to schema in swagger.
 
