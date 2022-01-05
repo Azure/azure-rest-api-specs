@@ -71,9 +71,9 @@
             "name": "Microsoft.EdgeOrder/locations/orders/read",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orders",
-              "operation": "List or Get ArmApiRes_orders",
-              "description": "List or get the ArmApiRes_orders"
+              "resource": "Order",
+              "operation": "List or Get Order",
+              "description": "List or get the Order"
             },
             "origin": "user",
             "isDataAction": false
@@ -82,9 +82,9 @@
             "name": "Microsoft.EdgeOrder/orders/read",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orders",
-              "operation": "List or Get ArmApiRes_orders",
-              "description": "List or get the ArmApiRes_orders"
+              "resource": "Order",
+              "operation": "List or Get Order",
+              "description": "List or get the Order"
             },
             "origin": "user",
             "isDataAction": false
@@ -93,27 +93,31 @@
             "name": "Microsoft.EdgeOrder/orderItems/cancel/action",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orderItems"
+              "resource": "OrderItem",
+              "operation": "Cancel OrderItem",
+              "description": "Cancels an OrderItem in progress."
             },
             "origin": "user",
-            "isDataAction": true
+            "isDataAction": false
           },
           {
             "name": "Microsoft.EdgeOrder/orderItems/return/action",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orderItems"
+              "resource": "OrderItem",
+              "operation": "Return OrderItem",
+              "description": "Return an OrderItem."
             },
             "origin": "user",
-            "isDataAction": true
+            "isDataAction": false
           },
           {
             "name": "Microsoft.EdgeOrder/orderItems/read",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orderItems",
-              "operation": "List or Get ArmApiRes_orderItems",
-              "description": "List or get the ArmApiRes_orderItems"
+              "resource": "OrderItem",
+              "operation": "List or Get OrderItem",
+              "description": "List or get the OrderItem"
             },
             "origin": "user",
             "isDataAction": false
@@ -122,9 +126,9 @@
             "name": "Microsoft.EdgeOrder/orderItems/delete",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orderItems",
-              "operation": "Delete ArmApiRes_orderItems",
-              "description": "Delete the ArmApiRes_orderItems"
+              "resource": "OrderItem",
+              "operation": "Delete OrderItem",
+              "description": "Delete the OrderItem"
             },
             "origin": "user",
             "isDataAction": false
@@ -133,9 +137,9 @@
             "name": "Microsoft.EdgeOrder/orderItems/write",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_orderItems",
-              "operation": "Create or Update ArmApiRes_orderItems",
-              "description": "Create or update the ArmApiRes_orderItems"
+              "resource": "OrderItem",
+              "operation": "Create or Update OrderItem",
+              "description": "Create or update the OrderItem"
             },
             "origin": "user",
             "isDataAction": false
@@ -144,28 +148,34 @@
             "name": "Microsoft.EdgeOrder/productFamiliesMetadata/action",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_Microsoft.EdgeOrder"
+              "resource": "ArmApiRes_Microsoft.EdgeOrder",
+              "operation": "List or Get product families metadata",
+              "description": "This method lists or gets the product families metadata."
             },
             "origin": "user",
-            "isDataAction": true
+            "isDataAction": false
           },
           {
             "name": "Microsoft.EdgeOrder/listProductFamilies/read",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_Microsoft.EdgeOrder"
+              "resource": "ArmApiRes_Microsoft.EdgeOrder",
+              "operation": "List Product Families",
+              "description": "This method returns list of product families."
             },
             "origin": "user",
-            "isDataAction": true
+            "isDataAction": false
           },
           {
             "name": "Microsoft.EdgeOrder/listConfigurations/action",
             "display": {
               "provider": "Edge Ordering",
-              "resource": "ArmApiRes_Microsoft.EdgeOrder"
+              "resource": "ArmApiRes_Microsoft.EdgeOrder",
+              "operation": "List Product Configurations",
+              "description": "This method returns list of product configurations."
             },
             "origin": "user",
-            "isDataAction": true
+            "isDataAction": false
           }
         ]
       }

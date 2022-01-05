@@ -456,7 +456,9 @@
                 "ServiceIssue",
                 "PlannedMaintenance",
                 "HealthAdvisory",
-                "RCA"
+                "RCA",
+                "EmergingIssues",
+                "SecurityAdvisory"
               ],
               "x-ms-enum": {
                 "name": "EventTypeValues",
@@ -516,6 +518,7 @@
               "description": "Level of event.",
               "enum": [
                 "Critical",
+                "Error",
                 "Warning",
                 "Informational"
               ],
@@ -605,13 +608,21 @@
               "type": "boolean",
               "description": "Tells if we want to enable or disable Microsoft Support for this event."
             },
+            "description": {
+              "type": "string",
+              "description": "Contains the communication message for the event, that could include summary, root cause and other details."
+            },
+            "platformInitiated": {
+              "type": "boolean",
+              "description": "Is true if the event is platform initiated."
+            },
             "enableChatWithUs": {
               "type": "boolean",
               "description": "Tells if we want to enable or disable Microsoft Support for this event."
             },
             "priority": {
               "type": "integer",
-              "description": "Priority level of the event."
+              "description": "Priority level of the event. Has value from 0 to 23. 0 is the highest priority. Service issue events have higher priority followed by planned maintenance and health advisory. Critical events have higher priority followed by error, warning and informational. Furthermore, active events have higher priority than resolved."
             },
             "lastUpdateTime": {
               "type": "string",
