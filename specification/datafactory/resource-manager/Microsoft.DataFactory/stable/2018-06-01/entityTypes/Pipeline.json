@@ -6728,7 +6728,7 @@
     },
     "FailActivity": {
       "x-ms-discriminator-value": "Fail",
-      "description": "Fails within the activity scope and provides a custom error message and error code.",
+      "description": "This activity will fail within its own scope and output a custom error message and error code. The error message and code can provided either as a string literal or as an expression that can be evaluated to a string at runtime. The activity scope can be the whole pipeline or a control activity (e.g. foreach, switch, until), if the fail activity is contained in it.",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
