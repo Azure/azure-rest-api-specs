@@ -2629,15 +2629,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ]
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -2699,15 +2691,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ]
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -2783,15 +2767,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ]
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -2854,15 +2830,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ]
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -5993,6 +5961,21 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
+    },
+    "ParentTypeParameter": {
+      "name": "parentType",
+      "in": "path",
+      "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "topics",
+        "domains"
+      ],
+      "x-ms-enum": {
+        "name": "",
+        "modelAsString": true
+      }
     }
   },
   "securityDefinitions": {
