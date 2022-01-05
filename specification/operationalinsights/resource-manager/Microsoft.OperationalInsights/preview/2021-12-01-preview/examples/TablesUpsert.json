@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "resourceGroupName": "oiautorest6685",
+    "workspaceName": "oiautorest6685",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "tableName": "AzureNetworkFlow",
+    "parameters": {
+      "properties": {
+        "schema": {
+          "columns": [
+            {
+              "name": "MyNewColumn",
+              "type": "guid"
+            }
+          ]
+        },
+        "retentionInDays": 45,
+        "totalRetentionInDays": 70
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "schema": {
+            "name": "AzureNetworkFlow",
+            "tableSubType": "DataCollectionRuleBased",
+            "tableType": "Microsoft",
+            "columns": [
+              {
+                "isHidden": false,
+                "name": "MyNewColumn",
+                "type": "guid",
+                "isDefaultDisplay": false
+              }
+            ],
+            "standardColumns": [
+              {
+                "isHidden": true,
+                "name": "TenantId",
+                "type": "guid",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "SourceSystem",
+                "type": "string",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "TimeGenerated",
+                "type": "dateTime",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "AgentID",
+                "type": "string",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "SourceIP",
+                "type": "string",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "Protocol",
+                "type": "string",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "SourcePort",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "DestinationPort",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "TcpFlags",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "Packets",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "Bytes",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "BytesOut",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "DurationInMs",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "RstCount",
+                "type": "int",
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "MaxSampleRtt",
+                "type": "int",
+                "isDefaultDisplay": false
+              }
+            ],
+            "solutions": [
+              "LogManagement"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "retentionInDays": 45,
+          "totalRetentionInDays": 70,
+          "archiveRetentionInDays": 25,
+          "plan": "Analytics"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/AzureNetworkFlow",
+        "name": "AzureNetworkFlow"
+      }
+    },
+    "202": {}
+  }
+}
