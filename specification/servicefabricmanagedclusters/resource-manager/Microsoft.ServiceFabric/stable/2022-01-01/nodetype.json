@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-11-01-preview"
+    "version": "2022-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -638,6 +638,11 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData"
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure resource location.",
+          "readOnly": true
         }
       },
       "description": "The resource model definition for proxy-only resource.",
@@ -831,6 +836,10 @@
         "useTempDataDisk": {
           "type": "boolean",
           "description": "Specifies whether to use the temporary disk for the service fabric data root, in which case no managed data disk will be attached and the temporary disk will be used. It is only allowed for stateless node types."
+        },
+        "enableOverProvisioning": {
+          "type": "boolean",
+          "description": "Specifies whether the node type should be overprovisioned. It is only allowed for stateless node types."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1167,6 +1176,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state, which only appears in the response."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
@@ -1434,7 +1447,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-11-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-01-01\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

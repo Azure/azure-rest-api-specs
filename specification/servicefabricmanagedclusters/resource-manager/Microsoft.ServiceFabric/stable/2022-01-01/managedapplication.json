@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-11-01-preview"
+    "version": "2022-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -2326,19 +2326,19 @@
       "type": "string",
       "description": "Enumerates the ways that a service can be partitioned.",
       "enum": [
-        "AveragePartitionLoad",
-        "AverageServiceLoad"
+        "AveragePartitionLoadTrigger",
+        "AverageServiceLoadTrigger"
       ],
       "x-ms-enum": {
         "name": "ServiceScalingTriggerKind",
         "modelAsString": true,
         "values": [
           {
-            "value": "AveragePartitionLoad",
+            "value": "AveragePartitionLoadTrigger",
             "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition. The value is 0."
           },
           {
-            "value": "AverageServiceLoad",
+            "value": "AverageServiceLoadTrigger",
             "description": "Represents a scaling policy related to an average load of a metric/resource of a service. The value is 1."
           }
         ]
@@ -2661,7 +2661,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-11-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-01-01\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

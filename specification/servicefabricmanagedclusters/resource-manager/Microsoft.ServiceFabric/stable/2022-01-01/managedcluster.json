@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-11-01-preview"
+    "version": "2022-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -581,6 +581,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "LongRunningOperations"
+        ],
+        "summary": "Get long running operation status.",
+        "description": "Get long running operation status.",
+        "operationId": "OperationStatus_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/operationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get failed operation status": {
+            "$ref": "./examples/Long_running_operation_status_failed.json"
+          },
+          "Get succeeded operation result": {
+            "$ref": "./examples/Long_running_operation_status_succeeded.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "LongRunningOperations"
+        ],
+        "summary": "Get long running operation result.",
+        "description": "Get long running operation result.",
+        "operationId": "OperationResult_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/operationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get operation result": {
+            "$ref": "./examples/Long_running_operation_result.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request is still running."
+          },
+          "204": {
+            "description": "No Content. For Delete operation results."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ServiceFabric/operations": {
       "get": {
         "tags": [
@@ -859,9 +951,46 @@
         "probeRequestPath": {
           "type": "string",
           "description": "The probe request path. Only supported for HTTP/HTTPS probes."
+        },
+        "loadDistribution": {
+          "type": "string",
+          "description": "The load distribution policy for this rule."
         }
       },
       "description": "Describes a load balancing rule."
+    },
+    "LongRunningOperationResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation.",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation.",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "The completion percentage of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The operation error."
+        }
+      },
+      "description": "Long running operation result."
     },
     "ManagedCluster": {
       "type": "object",
@@ -1645,7 +1774,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-11-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-01-01\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -1681,6 +1810,14 @@
       "name": "location",
       "in": "path",
       "description": "The location for the cluster code versions. This is different from cluster location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "operationId": {
+      "name": "operationId",
+      "in": "path",
+      "description": "operation identifier.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

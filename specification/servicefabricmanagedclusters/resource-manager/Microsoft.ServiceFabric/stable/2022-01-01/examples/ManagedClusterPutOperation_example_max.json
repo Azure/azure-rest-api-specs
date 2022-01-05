@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-11-01-preview",
+    "api-version": "2022-01-01",
     "parameters": {
       "location": "eastus",
       "tags": {},
@@ -38,7 +38,8 @@
             "backendPort": 10000,
             "probePort": 10000,
             "protocol": "tcp",
-            "probeProtocol": "http"
+            "probeProtocol": "http",
+            "loadDistribution": "Default"
           }
         ],
         "allowRdpAccess": true,
@@ -109,8 +110,8 @@
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -155,7 +156,8 @@
               "backendPort": 10000,
               "probePort": 10000,
               "protocol": "tcp",
-              "probeProtocol": "tcp"
+              "probeProtocol": "tcp",
+              "loadDistribution": "Default"
             }
           ],
           "allowRdpAccess": true,
@@ -245,8 +247,8 @@
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-11-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-01-01"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -291,7 +293,8 @@
               "backendPort": 10000,
               "probePort": 10000,
               "protocol": "tcp",
-              "probeProtocol": "tcp"
+              "probeProtocol": "tcp",
+              "loadDistribution": "Default"
             }
           ],
           "allowRdpAccess": true,
