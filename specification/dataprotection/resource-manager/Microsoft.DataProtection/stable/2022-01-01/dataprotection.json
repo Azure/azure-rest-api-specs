@@ -3744,12 +3744,17 @@
             "modelAsString": true,
             "name": "SourceDataStoreType"
           }
+        },
+        "sourceResourceId": {
+          "description": "Fully qualified ARM ID of the datasource which is being recovered.",
+          "type": "string"
         }
       },
       "required": [
         "objectType",
         "restoreTargetInfo",
-        "sourceDataStoreType"
+        "sourceDataStoreType",
+        "sourceResourceId"
       ],
       "title": "AzureBackupRestoreRequest",
       "type": "object"
@@ -3955,6 +3960,18 @@
         "datasourceAuthCredentials": {
           "$ref": "#/definitions/AuthCredentials",
           "description": "Credentials to use to authenticate with data source provider."
+        },
+        "validationType": {
+          "description": "Specifies the type of validation.",
+          "enum": [
+            "ShallowValidation",
+            "DeepValidation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidationType",
+            "modelAsString": true
+          }
         },
         "objectType": {
           "type": "string"
