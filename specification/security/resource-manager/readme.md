@@ -56,6 +56,10 @@ directive:
     where: $.paths
     from: standards.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: scanners.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -81,6 +85,18 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 input-file:
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
   - Microsoft.Security/preview/2021-08-01-preview/assignments.json
+
+override-info:
+  title: SecurityCenter
+``` 
+
+### Tag: package-preview-2021-12
+
+These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-12'
+input-file:
+  - Microsoft.Security/preview/2021-12-01-preview/scanners.json
 
 override-info:
   title: SecurityCenter
